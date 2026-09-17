@@ -1,0 +1,1250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Class 9 · Cuando era pequeño — Noah</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+
+/* ╔══════════════════════════════════════════════════════════════╗
+   ║  ESCOLAR × NOTHING — sistema de diseño                        ║
+   ║  Class 9 · L5 · "Cuando era pequeño" — el imperfecto           ║
+   ╚══════════════════════════════════════════════════════════════╝ */
+
+:root{
+  --paper:        #FBF7EE;
+  --paper-raised: #FFFFFF;
+  --paper-alt:    #F3ECDA;
+  --ink:          #23291F;
+  --ink-soft:     #565F52;
+  --ink-faint:    #8B9184;
+  --line:         rgba(35,41,31,0.12);
+  --line-strong:  rgba(35,41,31,0.22);
+
+  --b1:      #B5502E;  --b1-soft: #FBEBE3;  --b1-line: #EFC9B4;  /* terracota — grammar */
+  --b2:      #2F6FED;  --b2-soft: #EAF1FE;  --b2-line: #C6D9FC;  /* azul — roleplay */
+  --family:  #DB8A2E;  --family-soft: #FCF1E1; --family-line: #F3D9AF; /* ámbar — task/family */
+
+  --ok:      #2E9E6B;  --ok-soft: #E9F6EF;  --ok-line: #BEE6D3;  /* verde — correcto/completado, universal */
+
+  --f-display: 'Fraunces', Georgia, serif;
+  --f-body:    'IBM Plex Sans', system-ui, sans-serif;
+  --f-data:    'IBM Plex Mono', monospace;
+
+  --r-sm: 8px;
+  --r-md: 14px;
+  --r-lg: 20px;
+
+  --spring: cubic-bezier(.34,1.56,.64,1);
+  --shadow-1: 0 1px 2px rgba(35,41,31,0.05), 0 1px 8px rgba(35,41,31,0.04);
+  --blur-glass: blur(22px);
+  --blur-light: blur(13px);
+}
+
+*{ box-sizing:border-box; }
+body{
+  margin:0;
+  background: var(--paper);
+  background-image: radial-gradient(circle at 1px 1px, var(--line) 1px, transparent 0);
+  background-size: 22px 22px;
+  color: var(--ink);
+  font-family: var(--f-body);
+  line-height:1.6;
+}
+::selection{ background: var(--b1-soft); }
+
+/* ---------- PROGRESS RAIL (sticky, global) ---------- */
+.progress-rail{
+  position:sticky; top:0; z-index:50; height:4px; width:100%;
+  background: var(--paper-alt); border-bottom:1px solid var(--line);
+}
+.progress-fill{
+  height:100%; width:0%; background: var(--b1);
+  transition: width .4s var(--spring);
+}
+.progress-chip{
+  position:fixed; top:14px; right:14px; z-index:50;
+  display:flex; align-items:center; gap:8px;
+  background: rgba(255,255,255,.72); backdrop-filter: var(--blur-light); -webkit-backdrop-filter: var(--blur-light);
+  border:1px solid var(--line); border-radius:999px;
+  padding:6px 8px 6px 14px; box-shadow: var(--shadow-1);
+  font-family: var(--f-data); font-size:11.5px; color: var(--ink-soft);
+}
+.sound-toggle{
+  width:26px; height:26px; border-radius:50%; border:1px solid var(--line); background: var(--paper-alt);
+  cursor:pointer; font-size:12px; display:flex; align-items:center; justify-content:center;
+  transition: transform .15s var(--spring);
+}
+.sound-toggle:active{ transform: scale(.9); }
+.sound-toggle[aria-pressed="true"]{ background: var(--b1-soft); border-color: var(--b1-line); }
+
+.en-toggle{
+  height:26px; padding:0 10px; border-radius:999px; border:1px solid var(--line); background: var(--paper-alt);
+  cursor:pointer; font-family: var(--f-data); font-size:11px; font-weight:600; letter-spacing:.03em;
+  color: var(--ink-faint); display:flex; align-items:center; justify-content:center;
+  transition: transform .15s var(--spring), background .15s ease, border-color .15s ease, color .15s ease;
+}
+.en-toggle:active{ transform: scale(.9); }
+.en-toggle[aria-pressed="true"]{ background: var(--b2-soft); border-color: var(--b2-line); color: var(--b2); }
+
+/* ---------- ENGLISH TRANSLATION TOGGLE ----------
+   Hidden by default; the "EN" toggle in the progress chip adds
+   [data-english="on"] to <html>, which reveals .en-inline spans
+   placed next to Spanish content throughout the page. */
+.en-inline{ display:none; color: var(--ink-faint); font-style: italic; }
+html[data-english="on"] .en-inline{ display:inline; }
+
+@keyframes shake{
+  10%,90%{ transform: translateX(-1px); }
+  20%,80%{ transform: translateX(2px); }
+  30%,50%,70%{ transform: translateX(-4px); }
+  40%,60%{ transform: translateX(4px); }
+}
+@keyframes rise{
+  from{ opacity:0; transform: translateY(8px); }
+  to{ opacity:1; transform: translateY(0); }
+}
+@keyframes bounce{
+  0%,60%,100%{ transform: translateY(0); }
+  30%{ transform: translateY(-4px); }
+}
+@keyframes popIn{
+  0%{ transform: scale(1); }
+  40%{ transform: scale(1.18); }
+  100%{ transform: scale(1); }
+}
+
+/* ---------- HEADER ---------- */
+header{ padding:44px 24px 28px; max-width:760px; margin:0 auto; }
+.eyebrow{
+  font-family: var(--f-data); font-size:12px; letter-spacing:.14em;
+  text-transform:uppercase; color: var(--b1); margin:0 0 10px;
+  display:flex; align-items:center; gap:10px;
+}
+.eyebrow .dot{ width:6px; height:6px; border-radius:50%; background: var(--b1); }
+h1{
+  font-family: var(--f-display); font-weight:600;
+  font-size:clamp(30px,5.6vw,46px); line-height:1.08;
+  margin:0 0 14px; letter-spacing:-.01em;
+}
+h1 em{ font-style:italic; color: var(--b1); }
+.lede{ font-size:16px; color: var(--ink-soft); max-width:56ch; margin:0; }
+
+.meta-row{
+  display:flex; flex-wrap:wrap; gap:20px; margin-top:26px;
+  font-family: var(--f-data); font-size:12px; color: var(--ink-faint);
+}
+.meta-row strong{
+  display:block; color: var(--ink); font-size:14.5px; font-weight:500;
+  font-family: var(--f-display); margin-top:3px;
+}
+.cycle-flag{
+  margin-top:16px; padding:10px 14px; background: var(--b2-soft); border:1px solid var(--b2-line);
+  border-radius: var(--r-md); font-family: var(--f-data); font-size:12px; color: var(--b2);
+  display:inline-flex; align-items:center; gap:8px;
+}
+
+/* ---------- SECTIONS ---------- */
+main{ max-width:760px; margin:0 auto; padding:8px 24px 100px; }
+
+section.block{ margin-bottom:52px; }
+.block-head{ display:flex; align-items:baseline; gap:12px; margin-bottom:18px; }
+.time-tag{
+  font-family: var(--f-data); font-size:11px; color: var(--ink-faint);
+  background: var(--paper-alt); padding:3px 10px; border-radius:999px; margin-left:auto; flex:none;
+}
+.block-num{
+  font-family: var(--f-data); font-size:12px; color:#fff; background: var(--b1);
+  width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  flex:none; transition: background .25s var(--spring);
+}
+.block-num.is-done{ background: var(--ok); animation: popIn .35s var(--spring); }
+.block-head h2{
+  font-family: var(--f-display); font-weight:500; font-style:italic; font-size:22px; margin:0;
+}
+
+.panel{
+  background: rgba(255,255,255,.78); backdrop-filter: var(--blur-glass); -webkit-backdrop-filter: var(--blur-glass);
+  border:1px solid var(--line); border-radius: var(--r-lg);
+  box-shadow: var(--shadow-1); padding:26px 28px;
+}
+
+/* ---------- LOCKING ---------- */
+.is-locked .panel,
+.is-locked .roleplay-panel,
+.is-locked .task-panel{
+  opacity:.4; pointer-events:none; filter: grayscale(.3);
+  transition: opacity .3s ease, filter .3s ease;
+}
+.unlock-nudge{
+  display:none; font-family: var(--f-data); font-size:11.5px; color: var(--ink-faint);
+  margin-top:8px; padding-left:2px;
+}
+.is-locked .unlock-nudge{ display:block; }
+
+/* ---------- VERB REVIEW TABLE ---------- */
+.verb-table{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+@media (max-width:560px){ .verb-table{ grid-template-columns:1fr; } }
+.verb-col{ border-radius: var(--r-md); padding:16px 18px; border:1px solid var(--b1-line); background: var(--b1-soft); }
+.verb-title{ font-family: var(--f-display); font-weight:600; font-size:17px; color: var(--b1); margin:0 0 2px; }
+.verb-sub{ font-family: var(--f-data); font-size:10.5px; color: var(--ink-faint); text-transform:uppercase; letter-spacing:.05em; margin:0 0 10px; }
+.verb-list{ margin:0; padding:0; list-style:none; }
+.verb-list li{ font-size:13.5px; color: var(--ink-soft); padding:6px 0; border-top:1px dashed var(--line); display:flex; gap:8px; }
+.verb-list li:first-child{ border-top:none; }
+.verb-list .pron{ font-family: var(--f-data); font-size:11.5px; color: var(--ink-faint); min-width:64px; flex:none; padding-top:1px; }
+.verb-list strong{ color: var(--ink); font-weight:600; }
+
+.note{
+  margin-top:18px; padding:14px 16px; background: var(--b1-soft); border:1px solid var(--b1-line);
+  border-radius: var(--r-md); font-size:14px; color: var(--ink-soft);
+}
+.note strong{ color: var(--ink); }
+
+/* ---------- IRREGULAR SPOTLIGHT ---------- */
+.irregular-wrap{ margin-top:22px; }
+.irregular-title{
+  font-family: var(--f-data); font-size:11.5px; text-transform:uppercase; letter-spacing:.06em;
+  color: var(--ink-faint); margin:0 0 10px;
+}
+.feature-list{ display:grid; gap:12px; }
+.feature-card{
+  border-radius: var(--r-md); padding:14px 16px; border:1px solid var(--line); background: var(--paper-raised);
+  transition: border-color .15s ease;
+}
+.feature-name{ font-family: var(--f-display); font-weight:600; font-size:16px; color: var(--ink); margin:0 0 6px; }
+.feature-desc{ font-size:13.5px; color: var(--ink-soft); margin:0 0 8px; }
+.feature-pair{ display:flex; gap:10px; align-items:center; flex-wrap:wrap; font-family: var(--f-data); font-size:13.5px; }
+.feature-standard{ color: var(--ink-faint); }
+.feature-arrow{ color: var(--ink-faint); }
+.feature-andaluz{ color: var(--b1); font-weight:600; }
+
+.compare-warning{
+  margin-top:14px; padding:14px 16px; background: var(--family-soft); border:1px solid var(--family-line);
+  border-radius: var(--r-md); font-size:13.5px; color: var(--ink-soft);
+}
+.compare-warning strong{ color: var(--family); }
+
+/* ---------- VOCAB CARDS ---------- */
+.vocab-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:12px; }
+.vocab-card{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:14px 16px; cursor:pointer; perspective:600px; min-height:78px;
+  display:flex; flex-direction:column; justify-content:center;
+  transition: border-color .15s ease, transform .18s var(--spring);
+}
+.vocab-card:hover{ border-color: var(--b1-line); transform: translateY(-2px); }
+.vocab-card:focus-visible{ outline:2px solid var(--b1); outline-offset:2px; }
+.vocab-front{ font-family: var(--f-body); font-weight:600; font-size:15px; }
+.vocab-back{ display:none; font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); margin-top:6px; }
+.vocab-card.flipped .vocab-back{ display:block; }
+.vocab-card.flipped{ background: var(--b1-soft); border-color: var(--b1-line); transform: scale(1.02); }
+.vocab-hint{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin:10px 2px 16px; }
+
+/* ---------- LISTENING (transcript pairs) ---------- */
+.listen-card{
+  background: rgba(255,255,255,.78); backdrop-filter: var(--blur-light); -webkit-backdrop-filter: var(--blur-light);
+  border:1px solid var(--line); border-radius: var(--r-lg);
+  padding:18px 20px; margin-bottom:14px;
+}
+.listen-card:last-child{ margin-bottom:0; }
+.listen-head{ display:flex; align-items:center; gap:10px; margin-bottom:12px; }
+.listen-icon{
+  width:30px; height:30px; border-radius:50%; background: var(--b1-soft); color: var(--b1);
+  display:flex; align-items:center; justify-content:center; font-size:14px; flex:none;
+}
+.listen-title{ font-family: var(--f-display); font-weight:600; font-size:15.5px; margin:0; }
+.listen-toggle{
+  font-family: var(--f-data); font-size:11.5px; color: var(--b1); background:none; border:1.5px solid var(--b1-line);
+  padding:5px 12px; border-radius:999px; cursor:pointer; margin-left:auto;
+  transition: transform .12s var(--spring), border-color .15s ease;
+}
+.listen-toggle:hover{ border-color: var(--b1); }
+.listen-toggle:active{ transform: scale(.94); }
+.listen-andaluz{ font-size:15.5px; color: var(--ink); margin:0 0 8px; }
+.listen-standard{ display:none; font-size:13.5px; color: var(--ink-faint); font-style:italic; padding-top:8px; border-top:1px dashed var(--line); }
+.listen-standard.show{ display:block; }
+.listen-note{ font-family: var(--f-data); font-size:11.5px; color: var(--ink-faint); margin-top:8px; }
+
+/* ---------- EXERCISES ---------- */
+.exercise{ margin-bottom:20px; }
+.exercise:last-of-type{ margin-bottom:0; }
+.ex-sentence{ font-size:15.5px; margin-bottom:10px; }
+.ex-sentence .gap{ font-family: var(--f-data); color: var(--ink-faint); }
+.ex-options{ display:flex; flex-wrap:wrap; gap:8px; }
+.answer-flag{ font-size:13px; margin-left:4px; opacity:0; transition: opacity .15s ease; }
+.answer-flag.show{ opacity:1; }
+.answer-flag.ok{ color: var(--ok); }
+.answer-flag.no{ color: var(--b1); }
+.opt-btn{
+  font-family: var(--f-body); font-size:14px; background: var(--paper-raised);
+  border:1.5px solid var(--line); color: var(--ink); padding:7px 16px; border-radius:999px;
+  cursor:pointer; transition: transform .1s var(--spring), background .15s ease, border-color .15s ease, color .15s ease;
+}
+.opt-btn:hover{ border-color: var(--ink-faint); }
+.opt-btn:active{ transform: scale(.94); }
+.opt-btn.picked{ background: var(--b1-soft); border-color: var(--b1); color: var(--b1); }
+.opt-btn.correct{ background: var(--ok-soft); border-color: var(--ok); color: var(--ok); }
+.opt-btn.wrong{ background: var(--family-soft); border-color: var(--family); color: var(--family); animation: shake .32s var(--spring); }
+.opt-btn:disabled{ cursor:default; }
+
+.check-bar{
+  display:flex; align-items:center; justify-content:space-between; gap:16px;
+  margin-top:22px; padding-top:18px; border-top:1px dashed var(--line);
+}
+.btn-primary{
+  font-family: var(--f-body); font-weight:600; font-size:14px; color:#fff; background: var(--b1);
+  border:none; padding:11px 22px; border-radius:999px; cursor:pointer; transition: transform .12s var(--spring);
+}
+.btn-primary:hover{ transform: translateY(-1px); }
+.btn-primary:active{ transform: scale(.95); }
+#score-text{ font-family: var(--f-data); font-size:13px; color: var(--ink-faint); display:flex; align-items:center; gap:4px; }
+#score-num{ display:inline-block; color: var(--ok); font-weight:600; transition: transform .15s var(--spring); }
+#score-num.bump{ transform: scale(1.3); }
+.btn-ghost{
+  font-family: var(--f-body); font-weight:600; font-size:13px; color: var(--ink-soft); background:none;
+  border:1.5px solid var(--line); padding:9px 18px; border-radius:999px; cursor:pointer; transition: transform .12s var(--spring), border-color .15s ease;
+}
+.btn-ghost:hover{ border-color: var(--ink-faint); }
+.btn-ghost:active{ transform: scale(.95); }
+
+/* ---------- ROLEPLAY ---------- */
+.roleplay-panel{ background: var(--b2-soft); border:1px solid var(--b2-line); border-radius: var(--r-lg); padding:26px 28px; }
+.roleplay-panel .block-num{ background: var(--b2); }
+.roleplay-panel .block-num.is-done{ background: var(--ok); }
+.scene-setup{
+  display:flex; gap:14px; align-items:flex-start; background: var(--paper-raised);
+  border:1px solid var(--b2-line); border-radius: var(--r-md); padding:14px 16px; margin-bottom:20px;
+}
+.scene-icon{ font-size:22px; flex:none; }
+.scene-text{ font-size:14px; color: var(--ink-soft); }
+.scene-text strong{ color: var(--ink); }
+
+.dialogue{ display:flex; flex-direction:column; gap:14px; }
+.scene-tabs{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:18px; }
+.scene-tab{
+  font-family: var(--f-data); font-size:12.5px; background: var(--paper-raised);
+  border:1.5px solid var(--b2-line); color: var(--ink-soft); padding:7px 14px;
+  border-radius:999px; cursor:pointer; transition: transform .12s var(--spring), background .15s ease, border-color .15s ease, color .15s ease;
+}
+.scene-tab:hover{ border-color: var(--b2); }
+.scene-tab:active{ transform: scale(.95); }
+.scene-tab.active{ background: var(--b2); border-color: var(--b2); color:#fff; }
+.line{ display:flex; gap:12px; align-items:flex-start; animation: rise .32s var(--spring) both; }
+.line-avatar{
+  flex:none; width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  font-family: var(--f-display); font-weight:600; font-size:14px; color:#fff;
+}
+.line.friend .line-avatar{ background: var(--ink-faint); }
+.line.you .line-avatar{ background: var(--b2); }
+.line-body{ flex:1; }
+.line-name{ font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.05em; color: var(--ink-faint); margin:0 0 4px; }
+.line-bubble{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:12px 14px; font-size:14.5px; color: var(--ink);
+}
+.line.you .line-bubble{ background:#fff; border-color: var(--b2-line); }
+.line-input-wrap{ position:relative; }
+.line-input{
+  width:100%; font-family: var(--f-body); font-size:14.5px; color: var(--ink);
+  background:#fff; border:1px solid var(--b2-line); border-radius: var(--r-sm);
+  padding:10px 12px; resize:vertical; min-height:40px; margin-top:2px;
+}
+.line-input:focus{ outline:none; border-color: var(--b2); }
+.line-hint{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin-top:5px; }
+
+.typing-dots{
+  display:none; align-items:center; gap:3px; margin-top:6px; padding-left:2px;
+}
+.typing-dots.show{ display:flex; }
+.typing-dots span{
+  width:5px; height:5px; border-radius:50%; background: var(--b2); opacity:.6;
+  animation: bounce 1s infinite ease-in-out;
+}
+.typing-dots span:nth-child(2){ animation-delay:.15s; }
+.typing-dots span:nth-child(3){ animation-delay:.3s; }
+
+.roleplay-tip{
+  margin-top:22px; padding:14px 16px; background: var(--paper-raised); border:1px solid var(--b2-line);
+  border-radius: var(--r-md); font-size:13.5px; color: var(--ink-soft);
+}
+.roleplay-tip strong{ color: var(--ink); }
+
+/* ---------- FINAL TASK ---------- */
+.task-panel{ background: var(--family-soft); border:1px solid var(--family-line); border-radius: var(--r-lg); padding:26px 28px; }
+.task-panel .block-num{ background: var(--family); }
+.task-panel .block-num.is-done{ background: var(--ok); }
+textarea#final-task{
+  width:100%; min-height:110px; font-family: var(--f-body); font-size:15px; color: var(--ink);
+  background: var(--paper-raised); border:1px solid var(--family-line); border-radius: var(--r-md);
+  padding:14px 16px; resize:vertical; margin-top:14px;
+}
+textarea#final-task:focus{ outline:none; border-color: var(--family); }
+.task-footer{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:12px; flex-wrap:wrap; }
+#task-count{ font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); }
+.btn-secondary{
+  font-family: var(--f-body); font-weight:600; font-size:13.5px; color: var(--family); background:none;
+  border:1.5px solid var(--family-line); padding:9px 18px; border-radius:999px; cursor:pointer;
+  transition: transform .12s var(--spring);
+}
+.btn-secondary:active{ transform: scale(.95); }
+.saved-flag{ font-family: var(--f-data); font-size:12px; color: var(--ok); opacity:0; transition: opacity .3s ease; }
+.saved-flag.show{ opacity:1; }
+
+.listen-reminder{
+  display:flex; align-items:center; gap:14px; margin-top:16px; padding:14px 16px;
+  background: var(--paper-raised); border:1px solid var(--family-line); border-radius: var(--r-md);
+}
+.rec-dot{ width:12px; height:12px; border-radius:50%; background: var(--family); flex:none; }
+.rec-text{ font-size:13.5px; color: var(--ink-soft); }
+.rec-text strong{ color: var(--ink); }
+
+/* ---------- CYCLE OPEN BANNER ---------- */
+.complete-panel{
+  background: linear-gradient(135deg, var(--b1-soft) 0%, var(--b2-soft) 100%);
+  border:1px solid var(--b1-line); border-radius: var(--r-lg); padding:28px 30px; text-align:center;
+}
+.complete-title{ font-family: var(--f-display); font-weight:600; font-style:italic; font-size:24px; margin:0 0 8px; }
+.complete-text{ font-size:14.5px; color: var(--ink-soft); max-width:48ch; margin:0 auto; }
+
+/* ---------- FOOTER NAV ---------- */
+footer{
+  max-width:760px; margin:0 auto; padding:0 24px 60px; display:flex;
+  justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;
+  font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint);
+}
+footer a{ color: var(--b1); text-decoration:none; }
+footer a:hover{ text-decoration:underline; }
+
+@media (max-width:600px){
+  header{ padding:34px 18px 22px; }
+  main{ padding:8px 18px 90px; }
+  .panel, .task-panel{ padding:20px 18px; }
+  .progress-chip{ top:10px; right:10px; padding:5px 6px 5px 12px; }
+}
+@media (prefers-reduced-motion: reduce){
+  *{ transition:none !important; animation:none !important; }
+}
+</style>
+</head>
+<body>
+
+<div class="progress-rail"><div class="progress-fill" id="progress-fill"></div></div>
+<div class="progress-chip">
+  <span id="progress-text">0/7 blocks</span>
+  <button class="en-toggle" id="en-toggle" aria-pressed="false" aria-label="Toggle English translations">EN</button>
+  <button class="sound-toggle" id="sound-toggle" aria-pressed="false" aria-label="Toggle sound">🔇</button>
+</div>
+
+<header>
+  <p class="eyebrow"><span class="dot"></span>Class 9 · L5 · Describing the past</p>
+  <h1>Cuando era <em>pequeño</em></h1>
+  <p class="lede">You already tell finished stories with the pretérito — fui, comí, estuve. Today's tense is different: the <strong>imperfecto</strong> is for describing what things were like, what used to happen, what was going on in the background. It's how you compare childhood in the UK with life with Sofía's family in Sevilla.</p>
+  <div class="meta-row">
+    <div>Duration<strong>50 min</strong></div>
+    <div>Focus<strong>Imperfecto</strong></div>
+    <div>Level<strong>A2</strong></div>
+  </div>
+  <div class="cycle-flag">🌱 L5 · Describing the past — imperfecto, future plans and comparisons</div>
+</header>
+
+<main>
+
+  <section class="block" id="block-1" data-block="1">
+    <div class="block-head"><span class="block-num">1</span><h2>The imperfecto</h2><span class="time-tag">12 min</span></div>
+    <div class="panel">
+      <p class="lede" style="margin-bottom:16px; font-size:14.5px;">The pretérito (fui, comí, estuve) is for events that happened once and finished. The imperfecto is for the background: what things were like, what used to happen again and again, ongoing states with no clear end. In English it's often "used to" or "was/were -ing".</p>
+      <div class="verb-table">
+        <div class="verb-col">
+          <p class="verb-title">-AR · hablar</p>
+          <p class="verb-sub">to speak</p>
+          <ul class="verb-list">
+            <li><span class="pron">yo</span><span>De niño <strong>hablaba</strong> muy poco español. <span class="en-inline">As a boy I spoke very little Spanish.</span></span></li>
+            <li><span class="pron">tú</span><span>¿<strong>Hablabas</strong> otro idioma en casa? <span class="en-inline">Did you speak another language at home?</span></span></li>
+            <li><span class="pron">él/ella</span><span>Mi abuela <strong>hablaba</strong> con acento del norte. <span class="en-inline">My grandmother spoke with a northern accent.</span></span></li>
+            <li><span class="pron">nosotros</span><span><strong>Hablábamos</strong> inglés todos los días. <span class="en-inline">We used to speak English every day.</span></span></li>
+          </ul>
+        </div>
+        <div class="verb-col">
+          <p class="verb-title">-ER/-IR · comer, vivir</p>
+          <p class="verb-sub">to eat, to live</p>
+          <ul class="verb-list">
+            <li><span class="pron">yo</span><span>De pequeño <strong>comía</strong> mucho pescado. <span class="en-inline">As a child I used to eat a lot of fish.</span></span></li>
+            <li><span class="pron">tú</span><span>¿Dónde <strong>vivías</strong> antes? <span class="en-inline">Where did you use to live before?</span></span></li>
+            <li><span class="pron">él/ella</span><span>Mi familia <strong>vivía</strong> cerca del mar. <span class="en-inline">My family used to live near the sea.</span></span></li>
+            <li><span class="pron">nosotros</span><span><strong>Vivíamos</strong> en un pueblo pequeño. <span class="en-inline">We used to live in a small town.</span></span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="note"><strong>Pattern to notice:</strong> the imperfecto is almost completely regular — -ER and -IR verbs share the same endings (comía/vivía, comías/vivías), and only three verbs are irregular in the whole language: ser, ir and ver.</div>
+      <div class="unlock-nudge">↳ Scroll to read this block fully to unlock the next one.</div>
+    </div>
+  </section>
+
+  <section class="block" id="block-2" data-block="2">
+    <div class="block-head"><span class="block-num">2</span><h2>Three irregulars, and pretérito vs imperfecto</h2><span class="time-tag">10 min</span></div>
+    <div class="panel">
+      <p class="lede" style="margin-bottom:16px; font-size:14.5px;">Only ser, ir and ver break the pattern — learn these three and the imperfecto is done. Then the real skill: knowing which past tense to reach for.</p>
+      <div class="irregular-wrap">
+        <p class="irregular-title">The only three irregular imperfectos</p>
+        <div class="feature-list">
+          <div class="feature-card">
+            <p class="feature-name">Ser → era, eras, era…</p>
+            <p class="feature-desc">No stem change at all in the sense of "irregular endings" — it's just short and doesn't follow -ar/-er patterns.</p>
+            <div class="feature-pair">
+              <span class="feature-standard">De niño era muy tímido.</span>
+              <span class="feature-arrow">=</span>
+              <span class="feature-andaluz">As a child I was very shy.</span>
+            </div>
+          </div>
+          <div class="feature-card">
+            <p class="feature-name">Ir → iba, ibas, iba…</p>
+            <p class="feature-desc">Used constantly for habitual trips: where you used to go, again and again.</p>
+            <div class="feature-pair">
+              <span class="feature-standard">Íbamos a la playa cada verano.</span>
+              <span class="feature-arrow">=</span>
+              <span class="feature-andaluz">We used to go to the beach every summer.</span>
+            </div>
+          </div>
+          <div class="feature-card">
+            <p class="feature-name">Ver → veía, veías, veía…</p>
+            <p class="feature-desc">Keeps the -e- from the infinitive all the way through, unlike a regular -er verb.</p>
+            <div class="feature-pair">
+              <span class="feature-standard">Veía mucho a mis abuelos.</span>
+              <span class="feature-arrow">=</span>
+              <span class="feature-andaluz">I used to see my grandparents a lot.</span>
+            </div>
+          </div>
+        </div>
+        <div class="compare-warning">
+          <strong>Pretérito vs imperfecto:</strong> use pretérito for a single finished event (Ayer fui a Sevilla <span class="en-inline">— Yesterday I went to Seville</span>) and imperfecto for background, description or repeated habit (Cuando era pequeño, iba a Sevilla cada verano <span class="en-inline">— When I was little, I used to go to Seville every summer</span>). Often they appear in the same sentence: <em>Mientras cenábamos, sonó el teléfono</em> <span class="en-inline">— While we were having dinner, the phone rang</span> — imperfecto for what was going on, pretérito for the single event that interrupted it.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="block-3" data-block="3">
+    <div class="block-head"><span class="block-num">3</span><h2>Vocabulary: talking about the past</h2><span class="time-tag">6 min</span></div>
+    <p class="vocab-hint">Tap each card to see an example sentence.</p>
+    <div class="vocab-grid" id="vocab-grid"></div>
+  </section>
+
+  <section class="block" id="block-4" data-block="4">
+    <div class="block-head"><span class="block-num">4</span><h2>Listening: Sofía's family remembers</h2><span class="time-tag">8 min</span></div>
+    <p class="lede" style="margin-bottom:16px;">Four short lines about how things used to be, in relaxed Andaluz. Read the line out loud first, then tap to reveal the standard version.</p>
+    <div id="listening"></div>
+  </section>
+
+  <section class="block" id="block-5" data-block="5">
+    <div class="block-head"><span class="block-num">5</span><h2>Quick check</h2><span class="time-tag">6 min</span></div>
+    <div class="panel">
+      <p class="vocab-hint" style="margin-bottom:14px;">Choosing between pretérito and imperfecto — the key skill for telling a real story.</p>
+      <div id="exercises"></div>
+      <div class="check-bar">
+        <div style="display:flex; gap:10px;">
+          <button class="btn-primary" id="check-btn">Check answers</button>
+          <button class="btn-ghost" id="reset-btn">Reset</button>
+        </div>
+        <span id="score-text"></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="block roleplay-panel" id="block-6" data-block="6">
+    <div class="block-head"><span class="block-num">6</span><h2>Roleplay: comparing childhoods</h2><span class="time-tag">8 min</span></div>
+    <p class="lede" style="margin-bottom:16px;">Three real conversations about how things used to be. Choose one scene to practise out loud in class; the rest stay as a review bank.</p>
+    <div class="scene-tabs" id="scene-tabs"></div>
+    <div id="scene-container"></div>
+    <div class="roleplay-tip"><strong>In class:</strong> we'll practise one scene out loud, swapping roles. The other two are for you to practise on your own during the week.</div>
+  </section>
+
+  <section class="block task-panel" id="block-7" data-block="7">
+    <div class="block-head"><span class="block-num">7</span><h2 style="color:var(--family)">Your task</h2><span class="time-tag">3 min</span></div>
+    <p style="margin:0 0 4px; font-size:15px; color:var(--ink-soft);">Write <strong>5 sentences</strong> about what you were like or what you used to do as a child, using the imperfecto.</p>
+    <div class="listen-reminder">
+      <span class="rec-dot"></span>
+      <span class="rec-text"><strong>Idea:</strong> "De niño era... / Vivía en... / Íbamos a... / Todos los días..." — real memories from your own childhood work best.</span>
+    </div>
+    <textarea id="final-task" placeholder="1. &#10;2. &#10;3. &#10;4. &#10;5. "></textarea>
+    <div class="task-footer">
+      <span id="task-count">0 lines written</span>
+      <div style="display:flex; gap:10px; align-items:center;">
+        <span class="saved-flag" id="saved-flag">Saved ✓</span>
+        <button class="btn-secondary" id="save-btn">Save task</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="complete-panel">
+      <p class="complete-title">De niño... vs ayer</p>
+      <p class="complete-text">Now you have two ways to talk about the past: what happened once (pretérito) and what things were like (imperfecto). Together they're how every real story gets told — in English or in Spanish.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <span>Class 9 · L5, class 1</span>
+  <span>Next: future plans with Sofía's family — ir a + infinitive</span>
+</footer>
+
+<script>
+/* ================= PROGRESS ENGINE ================= */
+const TOTAL_BLOCKS = 7;
+const completed = new Set();
+
+function completeBlock(n){
+  if(completed.has(n)) return;
+  completed.add(n);
+  const numEl = document.querySelector(`#block-${n} .block-num`);
+  if(numEl) numEl.classList.add('is-done');
+  const section = document.getElementById(`block-${n}`);
+  if(section) section.classList.remove('is-locked');
+  updateProgress();
+  soundUnlock();
+  unlockNext(n);
+}
+
+function unlockNext(n){
+  const next = document.getElementById(`block-${n+1}`);
+  if(next) next.classList.remove('is-locked');
+}
+
+function updateProgress(){
+  const pct = Math.round((completed.size / TOTAL_BLOCKS) * 100);
+  document.getElementById('progress-fill').style.width = pct + '%';
+  document.getElementById('progress-text').textContent = `${completed.size}/${TOTAL_BLOCKS} blocks`;
+}
+
+/* ================= SOUND (Web Audio, no assets) ================= */
+let soundOn = false;
+let audioCtx = null;
+
+function playTone(freq, dur){
+  if(!soundOn) return;
+  try{
+    if(!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    osc.type = 'sine';
+    osc.frequency.value = freq;
+    gain.gain.setValueAtTime(0.0001, audioCtx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.12, audioCtx.currentTime + 0.01);
+    gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + dur);
+    osc.connect(gain).connect(audioCtx.destination);
+    osc.start();
+    osc.stop(audioCtx.currentTime + dur);
+  }catch(e){ /* silent failure */ }
+}
+function soundCorrect(){ playTone(660, 0.18); }
+function soundWrong(){ playTone(220, 0.22); }
+function soundUnlock(){
+  playTone(880, 0.1);
+  setTimeout(()=>playTone(1180, 0.14), 90);
+}
+
+const soundToggle = document.getElementById('sound-toggle');
+soundToggle.addEventListener('click', ()=>{
+  soundOn = !soundOn;
+  soundToggle.setAttribute('aria-pressed', String(soundOn));
+  soundToggle.textContent = soundOn ? '🔊' : '🔇';
+});
+
+/* ================= ENGLISH TRANSLATION TOGGLE ================= */
+const enToggle = document.getElementById('en-toggle');
+enToggle.addEventListener('click', ()=>{
+  const on = document.documentElement.getAttribute('data-english') === 'on';
+  if(on){
+    document.documentElement.removeAttribute('data-english');
+    enToggle.setAttribute('aria-pressed', 'false');
+  } else {
+    document.documentElement.setAttribute('data-english', 'on');
+    enToggle.setAttribute('aria-pressed', 'true');
+  }
+});
+
+/* ================= SCROLL-UNLOCK for passive blocks (1, 2, 4) ================= */
+const scrollUnlockObserver = new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      const n = parseInt(entry.target.dataset.block, 10);
+      completeBlock(n);
+      scrollUnlockObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.6 });
+
+[1, 2, 4].forEach(n=>{
+  const el = document.getElementById(`block-${n}`);
+  if(el) scrollUnlockObserver.observe(el);
+});
+
+/* Blocks 3, 5, 6, 7 require real interaction — completed via callbacks below */
+[3,4,5,6,7].forEach(n=>{
+  const el = document.getElementById(`block-${n}`);
+  if(el) el.classList.add('is-locked');
+});
+document.getElementById('block-4').classList.remove('is-locked');
+
+/* ================= VOCAB ================= */
+const VOCAB = [
+  {front:"cuando era pequeño/a (when I was little)", back:"Cuando era pequeño, vivía en Manchester.", back_en:"When I was little, I lived in Manchester."},
+  {front:"de niño/a (as a child)", back:"De niña, Sofía iba a la playa cada verano.", back_en:"As a child, Sofía used to go to the beach every summer."},
+  {front:"antes (before, in the past)", back:"Antes no hablaba nada de español.", back_en:"Before, I didn't speak any Spanish at all."},
+  {front:"siempre (always)", back:"Mi abuela siempre cocinaba los domingos.", back_en:"My grandmother always used to cook on Sundays."},
+  {front:"todos los días (every day)", back:"Todos los días caminaba al colegio.", back_en:"Every day I used to walk to school."},
+  {front:"mientras (while)", back:"Mientras cenábamos, Manolo contaba historias.", back_en:"While we were having dinner, Manolo used to tell stories."},
+];
+
+const grid = document.getElementById('vocab-grid');
+let vocabFlips = 0;
+VOCAB.forEach(v=>{
+  const card = document.createElement('div');
+  card.className = 'vocab-card';
+  card.setAttribute('role', 'button');
+  card.setAttribute('tabindex', '0');
+  card.setAttribute('aria-pressed', 'false');
+  card.setAttribute('aria-label', `${v.front}. Tap to see an example.`);
+  card.innerHTML = `<div class="vocab-front">${v.front}</div><div class="vocab-back">${v.back} <span class="en-inline">${v.back_en}</span></div>`;
+  const toggle = ()=>{
+    const flipped = card.classList.toggle('flipped');
+    card.setAttribute('aria-pressed', String(flipped));
+    if(flipped){
+      vocabFlips++;
+      soundCorrect();
+      if(vocabFlips >= 4) completeBlock(3);
+    }
+  };
+  card.addEventListener('click', toggle);
+  card.addEventListener('keydown', (e)=>{
+    if(e.key === 'Enter' || e.key === ' '){
+      e.preventDefault();
+      toggle();
+    }
+  });
+  grid.appendChild(card);
+});
+
+/* ================= LISTENING PRACTICE ================= */
+const LISTENING = [
+  {
+    andaluz: "\u201cDe pequeña iba a la playa to\u2019 lo\u2019 verano\u2019, illo.\u201d",
+    standard: "\u201cDe pequeña iba a la playa todos los veranos, illo.\u201d — \u201cAs a little girl I used to go to the beach every summer.\u201d",
+    note: "Dropped final -s on \u201ctodos\u201d and \u201cveranos\u201d — \u201ciba\u201d is the irregular imperfecto of ir."
+  },
+  {
+    andaluz: "\u201cMi abuela siempre cociná\u2019 pa\u2019 too\u2019 la familia.\u201d",
+    standard: "\u201cMi abuela siempre cocinaba para toda la familia.\u201d — \u201cMy grandmother always used to cook for the whole family.\u201d",
+    note: "\u201cCocinaba\u201d softened; \u201cpara\u201d shortened to \u201cpa\u2019\u201d — a regular -ar imperfecto."
+  },
+  {
+    andaluz: "\u201cCuando era chico, no había ni móvile\u2019, illo.\u201d",
+    standard: "\u201cCuando era chico, no había ni móviles, illo.\u201d — \u201cWhen I was a kid, there weren't even mobile phones.\u201d",
+    note: "\u201cHabía\u201d is the imperfecto of hay (there was/were) — used constantly to describe how things used to be."
+  },
+  {
+    andaluz: "\u201cMientra\u2019 mi padre trabajaba, nosotro\u2019 jugábamo\u2019 en la calle.\u201d",
+    standard: "\u201cMientras mi padre trabajaba, nosotros jugábamos en la calle.\u201d — \u201cWhile my father worked, we used to play in the street.\u201d",
+    note: "Two imperfectos en una frase — background action (trabajaba) alongside a repeated habit (jugábamos)."
+  }
+];
+
+const listenWrap = document.getElementById('listening');
+LISTENING.forEach((l, i)=>{
+  const card = document.createElement('div');
+  card.className = 'listen-card';
+  card.innerHTML = `
+    <div class="listen-head">
+      <span class="listen-icon">🎧</span>
+      <p class="listen-title">Line ${i+1}</p>
+      <button class="listen-toggle" data-idx="${i}">Reveal standard</button>
+    </div>
+    <p class="listen-andaluz">${l.andaluz}</p>
+    <p class="listen-standard" id="standard-${i}">${l.standard}</p>
+    <p class="listen-note">${l.note}</p>
+  `;
+  listenWrap.appendChild(card);
+});
+
+let revealedLines = 0;
+listenWrap.addEventListener('click', (e)=>{
+  const btn = e.target.closest('.listen-toggle');
+  if(!btn) return;
+  const idx = btn.dataset.idx;
+  const standardEl = document.getElementById(`standard-${idx}`);
+  const shown = standardEl.classList.toggle('show');
+  btn.textContent = shown ? 'Hide standard' : 'Reveal standard';
+  if(shown){
+    revealedLines++;
+    soundCorrect();
+  }
+});
+
+/* ================= EXERCISES ================= */
+const EXERCISES = [
+  {
+    "sentence": "Cuando <span class=\"gap\">___</span> pequeño, vivía en Manchester.",
+    "sentence_en": "When I was little, I lived in Manchester.",
+    "options": ["fui", "era", "soy"],
+    "answer": "era"
+  },
+  {
+    "sentence": "Ayer <span class=\"gap\">___</span> a la Feria con Sofía por primera vez.",
+    "sentence_en": "Yesterday I went to the Feria with Sofía for the first time.",
+    "options": ["iba", "fui", "voy"],
+    "answer": "fui"
+  },
+  {
+    "sentence": "De niña, Sofía <span class=\"gap\">___</span> a la playa cada verano.",
+    "sentence_en": "As a little girl, Sofía used to go to the beach every summer.",
+    "options": ["fue", "iba", "va"],
+    "answer": "iba"
+  },
+  {
+    "sentence": "Mientras <span class=\"gap\">___</span> con Manolo, sonó el teléfono.",
+    "sentence_en": "While I was having dinner with Manolo, the phone rang.",
+    "options": ["cené", "cenaba", "ceno"],
+    "answer": "cenaba"
+  },
+  {
+    "sentence": "El sábado <span class=\"gap\">___</span> mucho pescaíto frito en la caseta.",
+    "sentence_en": "On Saturday I ate a lot of fried fish at the caseta.",
+    "options": ["comía", "comí", "como"],
+    "answer": "comí"
+  },
+  {
+    "sentence": "Antes no <span class=\"gap\">___</span> nada de español.",
+    "sentence_en": "Before, I didn't speak any Spanish at all.",
+    "options": ["hablé", "hablaba", "hablo"],
+    "answer": "hablaba"
+  },
+  {
+    "sentence": "Mi abuela siempre <span class=\"gap\">___</span> los domingos.",
+    "sentence_en": "My grandmother always used to cook on Sundays.",
+    "options": ["cocinó", "cocinaba", "cocina"],
+    "answer": "cocinaba"
+  },
+  {
+    "sentence": "Cuando era pequeño, no <span class=\"gap\">___</span> ni móviles.",
+    "sentence_en": "When I was little, there weren't even mobile phones.",
+    "options": ["había", "hubo", "hay"],
+    "answer": "había"
+  },
+  {
+    "sentence": "El verano pasado, Noah y Sofía <span class=\"gap\">___</span> a Sevilla juntos.",
+    "sentence_en": "Last summer, Noah and Sofía went to Seville together.",
+    "options": ["iban", "fueron", "van"],
+    "answer": "fueron"
+  },
+  {
+    "sentence": "\u201cTo\u2019 lo\u2019 verano\u2019\u201d es la forma andaluza reducida de <span class=\"gap\">___</span>.",
+    "sentence_en": "\u201cTo\u2019 lo\u2019 verano\u2019\u201d is the reduced Andaluz form of \u201call the summers.\u201d",
+    "options": ["todos los veranos", "toda la verano", "todo el verano"],
+    "answer": "todos los veranos"
+  },
+  {
+    "sentence": "De pequeño, Noah <span class=\"gap\">___</span> muy tímido en el colegio.",
+    "sentence_en": "As a child, Noah was very shy at school.",
+    "options": ["fue", "era", "es"],
+    "answer": "era"
+  },
+  {
+    "sentence": "El domingo pasado <span class=\"gap\">___</span> a la Feria con toda la familia de Sofía.",
+    "sentence_en": "Last Sunday I went to the Feria with Sofía's whole family.",
+    "options": ["iba", "fui", "voy"],
+    "answer": "fui"
+  },
+  {
+    "sentence": "Cuando <span class=\"gap\">___</span> niño, Manolo vivía en un pueblo pequeño.",
+    "sentence_en": "When he was a boy, Manolo used to live in a small town.",
+    "options": ["fue", "era", "es"],
+    "answer": "era"
+  },
+  {
+    "sentence": "Mientras Sofía <span class=\"gap\">___</span>, Noah preparaba la cena.",
+    "sentence_en": "While Sofía was studying, Noah was making dinner.",
+    "options": ["estudió", "estudiaba", "estudia"],
+    "answer": "estudiaba"
+  },
+  {
+    "sentence": "Anoche <span class=\"gap\">___</span> pescaíto frito por primera vez.",
+    "sentence_en": "Last night I tried fried fish for the first time.",
+    "options": ["probaba", "probé", "pruebo"],
+    "answer": "probé"
+  },
+  {
+    "sentence": "De pequeña, Sofía <span class=\"gap\">___</span> con sus primos todos los veranos.",
+    "sentence_en": "As a little girl, Sofía used to play with her cousins every summer.",
+    "options": ["jugó", "jugaba", "juega"],
+    "answer": "jugaba"
+  },
+  {
+    "sentence": "El año pasado Noah y Sofía se <span class=\"gap\">___</span> en Sevilla.",
+    "sentence_en": "Last year Noah and Sofía met in Seville.",
+    "options": ["conocían", "conocieron", "conocen"],
+    "answer": "conocieron"
+  },
+  {
+    "sentence": "Antes, Manolo no <span class=\"gap\">___</span> nada de inglés.",
+    "sentence_en": "Before, Manolo didn't know any English at all.",
+    "options": ["sabía", "supo", "sabe"],
+    "answer": "sabía"
+  },
+  {
+    "sentence": "Mientras <span class=\"gap\">___</span> por la calle, Noah vio la casa de Sofía.",
+    "sentence_en": "While he was walking down the street, Noah saw Sofía's house.",
+    "options": ["caminó", "caminaba", "camina"],
+    "answer": "caminaba"
+  },
+  {
+    "sentence": "De niño, Noah <span class=\"gap\">___</span> al colegio en bicicleta.",
+    "sentence_en": "As a child, Noah used to go to school by bike.",
+    "options": ["fue", "iba", "va"],
+    "answer": "iba"
+  },
+  {
+    "sentence": "Ayer por la noche <span class=\"gap\">___</span> con toda la familia de Sofía.",
+    "sentence_en": "Last night I had dinner with Sofía's whole family.",
+    "options": ["cenaba", "cené", "ceno"],
+    "answer": "cené"
+  },
+  {
+    "sentence": "Cuando Manolo era joven, <span class=\"gap\">___</span> mucho la radio.",
+    "sentence_en": "When Manolo was young, he used to listen to the radio a lot.",
+    "options": ["escuchó", "escuchaba", "escucha"],
+    "answer": "escuchaba"
+  },
+  {
+    "sentence": "El sábado pasado, Sofía le <span class=\"gap\">___</span> a Noah toda Sevilla.",
+    "sentence_en": "Last Saturday, Sofía showed Noah all of Seville.",
+    "options": ["enseñaba", "enseñó", "enseña"],
+    "answer": "enseñó"
+  },
+  {
+    "sentence": "De pequeños, Noah y su hermana <span class=\"gap\">___</span> mucho tiempo juntos.",
+    "sentence_en": "As children, Noah and his sister used to spend a lot of time together.",
+    "options": ["pasaron", "pasaban", "pasan"],
+    "answer": "pasaban"
+  },
+  {
+    "sentence": "Mientras Manolo <span class=\"gap\">___</span> historias, todos escuchaban en silencio.",
+    "sentence_en": "While Manolo was telling stories, everyone listened in silence.",
+    "options": ["contó", "contaba", "cuenta"],
+    "answer": "contaba"
+  },
+  {
+    "sentence": "El mes pasado, Sofía <span class=\"gap\">___</span> a Noah a la casa de sus abuelos.",
+    "sentence_en": "Last month, Sofía took Noah to her grandparents' house.",
+    "options": ["llevaba", "llevó", "lleva"],
+    "answer": "llevó"
+  },
+  {
+    "sentence": "De niño, Noah <span class=\"gap\">___</span> mucho miedo a la oscuridad.",
+    "sentence_en": "As a child, Noah was very afraid of the dark.",
+    "options": ["tuvo", "tenía", "tiene"],
+    "answer": "tenía"
+  }
+];
+
+const exWrap = document.getElementById('exercises');
+EXERCISES.forEach((ex, i)=>{
+  const el = document.createElement('div');
+  el.className = 'exercise';
+  el.dataset.answer = ex.answer;
+  el.innerHTML = `
+    <div class="ex-sentence">${i+1}. ${ex.sentence} <span class="en-inline">${ex.sentence_en}</span> <span class="answer-flag" data-flag="${i}"></span></div>
+    <div class="ex-options">
+      ${ex.options.map(o=>`<button class="opt-btn" data-value="${o}">${o}</button>`).join('')}
+    </div>
+  `;
+  exWrap.appendChild(el);
+
+  el.querySelectorAll('.opt-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      el.querySelectorAll('.opt-btn').forEach(b=>b.classList.remove('picked'));
+      btn.classList.add('picked');
+    });
+  });
+});
+
+function animateCount(el, target){
+  let current = 0;
+  el.classList.add('bump');
+  const step = ()=>{
+    current++;
+    el.textContent = current;
+    if(current < target){
+      requestAnimationFrame(()=>setTimeout(step, 55));
+    } else {
+      setTimeout(()=>el.classList.remove('bump'), 150);
+    }
+  };
+  if(target === 0){ el.textContent = 0; return; }
+  step();
+}
+
+document.getElementById('check-btn').addEventListener('click', ()=>{
+  let correct = 0;
+  document.querySelectorAll('.exercise').forEach((el, i)=>{
+    const answer = el.dataset.answer;
+    const picked = el.querySelector('.opt-btn.picked');
+    const flag = el.querySelector('.answer-flag');
+    el.querySelectorAll('.opt-btn').forEach(b=>{
+      b.disabled = true;
+      if(b.dataset.value === answer) b.classList.add('correct');
+      else if(b === picked) b.classList.add('wrong');
+    });
+    const isCorrect = picked && picked.dataset.value === answer;
+    if(isCorrect){
+      correct++;
+      flag.textContent = '✓';
+      flag.classList.add('ok');
+      flag.setAttribute('aria-label', 'correct');
+    } else {
+      flag.textContent = '✗';
+      flag.classList.add('no');
+      flag.setAttribute('aria-label', 'incorrect');
+    }
+    flag.classList.add('show');
+  });
+  document.getElementById('score-text').innerHTML = `<span id="score-num">0</span> / ${EXERCISES.length} correct`;
+  animateCount(document.getElementById('score-num'), correct);
+  if(correct > 0) soundCorrect(); else soundWrong();
+  completeBlock(5);
+});
+
+document.getElementById('reset-btn').addEventListener('click', ()=>{
+  document.querySelectorAll('.exercise').forEach(el=>{
+    el.querySelectorAll('.opt-btn').forEach(b=>{
+      b.disabled = false;
+      b.classList.remove('picked','correct','wrong');
+    });
+    const flag = el.querySelector('.answer-flag');
+    flag.classList.remove('show','ok','no');
+    flag.textContent = '';
+  });
+  document.getElementById('score-text').textContent = '';
+});
+
+/* ================= ROLEPLAY SCENES ================= */
+const SCENES = [
+  {
+    "id": "sofia-infancia",
+    "tab": "Comparing childhoods",
+    "icon": "🧸",
+    "setup": "Sofía is curious about what Noah was like as a boy in England, and you're curious about her childhood in Sevilla.",
+    "lines": [
+      { "who": "friend", "name": "Sofía", "text": "¿Cómo eras tú de pequeño? ¿Tímido, hablador...?", "text_en": "What were you like as a boy? Shy, chatty...?" },
+      { "who": "you", "hint": "Describe yourself as a child, using \"era\"." },
+      { "who": "friend", "name": "Sofía", "text": "¿Dónde vivías? ¿Cerca del mar?", "text_en": "Where did you use to live? Near the sea?" },
+      { "who": "you", "hint": "Answer using \"vivía\"." },
+      { "who": "friend", "name": "Sofía", "text": "Yo de niña siempre iba a la playa con mis abuelos.", "text_en": "As a girl I always used to go to the beach with my grandparents." },
+      { "who": "you", "hint": "React and ask her a follow-up question using \"ibas\" or \"veías\"." },
+      { "who": "friend", "name": "Sofía", "text": "¿Qué hacías los domingos con tu familia?", "text_en": "What did you use to do on Sundays with your family?" },
+      { "who": "you", "hint": "Describe a habitual Sunday activity, using the imperfecto." },
+      { "who": "friend", "name": "Sofía", "text": "Qué diferente a como era yo, illo.", "text_en": "How different from how I was, illo." },
+      { "who": "you", "hint": "Agree or compare, using \"también\" or \"pero\"." }
+    ]
+  },
+  {
+    "id": "manolo-recuerdos",
+    "tab": "Manolo's memories",
+    "icon": "📻",
+    "setup": "Manolo loves telling stories about how things used to be — and he wants to hear about England too.",
+    "lines": [
+      { "who": "friend", "name": "Manolo", "text": "Cuando yo era joven, no había ni televisión en casa. ¿Y en Inglaterra?", "text_en": "When I was young, we didn't even have a television at home. And in England?" },
+      { "who": "you", "hint": "React, using \"había\" or comparing with your own childhood." },
+      { "who": "friend", "name": "Manolo", "text": "¿Qué idioma hablabas en casa de pequeño?", "text_en": "What language did you use to speak at home as a child?" },
+      { "who": "you", "hint": "Answer using \"hablaba\"." },
+      { "who": "friend", "name": "Manolo", "text": "¿Ibas mucho a visitar a tus abuelos?", "text_en": "Did you use to visit your grandparents a lot?" },
+      { "who": "you", "hint": "Answer using \"iba\" or \"veía\"." },
+      { "who": "friend", "name": "Manolo", "text": "Antes la gente vivía más despacio, ¿no crees?", "text_en": "People used to live more slowly before, don't you think?" },
+      { "who": "you", "hint": "Agree or disagree, using \"antes\" and the imperfecto." },
+      { "who": "friend", "name": "Manolo", "text": "Cuéntame algo que hacías siempre de niño.", "text_en": "Tell me something you always used to do as a child." },
+      { "who": "you", "hint": "Share a childhood habit, using \"siempre\" plus the imperfecto." }
+    ]
+  },
+  {
+    "id": "amigo-entonces-ahora",
+    "tab": "Then vs now",
+    "icon": "🔄",
+    "setup": "An English friend asks how your life has changed since you started spending time with Sofía's family.",
+    "lines": [
+      { "who": "friend", "name": "Friend", "text": "So what were you like before you met Sofía?" },
+      { "who": "you", "hint": "Reply in Spanish, using \"era\" to describe yourself before." },
+      { "who": "friend", "name": "Friend", "text": "Did you use to speak any Spanish at all?" },
+      { "who": "you", "hint": "Answer using \"hablaba\" or \"no hablaba\"." },
+      { "who": "friend", "name": "Friend", "text": "And now, how's it different?" },
+      { "who": "you", "hint": "Contrast then and now, mixing imperfecto with present tense." },
+      { "who": "friend", "name": "Friend", "text": "Do you think you'll keep learning?" },
+      { "who": "you", "hint": "Answer briefly, you can use present or a simple future idea." },
+      { "who": "friend", "name": "Friend", "text": "Sounds like a big change." },
+      { "who": "you", "hint": "Agree and summarise, using a connector (porque, y, pero)." }
+    ]
+  },
+  {
+    "id": "abuela-sofia-cocina",
+    "tab": "Grandma's kitchen",
+    "icon": "🍲",
+    "setup": "Sofía's grandmother is cooking and asks Noah about meals and family life back in England when he was a child.",
+    "lines": [
+      { "who": "friend", "name": "Abuela", "text": "¿Qué comíais en tu casa cuando eras pequeño?", "text_en": "What did you use to eat at home when you were little?" },
+      { "who": "you", "hint": "Describe a typical childhood meal, using \"comíamos\" or \"comía\"." },
+      { "who": "friend", "name": "Abuela", "text": "¿Quién cocinaba en tu familia, tu madre o tu padre?", "text_en": "Who used to cook in your family, your mother or your father?" },
+      { "who": "you", "hint": "Answer using \"cocinaba\"." },
+      { "who": "friend", "name": "Abuela", "text": "Aquí antes comíamos todos juntos los domingos, sin prisa.", "text_en": "Here we used to all eat together on Sundays, without rushing." },
+      { "who": "you", "hint": "Compare with your own family, using \"nosotros también\" or \"nosotros no\"." },
+      { "who": "friend", "name": "Abuela", "text": "¿Y de postre, qué solía haber?", "text_en": "And for dessert, what was there usually?" },
+      { "who": "you", "hint": "Describe a childhood dessert habit, using the imperfecto." },
+      { "who": "friend", "name": "Abuela", "text": "Qué bien, hijo, así se aprende, comiendo y hablando.", "text_en": "How nice, dear, that's how you learn, eating and talking." },
+      { "who": "you", "hint": "Close warmly, thanking her or agreeing, using a simple imperfecto or present phrase." }
+    ]
+  },
+  {
+    "id": "profesor-colegio",
+    "tab": "School days",
+    "icon": "🎒",
+    "setup": "A neighbour who used to be a schoolteacher asks Noah what school was like for him growing up in England.",
+    "lines": [
+      { "who": "friend", "name": "Vecino", "text": "¿Cómo era tu colegio de pequeño?", "text_en": "What was your school like when you were little?" },
+      { "who": "you", "hint": "Describe your childhood school, using \"era\"." },
+      { "who": "friend", "name": "Vecino", "text": "¿Ibas a pie o te llevaban en coche?", "text_en": "Did you use to walk or did they drive you?" },
+      { "who": "you", "hint": "Answer using \"iba\" or \"me llevaban\"." },
+      { "who": "friend", "name": "Vecino", "text": "¿Qué asignatura te gustaba más?", "text_en": "Which subject did you like the most?" },
+      { "who": "you", "hint": "Answer using \"me gustaba\"." },
+      { "who": "friend", "name": "Vecino", "text": "Yo de profesor siempre llegaba el primero a clase.", "text_en": "As a teacher I always used to arrive first to class." },
+      { "who": "you", "hint": "React, and ask him a follow-up question using the imperfecto." },
+      { "who": "friend", "name": "Vecino", "text": "Qué recuerdos, ¿verdad? Todo era más tranquilo.", "text_en": "What memories, right? Everything used to be calmer." },
+      { "who": "you", "hint": "Agree or add a final thought, using \"era\" or \"había\"." }
+    ]
+  }
+];
+
+const sceneTabs = document.getElementById('scene-tabs');
+const sceneContainer = document.getElementById('scene-container');
+let activeScene = 0;
+let filledOnce = new Set();
+
+function renderTabs(){
+  sceneTabs.innerHTML = SCENES.map((s,i)=>
+    `<button class="scene-tab${i===activeScene?' active':''}" data-idx="${i}">${s.icon} ${s.tab}</button>`
+  ).join('');
+  sceneTabs.querySelectorAll('.scene-tab').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      activeScene = parseInt(btn.dataset.idx, 10);
+      renderTabs();
+      renderScene();
+    });
+  });
+}
+
+function renderScene(){
+  const scene = SCENES[activeScene];
+  const linesHtml = scene.lines.map((l, li)=>{
+    if(l.who === 'friend'){
+      return `
+        <div class="line friend">
+          <div class="line-avatar">${l.name.charAt(0)}</div>
+          <div class="line-body">
+            <p class="line-name">${l.name}</p>
+            <div class="line-bubble">${l.text}${l.text_en ? ` <span class="en-inline">${l.text_en}</span>` : ''}</div>
+          </div>
+        </div>`;
+    } else {
+      return `
+        <div class="line you">
+          <div class="line-avatar">You</div>
+          <div class="line-body">
+            <p class="line-name">You</p>
+            <div class="line-input-wrap">
+              <textarea class="line-input" rows="2" placeholder="Write your reply..." data-scene="${scene.id}" data-line="${li}"></textarea>
+              <div class="typing-dots"><span></span><span></span><span></span></div>
+            </div>
+            <p class="line-hint">${l.hint}</p>
+          </div>
+        </div>`;
+    }
+  }).join('');
+
+  sceneContainer.innerHTML = `
+    <div class="scene-setup">
+      <span class="scene-icon">${scene.icon}</span>
+      <p class="scene-text"><strong>${scene.tab}:</strong> ${scene.setup}</p>
+    </div>
+    <div class="dialogue">${linesHtml}</div>
+  `;
+
+  sceneContainer.querySelectorAll('.line-input').forEach(ta=>{
+    const dots = ta.nextElementSibling;
+    let typingTimer;
+    ta.addEventListener('input', ()=>{
+      dots.classList.add('show');
+      clearTimeout(typingTimer);
+      typingTimer = setTimeout(()=>dots.classList.remove('show'), 900);
+
+      const key = `${ta.dataset.scene}-${ta.dataset.line}`;
+      if(ta.value.trim().length > 0 && !filledOnce.has(key)){
+        filledOnce.add(key);
+        if(filledOnce.size >= 3) completeBlock(6);
+      }
+    });
+    ta.addEventListener('blur', ()=>{
+      clearTimeout(typingTimer);
+      dots.classList.remove('show');
+    });
+  });
+}
+
+renderTabs();
+renderScene();
+
+/* ================= FINAL TASK ================= */
+const STORAGE_KEY = 'noah-clase09-tarea';
+const taskArea = document.getElementById('final-task');
+const taskCount = document.getElementById('task-count');
+const savedFlag = document.getElementById('saved-flag');
+
+async function cargarTarea(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(STORAGE_KEY);
+    if (res && typeof res.value === 'string') taskArea.value = res.value;
+  }catch(e){
+    // Key doesn't exist yet: no previous task, stays blank.
+  }
+  updateCount();
+}
+
+function updateCount(){
+  const lines = taskArea.value.split('\n').filter(l => l.trim().length > 0).length;
+  taskCount.textContent = `${lines} line${lines===1?'':'s'} written`;
+  if(lines >= 5) completeBlock(7);
+}
+taskArea.addEventListener('input', updateCount);
+updateCount();
+cargarTarea();
+
+document.getElementById('save-btn').addEventListener('click', async ()=>{
+  if (!window.storage){
+    savedFlag.textContent = 'Saving not available here';
+    savedFlag.classList.add('show');
+    setTimeout(()=>{ savedFlag.classList.remove('show'); savedFlag.textContent = 'Saved ✓'; }, 2200);
+    return;
+  }
+  try{
+    const ok = await window.storage.set(STORAGE_KEY, taskArea.value);
+    savedFlag.textContent = ok ? 'Saved ✓' : 'Could not save';
+  }catch(e){
+    savedFlag.textContent = 'Could not save';
+  }
+  savedFlag.classList.add('show');
+  setTimeout(()=>{ savedFlag.classList.remove('show'); savedFlag.textContent = 'Saved ✓'; }, 1800);
+});
+
+updateProgress();
+</script>
+
+</body>
+</html>
