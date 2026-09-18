@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clase 1 · Ser vs. estar — Hannah</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ... (mismo CSS que en el original, sin cambios) ... */
+:root{
+  --paper:        #FBF7EE;
+  --paper-raised: #FFFFFF;
+  --paper-alt:    #F3ECDA;
+  --ink:          #23291F;
+  --ink-soft:     #565F52;
+  --ink-faint:    #8B9184;
+  --line:         rgba(35,41,31,0.12);
+  --line-strong:  rgba(35,41,31,0.22);
+  --b1:      #2F6FED;  --b1-soft: #EAF1FE;  --b1-line: #C6D9FC;
+  --b2:      #2E9E6B;  --b2-soft: #E9F6EF;  --b2-line: #BEE6D3;
+  --family:  #B5502E;  --family-soft: #FBEBE3; --family-line: #EFC9B4;
+  --f-display: 'Fraunces', Georgia, serif;
+  --f-body:    'IBM Plex Sans', system-ui, sans-serif;
+  --f-data:    'IBM Plex Mono', monospace;
+  --r-sm: 8px;
+  --r-md: 14px;
+  --r-lg: 20px;
+  --shadow-1: 0 1px 2px rgba(35,41,31,0.05), 0 1px 8px rgba(35,41,31,0.04);
+}
+*{ box-sizing:border-box; }
+body{
+  margin:0;
+  background: var(--paper);
+  background-image: radial-gradient(circle at 1px 1px, var(--line) 1px, transparent 0);
+  background-size: 22px 22px;
+  color: var(--ink);
+  font-family: var(--f-body);
+  line-height:1.6;
+}
+::selection{ background: var(--b1-soft); }
+header{ padding:44px 24px 28px; max-width:760px; margin:0 auto; }
+.eyebrow{
+  font-family: var(--f-data); font-size:12px; letter-spacing:.14em;
+  text-transform:uppercase; color: var(--b1); margin:0 0 10px;
+  display:flex; align-items:center; gap:10px;
+}
+.eyebrow .dot{ width:6px; height:6px; border-radius:50%; background: var(--b1); }
+h1{
+  font-family: var(--f-display); font-weight:600;
+  font-size:clamp(30px,5.6vw,46px); line-height:1.08;
+  margin:0 0 14px; letter-spacing:-.01em;
+}
+h1 em{ font-style:italic; color: var(--b1); }
+.lede{ font-size:16px; color: var(--ink-soft); max-width:56ch; margin:0; }
+.meta-row{
+  display:flex; flex-wrap:wrap; gap:20px; margin-top:26px;
+  font-family: var(--f-data); font-size:12px; color: var(--ink-faint);
+}
+.meta-row strong{
+  display:block; color: var(--ink); font-size:14.5px; font-weight:500;
+  font-family: var(--f-display); margin-top:3px;
+}
+main{ max-width:760px; margin:0 auto; padding:8px 24px 100px; }
+section.block{ margin-bottom:52px; }
+.block-head{ display:flex; align-items:baseline; gap:12px; margin-bottom:18px; }
+.time-tag{
+  font-family: var(--f-data); font-size:11px; color: var(--ink-faint);
+  background: var(--paper-alt); padding:3px 10px; border-radius:999px; margin-left:auto; flex:none;
+}
+.block-num{
+  font-family: var(--f-data); font-size:12px; color:#fff; background: var(--b1);
+  width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  flex:none;
+}
+.block-head h2{
+  font-family: var(--f-display); font-weight:500; font-style:italic; font-size:22px; margin:0;
+}
+.panel{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-lg);
+  box-shadow: var(--shadow-1); padding:26px 28px;
+}
+.conj-table{ width:100%; border-collapse:collapse; margin-top:4px; }
+.conj-table td{ padding:10px 6px; border-bottom:1px dashed var(--line); font-size:15px; }
+.conj-table tr:last-child td{ border-bottom:none; }
+.conj-pron{ font-family: var(--f-data); color: var(--ink-faint); font-size:13px; width:90px; }
+.conj-form{ font-family: var(--f-display); font-weight:600; font-size:19px; color: var(--b1); }
+.conj-ex{ color: var(--ink-soft); font-size:14px; }
+.note{
+  margin-top:18px; padding:14px 16px; background: var(--b1-soft); border:1px solid var(--b1-line);
+  border-radius: var(--r-md); font-size:14px; color: var(--ink-soft);
+}
+.note strong{ color: var(--ink); }
+.compare-wrap{ margin-top:22px; }
+.compare-title{
+  font-family: var(--f-data); font-size:11.5px; text-transform:uppercase; letter-spacing:.06em;
+  color: var(--ink-faint); margin:0 0 10px;
+}
+.compare-grid{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+@media (max-width:560px){ .compare-grid{ grid-template-columns:1fr; } }
+.compare-col{ border-radius: var(--r-md); padding:16px 18px; border:1px solid; }
+.compare-col.is-ser{ background: var(--b1-soft); border-color: var(--b1-line); }
+.compare-col.is-estar{ background: var(--b2-soft); border-color: var(--b2-line); }
+.compare-head{ display:flex; align-items:center; gap:8px; margin:0 0 10px; }
+.compare-verb{ font-family: var(--f-display); font-weight:600; font-size:19px; }
+.is-ser .compare-verb{ color: var(--b1); }
+.is-estar .compare-verb{ color: var(--b2); }
+.compare-sub{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); }
+.compare-list{ margin:0; padding:0; list-style:none; }
+.compare-list li{ font-size:13.5px; color: var(--ink-soft); padding:6px 0; border-top:1px dashed var(--line); }
+.compare-list li:first-child{ border-top:none; }
+.compare-list strong{ color: var(--ink); font-weight:600; }
+.compare-list em{ display:block; font-style:normal; color: var(--ink-faint); font-size:12.5px; margin-top:2px; }
+.compare-warning{
+  margin-top:14px; padding:14px 16px; background: var(--family-soft); border:1px solid var(--family-line);
+  border-radius: var(--r-md); font-size:13.5px; color: var(--ink-soft);
+}
+.compare-warning strong{ color: var(--family); }
+.vocab-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:12px; }
+.vocab-card{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:14px 16px; cursor:pointer; perspective:600px; min-height:78px;
+  display:flex; flex-direction:column; justify-content:center; transition: border-color .15s ease;
+}
+.vocab-card:hover{ border-color: var(--b1-line); }
+.vocab-card:focus-visible{ outline:2px solid var(--b1); outline-offset:2px; }
+.vocab-front{ font-family: var(--f-body); font-weight:600; font-size:15px; }
+.vocab-back{ display:none; font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); margin-top:6px; }
+.vocab-card.flipped .vocab-back{ display:block; }
+.vocab-card.flipped{ background: var(--b1-soft); border-color: var(--b1-line); }
+.vocab-hint{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin:10px 2px 16px; }
+.exercise{ margin-bottom:20px; }
+.exercise:last-of-type{ margin-bottom:0; }
+.ex-sentence{ font-size:15.5px; margin-bottom:10px; }
+.ex-sentence .gap{ font-family: var(--f-data); color: var(--ink-faint); }
+.ex-options{ display:flex; flex-wrap:wrap; gap:8px; }
+.opt-btn{
+  font-family: var(--f-body); font-size:14px; background: var(--paper-raised);
+  border:1.5px solid var(--line); color: var(--ink); padding:7px 16px; border-radius:999px;
+  cursor:pointer; transition: all .15s ease;
+}
+.opt-btn:hover{ border-color: var(--ink-faint); }
+.opt-btn.picked{ background: var(--b1-soft); border-color: var(--b1); color: var(--b1); }
+.opt-btn.correct{ background: var(--b2-soft); border-color: var(--b2); color: var(--b2); }
+.opt-btn.wrong{ background: var(--family-soft); border-color: var(--family); color: var(--family); }
+.opt-btn:disabled{ cursor:default; }
+.check-bar{
+  display:flex; align-items:center; justify-content:space-between; gap:16px;
+  margin-top:22px; padding-top:18px; border-top:1px dashed var(--line);
+}
+.btn-primary{
+  font-family: var(--f-body); font-weight:600; font-size:14px; color:#fff; background: var(--b1);
+  border:none; padding:11px 22px; border-radius:999px; cursor:pointer; transition: transform .1s ease;
+}
+.btn-primary:hover{ transform: translateY(-1px); }
+#score-text{ font-family: var(--f-data); font-size:13px; color: var(--ink-faint); }
+.btn-ghost{
+  font-family: var(--f-body); font-weight:600; font-size:13px; color: var(--ink-soft); background:none;
+  border:1.5px solid var(--line); padding:9px 18px; border-radius:999px; cursor:pointer;
+}
+.btn-ghost:hover{ border-color: var(--ink-faint); }
+.ex-divider{
+  display:flex; align-items:center; gap:10px; margin:20px 0 16px;
+  font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.06em;
+  color: var(--ink-faint);
+}
+.ex-divider::before, .ex-divider::after{ content:""; flex:1; height:1px; background: var(--line); }
+.ex-divider.en-clase{ color: var(--b1); }
+.ex-divider.en-clase::before, .ex-divider.en-clase::after{ background: var(--b1-line); }
+.characters{ display:grid; gap:16px; }
+.char-card{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-lg);
+  padding:20px 22px; display:flex; gap:16px; align-items:flex-start;
+}
+.char-avatar{
+  flex:none; width:44px; height:44px; border-radius:50%; background: var(--b1-soft);
+  display:flex; align-items:center; justify-content:center; font-family: var(--f-display);
+  font-weight:600; font-size:17px; color: var(--b1);
+}
+.char-body{ flex:1; }
+.char-name{ font-family: var(--f-display); font-weight:600; font-size:17px; margin:0 0 4px; }
+.char-role{ font-family: var(--f-data); font-size:11.5px; text-transform:uppercase; letter-spacing:.05em; color: var(--ink-faint); margin:0 0 10px; }
+.char-facts{ display:flex; flex-wrap:wrap; gap:6px; margin-bottom:10px; }
+.fact-tag{
+  font-family: var(--f-data); font-size:12px; background: var(--paper-alt); color: var(--ink-soft);
+  padding:4px 10px; border-radius:999px;
+}
+.char-prompt{ font-size:14px; color: var(--ink-soft); }
+.char-input{
+  width:100%; margin-top:8px; font-family: var(--f-body); font-size:14.5px; color: var(--ink);
+  background: var(--paper); border:1px solid var(--line); border-radius: var(--r-sm);
+  padding:10px 12px; resize:vertical; min-height:44px;
+}
+.char-input:focus{ outline:none; border-color: var(--b1-line); background: var(--paper-raised); }
+.roleplay-panel{ background: var(--b2-soft); border:1px solid var(--b2-line); border-radius: var(--r-lg); padding:26px 28px; }
+.roleplay-panel .block-num{ background: var(--b2); }
+.scene-setup{
+  display:flex; gap:14px; align-items:flex-start; background: var(--paper-raised);
+  border:1px solid var(--b2-line); border-radius: var(--r-md); padding:14px 16px; margin-bottom:20px;
+}
+.scene-icon{ font-size:22px; flex:none; }
+.scene-text{ font-size:14px; color: var(--ink-soft); }
+.scene-text strong{ color: var(--ink); }
+.dialogue{ display:flex; flex-direction:column; gap:14px; }
+.scene-tabs{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:18px; }
+.scene-tab{
+  font-family: var(--f-data); font-size:12.5px; background: var(--paper-raised);
+  border:1.5px solid var(--b2-line); color: var(--ink-soft); padding:7px 14px;
+  border-radius:999px; cursor:pointer; transition: all .15s ease;
+}
+.scene-tab:hover{ border-color: var(--b2); }
+.scene-tab.active{ background: var(--b2); border-color: var(--b2); color:#fff; }
+.line{ display:flex; gap:12px; align-items:flex-start; }
+.line-avatar{
+  flex:none; width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  font-family: var(--f-display); font-weight:600; font-size:14px; color:#fff;
+}
+.line.friend .line-avatar{ background: var(--ink-faint); }
+.line.you .line-avatar{ background: var(--b2); }
+.line-body{ flex:1; }
+.line-name{ font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.05em; color: var(--ink-faint); margin:0 0 4px; }
+.line-bubble{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:12px 14px; font-size:14.5px; color: var(--ink);
+}
+.line.you .line-bubble{ background:#fff; border-color: var(--b2-line); }
+.line-input{
+  width:100%; font-family: var(--f-body); font-size:14.5px; color: var(--ink);
+  background:#fff; border:1px solid var(--b2-line); border-radius: var(--r-sm);
+  padding:10px 12px; resize:vertical; min-height:40px; margin-top:2px;
+}
+.line-input:focus{ outline:none; border-color: var(--b2); }
+.line-hint{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin-top:5px; }
+.roleplay-tip{
+  margin-top:22px; padding:14px 16px; background: var(--paper-raised); border:1px solid var(--b2-line);
+  border-radius: var(--r-md); font-size:13.5px; color: var(--ink-soft);
+}
+.roleplay-tip strong{ color: var(--ink); }
+.task-panel{ background: var(--family-soft); border:1px solid var(--family-line); border-radius: var(--r-lg); padding:26px 28px; }
+.task-panel .block-num{ background: var(--family); }
+textarea#final-task{
+  width:100%; min-height:110px; font-family: var(--f-body); font-size:15px; color: var(--ink);
+  background: var(--paper-raised); border:1px solid var(--family-line); border-radius: var(--r-md);
+  padding:14px 16px; resize:vertical; margin-top:14px;
+}
+textarea#final-task:focus{ outline:none; border-color: var(--family); }
+.task-footer{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:12px; flex-wrap:wrap; }
+#task-count{ font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); }
+.btn-secondary{
+  font-family: var(--f-body); font-weight:600; font-size:13.5px; color: var(--family); background:none;
+  border:1.5px solid var(--family-line); padding:9px 18px; border-radius:999px; cursor:pointer;
+}
+.saved-flag{ font-family: var(--f-data); font-size:12px; color: var(--b2); opacity:0; transition: opacity .3s ease; }
+.saved-flag.show{ opacity:1; }
+footer{
+  max-width:760px; margin:0 auto; padding:0 24px 60px; display:flex;
+  justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;
+  font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint);
+}
+footer a{ color: var(--b1); text-decoration:none; }
+footer a:hover{ text-decoration:underline; }
+@media (max-width:600px){
+  header{ padding:34px 18px 22px; }
+  main{ padding:8px 18px 90px; }
+  .panel, .task-panel{ padding:20px 18px; }
+  .char-card{ flex-direction:column; }
+}
+@media (prefers-reduced-motion: reduce){ *{ transition:none !important; } }
+</style>
+</head>
+<body>
+
+<header>
+  <p class="eyebrow"><span class="dot"></span>Clase 1 de 14 · L1 Quién soy, qué soy</p>
+  <h1>Ser vs. <em>estar</em></h1>
+  <p class="lede">Ya conoces lo básico de "ser" y "estar" — hoy profundizamos para que puedas hablar de tu identidad, tu carácter y tu día a día en España sin dudar entre los dos verbos. Hablaremos de tu trabajo, tus vecinos y cómo te sientes en la mudanza.</p>
+  <div class="meta-row">
+    <div>Duración<strong>50 min</strong></div>
+    <div>Gramática<strong>Ser vs. estar (repaso y ampliación)</strong></div>
+    <div>Nivel<strong>A2</strong></div>
+  </div>
+</header>
+
+<main>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">1</span><h2>Ser y estar, en profundidad</h2><span class="time-tag">10 min</span></div>
+    <div class="panel">
+      <table class="conj-table">
+        <tr><td class="conj-pron">yo</td><td class="conj-form">soy / estoy</td><td class="conj-ex">Soy Hannah. / Estoy cansada.</td></tr>
+        <tr><td class="conj-pron">tú</td><td class="conj-form">eres / estás</td><td class="conj-ex">Eres muy trabajadora. / Hoy estás ocupada.</td></tr>
+        <tr><td class="conj-pron">él / ella</td><td class="conj-form">es / está</td><td class="conj-ex">Mi vecino es simpático. / Está en el trabajo.</td></tr>
+        <tr><td class="conj-pron">nosotros/as</td><td class="conj-form">somos / estamos</td><td class="conj-ex">Somos una familia nueva aquí. / Estamos instalándonos.</td></tr>
+        <tr><td class="conj-pron">vosotros/as</td><td class="conj-form">sois / estáis</td><td class="conj-ex">Sois muy amables. / ¿Estáis ocupados hoy?</td></tr>
+        <tr><td class="conj-pron">ellos/as</td><td class="conj-form">son / están</td><td class="conj-ex">Son mis vecinos. / Están en el colegio.</td></tr>
+      </table>
+      <div class="note"><strong>Ya conoces lo básico:</strong> "ser" para identidad permanente y "estar" para ubicación o estado temporal. Hoy vamos más allá — vamos a ver los casos donde de verdad se confunden los dos verbos, sobre todo con adjetivos de carácter y estado.</div>
+
+      <div class="compare-wrap">
+        <p class="compare-title">El caso que confunde: el mismo adjetivo con ser y con estar</p>
+        <div class="compare-grid">
+          <div class="compare-col is-ser">
+            <div class="compare-head">
+              <span class="compare-verb">SER</span>
+              <span class="compare-sub">— cómo eres siempre</span>
+            </div>
+            <ul class="compare-list">
+              <li><strong>Rasgo de carácter:</strong> Soy simpática.
+                <em>Es tu forma de ser, no cambia según el día.</em>
+              </li>
+              <li><strong>Nacionalidad / origen:</strong> Soy inglesa. Mi marido es español.</li>
+              <li><strong>Profesión:</strong> Soy secretaria.</li>
+              <li><strong>Identidad general:</strong> Somos una familia con dos hijos.</li>
+              <li><strong>Relación entre personas:</strong> Es mi vecino. Son los padres del colegio de mis hijos.</li>
+            </ul>
+          </div>
+          <div class="compare-col is-estar">
+            <div class="compare-head">
+              <span class="compare-verb">ESTAR</span>
+              <span class="compare-sub">— cómo estás hoy</span>
+            </div>
+            <ul class="compare-list">
+              <li><strong>Estado temporal con el mismo adjetivo:</strong> Estoy simpática con ella últimamente.
+                <em>Es una actitud de un momento concreto, no tu carácter fijo.</em>
+              </li>
+              <li><strong>Ubicación:</strong> Estoy en el trabajo. Los niños están en el colegio.</li>
+              <li><strong>Estado de ánimo o físico:</strong> Estoy cansada / ocupada / nerviosa hoy.</li>
+              <li><strong>Situación temporal:</strong> Estamos instalándonos todavía; la mudanza está a medias.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="compare-warning">
+          <strong>La trampa real en A2:</strong> muchos adjetivos funcionan con los dos verbos pero cambian de sentido. "Es trabajadora" = tiene ese carácter siempre. "Está trabajando / está muy ocupada" = ahora mismo, en este periodo. "Es aburrido" (esa persona/cosa aburre a los demás, rasgo) frente a "está aburrido" (siente aburrimiento ahora). La pregunta clave: ¿describo cómo ES esta persona/cosa en general, o cómo ESTÁ en este momento o periodo?
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">2</span><h2>Vocabulario</h2><span class="time-tag">6 min</span></div>
+    <p class="vocab-hint">Toca cada tarjeta para ver un ejemplo.</p>
+    <div class="vocab-grid" id="vocab-grid"></div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">3</span><h2>Practica</h2><span class="time-tag">12 min</span></div>
+    <div class="panel">
+      <p class="vocab-hint" style="margin-bottom:14px;">50 frases: las primeras 12 se hacen en voz alta en clase; el resto queda como repaso para casa.</p>
+      <div id="exercises"></div>
+      <div class="check-bar">
+        <div style="display:flex; gap:10px;">
+          <button class="btn-primary" id="check-btn">Comprobar respuestas</button>
+          <button class="btn-ghost" id="reset-btn">Reiniciar</button>
+        </div>
+        <span id="score-text"></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">4</span><h2>Tarjetas de personajes</h2><span class="time-tag">8 min</span></div>
+    <p class="lede" style="margin-bottom:16px;">Describe a cada persona con una frase usando <strong>ser</strong> y otra usando <strong>estar</strong>. Usa los datos de la tarjeta como pista. Las primeras 6 (tú y tu familia) se trabajan en clase; el resto queda como banco de repaso para casa.</p>
+    <div class="characters" id="characters"></div>
+  </section>
+
+  <section class="block roleplay-panel">
+    <div class="block-head"><span class="block-num">5</span><h2>Roleplay: 5 escenas de tu vida en España</h2><span class="time-tag">13 min</span></div>
+    <p class="lede" style="margin-bottom:16px;">90 intercambios repartidos en 5 situaciones reales de tu día a día. Elige una escena para practicar en clase; el resto queda como banco de repaso para casa.</p>
+    <div class="scene-tabs" id="scene-tabs"></div>
+    <div id="scene-container"></div>
+    <div class="roleplay-tip"><strong>En clase:</strong> practicaremos una escena en voz alta, cambiando de rol. El resto de escenas son para practicar por tu cuenta durante la semana.</div>
+  </section>
+
+  <section class="block task-panel">
+    <div class="block-head"><span class="block-num">6</span><h2 style="color:var(--family)">Tu tarea</h2><span class="time-tag">3 min</span></div>
+    <p style="margin:0; font-size:15px; color:var(--ink-soft);">Escribe <strong>5 frases sobre ti misma</strong> alternando "ser" y "estar". Piensa en tu identidad (nombre, nacionalidad, carácter) y en cómo estás en esta etapa de la mudanza — son frases muy útiles para tus conversaciones con vecinos y en el colegio.</p>
+    <textarea id="final-task" placeholder="Soy Hannah...&#10;Estoy...&#10;Soy...&#10;Estoy...&#10;Soy..."></textarea>
+    <div class="task-footer">
+      <span id="task-count">0 frases con "soy" detectadas</span>
+      <span class="saved-flag" id="saved-flag">Guardado ✓</span>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <span>Clase 1 · Andén de salida</span>
+  <span>Próxima clase → Clase 2: ¿Dónde estoy? (estar)</span>
+</footer>
+
+<script>
+/* ---------- VOCAB ---------- */
+const VOCAB = [
+  {front:"cansada", back:"Hoy estoy muy cansada, hemos hecho la mudanza."},
+  {front:"ocupada", back:"Esta semana estoy muy ocupada con el colegio de los niños."},
+  {front:"en el trabajo", back:"Mi marido está en el trabajo hasta las seis."},
+  {front:"simpática", back:"Mi vecina es muy simpática conmigo."},
+  {front:"trabajadora", back:"Soy bastante trabajadora, siempre lo he sido."},
+  {front:"instalarse", back:"Todavía estamos instalándonos en el piso nuevo."},
+];
+
+const grid = document.getElementById('vocab-grid');
+VOCAB.forEach(v=>{
+  const card = document.createElement('div');
+  card.className = 'vocab-card';
+  card.setAttribute('role', 'button');
+  card.setAttribute('tabindex', '0');
+  card.setAttribute('aria-pressed', 'false');
+  card.setAttribute('aria-label', `${v.front}. Pulsa para ver un ejemplo.`);
+  card.innerHTML = `<div class="vocab-front">${v.front}</div><div class="vocab-back">${v.back}</div>`;
+  const toggle = ()=>{
+    const flipped = card.classList.toggle('flipped');
+    card.setAttribute('aria-pressed', String(flipped));
+  };
+  card.addEventListener('click', toggle);
+  card.addEventListener('keydown', (e)=>{
+    if(e.key === 'Enter' || e.key === ' '){
+      e.preventDefault();
+      toggle();
+    }
+  });
+  grid.appendChild(card);
+});
+
+/* ---------- EXERCISES ---------- */
+const EXERCISES = [
+  {"sentence":"<span class=\"gap\">___</span> Hannah, encantada.","options":["Soy","Estoy","Eres"],"answer":"Soy"},
+  {"sentence":"Yo <span class=\"gap\">___</span> inglesa.","options":["estoy","soy","es"],"answer":"soy"},
+  {"sentence":"Yo <span class=\"gap\">___</span> secretaria en mi país.","options":["soy","estoy","es"],"answer":"soy"},
+  {"sentence":"Normalmente <span class=\"gap\">___</span> bastante tranquila.","options":["estoy","soy","eres"],"answer":"soy"},
+  {"sentence":"Hoy <span class=\"gap\">___</span> muy cansada.","options":["soy","estoy","es"],"answer":"estoy"},
+  {"sentence":"<span class=\"gap\">___</span> un poco nerviosa por la mudanza.","options":["Soy","Estoy","Somos"],"answer":"Estoy"},
+  {"sentence":"Esta semana <span class=\"gap\">___</span> muy ocupada.","options":["soy","estoy","eres"],"answer":"estoy"},
+  {"sentence":"Ahora mismo <span class=\"gap\">___</span> en el ayuntamiento.","options":["soy","estoy","es"],"answer":"estoy"},
+  {"sentence":"<span class=\"gap\">___</span> afortunada de vivir aquí.","options":["Soy","Estoy","Eres"],"answer":"Soy"},
+  {"sentence":"¿De dónde <span class=\"gap\">___</span> tú?","options":["estás","eres","es"],"answer":"eres"},
+  {"sentence":"¿<span class=\"gap\">___</span> ocupada ahora o puedes hablar?","options":["Eres","Estás","Es"],"answer":"Estás"},
+  {"sentence":"Tú <span class=\"gap\">___</span> muy trabajadora, se nota.","options":["estás","eres","es"],"answer":"eres"},
+  {"sentence":"¿Cómo <span class=\"gap\">___</span> hoy, mejor que ayer?","options":["eres","estás","es"],"answer":"estás"},
+  {"sentence":"Tú <span class=\"gap\">___</span> la vecina nueva del segundo, ¿verdad?","options":["estás","eres","sois"],"answer":"eres"},
+  {"sentence":"Mi vecino <span class=\"gap\">___</span> muy simpático.","options":["está","es","son"],"answer":"es"},
+  {"sentence":"Mi marido <span class=\"gap\">___</span> en el trabajo hasta las seis.","options":["es","está","son"],"answer":"está"},
+  {"sentence":"La profesora de mi hija <span class=\"gap\">___</span> muy paciente.","options":["está","es","son"],"answer":"es"},
+  {"sentence":"Mi hijo <span class=\"gap\">___</span> un poco nervioso, es su primer día de colegio.","options":["es","está","son"],"answer":"está"},
+  {"sentence":"El funcionario de la oficina <span class=\"gap\">___</span> bastante amable.","options":["está","es","son"],"answer":"es"},
+  {"sentence":"¿Dónde <span class=\"gap\">___</span> el ayuntamiento?","options":["es","está","son"],"answer":"está"},
+  {"sentence":"Ella <span class=\"gap\">___</span> española, pero vive en Inglaterra.","options":["está","es","son"],"answer":"es"},
+  {"sentence":"La reunión con el profesor <span class=\"gap\">___</span> a las cinco.","options":["es","está","son"],"answer":"es"},
+  {"sentence":"Mi vecina <span class=\"gap\">___</span> muy ocupada esta semana con la mudanza.","options":["es","está","son"],"answer":"está"},
+  {"sentence":"¿Quién <span class=\"gap\">___</span> esa mujer del colegio?","options":["está","es","son"],"answer":"es"},
+  {"sentence":"La casilla del formulario <span class=\"gap\">___</span> vacía todavía.","options":["es","está","son"],"answer":"está"},
+  {"sentence":"Este <span class=\"gap\">___</span> el piso nuevo de mi familia.","options":["está","es","son"],"answer":"es"},
+  {"sentence":"Nosotros <span class=\"gap\">___</span> una familia con dos hijos.","options":["estamos","somos","sois"],"answer":"somos"},
+  {"sentence":"Todavía <span class=\"gap\">___</span> instalándonos en el piso.","options":["somos","estamos","son"],"answer":"estamos"},
+  {"sentence":"Nosotros <span class=\"gap\">___</span> ingleses, pero vivimos en España.","options":["estamos","somos","sois"],"answer":"somos"},
+  {"sentence":"Este mes <span class=\"gap\">___</span> muy ocupados con los papeleos.","options":["somos","estamos","son"],"answer":"estamos"},
+  {"sentence":"Nosotros <span class=\"gap\">___</span> afortunados de tener buenos vecinos.","options":["estamos","somos","sois"],"answer":"somos"},
+  {"sentence":"<span class=\"gap\">___</span> nerviosos con la entrevista del colegio.","options":["Somos","Estamos","Sois"],"answer":"Estamos"},
+  {"sentence":"¿Vosotros <span class=\"gap\">___</span> los nuevos vecinos del quinto?","options":["estáis","sois","son"],"answer":"sois"},
+  {"sentence":"¿<span class=\"gap\">___</span> ocupados este fin de semana?","options":["Sois","Estáis","Son"],"answer":"Estáis"},
+  {"sentence":"Vosotros <span class=\"gap\">___</span> muy amables con nosotros.","options":["estáis","sois","son"],"answer":"sois"},
+  {"sentence":"¿Cómo <span class=\"gap\">___</span> hoy, mejor tras el viaje?","options":["sois","estáis","son"],"answer":"estáis"},
+  {"sentence":"Mis vecinos <span class=\"gap\">___</span> muy simpáticos.","options":["están","son","es"],"answer":"son"},
+  {"sentence":"Los niños <span class=\"gap\">___</span> en el colegio ahora.","options":["son","están","es"],"answer":"están"},
+  {"sentence":"Los padres del colegio <span class=\"gap\">___</span> bastante abiertos.","options":["están","son","es"],"answer":"son"},
+  {"sentence":"Mis hijos <span class=\"gap\">___</span> un poco cansados del viaje.","options":["son","están","es"],"answer":"están"},
+  {"sentence":"¿De dónde <span class=\"gap\">___</span> tus padres?","options":["están","son","es"],"answer":"son"},
+  {"sentence":"Los documentos ya <span class=\"gap\">___</span> firmados.","options":["son","están","es"],"answer":"están"},
+  {"sentence":"Ellos <span class=\"gap\">___</span> los funcionarios de la oficina de extranjería.","options":["están","son","es"],"answer":"son"},
+  {"sentence":"Mis vecinas <span class=\"gap\">___</span> trabajando hoy hasta tarde.","options":["son","están","es"],"answer":"están"},
+  {"sentence":"Mi vecino <span class=\"gap\">___</span> muy trabajador, siempre lo ha sido.","options":["está","es","son"],"answer":"es"},
+  {"sentence":"Mi marido <span class=\"gap\">___</span> muy trabajador esta temporada, no para.","options":["es","está","son"],"answer":"está"},
+  {"sentence":"Ese trámite <span class=\"gap\">___</span> aburrido, siempre lo ha sido.","options":["está","es","son"],"answer":"es"},
+  {"sentence":"Mi hijo <span class=\"gap\">___</span> aburrido, no tiene nada que hacer hoy.","options":["es","está","son"],"answer":"está"},
+  {"sentence":"Ella <span class=\"gap\">___</span> muy simpática con todo el mundo, es su forma de ser.","options":["está","es","son"],"answer":"es"},
+  {"sentence":"Ella <span class=\"gap\">___</span> muy simpática conmigo últimamente, no sé por qué.","options":["es","está","son"],"answer":"está"}
+];
+
+const exWrap = document.getElementById('exercises');
+EXERCISES.forEach((ex, i)=>{
+  if(i === 0){
+    const divider = document.createElement('div');
+    divider.className = 'ex-divider en-clase';
+    divider.textContent = 'en clase · ítems 1–12';
+    exWrap.appendChild(divider);
+  }
+  if(i === 12){
+    const divider = document.createElement('div');
+    divider.className = 'ex-divider';
+    divider.textContent = 'para casa · repaso opcional';
+    exWrap.appendChild(divider);
+  }
+  const el = document.createElement('div');
+  el.className = 'exercise';
+  el.dataset.answer = ex.answer;
+  el.dataset.index = i;
+  el.innerHTML = `
+    <div class="ex-sentence">${i+1}. ${ex.sentence}</div>
+    <div class="ex-options">
+      ${ex.options.map(o=>`<button class="opt-btn" data-value="${o}">${o}</button>`).join('')}
+    </div>
+  `;
+  exWrap.appendChild(el);
+
+  el.querySelectorAll('.opt-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      if(practiceState.checked) return;
+      el.querySelectorAll('.opt-btn').forEach(b=>b.classList.remove('picked'));
+      btn.classList.add('picked');
+      practiceState.picked[i] = btn.dataset.value;
+      guardarPractica();
+    });
+  });
+});
+
+/* ---------- PERSISTENCIA PRÁCTICA ---------- */
+const PRACTICE_STORAGE_KEY = 'hannah-clase01-practica';
+let practiceState = { picked: {}, checked: false };
+
+async function guardarPractica(){
+  if (!window.storage) return;
+  try{
+    await window.storage.set(PRACTICE_STORAGE_KEY, JSON.stringify(practiceState));
+  }catch(e){}
+}
+
+async function cargarPractica(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(PRACTICE_STORAGE_KEY);
+    if (res && typeof res.value === 'string'){
+      const parsed = JSON.parse(res.value);
+      if (parsed && typeof parsed === 'object'){
+        practiceState = { picked: parsed.picked || {}, checked: !!parsed.checked };
+      }
+    }
+  }catch(e){ /* sin datos previos */ }
+}
+
+cargarPractica().then(()=>{
+  document.querySelectorAll('.exercise').forEach(el=>{
+    const i = parseInt(el.dataset.index);
+    const answer = el.dataset.answer;
+    const pickedValue = practiceState.picked[i];
+    if(!pickedValue) return;
+    const pickedBtn = el.querySelector(`.opt-btn[data-value="${CSS.escape(pickedValue)}"]`);
+    if(practiceState.checked){
+      el.querySelectorAll('.opt-btn').forEach(b=>{
+        b.disabled = true;
+        if(b.dataset.value === answer) b.classList.add('correct');
+        else if(b === pickedBtn) b.classList.add('wrong');
+      });
+    } else if(pickedBtn){
+      pickedBtn.classList.add('picked');
+    }
+  });
+  if(practiceState.checked){
+    let correct = 0;
+    document.querySelectorAll('.exercise').forEach(el=>{
+      const i = parseInt(el.dataset.index);
+      if(practiceState.picked[i] === el.dataset.answer) correct++;
+    });
+    document.getElementById('score-text').textContent = `${correct} / ${EXERCISES.length} correctas`;
+  }
+});
+
+document.getElementById('check-btn').addEventListener('click', ()=>{
+  let correct = 0;
+  document.querySelectorAll('.exercise').forEach(el=>{
+    const answer = el.dataset.answer;
+    const picked = el.querySelector('.opt-btn.picked');
+    el.querySelectorAll('.opt-btn').forEach(b=>{
+      b.disabled = true;
+      if(b.dataset.value === answer) b.classList.add('correct');
+      else if(b === picked) b.classList.add('wrong');
+    });
+    if(picked && picked.dataset.value === answer) correct++;
+  });
+  document.getElementById('score-text').textContent = `${correct} / ${EXERCISES.length} correctas`;
+  practiceState.checked = true;
+  guardarPractica();
+});
+
+document.getElementById('reset-btn').addEventListener('click', ()=>{
+  document.querySelectorAll('.exercise').forEach(el=>{
+    el.querySelectorAll('.opt-btn').forEach(b=>{
+      b.disabled = false;
+      b.classList.remove('picked','correct','wrong');
+    });
+  });
+  document.getElementById('score-text').textContent = '';
+  practiceState = { picked: {}, checked: false };
+  guardarPractica();
+});
+
+/* ---------- CHARACTER CARDS ---------- */
+const CHARACTERS = [
+  {"name":"Tú","role":"Descríbete a ti misma","facts":["tu nombre","tu nacionalidad","cómo estás hoy"],"prompt":"Escribe una frase con \"ser\" y otra con \"estar\":"},
+  {"name":"James","role":"Tu marido","facts":["inglés","muy trabajador","está ocupado con la mudanza"],"prompt":"Descríbelo con \"ser\" y con \"estar\":"},
+  {"name":"Sofía","role":"Tu vecina del segundo","facts":["española","muy simpática","está en el trabajo hasta tarde"],"prompt":"Escribe una frase con \"ser\" y otra con \"estar\":"},
+  {"name":"Ben","role":"Tu hijo mayor","facts":["nueve años","tímido","está nervioso por el colegio nuevo"],"prompt":"Descríbelo con \"ser\" y con \"estar\":"},
+  {"name":"Lily","role":"Tu hija pequeña","facts":["seis años","muy habladora","está contenta con la piscina"],"prompt":"Escribe una frase con \"ser\" y otra con \"estar\":"},
+  {"name":"El Sr. Martín","role":"El profesor del colegio de tus hijos","facts":["español","muy paciente","está reunido esta semana"],"prompt":"Descríbelo con \"ser\" y con \"estar\":"},
+  {"name":"Carmen","role":"La funcionaria del ayuntamiento","facts":["de Madrid","bastante amable","está ocupada por las citas"],"prompt":"Escribe una frase con \"ser\" y otra con \"estar\":"},
+  {"name":"Diego","role":"El portero de tu edificio","facts":["andaluz","muy hablador","está siempre en la entrada"],"prompt":"Descríbelo con \"ser\" y con \"estar\":"},
+  {"name":"Marta","role":"Otra madre del colegio","facts":["catalana","abogada","está muy ocupada con el trabajo"],"prompt":"Escribe una frase con \"ser\" y otra con \"estar\":"},
+  {"name":"Pau","role":"El padre de otro niño del colegio","facts":["catalán","ingeniero","está de baja esta semana"],"prompt":"Descríbelo con \"ser\" y con \"estar\":"},
+  {"name":"Elena","role":"La encargada de la empresa de mudanzas","facts":["de Valencia","muy eficiente","está terminando el último envío"],"prompt":"Escribe una frase con \"ser\" y otra con \"estar\":"},
+  {"name":"Tomás","role":"El vecino jubilado del primero","facts":["de Sevilla","muy curioso","está siempre en el portal"],"prompt":"Descríbelo con \"ser\" y con \"estar\":"},
+  {"name":"Isabel","role":"La directora del colegio","facts":["madrileña","exigente pero justa","está reunida con los profesores"],"prompt":"Escribe una frase con \"ser\" y otra con \"estar\":"},
+  {"name":"Rafa","role":"El fontanero que arregla el piso nuevo","facts":["catalán","muy puntual","está terminando la instalación"],"prompt":"Descríbelo con \"ser\" y con \"estar\":"},
+  {"name":"Alicia","role":"Tu compañera de yoga en el barrio","facts":["gallega","muy tranquila","está de vacaciones esta semana"],"prompt":"Escribe una frase con \"ser\" y otra con \"estar\":"},
+  {"name":"Nicolás","role":"El dueño de la cafetería de la esquina","facts":["de Bilbao","muy simpático","está siempre trabajando"],"prompt":"Descríbelo con \"ser\" y con \"estar\":"},
+  {"name":"Lucía","role":"La psicóloga escolar del colegio","facts":["andaluza","muy comprensiva","está disponible los martes"],"prompt":"Escribe una frase con \"ser\" y otra con \"estar\":"},
+  {"name":"Miguel","role":"El vecino del ático con perro","facts":["madrileño","muy sociable","está paseando por las mañanas"],"prompt":"Descríbelo con \"ser\" y con \"estar\":"}
+];
+
+const charWrap = document.getElementById('characters');
+CHARACTERS.forEach((c, i)=>{
+  if(i === 0){
+    const divider = document.createElement('div');
+    divider.className = 'ex-divider en-clase';
+    divider.textContent = 'en clase · personajes 1–6';
+    charWrap.appendChild(divider);
+  }
+  if(i === 6){
+    const divider = document.createElement('div');
+    divider.className = 'ex-divider';
+    divider.textContent = 'para casa · banco de repaso';
+    charWrap.appendChild(divider);
+  }
+  const card = document.createElement('div');
+  card.className = 'char-card';
+  card.innerHTML = `
+    <div class="char-avatar">${c.name.charAt(0)}</div>
+    <div class="char-body">
+      <p class="char-name">${c.name}</p>
+      <p class="char-role">${c.role}</p>
+      <div class="char-facts">${c.facts.map(f=>`<span class="fact-tag">${f}</span>`).join('')}</div>
+      <p class="char-prompt">${c.prompt}</p>
+      <textarea class="char-input" rows="2" placeholder="Es / Está ..." data-char-idx="${i}"></textarea>
+    </div>
+  `;
+  charWrap.appendChild(card);
+});
+
+/* ---------- PERSISTENCIA PERSONAJES ---------- */
+const CHAR_STORAGE_KEY = 'hannah-clase01-personajes';
+let charState = {};
+let charTimer = null;
+
+async function guardarChars(){
+  if (!window.storage) return;
+  try{
+    await window.storage.set(CHAR_STORAGE_KEY, JSON.stringify(charState));
+  }catch(e){}
+}
+
+async function cargarChars(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(CHAR_STORAGE_KEY);
+    if (res && typeof res.value === 'string'){
+      const parsed = JSON.parse(res.value);
+      if (parsed && typeof parsed === 'object') charState = parsed;
+    }
+  }catch(e){}
+}
+
+cargarChars().then(()=>{
+  document.querySelectorAll('.char-input').forEach(ta=>{
+    const idx = parseInt(ta.dataset.charIdx);
+    if (charState[idx] !== undefined) ta.value = charState[idx];
+    ta.addEventListener('input', ()=>{
+      charState[idx] = ta.value;
+      clearTimeout(charTimer);
+      charTimer = setTimeout(guardarChars, 800);
+    });
+  });
+});
+
+/* ---------- ROLEPLAY SCENES ---------- */
+const SCENES = [
+  {"id":"vecino","tab":"Vecino nuevo","icon":"🏠","setup":"Te cruzas con un vecino nuevo en el portal de tu edificio.","lines":[
+    {"who":"friend","name":"Diego","text":"¡Hola! Tú eres la vecina nueva del segundo, ¿verdad?"},
+    {"who":"you","hint":"Confirma con \"ser\" y di tu nombre."},
+    {"who":"friend","name":"Diego","text":"¿De dónde eres?"},
+    {"who":"you","hint":"Di tu nacionalidad con \"ser\"."},
+    {"who":"friend","name":"Diego","text":"¿Y cómo estás? La mudanza cansa mucho."},
+    {"who":"you","hint":"Responde con \"estar\" cómo te sientes hoy."},
+    {"who":"friend","name":"Diego","text":"Yo soy el portero, llevo veinte años aquí."},
+    {"who":"you","hint":"Reacciona y pregúntale algo con \"ser\" o \"estar\"."},
+    {"who":"friend","name":"Diego","text":"¿Estáis instalados ya del todo?"},
+    {"who":"you","hint":"Responde con \"estar\" sobre la mudanza."},
+    {"who":"friend","name":"Diego","text":"Si necesitáis algo, mi mujer y yo estamos siempre por aquí."},
+    {"who":"you","hint":"Da las gracias y comenta algo con \"ser\" sobre él."},
+    {"who":"friend","name":"Diego","text":"¿Tenéis hijos? Hay muchos niños en el barrio."},
+    {"who":"you","hint":"Responde con \"ser\" sobre tus hijos."},
+    {"who":"friend","name":"Diego","text":"Seguro que están un poco nerviosos con el cambio."},
+    {"who":"you","hint":"Responde con \"estar\" sobre cómo están tus hijos."},
+    {"who":"friend","name":"Diego","text":"Bueno, ¡bienvenidos al edificio!"},
+    {"who":"you","hint":"Da las gracias y añade una frase con \"ser\" o \"estar\"."}
+  ]},
+  {"id":"colegio","tab":"En el colegio","icon":"🎒","setup":"Vas a recoger a tus hijos al colegio y hablas con el profesor.","lines":[
+    {"who":"friend","name":"Sr. Martín","text":"Hola, usted es la madre de Ben, ¿no?"},
+    {"who":"you","hint":"Confirma con \"ser\" y preséntate."},
+    {"who":"friend","name":"Sr. Martín","text":"¿Cómo está Ben con el cambio de colegio?"},
+    {"who":"you","hint":"Responde con \"estar\" sobre tu hijo."},
+    {"who":"friend","name":"Sr. Martín","text":"Es normal, el primer mes siempre es difícil."},
+    {"who":"you","hint":"Responde con \"ser\" o \"estar\" dando tu opinión."},
+    {"who":"friend","name":"Sr. Martín","text":"Yo soy muy paciente con los niños nuevos."},
+    {"who":"you","hint":"Agradece y comenta algo con \"ser\"."},
+    {"who":"friend","name":"Sr. Martín","text":"¿Están ustedes ya instalados en el barrio?"},
+    {"who":"you","hint":"Responde con \"estar\" sobre la mudanza."},
+    {"who":"friend","name":"Sr. Martín","text":"La directora está reunida ahora, pero es muy accesible."},
+    {"who":"you","hint":"Reacciona usando \"ser\" o \"estar\"."},
+    {"who":"friend","name":"Sr. Martín","text":"¿Y usted, está contenta con la mudanza a España?"},
+    {"who":"you","hint":"Responde con \"estar\" sobre cómo te sientes."},
+    {"who":"friend","name":"Sr. Martín","text":"Me alegro. Aquí los padres son muy acogedores."},
+    {"who":"you","hint":"Responde con \"ser\" sobre los padres del colegio."},
+    {"who":"friend","name":"Sr. Martín","text":"Bien, ¡nos vemos la próxima semana!"},
+    {"who":"you","hint":"Despídete con una frase con \"ser\" o \"estar\"."}
+  ]},
+  {"id":"ayuntamiento","tab":"Cita en el ayuntamiento","icon":"🏛️","setup":"Tienes cita en el ayuntamiento para el empadronamiento y hablas con la funcionaria.","lines":[
+    {"who":"friend","name":"Carmen","text":"Buenos días, ¿es usted Hannah?"},
+    {"who":"you","hint":"Confirma con \"ser\"."},
+    {"who":"friend","name":"Carmen","text":"¿Está usted casada o soltera?"},
+    {"who":"you","hint":"Responde con \"ser\" sobre tu estado civil."},
+    {"who":"friend","name":"Carmen","text":"Perdone el retraso, hoy estamos muy ocupados."},
+    {"who":"you","hint":"Responde con \"estar\" o \"ser\" comprensivamente."},
+    {"who":"friend","name":"Carmen","text":"Esta casilla está vacía, falta rellenarla."},
+    {"who":"you","hint":"Reacciona y pregunta algo con \"ser\" o \"estar\"."},
+    {"who":"friend","name":"Carmen","text":"¿Es esta su dirección actual?"},
+    {"who":"you","hint":"Confirma con \"ser\" tu dirección."},
+    {"who":"friend","name":"Carmen","text":"Los documentos ya están firmados, todo correcto."},
+    {"who":"you","hint":"Responde con \"estar\" o agradece."},
+    {"who":"friend","name":"Carmen","text":"¿Están sus hijos también empadronados con usted?"},
+    {"who":"you","hint":"Responde con \"estar\" sobre tus hijos."},
+    {"who":"friend","name":"Carmen","text":"Perfecto, el trámite ya está terminado."},
+    {"who":"you","hint":"Responde con \"estar\" y da las gracias."},
+    {"who":"friend","name":"Carmen","text":"Ha sido un placer, ¡bienvenida a España!"},
+    {"who":"you","hint":"Despídete con \"ser\" o \"estar\"."}
+  ]},
+  {"id":"cena","tab":"Cena con vecinos","icon":"🍽️","setup":"Estás en una cena con vecinos del edificio y otros padres del colegio.","lines":[
+    {"who":"friend","name":"Sofía","text":"¡Hola! Tú eres la vecina inglesa del segundo, ¿verdad?"},
+    {"who":"you","hint":"Confirma con \"ser\" y di tu nombre."},
+    {"who":"friend","name":"Sofía","text":"¿Cómo estáis, ya instalados del todo?"},
+    {"who":"you","hint":"Responde con \"estar\" sobre la mudanza."},
+    {"who":"friend","name":"Sofía","text":"Este es Pau, es el padre de un compañero de tu hijo."},
+    {"who":"you","hint":"Salúdalo y pregúntale algo con \"ser\" o \"estar\"."},
+    {"who":"friend","name":"Pau","text":"Estoy un poco cansado, esta semana he trabajado mucho."},
+    {"who":"you","hint":"Responde con empatía usando \"estar\"."},
+    {"who":"friend","name":"Sofía","text":"¿Tu marido también es inglés?"},
+    {"who":"you","hint":"Responde con \"ser\" sobre tu marido."},
+    {"who":"friend","name":"Pau","text":"Marta, mi mujer, es abogada, pero está muy liada este mes."},
+    {"who":"you","hint":"Comenta con \"ser\" o \"estar\"."},
+    {"who":"friend","name":"Sofía","text":"¿Estáis contentos con el colegio de vuestros hijos?"},
+    {"who":"you","hint":"Responde con \"estar\" sobre el colegio."},
+    {"who":"friend","name":"Pau","text":"Los profesores de aquí son muy buenos, en general."},
+    {"who":"you","hint":"Responde con \"ser\" dando tu opinión."},
+    {"who":"friend","name":"Sofía","text":"Bueno, ¡bienvenida al barrio!"},
+    {"who":"you","hint":"Da las gracias y añade una frase con \"ser\" o \"estar\"."}
+  ]},
+  {"id":"mudanza","tab":"Día de la mudanza","icon":"📦","setup":"Es el día de la mudanza y hablas con Elena, la encargada de la empresa.","lines":[
+    {"who":"friend","name":"Elena","text":"Hola, soy Elena, la encargada de la mudanza."},
+    {"who":"you","hint":"Salúdala y preséntate con \"ser\"."},
+    {"who":"friend","name":"Elena","text":"¿Están todas las cajas ya preparadas?"},
+    {"who":"you","hint":"Responde con \"estar\" sobre las cajas."},
+    {"who":"friend","name":"Elena","text":"Mi equipo es muy rápido, no se preocupe."},
+    {"who":"you","hint":"Responde con \"ser\" o \"estar\" agradeciendo."},
+    {"who":"friend","name":"Elena","text":"¿Cómo están los niños con el cambio de casa?"},
+    {"who":"you","hint":"Responde con \"estar\" sobre tus hijos."},
+    {"who":"friend","name":"Elena","text":"Es normal que estén un poco confundidos al principio."},
+    {"who":"you","hint":"Responde con \"ser\" o \"estar\" dando tu opinión."},
+    {"who":"friend","name":"Elena","text":"El camión ya está aquí, ¿empezamos?"},
+    {"who":"you","hint":"Confirma con \"estar\" que estás lista."},
+    {"who":"friend","name":"Elena","text":"¿Es esta la dirección nueva, la del segundo piso?"},
+    {"who":"you","hint":"Confirma con \"ser\" la dirección."},
+    {"who":"friend","name":"Elena","text":"Perfecto, en dos horas todo está en el piso nuevo."},
+    {"who":"you","hint":"Responde con \"estar\" o agradece."},
+    {"who":"friend","name":"Elena","text":"¡Ya está todo! Espero que seáis muy felices aquí."},
+    {"who":"you","hint":"Da las gracias y añade una frase con \"ser\" o \"estar\"."}
+  ]}
+];
+
+const sceneTabs = document.getElementById('scene-tabs');
+const sceneContainer = document.getElementById('scene-container');
+let activeScene = 0;
+
+function renderTabs(){
+  sceneTabs.innerHTML = SCENES.map((s,i)=>
+    `<button class="scene-tab${i===activeScene?' active':''}" data-idx="${i}">${s.icon} ${s.tab}</button>`
+  ).join('');
+  sceneTabs.querySelectorAll('.scene-tab').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      activeScene = parseInt(btn.dataset.idx, 10);
+      renderTabs();
+      renderScene();
+    });
+  });
+}
+
+/* ---------- PERSISTENCIA ROLEPLAY ---------- */
+const ROLEPLAY_STORAGE_KEY = 'hannah-clase01-roleplay';
+let rpState = {};
+let rpTimer = null;
+
+async function guardarRP(){
+  if (!window.storage) return;
+  try{
+    await window.storage.set(ROLEPLAY_STORAGE_KEY, JSON.stringify(rpState));
+  }catch(e){}
+}
+
+async function cargarRP(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(ROLEPLAY_STORAGE_KEY);
+    if (res && typeof res.value === 'string'){
+      const parsed = JSON.parse(res.value);
+      if (parsed && typeof parsed === 'object') rpState = parsed;
+    }
+  }catch(e){}
+}
+
+function renderScene(){
+  const scene = SCENES[activeScene];
+  let lineIdx = 0;
+  const linesHtml = scene.lines.map((l)=>{
+    if(l.who === 'friend'){
+      return `
+        <div class="line friend">
+          <div class="line-avatar">${l.name.charAt(0)}</div>
+          <div class="line-body">
+            <p class="line-name">${l.name}</p>
+            <div class="line-bubble">${l.text}</div>
+          </div>
+        </div>`;
+    } else {
+      const key = `${activeScene}-${lineIdx}`;
+      lineIdx++;
+      const saved = rpState[key] || '';
+      return `
+        <div class="line you">
+          <div class="line-avatar">Tú</div>
+          <div class="line-body">
+            <p class="line-name">Tú</p>
+            <textarea class="line-input" rows="2" placeholder="Escribe tu respuesta con 'ser'..." data-rp-key="${key}">${saved}</textarea>
+            <p class="line-hint">${l.hint}</p>
+          </div>
+        </div>`;
+    }
+  }).join('');
+
+  sceneContainer.innerHTML = `
+    <div class="scene-setup">
+      <span class="scene-icon">${scene.icon}</span>
+      <p class="scene-text"><strong>${scene.tab}:</strong> ${scene.setup}</p>
+    </div>
+    <div class="dialogue">${linesHtml}</div>
+  `;
+
+  document.querySelectorAll('.line-input').forEach(ta=>{
+    const key = ta.dataset.rpKey;
+    ta.addEventListener('input', ()=>{
+      rpState[key] = ta.value;
+      clearTimeout(rpTimer);
+      rpTimer = setTimeout(guardarRP, 800);
+    });
+  });
+}
+
+cargarRP().then(()=>{
+  renderTabs();
+  renderScene();
+});
+
+/* ---------- FINAL TASK (autoguardado) ---------- */
+const TASK_STORAGE_KEY = 'hannah-clase01-tarea';
+const taskArea = document.getElementById('final-task');
+const taskCount = document.getElementById('task-count');
+const savedFlag = document.getElementById('saved-flag');
+
+async function cargarTarea(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(TASK_STORAGE_KEY);
+    if (res && typeof res.value === 'string') taskArea.value = res.value;
+  }catch(e){ /* sin datos previos */ }
+  updateCount();
+}
+
+function updateCount(){
+  const matches = (taskArea.value.match(/\bsoy\b/gi) || []).length;
+  taskCount.textContent = `${matches} frase${matches===1?'':'s'} con "soy" detectada${matches===1?'':'s'}`;
+}
+
+let taskTimer = null;
+taskArea.addEventListener('input', ()=>{
+  updateCount();
+  clearTimeout(taskTimer);
+  taskTimer = setTimeout(async ()=>{
+    if (!window.storage) return;
+    try{
+      await window.storage.set(TASK_STORAGE_KEY, taskArea.value);
+      savedFlag.textContent = 'Guardado ✓';
+      savedFlag.classList.add('show');
+      setTimeout(()=>{ savedFlag.classList.remove('show'); }, 1800);
+    }catch(e){}
+  }, 800);
+});
+
+updateCount();
+cargarTarea();
+</script>
+</body>
+</html>

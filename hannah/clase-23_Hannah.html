@@ -1,0 +1,3723 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clase 23 · Invitaciones y buenos modales — Hannah</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   TRATADO.css — pegado tal cual, aplicado en vivo a la vista
+   previa de componentes de esta misma página.
+   ============================================================ */
+/* ============================================================
+   TRATADO — sistema de diseño editorial
+   Maquetación de documentos como libro impreso.
+   Hermano de ESCOLAR, para el otro extremo del trabajo:
+   manuales densos de oposición, no ejercicios interactivos.
+   ============================================================ */
+
+:root{
+  /* -- superficie de papel -- */
+  --paper: #EDE9DC;
+  --paper-page: #F2EEE1;
+  --paper-shadow: rgba(28,27,25,0.14);
+
+  /* -- tinta -- */
+  --ink: #1C1B19;
+  --ink-soft: #4A473F;
+  --ink-faint: #726C5E;
+
+  /* -- acento editorial: coral iOS, sustituye al granate de tejuelo -- */
+  --claret: #FF2D55;
+  --claret-soft: #FFE1E8;
+
+  /* -- naranja iOS: metadatos, folios, aparato de referencias -- */
+  --sienna: #FF9500;
+  --sienna-soft: #FFEDD1;
+
+  /* -- verde iOS: reservado en exclusiva para el aparato normativo/legal -- */
+  --statute: #34C759;
+  --statute-soft: #DCF5E2;
+
+  /* -- rojo iOS: aviso de examen, el único uso de un color "caliente" -- */
+  --exam: #FF3B30;
+  --exam-soft: #FFE2DF;
+
+  /* -- tipografía -- */
+  /* Merriweather: serif cálida y de trazo robusto, muy usada en
+     blogs y plataformas de lectura larga por su buen rendimiento
+     en pantalla. Se carga desde Google Fonts (ver <link> en el
+     <head>). */
+  --serif: 'Merriweather', Georgia, 'Times New Roman', serif;
+  /* San Francisco (SF Pro): fuente de sistema de iOS/macOS.
+     No se puede cargar desde Google Fonts (es propietaria de
+     Apple), así que se referencia como fuente de sistema:
+     -apple-system/system-ui resuelven a SF Pro Text en
+     cualquier dispositivo Apple, con fallbacks de sistema
+     equivalentes en otras plataformas. */
+  --sans: -apple-system, system-ui, 'SF Pro Text', 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+
+  /* -- escala tipográfica --
+     8 escalones con propósito, sustituyen los ~15 valores sueltos
+     (11px–16.5px en saltos de 0.5px) del sistema anterior.
+     Progresión suave en texto pequeño (~1.09x), más marcada
+     en titulares (~1.25–1.44x). En rem, no en px: así el lector
+     puede escalar el texto (zoom del navegador, ajuste de tamaño
+     de fuente del sistema) y toda la escala responde junta,
+     como en un ebook real. Base: 1rem = 16px. */
+  --fs-micro:      0.6875rem; /* badges, contadores, cabeceras de tabla de asientos */
+  --fs-xs:         0.78125rem; /* folios, rótulos, referencias normativas, metadatos */
+  --fs-sm:         0.84375rem; /* botones de UI, índice de sección, resumen de quiz */
+  --fs-sans-base:  0.90625rem; /* tablas de datos, entradas de índice, opciones de quiz */
+  --fs-base:       0.96875rem; /* cuerpo de lectura, párrafos, sumarios */
+  --fs-md:         1.1875rem; /* h3.subepigrafe — nivel intermedio real */
+  --fs-lg:         1.5625rem; /* h2.epigrafe y .seccion-titulo, unificados */
+  --fs-xl:         2.25rem; /* .capitulo-titulo */
+
+  /* -- página --
+     Medida en caracteres (ch), no en píxeles: la columna de
+     lectura se mantiene cómoda sea cual sea el tamaño de fuente
+     del lector, en vez de fijar un ancho de pantalla concreto. */
+  --page-w: 68ch;
+  --margin-in: 4rem;   /* margen interior (lomo) */
+  --margin-out: 5.5rem; /* margen exterior (corte) */
+  --pagina-y: 4rem;    /* respiro vertical entre "capítulos" en el flujo continuo */
+
+  /* -- curvatura de esquinas (pantalla/marco), aplicada a las
+     superficies cerradas: la página y los recuadros con fondo
+     propio. Nunca a las reglas de acento de un solo lado. -- */
+  --radio-page: 28px;
+  --radio-panel: 16px;
+  --radio-chip: 8px;
+
+  /* -- barra de estudio flotante --
+     altura reservada en .page para que la barra fija no tape
+     contenido; 0 en escritorio (la barra flota sin tocar la
+     página), se sobrescribe en móvil donde pasa a ser un bloque
+     de 4 botones apilados a ancho completo. -- */
+  --barra-estudio-alto: 0px;
+}
+
+*{ box-sizing: border-box; }
+
+a:focus-visible, [tabindex]:focus-visible{
+  outline: 2px solid var(--claret);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce){
+  html{ scroll-behavior: auto; }
+}
+
+html{ scroll-behavior: smooth; }
+
+body{
+  margin: 0;
+  background: var(--paper-page);
+  color: var(--ink);
+  font-family: var(--serif);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ============================================================
+   EL LIENZO DE LECTURA
+   Flujo continuo tipo ebook: sin tarjeta de "papel" flotando
+   sobre un fondo de mesa, sin sombra, sin esquinas redondeadas.
+   Columna de medida fija en caracteres (no en píxeles) para que
+   la línea de lectura se mantenga cómoda sea cual sea el tamaño
+   de fuente que elija el lector.
+   ============================================================ */
+
+.page{
+  max-width: var(--page-w);
+  margin: 0 auto;
+  padding: var(--pagina-y) var(--margin-out) var(--pagina-y) var(--margin-in);
+  position: relative;
+}
+
+@media (max-width: 640px){
+  .page{
+    padding: 2.5rem 1.5rem calc(4rem + var(--barra-estudio-alto)) 1.5rem;
+  }
+  :root{ --margin-in: 1.5rem; --margin-out: 1.5rem; }
+}
+
+/* Tablet: columna algo más ancha, márgenes intermedios */
+@media (min-width: 641px) and (max-width: 900px){
+  :root{ --page-w: 72ch; --margin-in: 2.5rem; --margin-out: 2.5rem; }
+}
+
+/* Portátil: el ajuste original, sin cambios */
+@media (min-width: 901px) and (max-width: 1200px){
+  :root{ --page-w: 68ch; --margin-in: 4rem; --margin-out: 5.5rem; }
+}
+
+/* Escritorio grande: más aire lateral y una columna algo más generosa */
+@media (min-width: 1201px){
+  :root{ --page-w: 78ch; --margin-in: 5rem; --margin-out: 6.5rem; }
+}
+
+/* Folio — cabecera de página con número y materia */
+.folio{
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-family: var(--sans);
+  font-size: var(--fs-xs);
+  letter-spacing: 0.02em;
+  color: var(--ink-faint);
+  border-bottom: 1px solid #DDD8C9;
+  padding-bottom: 10px;
+  margin-bottom: 56px;
+}
+.folio .materia{ font-style: italic; }
+.folio .numero{ display: none; }
+
+/* ============================================================
+   PORTADILLA DE CAPÍTULO
+   ============================================================ */
+
+.capitulo-abre{
+  margin-bottom: 64px;
+}
+.capitulo-numero{
+  font-family: var(--sans);
+  font-size: var(--fs-sans-base);
+  letter-spacing: 0.04em;
+  color: var(--claret);
+  margin-bottom: 6px;
+}
+.capitulo-titulo{
+  font-size: var(--fs-xl);
+  line-height: 1.15;
+  font-weight: 600;
+  margin: 0 0 14px 0;
+  letter-spacing: -0.01em;
+  color: var(--claret);
+}
+.capitulo-sumario{
+  font-size: var(--fs-base);
+  font-style: italic;
+  color: var(--ink-soft);
+  line-height: 1.5;
+  max-width: 52ch;
+  border-left: 2px solid var(--claret);
+  padding-left: 18px;
+}
+
+/* ============================================================
+   CUERPO DE TEXTO
+   Línea de 60-72 caracteres, entrelínea generosa de libro.
+   ============================================================ */
+
+.cuerpo{
+  font-size: var(--fs-base);
+  line-height: 1.68;
+  color: var(--ink);
+}
+
+.cuerpo p{ margin: 0 0 20px 0; }
+.cuerpo p:first-of-type::first-letter{
+  font-size: 3.1em;
+  font-weight: 600;
+  float: left;
+  line-height: 0.85;
+  padding: 4px 7px 0 0;
+  color: var(--claret);
+}
+
+h2.epigrafe{
+  font-size: var(--fs-lg);
+  font-weight: 600;
+  margin: 48px 0 18px 0;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #DDD8C9;
+  color: var(--claret);
+}
+h3.subepigrafe{
+  font-family: var(--sans);
+  font-size: var(--fs-md);
+  font-weight: 700;
+  text-transform: none;
+  color: var(--claret);
+  margin: 32px 0 12px 0;
+}
+
+.cuerpo em{ font-style: italic; }
+.cuerpo strong{ font-weight: 600; color: var(--ink); }
+
+/* ============================================================
+   NOTA AL MARGEN
+   En vez de tooltips o popovers: la tradición del libro de
+   texto anotado. En pantallas anchas se saca al margen;
+   en estrecho, cae en línea como recuadro.
+
+   PENDIENTE DE USO: ningún elemento del cuerpo del documento
+   lleva .con-nota/.nota-margen todavía — 0 apariciones en el
+   HTML actual. El bloque se conserva porque el sistema funciona
+   y está listo, a la espera de que algún epígrafe lo use.
+   ============================================================ */
+
+.con-nota{ position: relative; }
+
+/* ============================================================
+   ETIQUETA — chip textual genérico ("Ejercicio", "Tarea",
+   "Examen", referencias normativas, metadatos de nota al
+   margen...). Sigue el acento variable de .html[data-acento],
+   igual que los títulos de capítulo y sección.
+   ============================================================ */
+.etiqueta{
+  color: var(--claret);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: var(--fs-xs);
+  letter-spacing: 0.02em;
+}
+
+.nota-margen{
+  font-family: var(--sans);
+  font-size: var(--fs-xs);
+  line-height: 1.45;
+  color: var(--ink-soft);
+  border-top: 1px solid #DDD8C9;
+  padding-top: 8px;
+  margin: 4px 0 20px 0;
+}
+.nota-margen .etiqueta{
+  color: var(--claret);
+  font-weight: 700;
+  font-style: italic;
+  margin-right: 4px;
+}
+
+@media (min-width: 1180px){
+  .page{ position: relative; }
+  .nota-margen{
+    position: absolute;
+    right: calc(-1 * var(--margin-out) - 4px);
+    width: 220px;
+    border-top: none;
+    padding-top: 0;
+    margin: 0;
+  }
+  .nota-margen::before{
+    content: '';
+    display: block;
+    width: 28px;
+    border-top: 1px solid var(--sienna);
+    margin-bottom: 6px;
+  }
+}
+
+/* ============================================================
+   BLOQUES DE APARATO — definición, ejemplo, norma, examen
+   Se distinguen por tipografía y una regla de color a la
+   izquierda, nunca por tarjetas con sombra ni iconos.
+   ============================================================ */
+
+.bloque{
+  position: relative;
+  margin: 28px 0;
+  padding: 8px 16px 8px 24px;
+  border-radius: var(--radio-chip);
+}
+.bloque::before{
+  content: '';
+  position: absolute;
+  left: 8px;
+  top: 8px;
+  bottom: 8px;
+  width: 4px;
+  border-radius: 999px;
+  background: var(--ink-faint);
+}
+.bloque .rotulo{
+  font-family: var(--sans);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  margin-bottom: 6px;
+}
+.bloque p{ margin: 0 0 10px 0; font-size: var(--fs-base); line-height: 1.6; }
+.bloque p:last-child{ margin-bottom: 0; }
+
+.bloque.definicion{ background: color-mix(in srgb, var(--sienna) 10%, transparent); }
+.bloque.definicion::before{ background: var(--sienna); }
+.bloque.definicion .rotulo{ color: var(--sienna); }
+
+/* PENDIENTE DE USO: .bloque.norma no aparece en el HTML actual
+   (0 apariciones) — .definicion y .examen sí están en uso. Se
+   conserva la variante lista para citar artículos de norma. */
+.bloque.norma{ background: color-mix(in srgb, var(--statute) 10%, transparent); }
+.bloque.norma::before{ background: var(--statute); }
+.bloque.norma .rotulo{ color: var(--statute); }
+.bloque.norma p{ font-family: var(--serif); font-style: italic; }
+.bloque.norma .cita-articulo{ font-family: var(--sans); font-style: normal; font-size: var(--fs-xs); color: var(--ink-faint); margin-top: 8px; }
+
+.bloque.ejemplo::before{ background: var(--ink-faint); }
+.bloque.ejemplo .rotulo{ color: var(--ink-soft); font-style: italic; font-weight: 400; }
+
+.bloque.examen{ background: color-mix(in srgb, var(--exam) 10%, transparent); }
+.bloque.examen::before{ background: var(--exam); }
+.bloque.examen .rotulo{ color: var(--exam); }
+
+/* ============================================================
+   TABLAS — de datos, no de UI. Hairlines, sin zebra-striping
+   agresivo, cifras en tabular numerals vía la sans.
+   ============================================================ */
+
+.tabla-datos{
+  width: 100%;
+  border-collapse: collapse;
+  margin: 24px 0;
+  font-family: var(--sans);
+  font-size: var(--fs-sans-base);
+}
+.tabla-datos caption{
+  text-align: left;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: var(--fs-sans-base);
+  color: var(--ink-soft);
+  margin-bottom: 8px;
+  caption-side: top;
+}
+.tabla-datos th{
+  text-align: left;
+  font-weight: 700;
+  padding: 8px 14px 8px 0;
+  border-bottom: 2px solid var(--ink);
+  color: var(--ink);
+}
+.tabla-datos td{
+  padding: 7px 14px 7px 0;
+  border-bottom: 1px solid #DDD8C9;
+  color: var(--ink-soft);
+  font-variant-numeric: tabular-nums;
+}
+.tabla-datos tr:last-child td{ border-bottom: 1px solid var(--ink); }
+.tabla-datos td.num, .tabla-datos th.num{ text-align: right; }
+
+/* ============================================================
+   LISTAS
+   ============================================================ */
+
+.cuerpo ul, .cuerpo ol{ margin: 0 0 20px 0; padding-left: 22px; }
+.cuerpo li{ margin-bottom: 8px; line-height: 1.6; }
+.cuerpo ul{ list-style: none; padding-left: 0; }
+.cuerpo ul li{ padding-left: 20px; position: relative; }
+.cuerpo ul li::before{
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: var(--claret);
+}
+
+/* ============================================================
+   PIE DE PÁGINA / REFERENCIA CRUZADA
+   ============================================================ */
+
+.pie-pagina{
+  margin-top: 72px;
+  padding-top: 14px;
+  border-top: 1px solid #DDD8C9;
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--sans);
+  font-size: var(--fs-micro);
+  color: var(--ink-faint);
+}
+
+/* Índice / sumario de temario */
+.indice{ font-family: var(--sans); }
+.indice-entrada{
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 9px 0;
+  border-bottom: 1px solid #E9E4D6;
+  font-size: var(--fs-sans-base);
+}
+.indice-entrada .titulo-tema{ color: var(--ink); font-weight: 500; white-space: nowrap; }
+.indice-entrada .puntos{
+  flex: 1;
+  border-bottom: 1px dotted var(--ink-faint);
+  transform: translateY(-4px);
+}
+.indice-entrada .pagina{ color: var(--ink-faint); font-variant-numeric: tabular-nums; }
+
+/* ============================================================
+   SECCIÓN — nivel jerárquico por encima del capítulo/epígrafe.
+   Para temarios normativos donde el capítulo se subdivide en
+   bloques de artículos (ej. "Sección 3: Rendimientos del
+   trabajo"), no solo en epígrafes de contenido corrido.
+   Tipografía sans para marcar que es un nivel de organización,
+   no de lectura — igual que el folio y los rótulos de bloque.
+   ============================================================ */
+
+.seccion-abre{
+  margin: 56px 0 32px 0;
+  padding-top: 32px;
+  border-top: 3px double #DDD8C9;
+}
+.seccion-abre:first-child{ margin-top: 0; padding-top: 0; border-top: none; }
+
+.seccion-numero{
+  font-family: var(--sans);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  color: var(--sienna);
+  margin-bottom: 4px;
+}
+.seccion-titulo{
+  font-size: var(--fs-lg);
+  font-weight: 600;
+  margin: 0 0 6px 0;
+  letter-spacing: -0.005em;
+  color: var(--claret);
+}
+.seccion-cuenta{
+  font-family: var(--sans);
+  font-style: italic;
+  font-size: var(--fs-sm);
+  color: var(--ink-faint);
+}
+
+/* ============================================================
+   FICHA-ARTÍCULO — la unidad atómica de un temario normativo.
+   Estructura fija y repetible: número + título, contenido,
+   cifras clave. Es, con diferencia, el componente que más se
+   repite en un temario (decenas por tema), así que NO lleva
+   fondo de color ni recuadro: un color "destacado" que cubre
+   el 90% de la página deja de significar nada y encima
+   desperdicia tinta al imprimir. Se separa cada ficha de la
+   siguiente solo con un hairline superior, como un artículo
+   de código o un diccionario — el granate se reserva para el
+   número de artículo, que es lo único que de verdad necesita
+   saltar a la vista al escanear la página.
+
+   PENDIENTE DE USO: toda la familia .ficha/.ficha-articulo/
+   .ficha-titulo/.ficha-contenido/.ficha-pie/.ficha-conceptos
+   tiene 0 apariciones en el HTML actual — este temario de
+   Contabilidad Financiera está construido con .seccion/.cuerpo,
+   no con fichas de artículo normativo. Se conserva para un
+   temario tipo TRATADO donde sí aplique esa estructura.
+   ============================================================ */
+
+.ficha{
+  padding: 18px 0;
+  border-top: 1px solid #DDD8C9;
+}
+.ficha:first-child{ border-top: none; padding-top: 0; }
+
+/* Variante: la ficha resume un tramo de artículos (ej. Art. 44–46),
+   no uno solo — el número pasa a siena en vez de granate, mismo
+   código de color que .seccion-numero, para leerse como "tramo
+   que agrupa varios artículos", no como un artículo puntual. */
+.ficha.rango .ficha-articulo{
+  color: var(--sienna);
+  letter-spacing: 0.01em;
+}
+
+.ficha-cabecera{
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.ficha-articulo{
+  font-family: var(--sans);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  color: var(--claret);
+  white-space: nowrap;
+}
+.ficha-titulo{
+  font-size: var(--fs-base);
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.ficha-contenido{
+  font-size: var(--fs-base);
+  line-height: 1.62;
+  color: var(--ink-soft);
+  margin: 0 0 12px 0;
+}
+.ficha-contenido:last-child{ margin-bottom: 0; }
+
+.ficha-pie{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 22px;
+  padding-top: 12px;
+  border-top: 1px solid #EBE6D8;
+  font-family: var(--sans);
+  font-size: var(--fs-xs);
+}
+.ficha-conceptos{ color: var(--ink-faint); }
+.ficha-conceptos .etiqueta-campo{ color: #7D5C39; font-weight: 700; margin-right: 5px; }
+
+/* ============================================================
+   CIFRA CLAVE — lo que de verdad se memoriza para el examen.
+   Ni negrita suelta (se pierde entre otras negritas del texto)
+   ni una tarjeta con sombra (es un dato, no un producto):
+   una etiqueta mono discreta con numerales tabulares, integrada
+   en línea con el texto pero con peso visual propio.
+   ============================================================ */
+
+.cifra{
+  font-family: var(--sans);
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  color: var(--claret);
+  background: var(--claret-soft);
+  padding: 1px 6px;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
+.ficha-cifras{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-left: auto;
+}
+
+/* ============================================================
+   REFERENCIA CRUZADA — remisión a otro artículo o norma.
+   Se distingue del cuerpo por ser sans + versalitas sutiles,
+   como una nota tipográfica de "esto vive en otro sitio",
+   nunca como un enlace azul subrayado.
+   ============================================================ */
+
+.ref{
+  font-family: var(--sans);
+  font-size: 0.86em;
+  font-style: normal;
+  color: var(--statute);
+  border-bottom: 1px dotted var(--statute);
+  padding-bottom: 0.5px;
+}
+
+/* ============================================================
+   QUIZ DE REPASO — opción múltiple con revelado bajo demanda.
+   <details>/<summary> nativo: sin JS, y la respuesta permanece
+   oculta hasta que el lector decide mirarla, preservando el
+   valor de autoevaluación en un HTML de solo lectura.
+   ============================================================ */
+
+.quiz-bloque{
+  margin: 32px 0;
+  padding: 24px 26px;
+  background: var(--paper);
+  border: 1px solid #E3DDCB;
+  border-radius: var(--radio-panel);
+}
+
+.quiz-enunciado{
+  font-family: var(--sans);
+  font-size: var(--fs-base);
+  font-weight: 600;
+  color: var(--ink);
+  margin: 0 0 14px 0;
+}
+.quiz-enunciado .quiz-numero{ color: var(--claret); margin-right: 6px; }
+
+.quiz-opciones{
+  list-style: none;
+  margin: 0 0 16px 0;
+  padding: 0;
+  font-size: var(--fs-sans-base);
+}
+.quiz-opciones li{
+  padding: 8px 0 8px 26px;
+  position: relative;
+  border-bottom: 1px solid #EBE6D8;
+  color: var(--ink-soft);
+}
+.quiz-opciones li:last-child{ border-bottom: none; }
+.quiz-opciones li::before{
+  content: attr(data-letra);
+  position: absolute;
+  left: 0;
+  font-family: var(--sans);
+  font-weight: 700;
+  color: var(--ink-faint);
+}
+
+.quiz-revelar{
+  font-family: var(--sans);
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  color: var(--claret);
+  cursor: pointer;
+  list-style: none;
+}
+.quiz-revelar::-webkit-details-marker{ display: none; }
+.quiz-revelar::before{ content: '→ '; }
+details[open] .quiz-revelar::before{ content: '↓ '; }
+
+.quiz-respuesta{
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px dashed var(--claret);
+}
+.quiz-correcta{
+  font-family: var(--sans);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  color: var(--claret);
+  margin-bottom: 8px;
+}
+.quiz-explicacion{
+  font-size: var(--fs-sans-base);
+  line-height: 1.6;
+  color: var(--ink-soft);
+  margin: 0;
+}
+.quiz-opciones li[data-correcta="true"]{
+  color: var(--ink);
+}
+details[open] .quiz-opciones li[data-correcta="true"]::after{
+  content: '✓ correcta';
+  margin-left: 10px;
+  font-family: var(--sans);
+  font-size: var(--fs-micro);
+  font-weight: 700;
+  color: var(--statute);
+}
+
+
+/* Índice general — enlaces internos */
+.indice-general .indice-entrada-bloque{
+  font-weight: 600;
+}
+.indice-general .indice-entrada-bloque .titulo-tema{
+  font-size: var(--fs-base);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+.indice-general .indice-entrada-seccion .titulo-tema{
+  padding-left: 18px;
+  font-weight: 400;
+  font-size: var(--fs-sm);
+  color: var(--ink-soft);
+}
+.indice-link{
+  color: inherit;
+  text-decoration: none;
+}
+.indice-link:hover{
+  text-decoration: underline;
+}
+
+/* ============================================================
+   MODO OSCURO — activable, respeta la estética "papel" con
+   una superficie oscura tipo pizarra/cuero en vez de blanco
+   puro. Toggle vía atributo data-tema en <html>.
+   ============================================================ */
+
+html[data-tema="oscuro"]{
+  --paper: #1B1A17;
+  --paper-page: #221F1B;
+  --paper-shadow: rgba(0,0,0,0.45);
+  --ink: #E9E5D8;
+  --ink-soft: #C7C1B0;
+  --ink-faint: #8D8676;
+  --claret: #FF6482;
+  --claret-soft: #4A1D28;
+  --sienna: #FFB340;
+  --sienna-soft: #3D2B0F;
+  --statute: #30D158;
+  --statute-soft: #123020;
+  --exam: #FF6961;
+  --exam-soft: #3D1A16;
+}
+html[data-tema="oscuro"] .ficha{ border-top-color: #3A362E; }
+html[data-tema="oscuro"] .folio{ border-bottom-color: #3A362E; }
+html[data-tema="oscuro"] .pie-pagina{ border-top-color: #3A362E; }
+html[data-tema="oscuro"] h2.epigrafe{ border-bottom-color: #3A362E; }
+html[data-tema="oscuro"] .indice-entrada{ border-bottom-color: #33302A; }
+html[data-tema="oscuro"] .ficha-pie{ border-top-color: #33302A; }
+html[data-tema="oscuro"] .quiz-bloque{ border-color: #3A362E; }
+html[data-tema="oscuro"] .quiz-opciones li{ border-bottom-color: #33302A; }
+
+/* ============================================================
+   PALETAS DE ACENTO — 6 alternativas a --claret (el rosa/coral
+   por defecto), activables con data-acento="clave" en <html> o
+   <body>, independiente del atributo data-tema. Cada paleta
+   redefine solo --claret y --claret-soft (nunca --sienna,
+   --statute ni --exam: esos tres son fijos, de uso semántico
+   exclusivo). Se combinan con el modo oscuro añadiendo el
+   mismo selector bajo html[data-tema="oscuro"].
+   ============================================================ */
+
+[data-acento="azul"]{      --claret: #007AFF; --claret-soft: #DBEAFF; }
+[data-acento="verde"]{     --claret: #30B34A; --claret-soft: #DCF3E1; }
+[data-acento="morado"]{    --claret: #AF52DE; --claret-soft: #F2E3FA; }
+[data-acento="naranja"]{   --claret: #FF6B35; --claret-soft: #FFE4D8; }
+[data-acento="turquesa"]{  --claret: #32ADE6; --claret-soft: #DBF1FB; }
+[data-acento="granate"]{   --claret: #C2185B; --claret-soft: #FBDCE8; }
+
+html[data-tema="oscuro"][data-acento="azul"]{      --claret: #409CFF; --claret-soft: #0F2A47; }
+html[data-tema="oscuro"][data-acento="verde"]{     --claret: #4CD164; --claret-soft: #123420; }
+html[data-tema="oscuro"][data-acento="morado"]{    --claret: #CB7CEB; --claret-soft: #3A1F4A; }
+html[data-tema="oscuro"][data-acento="naranja"]{   --claret: #FF8F66; --claret-soft: #4A2416; }
+html[data-tema="oscuro"][data-acento="turquesa"]{  --claret: #64D2FF; --claret-soft: #0F3140; }
+html[data-tema="oscuro"][data-acento="granate"]{   --claret: #F0568F; --claret-soft: #4A1330; }
+/* Necesitas más tonos: es una fila de dos declaraciones (claro +
+   oscuro) por paleta, no un sistema nuevo — pídelos y se añaden. */
+
+/* ============================================================
+   BARRA DE HERRAMIENTAS DE ESTUDIO — flotante, fija en pantalla,
+   independiente del maquetado editorial de las páginas.
+   ============================================================ */
+
+.barra-estudio{
+  position: fixed;
+  bottom: 22px;
+  right: 22px;
+  z-index: 500;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+  font-family: var(--sans);
+}
+
+.barra-boton{
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--ink);
+  color: var(--paper-page);
+  border: none;
+  border-radius: var(--radio-chip);
+  padding: 11px 16px;
+  font-family: var(--sans);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.22);
+  transition: transform 0.15s ease, opacity 0.15s ease;
+  white-space: nowrap;
+}
+.barra-boton:hover{ transform: translateY(-1px); opacity: 0.92; }
+.barra-boton:active{ transform: translateY(0); }
+.barra-boton .icono{ font-size: var(--fs-base); line-height: 1; }
+
+.barra-boton.activo{
+  background: var(--claret);
+  color: #fff;
+}
+
+html[data-tema="oscuro"] .barra-boton{
+  background: var(--claret);
+  color: #fff;
+}
+html[data-tema="oscuro"] .barra-boton.activo{
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.marcador-contador{
+  background: var(--claret);
+  color: #fff;
+  border-radius: 999px;
+  padding: 1px 7px;
+  font-size: var(--fs-micro);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 640px){
+  .barra-estudio{
+    bottom: 12px;
+    right: 12px;
+    left: 12px;
+    align-items: stretch;
+  }
+  .barra-boton{
+    justify-content: center;
+  }
+  /* En móvil la barra pasa de una fila de iconos a 4 botones
+     apilados a ancho completo: su altura real (~4 botones de
+     ~40px + 3 huecos de 10px + margen inferior de 12px) supera
+     los 72px de aire que .page reservaba, y tapaba el final del
+     contenido. Se expone como variable para que .page pueda
+     reservar el hueco exacto en vez de un margen adivinado. */
+  :root{ --barra-estudio-alto: 202px; }
+}
+
+/* ============================================================
+   MODO REPASO — oculta todo salvo los bloques de preguntas,
+   para poder repasar sin releer el temario completo.
+   ============================================================ */
+
+body.modo-repaso .cuerpo > *:not(.quiz-bloque):not(h3.subepigrafe),
+body.modo-repaso .capitulo-abre,
+body.modo-repaso .seccion-abre{
+  display: none;
+}
+body.modo-repaso h3.subepigrafe{
+  display: block;
+}
+body.modo-repaso .ficha{
+  display: none;
+}
+body.modo-repaso .page.sin-quiz{
+  display: none;
+}
+
+/* ============================================================
+   QUIZ INTERACTIVO — las opciones se vuelven clicables; al
+   elegir una, se marca correcta/incorrecta al instante y se
+   despliega la explicación automáticamente.
+   ============================================================ */
+
+.quiz-opciones li{ cursor: pointer; }
+.quiz-opciones li:hover{ background: var(--claret-soft); }
+.quiz-opciones li.seleccionada-correcta{
+  background: var(--statute-soft);
+  color: var(--statute);
+  font-weight: 600;
+}
+.quiz-opciones li.seleccionada-incorrecta{
+  background: var(--exam-soft);
+  color: var(--exam);
+  text-decoration: line-through;
+  text-decoration-color: var(--exam);
+}
+.quiz-bloque.respondido .quiz-opciones li{ cursor: default; }
+.quiz-bloque.respondido .quiz-opciones li:hover{ background: none; }
+.quiz-bloque.respondido .quiz-opciones li.seleccionada-correcta:hover{ background: var(--statute-soft); }
+.quiz-bloque.respondido .quiz-opciones li.seleccionada-incorrecta:hover{ background: var(--exam-soft); }
+
+/* Marcador de resultado en la cabecera del bloque, junto al enunciado */
+.quiz-marca{
+  display: inline-block;
+  margin-left: 8px;
+  font-size: var(--fs-sm);
+}
+.quiz-marca.correcta::after{ content: '✓'; color: var(--statute); }
+.quiz-marca.incorrecta::after{ content: '✗'; color: var(--exam); }
+
+/* Panel resumen de resultados, se muestra al final de cada página con quiz */
+.quiz-resumen-pagina{
+  margin-top: 24px;
+  padding: 14px 18px;
+  background: var(--sienna-soft);
+  border: 1px solid var(--sienna);
+  border-radius: var(--radio-chip);
+  font-family: var(--sans);
+  font-size: var(--fs-sm);
+  color: var(--ink-soft);
+  display: none;
+}
+
+/* ============================================================
+   ASIENTO CONTABLE — partida doble Debe/Haber.
+   Mismo lenguaje visual que .tabla-datos (hairlines, sans,
+   numerales tabulares) para que un asiento se lea como una
+   tabla de datos más, no como un widget aparte. El rótulo
+   reutiliza el código de color de .bloque.ejemplo (siena
+   queda para "definición"; el asiento es un caso aplicado,
+   así que usa el mismo tono neutro que .ejemplo).
+   ============================================================ */
+
+.asiento{
+  margin: 24px 0;
+  padding: 4px 0 4px 20px;
+  border-left: 3px solid var(--ink-faint);
+}
+.asiento-enunciado{
+  font-family: var(--sans);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  font-style: italic;
+  color: var(--ink-soft);
+  margin-bottom: 10px;
+  line-height: 1.5;
+}
+.asiento-tabla{
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--sans);
+  font-size: var(--fs-sm);
+}
+.asiento-tabla th{
+  text-align: left;
+  font-weight: 700;
+  padding: 6px 12px 6px 0;
+  border-bottom: 2px solid var(--ink);
+  color: var(--ink);
+  font-size: var(--fs-micro);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+.asiento-tabla th.num, .asiento-tabla td.num{ text-align: right; }
+.asiento-tabla td{
+  padding: 6px 12px 6px 0;
+  border-bottom: 1px solid #DDD8C9;
+  color: var(--ink-soft);
+  font-variant-numeric: tabular-nums;
+}
+.asiento-tabla tr:last-child td{ border-bottom: 1px solid var(--ink); }
+.asiento-tabla td.cuenta-codigo{
+  font-weight: 700;
+  color: var(--claret);
+  white-space: nowrap;
+  width: 44px;
+}
+.asiento-tabla td.cuenta-nombre{ color: var(--ink); }
+.asiento-tabla tr.fila-nota td{
+  border-bottom: none;
+  font-style: italic;
+  font-size: var(--fs-xs);
+  color: var(--ink-faint);
+  padding-top: 10px;
+}
+
+/* Referencia normativa/tributaria bajo el título de sección,
+   equivalente al "eyebrow" del sistema ESCOLAR: una línea sans
+   discreta que ancla el bloque a su norma de valoración. */
+.seccion-norma{
+  font-family: var(--sans);
+  font-size: var(--fs-xs);
+  font-style: italic;
+  color: var(--ink-faint);
+  margin: 4px 0 0 0;
+}
+
+html[data-tema="oscuro"] .asiento-tabla th{ border-bottom-color: var(--ink); }
+html[data-tema="oscuro"] .asiento-tabla td{ border-bottom-color: #33302A; }
+html[data-tema="oscuro"] .asiento-tabla tr:last-child td{ border-bottom-color: var(--ink); }
+
+/* ============================================================
+   PANEL DE PROGRESO — cuadrícula de acceso a temas con estado
+   de avance. Equivalente editorial de un "dashboard" de app:
+   nada de tarjetas flotantes con sombra dura ni contadores de
+   videojuego — cada entrada es una miniatura de portadilla de
+   capítulo (número en granate + título) con una regla de
+   avance fina en vez de una barra de progreso gruesa.
+   ============================================================ */
+
+.panel-avance{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1px;
+  background: #DDD8C9;
+  border: 1px solid #DDD8C9;
+  border-radius: var(--radio-panel);
+  overflow: hidden;
+  margin: 24px 0;
+}
+.avance-tema{
+  background: var(--paper-page);
+  padding: 20px 20px 18px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+  font-family: var(--sans);
+}
+.avance-tema:hover{ background: var(--paper); }
+.avance-tema.bloqueado{ cursor: default; opacity: 0.5; }
+.avance-tema.bloqueado:hover{ background: var(--paper-page); }
+
+.avance-cabecera{
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 10px;
+}
+.avance-numero{
+  font-family: var(--serif);
+  font-size: var(--fs-md);
+  font-weight: 700;
+  color: var(--claret);
+}
+.avance-numero.pendiente{ color: var(--ink-faint); }
+.avance-estado{
+  font-size: var(--fs-micro);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 700;
+  color: var(--ink-faint);
+}
+.avance-titulo{
+  font-family: var(--serif);
+  font-size: var(--fs-sans-base);
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.3;
+  margin: 0 0 14px 0;
+}
+.avance-regla{
+  height: 2px;
+  background: #E9E4D6;
+  position: relative;
+  margin-bottom: 6px;
+}
+.avance-regla::after{
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: var(--avance-pct, 0%);
+  background: var(--claret);
+}
+.avance-porcentaje{
+  font-family: var(--sans);
+  font-size: var(--fs-micro);
+  color: var(--ink-faint);
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+.panel-resumen{
+  margin: 20px 0 8px;
+  padding: 14px 18px;
+  border-top: 1px solid #DDD8C9;
+  border-bottom: 1px solid #DDD8C9;
+  font-family: var(--sans);
+  font-size: var(--fs-sm);
+  color: var(--ink-soft);
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.panel-resumen b{
+  font-family: var(--sans);
+  color: var(--claret);
+  font-variant-numeric: tabular-nums;
+}
+
+html[data-tema="oscuro"] .panel-avance{ background: #33302A; border-color: #33302A; }
+html[data-tema="oscuro"] .avance-regla{ background: #33302A; }
+html[data-tema="oscuro"] .panel-resumen{ border-color: #3A362E; }
+
+/* ============================================================
+   PESTAÑAS DE APARTADO — subdivisión de un epígrafe en vistas
+   (p.ej. "Teoría" / "Fórmulas" / "Ejercicio"), no navegación
+   de nivel superior. Rótulos sans subrayados por una regla de
+   acento, en la misma familia visual que .seccion-numero.
+   ============================================================ */
+
+.pestanas{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 22px;
+  margin: 28px 0 4px;
+  border-bottom: 1px solid #DDD8C9;
+}
+.pestana{
+  font-family: var(--sans);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--ink-faint);
+  padding: 8px 0 10px;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  cursor: pointer;
+  background: none;
+  border-left: none; border-right: none; border-top: none;
+  transition: color 0.15s ease;
+}
+.pestana:hover{ color: var(--ink-soft); }
+.pestana.activa{
+  color: var(--claret);
+  border-bottom-color: var(--claret);
+}
+.pestana-panel{ display: none; padding-top: 24px; }
+.pestana-panel.activa{ display: block; }
+
+html[data-tema="oscuro"] .pestanas{ border-bottom-color: #3A362E; }
+
+/* ============================================================
+   CAJA DE FÓRMULA — expresión matemática o contable aislada
+   del cuerpo, centrada, en mono/sans con numerales tabulares.
+   Distinta de .cifra (que es un valor suelto en línea): la
+   caja aloja una fórmula completa, con su propia regla superior
+   fina en siena que la ancla al aparato de datos del capítulo.
+   ============================================================ */
+
+.caja-formula{
+  margin: 22px 0;
+  padding: 16px 20px;
+  background: var(--paper);
+  border-top: 2px solid var(--claret);
+  border-radius: 0 0 var(--radio-chip) var(--radio-chip);
+  font-family: var(--sans);
+  font-size: var(--fs-md);
+  color: var(--ink);
+  overflow-x: auto;
+}
+.caja-formula.centrada{ text-align: center; }
+.caja-formula .formula-etiqueta{
+  display: block;
+  font-size: var(--fs-micro);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--claret);
+  margin-bottom: 6px;
+}
+
+html[data-tema="oscuro"] .caja-formula{ background: #221F1B; }
+
+/* ============================================================
+   FIGURA — ilustración o gráfico con leyenda numerada, como
+   una lámina de libro de texto. El pie va en cursiva serif,
+   como .capitulo-sumario, no en sans de metadato: es prosa
+   explicativa, no una etiqueta de interfaz.
+   ============================================================ */
+
+.figura{
+  margin: 28px 0;
+  padding: 18px;
+  background: var(--paper);
+  border: 1px solid #E3DDCB;
+  border-radius: var(--radio-panel);
+}
+.figura-lienzo{ width: 100%; }
+.figura-lienzo svg{ width: 100%; height: auto; display: block; }
+.figura-pie{
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: var(--fs-sans-base);
+  line-height: 1.5;
+  color: var(--ink-soft);
+  margin: 14px 0 0 0;
+  padding-top: 12px;
+  border-top: 1px solid #EBE6D8;
+}
+.figura-pie strong{ font-style: normal; color: var(--ink); }
+
+html[data-tema="oscuro"] .figura{ background: #1B1A17; border-color: #33302A; }
+html[data-tema="oscuro"] .figura-pie{ border-top-color: #33302A; }
+
+/* ============================================================
+   AVISO — apunte breve dentro del cuerpo que matiza o completa
+   lo dicho, sin llegar al peso de .bloque (que abre su propio
+   rótulo). Un solo hairline izquierdo en tinta suave y cursiva,
+   como un inciso al margen que se ha metido en el cuerpo.
+   ============================================================ */
+
+.aviso{
+  margin: 18px 0;
+  padding: 4px 0 4px 16px;
+  border-left: 2px solid var(--ink-faint);
+  font-style: italic;
+  color: var(--ink-soft);
+}
+.aviso strong{ font-style: normal; color: var(--ink); }
+
+/* ============================================================
+   EJERCICIO RESUELTO — distinto de .bloque.ejemplo: aquí hay
+   varios pasos numerados que se leen en secuencia, como un
+   problema resuelto al margen del texto. Cada paso lleva su
+   propio rótulo sans en mayúsculas pequeñas.
+   ============================================================ */
+
+.ejercicio{
+  margin: 28px 0;
+  padding: 20px 22px;
+  background: color-mix(in srgb, var(--ink) 4%, var(--paper-page));
+  border-radius: var(--radio-panel);
+  border: 1px solid #E3DDCB;
+}
+.ejercicio-enunciado{
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: var(--fs-sans-base);
+  color: var(--ink);
+  margin: 0 0 16px 0;
+}
+.ejercicio-enunciado .etiqueta{ margin-right: 8px; }
+.ejercicio-paso{ margin: 0 0 14px 0; }
+.ejercicio-paso:last-child{ margin-bottom: 0; }
+.ejercicio-paso-rotulo{
+  font-family: var(--sans);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  color: var(--ink-faint);
+  margin: 0 0 4px 0;
+}
+.ejercicio-paso p{ margin: 0; font-size: var(--fs-base); line-height: 1.6; color: var(--ink-soft); }
+.ejercicio-conclusion{
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px dashed var(--sienna);
+  font-weight: 600;
+  color: var(--ink);
+}
+
+html[data-tema="oscuro"] .ejercicio{ background: #221F1B; border-color: #33302A; }
+
+/* ============================================================
+   GLOSARIO — lista de términos con buscador simple. El campo
+   de búsqueda toma la tipografía sans del sistema, sin bordes
+   redondeados de "pill" de app: una caja discreta con hairline,
+   igual que cualquier otro input del aparato editorial.
+   ============================================================ */
+
+.glosario-buscador{
+  width: 100%;
+  font-family: var(--sans);
+  font-size: var(--fs-sans-base);
+  padding: 10px 14px;
+  margin: 20px 0;
+  border: 1px solid #DDD8C9;
+  border-radius: var(--radio-chip);
+  background: var(--paper-page);
+  color: var(--ink);
+}
+.glosario-buscador:focus{
+  outline: none;
+  border-color: var(--claret);
+}
+.glosario-buscador::placeholder{ color: var(--ink-faint); }
+
+.glosario-entrada{
+  padding: 14px 0;
+  border-bottom: 1px solid #E9E4D6;
+}
+.glosario-entrada:last-child{ border-bottom: none; }
+.glosario-termino{
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: var(--fs-sans-base);
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+.glosario-etiqueta-tema{
+  font-size: var(--fs-micro);
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--claret);
+  background: var(--claret-soft);
+  padding: 1px 7px;
+  border-radius: 999px;
+}
+.glosario-definicion{
+  font-size: var(--fs-base);
+  color: var(--ink-soft);
+  line-height: 1.6;
+  margin: 0;
+}
+.glosario-entrada.oculta{ display: none; }
+
+html[data-tema="oscuro"] .glosario-buscador{ background: #221F1B; border-color: #3A362E; }
+html[data-tema="oscuro"] .glosario-entrada{ border-bottom-color: #33302A; }
+
+/* ============================================================
+   QUIZ PAGINADO CON PROGRESO — variante de examen tipo test
+   de una sola pregunta a la vez, con regla de avance y
+   navegación. El aparato .quiz-bloque original se mantiene
+   para la revisión "en línea" con el temario; este componente
+   es para una sesión de repaso autocontenida.
+   ============================================================ */
+
+.quiz-sesion{
+  margin: 28px 0;
+  padding: 26px 28px;
+  background: var(--paper);
+  border: 1px solid #E3DDCB;
+  border-radius: var(--radio-panel);
+}
+.quiz-sesion-avance{
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 20px;
+  font-family: var(--sans);
+  font-size: var(--fs-xs);
+  color: var(--ink-faint);
+}
+.quiz-sesion-regla{
+  flex: 1;
+  height: 3px;
+  background: #E9E4D6;
+  position: relative;
+}
+.quiz-sesion-regla::after{
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: var(--avance-pct, 0%);
+  background: var(--claret);
+}
+.quiz-sesion-nav{
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 22px;
+}
+.quiz-sesion-boton{
+  font-family: var(--sans);
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  padding: 9px 20px;
+  border-radius: var(--radio-chip);
+  border: 1px solid var(--ink);
+  background: var(--ink);
+  color: var(--paper-page);
+  cursor: pointer;
+}
+.quiz-sesion-boton:disabled{
+  border-color: #DDD8C9;
+  background: #DDD8C9;
+  color: var(--ink-faint);
+  cursor: not-allowed;
+}
+.quiz-sesion-boton.secundario{
+  background: transparent;
+  color: var(--ink);
+}
+.quiz-sesion-resultado{
+  text-align: center;
+  padding: 24px 0;
+  font-family: var(--sans);
+}
+.quiz-sesion-resultado .puntuacion{
+  font-size: var(--fs-xl);
+  font-weight: 700;
+  color: var(--claret);
+  font-variant-numeric: tabular-nums;
+}
+
+html[data-tema="oscuro"] .quiz-sesion{ border-color: #3A362E; }
+html[data-tema="oscuro"] .quiz-sesion-regla{ background: #33302A; }
+
+/* ============================================================
+   FICHA-MEMORIA (flashcard) — tarjeta de dos caras para
+   repaso aleatorio. Sin animación de volteo 3D llamativa: un
+   simple cambio de contenido con un hairline que marca el
+   "reverso", coherente con la ausencia de sombras duras del
+   resto del sistema. El estado va por atributo, no por clase,
+   igual que el modo oscuro.
+   ============================================================ */
+
+.ficha-memoria{
+  max-width: 480px;
+  margin: 28px auto;
+  padding: 32px 28px;
+  background: var(--paper);
+  border: 1px solid #E3DDCB;
+  border-radius: var(--radio-panel);
+  text-align: center;
+  cursor: pointer;
+  min-height: 160px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.ficha-memoria[data-cara="reverso"]{
+  border-top: 3px solid var(--claret);
+}
+.ficha-memoria-etiqueta{
+  font-family: var(--sans);
+  font-size: var(--fs-micro);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-bottom: 14px;
+}
+.ficha-memoria[data-cara="reverso"] .ficha-memoria-etiqueta{ color: var(--claret); }
+.ficha-memoria-contenido{
+  font-family: var(--serif);
+  font-size: var(--fs-md);
+  color: var(--ink);
+  line-height: 1.4;
+}
+.ficha-memoria[data-cara="reverso"] .ficha-memoria-contenido{
+  font-family: var(--sans);
+  font-size: var(--fs-base);
+  color: var(--ink-soft);
+  text-align: left;
+}
+.ficha-memoria-pie{
+  margin-top: 16px;
+  font-family: var(--sans);
+  font-size: var(--fs-xs);
+  color: var(--ink-faint);
+}
+
+.ficha-memoria-filtros{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 16px 0 24px;
+}
+.filtro-chip{
+  font-family: var(--sans);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  padding: 5px 12px;
+  border-radius: 999px;
+  border: 1px solid #DDD8C9;
+  background: var(--paper-page);
+  color: var(--ink-soft);
+  cursor: pointer;
+}
+.filtro-chip:hover{ border-color: var(--claret); color: var(--claret); }
+.filtro-chip.activo{
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--paper-page);
+}
+
+html[data-tema="oscuro"] .ficha-memoria{ border-color: #3A362E; }
+html[data-tema="oscuro"] .filtro-chip{ background: #221F1B; border-color: #3A362E; }
+
+/* ============================================================
+   INSIGNIA — marcador breve de metadato (tema, dificultad,
+   norma aplicable), en línea con .etiqueta pero pensado para
+   ir suelto junto a un título, no dentro de un bloque.
+   ============================================================ */
+
+.insignia{
+  display: inline-block;
+  font-family: var(--sans);
+  font-size: var(--fs-micro);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 2px 9px;
+  border-radius: 999px;
+  background: var(--ink);
+  color: var(--paper-page);
+}
+.insignia.suave{
+  background: var(--claret-soft);
+  color: var(--claret);
+}
+
+/* ============================================================
+   BARRA DE PROGRESO DE LECTURA — hilo fijo en el borde superior
+   de la ventana, alimentado por scroll. Distinta de la barra de
+   estudio (que es una barra de herramientas): esta es solo una
+   línea de 3px, sin texto ni controles, que informa avance sin
+   pedir atención. Opcional: si #progreso-lectura no existe en
+   el HTML, TRATADO.js no la activa.
+   ============================================================ */
+
+.barra-progreso-lectura{
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 250;
+  height: 3px;
+  background: transparent;
+}
+.barra-progreso-lectura-relleno{
+  height: 100%;
+  width: 0%;
+  background: var(--claret);
+  opacity: 0.55;
+}
+
+/* ============================================================
+   VERDADERO O FALSO — misma familia visual que .quiz-bloque,
+   pero con dos botones de veredicto en vez de una lista de
+   opciones: la afirmación es única, la respuesta es binaria.
+   ============================================================ */
+
+.verdadero-falso{
+  margin: 32px 0;
+  padding: 24px 26px;
+  background: var(--paper);
+  border: 1px solid #E3DDCB;
+  border-radius: var(--radio-panel);
+}
+.vf-item{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 14px 0;
+  border-bottom: 1px solid #EBE6D8;
+}
+.vf-item:last-of-type{ border-bottom: none; }
+.vf-item p{
+  margin: 0;
+  font-family: var(--sans);
+  font-size: var(--fs-sans-base);
+  color: var(--ink);
+  flex: 1;
+}
+.vf-botones{ display: flex; gap: 8px; flex: none; }
+.vf-boton{
+  font-family: var(--sans);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  background: var(--paper-page);
+  border: 1px solid #DDD8C9;
+  color: var(--ink-soft);
+  padding: 6px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+}
+.vf-boton:hover{ border-color: var(--ink-faint); }
+.vf-boton.marcado{ background: var(--claret-soft); border-color: var(--claret); color: var(--claret); }
+.vf-boton.acierto{ background: var(--statute-soft); border-color: var(--statute); color: var(--statute); }
+.vf-boton.error{ background: var(--exam-soft); border-color: var(--exam); color: var(--exam); }
+.vf-boton:disabled{ cursor: default; }
+.verdadero-falso-marcador{ font-family: var(--sans); font-size: var(--fs-xs); color: var(--ink-faint); }
+
+html[data-tema="oscuro"] .verdadero-falso{ border-color: #3A362E; }
+html[data-tema="oscuro"] .vf-item{ border-bottom-color: #33302A; }
+html[data-tema="oscuro"] .vf-boton{ background: #221F1B; border-color: #3A362E; }
+
+/* ============================================================
+   ORDENAR PALABRAS — banco de fichas sueltas que el lector
+   recoloca en un renglón vacío. Mismo lenguaje de "ficha suelta"
+   que .filtro-chip, pero funcional en vez de decorativo.
+   ============================================================ */
+
+.ordenar-palabras{
+  margin: 32px 0;
+  padding: 24px 26px;
+  background: var(--paper);
+  border: 1px solid #E3DDCB;
+  border-radius: var(--radio-panel);
+}
+.ordenar-enunciado{
+  font-family: var(--sans);
+  font-size: var(--fs-sm);
+  color: var(--ink-soft);
+  margin: 0 0 16px 0;
+}
+.ordenar-item{ margin-bottom: 18px; }
+.ordenar-item:last-child{ margin-bottom: 0; }
+.ordenar-banco{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 10px;
+  min-height: 38px;
+}
+.ordenar-renglon{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  min-height: 42px;
+  padding: 8px;
+  background: var(--paper-page);
+  border: 1.5px dashed #DDD8C9;
+  border-radius: var(--radio-chip);
+}
+.ordenar-ficha{
+  font-family: var(--sans);
+  font-size: var(--fs-sans-base);
+  background: var(--paper-page);
+  border: 1px solid #DDD8C9;
+  color: var(--ink);
+  padding: 6px 13px;
+  border-radius: 999px;
+  cursor: pointer;
+  user-select: none;
+}
+.ordenar-ficha.usada{ background: var(--claret-soft); border-color: var(--claret); color: var(--claret); }
+.ordenar-resultado{ font-family: var(--sans); font-size: var(--fs-xs); color: var(--ink-faint); margin-top: 8px; }
+.ordenar-item.acierto .ordenar-renglon{ border-style: solid; border-color: var(--statute); background: var(--statute-soft); }
+.ordenar-item.error .ordenar-renglon{ border-style: solid; border-color: var(--exam); background: var(--exam-soft); }
+
+html[data-tema="oscuro"] .ordenar-palabras{ border-color: #3A362E; }
+html[data-tema="oscuro"] .ordenar-ficha{ background: #221F1B; border-color: #3A362E; }
+html[data-tema="oscuro"] .ordenar-renglon{ background: #1B1A17; border-color: #3A362E; }
+
+/* ============================================================
+   EMPAREJAR COLUMNAS — dos listas de botones; seleccionar uno
+   de cada lado los une. Reutiliza el radio-chip y las reglas de
+   acierto/error del resto del catálogo, sin tarjetas nuevas.
+   ============================================================ */
+
+.emparejar{
+  margin: 32px 0;
+  padding: 24px 26px;
+  background: var(--paper);
+  border: 1px solid #E3DDCB;
+  border-radius: var(--radio-panel);
+}
+.emparejar-enunciado{
+  font-family: var(--sans);
+  font-size: var(--fs-sm);
+  color: var(--ink-soft);
+  margin: 0 0 16px 0;
+}
+.emparejar-columnas{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+}
+.emparejar-col{ display: flex; flex-direction: column; gap: 8px; }
+.emparejar-item{
+  font-family: var(--sans);
+  font-size: var(--fs-sans-base);
+  text-align: left;
+  background: var(--paper-page);
+  border: 1px solid #DDD8C9;
+  color: var(--ink);
+  padding: 10px 14px;
+  border-radius: var(--radio-chip);
+  cursor: pointer;
+}
+.emparejar-item:hover{ border-color: var(--claret); }
+.emparejar-item.seleccionado{ background: var(--claret-soft); border-color: var(--claret); color: var(--claret); }
+.emparejar-item.unido{ background: var(--statute-soft); border-color: var(--statute); color: var(--statute); cursor: default; }
+.emparejar-item.fallo{ background: var(--exam-soft); border-color: var(--exam); color: var(--exam); }
+.emparejar-marcador{ font-family: var(--sans); font-size: var(--fs-xs); color: var(--ink-faint); }
+
+@media (max-width: 640px){
+  .emparejar-columnas{ grid-template-columns: 1fr; }
+}
+html[data-tema="oscuro"] .emparejar{ border-color: #3A362E; }
+html[data-tema="oscuro"] .emparejar-item{ background: #221F1B; border-color: #3A362E; }
+
+/* ============================================================
+   RELLENAR HUECOS — texto corrido en serif de lectura con
+   huecos en línea. El input hereda la tipografía del cuerpo
+   en vez de parecer un campo de formulario suelto.
+   ============================================================ */
+
+.rellenar-huecos{
+  margin: 32px 0;
+  padding: 24px 26px;
+  background: var(--paper);
+  border: 1px solid #E3DDCB;
+  border-radius: var(--radio-panel);
+}
+.rellenar-texto{
+  font-family: var(--serif);
+  font-size: var(--fs-base);
+  line-height: 2;
+  color: var(--ink);
+}
+.rellenar-texto input[type="text"]{
+  font-family: var(--sans);
+  font-size: var(--fs-sans-base);
+  width: 120px;
+  text-align: center;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid var(--ink-faint);
+  color: var(--ink);
+  padding: 2px 4px;
+  margin: 0 2px;
+}
+.rellenar-texto input[type="text"]:focus{ outline: none; border-bottom-color: var(--claret); }
+.rellenar-texto input.acierto{ border-bottom-color: var(--statute); color: var(--statute); }
+.rellenar-texto input.error{ border-bottom-color: var(--exam); color: var(--exam); text-decoration: line-through; }
+.rellenar-marcador{ font-family: var(--sans); font-size: var(--fs-xs); color: var(--ink-faint); margin-top: 16px; display: block; }
+
+html[data-tema="oscuro"] .rellenar-huecos{ border-color: #3A362E; }
+
+/* ============================================================
+   CONTROLES DE EJERCICIO — botón "Comprobar respuestas" y
+   "Reiniciar ejercicio", pareja fija para los ejercicios de
+   entrada diferida (huecos, transformar, tabla de conjugación).
+   El primario hereda el mismo lenguaje visual que
+   .quiz-sesion-boton; el secundario es un enlace discreto.
+   ============================================================ */
+
+.ejercicio-controles{
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 18px;
+  flex-wrap: wrap;
+}
+.ejercicio-btn-comprobar{
+  font-family: var(--sans);
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  padding: 9px 20px;
+  border-radius: var(--radio-chip);
+  border: 1px solid var(--ink);
+  background: var(--ink);
+  color: var(--paper-page);
+  cursor: pointer;
+}
+.ejercicio-btn-comprobar:hover{ background: var(--claret); border-color: var(--claret); }
+.ejercicio-btn-reiniciar{
+  font-family: var(--sans);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  padding: 8px 14px;
+  border-radius: var(--radio-chip);
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--ink-faint);
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.ejercicio-btn-reiniciar:hover{ color: var(--ink); }
+html[data-tema="oscuro"] .ejercicio-btn-comprobar{ background: var(--claret); border-color: var(--claret); color: #fff; }
+html[data-tema="oscuro"] .ejercicio-btn-comprobar:hover{ opacity: 0.88; }
+
+/* ============================================================
+   TOGGLE DE IDIOMA — por defecto solo se ve el español. En
+   modo bilingüe, cada bloque traducible muestra además su
+   versión en inglés en un tono más discreto (tamaño menor,
+   tinta suave, con divisor), sin sustituir al español.
+   ============================================================ */
+
+.pkg-btn-idioma{
+  font-family: var(--sans);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  padding: 8px 16px;
+  border-radius: var(--radio-chip);
+  border: 1px solid #DDD8C9;
+  background: var(--paper-page);
+  color: var(--ink-soft);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.pkg-btn-idioma:hover{ border-color: var(--ink-faint); }
+.pkg-btn-idioma.activo{
+  background: var(--claret);
+  border-color: var(--claret);
+  color: #fff;
+}
+html[data-tema="oscuro"] .pkg-btn-idioma{ background: #221F1B; border-color: #3A362E; color: var(--ink-soft); }
+html[data-tema="oscuro"] .pkg-btn-idioma.activo{ background: var(--claret); border-color: var(--claret); color: #fff; }
+
+.trad-en{
+  display: none;
+  font-family: var(--sans);
+  font-size: 0.86em;
+  font-style: italic;
+  color: var(--ink-faint);
+}
+html[data-idioma="bilingue"] .trad-en{ display: inline; }
+html[data-idioma="bilingue"] .trad-en::before{
+  content: "· ";
+  opacity: 0.6;
+  font-style: normal;
+}
+/* en bloque (párrafos, enunciados): línea propia, con filete izquierdo sutil */
+html[data-idioma="bilingue"] .trad-en.trad-en-bloque{
+  display: block;
+  margin-top: 4px;
+  padding-left: 10px;
+  border-left: 2px solid var(--claret-soft);
+}
+html[data-idioma="bilingue"] .trad-en.trad-en-bloque::before{ content: none; }
+
+/* ============================================================
+   FRASE DE CIERRE — remate de sección o de tema, en el único
+   lugar del sistema donde el acento se permite como fondo
+   suave en vez de como filete: un mesh-gradient estático,
+   sin animación, que marca "esto es lo que hay que llevarse".
+   ============================================================ */
+
+.frase-cierre{
+  margin: 40px 0;
+  padding: 30px 32px;
+  border-radius: var(--radio-panel);
+  border: 1px solid var(--claret-soft);
+  background:
+    radial-gradient(ellipse 320px 240px at 10% -12%, color-mix(in srgb, var(--claret) 12%, transparent) 0%, transparent 60%),
+    radial-gradient(ellipse 260px 200px at 94% 118%, color-mix(in srgb, var(--claret) 10%, transparent) 0%, transparent 55%),
+    var(--claret-soft);
+  text-align: center;
+}
+.frase-cierre-rotulo{
+  font-family: var(--sans);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--claret);
+  margin: 0 0 12px 0;
+}
+.frase-cierre-texto{
+  font-family: var(--serif);
+  font-size: var(--fs-lg);
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--ink);
+  margin: 0 0 10px 0;
+}
+.frase-cierre-texto em{ font-style: italic; color: var(--claret); }
+.frase-cierre-apoyo{
+  font-family: var(--sans);
+  font-size: var(--fs-sm);
+  color: var(--ink-soft);
+  max-width: 46ch;
+  margin: 0 auto;
+}
+
+html[data-tema="oscuro"] .frase-cierre{ border-color: #4A1D28; }
+
+/* ============================================================
+   CORRECCIÓN DE TAREA — línea tachada + línea correcta, con
+   una nota al margen. Neutro: no usa el acento, para que se
+   lea como aparato de corrección y no como contenido nuevo.
+   ============================================================ */
+
+.correccion{
+  margin: 32px 0;
+  padding: 22px 24px;
+  background: var(--paper);
+  border: 1px solid #E3DDCB;
+  border-radius: var(--radio-panel);
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.correccion-item{ flex: 1; min-width: 240px; }
+.correccion-mal{
+  font-family: var(--sans);
+  font-size: var(--fs-sans-base);
+  color: var(--ink-faint);
+  margin: 0 0 6px 0;
+}
+.correccion-mal del{ text-decoration-color: var(--exam); }
+.correccion-bien{
+  font-family: var(--sans);
+  font-size: var(--fs-sans-base);
+  color: var(--ink);
+  margin: 0;
+}
+.correccion-bien::before{ content: "✓ "; color: var(--statute); font-weight: 700; }
+.correccion-nota{
+  flex: none;
+  width: 260px;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  background: var(--sienna-soft);
+  border: 1px solid #F0D9A8;
+  border-radius: var(--radio-chip);
+  padding: 14px 16px;
+  font-family: var(--sans);
+  font-size: var(--fs-xs);
+  color: var(--ink-soft);
+}
+.correccion-nota strong{ color: var(--ink); }
+@media (max-width: 640px){ .correccion{ flex-direction: column; } .correccion-nota{ width: auto; } }
+html[data-tema="oscuro"] .correccion{ border-color: #3A362E; }
+html[data-tema="oscuro"] .correccion-nota{ background: #2A2313; border-color: #4A3B1D; }
+
+/* ============================================================
+   FRASES FIJAS — rejilla de tarjetas siempre abiertas (a
+   diferencia de .ficha-memoria, que voltea). Para estructuras
+   o fórmulas fijas que conviene tener siempre a la vista.
+   ============================================================ */
+
+.frases-fijas{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 14px;
+  margin: 24px 0;
+}
+.frase-fija{
+  background: var(--paper);
+  border: 1px solid #E3DDCB;
+  border-radius: var(--radio-chip);
+  padding: 16px 18px;
+}
+.frase-fija-frase{
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: var(--fs-md);
+  color: var(--claret);
+  margin: 0 0 4px 0;
+}
+.frase-fija-etiqueta{
+  font-family: var(--sans);
+  font-size: var(--fs-micro);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--ink-faint);
+  margin: 0 0 10px 0;
+}
+.frase-fija-ejemplo{
+  font-family: var(--sans);
+  font-size: var(--fs-sm);
+  color: var(--ink-soft);
+  line-height: 1.5;
+  margin: 0;
+}
+.frase-fija-ejemplo strong{ color: var(--claret); font-weight: 600; }
+html[data-tema="oscuro"] .frase-fija{ background: #221F1B; border-color: #3A362E; }
+
+/* ============================================================
+   DEBATE CORTO — pestañas de tema + panel de postura con
+   recordatorio de estructuras. Reutiliza .pestanas donde
+   pueda, pero necesita su propio panel de dos columnas.
+   ============================================================ */
+
+.debate{
+  margin: 32px 0;
+  padding: 26px 28px;
+  background: var(--claret-soft);
+  border: 1px solid var(--claret-soft);
+  border-radius: var(--radio-panel);
+}
+.debate-temas{ display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
+.debate-tema{
+  font-family: var(--sans);
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  color: var(--ink);
+  background: var(--paper-page);
+  border: 1px solid #DDD8C9;
+  padding: 9px 18px;
+  border-radius: 999px;
+  cursor: pointer;
+}
+.debate-tema:hover{ border-color: var(--claret); }
+.debate-tema.activa{ background: var(--claret); color: #fff; border-color: var(--claret); }
+.debate-panel{ display: flex; gap: 24px; flex-wrap: wrap; }
+.debate-principal{ flex: 1; min-width: 220px; }
+.debate-rotulo{ font-family: var(--sans); font-weight: 700; font-size: var(--fs-xs); color: var(--claret); text-transform: uppercase; letter-spacing: 0.04em; margin: 0 0 8px 0; }
+.debate-titulo{ font-family: var(--serif); font-weight: 600; font-size: var(--fs-md); color: var(--ink); margin: 0 0 8px 0; }
+.debate-postura{
+  width: 100%;
+  min-height: 70px;
+  font-family: var(--sans);
+  font-size: var(--fs-sans-base);
+  color: var(--ink);
+  background: var(--paper-page);
+  border: 1px solid #DDD8C9;
+  border-radius: var(--radio-chip);
+  padding: 10px 12px;
+  resize: vertical;
+}
+.debate-postura:focus{ outline: none; border-color: var(--claret); }
+.debate-recordar{
+  flex: none;
+  width: 230px;
+  background: var(--paper-page);
+  border: 1px solid #DDD8C9;
+  border-radius: var(--radio-chip);
+  padding: 16px 18px;
+  font-family: var(--sans);
+  font-size: var(--fs-xs);
+  color: var(--ink);
+}
+.debate-recordar strong{ display: block; margin-bottom: 8px; }
+.debate-recordar ul{ margin: 0; padding-left: 16px; color: var(--ink-soft); }
+.debate-recordar li{ margin-bottom: 6px; }
+@media (max-width: 640px){ .debate-recordar{ width: auto; } }
+html[data-tema="oscuro"] .debate-tema:not(.activa),
+html[data-tema="oscuro"] .debate-postura,
+html[data-tema="oscuro"] .debate-recordar{ background: #221F1B; border-color: #3A362E; }
+
+/* ============================================================
+   TABLA COMPARATIVA CON PESTAÑAS — misma tabla que .tabla-datos
+   pero con un selector de pestañas encima que cambia el
+   contenido del cuerpo (p. ej. un tiempo verbal cada vez).
+   ============================================================ */
+
+.tabla-pestanas{ display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
+.tabla-pestana{
+  font-family: var(--sans);
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  color: var(--ink-soft);
+  background: var(--paper-page);
+  border: 1px solid #DDD8C9;
+  padding: 7px 16px;
+  border-radius: 999px;
+  cursor: pointer;
+}
+.tabla-pestana:hover{ border-color: var(--ink-faint); }
+.tabla-pestana.activa{ background: var(--claret); color: #fff; border-color: var(--claret); }
+
+/* ============================================================
+   LECTURA Y COMPRENSIÓN — texto de lectura en caja diferenciada
+   más preguntas de opción múltiple con comprobación conjunta.
+   ============================================================ */
+
+.lectura{
+  margin: 32px 0;
+  padding: 26px 28px;
+  background: var(--paper);
+  border: 1px solid #E3DDCB;
+  border-radius: var(--radio-panel);
+}
+.lectura-texto{
+  font-family: var(--serif);
+  font-size: var(--fs-base);
+  line-height: 1.7;
+  color: var(--ink);
+  background: var(--paper-page);
+  border: 1px solid #E8D9B8;
+  border-radius: var(--radio-chip);
+  padding: 20px 22px;
+  margin-bottom: 20px;
+}
+.lectura-texto p{ margin: 0 0 12px 0; }
+.lectura-texto p:last-child{ margin-bottom: 0; }
+.lectura-pregunta{
+  background: var(--paper-page);
+  border: 1px solid #DDD8C9;
+  border-radius: var(--radio-chip);
+  padding: 14px 16px;
+  margin-bottom: 12px;
+}
+.lectura-pregunta:last-of-type{ margin-bottom: 0; }
+.lectura-pregunta p.enunciado{ font-family: var(--sans); font-size: var(--fs-sans-base); color: var(--ink); margin: 0 0 10px 0; font-weight: 600; }
+.lectura-opciones{ display: flex; flex-wrap: wrap; gap: 8px; }
+.lectura-opciones button{
+  font-family: var(--sans);
+  font-size: var(--fs-sm);
+  background: var(--paper-page);
+  border: 1.5px solid #DDD8C9;
+  color: var(--ink);
+  padding: 7px 16px;
+  border-radius: 999px;
+  cursor: pointer;
+}
+.lectura-opciones button:hover{ border-color: var(--ink-faint); }
+.lectura-opciones button.marcado{ background: var(--claret-soft); border-color: var(--claret); color: var(--claret); }
+.lectura-opciones button.acierto{ background: var(--statute-soft); border-color: var(--statute); color: var(--statute); }
+.lectura-opciones button.error{ background: var(--exam-soft); border-color: var(--exam); color: var(--exam); }
+.lectura-opciones button:disabled{ cursor: default; }
+.lectura-marcador{ font-family: var(--sans); font-size: var(--fs-xs); color: var(--ink-faint); }
+html[data-tema="oscuro"] .lectura{ border-color: #3A362E; }
+html[data-tema="oscuro"] .lectura-texto,
+html[data-tema="oscuro"] .lectura-pregunta,
+html[data-tema="oscuro"] .lectura-opciones button{ background: #221F1B; border-color: #3A362E; }
+
+/* ============================================================
+   FEEDBACK DE ACIERTOS — aviso breve tras responder bien.
+   Fondo suave verde estatutario, no el acento: refuerza que
+   es un estado de "correcto", igual que .vf-boton.acierto.
+   ============================================================ */
+
+.feedback{
+  margin: 24px 0;
+  padding: 16px 20px;
+  border-radius: var(--radio-chip);
+  background: var(--statute-soft);
+  border: 1px solid var(--statute-soft);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.feedback-icono{
+  flex: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--statute);
+  color: #fff;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.feedback-texto strong{ display: block; font-family: var(--serif); font-size: var(--fs-sans-base); color: var(--ink); }
+.feedback-texto span{ font-family: var(--sans); font-size: var(--fs-xs); color: var(--ink-soft); }
+html[data-tema="oscuro"] .feedback{ background: #16301F; border-color: #1F4A30; }
+
+/* ============================================================
+   TRANSFORMAR LA FRASE — original + instrucción + campo de
+   respuesta libre, comprobado por texto normalizado (reutiliza
+   normalizarTexto, ya definido para .rellenar-huecos).
+   ============================================================ */
+
+.transformar{
+  margin: 32px 0;
+  padding: 24px 26px;
+  background: var(--paper);
+  border: 1px solid #E3DDCB;
+  border-radius: var(--radio-panel);
+}
+.transformar-item{
+  background: var(--paper-page);
+  border: 1px solid #DDD8C9;
+  border-radius: var(--radio-chip);
+  padding: 14px 16px;
+  margin-bottom: 12px;
+}
+.transformar-item:last-child{ margin-bottom: 0; }
+.transformar-original{ font-family: var(--sans); font-size: var(--fs-sans-base); color: var(--ink-soft); margin: 0 0 4px 0; }
+.transformar-instruccion{
+  font-family: var(--sans);
+  font-size: var(--fs-micro);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--claret);
+  margin: 0 0 10px 0;
+}
+.transformar-item input[type="text"]{
+  width: 100%;
+  font-family: var(--sans);
+  font-size: var(--fs-sans-base);
+  color: var(--ink);
+  background: var(--paper-page);
+  border: 1px solid #DDD8C9;
+  border-radius: var(--radio-chip);
+  padding: 9px 12px;
+}
+.transformar-item input[type="text"]:focus{ outline: none; border-color: var(--claret); }
+.transformar-item input.acierto{ border-color: var(--statute); background: var(--statute-soft); }
+.transformar-item input.error{ border-color: var(--exam); background: var(--exam-soft); }
+.transformar-revelar{ font-family: var(--sans); font-size: var(--fs-xs); color: var(--ink-faint); margin: 8px 0 0 0; display: none; }
+.transformar-item.mostrar-revelar .transformar-revelar{ display: block; }
+html[data-tema="oscuro"] .transformar{ border-color: #3A362E; }
+html[data-tema="oscuro"] .transformar-item,
+html[data-tema="oscuro"] .transformar-item input[type="text"]{ background: #221F1B; border-color: #3A362E; }
+
+/* ============================================================
+   TABLA DE CONJUGACIÓN — variante de .tabla-datos con inputs
+   autocorregibles en vez de valores fijos.
+   ============================================================ */
+
+.tabla-conjugacion{ width: 100%; border-collapse: collapse; font-family: var(--sans); font-size: var(--fs-sans-base); margin: 24px 0; }
+.tabla-conjugacion caption{ text-align: left; font-size: var(--fs-xs); color: var(--ink-faint); margin-bottom: 8px; }
+.tabla-conjugacion th{
+  font-family: var(--sans);
+  font-size: var(--fs-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--ink-faint);
+  text-align: left;
+  padding: 8px 10px;
+  border-bottom: 1.5px solid var(--ink);
+}
+.tabla-conjugacion td{ padding: 7px 10px; border-bottom: 1px dashed #DDD8C9; }
+.tabla-conjugacion tr:last-child td{ border-bottom: 1px solid var(--ink); }
+.tabla-conjugacion td.pronombre{ font-family: var(--serif); font-weight: 600; color: var(--ink-soft); }
+.tabla-conjugacion input[type="text"]{
+  width: 100%;
+  font-family: var(--sans);
+  font-size: var(--fs-sans-base);
+  background: var(--paper-page);
+  border: 1px solid #DDD8C9;
+  border-radius: var(--radio-chip);
+  padding: 6px 9px;
+  color: var(--ink);
+}
+.tabla-conjugacion input[type="text"]:focus{ outline: none; border-color: var(--claret); }
+.tabla-conjugacion input.acierto{ border-color: var(--statute); background: var(--statute-soft); }
+.tabla-conjugacion input.error{ border-color: var(--exam); background: var(--exam-soft); }
+html[data-tema="oscuro"] .tabla-conjugacion input[type="text"]{ background: #221F1B; border-color: #3A362E; }
+
+/* ============================================================
+   CLASIFICAR EN CATEGORÍAS — banco de fichas + cubos donde
+   colocarlas por categoría. Reutiliza el lenguaje de ficha
+   suelta de .ordenar-ficha.
+   ============================================================ */
+
+.clasificar{
+  margin: 32px 0;
+  padding: 24px 26px;
+  background: var(--paper);
+  border: 1px solid #E3DDCB;
+  border-radius: var(--radio-panel);
+}
+.clasificar-banco{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 12px;
+  background: var(--paper-page);
+  border: 1px solid #DDD8C9;
+  border-radius: var(--radio-chip);
+  margin-bottom: 16px;
+}
+.clasificar-ficha{
+  font-family: var(--sans);
+  font-size: var(--fs-sans-base);
+  font-weight: 700;
+  background: var(--paper-page);
+  border: 1px solid #DDD8C9;
+  color: var(--ink);
+  padding: 6px 13px;
+  border-radius: 999px;
+  cursor: pointer;
+}
+.clasificar-ficha:hover{ border-color: var(--claret); }
+.clasificar-ficha.colocada{ background: var(--claret-soft); border-color: var(--claret); color: var(--claret); }
+.clasificar-ficha.acierto{ background: var(--statute-soft); border-color: var(--statute); color: var(--statute); }
+.clasificar-ficha.error{ background: var(--exam-soft); border-color: var(--exam); color: var(--exam); }
+.clasificar-tablero{ display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 14px; }
+.clasificar-cubo{
+  background: var(--paper-page);
+  border: 1.5px dashed #DDD8C9;
+  border-radius: var(--radio-chip);
+  padding: 12px;
+  min-height: 110px;
+}
+.clasificar-cubo h4{
+  font-family: var(--sans);
+  font-size: var(--fs-micro);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--ink-faint);
+  margin: 0 0 10px 0;
+}
+.clasificar-cubo-items{ display: flex; flex-wrap: wrap; gap: 6px; min-height: 30px; }
+.clasificar-marcador{ font-family: var(--sans); font-size: var(--fs-xs); color: var(--ink-faint); margin-top: 14px; display: block; }
+html[data-tema="oscuro"] .clasificar{ border-color: #3A362E; }
+html[data-tema="oscuro"] .clasificar-banco,
+html[data-tema="oscuro"] .clasificar-ficha,
+html[data-tema="oscuro"] .clasificar-cubo{ background: #221F1B; border-color: #3A362E; }
+
+/* ============================================================
+   ELIGE EL REGISTRO — frase + interruptor de dos posiciones
+   (formal / informal). Botones agrupados en píldora única.
+   ============================================================ */
+
+.registro{
+  margin: 32px 0;
+  padding: 24px 26px;
+  background: var(--paper);
+  border: 1px solid #E3DDCB;
+  border-radius: var(--radio-panel);
+}
+.registro-item{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 18px;
+  padding: 14px 0;
+  border-bottom: 1px solid #EBE6D8;
+}
+.registro-item:last-of-type{ border-bottom: none; }
+.registro-item p{ margin: 0; font-family: var(--serif); font-size: var(--fs-sans-base); color: var(--ink); flex: 1 1 100%; min-width: 0; }
+.registro-alterna{ display: flex; flex-wrap: wrap; flex: 1 1 100%; border: 1.5px solid #DDD8C9; border-radius: var(--radio-chip); overflow: hidden; }
+.registro-alterna button{
+  font-family: var(--sans);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  background: var(--paper-page);
+  border: none;
+  color: var(--ink-soft);
+  padding: 9px 13px;
+  cursor: pointer;
+  flex: 1 1 auto;
+  min-width: 0;
+  white-space: normal;
+  text-align: center;
+  line-height: 1.3;
+}
+.registro-alterna button.marcado{ background: var(--claret); color: #fff; }
+.registro-alterna button.acierto{ background: var(--statute); color: #fff; }
+.registro-alterna button.error{ background: var(--exam); color: #fff; }
+html[data-tema="oscuro"] .registro{ border-color: #3A362E; }
+html[data-tema="oscuro"] .registro-item{ border-bottom-color: #33302A; }
+html[data-tema="oscuro"] .registro-alterna button{ background: #221F1B; }
+
+/* ============================================================
+   ENCUENTRA EL ERROR — frase palabra a palabra; clic en la
+   palabra que sobra o está mal. Sin botón de comprobar: se
+   corrige al clic, como .spot-word en ESCOLAR.
+   ============================================================ */
+
+.encontrar-error{
+  margin: 32px 0;
+  padding: 24px 26px;
+  background: var(--paper);
+  border: 1px solid #E3DDCB;
+  border-radius: var(--radio-panel);
+}
+.encontrar-error-item{
+  padding: 14px 0;
+  border-bottom: 1px solid #EBE6D8;
+}
+.encontrar-error-item:last-of-type{ border-bottom: none; }
+.encontrar-error-frase{ font-family: var(--serif); font-size: var(--fs-base); line-height: 1.9; color: var(--ink); margin: 0; }
+.encontrar-error-palabra{ cursor: pointer; border-radius: 4px; padding: 1px 3px; }
+.encontrar-error-palabra:hover{ background: var(--claret-soft); }
+.encontrar-error-palabra.marcada{ background: var(--claret-soft); color: var(--claret); font-weight: 600; }
+.encontrar-error-palabra.acierto{ background: var(--statute-soft); color: var(--statute); font-weight: 600; }
+.encontrar-error-palabra.error{ background: var(--exam-soft); color: var(--exam); text-decoration: line-through; }
+.encontrar-error-correccion{ font-family: var(--sans); font-size: var(--fs-xs); color: var(--ink-faint); margin: 8px 0 0 0; display: none; }
+.encontrar-error-item.corregido .encontrar-error-correccion{ display: block; }
+html[data-tema="oscuro"] .encontrar-error{ border-color: #3A362E; }
+html[data-tema="oscuro"] .encontrar-error-item{ border-bottom-color: #33302A; }
+
+/* ============================================================
+   PARÓNIMOS — contexto con hueco + opciones de palabras
+   parecidas, cada una con una nota breve de significado.
+   ============================================================ */
+
+.paronimos{
+  margin: 32px 0;
+  padding: 24px 26px;
+  background: var(--paper);
+  border: 1px solid #E3DDCB;
+  border-radius: var(--radio-panel);
+}
+.paronimos-item{ padding: 14px 0; border-bottom: 1px solid #EBE6D8; }
+.paronimos-item:last-of-type{ border-bottom: none; }
+.paronimos-contexto{ font-family: var(--serif); font-size: var(--fs-sans-base); color: var(--ink); margin: 0 0 10px 0; }
+.paronimos-opciones{ display: flex; flex-wrap: wrap; gap: 8px; }
+.paronimos-opciones button{
+  font-family: var(--sans);
+  font-size: var(--fs-sm);
+  background: var(--paper-page);
+  border: 1.5px solid #DDD8C9;
+  color: var(--ink);
+  padding: 7px 16px;
+  border-radius: 999px;
+  cursor: pointer;
+  text-align: left;
+}
+.paronimos-opciones button small{ display: block; font-size: var(--fs-micro); color: var(--ink-faint); font-weight: 400; margin-top: 2px; }
+.paronimos-opciones button:hover{ border-color: var(--ink-faint); }
+.paronimos-opciones button.marcado{ background: var(--claret-soft); border-color: var(--claret); color: var(--claret); }
+.paronimos-opciones button.acierto{ background: var(--statute-soft); border-color: var(--statute); color: var(--statute); }
+.paronimos-opciones button.error{ background: var(--exam-soft); border-color: var(--exam); color: var(--exam); }
+.paronimos-opciones button:disabled{ cursor: default; }
+html[data-tema="oscuro"] .paronimos{ border-color: #3A362E; }
+html[data-tema="oscuro"] .paronimos-item{ border-bottom-color: #33302A; }
+html[data-tema="oscuro"] .paronimos-opciones button{ background: #221F1B; border-color: #3A362E; }
+
+/* ============================================================
+   DICTADO — botón circular de reproducción (máx. 2 veces) +
+   campo de texto libre. Sin corrección automática: el profesor
+   revisa; el aviso solo cuenta reproducciones usadas.
+   ============================================================ */
+
+.dictado{
+  margin: 32px 0;
+  padding: 24px 26px;
+  background: var(--paper);
+  border: 1px solid #E3DDCB;
+  border-radius: var(--radio-panel);
+}
+.dictado-item{ padding: 14px 0; border-bottom: 1px solid #EBE6D8; }
+.dictado-item:last-of-type{ border-bottom: none; }
+.dictado-controles{ display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+.dictado-reproducir{
+  flex: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--claret);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--fs-sm);
+}
+.dictado-aviso{ font-family: var(--sans); font-size: var(--fs-xs); color: var(--ink-faint); }
+.dictado-item textarea{
+  width: 100%;
+  min-height: 54px;
+  font-family: var(--sans);
+  font-size: var(--fs-sans-base);
+  color: var(--ink);
+  background: var(--paper-page);
+  border: 1px solid #DDD8C9;
+  border-radius: var(--radio-chip);
+  padding: 10px 12px;
+  resize: vertical;
+}
+.dictado-item textarea:focus{ outline: none; border-color: var(--claret); }
+html[data-tema="oscuro"] .dictado{ border-color: #3A362E; }
+html[data-tema="oscuro"] .dictado-item textarea{ background: #221F1B; border-color: #3A362E; }
+
+/* ============================================================
+   DIÁLOGO GUIADO — burbujas de chat ramificadas: el alumno
+   elige una respuesta y la conversación continúa según lo
+   elegido. Usa --claret para "tú", tono neutro para "ellos".
+   ============================================================ */
+
+.dialogo{
+  margin: 32px 0;
+  padding: 24px 26px;
+  background: var(--paper);
+  border: 1px solid #E3DDCB;
+  border-radius: var(--radio-panel);
+}
+.dialogo-burbujas{ display: flex; flex-direction: column; gap: 10px; }
+.dialogo-fila{ display: flex; }
+.dialogo-fila.ellos{ justify-content: flex-start; }
+.dialogo-fila.tu{ justify-content: flex-end; }
+.dialogo-burbuja{
+  max-width: 74%;
+  padding: 10px 14px;
+  border-radius: var(--radio-chip);
+  font-family: var(--sans);
+  font-size: var(--fs-sans-base);
+  line-height: 1.5;
+  background: var(--paper-page);
+  border: 1px solid #DDD8C9;
+}
+.dialogo-fila.ellos .dialogo-burbuja{ border-bottom-left-radius: 4px; }
+.dialogo-fila.tu .dialogo-burbuja{ border-bottom-right-radius: 4px; background: var(--claret-soft); border-color: var(--claret-soft); }
+.dialogo-opciones{ display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; justify-content: flex-end; }
+.dialogo-opciones button{
+  font-family: var(--sans);
+  font-size: var(--fs-sm);
+  background: var(--paper-page);
+  border: 1.5px solid #DDD8C9;
+  color: var(--ink);
+  padding: 7px 16px;
+  border-radius: 999px;
+  cursor: pointer;
+}
+.dialogo-opciones button:hover{ border-color: var(--claret); }
+.dialogo-controles{ display: flex; gap: 10px; margin-top: 18px; flex-wrap: wrap; }
+.dialogo-boton-ghost{
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: var(--fs-xs);
+  color: var(--ink-soft);
+  background: none;
+  border: 1.5px solid #DDD8C9;
+  padding: 9px 16px;
+  border-radius: 999px;
+  cursor: pointer;
+}
+.dialogo-boton-ghost:hover{ border-color: var(--ink-faint); }
+.dialogo-boton-ghost:disabled{ opacity: 0.4; cursor: not-allowed; }
+html[data-tema="oscuro"] .dialogo{ border-color: #3A362E; }
+html[data-tema="oscuro"] .dialogo-burbuja,
+html[data-tema="oscuro"] .dialogo-opciones button,
+html[data-tema="oscuro"] .dialogo-boton-ghost{ background: #221F1B; border-color: #3A362E; }
+
+/* ============================================================
+   TARJETA CULTURAL — aside con filete lateral de acento,
+   distinta de .bloque (que es para definición/norma/examen):
+   esta es para una nota cultural más extensa, a dos líneas.
+   ============================================================ */
+
+.tarjeta-cultural{
+  position: relative;
+  margin: 32px 0;
+  padding: 24px 26px 24px 30px;
+  background: var(--paper);
+  border: 1px solid #E3DDCB;
+  border-radius: var(--radio-panel);
+}
+.tarjeta-cultural::before{
+  content: "";
+  position: absolute;
+  top: 14px;
+  bottom: 14px;
+  left: 14px;
+  width: 4px;
+  border-radius: 999px;
+  background: var(--claret);
+}
+.tarjeta-cultural-antetitulo{
+  font-family: var(--sans);
+  font-size: var(--fs-micro);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--claret);
+  font-weight: 700;
+  margin: 0 0 8px 0;
+}
+.tarjeta-cultural h3{
+  font-family: var(--serif);
+  font-size: var(--fs-md);
+  font-weight: 600;
+  color: var(--ink);
+  margin: 0 0 10px 0;
+}
+.tarjeta-cultural p{
+  font-family: var(--sans);
+  font-size: var(--fs-sans-base);
+  color: var(--ink-soft);
+  line-height: 1.6;
+  margin: 0;
+}
+html[data-tema="oscuro"] .tarjeta-cultural{ border-color: #3A362E; }
+
+/* ============================================================
+   TAREA FINAL — mejora de .ejercicio: textarea de producción
+   libre con contador de palabras en vivo.
+   ============================================================ */
+
+.tarea-final{
+  margin: 32px 0;
+  padding: 24px 26px;
+  background: var(--paper);
+  border: 1px solid #E3DDCB;
+  border-radius: var(--radio-panel);
+}
+.tarea-final textarea{
+  width: 100%;
+  min-height: 140px;
+  font-family: var(--sans);
+  font-size: var(--fs-sans-base);
+  color: var(--ink);
+  background: var(--paper-page);
+  border: 1px solid #DDD8C9;
+  border-radius: var(--radio-chip);
+  padding: 14px 16px;
+  resize: vertical;
+  margin-top: 14px;
+}
+.tarea-final textarea:focus{ outline: none; border-color: var(--claret); }
+.tarea-final-pie{ display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 12px; flex-wrap: wrap; }
+.tarea-final-contador{ font-family: var(--sans); font-size: var(--fs-xs); color: var(--ink-faint); }
+html[data-tema="oscuro"] .tarea-final{ border-color: #3A362E; }
+html[data-tema="oscuro"] .tarea-final textarea{ background: #221F1B; border-color: #3A362E; }
+
+
+/* ============================================================
+   VISOR DEL PAQUETE — estilos propios de esta página contenedora
+   (namespace .pkg- para no chocar con las clases de TRATADO)
+   ============================================================ */
+
+
+/* ============================================================
+   ROLEPLAY GUIADO — turnos fijos del interlocutor (burbuja) más
+   una caja de texto libre para la respuesta del alumno tras cada
+   turno. Distinto de .dialogo (árbol de opciones): aquí el
+   alumno redacta su propia respuesta, no elige entre botones.
+   ============================================================ */
+
+.roleplay-guiado{
+  margin: 32px 0;
+  padding: 24px 26px;
+  background: var(--paper);
+  border: 1px solid #E3DDCB;
+  border-radius: var(--radio-panel);
+}
+.roleplay-guiado-intro{
+  font-family: var(--sans);
+  font-size: var(--fs-xs);
+  color: var(--ink-faint);
+  margin: 0 0 18px 0;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.roleplay-turno{
+  margin-bottom: 20px;
+}
+.roleplay-turno:last-child{ margin-bottom: 0; }
+.roleplay-turno-fila{ display: flex; justify-content: flex-start; margin-bottom: 10px; }
+.roleplay-turno-burbuja{
+  max-width: 78%;
+  padding: 10px 14px;
+  border-radius: var(--radio-chip);
+  border-bottom-left-radius: 4px;
+  font-family: var(--sans);
+  font-size: var(--fs-sans-base);
+  line-height: 1.5;
+  background: var(--paper-page);
+  border: 1px solid #DDD8C9;
+  color: var(--ink);
+}
+.roleplay-turno-etiqueta{
+  display: block;
+  font-family: var(--sans);
+  font-size: var(--fs-micro);
+  font-weight: 700;
+  color: var(--claret);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin: 0 0 4px 0;
+}
+.roleplay-respuesta{ margin-left: 4px; }
+.roleplay-respuesta-etiqueta{
+  display: block;
+  font-family: var(--sans);
+  font-size: var(--fs-micro);
+  font-weight: 700;
+  color: var(--ink-faint);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin: 0 0 6px 0;
+}
+.roleplay-respuesta textarea{
+  width: 100%;
+  min-height: 64px;
+  font-family: var(--serif);
+  font-size: var(--fs-sans-base);
+  color: var(--ink);
+  background: var(--paper-page);
+  border: 1px solid #DDD8C9;
+  border-radius: var(--radio-chip);
+  padding: 12px 14px;
+  resize: vertical;
+  box-sizing: border-box;
+}
+.roleplay-respuesta textarea:focus{ outline: none; border-color: var(--claret); }
+.roleplay-respuesta textarea::placeholder{ color: var(--ink-faint); }
+
+html[data-tema="oscuro"] .roleplay-guiado{ border-color: #3A362E; }
+html[data-tema="oscuro"] .roleplay-turno-burbuja,
+html[data-tema="oscuro"] .roleplay-respuesta textarea{ background: #221F1B; border-color: #3A362E; }
+
+/* -- selector de situación del roleplay: pestañas para alternar
+      entre varios escenarios dentro del mismo bloque -- */
+.roleplay-situaciones{ display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
+.roleplay-situacion-boton{
+  font-family: var(--sans);
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  color: var(--ink-soft);
+  background: var(--paper-page);
+  border: 1.5px solid #DDD8C9;
+  padding: 8px 18px;
+  border-radius: 999px;
+  cursor: pointer;
+}
+.roleplay-situacion-boton:hover{ border-color: var(--ink-faint); }
+.roleplay-situacion-boton.activa{ background: var(--claret); color: #fff; border-color: var(--claret); }
+.roleplay-situacion{ display: none; }
+.roleplay-situacion.activa{ display: block; }
+html[data-tema="oscuro"] .roleplay-situacion-boton{ background: #221F1B; border-color: #3A362E; }
+
+
+/* -- traducción inline EN, oculta por defecto, visible con toggle -- */
+.trad-en, .trad-en-bloque{
+  display:none;
+  font-style: italic;
+  color: var(--ink-faint);
+  font-family: var(--sans);
+}
+.trad-en-bloque{ display:none; margin-top: 4px; }
+html[data-en="on"] .trad-en{ display:inline; }
+html[data-en="on"] .trad-en-bloque{ display:block; }
+
+/* -- barra de controles de la clase (tema + idioma + volver) -- */
+.clase-controles{
+  max-width: var(--page-w);
+  margin: 0 auto;
+  padding: 1.5rem var(--margin-out) 0 var(--margin-in);
+  display:flex; flex-wrap:wrap; gap:10px;
+}
+@media (max-width: 640px){
+  .clase-controles{ padding: 1.5rem 1.5rem 0 1.5rem; }
+}
+.clase-toggle{
+  display:inline-flex; align-items:center; gap:8px;
+  font-family: var(--sans); font-size: var(--fs-xs); letter-spacing:.02em;
+  background: var(--paper-page); border:1px solid #DDD8C9; color: var(--ink-soft);
+  padding:7px 14px; border-radius:999px; cursor:pointer; transition: all .15s ease;
+}
+.clase-toggle:hover{ border-color: var(--ink-faint); color: var(--ink); }
+.clase-toggle[aria-pressed="true"]{ border-color: var(--claret); color: var(--ink); }
+.clase-toggle .punto{ width:8px; height:8px; border-radius:50%; background: var(--ink-faint); }
+.clase-toggle[aria-pressed="true"] .punto{ background: var(--claret); }
+</style>
+</head>
+<body>
+
+<div class="clase-controles">
+  <button class="clase-toggle" id="tema-toggle" type="button" aria-pressed="false">
+    <span class="punto"></span><span id="tema-toggle-label">Modo oscuro</span>
+  </button>
+  <button class="clase-toggle" id="en-toggle" type="button" aria-pressed="false">
+    <span class="punto"></span><span id="en-toggle-label">ES</span>
+  </button>
+</div>
+
+<div class="page">
+  <div class="folio">
+    <span class="materia">Español A2 · Hannah · L6 Vida social y el colegio</span>
+    <span class="clase">Clase 23</span>
+  </div>
+
+
+  <div class="capitulo-abre">
+    <p class="capitulo-numero">Clase 23 · 27 de octubre</p>
+    <h1 class="capitulo-titulo">Invitaciones <em>y buenos modales</em></h1>
+    <p class="capitulo-sumario">Cómo invitar a alguien a casa y usar <strong>poder + infinitivo</strong> para pedir permiso o hacer una invitación cortés.<span class="trad-en"> · How to invite someone over, and using "poder + infinitive" to ask permission or make a polite invitation.</span></p>
+  </div>
+
+  <div class="cuerpo">
+    <div class="bloque ejemplo">
+      <p class="rotulo">Calentamiento<span class="trad-en"> · Warm-up</span></p>
+      <p>Antes de empezar, responde en voz alta:<span class="trad-en"> · Before we start, answer out loud:</span></p>
+      <ol>
+        <li>¿Cómo se pregunta "a qué te dedicas" y cómo se contesta si te dedicas sobre todo a los niños?<span class="trad-en"> · How do you ask someone "what do you do" and how would you answer if you mainly look after the kids?</span></li>
+        <li>¿Qué es el AMPA y para qué sirve?<span class="trad-en"> · What is the AMPA and what is it for?</span></li>
+        <li>Si conoces a alguien nuevo en una fiesta del colegio, ¿cómo le propondrías mantener el contacto?<span class="trad-en"> · If you meet someone new at a school party, how would you suggest staying in touch?</span></li>
+      </ol>
+    </div>
+
+    <p>Invitar a otra familia a cenar en casa implica un pequeño protocolo social: cómo se invita, cómo se pregunta si se puede llevar algo, y cómo se confirma la hora. Todo esto gira en gran parte alrededor del verbo <strong>poder</strong>.</p>
+
+    <h2 class="epigrafe">Poder + infinitivo, en tono cortés</h2>
+    <div class="frases-fijas">
+      <div class="frase-fija">
+        <p class="frase-fija-frase">¿te importa si...?</p>
+        <p class="frase-fija-etiqueta">Pedir permiso con cortesía</p>
+        <p class="frase-fija-ejemplo">¿Te importa si llevo también a los niños?</p>
+      </div>
+      <div class="frase-fija">
+        <p class="frase-fija-frase">¿podríamos...?</p>
+        <p class="frase-fija-etiqueta">Proponer algo con cortesía</p>
+        <p class="frase-fija-ejemplo">¿Podríamos quedar sobre las ocho?</p>
+      </div>
+      <div class="frase-fija">
+        <p class="frase-fija-frase">puedes traer...</p>
+        <p class="frase-fija-etiqueta">Sugerir qué llevar</p>
+        <p class="frase-fija-ejemplo">Si quieres, puedes traer solo el postre.</p>
+      </div>
+    </div>
+
+    <div class="bloque ejemplo">
+      <p class="rotulo">Ser puntual</p>
+      <p>En España, para una cena informal en casa, llegar 10-15 minutos tarde suele estar bien visto; en cambio, para trámites o citas oficiales, lo esperado es ser puntual.<span class="trad-en"> · In Spain, for an informal dinner at home, arriving 10-15 minutes late is usually fine; for official appointments, being on time is expected.</span></p>
+    </div>
+  </div>
+
+  <div class="registro">
+    <p class="rotulo">Elige el registro</p>
+    <div class="registro-item" data-respuesta="formal">
+      <p>1. Preguntar si se puede llevar a los niños a una cena con otra familia<span class="trad-en"> · Asking if you can bring the kids to a dinner with another family</span></p>
+      <div class="registro-alterna">
+        <button data-valor="informal">Llevo a los niños también, ¿vale?</button>
+        <button data-valor="formal">¿Te importa si llevamos también a los niños?</button>
+      </div>
+    </div>
+    <div class="registro-item" data-respuesta="informal">
+      <p>2. Sugerir qué traer a una cena entre amigos<span class="trad-en"> · Suggesting what to bring to a dinner among friends</span></p>
+      <div class="registro-alterna">
+        <button data-valor="informal">Traigo el postre si quieres.</button>
+        <button data-valor="formal">¿Sería posible que aportara algo para la cena?</button>
+      </div>
+    </div>
+    <div class="registro-item" data-respuesta="formal">
+      <p>3. Pedir permiso para cambiar la hora de una cita con el director del colegio<span class="trad-en"> · Asking permission to change the time of a meeting with the head teacher</span></p>
+      <div class="registro-alterna">
+        <button data-valor="informal">¿Podemos cambiar la hora? Es que no puedo a esa hora.</button>
+        <button data-valor="formal">¿Sería posible cambiar la hora de la cita, dado que tengo un imprevisto?</button>
+      </div>
+    </div>
+    <div class="registro-item" data-respuesta="informal">
+      <p>4. Preguntar a un vecino si puedes aparcar delante de su casa un rato<span class="trad-en"> · Asking a neighbour if you can park in front of their house for a while</span></p>
+      <div class="registro-alterna">
+        <button data-valor="informal">¿Te importa si aparco aquí un momento? Es solo un ratito.</button>
+        <button data-valor="formal">¿Sería tan amable de permitirme estacionar frente a su vivienda?</button>
+      </div>
+    </div>
+    <div class="registro-item" data-respuesta="formal">
+      <p>5. Pedir permiso por escrito para llevar a un familiar a una reunión del AMPA<span class="trad-en"> · Asking permission in writing to bring a family member to an AMPA meeting</span></p>
+      <div class="registro-alterna">
+        <button data-valor="informal">¿Puedo llevar a mi hermana a la reunión, o mejor no?</button>
+        <button data-valor="formal">¿Sería posible que asistiera también un familiar a la reunión?</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="rellenar-huecos">
+    <p class="rotulo">Rellenar huecos</p>
+    <p class="rellenar-texto" data-huecos='[{"respuesta":"importa"},{"respuesta":"podríamos"}]'>
+      ¿Te <input type="text" data-respuesta="importa"> si traigo una tarta de postre? Y otra cosa, ¿<input type="text" data-respuesta="podríamos"> quedar un poco antes, sobre las siete y media?
+    </p>
+    <span class="trad-en trad-en-bloque">Would you "___" (mind) if I bring a cake for dessert? And another thing, "___" (could) we meet a bit earlier, around half past seven?</span>
+    <div class="ejercicio-controles">
+      <button type="button" class="ejercicio-btn-comprobar rellenar-comprobar">Comprobar respuestas</button>
+      <button type="button" class="ejercicio-btn-reiniciar" data-reiniciar-ejercicio>Reiniciar ejercicio</button>
+    </div>
+    <span class="rellenar-marcador"></span>
+  </div>
+
+  <div class="rellenar-huecos">
+    <p class="rellenar-texto" data-huecos='[{"respuesta":"puedes"},{"respuesta":"importa"}]'>
+      Si quieres, <input type="text" data-respuesta="puedes"> traer solo las bebidas, nosotros nos encargamos del resto. ¿Te <input type="text" data-respuesta="importa"> si empezamos un poco más tarde, sobre las nueve?
+    </p>
+    <span class="trad-en trad-en-bloque">If you like, "___" (you can) just bring the drinks, we'll take care of the rest. Would you "___" (mind) if we started a bit later, around nine?</span>
+    <div class="ejercicio-controles">
+      <button type="button" class="ejercicio-btn-comprobar rellenar-comprobar">Comprobar respuestas</button>
+      <button type="button" class="ejercicio-btn-reiniciar" data-reiniciar-ejercicio>Reiniciar ejercicio</button>
+    </div>
+    <span class="rellenar-marcador"></span>
+  </div>
+
+  <div class="transformar">
+    <p class="rotulo">Transformar la frase</p>
+    <div class="transformar-item" data-respuesta="¿Te importa si llegamos un poco tarde?">
+      <p class="transformar-original">1. Vamos a llegar un poco tarde. <span class="trad-en">We're going to arrive a bit late.</span></p>
+      <p class="transformar-instruccion">Convierte en pregunta cortés con "¿te importa si...?" <span class="trad-en">Turn into a polite question with "¿te importa si...?"</span></p>
+      <input type="text" placeholder="Escribe tu respuesta...">
+      <p class="transformar-revelar">Respuesta posible: ¿Te importa si llegamos un poco tarde? <span class="trad-en">Possible answer: Would you mind if we arrived a bit late?</span></p>
+    </div>
+    <div class="transformar-item" data-respuesta="¿Podríamos quedar sobre las ocho?">
+      <p class="transformar-original">2. Quedamos sobre las ocho, ¿vale? <span class="trad-en">Let's meet around eight, okay?</span></p>
+      <p class="transformar-instruccion">Convierte en pregunta cortés con "¿podríamos...?" <span class="trad-en">Turn into a polite question with "¿podríamos...?"</span></p>
+      <input type="text" placeholder="Escribe tu respuesta...">
+      <p class="transformar-revelar">Respuesta posible: ¿Podríamos quedar sobre las ocho? <span class="trad-en">Possible answer: Could we meet around eight?</span></p>
+    </div>
+    <div class="transformar-item" data-respuesta="Si quieres, puedes traer el postre.">
+      <p class="transformar-original">3. Trae el postre. <span class="trad-en">Bring the dessert.</span></p>
+      <p class="transformar-instruccion">Convierte en sugerencia cortés con "puedes traer..." <span class="trad-en">Turn into a polite suggestion with "puedes traer..."</span></p>
+      <input type="text" placeholder="Escribe tu respuesta...">
+      <p class="transformar-revelar">Respuesta posible: Si quieres, puedes traer el postre. <span class="trad-en">Possible answer: If you like, you could bring the dessert.</span></p>
+    </div>
+    <div class="transformar-item" data-respuesta="¿Te importa si nos vamos un poco antes?">
+      <p class="transformar-original">4. Nos vamos un poco antes, ¿vale? <span class="trad-en">We're leaving a bit early, okay?</span></p>
+      <p class="transformar-instruccion">Convierte en pregunta cortés con "¿te importa si...?" <span class="trad-en">Turn into a polite question with "¿te importa si...?"</span></p>
+      <input type="text" placeholder="Escribe tu respuesta...">
+      <p class="transformar-revelar">Respuesta posible: ¿Te importa si nos vamos un poco antes? <span class="trad-en">Possible answer: Would you mind if we left a bit early?</span></p>
+    </div>
+    <div class="transformar-item" data-respuesta="¿Podríamos llevar también a mi cuñada?">
+      <p class="transformar-original">5. Vamos a llevar también a mi cuñada. <span class="trad-en">We're going to bring my sister-in-law too.</span></p>
+      <p class="transformar-instruccion">Convierte en pregunta cortés con "¿podríamos...?" <span class="trad-en">Turn into a polite question with "¿podríamos...?"</span></p>
+      <input type="text" placeholder="Escribe tu respuesta...">
+      <p class="transformar-revelar">Respuesta posible: ¿Podríamos llevar también a mi cuñada? <span class="trad-en">Possible answer: Could we bring my sister-in-law too?</span></p>
+    </div>
+    <div class="ejercicio-controles">
+      <button type="button" class="ejercicio-btn-comprobar" data-comprobar="transformar">Comprobar respuestas</button>
+      <button type="button" class="ejercicio-btn-reiniciar" data-reiniciar-ejercicio>Reiniciar ejercicio</button>
+    </div>
+    <span class="transformar-marcador" style="font-family:var(--sans); font-size:var(--fs-xs); color:var(--ink-faint); display:block; margin-top:8px;"></span>
+  </div>
+
+  <div class="tarjeta-cultural">
+    <p class="tarjeta-cultural-antetitulo">Antes de seguir</p>
+    <h3>La sobremesa, una institución</h3>
+    <p>En España, una cena entre familias rara vez termina cuando se acaba la comida. Es habitual quedarse charlando en la mesa durante una hora o más, la llamada "sobremesa" — así que si te invitan a cenar, no te sorprendas si la noche se alarga bastante más de lo esperado.<span class="trad-en"> · In Spain, a dinner between families rarely ends when the food is finished. It's common to stay chatting at the table for an hour or more, known as the "sobremesa" — so if you're invited to dinner, don't be surprised if the evening runs much longer than expected.</span></p>
+  </div>
+
+  <div class="tarea-final">
+    <p class="ejercicio-enunciado"><span class="etiqueta">Tarea</span> Escribe 8 frases usando poder + infinitivo en tono cortés (mezcla "¿te importa si...?", "¿podríamos...?" y "puedes...").<span class="trad-en"> · Write 8 sentences using poder + infinitive in a polite tone (mix "¿te importa si...?", "¿podríamos...?" and "puedes...").</span></p>
+    <textarea placeholder="Escribe aquí..."></textarea>
+    <div class="tarea-final-pie">
+      <span class="tarea-final-contador">0 palabras escritas</span>
+    </div>
+  </div>
+
+  <div class="roleplay-guiado">
+    <p class="roleplay-guiado-intro">Roleplay de la clase<span class="trad-en"> · Class roleplay</span></p>
+    <div class="roleplay-situaciones">
+      <button type="button" class="roleplay-situacion-boton activa" data-situacion="0">1 · Cena en casa</button>
+      <button type="button" class="roleplay-situacion-boton" data-situacion="1">2 · Invitación de cumpleaños</button>
+      <button type="button" class="roleplay-situacion-boton" data-situacion="2">3 · Visita inesperada</button>
+    </div>
+
+    <div class="roleplay-situacion activa" data-situacion-panel="0">
+    <p style="font-family: var(--sans); font-size: var(--fs-sans-base); color: var(--ink-soft); margin: 0 0 20px 0;">Invita a una familia conocida del colegio a cenar en casa, y resuelve dudas sobre horarios y qué llevar.<span class="trad-en"> · Invite a family you know from school over for dinner, and sort out details about timing and what to bring.</span></p>
+
+    <div class="roleplay-turno">
+      <div class="roleplay-turno-fila">
+        <div class="roleplay-turno-burbuja">
+          <span class="roleplay-turno-etiqueta">Otra familia</span>
+          ¡Qué buena idea lo de la cena! ¿A qué hora os viene bien?<span class="trad-en"> · What a great idea, dinner! What time works for you?</span>
+        </div>
+      </div>
+      <div class="roleplay-respuesta">
+        <span class="roleplay-respuesta-etiqueta">Tu respuesta</span>
+        <textarea placeholder="Propón una hora usando '¿podríamos...?'..."></textarea>
+      </div>
+    </div>
+
+    <div class="roleplay-turno">
+      <div class="roleplay-turno-fila">
+        <div class="roleplay-turno-burbuja">
+          <span class="roleplay-turno-etiqueta">Otra familia</span>
+          Perfecto. Oye, ¿te importa si llevamos también a los niños? Y decidnos si podemos traer algo.<span class="trad-en"> · Perfect. Would you mind if we brought the kids too? And let us know if we can bring anything.</span>
+        </div>
+      </div>
+      <div class="roleplay-respuesta">
+        <span class="roleplay-respuesta-etiqueta">Tu respuesta</span>
+        <textarea placeholder="Responde sobre los niños y sugiere qué pueden traer, usando 'puedes traer...'..."></textarea>
+      </div>
+    </div>
+
+    <div class="roleplay-turno">
+      <div class="roleplay-turno-fila">
+        <div class="roleplay-turno-burbuja">
+          <span class="roleplay-turno-etiqueta">Otra familia</span>
+          Genial, entonces allí estaremos. Por cierto, ¿tenéis alguna alergia o algo que no podáis comer en casa?<span class="trad-en"> · Great, we'll be there then. By the way, does anyone have any allergies or anything you can't eat at home?</span>
+        </div>
+      </div>
+      <div class="roleplay-respuesta">
+        <span class="roleplay-respuesta-etiqueta">Tu respuesta</span>
+        <textarea placeholder="Contesta sobre alergias o preferencias de comida, con cortesía..."></textarea>
+      </div>
+    </div>
+
+    <div class="roleplay-turno">
+      <div class="roleplay-turno-fila">
+        <div class="roleplay-turno-burbuja">
+          <span class="roleplay-turno-etiqueta">Otra familia</span>
+          Perfecto, tomo nota. Una última cosa: ¿podríamos quedarnos un rato de sobremesa, o tenéis que madrugar al día siguiente?<span class="trad-en"> · Perfect, noted. One last thing: could we stay for a while chatting after dinner, or do you have to get up early the next day?</span>
+        </div>
+      </div>
+      <div class="roleplay-respuesta">
+        <span class="roleplay-respuesta-etiqueta">Tu respuesta</span>
+        <textarea placeholder="Responde usando 'poder' con cortesía sobre la sobremesa..."></textarea>
+      </div>
+    </div>
+    </div>
+
+    <div class="roleplay-situacion" data-situacion-panel="1">
+    <p style="font-family: var(--sans); font-size: var(--fs-sans-base); color: var(--ink-soft); margin: 0 0 20px 0;">Te han invitado al cumpleaños de la hija de una vecina. Confirma asistencia, pregunta si llevas regalo y ofrece ayuda.<span class="trad-en"> · You've been invited to a neighbour's daughter's birthday party. Confirm you'll attend, ask about bringing a gift, and offer to help.</span></p>
+
+    <div class="roleplay-turno">
+      <div class="roleplay-turno-fila">
+        <div class="roleplay-turno-burbuja">
+          <span class="roleplay-turno-etiqueta">Vecina</span>
+          Este sábado es el cumple de mi hija, ¿os venís? Va a ser en el parque, sobre las cinco.<span class="trad-en"> · This Saturday is my daughter's birthday, will you come? It'll be at the park, around five.</span>
+        </div>
+      </div>
+      <div class="roleplay-respuesta">
+        <span class="roleplay-respuesta-etiqueta">Tu respuesta</span>
+        <textarea placeholder="Confirma que iréis, agradeciendo la invitación..."></textarea>
+      </div>
+    </div>
+
+    <div class="roleplay-turno">
+      <div class="roleplay-turno-fila">
+        <div class="roleplay-turno-burbuja">
+          <span class="roleplay-turno-etiqueta">Vecina</span>
+          Genial. No hace falta que traigáis nada, pero si os apetece, un detallito pequeño siempre viene bien.<span class="trad-en"> · Great. You don't need to bring anything, but if you feel like it, a small gift is always nice.</span>
+        </div>
+      </div>
+      <div class="roleplay-respuesta">
+        <span class="roleplay-respuesta-etiqueta">Tu respuesta</span>
+        <textarea placeholder="Responde sobre el regalo con cortesía, usando '¿te importa si...?'..."></textarea>
+      </div>
+    </div>
+
+    <div class="roleplay-turno">
+      <div class="roleplay-turno-fila">
+        <div class="roleplay-turno-burbuja">
+          <span class="roleplay-turno-etiqueta">Vecina</span>
+          Qué detalle. Oye, ¿podrías echarme una mano llevando algo de comida o bebida si te viene bien?<span class="trad-en"> · How thoughtful. Hey, could you give me a hand bringing some food or drink if it's convenient?</span>
+        </div>
+      </div>
+      <div class="roleplay-respuesta">
+        <span class="roleplay-respuesta-etiqueta">Tu respuesta</span>
+        <textarea placeholder="Ofrece ayuda concreta usando 'puedo traer...' o '¿podría...?'..."></textarea>
+      </div>
+    </div>
+    </div>
+
+    <div class="roleplay-situacion" data-situacion-panel="2">
+    <p style="font-family: var(--sans); font-size: var(--fs-sans-base); color: var(--ink-soft); margin: 0 0 20px 0;">Un amigo se presenta en tu casa sin avisar. Recíbelo con cortesía, aunque no esperabas visita, y ofrécele algo.<span class="trad-en"> · A friend shows up at your house unannounced. Welcome him politely, even though you weren't expecting a visit, and offer him something.</span></p>
+
+    <div class="roleplay-turno">
+      <div class="roleplay-turno-fila">
+        <div class="roleplay-turno-burbuja">
+          <span class="roleplay-turno-etiqueta">Amigo</span>
+          ¡Hola! Perdona que me presente así sin avisar, pasaba por aquí cerca y me apetecía saludarte.<span class="trad-en"> · Hi! Sorry for showing up like this without warning, I was passing by nearby and felt like saying hello.</span>
+        </div>
+      </div>
+      <div class="roleplay-respuesta">
+        <span class="roleplay-respuesta-etiqueta">Tu respuesta</span>
+        <textarea placeholder="Recíbelo con cortesía e invítalo a pasar..."></textarea>
+      </div>
+    </div>
+
+    <div class="roleplay-turno">
+      <div class="roleplay-turno-fila">
+        <div class="roleplay-turno-burbuja">
+          <span class="roleplay-turno-etiqueta">Amigo</span>
+          Muchas gracias. Oye, ¿te importa si me quedo un ratito? No quiero molestarte si tienes cosas que hacer.<span class="trad-en"> · Thanks a lot. Hey, would you mind if I stayed for a little while? I don't want to bother you if you have things to do.</span>
+        </div>
+      </div>
+      <div class="roleplay-respuesta">
+        <span class="roleplay-respuesta-etiqueta">Tu respuesta</span>
+        <textarea placeholder="Tranquilízalo y ofrécele algo de beber o comer..."></textarea>
+      </div>
+    </div>
+
+    <div class="roleplay-turno">
+      <div class="roleplay-turno-fila">
+        <div class="roleplay-turno-burbuja">
+          <span class="roleplay-turno-etiqueta">Amigo</span>
+          Muy amable, gracias. La próxima vez te aviso antes, para que no te pille de sorpresa.<span class="trad-en"> · Very kind, thanks. Next time I'll let you know in advance, so it doesn't catch you by surprise.</span>
+        </div>
+      </div>
+      <div class="roleplay-respuesta">
+        <span class="roleplay-respuesta-etiqueta">Tu respuesta</span>
+        <textarea placeholder="Responde con cortesía, quitándole importancia a la sorpresa..."></textarea>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <div class="lectura">
+    <p class="rotulo">Comprensión lectora<span class="trad-en"> · Reading comprehension</span></p>
+    <div class="lectura-texto">
+      <p>Cuando Sarah organizó su primera cena con vecinos españoles, se preparó a conciencia: compró comida de sobra, dejó la casa impecable y calculó que la velada duraría, como mucho, dos horas y media. «A las once de la noche seguíamos sentados a la mesa hablando de todo un poco, y no era porque nadie quisiera irse, sino porque en España la sobremesa es casi tan importante como la cena en sí», cuenta entre risas.<span class="trad-en"> · When Sarah hosted her first dinner with Spanish neighbours, she prepared thoroughly: bought extra food, left the house spotless, and calculated the evening would last, at most, two and a half hours. "At eleven at night we were still sitting at the table talking about everything, and it wasn't because nobody wanted to leave, but because in Spain the after-dinner chat is almost as important as the dinner itself," she says, laughing.</span></p>
+      <p>Lo que más le costó entender al principio fueron los códigos no escritos de la hospitalidad: cuándo insistir para que alguien se quede a comer, cuándo un «no hace falta que traigas nada» significa exactamente eso y cuándo es simple cortesía. «Con el tiempo aprendí que, si te dicen que no lleves nada, igualmente está bien llevar un detalle pequeño, como vino o postre. Es un equilibrio que se aprende viviendo aquí, no en ningún libro», resume.<span class="trad-en"> · What was hardest to understand at first were the unwritten codes of hospitality: when to insist that someone stay for a meal, when a "you don't need to bring anything" means exactly that, and when it's just politeness. "Over time I learned that, even if they tell you not to bring anything, it's still fine to bring a small something, like wine or dessert. It's a balance you learn by living here, not from any book," she sums up.</span></p>
+    </div>
+
+    <div class="lectura-pregunta" data-respuesta="b">
+      <p class="enunciado">Según el texto, ¿por qué se alargó tanto la cena de Sarah?<span class="trad-en"> · According to the text, why did Sarah's dinner run so long?</span></p>
+      <div class="lectura-opciones">
+        <button type="button" data-valor="a">Porque la comida tardó mucho en prepararse</button>
+        <button type="button" data-valor="b">Por la costumbre de la sobremesa</button>
+        <button type="button" data-valor="c">Porque nadie sabía cómo despedirse</button>
+      </div>
+      <p class="lectura-marcador"></p>
+    </div>
+
+    <div class="lectura-pregunta" data-respuesta="c">
+      <p class="enunciado">¿Qué le costó entender a Sarah sobre la hospitalidad española?<span class="trad-en"> · What was hard for Sarah to understand about Spanish hospitality?</span></p>
+      <div class="lectura-opciones">
+        <button type="button" data-valor="a">Cómo cocinar platos típicos españoles</button>
+        <button type="button" data-valor="b">A qué hora se debe cenar en España</button>
+        <button type="button" data-valor="c">Los códigos no escritos sobre qué llevar o insistir</button>
+      </div>
+      <p class="lectura-marcador"></p>
+    </div>
+
+    <div class="lectura-pregunta" data-respuesta="a">
+      <p class="enunciado">Según Sarah, si te dicen "no hace falta que traigas nada", ¿qué es aceptable hacer?<span class="trad-en"> · According to Sarah, if you're told "you don't need to bring anything," what is acceptable to do?</span></p>
+      <div class="lectura-opciones">
+        <button type="button" data-valor="a">Llevar igualmente un pequeño detalle</button>
+        <button type="button" data-valor="b">No llevar absolutamente nada, nunca</button>
+        <button type="button" data-valor="c">Llevar toda la cena preparada</button>
+      </div>
+      <p class="lectura-marcador"></p>
+    </div>
+  </div>
+
+
+</div>
+
+<script>
+(function(){
+  'use strict';
+
+  /* ---------- Barra de progreso de lectura (scroll) ---------- */
+  var progresoRelleno = document.getElementById("progreso-lectura-relleno");
+  if (progresoRelleno) {
+    (function () {
+      function actualizarProgreso() {
+        var doc = document.documentElement;
+        var recorrible = doc.scrollHeight - doc.clientHeight;
+        var ratio = recorrible > 0 ? Math.min(1, Math.max(0, window.scrollY / recorrible)) : 0;
+        progresoRelleno.style.width = (ratio * 100) + "%";
+      }
+      var enCurso = false;
+      window.addEventListener("scroll", function () {
+        if (enCurso) return;
+        enCurso = true;
+        requestAnimationFrame(function () { actualizarProgreso(); enCurso = false; });
+      }, { passive: true });
+      window.addEventListener("resize", actualizarProgreso);
+      actualizarProgreso();
+    })();
+  }
+
+  /* ---------- Normaliza texto libre para comparar respuestas ---------- */
+  function normalizarTexto(s) {
+    return s.trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, " ");
+  }
+
+  /* ---------- Verdadero o falso ---------- */
+  document.querySelectorAll(".vf-item").forEach(function (item) {
+    var respuesta = item.getAttribute("data-respuesta") === "true";
+    var botones = item.querySelectorAll(".vf-boton");
+    botones.forEach(function (boton) {
+      boton.addEventListener("click", function () {
+        if (item.classList.contains("respondido")) return;
+        item.classList.add("respondido");
+        var elegidoVerdadero = boton.getAttribute("data-valor") === "true";
+        var acierto = elegidoVerdadero === respuesta;
+        botones.forEach(function (b) { b.disabled = true; });
+        boton.classList.add(acierto ? "acierto" : "error");
+        if (!acierto) {
+          botones.forEach(function (b) {
+            var esValorCorrecto = (b.getAttribute("data-valor") === "true") === respuesta;
+            if (esValorCorrecto) b.classList.add("acierto");
+          });
+        }
+      });
+    });
+  });
+
+  /* ---------- Ordenar palabras ---------- */
+  function mezclar(arr) {
+    var a = arr.slice();
+    for (var i = a.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var tmp = a[i]; a[i] = a[j]; a[j] = tmp;
+    }
+    return a;
+  }
+  document.querySelectorAll(".ordenar-item").forEach(function (item) {
+    var solucion = (item.getAttribute("data-solucion") || "").split(",").map(function (p) { return p.trim(); }).filter(Boolean);
+    var banco = item.querySelector(".ordenar-banco");
+    var renglon = item.querySelector(".ordenar-renglon");
+    var resultado = item.querySelector(".ordenar-resultado");
+    if (!banco || !renglon || !solucion.length) return;
+
+    function construir() {
+      banco.innerHTML = "";
+      renglon.innerHTML = "";
+      if (resultado) resultado.textContent = "";
+      item.classList.remove("acierto", "error");
+      mezclar(solucion).forEach(function (palabra) {
+        var ficha = document.createElement("span");
+        ficha.className = "ordenar-ficha";
+        ficha.textContent = palabra;
+        ficha.addEventListener("click", function () {
+          if (ficha.classList.contains("usada")) return;
+          ficha.classList.add("usada");
+          var colocada = document.createElement("span");
+          colocada.className = "ordenar-ficha usada";
+          colocada.textContent = palabra;
+          colocada.addEventListener("click", function () {
+            colocada.remove();
+            ficha.classList.remove("usada");
+            item.classList.remove("acierto", "error");
+            if (resultado) resultado.textContent = "";
+          });
+          renglon.appendChild(colocada);
+          var actual = Array.prototype.map.call(renglon.children, function (c) { return c.textContent; });
+          if (actual.length === solucion.length) {
+            var ok = actual.every(function (p, idx) { return p === solucion[idx]; });
+            item.classList.toggle("acierto", ok);
+            item.classList.toggle("error", !ok);
+            if (resultado) resultado.textContent = ok ? "Correcto." : "Prueba otra vez.";
+          }
+        });
+        banco.appendChild(ficha);
+      });
+    }
+    construir();
+  });
+
+  /* ---------- Emparejar columnas ---------- */
+  document.querySelectorAll(".emparejar").forEach(function (bloque) {
+    var paresAttr = bloque.getAttribute("data-pares");
+    var pares = [];
+    try { pares = paresAttr ? JSON.parse(paresAttr) : []; } catch (e) {}
+    var colIzq = bloque.querySelector('.emparejar-col[data-lado="izquierda"]');
+    var colDer = bloque.querySelector('.emparejar-col[data-lado="derecha"]');
+    var marcador = bloque.querySelector(".emparejar-marcador");
+    if (!colIzq || !colDer || !pares.length) return;
+
+    var seleccion = null, encontrados = 0;
+    colIzq.innerHTML = "";
+    colDer.innerHTML = "";
+    pares.map(function (p) { return p.izquierda; }).forEach(function (v) {
+      var b = document.createElement("button");
+      b.className = "emparejar-item"; b.textContent = v; b.dataset.lado = "i"; b.dataset.valor = v;
+      colIzq.appendChild(b);
+    });
+    mezclar(pares.map(function (p) { return p.derecha; })).forEach(function (v) {
+      var b = document.createElement("button");
+      b.className = "emparejar-item"; b.textContent = v; b.dataset.lado = "d"; b.dataset.valor = v;
+      colDer.appendChild(b);
+    });
+
+    bloque.querySelectorAll(".emparejar-item").forEach(function (item) {
+      item.addEventListener("click", function () {
+        if (item.classList.contains("unido")) return;
+        if (!seleccion) { seleccion = item; item.classList.add("seleccionado"); return; }
+        if (seleccion === item) return;
+        if (seleccion.dataset.lado === item.dataset.lado) {
+          seleccion.classList.remove("seleccionado");
+          seleccion = item; item.classList.add("seleccionado");
+          return;
+        }
+        var par = pares.find(function (p) {
+          return (p.izquierda === seleccion.dataset.valor && p.derecha === item.dataset.valor) ||
+                 (p.izquierda === item.dataset.valor && p.derecha === seleccion.dataset.valor);
+        });
+        if (par) {
+          seleccion.classList.remove("seleccionado"); seleccion.classList.add("unido");
+          item.classList.add("unido");
+          encontrados++;
+          if (marcador) marcador.textContent = encontrados === pares.length ? "Completo · " + encontrados + " / " + pares.length : encontrados + " / " + pares.length;
+        } else {
+          item.classList.add("fallo");
+          var anterior = seleccion;
+          setTimeout(function () { item.classList.remove("fallo"); anterior.classList.remove("seleccionado"); }, 450);
+        }
+        seleccion = null;
+      });
+    });
+  });
+
+  /* ---------- Rellenar huecos ---------- */
+  document.querySelectorAll(".rellenar-huecos").forEach(function (bloque) {
+    var entradas = bloque.querySelectorAll('input[type="text"]');
+    var marcador = bloque.querySelector(".rellenar-marcador");
+    var boton = bloque.querySelector(".rellenar-comprobar");
+    var botonReiniciar = bloque.querySelector("[data-reiniciar-ejercicio]");
+    function comprobar() {
+      var aciertos = 0;
+      entradas.forEach(function (input) {
+        var ok = normalizarTexto(input.value) === normalizarTexto(input.getAttribute("data-respuesta") || "");
+        input.classList.toggle("acierto", ok);
+        input.classList.toggle("error", !ok);
+        if (ok) aciertos++;
+      });
+      if (marcador) marcador.textContent = aciertos + " / " + entradas.length;
+    }
+    function reiniciar() {
+      entradas.forEach(function (input) {
+        input.value = "";
+        input.classList.remove("acierto", "error");
+      });
+      if (marcador) marcador.textContent = "";
+    }
+    if (boton) {
+      boton.addEventListener("click", comprobar);
+    } else {
+      entradas.forEach(function (input) {
+        input.addEventListener("blur", comprobar);
+      });
+    }
+    if (botonReiniciar) botonReiniciar.addEventListener("click", reiniciar);
+  });
+
+  /* ---------- Selector de situación del roleplay ---------- */
+  document.querySelectorAll(".roleplay-guiado").forEach(function (bloque) {
+    var botones = bloque.querySelectorAll(".roleplay-situacion-boton");
+    var paneles = bloque.querySelectorAll(".roleplay-situacion");
+    if (!botones.length) return;
+    botones.forEach(function (boton) {
+      boton.addEventListener("click", function () {
+        var idx = boton.getAttribute("data-situacion");
+        botones.forEach(function (b) { b.classList.remove("activa"); });
+        paneles.forEach(function (p) { p.classList.remove("activa"); });
+        boton.classList.add("activa");
+        var panel = bloque.querySelector('.roleplay-situacion[data-situacion-panel="' + idx + '"]');
+        if (panel) panel.classList.add("activa");
+      });
+    });
+  });
+
+  /* ---------- Lectura y comprensión ---------- */
+  document.querySelectorAll(".lectura-pregunta").forEach(function (pregunta) {
+    var respuesta = pregunta.getAttribute("data-respuesta");
+    var botones = pregunta.querySelectorAll(".lectura-opciones button");
+    var marcador = pregunta.closest(".lectura") ? pregunta.closest(".lectura").querySelector(".lectura-marcador") : null;
+    botones.forEach(function (boton) {
+      boton.addEventListener("click", function () {
+        if (pregunta.classList.contains("respondida")) return;
+        pregunta.classList.add("respondida");
+        var ok = boton.getAttribute("data-valor") === respuesta;
+        botones.forEach(function (b) { b.disabled = true; });
+        boton.classList.add(ok ? "acierto" : "error");
+        if (!ok) {
+          botones.forEach(function (b) {
+            if (b.getAttribute("data-valor") === respuesta) b.classList.add("acierto");
+          });
+        }
+        if (marcador) marcador.textContent = ok ? "Correcto." : "Revisa el texto e inténtalo de nuevo.";
+      });
+    });
+  });
+
+  /* ---------- Quiz interactivo: feedback al elegir opción + reinicio ---------- */
+  document.querySelectorAll(".quiz-bloque").forEach(function (bloque) {
+    var opciones = bloque.querySelectorAll(".quiz-opciones li");
+    if (!opciones.length) return;
+    var enunciado = bloque.querySelector(".quiz-enunciado");
+    var detalles = bloque.querySelector("details");
+
+    opciones.forEach(function (opcion) {
+      opcion.addEventListener("click", function () {
+        if (bloque.classList.contains("respondido")) return;
+        bloque.classList.add("respondido");
+        var ok = opcion.getAttribute("data-correcta") === "true";
+        opcion.classList.add(ok ? "seleccionada-correcta" : "seleccionada-incorrecta");
+        if (!ok) {
+          opciones.forEach(function (o) {
+            if (o.getAttribute("data-correcta") === "true") o.classList.add("seleccionada-correcta");
+          });
+        }
+        if (enunciado) {
+          var marca = document.createElement("span");
+          marca.className = "quiz-marca " + (ok ? "correcta" : "incorrecta");
+          enunciado.appendChild(marca);
+        }
+        if (detalles) detalles.open = true;
+      });
+    });
+
+    var controles = document.createElement("div");
+    controles.className = "ejercicio-controles";
+    var botonReiniciar = document.createElement("button");
+    botonReiniciar.type = "button";
+    botonReiniciar.className = "ejercicio-btn-reiniciar";
+    botonReiniciar.setAttribute("data-reiniciar-ejercicio", "");
+    botonReiniciar.textContent = "Reiniciar ejercicio";
+    controles.appendChild(botonReiniciar);
+    if (detalles) {
+      bloque.insertBefore(controles, detalles);
+    } else {
+      bloque.appendChild(controles);
+    }
+
+    botonReiniciar.addEventListener("click", function () {
+      bloque.classList.remove("respondido");
+      opciones.forEach(function (o) { o.classList.remove("seleccionada-correcta", "seleccionada-incorrecta"); });
+      if (enunciado) {
+        var marcaVieja = enunciado.querySelector(".quiz-marca");
+        if (marcaVieja) marcaVieja.remove();
+      }
+      if (detalles) detalles.open = false;
+    });
+  });
+
+  /* ---------- Transformar la frase ---------- */
+  document.querySelectorAll(".transformar").forEach(function (bloque) {
+    var items = bloque.querySelectorAll(".transformar-item");
+    var marcador = bloque.querySelector(".transformar-marcador");
+    var boton = bloque.querySelector('[data-comprobar="transformar"]');
+    var botonReiniciar = bloque.querySelector("[data-reiniciar-ejercicio]");
+
+    function comprobarItem(item) {
+      var input = item.querySelector('input[type="text"]');
+      var respuesta = item.getAttribute("data-respuesta") || "";
+      var ok = normalizarTexto(input.value) === normalizarTexto(respuesta);
+      input.classList.toggle("acierto", ok);
+      input.classList.toggle("error", !ok);
+      item.classList.add("mostrar-revelar");
+      return ok;
+    }
+    function comprobarTodo() {
+      var aciertos = 0;
+      items.forEach(function (item) { if (comprobarItem(item)) aciertos++; });
+      if (marcador) marcador.textContent = aciertos + " / " + items.length;
+    }
+    function reiniciar() {
+      items.forEach(function (item) {
+        var input = item.querySelector('input[type="text"]');
+        input.value = "";
+        input.classList.remove("acierto", "error");
+        item.classList.remove("mostrar-revelar");
+      });
+      if (marcador) marcador.textContent = "";
+    }
+    if (boton) {
+      boton.addEventListener("click", comprobarTodo);
+    } else {
+      items.forEach(function (item) {
+        var input = item.querySelector('input[type="text"]');
+        input.addEventListener("blur", function () {
+          var ok = comprobarItem(item);
+          if (marcador) marcador.textContent = ok ? "Correcto." : "Revisa la transformación.";
+        });
+      });
+    }
+    if (botonReiniciar) botonReiniciar.addEventListener("click", reiniciar);
+  });
+
+  /* ---------- Tabla de conjugación interactiva ---------- */
+  document.querySelectorAll(".tabla-conjugacion-envoltorio, .tabla-conjugacion").forEach(function (contenedor) {
+    var tabla = contenedor.classList.contains("tabla-conjugacion") ? contenedor : contenedor.querySelector(".tabla-conjugacion");
+    if (!tabla) return;
+    var entradas = tabla.querySelectorAll('input[type="text"]');
+    var marcador = contenedor.querySelector(".tabla-conjugacion-marcador");
+    var boton = contenedor.querySelector('[data-comprobar="tabla-conjugacion"]');
+    var botonReiniciar = contenedor.querySelector("[data-reiniciar-ejercicio]");
+
+    function comprobarInput(input) {
+      var ok = normalizarTexto(input.value) === normalizarTexto(input.getAttribute("data-respuesta") || "");
+      input.classList.toggle("acierto", ok);
+      input.classList.toggle("error", !ok);
+      return ok;
+    }
+    function comprobarTodo() {
+      var aciertos = 0;
+      entradas.forEach(function (input) { if (comprobarInput(input)) aciertos++; });
+      if (marcador) marcador.textContent = aciertos + " / " + entradas.length;
+    }
+    function reiniciar() {
+      entradas.forEach(function (input) {
+        input.value = "";
+        input.classList.remove("acierto", "error");
+      });
+      if (marcador) marcador.textContent = "";
+    }
+    if (boton) {
+      boton.addEventListener("click", comprobarTodo);
+    } else {
+      entradas.forEach(function (input) {
+        input.addEventListener("blur", function () { comprobarInput(input); });
+      });
+    }
+    if (botonReiniciar) botonReiniciar.addEventListener("click", reiniciar);
+  });
+
+  /* ---------- Clasificar en categorías ---------- */
+  document.querySelectorAll(".clasificar").forEach(function (bloque) {
+    var datosAttr = bloque.getAttribute("data-items");
+    var categoriasAttr = bloque.getAttribute("data-categorias");
+    var items = [], categorias = [];
+    try { items = datosAttr ? JSON.parse(datosAttr) : []; } catch (e) {}
+    try { categorias = categoriasAttr ? JSON.parse(categoriasAttr) : []; } catch (e) {}
+    var banco = bloque.querySelector(".clasificar-banco");
+    var tablero = bloque.querySelector(".clasificar-tablero");
+    var marcador = bloque.querySelector(".clasificar-marcador");
+    if (!banco || !tablero || !items.length || !categorias.length) return;
+
+    var seleccionada = null;
+
+    function construir() {
+      banco.innerHTML = "";
+      tablero.innerHTML = "";
+      seleccionada = null;
+      if (marcador) marcador.textContent = "";
+      mezclar(items).forEach(function (it) {
+        var ficha = document.createElement("span");
+        ficha.className = "clasificar-ficha";
+        ficha.textContent = it.palabra;
+        ficha.dataset.palabra = it.palabra;
+        ficha.dataset.categoria = it.categoria;
+        ficha.addEventListener("click", function () {
+          if (ficha.classList.contains("colocada")) return;
+          banco.querySelectorAll(".clasificar-ficha").forEach(function (f) { f.style.outline = "none"; });
+          seleccionada = ficha;
+          ficha.style.outline = "2px solid var(--claret)";
+        });
+        banco.appendChild(ficha);
+      });
+      categorias.forEach(function (cat) {
+        var cubo = document.createElement("div");
+        cubo.className = "clasificar-cubo";
+        cubo.innerHTML = '<h4>' + cat + '</h4><div class="clasificar-cubo-items"></div>';
+        cubo.addEventListener("click", function () {
+          if (!seleccionada) return;
+          var colocada = document.createElement("span");
+          colocada.className = "clasificar-ficha colocada";
+          colocada.textContent = seleccionada.dataset.palabra;
+          colocada.dataset.palabra = seleccionada.dataset.palabra;
+          colocada.dataset.categoria = seleccionada.dataset.categoria;
+          colocada.dataset.colocadaEn = cat;
+          cubo.querySelector(".clasificar-cubo-items").appendChild(colocada);
+          seleccionada.remove();
+          seleccionada = null;
+          comprobarSiCompleto();
+        });
+        tablero.appendChild(cubo);
+      });
+    }
+
+    function comprobarSiCompleto() {
+      var colocadas = tablero.querySelectorAll(".clasificar-ficha.colocada");
+      if (colocadas.length !== items.length) return;
+      var aciertos = 0;
+      colocadas.forEach(function (f) {
+        var ok = f.dataset.categoria === f.dataset.colocadaEn;
+        f.classList.toggle("acierto", ok);
+        f.classList.toggle("error", !ok);
+        if (ok) aciertos++;
+      });
+      if (marcador) marcador.textContent = aciertos + " / " + items.length + " correctas";
+    }
+
+    construir();
+  });
+
+  /* ---------- Elige el registro ---------- */
+  document.querySelectorAll(".registro-item").forEach(function (item) {
+    var respuesta = item.getAttribute("data-respuesta");
+    var botones = item.querySelectorAll(".registro-alterna button");
+    botones.forEach(function (boton) {
+      boton.addEventListener("click", function () {
+        if (item.classList.contains("respondido")) return;
+        item.classList.add("respondido");
+        var ok = boton.getAttribute("data-valor") === respuesta;
+        botones.forEach(function (b) { b.disabled = true; });
+        boton.classList.add(ok ? "acierto" : "error");
+        if (!ok) {
+          botones.forEach(function (b) {
+            if (b.getAttribute("data-valor") === respuesta) b.classList.add("acierto");
+          });
+        }
+      });
+    });
+  });
+
+  /* ---------- Encuentra el error ---------- */
+  document.querySelectorAll(".encontrar-error-item").forEach(function (item) {
+    var errorIdx = Number(item.getAttribute("data-error"));
+    var palabras = item.querySelectorAll(".encontrar-error-palabra");
+    palabras.forEach(function (palabra) {
+      palabra.addEventListener("click", function () {
+        if (item.classList.contains("corregido")) return;
+        palabras.forEach(function (p) { p.classList.remove("marcada"); });
+        palabra.classList.add("marcada");
+        var ok = Number(palabra.getAttribute("data-idx")) === errorIdx;
+        if (ok) {
+          palabra.classList.add("acierto");
+        } else {
+          palabra.classList.add("error");
+          var correcta = item.querySelector('[data-idx="' + errorIdx + '"]');
+          if (correcta) correcta.classList.add("acierto");
+        }
+        item.classList.add("corregido");
+      });
+    });
+  });
+
+  /* ---------- Elige la palabra correcta (parónimos) ---------- */
+  document.querySelectorAll(".paronimos-item").forEach(function (item) {
+    var respuesta = item.getAttribute("data-respuesta");
+    var botones = item.querySelectorAll(".paronimos-opciones button");
+    botones.forEach(function (boton) {
+      boton.addEventListener("click", function () {
+        if (item.classList.contains("respondido")) return;
+        item.classList.add("respondido");
+        var ok = boton.getAttribute("data-valor") === respuesta;
+        botones.forEach(function (b) { b.disabled = true; });
+        boton.classList.add(ok ? "acierto" : "error");
+        if (!ok) {
+          botones.forEach(function (b) {
+            if (b.getAttribute("data-valor") === respuesta) b.classList.add("acierto");
+          });
+        }
+      });
+    });
+  });
+
+  /* ---------- Dictado / escucha activa ---------- */
+  document.querySelectorAll(".dictado-item").forEach(function (item) {
+    var boton = item.querySelector(".dictado-reproducir");
+    var aviso = item.querySelector(".dictado-aviso");
+    var src = item.getAttribute("data-audio") || "";
+    var reproducciones = 0;
+    if (!boton) return;
+    boton.addEventListener("click", function () {
+      if (reproducciones >= 2) return;
+      reproducciones++;
+      if (src) {
+        var audio = new Audio(src);
+        audio.play().catch(function () {});
+      }
+      if (aviso) {
+        var etiqueta = aviso.textContent.split(" · ")[0];
+        aviso.textContent = etiqueta + " · reproducciones usadas: " + reproducciones + "/2";
+      }
+    });
+  });
+
+  /* ---------- Diálogo guiado (burbujas ramificadas) ---------- */
+  document.querySelectorAll(".dialogo").forEach(function (bloque) {
+    var arbolAttr = bloque.getAttribute("data-arbol");
+    var arbol = {};
+    try { arbol = arbolAttr ? JSON.parse(arbolAttr) : {}; } catch (e) {}
+    var panel = bloque.querySelector(".dialogo-burbujas");
+    var botonAtras = bloque.querySelector(".dialogo-controles button:first-child");
+    var botonReiniciar = bloque.querySelector(".dialogo-controles button:last-child");
+    if (!panel || !Object.keys(arbol).length) return;
+
+    var historial = ["start"];
+
+    function actualizarControles() {
+      if (botonAtras) botonAtras.disabled = historial.length <= 1;
+    }
+
+    function pintar() {
+      panel.innerHTML = "";
+      historial.forEach(function (claveNodo, i) {
+        var nodo = arbol[claveNodo];
+        if (!nodo) return;
+
+        var filaEllos = document.createElement("div");
+        filaEllos.className = "dialogo-fila ellos";
+        filaEllos.innerHTML = '<div class="dialogo-burbuja">' + nodo.ellos + "</div>";
+        panel.appendChild(filaEllos);
+
+        var esUltimo = i === historial.length - 1;
+        var siguienteClave = historial[i + 1];
+
+        if (!nodo.opciones || !nodo.opciones.length) return;
+
+        var filaTu = document.createElement("div");
+        filaTu.className = "dialogo-fila tu";
+
+        if (!esUltimo) {
+          var elegida = nodo.opciones.filter(function (o) { return o.siguiente === siguienteClave; })[0];
+          var burbuja = document.createElement("div");
+          burbuja.className = "dialogo-burbuja";
+          burbuja.textContent = elegida ? elegida.texto : "";
+          filaTu.appendChild(burbuja);
+        } else {
+          var opcionesHtml = '<div class="dialogo-opciones">' + mezclar(nodo.opciones).map(function (o, idx) {
+            return '<button data-indice="' + idx + '">' + o.texto + "</button>";
+          }).join("") + "</div>";
+          filaTu.innerHTML = opcionesHtml;
+        }
+        panel.appendChild(filaTu);
+
+        if (esUltimo) {
+          filaTu.querySelectorAll("button").forEach(function (boton) {
+            boton.addEventListener("click", function () {
+              var elegida = nodo.opciones[Number(boton.getAttribute("data-indice"))];
+              historial.push(elegida.siguiente);
+              pintar();
+            });
+          });
+        }
+      });
+      actualizarControles();
+    }
+
+    if (botonAtras) {
+      botonAtras.addEventListener("click", function () {
+        if (historial.length > 1) { historial.pop(); pintar(); }
+      });
+    }
+    if (botonReiniciar) {
+      botonReiniciar.addEventListener("click", function () {
+        historial = ["start"];
+        pintar();
+      });
+    }
+    pintar();
+  });
+
+  /* ---------- Tarea final: contador de palabras ---------- */
+  document.querySelectorAll(".tarea-final textarea").forEach(function (textarea) {
+    var contador = textarea.closest(".tarea-final").querySelector(".tarea-final-contador");
+    if (!contador) return;
+    textarea.addEventListener("input", function () {
+      var palabras = textarea.value.trim().length ? textarea.value.trim().split(/\s+/).length : 0;
+      contador.textContent = palabras + (palabras === 1 ? " palabra escrita" : " palabras escritas");
+    });
+  });
+
+})();
+</script>
+
+<script>
+(function(){
+  'use strict';
+  var temaBtn = document.getElementById('tema-toggle');
+  var temaLabel = document.getElementById('tema-toggle-label');
+  var enBtn = document.getElementById('en-toggle');
+  var enLabel = document.getElementById('en-toggle-label');
+
+  function aplicarTema(oscuro){
+    document.documentElement.setAttribute('data-tema', oscuro ? 'oscuro' : 'claro');
+    temaBtn.setAttribute('aria-pressed', String(oscuro));
+    temaLabel.textContent = oscuro ? 'Modo claro' : 'Modo oscuro';
+  }
+  function aplicarEn(on){
+    document.documentElement.setAttribute('data-en', on ? 'on' : 'off');
+    enBtn.setAttribute('aria-pressed', String(on));
+    enLabel.textContent = on ? 'ES + ENG' : 'ES';
+  }
+  temaBtn.addEventListener('click', function(){
+    aplicarTema(document.documentElement.getAttribute('data-tema') !== 'oscuro');
+  });
+  enBtn.addEventListener('click', function(){
+    aplicarEn(document.documentElement.getAttribute('data-en') !== 'on');
+  });
+  aplicarTema(false);
+  aplicarEn(false);
+})();
+</script>
+
+</body>
+</html>

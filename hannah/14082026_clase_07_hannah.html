@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clase 7 · Connecting ideas — Hannah</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* (mismo CSS que el original, sin cambios) */
+:root{
+  --paper:        #FBF7EE;
+  --paper-raised: #FFFFFF;
+  --paper-alt:    #F3ECDA;
+  --ink:          #23291F;
+  --ink-soft:     #565F52;
+  --ink-faint:    #8B9184;
+  --line:         rgba(35,41,31,0.12);
+  --line-strong:  rgba(35,41,31,0.22);
+  --b1:      #2E9E6B;  --b1-soft: #E9F6EF;  --b1-line: #BEE6D3;
+  --b2:      #2F6FED;  --b2-soft: #EAF1FE;  --b2-line: #C6D9FC;
+  --family:  #B5502E;  --family-soft: #FBEBE3; --family-line: #EFC9B4;
+  --f-display: 'Fraunces', Georgia, serif;
+  --f-body:    'IBM Plex Sans', system-ui, sans-serif;
+  --f-data:    'IBM Plex Mono', monospace;
+  --r-sm: 8px;
+  --r-md: 14px;
+  --r-lg: 20px;
+  --shadow-1: 0 1px 2px rgba(35,41,31,0.05), 0 1px 8px rgba(35,41,31,0.04);
+}
+*{ box-sizing:border-box; }
+body{
+  margin:0;
+  background: var(--paper);
+  background-image: radial-gradient(circle at 1px 1px, var(--line) 1px, transparent 0);
+  background-size: 22px 22px;
+  color: var(--ink);
+  font-family: var(--f-body);
+  line-height:1.6;
+}
+::selection{ background: var(--b1-soft); }
+header{ padding:44px 24px 28px; max-width:760px; margin:0 auto; }
+.eyebrow{
+  font-family: var(--f-data); font-size:12px; letter-spacing:.14em;
+  text-transform:uppercase; color: var(--b1); margin:0 0 10px;
+  display:flex; align-items:center; gap:10px;
+}
+.eyebrow .dot{ width:6px; height:6px; border-radius:50%; background: var(--b1); }
+h1{
+  font-family: var(--f-display); font-weight:600;
+  font-size:clamp(30px,5.6vw,46px); line-height:1.08;
+  margin:0 0 14px; letter-spacing:-.01em;
+}
+h1 em{ font-style:italic; color: var(--b1); }
+.lede{ font-size:16px; color: var(--ink-soft); max-width:56ch; margin:0; }
+.meta-row{
+  display:flex; flex-wrap:wrap; gap:20px; margin-top:26px;
+  font-family: var(--f-data); font-size:12px; color: var(--ink-faint);
+}
+.meta-row strong{
+  display:block; color: var(--ink); font-size:14.5px; font-weight:500;
+  font-family: var(--f-display); margin-top:3px;
+}
+main{ max-width:760px; margin:0 auto; padding:8px 24px 100px; }
+section.block{ margin-bottom:52px; }
+.block-head{ display:flex; align-items:baseline; gap:12px; margin-bottom:18px; }
+.time-tag{
+  font-family: var(--f-data); font-size:11px; color: var(--ink-faint);
+  background: var(--paper-alt); padding:3px 10px; border-radius:999px; margin-left:auto; flex:none;
+}
+.block-num{
+  font-family: var(--f-data); font-size:12px; color:#fff; background: var(--b1);
+  width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  flex:none;
+}
+.block-head h2{
+  font-family: var(--f-display); font-weight:500; font-style:italic; font-size:22px; margin:0;
+}
+.panel{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-lg);
+  box-shadow: var(--shadow-1); padding:26px 28px;
+}
+.conj-table{ width:100%; border-collapse:collapse; margin-top:4px; }
+.conj-table td{ padding:10px 6px; border-bottom:1px dashed var(--line); font-size:15px; }
+.conj-table tr:last-child td{ border-bottom:none; }
+.conj-pron{ font-family: var(--f-data); color: var(--ink-faint); font-size:13px; width:140px; }
+.conj-form{ font-family: var(--f-display); font-weight:600; font-size:19px; color: var(--b1); }
+.conj-ex{ color: var(--ink-soft); font-size:14px; }
+.note{
+  margin-top:18px; padding:14px 16px; background: var(--b1-soft); border:1px solid var(--b1-line);
+  border-radius: var(--r-md); font-size:14px; color: var(--ink-soft);
+}
+.note strong{ color: var(--ink); }
+.compare-wrap{ margin-top:22px; }
+.compare-title{
+  font-family: var(--f-data); font-size:11.5px; text-transform:uppercase; letter-spacing:.06em;
+  color: var(--ink-faint); margin:0 0 10px;
+}
+.compare-grid{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+@media (max-width:560px){ .compare-grid{ grid-template-columns:1fr; } }
+.compare-col{ border-radius: var(--r-md); padding:16px 18px; border:1px solid; }
+.compare-col.is-ser{ background: var(--b1-soft); border-color: var(--b1-line); }
+.compare-col.is-estar{ background: var(--b2-soft); border-color: var(--b2-line); }
+.compare-head{ display:flex; align-items:center; gap:8px; margin:0 0 10px; }
+.compare-verb{ font-family: var(--f-display); font-weight:600; font-size:19px; }
+.is-ser .compare-verb{ color: var(--b1); }
+.is-estar .compare-verb{ color: var(--b2); }
+.compare-sub{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); }
+.compare-list{ margin:0; padding:0; list-style:none; }
+.compare-list li{ font-size:13.5px; color: var(--ink-soft); padding:6px 0; border-top:1px dashed var(--line); }
+.compare-list li:first-child{ border-top:none; }
+.compare-list strong{ color: var(--ink); font-weight:600; }
+.compare-list em{ display:block; font-style:normal; color: var(--ink-faint); font-size:12.5px; margin-top:2px; }
+.compare-warning{
+  margin-top:14px; padding:14px 16px; background: var(--family-soft); border:1px solid var(--family-line);
+  border-radius: var(--r-md); font-size:13.5px; color: var(--ink-soft);
+}
+.compare-warning strong{ color: var(--family); }
+.form-mockup{
+  margin-top:22px; background: var(--paper-alt); border:1px solid var(--line-strong);
+  border-radius: var(--r-md); padding:18px 20px;
+}
+.form-mockup-title{
+  font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.06em;
+  color: var(--ink-faint); margin:0 0 14px; display:flex; align-items:center; gap:8px;
+}
+.form-mockup-title::before{ content:"🔗"; font-size:14px; }
+.form-row{ display:grid; grid-template-columns:170px 1fr; gap:10px; align-items:center; padding:8px 0; border-bottom:1px dashed var(--line); }
+.form-row:last-child{ border-bottom:none; }
+.form-label{ font-family: var(--f-body); font-weight:600; font-size:13.5px; color: var(--ink); }
+.form-field{
+  background: var(--paper-raised); border:1px solid var(--line-strong); border-radius: var(--r-sm);
+  padding:7px 10px; font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); min-height:16px;
+}
+.vocab-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:12px; }
+.vocab-card{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:14px 16px; cursor:pointer; perspective:600px; min-height:78px;
+  display:flex; flex-direction:column; justify-content:center; transition: border-color .15s ease;
+}
+.vocab-card:hover{ border-color: var(--b1-line); }
+.vocab-card:focus-visible{ outline:2px solid var(--b1); outline-offset:2px; }
+.vocab-front{ font-family: var(--f-body); font-weight:600; font-size:15px; }
+.vocab-back{ display:none; font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); margin-top:6px; }
+.vocab-card.flipped .vocab-back{ display:block; }
+.vocab-card.flipped{ background: var(--b1-soft); border-color: var(--b1-line); }
+.vocab-hint{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin:10px 2px 16px; }
+.exercise{ margin-bottom:20px; }
+.exercise:last-of-type{ margin-bottom:0; }
+.ex-sentence{ font-size:15.5px; margin-bottom:10px; }
+.ex-sentence .gap{ font-family: var(--f-data); color: var(--ink-faint); }
+.ex-options{ display:flex; flex-wrap:wrap; gap:8px; }
+.opt-btn{
+  font-family: var(--f-body); font-size:14px; background: var(--paper-raised);
+  border:1.5px solid var(--line); color: var(--ink); padding:7px 16px; border-radius:999px;
+  cursor:pointer; transition: all .15s ease;
+}
+.opt-btn:hover{ border-color: var(--ink-faint); }
+.opt-btn.picked{ background: var(--b1-soft); border-color: var(--b1); color: var(--b1); }
+.opt-btn.correct{ background: var(--b1-soft); border-color: var(--b1); color: var(--b1); }
+.opt-btn.wrong{ background: var(--family-soft); border-color: var(--family); color: var(--family); }
+.opt-btn:disabled{ cursor:default; }
+.check-bar{
+  display:flex; align-items:center; justify-content:space-between; gap:16px;
+  margin-top:22px; padding-top:18px; border-top:1px dashed var(--line);
+}
+.btn-primary{
+  font-family: var(--f-body); font-weight:600; font-size:14px; color:#fff; background: var(--b1);
+  border:none; padding:11px 22px; border-radius:999px; cursor:pointer; transition: transform .1s ease;
+}
+.btn-primary:hover{ transform: translateY(-1px); }
+#score-text{ font-family: var(--f-data); font-size:13px; color: var(--ink-faint); }
+.btn-ghost{
+  font-family: var(--f-body); font-weight:600; font-size:13px; color: var(--ink-soft); background:none;
+  border:1.5px solid var(--line); padding:9px 18px; border-radius:999px; cursor:pointer;
+}
+.btn-ghost:hover{ border-color: var(--ink-faint); }
+.ex-divider{
+  display:flex; align-items:center; gap:10px; margin:20px 0 16px;
+  font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.06em;
+  color: var(--ink-faint);
+}
+.ex-divider::before, .ex-divider::after{ content:""; flex:1; height:1px; background: var(--line); }
+.ex-divider.en-clase{ color: var(--b1); }
+.ex-divider.en-clase::before, .ex-divider.en-clase::after{ background: var(--b1-line); }
+.characters{ display:grid; gap:16px; }
+.char-card{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-lg);
+  padding:20px 22px; display:flex; gap:16px; align-items:flex-start;
+}
+.char-avatar{
+  flex:none; width:44px; height:44px; border-radius:50%; background: var(--b1-soft);
+  display:flex; align-items:center; justify-content:center; font-family: var(--f-display);
+  font-weight:600; font-size:17px; color: var(--b1);
+}
+.char-body{ flex:1; }
+.char-name{ font-family: var(--f-display); font-weight:600; font-size:17px; margin:0 0 4px; }
+.char-role{ font-family: var(--f-data); font-size:11.5px; text-transform:uppercase; letter-spacing:.05em; color: var(--ink-faint); margin:0 0 10px; }
+.char-facts{ display:flex; flex-wrap:wrap; gap:6px; margin-bottom:10px; }
+.fact-tag{
+  font-family: var(--f-data); font-size:12px; background: var(--paper-alt); color: var(--ink-soft);
+  padding:4px 10px; border-radius:999px;
+}
+.char-prompt{ font-size:14px; color: var(--ink-soft); }
+.char-input{
+  width:100%; margin-top:8px; font-family: var(--f-body); font-size:14.5px; color: var(--ink);
+  background: var(--paper); border:1px solid var(--line); border-radius: var(--r-sm);
+  padding:10px 12px; resize:vertical; min-height:44px;
+}
+.char-input:focus{ outline:none; border-color: var(--b1-line); background: var(--paper-raised); }
+.roleplay-panel{ background: var(--b2-soft); border:1px solid var(--b2-line); border-radius: var(--r-lg); padding:26px 28px; }
+.roleplay-panel .block-num{ background: var(--b2); }
+.scene-setup{
+  display:flex; gap:14px; align-items:flex-start; background: var(--paper-raised);
+  border:1px solid var(--b2-line); border-radius: var(--r-md); padding:14px 16px; margin-bottom:20px;
+}
+.scene-icon{ font-size:22px; flex:none; }
+.scene-text{ font-size:14px; color: var(--ink-soft); }
+.scene-text strong{ color: var(--ink); }
+.dialogue{ display:flex; flex-direction:column; gap:14px; }
+.scene-tabs{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:18px; }
+.scene-tab{
+  font-family: var(--f-data); font-size:12.5px; background: var(--paper-raised);
+  border:1.5px solid var(--b2-line); color: var(--ink-soft); padding:7px 14px;
+  border-radius:999px; cursor:pointer; transition: all .15s ease;
+}
+.scene-tab:hover{ border-color: var(--b2); }
+.scene-tab.active{ background: var(--b2); border-color: var(--b2); color:#fff; }
+.line{ display:flex; gap:12px; align-items:flex-start; }
+.line-avatar{
+  flex:none; width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  font-family: var(--f-display); font-weight:600; font-size:14px; color:#fff;
+}
+.line.friend .line-avatar{ background: var(--ink-faint); }
+.line.you .line-avatar{ background: var(--b2); }
+.line-body{ flex:1; }
+.line-name{ font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.05em; color: var(--ink-faint); margin:0 0 4px; }
+.line-bubble{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:12px 14px; font-size:14.5px; color: var(--ink);
+}
+.line.you .line-bubble{ background:#fff; border-color: var(--b2-line); }
+.line-input{
+  width:100%; font-family: var(--f-body); font-size:14.5px; color: var(--ink);
+  background:#fff; border:1px solid var(--b2-line); border-radius: var(--r-sm);
+  padding:10px 12px; resize:vertical; min-height:40px; margin-top:2px;
+}
+.line-input:focus{ outline:none; border-color: var(--b2); }
+.line-hint{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin-top:5px; }
+.roleplay-tip{
+  margin-top:22px; padding:14px 16px; background: var(--paper-raised); border:1px solid var(--b2-line);
+  border-radius: var(--r-md); font-size:13.5px; color: var(--ink-soft);
+}
+.roleplay-tip strong{ color: var(--ink); }
+.task-panel{ background: var(--family-soft); border:1px solid var(--family-line); border-radius: var(--r-lg); padding:26px 28px; }
+.task-panel .block-num{ background: var(--family); }
+textarea#final-task{
+  width:100%; min-height:110px; font-family: var(--f-body); font-size:15px; color: var(--ink);
+  background: var(--paper-raised); border:1px solid var(--family-line); border-radius: var(--r-md);
+  padding:14px 16px; resize:vertical; margin-top:14px;
+}
+textarea#final-task:focus{ outline:none; border-color: var(--family); }
+.task-footer{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:12px; flex-wrap:wrap; }
+#task-count{ font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); }
+.btn-secondary{
+  font-family: var(--f-body); font-weight:600; font-size:13.5px; color: var(--family); background:none;
+  border:1.5px solid var(--family-line); padding:9px 18px; border-radius:999px; cursor:pointer;
+}
+.saved-flag{ font-family: var(--f-data); font-size:12px; color: var(--b1); opacity:0; transition: opacity .3s ease; }
+.saved-flag.show{ opacity:1; }
+footer{
+  max-width:760px; margin:0 auto; padding:0 24px 60px; display:flex;
+  justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;
+  font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint);
+}
+footer a{ color: var(--b1); text-decoration:none; }
+footer a:hover{ text-decoration:underline; }
+@media (max-width:600px){
+  header{ padding:34px 18px 22px; }
+  main{ padding:8px 18px 90px; }
+  .panel, .task-panel{ padding:20px 18px; }
+  .char-card{ flex-direction:column; }
+  .form-row{ grid-template-columns:1fr; gap:4px; }
+}
+@media (prefers-reduced-motion: reduce){ *{ transition:none !important; } }
+</style>
+</head>
+<body>
+
+<header>
+  <p class="eyebrow"><span class="dot"></span>Clase 7 de 14 · L2 Papeleos y vida diaria</p>
+  <h1>Conectar <em>ideas</em></h1>
+  <p class="lede">Ya sabes rellenar formularios y pedir cita — ahora aprendes a contarlo todo de forma fluida. Con los conectores de secuencia (primero, luego, después) y de causa/consecuencia (por eso, además, sin embargo) tus explicaciones sonarán mucho más naturales.</p>
+  <div class="meta-row">
+    <div>Duración<strong>50 min</strong></div>
+    <div>Gramática<strong>Conectores de secuencia y de causa/consecuencia</strong></div>
+    <div>Nivel<strong>A2</strong></div>
+  </div>
+</header>
+
+<main>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">1</span><h2>Dos familias de conectores</h2><span class="time-tag">10 min</span></div>
+    <div class="panel">
+      <table class="conj-table">
+        <tr><td class="conj-pron">1º paso</td><td class="conj-form">primero</td><td class="conj-ex">Primero pedí cita por teléfono.</td></tr>
+        <tr><td class="conj-pron">2º paso</td><td class="conj-form">luego / después</td><td class="conj-ex">Luego fui a la oficina con todos los documentos.</td></tr>
+        <tr><td class="conj-pron">último paso</td><td class="conj-form">por último / finalmente</td><td class="conj-ex">Por último, firmé la solicitud y me dieron un justificante.</td></tr>
+        <tr><td class="conj-pron">consecuencia</td><td class="conj-form">por eso / entonces</td><td class="conj-ex">No tenía el contrato de alquiler, por eso volví otro día.</td></tr>
+        <tr><td class="conj-pron">añadir</td><td class="conj-form">además</td><td class="conj-ex">Rellené el formulario y, además, adjunté una fotocopia.</td></tr>
+        <tr><td class="conj-pron">contraste</td><td class="conj-form">sin embargo</td><td class="conj-ex">Pedí cita para el lunes; sin embargo, me la dieron para el jueves.</td></tr>
+      </table>
+      <div class="note"><strong>La regla simple:</strong> los conectores de secuencia (primero, luego, después, por último) ordenan los pasos de una historia o un trámite. Los conectores de causa/consecuencia (por eso, entonces, además, sin embargo) explican por qué pasó algo o cómo se relacionan dos ideas. Combinar ambos tipos es lo que hace que un relato suene fluido en vez de una lista de frases sueltas.</div>
+
+      <div class="compare-wrap">
+        <p class="compare-title">Secuencia vs. causa/consecuencia — dos funciones distintas</p>
+        <div class="compare-grid">
+          <div class="compare-col is-ser">
+            <div class="compare-head">
+              <span class="compare-verb">SECUENCIA</span>
+              <span class="compare-sub">— ordenan los pasos en el tiempo</span>
+            </div>
+            <ul class="compare-list">
+              <li><strong>Primero:</strong> Primero llamé para pedir cita.
+                <em>Marca el inicio de la historia o el trámite.</em>
+              </li>
+              <li><strong>Luego / después:</strong> Luego fui a la oficina con los papeles.</li>
+              <li><strong>Por último / finalmente:</strong> Por último, recogí el justificante.</li>
+              <li><strong>Se usan solos</strong>, normalmente al principio de la frase, seguidos de coma.</li>
+            </ul>
+          </div>
+          <div class="compare-col is-estar">
+            <div class="compare-head">
+              <span class="compare-verb">CAUSA / CONSECUENCIA</span>
+              <span class="compare-sub">— explican el porqué o añaden matices</span>
+            </div>
+            <ul class="compare-list">
+              <li><strong>Por eso:</strong> No tenía el NIE, por eso no pude terminar el trámite.
+                <em>Une una causa con su resultado.</em>
+              </li>
+              <li><strong>Además:</strong> Firmé la solicitud y, además, pedí una copia.</li>
+              <li><strong>Sin embargo:</strong> Fui temprano; sin embargo, tuve que esperar una hora.</li>
+              <li><strong>Sin embargo</strong> introduce un contraste, no una consecuencia.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="compare-warning">
+          <strong>Y recuerda:</strong> "entonces" puede confundirse con "por eso" — ambos indican consecuencia, pero "entonces" también se usa para decir "en ese momento" (Entonces llegó el funcionario y me ayudó). Fíjate en el contexto para saber cuál es cuál.
+        </div>
+      </div>
+
+      <div class="form-mockup">
+        <p class="form-mockup-title">Mapa rápido de conectores</p>
+        <div class="form-row"><span class="form-label">Empezar</span><span class="form-field">primero, para empezar</span></div>
+        <div class="form-row"><span class="form-label">Continuar</span><span class="form-field">luego, después, a continuación</span></div>
+        <div class="form-row"><span class="form-label">Terminar</span><span class="form-field">por último, finalmente</span></div>
+        <div class="form-row"><span class="form-label">Causa</span><span class="form-field">por eso, entonces</span></div>
+        <div class="form-row"><span class="form-label">Añadir</span><span class="form-field">además, también</span></div>
+        <div class="form-row"><span class="form-label">Contrastar</span><span class="form-field">sin embargo, pero</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">2</span><h2>Vocabulario</h2><span class="time-tag">6 min</span></div>
+    <p class="vocab-hint">Toca cada tarjeta para ver un ejemplo.</p>
+    <div class="vocab-grid" id="vocab-grid"></div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">3</span><h2>Practica</h2><span class="time-tag">12 min</span></div>
+    <div class="panel">
+      <p class="vocab-hint" style="margin-bottom:14px;">18 frases: las primeras 8 se hacen en voz alta en clase; el resto queda como repaso para casa.</p>
+      <div id="exercises"></div>
+      <div class="check-bar">
+        <div style="display:flex; gap:10px;">
+          <button class="btn-primary" id="check-btn">Comprobar respuestas</button>
+          <button class="btn-ghost" id="reset-btn">Reiniciar</button>
+        </div>
+        <span id="score-text"></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">4</span><h2>Tarjetas de trámites encadenados</h2><span class="time-tag">8 min</span></div>
+    <p class="lede" style="margin-bottom:16px;">Cuenta cada situación como una mini historia usando al menos dos conectores (uno de secuencia y uno de causa/consecuencia). Usa los datos de la tarjeta como pista. Las primeras 4 se trabajan en clase; el resto queda como banco de repaso para casa.</p>
+    <div class="characters" id="characters"></div>
+  </section>
+
+  <section class="block roleplay-panel">
+    <div class="block-head"><span class="block-num">5</span><h2>Roleplay: 3 escenas para contar un trámite</h2><span class="time-tag">13 min</span></div>
+    <p class="lede" style="margin-bottom:16px;">Situaciones donde tienes que explicar, paso a paso, cómo hiciste un trámite reciente. Elige una escena para practicar en clase; el resto queda como banco de repaso para casa.</p>
+    <div class="scene-tabs" id="scene-tabs"></div>
+    <div id="scene-container"></div>
+    <div class="roleplay-tip"><strong>En clase:</strong> practicaremos una escena en voz alta, cambiando de rol. El resto de escenas son para practicar por tu cuenta durante la semana.</div>
+  </section>
+
+  <section class="block task-panel">
+    <div class="block-head"><span class="block-num">6</span><h2 style="color:var(--family)">Tu tarea</h2><span class="time-tag">3 min</span></div>
+    <p style="margin:0; font-size:15px; color:var(--ink-soft);">Reescribe un texto corto (o cuenta un trámite reciente, como el NIE o el empadronamiento) añadiendo al menos <strong>5 conectores</strong> distintos: mezcla secuencia (primero, luego, por último) y causa/consecuencia (por eso, además, sin embargo).</p>
+    <textarea id="final-task" placeholder="Primero...&#10;Luego...&#10;Por eso...&#10;Además...&#10;Por último..."></textarea>
+    <div class="task-footer">
+      <span id="task-count">0 frases escritas</span>
+      <span class="saved-flag" id="saved-flag">Guardado ✓</span>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <span>Clase 6 · Dealing with paperwork</span>
+  <span>Próxima clase → Clase 8: Everyday small talk</span>
+</footer>
+
+<script>
+/* ---------- VOCAB ---------- */
+const VOCAB = [
+  {front:"primero", back:"Primero pedí cita por teléfono."},
+  {front:"luego / después", back:"Luego fui a la oficina con todos los documentos."},
+  {front:"por último / finalmente", back:"Por último, firmé la solicitud y me dieron un justificante."},
+  {front:"por eso", back:"No tenía el contrato de alquiler, por eso volví otro día."},
+  {front:"además", back:"Rellené el formulario y, además, adjunté una fotocopia."},
+  {front:"sin embargo", back:"Pedí cita para el lunes; sin embargo, me la dieron para el jueves."},
+];
+
+const grid = document.getElementById('vocab-grid');
+VOCAB.forEach(v=>{
+  const card = document.createElement('div');
+  card.className = 'vocab-card';
+  card.setAttribute('role', 'button');
+  card.setAttribute('tabindex', '0');
+  card.setAttribute('aria-pressed', 'false');
+  card.setAttribute('aria-label', `${v.front}. Pulsa para ver un ejemplo.`);
+  card.innerHTML = `<div class="vocab-front">${v.front}</div><div class="vocab-back">${v.back}</div>`;
+  const toggle = ()=>{
+    const flipped = card.classList.toggle('flipped');
+    card.setAttribute('aria-pressed', String(flipped));
+  };
+  card.addEventListener('click', toggle);
+  card.addEventListener('keydown', (e)=>{
+    if(e.key === 'Enter' || e.key === ' '){
+      e.preventDefault();
+      toggle();
+    }
+  });
+  grid.appendChild(card);
+});
+
+/* ---------- EXERCISES ---------- */
+const EXERCISES = [
+  {"sentence":"<span class=\"gap\">___</span> llamé para pedir cita en el ayuntamiento.","options":["Además","Primero","Sin embargo"],"answer":"Primero"},
+  {"sentence":"<span class=\"gap\">___</span> fui a la oficina con todos los documentos.","options":["Luego","Por eso","Sin embargo"],"answer":"Luego"},
+  {"sentence":"<span class=\"gap\">___</span>, firmé la solicitud y recogí el justificante.","options":["Primero","Por último","Entonces"],"answer":"Por último"},
+  {"sentence":"No tenía el contrato de alquiler, <span class=\"gap\">___</span> volví otro día.","options":["además","por eso","sin embargo"],"answer":"por eso"},
+  {"sentence":"Rellené el formulario y, <span class=\"gap\">___</span>, adjunté una fotocopia.","options":["además","por eso","luego"],"answer":"además"},
+  {"sentence":"Pedí cita para el lunes; <span class=\"gap\">___</span>, me la dieron para el jueves.","options":["además","sin embargo","primero"],"answer":"sin embargo"},
+  {"sentence":"Fui temprano a la oficina; <span class=\"gap\">___</span>, tuve que esperar una hora.","options":["sin embargo","por eso","además"],"answer":"sin embargo"},
+  {"sentence":"No llevaba el DNI, <span class=\"gap\">___</span> no pude presentar la solicitud.","options":["además","por eso","luego"],"answer":"por eso"},
+  {"sentence":"<span class=\"gap\">___</span> pedí cita, luego reuní los documentos y por último los presenté.","options":["Sin embargo","Primero","Además"],"answer":"Primero"},
+  {"sentence":"Presenté los papeles y, <span class=\"gap\">___</span>, pedí una copia para mí.","options":["además","por eso","sin embargo"],"answer":"además"},
+  {"sentence":"El funcionario llegó tarde; <span class=\"gap\">___</span> tuvimos que esperar.","options":["por eso","sin embargo","primero"],"answer":"por eso"},
+  {"sentence":"<span class=\"gap\">___</span> de rellenar el formulario, tienes que firmarlo.","options":["Después","Por eso","Sin embargo"],"answer":"Después"},
+  {"sentence":"Fui a la cita con todos los papeles; <span class=\"gap\">___</span>, faltaba uno.","options":["sin embargo","por eso","luego"],"answer":"sin embargo"},
+  {"sentence":"Primero pedí cita, <span class=\"gap\">___</span> presenté los documentos.","options":["por eso","luego","sin embargo"],"answer":"luego"},
+  {"sentence":"No sabía dónde firmar, <span class=\"gap\">___</span> pregunté al funcionario.","options":["por eso","además","sin embargo"],"answer":"por eso"},
+  {"sentence":"Rellené la solicitud; <span class=\"gap\">___</span>, tuve que corregir un error.","options":["sin embargo","por eso","primero"],"answer":"sin embargo"},
+  {"sentence":"Adjunté el pasaporte y, <span class=\"gap\">___</span>, una fotocopia del contrato.","options":["además","por eso","sin embargo"],"answer":"además"},
+  {"sentence":"<span class=\"gap\">___</span> de firmar, me dieron un número de expediente.","options":["Además","Después","Por eso"],"answer":"Después"}
+];
+
+const exWrap = document.getElementById('exercises');
+EXERCISES.forEach((ex, i)=>{
+  if(i === 0){
+    const divider = document.createElement('div');
+    divider.className = 'ex-divider en-clase';
+    divider.textContent = 'en clase · ítems 1–8';
+    exWrap.appendChild(divider);
+  }
+  if(i === 8){
+    const divider = document.createElement('div');
+    divider.className = 'ex-divider';
+    divider.textContent = 'para casa · repaso opcional';
+    exWrap.appendChild(divider);
+  }
+  const el = document.createElement('div');
+  el.className = 'exercise';
+  el.dataset.answer = ex.answer;
+  el.dataset.index = i;
+  el.innerHTML = `
+    <div class="ex-sentence">${i+1}. ${ex.sentence}</div>
+    <div class="ex-options">
+      ${ex.options.map(o=>`<button class="opt-btn" data-value="${o}">${o}</button>`).join('')}
+    </div>
+  `;
+  exWrap.appendChild(el);
+
+  el.querySelectorAll('.opt-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      if(practiceState.checked) return;
+      el.querySelectorAll('.opt-btn').forEach(b=>b.classList.remove('picked'));
+      btn.classList.add('picked');
+      practiceState.picked[i] = btn.dataset.value;
+      guardarPractica();
+    });
+  });
+});
+
+/* ---------- PERSISTENCIA PRÁCTICA ---------- */
+const PRACTICE_STORAGE_KEY = 'hannah-clase07-practica';
+let practiceState = { picked: {}, checked: false };
+
+async function guardarPractica(){
+  if (!window.storage) return;
+  try{
+    await window.storage.set(PRACTICE_STORAGE_KEY, JSON.stringify(practiceState));
+  }catch(e){}
+}
+
+async function cargarPractica(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(PRACTICE_STORAGE_KEY);
+    if (res && typeof res.value === 'string'){
+      const parsed = JSON.parse(res.value);
+      if (parsed && typeof parsed === 'object'){
+        practiceState = { picked: parsed.picked || {}, checked: !!parsed.checked };
+      }
+    }
+  }catch(e){}
+}
+
+cargarPractica().then(()=>{
+  document.querySelectorAll('.exercise').forEach(el=>{
+    const i = parseInt(el.dataset.index);
+    const answer = el.dataset.answer;
+    const pickedValue = practiceState.picked[i];
+    if(!pickedValue) return;
+    const pickedBtn = el.querySelector(`.opt-btn[data-value="${CSS.escape(pickedValue)}"]`);
+    if(practiceState.checked){
+      el.querySelectorAll('.opt-btn').forEach(b=>{
+        b.disabled = true;
+        if(b.dataset.value === answer) b.classList.add('correct');
+        else if(b === pickedBtn) b.classList.add('wrong');
+      });
+    } else if(pickedBtn){
+      pickedBtn.classList.add('picked');
+    }
+  });
+  if(practiceState.checked){
+    let correct = 0;
+    document.querySelectorAll('.exercise').forEach(el=>{
+      const i = parseInt(el.dataset.index);
+      if(practiceState.picked[i] === el.dataset.answer) correct++;
+    });
+    document.getElementById('score-text').textContent = `${correct} / ${EXERCISES.length} correctas`;
+  }
+});
+
+document.getElementById('check-btn').addEventListener('click', ()=>{
+  let correct = 0;
+  document.querySelectorAll('.exercise').forEach(el=>{
+    const answer = el.dataset.answer;
+    const picked = el.querySelector('.opt-btn.picked');
+    el.querySelectorAll('.opt-btn').forEach(b=>{
+      b.disabled = true;
+      if(b.dataset.value === answer) b.classList.add('correct');
+      else if(b === picked) b.classList.add('wrong');
+    });
+    if(picked && picked.dataset.value === answer) correct++;
+  });
+  document.getElementById('score-text').textContent = `${correct} / ${EXERCISES.length} correctas`;
+  practiceState.checked = true;
+  guardarPractica();
+});
+
+document.getElementById('reset-btn').addEventListener('click', ()=>{
+  document.querySelectorAll('.exercise').forEach(el=>{
+    el.querySelectorAll('.opt-btn').forEach(b=>{
+      b.disabled = false;
+      b.classList.remove('picked','correct','wrong');
+    });
+  });
+  document.getElementById('score-text').textContent = '';
+  practiceState = { picked: {}, checked: false };
+  guardarPractica();
+});
+
+/* ---------- CHARACTER CARDS ---------- */
+const CHARACTERS = [
+  {"name":"El trámite del empadronamiento","role":"Ayuntamiento","facts":["pediste cita por teléfono","faltaba el contrato de alquiler","volviste con todo completo"],"prompt":"Cuenta la historia usando \"primero\" y \"por eso\":"},
+  {"name":"La solicitud del NIE","role":"Extranjería","facts":["cita a las nueve de la mañana","esperaste una hora extra","al final te lo dieron el mismo día"],"prompt":"Explica qué pasó usando \"sin embargo\":"},
+  {"name":"La cita del médico","role":"Centro de salud","facts":["pediste cita por la app","llevaste la tarjeta sanitaria","además preguntaste por una vacuna"],"prompt":"Cuenta la visita usando \"luego\" y \"además\":"},
+  {"name":"El formulario del colegio","role":"Matrícula escolar","facts":["rellenaste los datos de las niñas","faltaba el libro de familia","lo entregaste al día siguiente"],"prompt":"Describe el proceso usando \"primero\", \"por eso\" y \"por último\":"},
+  {"name":"La cuenta del banco","role":"Trámite bancario","facts":["pediste cita para actualizar los datos","el empleado tardó en atenderte","al final todo salió bien"],"prompt":"Cuenta la experiencia usando \"sin embargo\":"},
+  {"name":"La solicitud de la tarjeta sanitaria","role":"Sanidad","facts":["presentaste el NIE y el empadronamiento","además pediste información sobre el médico","tardó dos semanas en llegar"],"prompt":"Explica el trámite usando \"además\" y \"luego\":"},
+  {"name":"La mudanza a la nueva casa","role":"Trámite doméstico","facts":["primero cambiaste de dirección","luego avisaste al colegio","por eso todo quedó actualizado"],"prompt":"Cuenta el proceso encadenando los pasos:"},
+  {"name":"Una cita cancelada","role":"Imprevisto","facts":["te avisaron tarde de la cancelación","sin embargo conseguiste otra cita","por eso no perdiste el trámite"],"prompt":"Cuenta la situación usando \"sin embargo\" y \"por eso\":"}
+];
+
+const charWrap = document.getElementById('characters');
+CHARACTERS.forEach((c, i)=>{
+  if(i === 0){
+    const divider = document.createElement('div');
+    divider.className = 'ex-divider en-clase';
+    divider.textContent = 'en clase · personajes 1–4';
+    charWrap.appendChild(divider);
+  }
+  if(i === 4){
+    const divider = document.createElement('div');
+    divider.className = 'ex-divider';
+    divider.textContent = 'para casa · banco de repaso';
+    charWrap.appendChild(divider);
+  }
+  const card = document.createElement('div');
+  card.className = 'char-card';
+  card.innerHTML = `
+    <div class="char-avatar">${c.name.charAt(0)}</div>
+    <div class="char-body">
+      <p class="char-name">${c.name}</p>
+      <p class="char-role">${c.role}</p>
+      <div class="char-facts">${c.facts.map(f=>`<span class="fact-tag">${f}</span>`).join('')}</div>
+      <p class="char-prompt">${c.prompt}</p>
+      <textarea class="char-input" rows="2" placeholder="Primero... / Luego... / Por eso... / Sin embargo..." data-char-idx="${i}"></textarea>
+    </div>
+  `;
+  charWrap.appendChild(card);
+});
+
+/* ---------- PERSISTENCIA PERSONAJES ---------- */
+const CHAR_STORAGE_KEY = 'hannah-clase07-personajes';
+let charState = {};
+let charTimer = null;
+
+async function guardarChars(){
+  if (!window.storage) return;
+  try{
+    await window.storage.set(CHAR_STORAGE_KEY, JSON.stringify(charState));
+  }catch(e){}
+}
+
+async function cargarChars(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(CHAR_STORAGE_KEY);
+    if (res && typeof res.value === 'string'){
+      const parsed = JSON.parse(res.value);
+      if (parsed && typeof parsed === 'object') charState = parsed;
+    }
+  }catch(e){}
+}
+
+cargarChars().then(()=>{
+  document.querySelectorAll('.char-input').forEach(ta=>{
+    const idx = parseInt(ta.dataset.charIdx);
+    if (charState[idx] !== undefined) ta.value = charState[idx];
+    ta.addEventListener('input', ()=>{
+      charState[idx] = ta.value;
+      clearTimeout(charTimer);
+      charTimer = setTimeout(guardarChars, 800);
+    });
+  });
+});
+
+/* ---------- ROLEPLAY SCENES ---------- */
+const SCENES = [
+  {"id":"amigo","tab":"Contarle a un amigo el NIE","icon":"👋","setup":"Le explicas a un amigo, paso a paso, cómo hiciste el trámite del NIE.","lines":[
+    {"who":"friend","name":"Amigo","text":"Oye, ¿cómo conseguiste el NIE al final? Yo todavía no sé por dónde empezar."},
+    {"who":"you","hint":"Cuenta el primer paso usando 'primero' (pedir cita, por ejemplo)."},
+    {"who":"friend","name":"Amigo","text":"Vale, ¿y luego qué hiciste?"},
+    {"who":"you","hint":"Explica el segundo paso usando 'luego' o 'después'."},
+    {"who":"friend","name":"Amigo","text":"¿Tuviste algún problema con los documentos?"},
+    {"who":"you","hint":"Cuenta un problema usando 'sin embargo' o 'por eso'."},
+    {"who":"friend","name":"Amigo","text":"Vaya, ¡qué rollo! ¿Y cómo terminó todo?"},
+    {"who":"you","hint":"Cierra la historia usando 'por último' o 'finalmente'."},
+    {"who":"friend","name":"Amigo","text":"Genial, muchas gracias por contármelo, me será muy útil."},
+    {"who":"you","hint":"Despídete y ofrécele ayuda si la necesita con su propio trámite."}
+  ]},
+  {"id":"pareja","tab":"Explicarle a tu pareja el empadronamiento","icon":"🏡","setup":"Cuentas a tu pareja cómo fue la cita del empadronamiento en el ayuntamiento.","lines":[
+    {"who":"friend","name":"Pareja","text":"¿Qué tal ha ido la cita del empadronamiento?"},
+    {"who":"you","hint":"Empieza contando el primer paso con 'primero'."},
+    {"who":"friend","name":"Pareja","text":"¿Y te han pedido muchos documentos?"},
+    {"who":"you","hint":"Explica qué documentos presentaste, añadiendo algo con 'además'."},
+    {"who":"friend","name":"Pareja","text":"¿Ha habido algún problema?"},
+    {"who":"you","hint":"Cuenta un contratiempo usando 'sin embargo'."},
+    {"who":"friend","name":"Pareja","text":"Vaya, ¿y cómo lo has solucionado?"},
+    {"who":"you","hint":"Explica la solución usando 'por eso'."},
+    {"who":"friend","name":"Pareja","text":"Menos mal. ¿Y ya está todo listo?"},
+    {"who":"you","hint":"Cierra la historia con 'por último' o 'finalmente'."}
+  ]},
+  {"id":"profesora","tab":"Contarle a la profesora un trámite","icon":"📝","setup":"Le cuentas a tu profesora de español cómo hiciste un trámite reciente, usando conectores.","lines":[
+    {"who":"friend","name":"Profesora","text":"Cuéntame, ¿qué trámite hiciste esta semana?"},
+    {"who":"you","hint":"Explica de qué trámite se trata y el primer paso con 'primero'."},
+    {"who":"friend","name":"Profesora","text":"Muy bien, ¿y después?"},
+    {"who":"you","hint":"Continúa la historia con 'luego' o 'después'."},
+    {"who":"friend","name":"Profesora","text":"¿Tuviste que esperar mucho o hubo algún problema?"},
+    {"who":"you","hint":"Cuenta un problema usando 'sin embargo'."},
+    {"who":"friend","name":"Profesora","text":"¿Y cómo lo resolviste?"},
+    {"who":"you","hint":"Explica la solución con 'por eso' o 'entonces'."},
+    {"who":"friend","name":"Profesora","text":"¡Muy bien contado! ¿Cómo terminó todo?"},
+    {"who":"you","hint":"Termina la historia con 'por último' o 'finalmente'."}
+  ]}
+];
+
+const sceneTabs = document.getElementById('scene-tabs');
+const sceneContainer = document.getElementById('scene-container');
+let activeScene = 0;
+
+function renderTabs(){
+  sceneTabs.innerHTML = SCENES.map((s,i)=>
+    `<button class="scene-tab${i===activeScene?' active':''}" data-idx="${i}">${s.icon} ${s.tab}</button>`
+  ).join('');
+  sceneTabs.querySelectorAll('.scene-tab').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      activeScene = parseInt(btn.dataset.idx, 10);
+      renderTabs();
+      renderScene();
+    });
+  });
+}
+
+/* ---------- PERSISTENCIA ROLEPLAY ---------- */
+const ROLEPLAY_STORAGE_KEY = 'hannah-clase07-roleplay';
+let rpState = {};
+let rpTimer = null;
+
+async function guardarRP(){
+  if (!window.storage) return;
+  try{
+    await window.storage.set(ROLEPLAY_STORAGE_KEY, JSON.stringify(rpState));
+  }catch(e){}
+}
+
+async function cargarRP(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(ROLEPLAY_STORAGE_KEY);
+    if (res && typeof res.value === 'string'){
+      const parsed = JSON.parse(res.value);
+      if (parsed && typeof parsed === 'object') rpState = parsed;
+    }
+  }catch(e){}
+}
+
+function renderScene(){
+  const scene = SCENES[activeScene];
+  let lineIdx = 0;
+  const linesHtml = scene.lines.map((l)=>{
+    if(l.who === 'friend'){
+      return `
+        <div class="line friend">
+          <div class="line-avatar">${l.name.charAt(0)}</div>
+          <div class="line-body">
+            <p class="line-name">${l.name}</p>
+            <div class="line-bubble">${l.text}</div>
+          </div>
+        </div>`;
+    } else {
+      const key = `${activeScene}-${lineIdx}`;
+      lineIdx++;
+      const saved = rpState[key] || '';
+      return `
+        <div class="line you">
+          <div class="line-avatar">Tú</div>
+          <div class="line-body">
+            <p class="line-name">Tú</p>
+            <textarea class="line-input" rows="2" placeholder="Escribe tu respuesta usando 'primero', 'luego', 'por eso' o 'sin embargo'..." data-rp-key="${key}">${saved}</textarea>
+            <p class="line-hint">${l.hint}</p>
+          </div>
+        </div>`;
+    }
+  }).join('');
+
+  sceneContainer.innerHTML = `
+    <div class="scene-setup">
+      <span class="scene-icon">${scene.icon}</span>
+      <p class="scene-text"><strong>${scene.tab}:</strong> ${scene.setup}</p>
+    </div>
+    <div class="dialogue">${linesHtml}</div>
+  `;
+
+  document.querySelectorAll('.line-input').forEach(ta=>{
+    const key = ta.dataset.rpKey;
+    ta.addEventListener('input', ()=>{
+      rpState[key] = ta.value;
+      clearTimeout(rpTimer);
+      rpTimer = setTimeout(guardarRP, 800);
+    });
+  });
+}
+
+cargarRP().then(()=>{
+  renderTabs();
+  renderScene();
+});
+
+/* ---------- FINAL TASK (autoguardado) ---------- */
+const TASK_STORAGE_KEY = 'hannah-clase07-tarea';
+const taskArea = document.getElementById('final-task');
+const taskCount = document.getElementById('task-count');
+const savedFlag = document.getElementById('saved-flag');
+
+async function cargarTarea(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(TASK_STORAGE_KEY);
+    if (res && typeof res.value === 'string') taskArea.value = res.value;
+  }catch(e){}
+  updateCount();
+}
+
+function updateCount(){
+  const lines = taskArea.value.split('\n').map(l=>l.trim()).filter(l=>l.length>0);
+  taskCount.textContent = `${lines.length} frase${lines.length===1?'':'s'} escrita${lines.length===1?'':'s'}`;
+}
+
+let taskTimer = null;
+taskArea.addEventListener('input', ()=>{
+  updateCount();
+  clearTimeout(taskTimer);
+  taskTimer = setTimeout(async ()=>{
+    if (!window.storage) return;
+    try{
+      await window.storage.set(TASK_STORAGE_KEY, taskArea.value);
+      savedFlag.textContent = 'Guardado ✓';
+      savedFlag.classList.add('show');
+      setTimeout(()=>{ savedFlag.classList.remove('show'); }, 1800);
+    }catch(e){}
+  }, 800);
+});
+
+updateCount();
+cargarTarea();
+</script>
+</body>
+</html>

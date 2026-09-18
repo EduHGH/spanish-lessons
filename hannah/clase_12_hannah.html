@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clase 12 · Moving and next steps — Hannah</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* (mismo CSS que el original, sin cambios) */
+:root{
+  --paper:        #FBF7EE;
+  --paper-raised: #FFFFFF;
+  --paper-alt:    #F3ECDA;
+  --ink:          #23291F;
+  --ink-soft:     #565F52;
+  --ink-faint:    #8B9184;
+  --line:         rgba(35,41,31,0.12);
+  --line-strong:  rgba(35,41,31,0.22);
+  --b1:      #2F6FED;  --b1-soft: #EAF1FE;  --b1-line: #C6D9FC;
+  --b2:      #2E9E6B;  --b2-soft: #E9F6EF;  --b2-line: #BEE6D3;
+  --family:  #B5502E;  --family-soft: #FBEBE3; --family-line: #EFC9B4;
+  --f-display: 'Fraunces', Georgia, serif;
+  --f-body:    'IBM Plex Sans', system-ui, sans-serif;
+  --f-data:    'IBM Plex Mono', monospace;
+  --r-sm: 8px;
+  --r-md: 14px;
+  --r-lg: 20px;
+  --shadow-1: 0 1px 2px rgba(35,41,31,0.05), 0 1px 8px rgba(35,41,31,0.04);
+}
+*{ box-sizing:border-box; }
+body{
+  margin:0;
+  background: var(--paper);
+  background-image: radial-gradient(circle at 1px 1px, var(--line) 1px, transparent 0);
+  background-size: 22px 22px;
+  color: var(--ink);
+  font-family: var(--f-body);
+  line-height:1.6;
+}
+::selection{ background: var(--b1-soft); }
+header{ padding:44px 24px 28px; max-width:760px; margin:0 auto; }
+.eyebrow{
+  font-family: var(--f-data); font-size:12px; letter-spacing:.14em;
+  text-transform:uppercase; color: var(--b1); margin:0 0 10px;
+  display:flex; align-items:center; gap:10px;
+}
+.eyebrow .dot{ width:6px; height:6px; border-radius:50%; background: var(--b1); }
+h1{
+  font-family: var(--f-display); font-weight:600;
+  font-size:clamp(30px,5.6vw,46px); line-height:1.08;
+  margin:0 0 14px; letter-spacing:-.01em;
+}
+h1 em{ font-style:italic; color: var(--b1); }
+.lede{ font-size:16px; color: var(--ink-soft); max-width:56ch; margin:0; }
+.meta-row{
+  display:flex; flex-wrap:wrap; gap:20px; margin-top:26px;
+  font-family: var(--f-data); font-size:12px; color: var(--ink-faint);
+}
+.meta-row strong{
+  display:block; color: var(--ink); font-size:14.5px; font-weight:500;
+  font-family: var(--f-display); margin-top:3px;
+}
+main{ max-width:760px; margin:0 auto; padding:8px 24px 100px; }
+section.block{ margin-bottom:52px; }
+.block-head{ display:flex; align-items:baseline; gap:12px; margin-bottom:18px; }
+.time-tag{
+  font-family: var(--f-data); font-size:11px; color: var(--ink-faint);
+  background: var(--paper-alt); padding:3px 10px; border-radius:999px; margin-left:auto; flex:none;
+}
+.block-num{
+  font-family: var(--f-data); font-size:12px; color:#fff; background: var(--b1);
+  width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  flex:none;
+}
+.block-head h2{
+  font-family: var(--f-display); font-weight:500; font-style:italic; font-size:22px; margin:0;
+}
+.panel{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-lg);
+  box-shadow: var(--shadow-1); padding:26px 28px;
+}
+.conj-table{ width:100%; border-collapse:collapse; margin-top:4px; }
+.conj-table td{ padding:10px 6px; border-bottom:1px dashed var(--line); font-size:15px; }
+.conj-table tr:last-child td{ border-bottom:none; }
+.conj-pron{ font-family: var(--f-data); color: var(--ink-faint); font-size:13px; width:140px; }
+.conj-form{ font-family: var(--f-display); font-weight:600; font-size:19px; color: var(--b1); }
+.conj-ex{ color: var(--ink-soft); font-size:14px; }
+.note{
+  margin-top:18px; padding:14px 16px; background: var(--b1-soft); border:1px solid var(--b1-line);
+  border-radius: var(--r-md); font-size:14px; color: var(--ink-soft);
+}
+.note strong{ color: var(--ink); }
+.compare-wrap{ margin-top:22px; }
+.compare-title{
+  font-family: var(--f-data); font-size:11.5px; text-transform:uppercase; letter-spacing:.06em;
+  color: var(--ink-faint); margin:0 0 10px;
+}
+.compare-grid2{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+@media (max-width:680px){ .compare-grid2{ grid-template-columns:1fr; } }
+.compare-col{ border-radius: var(--r-md); padding:16px 18px; border:1px solid; }
+.compare-col.is-mover{ background: var(--b1-soft); border-color: var(--b1-line); }
+.compare-col.is-mudarse{ background: var(--b2-soft); border-color: var(--b2-line); }
+.compare-head{ display:flex; align-items:center; gap:8px; margin:0 0 10px; }
+.compare-verb{ font-family: var(--f-display); font-weight:600; font-size:18px; }
+.is-mover .compare-verb{ color: var(--b1); }
+.is-mudarse .compare-verb{ color: var(--b2); }
+.compare-sub{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); }
+.compare-list{ margin:0; padding:0; list-style:none; }
+.compare-list li{ font-size:13.5px; color: var(--ink-soft); padding:6px 0; border-top:1px dashed var(--line); }
+.compare-list li:first-child{ border-top:none; }
+.compare-list strong{ color: var(--ink); font-weight:600; }
+.compare-list em{ display:block; font-style:normal; color: var(--ink-faint); font-size:12.5px; margin-top:2px; }
+.compare-warning{
+  margin-top:14px; padding:14px 16px; background: var(--family-soft); border:1px solid var(--family-line);
+  border-radius: var(--r-md); font-size:13.5px; color: var(--ink-soft);
+}
+.compare-warning strong{ color: var(--family); }
+.form-mockup{
+  margin-top:22px; background: var(--paper-alt); border:1px solid var(--line-strong);
+  border-radius: var(--r-md); padding:18px 20px;
+}
+.form-mockup-title{
+  font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.06em;
+  color: var(--ink-faint); margin:0 0 14px; display:flex; align-items:center; gap:8px;
+}
+.form-mockup-title::before{ content:"📦"; font-size:14px; }
+.form-row{ display:grid; grid-template-columns:170px 1fr; gap:10px; align-items:center; padding:8px 0; border-bottom:1px dashed var(--line); }
+.form-row:last-child{ border-bottom:none; }
+.form-label{ font-family: var(--f-body); font-weight:600; font-size:13.5px; color: var(--ink); }
+.form-field{
+  background: var(--paper-raised); border:1px solid var(--line-strong); border-radius: var(--r-sm);
+  padding:7px 10px; font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); min-height:16px;
+}
+.vocab-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:12px; }
+.vocab-card{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:14px 16px; cursor:pointer; perspective:600px; min-height:78px;
+  display:flex; flex-direction:column; justify-content:center; transition: border-color .15s ease;
+}
+.vocab-card:hover{ border-color: var(--b1-line); }
+.vocab-card:focus-visible{ outline:2px solid var(--b1); outline-offset:2px; }
+.vocab-front{ font-family: var(--f-body); font-weight:600; font-size:15px; }
+.vocab-back{ display:none; font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); margin-top:6px; }
+.vocab-card.flipped .vocab-back{ display:block; }
+.vocab-card.flipped{ background: var(--b1-soft); border-color: var(--b1-line); }
+.vocab-hint{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin:10px 2px 16px; }
+.exercise{ margin-bottom:20px; }
+.exercise:last-of-type{ margin-bottom:0; }
+.ex-sentence{ font-size:15.5px; margin-bottom:10px; }
+.ex-sentence .gap{ font-family: var(--f-data); color: var(--ink-faint); }
+.ex-options{ display:flex; flex-wrap:wrap; gap:8px; }
+.opt-btn{
+  font-family: var(--f-body); font-size:14px; background: var(--paper-raised);
+  border:1.5px solid var(--line); color: var(--ink); padding:7px 16px; border-radius:999px;
+  cursor:pointer; transition: all .15s ease;
+}
+.opt-btn:hover{ border-color: var(--ink-faint); }
+.opt-btn.picked{ background: var(--b1-soft); border-color: var(--b1); color: var(--b1); }
+.opt-btn.correct{ background: var(--b1-soft); border-color: var(--b1); color: var(--b1); }
+.opt-btn.wrong{ background: var(--family-soft); border-color: var(--family); color: var(--family); }
+.opt-btn:disabled{ cursor:default; }
+.check-bar{
+  display:flex; align-items:center; justify-content:space-between; gap:16px;
+  margin-top:22px; padding-top:18px; border-top:1px dashed var(--line);
+}
+.btn-primary{
+  font-family: var(--f-body); font-weight:600; font-size:14px; color:#fff; background: var(--b1);
+  border:none; padding:11px 22px; border-radius:999px; cursor:pointer; transition: transform .1s ease;
+}
+.btn-primary:hover{ transform: translateY(-1px); }
+#score-text{ font-family: var(--f-data); font-size:13px; color: var(--ink-faint); }
+.btn-ghost{
+  font-family: var(--f-body); font-weight:600; font-size:13px; color: var(--ink-soft); background:none;
+  border:1.5px solid var(--line); padding:9px 18px; border-radius:999px; cursor:pointer;
+}
+.btn-ghost:hover{ border-color: var(--ink-faint); }
+.ex-divider{
+  display:flex; align-items:center; gap:10px; margin:20px 0 16px;
+  font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.06em;
+  color: var(--ink-faint);
+}
+.ex-divider::before, .ex-divider::after{ content:""; flex:1; height:1px; background: var(--line); }
+.ex-divider.en-clase{ color: var(--b1); }
+.ex-divider.en-clase::before, .ex-divider.en-clase::after{ background: var(--b1-line); }
+.characters{ display:grid; gap:16px; }
+.char-card{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-lg);
+  padding:20px 22px; display:flex; gap:16px; align-items:flex-start;
+}
+.char-avatar{
+  flex:none; width:44px; height:44px; border-radius:50%; background: var(--b1-soft);
+  display:flex; align-items:center; justify-content:center; font-family: var(--f-display);
+  font-weight:600; font-size:17px; color: var(--b1);
+}
+.char-body{ flex:1; }
+.char-name{ font-family: var(--f-display); font-weight:600; font-size:17px; margin:0 0 4px; }
+.char-role{ font-family: var(--f-data); font-size:11.5px; text-transform:uppercase; letter-spacing:.05em; color: var(--ink-faint); margin:0 0 10px; }
+.char-facts{ display:flex; flex-wrap:wrap; gap:6px; margin-bottom:10px; }
+.fact-tag{
+  font-family: var(--f-data); font-size:12px; background: var(--paper-alt); color: var(--ink-soft);
+  padding:4px 10px; border-radius:999px;
+}
+.char-prompt{ font-size:14px; color: var(--ink-soft); }
+.char-input{
+  width:100%; margin-top:8px; font-family: var(--f-body); font-size:14.5px; color: var(--ink);
+  background: var(--paper); border:1px solid var(--line); border-radius: var(--r-sm);
+  padding:10px 12px; resize:vertical; min-height:44px;
+}
+.char-input:focus{ outline:none; border-color: var(--b1-line); background: var(--paper-raised); }
+.roleplay-panel{ background: var(--b2-soft); border:1px solid var(--b2-line); border-radius: var(--r-lg); padding:26px 28px; }
+.roleplay-panel .block-num{ background: var(--b2); }
+.scene-setup{
+  display:flex; gap:14px; align-items:flex-start; background: var(--paper-raised);
+  border:1px solid var(--b2-line); border-radius: var(--r-md); padding:14px 16px; margin-bottom:20px;
+}
+.scene-icon{ font-size:22px; flex:none; }
+.scene-text{ font-size:14px; color: var(--ink-soft); }
+.scene-text strong{ color: var(--ink); }
+.dialogue{ display:flex; flex-direction:column; gap:14px; }
+.scene-tabs{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:18px; }
+.scene-tab{
+  font-family: var(--f-data); font-size:12.5px; background: var(--paper-raised);
+  border:1.5px solid var(--b2-line); color: var(--ink-soft); padding:7px 14px;
+  border-radius:999px; cursor:pointer; transition: all .15s ease;
+}
+.scene-tab:hover{ border-color: var(--b2); }
+.scene-tab.active{ background: var(--b2); border-color: var(--b2); color:#fff; }
+.line{ display:flex; gap:12px; align-items:flex-start; }
+.line-avatar{
+  flex:none; width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  font-family: var(--f-display); font-weight:600; font-size:14px; color:#fff;
+}
+.line.friend .line-avatar{ background: var(--ink-faint); }
+.line.you .line-avatar{ background: var(--b2); }
+.line-body{ flex:1; }
+.line-name{ font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.05em; color: var(--ink-faint); margin:0 0 4px; }
+.line-bubble{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:12px 14px; font-size:14.5px; color: var(--ink);
+}
+.line.you .line-bubble{ background:#fff; border-color: var(--b2-line); }
+.line-input{
+  width:100%; font-family: var(--f-body); font-size:14.5px; color: var(--ink);
+  background:#fff; border:1px solid var(--b2-line); border-radius: var(--r-sm);
+  padding:10px 12px; resize:vertical; min-height:40px; margin-top:2px;
+}
+.line-input:focus{ outline:none; border-color: var(--b2); }
+.line-hint{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin-top:5px; }
+.roleplay-tip{
+  margin-top:22px; padding:14px 16px; background: var(--paper-raised); border:1px solid var(--b2-line);
+  border-radius: var(--r-md); font-size:13.5px; color: var(--ink-soft);
+}
+.roleplay-tip strong{ color: var(--ink); }
+.task-panel{ background: var(--family-soft); border:1px solid var(--family-line); border-radius: var(--r-lg); padding:26px 28px; }
+.task-panel .block-num{ background: var(--family); }
+textarea#final-task{
+  width:100%; min-height:110px; font-family: var(--f-body); font-size:15px; color: var(--ink);
+  background: var(--paper-raised); border:1px solid var(--family-line); border-radius: var(--r-md);
+  padding:14px 16px; resize:vertical; margin-top:14px;
+}
+textarea#final-task:focus{ outline:none; border-color: var(--family); }
+.task-footer{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:12px; flex-wrap:wrap; }
+#task-count{ font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); }
+.btn-secondary{
+  font-family: var(--f-body); font-weight:600; font-size:13.5px; color: var(--family); background:none;
+  border:1.5px solid var(--family-line); padding:9px 18px; border-radius:999px; cursor:pointer;
+}
+.saved-flag{ font-family: var(--f-data); font-size:12px; color: var(--b1); opacity:0; transition: opacity .3s ease; }
+.saved-flag.show{ opacity:1; }
+footer{
+  max-width:760px; margin:0 auto; padding:0 24px 60px; display:flex;
+  justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;
+  font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint);
+}
+footer a{ color: var(--b1); text-decoration:none; }
+footer a:hover{ text-decoration:underline; }
+@media (max-width:640px){
+  header{ padding:34px 18px 22px; }
+  main{ padding:8px 18px 90px; }
+  .panel, .task-panel{ padding:20px 18px; }
+  .char-card{ flex-direction:column; }
+  .form-row{ grid-template-columns:1fr; gap:4px; }
+}
+@media (prefers-reduced-motion: reduce){ *{ transition:none !important; } }
+</style>
+</head>
+<body>
+
+<header>
+  <p class="eyebrow"><span class="dot"></span>Clase 12 de 14 · L4 Cocina, familia y mudanza</p>
+  <h1>El <em>siguiente</em> paso hacia septiembre</h1>
+  <p class="lede">La mudanza ya está cerca. Hoy afinamos dos parejas de palabras que se confunden fácilmente: "mover" y "mudarse" (dos verbos distintos para dos ideas distintas), y "próximo" frente a "siguiente" (dos formas de hablar del futuro que no siempre son intercambiables). Con este vocabulario podrás explicar con precisión cómo va la mudanza y qué toca hacer después.</p>
+  <div class="meta-row">
+    <div>Duración<strong>50 min</strong></div>
+    <div>Gramática<strong>Verbo mover / mudarse + próximo vs siguiente</strong></div>
+    <div>Nivel<strong>A2</strong></div>
+  </div>
+</header>
+
+<main>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">1</span><h2>Mover y mudarse — no son lo mismo</h2><span class="time-tag">12 min</span></div>
+    <div class="panel">
+      <table class="conj-table">
+        <tr><td class="conj-pron">mover (yo)</td><td class="conj-form">muevo</td><td class="conj-ex">Muevo esta caja a la otra habitación.</td></tr>
+        <tr><td class="conj-pron">mover (nosotros)</td><td class="conj-form">movemos</td><td class="conj-ex">Movemos los muebles antes de que llegue la empresa.</td></tr>
+        <tr><td class="conj-pron">mudarse (yo)</td><td class="conj-form">me mudo</td><td class="conj-ex">Me mudo a la nueva casa en septiembre.</td></tr>
+        <tr><td class="conj-pron">mudarse (nosotros)</td><td class="conj-form">nos mudamos</td><td class="conj-ex">Nos mudamos el primer fin de semana de septiembre.</td></tr>
+        <tr><td class="conj-pron">la mudanza (sustantivo)</td><td class="conj-form">la mudanza</td><td class="conj-ex">La mudanza está prevista para el día 5.</td></tr>
+      </table>
+      <div class="note"><strong>La regla simple:</strong> "mover" es transitivo y físico — mueves un objeto de un sitio a otro (mover una silla, mover el sofá). "Mudarse" es reflexivo y se refiere a la persona que cambia de vivienda o de ciudad (nos mudamos, se muda). Nunca digas "me muevo a una casa nueva" para hablar de cambiar de vivienda — en español eso suena raro; lo correcto es "me mudo". "Mover" se reserva para objetos, muebles, o para el sentido más literal de desplazar algo.</div>
+
+      <div class="compare-wrap">
+        <p class="compare-title">Mover · mudarse — de un vistazo</p>
+        <div class="compare-grid2">
+          <div class="compare-col is-mover">
+            <div class="compare-head">
+              <span class="compare-verb">MOVER</span>
+              <span class="compare-sub">— desplazar un objeto</span>
+            </div>
+            <ul class="compare-list">
+              <li><strong>Mover una caja, un mueble:</strong> cambiar algo de lugar con las manos.
+                <em>Los transportistas movieron el armario con cuidado.</em>
+              </li>
+              <li><strong>No es reflexivo</strong> cuando hablamos de objetos: muevo la mesa (no "me muevo la mesa").</li>
+              <li><strong>También existe "moverse"</strong> para personas, pero significa desplazarse físicamente (moverse por la habitación), no cambiar de vivienda.</li>
+            </ul>
+          </div>
+          <div class="compare-col is-mudarse">
+            <div class="compare-head">
+              <span class="compare-verb">MUDARSE</span>
+              <span class="compare-sub">— cambiar de vivienda</span>
+            </div>
+            <ul class="compare-list">
+              <li><strong>Me mudo, nos mudamos:</strong> cambiar de casa, piso o ciudad.
+                <em>Nos mudamos a la casa nueva en septiembre.</em>
+              </li>
+              <li><strong>Siempre reflexivo:</strong> me mudo, te mudas, se muda, nos mudamos.</li>
+              <li><strong>El sustantivo es "la mudanza":</strong> la empresa de mudanzas, el día de la mudanza.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="compare-warning">
+          <strong>El truco para no dudar:</strong> si lo que cambia de sitio es un objeto (una caja, un mueble), es "mover". Si la que cambia de sitio eres tú, tu familia o vuestra vivienda, es "mudarse". Una frase que combina las dos: "Antes de mudarnos, tenemos que mover todos los muebles del salón."
+        </div>
+      </div>
+
+      <div class="form-mockup">
+        <p class="form-mockup-title">Próximo vs siguiente — misma idea de futuro, uso distinto</p>
+        <div class="form-row"><span class="form-label">la próxima semana</span><span class="form-field">próximo/a: desde AHORA, hacia el futuro</span></div>
+        <div class="form-row"><span class="form-label">el siguiente paso</span><span class="form-field">siguiente: lo que viene DESPUÉS de algo ya mencionado</span></div>
+        <div class="form-row"><span class="form-label">el próximo mes</span><span class="form-field">próximo/a va antes o después del sustantivo</span></div>
+        <div class="form-row"><span class="form-label">al día siguiente</span><span class="form-field">siguiente casi siempre va después del sustantivo</span></div>
+        <div class="form-row"><span class="form-label">¿Cuál es el siguiente?</span><span class="form-field">siguiente = el que sigue en una lista o proceso</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">2</span><h2>Vocabulario de la mudanza</h2><span class="time-tag">6 min</span></div>
+    <p class="vocab-hint">Toca cada tarjeta para ver un ejemplo.</p>
+    <div class="vocab-grid" id="vocab-grid"></div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">3</span><h2>Practica</h2><span class="time-tag">12 min</span></div>
+    <div class="panel">
+      <p class="vocab-hint" style="margin-bottom:14px;">16 frases: las primeras 8 se hacen en voz alta en clase; el resto queda como repaso para casa.</p>
+      <div id="exercises"></div>
+      <div class="check-bar">
+        <div style="display:flex; gap:10px;">
+          <button class="btn-primary" id="check-btn">Comprobar respuestas</button>
+          <button class="btn-ghost" id="reset-btn">Reiniciar</button>
+        </div>
+        <span id="score-text"></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">4</span><h2>Rumbo a septiembre — tarjetas</h2><span class="time-tag">8 min</span></div>
+    <p class="lede" style="margin-bottom:16px;">Cada tarjeta te da una situación relacionada con la mudanza. Responde usando mover, mudarse, próximo o siguiente según corresponda. Las primeras 4 se trabajan en clase; el resto queda como banco de repaso para casa.</p>
+    <div class="characters" id="characters"></div>
+  </section>
+
+  <section class="block roleplay-panel">
+    <div class="block-head"><span class="block-num">5</span><h2>Roleplay: 3 escenas de mudanza</h2><span class="time-tag">9 min</span></div>
+    <p class="lede" style="margin-bottom:16px;">Situaciones reales donde tendrás que hablar de la mudanza, coordinar con una empresa de transportes y explicar qué toca hacer a continuación. Elige una escena para practicar en clase; el resto queda como banco de repaso para casa.</p>
+    <div class="scene-tabs" id="scene-tabs"></div>
+    <div id="scene-container"></div>
+    <div class="roleplay-tip"><strong>En clase:</strong> practicaremos una escena en voz alta, cambiando de rol. El resto de escenas son para practicar por tu cuenta durante la semana.</div>
+  </section>
+
+  <section class="block task-panel">
+    <div class="block-head"><span class="block-num">6</span><h2 style="color:var(--family)">Tu tarea</h2><span class="time-tag">3 min</span></div>
+    <p style="margin:0; font-size:15px; color:var(--ink-soft);">Escribe 3 frases sobre tus próximos pasos antes de la mudanza. Usa "próximo/a" para hablar de lo que viene desde ahora (la próxima semana, el próximo fin de semana) y "siguiente" para hablar del paso que sigue a otro que ya has mencionado (el siguiente paso, al día siguiente).</p>
+    <textarea id="final-task" placeholder="La próxima semana... / El siguiente paso es... / Antes de mudarnos, tenemos que mover..."></textarea>
+    <div class="task-footer">
+      <span id="task-count">0 frases escritas</span>
+      <span class="saved-flag" id="saved-flag">Guardado ✓</span>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <span>Clase 11 · Trying new things (el verbo probar)</span>
+  <span>Próxima clase → Clase 13: Visiting Spain, not to Spain (visitar)</span>
+</footer>
+
+<script>
+/* ---------- VOCAB ---------- */
+const VOCAB = [
+  {front:"mudarse", back:"Nos mudamos a la nueva casa el primer fin de semana de septiembre."},
+  {front:"mover", back:"Vamos a mover el sofá antes de que lleguen los de la mudanza."},
+  {front:"la próxima semana", back:"La próxima semana empezamos a hacer las cajas."},
+  {front:"el siguiente paso", back:"Ya tenemos el NIE; el siguiente paso es el empadronamiento."},
+  {front:"la empresa de mudanzas", back:"He llamado a la empresa de mudanzas para pedir presupuesto."},
+  {front:"hacer las cajas", back:"Este fin de semana vamos a hacer las cajas de la cocina."},
+];
+
+const grid = document.getElementById('vocab-grid');
+VOCAB.forEach(v=>{
+  const card = document.createElement('div');
+  card.className = 'vocab-card';
+  card.setAttribute('role', 'button');
+  card.setAttribute('tabindex', '0');
+  card.setAttribute('aria-pressed', 'false');
+  card.setAttribute('aria-label', `${v.front}. Pulsa para ver un ejemplo.`);
+  card.innerHTML = `<div class="vocab-front">${v.front}</div><div class="vocab-back">${v.back}</div>`;
+  const toggle = ()=>{
+    const flipped = card.classList.toggle('flipped');
+    card.setAttribute('aria-pressed', String(flipped));
+  };
+  card.addEventListener('click', toggle);
+  card.addEventListener('keydown', (e)=>{
+    if(e.key === 'Enter' || e.key === ' '){
+      e.preventDefault();
+      toggle();
+    }
+  });
+  grid.appendChild(card);
+});
+
+/* ---------- EXERCISES ---------- */
+const EXERCISES = [
+  {"sentence":"En septiembre <span class=\"gap\">___</span> a la casa nueva.","options":["nos mudamos","nos movemos","movemos"],"answer":"nos mudamos"},
+  {"sentence":"¿Puedes ayudarme a <span class=\"gap\">___</span> esta caja tan pesada?","options":["mover","mudar","mudarme"],"answer":"mover"},
+  {"sentence":"Ya hemos hecho el NIE. El <span class=\"gap\">___</span> paso es el empadronamiento.","options":["siguiente","próximo","siguientemente"],"answer":"siguiente"},
+  {"sentence":"<span class=\"gap\">___</span> semana empezamos a hacer las cajas.","options":["La próxima","La siguiente","El próximo"],"answer":"La próxima"},
+  {"sentence":"Han llamado de la empresa de <span class=\"gap\">___</span> para confirmar la fecha.","options":["mudanzas","movidas","muebles"],"answer":"mudanzas"},
+  {"sentence":"Antes de <span class=\"gap\">___</span>, tenemos que vaciar el trastero.","options":["mudarnos","movernos","mudar"],"answer":"mudarnos"},
+  {"sentence":"¿Dónde <span class=\"gap\">___</span> el armario, a la izquierda o a la derecha?","options":["movemos","mudamos","nos mudamos"],"answer":"movemos"},
+  {"sentence":"Al día <span class=\"gap\">___</span> de llegar, ya teníamos que ir al colegio.","options":["siguiente","próximo","que viene"],"answer":"siguiente"},
+  {"sentence":"Mis padres <span class=\"gap\">___</span> a otra ciudad el año pasado.","options":["se mudaron","se movieron","movieron"],"answer":"se mudaron"},
+  {"sentence":"¿Cuál es el <span class=\"gap\">___</span> trámite que tenemos que hacer?","options":["siguiente","próximo mes","movido"],"answer":"siguiente"},
+  {"sentence":"El <span class=\"gap\">___</span> fin de semana viene mi familia a ayudarnos con las cajas.","options":["próximo","siguiente","que sigue"],"answer":"próximo"},
+  {"sentence":"No <span class=\"gap\">___</span> los muebles todavía, esperamos a que lleguen los transportistas.","options":["muevas","mudes","te mudes"],"answer":"muevas"},
+  {"sentence":"Cuando <span class=\"gap\">___</span>, tendremos un cuarto más para los niños.","options":["nos mudemos","nos movamos","movamos"],"answer":"nos mudemos"},
+  {"sentence":"En la lista de tareas, ¿qué viene <span class=\"gap\">___</span> de empaquetar la cocina?","options":["a continuación","el próximo","movido"],"answer":"a continuación"},
+  {"sentence":"Vamos a <span class=\"gap\">___</span> algunas cajas al garaje mientras esperamos.","options":["mover","mudar","mudarnos"],"answer":"mover"},
+  {"sentence":"El <span class=\"gap\">___</span> curso, mis hijos empezarán en el nuevo colegio.","options":["próximo","siguiente","que sigue"],"answer":"próximo"}
+];
+
+const exWrap = document.getElementById('exercises');
+EXERCISES.forEach((ex, i)=>{
+  if(i === 0){
+    const divider = document.createElement('div');
+    divider.className = 'ex-divider en-clase';
+    divider.textContent = 'en clase · ítems 1–8';
+    exWrap.appendChild(divider);
+  }
+  if(i === 8){
+    const divider = document.createElement('div');
+    divider.className = 'ex-divider';
+    divider.textContent = 'para casa · repaso opcional';
+    exWrap.appendChild(divider);
+  }
+  const el = document.createElement('div');
+  el.className = 'exercise';
+  el.dataset.answer = ex.answer;
+  el.dataset.index = i;
+  el.innerHTML = `
+    <div class="ex-sentence">${i+1}. ${ex.sentence}</div>
+    <div class="ex-options">
+      ${ex.options.map(o=>`<button class="opt-btn" data-value="${o}">${o}</button>`).join('')}
+    </div>
+  `;
+  exWrap.appendChild(el);
+
+  el.querySelectorAll('.opt-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      if(practiceState.checked) return;
+      el.querySelectorAll('.opt-btn').forEach(b=>b.classList.remove('picked'));
+      btn.classList.add('picked');
+      practiceState.picked[i] = btn.dataset.value;
+      guardarPractica();
+    });
+  });
+});
+
+/* ---------- PERSISTENCIA PRÁCTICA ---------- */
+const PRACTICE_STORAGE_KEY = 'hannah-clase12-practica';
+let practiceState = { picked: {}, checked: false };
+
+async function guardarPractica(){
+  if (!window.storage) return;
+  try{
+    await window.storage.set(PRACTICE_STORAGE_KEY, JSON.stringify(practiceState));
+  }catch(e){}
+}
+
+async function cargarPractica(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(PRACTICE_STORAGE_KEY);
+    if (res && typeof res.value === 'string'){
+      const parsed = JSON.parse(res.value);
+      if (parsed && typeof parsed === 'object'){
+        practiceState = { picked: parsed.picked || {}, checked: !!parsed.checked };
+      }
+    }
+  }catch(e){}
+}
+
+cargarPractica().then(()=>{
+  document.querySelectorAll('.exercise').forEach(el=>{
+    const i = parseInt(el.dataset.index);
+    const answer = el.dataset.answer;
+    const pickedValue = practiceState.picked[i];
+    if(!pickedValue) return;
+    const pickedBtn = el.querySelector(`.opt-btn[data-value="${CSS.escape(pickedValue)}"]`);
+    if(practiceState.checked){
+      el.querySelectorAll('.opt-btn').forEach(b=>{
+        b.disabled = true;
+        if(b.dataset.value === answer) b.classList.add('correct');
+        else if(b === pickedBtn) b.classList.add('wrong');
+      });
+    } else if(pickedBtn){
+      pickedBtn.classList.add('picked');
+    }
+  });
+  if(practiceState.checked){
+    let correct = 0;
+    document.querySelectorAll('.exercise').forEach(el=>{
+      const i = parseInt(el.dataset.index);
+      if(practiceState.picked[i] === el.dataset.answer) correct++;
+    });
+    document.getElementById('score-text').textContent = `${correct} / ${EXERCISES.length} correctas`;
+  }
+});
+
+document.getElementById('check-btn').addEventListener('click', ()=>{
+  let correct = 0;
+  document.querySelectorAll('.exercise').forEach(el=>{
+    const answer = el.dataset.answer;
+    const picked = el.querySelector('.opt-btn.picked');
+    el.querySelectorAll('.opt-btn').forEach(b=>{
+      b.disabled = true;
+      if(b.dataset.value === answer) b.classList.add('correct');
+      else if(b === picked) b.classList.add('wrong');
+    });
+    if(picked && picked.dataset.value === answer) correct++;
+  });
+  document.getElementById('score-text').textContent = `${correct} / ${EXERCISES.length} correctas`;
+  practiceState.checked = true;
+  guardarPractica();
+});
+
+document.getElementById('reset-btn').addEventListener('click', ()=>{
+  document.querySelectorAll('.exercise').forEach(el=>{
+    el.querySelectorAll('.opt-btn').forEach(b=>{
+      b.disabled = false;
+      b.classList.remove('picked','correct','wrong');
+    });
+  });
+  document.getElementById('score-text').textContent = '';
+  practiceState = { picked: {}, checked: false };
+  guardarPractica();
+});
+
+/* ---------- CHARACTER CARDS ---------- */
+const CHARACTERS = [
+  {"name":"El día de la mudanza","role":"Todo listo para septiembre","facts":["viene la empresa de mudanzas","hay que mover los muebles grandes primero","los niños ayudan con las cajas pequeñas"],"prompt":"Cuenta cómo va a ser el día de la mudanza, usando mover y mudarse:"},
+  {"name":"La lista de trámites","role":"Un paso detrás de otro","facts":["ya tienen el NIE","falta el empadronamiento","después toca matricular a los niños"],"prompt":"Explica cuál es el siguiente paso de la lista, usando siguiente:"},
+  {"name":"El calendario de agosto","role":"Lo que viene desde ahora","facts":["esta semana hacen las cajas","la próxima semana llega el camión","en dos semanas ya viven en la casa nueva"],"prompt":"Cuenta los planes usando próximo/a semana:"},
+  {"name":"El sofá del salón","role":"Un mueble pesado","facts":["no cabe por la puerta principal","hay que desmontarlo","los transportistas tienen experiencia"],"prompt":"Explica cómo van a mover este mueble, usando mover:"},
+  {"name":"El colegio nuevo","role":"El curso que empieza","facts":["empieza el próximo curso","el primer día es el siguiente lunes tras la mudanza","los niños están nerviosos y emocionados"],"prompt":"Habla del colegio nuevo combinando próximo y siguiente:"},
+  {"name":"El presupuesto de la mudanza","role":"Comparar empresas","facts":["pidieron tres presupuestos distintos","el siguiente paso es elegir uno","quieren confirmarlo esta semana"],"prompt":"Cuenta el proceso de elegir empresa, usando siguiente:"},
+  {"name":"La despedida del barrio","role":"Antes de mudarse","facts":["se despiden de los vecinos","prometen volver de visita","se mudan al barrio de al lado, no muy lejos"],"prompt":"Cuenta cómo se despiden antes de mudarse, usando mudarse:"},
+  {"name":"El cuarto de los niños","role":"Organizar el espacio nuevo","facts":["hay que mover las camas primero","después mover el resto de muebles","el próximo fin de semana lo organizan del todo"],"prompt":"Explica el plan para el cuarto, combinando mover y próximo/a:"}
+];
+
+const charWrap = document.getElementById('characters');
+CHARACTERS.forEach((c, i)=>{
+  if(i === 0){
+    const divider = document.createElement('div');
+    divider.className = 'ex-divider en-clase';
+    divider.textContent = 'en clase · tarjetas 1–4';
+    charWrap.appendChild(divider);
+  }
+  if(i === 4){
+    const divider = document.createElement('div');
+    divider.className = 'ex-divider';
+    divider.textContent = 'para casa · banco de repaso';
+    charWrap.appendChild(divider);
+  }
+  const card = document.createElement('div');
+  card.className = 'char-card';
+  card.innerHTML = `
+    <div class="char-avatar">${c.name.charAt(0)}</div>
+    <div class="char-body">
+      <p class="char-name">${c.name}</p>
+      <p class="char-role">${c.role}</p>
+      <div class="char-facts">${c.facts.map(f=>`<span class="fact-tag">${f}</span>`).join('')}</div>
+      <p class="char-prompt">${c.prompt}</p>
+      <textarea class="char-input" rows="2" placeholder="Nos mudamos... / Vamos a mover... / La próxima semana... / El siguiente paso..." data-char-idx="${i}"></textarea>
+    </div>
+  `;
+  charWrap.appendChild(card);
+});
+
+/* ---------- PERSISTENCIA PERSONAJES ---------- */
+const CHAR_STORAGE_KEY = 'hannah-clase12-personajes';
+let charState = {};
+let charTimer = null;
+
+async function guardarChars(){
+  if (!window.storage) return;
+  try{
+    await window.storage.set(CHAR_STORAGE_KEY, JSON.stringify(charState));
+  }catch(e){}
+}
+
+async function cargarChars(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(CHAR_STORAGE_KEY);
+    if (res && typeof res.value === 'string'){
+      const parsed = JSON.parse(res.value);
+      if (parsed && typeof parsed === 'object') charState = parsed;
+    }
+  }catch(e){}
+}
+
+cargarChars().then(()=>{
+  document.querySelectorAll('.char-input').forEach(ta=>{
+    const idx = parseInt(ta.dataset.charIdx);
+    if (charState[idx] !== undefined) ta.value = charState[idx];
+    ta.addEventListener('input', ()=>{
+      charState[idx] = ta.value;
+      clearTimeout(charTimer);
+      charTimer = setTimeout(guardarChars, 800);
+    });
+  });
+});
+
+/* ---------- ROLEPLAY SCENES ---------- */
+const SCENES = [
+  {"id":"empresa_mudanzas","tab":"Llamada a la empresa de mudanzas","icon":"📞","setup":"Llamas a una empresa de mudanzas para explicar cuándo os mudáis y qué necesitáis.","lines":[
+    {"who":"friend","name":"Empresa","text":"Buenos días, mudanzas García, ¿en qué puedo ayudarle?"},
+    {"who":"you","hint":"Explica que os mudáis en septiembre y pide información."},
+    {"who":"friend","name":"Empresa","text":"¿Para qué fecha exacta necesita el servicio?"},
+    {"who":"you","hint":"Da la fecha y menciona qué muebles hay que mover (sofá, armarios...)."},
+    {"who":"friend","name":"Empresa","text":"Entendido. ¿Cuál sería el siguiente paso para reservar la fecha?"},
+    {"who":"you","hint":"Pregunta cuál es el siguiente paso del proceso."},
+    {"who":"friend","name":"Empresa","text":"Le enviamos un presupuesto esta semana y usted lo confirma la próxima."},
+    {"who":"you","hint":"Confirma que esperas el presupuesto y despídete."}
+  ]},
+  {"id":"vecina_despedida","tab":"Despedida de una vecina","icon":"👋","setup":"Te despides de una vecina antes de mudaros, contándole los planes.","lines":[
+    {"who":"friend","name":"Vecina","text":"He oído que os mudáis pronto, ¿es verdad?"},
+    {"who":"you","hint":"Confirma la mudanza y di cuándo os mudáis, usando mudarse."},
+    {"who":"friend","name":"Vecina","text":"¡Qué pena! ¿Y está todo listo ya?"},
+    {"who":"you","hint":"Cuenta qué falta por hacer (mover muebles, hacer cajas...)."},
+    {"who":"friend","name":"Vecina","text":"¿Cuál es el siguiente paso antes del gran día?"},
+    {"who":"you","hint":"Explica el siguiente paso del proceso."},
+    {"who":"friend","name":"Vecina","text":"Espero que vengáis a visitarnos la próxima primavera."},
+    {"who":"you","hint":"Responde usando próxima/o en tu respuesta."}
+  ]},
+  {"id":"coordinar_familia","tab":"Coordinar con la familia","icon":"👨‍👩‍👧","setup":"Hablas con tu pareja o un familiar sobre cómo organizar los próximos días de la mudanza.","lines":[
+    {"who":"friend","name":"Pareja","text":"¿Qué toca hacer hoy antes de la mudanza?"},
+    {"who":"you","hint":"Explica qué muebles hay que mover hoy, usando mover."},
+    {"who":"friend","name":"Pareja","text":"Vale. ¿Y cuál es el siguiente paso después de eso?"},
+    {"who":"you","hint":"Explica el siguiente paso, usando siguiente."},
+    {"who":"friend","name":"Pareja","text":"¿Cuándo llega el camión de la mudanza?"},
+    {"who":"you","hint":"Confirma la fecha usando próximo/a."},
+    {"who":"friend","name":"Pareja","text":"¿Nos mudamos definitivamente el sábado, entonces?"},
+    {"who":"you","hint":"Confirma la mudanza usando mudarse."}
+  ]}
+];
+
+const sceneTabs = document.getElementById('scene-tabs');
+const sceneContainer = document.getElementById('scene-container');
+let activeScene = 0;
+
+function renderTabs(){
+  sceneTabs.innerHTML = SCENES.map((s,i)=>
+    `<button class="scene-tab${i===activeScene?' active':''}" data-idx="${i}">${s.icon} ${s.tab}</button>`
+  ).join('');
+  sceneTabs.querySelectorAll('.scene-tab').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      activeScene = parseInt(btn.dataset.idx, 10);
+      renderTabs();
+      renderScene();
+    });
+  });
+}
+
+/* ---------- PERSISTENCIA ROLEPLAY ---------- */
+const ROLEPLAY_STORAGE_KEY = 'hannah-clase12-roleplay';
+let rpState = {};
+let rpTimer = null;
+
+async function guardarRP(){
+  if (!window.storage) return;
+  try{
+    await window.storage.set(ROLEPLAY_STORAGE_KEY, JSON.stringify(rpState));
+  }catch(e){}
+}
+
+async function cargarRP(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(ROLEPLAY_STORAGE_KEY);
+    if (res && typeof res.value === 'string'){
+      const parsed = JSON.parse(res.value);
+      if (parsed && typeof parsed === 'object') rpState = parsed;
+    }
+  }catch(e){}
+}
+
+function renderScene(){
+  const scene = SCENES[activeScene];
+  let lineIdx = 0;
+  const linesHtml = scene.lines.map((l)=>{
+    if(l.who === 'friend'){
+      return `
+        <div class="line friend">
+          <div class="line-avatar">${l.name.charAt(0)}</div>
+          <div class="line-body">
+            <p class="line-name">${l.name}</p>
+            <div class="line-bubble">${l.text}</div>
+          </div>
+        </div>`;
+    } else {
+      const key = `${activeScene}-${lineIdx}`;
+      lineIdx++;
+      const saved = rpState[key] || '';
+      return `
+        <div class="line you">
+          <div class="line-avatar">Tú</div>
+          <div class="line-body">
+            <p class="line-name">Tú</p>
+            <textarea class="line-input" rows="2" placeholder="Escribe tu respuesta usando mover, mudarse, próximo o siguiente..." data-rp-key="${key}">${saved}</textarea>
+            <p class="line-hint">${l.hint}</p>
+          </div>
+        </div>`;
+    }
+  }).join('');
+
+  sceneContainer.innerHTML = `
+    <div class="scene-setup">
+      <span class="scene-icon">${scene.icon}</span>
+      <p class="scene-text"><strong>${scene.tab}:</strong> ${scene.setup}</p>
+    </div>
+    <div class="dialogue">${linesHtml}</div>
+  `;
+
+  document.querySelectorAll('.line-input').forEach(ta=>{
+    const key = ta.dataset.rpKey;
+    ta.addEventListener('input', ()=>{
+      rpState[key] = ta.value;
+      clearTimeout(rpTimer);
+      rpTimer = setTimeout(guardarRP, 800);
+    });
+  });
+}
+
+cargarRP().then(()=>{
+  renderTabs();
+  renderScene();
+});
+
+/* ---------- FINAL TASK (autoguardado) ---------- */
+const TASK_STORAGE_KEY = 'hannah-clase12-tarea';
+const taskArea = document.getElementById('final-task');
+const taskCount = document.getElementById('task-count');
+const savedFlag = document.getElementById('saved-flag');
+
+async function cargarTarea(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(TASK_STORAGE_KEY);
+    if (res && typeof res.value === 'string') taskArea.value = res.value;
+  }catch(e){}
+  updateCount();
+}
+
+function updateCount(){
+  const lines = taskArea.value.split('\n').map(l=>l.trim()).filter(l=>l.length>0);
+  taskCount.textContent = `${lines.length} frase${lines.length===1?'':'s'} escrita${lines.length===1?'':'s'}`;
+}
+
+let taskTimer = null;
+taskArea.addEventListener('input', ()=>{
+  updateCount();
+  clearTimeout(taskTimer);
+  taskTimer = setTimeout(async ()=>{
+    if (!window.storage) return;
+    try{
+      await window.storage.set(TASK_STORAGE_KEY, taskArea.value);
+      savedFlag.textContent = 'Guardado ✓';
+      savedFlag.classList.add('show');
+      setTimeout(()=>{ savedFlag.classList.remove('show'); }, 1800);
+    }catch(e){}
+  }, 800);
+});
+
+updateCount();
+cargarTarea();
+</script>
+</body>
+</html>
