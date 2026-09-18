@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Class 13 · Repaso: condicionales y simulacro de entrevista</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Space+Mono:wght@400;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+
+/* ╔══════════════════════════════════════════════════════════════╗
+   ║  ESCOLAR × NOTHING                                            ║
+   ║  Class 13 · L3R Repaso 2: condicionales y simulacro entrevista ║
+   ╚══════════════════════════════════════════════════════════════╝ */
+
+:root{
+  --paper:        #F4EFE4;
+  --paper-deep:   #EAE3D2;
+  --glass:        rgba(255,255,255,0.55);
+  --glass-strong: rgba(255,255,255,0.75);
+  --ink:          #23291F;
+  --ink-soft:     #565F52;
+  --ink-faint:    #8B9184;
+  --line:         rgba(35,41,31,0.10);
+  --line-strong:  rgba(35,41,31,0.20);
+
+  /* roles semánticos de esta clase — repaso de condicionales:
+     b1 violeta = condicional/subjuntivo (tema del día), b2 azul = simulacro de entrevista
+     (roleplay), family ámbar = tarea, ok verde = acierto */
+  --b1:      #6B4FA0;  --b1-soft: rgba(107,79,160,0.10);   --b1-line: rgba(107,79,160,0.30);
+  --b2:      #2F6FED;  --b2-soft: rgba(47,111,237,0.10);  --b2-line: rgba(47,111,237,0.30);
+  --family:  #DB8A2E;  --family-soft: rgba(219,138,46,0.10); --family-line: rgba(219,138,46,0.30);
+  --ok:      #2E9E6B;  --ok-soft: rgba(46,158,107,0.10);  --ok-line: rgba(46,158,107,0.30);
+
+  --f-display: 'Fraunces', Georgia, serif;
+  --f-body:    'IBM Plex Sans', system-ui, sans-serif;
+  --f-data:    'Space Mono', ui-monospace, monospace;
+
+  --r-sm: 8px;
+  --r-md: 16px;
+  --r-lg: 24px;
+
+  --blur: 22px;
+  --spring: cubic-bezier(.34,1.56,.64,1);
+  --shadow-glass: 0 8px 32px rgba(35,41,31,0.06), 0 1px 2px rgba(35,41,31,0.05);
+}
+
+*{ box-sizing:border-box; }
+html{ scroll-behavior:smooth; }
+body{
+  margin:0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--f-body);
+  line-height:1.6;
+  padding: 0 0 100px;
+  position: relative;
+  min-height: 100vh;
+}
+body::before{
+  content:"";
+  position: fixed; inset:0;
+  background-image: radial-gradient(circle, rgba(35,41,31,0.09) 1.5px, transparent 1.5px);
+  background-size: 28px 28px;
+  pointer-events:none; z-index:0;
+}
+body::after{
+  content:"";
+  position: fixed; inset:0;
+  background: radial-gradient(ellipse 70% 50% at 50% -10%, var(--paper-deep), transparent 60%);
+  pointer-events:none; z-index:0;
+}
+::selection{ background: var(--b1-soft); }
+
+.page{ max-width: 760px; margin:0 auto; padding: 56px 20px 0; position:relative; z-index:1; }
+
+/* ---------- HERO ---------- */
+.hero{
+  background: var(--glass);
+  backdrop-filter: blur(var(--blur)); -webkit-backdrop-filter: blur(var(--blur));
+  border:1px solid rgba(255,255,255,0.6);
+  border-radius: var(--r-lg);
+  padding: 44px 40px 36px;
+  box-shadow: var(--shadow-glass);
+  position:relative; overflow:hidden; margin-bottom: 24px;
+}
+.hero-eyebrow{
+  font-family: var(--f-data); font-size:12px; letter-spacing:.16em; text-transform:uppercase;
+  color: var(--ink-faint); margin:0 0 16px; display:flex; align-items:center; gap:10px;
+}
+.dot-live{ width:7px; height:7px; border-radius:50%; background: var(--b1); box-shadow: 0 0 0 4px var(--b1-soft); animation: pulse 2.6s ease-in-out infinite; }
+@keyframes pulse{ 0%,100%{opacity:1;} 50%{opacity:0.35;} }
+
+.hero h1{ font-family: var(--f-display); font-weight:500; font-size:clamp(28px,5vw,44px); margin:0 0 12px; letter-spacing:-.01em; line-height:1.08; }
+.hero h1 em{ font-style:italic; color: var(--b1); }
+.hero p.desc{ font-size:15px; color: var(--ink-soft); max-width:60ch; margin:0; }
+
+.meta-row{ display:flex; flex-wrap:wrap; gap:20px; margin-top:26px; font-family: var(--f-data); font-size:12px; color: var(--ink-faint); }
+.meta-row strong{ display:block; color: var(--ink); font-size:14.5px; font-weight:500; font-family: var(--f-display); margin-top:3px; }
+
+/* ---------- SECTION HEAD ---------- */
+.section{ margin-top: 52px; }
+.section-head{ display:flex; align-items:baseline; gap:12px; margin-bottom:18px; }
+.section-num{
+  font-family: var(--f-data); font-size:12px; color:#fff; background: var(--b1);
+  width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex:none;
+}
+.section-head h2{ font-family: var(--f-display); font-weight:500; font-style:italic; font-size:22px; margin:0; }
+.time-tag{
+  font-family: var(--f-data); font-size:11px; color: var(--ink-faint);
+  background: var(--glass-strong); border:1px solid var(--line); padding:3px 10px; border-radius:999px; margin-left:auto; flex:none;
+}
+
+/* ---------- GLASS PANEL ---------- */
+.glass-panel{
+  background: var(--glass);
+  backdrop-filter: blur(var(--blur)); -webkit-backdrop-filter: blur(var(--blur));
+  border: 1px solid rgba(255,255,255,0.6);
+  border-radius: var(--r-lg);
+  padding: 26px 28px;
+  box-shadow: var(--shadow-glass);
+}
+.glass-panel[data-role="b1"]{ border-color: var(--b1-line); background: linear-gradient(var(--b1-soft), var(--b1-soft)), var(--glass); }
+.glass-panel[data-role="b2"]{ border-color: var(--b2-line); background: linear-gradient(var(--b2-soft), var(--b2-soft)), var(--glass); }
+.glass-panel[data-role="family"]{ border-color: var(--family-line); background: linear-gradient(var(--family-soft), var(--family-soft)), var(--glass); }
+.glass-panel[data-role="ok"]{ border-color: var(--ok-line); background: linear-gradient(var(--ok-soft), var(--ok-soft)), var(--glass); }
+.glass-panel p{ font-size:15px; color: var(--ink-soft); margin:0 0 14px; }
+.glass-panel p:last-of-type{ margin-bottom:0; }
+.glass-panel p strong{ color: var(--ink); font-weight:600; }
+
+/* ---------- CONJUGATION TABLE ---------- */
+.conj-table-wrap{ overflow-x:auto; margin:4px 0 0; }
+table.conj{ width:100%; border-collapse:collapse; font-size:14.5px; min-width:420px; }
+table.conj td{ padding:11px 8px; border-bottom:1px dashed var(--line); }
+table.conj tr:last-child td{ border-bottom:none; }
+table.conj td.pron{ font-family: var(--f-data); color: var(--ink-faint); font-size:12px; width:150px; }
+table.conj td.form{ font-family: var(--f-display); font-weight:600; font-size:20px; color: var(--b1); }
+table.conj td.ex{ color: var(--ink-soft); font-size:13.5px; }
+
+.note{ margin-top:16px; padding:14px 16px; background: linear-gradient(var(--b1-soft),var(--b1-soft)), var(--glass); border:1px solid var(--b1-line); border-radius: var(--r-md); font-size:13.5px; color: var(--ink-soft); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+.note strong{ color: var(--ink); }
+.warning-box{ margin-top:16px; padding:14px 16px; background: linear-gradient(var(--family-soft),var(--family-soft)), var(--glass); border:1px solid var(--family-line); border-radius: var(--r-md); font-size:13.5px; color: var(--ink-soft); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+.warning-box strong{ color:#96591A; }
+
+/* ---------- USES GRID (usos del condicional) ---------- */
+.uses-grid{ display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:18px; }
+@media (max-width:560px){ .uses-grid{ grid-template-columns:1fr; } }
+.use-card{
+  border-radius: var(--r-md); padding:16px 18px; border:1px solid var(--b1-line);
+  background: linear-gradient(var(--b1-soft), var(--b1-soft)), var(--glass);
+  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+}
+.use-tag{ font-family: var(--f-data); font-size:10px; text-transform:uppercase; letter-spacing:.06em; color: var(--b1); margin:0 0 6px; }
+.use-trigger{ font-family: var(--f-display); font-weight:600; font-size:16.5px; color: var(--ink); margin:0 0 6px; }
+.use-ex{ font-size:13px; color: var(--ink-soft); }
+
+/* ---------- VOCAB / TAP CARDS ---------- */
+.vocab-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:12px; margin-top:4px; }
+.tap-card{
+  background: var(--glass); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  border:1px solid rgba(255,255,255,0.5); border-radius: var(--r-md);
+  padding:14px 16px; cursor:pointer; min-height:78px;
+  display:flex; flex-direction:column; justify-content:center;
+  transition: border-color .15s ease, transform .18s var(--spring);
+}
+.tap-card:hover{ border-color: var(--b1-line); transform: translateY(-2px); }
+.tap-card:active{ transform: scale(.97); transition-duration: .08s; }
+.tap-card:focus-visible{ outline:2px solid var(--b1); outline-offset:2px; }
+.tap-front{ font-family: var(--f-body); font-weight:600; font-size:15px; }
+.tap-back{ display:none; font-family: var(--f-data); font-size:12px; color: var(--ink-faint); margin-top:6px; }
+.tap-card.flipped .tap-back{ display:block; }
+.tap-card.flipped{ background: linear-gradient(var(--b1-soft),var(--b1-soft)), var(--glass); border-color: var(--b1-line); }
+.vocab-hint{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin:10px 2px 16px; }
+
+/* ---------- QUIZ / OPCIONES ---------- */
+.exercise{ margin-bottom:18px; }
+.exercise:last-of-type{ margin-bottom:0; }
+.ex-sentence{ font-size:15px; margin-bottom:10px; color: var(--ink); }
+.ex-sentence .gap{ font-family: var(--f-data); color: var(--ink-faint); }
+.ex-options{ display:flex; flex-wrap:wrap; gap:8px; }
+.opt-btn{
+  font-family: var(--f-body); font-size:14px; background: var(--glass-strong); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  border:1.5px solid var(--line-strong); color: var(--ink); padding:8px 17px; border-radius:999px; cursor:pointer;
+  transition: transform .18s var(--spring), background .15s ease, border-color .15s ease, color .15s ease;
+}
+.opt-btn:hover{ border-color: var(--ink-faint); }
+.opt-btn:active{ transform: scale(.94); transition-duration: .08s; }
+.opt-btn.picked{ background: linear-gradient(var(--b1-soft),var(--b1-soft)), var(--glass-strong); border-color: var(--b1); color: var(--b1); }
+.opt-btn.correct{ background: linear-gradient(var(--ok-soft),var(--ok-soft)), var(--glass-strong); border-color: var(--ok); color: var(--ok); }
+.opt-btn.wrong{ background: linear-gradient(var(--family-soft),var(--family-soft)), var(--glass-strong); border-color: var(--family); color: var(--family); text-decoration: line-through; }
+.opt-btn:disabled{ cursor:default; }
+.check-bar{ display:flex; align-items:center; justify-content:space-between; gap:16px; margin-top:20px; padding-top:18px; border-top:1px dashed var(--line); flex-wrap:wrap; }
+
+.btn-primary{
+  font-family: var(--f-body); font-weight:600; font-size:14px; color:#fff; background: var(--b1);
+  border:none; padding:11px 22px; border-radius:999px; cursor:pointer;
+  transition: transform .18s var(--spring);
+}
+.btn-primary:hover{ transform: translateY(-1px); }
+.btn-primary:active{ transform: scale(.95); transition-duration: .08s; }
+.btn-ghost{
+  font-family: var(--f-body); font-weight:600; font-size:13px; color: var(--ink-soft); background:none;
+  border:1.5px solid var(--line); padding:9px 18px; border-radius:999px; cursor:pointer;
+  transition: transform .18s var(--spring), border-color .15s ease;
+}
+.btn-ghost:hover{ border-color: var(--ink-faint); }
+.btn-ghost:active{ transform: scale(.95); transition-duration: .08s; }
+#score-text{ font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); }
+
+/* ---------- CHARACTER / PROMPT CARDS ---------- */
+.q-bank{ display:grid; gap:10px; margin-top:4px; }
+.q-card{
+  background: var(--glass); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  border:1px solid rgba(255,255,255,0.6); border-radius: var(--r-md);
+  padding:14px 16px; display:flex; gap:12px; align-items:flex-start;
+}
+.q-num{
+  font-family: var(--f-data); font-size:11px; color:#fff; background: var(--b1);
+  width:20px; height:20px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex:none; margin-top:2px;
+}
+.q-text{ font-size:14.5px; color: var(--ink); }
+
+.characters{ display:grid; gap:16px; margin-top:20px; }
+.char-card{
+  background: var(--glass); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  border:1px solid rgba(255,255,255,0.6); border-radius: var(--r-lg);
+  padding:20px 22px; display:flex; gap:16px; align-items:flex-start;
+}
+.char-avatar{
+  flex:none; width:44px; height:44px; border-radius:50%; background: linear-gradient(var(--b1-soft),var(--b1-soft)), var(--glass);
+  display:flex; align-items:center; justify-content:center; font-family: var(--f-display);
+  font-weight:600; font-size:17px; color: var(--b1);
+}
+.char-body{ flex:1; }
+.char-name{ font-family: var(--f-display); font-weight:600; font-size:17px; margin:0 0 4px; }
+.char-role{ font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.05em; color: var(--ink-faint); margin:0 0 10px; }
+.char-facts{ display:flex; flex-wrap:wrap; gap:6px; margin-bottom:10px; }
+.fact-tag{
+  font-family: var(--f-data); font-size:11.5px; background: rgba(255,255,255,0.5); border:1px solid var(--line); color: var(--ink-soft);
+  padding:4px 10px; border-radius:999px;
+}
+.char-prompt{ font-size:14px; color: var(--ink-soft); }
+.char-input{
+  width:100%; margin-top:8px; font-family: var(--f-body); font-size:14.5px; color: var(--ink);
+  background: rgba(255,255,255,0.6); border:1px solid var(--line-strong); border-radius: var(--r-sm);
+  padding:10px 12px; resize:vertical; min-height:44px;
+}
+.char-input:focus{ outline:none; border-color: var(--b1); background:#fff; }
+
+/* ---------- ROLEPLAY / SCENE TABS (simulacro de entrevista) ---------- */
+.scene-tabs{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:18px; }
+.scene-tab{
+  font-family: var(--f-data); font-size:12px; text-transform:uppercase; letter-spacing:.04em; font-weight:700;
+  background: rgba(255,255,255,0.4); border:1.5px solid var(--b2-line); color: var(--ink-soft); padding:7px 15px;
+  border-radius:999px; cursor:pointer;
+  transition: transform .18s var(--spring), background .15s ease, border-color .15s ease, color .15s ease;
+}
+.scene-tab:hover{ border-color: var(--b2); }
+.scene-tab:active{ transform: scale(.95); transition-duration: .08s; }
+.scene-tab.active{ background: var(--b2); border-color: var(--b2); color:#fff; }
+
+.trigger-card{
+  background: var(--glass-strong); border:1px solid rgba(255,255,255,0.6); border-radius: var(--r-md);
+  padding:20px 22px; backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+}
+.trigger-word{ font-family: var(--f-display); font-weight:600; font-style:italic; font-size:22px; color: var(--b2); margin:0 0 6px; }
+.trigger-sub{ font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.05em; color: var(--ink-faint); margin:0 0 14px; }
+.trigger-task{ font-size:14.5px; color: var(--ink-soft); margin:0 0 12px; }
+.trigger-input{
+  width:100%; font-family: var(--f-body); font-size:14.5px; color: var(--ink);
+  background:#fff; border:1px solid var(--b2-line); border-radius: var(--r-sm);
+  padding:10px 12px; resize:vertical; min-height:44px;
+}
+.trigger-input:focus{ outline:none; border-color: var(--b2); }
+
+.roleplay-tip{
+  margin-top:22px; padding:14px 16px; background: var(--glass-strong); border:1px solid var(--b2-line);
+  border-radius: var(--r-md); font-size:13.5px; color: var(--ink-soft); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+}
+.roleplay-tip strong{ color: var(--ink); }
+
+/* ---------- FINAL TASK ---------- */
+textarea#final-task{
+  width:100%; min-height:130px; font-family: var(--f-body); font-size:15px; color: var(--ink);
+  background: rgba(255,255,255,0.6); border:1px solid var(--family-line); border-radius: var(--r-md);
+  padding:14px 16px; resize:vertical; margin-top:14px;
+}
+textarea#final-task:focus{ outline:none; border-color: var(--family); background:#fff; }
+.task-footer{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:12px; flex-wrap:wrap; }
+#task-count{ font-family: var(--f-data); font-size:12px; color: var(--ink-faint); }
+.btn-secondary{
+  font-family: var(--f-body); font-weight:600; font-size:13.5px; color:#96591A; background:none;
+  border:1.5px solid var(--family-line); padding:9px 18px; border-radius:999px; cursor:pointer;
+  transition: transform .18s var(--spring), border-color .15s ease;
+}
+.btn-secondary:hover{ border-color: var(--family); }
+.btn-secondary:active{ transform: scale(.95); transition-duration: .08s; }
+.saved-flag{ font-family: var(--f-data); font-size:11.5px; color: var(--ok); opacity:0; transition: opacity .3s ease; }
+.saved-flag.show{ opacity:1; }
+
+/* ---------- RESOURCES ---------- */
+.resources-grid{ display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:16px; }
+@media (max-width:560px){ .resources-grid{ grid-template-columns:1fr; } }
+.resource-card{
+  background: var(--glass); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  border:1px solid var(--family-line); border-radius: var(--r-md); padding:14px 16px;
+}
+.resource-tag{ font-family: var(--f-data); font-size:10.5px; text-transform:uppercase; letter-spacing:.06em; color:#96591A; margin:0 0 6px; }
+.resource-title{ font-family: var(--f-display); font-weight:600; font-size:15px; margin:0 0 4px; }
+.resource-desc{ font-size:13px; color: var(--ink-soft); margin:0; }
+
+footer{
+  max-width:760px; margin:0 auto; padding:0 20px; display:flex;
+  justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;
+  font-family: var(--f-data); font-size:12px; color: var(--ink-faint);
+  margin-top:64px; padding-top:28px; border-top:1px solid var(--line);
+}
+
+@media (max-width:600px){
+  .page{ padding:36px 16px 0; }
+  .hero{ padding:32px 24px 28px; }
+  .glass-panel, .char-card{ padding:20px 18px; }
+  .char-card{ flex-direction:column; }
+}
+@media (prefers-reduced-motion: reduce){ *{ transition:none !important; } }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HERO -->
+  <div class="hero">
+    <p class="hero-eyebrow"><span class="dot-live"></span>Class 13 · L3R Repaso: afianzar antes de seguir</p>
+    <h1>Condicionales y <em>simulacro de entrevista</em></h1>
+    <p class="desc">Hoy repasamos el condicional simple, las condicionales reales (si + presente + futuro) y las hipotéticas (si + imperfecto de subjuntivo + condicional), combinándolas libremente con el subjuntivo ya trabajado. Ponemos todo a prueba en un mini simulacro de entrevista de trabajo y cerramos con una autoevaluación guiada de las once primeras clases.</p>
+    <div class="meta-row">
+      <div>Duration<strong>50 min</strong></div>
+      <div>Focus<strong>condicional simple · condicionales reales · condicionales hipotéticas</strong></div>
+      <div>Level<strong>A2</strong></div>
+    </div>
+  </div>
+
+  <!-- 1. CONVERSACIÓN -->
+  <div class="section">
+    <div class="section-head"><span class="section-num">1</span><h2>Conversación: ¿cómo te sientes con el español?</h2><span class="time-tag">10 min</span></div>
+    <div class="glass-panel">
+      <p>Ya llevamos once clases juntas. Antes de repasar las estructuras de hoy, cuéntame cómo te sientes con el español a estas alturas del curso — qué notas que ha mejorado, y qué te sigue costando al hablar.</p>
+      <div class="note"><strong>Preguntas para guiar la conversación:</strong> ¿En qué situaciones te sientes más cómoda hablando español? ¿Qué es lo que más te ha costado del curso hasta ahora? ¿Notas diferencia entre cómo hablabas al principio y cómo hablas ahora?</div>
+    </div>
+  </div>
+
+  <!-- 2. GRAMÁTICA: condicionales -->
+  <div class="section">
+    <div class="section-head"><span class="section-num">2</span><h2>Condicional simple e hipotéticas</h2><span class="time-tag">18 min</span></div>
+    <div class="glass-panel" data-role="b1">
+      <p>El condicional simple sirve para hablar de deseos, peticiones corteses e hipótesis. Cuando lo combinamos con "si", tenemos dos estructuras distintas según cómo de real sea la condición.</p>
+
+      <div class="conj-table-wrap">
+        <table class="conj">
+          <tr><td class="pron">condicional simple</td><td class="form">-ía</td><td class="ex">Me gustaría trabajar en un hotel de aquí.</td></tr>
+          <tr><td class="pron">condicional simple</td><td class="form">podría</td><td class="ex">Podría empezar la semana que viene.</td></tr>
+          <tr><td class="pron">real (si+pres+fut)</td><td class="form">si consigo</td><td class="ex">Si consigo el trabajo, empezaré en septiembre.</td></tr>
+          <tr><td class="pron">hipotética (si+impf.subj+cond)</td><td class="form">si tuviera</td><td class="ex">Si tuviera más experiencia, pediría un puesto mejor.</td></tr>
+        </table>
+      </div>
+
+      <div class="uses-grid">
+        <div class="use-card">
+          <p class="use-tag">condicional</p>
+          <p class="use-trigger">cortesía</p>
+          <p class="use-ex">¿Podría hacerle unas preguntas sobre su experiencia?</p>
+        </div>
+        <div class="use-card">
+          <p class="use-tag">real</p>
+          <p class="use-trigger">si + presente + futuro</p>
+          <p class="use-ex">Si me llaman, iré a la entrevista encantada.</p>
+        </div>
+        <div class="use-card">
+          <p class="use-tag">hipotética</p>
+          <p class="use-trigger">si + imperfecto subj. + cond.</p>
+          <p class="use-ex">Si hablara mejor inglés, buscaría trabajo en un hotel internacional.</p>
+        </div>
+        <div class="use-card">
+          <p class="use-tag">combinado</p>
+          <p class="use-trigger">condicional + subjuntivo</p>
+          <p class="use-ex">Me gustaría que me dieran la oportunidad de demostrarlo.</p>
+        </div>
+      </div>
+
+      <div class="warning-box"><strong>El error más repetido:</strong> mezclar los tiempos dentro de la misma condición — "si tengo más experiencia, pediría" en vez de "si tuviera más experiencia, pediría". Recuerda: la condición hipotética pide imperfecto de subjuntivo, no presente.</div>
+    </div>
+  </div>
+
+  <!-- 3. VOCABULARIO -->
+  <div class="section">
+    <div class="section-head"><span class="section-num">3</span><h2>Vocabulario</h2><span class="time-tag">5 min</span></div>
+    <p class="vocab-hint">Toca cada tarjeta para ver el significado y un ejemplo en contexto.</p>
+    <div class="vocab-grid" id="vocab-grid"></div>
+  </div>
+
+  <!-- 4. PRÁCTICA -->
+  <div class="section">
+    <div class="section-head"><span class="section-num">4</span><h2>Practica</h2><span class="time-tag">10 min</span></div>
+    <div class="glass-panel">
+      <p class="vocab-hint" style="margin-bottom:14px;">10 frases mezclando condicional simple, condicionales reales e hipotéticas. Piensa primero si la condición es probable o poco probable, antes de elegir.</p>
+      <div id="exercises"></div>
+      <div class="check-bar">
+        <div style="display:flex; gap:10px;">
+          <button class="btn-primary" id="check-btn">Comprobar respuestas</button>
+          <button class="btn-ghost" id="reset-btn">Reiniciar</button>
+        </div>
+        <span id="score-text"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. AUTOCORRECCIÓN DE FRASES PROPIAS -->
+  <div class="section">
+    <div class="section-head"><span class="section-num">5</span><h2>Tus propios errores, revisados</h2><span class="time-tag">7 min</span></div>
+    <p class="section-desc" style="margin-bottom:16px;">Estas son frases parecidas a las que has dicho en clases anteriores de L1-L3. Piensa cómo las corregirías antes de que las revisemos juntos.</p>
+    <div class="q-bank">
+      <div class="q-card"><span class="q-num">1</span><span class="q-text">"Si tengo el trabajo, estaría muy contenta" → ¿qué cambiarías?</span></div>
+      <div class="q-card"><span class="q-num">2</span><span class="q-text">"Si tenía más experiencia, pediría un sueldo mejor" → ¿qué cambiarías?</span></div>
+      <div class="q-card"><span class="q-num">3</span><span class="q-text">"Me gustaría que me dan una oportunidad" → ¿qué cambiarías?</span></div>
+      <div class="q-card"><span class="q-num">4</span><span class="q-text">"Si consiguiera el puesto, empezaré la semana que viene" → ¿qué cambiarías?</span></div>
+      <div class="q-card"><span class="q-num">5</span><span class="q-text">"Podría trabajar los fines de semana también" → ¿está bien o qué cambiarías?</span></div>
+    </div>
+  </div>
+
+  <!-- 6. SIMULACRO DE ENTREVISTA -->
+  <div class="section">
+    <div class="section-head"><span class="section-num">6</span><h2>Mini simulacro de entrevista</h2><span class="time-tag">15 min</span></div>
+    <p class="section-desc" style="margin-bottom:16px;">Cada tarjeta da una pregunta típica de entrevista. Responde combinando condicional e hipotéticas donde puedas — es la puesta a prueba de las once primeras clases.</p>
+    <div class="glass-panel" data-role="b2">
+      <div class="scene-tabs" id="scene-tabs"></div>
+      <div id="scene-container"></div>
+      <div class="roleplay-tip"><strong>En clase:</strong> haremos el simulacro en voz alta, con el profesor como entrevistador — y después revisaremos juntas las respuestas que más te costaron.</div>
+    </div>
+  </div>
+
+  <!-- 7. TAREA FINAL -->
+  <div class="section">
+    <div class="section-head"><span class="section-num">7</span><h2 style="color:#96591A">Tu tarea</h2><span class="time-tag">3 min</span></div>
+    <div class="glass-panel" data-role="family">
+      <p style="margin:0;">Escribe <strong>5 frases</strong> sobre tu futuro laboral, combinando condicional simple y condicional hipotético (si + imperfecto de subjuntivo + condicional).</p>
+      <textarea id="final-task" placeholder="Me gustaría... / Si tuviera... / Si consigo... / Podría... / Si hablara mejor inglés..."></textarea>
+      <div class="task-footer">
+        <span id="task-count">0 usos de condicional detectados</span>
+        <div style="display:flex; gap:10px; align-items:center;">
+          <span class="saved-flag" id="saved-flag">Guardado ✓</span>
+          <button class="btn-secondary" id="save-btn">Guardar tarea</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 8. PARA LA PRÓXIMA CLASE -->
+  <div class="section">
+    <div class="section-head"><span class="section-num">8</span><h2>Para la próxima clase</h2><span class="time-tag">—</span></div>
+    <div class="resources-grid">
+      <div class="resource-card">
+        <p class="resource-tag">Lectura</p>
+        <p class="resource-title">Tus propias frases de tareas de L1-L3</p>
+        <p class="resource-desc">Repásalas antes de clase y busca patrones de error que se repitan entre distintas tareas.</p>
+      </div>
+      <div class="resource-card">
+        <p class="resource-tag">Audio</p>
+        <p class="resource-title">Reescucha de una entrevista simulada anterior</p>
+        <p class="resource-desc">Vuelve a escuchar una de tus entrevistas de trabajo simuladas, identificando ahora aciertos y áreas de mejora.</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <span>Class 13 · Repaso: condicionales y simulacro de entrevista</span>
+  <span>Next class → Class 14: lo que ha cambiado desde que llegué</span>
+</footer>
+
+<script>
+/* ---------- VOCAB ---------- */
+const VOCAB = [
+  {front:"el currículum", back:"CV / résumé. — Envié mi currículum a varios hoteles la semana pasada."},
+  {front:"la entrevista", back:"Interview. — Tengo una entrevista el jueves por la mañana."},
+  {front:"la experiencia", back:"Experience. — Tengo tres años de experiencia en atención al cliente."},
+  {front:"si tuviera", back:"If I had (imperfecto de subjuntivo, condición hipotética). — Si tuviera el título, buscaría un puesto mejor."},
+  {front:"si consigo", back:"If I get / manage to (presente, condición real). — Si consigo el trabajo, avisaré a mi familia enseguida."},
+  {front:"me gustaría", back:"I would like (condicional de cortesía/deseo). — Me gustaría trabajar en recepción."},
+  {front:"el sueldo", back:"Salary. — ¿Cuál sería el sueldo para este puesto?"},
+  {front:"el puesto", back:"Position / job. — Este puesto requiere disponibilidad los fines de semana."},
+];
+
+const grid = document.getElementById('vocab-grid');
+VOCAB.forEach(v=>{
+  const card = document.createElement('div');
+  card.className = 'tap-card';
+  card.setAttribute('role', 'button');
+  card.setAttribute('tabindex', '0');
+  card.setAttribute('aria-pressed', 'false');
+  card.setAttribute('aria-label', `${v.front}. Press to see the meaning.`);
+  card.innerHTML = `<div class="tap-front">${v.front}</div><div class="tap-back">${v.back}</div>`;
+  const toggle = ()=>{
+    const flipped = card.classList.toggle('flipped');
+    card.setAttribute('aria-pressed', String(flipped));
+  };
+  card.addEventListener('click', toggle);
+  card.addEventListener('keydown', (e)=>{
+    if(e.key === 'Enter' || e.key === ' '){
+      e.preventDefault();
+      toggle();
+    }
+  });
+  grid.appendChild(card);
+});
+
+/* ---------- EXERCISES ---------- */
+const EXERCISES = [
+  {
+    "sentence": "Me <span class=\"gap\">___</span> trabajar en un hotel de aquí.",
+    "options": ["gustaría", "gusta", "gustar"],
+    "answer": "gustaría"
+  },
+  {
+    "sentence": "Si <span class=\"gap\">___</span> el trabajo, empezaré en septiembre.",
+    "options": ["consigo", "consiguiera", "conseguiría"],
+    "answer": "consigo"
+  },
+  {
+    "sentence": "Si <span class=\"gap\">___</span> más experiencia, pediría un sueldo mejor.",
+    "options": ["tuviera", "tengo", "tendría"],
+    "answer": "tuviera"
+  },
+  {
+    "sentence": "¿<span class=\"gap\">___</span> hacerle unas preguntas sobre su experiencia?",
+    "options": ["Podría", "Puedo", "Podré"],
+    "answer": "Podría"
+  },
+  {
+    "sentence": "Si me llaman, <span class=\"gap\">___</span> a la entrevista encantada.",
+    "options": ["iré", "iría", "fuera"],
+    "answer": "iré"
+  },
+  {
+    "sentence": "Si <span class=\"gap\">___</span> mejor inglés, buscaría trabajo en un hotel internacional.",
+    "options": ["hablara", "hablo", "hablaría"],
+    "answer": "hablara"
+  },
+  {
+    "sentence": "Me gustaría que me <span class=\"gap\">___</span> la oportunidad de demostrarlo.",
+    "options": ["dieran", "dan", "darían"],
+    "answer": "dieran"
+  },
+  {
+    "sentence": "<span class=\"gap\">___</span> empezar la semana que viene si hace falta.",
+    "options": ["Podría", "Puedo", "Pude"],
+    "answer": "Podría"
+  },
+  {
+    "sentence": "Si el puesto <span class=\"gap\">___</span> disponible, avísenme por favor.",
+    "options": ["sigue", "siguiera", "seguiría"],
+    "answer": "sigue"
+  },
+  {
+    "sentence": "Si no <span class=\"gap\">___</span> este trabajo, seguiría buscando otro parecido.",
+    "options": ["consiguiera", "consigo", "conseguiré"],
+    "answer": "consiguiera"
+  }
+];
+
+function shuffle(arr){
+  const a = arr.slice();
+  for(let i = a.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+const exWrap = document.getElementById('exercises');
+EXERCISES.forEach((ex, i)=>{
+  const el = document.createElement('div');
+  el.className = 'exercise';
+  el.dataset.answer = ex.answer;
+  const shuffledOptions = shuffle(ex.options);
+  el.innerHTML = `
+    <div class="ex-sentence">${i+1}. ${ex.sentence}</div>
+    <div class="ex-options">
+      ${shuffledOptions.map(o=>`<button class="opt-btn" data-value="${o}">${o}</button>`).join('')}
+    </div>
+  `;
+  exWrap.appendChild(el);
+
+  el.querySelectorAll('.opt-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      el.querySelectorAll('.opt-btn').forEach(b=>b.classList.remove('picked'));
+      btn.classList.add('picked');
+    });
+  });
+});
+
+document.getElementById('check-btn').addEventListener('click', ()=>{
+  let correct = 0;
+  document.querySelectorAll('.exercise').forEach(el=>{
+    const answer = el.dataset.answer;
+    const picked = el.querySelector('.opt-btn.picked');
+    el.querySelectorAll('.opt-btn').forEach(b=>{
+      b.disabled = true;
+      if(b.dataset.value === answer) b.classList.add('correct');
+      else if(b === picked) b.classList.add('wrong');
+    });
+    if(picked && picked.dataset.value === answer) correct++;
+  });
+  document.getElementById('score-text').textContent = `${correct} / ${EXERCISES.length} correctas`;
+});
+
+document.getElementById('reset-btn').addEventListener('click', ()=>{
+  document.querySelectorAll('.exercise').forEach(el=>{
+    el.querySelectorAll('.opt-btn').forEach(b=>{
+      b.disabled = false;
+      b.classList.remove('picked','correct','wrong');
+    });
+  });
+  document.getElementById('score-text').textContent = '';
+});
+
+/* ---------- SIMULACRO DE ENTREVISTA (5 preguntas) ---------- */
+const SCENES = [
+  { "id": "presentacion", "tab": "👋 Presentación", "word": "Hábleme de usted", "sub": "pregunta · presentación", "task": "Preséntate brevemente: quién eres, de dónde vienes y qué experiencia tienes, usando \"me gustaría\" en algún momento." },
+  { "id": "hipotetica", "tab": "🤔 Hipótesis", "word": "¿Qué haría si...?", "sub": "pregunta · condicional hipotético", "task": "Responde: \"¿Qué haría usted si un cliente se quejara delante de otras personas?\" usando si + imperfecto de subjuntivo + condicional." },
+  { "id": "disponibilidad", "tab": "📅 Disponibilidad", "word": "¿Cuándo podría empezar?", "sub": "pregunta · condición real", "task": "Responde combinando \"si\" + presente + futuro sobre cuándo podrías empezar a trabajar." },
+  { "id": "fortalezas", "tab": "💪 Fortalezas", "word": "¿Cuál es su punto fuerte?", "sub": "pregunta · condicional de cortesía", "task": "Responde usando \"podría\" o \"me gustaría\" para hablar de una fortaleza tuya relacionada con el puesto." },
+  { "id": "futuro", "tab": "🎯 Futuro", "word": "¿Dónde se ve en un año?", "sub": "pregunta · condicional hipotético", "task": "Responde: \"Si todo saliera bien, ¿dónde se vería usted en un año?\" combinando hipotética y condicional simple." }
+];
+
+const sceneTabs = document.getElementById('scene-tabs');
+const sceneContainer = document.getElementById('scene-container');
+let activeScene = 0;
+
+function renderTabs(){
+  sceneTabs.innerHTML = SCENES.map((s,i)=>
+    `<button class="scene-tab${i===activeScene?' active':''}" data-idx="${i}">${s.tab}</button>`
+  ).join('');
+  sceneTabs.querySelectorAll('.scene-tab').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      activeScene = parseInt(btn.dataset.idx, 10);
+      renderTabs();
+      renderScene();
+    });
+  });
+}
+
+function renderScene(){
+  const scene = SCENES[activeScene];
+  sceneContainer.innerHTML = `
+    <div class="trigger-card">
+      <p class="trigger-word">${scene.word}</p>
+      <p class="trigger-sub">${scene.sub}</p>
+      <p class="trigger-task">${scene.task}</p>
+      <textarea class="trigger-input" rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+    </div>
+  `;
+}
+
+renderTabs();
+renderScene();
+
+/* ---------- FINAL TASK ---------- */
+const STORAGE_KEY = 'pylypenko-clase13-tarea';
+const taskArea = document.getElementById('final-task');
+const taskCount = document.getElementById('task-count');
+const savedFlag = document.getElementById('saved-flag');
+
+async function loadTask(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(STORAGE_KEY);
+    if (res && typeof res.value === 'string') taskArea.value = res.value;
+  }catch(e){
+    // Key doesn't exist yet: no previous task, stays blank.
+  }
+  updateCount();
+}
+
+function updateCount(){
+  const matches = (taskArea.value.match(/\b(me gustaría|podría|podríamos|si tuviera|si consigo|si consiguiera|si hablara|si tengo|empezaría|buscaría|pediría|trabajaría)\b/gi) || []).length;
+  taskCount.textContent = `${matches} uso${matches===1?'':'s'} de condicional detectado${matches===1?'':'s'}`;
+}
+taskArea.addEventListener('input', updateCount);
+updateCount();
+loadTask();
+
+document.getElementById('save-btn').addEventListener('click', async ()=>{
+  if (!window.storage){
+    savedFlag.textContent = 'No se puede guardar aquí';
+    savedFlag.classList.add('show');
+    setTimeout(()=>{ savedFlag.classList.remove('show'); savedFlag.textContent = 'Guardado ✓'; }, 2200);
+    return;
+  }
+  try{
+    const ok = await window.storage.set(STORAGE_KEY, taskArea.value);
+    savedFlag.textContent = ok ? 'Guardado ✓' : 'No se pudo guardar';
+  }catch(e){
+    savedFlag.textContent = 'No se pudo guardar';
+  }
+  savedFlag.classList.add('show');
+  setTimeout(()=>{ savedFlag.classList.remove('show'); savedFlag.textContent = 'Guardado ✓'; }, 1800);
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Class 10 · La entrevista de trabajo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+
+/* ╔══════════════════════════════════════════════════════════════╗
+   ║  ESCOLAR — sistema de diseño para clases de español online   ║
+   ║  Class 10 · L3 Hacia la entrevista de trabajo                ║
+   ╚══════════════════════════════════════════════════════════════╝ */
+
+:root{
+  --paper:        #FBF7EE;
+  --paper-raised: #FFFFFF;
+  --paper-alt:    #F3ECDA;
+  --ink:          #23291F;
+  --ink-soft:     #565F52;
+  --ink-faint:    #8B9184;
+  --line:         rgba(35,41,31,0.12);
+  --line-strong:  rgba(35,41,31,0.22);
+
+  --b1:      #DB8A2E;  --b1-soft: #FCF1E1;  --b1-line: #F3D9AF;
+  --b2:      #2F6FED;  --b2-soft: #EAF1FE;  --b2-line: #C6D9FC;
+  --family:  #B5502E;  --family-soft: #FBEBE3; --family-line: #EFC9B4;
+
+  --f-display: 'Fraunces', Georgia, serif;
+  --f-body:    'IBM Plex Sans', system-ui, sans-serif;
+  --f-data:    'IBM Plex Mono', monospace;
+
+  --r-sm: 8px;
+  --r-md: 14px;
+  --r-lg: 20px;
+
+  --shadow-1: 0 1px 2px rgba(35,41,31,0.05), 0 1px 8px rgba(35,41,31,0.04);
+}
+
+*{ box-sizing:border-box; }
+body{
+  margin:0;
+  background: var(--paper);
+  background-image: radial-gradient(circle at 1px 1px, var(--line) 1px, transparent 0);
+  background-size: 22px 22px;
+  color: var(--ink);
+  font-family: var(--f-body);
+  line-height:1.6;
+}
+::selection{ background: var(--b1-soft); }
+
+/* ---------- HEADER ---------- */
+header{ padding:44px 24px 28px; max-width:760px; margin:0 auto; }
+.eyebrow{
+  font-family: var(--f-data); font-size:12px; letter-spacing:.14em;
+  text-transform:uppercase; color: var(--b1); margin:0 0 10px;
+  display:flex; align-items:center; gap:10px;
+}
+.eyebrow .dot{ width:6px; height:6px; border-radius:50%; background: var(--b1); }
+h1{
+  font-family: var(--f-display); font-weight:600;
+  font-size:clamp(30px,5.6vw,46px); line-height:1.08;
+  margin:0 0 14px; letter-spacing:-.01em;
+}
+h1 em{ font-style:italic; color: var(--b1); }
+.lede{ font-size:16px; color: var(--ink-soft); max-width:56ch; margin:0; }
+
+.meta-row{
+  display:flex; flex-wrap:wrap; gap:20px; margin-top:26px;
+  font-family: var(--f-data); font-size:12px; color: var(--ink-faint);
+}
+.meta-row strong{
+  display:block; color: var(--ink); font-size:14.5px; font-weight:500;
+  font-family: var(--f-display); margin-top:3px;
+}
+
+/* ---------- SECTIONS ---------- */
+main{ max-width:760px; margin:0 auto; padding:8px 24px 100px; }
+
+section.block{ margin-bottom:52px; }
+.block-head{ display:flex; align-items:baseline; gap:12px; margin-bottom:18px; }
+.time-tag{
+  font-family: var(--f-data); font-size:11px; color: var(--ink-faint);
+  background: var(--paper-alt); padding:3px 10px; border-radius:999px; margin-left:auto; flex:none;
+}
+.block-num{
+  font-family: var(--f-data); font-size:12px; color:#fff; background: var(--b1);
+  width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  flex:none;
+}
+.block-head h2{
+  font-family: var(--f-display); font-weight:500; font-style:italic; font-size:22px; margin:0;
+}
+
+.panel{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-lg);
+  box-shadow: var(--shadow-1); padding:26px 28px;
+}
+
+/* ---------- CONJUGATION TABLE ---------- */
+.conj-table{ width:100%; border-collapse:collapse; margin-top:4px; }
+.conj-table td{ padding:12px 6px; border-bottom:1px dashed var(--line); font-size:15px; }
+.conj-table tr:last-child td{ border-bottom:none; }
+.conj-pron{ font-family: var(--f-data); color: var(--ink-faint); font-size:13px; width:130px; }
+.conj-form{ font-family: var(--f-display); font-weight:600; font-size:22px; color: var(--b1); }
+.conj-ex{ color: var(--ink-soft); font-size:14px; }
+
+.note{
+  margin-top:18px; padding:14px 16px; background: var(--b1-soft); border:1px solid var(--b1-line);
+  border-radius: var(--r-md); font-size:14px; color: var(--ink-soft);
+}
+.note strong{ color: var(--ink); }
+
+/* ---------- CONNECTORS GRID ---------- */
+.conn-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:16px; }
+@media (max-width:560px){ .conn-grid{ grid-template-columns:1fr; } }
+.conn-card{
+  background: var(--paper-alt); border:1px solid var(--line); border-radius: var(--r-sm);
+  padding:12px 14px;
+}
+.conn-word{ font-family: var(--f-display); font-weight:600; font-size:15.5px; color: var(--b1); }
+.conn-desc{ font-family: var(--f-data); font-size:11.5px; color: var(--ink-faint); margin-top:3px; }
+
+/* ---------- COMPARE (para que / antes de que) ---------- */
+.compare-wrap{ margin-top:22px; }
+.compare-title{
+  font-family: var(--f-data); font-size:11.5px; text-transform:uppercase; letter-spacing:.06em;
+  color: var(--ink-faint); margin:0 0 10px;
+}
+.compare-grid{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+@media (max-width:560px){ .compare-grid{ grid-template-columns:1fr; } }
+.compare-col{ border-radius: var(--r-md); padding:16px 18px; border:1px solid; }
+.compare-col.is-ser{ background: var(--b1-soft); border-color: var(--b1-line); }
+.compare-col.is-estar{ background: var(--b2-soft); border-color: var(--b2-line); }
+.compare-head{ display:flex; align-items:center; gap:8px; margin:0 0 10px; }
+.compare-verb{ font-family: var(--f-display); font-weight:600; font-size:19px; }
+.is-ser .compare-verb{ color: var(--b1); }
+.is-estar .compare-verb{ color: var(--b2); }
+.compare-sub{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); }
+.compare-list{ margin:0; padding:0; list-style:none; }
+.compare-list li{ font-size:13.5px; color: var(--ink-soft); padding:6px 0; border-top:1px dashed var(--line); }
+.compare-list li:first-child{ border-top:none; }
+.compare-list strong{ color: var(--ink); font-weight:600; }
+.compare-list em{ display:block; font-style:normal; color: var(--ink-faint); font-size:12.5px; margin-top:2px; }
+.compare-warning{
+  margin-top:14px; padding:14px 16px; background: var(--family-soft); border:1px solid var(--family-line);
+  border-radius: var(--r-md); font-size:13.5px; color: var(--ink-soft);
+}
+.compare-warning strong{ color: var(--family); }
+
+/* ---------- VOCAB CARDS ---------- */
+.vocab-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:12px; }
+.vocab-card{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:14px 16px; cursor:pointer; perspective:600px; min-height:78px;
+  display:flex; flex-direction:column; justify-content:center; transition: border-color .15s ease;
+}
+.vocab-card:hover{ border-color: var(--b1-line); }
+.vocab-card:focus-visible{ outline:2px solid var(--b1); outline-offset:2px; }
+.vocab-front{ font-family: var(--f-body); font-weight:600; font-size:15px; }
+.vocab-back{ display:none; font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); margin-top:6px; }
+.vocab-card.flipped .vocab-back{ display:block; }
+.vocab-card.flipped{ background: var(--b1-soft); border-color: var(--b1-line); }
+.vocab-hint{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin:10px 2px 16px; }
+
+/* ---------- EXERCISE ---------- */
+.exercise{ margin-bottom:20px; }
+.exercise:last-of-type{ margin-bottom:0; }
+.ex-sentence{ font-size:15.5px; margin-bottom:10px; }
+.ex-sentence .gap{ font-family: var(--f-data); color: var(--ink-faint); }
+.ex-options{ display:flex; flex-wrap:wrap; gap:8px; }
+.opt-btn{
+  font-family: var(--f-body); font-size:14px; background: var(--paper-raised);
+  border:1.5px solid var(--line); color: var(--ink); padding:7px 16px; border-radius:999px;
+  cursor:pointer; transition: all .15s ease;
+}
+.opt-btn:hover{ border-color: var(--ink-faint); }
+.opt-btn.picked{ background: var(--b1-soft); border-color: var(--b1); color: var(--b1); }
+.opt-btn.correct{ background: var(--b1-soft); border-color: var(--b1); color: var(--b1); }
+.opt-btn.wrong{ background: var(--family-soft); border-color: var(--family); color: var(--family); }
+.opt-btn:disabled{ cursor:default; }
+
+.check-bar{
+  display:flex; align-items:center; justify-content:space-between; gap:16px;
+  margin-top:22px; padding-top:18px; border-top:1px dashed var(--line);
+}
+.btn-primary{
+  font-family: var(--f-body); font-weight:600; font-size:14px; color:#fff; background: var(--b1);
+  border:none; padding:11px 22px; border-radius:999px; cursor:pointer; transition: transform .1s ease;
+}
+.btn-primary:hover{ transform: translateY(-1px); }
+#score-text{ font-family: var(--f-data); font-size:13px; color: var(--ink-faint); }
+.btn-ghost{
+  font-family: var(--f-body); font-weight:600; font-size:13px; color: var(--ink-soft); background:none;
+  border:1.5px solid var(--line); padding:9px 18px; border-radius:999px; cursor:pointer;
+}
+.btn-ghost:hover{ border-color: var(--ink-faint); }
+.ex-divider{
+  display:flex; align-items:center; gap:10px; margin:20px 0 16px;
+  font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.06em;
+  color: var(--ink-faint);
+}
+.ex-divider::before, .ex-divider::after{ content:""; flex:1; height:1px; background: var(--line); }
+.ex-divider.en-clase{ color: var(--b1); }
+.ex-divider.en-clase::before, .ex-divider.en-clase::after{ background: var(--b1-line); }
+
+/* ---------- PROMPT CARDS ---------- */
+.characters{ display:grid; gap:16px; }
+.char-card{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-lg);
+  padding:20px 22px; display:flex; gap:16px; align-items:flex-start;
+}
+.char-avatar{
+  flex:none; width:44px; height:44px; border-radius:50%; background: var(--b1-soft);
+  display:flex; align-items:center; justify-content:center; font-family: var(--f-display);
+  font-weight:600; font-size:17px; color: var(--b1);
+}
+.char-body{ flex:1; }
+.char-name{ font-family: var(--f-display); font-weight:600; font-size:17px; margin:0 0 4px; }
+.char-role{ font-family: var(--f-data); font-size:11.5px; text-transform:uppercase; letter-spacing:.05em; color: var(--ink-faint); margin:0 0 10px; }
+.char-facts{ display:flex; flex-wrap:wrap; gap:6px; margin-bottom:10px; }
+.fact-tag{
+  font-family: var(--f-data); font-size:12px; background: var(--paper-alt); color: var(--ink-soft);
+  padding:4px 10px; border-radius:999px;
+}
+.char-prompt{ font-size:14px; color: var(--ink-soft); }
+.char-input{
+  width:100%; margin-top:8px; font-family: var(--f-body); font-size:14.5px; color: var(--ink);
+  background: var(--paper); border:1px solid var(--line); border-radius: var(--r-sm);
+  padding:10px 12px; resize:vertical; min-height:44px;
+}
+.char-input:focus{ outline:none; border-color: var(--b1-line); background: var(--paper-raised); }
+
+/* ---------- INTERVIEW SIMULATION ---------- */
+.roleplay-panel{ background: var(--b2-soft); border:1px solid var(--b2-line); border-radius: var(--r-lg); padding:26px 28px; }
+.roleplay-panel .block-num{ background: var(--b2); }
+.scene-setup{
+  display:flex; gap:14px; align-items:flex-start; background: var(--paper-raised);
+  border:1px solid var(--b2-line); border-radius: var(--r-md); padding:14px 16px; margin-bottom:20px;
+}
+.scene-icon{ font-size:22px; flex:none; }
+.scene-text{ font-size:14px; color: var(--ink-soft); }
+.scene-text strong{ color: var(--ink); }
+
+.dialogue{ display:flex; flex-direction:column; gap:14px; }
+.scene-tabs{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:18px; }
+.scene-tab{
+  font-family: var(--f-data); font-size:12.5px; background: var(--paper-raised);
+  border:1.5px solid var(--b2-line); color: var(--ink-soft); padding:7px 14px;
+  border-radius:999px; cursor:pointer; transition: all .15s ease;
+}
+.scene-tab:hover{ border-color: var(--b2); }
+.scene-tab.active{ background: var(--b2); border-color: var(--b2); color:#fff; }
+.line{ display:flex; gap:12px; align-items:flex-start; }
+.line-avatar{
+  flex:none; width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  font-family: var(--f-display); font-weight:600; font-size:14px; color:#fff;
+}
+.line.friend .line-avatar{ background: var(--ink-faint); }
+.line.you .line-avatar{ background: var(--b2); }
+.line-body{ flex:1; }
+.line-name{ font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.05em; color: var(--ink-faint); margin:0 0 4px; }
+.line-bubble{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:12px 14px; font-size:14.5px; color: var(--ink);
+}
+.line.you .line-bubble{ background:#fff; border-color: var(--b2-line); }
+.line-input{
+  width:100%; font-family: var(--f-body); font-size:14.5px; color: var(--ink);
+  background:#fff; border:1px solid var(--b2-line); border-radius: var(--r-sm);
+  padding:10px 12px; resize:vertical; min-height:40px; margin-top:2px;
+}
+.line-input:focus{ outline:none; border-color: var(--b2); }
+.line-hint{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin-top:5px; }
+
+.roleplay-tip{
+  margin-top:22px; padding:14px 16px; background: var(--paper-raised); border:1px solid var(--b2-line);
+  border-radius: var(--r-md); font-size:13.5px; color: var(--ink-soft);
+}
+.roleplay-tip strong{ color: var(--ink); }
+
+/* ---------- FINAL TASK ---------- */
+.task-panel{ background: var(--family-soft); border:1px solid var(--family-line); border-radius: var(--r-lg); padding:26px 28px; }
+.task-panel .block-num{ background: var(--family); }
+textarea#final-task{
+  width:100%; min-height:130px; font-family: var(--f-body); font-size:15px; color: var(--ink);
+  background: var(--paper-raised); border:1px solid var(--family-line); border-radius: var(--r-md);
+  padding:14px 16px; resize:vertical; margin-top:14px;
+}
+textarea#final-task:focus{ outline:none; border-color: var(--family); }
+.task-footer{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:12px; flex-wrap:wrap; }
+#task-count{ font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); }
+.btn-secondary{
+  font-family: var(--f-body); font-weight:600; font-size:13.5px; color: var(--family); background:none;
+  border:1.5px solid var(--family-line); padding:9px 18px; border-radius:999px; cursor:pointer;
+}
+.saved-flag{ font-family: var(--f-data); font-size:12px; color: var(--b1); opacity:0; transition: opacity .3s ease; }
+.saved-flag.show{ opacity:1; }
+
+/* ---------- QUESTIONS BANK ---------- */
+.q-bank{ display:grid; gap:10px; margin-top:4px; }
+.q-card{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:14px 16px; display:flex; gap:12px; align-items:flex-start;
+}
+.q-num{
+  font-family: var(--f-data); font-size:11px; color:#fff; background: var(--b1);
+  width:20px; height:20px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex:none; margin-top:2px;
+}
+.q-text{ font-size:14.5px; color: var(--ink); }
+
+/* ---------- RESOURCES PANEL ---------- */
+.resources-grid{ display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:16px; }
+@media (max-width:560px){ .resources-grid{ grid-template-columns:1fr; } }
+.resource-card{
+  background: var(--paper-raised); border:1px solid var(--family-line); border-radius: var(--r-md);
+  padding:14px 16px;
+}
+.resource-tag{
+  font-family: var(--f-data); font-size:10.5px; text-transform:uppercase; letter-spacing:.06em;
+  color: var(--family); margin:0 0 6px;
+}
+.resource-title{ font-family: var(--f-display); font-weight:600; font-size:15px; margin:0 0 4px; }
+.resource-desc{ font-size:13px; color: var(--ink-soft); margin:0; }
+
+/* ---------- FOOTER NAV ---------- */
+footer{
+  max-width:760px; margin:0 auto; padding:0 24px 60px; display:flex;
+  justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;
+  font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint);
+}
+footer a{ color: var(--b1); text-decoration:none; }
+footer a:hover{ text-decoration:underline; }
+
+@media (max-width:600px){
+  header{ padding:34px 18px 22px; }
+  main{ padding:8px 18px 90px; }
+  .panel, .task-panel, .listen-panel{ padding:20px 18px; }
+  .char-card{ flex-direction:column; }
+}
+@media (prefers-reduced-motion: reduce){ *{ transition:none !important; } }
+</style>
+</head>
+<body>
+
+<header>
+  <p class="eyebrow"><span class="dot"></span>Class 10 of 11 · L3 Hacia la entrevista de trabajo</p>
+  <h1>La entrevista de <em>trabajo</em></h1>
+  <p class="lede">Hoy juntamos todo lo aprendido — subjuntivo y condicional — al servicio de un objetivo muy concreto: tu próxima entrevista de trabajo como recepcionista o camarera. Practicaremos vocabulario profesional, conectores de secuencia, y haremos una simulación completa de entrevista.</p>
+  <div class="meta-row">
+    <div>Duration<strong>50 min</strong></div>
+    <div>Focus<strong>para que / antes de que + condicional</strong></div>
+    <div>Level<strong>A2</strong></div>
+  </div>
+</header>
+
+<main>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">1</span><h2>Conversación: lo que esperas de una entrevista</h2><span class="time-tag">10 min</span></div>
+    <div class="panel">
+      <p style="margin:0 0 14px; font-size:15px; color:var(--ink-soft);">Antes de simular la entrevista, hablemos de verdad sobre cómo te sientes al respecto. Cuéntame qué esperas de un proceso de selección para recepcionista o camarera, y qué es lo que más te preocupa o te da más seguridad.</p>
+      <div class="note"><strong>Preguntas para guiar la conversación:</strong> ¿Has tenido entrevistas de trabajo en España antes? ¿Qué es lo que más te nervioso/a te pone de una entrevista? ¿Qué crees que te hace una buena candidata para estos puestos?</div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">2</span><h2>Para que / antes de que + condicional</h2><span class="time-tag">15 min</span></div>
+    <div class="panel">
+      <p class="vocab-hint" style="margin:0 0 12px;">En el lenguaje de entrevistas usamos mucho el subjuntivo con conjunciones finales y temporales, combinado con el condicional para sonar cortés y profesional. "Para que" expresa <strong>finalidad</strong> (el objetivo de una acción); "antes de que" expresa <strong>anterioridad</strong> (algo que pasa primero).</p>
+
+      <table class="conj-table">
+        <tr><td class="conj-pron">para que + subj.</td><td class="conj-form">sepa</td><td class="conj-ex">Le explico mi experiencia para que sepa que soy la persona adecuada.</td></tr>
+        <tr><td class="conj-pron">antes de que + subj.</td><td class="conj-form">pregunte</td><td class="conj-ex">Quiero mencionar mi disponibilidad antes de que me pregunte.</td></tr>
+      </table>
+      <div class="note"><strong>El truco:</strong> tanto "para que" como "antes de que" siempre van seguidas de subjuntivo cuando el sujeto cambia — igual que "espero que" o "quiero que" que ya conoces. Si el sujeto no cambia, usamos infinitivo (para saber, antes de preguntar).</div>
+
+      <div class="compare-wrap">
+        <p class="compare-title">Cortesía en la entrevista: condicional vs presente</p>
+        <div class="compare-grid">
+          <div class="compare-col is-ser">
+            <div class="compare-head">
+              <span class="compare-verb">Presente</span>
+              <span class="compare-sub">— directo, informal</span>
+            </div>
+            <ul class="compare-list">
+              <li><strong>Quiero este trabajo.</strong>
+                <em>Correcto, pero suena algo brusco en una entrevista.</em>
+              </li>
+              <li><strong>Puedo empezar mañana.</strong>
+                <em>Directo — funciona, pero es menos cortés.</em>
+              </li>
+            </ul>
+          </div>
+          <div class="compare-col is-estar">
+            <div class="compare-head">
+              <span class="compare-verb">Condicional</span>
+              <span class="compare-sub">— cortés, profesional</span>
+            </div>
+            <ul class="compare-list">
+              <li><strong>Me gustaría mucho trabajar aquí.</strong>
+                <em>El condicional suaviza el deseo — más profesional.</em>
+              </li>
+              <li><strong>Podría empezar la semana que viene.</strong>
+                <em>Mismo contenido, tono más cuidado y flexible.</em>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="compare-warning"><strong>Regla de oro:</strong> en una entrevista de trabajo, el condicional (me gustaría, podría, sería) suena más cortés y profesional que el presente. Combínalo con "para que" y "antes de que" + subjuntivo para explicar tus razones con naturalidad.</div>
+      </div>
+
+      <p class="vocab-hint" style="margin:18px 0 8px;">Conectores de secuencia y conclusión, útiles para organizar tus respuestas:</p>
+      <div class="conn-grid">
+        <div class="conn-card"><div class="conn-word">en primer lugar</div><div class="conn-desc">para empezar una idea</div></div>
+        <div class="conn-card"><div class="conn-word">además</div><div class="conn-desc">para añadir información</div></div>
+        <div class="conn-card"><div class="conn-word">por último</div><div class="conn-desc">para cerrar tu respuesta</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">3</span><h2>Vocabulario</h2><span class="time-tag">6 min</span></div>
+    <p class="vocab-hint">Toca cada tarjeta para ver el significado y un ejemplo en contexto.</p>
+    <div class="vocab-grid" id="vocab-grid"></div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">4</span><h2>Practica</h2><span class="time-tag">8 min</span></div>
+    <div class="panel">
+      <p class="vocab-hint" style="margin-bottom:14px;">10 frases con "para que", "antes de que" y condicional de cortesía. Piensa primero si el sujeto cambia o si buscas un tono cortés, antes de elegir.</p>
+      <div id="exercises"></div>
+      <div class="check-bar">
+        <div style="display:flex; gap:10px;">
+          <button class="btn-primary" id="check-btn">Comprobar respuestas</button>
+          <button class="btn-ghost" id="reset-btn">Reiniciar</button>
+        </div>
+        <span id="score-text"></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">5</span><h2>Preguntas típicas de entrevista</h2><span class="time-tag">6 min</span></div>
+    <p class="lede" style="margin-bottom:16px;">Prepara mentalmente cómo responderías a estas preguntas frecuentes en una entrevista de recepcionista o camarera, usando condicional y las estructuras de hoy.</p>
+    <div class="q-bank">
+      <div class="q-card"><span class="q-num">1</span><span class="q-text">¿Por qué le gustaría trabajar con nosotros?</span></div>
+      <div class="q-card"><span class="q-num">2</span><span class="q-text">¿Qué experiencia tiene atendiendo al público?</span></div>
+      <div class="q-card"><span class="q-num">3</span><span class="q-text">¿Cuál es su disponibilidad horaria?</span></div>
+      <div class="q-card"><span class="q-num">4</span><span class="q-text">¿Cómo actuaría si un cliente estuviera enfadado?</span></div>
+      <div class="q-card"><span class="q-num">5</span><span class="q-text">¿Qué la hace una buena candidata para este puesto?</span></div>
+    </div>
+    <div class="characters" id="characters" style="margin-top:20px;"></div>
+  </section>
+
+  <section class="block roleplay-panel">
+    <div class="block-head"><span class="block-num">6</span><h2>Simulación completa de entrevista</h2><span class="time-tag">15 min</span></div>
+    <p class="lede" style="margin-bottom:16px;">El profesor hará de entrevistador. Responde usando subjuntivo (para que sepa..., antes de que pregunte...) y condicional (me gustaría..., podría...). Elige el puesto que prefieras practicar primero.</p>
+    <div class="scene-tabs" id="scene-tabs"></div>
+    <div id="scene-container"></div>
+    <div class="roleplay-tip"><strong>En clase:</strong> simularemos la entrevista completa en voz alta. Después haremos feedback conjunto y repetiremos las respuestas clave para mejorarlas.</div>
+  </section>
+
+  <section class="block task-panel">
+    <div class="block-head"><span class="block-num">7</span><h2 style="color:var(--family)">Tu tarea</h2><span class="time-tag">3 min</span></div>
+    <p style="margin:0; font-size:15px; color:var(--ink-soft);">Graba tus respuestas a <strong>3 preguntas típicas de entrevista de trabajo</strong>, aplicando el vocabulario y las estructuras trabajadas hoy (condicional de cortesía, "para que", "antes de que").</p>
+    <textarea id="final-task" placeholder="Me gustaría... porque...&#10;Podría... para que...&#10;Antes de que me pregunte, quiero decir que..."></textarea>
+    <div class="task-footer">
+      <span id="task-count">0 verbos en condicional detectados</span>
+      <div style="display:flex; gap:10px; align-items:center;">
+        <span class="saved-flag" id="saved-flag">Guardado ✓</span>
+        <button class="btn-secondary" id="save-btn">Guardar tarea</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">8</span><h2>Para la próxima clase</h2><span class="time-tag">—</span></div>
+    <div class="resources-grid">
+      <div class="resource-card">
+        <p class="resource-tag">Lectura</p>
+        <p class="resource-title">Preguntas frecuentes en una entrevista de hostelería</p>
+        <p class="resource-desc">Guía breve adaptada — subraya 3 estructuras con condicional o subjuntivo que podrías reutilizar.</p>
+      </div>
+      <div class="resource-card">
+        <p class="resource-tag">Audio</p>
+        <p class="resource-title">Simulación real de entrevista de trabajo</p>
+        <p class="resource-desc">Vídeo corto de una entrevista en español — anota 2 expresiones de cortesía que uses la próxima vez.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <span>Class 10 · Hacia la entrevista de trabajo</span>
+  <span>Next class → Class 11: debate final, mi vida en España</span>
+</footer>
+
+<script>
+/* ---------- VOCAB ---------- */
+const VOCAB = [
+  {front:"la entrevista de trabajo", back:"Job interview. — Mañana tengo una entrevista de trabajo para recepcionista."},
+  {front:"el puesto", back:"Position / role. — El puesto es de camarera en un hotel del sur."},
+  {front:"la experiencia laboral", back:"Work experience. — Tengo experiencia laboral como maquilladora y secretaria."},
+  {front:"atender al cliente", back:"To assist a customer. — Me gusta atender al cliente y resolver sus dudas."},
+  {front:"para que", back:"So that (+ subjuntivo). — Le explico esto para que entienda mi experiencia."},
+  {front:"antes de que", back:"Before (+ subjuntivo). — Quiero preguntar el horario antes de que termine la entrevista."},
+  {front:"disponible", back:"Available. — Estoy disponible a partir de septiembre."},
+  {front:"la disponibilidad horaria", back:"Schedule availability. — Mi disponibilidad horaria es bastante flexible."},
+];
+
+const grid = document.getElementById('vocab-grid');
+VOCAB.forEach(v=>{
+  const card = document.createElement('div');
+  card.className = 'vocab-card';
+  card.setAttribute('role', 'button');
+  card.setAttribute('tabindex', '0');
+  card.setAttribute('aria-pressed', 'false');
+  card.setAttribute('aria-label', `${v.front}. Press to see the meaning.`);
+  card.innerHTML = `<div class="vocab-front">${v.front}</div><div class="vocab-back">${v.back}</div>`;
+  const toggle = ()=>{
+    const flipped = card.classList.toggle('flipped');
+    card.setAttribute('aria-pressed', String(flipped));
+  };
+  card.addEventListener('click', toggle);
+  card.addEventListener('keydown', (e)=>{
+    if(e.key === 'Enter' || e.key === ' '){
+      e.preventDefault();
+      toggle();
+    }
+  });
+  grid.appendChild(card);
+});
+
+/* ---------- EXERCISES ---------- */
+const EXERCISES = [
+  {
+    "sentence": "Le explico mi experiencia para que <span class=\"gap\">___</span> que soy la persona adecuada.",
+    "options": ["sepa", "sabe", "saber"],
+    "answer": "sepa"
+  },
+  {
+    "sentence": "Quiero mencionar mi disponibilidad antes de que me lo <span class=\"gap\">___</span>.",
+    "options": ["pregunten", "preguntan", "preguntar"],
+    "answer": "pregunten"
+  },
+  {
+    "sentence": "Me <span class=\"gap\">___</span> mucho trabajar en un hotel como este.",
+    "options": ["gustaría", "gusta", "gustara"],
+    "answer": "gustaría"
+  },
+  {
+    "sentence": "<span class=\"gap\">___</span> empezar la semana que viene si me contratan.",
+    "options": ["Podría", "Puedo", "Pudiera"],
+    "answer": "Podría"
+  },
+  {
+    "sentence": "He preparado ejemplos para que <span class=\"gap\">___</span> mi experiencia con clientes.",
+    "options": ["vea", "ve", "ver"],
+    "answer": "vea"
+  },
+  {
+    "sentence": "Antes de que <span class=\"gap\">___</span> la entrevista, quiero agradecerle la oportunidad.",
+    "options": ["termine", "termina", "terminar"],
+    "answer": "termine"
+  },
+  {
+    "sentence": "En primer lugar, me <span class=\"gap\">___</span> hablarle de mi experiencia como camarera.",
+    "options": ["gustaría", "gusta", "gustara"],
+    "answer": "gustaría"
+  },
+  {
+    "sentence": "Si un cliente estuviera enfadado, <span class=\"gap\">___</span> con calma y buscaría una solución.",
+    "options": ["hablaría", "hablo", "hable"],
+    "answer": "hablaría"
+  },
+  {
+    "sentence": "Le doy mi número para que me <span class=\"gap\">___</span> si tiene alguna duda.",
+    "options": ["llame", "llama", "llamar"],
+    "answer": "llame"
+  },
+  {
+    "sentence": "Por último, <span class=\"gap\">___</span> confirmar que estoy disponible desde septiembre.",
+    "options": ["me gustaría", "me gusta", "me guste"],
+    "answer": "me gustaría"
+  }
+];
+
+const exWrap = document.getElementById('exercises');
+EXERCISES.forEach((ex, i)=>{
+  const el = document.createElement('div');
+  el.className = 'exercise';
+  el.dataset.answer = ex.answer;
+  el.innerHTML = `
+    <div class="ex-sentence">${i+1}. ${ex.sentence}</div>
+    <div class="ex-options">
+      ${ex.options.map(o=>`<button class="opt-btn" data-value="${o}">${o}</button>`).join('')}
+    </div>
+  `;
+  exWrap.appendChild(el);
+
+  el.querySelectorAll('.opt-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      el.querySelectorAll('.opt-btn').forEach(b=>b.classList.remove('picked'));
+      btn.classList.add('picked');
+    });
+  });
+});
+
+document.getElementById('check-btn').addEventListener('click', ()=>{
+  let correct = 0;
+  document.querySelectorAll('.exercise').forEach(el=>{
+    const answer = el.dataset.answer;
+    const picked = el.querySelector('.opt-btn.picked');
+    el.querySelectorAll('.opt-btn').forEach(b=>{
+      b.disabled = true;
+      if(b.dataset.value === answer) b.classList.add('correct');
+      else if(b === picked) b.classList.add('wrong');
+    });
+    if(picked && picked.dataset.value === answer) correct++;
+  });
+  document.getElementById('score-text').textContent = `${correct} / ${EXERCISES.length} correctas`;
+});
+
+document.getElementById('reset-btn').addEventListener('click', ()=>{
+  document.querySelectorAll('.exercise').forEach(el=>{
+    el.querySelectorAll('.opt-btn').forEach(b=>{
+      b.disabled = false;
+      b.classList.remove('picked','correct','wrong');
+    });
+  });
+  document.getElementById('score-text').textContent = '';
+});
+
+/* ---------- PROMPT CARDS ---------- */
+const CHARACTERS = [
+  {
+    "name": "Tu experiencia",
+    "role": "Maquilladora, camarera, secretaria",
+    "facts": ["para que sepa", "mi experiencia", "atender al cliente"],
+    "prompt": "Escribe una frase completa con \"para que\" + subjuntivo sobre tu experiencia:"
+  },
+  {
+    "name": "Tu disponibilidad",
+    "role": "Horarios y fecha de inicio",
+    "facts": ["antes de que pregunte", "disponible", "septiembre"],
+    "prompt": "Escribe una frase completa con \"antes de que\" + subjuntivo sobre tu disponibilidad:"
+  },
+  {
+    "name": "Tu motivación",
+    "role": "Por qué quieres el puesto",
+    "facts": ["me gustaría", "podría", "el puesto"],
+    "prompt": "Escribe una frase completa con condicional de cortesía explicando tu motivación:"
+  }
+];
+
+const charWrap = document.getElementById('characters');
+CHARACTERS.forEach((c)=>{
+  const card = document.createElement('div');
+  card.className = 'char-card';
+  card.innerHTML = `
+    <div class="char-avatar">${c.name.charAt(0)}</div>
+    <div class="char-body">
+      <p class="char-name">${c.name}</p>
+      <p class="char-role">${c.role}</p>
+      <div class="char-facts">${c.facts.map(f=>`<span class="fact-tag">${f}</span>`).join('')}</div>
+      <p class="char-prompt">${c.prompt}</p>
+      <textarea class="char-input" rows="2" placeholder="Para que / Antes de que / Me gustaría..."></textarea>
+    </div>
+  `;
+  charWrap.appendChild(card);
+});
+
+/* ---------- INTERVIEW SIMULATION SCENES ---------- */
+const SCENES = [
+  {
+    "id": "recepcionista",
+    "tab": "Entrevista: recepcionista",
+    "icon": "🏨",
+    "setup": "El profesor entrevista a Pylypenko para un puesto de recepcionista en un hotel del norte de Tenerife.",
+    "lines": [
+      { "who": "friend", "name": "Entrevistador", "text": "Cuénteme un poco sobre su experiencia laboral." },
+      { "who": "you", "hint": "Responde con \"en primer lugar\" + tu experiencia (camarera, secretaria)." },
+      { "who": "friend", "name": "Entrevistador", "text": "¿Por qué le gustaría trabajar con nosotros?" },
+      { "who": "you", "hint": "Responde con \"me gustaría\" + una razón concreta." },
+      { "who": "friend", "name": "Entrevistador", "text": "¿Cómo actuaría si un cliente estuviera muy enfadado?" },
+      { "who": "you", "hint": "Responde con condicional: \"hablaría con calma y...\"." },
+      { "who": "friend", "name": "Entrevistador", "text": "¿Cuál es su disponibilidad horaria?" },
+      { "who": "you", "hint": "Responde con \"antes de que\" + tu disponibilidad." }
+    ]
+  },
+  {
+    "id": "camarera",
+    "tab": "Entrevista: camarera",
+    "icon": "☕",
+    "setup": "El profesor entrevista a Pylypenko para un puesto de camarera en una cafetería turística.",
+    "lines": [
+      { "who": "friend", "name": "Entrevistador", "text": "¿Qué experiencia tiene atendiendo al público?" },
+      { "who": "you", "hint": "Responde con \"para que sepa\" + tu experiencia previa." },
+      { "who": "friend", "name": "Entrevistador", "text": "¿Podría trabajar los fines de semana?" },
+      { "who": "you", "hint": "Responde con condicional: \"podría...\"." },
+      { "who": "friend", "name": "Entrevistador", "text": "¿Qué la hace una buena candidata para este puesto?" },
+      { "who": "you", "hint": "Responde con \"además\" + una cualidad tuya." },
+      { "who": "friend", "name": "Entrevistador", "text": "¿Alguna pregunta antes de terminar?" },
+      { "who": "you", "hint": "Responde con \"antes de que terminemos, me gustaría preguntar...\"." }
+    ]
+  }
+];
+
+const sceneTabs = document.getElementById('scene-tabs');
+const sceneContainer = document.getElementById('scene-container');
+let activeScene = 0;
+
+function renderTabs(){
+  sceneTabs.innerHTML = SCENES.map((s,i)=>
+    `<button class="scene-tab${i===activeScene?' active':''}" data-idx="${i}">${s.icon} ${s.tab}</button>`
+  ).join('');
+  sceneTabs.querySelectorAll('.scene-tab').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      activeScene = parseInt(btn.dataset.idx, 10);
+      renderTabs();
+      renderScene();
+    });
+  });
+}
+
+function renderScene(){
+  const scene = SCENES[activeScene];
+  const linesHtml = scene.lines.map((l)=>{
+    if(l.who === 'friend'){
+      return `
+        <div class="line friend">
+          <div class="line-avatar">${l.name.charAt(0)}</div>
+          <div class="line-body">
+            <p class="line-name">${l.name}</p>
+            <div class="line-bubble">${l.text}</div>
+          </div>
+        </div>`;
+    } else {
+      return `
+        <div class="line you">
+          <div class="line-avatar">You</div>
+          <div class="line-body">
+            <p class="line-name">You</p>
+            <textarea class="line-input" rows="2" placeholder="Escribe tu respuesta..."></textarea>
+            <p class="line-hint">${l.hint}</p>
+          </div>
+        </div>`;
+    }
+  }).join('');
+
+  sceneContainer.innerHTML = `
+    <div class="scene-setup">
+      <span class="scene-icon">${scene.icon}</span>
+      <p class="scene-text"><strong>${scene.tab}:</strong> ${scene.setup}</p>
+    </div>
+    <div class="dialogue">${linesHtml}</div>
+  `;
+}
+
+renderTabs();
+renderScene();
+
+/* ---------- FINAL TASK ---------- */
+const STORAGE_KEY = 'pylypenko-clase10-tarea';
+const taskArea = document.getElementById('final-task');
+const taskCount = document.getElementById('task-count');
+const savedFlag = document.getElementById('saved-flag');
+
+async function loadTask(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(STORAGE_KEY);
+    if (res && typeof res.value === 'string') taskArea.value = res.value;
+  }catch(e){
+    // Key doesn't exist yet: no previous task, stays blank.
+  }
+  updateCount();
+}
+
+function updateCount(){
+  const matches = (taskArea.value.match(/\b(me gustaría|podría|sería|tendría|haría|querría)\b/gi) || []).length;
+  taskCount.textContent = `${matches} verbo${matches===1?'':'s'} en condicional detectado${matches===1?'':'s'}`;
+}
+taskArea.addEventListener('input', updateCount);
+updateCount();
+loadTask();
+
+document.getElementById('save-btn').addEventListener('click', async ()=>{
+  if (!window.storage){
+    savedFlag.textContent = 'No se puede guardar aquí';
+    savedFlag.classList.add('show');
+    setTimeout(()=>{ savedFlag.classList.remove('show'); savedFlag.textContent = 'Guardado ✓'; }, 2200);
+    return;
+  }
+  try{
+    const ok = await window.storage.set(STORAGE_KEY, taskArea.value);
+    savedFlag.textContent = ok ? 'Guardado ✓' : 'No se pudo guardar';
+  }catch(e){
+    savedFlag.textContent = 'No se pudo guardar';
+  }
+  savedFlag.classList.add('show');
+  setTimeout(()=>{ savedFlag.classList.remove('show'); savedFlag.textContent = 'Guardado ✓'; }, 1800);
+});
+</script>
+
+</body>
+</html>

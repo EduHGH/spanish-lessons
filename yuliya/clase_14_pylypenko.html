@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Class 14 · Lo que ha cambiado desde que llegué</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Space+Mono:wght@400;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+
+/* ╔══════════════════════════════════════════════════════════════╗
+   ║  ESCOLAR × NOTHING                                            ║
+   ║  Class 14 · L4 Perfecto vs indefinido — línea de tiempo         ║
+   ╚══════════════════════════════════════════════════════════════╝ */
+
+:root{
+  --paper:        #F4EFE4;
+  --paper-deep:   #EAE3D2;
+  --glass:        rgba(255,255,255,0.55);
+  --glass-strong: rgba(255,255,255,0.75);
+  --ink:          #23291F;
+  --ink-soft:     #565F52;
+  --ink-faint:    #8B9184;
+  --line:         rgba(35,41,31,0.10);
+  --line-strong:  rgba(35,41,31,0.20);
+
+  /* roles semánticos de esta clase — apertura de L4, el pasado biográfico:
+     b1 azul = gramática del día (perfecto/indefinido), b2 verde = línea de tiempo personal
+     (biografía), family ámbar = tarea, ok verde = acierto */
+  --b1:      #2F6FED;  --b1-soft: rgba(47,111,237,0.10);  --b1-line: rgba(47,111,237,0.30);
+  --b2:      #2E9E6B;  --b2-soft: rgba(46,158,107,0.10);  --b2-line: rgba(46,158,107,0.30);
+  --family:  #DB8A2E;  --family-soft: rgba(219,138,46,0.10); --family-line: rgba(219,138,46,0.30);
+  --ok:      #2E9E6B;  --ok-soft: rgba(46,158,107,0.10);  --ok-line: rgba(46,158,107,0.30);
+
+  --f-display: 'Fraunces', Georgia, serif;
+  --f-body:    'IBM Plex Sans', system-ui, sans-serif;
+  --f-data:    'Space Mono', ui-monospace, monospace;
+
+  --r-sm: 8px;
+  --r-md: 16px;
+  --r-lg: 24px;
+
+  --blur: 22px;
+  --spring: cubic-bezier(.34,1.56,.64,1);
+  --shadow-glass: 0 8px 32px rgba(35,41,31,0.06), 0 1px 2px rgba(35,41,31,0.05);
+}
+
+*{ box-sizing:border-box; }
+html{ scroll-behavior:smooth; }
+body{
+  margin:0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--f-body);
+  line-height:1.6;
+  padding: 0 0 100px;
+  position: relative;
+  min-height: 100vh;
+}
+body::before{
+  content:"";
+  position: fixed; inset:0;
+  background-image: radial-gradient(circle, rgba(35,41,31,0.09) 1.5px, transparent 1.5px);
+  background-size: 28px 28px;
+  pointer-events:none; z-index:0;
+}
+body::after{
+  content:"";
+  position: fixed; inset:0;
+  background: radial-gradient(ellipse 70% 50% at 50% -10%, var(--paper-deep), transparent 60%);
+  pointer-events:none; z-index:0;
+}
+::selection{ background: var(--b1-soft); }
+
+.page{ max-width: 760px; margin:0 auto; padding: 56px 20px 0; position:relative; z-index:1; }
+
+/* ---------- HERO ---------- */
+.hero{
+  background: var(--glass);
+  backdrop-filter: blur(var(--blur)); -webkit-backdrop-filter: blur(var(--blur));
+  border:1px solid rgba(255,255,255,0.6);
+  border-radius: var(--r-lg);
+  padding: 44px 40px 36px;
+  box-shadow: var(--shadow-glass);
+  position:relative; overflow:hidden; margin-bottom: 24px;
+}
+.hero-eyebrow{
+  font-family: var(--f-data); font-size:12px; letter-spacing:.16em; text-transform:uppercase;
+  color: var(--ink-faint); margin:0 0 16px; display:flex; align-items:center; gap:10px;
+}
+.dot-live{ width:7px; height:7px; border-radius:50%; background: var(--b1); box-shadow: 0 0 0 4px var(--b1-soft); animation: pulse 2.6s ease-in-out infinite; }
+@keyframes pulse{ 0%,100%{opacity:1;} 50%{opacity:0.35;} }
+
+.hero h1{ font-family: var(--f-display); font-weight:500; font-size:clamp(28px,5vw,44px); margin:0 0 12px; letter-spacing:-.01em; line-height:1.08; }
+.hero h1 em{ font-style:italic; color: var(--b1); }
+.hero p.desc{ font-size:15px; color: var(--ink-soft); max-width:60ch; margin:0; }
+
+.meta-row{ display:flex; flex-wrap:wrap; gap:20px; margin-top:26px; font-family: var(--f-data); font-size:12px; color: var(--ink-faint); }
+.meta-row strong{ display:block; color: var(--ink); font-size:14.5px; font-weight:500; font-family: var(--f-display); margin-top:3px; }
+
+/* ---------- SECTION HEAD ---------- */
+.section{ margin-top: 52px; }
+.section-head{ display:flex; align-items:baseline; gap:12px; margin-bottom:18px; }
+.section-num{
+  font-family: var(--f-data); font-size:12px; color:#fff; background: var(--b1);
+  width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex:none;
+}
+.section-head h2{ font-family: var(--f-display); font-weight:500; font-style:italic; font-size:22px; margin:0; }
+.time-tag{
+  font-family: var(--f-data); font-size:11px; color: var(--ink-faint);
+  background: var(--glass-strong); border:1px solid var(--line); padding:3px 10px; border-radius:999px; margin-left:auto; flex:none;
+}
+
+/* ---------- GLASS PANEL ---------- */
+.glass-panel{
+  background: var(--glass);
+  backdrop-filter: blur(var(--blur)); -webkit-backdrop-filter: blur(var(--blur));
+  border: 1px solid rgba(255,255,255,0.6);
+  border-radius: var(--r-lg);
+  padding: 26px 28px;
+  box-shadow: var(--shadow-glass);
+}
+.glass-panel[data-role="b1"]{ border-color: var(--b1-line); background: linear-gradient(var(--b1-soft), var(--b1-soft)), var(--glass); }
+.glass-panel[data-role="b2"]{ border-color: var(--b2-line); background: linear-gradient(var(--b2-soft), var(--b2-soft)), var(--glass); }
+.glass-panel[data-role="family"]{ border-color: var(--family-line); background: linear-gradient(var(--family-soft), var(--family-soft)), var(--glass); }
+.glass-panel[data-role="ok"]{ border-color: var(--ok-line); background: linear-gradient(var(--ok-soft), var(--ok-soft)), var(--glass); }
+.glass-panel p{ font-size:15px; color: var(--ink-soft); margin:0 0 14px; }
+.glass-panel p:last-of-type{ margin-bottom:0; }
+.glass-panel p strong{ color: var(--ink); font-weight:600; }
+
+/* ---------- CONJUGATION TABLE ---------- */
+.conj-table-wrap{ overflow-x:auto; margin:4px 0 0; }
+table.conj{ width:100%; border-collapse:collapse; font-size:14.5px; min-width:420px; }
+table.conj td{ padding:11px 8px; border-bottom:1px dashed var(--line); }
+table.conj tr:last-child td{ border-bottom:none; }
+table.conj td.pron{ font-family: var(--f-data); color: var(--ink-faint); font-size:12px; width:170px; }
+table.conj td.form{ font-family: var(--f-display); font-weight:600; font-size:20px; color: var(--b1); }
+table.conj td.ex{ color: var(--ink-soft); font-size:13.5px; }
+
+.note{ margin-top:16px; padding:14px 16px; background: linear-gradient(var(--b1-soft),var(--b1-soft)), var(--glass); border:1px solid var(--b1-line); border-radius: var(--r-md); font-size:13.5px; color: var(--ink-soft); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+.note strong{ color: var(--ink); }
+.warning-box{ margin-top:16px; padding:14px 16px; background: linear-gradient(var(--family-soft),var(--family-soft)), var(--glass); border:1px solid var(--family-line); border-radius: var(--r-md); font-size:13.5px; color: var(--ink-soft); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+.warning-box strong{ color:#96591A; }
+
+/* ---------- USES GRID ---------- */
+.uses-grid{ display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:18px; }
+@media (max-width:560px){ .uses-grid{ grid-template-columns:1fr; } }
+.use-card{
+  border-radius: var(--r-md); padding:16px 18px; border:1px solid var(--b1-line);
+  background: linear-gradient(var(--b1-soft), var(--b1-soft)), var(--glass);
+  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+}
+.use-tag{ font-family: var(--f-data); font-size:10px; text-transform:uppercase; letter-spacing:.06em; color: var(--b1); margin:0 0 6px; }
+.use-trigger{ font-family: var(--f-display); font-weight:600; font-size:16.5px; color: var(--ink); margin:0 0 6px; }
+.use-ex{ font-size:13px; color: var(--ink-soft); }
+
+/* ---------- VOCAB / TAP CARDS ---------- */
+.vocab-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:12px; margin-top:4px; }
+.tap-card{
+  background: var(--glass); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  border:1px solid rgba(255,255,255,0.5); border-radius: var(--r-md);
+  padding:14px 16px; cursor:pointer; min-height:78px;
+  display:flex; flex-direction:column; justify-content:center;
+  transition: border-color .15s ease, transform .18s var(--spring);
+}
+.tap-card:hover{ border-color: var(--b1-line); transform: translateY(-2px); }
+.tap-card:active{ transform: scale(.97); transition-duration: .08s; }
+.tap-card:focus-visible{ outline:2px solid var(--b1); outline-offset:2px; }
+.tap-front{ font-family: var(--f-body); font-weight:600; font-size:15px; }
+.tap-back{ display:none; font-family: var(--f-data); font-size:12px; color: var(--ink-faint); margin-top:6px; }
+.tap-card.flipped .tap-back{ display:block; }
+.tap-card.flipped{ background: linear-gradient(var(--b1-soft),var(--b1-soft)), var(--glass); border-color: var(--b1-line); }
+.vocab-hint{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin:10px 2px 16px; }
+
+/* ---------- QUIZ ---------- */
+.exercise{ margin-bottom:18px; }
+.exercise:last-of-type{ margin-bottom:0; }
+.ex-sentence{ font-size:15px; margin-bottom:10px; color: var(--ink); }
+.ex-sentence .gap{ font-family: var(--f-data); color: var(--ink-faint); }
+.ex-options{ display:flex; flex-wrap:wrap; gap:8px; }
+.opt-btn{
+  font-family: var(--f-body); font-size:14px; background: var(--glass-strong); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  border:1.5px solid var(--line-strong); color: var(--ink); padding:8px 17px; border-radius:999px; cursor:pointer;
+  transition: transform .18s var(--spring), background .15s ease, border-color .15s ease, color .15s ease;
+}
+.opt-btn:hover{ border-color: var(--ink-faint); }
+.opt-btn:active{ transform: scale(.94); transition-duration: .08s; }
+.opt-btn.picked{ background: linear-gradient(var(--b1-soft),var(--b1-soft)), var(--glass-strong); border-color: var(--b1); color: var(--b1); }
+.opt-btn.correct{ background: linear-gradient(var(--ok-soft),var(--ok-soft)), var(--glass-strong); border-color: var(--ok); color: var(--ok); }
+.opt-btn.wrong{ background: linear-gradient(var(--family-soft),var(--family-soft)), var(--glass-strong); border-color: var(--family); color: var(--family); text-decoration: line-through; }
+.opt-btn:disabled{ cursor:default; }
+.check-bar{ display:flex; align-items:center; justify-content:space-between; gap:16px; margin-top:20px; padding-top:18px; border-top:1px dashed var(--line); flex-wrap:wrap; }
+
+.btn-primary{
+  font-family: var(--f-body); font-weight:600; font-size:14px; color:#fff; background: var(--b1);
+  border:none; padding:11px 22px; border-radius:999px; cursor:pointer;
+  transition: transform .18s var(--spring);
+}
+.btn-primary:hover{ transform: translateY(-1px); }
+.btn-primary:active{ transform: scale(.95); transition-duration: .08s; }
+.btn-ghost{
+  font-family: var(--f-body); font-weight:600; font-size:13px; color: var(--ink-soft); background:none;
+  border:1.5px solid var(--line); padding:9px 18px; border-radius:999px; cursor:pointer;
+  transition: transform .18s var(--spring), border-color .15s ease;
+}
+.btn-ghost:hover{ border-color: var(--ink-faint); }
+.btn-ghost:active{ transform: scale(.95); transition-duration: .08s; }
+#score-text{ font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); }
+
+/* ---------- PROMPT CARDS ---------- */
+.q-bank{ display:grid; gap:10px; margin-top:4px; }
+.q-card{
+  background: var(--glass); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  border:1px solid rgba(255,255,255,0.6); border-radius: var(--r-md);
+  padding:14px 16px; display:flex; gap:12px; align-items:flex-start;
+}
+.q-num{
+  font-family: var(--f-data); font-size:11px; color:#fff; background: var(--b1);
+  width:20px; height:20px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex:none; margin-top:2px;
+}
+.q-text{ font-size:14.5px; color: var(--ink); }
+
+/* ---------- LÍNEA DE TIEMPO (timeline biográfico) ---------- */
+.timeline{ position:relative; padding-left:30px; margin-top:18px; }
+.timeline::before{
+  content:""; position:absolute; left:9px; top:6px; bottom:6px; width:3px;
+  background: var(--b2-line);
+}
+.tl-item{ position:relative; margin-bottom:20px; }
+.tl-item:last-child{ margin-bottom:0; }
+.tl-item::before{
+  content:""; position:absolute; left:-30px; top:4px; width:12px; height:12px; border-radius:50%;
+  background: var(--b2); border:2px solid var(--paper);
+}
+.tl-label{ font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.06em; color: var(--b2); margin:0 0 4px; }
+.tl-input{
+  width:100%; font-family: var(--f-body); font-size:14.5px; color: var(--ink);
+  background:#fff; border:1px solid var(--b2-line); border-radius: var(--r-sm);
+  padding:10px 12px; resize:vertical; min-height:44px;
+}
+.tl-input:focus{ outline:none; border-color: var(--b2); }
+.tl-hint{ font-size:12.5px; color: var(--ink-faint); margin:4px 2px 0; }
+
+/* ---------- CHAIN PRODUCTION (marcadores encadenados) ---------- */
+.chain-list{ display:flex; flex-direction:column; gap:10px; margin-top:16px; }
+.chain-item{
+  background: var(--glass-strong); border:1px solid var(--b2-line); border-radius: var(--r-md);
+  padding:12px 16px; display:flex; align-items:center; gap:12px; backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+}
+.chain-marker{
+  font-family: var(--f-display); font-weight:600; font-style:italic; font-size:15px; color: var(--b2);
+  flex:none; min-width:110px;
+}
+.chain-input{
+  flex:1; font-family: var(--f-body); font-size:14px; color: var(--ink);
+  background:#fff; border:1px solid var(--line-strong); border-radius: var(--r-sm);
+  padding:8px 12px;
+}
+.chain-input:focus{ outline:none; border-color: var(--b2); }
+
+/* ---------- FINAL TASK ---------- */
+textarea#final-task{
+  width:100%; min-height:130px; font-family: var(--f-body); font-size:15px; color: var(--ink);
+  background: rgba(255,255,255,0.6); border:1px solid var(--family-line); border-radius: var(--r-md);
+  padding:14px 16px; resize:vertical; margin-top:14px;
+}
+textarea#final-task:focus{ outline:none; border-color: var(--family); background:#fff; }
+.task-footer{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:12px; flex-wrap:wrap; }
+#task-count{ font-family: var(--f-data); font-size:12px; color: var(--ink-faint); }
+.btn-secondary{
+  font-family: var(--f-body); font-weight:600; font-size:13.5px; color:#96591A; background:none;
+  border:1.5px solid var(--family-line); padding:9px 18px; border-radius:999px; cursor:pointer;
+  transition: transform .18s var(--spring), border-color .15s ease;
+}
+.btn-secondary:hover{ border-color: var(--family); }
+.btn-secondary:active{ transform: scale(.95); transition-duration: .08s; }
+.saved-flag{ font-family: var(--f-data); font-size:11.5px; color: var(--ok); opacity:0; transition: opacity .3s ease; }
+.saved-flag.show{ opacity:1; }
+
+/* ---------- RESOURCES ---------- */
+.resources-grid{ display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:16px; }
+@media (max-width:560px){ .resources-grid{ grid-template-columns:1fr; } }
+.resource-card{
+  background: var(--glass); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  border:1px solid var(--family-line); border-radius: var(--r-md); padding:14px 16px;
+}
+.resource-tag{ font-family: var(--f-data); font-size:10.5px; text-transform:uppercase; letter-spacing:.06em; color:#96591A; margin:0 0 6px; }
+.resource-title{ font-family: var(--f-display); font-weight:600; font-size:15px; margin:0 0 4px; }
+.resource-desc{ font-size:13px; color: var(--ink-soft); margin:0; }
+
+/* ---------- LECTURA (reading passage) ---------- */
+.read-card{
+  background: var(--glass); backdrop-filter: blur(var(--blur)); -webkit-backdrop-filter: blur(var(--blur));
+  border:1px solid var(--family-line); border-radius: var(--r-lg); padding:24px 26px;
+  box-shadow: var(--shadow-glass); margin-top:14px;
+}
+.read-title{ font-family: var(--f-display); font-weight:600; font-size:18px; margin:0 0 4px; }
+.read-sub{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); text-transform:uppercase; letter-spacing:.06em; margin:0 0 16px; }
+.read-body p{ font-size:15px; color: var(--ink); margin:0 0 12px; }
+.read-body p:last-child{ margin-bottom:0; }
+.read-body strong{ color:#96591A; font-weight:600; }
+.glossary{ margin-top:16px; padding-top:14px; border-top:1px dashed var(--line); display:flex; flex-wrap:wrap; gap:8px 18px; }
+.gloss-item{ font-size:12.5px; color: var(--ink-soft); }
+.gloss-item b{ font-family: var(--f-data); font-weight:700; color: var(--ink); font-size:12px; }
+
+/* ---------- TRANSCRIPCIÓN ---------- */
+.transcript{ margin-top:14px; padding-top:14px; border-top:1px dashed var(--line); }
+.transcript p{ font-size:14.5px; color: var(--ink-soft); margin:0 0 10px; }
+.transcript p:last-child{ margin-bottom:0; }
+.transcript .speaker{ font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.05em; color: var(--family); display:block; margin-bottom:2px; }
+.transcript strong{ color: var(--ink); font-weight:600; }
+
+footer{
+  max-width:760px; margin:0 auto; padding:0 20px; display:flex;
+  justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;
+  font-family: var(--f-data); font-size:12px; color: var(--ink-faint);
+  margin-top:64px; padding-top:28px; border-top:1px solid var(--line);
+}
+
+@media (max-width:600px){
+  .page{ padding:36px 16px 0; }
+  .hero{ padding:32px 24px 28px; }
+  .glass-panel{ padding:20px 18px; }
+  .chain-item{ flex-direction:column; align-items:flex-start; }
+  .chain-marker{ min-width:0; }
+}
+@media (prefers-reduced-motion: reduce){ *{ transition:none !important; } }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HERO -->
+  <div class="hero">
+    <p class="hero-eyebrow"><span class="dot-live"></span>Class 14 · L4 El pasado que me trajo aquí</p>
+    <h1>Lo que <em>ha cambiado</em> desde que llegué</h1>
+    <p class="desc">Empezamos una nueva línea: el pasado biográfico. Hoy repasamos y consolidamos el pretérito perfecto (he vivido, ha cambiado) frente al indefinido (viví, cambió), con marcadores temporales como desde que, últimamente y hace cuatro años. Construimos tu propia línea de tiempo — Ucrania, la llegada, los primeros meses, ahora — y de paso afinamos dos detalles que se cuelan en casi todas tus frases: preposiciones fijas con verbos y cuándo llevan artículo palabras como Ucrania o la guerra.</p>
+    <div class="meta-row">
+      <div>Duration<strong>50 min</strong></div>
+      <div>Focus<strong>pretérito perfecto vs indefinido · preposiciones fijas · artículo</strong></div>
+      <div>Level<strong>A2</strong></div>
+    </div>
+  </div>
+
+  <!-- 1. CONVERSACIÓN -->
+  <div class="section">
+    <div class="section-head"><span class="section-num">1</span><h2>Conversación: cómo ha cambiado tu vida</h2><span class="time-tag">10 min</span></div>
+    <div class="glass-panel">
+      <p>Llevas ya un tiempo en Tenerife. Antes de entrar en la gramática, cuéntame en general — con tus propias palabras, sin preocuparte todavía por el tiempo verbal exacto — cómo ha cambiado tu vida desde que llegaste.</p>
+      <div class="note"><strong>Preguntas para guiar la conversación:</strong> ¿Qué es lo primero que notaste diferente al llegar? ¿Qué ha mejorado últimamente? ¿Hay algo de tu vida en Ucrania que echas de menos y que no ha cambiado en ti?</div>
+    </div>
+  </div>
+
+  <!-- 2. GRAMÁTICA: perfecto vs indefinido -->
+  <div class="section">
+    <div class="section-head"><span class="section-num">2</span><h2>Pretérito perfecto vs indefinido</h2><span class="time-tag">18 min</span></div>
+    <div class="glass-panel" data-role="b1">
+      <p>Los dos hablan del pasado, pero con una diferencia clave: el <strong>perfecto</strong> conecta ese pasado con el presente (un periodo todavía abierto, como "este año" o "mi vida hasta ahora"); el <strong>indefinido</strong> habla de un hecho cerrado, terminado, con un momento concreto en el pasado.</p>
+
+      <div class="conj-table-wrap">
+        <table class="conj">
+          <tr><td class="pron">perfecto — periodo abierto</td><td class="form">he vivido</td><td class="ex">He vivido en tres ciudades distintas desde que llegué a España.</td></tr>
+          <tr><td class="pron">perfecto — periodo abierto</td><td class="form">ha cambiado</td><td class="ex">Mi español ha cambiado mucho este año.</td></tr>
+          <tr><td class="pron">indefinido — hecho cerrado</td><td class="form">viví</td><td class="ex">Viví en Kiev hasta los veintiséis años.</td></tr>
+          <tr><td class="pron">indefinido — hecho cerrado</td><td class="form">llegué</td><td class="ex">Llegué a Tenerife hace cuatro años, en marzo.</td></tr>
+        </table>
+      </div>
+
+      <div class="uses-grid">
+        <div class="use-card">
+          <p class="use-tag">perfecto</p>
+          <p class="use-trigger">últimamente</p>
+          <p class="use-ex">Últimamente he mejorado mucho con los tiempos del pasado.</p>
+        </div>
+        <div class="use-card">
+          <p class="use-tag">perfecto</p>
+          <p class="use-trigger">este año / este mes</p>
+          <p class="use-ex">Este año he hecho muchos amigos nuevos en el trabajo.</p>
+        </div>
+        <div class="use-card">
+          <p class="use-tag">indefinido</p>
+          <p class="use-trigger">hace + tiempo</p>
+          <p class="use-ex">Empecé a trabajar en el hotel hace dos años.</p>
+        </div>
+        <div class="use-card">
+          <p class="use-tag">combinado</p>
+          <p class="use-trigger">desde que + indefinido... perfecto</p>
+          <p class="use-ex">Desde que llegué, he cambiado mucho como persona.</p>
+        </div>
+      </div>
+
+      <div class="warning-box"><strong>El error más repetido:</strong> usar indefinido con marcadores de periodo abierto — "últimamente cambié mucho" en vez de "últimamente he cambiado mucho". Si el marcador incluye el presente (este año, últimamente, desde entonces), casi siempre pide perfecto.</div>
+    </div>
+  </div>
+
+  <!-- 3. HILO TRANSVERSAL: preposiciones y artículo -->
+  <div class="section">
+    <div class="section-head"><span class="section-num">3</span><h2>Hilo transversal: preposiciones fijas y el artículo</h2><span class="time-tag">6 min</span></div>
+    <div class="glass-panel" data-role="b2">
+      <p>Dos detalles pequeños que aparecen constantemente en tu español: verbos que van siempre con la misma preposición, y palabras como Ucrania que a veces llevan artículo y a veces no.</p>
+      <div class="uses-grid">
+        <div class="use-card" style="border-color:var(--b2-line); background:linear-gradient(var(--b2-soft),var(--b2-soft)), var(--glass);">
+          <p class="use-tag" style="color:var(--b2);">preposición fija</p>
+          <p class="use-trigger">pensar en</p>
+          <p class="use-ex">Pienso mucho en mi familia que sigue en Ucrania.</p>
+        </div>
+        <div class="use-card" style="border-color:var(--b2-line); background:linear-gradient(var(--b2-soft),var(--b2-soft)), var(--glass);">
+          <p class="use-tag" style="color:var(--b2);">preposición fija</p>
+          <p class="use-trigger">depender de</p>
+          <p class="use-ex">Todo dependió de cómo salieron los primeros meses aquí.</p>
+        </div>
+        <div class="use-card" style="border-color:var(--b2-line); background:linear-gradient(var(--b2-soft),var(--b2-soft)), var(--glass);">
+          <p class="use-tag" style="color:var(--b2);">preposición fija</p>
+          <p class="use-trigger">acostumbrarse a</p>
+          <p class="use-ex">Me he acostumbrado al clima de aquí bastante rápido.</p>
+        </div>
+        <div class="use-card" style="border-color:var(--b2-line); background:linear-gradient(var(--b2-soft),var(--b2-soft)), var(--glass);">
+          <p class="use-tag" style="color:var(--b2);">artículo</p>
+          <p class="use-trigger">Ucrania (sin) / la guerra (con)</p>
+          <p class="use-ex">Nací en Ucrania. — La guerra en Ucrania empezó en 2022.</p>
+        </div>
+      </div>
+      <div class="note" style="background:linear-gradient(var(--b2-soft),var(--b2-soft)), var(--glass); border-color:var(--b2-line);"><strong>Y otro detalle:</strong> tras "creo que" y "pero creo que" no se usa "de que" — solo con verbos y expresiones concretas (me alegro de que, estoy segura de que) se necesita esa "de". Con "creo", "pienso" y "es probable que", va directo con "que".</div>
+    </div>
+  </div>
+
+  <!-- 4. VOCABULARIO -->
+  <div class="section">
+    <div class="section-head"><span class="section-num">4</span><h2>Vocabulario</h2><span class="time-tag">5 min</span></div>
+    <p class="vocab-hint">Toca cada tarjeta para ver el significado y un ejemplo en contexto.</p>
+    <div class="vocab-grid" id="vocab-grid"></div>
+  </div>
+
+  <!-- 5. LÍNEA DE TIEMPO PERSONAL -->
+  <div class="section">
+    <div class="section-head"><span class="section-num">5</span><h2>Tu línea de tiempo: Ucrania → ahora</h2><span class="time-tag">14 min</span></div>
+    <div class="glass-panel" data-role="b2">
+      <p>Construye tu propia biografía reciente en cuatro etapas. Usa <strong>indefinido</strong> para los hechos puntuales de cada etapa (llegué, empecé, cambié) y <strong>perfecto</strong> cuando hables de lo que ha pasado hasta ahora, en el último bloque.</p>
+      <div class="timeline">
+        <div class="tl-item">
+          <p class="tl-label">Ucrania — antes de venir</p>
+          <textarea class="tl-input" rows="2" placeholder="Viví en... / Trabajé en... / Estudié..."></textarea>
+          <p class="tl-hint">Usa indefinido: hechos concretos y cerrados de tu vida en Ucrania.</p>
+        </div>
+        <div class="tl-item">
+          <p class="tl-label">La llegada</p>
+          <textarea class="tl-input" rows="2" placeholder="Llegué a Tenerife en... / El primer mes fue..."></textarea>
+          <p class="tl-hint">Indefinido de nuevo: el momento exacto de la llegada.</p>
+        </div>
+        <div class="tl-item">
+          <p class="tl-label">Los primeros meses</p>
+          <textarea class="tl-input" rows="2" placeholder="Al principio conocí a... / Empecé a trabajar en..."></textarea>
+          <p class="tl-hint">Sigue con indefinido: hitos concretos de esa etapa.</p>
+        </div>
+        <div class="tl-item">
+          <p class="tl-label">Ahora — el balance</p>
+          <textarea class="tl-input" rows="2" placeholder="He aprendido... / He cambiado... / Últimamente he..."></textarea>
+          <p class="tl-hint">Aquí cambia a perfecto: es un periodo que sigue abierto hasta hoy.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. PRODUCCIÓN ORAL ENCADENADA -->
+  <div class="section">
+    <div class="section-head"><span class="section-num">6</span><h2>Producción encadenada: un marcador distinto cada vez</h2><span class="time-tag">10 min</span></div>
+    <div class="glass-panel">
+      <p>Ahora en voz alta: di una frase sobre tu vida usando cada uno de estos marcadores, sin repetir el mismo dos veces. Prioriza frases cortas y directas frente a subordinadas complicadas.</p>
+      <div class="chain-list">
+        <div class="chain-item"><span class="chain-marker">desde que</span><input class="chain-input" type="text" placeholder="Desde que llegué..."></div>
+        <div class="chain-item"><span class="chain-marker">últimamente</span><input class="chain-input" type="text" placeholder="Últimamente..."></div>
+        <div class="chain-item"><span class="chain-marker">este año</span><input class="chain-input" type="text" placeholder="Este año..."></div>
+        <div class="chain-item"><span class="chain-marker">hace + tiempo</span><input class="chain-input" type="text" placeholder="Hace... años/meses..."></div>
+        <div class="chain-item"><span class="chain-marker">desde entonces</span><input class="chain-input" type="text" placeholder="Desde entonces..."></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7. PRÁCTICA -->
+  <div class="section">
+    <div class="section-head"><span class="section-num">7</span><h2>Practica</h2><span class="time-tag">10 min</span></div>
+    <div class="glass-panel">
+      <p class="vocab-hint" style="margin-bottom:14px;">10 frases mezclando perfecto e indefinido. Fíjate en el marcador temporal antes de elegir: ¿el periodo sigue abierto o ya se cerró?</p>
+      <div id="exercises"></div>
+      <div class="check-bar">
+        <div style="display:flex; gap:10px;">
+          <button class="btn-primary" id="check-btn">Comprobar respuestas</button>
+          <button class="btn-ghost" id="reset-btn">Reiniciar</button>
+        </div>
+        <span id="score-text"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 8. TAREA FINAL -->
+  <div class="section">
+    <div class="section-head"><span class="section-num">8</span><h2 style="color:#96591A">Tu tarea</h2><span class="time-tag">2 min</span></div>
+    <div class="glass-panel" data-role="family">
+      <p>Graba un <strong>audio de 1-2 minutos</strong> contando qué ha cambiado en tu vida en los últimos cuatro años. Usa el espacio de abajo para anotar tres o cuatro ideas sueltas antes de grabar, no hace falta escribir frases completas.</p>
+      <textarea id="final-task" placeholder="He cambiado... / Últimamente... / Desde que llegué... / Hace cuatro años..."></textarea>
+      <div class="task-footer">
+        <span id="task-count">0 usos de perfecto/indefinido detectados</span>
+        <div style="display:flex; gap:10px; align-items:center;">
+          <span class="saved-flag" id="saved-flag">Guardado ✓</span>
+          <button class="btn-secondary" id="save-btn">Guardar tarea</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 9. PARA LA PRÓXIMA CLASE -->
+  <div class="section">
+    <div class="section-head"><span class="section-num">9</span><h2>Para la próxima clase</h2><span class="time-tag">—</span></div>
+    <div class="resources-grid">
+      <div class="resource-card">
+        <p class="resource-tag">Lectura</p>
+        <p class="resource-title">Testimonio de alguien que emigró</p>
+        <p class="resource-desc">Un texto breve adaptado de una persona que mira atrás en su trayectoria de emigración.</p>
+      </div>
+      <div class="resource-card">
+        <p class="resource-tag">Audio</p>
+        <p class="resource-title">Entrevista sobre adaptación a un país nuevo</p>
+        <p class="resource-desc">Alguien reflexionando en voz alta sobre su propio proceso de adaptación.</p>
+      </div>
+    </div>
+
+    <!-- LECTURA -->
+    <div class="read-card">
+      <p class="read-title">Testimonio: «Ya no soy la misma persona que llegó»</p>
+      <p class="read-sub">Lectura adaptada · nivel A2</p>
+      <div class="read-body">
+        <p>Me llamo Marta y <strong>hace seis años</strong> dejé mi ciudad para venir a vivir a las islas. <strong>Llegué</strong> con una maleta pequeña y muchísimo miedo, sin conocer a nadie y sin hablar bien el idioma de aquí.</p>
+        <p>Los primeros meses fueron difíciles. <strong>Trabajé</strong> en varios sitios distintos hasta que <strong>encontré</strong> algo estable, y <strong>viví</strong> en tres pisos compartidos antes de tener uno propio. En aquella época todo me parecía nuevo y un poco abrumador.</p>
+        <p>Pero desde entonces, <strong>he cambiado</strong> mucho. <strong>He aprendido</strong> el idioma, <strong>me he hecho</strong> amigos que ya son como familia, y <strong>he construido</strong> una vida que, sinceramente, hace seis años no podía ni imaginar. Últimamente incluso <strong>he empezado</strong> a soñar en este idioma, y eso, para mí, lo dice todo.</p>
+        <p>Cuando miro atrás, pienso que la decisión más difícil de mi vida ha sido también la mejor. Ya no soy la misma persona que llegó aquella tarde de marzo.</p>
+      </div>
+      <div class="glossary">
+        <span class="gloss-item"><b>abrumador</b> overwhelming</span>
+        <span class="gloss-item"><b>hacerse amigos</b> to make friends</span>
+        <span class="gloss-item"><b>mirar atrás</b> to look back</span>
+        <span class="gloss-item"><b>construir una vida</b> to build a life</span>
+      </div>
+    </div>
+
+    <div class="q-bank" style="margin-top:14px;">
+      <div class="q-card"><span class="q-num">1</span><span class="q-text">¿Qué tiempo verbal usa Marta para los hechos puntuales del pasado (llegar, trabajar, vivir)?</span></div>
+      <div class="q-card"><span class="q-num">2</span><span class="q-text">¿Qué tiempo usa para hablar de lo que ha pasado hasta ahora (aprender, construir, hacerse amigos)?</span></div>
+      <div class="q-card"><span class="q-num">3</span><span class="q-text">Busca en el texto un marcador temporal que ya conoces de esta clase.</span></div>
+    </div>
+
+    <!-- AUDIO (transcripción) -->
+    <div class="read-card" style="margin-top:18px;">
+      <p class="read-title">Entrevista sobre adaptarse a un país nuevo</p>
+      <p class="read-sub">Comprensión oral · transcripción · nivel A2</p>
+      <p style="font-size:14.5px; color:var(--ink-soft); margin:0 0 14px;">Un periodista le pregunta a Andriy cómo ha sido su proceso de adaptación. Lee el diálogo fijándote en los tiempos verbales marcados.</p>
+      <div class="transcript open">
+        <p><span class="speaker">Periodista</span>Hoy hablamos con Andriy sobre su experiencia. Andriy, ¿cuánto tiempo llevas viviendo aquí?</p>
+        <p><span class="speaker">Andriy</span><strong>Llegué</strong> hace cuatro años, así que llevo bastante tiempo ya.</p>
+        <p><span class="speaker">Periodista</span>¿Y cómo <strong>ha sido</strong> el proceso de adaptación?</p>
+        <p><span class="speaker">Andriy</span>Al principio fue duro. Los primeros meses no <strong>entendía</strong> casi nada y <strong>me sentí</strong> muy solo. Pero poco a poco las cosas <strong>han ido</strong> cambiando.</p>
+        <p><span class="speaker">Periodista</span>¿Qué es lo que más <strong>ha cambiado</strong> en ti?</p>
+        <p><span class="speaker">Andriy</span>Sobre todo la confianza. Últimamente <strong>me he sentido</strong> mucho más seguro hablando, y eso <strong>ha cambiado</strong> también cómo me relaciono con la gente. Desde que llegué, creo que <strong>he madurado</strong> mucho como persona.</p>
+        <p><span class="speaker">Periodista</span>Muchas gracias por compartir tu historia, Andriy.</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <span>Class 14 · Lo que ha cambiado desde que llegué</span>
+  <span>Next class → Class 15: aquella tarde en que todo empezó</span>
+</footer>
+
+<script>
+/* ---------- VOCAB ---------- */
+const VOCAB = [
+  {front:"cambiar", back:"To change. — Mi vida ha cambiado mucho desde que llegué a España."},
+  {front:"mejorar", back:"To improve. — Mi español ha mejorado bastante este último año."},
+  {front:"adaptarse", back:"To adapt. — Me adapté al clima de aquí más rápido de lo que pensaba."},
+  {front:"últimamente", back:"Lately. — Últimamente he estado más tranquila con el idioma."},
+  {front:"desde entonces", back:"Since then. — Llegué en marzo; desde entonces no he vuelto a Ucrania."},
+  {front:"el balance", back:"The overall assessment. — Haciendo balance, creo que ha sido un buen año."},
+  {front:"los logros", back:"Achievements. — Entre mis logros está haber encontrado trabajo estable."},
+  {front:"acostumbrarse a", back:"To get used to. — Me he acostumbrado a hablar español todos los días."},
+];
+
+const grid = document.getElementById('vocab-grid');
+VOCAB.forEach(v=>{
+  const card = document.createElement('div');
+  card.className = 'tap-card';
+  card.setAttribute('role', 'button');
+  card.setAttribute('tabindex', '0');
+  card.setAttribute('aria-pressed', 'false');
+  card.setAttribute('aria-label', `${v.front}. Press to see the meaning.`);
+  card.innerHTML = `<div class="tap-front">${v.front}</div><div class="tap-back">${v.back}</div>`;
+  const toggle = ()=>{
+    const flipped = card.classList.toggle('flipped');
+    card.setAttribute('aria-pressed', String(flipped));
+  };
+  card.addEventListener('click', toggle);
+  card.addEventListener('keydown', (e)=>{
+    if(e.key === 'Enter' || e.key === ' '){
+      e.preventDefault();
+      toggle();
+    }
+  });
+  grid.appendChild(card);
+});
+
+/* ---------- EXERCISES ---------- */
+const EXERCISES = [
+  {
+    "sentence": "<span class=\"gap\">___</span> a Tenerife hace cuatro años, en marzo.",
+    "options": ["Llegué", "He llegado", "Llegaba"],
+    "answer": "Llegué"
+  },
+  {
+    "sentence": "Este año <span class=\"gap\">___</span> mucho con el idioma.",
+    "options": ["he mejorado", "mejoré", "mejoraba"],
+    "answer": "he mejorado"
+  },
+  {
+    "sentence": "Últimamente <span class=\"gap\">___</span> más segura hablando en español.",
+    "options": ["me he sentido", "me sentí", "me sentía"],
+    "answer": "me he sentido"
+  },
+  {
+    "sentence": "<span class=\"gap\">___</span> a trabajar en el hotel hace dos años.",
+    "options": ["Empecé", "He empezado", "Empezaba"],
+    "answer": "Empecé"
+  },
+  {
+    "sentence": "Desde que llegué, <span class=\"gap\">___</span> mucho como persona.",
+    "options": ["he cambiado", "cambié", "cambiaba"],
+    "answer": "he cambiado"
+  },
+  {
+    "sentence": "En Ucrania <span class=\"gap\">___</span> en una ciudad pequeña cerca de Kiev.",
+    "options": ["viví", "he vivido", "vivía"],
+    "answer": "viví"
+  },
+  {
+    "sentence": "<span class=\"gap\">___</span> tres pisos distintos desde que estoy en España.",
+    "options": ["He tenido", "Tuve", "Tenía"],
+    "answer": "He tenido"
+  },
+  {
+    "sentence": "Pienso mucho <span class=\"gap\">___</span> mi familia que sigue allí.",
+    "options": ["en", "de", "con"],
+    "answer": "en"
+  },
+  {
+    "sentence": "Me he acostumbrado <span class=\"gap\">___</span> el ritmo de vida de aquí.",
+    "options": ["a", "en", "de"],
+    "answer": "a"
+  },
+  {
+    "sentence": "Nací <span class=\"gap\">___</span> Ucrania, un país que echo de menos.",
+    "options": ["en", "en la", "de"],
+    "answer": "en"
+  }
+];
+
+function shuffle(arr){
+  const a = arr.slice();
+  for(let i = a.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+const exWrap = document.getElementById('exercises');
+EXERCISES.forEach((ex, i)=>{
+  const el = document.createElement('div');
+  el.className = 'exercise';
+  el.dataset.answer = ex.answer;
+  const shuffledOptions = shuffle(ex.options);
+  el.innerHTML = `
+    <div class="ex-sentence">${i+1}. ${ex.sentence}</div>
+    <div class="ex-options">
+      ${shuffledOptions.map(o=>`<button class="opt-btn" data-value="${o}">${o}</button>`).join('')}
+    </div>
+  `;
+  exWrap.appendChild(el);
+
+  el.querySelectorAll('.opt-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      el.querySelectorAll('.opt-btn').forEach(b=>b.classList.remove('picked'));
+      btn.classList.add('picked');
+    });
+  });
+});
+
+document.getElementById('check-btn').addEventListener('click', ()=>{
+  let correct = 0;
+  document.querySelectorAll('.exercise').forEach(el=>{
+    const answer = el.dataset.answer;
+    const picked = el.querySelector('.opt-btn.picked');
+    el.querySelectorAll('.opt-btn').forEach(b=>{
+      b.disabled = true;
+      if(b.dataset.value === answer) b.classList.add('correct');
+      else if(b === picked) b.classList.add('wrong');
+    });
+    if(picked && picked.dataset.value === answer) correct++;
+  });
+  document.getElementById('score-text').textContent = `${correct} / ${EXERCISES.length} correctas`;
+});
+
+document.getElementById('reset-btn').addEventListener('click', ()=>{
+  document.querySelectorAll('.exercise').forEach(el=>{
+    el.querySelectorAll('.opt-btn').forEach(b=>{
+      b.disabled = false;
+      b.classList.remove('picked','correct','wrong');
+    });
+  });
+  document.getElementById('score-text').textContent = '';
+});
+
+/* ---------- LÍNEA DE TIEMPO (autosave) ---------- */
+const STORAGE_KEY_TL = 'pylypenko-clase14-timeline';
+const tlInputs = document.querySelectorAll('.tl-input');
+
+async function loadTimeline(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(STORAGE_KEY_TL);
+    if (res && typeof res.value === 'string'){
+      const values = JSON.parse(res.value);
+      tlInputs.forEach((el, i)=>{ if(values[i]) el.value = values[i]; });
+    }
+  }catch(e){
+    // sin datos previos
+  }
+}
+tlInputs.forEach(el=>{
+  el.addEventListener('input', ()=>{
+    clearTimeout(el._saveTimer);
+    el._saveTimer = setTimeout(()=>{
+      if (!window.storage) return;
+      const values = Array.from(tlInputs).map(i=>i.value);
+      window.storage.set(STORAGE_KEY_TL, JSON.stringify(values)).catch(()=>{ /* fallo silencioso */ });
+    }, 600);
+  });
+});
+loadTimeline();
+
+/* ---------- FINAL TASK ---------- */
+const STORAGE_KEY = 'pylypenko-clase14-tarea';
+const taskArea = document.getElementById('final-task');
+const taskCount = document.getElementById('task-count');
+const savedFlag = document.getElementById('saved-flag');
+
+async function loadTask(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(STORAGE_KEY);
+    if (res && typeof res.value === 'string') taskArea.value = res.value;
+  }catch(e){
+    // Key doesn't exist yet: no previous task, stays blank.
+  }
+  updateCount();
+}
+
+function updateCount(){
+  const matches = (taskArea.value.match(/\b(he \w+ado|he \w+ido|ha \w+ado|ha \w+ido|hemos \w+ado|últimamente|desde que|desde entonces|hace \w+ años|hace \w+ meses|llegué|empecé|cambió|cambié)\b/gi) || []).length;
+  taskCount.textContent = `${matches} uso${matches===1?'':'s'} de perfecto/indefinido detectado${matches===1?'':'s'}`;
+}
+taskArea.addEventListener('input', updateCount);
+updateCount();
+loadTask();
+
+document.getElementById('save-btn').addEventListener('click', async ()=>{
+  if (!window.storage){
+    savedFlag.textContent = 'No se puede guardar aquí';
+    savedFlag.classList.add('show');
+    setTimeout(()=>{ savedFlag.classList.remove('show'); savedFlag.textContent = 'Guardado ✓'; }, 2200);
+    return;
+  }
+  try{
+    const ok = await window.storage.set(STORAGE_KEY, taskArea.value);
+    savedFlag.textContent = ok ? 'Guardado ✓' : 'No se pudo guardar';
+  }catch(e){
+    savedFlag.textContent = 'No se pudo guardar';
+  }
+  savedFlag.classList.add('show');
+  setTimeout(()=>{ savedFlag.classList.remove('show'); savedFlag.textContent = 'Guardado ✓'; }, 1800);
+});
+
+</script>
+
+</body>
+</html>

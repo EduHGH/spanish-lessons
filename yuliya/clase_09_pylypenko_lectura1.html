@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lectura · Anuncios de trabajo en Canarias</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+
+:root{
+  --paper:        #FBF7EE;
+  --paper-raised: #FFFFFF;
+  --paper-alt:    #F3ECDA;
+  --ink:          #23291F;
+  --ink-soft:     #565F52;
+  --ink-faint:    #8B9184;
+  --line:         rgba(35,41,31,0.12);
+  --line-strong:  rgba(35,41,31,0.22);
+
+  --b1:      #2F6FED;  --b1-soft: #EAF1FE;  --b1-line: #C6D9FC;
+  --b2:      #2E9E6B;  --b2-soft: #E9F6EF;  --b2-line: #BEE6D3;
+  --b3:      #DB8A2E;  --b3-soft: #FCF1E1;  --b3-line: #F3D9AF;
+
+  --accent:      var(--b2);
+  --accent-soft: var(--b2-soft);
+  --accent-line: var(--b2-line);
+
+  --f-display: 'Fraunces', Georgia, serif;
+  --f-body:    'IBM Plex Sans', system-ui, sans-serif;
+  --f-data:    'IBM Plex Mono', monospace;
+
+  --r-sm: 8px;
+  --r-md: 14px;
+  --r-lg: 20px;
+
+  --shadow-1: 0 1px 2px rgba(35,41,31,0.05), 0 1px 8px rgba(35,41,31,0.04);
+}
+
+*{ box-sizing:border-box; }
+html{ -webkit-text-size-adjust:100%; }
+body{
+  margin:0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--f-body);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+::selection{ background: var(--b2-line); }
+
+.wrap{ max-width: 720px; margin: 0 auto; padding: 0 0 70px; }
+
+/* ── hero ── */
+.hero{ padding: 44px 24px 30px; border-bottom: 1px solid var(--line); position: relative; overflow:hidden; }
+.hero::before{ content:""; position:absolute; top:0; left:0; right:0; height: 5px; background: linear-gradient(90deg, var(--b2), var(--b1)); }
+.hero-eyebrow{ font-family: var(--f-data); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-faint); margin: 8px 0 16px; display:flex; align-items:center; gap:8px; }
+.hero-eyebrow .dot{ width:5px; height:5px; border-radius:50%; background: var(--ink-faint); }
+.hero-title{ font-family: var(--f-display); font-weight: 600; font-size: clamp(28px,5.5vw,40px); line-height: 1.1; margin: 0 0 14px; letter-spacing: -0.01em; }
+.hero-lead{ color: var(--ink-soft); font-size: 15.5px; max-width: 58ch; margin: 0 0 18px; }
+.hero-meta{ display:flex; flex-wrap:wrap; gap: 16px; margin-top: 18px; }
+.meta-item{ display:flex; align-items:center; gap:7px; font-family: var(--f-data); font-size: 12.5px; color: var(--ink-soft); }
+.meta-item b{ color: var(--ink); }
+
+/* ── objetivo ── */
+.objetivos{ margin: 24px 24px 26px; padding: 17px 19px; background: var(--paper-alt); border: 1px solid var(--line); border-radius: var(--r-lg); }
+.objetivos h2{ font-family: var(--f-display); font-size: 16.5px; font-weight:600; margin: 0 0 10px; display:flex; align-items:center; gap:9px; }
+.objetivos p{ margin:0; font-size: 14.5px; color: var(--ink-soft); }
+.objetivos p b{ color: var(--ink); font-weight:600; }
+
+/* ── seccion ── */
+.seccion{ margin: 0 24px 20px; background: var(--paper-raised); border: 1px solid var(--line); border-radius: var(--r-lg); box-shadow: var(--shadow-1); overflow:hidden; }
+.seccion-head{ display:flex; align-items:center; gap:14px; padding: 17px 21px; border-bottom: 1px solid var(--line); }
+.seccion-num{ width:34px; height:34px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-family: var(--f-data); font-weight:500; font-size:14px; flex-shrink:0; background: var(--accent-soft); color: var(--accent); border:1px solid var(--accent-line); }
+.seccion-titles{ flex:1; min-width:0; }
+.seccion-title{ font-family: var(--f-display); font-weight:600; font-size: 18.5px; margin:0 0 2px; }
+.seccion-time{ font-family: var(--f-data); font-size: 11px; color: var(--ink-faint); }
+.seccion-body{ padding: 19px 21px 24px; }
+.seccion-body > *:first-child{ margin-top:0; }
+.seccion-body > *:last-child{ margin-bottom:0; }
+
+/* ── anuncio card ── */
+.anuncio{
+  background: var(--paper-alt); border: 1px solid var(--line); border-radius: var(--r-md);
+  padding: 18px 19px; margin: 16px 0; position:relative;
+}
+.anuncio-tag{
+  display:inline-flex; align-items:center; gap:6px; font-family: var(--f-data); font-size: 11px;
+  text-transform:uppercase; letter-spacing:.05em; padding: 4px 10px; border-radius: 999px;
+  margin-bottom: 12px; font-weight:500;
+}
+.anuncio-tag.recep{ background: var(--b1-soft); color: var(--b1); border:1px solid var(--b1-line); }
+.anuncio-tag.cam{ background: var(--b3-soft); color: var(--b3); border:1px solid var(--b3-line); }
+.anuncio-tag.hos{ background: var(--b2-soft); color: var(--b2); border:1px solid var(--b2-line); }
+.anuncio h3{ font-family: var(--f-display); font-size: 17px; font-weight:600; margin: 0 0 4px; }
+.anuncio .lugar{ font-family: var(--f-data); font-size: 12px; color: var(--ink-faint); margin-bottom: 12px; display:block; }
+.anuncio p{ font-size: 14.5px; color: var(--ink-soft); margin: 0 0 10px; }
+.anuncio p:last-of-type{ margin-bottom:0; }
+.anuncio ul{ margin: 10px 0; padding-left: 20px; }
+.anuncio li{ font-size: 14px; color: var(--ink-soft); margin-bottom: 5px; }
+.anuncio .contacto{
+  margin-top: 12px; padding-top: 12px; border-top: 1px dashed var(--line-strong);
+  font-family: var(--f-data); font-size: 12.5px; color: var(--ink-faint);
+}
+
+/* ── vocab highlight ── */
+mark.voc{
+  background: var(--b2-soft); color: var(--b2); padding: 1px 5px; border-radius: 5px;
+  font-weight: 600; box-decoration-break: clone; -webkit-box-decoration-break: clone;
+}
+
+/* ── task box ── */
+.tarea{
+  background: var(--paper-raised); border: 2px dashed var(--accent-line); border-radius: var(--r-lg);
+  padding: 20px 22px; margin: 0 24px 20px;
+}
+.tarea h2{ font-family: var(--f-display); font-size: 18px; font-weight:600; margin: 0 0 10px; display:flex; align-items:center; gap:9px; }
+.tarea p{ font-size: 14.5px; color: var(--ink-soft); margin: 0 0 16px; }
+.tarea-grid{ display:flex; flex-direction:column; gap: 12px; }
+.tarea-item{ display:flex; gap: 12px; align-items:flex-start; }
+.tarea-item .n{
+  width:26px; height:26px; border-radius:50%; background: var(--accent-soft); color: var(--accent);
+  border: 1px solid var(--accent-line); display:flex; align-items:center; justify-content:center;
+  font-family: var(--f-data); font-size:13px; font-weight:600; flex-shrink:0;
+}
+.tarea-fields{ flex:1; display:flex; flex-direction:column; gap:8px; }
+.tarea-input{
+  width:100%; padding: 9px 12px; border-radius: var(--r-sm); border: 1px solid var(--line-strong);
+  background: var(--paper); font-family: var(--f-body); font-size: 14px; color: var(--ink);
+}
+.tarea-input::placeholder{ color: var(--ink-faint); }
+.tarea-input:focus{ outline: 2px solid var(--accent-line); outline-offset: 1px; border-color: var(--accent); background: var(--paper-raised); }
+
+/* ── glosario ── */
+.glosario{ display:flex; flex-wrap:wrap; gap:8px; margin: 14px 0 0; }
+.gloss-pill{ font-size: 13px; padding: 6px 12px; background: var(--paper-raised); border: 1px solid var(--line); border-radius: 999px; color: var(--ink-soft); }
+.gloss-pill b{ color: var(--ink); }
+
+footer.closing{ margin: 26px 24px 0; padding: 18px 20px; background: var(--paper-alt); border-radius: var(--r-lg); text-align:center; }
+footer.closing span{ font-family: var(--f-data); font-size: 11px; color: var(--ink-faint); }
+
+@media (max-width: 600px){
+  .hero{ padding: 32px 18px 24px; }
+  .objetivos, .seccion, .tarea, footer.closing{ margin-left:14px; margin-right:14px; }
+  .seccion-head{ padding: 14px 16px; }
+  .seccion-body{ padding: 16px 16px 20px; }
+}
+
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <div class="hero-eyebrow">Lectura <span class="dot"></span> Vocabulario laboral</div>
+    <h1 class="hero-title">Anuncios de trabajo<br>en Canarias</h1>
+    <p class="hero-lead">Tres anuncios reales adaptados del sector turístico canario — recepción, camarera de sala y hostelería en general. Vas a encontrarte con el vocabulario exacto que aparece en las ofertas de verdad, así que la próxima vez que busques trabajo por tu cuenta, ya lo reconocerás.</p>
+    <div class="hero-meta">
+      <span class="meta-item">📖 <b>Lectura</b></span>
+      <span class="meta-item">⏱️ <b>15–20 min</b></span>
+      <span class="meta-item">🎯 3 palabras nuevas</span>
+    </div>
+  </header>
+
+  <div class="objetivos">
+    <h2>🎯 Tu tarea</h2>
+    <p>Lee los tres anuncios con calma. Mientras lees, busca <b>tres palabras o expresiones nuevas</b> relacionadas con el mundo laboral — pueden ser de un solo anuncio o repartidas entre los tres. Al final tienes espacio para anotarlas con su significado.</p>
+  </div>
+
+  <!-- ═══ ANUNCIO 1 · RECEPCIONISTA ═══ -->
+  <section class="seccion">
+    <div class="seccion-head">
+      <div class="seccion-num">1</div>
+      <div class="seccion-titles">
+        <h2 class="seccion-title">Recepcionista de hotel</h2>
+        <span class="seccion-time">Anuncio adaptado — sector hotelero</span>
+      </div>
+    </div>
+    <div class="seccion-body">
+      <div class="anuncio">
+        <span class="anuncio-tag recep">Recepción</span>
+        <h3>Se busca recepcionista de hotel</h3>
+        <span class="lugar">📍 Maspalomas, Gran Canaria</span>
+        <p>Cadena hotelera de la zona sur busca <mark class="voc">recepcionista</mark> para incorporación inmediata. Se ofrece <mark class="voc">jornada completa</mark> con días de descanso y salario según convenio.</p>
+        <p><b>Requisitos:</b></p>
+        <ul>
+          <li>Experiencia previa como recepcionista, preferiblemente en hostelería.</li>
+          <li>Nivel de inglés medio; se valoran otros idiomas.</li>
+          <li>Manejo del sistema de reservas del hotel.</li>
+          <li>Buena presencia, actitud <mark class="voc">proactiva</mark> y buenas habilidades de comunicación.</li>
+          <li>Disponibilidad para <mark class="voc">turnos rotativos</mark> (mañana, tarde y noche).</li>
+        </ul>
+        <p><b>Funciones:</b> registro y salida de huéspedes, gestión de cobros, venta de servicios extra, información sobre el hotel y la zona.</p>
+        <div class="contacto">Tipo de contrato: sustitución · Interesados/as enviar CV por correo electrónico.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ ANUNCIO 2 · CAMARERA ═══ -->
+  <section class="seccion">
+    <div class="seccion-head">
+      <div class="seccion-num">2</div>
+      <div class="seccion-titles">
+        <h2 class="seccion-title">Camarera de sala / ayudante de camarero</h2>
+        <span class="seccion-time">Anuncio adaptado — restauración</span>
+      </div>
+    </div>
+    <div class="seccion-body">
+      <div class="anuncio">
+        <span class="anuncio-tag cam">Sala</span>
+        <h3>Ayudante de camarero/a</h3>
+        <span class="lugar">📍 Playa de las Américas, Tenerife</span>
+        <p>Importante cadena hotelera del sur de Tenerife busca <mark class="voc">ayudantes de camarero/a</mark> para incorporarse a sus restaurantes.</p>
+        <p><b>Funciones:</b></p>
+        <ul>
+          <li>Atención al cliente en el <mark class="voc">bufet</mark> y en el restaurante.</li>
+          <li>Montaje y recogida de mesas.</li>
+          <li>Reposición de comida y bebida durante el servicio.</li>
+          <li>Trabajo en equipo con el resto de personal de sala.</li>
+        </ul>
+        <p><b>Se requiere:</b> persona organizada, con don de gentes, capaz de trabajar bajo presión en <mark class="voc">horas punta</mark>. No es imprescindible experiencia, pero se valora.</p>
+        <div class="contacto">Horario: 8 horas, turnos rotativos · Jornada completa o media jornada, a convenir.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ ANUNCIO 3 · HOSTELERÍA GENERAL ═══ -->
+  <section class="seccion">
+    <div class="seccion-head">
+      <div class="seccion-num">3</div>
+      <div class="seccion-titles">
+        <h2 class="seccion-title">Personal de hostelería</h2>
+        <span class="seccion-time">Anuncio adaptado — varios puestos</span>
+      </div>
+    </div>
+    <div class="seccion-body">
+      <div class="anuncio">
+        <span class="anuncio-tag hos">Hostelería</span>
+        <h3>Personal para departamento de pisos y recepción</h3>
+        <span class="lugar">📍 Adeje, Tenerife</span>
+        <p>Empresa del sector turístico busca personal para varios puestos en un hotel de 4 estrellas:</p>
+        <ul>
+          <li><b>Camarera de pisos:</b> hacer las camas, cambiar la ropa de cama y mantener las habitaciones limpias y en orden.</li>
+          <li><b>Recepcionista de noche:</b> dar la bienvenida a los huéspedes, gestionar llegadas y salidas durante el turno de noche, procesos de <mark class="voc">auditoría nocturna</mark>.</li>
+        </ul>
+        <p><b>Se ofrece:</b> contrato temporal con posibilidad de <mark class="voc">incorporación</mark> a plantilla fija, formación adaptada al puesto, buen ambiente de trabajo.</p>
+        <p><b>Se valora:</b> experiencia previa en puestos similares, conocimientos básicos de informática, título de la ESO.</p>
+        <div class="contacto">Contrato: temporal · Sector: hostelería · Se prioriza la contratación local.</div>
+      </div>
+
+      <div class="glosario">
+        <span class="gloss-pill"><b>convenio</b> — acuerdo laboral que fija sueldo y condiciones</span>
+        <span class="gloss-pill"><b>plantilla</b> — conjunto de trabajadores fijos de una empresa</span>
+        <span class="gloss-pill"><b>don de gentes</b> — facilidad para tratar bien a la gente</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ TAREA ═══ -->
+  <div class="tarea">
+    <h2>✍️ Tus tres palabras nuevas</h2>
+    <p>Elige tres palabras o expresiones del texto que no conocías. Escribe la palabra y qué crees que significa por el contexto — luego lo comentamos juntas.</p>
+    <div class="tarea-grid">
+      <div class="tarea-item">
+        <span class="n">1</span>
+        <div class="tarea-fields">
+          <input class="tarea-input" type="text" placeholder="Palabra o expresión...">
+          <input class="tarea-input" type="text" placeholder="¿Qué crees que significa?">
+        </div>
+      </div>
+      <div class="tarea-item">
+        <span class="n">2</span>
+        <div class="tarea-fields">
+          <input class="tarea-input" type="text" placeholder="Palabra o expresión...">
+          <input class="tarea-input" type="text" placeholder="¿Qué crees que significa?">
+        </div>
+      </div>
+      <div class="tarea-item">
+        <span class="n">3</span>
+        <div class="tarea-fields">
+          <input class="tarea-input" type="text" placeholder="Palabra o expresión...">
+          <input class="tarea-input" type="text" placeholder="¿Qué crees que significa?">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="closing">
+    <span>ESCOLAR · lectura · vocabulario laboral · Canarias</span>
+  </footer>
+
+</div>
+</body>
+</html>

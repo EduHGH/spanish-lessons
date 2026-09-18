@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Class 19 · Órdenes, instrucciones y el imperativo en el trabajo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+
+/* ╔══════════════════════════════════════════════════════════════════╗
+   ║  ESCOLAR Multiacento — Class 19 · Pylypenko · L5 (nueva línea)     ║
+   ║  Imperativo afirmativo/negativo · atención al cliente             ║
+   ║  Acento: verde bosque — marca el inicio de la línea L5            ║
+   ╚══════════════════════════════════════════════════════════════════╝ */
+
+:root{
+  --paper:        #FBF7EE;
+  --paper-raised: #FFFFFF;
+  --paper-alt:    #F3ECDA;
+  --ink:          #23291F;
+  --ink-soft:     #565F52;
+  --ink-faint:    #8B9184;
+  --line:         rgba(35,41,31,0.12);
+  --line-strong:  rgba(35,41,31,0.22);
+
+  --b2:      #2F6FED;  --b2-soft: #EAF1FE;  --b2-line: #C6D9FC;
+  --ok:      #2F7D5C;  --ok-soft:  #E7F3EC; --ok-line:  #BFE0CE;
+  --family:  #B5502E;  --family-soft: #FBEBE3; --family-line: #EFC9B4;
+  --amber:   #C1892F;  --amber-soft: #FBF1E1; --amber-line: #F0D9A8;
+
+  --accent:      #2F7D5C;
+  --accent-soft: #E7F3EC;
+  --accent-line: #BFE0CE;
+
+  --f-display: 'Fraunces', Georgia, serif;
+  --f-body:    'IBM Plex Sans', system-ui, sans-serif;
+  --f-data:    'IBM Plex Mono', monospace;
+
+  --r-sm: 8px;
+  --r-md: 14px;
+  --r-lg: 20px;
+
+  --shadow-1: 0 1px 2px rgba(35,41,31,0.05), 0 1px 8px rgba(35,41,31,0.04);
+  --mesh-color: var(--accent);
+}
+
+*{ box-sizing:border-box; }
+body{
+  margin:0;
+  background: var(--paper);
+  background-image: radial-gradient(circle at 1px 1px, var(--line) 1px, transparent 0);
+  background-size: 22px 22px;
+  color: var(--ink);
+  font-family: var(--f-body);
+  line-height:1.6;
+}
+::selection{ background: var(--accent-soft); }
+
+/* ---------- HEADER ---------- */
+header{ padding:44px 24px 28px; max-width:760px; margin:0 auto; }
+.header-top{ display:flex; align-items:flex-start; justify-content:space-between; gap:24px; }
+.eyebrow{
+  font-family: var(--f-data); font-size:12px; letter-spacing:.14em;
+  text-transform:uppercase; color: var(--accent); margin:0 0 10px;
+  display:flex; align-items:center; gap:10px;
+}
+.eyebrow .dot{ width:6px; height:6px; border-radius:50%; background: var(--accent); animation: pulse 2.6s ease-in-out infinite; }
+@keyframes pulse{ 0%,100%{opacity:1;} 50%{opacity:.35;} }
+h1{
+  font-family: var(--f-display); font-weight:600;
+  font-size:clamp(28px,5.4vw,46px); line-height:1.05;
+  margin:0; letter-spacing:-.015em;
+}
+h1 em{ font-style:italic; color: var(--accent); }
+.level-badge{
+  font-family: var(--f-display); font-weight:700; font-style:normal;
+  font-size:clamp(44px,9vw,76px); line-height:0.85; color: var(--accent);
+  letter-spacing:-.02em; flex:none; margin-top:-2px;
+}
+.lede{ font-size:15.5px; color: var(--ink-soft); max-width:60ch; margin:16px 0 0; }
+.lede .new-line-tag{
+  display:inline-block; font-family: var(--f-data); font-size:10.5px; text-transform:uppercase; letter-spacing:.06em;
+  background: var(--accent-soft); border:1px solid var(--accent-line); color: var(--accent);
+  padding:3px 9px; border-radius:999px; margin-left:6px; vertical-align:middle;
+}
+.meta-row{
+  display:flex; flex-wrap:wrap; gap:24px; margin-top:28px;
+  font-family: var(--f-data); font-size:12px; color: var(--ink-faint);
+}
+.meta-row strong{
+  display:block; color: var(--ink); font-size:14.5px; font-weight:500;
+  font-family: var(--f-display); margin-top:3px;
+}
+@media (max-width:600px){
+  .header-top{ flex-direction:column; gap:6px; }
+  .level-badge{ margin-top:0; }
+}
+
+/* ---------- SECTIONS ---------- */
+main{ max-width:760px; margin:0 auto; padding:8px 24px 100px; }
+section.block{ margin-bottom:48px; }
+.block-head{ display:flex; align-items:baseline; gap:12px; margin-bottom:18px; }
+.time-tag{
+  font-family: var(--f-data); font-size:11px; color: var(--ink-faint);
+  background: var(--paper-alt); padding:3px 10px; border-radius:999px; margin-left:auto; flex:none;
+}
+.block-num{
+  font-family: var(--f-data); font-size:12px; color:#fff; background: var(--accent);
+  width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex:none;
+}
+.block-head h2{ font-family: var(--f-display); font-weight:500; font-style:italic; font-size:22px; margin:0; }
+
+.panel{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-lg);
+  box-shadow: var(--shadow-1); padding:26px 28px;
+}
+.panel p{ font-size:15px; color: var(--ink-soft); margin:0 0 14px; }
+.panel p:last-of-type{ margin-bottom:0; }
+.panel p strong{ color: var(--ink); font-weight:600; }
+
+.note{
+  margin-top:16px; padding:14px 16px; background: var(--accent-soft); border:1px solid var(--accent-line);
+  border-radius: var(--r-md); font-size:13.5px; color: var(--ink-soft);
+}
+.note strong{ color: var(--ink); }
+.warning-box{
+  margin-top:16px; padding:14px 16px; background: var(--family-soft); border:1px solid var(--family-line);
+  border-radius: var(--r-md); font-size:13.5px; color: var(--ink-soft);
+}
+.warning-box strong{ color: var(--family); }
+
+/* ---------- FRASE DESTACADA (mesh-gradient, apertura) ---------- */
+.phrase-card{ padding:30px 34px; border-radius: var(--r-lg); border:1px solid var(--line); text-align:center; background: var(--paper-raised); position:relative; overflow:hidden; isolation:isolate; }
+.phrase-card::before,
+.phrase-card::after,
+.phrase-card .mesh-blob{
+  content:""; position:absolute; border-radius:50%; filter: blur(46px);
+  z-index:-1; animation: mesh-drift 22s ease-in-out infinite alternate; pointer-events:none;
+}
+.phrase-card::before{ width:60%; height:60%; top:-10%; left:-10%; background: var(--mesh-color); opacity:.16; }
+.phrase-card::after{ width:50%; height:50%; bottom:-15%; right:-5%; background: var(--mesh-color); opacity:.13; animation-delay:-7s; }
+.phrase-card .mesh-blob{ width:40%; height:40%; top:30%; right:20%; background: var(--mesh-color); opacity:.11; animation-delay:-14s; }
+@keyframes mesh-drift{
+  0%{ transform: translate(0,0) scale(1); }
+  50%{ transform: translate(6%,-4%) scale(1.08); }
+  100%{ transform: translate(-4%,5%) scale(.96); }
+}
+.phrase-eyebrow{ font-family: var(--f-data); font-size:11.5px; letter-spacing:.1em; text-transform:uppercase; color: var(--accent); font-weight:600; margin:0 0 12px; }
+.phrase-main{ font-family: var(--f-display); font-weight:600; font-size:clamp(20px,3.2vw,27px); line-height:1.35; margin:0 0 10px; }
+.phrase-main em{ font-style:italic; color: var(--accent); font-weight:500; }
+.phrase-sub{ font-size:13.5px; color: var(--ink-soft); max-width:48ch; margin:0 auto; }
+
+/* ---------- TABLA DE CONJUGACIÓN ---------- */
+.conj-table-wrap{ overflow-x:auto; margin:4px 0 0; }
+table.conj{ width:100%; border-collapse:collapse; font-size:14px; min-width:480px; }
+table.conj th{
+  font-family: var(--f-data); font-size:10px; text-transform:uppercase; letter-spacing:.05em;
+  color: var(--ink-faint); text-align:left; padding:8px 8px; border-bottom:1.5px solid var(--line-strong);
+}
+table.conj td{ padding:10px 8px; border-bottom:1px dashed var(--line); vertical-align:top; }
+table.conj tr:last-child td{ border-bottom:none; }
+table.conj td.pron{ font-family: var(--f-data); color: var(--ink-faint); font-size:12px; width:70px; }
+table.conj td.form{ font-family: var(--f-display); font-weight:600; font-size:17px; color: var(--accent); }
+table.conj td.formneg{ font-family: var(--f-display); font-weight:600; font-size:15px; color: var(--family); }
+table.conj td.ex{ color: var(--ink-soft); font-size:13px; }
+
+/* ---------- IRREGULARES ---------- */
+.irr-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(130px,1fr)); gap:10px; margin-top:16px; }
+.irr-pill{
+  background: var(--accent-soft); border:1px solid var(--accent-line); border-radius: var(--r-md);
+  padding:10px 12px; text-align:center;
+}
+.irr-inf{ font-family: var(--f-data); font-size:10.5px; color: var(--ink-faint); text-transform:uppercase; letter-spacing:.03em; }
+.irr-form{ font-family: var(--f-display); font-weight:600; font-size:18px; color: var(--accent); margin-top:2px; }
+
+/* ---------- USES GRID ---------- */
+.uses-grid{ display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:18px; }
+@media (max-width:560px){ .uses-grid{ grid-template-columns:1fr; } }
+.use-card{
+  border-radius: var(--r-md); padding:16px 18px; border:1px solid var(--accent-line);
+  background: var(--accent-soft);
+}
+.use-tag{ font-family: var(--f-data); font-size:10px; text-transform:uppercase; letter-spacing:.06em; color: var(--accent); margin:0 0 6px; }
+.use-trigger{ font-family: var(--f-display); font-weight:600; font-size:16px; color: var(--ink); margin:0 0 6px; }
+.use-ex{ font-size:13px; color: var(--ink-soft); }
+
+/* ---------- VOCAB / TAP CARDS ---------- */
+.vocab-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:12px; margin-top:4px; }
+.vocab-card{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:14px 16px; cursor:pointer; min-height:78px;
+  display:flex; flex-direction:column; justify-content:center;
+  transition: border-color .15s ease, transform .15s ease;
+}
+.vocab-card:hover{ border-color: var(--accent-line); transform: translateY(-1px); }
+.vocab-card:focus-visible{ outline:2px solid var(--accent); outline-offset:2px; }
+.vocab-front{ font-family: var(--f-body); font-weight:600; font-size:15px; }
+.vocab-back{ display:none; font-family: var(--f-data); font-size:12px; color: var(--ink-faint); margin-top:6px; }
+.vocab-card.flipped .vocab-back{ display:block; }
+.vocab-card.flipped{ background: var(--accent-soft); border-color: var(--accent-line); }
+.vocab-hint{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin:10px 2px 16px; }
+
+/* ---------- TRANSFORMA: PIDE AL ESTILO ADECUADO ---------- */
+.transform-item{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:16px 18px; margin-bottom:12px;
+}
+.transform-item:last-child{ margin-bottom:0; }
+.transform-item .direct-line{ font-size:14.5px; color: var(--ink-soft); margin:0 0 4px; }
+.transform-item .direct-line b{ color: var(--ink); font-family: var(--f-data); font-weight:500; }
+.transform-item .instruction{ font-family: var(--f-data); font-size:11px; color: var(--accent); text-transform:uppercase; letter-spacing:.04em; margin:0 0 10px; }
+.transform-item input[type="text"]{
+  width:100%; font-family: var(--f-body); font-size:14.5px; color: var(--ink);
+  background: var(--paper-alt); border:1px solid var(--line); border-radius: var(--r-sm);
+  padding:9px 12px;
+}
+.transform-item input[type="text"]:focus{ outline:none; border-color: var(--accent); }
+.transform-item .reveal{ font-size:13px; color: var(--ink-faint); margin-top:8px; display:none; }
+.transform-item.show-reveal .reveal{ display:block; }
+.transform-footer{ display:flex; align-items:center; justify-content:flex-end; gap:12px; margin-top:6px; }
+
+/* ---------- ROLEPLAY (usa --family, no el acento, para diferenciarse) ---------- */
+.roleplay-panel{ background: var(--family-soft); border:1px solid var(--family-line); border-radius: var(--r-lg); padding:26px 28px; }
+.roleplay-panel .block-num{ background: var(--family); }
+.scene-setup{
+  display:flex; gap:14px; align-items:flex-start; background: var(--paper-raised);
+  border:1px solid var(--family-line); border-radius: var(--r-md); padding:14px 16px; margin-bottom:20px;
+}
+.scene-icon{ font-size:22px; flex:none; }
+.scene-text{ font-size:14px; color: var(--ink-soft); }
+.scene-text strong{ color: var(--ink); }
+.desc-card{
+  background: var(--paper-raised); border:1px solid var(--family-line); border-radius: var(--r-md);
+  padding:18px 20px;
+}
+.desc-card .desc-title{ font-family: var(--f-display); font-weight:600; font-size:16px; margin:0 0 8px; color: var(--ink); }
+.desc-card .desc-brief{ font-size:14px; color: var(--ink-soft); margin:0 0 14px; }
+.desc-card .desc-prompts{ margin:0; padding-left:18px; font-size:13.5px; color: var(--ink-soft); }
+.desc-card .desc-prompts li{ margin-bottom:6px; }
+.desc-card textarea{
+  width:100%; min-height:80px; font-family: var(--f-body); font-size:14.5px; color: var(--ink);
+  background:#fff; border:1px solid var(--family-line); border-radius: var(--r-sm);
+  padding:10px 12px; resize:vertical; margin-top:12px;
+}
+.desc-card textarea:focus{ outline:none; border-color: var(--family); }
+.roleplay-tip{
+  margin-top:22px; padding:14px 16px; background: var(--paper-raised); border:1px solid var(--family-line);
+  border-radius: var(--r-md); font-size:13.5px; color: var(--ink-soft);
+}
+.roleplay-tip strong{ color: var(--ink); }
+
+/* ---------- CORRECCIÓN (neutro) ---------- */
+.correction-panel{ background: var(--paper-alt); border:1px solid var(--line); border-radius: var(--r-lg); padding:26px 28px; }
+.correction-panel .block-num{ background: var(--ink-soft); }
+.correction-item{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:14px 16px; margin-bottom:12px;
+}
+.correction-item:last-child{ margin-bottom:0; }
+.correction-item .wrong-line{ font-size:14.5px; color: var(--family); text-decoration: line-through; text-decoration-color: var(--family-line); }
+.correction-item .right-line{ font-size:14.5px; color: var(--b2); margin-top:6px; font-weight:500; }
+.correction-item .why{ font-size:13px; color: var(--ink-faint); margin-top:6px; }
+
+/* ---------- EJERCICIOS (opción múltiple) ---------- */
+.exercise{ margin-bottom:18px; }
+.exercise:last-of-type{ margin-bottom:0; }
+.ex-sentence{ font-size:15px; margin-bottom:10px; color: var(--ink); }
+.ex-sentence .gap{ font-family: var(--f-data); color: var(--ink-faint); }
+.ex-options{ display:flex; flex-wrap:wrap; gap:8px; }
+.opt-btn{
+  font-family: var(--f-body); font-size:14px; background: var(--paper-raised);
+  border:1.5px solid var(--line); color: var(--ink); padding:8px 17px; border-radius:999px;
+  cursor:pointer; transition: all .15s ease;
+}
+.opt-btn:hover{ border-color: var(--ink-faint); }
+.opt-btn.picked{ background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+.opt-btn.correct{ background: var(--ok-soft); border-color: var(--ok); color: var(--ok); }
+.opt-btn.wrong{ background: var(--family-soft); border-color: var(--family); color: var(--family); text-decoration: line-through; }
+.opt-btn:disabled{ cursor:default; }
+
+.check-bar{ display:flex; align-items:center; justify-content:space-between; gap:16px; margin-top:20px; padding-top:18px; border-top:1px dashed var(--line); flex-wrap:wrap; }
+.btn-primary{
+  font-family: var(--f-body); font-weight:600; font-size:14px; color:#fff; background: var(--accent);
+  border:none; padding:11px 22px; border-radius:999px; cursor:pointer; transition: transform .15s ease;
+}
+.btn-primary:hover{ transform: translateY(-1px); }
+.btn-primary:active{ transform: scale(.96); }
+.btn-ghost{
+  font-family: var(--f-body); font-weight:600; font-size:13px; color: var(--ink-soft); background:none;
+  border:1.5px solid var(--line); padding:9px 18px; border-radius:999px; cursor:pointer; transition: border-color .15s ease;
+}
+.btn-ghost:hover{ border-color: var(--ink-faint); }
+#score-text{ font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); }
+
+/* ---------- TAREA FINAL ---------- */
+.task-panel{ background: var(--paper-alt); border:1px solid var(--line); border-radius: var(--r-lg); padding:26px 28px; }
+.task-panel .block-num{ background: var(--ink-soft); }
+textarea.final-task{
+  width:100%; min-height:120px; font-family: var(--f-body); font-size:15px; color: var(--ink);
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:14px 16px; resize:vertical; margin-top:14px;
+}
+textarea.final-task:focus{ outline:none; border-color: var(--accent); }
+.task-footer{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:12px; flex-wrap:wrap; }
+.task-count{ font-family: var(--f-data); font-size:12px; color: var(--ink-faint); }
+.btn-secondary{
+  font-family: var(--f-body); font-weight:600; font-size:13.5px; color: var(--ink-soft); background:none;
+  border:1.5px solid var(--line); padding:9px 18px; border-radius:999px; cursor:pointer; transition: border-color .15s ease;
+}
+.btn-secondary:hover{ border-color: var(--accent); }
+.saved-flag{ font-family: var(--f-data); font-size:11.5px; color: var(--ok); opacity:0; transition: opacity .3s ease; }
+.saved-flag.show{ opacity:1; }
+
+/* ---------- RESOURCES ---------- */
+.resources-grid{ display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:16px; }
+@media (max-width:560px){ .resources-grid{ grid-template-columns:1fr; } }
+.resource-card{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md); padding:14px 16px;
+}
+.resource-tag{ font-family: var(--f-data); font-size:10.5px; text-transform:uppercase; letter-spacing:.06em; color: var(--accent); margin:0 0 6px; }
+.resource-title{ font-family: var(--f-display); font-weight:600; font-size:15px; margin:0 0 4px; }
+.resource-desc{ font-size:13px; color: var(--ink-soft); margin:0; }
+
+/* ---------- LECTURA (cartel/folleto con imperativo) ---------- */
+.read-card{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-lg); padding:24px 26px; margin-top:14px;
+}
+.read-title{ font-family: var(--f-display); font-weight:600; font-size:18px; margin:0 0 4px; }
+.read-sub{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); text-transform:uppercase; letter-spacing:.06em; margin:0 0 16px; }
+.read-body p{ font-size:15px; color: var(--ink); margin:0 0 12px; }
+.read-body p:last-child{ margin-bottom:0; }
+.read-body strong{ color: var(--accent); font-weight:600; }
+.poster-rules{ list-style:none; margin:0; padding:0; display:grid; gap:10px; }
+.poster-rules li{
+  font-family: var(--f-display); font-size:15.5px; color: var(--ink); background: var(--accent-soft);
+  border:1px solid var(--accent-line); border-radius: var(--r-sm); padding:10px 14px;
+}
+.glossary{ margin-top:16px; padding-top:14px; border-top:1px dashed var(--line); display:flex; flex-wrap:wrap; gap:8px 18px; }
+.gloss-item{ font-size:12.5px; color: var(--ink-soft); }
+.gloss-item b{ font-family: var(--f-data); font-weight:700; color: var(--ink); font-size:12px; }
+
+/* ---------- TRANSCRIPCIÓN ---------- */
+.transcript{ margin-top:14px; padding-top:14px; border-top:1px dashed var(--line); }
+.transcript p{ font-size:14.5px; color: var(--ink-soft); margin:0 0 10px; }
+.transcript p:last-child{ margin-bottom:0; }
+.transcript .speaker{ font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.05em; color: var(--accent); display:block; margin-bottom:2px; }
+.transcript strong{ color: var(--ink); font-weight:600; }
+
+footer{
+  max-width:760px; margin:0 auto; padding:0 24px; display:flex;
+  justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;
+  font-family: var(--f-data); font-size:12px; color: var(--ink-faint);
+  margin-top:16px; padding-top:28px; border-top:1px solid var(--line); padding-bottom:60px;
+}
+
+@media (max-width:600px){
+  header{ padding:34px 18px 22px; }
+  main{ padding:8px 18px 90px; }
+  .panel, .task-panel, .roleplay-panel, .correction-panel, .read-card{ padding:20px 18px; }
+  .phrase-card{ padding:26px 22px; }
+}
+@media (prefers-reduced-motion: reduce){ *{ animation:none !important; transition:none !important; } }
+</style>
+</head>
+<body data-accent="verde">
+<header>
+  <div class="header-top">
+    <div>
+      <p class="eyebrow"><span class="dot"></span>Class 19 · L5 Hablar como se habla de verdad</p>
+      <h1>El imperativo <em>en el trabajo</em></h1>
+    </div>
+    <span class="level-badge">A2</span>
+  </div>
+  <p class="lede">Empezamos una línea nueva<span class="new-line-tag">L5 · nueva línea</span>: fluidez, imperativo y marcadores discursivos, la recta final hacia B1. Hoy aprendemos a dar órdenes e instrucciones — con tú y con usted — en situaciones reales de atención al cliente: en recepción, en una cafetería, en el mostrador.</p>
+  <div class="meta-row">
+    <div>Duration<strong>50 min</strong></div>
+    <div>Focus<strong>imperativo afirmativo/negativo · tú y usted</strong></div>
+    <div>Level<strong>A2</strong></div>
+  </div>
+</header>
+
+<main>
+
+  <!-- FRASE DESTACADA -->
+  <section class="block">
+    <div class="phrase-card">
+      <span class="mesh-blob"></span>
+      <p class="phrase-eyebrow">Frase de hoy</p>
+      <p class="phrase-main">Espere un momento, por favor; <em>tome</em> asiento.</p>
+      <p class="phrase-sub">Imperativo formal (usted): la forma que vas a usar todo el día en atención al cliente.</p>
+    </div>
+  </section>
+
+  <!-- 1. CONVERSACIÓN -->
+  <div class="block">
+    <div class="block-head"><span class="block-num">1</span><h2>Conversación: dando instrucciones en el trabajo</h2><span class="time-tag">10 min</span></div>
+    <div class="panel">
+      <p>Cuéntame sobre situaciones típicas de tu trabajo (o de un trabajo que te gustaría tener) en las que tienes que dar instrucciones a alguien — en recepción, en una cafetería, atendiendo a un cliente.</p>
+      <div class="note"><strong>Preguntas para guiar la conversación:</strong> ¿Qué instrucciones das más a menudo? ¿Las das de forma más directa o más suave? ¿Usas más "tú" o "usted" en tu trabajo?</div>
+    </div>
+  </div>
+
+  <!-- 2. GRAMÁTICA: imperativo -->
+  <div class="block">
+    <div class="block-head"><span class="block-num">2</span><h2>Imperativo afirmativo y negativo</h2><span class="time-tag">20 min</span></div>
+    <div class="panel">
+      <p>El imperativo sirve para dar órdenes, instrucciones o consejos. La forma <strong>afirmativa</strong> y la <strong>negativa</strong> no se construyen igual, y además cambian entre "tú" y "usted".</p>
+
+      <div class="conj-table-wrap">
+        <table class="conj">
+          <tr><th>Forma</th><th>Afirmativo</th><th>Negativo</th><th>Ejemplo</th></tr>
+          <tr><td class="pron">tú</td><td class="form">espera</td><td class="formneg">no esperes</td><td class="ex">Espera un momento. / No esperes de pie, siéntate.</td></tr>
+          <tr><td class="pron">usted</td><td class="form">espere</td><td class="formneg">no espere</td><td class="ex">Espere un momento, por favor. / No espere aquí, pase a la sala.</td></tr>
+          <tr><td class="pron">tú</td><td class="form">toma</td><td class="formneg">no tomes</td><td class="ex">Toma nota del pedido. / No tomes el ascensor, está averiado.</td></tr>
+          <tr><td class="pron">usted</td><td class="form">tome</td><td class="formneg">no tome</td><td class="ex">Tome asiento, por favor. / No tome esa puerta, es de servicio.</td></tr>
+        </table>
+      </div>
+
+      <p style="margin-top:18px;"><strong>Irregulares frecuentes (tú, afirmativo):</strong></p>
+      <div class="irr-grid">
+        <div class="irr-pill"><div class="irr-inf">poner</div><div class="irr-form">pon</div></div>
+        <div class="irr-pill"><div class="irr-inf">venir</div><div class="irr-form">ven</div></div>
+        <div class="irr-pill"><div class="irr-inf">tener</div><div class="irr-form">ten</div></div>
+        <div class="irr-pill"><div class="irr-inf">salir</div><div class="irr-form">sal</div></div>
+        <div class="irr-pill"><div class="irr-inf">hacer</div><div class="irr-form">haz</div></div>
+        <div class="irr-pill"><div class="irr-inf">decir</div><div class="irr-form">di</div></div>
+      </div>
+
+      <div class="uses-grid" style="margin-top:18px;">
+        <div class="use-card">
+          <p class="use-tag">tú — afirmativo</p>
+          <p class="use-trigger">pon, ven, ten...</p>
+          <p class="use-ex">Ven un momento, necesito ayuda con la reserva.</p>
+        </div>
+        <div class="use-card">
+          <p class="use-tag">tú — negativo</p>
+          <p class="use-trigger">no pongas, no vengas...</p>
+          <p class="use-ex">No pongas la bandeja ahí, ponla en la barra.</p>
+        </div>
+        <div class="use-card">
+          <p class="use-tag">usted — afirmativo</p>
+          <p class="use-trigger">espere, tome, pase...</p>
+          <p class="use-ex">Pase por aquí, por favor, y tome asiento.</p>
+        </div>
+        <div class="use-card">
+          <p class="use-tag">usted — negativo</p>
+          <p class="use-trigger">no espere, no pase...</p>
+          <p class="use-ex">No espere de pie, siéntese mientras le atendemos.</p>
+        </div>
+      </div>
+
+      <div class="warning-box"><strong>El error más repetido:</strong> usar la misma forma para afirmativo y negativo, diciendo "no espera" en vez de "no espere" — el imperativo negativo con "usted" no es igual que el presente de indicativo, se forma como el subjuntivo.</div>
+    </div>
+  </div>
+
+  <!-- 3. HILO TRANSVERSAL -->
+  <div class="block">
+    <div class="block-head"><span class="block-num">3</span><h2>Hilo transversal: preposiciones de atención al cliente</h2><span class="time-tag">6 min</span></div>
+    <div class="panel">
+      <div class="uses-grid">
+        <div class="use-card">
+          <p class="use-tag">atender a</p>
+          <p class="use-trigger">atender a alguien</p>
+          <p class="use-ex">Ahora mismo la atiendo, un momento por favor.</p>
+        </div>
+        <div class="use-card">
+          <p class="use-tag">ayudar con</p>
+          <p class="use-trigger">ayudar con algo</p>
+          <p class="use-ex">¿Le ayudo con las maletas hasta la habitación?</p>
+        </div>
+        <div class="use-card">
+          <p class="use-tag">encargarse de</p>
+          <p class="use-trigger">encargarse de algo</p>
+          <p class="use-ex">Yo me encargo de la reserva, tú encárgate de la mesa 4.</p>
+        </div>
+        <div class="use-card">
+          <p class="use-tag">disculpar por</p>
+          <p class="use-trigger">disculpe por + sustantivo</p>
+          <p class="use-ex">Disculpe por la espera, ahora mismo le atiendo.</p>
+        </div>
+      </div>
+      <div class="note"><strong>La regla rápida:</strong> "atender", "ayudar" y "encargarse" son verbos muy frecuentes en atención al cliente y cada uno pide su propia preposición fija — memorízalos como bloque, no palabra por palabra.</div>
+    </div>
+  </div>
+
+  <!-- 4. VOCABULARIO -->
+  <div class="block">
+    <div class="block-head"><span class="block-num">4</span><h2>Vocabulario</h2><span class="time-tag">5 min</span></div>
+    <p class="vocab-hint">Toca cada tarjeta para ver el significado y un ejemplo en contexto.</p>
+    <div class="vocab-grid" id="vocab-grid"></div>
+  </div>
+
+  <!-- 5. TRANSFORMA: DE TÚ A USTED -->
+  <div class="block">
+    <div class="block-head"><span class="block-num">5</span><h2>Transforma: de tú a usted (y al revés)</h2><span class="time-tag">14 min</span></div>
+    <div class="panel">
+      <p style="margin-bottom:16px;">Cambia cada instrucción de "tú" a "usted", o de "usted" a "tú", manteniendo el mismo sentido.</p>
+      <div id="transform-list"></div>
+      <div class="transform-footer">
+        <button class="btn-ghost" id="reveal-all-btn">Mostrar todas las respuestas</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. ROLE-PLAY -->
+  <div class="block">
+    <div class="block-head"><span class="block-num">6</span><h2>Role-play: recepción de hotel</h2><span class="time-tag">15 min</span></div>
+    <div class="roleplay-panel">
+      <div class="scene-setup">
+        <span class="scene-icon">🛎️</span>
+        <p class="scene-text"><strong>Escena:</strong> Trabajas en la recepción de un hotel. Un huésped imaginario acaba de llegar. Dale instrucciones usando el imperativo formal (usted): dónde firmar, cómo llegar a la habitación, qué hacer con el equipaje, a qué hora es el desayuno.</p>
+      </div>
+      <div class="desc-card">
+        <p class="desc-title">Tus instrucciones al huésped</p>
+        <p class="desc-brief">Usa al menos cuatro imperativos formales distintos, combinando afirmativo y negativo.</p>
+        <ul class="desc-prompts">
+          <li>¿Dónde tiene que firmar o dejar su documento?</li>
+          <li>¿Cómo llega a su habitación (ascensor, escaleras, planta)?</li>
+          <li>¿Qué no debe hacer (aparcar en cierta zona, usar cierta puerta)?</li>
+          <li>¿A qué hora y dónde es el desayuno?</li>
+        </ul>
+        <textarea placeholder="Firme aquí, por favor... No aparque en... Tome el ascensor y..."></textarea>
+      </div>
+      <div class="roleplay-tip"><strong>Consejo:</strong> practica formas afirmativas y negativas con frases cortas y directas — en atención al cliente, cuanto más clara y breve la instrucción, mejor se entiende.</div>
+    </div>
+  </div>
+
+  <!-- 7. CORRECCIÓN DE ERRORES TÍPICOS -->
+  <div class="block">
+    <div class="block-head"><span class="block-num">7</span><h2>Corrección de errores típicos</h2><span class="time-tag">5 min</span></div>
+    <div class="correction-panel">
+      <div class="correction-item">
+        <p class="wrong-line">✗ No espera aquí, pase a la sala.</p>
+        <p class="right-line">✓ No espere aquí, pase a la sala.</p>
+        <p class="why">El imperativo negativo de "usted" cambia la vocal, como el subjuntivo: espere / no espere.</p>
+      </div>
+      <div class="correction-item">
+        <p class="wrong-line">✗ Pon la mesa 4, por favor (a un cliente, tratamiento de usted).</p>
+        <p class="right-line">✓ Ponga la mesa 4, por favor.</p>
+        <p class="why">Si tratas a alguien de usted, todo el imperativo debe mantenerse en esa forma.</p>
+      </div>
+      <div class="correction-item">
+        <p class="wrong-line">✗ No pongas te preocupes, ya lo resuelvo yo.</p>
+        <p class="right-line">✓ No te preocupes, ya lo resuelvo yo.</p>
+        <p class="why">Con verbos reflexivos en negativo, el pronombre va delante del verbo, no después.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 8. PRÁCTICA -->
+  <div class="block">
+    <div class="block-head"><span class="block-num">8</span><h2>Practica</h2><span class="time-tag">10 min</span></div>
+    <div class="panel">
+      <p class="vocab-hint" style="margin-bottom:14px;">10 frases con imperativo afirmativo y negativo, tú y usted, y las preposiciones de atención al cliente. Fíjate en el tratamiento (tú/usted) antes de elegir.</p>
+      <div id="exercises"></div>
+      <div class="check-bar">
+        <div style="display:flex; gap:10px;">
+          <button class="btn-primary" id="check-btn">Comprobar respuestas</button>
+          <button class="btn-ghost" id="reset-btn">Reiniciar</button>
+        </div>
+        <span id="score-text"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 9. TAREA FINAL -->
+  <div class="block">
+    <div class="block-head"><span class="block-num">9</span><h2 style="color:#565F52">Tu tarea</h2><span class="time-tag">2 min</span></div>
+    <div class="task-panel">
+      <p style="font-size:15px; color:var(--ink-soft); margin:0;">Graba un <strong style="color:var(--ink);">audio de 1 minuto</strong> dando 5 instrucciones típicas de atención al cliente usando el imperativo formal (usted).</p>
+      <textarea class="final-task" placeholder="Espere un momento... Tome asiento... Pase por aquí... No se preocupe..."></textarea>
+      <div class="task-footer">
+        <span class="task-count" id="task-count">0 imperativos detectados</span>
+        <div style="display:flex; gap:10px; align-items:center;">
+          <span class="saved-flag" id="saved-flag">Guardado ✓</span>
+          <button class="btn-secondary" id="save-btn">Guardar tarea</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 10. PARA LA PRÓXIMA CLASE -->
+  <div class="block">
+    <div class="block-head"><span class="block-num">10</span><h2>Para la próxima clase</h2><span class="time-tag">—</span></div>
+    <div class="resources-grid">
+      <div class="resource-card">
+        <p class="resource-tag">Lectura</p>
+        <p class="resource-title">Normas de un hotel en imperativo</p>
+        <p class="resource-desc">Cartel adaptado con normas de un hotel o restaurante, escrito en imperativo.</p>
+      </div>
+      <div class="resource-card">
+        <p class="resource-tag">Escucha</p>
+        <p class="resource-title">Recepcionista dando indicaciones</p>
+        <p class="resource-desc">Grabación simulada de un/a recepcionista dando indicaciones a un huésped.</p>
+      </div>
+    </div>
+
+    <!-- LECTURA -->
+    <div class="read-card">
+      <p class="read-title">Cartel: normas del hotel</p>
+      <p class="read-sub">Lectura adaptada · imperativo formal · nivel A2</p>
+      <ul class="poster-rules">
+        <li><strong>Presente</strong> su documento de identidad en la recepción al llegar.</li>
+        <li><strong>No fume</strong> en las habitaciones ni en las zonas comunes cerradas.</li>
+        <li><strong>Deje</strong> la llave en recepción antes de salir del hotel.</li>
+        <li><strong>Respete</strong> el horario de silencio a partir de las 22:00.</li>
+        <li><strong>No deje</strong> objetos de valor sin vigilancia en la piscina.</li>
+      </ul>
+      <div class="glossary" style="margin-top:18px;">
+        <span class="gloss-item"><b>presentar</b> to show/present</span>
+        <span class="gloss-item"><b>las zonas comunes</b> common areas</span>
+        <span class="gloss-item"><b>respetar el horario</b> to respect the schedule</span>
+        <span class="gloss-item"><b>sin vigilancia</b> unattended</span>
+      </div>
+    </div>
+
+    <div class="panel" style="margin-top:14px;">
+      <p style="margin-bottom:8px;"><strong>1.</strong> ¿Cuáles de las normas del cartel están en imperativo negativo?</p>
+      <p style="margin-bottom:8px;"><strong>2.</strong> Reescribe una de las normas usando "tú" en vez de "usted".</p>
+      <p style="margin:0;"><strong>3.</strong> Prepara una norma más, inventada por ti, para la próxima clase.</p>
+    </div>
+
+    <!-- ESCUCHA (transcripción) -->
+    <div class="read-card" style="margin-top:18px;">
+      <p class="read-title">Recepcionista dando indicaciones a un huésped</p>
+      <p class="read-sub">Comprensión auditiva · transcripción · imperativo formal · nivel A2</p>
+      <p style="font-size:14.5px; color:var(--ink-soft); margin:0 0 14px;">Lee la transcripción y subraya mentalmente todos los imperativos que encuentres.</p>
+      <div class="transcript">
+        <p><span class="speaker">Recepcionista</span>Bienvenido al hotel. Present<strong>e</strong> su documento, por favor, y firm<strong>e</strong> aquí abajo.</p>
+        <p><span class="speaker">Recepcionista</span>Tom<strong>e</strong> el ascensor hasta la tercera planta; su habitación es la 305. No <strong>use</strong> las escaleras de servicio, están cerradas por obras.</p>
+        <p><span class="speaker">Recepcionista</span>El desayuno es de 7:00 a 10:30 en el restaurante de la planta baja. Si necesita algo más, no dud<strong>e</strong> en llamar a recepción.</p>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <span>Class 19 · Órdenes, instrucciones y el imperativo en el trabajo</span>
+  <span>Next class → Class 20: muletillas y conectores de la conversación real</span>
+</footer>
+
+<script>
+/* ---------- VOCAB ---------- */
+const VOCAB = [
+  {front:"atender", back:"To attend to / serve. — Ahora mismo la atiendo, un momento."},
+  {front:"esperar un momento", back:"To wait a moment. — Espere un momento, por favor."},
+  {front:"tomar nota", back:"To take note / write down. — Tome nota del número de habitación."},
+  {front:"el mostrador", back:"Counter / front desk. — Deje su documento en el mostrador."},
+  {front:"la reserva", back:"Reservation / booking. — Tiene la reserva a nombre de González."},
+  {front:"disculpe", back:"Excuse me / I apologize (formal). — Disculpe la espera, ya le atiendo."},
+  {front:"por favor", back:"Please. — Tome asiento, por favor."},
+  {front:"encargarse de", back:"To take care of / be in charge of. — Yo me encargo de la reserva."},
+];
+const grid = document.getElementById('vocab-grid');
+VOCAB.forEach(v=>{
+  const card = document.createElement('div');
+  card.className = 'vocab-card';
+  card.setAttribute('role','button');
+  card.setAttribute('tabindex','0');
+  card.setAttribute('aria-pressed','false');
+  card.setAttribute('aria-label', `${v.front}. Press to see the meaning.`);
+  card.innerHTML = `<div class="vocab-front">${v.front}</div><div class="vocab-back">${v.back}</div>`;
+  const toggle = ()=>{
+    const flipped = card.classList.toggle('flipped');
+    card.setAttribute('aria-pressed', String(flipped));
+  };
+  card.addEventListener('click', toggle);
+  card.addEventListener('keydown', (e)=>{
+    if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); toggle(); }
+  });
+  grid.appendChild(card);
+});
+
+/* ---------- TRANSFORMA: DE TÚ A USTED ---------- */
+const TRANSFORMS = [
+  {direct:"\"Espera un momento.\" (a un compañero)", instruction:"cambia a usted", answer:"Espere un momento."},
+  {direct:"\"Tome asiento, por favor.\" (a un cliente)", instruction:"cambia a tú", answer:"Toma asiento, por favor."},
+  {direct:"\"No pongas la bandeja ahí.\" (a un compañero)", instruction:"cambia a usted", answer:"No ponga la bandeja ahí."},
+  {direct:"\"Pase por aquí, por favor.\" (a un huésped)", instruction:"cambia a tú", answer:"Pasa por aquí, por favor."},
+  {direct:"\"No te preocupes, yo lo resuelvo.\" (a un compañero)", instruction:"cambia a usted", answer:"No se preocupe, yo lo resuelvo."},
+];
+const transformList = document.getElementById('transform-list');
+TRANSFORMS.forEach((t,i)=>{
+  const el = document.createElement('div');
+  el.className = 'transform-item';
+  el.innerHTML = `
+    <p class="direct-line">${i+1}. <b>${t.direct}</b></p>
+    <p class="instruction">${t.instruction}</p>
+    <input type="text" placeholder="Escribe la frase transformada...">
+    <p class="reveal">Respuesta modelo: ${t.answer}</p>
+  `;
+  const input = el.querySelector('input');
+  input.addEventListener('blur', ()=>{
+    if(input.value.trim().length > 0){ el.classList.add('show-reveal'); }
+  });
+  transformList.appendChild(el);
+});
+document.getElementById('reveal-all-btn').addEventListener('click', ()=>{
+  document.querySelectorAll('.transform-item').forEach(el=>el.classList.add('show-reveal'));
+});
+
+/* ---------- EXERCISES ---------- */
+const EXERCISES = [
+  {sentence:"<span class=\"gap\">___</span> un momento, por favor (a un cliente).", options:["Espere","Espera","Esperas"], answer:"Espere"},
+  {sentence:"<span class=\"gap\">___</span> asiento, ahora mismo te atiendo (a un compañero).", options:["Toma","Tome","Tomas"], answer:"Toma"},
+  {sentence:"No <span class=\"gap\">___</span> aquí, pase a la sala de espera (a un cliente).", options:["espere","espera","esperas"], answer:"espere"},
+  {sentence:"<span class=\"gap\">___</span> nota del pedido, por favor (a un compañero).", options:["Ten","Tenga","Tienes"], answer:"Ten"},
+  {sentence:"No <span class=\"gap\">___</span> la bandeja ahí (a un cliente).", options:["ponga","pon","pongas"], answer:"ponga"},
+  {sentence:"Ahora mismo la <span class=\"gap\">___</span>, un momento.", options:["atiendo","atiende","atiendes"], answer:"atiendo"},
+  {sentence:"¿Le ayudo <span class=\"gap\">___</span> las maletas?", options:["con","de","en"], answer:"con"},
+  {sentence:"Yo me encargo <span class=\"gap\">___</span> la reserva.", options:["de","con","en"], answer:"de"},
+  {sentence:"<span class=\"gap\">___</span>e por la espera, ya le atiendo (a un cliente).", options:["Disculp","Perdon","Siento"], answer:"Disculp"},
+  {sentence:"No te <span class=\"gap\">___</span>, ya lo resuelvo yo (a un compañero).", options:["preocupes","preocupa","preocupas"], answer:"preocupes"}
+];
+function shuffle(arr){
+  const a = arr.slice();
+  for(let i = a.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+const exWrap = document.getElementById('exercises');
+EXERCISES.forEach((ex,i)=>{
+  const el = document.createElement('div');
+  el.className = 'exercise';
+  el.dataset.answer = ex.answer;
+  const shuffledOptions = shuffle(ex.options);
+  el.innerHTML = `
+    <div class="ex-sentence">${i+1}. ${ex.sentence}</div>
+    <div class="ex-options">
+      ${shuffledOptions.map(o=>`<button class="opt-btn" data-value="${o}">${o}</button>`).join('')}
+    </div>
+  `;
+  exWrap.appendChild(el);
+  el.querySelectorAll('.opt-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      el.querySelectorAll('.opt-btn').forEach(b=>b.classList.remove('picked'));
+      btn.classList.add('picked');
+    });
+  });
+});
+document.getElementById('check-btn').addEventListener('click', ()=>{
+  let correct = 0;
+  document.querySelectorAll('.exercise').forEach(el=>{
+    const answer = el.dataset.answer;
+    const picked = el.querySelector('.opt-btn.picked');
+    el.querySelectorAll('.opt-btn').forEach(b=>{
+      b.disabled = true;
+      if(b.dataset.value === answer) b.classList.add('correct');
+      else if(b === picked) b.classList.add('wrong');
+    });
+    if(picked && picked.dataset.value === answer) correct++;
+  });
+  document.getElementById('score-text').textContent = `${correct} / ${EXERCISES.length} correctas`;
+});
+document.getElementById('reset-btn').addEventListener('click', ()=>{
+  document.querySelectorAll('.exercise').forEach(el=>{
+    el.querySelectorAll('.opt-btn').forEach(b=>{
+      b.disabled = false;
+      b.classList.remove('picked','correct','wrong');
+    });
+  });
+  document.getElementById('score-text').textContent = '';
+});
+
+/* ---------- TAREA FINAL (autosave) ---------- */
+const STORAGE_KEY = 'pylypenko-clase19-tarea';
+const taskArea = document.querySelector('.final-task');
+const taskCount = document.getElementById('task-count');
+const savedFlag = document.getElementById('saved-flag');
+
+async function loadTask(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(STORAGE_KEY);
+    if (res && typeof res.value === 'string') taskArea.value = res.value;
+  }catch(e){
+    // sin tarea previa guardada
+  }
+  updateCount();
+}
+function updateCount(){
+  const matches = (taskArea.value.match(/\b(espere|tome|pase|disculpe|no se preocupe|ponga|venga|salga|haga|diga|siéntese)\b/gi) || []).length;
+  taskCount.textContent = `${matches} imperativo${matches===1?'':'s'} detectado${matches===1?'':'s'}`;
+}
+taskArea.addEventListener('input', updateCount);
+updateCount();
+loadTask();
+
+document.getElementById('save-btn').addEventListener('click', async ()=>{
+  if (!window.storage){
+    savedFlag.textContent = 'No se puede guardar aquí';
+    savedFlag.classList.add('show');
+    setTimeout(()=>{ savedFlag.classList.remove('show'); savedFlag.textContent = 'Guardado ✓'; }, 2200);
+    return;
+  }
+  try{
+    const ok = await window.storage.set(STORAGE_KEY, taskArea.value);
+    savedFlag.textContent = ok ? 'Guardado ✓' : 'No se pudo guardar';
+  }catch(e){
+    savedFlag.textContent = 'No se pudo guardar';
+  }
+  savedFlag.classList.add('show');
+  setTimeout(()=>{ savedFlag.classList.remove('show'); savedFlag.textContent = 'Guardado ✓'; }, 1800);
+});
+</script>
+
+</body>
+</html>

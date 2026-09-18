@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Class 16 · Beberick antes y ahora</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Space+Mono:wght@400;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+
+/* ╔══════════════════════════════════════════════════════════════╗
+   ║  ESCOLAR × NOTHING                                            ║
+   ║  Class 16 · L4 Imperfecto de hábitos — Beberick antes y ahora  ║
+   ╚══════════════════════════════════════════════════════════════╝ */
+
+:root{
+  --paper:        #F4EFE4;
+  --paper-deep:   #EAE3D2;
+  --glass:        rgba(255,255,255,0.55);
+  --glass-strong: rgba(255,255,255,0.75);
+  --ink:          #23291F;
+  --ink-soft:     #565F52;
+  --ink-faint:    #8B9184;
+  --line:         rgba(35,41,31,0.10);
+  --line-strong:  rgba(35,41,31,0.20);
+
+  /* roles semánticos de esta clase — cierre de L4, hábitos e infancia:
+     b1 violeta = imperfecto de hábitos (tema del día), b2 verde = Beberick/presente,
+     family ámbar = tarea, ok verde = acierto */
+  --b1:      #7B4FC9;  --b1-soft: rgba(123,79,201,0.10);  --b1-line: rgba(123,79,201,0.30);
+  --b2:      #2E9E6B;  --b2-soft: rgba(46,158,107,0.10);  --b2-line: rgba(46,158,107,0.30);
+  --family:  #DB8A2E;  --family-soft: rgba(219,138,46,0.10); --family-line: rgba(219,138,46,0.30);
+  --ok:      #2E9E6B;  --ok-soft: rgba(46,158,107,0.10);  --ok-line: rgba(46,158,107,0.30);
+
+  --f-display: 'Fraunces', Georgia, serif;
+  --f-body:    'IBM Plex Sans', system-ui, sans-serif;
+  --f-data:    'Space Mono', ui-monospace, monospace;
+
+  --r-sm: 8px;
+  --r-md: 16px;
+  --r-lg: 24px;
+
+  --blur: 22px;
+  --spring: cubic-bezier(.34,1.56,.64,1);
+  --shadow-glass: 0 8px 32px rgba(35,41,31,0.06), 0 1px 2px rgba(35,41,31,0.05);
+}
+
+*{ box-sizing:border-box; }
+html{ scroll-behavior:smooth; }
+body{
+  margin:0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--f-body);
+  line-height:1.6;
+  padding: 0 0 100px;
+  position: relative;
+  min-height: 100vh;
+}
+body::before{
+  content:"";
+  position: fixed; inset:0;
+  background-image: radial-gradient(circle, rgba(35,41,31,0.09) 1.5px, transparent 1.5px);
+  background-size: 28px 28px;
+  pointer-events:none; z-index:0;
+}
+body::after{
+  content:"";
+  position: fixed; inset:0;
+  background: radial-gradient(ellipse 70% 50% at 50% -10%, var(--paper-deep), transparent 60%);
+  pointer-events:none; z-index:0;
+}
+::selection{ background: var(--b1-soft); }
+
+.page{ max-width: 760px; margin:0 auto; padding: 56px 20px 0; position:relative; z-index:1; }
+
+/* ---------- HERO ---------- */
+.hero{
+  background: var(--glass);
+  backdrop-filter: blur(var(--blur)); -webkit-backdrop-filter: blur(var(--blur));
+  border:1px solid rgba(255,255,255,0.6);
+  border-radius: var(--r-lg);
+  padding: 44px 40px 36px;
+  box-shadow: var(--shadow-glass);
+  position:relative; overflow:hidden; margin-bottom: 24px;
+}
+.hero-eyebrow{
+  font-family: var(--f-data); font-size:12px; letter-spacing:.16em; text-transform:uppercase;
+  color: var(--ink-faint); margin:0 0 16px; display:flex; align-items:center; gap:10px;
+}
+.dot-live{ width:7px; height:7px; border-radius:50%; background: var(--b1); box-shadow: 0 0 0 4px var(--b1-soft); animation: pulse 2.6s ease-in-out infinite; }
+@keyframes pulse{ 0%,100%{opacity:1;} 50%{opacity:0.35;} }
+
+.hero h1{ font-family: var(--f-display); font-weight:500; font-size:clamp(28px,5vw,44px); margin:0 0 12px; letter-spacing:-.01em; line-height:1.08; }
+.hero h1 em{ font-style:italic; color: var(--b1); }
+.hero p.desc{ font-size:15px; color: var(--ink-soft); max-width:60ch; margin:0; }
+
+.meta-row{ display:flex; flex-wrap:wrap; gap:20px; margin-top:26px; font-family: var(--f-data); font-size:12px; color: var(--ink-faint); }
+.meta-row strong{ display:block; color: var(--ink); font-size:14.5px; font-weight:500; font-family: var(--f-display); margin-top:3px; }
+
+/* ---------- SECTION HEAD ---------- */
+.section{ margin-top: 52px; }
+.section-head{ display:flex; align-items:baseline; gap:12px; margin-bottom:18px; }
+.section-num{
+  font-family: var(--f-data); font-size:12px; color:#fff; background: var(--b1);
+  width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex:none;
+}
+.section-head h2{ font-family: var(--f-display); font-weight:500; font-style:italic; font-size:22px; margin:0; }
+.time-tag{
+  font-family: var(--f-data); font-size:11px; color: var(--ink-faint);
+  background: var(--glass-strong); border:1px solid var(--line); padding:3px 10px; border-radius:999px; margin-left:auto; flex:none;
+}
+
+/* ---------- GLASS PANEL ---------- */
+.glass-panel{
+  background: var(--glass);
+  backdrop-filter: blur(var(--blur)); -webkit-backdrop-filter: blur(var(--blur));
+  border: 1px solid rgba(255,255,255,0.6);
+  border-radius: var(--r-lg);
+  padding: 26px 28px;
+  box-shadow: var(--shadow-glass);
+}
+.glass-panel[data-role="b1"]{ border-color: var(--b1-line); background: linear-gradient(var(--b1-soft), var(--b1-soft)), var(--glass); }
+.glass-panel[data-role="b2"]{ border-color: var(--b2-line); background: linear-gradient(var(--b2-soft), var(--b2-soft)), var(--glass); }
+.glass-panel[data-role="family"]{ border-color: var(--family-line); background: linear-gradient(var(--family-soft), var(--family-soft)), var(--glass); }
+.glass-panel[data-role="ok"]{ border-color: var(--ok-line); background: linear-gradient(var(--ok-soft), var(--ok-soft)), var(--glass); }
+.glass-panel p{ font-size:15px; color: var(--ink-soft); margin:0 0 14px; }
+.glass-panel p:last-of-type{ margin-bottom:0; }
+.glass-panel p strong{ color: var(--ink); font-weight:600; }
+
+/* ---------- CONJUGATION TABLE ---------- */
+.conj-table-wrap{ overflow-x:auto; margin:4px 0 0; }
+table.conj{ width:100%; border-collapse:collapse; font-size:14.5px; min-width:420px; }
+table.conj td{ padding:11px 8px; border-bottom:1px dashed var(--line); }
+table.conj tr:last-child td{ border-bottom:none; }
+table.conj td.pron{ font-family: var(--f-data); color: var(--ink-faint); font-size:12px; width:170px; }
+table.conj td.form{ font-family: var(--f-display); font-weight:600; font-size:20px; color: var(--b1); }
+table.conj td.ex{ color: var(--ink-soft); font-size:13.5px; }
+
+.note{ margin-top:16px; padding:14px 16px; background: linear-gradient(var(--b1-soft),var(--b1-soft)), var(--glass); border:1px solid var(--b1-line); border-radius: var(--r-md); font-size:13.5px; color: var(--ink-soft); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+.note strong{ color: var(--ink); }
+.warning-box{ margin-top:16px; padding:14px 16px; background: linear-gradient(var(--family-soft),var(--family-soft)), var(--glass); border:1px solid var(--family-line); border-radius: var(--r-md); font-size:13.5px; color: var(--ink-soft); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+.warning-box strong{ color:#96591A; }
+
+/* ---------- USES GRID ---------- */
+.uses-grid{ display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:18px; }
+@media (max-width:560px){ .uses-grid{ grid-template-columns:1fr; } }
+.use-card{
+  border-radius: var(--r-md); padding:16px 18px; border:1px solid var(--b1-line);
+  background: linear-gradient(var(--b1-soft), var(--b1-soft)), var(--glass);
+  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+}
+.use-tag{ font-family: var(--f-data); font-size:10px; text-transform:uppercase; letter-spacing:.06em; color: var(--b1); margin:0 0 6px; }
+.use-trigger{ font-family: var(--f-display); font-weight:600; font-size:16.5px; color: var(--ink); margin:0 0 6px; }
+.use-ex{ font-size:13px; color: var(--ink-soft); }
+
+/* ---------- VOCAB / TAP CARDS ---------- */
+.vocab-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:12px; margin-top:4px; }
+.tap-card{
+  background: var(--glass); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  border:1px solid rgba(255,255,255,0.5); border-radius: var(--r-md);
+  padding:14px 16px; cursor:pointer; min-height:78px;
+  display:flex; flex-direction:column; justify-content:center;
+  transition: border-color .15s ease, transform .18s var(--spring);
+}
+.tap-card:hover{ border-color: var(--b1-line); transform: translateY(-2px); }
+.tap-card:active{ transform: scale(.97); transition-duration: .08s; }
+.tap-card:focus-visible{ outline:2px solid var(--b1); outline-offset:2px; }
+.tap-front{ font-family: var(--f-body); font-weight:600; font-size:15px; }
+.tap-back{ display:none; font-family: var(--f-data); font-size:12px; color: var(--ink-faint); margin-top:6px; }
+.tap-card.flipped .tap-back{ display:block; }
+.tap-card.flipped{ background: linear-gradient(var(--b1-soft),var(--b1-soft)), var(--glass); border-color: var(--b1-line); }
+.vocab-hint{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin:10px 2px 16px; }
+
+/* ---------- QUIZ ---------- */
+.exercise{ margin-bottom:18px; }
+.exercise:last-of-type{ margin-bottom:0; }
+.ex-sentence{ font-size:15px; margin-bottom:10px; color: var(--ink); }
+.ex-sentence .gap{ font-family: var(--f-data); color: var(--ink-faint); }
+.ex-options{ display:flex; flex-wrap:wrap; gap:8px; }
+.opt-btn{
+  font-family: var(--f-body); font-size:14px; background: var(--glass-strong); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  border:1.5px solid var(--line-strong); color: var(--ink); padding:8px 17px; border-radius:999px; cursor:pointer;
+  transition: transform .18s var(--spring), background .15s ease, border-color .15s ease, color .15s ease;
+}
+.opt-btn:hover{ border-color: var(--ink-faint); }
+.opt-btn:active{ transform: scale(.94); transition-duration: .08s; }
+.opt-btn.picked{ background: linear-gradient(var(--b1-soft),var(--b1-soft)), var(--glass-strong); border-color: var(--b1); color: var(--b1); }
+.opt-btn.correct{ background: linear-gradient(var(--ok-soft),var(--ok-soft)), var(--glass-strong); border-color: var(--ok); color: var(--ok); }
+.opt-btn.wrong{ background: linear-gradient(var(--family-soft),var(--family-soft)), var(--glass-strong); border-color: var(--family); color: var(--family); text-decoration: line-through; }
+.opt-btn:disabled{ cursor:default; }
+.check-bar{ display:flex; align-items:center; justify-content:space-between; gap:16px; margin-top:20px; padding-top:18px; border-top:1px dashed var(--line); flex-wrap:wrap; }
+
+.btn-primary{
+  font-family: var(--f-body); font-weight:600; font-size:14px; color:#fff; background: var(--b1);
+  border:none; padding:11px 22px; border-radius:999px; cursor:pointer;
+  transition: transform .18s var(--spring);
+}
+.btn-primary:hover{ transform: translateY(-1px); }
+.btn-primary:active{ transform: scale(.95); transition-duration: .08s; }
+.btn-ghost{
+  font-family: var(--f-body); font-weight:600; font-size:13px; color: var(--ink-soft); background:none;
+  border:1.5px solid var(--line); padding:9px 18px; border-radius:999px; cursor:pointer;
+  transition: transform .18s var(--spring), border-color .15s ease;
+}
+.btn-ghost:hover{ border-color: var(--ink-faint); }
+.btn-ghost:active{ transform: scale(.95); transition-duration: .08s; }
+#score-text{ font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); }
+
+/* ---------- BEBERICK CHARACTER CARD ---------- */
+.characters{ display:grid; gap:16px; margin-top:4px; }
+.char-card{
+  background: var(--glass); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  border:1px solid rgba(255,255,255,0.6); border-radius: var(--r-lg);
+  padding:20px 22px; display:flex; gap:16px; align-items:flex-start;
+}
+.char-avatar{
+  flex:none; width:44px; height:44px; border-radius:50%; background: linear-gradient(var(--b2-soft),var(--b2-soft)), var(--glass);
+  display:flex; align-items:center; justify-content:center; font-size:22px;
+}
+.char-body{ flex:1; }
+.char-name{ font-family: var(--f-display); font-weight:600; font-size:17px; margin:0 0 4px; }
+.char-role{ font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.05em; color: var(--ink-faint); margin:0 0 10px; }
+.char-facts{ display:flex; flex-wrap:wrap; gap:6px; margin-bottom:10px; }
+.fact-tag{
+  font-family: var(--f-data); font-size:11.5px; background: rgba(255,255,255,0.5); border:1px solid var(--line); color: var(--ink-soft);
+  padding:4px 10px; border-radius:999px;
+}
+.char-prompt{ font-size:14px; color: var(--ink-soft); }
+.char-input{
+  width:100%; margin-top:8px; font-family: var(--f-body); font-size:14.5px; color: var(--ink);
+  background: rgba(255,255,255,0.6); border:1px solid var(--line-strong); border-radius: var(--r-sm);
+  padding:10px 12px; resize:vertical; min-height:44px;
+}
+.char-input:focus{ outline:none; border-color: var(--b2); background:#fff; }
+
+/* ---------- MEMORY GAME (antes/ahora) ---------- */
+.memory-grid{ display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:16px; }
+@media (max-width:560px){ .memory-grid{ grid-template-columns:1fr; } }
+.memory-col{ background: var(--glass-strong); border-radius: var(--r-md); padding:16px 18px; backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
+.memory-col.antes{ border:1.5px solid var(--b1-line); }
+.memory-col.ahora{ border:1.5px solid var(--b2-line); }
+.memory-col-title{ font-family: var(--f-display); font-weight:600; font-style:italic; font-size:18px; margin:0 0 10px; }
+.memory-col.antes .memory-col-title{ color: var(--b1); }
+.memory-col.ahora .memory-col-title{ color: var(--b2); }
+.memory-item{ margin-bottom:10px; }
+.memory-item:last-child{ margin-bottom:0; }
+.memory-item label{ font-size:12.5px; color: var(--ink-faint); font-family: var(--f-data); display:block; margin-bottom:4px; }
+.memory-item input{
+  width:100%; font-family: var(--f-body); font-size:14px; color: var(--ink);
+  background:#fff; border:1px solid var(--line-strong); border-radius: var(--r-sm);
+  padding:8px 10px;
+}
+.memory-item.antes-input input:focus{ outline:none; border-color: var(--b1); }
+.memory-item.ahora-input input:focus{ outline:none; border-color: var(--b2); }
+
+/* ---------- FINAL TASK ---------- */
+textarea#final-task{
+  width:100%; min-height:130px; font-family: var(--f-body); font-size:15px; color: var(--ink);
+  background: rgba(255,255,255,0.6); border:1px solid var(--family-line); border-radius: var(--r-md);
+  padding:14px 16px; resize:vertical; margin-top:14px;
+}
+textarea#final-task:focus{ outline:none; border-color: var(--family); background:#fff; }
+.task-footer{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:12px; flex-wrap:wrap; }
+#task-count{ font-family: var(--f-data); font-size:12px; color: var(--ink-faint); }
+.btn-secondary{
+  font-family: var(--f-body); font-weight:600; font-size:13.5px; color:#96591A; background:none;
+  border:1.5px solid var(--family-line); padding:9px 18px; border-radius:999px; cursor:pointer;
+  transition: transform .18s var(--spring), border-color .15s ease;
+}
+.btn-secondary:hover{ border-color: var(--family); }
+.btn-secondary:active{ transform: scale(.95); transition-duration: .08s; }
+.saved-flag{ font-family: var(--f-data); font-size:11.5px; color: var(--ok); opacity:0; transition: opacity .3s ease; }
+.saved-flag.show{ opacity:1; }
+
+/* ---------- RESOURCES ---------- */
+.resources-grid{ display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:16px; }
+@media (max-width:560px){ .resources-grid{ grid-template-columns:1fr; } }
+.resource-card{
+  background: var(--glass); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  border:1px solid var(--family-line); border-radius: var(--r-md); padding:14px 16px;
+}
+.resource-tag{ font-family: var(--f-data); font-size:10.5px; text-transform:uppercase; letter-spacing:.06em; color:#96591A; margin:0 0 6px; }
+.resource-title{ font-family: var(--f-display); font-weight:600; font-size:15px; margin:0 0 4px; }
+.resource-desc{ font-size:13px; color: var(--ink-soft); margin:0; }
+
+/* ---------- LECTURA (reading passage) ---------- */
+.read-card{
+  background: var(--glass); backdrop-filter: blur(var(--blur)); -webkit-backdrop-filter: blur(var(--blur));
+  border:1px solid var(--family-line); border-radius: var(--r-lg); padding:24px 26px;
+  box-shadow: var(--shadow-glass); margin-top:14px;
+}
+.read-title{ font-family: var(--f-display); font-weight:600; font-size:18px; margin:0 0 4px; }
+.read-sub{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); text-transform:uppercase; letter-spacing:.06em; margin:0 0 16px; }
+.read-body p{ font-size:15px; color: var(--ink); margin:0 0 12px; }
+.read-body p:last-child{ margin-bottom:0; }
+.read-body strong{ color:#96591A; font-weight:600; }
+.glossary{ margin-top:16px; padding-top:14px; border-top:1px dashed var(--line); display:flex; flex-wrap:wrap; gap:8px 18px; }
+.gloss-item{ font-size:12.5px; color: var(--ink-soft); }
+.gloss-item b{ font-family: var(--f-data); font-weight:700; color: var(--ink); font-size:12px; }
+
+/* ---------- TRANSCRIPCIÓN ---------- */
+.transcript{ margin-top:14px; padding-top:14px; border-top:1px dashed var(--line); }
+.transcript p{ font-size:14.5px; color: var(--ink-soft); margin:0 0 10px; }
+.transcript p:last-child{ margin-bottom:0; }
+.transcript .speaker{ font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.05em; color: var(--family); display:block; margin-bottom:2px; }
+.transcript strong{ color: var(--ink); font-weight:600; }
+
+footer{
+  max-width:760px; margin:0 auto; padding:0 20px; display:flex;
+  justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;
+  font-family: var(--f-data); font-size:12px; color: var(--ink-faint);
+  margin-top:64px; padding-top:28px; border-top:1px solid var(--line);
+}
+
+@media (max-width:600px){
+  .page{ padding:36px 16px 0; }
+  .hero{ padding:32px 24px 28px; }
+  .glass-panel, .char-card{ padding:20px 18px; }
+  .char-card{ flex-direction:column; }
+}
+@media (prefers-reduced-motion: reduce){ *{ transition:none !important; } }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HERO -->
+  <div class="hero">
+    <p class="hero-eyebrow"><span class="dot-live"></span>Class 16 · L4 El pasado que me trajo aquí</p>
+    <h1>Beberick <em>antes y ahora</em></h1>
+    <p class="desc">Cerramos la línea del pasado biográfico con el imperfecto de hábitos y descripciones: cómo eras de pequeña, cómo era Beberick cuando lo adoptaste. Comparamos ese "antes" con tu presente actual, y de paso resolvemos dos detalles que llevan toda la línea apareciendo: el artículo con países y nacionalidades, y cuándo "de que" sobra después de verbos de recuerdo y opinión.</p>
+    <div class="meta-row">
+      <div>Duration<strong>50 min</strong></div>
+      <div>Focus<strong>imperfecto de hábitos · soler + infinitivo · artículo con países</strong></div>
+      <div>Level<strong>A2</strong></div>
+    </div>
+  </div>
+
+  <!-- 1. CONVERSACIÓN -->
+  <div class="section">
+    <div class="section-head"><span class="section-num">1</span><h2>Conversación: Beberick, antes y ahora</h2><span class="time-tag">10 min</span></div>
+    <div class="glass-panel">
+      <p>Cuéntame cómo era Beberick cuando lo adoptaste y cómo es ahora — su carácter, sus costumbres, cómo ha cambiado su relación contigo.</p>
+      <div class="note"><strong>Preguntas para guiar la conversación:</strong> ¿Cómo se comportaba Beberick los primeros días? ¿Era tímido, asustadizo, cariñoso desde el principio? ¿Qué costumbre tuya ha cambiado desde que lo tienes?</div>
+    </div>
+  </div>
+
+  <!-- 2. GRAMÁTICA: imperfecto de hábitos -->
+  <div class="section">
+    <div class="section-head"><span class="section-num">2</span><h2>Imperfecto para hábitos y descripciones</h2><span class="time-tag">18 min</span></div>
+    <div class="glass-panel" data-role="b1">
+      <p>El imperfecto no solo describe el contexto de un momento puntual (como viste la clase pasada) — también sirve para hábitos y rutinas del pasado, cosas que hacías repetidamente o que eran así durante un periodo largo.</p>
+
+      <div class="conj-table-wrap">
+        <table class="conj">
+          <tr><td class="pron">imperfecto — hábito</td><td class="form">vivía</td><td class="ex">De pequeña vivía en un pueblo cerca de Kiev.</td></tr>
+          <tr><td class="pron">imperfecto — carácter/descripción</td><td class="form">era</td><td class="ex">Beberick era muy tímido cuando lo adopté.</td></tr>
+          <tr><td class="pron">soler + infinitivo</td><td class="form">solía</td><td class="ex">Solía pasear con él una hora todos los días.</td></tr>
+          <tr><td class="pron">presente — hábito actual</td><td class="form">suelo</td><td class="ex">Ahora suelo pasear con él por la playa, en vez del parque.</td></tr>
+        </table>
+      </div>
+
+      <div class="uses-grid">
+        <div class="use-card">
+          <p class="use-tag">imperfecto</p>
+          <p class="use-trigger">de pequeña</p>
+          <p class="use-ex">De pequeña pasaba los veranos en casa de mis abuelos.</p>
+        </div>
+        <div class="use-card">
+          <p class="use-tag">imperfecto</p>
+          <p class="use-trigger">el carácter de entonces</p>
+          <p class="use-ex">Era una niña muy cariñosa, pero también muy tímida con extraños.</p>
+        </div>
+        <div class="use-card">
+          <p class="use-tag">soler</p>
+          <p class="use-trigger">solía + infinitivo</p>
+          <p class="use-ex">Solíamos ir al parque los domingos, toda la familia junta.</p>
+        </div>
+        <div class="use-card">
+          <p class="use-tag">contraste</p>
+          <p class="use-trigger">antes (imperfecto) / ahora (presente)</p>
+          <p class="use-ex">Antes Beberick se escondía debajo de la cama; ahora duerme a mi lado.</p>
+        </div>
+      </div>
+
+      <div class="warning-box"><strong>El error más repetido:</strong> confundir "soler" en presente con el imperfecto de hábito — ambos existen y significan cosas distintas según el tiempo: "solía pasear" (hábito pasado) frente a "suelo pasear" (hábito actual). Usa el tiempo verbal de "soler" según de qué época hables.</div>
+    </div>
+  </div>
+
+  <!-- 3. HILO TRANSVERSAL -->
+  <div class="section">
+    <div class="section-head"><span class="section-num">3</span><h2>Hilo transversal: el artículo con países, y "que" sin "de"</h2><span class="time-tag">6 min</span></div>
+    <div class="glass-panel" data-role="b2">
+      <div class="uses-grid">
+        <div class="use-card" style="border-color:var(--b2-line); background:linear-gradient(var(--b2-soft),var(--b2-soft)), var(--glass);">
+          <p class="use-tag" style="color:var(--b2);">sin artículo</p>
+          <p class="use-trigger">vivía en Ucrania</p>
+          <p class="use-ex">De pequeña vivía en Ucrania, en una casa con jardín.</p>
+        </div>
+        <div class="use-card" style="border-color:var(--b2-line); background:linear-gradient(var(--b2-soft),var(--b2-soft)), var(--glass);">
+          <p class="use-tag" style="color:var(--b2);">con artículo</p>
+          <p class="use-trigger">antes de la guerra</p>
+          <p class="use-ex">Antes de la guerra, nunca había pensado en emigrar.</p>
+        </div>
+        <div class="use-card" style="border-color:var(--b2-line); background:linear-gradient(var(--b2-soft),var(--b2-soft)), var(--glass);">
+          <p class="use-tag" style="color:var(--b2);">verbo de recuerdo</p>
+          <p class="use-trigger">me acuerdo de que</p>
+          <p class="use-ex">Me acuerdo de que jugaba en el patio todas las tardes.</p>
+        </div>
+        <div class="use-card" style="border-color:var(--b2-line); background:linear-gradient(var(--b2-soft),var(--b2-soft)), var(--glass);">
+          <p class="use-tag" style="color:var(--b2);">sin "de"</p>
+          <p class="use-trigger">recuerdo que</p>
+          <p class="use-ex">Recuerdo que Beberick tardó semanas en confiar en mí.</p>
+        </div>
+      </div>
+      <div class="note" style="background:linear-gradient(var(--b2-soft),var(--b2-soft)), var(--glass); border-color:var(--b2-line);"><strong>La regla rápida:</strong> "acordarse" lleva "de que" (me acuerdo de que...), pero "recordar" va directo con "que" (recuerdo que...) — son casi sinónimos pero se construyen distinto.</div>
+    </div>
+  </div>
+
+  <!-- 4. VOCABULARIO -->
+  <div class="section">
+    <div class="section-head"><span class="section-num">4</span><h2>Vocabulario</h2><span class="time-tag">5 min</span></div>
+    <p class="vocab-hint">Toca cada tarjeta para ver el significado y un ejemplo en contexto.</p>
+    <div class="vocab-grid" id="vocab-grid"></div>
+  </div>
+
+  <!-- 5. FICHA DE BEBERICK -->
+  <div class="section">
+    <div class="section-head"><span class="section-num">5</span><h2>Ficha de Beberick: describe su carácter</h2><span class="time-tag">14 min</span></div>
+    <div class="characters">
+      <div class="char-card">
+        <div class="char-avatar">🐶</div>
+        <div class="char-body">
+          <p class="char-name">Beberick</p>
+          <p class="char-role">adoptado hace un tiempo · vive contigo en Tenerife</p>
+          <div class="char-facts">
+            <span class="fact-tag">antes: tímido</span>
+            <span class="fact-tag">antes: se escondía</span>
+            <span class="fact-tag">ahora: cariñoso</span>
+          </div>
+          <p class="char-prompt">Describe con imperfecto cómo era Beberick el primer mes que lo tuviste — su comportamiento, sus miedos, sus costumbres.</p>
+          <textarea class="char-input" rows="2" placeholder="Cuando lo adopté, Beberick era... / Se escondía... / No solía..."></textarea>
+        </div>
+      </div>
+      <div class="char-card">
+        <div class="char-avatar">🐾</div>
+        <div class="char-body">
+          <p class="char-name">Beberick, ahora</p>
+          <p class="char-role">presente de hábito</p>
+          <p class="char-prompt">Ahora describe cómo es Beberick hoy, con presente de hábito, contrastando con lo que escribiste arriba.</p>
+          <textarea class="char-input" rows="2" placeholder="Ahora Beberick es... / Suele... / Duerme..."></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. JUEGO DE MEMORIA: DE ANTES / DE AHORA -->
+  <div class="section">
+    <div class="section-head"><span class="section-num">6</span><h2>Juego de memoria: de antes / de ahora</h2><span class="time-tag">10 min</span></div>
+    <div class="glass-panel">
+      <p>Elige tres objetos o rutinas de tu infancia en Ucrania y descríbelos con imperfecto; luego su equivalente actual con presente.</p>
+      <div class="memory-grid">
+        <div class="memory-col antes">
+          <p class="memory-col-title">De antes (imperfecto)</p>
+          <div class="memory-item antes-input"><label>Objeto o rutina 1</label><input type="text" placeholder="De pequeña tenía..."></div>
+          <div class="memory-item antes-input"><label>Objeto o rutina 2</label><input type="text" placeholder="Solía..."></div>
+          <div class="memory-item antes-input"><label>Objeto o rutina 3</label><input type="text" placeholder="Era típico..."></div>
+        </div>
+        <div class="memory-col ahora">
+          <p class="memory-col-title">De ahora (presente)</p>
+          <div class="memory-item ahora-input"><label>Equivalente 1</label><input type="text" placeholder="Ahora tengo..."></div>
+          <div class="memory-item ahora-input"><label>Equivalente 2</label><input type="text" placeholder="Suelo..."></div>
+          <div class="memory-item ahora-input"><label>Equivalente 3</label><input type="text" placeholder="Es típico..."></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7. PRÁCTICA -->
+  <div class="section">
+    <div class="section-head"><span class="section-num">7</span><h2>Practica</h2><span class="time-tag">10 min</span></div>
+    <div class="glass-panel">
+      <p class="vocab-hint" style="margin-bottom:14px;">10 frases con imperfecto de hábitos, soler, y el artículo con países. Piensa qué época describe cada frase antes de elegir.</p>
+      <div id="exercises"></div>
+      <div class="check-bar">
+        <div style="display:flex; gap:10px;">
+          <button class="btn-primary" id="check-btn">Comprobar respuestas</button>
+          <button class="btn-ghost" id="reset-btn">Reiniciar</button>
+        </div>
+        <span id="score-text"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 8. TAREA FINAL -->
+  <div class="section">
+    <div class="section-head"><span class="section-num">8</span><h2 style="color:#96591A">Tu tarea</h2><span class="time-tag">2 min</span></div>
+    <div class="glass-panel" data-role="family">
+      <p>Graba un <strong>audio de 1 minuto</strong> describiendo cómo era tu vida antes de mudarte y cómo es ahora. Usa imperfecto para el "antes" y presente para el "ahora".</p>
+      <textarea id="final-task" placeholder="Antes vivía... / Solía... / Ahora vivo... / Suelo..."></textarea>
+      <div class="task-footer">
+        <span id="task-count">0 usos de imperfecto/presente detectados</span>
+        <div style="display:flex; gap:10px; align-items:center;">
+          <span class="saved-flag" id="saved-flag">Guardado ✓</span>
+          <button class="btn-secondary" id="save-btn">Guardar tarea</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 9. PARA LA PRÓXIMA CLASE -->
+  <div class="section">
+    <div class="section-head"><span class="section-num">9</span><h2>Para la próxima clase</h2><span class="time-tag">—</span></div>
+    <div class="resources-grid">
+      <div class="resource-card">
+        <p class="resource-tag">Lectura</p>
+        <p class="resource-title">Adopción de mascotas y adaptación</p>
+        <p class="resource-desc">Un texto breve sobre cómo un animal se adapta a un hogar nuevo — buen paralelo con tu propia adaptación.</p>
+      </div>
+      <div class="resource-card">
+        <p class="resource-tag">Vídeo</p>
+        <p class="resource-title">Alguien describiendo su infancia</p>
+        <p class="resource-desc">Un vídeo corto de alguien contando cómo era su vida de pequeño/a, con imperfecto.</p>
+      </div>
+    </div>
+
+    <!-- LECTURA -->
+    <div class="read-card">
+      <p class="read-title">Texto: cómo se adapta un animal a un hogar nuevo</p>
+      <p class="read-sub">Lectura adaptada · nivel A2</p>
+      <div class="read-body">
+        <p>Cuando un animal llega a una casa nueva, casi siempre <strong>pasaba</strong> por el mismo proceso que pasamos las personas cuando cambiamos de país. Al principio <strong>solía</strong> esconderse, no <strong>comía</strong> bien y <strong>desconfiaba</strong> de todo lo que era diferente: los ruidos, los olores, las personas nuevas.</p>
+        <p>Con el tiempo, sin embargo, todo cambia. El animal <strong>empieza</strong> a reconocer las rutinas de la casa, <strong>aprende</strong> dónde está su comida y quién lo cuida, y poco a poco <strong>deja</strong> de tener miedo. Lo que antes era motivo de estrés se convierte en algo normal y hasta cómodo.</p>
+        <p>Los expertos en comportamiento animal dicen que la clave está en la paciencia y en la rutina: un horario fijo para comer, pasear y dormir ayuda a que el animal se sienta seguro mucho antes. Igual que pasa con las personas, <strong>adaptarse</strong> no es cuestión de un día, sino de ir construyendo, poco a poco, una sensación de hogar.</p>
+      </div>
+      <div class="glossary">
+        <span class="gloss-item"><b>desconfiar de</b> to distrust</span>
+        <span class="gloss-item"><b>el comportamiento</b> behavior</span>
+        <span class="gloss-item"><b>la rutina</b> routine</span>
+        <span class="gloss-item"><b>sentirse seguro</b> to feel safe</span>
+      </div>
+    </div>
+
+    <div class="q-bank" style="margin-top:14px;">
+      <div class="q-card"><span class="q-num">1</span><span class="q-text">¿Qué verbo del texto expresa un hábito repetido en el pasado con "soler"?</span></div>
+      <div class="q-card"><span class="q-num">2</span><span class="q-text">Según el texto, ¿qué ayuda a que un animal se sienta seguro?</span></div>
+      <div class="q-card"><span class="q-num">3</span><span class="q-text">¿Ves algún paralelo entre este proceso y tu propia adaptación? Prepara una frase con imperfecto para la próxima clase.</span></div>
+    </div>
+
+    <!-- VÍDEO (transcripción) -->
+    <div class="read-card" style="margin-top:18px;">
+      <p class="read-title">Alguien describe cómo era su infancia</p>
+      <p class="read-sub">Comprensión audiovisual · transcripción · imperfecto descriptivo · nivel A2</p>
+      <p style="font-size:14.5px; color:var(--ink-soft); margin:0 0 14px;">Lee lo que dice Elena, fijándote en cómo usa el imperfecto para describir su vida de pequeña.</p>
+      <div class="transcript">
+        <p><span class="speaker">Elena</span>De pequeña <strong>vivía</strong> en un pueblo muy tranquilo. No <strong>había</strong> casi tráfico, así que <strong>solíamos</strong> jugar en la calle hasta que se hacía de noche.</p>
+        <p><span class="speaker">Elena</span>Mi abuela <strong>tenía</strong> un huerto enorme, y todos los veranos <strong>íbamos</strong> allí a ayudarla. Yo siempre <strong>me escapaba</strong> a comer fresas directamente de la planta.</p>
+        <p><span class="speaker">Elena</span>Los domingos <strong>era</strong> tradición comer todos juntos en casa de mis abuelos. <strong>Éramos</strong> muchos primos, y siempre <strong>acababa</strong> el día agotada de tanto jugar.</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <span>Class 16 · Beberick antes y ahora</span>
+  <span>Next class → Class 17: estilo indirecto, lo que me dijeron en la entrevista</span>
+</footer>
+
+<script>
+/* ---------- VOCAB ---------- */
+const VOCAB = [
+  {front:"de pequeña", back:"As a child (feminine). — De pequeña vivía en un pueblo cerca de Kiev."},
+  {front:"soler + infinitivo", back:"To usually do something. — Solía pasear con Beberick una hora todos los días."},
+  {front:"el carácter", back:"Personality / character. — Beberick tiene un carácter muy tranquilo ahora."},
+  {front:"tímido/a", back:"Shy. — Era muy tímido con la gente que no conocía."},
+  {front:"cariñoso/a", back:"Affectionate. — Ahora es un perro muy cariñoso conmigo."},
+  {front:"adoptar", back:"To adopt. — Adopté a Beberick hace un par de años."},
+  {front:"acostumbrarse", back:"To get used to (something/someone). — Le costó acostumbrarse a la casa nueva."},
+  {front:"me acuerdo de que", back:"I remember that (needs 'de que'). — Me acuerdo de que se escondía debajo de la cama."},
+];
+
+const grid = document.getElementById('vocab-grid');
+VOCAB.forEach(v=>{
+  const card = document.createElement('div');
+  card.className = 'tap-card';
+  card.setAttribute('role', 'button');
+  card.setAttribute('tabindex', '0');
+  card.setAttribute('aria-pressed', 'false');
+  card.setAttribute('aria-label', `${v.front}. Press to see the meaning.`);
+  card.innerHTML = `<div class="tap-front">${v.front}</div><div class="tap-back">${v.back}</div>`;
+  const toggle = ()=>{
+    const flipped = card.classList.toggle('flipped');
+    card.setAttribute('aria-pressed', String(flipped));
+  };
+  card.addEventListener('click', toggle);
+  card.addEventListener('keydown', (e)=>{
+    if(e.key === 'Enter' || e.key === ' '){
+      e.preventDefault();
+      toggle();
+    }
+  });
+  grid.appendChild(card);
+});
+
+/* ---------- EXERCISES ---------- */
+const EXERCISES = [
+  {
+    "sentence": "De pequeña <span class=\"gap\">___</span> en un pueblo cerca de Kiev.",
+    "options": ["vivía", "viví", "he vivido"],
+    "answer": "vivía"
+  },
+  {
+    "sentence": "Beberick <span class=\"gap\">___</span> muy tímido cuando lo adopté.",
+    "options": ["era", "fue", "ha sido"],
+    "answer": "era"
+  },
+  {
+    "sentence": "<span class=\"gap\">___</span> pasear con él una hora todos los días.",
+    "options": ["Solía", "Suelo", "Soliera"],
+    "answer": "Solía"
+  },
+  {
+    "sentence": "Ahora <span class=\"gap\">___</span> pasear por la playa en vez del parque.",
+    "options": ["suelo", "solía", "solí"],
+    "answer": "suelo"
+  },
+  {
+    "sentence": "De pequeña vivía en <span class=\"gap\">___</span> Ucrania.</span>","options": ["—", "la", "el"],
+    "answer": "—"
+  },
+  {
+    "sentence": "Antes de <span class=\"gap\">___</span> guerra, nunca había pensado en emigrar.",
+    "options": ["la", "—", "una"],
+    "answer": "la"
+  },
+  {
+    "sentence": "Me acuerdo <span class=\"gap\">___</span> jugaba en el patio todas las tardes.",
+    "options": ["de que", "que", "de"],
+    "answer": "de que"
+  },
+  {
+    "sentence": "<span class=\"gap\">___</span> Beberick tardó semanas en confiar en mí.",
+    "options": ["Recuerdo que", "Recuerdo de que", "Me acuerdo que"],
+    "answer": "Recuerdo que"
+  },
+  {
+    "sentence": "Antes se <span class=\"gap\">___</span> debajo de la cama; ahora duerme a mi lado.",
+    "options": ["escondía", "escondió", "ha escondido"],
+    "answer": "escondía"
+  },
+  {
+    "sentence": "De niña <span class=\"gap\">___</span> muy cariñosa con mi familia.",
+    "options": ["era", "fui", "he sido"],
+    "answer": "era"
+  }
+];
+
+function shuffle(arr){
+  const a = arr.slice();
+  for(let i = a.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+const exWrap = document.getElementById('exercises');
+EXERCISES.forEach((ex, i)=>{
+  const el = document.createElement('div');
+  el.className = 'exercise';
+  el.dataset.answer = ex.answer;
+  const shuffledOptions = shuffle(ex.options);
+  el.innerHTML = `
+    <div class="ex-sentence">${i+1}. ${ex.sentence}</div>
+    <div class="ex-options">
+      ${shuffledOptions.map(o=>`<button class="opt-btn" data-value="${o}">${o}</button>`).join('')}
+    </div>
+  `;
+  exWrap.appendChild(el);
+
+  el.querySelectorAll('.opt-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      el.querySelectorAll('.opt-btn').forEach(b=>b.classList.remove('picked'));
+      btn.classList.add('picked');
+    });
+  });
+});
+
+document.getElementById('check-btn').addEventListener('click', ()=>{
+  let correct = 0;
+  document.querySelectorAll('.exercise').forEach(el=>{
+    const answer = el.dataset.answer;
+    const picked = el.querySelector('.opt-btn.picked');
+    el.querySelectorAll('.opt-btn').forEach(b=>{
+      b.disabled = true;
+      if(b.dataset.value === answer) b.classList.add('correct');
+      else if(b === picked) b.classList.add('wrong');
+    });
+    if(picked && picked.dataset.value === answer) correct++;
+  });
+  document.getElementById('score-text').textContent = `${correct} / ${EXERCISES.length} correctas`;
+});
+
+document.getElementById('reset-btn').addEventListener('click', ()=>{
+  document.querySelectorAll('.exercise').forEach(el=>{
+    el.querySelectorAll('.opt-btn').forEach(b=>{
+      b.disabled = false;
+      b.classList.remove('picked','correct','wrong');
+    });
+  });
+  document.getElementById('score-text').textContent = '';
+});
+
+/* ---------- FICHA BEBERICK Y MEMORIA (autosave) ---------- */
+const STORAGE_KEY_CHAR = 'pylypenko-clase16-beberick';
+const charInputs = document.querySelectorAll('.char-input');
+const memoryInputs = document.querySelectorAll('.memory-item input');
+
+async function loadExtras(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(STORAGE_KEY_CHAR);
+    if (res && typeof res.value === 'string'){
+      const values = JSON.parse(res.value);
+      if (values.chars) charInputs.forEach((el,i)=>{ if(values.chars[i]) el.value = values.chars[i]; });
+      if (values.memory) memoryInputs.forEach((el,i)=>{ if(values.memory[i]) el.value = values.memory[i]; });
+    }
+  }catch(e){
+    // sin datos previos
+  }
+}
+function saveExtras(){
+  if (!window.storage) return;
+  const data = {
+    chars: Array.from(charInputs).map(i=>i.value),
+    memory: Array.from(memoryInputs).map(i=>i.value)
+  };
+  window.storage.set(STORAGE_KEY_CHAR, JSON.stringify(data)).catch(()=>{ /* fallo silencioso */ });
+}
+[...charInputs, ...memoryInputs].forEach(el=>{
+  el.addEventListener('input', ()=>{
+    clearTimeout(el._saveTimer);
+    el._saveTimer = setTimeout(saveExtras, 600);
+  });
+});
+loadExtras();
+
+/* ---------- FINAL TASK ---------- */
+const STORAGE_KEY = 'pylypenko-clase16-tarea';
+const taskArea = document.getElementById('final-task');
+const taskCount = document.getElementById('task-count');
+const savedFlag = document.getElementById('saved-flag');
+
+async function loadTask(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(STORAGE_KEY);
+    if (res && typeof res.value === 'string') taskArea.value = res.value;
+  }catch(e){
+    // Key doesn't exist yet: no previous task, stays blank.
+  }
+  updateCount();
+}
+
+function updateCount(){
+  const matches = (taskArea.value.match(/\b(vivía|era|solía|suelo|soléis|solemos|tenía|tengo|jugaba|paseaba|paseo)\b/gi) || []).length;
+  taskCount.textContent = `${matches} uso${matches===1?'':'s'} de imperfecto/presente detectado${matches===1?'':'s'}`;
+}
+taskArea.addEventListener('input', updateCount);
+updateCount();
+loadTask();
+
+document.getElementById('save-btn').addEventListener('click', async ()=>{
+  if (!window.storage){
+    savedFlag.textContent = 'No se puede guardar aquí';
+    savedFlag.classList.add('show');
+    setTimeout(()=>{ savedFlag.classList.remove('show'); savedFlag.textContent = 'Guardado ✓'; }, 2200);
+    return;
+  }
+  try{
+    const ok = await window.storage.set(STORAGE_KEY, taskArea.value);
+    savedFlag.textContent = ok ? 'Guardado ✓' : 'No se pudo guardar';
+  }catch(e){
+    savedFlag.textContent = 'No se pudo guardar';
+  }
+  savedFlag.classList.add('show');
+  setTimeout(()=>{ savedFlag.classList.remove('show'); savedFlag.textContent = 'Guardado ✓'; }, 1800);
+});
+
+</script>
+
+</body>
+</html>

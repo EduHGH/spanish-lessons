@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Class 14 · El imperfecto de subjuntivo: rutas en bici por Tenerife</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Space+Mono:wght@400;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+
+/* ╔══════════════════════════════════════════════════════════════╗
+   ║  ESCOLAR × NOTHING                                            ║
+   ║  Class 14 · El imperfecto de subjuntivo — rutas ciclistas     ║
+   ╚══════════════════════════════════════════════════════════════╝ */
+
+:root{
+  --paper:        #F4EFE4;
+  --paper-deep:   #EAE3D2;
+  --glass:        rgba(255,255,255,0.55);
+  --glass-strong: rgba(255,255,255,0.75);
+  --ink:          #23291F;
+  --ink-soft:     #565F52;
+  --ink-faint:    #8B9184;
+  --line:         rgba(35,41,31,0.10);
+  --line-strong:  rgba(35,41,31,0.20);
+
+  /* roles semánticos de esta clase — imperfecto de subjuntivo con temática ciclista:
+     b1 verde volcánico = subjuntivo/gramática (tema del día), b2 azul cielo = rutas/roleplay
+     family ámbar = tarea, ok verde = acierto */
+  --b1:      #3E7D4C;  --b1-soft: rgba(62,125,76,0.10);   --b1-line: rgba(62,125,76,0.30);
+  --b2:      #1D7FAE;  --b2-soft: rgba(29,127,174,0.10);  --b2-line: rgba(29,127,174,0.30);
+  --family:  #DB8A2E;  --family-soft: rgba(219,138,46,0.10); --family-line: rgba(219,138,46,0.30);
+  --ok:      #2E9E6B;  --ok-soft: rgba(46,158,107,0.10);  --ok-line: rgba(46,158,107,0.30);
+
+  --f-display: 'Fraunces', Georgia, serif;
+  --f-body:    'IBM Plex Sans', system-ui, sans-serif;
+  --f-data:    'Space Mono', ui-monospace, monospace;
+
+  --r-sm: 8px;
+  --r-md: 16px;
+  --r-lg: 24px;
+
+  --blur: 22px;
+  --spring: cubic-bezier(.34,1.56,.64,1);
+  --shadow-glass: 0 8px 32px rgba(35,41,31,0.06), 0 1px 2px rgba(35,41,31,0.05);
+}
+
+*{ box-sizing:border-box; }
+html{ scroll-behavior:smooth; }
+body{
+  margin:0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--f-body);
+  line-height:1.6;
+  padding: 0 0 100px;
+  position: relative;
+  min-height: 100vh;
+}
+body::before{
+  content:"";
+  position: fixed; inset:0;
+  background-image: radial-gradient(circle, rgba(35,41,31,0.09) 1.5px, transparent 1.5px);
+  background-size: 28px 28px;
+  pointer-events:none; z-index:0;
+}
+body::after{
+  content:"";
+  position: fixed; inset:0;
+  background: radial-gradient(ellipse 70% 50% at 50% -10%, var(--paper-deep), transparent 60%);
+  pointer-events:none; z-index:0;
+}
+::selection{ background: var(--b1-soft); }
+
+.page{ max-width: 760px; margin:0 auto; padding: 56px 20px 0; position:relative; z-index:1; }
+
+/* ---------- HERO ---------- */
+.hero{
+  background: var(--glass);
+  backdrop-filter: blur(var(--blur)); -webkit-backdrop-filter: blur(var(--blur));
+  border:1px solid rgba(255,255,255,0.6);
+  border-radius: var(--r-lg);
+  padding: 44px 40px 36px;
+  box-shadow: var(--shadow-glass);
+  position:relative; overflow:hidden; margin-bottom: 24px;
+}
+.hero-eyebrow{
+  font-family: var(--f-data); font-size:12px; letter-spacing:.16em; text-transform:uppercase;
+  color: var(--ink-faint); margin:0 0 16px; display:flex; align-items:center; gap:10px;
+}
+.dot-live{ width:7px; height:7px; border-radius:50%; background: var(--b1); box-shadow: 0 0 0 4px var(--b1-soft); animation: pulse 2.6s ease-in-out infinite; }
+@keyframes pulse{ 0%,100%{opacity:1;} 50%{opacity:0.35;} }
+
+.hero h1{ font-family: var(--f-display); font-weight:500; font-size:clamp(28px,5vw,44px); margin:0 0 12px; letter-spacing:-.01em; line-height:1.08; }
+.hero h1 em{ font-style:italic; color: var(--b1); }
+.hero p.desc{ font-size:15px; color: var(--ink-soft); max-width:60ch; margin:0; }
+
+.meta-row{ display:flex; flex-wrap:wrap; gap:20px; margin-top:26px; font-family: var(--f-data); font-size:12px; color: var(--ink-faint); }
+.meta-row strong{ display:block; color: var(--ink); font-size:14.5px; font-weight:500; font-family: var(--f-display); margin-top:3px; }
+
+/* ---------- SECTION HEAD ---------- */
+.section{ margin-top: 52px; }
+.section-head{ display:flex; align-items:baseline; gap:12px; margin-bottom:18px; }
+.section-num{
+  font-family: var(--f-data); font-size:12px; color:#fff; background: var(--b1);
+  width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex:none;
+}
+.section-head h2{ font-family: var(--f-display); font-weight:500; font-style:italic; font-size:22px; margin:0; }
+.time-tag{
+  font-family: var(--f-data); font-size:11px; color: var(--ink-faint);
+  background: var(--glass-strong); border:1px solid var(--line); padding:3px 10px; border-radius:999px; margin-left:auto; flex:none;
+}
+.section-desc{ font-size:14.5px; color: var(--ink-soft); margin:0; }
+
+/* ---------- GLASS PANEL ---------- */
+.glass-panel{
+  background: var(--glass);
+  backdrop-filter: blur(var(--blur)); -webkit-backdrop-filter: blur(var(--blur));
+  border: 1px solid rgba(255,255,255,0.6);
+  border-radius: var(--r-lg);
+  padding: 26px 28px;
+  box-shadow: var(--shadow-glass);
+}
+.glass-panel[data-role="b1"]{ border-color: var(--b1-line); background: linear-gradient(var(--b1-soft), var(--b1-soft)), var(--glass); }
+.glass-panel[data-role="b2"]{ border-color: var(--b2-line); background: linear-gradient(var(--b2-soft), var(--b2-soft)), var(--glass); }
+.glass-panel[data-role="family"]{ border-color: var(--family-line); background: linear-gradient(var(--family-soft), var(--family-soft)), var(--glass); }
+.glass-panel[data-role="ok"]{ border-color: var(--ok-line); background: linear-gradient(var(--ok-soft), var(--ok-soft)), var(--glass); }
+.glass-panel p{ font-size:15px; color: var(--ink-soft); margin:0 0 14px; }
+.glass-panel p:last-of-type{ margin-bottom:0; }
+.glass-panel p strong{ color: var(--ink); font-weight:600; }
+
+/* ---------- CONJUGATION TABLE ---------- */
+.conj-table-wrap{ overflow-x:auto; margin:4px 0 0; }
+table.conj{ width:100%; border-collapse:collapse; font-size:14.5px; min-width:420px; }
+table.conj td{ padding:11px 8px; border-bottom:1px dashed var(--line); }
+table.conj tr:last-child td{ border-bottom:none; }
+table.conj td.pron{ font-family: var(--f-data); color: var(--ink-faint); font-size:12px; width:150px; }
+table.conj td.form{ font-family: var(--f-display); font-weight:600; font-size:20px; color: var(--b1); }
+table.conj td.ex{ color: var(--ink-soft); font-size:13.5px; }
+
+.note{ margin-top:16px; padding:14px 16px; background: linear-gradient(var(--b1-soft),var(--b1-soft)), var(--glass); border:1px solid var(--b1-line); border-radius: var(--r-md); font-size:13.5px; color: var(--ink-soft); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+.note strong{ color: var(--ink); }
+.warning-box{ margin-top:16px; padding:14px 16px; background: linear-gradient(var(--family-soft),var(--family-soft)), var(--glass); border:1px solid var(--family-line); border-radius: var(--r-md); font-size:13.5px; color: var(--ink-soft); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+.warning-box strong{ color:#96591A; }
+
+/* ---------- VERB GROUPS (irregulares del imperfecto de subjuntivo) ---------- */
+.verb-groups{ display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:18px; }
+@media (max-width:560px){ .verb-groups{ grid-template-columns:1fr; } }
+.verb-card{
+  border-radius: var(--r-md); padding:16px 18px; border:1px solid var(--b1-line);
+  background: linear-gradient(var(--b1-soft), var(--b1-soft)), var(--glass);
+  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+}
+.verb-tag{ font-family: var(--f-data); font-size:10px; text-transform:uppercase; letter-spacing:.06em; color: var(--b1); margin:0 0 6px; }
+.verb-inf{ font-family: var(--f-display); font-weight:600; font-size:16.5px; color: var(--ink); margin:0 0 4px; }
+.verb-form{ font-family: var(--f-data); font-size:13px; color: var(--b1); margin:0 0 6px; }
+.verb-ex{ font-size:13px; color: var(--ink-soft); }
+
+/* ---------- USES GRID (usos del imperfecto de subjuntivo) ---------- */
+.uses-grid{ display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:18px; }
+@media (max-width:560px){ .uses-grid{ grid-template-columns:1fr; } }
+.use-card{
+  border-radius: var(--r-md); padding:16px 18px; border:1px solid var(--b1-line);
+  background: linear-gradient(var(--b1-soft), var(--b1-soft)), var(--glass);
+  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+}
+.use-tag{ font-family: var(--f-data); font-size:10px; text-transform:uppercase; letter-spacing:.06em; color: var(--b1); margin:0 0 6px; }
+.use-trigger{ font-family: var(--f-display); font-weight:600; font-size:16.5px; color: var(--ink); margin:0 0 6px; }
+.use-ex{ font-size:13px; color: var(--ink-soft); }
+
+/* ---------- VOCAB / TAP CARDS ---------- */
+.vocab-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:12px; margin-top:4px; }
+.tap-card{
+  background: var(--glass); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  border:1px solid rgba(255,255,255,0.5); border-radius: var(--r-md);
+  padding:14px 16px; cursor:pointer; min-height:78px;
+  display:flex; flex-direction:column; justify-content:center;
+  transition: border-color .15s ease, transform .18s var(--spring);
+}
+.tap-card:hover{ border-color: var(--b1-line); transform: translateY(-2px); }
+.tap-card:active{ transform: scale(.97); transition-duration: .08s; }
+.tap-card:focus-visible{ outline:2px solid var(--b1); outline-offset:2px; }
+.tap-front{ font-family: var(--f-body); font-weight:600; font-size:15px; }
+.tap-back{ display:none; font-family: var(--f-data); font-size:12px; color: var(--ink-faint); margin-top:6px; }
+.tap-card.flipped .tap-back{ display:block; }
+.tap-card.flipped{ background: linear-gradient(var(--b1-soft),var(--b1-soft)), var(--glass); border-color: var(--b1-line); }
+.vocab-hint{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin:10px 2px 16px; }
+
+/* ---------- QUIZ / OPCIONES ---------- */
+.exercise{ margin-bottom:18px; }
+.exercise:last-of-type{ margin-bottom:0; }
+.ex-sentence{ font-size:15px; margin-bottom:10px; color: var(--ink); }
+.ex-sentence .gap{ font-family: var(--f-data); color: var(--ink-faint); }
+.ex-options{ display:flex; flex-wrap:wrap; gap:8px; }
+.opt-btn{
+  font-family: var(--f-body); font-size:14px; background: var(--glass-strong); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  border:1.5px solid var(--line-strong); color: var(--ink); padding:8px 17px; border-radius:999px; cursor:pointer;
+  transition: transform .18s var(--spring), background .15s ease, border-color .15s ease, color .15s ease;
+}
+.opt-btn:hover{ border-color: var(--ink-faint); }
+.opt-btn:active{ transform: scale(.94); transition-duration: .08s; }
+.opt-btn.picked{ background: linear-gradient(var(--b1-soft),var(--b1-soft)), var(--glass-strong); border-color: var(--b1); color: var(--b1); }
+.opt-btn.correct{ background: linear-gradient(var(--ok-soft),var(--ok-soft)), var(--glass-strong); border-color: var(--ok); color: var(--ok); }
+.opt-btn.wrong{ background: linear-gradient(var(--family-soft),var(--family-soft)), var(--glass-strong); border-color: var(--family); color: var(--family); text-decoration: line-through; }
+.opt-btn:disabled{ cursor:default; }
+.check-bar{ display:flex; align-items:center; justify-content:space-between; gap:16px; margin-top:20px; padding-top:18px; border-top:1px dashed var(--line); flex-wrap:wrap; }
+
+.btn-primary{
+  font-family: var(--f-body); font-weight:600; font-size:14px; color:#fff; background: var(--b1);
+  border:none; padding:11px 22px; border-radius:999px; cursor:pointer;
+  transition: transform .18s var(--spring);
+}
+.btn-primary:hover{ transform: translateY(-1px); }
+.btn-primary:active{ transform: scale(.95); transition-duration: .08s; }
+.btn-ghost{
+  font-family: var(--f-body); font-weight:600; font-size:13px; color: var(--ink-soft); background:none;
+  border:1.5px solid var(--line); padding:9px 18px; border-radius:999px; cursor:pointer;
+  transition: transform .18s var(--spring), border-color .15s ease;
+}
+.btn-ghost:hover{ border-color: var(--ink-faint); }
+.btn-ghost:active{ transform: scale(.95); transition-duration: .08s; }
+#score-text{ font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); }
+
+/* ---------- CHARACTER / PROMPT CARDS ---------- */
+.q-bank{ display:grid; gap:10px; margin-top:4px; }
+.q-card{
+  background: var(--glass); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  border:1px solid rgba(255,255,255,0.6); border-radius: var(--r-md);
+  padding:14px 16px; display:flex; gap:12px; align-items:flex-start;
+}
+.q-num{
+  font-family: var(--f-data); font-size:11px; color:#fff; background: var(--b1);
+  width:20px; height:20px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex:none; margin-top:2px;
+}
+.q-text{ font-size:14.5px; color: var(--ink); }
+
+/* ---------- ROLEPLAY / SCENE TABS (rutas de la isla) ---------- */
+.scene-tabs{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:18px; }
+.scene-tab{
+  font-family: var(--f-data); font-size:12px; text-transform:uppercase; letter-spacing:.04em; font-weight:700;
+  background: rgba(255,255,255,0.4); border:1.5px solid var(--b2-line); color: var(--ink-soft); padding:7px 15px;
+  border-radius:999px; cursor:pointer;
+  transition: transform .18s var(--spring), background .15s ease, border-color .15s ease, color .15s ease;
+}
+.scene-tab:hover{ border-color: var(--b2); }
+.scene-tab:active{ transform: scale(.95); transition-duration: .08s; }
+.scene-tab.active{ background: var(--b2); border-color: var(--b2); color:#fff; }
+
+.trigger-card{
+  background: var(--glass-strong); border:1px solid rgba(255,255,255,0.6); border-radius: var(--r-md);
+  padding:20px 22px; backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+}
+.trigger-word{ font-family: var(--f-display); font-weight:600; font-style:italic; font-size:22px; color: var(--b2); margin:0 0 6px; }
+.trigger-sub{ font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.05em; color: var(--ink-faint); margin:0 0 14px; }
+.trigger-task{ font-size:14.5px; color: var(--ink-soft); margin:0 0 12px; }
+.trigger-input{
+  width:100%; font-family: var(--f-body); font-size:14.5px; color: var(--ink);
+  background:#fff; border:1px solid var(--b2-line); border-radius: var(--r-sm);
+  padding:10px 12px; resize:vertical; min-height:44px;
+}
+.trigger-input:focus{ outline:none; border-color: var(--b2); }
+
+.roleplay-tip{
+  margin-top:22px; padding:14px 16px; background: var(--glass-strong); border:1px solid var(--b2-line);
+  border-radius: var(--r-md); font-size:13.5px; color: var(--ink-soft); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+}
+.roleplay-tip strong{ color: var(--ink); }
+
+/* ---------- FINAL TASK ---------- */
+textarea#final-task{
+  width:100%; min-height:130px; font-family: var(--f-body); font-size:15px; color: var(--ink);
+  background: rgba(255,255,255,0.6); border:1px solid var(--family-line); border-radius: var(--r-md);
+  padding:14px 16px; resize:vertical; margin-top:14px;
+}
+textarea#final-task:focus{ outline:none; border-color: var(--family); background:#fff; }
+.task-footer{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:12px; flex-wrap:wrap; }
+#task-count{ font-family: var(--f-data); font-size:12px; color: var(--ink-faint); }
+.btn-secondary{
+  font-family: var(--f-body); font-weight:600; font-size:13.5px; color:#96591A; background:none;
+  border:1.5px solid var(--family-line); padding:9px 18px; border-radius:999px; cursor:pointer;
+  transition: transform .18s var(--spring), border-color .15s ease;
+}
+.btn-secondary:hover{ border-color: var(--family); }
+.btn-secondary:active{ transform: scale(.95); transition-duration: .08s; }
+.saved-flag{ font-family: var(--f-data); font-size:11.5px; color: var(--ok); opacity:0; transition: opacity .3s ease; }
+.saved-flag.show{ opacity:1; }
+
+/* ---------- RESOURCES ---------- */
+.resources-grid{ display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:16px; }
+@media (max-width:560px){ .resources-grid{ grid-template-columns:1fr; } }
+.resource-card{
+  background: var(--glass); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  border:1px solid var(--family-line); border-radius: var(--r-md); padding:14px 16px;
+}
+.resource-tag{ font-family: var(--f-data); font-size:10.5px; text-transform:uppercase; letter-spacing:.06em; color:#96591A; margin:0 0 6px; }
+.resource-title{ font-family: var(--f-display); font-weight:600; font-size:15px; margin:0 0 4px; }
+.resource-desc{ font-size:13px; color: var(--ink-soft); margin:0; }
+
+footer{
+  max-width:760px; margin:0 auto; padding:0 20px; display:flex;
+  justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;
+  font-family: var(--f-data); font-size:12px; color: var(--ink-faint);
+  margin-top:64px; padding-top:28px; border-top:1px solid var(--line);
+}
+
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HERO -->
+  <div class="hero">
+    <p class="hero-eyebrow"><span class="dot-live"></span>ESCOLAR · Clase 14 · Nivel B1</p>
+    <h1>El imperfecto de <em>subjuntivo</em>, pedaleando por Tenerife</h1>
+    <p class="desc">Hoy dejamos las entrevistas y salimos a rodar: vamos a hablar de rutas ciclistas por la isla usando <strong>si + imperfecto de subjuntivo</strong> — "si subiera al Teide", "si lloviera en el Anaga", "si tuviera más piernas hoy" — y practicaremos muchos verbos distintos, no solo <em>pudiera</em> y <em>hubiera</em>.</p>
+    <div class="meta-row">
+      <div>Duración<strong>65 min</strong></div>
+      <div>Enfoque<strong>Gramática + vocabulario ciclista</strong></div>
+      <div>Contexto<strong>Rutas por Tenerife</strong></div>
+    </div>
+  </div>
+
+  <!-- 1. CONTEXTO -->
+  <div class="section">
+    <div class="section-head"><span class="section-num">1</span><h2>El contexto de hoy</h2><span class="time-tag">5 min</span></div>
+    <div class="glass-panel">
+      <p>Imagina que eres <strong>Iryna, cicloturista</strong>, y llevas tres semanas haciendo rutas por Tenerife: el Teide, el Anaga, la costa de Los Gigantes. Cada día decides la ruta según el tiempo, tus piernas y el tráfico. Hoy vamos a hablar de esas decisiones con frases como <strong>"si el viento no soplara tanto, subiría por la vertiente sur"</strong> — condiciones poco probables o puramente hipotéticas sobre tus rutas.</p>
+      <p>El imperfecto de subjuntivo no es solo "pudiera" y "hubiera": hoy vas a usar <strong>quisiera, supiera, viniera, durmiera, pidiera, siguiera, sintiera, tuviera, hiciera, fuera, dijera, viera, saliera, llegara, parara, lloviera, subiera, cambiara</strong> — el objetivo es que suene natural con cualquier verbo, no solo con los dos de siempre.</p>
+    </div>
+  </div>
+
+  <!-- 2. GRAMÁTICA -->
+  <div class="section">
+    <div class="section-head"><span class="section-num">2</span><h2>Formación del imperfecto de subjuntivo</h2><span class="time-tag">12 min</span></div>
+    <div class="glass-panel" data-role="b1">
+      <p><strong>Regla de oro:</strong> se forma a partir de la 3ª persona plural del pretérito indefinido. Quitas <strong>-ron</strong> y añades las terminaciones del imperfecto de subjuntivo (hay dos formas, -ra y -se, pero en España se usa casi siempre la de -ra).</p>
+      <div class="conj-table-wrap">
+        <table class="conj">
+          <tr><td class="pron">subir → subieron</td><td class="form">subiera</td><td class="ex">Si subiera al Teide hoy, llevaría más agua.</td></tr>
+          <tr><td class="pron">llegar → llegaron</td><td class="form">llegara</td><td class="ex">Si llegara antes al mirador, vería el amanecer.</td></tr>
+          <tr><td class="pron">llover → llovieron</td><td class="form">lloviera</td><td class="ex">Si lloviera en el Anaga, cambiaría de ruta.</td></tr>
+          <tr><td class="pron">salir → salieron</td><td class="form">saliera</td><td class="ex">Si saliera a las seis, evitaría el calor.</td></tr>
+          <tr><td class="pron">seguir → siguieron</td><td class="form">siguiera</td><td class="ex">Si siguiera esta pista, llegaría a Masca.</td></tr>
+        </table>
+      </div>
+      <div class="note"><strong>Truco rápido:</strong> si sabes el pretérito indefinido en "ellos", ya tienes el imperfecto de subjuntivo. <span class="f-data">comieron→comiera, vinieron→viniera, durmieron→durmiera, pidieron→pidiera, dijeron→dijera, hicieron→hiciera, fueron→fuera, tuvieron→tuviera, supieron→supiera, quisieron→quisiera, vieron→viera, pararon→parara</span>.</div>
+    </div>
+
+    <div class="verb-groups">
+      <div class="verb-card">
+        <p class="verb-tag">Irregular · raíz -ie-/-i-</p>
+        <p class="verb-inf">pedir</p>
+        <p class="verb-form">pidiera, pidieras, pidiera…</p>
+        <p class="verb-ex">Si el guía nos pidiera bajar el ritmo, le haría caso.</p>
+      </div>
+      <div class="verb-card">
+        <p class="verb-tag">Irregular · raíz -u-</p>
+        <p class="verb-inf">dormir</p>
+        <p class="verb-form">durmiera, durmieras, durmiera…</p>
+        <p class="verb-ex">Si durmiera ocho horas, rodaría mucho mejor.</p>
+      </div>
+      <div class="verb-card">
+        <p class="verb-tag">Irregular · raíz "vin-"</p>
+        <p class="verb-inf">venir</p>
+        <p class="verb-form">viniera, vinieras, viniera…</p>
+        <p class="verb-ex">Si vinieras conmigo al Teide, te encantaría la bajada.</p>
+      </div>
+      <div class="verb-card">
+        <p class="verb-tag">Irregular · raíz "hic-"</p>
+        <p class="verb-inf">hacer</p>
+        <p class="verb-form">hiciera, hicieras, hiciera…</p>
+        <p class="verb-ex">Si hiciera menos viento, iría por la costa.</p>
+      </div>
+      <div class="verb-card">
+        <p class="verb-tag">Irregular · raíz "dij-"</p>
+        <p class="verb-inf">decir</p>
+        <p class="verb-form">dijera, dijeras, dijera…</p>
+        <p class="verb-ex">Si el pronóstico dijera lluvia, me quedaría en el hotel.</p>
+      </div>
+      <div class="verb-card">
+        <p class="verb-tag">Irregular · raíz "sup-"</p>
+        <p class="verb-inf">saber</p>
+        <p class="verb-form">supiera, supieras, supiera…</p>
+        <p class="verb-ex">Si supiera el estado de la carretera, decidiría con más calma.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. USOS -->
+  <div class="section">
+    <div class="section-head"><span class="section-num">3</span><h2>¿Cuándo se usa?</h2><span class="time-tag">8 min</span></div>
+    <div class="uses-grid">
+      <div class="use-card">
+        <p class="use-tag">Condición hipotética</p>
+        <p class="use-trigger">si + imperfecto subj. + condicional</p>
+        <p class="use-ex">Si tuviera un día libre más, haría toda la vuelta a la isla.</p>
+      </div>
+      <div class="use-card">
+        <p class="use-tag">Deseo poco realista</p>
+        <p class="use-trigger">ojalá + imperfecto subj.</p>
+        <p class="use-ex">Ojalá lloviera menos esta semana en el norte.</p>
+      </div>
+      <div class="use-card">
+        <p class="use-tag">Cortesía / petición suave</p>
+        <p class="use-trigger">quisiera + infinitivo</p>
+        <p class="use-ex">Quisiera preguntarte por el estado de la carretera del Teide.</p>
+      </div>
+      <div class="use-card">
+        <p class="use-tag">Como si...</p>
+        <p class="use-trigger">como si + imperfecto subj.</p>
+        <p class="use-ex">Pedaleaba como si no sintiera las piernas.</p>
+      </div>
+      <div class="use-card">
+        <p class="use-tag">Recomendación / consejo pasado</p>
+        <p class="use-trigger">verbo de voluntad (pas.) + que + imp. subj.</p>
+        <p class="use-ex">El médico me recomendó que parara si sentía mareo por la altitud.</p>
+      </div>
+      <div class="use-card">
+        <p class="use-tag">Emoción o duda pasada</p>
+        <p class="use-trigger">verbo emoción/duda (pas.) + que + imp. subj.</p>
+        <p class="use-ex">Dudaba que llegara antes de que anocheciera.</p>
+      </div>
+    </div>
+    <div class="warning-box"><strong>Ojo:</strong> "pudiera" y "hubiera" son solo dos verbos entre decenas. Si en tus frases siempre aparecen estos dos, seguramente estés evitando el resto — hoy vamos a forzar variedad: pedir, dormir, venir, hacer, decir, saber, seguir, sentir, ver, salir, llegar, parar, llover, subir, cambiar, querer.</div>
+  </div>
+
+  <!-- 4. VOCABULARIO -->
+  <div class="section">
+    <div class="section-head"><span class="section-num">4</span><h2>Vocabulario de ruta</h2><span class="time-tag">6 min</span></div>
+    <p class="vocab-hint">Toca cada tarjeta para ver el significado y un ejemplo en contexto.</p>
+    <div class="vocab-grid" id="vocab-grid"></div>
+  </div>
+
+  <!-- 5. PRÁCTICA -->
+  <div class="section">
+    <div class="section-head"><span class="section-num">5</span><h2>Practica</h2><span class="time-tag">12 min</span></div>
+    <div class="glass-panel">
+      <p class="vocab-hint" style="margin-bottom:14px;">12 frases sobre rutas por Tenerife. Fíjate en el verbo de cada hueco — no se repite el mismo dos veces seguidas.</p>
+      <div id="exercises"></div>
+      <div class="check-bar">
+        <div style="display:flex; gap:10px;">
+          <button class="btn-primary" id="check-btn">Comprobar respuestas</button>
+          <button class="btn-ghost" id="reset-btn">Reiniciar</button>
+        </div>
+        <span id="score-text"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. AUTOCORRECCIÓN -->
+  <div class="section">
+    <div class="section-head"><span class="section-num">6</span><h2>Tus propios errores, revisados</h2><span class="time-tag">7 min</span></div>
+    <p class="section-desc" style="margin-bottom:16px;">Piensa cómo corregirías estas frases antes de que las revisemos juntos en clase.</p>
+    <div class="q-bank">
+      <div class="q-card"><span class="q-num">1</span><span class="q-text">"Si yo tenía más tiempo, haría la ruta completa del Anaga" → ¿qué cambiarías?</span></div>
+      <div class="q-card"><span class="q-num">2</span><span class="q-text">"Ojalá no llueva mañana para la subida al Teide" → ¿está bien, o falta algo?</span></div>
+      <div class="q-card"><span class="q-num">3</span><span class="q-text">"Pedaleaba como si no tiene cansancio" → ¿qué cambiarías?</span></div>
+      <div class="q-card"><span class="q-num">4</span><span class="q-text">"Si el grupo parara a descansar, yo seguiría solo" → ¿está bien, o qué cambiarías?</span></div>
+      <div class="q-card"><span class="q-num">5</span><span class="q-text">"Quisiera que me explicas el desnivel de la ruta" → ¿qué cambiarías?</span></div>
+    </div>
+  </div>
+
+  <!-- 7. RUTAS DE LA ISLA (ROLEPLAY) -->
+  <div class="section">
+    <div class="section-head"><span class="section-num">7</span><h2>Elige tu ruta por la isla</h2><span class="time-tag">15 min</span></div>
+    <p class="section-desc" style="margin-bottom:16px;">Cada pestaña es una ruta real de Tenerife. Responde a la situación usando el imperfecto de subjuntivo — intenta no repetir el mismo verbo en dos rutas distintas.</p>
+    <div class="glass-panel" data-role="b2">
+      <div class="scene-tabs" id="scene-tabs"></div>
+      <div id="scene-container"></div>
+      <div class="roleplay-tip"><strong>En clase:</strong> haremos esto en voz alta, ruta por ruta, y yo iré anotando qué verbos usas para asegurarme de que salgan distintos a "pudiera" y "hubiera".</div>
+    </div>
+  </div>
+
+  <!-- 8. TAREA FINAL -->
+  <div class="section">
+    <div class="section-head"><span class="section-num">8</span><h2 style="color:#96591A">Tu tarea</h2><span class="time-tag">3 min</span></div>
+    <div class="glass-panel" data-role="family">
+      <p style="margin:0;">Escribe <strong>6 frases</strong> sobre tus rutas en bici por Tenerife usando el imperfecto de subjuntivo. Usa <strong>al menos 5 verbos distintos</strong> — evita repetir "pudiera" o "hubiera" más de una vez cada uno.</p>
+      <textarea id="final-task" placeholder="Si lloviera... / Si tuviera... / Ojalá pidiera... / Como si durmiera... / Si siguiera esta pista... / Si supiera el desnivel..."></textarea>
+      <div class="task-footer">
+        <span id="task-count">0 usos de imperfecto de subjuntivo detectados</span>
+        <div style="display:flex; gap:10px; align-items:center;">
+          <span class="saved-flag" id="saved-flag">Guardado ✓</span>
+          <button class="btn-secondary" id="save-btn">Guardar tarea</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 9. PARA LA PRÓXIMA CLASE -->
+  <div class="section">
+    <div class="section-head"><span class="section-num">9</span><h2>Para la próxima clase</h2><span class="time-tag">—</span></div>
+    <div class="resources-grid">
+      <div class="resource-card">
+        <p class="resource-tag">Lectura</p>
+        <p class="resource-title">Tus 6 frases de la tarea de hoy</p>
+        <p class="resource-desc">Repásalas antes de clase y subraya cada verbo en imperfecto de subjuntivo que usaste.</p>
+      </div>
+      <div class="resource-card">
+        <p class="resource-tag">Reflexión</p>
+        <p class="resource-title">Una ruta que te gustaría repetir</p>
+        <p class="resource-desc">Piensa en una ruta de Tenerife y prepárate para contar, con "si + imperfecto de subjuntivo", cómo la harías distinta la próxima vez.</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <span>Class 14 · El imperfecto de subjuntivo: rutas en bici por Tenerife</span>
+  <span>Next class → Class 15: pluscuamperfecto de subjuntivo</span>
+</footer>
+
+<script>
+/* ---------- VOCAB ---------- */
+const VOCAB = [
+  {front:"la vertiente", back:"Slope / side of a mountain. — Si subiera por la vertiente norte, tardaría más por el viento."},
+  {front:"el desnivel", back:"Elevation gain. — Si supiera el desnivel exacto, calcularía mejor el tiempo."},
+  {front:"la cuesta", back:"Hill / slope. — Si esta cuesta no fuera tan empinada, iría más rápido."},
+  {front:"el mirador", back:"Viewpoint. — Si llegara antes al mirador, vería el amanecer sobre el Teide."},
+  {front:"pinchar (una rueda)", back:"To get a flat tyre. — Si pinchara en mitad del Anaga, tendría un problema serio."},
+  {front:"el pelotón", back:"The pack / group of riders. — Si el pelotón fuera más rápido, yo no podría seguirle el ritmo."},
+  {front:"la carretera de cornisa", back:"Cliffside road. — Si lloviera en la carretera de cornisa, sería peligroso seguir."},
+  {front:"la altitud", back:"Altitude. — Si la altitud me afectara, pararía a descansar un rato."},
+  {front:"rodar", back:"To ride/roll (cycling slang). — Si rodara todos los días, mejoraría mucho mi resistencia."},
+  {front:"el avituallamiento", back:"Refuelling / supply point. — Si el avituallamiento estuviera cerrado, tendría que llevar más comida."},
+];
+
+const grid = document.getElementById('vocab-grid');
+VOCAB.forEach(v=>{
+  const card = document.createElement('div');
+  card.className = 'tap-card';
+  card.setAttribute('role', 'button');
+  card.setAttribute('tabindex', '0');
+  card.setAttribute('aria-pressed', 'false');
+  card.setAttribute('aria-label', `${v.front}. Press to see the meaning.`);
+  card.innerHTML = `<div class="tap-front">${v.front}</div><div class="tap-back">${v.back}</div>`;
+  const toggle = ()=>{
+    const flipped = card.classList.toggle('flipped');
+    card.setAttribute('aria-pressed', String(flipped));
+  };
+  card.addEventListener('click', toggle);
+  card.addEventListener('keydown', (e)=>{
+    if(e.key === 'Enter' || e.key === ' '){
+      e.preventDefault();
+      toggle();
+    }
+  });
+  grid.appendChild(card);
+});
+
+/* ---------- EXERCISES ---------- */
+const EXERCISES = [
+  {
+    "sentence": "Si <span class=\"gap\">___</span> menos viento hoy, subiría por la vertiente sur del Teide.",
+    "options": ["hiciera", "hace", "haría"],
+    "answer": "hiciera"
+  },
+  {
+    "sentence": "Ojalá no <span class=\"gap\">___</span> esta tarde en el Anaga, porque la carretera se pone resbaladiza.",
+    "options": ["lloviera", "llueve", "llovería"],
+    "answer": "lloviera"
+  },
+  {
+    "sentence": "Si <span class=\"gap\">___</span> ocho horas anoche, hoy rodaría con muchas más fuerzas.",
+    "options": ["durmiera", "duermo", "dormiría"],
+    "answer": "durmiera"
+  },
+  {
+    "sentence": "<span class=\"gap\">___</span> preguntarte si conoces una ruta más tranquila que esta.",
+    "options": ["Quisiera", "Quiero", "Querría"],
+    "answer": "Quisiera"
+  },
+  {
+    "sentence": "Si el guía nos <span class=\"gap\">___</span> bajar el ritmo, le haría caso sin dudarlo.",
+    "options": ["pidiera", "pide", "pediría"],
+    "answer": "pidiera"
+  },
+  {
+    "sentence": "Pedaleaba por Masca como si no <span class=\"gap\">___</span> el cansancio acumulado de toda la semana.",
+    "options": ["sintiera", "siente", "sentiría"],
+    "answer": "sintiera"
+  },
+  {
+    "sentence": "Si <span class=\"gap\">___</span> el estado real de la pista, decidiría con más calma qué ruta tomar.",
+    "options": ["supiera", "sé", "sabría"],
+    "answer": "supiera"
+  },
+  {
+    "sentence": "Si <span class=\"gap\">___</span> conmigo al mirador de Masca, entenderías por qué me encanta esta isla.",
+    "options": ["vinieras", "vienes", "vendrías"],
+    "answer": "vinieras"
+  },
+  {
+    "sentence": "El médico me recomendó que <span class=\"gap\">___</span> a descansar si notaba mareo por la altitud.",
+    "options": ["parara", "paro", "pararía"],
+    "answer": "parara"
+  },
+  {
+    "sentence": "Si esta pista <span class=\"gap\">___</span> hasta la costa, llegaríamos a tiempo para el atardecer.",
+    "options": ["siguiera", "sigue", "seguiría"],
+    "answer": "siguiera"
+  },
+  {
+    "sentence": "Dudaba que el grupo <span class=\"gap\">___</span> antes de que anocheciera en Los Gigantes.",
+    "options": ["llegara", "llega", "llegaría"],
+    "answer": "llegara"
+  },
+  {
+    "sentence": "Si <span class=\"gap\">___</span> un día libre más esta semana, haría la vuelta completa a la isla.",
+    "options": ["tuviera", "tengo", "tendría"],
+    "answer": "tuviera"
+  }
+];
+
+function shuffle(arr){
+  const a = arr.slice();
+  for(let i = a.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+const exWrap = document.getElementById('exercises');
+EXERCISES.forEach((ex, i)=>{
+  const el = document.createElement('div');
+  el.className = 'exercise';
+  el.dataset.answer = ex.answer;
+  const shuffledOptions = shuffle(ex.options);
+  el.innerHTML = `
+    <div class="ex-sentence">${i+1}. ${ex.sentence}</div>
+    <div class="ex-options">
+      ${shuffledOptions.map(o=>`<button class="opt-btn" data-value="${o}">${o}</button>`).join('')}
+    </div>
+  `;
+  exWrap.appendChild(el);
+
+  el.querySelectorAll('.opt-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      el.querySelectorAll('.opt-btn').forEach(b=>b.classList.remove('picked'));
+      btn.classList.add('picked');
+    });
+  });
+});
+
+document.getElementById('check-btn').addEventListener('click', ()=>{
+  let correct = 0;
+  document.querySelectorAll('.exercise').forEach(el=>{
+    const answer = el.dataset.answer;
+    const picked = el.querySelector('.opt-btn.picked');
+    el.querySelectorAll('.opt-btn').forEach(b=>{
+      b.disabled = true;
+      if(b.dataset.value === answer) b.classList.add('correct');
+      else if(b === picked) b.classList.add('wrong');
+    });
+    if(picked && picked.dataset.value === answer) correct++;
+  });
+  document.getElementById('score-text').textContent = `${correct} / ${EXERCISES.length} correctas`;
+});
+
+document.getElementById('reset-btn').addEventListener('click', ()=>{
+  document.querySelectorAll('.exercise').forEach(el=>{
+    el.querySelectorAll('.opt-btn').forEach(b=>{
+      b.disabled = false;
+      b.classList.remove('picked','correct','wrong');
+    });
+  });
+  document.getElementById('score-text').textContent = '';
+});
+
+/* ---------- RUTAS DE LA ISLA (5 escenas) ---------- */
+const SCENES = [
+  { "id": "teide", "tab": "🌋 Teide", "word": "La subida al Teide", "sub": "situación · condición hipotética", "task": "Imagina que hoy hace mucho viento en la subida al Teide. Escribe una frase con \"si + imperfecto de subjuntivo\" usando el verbo hacer, soplar o subir (no pudiera/hubiera)." },
+  { "id": "anaga", "tab": "🌲 Anaga", "word": "La ruta del Anaga", "sub": "situación · deseo poco realista", "task": "El pronóstico dice que puede llover en el Anaga esta tarde. Escribe un deseo con \"ojalá + imperfecto de subjuntivo\" usando el verbo llover, parar o cambiar." },
+  { "id": "masca", "tab": "🏔️ Masca", "word": "La bajada a Masca", "sub": "situación · como si", "task": "Describe cómo pedaleabas en la bajada a Masca usando \"como si + imperfecto de subjuntivo\" con el verbo sentir, tener o saber." },
+  { "id": "gigantes", "tab": "🌊 Los Gigantes", "word": "La costa de Los Gigantes", "sub": "situación · petición de cortesía", "task": "Quieres preguntarle a un ciclista local sobre el estado de la carretera. Empieza tu frase con \"quisiera\" seguido de un infinitivo." },
+  { "id": "grupo", "tab": "🚴 El pelotón", "word": "Decisión con el grupo", "sub": "situación · duda o emoción pasada", "task": "El grupo no está seguro de si vas a llegar a tiempo al punto de encuentro. Escribe una frase con \"dudaba que\" o \"temía que\" + imperfecto de subjuntivo usando el verbo llegar, seguir o venir." }
+];
+
+const sceneTabs = document.getElementById('scene-tabs');
+const sceneContainer = document.getElementById('scene-container');
+let activeScene = 0;
+
+function renderTabs(){
+  sceneTabs.innerHTML = SCENES.map((s,i)=>
+    `<button class="scene-tab${i===activeScene?' active':''}" data-idx="${i}">${s.tab}</button>`
+  ).join('');
+  sceneTabs.querySelectorAll('.scene-tab').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      activeScene = parseInt(btn.dataset.idx, 10);
+      renderTabs();
+      renderScene();
+    });
+  });
+}
+
+function renderScene(){
+  const scene = SCENES[activeScene];
+  sceneContainer.innerHTML = `
+    <div class="trigger-card">
+      <p class="trigger-word">${scene.word}</p>
+      <p class="trigger-sub">${scene.sub}</p>
+      <p class="trigger-task">${scene.task}</p>
+      <textarea class="trigger-input" rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+    </div>
+  `;
+}
+
+renderTabs();
+renderScene();
+
+/* ---------- FINAL TASK ---------- */
+const STORAGE_KEY = 'pylypenko-clase14-tarea';
+const taskArea = document.getElementById('final-task');
+const taskCount = document.getElementById('task-count');
+const savedFlag = document.getElementById('saved-flag');
+
+async function loadTask(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(STORAGE_KEY);
+    if (res && typeof res.value === 'string') taskArea.value = res.value;
+  }catch(e){
+    // Key doesn't exist yet: no previous task, stays blank.
+  }
+  updateCount();
+}
+
+function updateCount(){
+  const matches = (taskArea.value.match(/\b(si\s+\w*(?:iera|iese)|ojalá\s+\w*(?:iera|iese)|como si\s+\w*(?:iera|iese)|quisiera|dudaba que\s+\w*(?:iera|iese)|temía que\s+\w*(?:iera|iese))\b/gi) || []).length;
+  taskCount.textContent = `${matches} uso${matches===1?'':'s'} de imperfecto de subjuntivo detectado${matches===1?'':'s'}`;
+}
+taskArea.addEventListener('input', updateCount);
+updateCount();
+loadTask();
+
+document.getElementById('save-btn').addEventListener('click', async ()=>{
+  if (!window.storage){
+    savedFlag.textContent = 'No se puede guardar aquí';
+    savedFlag.classList.add('show');
+    setTimeout(()=>{ savedFlag.classList.remove('show'); savedFlag.textContent = 'Guardado ✓'; }, 2200);
+    return;
+  }
+  try{
+    const ok = await window.storage.set(STORAGE_KEY, taskArea.value);
+    savedFlag.textContent = ok ? 'Guardado ✓' : 'No se pudo guardar';
+  }catch(e){
+    savedFlag.textContent = 'No se pudo guardar';
+  }
+  savedFlag.classList.add('show');
+  setTimeout(()=>{ savedFlag.classList.remove('show'); savedFlag.textContent = 'Guardado ✓'; }, 1800);
+});
+</script>
+
+</body>
+</html>
