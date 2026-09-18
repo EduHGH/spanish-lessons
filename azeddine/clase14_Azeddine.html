@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clase 14 · Línea de llegada, segunda parte — Azeddine</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   TRATADO — sistema de diseño editorial
+   Clase 14 · L14 Línea de llegada, 2ª parte · Simulación final · Azeddine
+   ============================================================ */
+
+:root{
+  --paper: #EDE9DC;
+  --paper-page: #F2EEE1;
+  --paper-shadow: rgba(28,27,25,0.14);
+
+  --ink: #1C1B19;
+  --ink-soft: #4A473F;
+  --ink-faint: #726C5E;
+
+  --claret: #FF2D55;
+  --claret-soft: #FFE1E8;
+
+  --sienna: #FF9500;
+  --sienna-soft: #FFEDD1;
+
+  --statute: #34C759;
+  --statute-soft: #DCF5E2;
+
+  --exam: #FF3B30;
+  --exam-soft: #FFE2DF;
+
+  --serif: 'Merriweather', Georgia, 'Times New Roman', serif;
+  --sans: -apple-system, system-ui, 'SF Pro Text', 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+
+  --fs-micro:      0.6875rem;
+  --fs-xs:         0.78125rem;
+  --fs-sm:         0.84375rem;
+  --fs-sans-base:  0.90625rem;
+  --fs-base:       0.96875rem;
+  --fs-md:         1.1875rem;
+  --fs-lg:         1.5625rem;
+  --fs-xl:         2.25rem;
+
+  --page-w: 68ch;
+  --margin-in: 4rem;
+  --margin-out: 5.5rem;
+  --pagina-y: 4rem;
+
+  --radio-page: 28px;
+  --radio-panel: 16px;
+  --radio-chip: 8px;
+
+  --barra-estudio-alto: 0px;
+}
+
+*{ box-sizing: border-box; }
+
+a:focus-visible, [tabindex]:focus-visible{
+  outline: 2px solid var(--claret);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce){ html{ scroll-behavior: auto; } }
+html{ scroll-behavior: smooth; }
+
+body{
+  margin: 0;
+  background: var(--paper-page);
+  color: var(--ink);
+  font-family: var(--serif);
+  -webkit-font-smoothing: antialiased;
+}
+
+.page{
+  max-width: var(--page-w);
+  margin: 0 auto;
+  padding: var(--pagina-y) var(--margin-out) var(--pagina-y) var(--margin-in);
+  position: relative;
+}
+
+@media (max-width: 640px){
+  .page{ padding: 2.5rem 1.5rem calc(4rem + var(--barra-estudio-alto)) 1.5rem; }
+  :root{ --margin-in: 1.5rem; --margin-out: 1.5rem; }
+}
+@media (min-width: 641px) and (max-width: 900px){
+  :root{ --page-w: 72ch; --margin-in: 2.5rem; --margin-out: 2.5rem; }
+}
+@media (min-width: 901px) and (max-width: 1200px){
+  :root{ --page-w: 68ch; --margin-in: 4rem; --margin-out: 5.5rem; }
+}
+@media (min-width: 1201px){
+  :root{ --page-w: 78ch; --margin-in: 5rem; --margin-out: 6.5rem; }
+}
+
+.folio{
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-family: var(--sans);
+  font-size: var(--fs-xs);
+  letter-spacing: 0.02em;
+  color: var(--ink-faint);
+  border-bottom: 1px solid #DDD8C9;
+  padding-bottom: 10px;
+  margin-bottom: 56px;
+}
+.folio .materia{ font-style: italic; }
+
+/* ---------- SELECTOR DE IDIOMA (ES destacado / FR discreto) ---------- */
+.idioma-selector{
+  display: flex; align-items: center; gap: 10px; margin-bottom: 28px;
+  font-family: var(--sans);
+}
+.idioma-btn-es{
+  font-family: var(--sans); font-size: var(--fs-xs); font-weight: 700;
+  letter-spacing: 0.03em; padding: 7px 16px; border-radius: 999px;
+  border: 1px solid var(--claret); background: var(--claret); color: #fff;
+  cursor: pointer; transition: all .15s ease;
+}
+.idioma-btn-es[aria-pressed="false"]{
+  background: var(--paper-page); color: var(--ink-soft); border-color: #DDD8C9;
+}
+.idioma-btn-es:hover{ opacity: 0.92; }
+.idioma-btn-fr{
+  font-family: var(--sans); font-size: var(--fs-micro); font-weight: 400;
+  letter-spacing: 0.02em; color: var(--ink-faint); background: none; border: none;
+  text-decoration: underline; text-decoration-color: #DDD8C9; text-underline-offset: 3px;
+  cursor: pointer; padding: 4px 2px; transition: color .15s ease;
+}
+.idioma-btn-fr:hover{ color: var(--ink-soft); }
+.idioma-btn-fr[aria-pressed="true"]{ color: var(--sienna); text-decoration-color: var(--sienna-soft); font-weight: 600; }
+
+.fr-trad{
+  display: none;
+  font-family: var(--sans); font-size: var(--fs-xs); font-style: italic;
+  color: var(--ink-faint); margin-top: 4px; line-height: 1.45;
+}
+body.mostrar-fr .fr-trad{ display: block; }
+
+.capitulo-abre{ margin-bottom: 48px; }
+.capitulo-numero{
+  font-family: var(--sans);
+  font-size: var(--fs-sans-base);
+  letter-spacing: 0.04em;
+  color: var(--claret);
+  margin-bottom: 6px;
+}
+.capitulo-titulo{
+  font-size: var(--fs-xl);
+  line-height: 1.15;
+  font-weight: 600;
+  margin: 0 0 14px 0;
+  letter-spacing: -0.01em;
+  color: var(--claret);
+  font-family: var(--serif);
+}
+.capitulo-titulo em{ font-style: italic; }
+.capitulo-sumario{
+  font-size: var(--fs-base);
+  font-style: italic;
+  color: var(--ink-soft);
+  line-height: 1.5;
+  max-width: 56ch;
+  border-left: 2px solid var(--claret);
+  padding-left: 18px;
+}
+.capitulo-meta{
+  display: flex; flex-wrap: wrap; gap: 22px; margin-top: 22px;
+  font-family: var(--sans); font-size: var(--fs-xs); color: var(--ink-faint);
+}
+.capitulo-meta strong{
+  display: block; color: var(--ink); font-size: var(--fs-sans-base); font-weight: 700;
+  font-family: var(--sans); margin-top: 3px;
+}
+
+.panel-resumen{
+  margin: 20px 0 8px;
+  padding: 14px 18px;
+  border-top: 1px solid #DDD8C9;
+  border-bottom: 1px solid #DDD8C9;
+  font-family: var(--sans);
+  font-size: var(--fs-sm);
+  color: var(--ink-soft);
+}
+.panel-resumen-titulo{
+  font-family: var(--sans); font-size: var(--fs-xs); text-transform: uppercase;
+  letter-spacing: 0.05em; color: var(--ink-faint); margin: 0 0 10px 0;
+}
+.panel-resumen-chips{ display: flex; flex-wrap: wrap; gap: 8px; }
+.resumen-chip{
+  font-family: var(--sans); font-size: var(--fs-xs); color: var(--ink-soft);
+  background: var(--paper-page); border: 1px solid #DDD8C9; border-radius: 999px;
+  padding: 5px 12px 5px 8px; display: flex; align-items: center; gap: 6px;
+}
+.resumen-chip .n{
+  font-family: var(--sans); font-weight: 700; font-size: var(--fs-micro); color: #fff;
+  background: var(--claret); width: 16px; height: 16px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center; flex: none;
+}
+
+.seccion-abre{
+  margin: 48px 0 24px 0;
+  padding-top: 28px;
+  border-top: 3px double #DDD8C9;
+}
+.seccion-abre:first-of-type{ margin-top: 0; }
+.seccion-cabeza{ display: flex; align-items: baseline; gap: 12px; margin-bottom: 4px; }
+.seccion-numero{
+  font-family: var(--sans); font-size: var(--fs-xs); font-weight: 700;
+  letter-spacing: 0.03em; color: var(--sienna); margin-bottom: 4px;
+}
+.seccion-titulo{
+  font-size: var(--fs-lg); font-weight: 600; margin: 0 0 6px 0;
+  letter-spacing: -0.005em; color: var(--claret); font-family: var(--serif); font-style: italic;
+}
+
+.cuerpo{ font-size: var(--fs-base); line-height: 1.68; color: var(--ink); }
+.cuerpo p{ margin: 0 0 16px 0; }
+.cuerpo strong{ font-weight: 600; color: var(--ink); }
+.cuerpo em{ font-style: italic; }
+
+.bloque{
+  position: relative;
+  margin: 22px 0;
+  padding: 8px 16px 8px 24px;
+  border-radius: var(--radio-chip);
+}
+.bloque::before{
+  content: ''; position: absolute; left: 8px; top: 8px; bottom: 8px;
+  width: 4px; border-radius: 999px; background: var(--ink-faint);
+}
+.bloque .rotulo{
+  font-family: var(--sans); font-size: var(--fs-xs); font-weight: 700;
+  letter-spacing: 0.03em; margin-bottom: 6px;
+}
+.bloque p{ margin: 0 0 10px 0; font-size: var(--fs-base); line-height: 1.6; }
+.bloque p:last-child{ margin-bottom: 0; }
+.bloque.definicion{ background: color-mix(in srgb, var(--sienna) 10%, transparent); }
+.bloque.definicion::before{ background: var(--sienna); }
+.bloque.definicion .rotulo{ color: var(--sienna); }
+
+/* ---------- REVIEW GRID (repaso integrado de estructuras) ---------- */
+.repaso-grid{ display: grid; grid-template-columns: repeat(auto-fill,minmax(200px,1fr)); gap: 12px; margin: 18px 0; }
+.repaso-card{ background: var(--paper); border: 1px solid #E3DDCB; border-radius: var(--radio-chip); padding: 14px 16px; }
+.repaso-card .tag{
+  font-family: var(--sans); font-size: var(--fs-micro); text-transform: uppercase; letter-spacing: 0.05em;
+  color: var(--claret); margin-bottom: 6px;
+}
+.repaso-card .form{ font-family: var(--serif); font-weight: 700; font-size: var(--fs-md); color: var(--ink); margin-bottom: 4px; }
+.repaso-card .ex{ font-family: var(--sans); font-size: var(--fs-xs); color: var(--ink-soft); }
+
+.frases-fijas{
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(180px,1fr)); gap: 12px; margin: 20px 0;
+}
+.frase-fija{ background: var(--paper); border: 1px solid #E3DDCB; border-radius: var(--radio-chip); padding: 14px 16px; }
+.frase-fija-frase{ font-family: var(--sans); font-weight: 700; font-size: var(--fs-sans-base); color: var(--ink); margin: 0 0 6px 0; }
+.frase-fija-ejemplo{ font-family: var(--sans); font-size: var(--fs-xs); color: var(--ink-soft); line-height: 1.5; margin: 0; }
+
+.ejercicio{
+  margin: 26px 0;
+  padding: 20px 22px;
+  background: color-mix(in srgb, var(--ink) 4%, var(--paper-page));
+  border-radius: var(--radio-panel);
+  border: 1px solid #E3DDCB;
+}
+.ejercicio-enunciado{
+  font-family: var(--sans); font-weight: 700; font-size: var(--fs-sans-base);
+  color: var(--ink); margin: 0 0 16px 0;
+}
+.ejercicio-divisor{
+  display: flex; align-items: center; gap: 10px; margin: 18px 0 14px;
+  font-family: var(--sans); font-size: var(--fs-micro); text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--ink-faint);
+}
+.ejercicio-divisor::before, .ejercicio-divisor::after{ content:""; flex:1; height:1px; background:#DDD8C9; }
+.ejercicio-divisor.en-clase{ color: var(--claret); }
+.ejercicio-divisor.en-clase::before, .ejercicio-divisor.en-clase::after{ background: var(--claret-soft); }
+
+.item-frase{ margin-bottom: 18px; }
+.item-frase:last-of-type{ margin-bottom: 0; }
+.item-enunciado{ font-family: var(--sans); font-size: var(--fs-sans-base); margin-bottom: 10px; color: var(--ink); }
+.item-enunciado .hueco{ font-family: var(--sans); color: var(--ink-faint); }
+.item-opciones{ display: flex; flex-wrap: wrap; gap: 8px; }
+.opt-btn{
+  font-family: var(--sans); font-size: var(--fs-sm); background: var(--paper-page);
+  border: 1px solid #DDD8C9; color: var(--ink); padding: 7px 15px; border-radius: 999px;
+  cursor: pointer; transition: all .15s ease;
+}
+.opt-btn:hover{ border-color: var(--ink-faint); }
+.opt-btn.picked{ background: var(--claret-soft); border-color: var(--claret); color: var(--claret); }
+.opt-btn.correct{ background: var(--statute-soft); border-color: var(--statute); color: var(--statute); }
+.opt-btn.wrong{ background: var(--exam-soft); border-color: var(--exam); color: var(--exam); }
+.opt-btn:disabled{ cursor: default; }
+
+.ejercicio-controles{
+  display: flex; align-items: center; justify-content: space-between; gap: 14px;
+  margin-top: 18px; padding-top: 16px; border-top: 1px dashed #DDD8C9; flex-wrap: wrap;
+}
+.ejercicio-controles-botones{ display: flex; gap: 10px; }
+.ejercicio-btn-comprobar{
+  font-family: var(--sans); font-size: var(--fs-sm); font-weight: 700; padding: 9px 20px;
+  border-radius: var(--radio-chip); border: 1px solid var(--ink); background: var(--ink);
+  color: var(--paper-page); cursor: pointer;
+}
+.ejercicio-btn-comprobar:hover{ background: var(--claret); border-color: var(--claret); }
+.ejercicio-btn-reiniciar{
+  font-family: var(--sans); font-size: var(--fs-sm); font-weight: 600; padding: 8px 14px;
+  border-radius: var(--radio-chip); border: 1px solid transparent; background: transparent;
+  color: var(--ink-faint); cursor: pointer; text-decoration: underline; text-underline-offset: 3px;
+}
+.ejercicio-btn-reiniciar:hover{ color: var(--ink); }
+.marcador-resultado{ font-family: var(--sans); font-size: var(--fs-xs); color: var(--ink-faint); }
+
+.dialogo{ margin: 0; }
+.escena-tag{
+  font-family: var(--sans); font-size: var(--fs-xs); text-transform: uppercase; letter-spacing: 0.05em;
+  color: var(--claret); background: var(--claret-soft); border: 1px solid var(--claret-soft);
+  border-radius: 999px; padding: 4px 12px; display: inline-block; margin-bottom: 14px; font-weight: 700;
+}
+.dialogo-burbujas{ display: flex; flex-direction: column; gap: 10px; }
+.dialogo-fila{ display: flex; }
+.dialogo-fila.ellos{ justify-content: flex-start; }
+.dialogo-fila.tu{ justify-content: flex-end; }
+.dialogo-quien{ font-family: var(--sans); font-size: var(--fs-micro); text-transform: uppercase; letter-spacing: 0.04em; color: var(--ink-faint); display: block; margin-bottom: 3px; }
+.dialogo-fila.tu .dialogo-quien{ text-align: right; }
+.dialogo-burbuja{
+  max-width: 78%; padding: 10px 14px; border-radius: var(--radio-chip);
+  font-family: var(--sans); font-size: var(--fs-sans-base); line-height: 1.5;
+  background: var(--paper-page); border: 1px solid #DDD8C9;
+}
+.dialogo-fila.ellos .dialogo-burbuja{ border-bottom-left-radius: 4px; }
+.dialogo-fila.tu .dialogo-burbuja{ border-bottom-right-radius: 4px; background: var(--claret-soft); border-color: var(--claret-soft); }
+.dialogo-burbuja em{ font-style: italic; color: var(--claret); font-weight: 600; }
+.dialogo-fila.tu .dialogo-burbuja em{ color: #B5502E; }
+
+/* ---------- PESTAÑAS DE ESCENA (varias situaciones de roleplay) ---------- */
+.escena-tabs{ display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+.escena-tab{
+  font-family: var(--sans); font-size: var(--fs-xs); font-weight: 700; color: var(--ink-soft);
+  background: var(--paper-page); border: 1px solid #DDD8C9; border-radius: 999px;
+  padding: 7px 15px; cursor: pointer; transition: all .15s ease;
+}
+.escena-tab:hover{ border-color: var(--ink-faint); }
+.escena-tab.activa{ background: var(--claret); border-color: var(--claret); color: #fff; }
+.escena-panel{ display: none; }
+.escena-panel.activa{ display: block; }
+
+.verdadero-falso{
+  margin: 26px 0; padding: 22px 24px; background: var(--paper);
+  border: 1px solid #E3DDCB; border-radius: var(--radio-panel);
+}
+.eval-lista{ margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; }
+.eval-item{
+  display: flex; gap: 12px; align-items: flex-start; font-family: var(--sans); font-size: var(--fs-sans-base);
+  color: var(--ink-soft); background: var(--paper-page); border: 1px solid #E3DDCB; border-radius: var(--radio-chip);
+  padding: 12px 14px; cursor: pointer;
+}
+.eval-check{
+  width: 20px; height: 20px; border-radius: 6px; border: 1.5px solid var(--claret); flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center; font-size: var(--fs-xs); color: transparent;
+  background: var(--paper-page); transition: all .15s ease; margin-top: 1px;
+}
+.eval-item.done .eval-check{ background: var(--claret); color: #fff; }
+.eval-item.done .eval-text{ color: var(--ink); }
+.eval-text strong{ color: var(--ink); }
+
+.tarea-final textarea{
+  width: 100%; min-height: 170px; font-family: var(--serif); font-size: var(--fs-base); color: var(--ink);
+  background: var(--paper-page); border: 1px solid #DDD8C9; border-radius: var(--radio-panel);
+  padding: 14px 16px; resize: vertical; margin-top: 14px; line-height: 1.6;
+}
+.tarea-final textarea:focus{ outline: none; border-color: var(--claret); }
+.tarea-final-pie{ display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 12px; flex-wrap: wrap; font-family: var(--sans); }
+.tarea-final-contador{ font-family: var(--sans); font-size: var(--fs-xs); color: var(--ink-faint); }
+.tarea-guardado{ font-family: var(--sans); font-size: var(--fs-xs); color: var(--statute); opacity: 0; transition: opacity .3s ease; }
+.tarea-guardado.show{ opacity: 1; }
+
+.frase-cierre{
+  margin: 40px 0 8px;
+  padding: 30px 32px;
+  border-radius: var(--radio-panel);
+  border: 1px solid var(--claret-soft);
+  background:
+    radial-gradient(ellipse 320px 240px at 10% -12%, color-mix(in srgb, var(--claret) 12%, transparent) 0%, transparent 60%),
+    radial-gradient(ellipse 260px 200px at 94% 118%, color-mix(in srgb, var(--claret) 10%, transparent) 0%, transparent 55%),
+    var(--claret-soft);
+  text-align: center;
+}
+.frase-cierre .trofeo{ font-size: 38px; margin-bottom: 10px; }
+.frase-cierre-rotulo{
+  font-family: var(--sans); font-size: var(--fs-xs); font-weight: 700; letter-spacing: 0.06em;
+  text-transform: uppercase; color: var(--claret); margin: 0 0 10px 0;
+}
+.frase-cierre-texto{ font-family: var(--serif); font-size: 1.75rem; font-weight: 600; line-height: 1.3; color: var(--ink); margin: 0 0 10px 0; font-style: italic; }
+.frase-cierre-apoyo{ font-family: var(--sans); font-size: var(--fs-sm); color: var(--ink-soft); max-width: 50ch; margin: 0 auto; }
+
+.pie-pagina{
+  margin-top: 48px; padding-top: 14px; border-top: 1px solid #DDD8C9;
+  display: flex; justify-content: space-between; font-family: var(--sans);
+  font-size: var(--fs-micro); color: var(--ink-faint);
+}
+
+@media (max-width: 600px){
+  .ejercicio{ padding: 16px 16px; }
+  .item-opciones{ gap: 6px; }
+}
+@media (prefers-reduced-motion: reduce){ *{ transition:none !important; } }
+</style>
+</head>
+<body>
+<div class="page">
+
+<div class="folio">
+  <span class="materia">Español · A1 · Ruta 2</span>
+  <span>Clase 14 de 14 · Curso completado</span>
+</div>
+
+<div class="idioma-selector">
+  <button type="button" class="idioma-btn-es" id="btn-es" aria-pressed="true">Español</button>
+  <button type="button" class="idioma-btn-fr" id="btn-fr" aria-pressed="false">+ traducción en français</button>
+</div>
+
+<div class="capitulo-abre">
+  <p class="capitulo-numero">Clase 14 de 14 · L14 Línea de llegada — segunda parte</p>
+  <p class="fr-trad">Classe 14 sur 14 · L14 Ligne d'arrivée — deuxième partie</p>
+  <h1 class="capitulo-titulo">La <em>llamada</em> completa</h1>
+  <p class="fr-trad" style="font-size: var(--fs-sm); margin-bottom: 14px;">L'appel complet</p>
+  <p class="capitulo-sumario">Esta es tu evaluación final. Vas a combinar todo lo aprendido en la Segunda Parte — pretérito perfecto, comparativos, pretérito indefinido, condicional de cortesía, futuro simple e imperativo formal — en una simulación completa: una llamada de atención al cliente en el aeropuerto de Estados Unidos durante el Mundial.</p>
+  <p class="fr-trad">Voici votre évaluation finale. Vous allez combiner tout ce que vous avez appris dans la Deuxième Partie — passé composé, comparatifs, passé simple, conditionnel de politesse, futur simple et impératif formel — dans une simulation complète : un appel au service client à l'aéroport aux États-Unis pendant la Coupe du Monde.</p>
+  <div class="capitulo-meta">
+    <div>Duración<strong>25 min</strong></div>
+    <div>Gramática<strong>Repaso integrado de la Segunda Parte</strong></div>
+    <div>Nivel<strong>A1 (avanzado) — evaluación final</strong></div>
+  </div>
+</div>
+
+<div class="panel-resumen">
+  <p class="panel-resumen-titulo">Las seis estructuras que combinas hoy</p>
+  <p class="fr-trad" style="margin: -4px 0 10px;">Les six structures que vous combinez aujourd'hui</p>
+  <div class="panel-resumen-chips">
+    <span class="resumen-chip"><span class="n">8</span>pretérito perfecto</span>
+    <span class="resumen-chip"><span class="n">9</span>comparativos</span>
+    <span class="resumen-chip"><span class="n">10</span>pretérito indefinido</span>
+    <span class="resumen-chip"><span class="n">11</span>condicional de cortesía</span>
+    <span class="resumen-chip"><span class="n">12</span>futuro simple</span>
+    <span class="resumen-chip"><span class="n">13</span>imperativo formal</span>
+  </div>
+</div>
+
+<section class="seccion-abre">
+  <div class="seccion-cabeza"><span class="seccion-numero">Sección 1 · 6 min</span></div>
+  <h2 class="seccion-titulo">Repaso relámpago: las seis estructuras</h2>
+  <p class="fr-trad" style="margin: -2px 0 14px;">Révision éclair : les six structures</p>
+  <div class="cuerpo">
+    <div class="repaso-grid">
+      <div class="repaso-card"><div class="tag">pretérito perfecto</div><div class="form">he llamado</div><div class="ex">¿Qué ha hecho esta semana?</div><div class="fr-trad">j'ai appelé — Qu'avez-vous fait cette semaine ?</div></div>
+      <div class="repaso-card"><div class="tag">comparativos</div><div class="form">más...que / tan...como</div><div class="ex">Esta póliza es más completa que la otra.</div><div class="fr-trad">plus...que / aussi...que — Cette police est plus complète que l'autre.</div></div>
+      <div class="repaso-card"><div class="tag">pretérito indefinido</div><div class="form">visitó, llegó, se quedó</div><div class="ex">Mi hermano visitó Sevilla el mes pasado.</div><div class="fr-trad">il a visité, il est arrivé, il est resté — Mon frère a visité Séville le mois dernier.</div></div>
+      <div class="repaso-card"><div class="tag">condicional de cortesía</div><div class="form">me gustaría, podría</div><div class="ex">¿Podría darme sus datos, por favor?</div><div class="fr-trad">j'aimerais, pourriez-vous — Pourriez-vous me donner vos coordonnées, s'il vous plaît ?</div></div>
+      <div class="repaso-card"><div class="tag">futuro simple</div><div class="form">tendrá, viajará</div><div class="ex">Mi hija viajará a Estados Unidos.</div><div class="fr-trad">il aura, il voyagera — Ma fille voyagera aux États-Unis.</div></div>
+      <div class="repaso-card"><div class="tag">imperativo formal</div><div class="form">rellene, envíe, adjunte</div><div class="ex">Rellene el formulario, por favor.</div><div class="fr-trad">remplissez, envoyez, joignez — Remplissez le formulaire, s'il vous plaît.</div></div>
+    </div>
+    <div class="bloque definicion">
+      <p class="rotulo">Hoy no aprendes gramática nueva</p>
+      <p><strong>Combinas</strong> todo lo que ya sabes en una sola conversación larga, como haría un profesional de seguros de verdad atendiendo una llamada.</p>
+      <p class="fr-trad">Aujourd'hui, vous n'apprenez pas de nouvelle grammaire. Vous combinez tout ce que vous savez déjà dans une seule longue conversation, comme le ferait un vrai professionnel de l'assurance en répondant à un appel.</p>
+    </div>
+  </div>
+</section>
+
+<section class="seccion-abre">
+  <div class="seccion-cabeza"><span class="seccion-numero">Sección 2 · 4 min</span></div>
+  <h2 class="seccion-titulo">Vocabulario de la simulación</h2>
+  <p class="fr-trad" style="margin: -2px 0 14px;">Vocabulaire de la simulation</p>
+  <div class="cuerpo">
+    <p style="font-family: var(--sans); font-size: var(--fs-xs); color: var(--ink-faint);">Ocho términos con un ejemplo en contexto.</p>
+    <p class="fr-trad" style="margin-top: -6px;">Huit termes avec un exemple en contexte.</p>
+    <div class="frases-fijas" id="vocab-grid"></div>
+  </div>
+</section>
+
+<section class="seccion-abre">
+  <div class="seccion-cabeza"><span class="seccion-numero">Sección 3 · 6 min</span></div>
+  <h2 class="seccion-titulo">Elige la estructura correcta</h2>
+  <p class="fr-trad" style="margin: -2px 0 14px;">Choisissez la structure correcte</p>
+  <div class="ejercicio">
+    <p class="ejercicio-enunciado">10 frases mezclando las seis estructuras de la Segunda Parte. Las primeras 6 en clase; el resto, repaso para casa.</p>
+    <p class="fr-trad" style="margin-top: -12px; margin-bottom: 16px;">10 phrases mélangeant les six structures de la Deuxième Partie. Les 6 premières en classe ; le reste, en révision à la maison.</p>
+    <div id="exercises"></div>
+    <div class="ejercicio-controles">
+      <div class="ejercicio-controles-botones">
+        <button class="ejercicio-btn-comprobar" id="check-btn">Comprobar respuestas</button>
+        <button class="ejercicio-btn-reiniciar" id="reset-btn">Reiniciar</button>
+      </div>
+      <span class="marcador-resultado" id="score-text"></span>
+    </div>
+  </div>
+</section>
+
+<section class="seccion-abre">
+  <div class="seccion-cabeza"><span class="seccion-numero">Sección 4 · 8 min</span></div>
+  <h2 class="seccion-titulo">Simulación completa: llamada de atención al cliente</h2>
+  <p class="fr-trad" style="margin: -2px 0 14px;">Simulation complète : appel au service client</p>
+  <div class="ejercicio">
+    <p class="ejercicio-enunciado">Tres llamadas distintas, mismo repaso integrado. Cambia entre ellas con las pestañas.</p>
+    <p class="fr-trad" style="margin-top: -12px; margin-bottom: 16px;">Trois appels différents, même révision intégrée. Changez entre eux avec les onglets.</p>
+    <div class="escena-tabs" id="escena-tabs">
+      <button type="button" class="escena-tab activa" data-escena="0">1 · Equipaje perdido</button>
+      <button type="button" class="escena-tab" data-escena="1">2 · Cambio de vuelo y hotel</button>
+      <button type="button" class="escena-tab" data-escena="2">3 · Objeto robado</button>
+    </div>
+
+    <div class="escena-panel activa" data-escena-panel="0">
+      <span class="escena-tag">Escena: aeropuerto de Miami, durante el Mundial</span>
+      <p class="fr-trad" style="margin: -8px 0 14px;">Scène : aéroport de Miami, pendant la Coupe du Monde</p>
+      <div class="dialogo">
+        <div class="dialogo-burbujas">
+          <div class="dialogo-fila ellos"><div><span class="dialogo-quien">Cliente</span><div class="dialogo-burbuja">Buenas tardes, le llamo desde el aeropuerto de Miami. Tengo un problema con mi póliza de viaje.</div><p class="fr-trad">Bonjour, je vous appelle depuis l'aéroport de Miami. J'ai un problème avec mon assurance voyage.</p></div></div>
+          <div class="dialogo-fila tu"><div><span class="dialogo-quien">Tú</span><div class="dialogo-burbuja"><em>Me gustaría</em> ayudarle. ¿<em>Podría</em> darme su número de póliza, por favor?</div><p class="fr-trad">J'aimerais vous aider. Pourriez-vous me donner votre numéro de police, s'il vous plaît ?</p></div></div>
+          <div class="dialogo-fila ellos"><div><span class="dialogo-quien">Cliente</span><div class="dialogo-burbuja">Sí, claro. Mi hija llegó ayer a Miami para ver el Mundial, pero la aerolínea ha perdido su equipaje.</div><p class="fr-trad">Oui, bien sûr. Ma fille est arrivée hier à Miami pour voir la Coupe du Monde, mais la compagnie aérienne a perdu ses bagages.</p></div></div>
+          <div class="dialogo-fila tu"><div><span class="dialogo-quien">Tú</span><div class="dialogo-burbuja">Entiendo. ¿<em>Ha llamado</em> ya a la aerolínea para hacer la reclamación oficial?</div><p class="fr-trad">Je comprends. Avez-vous déjà appelé la compagnie aérienne pour faire la réclamation officielle ?</p></div></div>
+          <div class="dialogo-fila ellos"><div><span class="dialogo-quien">Cliente</span><div class="dialogo-burbuja">Sí, ya lo <em>hicimos</em> ayer por la noche, justo cuando <em>llegamos</em>.</div><p class="fr-trad">Oui, nous l'avons déjà fait hier soir, juste quand nous sommes arrivés.</p></div></div>
+          <div class="dialogo-fila tu"><div><span class="dialogo-quien">Tú</span><div class="dialogo-burbuja">Perfecto. Su póliza es <em>más completa que</em> la básica, así que cubre el equipaje perdido. Primero, <em>rellene</em> este formulario con los datos del vuelo.</div><p class="fr-trad">Parfait. Votre police est plus complète que la basique, donc elle couvre les bagages perdus. D'abord, remplissez ce formulaire avec les données du vol.</p></div></div>
+          <div class="dialogo-fila ellos"><div><span class="dialogo-quien">Cliente</span><div class="dialogo-burbuja">De acuerdo. ¿Qué más necesito hacer?</div><p class="fr-trad">D'accord. Que dois-je faire d'autre ?</p></div></div>
+          <div class="dialogo-fila tu"><div><span class="dialogo-quien">Tú</span><div class="dialogo-burbuja"><em>Adjunte</em> el justificante de la aerolínea y <em>envíe</em> todo antes de que termine el plazo de 48 horas.</div><p class="fr-trad">Joignez le justificatif de la compagnie aérienne et envoyez le tout avant la fin du délai de 48 heures.</p></div></div>
+          <div class="dialogo-fila ellos"><div><span class="dialogo-quien">Cliente</span><div class="dialogo-burbuja">¿Y cuándo <em>tendré</em> una respuesta?</div><p class="fr-trad">Et quand aurai-je une réponse ?</p></div></div>
+          <div class="dialogo-fila tu"><div><span class="dialogo-quien">Tú</span><div class="dialogo-burbuja">La aseguradora <em>responderá</em> en un plazo máximo de cinco días. <em>Tenga</em> paciencia, por favor, y guarde el número de su reclamación.</div><p class="fr-trad">L'assureur répondra sous un délai maximum de cinq jours. Soyez patient, s'il vous plaît, et gardez le numéro de votre réclamation.</p></div></div>
+          <div class="dialogo-fila ellos"><div><span class="dialogo-quien">Cliente</span><div class="dialogo-burbuja">Muchas gracias por su ayuda. Espero que mi hija <em>pueda</em> disfrutar del partido de mañana.</div><p class="fr-trad">Merci beaucoup pour votre aide. J'espère que ma fille pourra profiter du match de demain.</p></div></div>
+          <div class="dialogo-fila tu"><div><span class="dialogo-quien">Tú</span><div class="dialogo-burbuja">Con gusto. Que <em>tengan</em> un buen Mundial, y no dude en llamarnos si necesita algo más.</div><p class="fr-trad">Avec plaisir. Passez une bonne Coupe du Monde, et n'hésitez pas à nous rappeler si vous avez besoin d'autre chose.</p></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="escena-panel" data-escena-panel="1">
+      <span class="escena-tag">Escena: vuelo cancelado, aeropuerto de Dallas</span>
+      <p class="fr-trad" style="margin: -8px 0 14px;">Scène : vol annulé, aéroport de Dallas</p>
+      <div class="dialogo">
+        <div class="dialogo-burbujas">
+          <div class="dialogo-fila ellos"><div><span class="dialogo-quien">Cliente</span><div class="dialogo-burbuja">Buenas noches, mi vuelo de vuelta se ha cancelado y no sé qué hacer con el hotel.</div><p class="fr-trad">Bonsoir, mon vol de retour a été annulé et je ne sais pas quoi faire pour l'hôtel.</p></div></div>
+          <div class="dialogo-fila tu"><div><span class="dialogo-quien">Tú</span><div class="dialogo-burbuja">Lo siento mucho. ¿<em>Podría</em> decirme el número de su reserva, por favor?</div><p class="fr-trad">Je suis vraiment désolé. Pourriez-vous me donner le numéro de votre réservation, s'il vous plaît ?</p></div></div>
+          <div class="dialogo-fila ellos"><div><span class="dialogo-quien">Cliente</span><div class="dialogo-burbuja">Sí, es RES-7789. Ya <em>he hablado</em> con la aerolínea, pero no me han dado un hotel.</div><p class="fr-trad">Oui, c'est RES-7789. J'ai déjà parlé avec la compagnie aérienne, mais on ne m'a pas donné d'hôtel.</p></div></div>
+          <div class="dialogo-fila tu"><div><span class="dialogo-quien">Tú</span><div class="dialogo-burbuja">Entiendo. Su póliza es <em>más completa que</em> la básica, así que cubre alojamiento de emergencia.</div><p class="fr-trad">Je comprends. Votre police est plus complète que la basique, donc elle couvre l'hébergement d'urgence.</p></div></div>
+          <div class="dialogo-fila ellos"><div><span class="dialogo-quien">Cliente</span><div class="dialogo-burbuja">¿Qué tengo que hacer para que me lo paguen?</div><p class="fr-trad">Que dois-je faire pour être remboursé ?</p></div></div>
+          <div class="dialogo-fila tu"><div><span class="dialogo-quien">Tú</span><div class="dialogo-burbuja"><em>Reserve</em> el hotel usted mismo y <em>guarde</em> la factura. Después <em>envíela</em> junto con el justificante del vuelo cancelado.</div><p class="fr-trad">Réservez l'hôtel vous-même et gardez la facture. Ensuite, envoyez-la avec le justificatif du vol annulé.</p></div></div>
+          <div class="dialogo-fila ellos"><div><span class="dialogo-quien">Cliente</span><div class="dialogo-burbuja">El año pasado <em>tuve</em> un problema parecido y tardaron mucho en pagarme.</div><p class="fr-trad">L'année dernière, j'ai eu un problème similaire et ils ont mis longtemps à me payer.</p></div></div>
+          <div class="dialogo-fila tu"><div><span class="dialogo-quien">Tú</span><div class="dialogo-burbuja">Lamento oír eso. Esta vez la aseguradora <em>responderá</em> en un máximo de tres días laborables. <em>Tenga</em> a mano su número de reserva cuando llame.</div><p class="fr-trad">Je regrette de l'entendre. Cette fois, l'assureur répondra sous un maximum de trois jours ouvrables. Ayez votre numéro de réservation à portée de main quand vous appellerez.</p></div></div>
+          <div class="dialogo-fila ellos"><div><span class="dialogo-quien">Cliente</span><div class="dialogo-burbuja">Muchas gracias. ¿Hay algo más que deba enviar?</div><p class="fr-trad">Merci beaucoup. Y a-t-il autre chose que je doive envoyer ?</p></div></div>
+          <div class="dialogo-fila tu"><div><span class="dialogo-quien">Tú</span><div class="dialogo-burbuja">Solo eso. <em>Llámenos</em> mañana si el nuevo vuelo <em>llega</em> con más retraso.</div><p class="fr-trad">C'est tout. Appelez-nous demain si le nouveau vol arrive avec plus de retard.</p></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="escena-panel" data-escena-panel="2">
+      <span class="escena-tag">Escena: comisaría cerca del estadio, tras el partido</span>
+      <p class="fr-trad" style="margin: -8px 0 14px;">Scène : commissariat près du stade, après le match</p>
+      <div class="dialogo">
+        <div class="dialogo-burbujas">
+          <div class="dialogo-fila ellos"><div><span class="dialogo-quien">Cliente</span><div class="dialogo-burbuja">Hola, me han robado la cámara y el móvil a la salida del estadio.</div><p class="fr-trad">Bonjour, on m'a volé mon appareil photo et mon téléphone à la sortie du stade.</p></div></div>
+          <div class="dialogo-fila tu"><div><span class="dialogo-quien">Tú</span><div class="dialogo-burbuja">Cuánto lo siento. ¿<em>Ha hecho</em> ya la denuncia en la policía?</div><p class="fr-trad">Je suis vraiment désolé. Avez-vous déjà déposé plainte à la police ?</p></div></div>
+          <div class="dialogo-fila ellos"><div><span class="dialogo-quien">Cliente</span><div class="dialogo-burbuja">Sí, la <em>hice</em> hace media hora, justo cuando <em>salí</em> del estadio.</div><p class="fr-trad">Oui, je l'ai fait il y a une demi-heure, juste quand je suis sorti du stade.</p></div></div>
+          <div class="dialogo-fila tu"><div><span class="dialogo-quien">Tú</span><div class="dialogo-burbuja">Perfecto, eso es imprescindible. Su póliza tiene <em>tanta</em> cobertura de robo <em>como</em> la de equipaje. <em>Adjunte</em> la copia de la denuncia al formulario.</div><p class="fr-trad">Parfait, c'est indispensable. Votre police a autant de couverture vol que celle des bagages. Joignez la copie de la plainte au formulaire.</p></div></div>
+          <div class="dialogo-fila ellos"><div><span class="dialogo-quien">Cliente</span><div class="dialogo-burbuja">¿Necesito el ticket de compra de los aparatos?</div><p class="fr-trad">Ai-je besoin du ticket d'achat des appareils ?</p></div></div>
+          <div class="dialogo-fila tu"><div><span class="dialogo-quien">Tú</span><div class="dialogo-burbuja">Si lo tiene, <em>envíelo</em> también; si no, no se preocupe, no es obligatorio.</div><p class="fr-trad">Si vous l'avez, envoyez-le aussi ; sinon, ne vous inquiétez pas, ce n'est pas obligatoire.</p></div></div>
+          <div class="dialogo-fila ellos"><div><span class="dialogo-quien">Cliente</span><div class="dialogo-burbuja">¿Cuándo <em>sabré</em> si me lo cubren?</div><p class="fr-trad">Quand saurai-je si c'est couvert ?</p></div></div>
+          <div class="dialogo-fila tu"><div><span class="dialogo-quien">Tú</span><div class="dialogo-burbuja">La aseguradora <em>revisará</em> el caso esta semana. <em>Tenga</em> paciencia y guarde el número de expediente.</div><p class="fr-trad">L'assureur examinera le dossier cette semaine. Soyez patient et gardez le numéro de dossier.</p></div></div>
+          <div class="dialogo-fila ellos"><div><span class="dialogo-quien">Cliente</span><div class="dialogo-burbuja">Gracias. Menos mal que <em>disfruté</em> del partido antes de que pasara esto.</div><p class="fr-trad">Merci. Heureusement que j'ai profité du match avant que cela n'arrive.</p></div></div>
+          <div class="dialogo-fila tu"><div><span class="dialogo-quien">Tú</span><div class="dialogo-burbuja">Me alegro. <em>Llámenos</em> si necesita cualquier otra cosa durante el Mundial.</div><p class="fr-trad">Tant mieux. Appelez-nous si vous avez besoin d'autre chose pendant la Coupe du Monde.</p></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="seccion-abre">
+  <div class="seccion-cabeza"><span class="seccion-numero">✓</span></div>
+  <h2 class="seccion-titulo">Autoevaluación final — Segunda Parte</h2>
+  <p class="fr-trad" style="margin: -2px 0 14px;">Auto-évaluation finale — Deuxième Partie</p>
+  <div class="verdadero-falso">
+    <ul class="eval-lista">
+      <li class="eval-item" data-id="e1"><span class="eval-check">✓</span><span class="eval-text">Puedo usar el pretérito perfecto para hablar de acciones recientes.<span class="fr-trad">Je peux utiliser le passé composé pour parler d'actions récentes.</span></span></li>
+      <li class="eval-item" data-id="e2"><span class="eval-check">✓</span><span class="eval-text">Puedo comparar pólizas y seguros con comparativos.<span class="fr-trad">Je peux comparer des polices et des assurances avec des comparatifs.</span></span></li>
+      <li class="eval-item" data-id="e3"><span class="eval-check">✓</span><span class="eval-text">Puedo contar hechos pasados con el pretérito indefinido.<span class="fr-trad">Je peux raconter des faits passés avec le passé simple.</span></span></li>
+      <li class="eval-item" data-id="e4"><span class="eval-check">✓</span><span class="eval-text">Puedo atender a un cliente con cortesía usando el condicional.<span class="fr-trad">Je peux répondre à un client avec courtoisie en utilisant le conditionnel.</span></span></li>
+      <li class="eval-item" data-id="e5"><span class="eval-check">✓</span><span class="eval-text">Puedo hacer predicciones y hablar de planes con el futuro simple.<span class="fr-trad">Je peux faire des prédictions et parler de projets avec le futur simple.</span></span></li>
+      <li class="eval-item" data-id="e6"><span class="eval-check">✓</span><span class="eval-text">Puedo dar instrucciones formales con el imperativo (usted).<span class="fr-trad">Je peux donner des instructions formelles avec l'impératif (vouvoiement).</span></span></li>
+      <li class="eval-item" data-id="e7"><span class="eval-check">✓</span><span class="eval-text">Puedo gestionar una llamada completa combinando todas estas estructuras.<span class="fr-trad">Je peux gérer un appel complet en combinant toutes ces structures.</span></span></li>
+    </ul>
+  </div>
+</section>
+
+<section class="seccion-abre">
+  <div class="seccion-cabeza"><span class="seccion-numero">Sección 5 · tarea final</span></div>
+  <h2 class="seccion-titulo">Tu evaluación final oral</h2>
+  <p class="fr-trad" style="margin: -2px 0 14px;">Votre évaluation orale finale</p>
+  <div class="ejercicio tarea-final">
+    <p class="ejercicio-enunciado" style="margin-bottom:0;">Practica en voz alta la llamada completa del aeropuerto, o escribe tu propia versión combinando las seis estructuras: pretérito perfecto, comparativos, pretérito indefinido, condicional de cortesía, futuro simple e imperativo formal.</p>
+    <p class="fr-trad">Pratiquez à voix haute l'appel complet de l'aéroport, ou écrivez votre propre version en combinant les six structures : passé composé, comparatifs, passé simple, conditionnel de politesse, futur simple et impératif formel.</p>
+    <textarea id="final-task" placeholder="Buenas tardes, le llamo desde el aeropuerto de..."></textarea>
+    <div class="tarea-final-pie">
+      <span class="tarea-final-contador" id="task-count">0 frases escritas</span>
+      <span class="tarea-guardado" id="saved-flag">Guardado ✓</span>
+    </div>
+  </div>
+</section>
+
+<div class="frase-cierre">
+  <div class="trofeo">🏆</div>
+  <p class="frase-cierre-rotulo">Programa completado — Segunda Parte</p>
+  <p class="fr-trad" style="text-align:center; margin-bottom: 10px;">Programme terminé — Deuxième Partie</p>
+  <p class="frase-cierre-texto">¡Enhorabuena, Azeddine!</p>
+  <p class="fr-trad" style="text-align:center; font-size: 1.05rem; margin-bottom: 10px;">Félicitations, Azeddine !</p>
+  <p class="frase-cierre-apoyo">Has llegado a la línea de meta: desde presentarte con "soy" hasta gestionar una llamada completa de atención al cliente en imperativo formal. Rumbo al Mundial, completado.</p>
+  <p class="fr-trad" style="text-align:center; max-width: 50ch; margin: 8px auto 0;">Vous avez atteint la ligne d'arrivée : depuis vous présenter avec « soy » jusqu'à gérer un appel complet au service client à l'impératif formel. Cap sur la Coupe du Monde, atteint.</p>
+</div>
+
+<div class="pie-pagina">
+  <span>Azeddine · Español A1 · Ruta 2</span>
+  <span>Clase 14 de 14 · Curso completado</span>
+</div>
+
+</div>
+
+<script>
+const STORAGE_KEY = 'azeddine-clase14-tarea';
+
+/* ---------- VOCAB CARDS (frases-fijas, siempre visibles) ---------- */
+const VOCAB = [
+  { front: 'el aeropuerto', back: 'Le llamo desde el aeropuerto de Miami.', frFront: "l'aéroport", frBack: "Je vous appelle depuis l'aéroport de Miami." },
+  { front: 'el equipaje perdido', back: 'La aerolínea ha perdido su equipaje.', frFront: 'les bagages perdus', frBack: 'La compagnie aérienne a perdu vos bagages.' },
+  { front: 'la reclamación', back: 'Ya hicimos la reclamación ayer por la noche.', frFront: 'la réclamation', frBack: 'Nous avons déjà fait la réclamation hier soir.' },
+  { front: 'el justificante', back: 'Adjunte el justificante de la aerolínea.', frFront: 'le justificatif', frBack: 'Joignez le justificatif de la compagnie aérienne.' },
+  { front: 'el plazo', back: 'Envíe todo antes de que termine el plazo.', frFront: 'le délai', frBack: 'Envoyez tout avant la fin du délai.' },
+  { front: 'la aseguradora', back: 'La aseguradora responderá en cinco días.', frFront: "l'assureur", frBack: "L'assureur répondra sous cinq jours." },
+  { front: 'la cobertura', back: 'Su póliza tiene cobertura de equipaje.', frFront: 'la couverture', frBack: 'Votre police a une couverture bagages.' },
+  { front: 'el Mundial', back: 'Que tengan un buen Mundial.', frFront: 'la Coupe du Monde', frBack: 'Passez une bonne Coupe du Monde.' },
+];
+
+const vocabGrid = document.getElementById('vocab-grid');
+VOCAB.forEach(v=>{
+  const card = document.createElement('div');
+  card.className = 'frase-fija';
+  card.innerHTML = `<div class="frase-fija-frase">${v.front}</div><div class="frase-fija-ejemplo">${v.back}</div><div class="fr-trad">${v.frFront} — ${v.frBack}</div>`;
+  vocabGrid.appendChild(card);
+});
+
+/* ---------- EXERCISES: MULTIPLE CHOICE (repaso integrado) ---------- */
+const EXERCISES = [
+  { sentence: "¿<span class=\"hueco\">___</span> darme su número de póliza, por favor?", options: ["Podría","Puede","Pudo"], correct: "Podría" },
+  { sentence: "Mi hija <span class=\"hueco\">___</span> ayer a Miami para el Mundial.", options: ["llegó","llega","llegará"], correct: "llegó" },
+  { sentence: "Esta póliza es <span class=\"hueco\">___</span> completa que la básica.", options: ["más","tan","menos que"], correct: "más" },
+  { sentence: "¿Ya <span class=\"hueco\">___</span> la reclamación a la aerolínea?", options: ["ha hecho","hizo","hará"], correct: "ha hecho" },
+  { sentence: "<span class=\"hueco\">___</span> este formulario con los datos del vuelo.", options: ["Rellene","Rellena","Rellenó"], correct: "Rellene" },
+  { sentence: "La aseguradora <span class=\"hueco\">___</span> en cinco días.", options: ["responderá","responde","respondió"], correct: "responderá" },
+  { sentence: "<span class=\"hueco\">___</span> paciencia, por favor, mientras revisamos su caso.", options: ["Tenga","Tiene","Tuvo"], correct: "Tenga" },
+  { sentence: "El mes pasado, mi hermano <span class=\"hueco\">___</span> Sevilla.", options: ["visitó","visita","visitará"], correct: "visitó" },
+  { sentence: "<span class=\"hueco\">___</span> gustaría resolver esto lo antes posible.", options: ["Me","Yo","Se"], correct: "Me" },
+  { sentence: "<span class=\"hueco\">___</span> el justificante antes de las 48 horas.", options: ["Envíe","Envía","Envió"], correct: "Envíe" },
+];
+
+const exWrap = document.getElementById('exercises');
+EXERCISES.forEach((ex,i)=>{
+  if(i===0){ const d=document.createElement('div'); d.className='ejercicio-divisor en-clase'; d.textContent='en clase · ítems 1–6'; exWrap.appendChild(d); }
+  if(i===6){ const d=document.createElement('div'); d.className='ejercicio-divisor'; d.textContent='para casa · repaso opcional'; exWrap.appendChild(d); }
+  const el = document.createElement('div');
+  el.className = 'item-frase';
+  el.innerHTML = `<div class="item-enunciado">${i+1}. ${ex.sentence}</div>
+    <div class="item-opciones">${ex.options.map(o=>`<button class="opt-btn" data-val="${o}">${o}</button>`).join('')}</div>`;
+  el.dataset.correct = ex.correct;
+  exWrap.appendChild(el);
+
+  el.querySelectorAll('.opt-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      el.querySelectorAll('.opt-btn').forEach(b=>b.classList.remove('picked'));
+      btn.classList.add('picked');
+    });
+  });
+});
+
+document.getElementById('check-btn').addEventListener('click', ()=>{
+  let correct = 0;
+  document.querySelectorAll('#exercises .item-frase').forEach(el=>{
+    const picked = el.querySelector('.opt-btn.picked');
+    el.querySelectorAll('.opt-btn').forEach(b=>b.disabled = true);
+    if(picked){
+      if(picked.dataset.val === el.dataset.correct){ picked.classList.add('correct'); correct++; }
+      else{
+        picked.classList.add('wrong');
+        el.querySelectorAll('.opt-btn').forEach(b=>{ if(b.dataset.val === el.dataset.correct) b.classList.add('correct'); });
+      }
+    } else {
+      el.querySelectorAll('.opt-btn').forEach(b=>{ if(b.dataset.val === el.dataset.correct) b.classList.add('correct'); });
+    }
+  });
+  document.getElementById('score-text').textContent = `${correct} / ${EXERCISES.length} correctas`;
+});
+
+document.getElementById('reset-btn').addEventListener('click', ()=>{
+  document.querySelectorAll('#exercises .item-frase').forEach(el=>{
+    el.querySelectorAll('.opt-btn').forEach(b=>{ b.disabled = false; b.classList.remove('picked','correct','wrong'); });
+  });
+  document.getElementById('score-text').textContent = '';
+});
+
+/* ---------- PESTAÑAS DE ESCENA (roleplay) ---------- */
+document.querySelectorAll('#escena-tabs .escena-tab').forEach(tab=>{
+  tab.addEventListener('click', ()=>{
+    const idx = tab.dataset.escena;
+    document.querySelectorAll('#escena-tabs .escena-tab').forEach(t=>t.classList.remove('activa'));
+    tab.classList.add('activa');
+    document.querySelectorAll('[data-escena-panel]').forEach(p=>{
+      p.classList.toggle('activa', p.dataset.escenaPanel === idx);
+    });
+  });
+});
+
+/* ---------- EVAL CHECKLIST (persistente) ---------- */
+const EVAL_KEY = 'azeddine-clase14-evaluacion';
+
+async function cargarEval(){
+  if (!window.storage) return {};
+  try{
+    const res = await window.storage.get(EVAL_KEY);
+    return (res && typeof res.value === 'string') ? JSON.parse(res.value) : {};
+  }catch(e){ return {}; }
+}
+async function guardarEval(state){
+  if (!window.storage) return;
+  try{ await window.storage.set(EVAL_KEY, JSON.stringify(state)); }catch(e){ /* fallo silencioso */ }
+}
+
+(async function initEval(){
+  const state = await cargarEval();
+  document.querySelectorAll('.eval-item').forEach(item=>{
+    const id = item.dataset.id;
+    if(state[id]) item.classList.add('done');
+    item.addEventListener('click', async ()=>{
+      const done = !item.classList.contains('done');
+      item.classList.toggle('done', done);
+      state[id] = done;
+      await guardarEval(state);
+    });
+  });
+})();
+
+/* ---------- FINAL TASK (autoguardado) ---------- */
+const taskArea = document.getElementById('final-task');
+const taskCount = document.getElementById('task-count');
+const savedFlag = document.getElementById('saved-flag');
+let taskSaveTimer = null;
+
+async function cargarTarea(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(STORAGE_KEY);
+    if (res && typeof res.value === 'string') taskArea.value = res.value;
+  }catch(e){ /* sin tarea previa */ }
+  updateCount();
+}
+function updateCount(){
+  const lines = taskArea.value.split('\n').map(l=>l.trim()).filter(Boolean);
+  taskCount.textContent = `${lines.length} frase${lines.length===1?'':'s'} escrita${lines.length===1?'':'s'}`;
+}
+async function guardarTareaAuto(){
+  if (!window.storage) return;
+  try{
+    const ok = await window.storage.set(STORAGE_KEY, taskArea.value);
+    savedFlag.textContent = ok ? 'Guardado ✓' : 'No se pudo guardar';
+  }catch(e){ savedFlag.textContent = 'No se pudo guardar'; }
+  savedFlag.classList.add('show');
+  setTimeout(()=>{ savedFlag.classList.remove('show'); }, 1800);
+}
+taskArea.addEventListener('input', ()=>{
+  updateCount();
+  clearTimeout(taskSaveTimer);
+  taskSaveTimer = setTimeout(guardarTareaAuto, 700);
+});
+updateCount();
+cargarTarea();
+
+/* ---------- SELECTOR DE IDIOMA (ES / + FR discreto) ---------- */
+const FR_KEY = 'azeddine-clase14-idioma-fr';
+const btnFr = document.getElementById('btn-fr');
+const btnEs = document.getElementById('btn-es');
+
+async function cargarIdioma(){
+  if (!window.storage) return false;
+  try{
+    const res = await window.storage.get(FR_KEY);
+    return !!(res && res.value === '1');
+  }catch(e){ return false; }
+}
+async function guardarIdioma(activo){
+  if (!window.storage) return;
+  try{ await window.storage.set(FR_KEY, activo ? '1' : '0'); }catch(e){ /* fallo silencioso */ }
+}
+function aplicarIdioma(activo){
+  document.body.classList.toggle('mostrar-fr', activo);
+  btnFr.setAttribute('aria-pressed', String(activo));
+  btnFr.textContent = activo ? '✓ français' : '+ traducción en français';
+}
+
+btnFr.addEventListener('click', async ()=>{
+  const activo = !document.body.classList.contains('mostrar-fr');
+  aplicarIdioma(activo);
+  await guardarIdioma(activo);
+});
+btnEs.addEventListener('click', ()=>{
+  // El español es siempre la base del contenido; este botón solo confirma el estado activo.
+  aplicarIdioma(false);
+  guardarIdioma(false);
+});
+
+(async function initIdioma(){
+  const activo = await cargarIdioma();
+  aplicarIdioma(activo);
+})();
+</script>
+
+</body>
+</html>

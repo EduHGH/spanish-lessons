@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clase 12 · Línea del Mundial — Azeddine</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   TRATADO — sistema de diseño editorial, aplicado a
+   Clase 12 · L12 Línea del Mundial · Futuro simple · Azeddine
+   ============================================================ */
+
+:root{
+  --paper: #EDE9DC;
+  --paper-page: #F2EEE1;
+  --paper-shadow: rgba(28,27,25,0.14);
+
+  --ink: #1C1B19;
+  --ink-soft: #4A473F;
+  --ink-faint: #726C5E;
+
+  --claret: #FF2D55;
+  --claret-soft: #FFE1E8;
+
+  --sienna: #FF9500;
+  --sienna-soft: #FFEDD1;
+
+  --statute: #34C759;
+  --statute-soft: #DCF5E2;
+
+  --exam: #FF3B30;
+  --exam-soft: #FFE2DF;
+
+  --serif: 'Merriweather', Georgia, 'Times New Roman', serif;
+  --sans: -apple-system, system-ui, 'SF Pro Text', 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+
+  --fs-micro: 0.6875rem;
+  --fs-xs: 0.78125rem;
+  --fs-sm: 0.84375rem;
+  --fs-sans-base: 0.90625rem;
+  --fs-base: 0.96875rem;
+  --fs-md: 1.1875rem;
+  --fs-lg: 1.5625rem;
+  --fs-xl: 2.25rem;
+
+  --page-w: 68ch;
+  --margin-in: 4rem;
+  --margin-out: 5.5rem;
+  --pagina-y: 4rem;
+
+  --radio-page: 28px;
+  --radio-panel: 16px;
+  --radio-chip: 8px;
+
+  --barra-estudio-alto: 0px;
+}
+
+/* ---------- TOGGLE DE IDIOMA (ES protagonista / FR sutil) ---------- */
+.idioma-toggle{
+  position: fixed; top: 18px; right: 18px; z-index: 40;
+  display: flex; align-items: center; gap: 8px;
+  background: var(--paper); border: 1px solid #DDD8C9; border-radius: 999px;
+  padding: 5px 6px; box-shadow: 0 2px 10px rgba(28,27,25,0.08);
+}
+.idioma-btn{
+  font-family: var(--sans); font-size: var(--fs-xs); font-weight: 700;
+  border: none; border-radius: 999px; padding: 6px 13px; cursor: pointer;
+  background: transparent; color: var(--ink-faint); letter-spacing: 0.02em;
+  transition: background .15s ease, color .15s ease;
+}
+.idioma-btn.activo{ background: var(--claret); color: #fff; }
+.idioma-btn.fr-sutil-btn{
+  font-size: 0.6875rem; font-weight: 500; color: var(--ink-faint);
+  padding: 4px 9px; opacity: 0.65;
+}
+.idioma-btn.fr-sutil-btn.activo{ background: var(--ink-faint); color: var(--paper-page); opacity: 1; }
+@media (max-width: 640px){
+  .idioma-toggle{ top: auto; bottom: 14px; right: 14px; }
+}
+
+.fr-glosa{
+  display: none; font-family: var(--sans); font-style: italic; font-weight: 400;
+  font-size: 0.75em; color: var(--ink-faint); opacity: 0.8;
+  margin-top: 2px; line-height: 1.4;
+}
+body.fr-activo .fr-glosa{ display: block; }
+body.fr-activo span.fr-glosa{ display: inline; }
+body.fr-activo .dialogo-tab .fr-glosa{ display: inline; }
+
+
+*{ box-sizing: border-box; }
+
+a:focus-visible, [tabindex]:focus-visible{
+  outline: 2px solid var(--claret);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce){ html{ scroll-behavior: auto; } }
+html{ scroll-behavior: smooth; }
+
+body{
+  margin: 0;
+  background: var(--paper-page);
+  color: var(--ink);
+  font-family: var(--serif);
+  -webkit-font-smoothing: antialiased;
+}
+
+.page{
+  max-width: var(--page-w);
+  margin: 0 auto;
+  padding: var(--pagina-y) var(--margin-out) var(--pagina-y) var(--margin-in);
+  position: relative;
+}
+
+@media (max-width: 640px){
+  .page{ padding: 2.5rem 1.5rem calc(4rem + var(--barra-estudio-alto)) 1.5rem; }
+  :root{ --margin-in: 1.5rem; --margin-out: 1.5rem; }
+}
+@media (min-width: 641px) and (max-width: 900px){
+  :root{ --page-w: 72ch; --margin-in: 2.5rem; --margin-out: 2.5rem; }
+}
+@media (min-width: 901px) and (max-width: 1200px){
+  :root{ --page-w: 68ch; --margin-in: 4rem; --margin-out: 5.5rem; }
+}
+@media (min-width: 1201px){
+  :root{ --page-w: 78ch; --margin-in: 5rem; --margin-out: 6.5rem; }
+}
+
+.folio{
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-family: var(--sans);
+  font-size: var(--fs-xs);
+  letter-spacing: 0.02em;
+  color: var(--ink-faint);
+  border-bottom: 1px solid #DDD8C9;
+  padding-bottom: 10px;
+  margin-bottom: 56px;
+}
+.folio .materia{ font-style: italic; }
+
+.capitulo-abre{ margin-bottom: 48px; }
+.capitulo-numero{
+  font-family: var(--sans);
+  font-size: var(--fs-sans-base);
+  letter-spacing: 0.04em;
+  color: var(--claret);
+  margin-bottom: 6px;
+  display: block;
+}
+.capitulo-titulo{
+  font-size: var(--fs-xl);
+  line-height: 1.15;
+  font-weight: 600;
+  margin: 0 0 14px 0;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+.capitulo-titulo em{ font-style: italic; color: var(--claret); }
+.capitulo-sumario{
+  font-size: var(--fs-base);
+  font-style: italic;
+  color: var(--ink-soft);
+  line-height: 1.5;
+  max-width: 58ch;
+  border-left: 2px solid var(--claret);
+  padding-left: 18px;
+  margin: 0 0 20px 0;
+}
+.capitulo-meta{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  font-family: var(--sans);
+  font-size: var(--fs-xs);
+  color: var(--ink-faint);
+  padding-top: 16px;
+  border-top: 1px solid #DDD8C9;
+}
+.capitulo-meta strong{
+  display: block;
+  color: var(--ink);
+  font-size: var(--fs-sans-base);
+  font-weight: 600;
+  margin-top: 3px;
+  font-family: var(--serif);
+}
+
+.insignia{
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--sans);
+  font-size: var(--fs-micro);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--ink-soft);
+  background: var(--paper);
+  border: 1px solid #DDD8C9;
+  border-radius: 999px;
+  padding: 4px 11px;
+  gap: 5px;
+}
+.insignia .n{
+  width: 15px; height: 15px; border-radius: 50%;
+  background: var(--ink-faint); color: #fff;
+  font-family: var(--sans); font-weight: 700; font-size: 9.5px;
+  display: flex; align-items: center; justify-content: center; flex: none;
+}
+.insignia-fila{ display: flex; flex-wrap: wrap; gap: 8px; margin: 28px 0 44px 0; }
+.insignia-titulo{
+  font-family: var(--sans); font-size: var(--fs-xs); text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--ink-faint); margin: 0 0 12px 0; width: 100%;
+}
+
+.seccion-abre{
+  margin: 56px 0 28px 0;
+  padding-top: 32px;
+  border-top: 3px double #DDD8C9;
+}
+.seccion-abre:first-of-type{ margin-top: 0; padding-top: 0; border-top: none; }
+.seccion-numero{
+  font-family: var(--sans); font-size: var(--fs-xs); font-weight: 700;
+  letter-spacing: 0.03em; color: var(--sienna); margin-bottom: 4px; display: block;
+}
+.seccion-titulo{ font-size: var(--fs-lg); font-weight: 600; margin: 0 0 6px 0; letter-spacing: -0.005em; }
+.seccion-cuenta{ font-family: var(--sans); font-style: italic; font-size: var(--fs-sm); color: var(--ink-faint); }
+
+.cuerpo{ font-size: var(--fs-base); line-height: 1.68; color: var(--ink); }
+.cuerpo p{ margin: 0 0 18px 0; }
+.cuerpo p:last-child{ margin-bottom: 0; }
+
+.bloque{
+  margin: 28px 0;
+  padding: 18px 22px;
+  border-left: 3px solid var(--claret);
+  background: var(--paper);
+  border-radius: 0 var(--radio-chip) var(--radio-chip) 0;
+  font-size: var(--fs-base);
+  color: var(--ink-soft);
+  line-height: 1.6;
+}
+.bloque strong{ color: var(--ink); }
+.etiqueta{
+  display: inline-block;
+  font-family: var(--sans); font-size: var(--fs-micro); font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.05em; color: var(--claret);
+  background: var(--claret-soft); border-radius: 4px; padding: 2px 7px; margin-right: 8px;
+}
+
+.aviso{
+  margin: 28px 0; padding: 16px 20px;
+  background: var(--sienna-soft); border-left: 3px solid var(--sienna);
+  border-radius: 0 var(--radio-chip) var(--radio-chip) 0;
+  font-size: var(--fs-base); color: var(--ink-soft); line-height: 1.6;
+}
+.aviso strong{ color: var(--ink); }
+
+.tabla-conjugacion{ width: 100%; border-collapse: collapse; font-family: var(--sans); font-size: var(--fs-sans-base); margin: 20px 0 0 0; }
+.tabla-conjugacion caption{ text-align: left; font-size: var(--fs-xs); color: var(--claret); font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 10px; }
+.tabla-conjugacion caption em{ font-style: italic; color: var(--ink-faint); text-transform: none; font-weight: 400; letter-spacing: 0; margin-left: 6px; font-family: var(--serif); }
+.tabla-conjugacion th{
+  font-family: var(--sans); font-size: var(--fs-xs); text-transform: uppercase; letter-spacing: 0.04em;
+  color: var(--ink-faint); text-align: left; padding: 8px 10px; border-bottom: 1.5px solid var(--ink);
+}
+.tabla-conjugacion td{ padding: 9px 10px; border-bottom: 1px dashed #DDD8C9; }
+.tabla-conjugacion tr:last-child td{ border-bottom: 1px solid var(--ink); }
+.tabla-conjugacion td.pronombre{ font-family: var(--sans); color: var(--ink-faint); font-size: var(--fs-xs); white-space: nowrap; }
+.tabla-conjugacion td.forma{ font-family: var(--serif); font-weight: 700; font-size: var(--fs-md); color: var(--claret); }
+.tabla-conjugacion td.ejemplo{ color: var(--ink-soft); font-size: var(--fs-sans-base); }
+.grupo-verbal{ margin-bottom: 30px; }
+.grupo-verbal:last-child{ margin-bottom: 0; }
+
+.frases-fijas{
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 12px; margin: 20px 0 0 0;
+}
+.frase-fija{ background: var(--paper); border: 1px solid #E3DDCB; border-radius: var(--radio-chip); padding: 12px 14px; }
+.frase-fija.irregular{ border-color: var(--claret-soft); }
+.frase-fija-etiqueta{ font-family: var(--sans); font-size: var(--fs-micro); color: var(--ink-faint); margin: 0 0 3px 0; text-transform: none; }
+.frase-fija-frase{ font-family: var(--serif); font-weight: 700; font-size: var(--fs-md); color: var(--claret); margin: 0; }
+.frase-fija.irregular .frase-fija-frase{ color: #B5502E; }
+
+.glosario-buscador{ display: none; }
+.ficha-memoria-filtros{ display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 16px 0; }
+.filtro-chip{
+  font-family: var(--sans); font-size: var(--fs-xs); color: var(--ink-faint);
+  background: var(--paper); border: 1px solid #DDD8C9; border-radius: 999px; padding: 5px 13px;
+}
+.vocab-hint{ font-family: var(--sans); font-size: var(--fs-xs); color: var(--ink-faint); margin: 0 0 16px 0; font-style: italic; }
+.ficha-memoria-grid{ display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; }
+.ficha-memoria{
+  background: var(--paper); border: 1px solid #E3DDCB; border-radius: var(--radio-chip);
+  padding: 14px 16px; cursor: pointer; min-height: 76px;
+  display: flex; flex-direction: column; justify-content: center; transition: border-color .15s ease;
+}
+.ficha-memoria:hover{ border-color: var(--claret-soft); }
+.ficha-memoria:focus-visible{ outline: 2px solid var(--claret); outline-offset: 2px; }
+.ficha-memoria-contenido{ font-family: var(--sans); font-weight: 600; font-size: var(--fs-sans-base); color: var(--ink); margin: 0; }
+.ficha-memoria-pie{ display: none; font-family: var(--serif); font-size: var(--fs-sm); color: var(--ink-soft); margin: 8px 0 0 0; line-height: 1.4; }
+.ficha-memoria.volteada{ background: var(--claret-soft); border-color: var(--claret); }
+.ficha-memoria.volteada .ficha-memoria-pie{ display: block; }
+.ficha-memoria.volteada .ficha-memoria-contenido{ color: var(--claret); }
+
+.quiz-bloque{ margin: 28px 0; padding: 22px 24px; background: var(--paper); border: 1px solid #E3DDCB; border-radius: var(--radio-panel); }
+.quiz-enunciado{ font-family: var(--sans); font-size: var(--fs-base); font-weight: 600; color: var(--ink); margin: 0 0 14px 0; }
+.quiz-enunciado .quiz-numero{ color: var(--claret); margin-right: 6px; }
+.quiz-marca{ margin-left: 8px; font-size: var(--fs-sm); }
+.quiz-marca.correcta::after{ content: "✓ ¡Correcto!"; color: var(--statute); font-weight: 700; }
+.quiz-marca.incorrecta::after{ content: "✗ Revisa la opción marcada."; color: var(--exam); font-weight: 700; }
+.quiz-opciones{ list-style: none; margin: 0; padding: 0; font-size: var(--fs-sans-base); }
+.quiz-opciones li{
+  padding: 9px 14px; border: 1px solid #DDD8C9; border-radius: var(--radio-chip);
+  margin-bottom: 8px; cursor: pointer; background: var(--paper-page); font-family: var(--sans);
+}
+.quiz-opciones li:last-child{ margin-bottom: 0; }
+.quiz-opciones li:hover{ border-color: var(--ink-faint); }
+.quiz-bloque.respondido .quiz-opciones li{ cursor: default; }
+.quiz-opciones li.seleccionada-correcta{ background: var(--statute-soft); border-color: var(--statute); color: var(--statute); font-weight: 700; }
+.quiz-opciones li.seleccionada-incorrecta{ background: var(--exam-soft); border-color: var(--exam); color: var(--exam); text-decoration: line-through; }
+
+.rellenar-huecos{ margin: 28px 0; padding: 22px 24px; background: var(--paper); border: 1px solid #E3DDCB; border-radius: var(--radio-panel); }
+.rellenar-intro{ font-family: var(--sans); font-size: var(--fs-sm); color: var(--ink-soft); margin: 0 0 16px 0; }
+.rellenar-item{ margin-bottom: 14px; }
+.rellenar-item:last-child{ margin-bottom: 0; }
+.rellenar-texto{ font-family: var(--sans); font-size: var(--fs-sans-base); line-height: 2; color: var(--ink); }
+.rellenar-texto .rellenar-num{ color: var(--ink-faint); margin-right: 4px; }
+.rellenar-texto input[type="text"]{
+  font-family: var(--sans); font-size: var(--fs-sans-base); width: 130px; text-align: center;
+  background: var(--paper-page); border: none; border-bottom: 2px solid var(--ink-faint);
+  color: var(--ink); padding: 2px 4px; margin: 0 2px;
+}
+.rellenar-texto input[type="text"]:focus{ outline: none; border-bottom-color: var(--claret); }
+.rellenar-texto input.acierto{ border-bottom-color: var(--statute); color: var(--statute); }
+.rellenar-texto input.error{ border-bottom-color: var(--exam); color: var(--exam); text-decoration: line-through; }
+.rellenar-marcador{ font-family: var(--sans); font-size: var(--fs-xs); color: var(--ink-faint); margin-top: 14px; display: block; }
+
+.ejercicio-controles{ display: flex; align-items: center; gap: 14px; margin-top: 16px; flex-wrap: wrap; }
+.ejercicio-btn-comprobar{
+  font-family: var(--sans); font-size: var(--fs-sm); font-weight: 700; padding: 9px 20px;
+  border-radius: var(--radio-chip); border: 1px solid var(--ink); background: var(--ink);
+  color: var(--paper-page); cursor: pointer;
+}
+.ejercicio-btn-comprobar:hover{ background: var(--claret); border-color: var(--claret); }
+.ejercicio-btn-reiniciar{
+  font-family: var(--sans); font-size: var(--fs-sm); font-weight: 600; padding: 8px 14px;
+  border-radius: var(--radio-chip); border: 1px solid transparent; background: transparent;
+  color: var(--ink-faint); cursor: pointer; text-decoration: underline; text-underline-offset: 3px;
+}
+.ejercicio-btn-reiniciar:hover{ color: var(--ink); }
+
+.divisor-tramo{
+  display: flex; align-items: center; gap: 10px; margin: 24px 0 16px;
+  font-family: var(--sans); font-size: var(--fs-xs); text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--ink-faint);
+}
+.divisor-tramo::before, .divisor-tramo::after{ content: ""; flex: 1; height: 1px; background: #DDD8C9; }
+.divisor-tramo.en-clase{ color: var(--claret); }
+.divisor-tramo.en-clase::before, .divisor-tramo.en-clase::after{ background: var(--claret-soft); }
+
+.dialogo{ margin: 28px 0; padding: 22px 24px; background: var(--paper); border: 1px solid #E3DDCB; border-radius: var(--radio-panel); }
+.dialogo-burbujas{ display: flex; flex-direction: column; gap: 10px; }
+.dialogo-fila{ display: flex; }
+.dialogo-fila.ellos{ justify-content: flex-start; }
+.dialogo-fila.tu{ justify-content: flex-end; }
+.dialogo-quien{ font-family: var(--sans); font-size: var(--fs-micro); text-transform: uppercase; letter-spacing: 0.04em; color: var(--ink-faint); display: block; margin-bottom: 3px; }
+.dialogo-fila.tu .dialogo-quien{ text-align: right; }
+.dialogo-burbuja{
+  max-width: 78%; padding: 10px 14px; border-radius: var(--radio-chip);
+  font-family: var(--sans); font-size: var(--fs-sans-base); line-height: 1.5;
+  background: var(--paper-page); border: 1px solid #DDD8C9;
+}
+.dialogo-fila.ellos .dialogo-burbuja{ border-bottom-left-radius: 4px; }
+.dialogo-fila.tu .dialogo-burbuja{ border-bottom-right-radius: 4px; background: var(--claret-soft); border-color: var(--claret-soft); }
+.dialogo-burbuja em{ font-style: italic; color: var(--claret); font-weight: 600; }
+.dialogo-fila.tu .dialogo-burbuja em{ color: #B5502E; }
+.dialogo-selector{ display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0 0 0; }
+.dialogo-tab{
+  font-family: var(--sans); font-size: var(--fs-xs); font-weight: 600;
+  padding: 8px 14px; border-radius: 999px; border: 1px solid #E3DDCB;
+  background: var(--paper-page); color: var(--ink-soft); cursor: pointer;
+  transition: background .15s ease, color .15s ease, border-color .15s ease;
+}
+.dialogo-tab:hover{ border-color: var(--claret); }
+.dialogo-tab.activa{ background: var(--claret); color: #fff; border-color: var(--claret); }
+
+.eval-panel{ margin: 28px 0; padding: 24px 26px; background: var(--statute-soft); border: 1px solid #BEE6D3; border-radius: var(--radio-panel); }
+.eval-titulo{ display: flex; align-items: center; gap: 10px; font-size: var(--fs-md); font-weight: 600; color: var(--ink); margin: 0 0 16px 0; }
+.eval-titulo .marca{ width: 26px; height: 26px; border-radius: 50%; background: var(--statute); color: #fff; display: flex; align-items: center; justify-content: center; font-size: var(--fs-sm); flex: none; }
+.eval-lista{ margin: 0; padding: 0; list-style: none; display: grid; gap: 9px; }
+.eval-item{
+  display: flex; gap: 12px; align-items: flex-start; font-family: var(--sans); font-size: var(--fs-sans-base);
+  color: var(--ink-soft); background: var(--paper-page); border: 1px solid #BEE6D3; border-radius: var(--radio-chip);
+  padding: 11px 14px; cursor: pointer;
+}
+.eval-check{
+  width: 19px; height: 19px; border-radius: 5px; border: 1.5px solid var(--statute); flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center; font-size: 12px; color: transparent;
+  background: var(--paper-page); margin-top: 1px;
+}
+.eval-item.hecho .eval-check{ background: var(--statute); color: #fff; }
+.eval-item.hecho .eval-texto{ color: var(--ink); }
+
+.tarea-final{ margin: 28px 0; padding: 22px 24px; background: var(--paper); border: 1px solid #E3DDCB; border-radius: var(--radio-panel); }
+.tarea-final p.ejercicio-enunciado{ font-family: var(--sans); font-size: var(--fs-sans-base); color: var(--ink-soft); margin: 0 0 4px 0; }
+.tarea-final textarea{
+  width: 100%; min-height: 130px; font-family: var(--sans); font-size: var(--fs-sans-base); color: var(--ink);
+  background: var(--paper-page); border: 1px solid #DDD8C9; border-radius: var(--radio-chip);
+  padding: 14px 16px; resize: vertical; margin-top: 14px;
+}
+.tarea-final textarea:focus{ outline: none; border-color: var(--claret); }
+.tarea-final-pie{ display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 12px; flex-wrap: wrap; }
+.tarea-final-contador{ font-family: var(--sans); font-size: var(--fs-xs); color: var(--ink-faint); }
+.tarea-final-guardado{ font-family: var(--sans); font-size: var(--fs-xs); color: var(--statute); opacity: 0; transition: opacity .3s ease; }
+.tarea-final-guardado.show{ opacity: 1; }
+
+.frase-cierre{
+  margin: 44px 0 0 0; padding: 30px 32px; border-radius: var(--radio-panel); border: 1px solid var(--claret-soft);
+  background:
+    radial-gradient(ellipse 320px 240px at 10% -12%, color-mix(in srgb, var(--claret) 12%, transparent) 0%, transparent 60%),
+    radial-gradient(ellipse 260px 200px at 94% 118%, color-mix(in srgb, var(--claret) 10%, transparent) 0%, transparent 55%),
+    var(--claret-soft);
+  text-align: center;
+}
+.frase-cierre-rotulo{ font-family: var(--sans); font-size: var(--fs-xs); font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--claret); margin: 0 0 12px 0; }
+.frase-cierre-texto{ font-family: var(--serif); font-size: var(--fs-lg); font-weight: 600; line-height: 1.35; color: var(--ink); margin: 0 0 10px 0; }
+.frase-cierre-apoyo{ font-family: var(--sans); font-size: var(--fs-sm); color: var(--ink-soft); max-width: 46ch; margin: 0 auto; }
+
+.pie-pagina{
+  max-width: var(--page-w); margin: 40px auto 0; padding: 20px var(--margin-out) 0 var(--margin-in);
+  border-top: 1px solid #DDD8C9; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px;
+  font-family: var(--sans); font-size: var(--fs-xs); color: var(--ink-faint);
+}
+@media (max-width: 640px){ .pie-pagina{ padding: 20px 1.5rem 0; } }
+</style>
+</head>
+<body>
+
+<div class="idioma-toggle" role="group" aria-label="Idioma del glosario">
+  <button type="button" class="idioma-btn activo" data-idioma="es" aria-pressed="true">ES</button>
+  <button type="button" class="idioma-btn fr-sutil-btn" data-idioma="fr" aria-pressed="false">fr</button>
+</div>
+
+<div class="page">
+
+  <div class="folio">
+    <span class="materia">Azeddine · Español A1 · Ruta 2</span>
+    <span>Clase 10 de 14</span>
+  </div>
+
+  <div class="capitulo-abre">
+    <span class="capitulo-numero">Clase 12 de 14 · L12 Línea del Mundial</span>
+    <h1 class="capitulo-titulo">¿Qué <em>pasará</em>?<span class="fr-glosa fr-glosa-inline"> — Que va-t-il se passer ?</span></h1>
+    <p class="capitulo-sumario">Ya sabes ser más cortés con tus clientes. Ahora aprendes el <strong>futuro simple</strong> para hacer predicciones sobre el Mundial y hablar de la póliza de viaje de tu hija, que estudia medicina y viajará a Estados Unidos.<span class="fr-glosa fr-glosa-inline"> Tu sais déjà être plus poli avec tes clients. Maintenant tu apprends le futur simple pour faire des prédictions sur la Coupe du Monde et parler de l'assurance voyage de ta fille, qui étudie la médecine et voyagera aux États-Unis.</span></p>
+    <div class="capitulo-meta">
+      <div>Duración<strong>25 min</strong></div>
+      <div>Gramática<strong>Futuro simple: regulares e irregulares frecuentes<span class="fr-glosa fr-glosa-inline"> — Futur simple : réguliers et irréguliers fréquents</span></strong></div>
+      <div>Nivel<strong>A1 (avanzado)</strong></div>
+    </div>
+  </div>
+
+  <div class="insignia-fila">
+    <p class="insignia-titulo">Todo lo que traes a esta clase<span class="fr-glosa fr-glosa-inline"> — Tout ce que tu apportes à ce cours</span></p>
+    <span class="insignia"><span class="n">1</span>ser + identidad</span>
+    <span class="insignia"><span class="n">2</span>presente regular</span>
+    <span class="insignia"><span class="n">3</span>me gusta / gustan</span>
+    <span class="insignia"><span class="n">4</span>hay / estar / ir a</span>
+    <span class="insignia"><span class="n">5</span>posesivos + gerundio</span>
+    <span class="insignia"><span class="n">6</span>querer / necesitar</span>
+    <span class="insignia"><span class="n">7</span>repaso integrado</span>
+    <span class="insignia"><span class="n">8</span>pretérito perfecto</span>
+    <span class="insignia"><span class="n">9</span>comparativos</span>
+    <span class="insignia"><span class="n">10</span>pretérito indefinido</span>
+    <span class="insignia"><span class="n">11</span>condicional de cortesía</span>
+  </div>
+
+  <div class="seccion-abre">
+    <span class="seccion-numero">Apartado 1 · 7 min</span>
+    <h2 class="seccion-titulo">Gramática: futuro simple<span class="fr-glosa fr-glosa-inline"> — Grammaire : le futur simple</span></h2>
+  </div>
+
+  <div class="grupo-verbal">
+    <table class="tabla-conjugacion">
+      <caption>Jugar (regular) <em>predicciones y planes futuros</em><span class="fr-glosa fr-glosa-inline"> — Jouer (régulier), prédictions et projets futurs</span></caption>
+      <thead><tr><th>Pronombre</th><th>Forma</th><th>Ejemplo</th></tr></thead>
+      <tbody>
+        <tr><td class="pronombre">yo</td><td class="forma">jugaré</td><td class="ejemplo">Yo jugaré al fútbol el sábado.<span class="fr-glosa fr-glosa-inline"> Je jouerai au football samedi.</span></td></tr>
+        <tr><td class="pronombre">tú</td><td class="forma">jugarás</td><td class="ejemplo">¿Tú jugarás en el equipo este año?<span class="fr-glosa fr-glosa-inline"> Joueras-tu dans l'équipe cette année ?</span></td></tr>
+        <tr><td class="pronombre">él / ella / usted</td><td class="forma">jugará</td><td class="ejemplo">España jugará la final del Mundial.<span class="fr-glosa fr-glosa-inline"> L'Espagne jouera la finale de la Coupe du Monde.</span></td></tr>
+        <tr><td class="pronombre">nosotros/as</td><td class="forma">jugaremos</td><td class="ejemplo">Nosotros jugaremos en Estados Unidos.<span class="fr-glosa fr-glosa-inline"> Nous jouerons aux États-Unis.</span></td></tr>
+        <tr><td class="pronombre">vosotros/as</td><td class="forma">jugaréis</td><td class="ejemplo">¿Vosotros jugaréis el próximo partido?<span class="fr-glosa fr-glosa-inline"> Jouerez-vous le prochain match ?</span></td></tr>
+        <tr><td class="pronombre">ellos/as</td><td class="forma">jugarán</td><td class="ejemplo">Los equipos jugarán en varios estadios.<span class="fr-glosa fr-glosa-inline"> Les équipes joueront dans plusieurs stades.</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="bloque"><span class="etiqueta">Regla</span>El futuro simple se forma con el <strong>infinitivo completo</strong> + terminación (-é, -ás, -á, -emos, -éis, -án). Se usa para predicciones, planes futuros y promesas: "el Mundial será increíble", "mi hija viajará a Estados Unidos".<span class="fr-glosa fr-glosa-inline"> Le futur simple se forme avec l'infinitif complet + terminaison (-é, -ás, -á, -emos, -éis, -án). Il s'utilise pour les prédictions, les projets futurs et les promesses : « la Coupe du Monde sera incroyable », « ma fille voyagera aux États-Unis ».</span></p>
+
+  <div class="frases-fijas">
+    <div class="frase-fija irregular"><p class="frase-fija-etiqueta">tener<span class="fr-glosa fr-glosa-inline"> · avoir</span></p><p class="frase-fija-frase">tendrá</p></div>
+    <div class="frase-fija irregular"><p class="frase-fija-etiqueta">hacer<span class="fr-glosa fr-glosa-inline"> · faire</span></p><p class="frase-fija-frase">hará</p></div>
+    <div class="frase-fija irregular"><p class="frase-fija-etiqueta">poder<span class="fr-glosa fr-glosa-inline"> · pouvoir</span></p><p class="frase-fija-frase">podrá</p></div>
+    <div class="frase-fija irregular"><p class="frase-fija-etiqueta">ser<span class="fr-glosa fr-glosa-inline"> · être</span></p><p class="frase-fija-frase">será</p></div>
+    <div class="frase-fija irregular"><p class="frase-fija-etiqueta">venir<span class="fr-glosa fr-glosa-inline"> · venir</span></p><p class="frase-fija-frase">vendrá</p></div>
+    <div class="frase-fija irregular"><p class="frase-fija-etiqueta">salir<span class="fr-glosa fr-glosa-inline"> · sortir</span></p><p class="frase-fija-frase">saldrá</p></div>
+  </div>
+
+  <p class="aviso"><strong>Fíjate:</strong> estos verbos son <strong>irregulares</strong> en el futuro — cambian la raíz pero usan las mismas terminaciones: tendrá, hará, podrá, será, vendrá, saldrá. Son muy frecuentes en predicciones.<span class="fr-glosa fr-glosa-inline"> Remarque : ces verbes sont irréguliers au futur — ils changent de racine mais utilisent les mêmes terminaisons. Ils sont très fréquents dans les prédictions.</span></p>
+
+  <div class="seccion-abre">
+    <span class="seccion-numero">Apartado 2 · 4 min</span>
+    <h2 class="seccion-titulo">Vocabulario: predicciones sobre el Mundial<span class="fr-glosa fr-glosa-inline"> — Vocabulaire : prédictions sur la Coupe du Monde</span></h2>
+  </div>
+  <p class="vocab-hint">Toca cada ficha para ver un ejemplo en futuro simple.<span class="fr-glosa fr-glosa-inline"> Touche chaque carte pour voir un exemple au futur simple.</span></p>
+  <div class="ficha-memoria-grid" id="vocab-grid"></div>
+
+  <div class="seccion-abre">
+    <span class="seccion-numero">Apartado 3 · 6 min</span>
+    <h2 class="seccion-titulo">Completa con el futuro simple<span class="fr-glosa fr-glosa-inline"> — Complète avec le futur simple</span></h2>
+  </div>
+  <p class="vocab-hint">12 frases con futuro simple, regulares e irregulares. Las primeras 6 en clase; el resto, repaso para casa.<span class="fr-glosa fr-glosa-inline"> 12 phrases au futur simple, régulières et irrégulières. Les 6 premières en classe ; le reste, révision à la maison.</span></p>
+  <div id="quiz-exercises"></div>
+
+  <div class="seccion-abre">
+    <span class="seccion-numero">Apartado 3b · 4 min</span>
+    <h2 class="seccion-titulo">Escribe el futuro irregular<span class="fr-glosa fr-glosa-inline"> — Écris le futur irrégulier</span></h2>
+  </div>
+  <div class="rellenar-huecos">
+    <p class="rellenar-intro">8 verbos irregulares: escribe la forma de "él/ella" en futuro. Las primeras 4 en clase; el resto, repaso para casa.<span class="fr-glosa fr-glosa-inline"> 8 verbes irréguliers : écris la forme « il/elle » au futur. Les 4 premiers en classe ; le reste, révision à la maison.</span></p>
+    <div id="rellenar-items"></div>
+    <div class="ejercicio-controles">
+      <button type="button" class="ejercicio-btn-comprobar rellenar-comprobar">Comprobar respuestas<span class="fr-glosa fr-glosa-inline" style="margin-left:6px;"> · Vérifier</span></button>
+      <button type="button" class="ejercicio-btn-reiniciar" data-reiniciar-ejercicio>Reiniciar ejercicio<span class="fr-glosa fr-glosa-inline" style="margin-left:6px;"> · Recommencer</span></button>
+    </div>
+    <span class="rellenar-marcador"></span>
+  </div>
+
+  <div class="seccion-abre">
+    <span class="seccion-numero">Apartado 4 · 4 min</span>
+    <h2 class="seccion-titulo">Diálogo: hablando de planes futuros<span class="fr-glosa fr-glosa-inline"> — Dialogue : parler de projets futurs</span></h2>
+  </div>
+  <div class="dialogo-selector" role="tablist" aria-label="Elegir situación del diálogo">
+    <button type="button" class="dialogo-tab activa" role="tab" aria-selected="true" data-dialogo="d12-1">1 · El Mundial y la póliza de mi hija<span class="fr-glosa fr-glosa-inline"> · La Coupe du Monde et l'assurance de ma fille</span></button>
+    <button type="button" class="dialogo-tab" role="tab" aria-selected="false" data-dialogo="d12-2">2 · Las vacaciones de verano<span class="fr-glosa fr-glosa-inline"> · Les vacances d'été</span></button>
+    <button type="button" class="dialogo-tab" role="tab" aria-selected="false" data-dialogo="d12-3">3 · La reunión del lunes<span class="fr-glosa fr-glosa-inline"> · La réunion de lundi</span></button>
+  </div>
+  <div class="dialogo" data-dialogo-panel="d12-1">
+    <div class="dialogo-burbujas">
+      <div class="dialogo-fila ellos"><div><span class="dialogo-quien">Compañero</span><div class="dialogo-burbuja">Azeddine, ¿quién crees que ganará el Mundial este año?<span class="fr-glosa"> Azeddine, qui penses-tu qui va gagner la Coupe du Monde cette année ?</span></div></div></div>
+      <div class="dialogo-fila tu"><div><span class="dialogo-quien">Tú</span><div class="dialogo-burbuja">Creo que España jugará muy bien, pero el Mundial <em>será</em> muy difícil de predecir.<span class="fr-glosa"> Je crois que l'Espagne jouera très bien, mais la Coupe du Monde sera très difficile à prédire.</span></div></div></div>
+      <div class="dialogo-fila ellos"><div><span class="dialogo-quien">Compañero</span><div class="dialogo-burbuja">¿Y tu hija viajará a Estados Unidos para verlo?<span class="fr-glosa"> Et ta fille voyagera aux États-Unis pour le voir ?</span></div></div></div>
+      <div class="dialogo-fila tu"><div><span class="dialogo-quien">Tú</span><div class="dialogo-burbuja">Sí, viajará en junio. Ya tiene la póliza de viaje lista.<span class="fr-glosa"> Oui, elle voyagera en juin. Elle a déjà son assurance voyage prête.</span></div></div></div>
+      <div class="dialogo-fila ellos"><div><span class="dialogo-quien">Compañero</span><div class="dialogo-burbuja">¿Tendrá cobertura médica completa?<span class="fr-glosa"> Aura-t-elle une couverture médicale complète ?</span></div></div></div>
+      <div class="dialogo-fila tu"><div><span class="dialogo-quien">Tú</span><div class="dialogo-burbuja">Sí, tendrá cobertura médica y de equipaje durante todo el viaje.<span class="fr-glosa"> Oui, elle aura une couverture médicale et bagages pendant tout le voyage.</span></div></div></div>
+    </div>
+  </div>
+  <div class="dialogo" data-dialogo-panel="d12-2" hidden>
+    <div class="dialogo-burbujas">
+      <div class="dialogo-fila ellos"><div><span class="dialogo-quien">Compañero</span><div class="dialogo-burbuja">¿Qué harás en vacaciones este verano?<span class="fr-glosa"> Que feras-tu pendant les vacances cet été ?</span></div></div></div>
+      <div class="dialogo-fila tu"><div><span class="dialogo-quien">Tú</span><div class="dialogo-burbuja">Todavía no lo sé seguro, pero creo que <em>iremos</em> a la playa con toda la familia.<span class="fr-glosa"> Je ne sais pas encore exactement, mais je crois que nous irons à la plage avec toute la famille.</span></div></div></div>
+      <div class="dialogo-fila ellos"><div><span class="dialogo-quien">Compañero</span><div class="dialogo-burbuja">¿Cuánto tiempo estaréis fuera?<span class="fr-glosa"> Combien de temps serez-vous partis ?</span></div></div></div>
+      <div class="dialogo-fila tu"><div><span class="dialogo-quien">Tú</span><div class="dialogo-burbuja">Estaremos dos semanas, así que tendremos tiempo de descansar bien.<span class="fr-glosa"> Nous serons partis deux semaines, nous aurons donc le temps de bien nous reposer.</span></div></div></div>
+      <div class="dialogo-fila ellos"><div><span class="dialogo-quien">Compañero</span><div class="dialogo-burbuja">¿Vendrán también tus padres?<span class="fr-glosa"> Tes parents viendront-ils aussi ?</span></div></div></div>
+      <div class="dialogo-fila tu"><div><span class="dialogo-quien">Tú</span><div class="dialogo-burbuja">Sí, vendrán la última semana y se quedarán con nosotros hasta el final.<span class="fr-glosa"> Oui, ils viendront la dernière semaine et resteront avec nous jusqu'à la fin.</span></div></div></div>
+    </div>
+  </div>
+  <div class="dialogo" data-dialogo-panel="d12-3" hidden>
+    <div class="dialogo-burbujas">
+      <div class="dialogo-fila ellos"><div><span class="dialogo-quien">Compañero</span><div class="dialogo-burbuja">¿Qué se decidirá en la reunión del lunes?<span class="fr-glosa"> Qu'est-ce qui sera décidé lors de la réunion de lundi ?</span></div></div></div>
+      <div class="dialogo-fila tu"><div><span class="dialogo-quien">Tú</span><div class="dialogo-burbuja">Creo que <em>hablaremos</em> del nuevo presupuesto y de los próximos proyectos.<span class="fr-glosa"> Je crois que nous parlerons du nouveau budget et des prochains projets.</span></div></div></div>
+      <div class="dialogo-fila ellos"><div><span class="dialogo-quien">Compañero</span><div class="dialogo-burbuja">¿A qué hora empezará?<span class="fr-glosa"> À quelle heure ça commencera ?</span></div></div></div>
+      <div class="dialogo-fila tu"><div><span class="dialogo-quien">Tú</span><div class="dialogo-burbuja">Empezará a las nueve y probablemente durará una hora aproximadamente.<span class="fr-glosa"> Ça commencera à neuf heures et durera probablement environ une heure.</span></div></div></div>
+      <div class="dialogo-fila ellos"><div><span class="dialogo-quien">Compañero</span><div class="dialogo-burbuja">¿Vendrá el director también?<span class="fr-glosa"> Le directeur viendra-t-il aussi ?</span></div></div></div>
+      <div class="dialogo-fila tu"><div><span class="dialogo-quien">Tú</span><div class="dialogo-burbuja">Sí, vendrá y también nos dirá las novedades del próximo trimestre.<span class="fr-glosa"> Oui, il viendra et nous dira aussi les nouveautés du prochain trimestre.</span></div></div></div>
+    </div>
+  </div>
+
+  <div class="eval-panel">
+    <p class="eval-titulo"><span class="marca">✓</span>Autoevaluación<span class="fr-glosa fr-glosa-inline"> — Autoévaluation</span></p>
+    <ul class="eval-lista">
+      <li class="eval-item" data-id="e1"><span class="eval-check">✓</span><span class="eval-texto">Sé conjugar el futuro simple regular.<span class="fr-glosa"> Je sais conjuguer le futur simple régulier.</span></span></li>
+      <li class="eval-item" data-id="e2"><span class="eval-check">✓</span><span class="eval-texto">Conozco los futuros irregulares frecuentes: tendrá, hará, podrá, será.<span class="fr-glosa"> Je connais les futurs irréguliers fréquents.</span></span></li>
+      <li class="eval-item" data-id="e3"><span class="eval-check">✓</span><span class="eval-texto">Puedo hacer predicciones sobre el Mundial.<span class="fr-glosa"> Je peux faire des prédictions sur la Coupe du Monde.</span></span></li>
+      <li class="eval-item" data-id="e4"><span class="eval-check">✓</span><span class="eval-texto">Puedo hablar del viaje y la póliza de mi hija en futuro.<span class="fr-glosa"> Je peux parler du voyage et de l'assurance de ma fille au futur.</span></span></li>
+    </ul>
+  </div>
+
+  <div class="seccion-abre">
+    <span class="seccion-numero">Para casa</span>
+    <h2 class="seccion-titulo">Tu tarea: predicciones sobre el Mundial<span class="fr-glosa fr-glosa-inline"> — Ton devoir : prédictions sur la Coupe du Monde</span></h2>
+  </div>
+  <div class="tarea-final">
+    <p class="ejercicio-enunciado">Escribe 5 predicciones sobre el Mundial y el viaje de tu hija a Estados Unidos, usando el futuro simple.<span class="fr-glosa fr-glosa-inline"> Écris 5 prédictions sur la Coupe du Monde et le voyage de ta fille aux États-Unis, en utilisant le futur simple.</span></p>
+    <textarea id="final-task" placeholder="Mi hija viajará a..."></textarea>
+    <div class="tarea-final-pie">
+      <span class="tarea-final-contador" id="task-count">0 frases escritas</span>
+      <span class="tarea-final-guardado" id="saved-flag">Guardado ✓</span>
+    </div>
+  </div>
+
+  <div class="frase-cierre">
+    <p class="frase-cierre-rotulo">Clase 12 completada<span class="fr-glosa fr-glosa-inline"> — Cours 12 terminé</span></p>
+    <p class="frase-cierre-texto">Ya sabes hablar del <em>futuro</em>.<span class="fr-glosa fr-glosa-inline"> Tu sais déjà parler du futur.</span></p>
+    <p class="frase-cierre-apoyo">En la próxima clase aprenderás el imperativo formal para dar instrucciones a un cliente paso a paso.<span class="fr-glosa fr-glosa-inline"> Dans le prochain cours, tu apprendras l'impératif formel pour donner des instructions à un client étape par étape.</span></p>
+  </div>
+
+</div>
+
+<div class="pie-pagina">
+  <span>Azeddine · Español A1 · Ruta 2</span>
+  <span>Clase 12 de 14</span>
+</div>
+
+<script>
+window.TRATADO_NS = "azeddine-clase12";
+const STORAGE_KEY = 'azeddine-clase12-tarea';
+
+/* ---------- VOCAB CARDS (ficha-memoria) ---------- */
+const VOCAB = [
+  { front: 'el Mundial', front_fr: 'la Coupe du Monde', back: 'El Mundial será en Estados Unidos este año.', back_fr: 'La Coupe du Monde aura lieu aux États-Unis cette année.' },
+  { front: 'ganar', front_fr: 'gagner', back: '¿Quién ganará el Mundial este año?', back_fr: 'Qui gagnera la Coupe du Monde cette année ?' },
+  { front: 'viajar', front_fr: 'voyager', back: 'Mi hija viajará a Estados Unidos en junio.', back_fr: 'Ma fille voyagera aux États-Unis en juin.' },
+  { front: 'la póliza de viaje', front_fr: "l'assurance voyage", back: 'La póliza de viaje tendrá cobertura completa.', back_fr: 'L\'assurance voyage aura une couverture complète.' },
+  { front: 'Estados Unidos', front_fr: 'les États-Unis', back: 'El Mundial se jugará en Estados Unidos.', back_fr: 'La Coupe du Monde se jouera aux États-Unis.' },
+  { front: 'estudiar medicina', front_fr: 'étudier la médecine', back: 'Mi hija, que estudia medicina, viajará al Mundial.', back_fr: 'Ma fille, qui étudie la médecine, voyagera pour la Coupe du Monde.' },
+  { front: 'la cobertura médica', front_fr: 'la couverture médicale', back: 'Tendrá cobertura médica durante todo el viaje.', back_fr: 'Elle aura une couverture médicale pendant tout le voyage.' },
+  { front: 'el estadio', front_fr: 'le stade', back: 'Muchos partidos se jugarán en estadios nuevos.', back_fr: 'De nombreux matchs se joueront dans de nouveaux stades.' },
+];
+const vocabGrid = document.getElementById('vocab-grid');
+VOCAB.forEach(v=>{
+  const card = document.createElement('div');
+  card.className = 'ficha-memoria';
+  card.tabIndex = 0;
+  card.innerHTML = `<p class="ficha-memoria-contenido">${v.front}<span class="fr-glosa fr-glosa-inline"> — ${v.front_fr}</span></p><p class="ficha-memoria-pie">${v.back}<span class="fr-glosa fr-glosa-inline"> ${v.back_fr}</span></p>`;
+  card.addEventListener('click', ()=> card.classList.toggle('volteada'));
+  card.addEventListener('keydown', (e)=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); card.classList.toggle('volteada'); }});
+  vocabGrid.appendChild(card);
+});
+
+/* ---------- EXERCISES: MULTIPLE CHOICE (quiz-bloque, feedback inmediato) ---------- */
+const EXERCISES = [
+  { sentence: "España ___ la final del Mundial.", sentence_fr: "L'Espagne ___ la finale de la Coupe du Monde.", options: ["jugará","juega","jugó"], correct: "jugará" },
+  { sentence: "Mi hija ___ a Estados Unidos en junio.", sentence_fr: "Ma fille ___ aux États-Unis en juin.", options: ["viajará","viaja","viajó"], correct: "viajará" },
+  { sentence: "La póliza ___ cobertura médica completa.", sentence_fr: "L'assurance ___ une couverture médicale complète.", options: ["tendrá","tiene","tuvo"], correct: "tendrá" },
+  { sentence: "¿Quién ___ el Mundial este año?", sentence_fr: "Qui ___ la Coupe du Monde cette année ?", options: ["ganará","gana","ganó"], correct: "ganará" },
+  { sentence: "Nosotros ___ el partido juntos.", sentence_fr: "Nous ___ le match ensemble.", options: ["veremos","vemos","vimos"], correct: "veremos" },
+  { sentence: "El Mundial ___ muy emocionante.", sentence_fr: "La Coupe du Monde ___ très excitante.", options: ["será","es","fue"], correct: "será" },
+  { sentence: "Mi hija ___ a casa después del examen.", sentence_fr: "Ma fille ___ à la maison après l'examen.", options: ["vendrá","viene","vino"], correct: "vendrá" },
+  { sentence: "¿Tú ___ ver el partido en el estadio?", sentence_fr: "___-tu voir le match au stade ?", options: ["podrás","puedes","pudiste"], correct: "podrás" },
+  { sentence: "El avión ___ a las ocho de la mañana.", sentence_fr: "L'avion ___ à huit heures du matin.", options: ["saldrá","sale","salió"], correct: "saldrá" },
+  { sentence: "Ellos ___ muchas preguntas sobre el seguro.", sentence_fr: "Ils ___ beaucoup de questions sur l'assurance.", options: ["harán","hacen","hicieron"], correct: "harán" },
+  { sentence: "Yo ___ la información mañana por la tarde.", sentence_fr: "J'___ l'information demain après-midi.", options: ["tendré","tengo","tuve"], correct: "tendré" },
+  { sentence: "¿Vosotros ___ al Mundial este año?", sentence_fr: "___-vous à la Coupe du Monde cette année ?", options: ["iréis","vais","fuisteis"], correct: "iréis" },
+];
+function mezclar(arr){ return arr.map(v=>[Math.random(),v]).sort((a,b)=>a[0]-b[0]).map(v=>v[1]); }
+const quizWrap = document.getElementById('quiz-exercises');
+EXERCISES.forEach((ex,i)=>{
+  if(i===0){ const d=document.createElement('div'); d.className='divisor-tramo en-clase'; d.innerHTML='en clase · ítems 1–6<span class="fr-glosa fr-glosa-inline"> · en classe</span>'; quizWrap.appendChild(d); }
+  if(i===6){ const d=document.createElement('div'); d.className='divisor-tramo'; d.innerHTML='para casa · repaso opcional<span class="fr-glosa fr-glosa-inline"> · à la maison</span>'; quizWrap.appendChild(d); }
+  const bloque = document.createElement('div');
+  bloque.className = 'quiz-bloque';
+  bloque.innerHTML = `<p class="quiz-enunciado"><span class="quiz-numero">${i+1}.</span>${ex.sentence}<span class="fr-glosa fr-glosa-inline"> ${ex.sentence_fr}</span></p>
+    <ul class="quiz-opciones">${mezclar(ex.options).map(o=>`<li data-correcta="${o===ex.correct}">${o}</li>`).join('')}</ul>`;
+  quizWrap.appendChild(bloque);
+});
+
+/* ---------- EXERCISES: rellenar-huecos, forma él/ella (texto libre) ---------- */
+const EXERCISES_BANCO = [
+  { verbo: "tener (él)", verbo_fr: "avoir (il)", respuesta: "tendrá" },
+  { verbo: "hacer (ella)", verbo_fr: "faire (elle)", respuesta: "hará" },
+  { verbo: "poder (él)", verbo_fr: "pouvoir (il)", respuesta: "podrá" },
+  { verbo: "ser (ella)", verbo_fr: "être (elle)", respuesta: "será" },
+  { verbo: "venir (él)", verbo_fr: "venir (il)", respuesta: "vendrá" },
+  { verbo: "salir (ella)", verbo_fr: "sortir (elle)", respuesta: "saldrá" },
+  { verbo: "decir (él)", verbo_fr: "dire (il)", respuesta: "dirá" },
+  { verbo: "querer (ella)", verbo_fr: "vouloir (elle)", respuesta: "querrá" },
+];
+const rellenarWrap = document.getElementById('rellenar-items');
+EXERCISES_BANCO.forEach((ex,i)=>{
+  if(i===0){ const d=document.createElement('div'); d.className='divisor-tramo en-clase'; d.innerHTML='en clase · ítems 1–4<span class="fr-glosa fr-glosa-inline"> · en classe</span>'; rellenarWrap.appendChild(d); }
+  if(i===4){ const d=document.createElement('div'); d.className='divisor-tramo'; d.innerHTML='para casa · repaso opcional<span class="fr-glosa fr-glosa-inline"> · à la maison</span>'; rellenarWrap.appendChild(d); }
+  const el = document.createElement('div');
+  el.className = 'rellenar-item';
+  el.innerHTML = `<p class="rellenar-texto"><span class="rellenar-num">${i+1}.</span> ${ex.verbo}<span class="fr-glosa fr-glosa-inline"> (${ex.verbo_fr})</span> → <input type="text" data-respuesta="${ex.respuesta}" autocomplete="off" spellcheck="false"></p>`;
+  rellenarWrap.appendChild(el);
+});
+
+/* ---------- EVAL CHECKLIST (persistente vía window.storage) ---------- */
+const EVAL_KEY = 'azeddine-clase12-evaluacion';
+async function cargarEval(){
+  if (!window.storage) return {};
+  try{ const res = await window.storage.get(EVAL_KEY); return (res && typeof res.value === 'string') ? JSON.parse(res.value) : {}; }catch(e){ return {}; }
+}
+async function guardarEval(state){
+  if (!window.storage) return;
+  try{ await window.storage.set(EVAL_KEY, JSON.stringify(state)); }catch(e){}
+}
+(async function initEval(){
+  const state = await cargarEval();
+  document.querySelectorAll('.eval-item').forEach(item=>{
+    const id = item.dataset.id;
+    if(state[id]) item.classList.add('hecho');
+    item.addEventListener('click', async ()=>{
+      const hecho = !item.classList.contains('hecho');
+      item.classList.toggle('hecho', hecho);
+      state[id] = hecho;
+      await guardarEval(state);
+    });
+  });
+})();
+
+/* ---------- TAREA FINAL (autoguardado vía window.storage) ---------- */
+const taskArea = document.getElementById('final-task');
+const taskCount = document.getElementById('task-count');
+const savedFlag = document.getElementById('saved-flag');
+let taskSaveTimer = null;
+async function cargarTarea(){
+  if (!window.storage) return;
+  try{ const res = await window.storage.get(STORAGE_KEY); if (res && typeof res.value === 'string') taskArea.value = res.value; }catch(e){}
+  updateCount();
+}
+function updateCount(){
+  const lines = taskArea.value.split('\n').map(l=>l.trim()).filter(Boolean);
+  taskCount.textContent = `${lines.length} frase${lines.length===1?'':'s'} escrita${lines.length===1?'':'s'}`;
+}
+async function guardarTareaAuto(){
+  if (!window.storage) return;
+  try{ const ok = await window.storage.set(STORAGE_KEY, taskArea.value); savedFlag.textContent = ok ? 'Guardado ✓' : 'No se pudo guardar'; }catch(e){ savedFlag.textContent = 'No se pudo guardar'; }
+  savedFlag.classList.add('show');
+  setTimeout(()=>{ savedFlag.classList.remove('show'); }, 1800);
+}
+taskArea.addEventListener('input', ()=>{
+  updateCount();
+  clearTimeout(taskSaveTimer);
+  taskSaveTimer = setTimeout(guardarTareaAuto, 700);
+});
+updateCount();
+cargarTarea();
+
+/* ---------- TOGGLE DE IDIOMA (ES / fr sutil) ---------- */
+(function(){
+  const btnEs = document.querySelector('.idioma-btn[data-idioma="es"]');
+  const btnFr = document.querySelector('.idioma-btn[data-idioma="fr"]');
+  const IDIOMA_KEY = 'azeddine-clase12-idioma';
+  function aplicar(mostrarFr){
+    document.body.classList.toggle('fr-activo', mostrarFr);
+    btnFr.classList.toggle('activo', mostrarFr);
+    btnFr.setAttribute('aria-pressed', mostrarFr ? 'true' : 'false');
+  }
+  btnFr.addEventListener('click', async ()=>{
+    const activo = !document.body.classList.contains('fr-activo');
+    aplicar(activo);
+    if (window.storage) { try { await window.storage.set(IDIOMA_KEY, activo ? 'fr' : 'es'); } catch(e){} }
+  });
+  btnEs.addEventListener('click', ()=>{ /* ES es siempre visible; este botón solo confirma el estado base */ });
+  (async function initIdioma(){
+    if (!window.storage) return;
+    try{
+      const res = await window.storage.get(IDIOMA_KEY);
+      if (res && res.value === 'fr') aplicar(true);
+    }catch(e){}
+  })();
+})();
+</script>
+
+<script>
+/* ============================================================
+   TRATADO.js — comportamiento estándar (quiz interactivo,
+   rellenar-huecos). Namespace ya definido arriba.
+   ============================================================ */
+(function () {
+  "use strict";
+  var TRATADO_NS = window.TRATADO_NS || "tratado-doc";
+  var STORAGE_RESULTADOS = TRATADO_NS + "-resultados";
+
+  var totalPreguntas = 0, totalAciertos = 0;
+  var resultadosGuardados = {};
+  try {
+    var raw = localStorage.getItem(STORAGE_RESULTADOS);
+    if (raw) resultadosGuardados = JSON.parse(raw);
+  } catch (e) {}
+  function guardarResultado(id, ok) {
+    resultadosGuardados[id] = ok;
+    try { localStorage.setItem(STORAGE_RESULTADOS, JSON.stringify(resultadosGuardados)); } catch (e) {}
+  }
+
+  var bloques = document.querySelectorAll(".quiz-bloque");
+  bloques.forEach(function (bloque, idx) {
+    var opciones = bloque.querySelectorAll(".quiz-opciones li");
+    var enunciado = bloque.querySelector(".quiz-enunciado");
+    var idPregunta = "q" + idx;
+    totalPreguntas++;
+    if (resultadosGuardados[idPregunta] === true) totalAciertos++;
+
+    opciones.forEach(function (opcion) {
+      opcion.addEventListener("click", function () {
+        if (bloque.classList.contains("respondido")) return;
+        bloque.classList.add("respondido");
+        var esCorrecta = opcion.getAttribute("data-correcta") === "true";
+        opciones.forEach(function (o) {
+          if (o.getAttribute("data-correcta") === "true") o.classList.add("seleccionada-correcta");
+        });
+        if (!esCorrecta) opcion.classList.add("seleccionada-incorrecta");
+        if (enunciado) {
+          var marca = document.createElement("span");
+          marca.className = "quiz-marca " + (esCorrecta ? "correcta" : "incorrecta");
+          enunciado.appendChild(marca);
+        }
+        if (esCorrecta) totalAciertos++;
+        guardarResultado(idPregunta, esCorrecta);
+      });
+    });
+  });
+
+  function normalizarTexto(s) {
+    return s.trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, " ");
+  }
+
+  document.querySelectorAll(".rellenar-huecos").forEach(function (bloque) {
+    var entradas = bloque.querySelectorAll('input[type="text"]');
+    var marcador = bloque.querySelector(".rellenar-marcador");
+    var boton = bloque.querySelector(".rellenar-comprobar");
+    var reiniciar = bloque.querySelector("[data-reiniciar-ejercicio]");
+    function comprobar() {
+      var aciertos = 0;
+      entradas.forEach(function (input) {
+        var ok = normalizarTexto(input.value) === normalizarTexto(input.getAttribute("data-respuesta") || "");
+        input.classList.toggle("acierto", ok);
+        input.classList.toggle("error", !ok);
+        input.disabled = true;
+        if (ok) aciertos++;
+      });
+      if (marcador) marcador.textContent = aciertos + " / " + entradas.length + " correctas";
+    }
+    if (boton) boton.addEventListener("click", comprobar);
+    if (reiniciar) {
+      reiniciar.addEventListener("click", function () {
+        entradas.forEach(function (input) {
+          input.disabled = false;
+          input.value = "";
+          input.classList.remove("acierto", "error");
+        });
+        if (marcador) marcador.textContent = "";
+      });
+    }
+  });
+
+  document.querySelectorAll(".dialogo-selector").forEach(function (selector) {
+    var tabs = selector.querySelectorAll(".dialogo-tab");
+    var contenedor = selector.parentElement;
+    tabs.forEach(function (tab) {
+      tab.addEventListener("click", function () {
+        var id = tab.getAttribute("data-dialogo");
+        tabs.forEach(function (t) {
+          var activo = t === tab;
+          t.classList.toggle("activa", activo);
+          t.setAttribute("aria-selected", activo ? "true" : "false");
+        });
+        contenedor.querySelectorAll("[data-dialogo-panel]").forEach(function (panel) {
+          panel.hidden = panel.getAttribute("data-dialogo-panel") !== id;
+        });
+      });
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
