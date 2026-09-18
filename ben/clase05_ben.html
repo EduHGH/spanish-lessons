@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clase 5 · Masculino y femenino — Ben</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+
+/* ╔══════════════════════════════════════════════════════════════╗
+   ║  ESCOLAR — sistema de diseño para clases de español online   ║
+   ║  Clase 5 · L2 Segunda parada · "Masculino y femenino"         ║
+   ╚══════════════════════════════════════════════════════════════╝ */
+
+:root{
+  --paper:        #FBF7EE;
+  --paper-raised: #FFFFFF;
+  --paper-alt:    #F3ECDA;
+  --ink:          #23291F;
+  --ink-soft:     #565F52;
+  --ink-faint:    #8B9184;
+  --line:         rgba(35,41,31,0.12);
+  --line-strong:  rgba(35,41,31,0.22);
+
+  --b1:      #2F6FED;  --b1-soft: #EAF1FE;  --b1-line: #C6D9FC;
+  --b2:      #2E9E6B;  --b2-soft: #E9F6EF;  --b2-line: #BEE6D3;
+  --family:  #B5502E;  --family-soft: #FBEBE3; --family-line: #EFC9B4;
+
+  --f-display: 'Fraunces', Georgia, serif;
+  --f-body:    'IBM Plex Sans', system-ui, sans-serif;
+  --f-data:    'IBM Plex Mono', monospace;
+
+  --r-sm: 8px;
+  --r-md: 14px;
+  --r-lg: 20px;
+
+  --shadow-1: 0 1px 2px rgba(35,41,31,0.05), 0 1px 8px rgba(35,41,31,0.04);
+}
+
+*{ box-sizing:border-box; }
+body{
+  margin:0;
+  background: var(--paper);
+  background-image: radial-gradient(circle at 1px 1px, var(--line) 1px, transparent 0);
+  background-size: 22px 22px;
+  color: var(--ink);
+  font-family: var(--f-body);
+  line-height:1.6;
+}
+::selection{ background: var(--b1-soft); }
+
+/* ---------- HEADER ---------- */
+header{ padding:44px 24px 28px; max-width:760px; margin:0 auto; }
+.eyebrow{
+  font-family: var(--f-data); font-size:12px; letter-spacing:.14em;
+  text-transform:uppercase; color: var(--b2); margin:0 0 10px;
+  display:flex; align-items:center; gap:10px;
+}
+.eyebrow .dot{ width:6px; height:6px; border-radius:50%; background: var(--b2); }
+h1{
+  font-family: var(--f-display); font-weight:600;
+  font-size:clamp(30px,5.6vw,46px); line-height:1.08;
+  margin:0 0 14px; letter-spacing:-.01em;
+}
+h1 em{ font-style:italic; color: var(--b2); }
+.lede{ font-size:16px; color: var(--ink-soft); max-width:56ch; margin:0; }
+
+.meta-row{
+  display:flex; flex-wrap:wrap; gap:20px; margin-top:26px;
+  font-family: var(--f-data); font-size:12px; color: var(--ink-faint);
+}
+.meta-row strong{
+  display:block; color: var(--ink); font-size:14.5px; font-weight:500;
+  font-family: var(--f-display); margin-top:3px;
+}
+
+/* ---------- SECTIONS ---------- */
+main{ max-width:760px; margin:0 auto; padding:8px 24px 100px; }
+
+section.block{ margin-bottom:52px; }
+.block-head{ display:flex; align-items:baseline; gap:12px; margin-bottom:18px; }
+.time-tag{
+  font-family: var(--f-data); font-size:11px; color: var(--ink-faint);
+  background: var(--paper-alt); padding:3px 10px; border-radius:999px; margin-left:auto; flex:none;
+}
+.block-num{
+  font-family: var(--f-data); font-size:12px; color:#fff; background: var(--b1);
+  width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  flex:none;
+}
+.block-head h2{
+  font-family: var(--f-display); font-weight:500; font-style:italic; font-size:22px; margin:0;
+}
+
+.panel{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-lg);
+  box-shadow: var(--shadow-1); padding:26px 28px;
+}
+
+/* ---------- GRAMMAR TABLE ---------- */
+.conj-table{ width:100%; border-collapse:collapse; margin-top:4px; }
+.conj-table td{ padding:10px 6px; border-bottom:1px dashed var(--line); font-size:15px; }
+.conj-table tr:last-child td{ border-bottom:none; }
+.conj-pron{ font-family: var(--f-data); color: var(--ink-faint); font-size:13px; width:90px; }
+.conj-form{ font-family: var(--f-display); font-weight:600; font-size:19px; color: var(--b1); }
+.conj-ex{ color: var(--ink-soft); font-size:14px; }
+
+.note{
+  margin-top:18px; padding:14px 16px; background: var(--b1-soft); border:1px solid var(--b1-line);
+  border-radius: var(--r-md); font-size:14px; color: var(--ink-soft);
+}
+.note strong{ color: var(--ink); }
+
+/* ---------- SER vs ESTAR ---------- */
+.compare-wrap{ margin-top:22px; }
+.compare-title{
+  font-family: var(--f-data); font-size:11.5px; text-transform:uppercase; letter-spacing:.06em;
+  color: var(--ink-faint); margin:0 0 10px;
+}
+.compare-grid{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+@media (max-width:560px){ .compare-grid{ grid-template-columns:1fr; } }
+.compare-col{ border-radius: var(--r-md); padding:16px 18px; border:1px solid; }
+.compare-col.is-ser{ background: var(--b1-soft); border-color: var(--b1-line); }
+.compare-col.is-estar{ background: var(--b2-soft); border-color: var(--b2-line); }
+.compare-head{ display:flex; align-items:center; gap:8px; margin:0 0 10px; }
+.compare-verb{ font-family: var(--f-display); font-weight:600; font-size:19px; }
+.is-ser .compare-verb{ color: var(--b1); }
+.is-estar .compare-verb{ color: var(--b2); }
+.compare-sub{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); }
+.compare-list{ margin:0; padding:0; list-style:none; }
+.compare-list li{ font-size:13.5px; color: var(--ink-soft); padding:6px 0; border-top:1px dashed var(--line); }
+.compare-list li:first-child{ border-top:none; }
+.compare-list strong{ color: var(--ink); font-weight:600; }
+.compare-list em{ display:block; font-style:normal; color: var(--ink-faint); font-size:12.5px; margin-top:2px; }
+.compare-warning{
+  margin-top:14px; padding:14px 16px; background: var(--family-soft); border:1px solid var(--family-line);
+  border-radius: var(--r-md); font-size:13.5px; color: var(--ink-soft);
+}
+.compare-warning strong{ color: var(--family); }
+
+/* ---------- VOCAB CARDS ---------- */
+.vocab-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:12px; }
+.vocab-card{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:14px 16px; cursor:pointer; perspective:600px; min-height:78px;
+  display:flex; flex-direction:column; justify-content:center; transition: border-color .15s ease;
+}
+.vocab-card:hover{ border-color: var(--b1-line); }
+.vocab-card:focus-visible{ outline:2px solid var(--b1); outline-offset:2px; }
+.vocab-front{ font-family: var(--f-body); font-weight:600; font-size:15px; }
+.vocab-back{ display:none; font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); margin-top:6px; }
+.vocab-card.flipped .vocab-back{ display:block; }
+.vocab-card.flipped{ background: var(--b1-soft); border-color: var(--b1-line); }
+.vocab-hint{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin:10px 2px 16px; }
+
+/* ---------- EXERCISE ---------- */
+.exercise{ margin-bottom:20px; }
+.exercise:last-of-type{ margin-bottom:0; }
+.ex-sentence{ font-size:15.5px; margin-bottom:10px; }
+.ex-sentence .gap{ font-family: var(--f-data); color: var(--ink-faint); }
+.ex-options{ display:flex; flex-wrap:wrap; gap:8px; }
+.opt-btn{
+  font-family: var(--f-body); font-size:14px; background: var(--paper-raised);
+  border:1.5px solid var(--line); color: var(--ink); padding:7px 16px; border-radius:999px;
+  cursor:pointer; transition: all .15s ease;
+}
+.opt-btn:hover{ border-color: var(--ink-faint); }
+.opt-btn.picked{ background: var(--b1-soft); border-color: var(--b1); color: var(--b1); }
+.opt-btn.correct{ background: var(--b2-soft); border-color: var(--b2); color: var(--b2); }
+.opt-btn.wrong{ background: var(--family-soft); border-color: var(--family); color: var(--family); }
+.opt-btn:disabled{ cursor:default; }
+
+.check-bar{
+  display:flex; align-items:center; justify-content:space-between; gap:16px;
+  margin-top:22px; padding-top:18px; border-top:1px dashed var(--line);
+}
+.btn-primary{
+  font-family: var(--f-body); font-weight:600; font-size:14px; color:#fff; background: var(--b1);
+  border:none; padding:11px 22px; border-radius:999px; cursor:pointer; transition: transform .1s ease;
+}
+.btn-primary:hover{ transform: translateY(-1px); }
+#score-text{ font-family: var(--f-data); font-size:13px; color: var(--ink-faint); }
+.btn-ghost{
+  font-family: var(--f-body); font-weight:600; font-size:13px; color: var(--ink-soft); background:none;
+  border:1.5px solid var(--line); padding:9px 18px; border-radius:999px; cursor:pointer;
+}
+.btn-ghost:hover{ border-color: var(--ink-faint); }
+.ex-divider{
+  display:flex; align-items:center; gap:10px; margin:20px 0 16px;
+  font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.06em;
+  color: var(--ink-faint);
+}
+.ex-divider::before, .ex-divider::after{ content:""; flex:1; height:1px; background: var(--line); }
+.ex-divider.en-clase{ color: var(--b1); }
+.ex-divider.en-clase::before, .ex-divider.en-clase::after{ background: var(--b1-line); }
+
+/* ---------- CHARACTER CARDS ---------- */
+.characters{ display:grid; gap:16px; }
+.char-card{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-lg);
+  padding:20px 22px; display:flex; gap:16px; align-items:flex-start;
+}
+.char-avatar{
+  flex:none; width:44px; height:44px; border-radius:50%; background: var(--b1-soft);
+  display:flex; align-items:center; justify-content:center; font-family: var(--f-display);
+  font-weight:600; font-size:17px; color: var(--b1);
+}
+.char-body{ flex:1; }
+.char-name{ font-family: var(--f-display); font-weight:600; font-size:17px; margin:0 0 4px; }
+.char-role{ font-family: var(--f-data); font-size:11.5px; text-transform:uppercase; letter-spacing:.05em; color: var(--ink-faint); margin:0 0 10px; }
+.char-facts{ display:flex; flex-wrap:wrap; gap:6px; margin-bottom:10px; }
+.fact-tag{
+  font-family: var(--f-data); font-size:12px; background: var(--paper-alt); color: var(--ink-soft);
+  padding:4px 10px; border-radius:999px;
+}
+.char-prompt{ font-size:14px; color: var(--ink-soft); }
+.char-input{
+  width:100%; margin-top:8px; font-family: var(--f-body); font-size:14.5px; color: var(--ink);
+  background: var(--paper); border:1px solid var(--line); border-radius: var(--r-sm);
+  padding:10px 12px; resize:vertical; min-height:44px;
+}
+.char-input:focus{ outline:none; border-color: var(--b1-line); background: var(--paper-raised); }
+
+/* ---------- ROLEPLAY ---------- */
+.roleplay-panel{ background: var(--b2-soft); border:1px solid var(--b2-line); border-radius: var(--r-lg); padding:26px 28px; }
+.roleplay-panel .block-num{ background: var(--b2); }
+.scene-setup{
+  display:flex; gap:14px; align-items:flex-start; background: var(--paper-raised);
+  border:1px solid var(--b2-line); border-radius: var(--r-md); padding:14px 16px; margin-bottom:20px;
+}
+.scene-icon{ font-size:22px; flex:none; }
+.scene-text{ font-size:14px; color: var(--ink-soft); }
+.scene-text strong{ color: var(--ink); }
+
+.dialogue{ display:flex; flex-direction:column; gap:14px; }
+.scene-tabs{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:18px; }
+.scene-tab{
+  font-family: var(--f-data); font-size:12.5px; background: var(--paper-raised);
+  border:1.5px solid var(--b2-line); color: var(--ink-soft); padding:7px 14px;
+  border-radius:999px; cursor:pointer; transition: all .15s ease;
+}
+.scene-tab:hover{ border-color: var(--b2); }
+.scene-tab.active{ background: var(--b2); border-color: var(--b2); color:#fff; }
+.line{ display:flex; gap:12px; align-items:flex-start; }
+.line-avatar{
+  flex:none; width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  font-family: var(--f-display); font-weight:600; font-size:14px; color:#fff;
+}
+.line.friend .line-avatar{ background: var(--ink-faint); }
+.line.you .line-avatar{ background: var(--b2); }
+.line-body{ flex:1; }
+.line-name{ font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.05em; color: var(--ink-faint); margin:0 0 4px; }
+.line-bubble{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:12px 14px; font-size:14.5px; color: var(--ink);
+}
+.line.you .line-bubble{ background:#fff; border-color: var(--b2-line); }
+.line-input{
+  width:100%; font-family: var(--f-body); font-size:14.5px; color: var(--ink);
+  background:#fff; border:1px solid var(--b2-line); border-radius: var(--r-sm);
+  padding:10px 12px; resize:vertical; min-height:40px; margin-top:2px;
+}
+.line-input:focus{ outline:none; border-color: var(--b2); }
+.line-hint{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin-top:5px; }
+
+.roleplay-tip{
+  margin-top:22px; padding:14px 16px; background: var(--paper-raised); border:1px solid var(--b2-line);
+  border-radius: var(--r-md); font-size:13.5px; color: var(--ink-soft);
+}
+.roleplay-tip strong{ color: var(--ink); }
+
+/* ---------- FINAL TASK ---------- */
+.task-panel{ background: var(--family-soft); border:1px solid var(--family-line); border-radius: var(--r-lg); padding:26px 28px; }
+.task-panel .block-num{ background: var(--family); }
+textarea#final-task{
+  width:100%; min-height:110px; font-family: var(--f-body); font-size:15px; color: var(--ink);
+  background: var(--paper-raised); border:1px solid var(--family-line); border-radius: var(--r-md);
+  padding:14px 16px; resize:vertical; margin-top:14px;
+}
+textarea#final-task:focus{ outline:none; border-color: var(--family); }
+.task-footer{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:12px; flex-wrap:wrap; }
+#task-count{ font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); }
+.btn-secondary{
+  font-family: var(--f-body); font-weight:600; font-size:13.5px; color: var(--family); background:none;
+  border:1.5px solid var(--family-line); padding:9px 18px; border-radius:999px; cursor:pointer;
+}
+.saved-flag{ font-family: var(--f-data); font-size:12px; color: var(--b2); opacity:0; transition: opacity .3s ease; }
+.saved-flag.show{ opacity:1; }
+
+/* ---------- FOOTER NAV ---------- */
+footer{
+  max-width:760px; margin:0 auto; padding:0 24px 60px; display:flex;
+  justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;
+  font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint);
+}
+footer a{ color: var(--b1); text-decoration:none; }
+footer a:hover{ text-decoration:underline; }
+
+@media (max-width:600px){
+  header{ padding:34px 18px 22px; }
+  main{ padding:8px 18px 90px; }
+  .panel, .task-panel{ padding:20px 18px; }
+  .char-card{ flex-direction:column; }
+}
+@media (prefers-reduced-motion: reduce){ *{ transition:none !important; } }
+</style>
+</head>
+<body>
+
+<header>
+  <p class="eyebrow"><span class="dot"></span>Clase 5 de 12 · L2 Segunda parada</p>
+  <h1>Masculino y <em>femenino</em></h1>
+  <p class="lede">Empezamos la segunda parada del viaje afianzando algo que usarás en cada frase: la concordancia de género y número entre el/la, un/una y los sustantivos y adjetivos que los acompañan. Practicamos con objetos de viaje y una tienda de recuerdos en Valencia.</p>
+  <div class="meta-row">
+    <div>Duración<strong>50 min</strong></div>
+    <div>Gramática<strong>Concordancia masc./fem.</strong></div>
+    <div>Nivel<strong>A1</strong></div>
+  </div>
+</header>
+
+<main>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">1</span><h2>Concordancia: el/la, un/una</h2><span class="time-tag">8 min</span></div>
+    <div class="panel">
+      <table class="conj-table">
+        <tr><td class="conj-pron">masc. sing.</td><td class="conj-form">el / un</td><td class="conj-ex">el billete, un mapa</td></tr>
+        <tr><td class="conj-pron">fem. sing.</td><td class="conj-form">la / una</td><td class="conj-ex">la maleta, una llave</td></tr>
+        <tr><td class="conj-pron">masc. plural</td><td class="conj-form">los / unos</td><td class="conj-ex">los billetes, unos mapas</td></tr>
+        <tr><td class="conj-pron">fem. plural</td><td class="conj-form">las / unas</td><td class="conj-ex">las maletas, unas llaves</td></tr>
+        <tr><td class="conj-pron">adjetivo masc.</td><td class="conj-form">-o</td><td class="conj-ex">el mapa pequeño</td></tr>
+        <tr><td class="conj-pron">adjetivo fem.</td><td class="conj-form">-a</td><td class="conj-ex">la maleta pequeña</td></tr>
+      </table>
+      <div class="note"><strong>En español, el determinante, el sustantivo y el adjetivo tienen que concordar en género y número.</strong> Si el sustantivo es femenino, el artículo y el adjetivo también lo son: "la maleta roja", no "el maleta rojo".</div>
+
+      <div class="compare-wrap">
+        <p class="compare-title">Objetos de viaje — masculino y femenino, lado a lado</p>
+        <div class="compare-grid">
+          <div class="compare-col is-ser">
+            <div class="compare-head">
+              <span class="compare-verb">Masculino</span>
+              <span class="compare-sub">el / un</span>
+            </div>
+            <ul class="compare-list">
+              <li><strong>el mapa</strong> — un mapa pequeño</li>
+              <li><strong>el billete</strong> — un billete barato</li>
+              <li><strong>el pasaporte</strong> — el pasaporte alemán</li>
+            </ul>
+          </div>
+          <div class="compare-col is-estar">
+            <div class="compare-head">
+              <span class="compare-verb">Femenino</span>
+              <span class="compare-sub">la / una</span>
+            </div>
+            <ul class="compare-list">
+              <li><strong>la maleta</strong> — una maleta grande</li>
+              <li><strong>la habitación</strong> — la habitación bonita</li>
+              <li><strong>la llave</strong> — una llave nueva</li>
+            </ul>
+          </div>
+        </div>
+        <div class="compare-warning">
+          <strong>Ojo, trampa frecuente:</strong> "el mapa" es masculino aunque termine en -a (viene del griego), igual que "el problema" o "el idioma". No todos los sustantivos en -a son femeninos, ni todos los que terminan en -o son masculinos ("la mano"). Cuando dudes, es mejor aprender el sustantivo junto con su artículo desde el principio: no "maleta", sino "la maleta".
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">2</span><h2>Vocabulario</h2><span class="time-tag">6 min</span></div>
+    <p class="vocab-hint">Toca cada tarjeta para ver un ejemplo.</p>
+    <div class="vocab-grid" id="vocab-grid"></div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">3</span><h2>Practica</h2><span class="time-tag">12 min</span></div>
+    <div class="panel">
+      <p class="vocab-hint" style="margin-bottom:14px;">50 frases: las primeras 12 se hacen en voz alta en clase; el resto queda como repaso para casa.</p>
+      <div id="exercises"></div>
+      <div class="check-bar">
+        <div style="display:flex; gap:10px;">
+          <button class="btn-primary" id="check-btn">Comprobar respuestas</button>
+          <button class="btn-ghost" id="reset-btn">Reiniciar</button>
+        </div>
+        <span id="score-text"></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">4</span><h2>Tarjetas de personajes</h2><span class="time-tag">8 min</span></div>
+    <p class="lede" style="margin-bottom:16px;">Describe cada objeto o persona con el artículo y el adjetivo correctos, cuidando la concordancia. Las primeras 6 se trabajan en clase; el resto queda como banco de repaso para casa.</p>
+    <div class="characters" id="characters"></div>
+  </section>
+
+  <section class="block roleplay-panel">
+    <div class="block-head"><span class="block-num">5</span><h2>Roleplay: tienda de recuerdos en Valencia</h2><span class="time-tag">13 min</span></div>
+    <p class="lede" style="margin-bottom:16px;">50 intercambios repartidos en 5 situaciones de una tienda de recuerdos, pidiendo tallas, colores y precios con concordancia correcta. Elige una escena para practicar en clase; el resto queda como banco de repaso para casa.</p>
+    <div class="scene-tabs" id="scene-tabs"></div>
+    <div id="scene-container"></div>
+    <div class="roleplay-tip"><strong>En clase:</strong> practicaremos una escena en voz alta, cambiando de rol. El resto de escenas son para practicar por tu cuenta durante la semana.</div>
+  </section>
+
+  <section class="block task-panel">
+    <div class="block-head"><span class="block-num">6</span><h2 style="color:var(--family)">Tu tarea</h2><span class="time-tag">3 min</span></div>
+    <p style="margin:0; font-size:15px; color:var(--ink-soft);">Etiqueta <strong>10 objetos de tu maleta</strong> con "el/la" o "un/una", cuidando la concordancia. Por ejemplo: "el pasaporte, la maleta, un mapa..."</p>
+    <textarea id="final-task" placeholder="el...&#10;la...&#10;un..."></textarea>
+    <div class="task-footer">
+      <span id="task-count">0 artículos detectados</span>
+      <div style="display:flex; gap:10px; align-items:center;">
+        <span class="saved-flag" id="saved-flag">Guardado ✓</span>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <span>Clase 5 · Segunda parada</span>
+  <span>Próxima clase → Clase 6: Hablar de tus gustos</span>
+</footer>
+
+<script>
+/* ---------- VOCAB ---------- */
+const VOCAB = [
+  {front:"la maleta", back:"Mi maleta es grande y roja."},
+  {front:"el mapa", back:"Uso un mapa de Valencia para pasear."},
+  {front:"la habitación", back:"Mi habitación está en el tercer piso."},
+  {front:"la llave", back:"Necesito una llave nueva para la habitación."},
+  {front:"el billete", back:"Compro un billete de tren barato."},
+  {front:"el pasaporte", back:"Mi pasaporte es alemán."},
+];
+
+const grid = document.getElementById('vocab-grid');
+VOCAB.forEach(v=>{
+  const card = document.createElement('div');
+  card.className = 'vocab-card';
+  card.setAttribute('role', 'button');
+  card.setAttribute('tabindex', '0');
+  card.setAttribute('aria-pressed', 'false');
+  card.setAttribute('aria-label', `${v.front}. Pulsa para ver un ejemplo.`);
+  card.innerHTML = `<div class="vocab-front">${v.front}</div><div class="vocab-back">${v.back}</div>`;
+  const toggle = ()=>{
+    const flipped = card.classList.toggle('flipped');
+    card.setAttribute('aria-pressed', String(flipped));
+  };
+  card.addEventListener('click', toggle);
+  card.addEventListener('keydown', (e)=>{
+    if(e.key === 'Enter' || e.key === ' '){
+      e.preventDefault();
+      toggle();
+    }
+  });
+  grid.appendChild(card);
+});
+
+/* ---------- EXERCISES ---------- */
+const EXERCISES = [
+  {"sentence":"<span class=\"gap\">___</span> maleta es grande.","options":["El","La","Los"],"answer":"La"},
+  {"sentence":"<span class=\"gap\">___</span> mapa es pequeño.","options":["El","La","Las"],"answer":"El"},
+  {"sentence":"Necesito <span class=\"gap\">___</span> llave nueva.","options":["un","una","unos"],"answer":"una"},
+  {"sentence":"Compro <span class=\"gap\">___</span> billete barato.","options":["un","una","unas"],"answer":"un"},
+  {"sentence":"<span class=\"gap\">___</span> habitación es bonita.","options":["El","La","Los"],"answer":"La"},
+  {"sentence":"<span class=\"gap\">___</span> pasaporte es alemán.","options":["El","La","Los"],"answer":"El"},
+  {"sentence":"La maleta es <span class=\"gap\">___</span>. (roja)","options":["rojo","roja","rojos"],"answer":"roja"},
+  {"sentence":"El mapa es <span class=\"gap\">___</span>. (pequeño)","options":["pequeño","pequeña","pequeños"],"answer":"pequeño"},
+  {"sentence":"La habitación es <span class=\"gap\">___</span>. (grande)","options":["grande","grandes","grando"],"answer":"grande"},
+  {"sentence":"El billete es <span class=\"gap\">___</span>. (barato)","options":["barato","barata","baratos"],"answer":"barato"},
+  {"sentence":"<span class=\"gap\">___</span> maletas son grandes. (las/los)","options":["Los","Las","Unos"],"answer":"Las"},
+  {"sentence":"<span class=\"gap\">___</span> mapas son pequeños. (los/las)","options":["Las","Los","Unas"],"answer":"Los"},
+  {"sentence":"Compro <span class=\"gap\">___</span> billetes para el tren. (unos/unas)","options":["unos","unas","unas"],"answer":"unos"},
+  {"sentence":"Necesito <span class=\"gap\">___</span> llaves nuevas. (unas/unos)","options":["unos","unas","los"],"answer":"unas"},
+  {"sentence":"<span class=\"gap\">___</span> pasaportes son alemanes. (los/las)","options":["Las","Los","Unos"],"answer":"Los"},
+  {"sentence":"La maleta pequeña — el mapa <span class=\"gap\">___</span>","options":["pequeño","pequeña","pequeños"],"answer":"pequeño"},
+  {"sentence":"El billete caro — la habitación <span class=\"gap\">___</span>","options":["caro","cara","caros"],"answer":"cara"},
+  {"sentence":"Esta maleta es muy <span class=\"gap\">___</span>. (pesado)","options":["pesado","pesada","pesados"],"answer":"pesada"},
+  {"sentence":"Este mapa es muy <span class=\"gap\">___</span>. (útil)","options":["útil","útila","útiles"],"answer":"útil"},
+  {"sentence":"¿Tienes <span class=\"gap\">___</span> mapa de la ciudad?","options":["un","una","unos"],"answer":"un"},
+  {"sentence":"¿Tienes <span class=\"gap\">___</span> llave de repuesto?","options":["un","una","unas"],"answer":"una"},
+  {"sentence":"Compro <span class=\"gap\">___</span> maleta nueva.","options":["un","una","unos"],"answer":"una"},
+  {"sentence":"Necesito <span class=\"gap\">___</span> billete de vuelta.","options":["un","una","unas"],"answer":"un"},
+  {"sentence":"<span class=\"gap\">___</span> habitación tiene una vista bonita.","options":["El","La","Los"],"answer":"La"},
+  {"sentence":"Mi habitación es <span class=\"gap\">___</span>. (moderno)","options":["moderno","moderna","modernos"],"answer":"moderna"},
+  {"sentence":"Mi pasaporte es <span class=\"gap\">___</span>. (nuevo)","options":["nuevo","nueva","nuevos"],"answer":"nuevo"},
+  {"sentence":"Los billetes son <span class=\"gap\">___</span>. (caro)","options":["caro","cara","caros"],"answer":"caros"},
+  {"sentence":"Las llaves son <span class=\"gap\">___</span>. (nuevo)","options":["nuevo","nuevas","nuevos"],"answer":"nuevas"},
+  {"sentence":"El mapa está en <span class=\"gap\">___</span> maleta. (mi)","options":["mi","mis","su"],"answer":"mi"},
+  {"sentence":"<span class=\"gap\">___</span> billete está en mi mochila. (el)","options":["El","La","Los"],"answer":"El"},
+  {"sentence":"Esta tienda vende <span class=\"gap\">___</span> mapas turísticos.","options":["unos","unas","un"],"answer":"unos"},
+  {"sentence":"Esta tienda vende <span class=\"gap\">___</span> maletas pequeñas.","options":["unos","unas","un"],"answer":"unas"},
+  {"sentence":"¿Cuánto cuesta <span class=\"gap\">___</span> mapa?","options":["el","la","los"],"answer":"el"},
+  {"sentence":"¿Cuánto cuesta <span class=\"gap\">___</span> maleta?","options":["el","la","los"],"answer":"la"},
+  {"sentence":"Quiero <span class=\"gap\">___</span> pasaporte nuevo. (broma: un cambio de foto)","options":["un","una","unos"],"answer":"un"},
+  {"sentence":"La camiseta es <span class=\"gap\">___</span>. (bonito)","options":["bonito","bonita","bonitos"],"answer":"bonita"},
+  {"sentence":"El recuerdo es <span class=\"gap\">___</span>. (bonito)","options":["bonito","bonita","bonitos"],"answer":"bonito"},
+  {"sentence":"Las camisetas son <span class=\"gap\">___</span>. (bonito)","options":["bonito","bonitas","bonitos"],"answer":"bonitas"},
+  {"sentence":"Los recuerdos son <span class=\"gap\">___</span>. (bonito)","options":["bonito","bonitas","bonitos"],"answer":"bonitos"},
+  {"sentence":"¿Tiene esta camiseta en talla <span class=\"gap\">___</span>? (pequeño)","options":["pequeño","pequeña","pequeños"],"answer":"pequeña"},
+  {"sentence":"Quiero <span class=\"gap\">___</span> camiseta roja. (un/una)","options":["un","una","unos"],"answer":"una"},
+  {"sentence":"Quiero <span class=\"gap\">___</span> imán para la nevera. (un/una)","options":["un","una","unos"],"answer":"un"},
+  {"sentence":"<span class=\"gap\">___</span> tienda está cerca del hotel. (esta/este)","options":["Este","Esta","Estos"],"answer":"Esta"},
+  {"sentence":"<span class=\"gap\">___</span> recuerdo es para mi hermana. (este/esta)","options":["Este","Esta","Estos"],"answer":"Este"},
+  {"sentence":"Mi maleta y mi mapa son <span class=\"gap\">___</span>. (nuevo, ambos)","options":["nuevos","nuevas","nueva"],"answer":"nuevos"},
+  {"sentence":"El billete y la llave están en <span class=\"gap\">___</span> mochila. (mi)","options":["mi","mis","su"],"answer":"mi"},
+  {"sentence":"Esta maleta roja es <span class=\"gap\">___</span> (mío/mía).","options":["mía","mío","míos"],"answer":"mía"},
+  {"sentence":"Este pasaporte azul es <span class=\"gap\">___</span> (mío/mía).","options":["mío","mía","míos"],"answer":"mío"},
+  {"sentence":"¿Cuánto cuestan <span class=\"gap\">___</span> camisetas? (las/los)","options":["los","las","unos"],"answer":"las"},
+  {"sentence":"¿Cuánto cuestan <span class=\"gap\">___</span> mapas? (las/los)","options":["los","las","unas"],"answer":"los"}
+];
+
+const exWrap = document.getElementById('exercises');
+EXERCISES.forEach((ex, i)=>{
+  if(i === 0){
+    const divider = document.createElement('div');
+    divider.className = 'ex-divider en-clase';
+    divider.textContent = 'en clase · ítems 1–12';
+    exWrap.appendChild(divider);
+  }
+  if(i === 12){
+    const divider = document.createElement('div');
+    divider.className = 'ex-divider';
+    divider.textContent = 'para casa · repaso opcional';
+    exWrap.appendChild(divider);
+  }
+  const el = document.createElement('div');
+  el.className = 'exercise';
+  el.dataset.answer = ex.answer;
+  el.innerHTML = `
+    <div class="ex-sentence">${i+1}. ${ex.sentence}</div>
+    <div class="ex-options">
+      ${ex.options.map(o=>`<button class="opt-btn" data-value="${o}">${o}</button>`).join('')}
+    </div>
+  `;
+  exWrap.appendChild(el);
+
+  el.querySelectorAll('.opt-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      el.querySelectorAll('.opt-btn').forEach(b=>b.classList.remove('picked'));
+      btn.classList.add('picked');
+    });
+  });
+});
+
+document.getElementById('check-btn').addEventListener('click', ()=>{
+  let correct = 0;
+  document.querySelectorAll('.exercise').forEach(el=>{
+    const answer = el.dataset.answer;
+    const picked = el.querySelector('.opt-btn.picked');
+    el.querySelectorAll('.opt-btn').forEach(b=>{
+      b.disabled = true;
+      if(b.dataset.value === answer) b.classList.add('correct');
+      else if(b === picked) b.classList.add('wrong');
+    });
+    if(picked && picked.dataset.value === answer) correct++;
+  });
+  document.getElementById('score-text').textContent = `${correct} / ${EXERCISES.length} correctas`;
+});
+
+document.getElementById('reset-btn').addEventListener('click', ()=>{
+  document.querySelectorAll('.exercise').forEach(el=>{
+    el.querySelectorAll('.opt-btn').forEach(b=>{
+      b.disabled = false;
+      b.classList.remove('picked','correct','wrong');
+    });
+  });
+  document.getElementById('score-text').textContent = '';
+});
+
+/* ---------- CHARACTER CARDS ---------- */
+const CHARACTERS = [
+  {"name":"La maleta","role":"Tu equipaje de viaje","facts":["grande","roja","con ruedas"],"prompt":"Describe con \"la\" y un adjetivo concordado:"},
+  {"name":"El mapa","role":"Tu guía de Valencia","facts":["pequeño","útil","de papel"],"prompt":"Describe con \"el\" y un adjetivo concordado:"},
+  {"name":"La habitación","role":"Tu cuarto en el hotel","facts":["luminosa","moderna","con vistas"],"prompt":"Describe con \"la\" y un adjetivo concordado:"},
+  {"name":"El pasaporte","role":"Tu documento de viaje","facts":["alemán","nuevo","válido"],"prompt":"Describe con \"el\" y un adjetivo concordado:"},
+  {"name":"El billete de tren","role":"Para tu viaje a Ibiza","facts":["barato","directo","de ida y vuelta"],"prompt":"Describe con \"el\" y un adjetivo concordado:"},
+  {"name":"La llave","role":"De tu habitación de hotel","facts":["nueva","pequeña","electrónica"],"prompt":"Describe con \"la\" y un adjetivo concordado:"},
+  {"name":"La camiseta","role":"Recuerdo para tu hermana","facts":["roja","de algodón","con el mapa de España"],"prompt":"Describe con \"la\" y un adjetivo concordado:"},
+  {"name":"El imán","role":"Recuerdo para la nevera","facts":["pequeño","de cerámica","de Valencia"],"prompt":"Describe con \"el\" y un adjetivo concordado:"},
+  {"name":"La postal","role":"Para enviar a tus padres","facts":["bonita","barata","con una foto de la playa"],"prompt":"Describe con \"la\" y un adjetivo concordado:"},
+  {"name":"El sombrero","role":"Recuerdo típico español","facts":["grande","de paja","tradicional"],"prompt":"Describe con \"el\" y un adjetivo concordado:"},
+  {"name":"Las gafas de sol","role":"Compradas en la tienda","facts":["negras","modernas","baratas"],"prompt":"Describe con \"las\" y adjetivos concordados en plural:"},
+  {"name":"Los mapas turísticos","role":"En el mostrador de la tienda","facts":["gratuitos","útiles","de la ciudad"],"prompt":"Describe con \"los\" y adjetivos concordados en plural:"},
+  {"name":"La dependienta","role":"Te atiende en la tienda","facts":["amable","valenciana","con paciencia"],"prompt":"Descríbela con \"la\" y adjetivos concordados:"},
+  {"name":"El dependiente","role":"Te ayuda a elegir tallas","facts":["simpático","joven","con experiencia"],"prompt":"Descríbelo con \"el\" y adjetivos concordados:"}
+];
+
+const charWrap = document.getElementById('characters');
+CHARACTERS.forEach((c, i)=>{
+  if(i === 0){
+    const divider = document.createElement('div');
+    divider.className = 'ex-divider en-clase';
+    divider.textContent = 'en clase · personajes 1–6';
+    charWrap.appendChild(divider);
+  }
+  if(i === 6){
+    const divider = document.createElement('div');
+    divider.className = 'ex-divider';
+    divider.textContent = 'para casa · banco de repaso';
+    charWrap.appendChild(divider);
+  }
+  const card = document.createElement('div');
+  card.className = 'char-card';
+  card.innerHTML = `
+    <div class="char-avatar">${c.name.charAt(0)}</div>
+    <div class="char-body">
+      <p class="char-name">${c.name}</p>
+      <p class="char-role">${c.role}</p>
+      <div class="char-facts">${c.facts.map(f=>`<span class="fact-tag">${f}</span>`).join('')}</div>
+      <p class="char-prompt">${c.prompt}</p>
+      <textarea class="char-input" rows="2" placeholder="El / La / Los / Las ..." data-char-idx="${i}"></textarea>
+    </div>
+  `;
+  charWrap.appendChild(card);
+});
+
+/* ---------- AUTOGUARDADO PERSONAJES ---------- */
+const CHAR_STORAGE_PREFIX = 'ben-clase05-personaje-';
+async function cargarCharInputs(){
+  if (!window.storage) return;
+  const inputs = charWrap.querySelectorAll('.char-input');
+  for (const input of inputs){
+    try{
+      const res = await window.storage.get(CHAR_STORAGE_PREFIX + input.dataset.charIdx);
+      if (res && typeof res.value === 'string') input.value = res.value;
+    }catch(e){
+      // Sin dato previo guardado para este personaje.
+    }
+  }
+}
+charWrap.addEventListener('change', async (e)=>{
+  if (!e.target.classList.contains('char-input') || !window.storage) return;
+  try{
+    await window.storage.set(CHAR_STORAGE_PREFIX + e.target.dataset.charIdx, e.target.value);
+  }catch(err){
+    // Guardado fallido: se mantiene el valor solo en pantalla.
+  }
+});
+cargarCharInputs();
+
+/* ---------- ROLEPLAY SCENES ---------- */
+const SCENES = [
+  {
+    "id": "entrada2",
+    "tab": "Entrando en la tienda",
+    "icon": "🛍️",
+    "setup": "Paseas por el centro de Valencia y entras en una tienda de recuerdos para comprar regalos para tu familia.",
+    "lines": [
+      {"who":"friend","name":"Dependienta","text":"¡Buenas tardes! ¿Busca algo en concreto?"},
+      {"who":"you","hint":"Responde y menciona qué buscas (un recuerdo, una camiseta...)."},
+      {"who":"friend","name":"Dependienta","text":"Tenemos camisetas, imanes y mapas de la ciudad."},
+      {"who":"you","hint":"Elige un producto usando \"el/la\" o \"un/una\"."},
+      {"who":"friend","name":"Dependienta","text":"¿Es para usted o para regalar?"},
+      {"who":"you","hint":"Responde y menciona a quién es para (mi hermana, mis padres...)."},
+      {"who":"friend","name":"Dependienta","text":"Esta camiseta roja es muy popular."},
+      {"who":"you","hint":"Da tu opinión usando un adjetivo concordado."},
+      {"who":"friend","name":"Dependienta","text":"¿Qué talla necesita?"},
+      {"who":"you","hint":"Responde con una talla (pequeña, mediana, grande)."}
+    ]
+  },
+  {
+    "id": "tallas",
+    "tab": "Pidiendo tallas y colores",
+    "icon": "👕",
+    "setup": "Sigues mirando ropa y accesorios y necesitas pedir otra talla o color.",
+    "lines": [
+      {"who":"friend","name":"Dependienta","text":"¿Le gusta esta camiseta?"},
+      {"who":"you","hint":"Responde con un adjetivo (bonita, fea...) concordado."},
+      {"who":"friend","name":"Dependienta","text":"¿La quiere en otro color?"},
+      {"who":"you","hint":"Pide un color usando \"la quiero en...\"."},
+      {"who":"friend","name":"Dependienta","text":"¿Y el sombrero, le gusta?"},
+      {"who":"you","hint":"Responde con un adjetivo (grande, pequeño...) concordado."},
+      {"who":"friend","name":"Dependienta","text":"Tenemos sombreros más pequeños también."},
+      {"who":"you","hint":"Responde si prefieres el pequeño o el grande."},
+      {"who":"friend","name":"Dependienta","text":"Perfecto, se lo preparo."},
+      {"who":"you","hint":"Da las gracias."}
+    ]
+  },
+  {
+    "id": "precios",
+    "tab": "Preguntando precios",
+    "icon": "💶",
+    "setup": "Antes de decidirte, preguntas los precios de varios productos.",
+    "lines": [
+      {"who":"friend","name":"Dependiente","text":"¿Cuánto cuesta el mapa? Son 2 euros."},
+      {"who":"you","hint":"Responde si lo quieres o no."},
+      {"who":"friend","name":"Dependiente","text":"¿Y la maleta pequeña? Cuesta 25 euros."},
+      {"who":"you","hint":"Da tu opinión sobre el precio (caro/barato)."},
+      {"who":"friend","name":"Dependiente","text":"Las camisetas cuestan 12 euros cada una."},
+      {"who":"you","hint":"Responde y decide cuántas quieres."},
+      {"who":"friend","name":"Dependiente","text":"¿Quiere también unos imanes? Son 3 euros cada uno."},
+      {"who":"you","hint":"Responde con \"quiero\" + artículo correcto."},
+      {"who":"friend","name":"Dependiente","text":"Muy bien, son 40 euros en total."},
+      {"who":"you","hint":"Confirma la compra."}
+    ]
+  },
+  {
+    "id": "regalo",
+    "tab": "Eligiendo el regalo perfecto",
+    "icon": "🎁",
+    "setup": "La dependienta te ayuda a elegir el regalo ideal para cada miembro de tu familia.",
+    "lines": [
+      {"who":"friend","name":"Dependienta","text":"¿Para quién es este regalo?"},
+      {"who":"you","hint":"Responde con \"mi hermana\", \"mis padres\"..."},
+      {"who":"friend","name":"Dependienta","text":"¿Le gustan los imanes o las postales?"},
+      {"who":"you","hint":"Elige uno usando \"me gustan\" o \"prefiero\"."},
+      {"who":"friend","name":"Dependienta","text":"Esta postal tiene una foto muy bonita de la playa."},
+      {"who":"you","hint":"Responde con un adjetivo concordado."},
+      {"who":"friend","name":"Dependienta","text":"¿Necesita algo más para su familia?"},
+      {"who":"you","hint":"Responde sí o no y añade un producto."},
+      {"who":"friend","name":"Dependienta","text":"Perfecto, se lo envuelvo todo."},
+      {"who":"you","hint":"Da las gracias."}
+    ]
+  },
+  {
+    "id": "pago2",
+    "tab": "Pagando en caja",
+    "icon": "💳",
+    "setup": "Terminas tu compra y vas a pagar en la caja de la tienda.",
+    "lines": [
+      {"who":"friend","name":"Cajera","text":"¿Ha encontrado todo lo que buscaba?"},
+      {"who":"you","hint":"Responde sí o no."},
+      {"who":"friend","name":"Cajera","text":"Son en total 45 euros con 50."},
+      {"who":"you","hint":"Confirma la forma de pago (tarjeta/efectivo)."},
+      {"who":"friend","name":"Cajera","text":"¿Quiere una bolsa? Cuesta 20 céntimos más."},
+      {"who":"you","hint":"Responde sí o no."},
+      {"who":"friend","name":"Cajera","text":"Aquí tiene su tique y su bolsa."},
+      {"who":"you","hint":"Da las gracias."},
+      {"who":"friend","name":"Cajera","text":"¡Que disfrute el resto del día en Valencia!"},
+      {"who":"you","hint":"Despídete."}
+    ]
+  }
+];
+
+const sceneTabs = document.getElementById('scene-tabs');
+const sceneContainer = document.getElementById('scene-container');
+let activeScene = 0;
+
+function renderTabs(){
+  sceneTabs.innerHTML = SCENES.map((s,i)=>
+    `<button class="scene-tab${i===activeScene?' active':''}" data-idx="${i}">${s.icon} ${s.tab}</button>`
+  ).join('');
+  sceneTabs.querySelectorAll('.scene-tab').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      activeScene = parseInt(btn.dataset.idx, 10);
+      renderTabs();
+      renderScene();
+    });
+  });
+}
+
+function renderScene(){
+  const scene = SCENES[activeScene];
+  const linesHtml = scene.lines.map((l, li)=>{
+    if(l.who === 'friend'){
+      return `
+        <div class="line friend">
+          <div class="line-avatar">${l.name.charAt(0)}</div>
+          <div class="line-body">
+            <p class="line-name">${l.name}</p>
+            <div class="line-bubble">${l.text}</div>
+          </div>
+        </div>`;
+    } else {
+      return `
+        <div class="line you">
+          <div class="line-avatar">Tú</div>
+          <div class="line-body">
+            <p class="line-name">Tú</p>
+            <textarea class="line-input" rows="2" placeholder="Escribe tu respuesta cuidando la concordancia..." data-line-idx="${li}"></textarea>
+            <p class="line-hint">${l.hint}</p>
+          </div>
+        </div>`;
+    }
+  }).join('');
+
+  sceneContainer.innerHTML = `
+    <div class="scene-setup">
+      <span class="scene-icon">${scene.icon}</span>
+      <p class="scene-text"><strong>${scene.tab}:</strong> ${scene.setup}</p>
+    </div>
+    <div class="dialogue">${linesHtml}</div>
+  `;
+  cargarLineInputs();
+}
+
+/* ---------- AUTOGUARDADO ROLEPLAY ---------- */
+const LINE_STORAGE_PREFIX = 'ben-clase05-roleplay-';
+function lineKey(li){ return `${LINE_STORAGE_PREFIX}${activeScene}-${li}`; }
+async function cargarLineInputs(){
+  if (!window.storage) return;
+  const inputs = sceneContainer.querySelectorAll('.line-input');
+  for (const input of inputs){
+    try{
+      const res = await window.storage.get(lineKey(input.dataset.lineIdx));
+      if (res && typeof res.value === 'string') input.value = res.value;
+    }catch(e){
+      // Sin dato previo guardado para esta línea.
+    }
+  }
+}
+sceneContainer.addEventListener('change', async (e)=>{
+  if (!e.target.classList.contains('line-input') || !window.storage) return;
+  try{
+    await window.storage.set(lineKey(e.target.dataset.lineIdx), e.target.value);
+  }catch(err){
+    // Guardado fallido: se mantiene el valor solo en pantalla.
+  }
+});
+
+renderTabs();
+renderScene();
+
+/* ---------- FINAL TASK ---------- */
+const STORAGE_KEY = 'ben-clase05-tarea';
+const taskArea = document.getElementById('final-task');
+const taskCount = document.getElementById('task-count');
+const savedFlag = document.getElementById('saved-flag');
+
+async function cargarTarea(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(STORAGE_KEY);
+    if (res && typeof res.value === 'string') taskArea.value = res.value;
+  }catch(e){
+    // Clave inexistente todavía: no hay tarea previa, se queda en blanco.
+  }
+  updateCount();
+}
+
+function updateCount(){
+  const matches = (taskArea.value.match(/\b(el|la|los|las|un|una|unos|unas)\b/gi) || []).length;
+  taskCount.textContent = `${matches} artículo${matches===1?'':'s'} detectado${matches===1?'':'s'}`;
+}
+let taskSaveTimeout = null;
+async function autoguardarTarea(){
+  if (!window.storage) return;
+  try{
+    const ok = await window.storage.set(STORAGE_KEY, taskArea.value);
+    savedFlag.textContent = ok ? 'Guardado ✓' : 'No se pudo guardar';
+  }catch(e){
+    savedFlag.textContent = 'No se pudo guardar';
+  }
+  savedFlag.classList.add('show');
+  setTimeout(()=>{ savedFlag.classList.remove('show'); savedFlag.textContent = 'Guardado ✓'; }, 1800);
+}
+taskArea.addEventListener('input', ()=>{
+  updateCount();
+  clearTimeout(taskSaveTimeout);
+  taskSaveTimeout = setTimeout(autoguardarTarea, 600);
+});
+taskArea.addEventListener('blur', ()=>{
+  clearTimeout(taskSaveTimeout);
+  autoguardarTarea();
+});
+updateCount();
+cargarTarea();
+</script>
+
+</body>
+</html>
