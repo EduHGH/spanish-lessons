@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mini · ¿A qué te dedicas?</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+
+/* ╔══════════════════════════════════════════════════════════════╗
+   ║  ESCOLAR — Expansion Pack · Mini                              ║
+   ║  "¿A qué te dedicas?" — Verbos + preposiciones profesionales   ║
+   ╚══════════════════════════════════════════════════════════════╝ */
+
+:root{
+  --paper:        #FBF7EE;
+  --paper-raised: #FFFFFF;
+  --paper-alt:    #F3ECDA;
+  --ink:          #23291F;
+  --ink-soft:     #565F52;
+  --ink-faint:    #8B9184;
+  --line:         rgba(35,41,31,0.12);
+  --line-strong:  rgba(35,41,31,0.22);
+
+  --b1:      #2F6FED;  --b1-soft: #EAF1FE;  --b1-line: #C6D9FC;
+  --b2:      #2E9E6B;  --b2-soft: #E9F6EF;  --b2-line: #BEE6D3;
+  --family:  #B5502E;  --family-soft: #FBEBE3; --family-line: #EFC9B4;
+  --violet:  #7B4FC9;  --violet-soft: #F1EBFB; --violet-line: #D9C8F0;
+
+  --f-display: 'Fraunces', Georgia, serif;
+  --f-body:    'IBM Plex Sans', system-ui, sans-serif;
+  --f-data:    'IBM Plex Mono', monospace;
+
+  --r-sm: 8px;
+  --r-md: 14px;
+  --r-lg: 20px;
+
+  --shadow-1: 0 1px 2px rgba(35,41,31,0.05), 0 1px 8px rgba(35,41,31,0.04);
+}
+
+*{ box-sizing:border-box; }
+body{
+  margin:0;
+  background: var(--paper);
+  background-image: radial-gradient(circle at 1px 1px, var(--line) 1px, transparent 0);
+  background-size: 22px 22px;
+  color: var(--ink);
+  font-family: var(--f-body);
+  line-height:1.6;
+}
+::selection{ background: var(--b1-soft); }
+
+/* ---------- HEADER ---------- */
+header{ padding:44px 24px 28px; max-width:760px; margin:0 auto; }
+.eyebrow{
+  font-family: var(--f-data); font-size:12px; letter-spacing:.14em;
+  text-transform:uppercase; color: var(--violet); margin:0 0 10px;
+  display:flex; align-items:center; gap:10px;
+}
+.eyebrow .dot{ width:6px; height:6px; border-radius:50%; background: var(--violet); }
+h1{
+  font-family: var(--f-display); font-weight:600;
+  font-size:clamp(30px,5.6vw,46px); line-height:1.08;
+  margin:0 0 14px; letter-spacing:-.01em;
+}
+h1 em{ font-style:italic; color: var(--violet); }
+.lede{ font-size:16px; color: var(--ink-soft); max-width:56ch; margin:0; }
+
+.meta-row{
+  display:flex; flex-wrap:wrap; gap:20px; margin-top:26px;
+  font-family: var(--f-data); font-size:12px; color: var(--ink-faint);
+}
+.meta-row strong{
+  display:block; color: var(--ink); font-size:14.5px; font-weight:500;
+  font-family: var(--f-display); margin-top:3px;
+}
+
+/* ---------- STRUCTURE STRIP ---------- */
+.structure-strip{
+  display:grid; grid-template-columns:repeat(5,1fr); gap:2px; margin-top:24px;
+  border-radius: var(--r-md); overflow:hidden; border:1px solid var(--line);
+}
+.structure-strip.row2{ margin-top:2px; }
+.structure-cell{ background: var(--paper-raised); padding:10px 8px; }
+.structure-cell .s-icon{ font-size:15px; }
+.structure-cell .s-label{ font-family: var(--f-body); font-weight:600; font-size:10.5px; color: var(--ink); margin-top:4px; line-height:1.25; }
+
+/* ---------- SECTIONS ---------- */
+main{ max-width:760px; margin:0 auto; padding:8px 24px 100px; }
+
+section.block{ margin-bottom:52px; }
+.block-head{ display:flex; align-items:baseline; gap:12px; margin-bottom:18px; }
+.time-tag{
+  font-family: var(--f-data); font-size:11px; color: var(--ink-faint);
+  background: var(--paper-alt); padding:3px 10px; border-radius:999px; margin-left:auto; flex:none;
+}
+.block-num{
+  font-family: var(--f-data); font-size:12px; color:#fff; background: var(--violet);
+  width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  flex:none;
+}
+.block-head h2{
+  font-family: var(--f-display); font-weight:500; font-style:italic; font-size:22px; margin:0;
+}
+.phase-label{
+  font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.08em;
+  color: var(--ink-faint); margin:0 0 8px; display:flex; align-items:center; gap:8px;
+}
+
+.panel{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-lg);
+  box-shadow: var(--shadow-1); padding:26px 28px;
+}
+
+/* ---------- 1. EL MOMENTO (scene) ---------- */
+.scene-panel{ background: var(--family-soft); border:1px solid var(--family-line); border-radius: var(--r-lg); padding:26px 28px; }
+.scene-panel .block-num{ background: var(--family); }
+.scene-setup{
+  display:flex; gap:14px; align-items:flex-start; background: var(--paper-raised);
+  border:1px solid var(--family-line); border-radius: var(--r-md); padding:16px 18px; margin-bottom:16px;
+}
+.scene-icon{ font-size:24px; flex:none; }
+.scene-text{ font-size:15px; color: var(--ink-soft); }
+.scene-text strong{ color: var(--ink); }
+.blocked-line{
+  margin-top:16px; padding:16px 18px; background: rgba(255,255,255,0.5); border:1px dashed var(--family-line);
+  border-radius: var(--r-md); font-family: var(--f-display); font-style:italic; font-size:16.5px; color: var(--ink);
+}
+.blocked-line .who{ font-family: var(--f-data); font-style:normal; font-size:11px; text-transform:uppercase;
+  letter-spacing:.05em; color: var(--family); display:block; margin-bottom:6px; }
+
+/* ---------- 2. LA SALIDA INMEDIATA ---------- */
+.exit-panel{ background: var(--violet-soft); border:1px solid var(--violet-line); }
+.exit-panel .block-num{ background: var(--violet); }
+.exit-line{
+  font-family: var(--f-display); font-weight:500; font-size:22px; color: var(--ink);
+  background: var(--paper-raised); border:1px solid var(--violet-line); border-radius: var(--r-md);
+  padding:20px 22px; margin-top:4px;
+}
+.exit-line .accent{ color: var(--violet); }
+.exit-note{ font-size:13.5px; color: var(--ink-soft); margin-top:14px; }
+.exit-note strong{ color: var(--ink); }
+
+/* ---------- 3. ALTERNATIVAS ---------- */
+.alt-list{ display:flex; flex-direction:column; gap:10px; margin-top:4px; }
+.alt-item{
+  display:flex; align-items:center; gap:14px; flex-wrap:wrap; background: var(--paper-raised); border:1px solid var(--line);
+  border-radius: var(--r-md); padding:13px 16px; transition: border-color .15s ease;
+}
+.alt-item:hover{ border-color: var(--violet-line); }
+.alt-num{
+  font-family: var(--f-data); font-size:11px; color: var(--ink-faint); flex:none; width:18px;
+}
+.alt-main{ display:flex; flex-direction:column; flex:1; min-width:200px; }
+.alt-text{ font-size:15px; color: var(--ink); }
+.alt-tag{
+  flex:none; margin-left:auto; font-family: var(--f-data); font-size:10.5px; text-transform:uppercase;
+  letter-spacing:.04em; color: var(--violet); background: var(--violet-soft); padding:3px 9px; border-radius:999px;
+}
+
+/* ---------- 4. VERBOS + PREPOSICIONES ---------- */
+.prep-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(210px,1fr)); gap:12px; margin-top:4px; }
+.prep-card{
+  background: var(--paper-raised); border:1px solid var(--b1-line); border-radius: var(--r-md);
+  padding:16px 18px; cursor:pointer; min-height:96px; display:flex; flex-direction:column;
+  justify-content:center; transition: border-color .15s ease, transform .1s ease;
+}
+.prep-card:hover{ border-color: var(--b1); transform: translateY(-1px); }
+.prep-card:focus-visible{ outline:2px solid var(--b1); outline-offset:2px; }
+.prep-verb{ font-family: var(--f-display); font-weight:600; font-size:17px; color: var(--ink); }
+.prep-verb .prep{ color: var(--b1); font-style:italic; }
+.prep-example{ display:none; font-family: var(--f-body); font-size:13px; color: var(--ink-soft); margin-top:8px; line-height:1.5; }
+.prep-example .en{ margin-top:6px; }
+.prep-card.flipped .prep-example{ display:block; }
+.prep-card.flipped{ background: var(--b1-soft); border-color: var(--b1); }
+.prep-hint{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin:12px 2px 0; }
+
+/* ---------- 5. FÓRMULAS NATURALES ---------- */
+.formula-grid{ display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:4px; }
+@media(max-width:640px){ .formula-grid{ grid-template-columns:1fr; } }
+.formula-card{
+  background: var(--paper-raised); border:1px solid var(--b2-line); border-radius: var(--r-md);
+  padding:18px 20px;
+}
+.formula-card .f-label{ font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.05em; color: var(--b2); margin-bottom:8px; }
+.formula-card .f-text{ font-family: var(--f-display); font-size:16px; color: var(--ink); font-style:italic; }
+
+/* ---------- RESCUE PHRASES (muletillas) ---------- */
+.rescue-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:12px; margin-top:4px; }
+.rescue-card{
+  background: var(--paper-raised); border:1px solid var(--family-line); border-radius: var(--r-md);
+  padding:16px 18px;
+}
+.rescue-phrase{ font-family: var(--f-display); font-weight:600; font-style:italic; font-size:16px; color: var(--family); margin-bottom:6px; }
+.rescue-use{ font-size:13px; color: var(--ink-soft); }
+.rescue-use .en{ margin-top:8px; }
+
+/* ---------- FOLLOW-UP Qs (bloque nuevo) ---------- */
+.followup-list{ display:flex; flex-direction:column; gap:14px; margin-top:4px; }
+.followup-item{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:16px 18px;
+}
+.followup-q{ font-family: var(--f-display); font-style:italic; font-size:15.5px; color: var(--ink); margin-bottom:8px; }
+.followup-q::before{ content:"— "; color: var(--ink-faint); }
+.followup-q .en{ font-family: var(--f-body); font-style:italic; }
+.followup-a{ font-size:14px; color: var(--ink-soft); padding-left:14px; border-left:2px solid var(--b1-line); }
+.followup-a strong{ color: var(--b1); font-weight:600; }
+.followup-a .en{ margin-top:8px; }
+
+/* ---------- REGISTER TABLE (bloque nuevo) ---------- */
+.register-table{ width:100%; border-collapse:collapse; margin-top:4px; }
+.register-table th{
+  font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.05em;
+  color: var(--ink-faint); text-align:left; padding:0 10px 10px; border-bottom:1px solid var(--line);
+}
+.register-table td{ padding:12px 10px; border-bottom:1px dashed var(--line); font-size:14px; vertical-align:top; }
+.register-table tr:last-child td{ border-bottom:none; }
+.register-table .reg-tag{ font-family: var(--f-data); font-size:11px; text-transform:uppercase; color: var(--violet); white-space:nowrap; }
+
+/* ---------- 6. MINI-ROLEPLAY ---------- */
+.roleplay-panel{ background: var(--b1-soft); border:1px solid var(--b1-line); border-radius: var(--r-lg); padding:26px 28px; }
+.roleplay-panel .block-num{ background: var(--b1); }
+.dialogue{ display:flex; flex-direction:column; gap:14px; }
+.line{ display:flex; gap:12px; align-items:flex-start; }
+.line-avatar{
+  flex:none; width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  font-family: var(--f-display); font-weight:600; font-size:14px; color:#fff;
+}
+.line.friend .line-avatar{ background: var(--ink-faint); }
+.line.you .line-avatar{ background: var(--b1); }
+.line-body{ flex:1; }
+.line-name{ font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.05em; color: var(--ink-faint); margin:0 0 4px; }
+.line-bubble{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:12px 14px; font-size:14.5px; color: var(--ink);
+}
+.line.you .line-bubble{ background:#fff; border-color: var(--b1-line); }
+.line-input{
+  width:100%; font-family: var(--f-body); font-size:14.5px; color: var(--ink);
+  background:#fff; border:1px solid var(--b1-line); border-radius: var(--r-sm);
+  padding:10px 12px; resize:vertical; min-height:44px; margin-top:2px;
+}
+.line-input:focus{ outline:none; border-color: var(--b1); }
+.line-hint{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin-top:5px; }
+.roleplay-tip{
+  margin-top:22px; padding:14px 16px; background: var(--paper-raised); border:1px solid var(--b1-line);
+  border-radius: var(--r-md); font-size:13.5px; color: var(--ink-soft);
+}
+.roleplay-tip strong{ color: var(--ink); }
+
+/* ---------- 7. CHOOSE YOUR WORDS ---------- */
+.choose-panel{ background: var(--paper-raised); border:1px solid var(--line); }
+.choose-intro{ font-size:14px; color: var(--ink-soft); margin:0 0 18px; }
+.choose-grid{ display:flex; flex-direction:column; gap:10px; }
+.choose-item{
+  display:flex; align-items:center; gap:14px; padding:12px 14px; border:1px solid var(--line);
+  border-radius: var(--r-md); cursor:pointer; transition: all .15s ease; background: var(--paper-raised);
+}
+.choose-item:hover{ border-color: var(--violet-line); background: var(--violet-soft); }
+.choose-item.picked{ border-color: var(--violet); background: var(--violet-soft); }
+.choose-checkbox{
+  flex:none; width:20px; height:20px; border-radius:6px; border:1.5px solid var(--line-strong);
+  display:flex; align-items:center; justify-content:center; font-size:13px; color:#fff;
+  background: var(--paper-raised);
+}
+.choose-item.picked .choose-checkbox{ background: var(--violet); border-color: var(--violet); }
+.choose-text{ font-size:14.5px; color: var(--ink); flex:1; }
+.choose-text .en{ margin-top:4px; }
+.choose-footer{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:20px; padding-top:18px; border-top:1px dashed var(--line); flex-wrap:wrap; }
+#choose-count{ font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); }
+.btn-primary{
+  font-family: var(--f-body); font-weight:600; font-size:14px; color:#fff; background: var(--violet);
+  border:none; padding:11px 22px; border-radius:999px; cursor:pointer; transition: transform .1s ease;
+}
+.btn-primary:hover{ transform: translateY(-1px); }
+textarea#final-summary{
+  width:100%; min-height:100px; font-family: var(--f-body); font-size:14.5px; color: var(--ink);
+  background: var(--paper-alt); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:14px 16px; resize:vertical; margin-top:16px; display:none;
+}
+textarea#final-summary:focus{ outline:none; border-color: var(--violet); }
+
+footer{ max-width:760px; margin:0 auto; padding:0 24px 60px; font-family: var(--f-data); font-size:12px; color: var(--ink-faint); text-align:center; }
+
+/* ---------- LANG TOGGLE ---------- */
+.lang-toggle{
+  position:fixed; top:18px; right:18px; z-index:50;
+  display:flex; align-items:center; gap:8px;
+  background: var(--paper-raised); border:1px solid var(--line-strong); border-radius:999px;
+  padding:6px 8px; box-shadow: var(--shadow-1);
+  font-family: var(--f-data); font-size:11px;
+}
+.lang-toggle span{ color: var(--ink-faint); padding:0 2px; }
+.lang-toggle span.active{ color: var(--violet); font-weight:700; }
+.lang-switch{
+  position:relative; width:38px; height:20px; border-radius:999px; background: var(--paper-alt);
+  border:1px solid var(--line-strong); cursor:pointer; flex:none;
+}
+.lang-switch::after{
+  content:""; position:absolute; top:1px; left:1px; width:16px; height:16px; border-radius:50%;
+  background: var(--violet); transition: transform .15s ease;
+}
+body.show-en .lang-switch::after{ transform: translateX(18px); }
+
+.en{
+  display:none;
+  font-family: var(--f-body); font-size:0.92em; color: var(--ink-faint);
+  font-style:italic; margin-top:4px;
+}
+body.show-en .en{ display:block; }
+body.show-en .en.inline{ display:inline; margin-top:0; margin-left:6px; }
+.en::before{ content:"EN · "; font-family: var(--f-data); font-style:normal; font-size:0.85em; color: var(--violet); }
+
+</style>
+</head>
+<body>
+
+<div class="lang-toggle">
+  <span id="lang-es-label" class="active">ES</span>
+  <div class="lang-switch" id="lang-switch" role="button" tabindex="0" aria-label="Mostrar traducción al inglés"></div>
+  <span id="lang-en-label">EN</span>
+</div>
+
+
+<header>
+  <p class="eyebrow"><span class="dot"></span>Expansion Pack · Mini</p>
+  <h1>¿A qué <em>te dedicas?</em></h1>
+  <p class="lede">No memorizar una lista de vocabulario de bodas. Construir, con seis verbos y sus preposiciones, todas las frases que necesitas para hablar de tu trabajo sin quedarte en blanco.
+    <span class="en">Not memorizing a list of wedding vocabulary. Building, with a handful of verbs and their prepositions, all the sentences you need to talk about your job without freezing up.</span>
+  </p>
+
+  <div class="meta-row">
+    <div>Contexto <strong>Directora de bodas · remoto EE.UU.–España</strong></div>
+    <div>Bloqueo <strong>"¿A qué te dedicas?" — explicar 5–10 min</strong></div>
+    <div>Duración <strong>~20 min</strong></div>
+  </div>
+
+  <div class="structure-strip">
+    <div class="structure-cell"><div class="s-icon">🧊</div><div class="s-label">El momento</div></div>
+    <div class="structure-cell"><div class="s-icon">🚪</div><div class="s-label">Salida inmediata</div></div>
+    <div class="structure-cell"><div class="s-icon">🔀</div><div class="s-label">Alternativas</div></div>
+    <div class="structure-cell"><div class="s-icon">🧩</div><div class="s-label">Verbos + prep.</div></div>
+    <div class="structure-cell"><div class="s-icon">💬</div><div class="s-label">Fórmulas</div></div>
+  </div>
+  <div class="structure-strip row2">
+    <div class="structure-cell"><div class="s-icon">🆘</div><div class="s-label">Rescate</div></div>
+    <div class="structure-cell"><div class="s-icon">❓</div><div class="s-label">Si preguntan más</div></div>
+    <div class="structure-cell"><div class="s-icon">🎚️</div><div class="s-label">Registro</div></div>
+    <div class="structure-cell"><div class="s-icon">🎭</div><div class="s-label">Roleplay</div></div>
+    <div class="structure-cell"><div class="s-icon">✅</div><div class="s-label">Tus palabras</div></div>
+  </div>
+</header>
+
+<main>
+
+  <!-- ============ 1. EL MOMENTO ============ -->
+  <section class="block">
+    <div class="block-head">
+      <div class="block-num">1</div>
+      <h2>El momento</h2>
+      <div class="time-tag">bloqueo real</div>
+    </div>
+    <div class="scene-panel">
+      <div class="scene-setup">
+        <div class="scene-icon">🥂</div>
+        <div class="scene-text">Estás en una cena con gente nueva. Alguien se entera de que vives entre España y Estados Unidos y muestra <strong>interés real</strong> — no es una pregunta de cortesía, quiere que le cuentes más.
+          <span class="en">You're at a dinner with new people. Someone finds out you live between Spain and the United States and shows <strong>real interest</strong> — it's not a polite question, they want to hear more.</span>
+        </div>
+      </div>
+      <div class="blocked-line">
+        <span class="who">Alguien en la mesa</span>
+        "Qué interesante... ¿y a qué te dedicas exactamente?"
+        <span class="en">"How interesting... so what exactly do you do for work?"</span>
+      </div>
+      <p class="scene-text" style="margin-top:16px;">Sabes decir <em>"soy directora de bodas"</em>. Pero ahí la frase se para. La otra persona espera algo más — con quién trabajas, desde dónde, cómo te organizas — y es justo ese "algo más" lo que no cabe en una clase normal.
+        <span class="en">You know how to say <em>"I'm a wedding planner"</em>. But that's where the sentence stops. The other person expects more — who you work with, from where, how you organize it — and that "more" is exactly what doesn't fit in a normal class.</span>
+      </p>
+      <p class="scene-text" style="margin-top:12px;">Este bloqueo no aparece solo en cenas con desconocidos. Aparece cada vez que alguien muestra <strong>interés real</strong> en vez de hacer la pregunta de cortesía: un vecino nuevo en el rellano, la madre de un cliente en una llamada, alguien en el gimnasio, la persona que te corta el pelo. En todos esos momentos la primera frase te sale bien — el problema empieza justo después, cuando toca sostener la conversación otros 30 segundos más.
+        <span class="en">This block doesn't only show up at dinners with strangers. It shows up any time someone shows <strong>real interest</strong> instead of asking out of politeness: a new neighbour in the hallway, a client's mother on a call, someone at the gym, your hairdresser. In all those moments the first sentence comes out fine — the problem starts right after, when you need to keep the conversation going for another 30 seconds.</span>
+      </p>
+      <div class="scene-setup" style="margin-top:16px; margin-bottom:0;">
+        <div class="scene-icon">🧠</div>
+        <div class="scene-text">Por qué se produce el bloqueo: en inglés tienes automatizada toda la frase larga sobre tu trabajo. En español solo tienes la versión corta — "soy directora de bodas" — y cuando intentas alargarla en tiempo real, tu cerebro busca las palabras en inglés y traduce sobre la marcha, lo que te hace dudar y perder el hilo.
+          <span class="en">Why the block happens: in English, the whole long explanation of your job is automatic. In Spanish you only have the short version — "I'm a wedding planner" — and when you try to extend it in real time, your brain reaches for the English words and translates on the fly, which makes you hesitate and lose the thread.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 2. LA SALIDA INMEDIATA ============ -->
+  <section class="block">
+    <div class="block-head">
+      <div class="block-num">2</div>
+      <h2>La salida inmediata</h2>
+    </div>
+    <div class="panel exit-panel">
+      <div class="exit-line">Me <span class="accent">encargo de</span> organizar bodas para un restaurante <span class="accent">de</span> EE.UU., pero trabajo <span class="accent">desde</span> España.
+        <span class="en">I'm <span class="accent">in charge of</span> organizing weddings for a restaurant <span class="accent">in</span> the US, but I work <span class="accent">from</span> Spain.</span>
+      </div>
+      <p class="exit-note">Esta frase sola ya resuelve el bloqueo: dice <strong>qué haces</strong>, <strong>para quién</strong> y <strong>desde dónde</strong> en una sola respiración. Todo lo que viene después en este Mini son variaciones sobre esta misma estructura.
+        <span class="en">This sentence alone already solves the block: it says <strong>what you do</strong>, <strong>for whom</strong>, and <strong>from where</strong> in one breath. Everything that follows in this Mini is a variation on this same structure.</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ 3. ALTERNATIVAS ============ -->
+  <section class="block">
+    <div class="block-head">
+      <div class="block-num">3</div>
+      <h2>Alternativas</h2>
+      <div class="time-tag">misma idea, otro giro</div>
+    </div>
+    <div class="panel">
+      <div class="alt-list">
+        <div class="alt-item"><span class="alt-num">1</span><div class="alt-main"><span class="alt-text">Trabajo organizando bodas para un restaurante de EE.UU.</span><span class="en">My work is organizing weddings for a restaurant in the US.</span></div><span class="alt-tag">directa</span></div>
+        <div class="alt-item"><span class="alt-num">2</span><div class="alt-main"><span class="alt-text">Soy directora de bodas — coordino todo desde España para clientes en EE.UU.</span><span class="en">I'm a wedding planner — I coordinate everything from Spain for clients in the US.</span></div><span class="alt-tag">con "coordino"</span></div>
+        <div class="alt-item"><span class="alt-num">3</span><div class="alt-main"><span class="alt-text">Me dedico a organizar bodas, trabajando en remoto para un restaurante americano.</span><span class="en">I work in wedding planning, working remotely for an American restaurant.</span></div><span class="alt-tag">"me dedico a"</span></div>
+        <div class="alt-item"><span class="alt-num">4</span><div class="alt-main"><span class="alt-text">Estoy a cargo de las bodas de un restaurante en EE.UU., aunque vivo en España.</span><span class="en">I'm in charge of the weddings for a restaurant in the US, even though I live in Spain.</span></div><span class="alt-tag">formal</span></div>
+        <div class="alt-item"><span class="alt-num">5</span><div class="alt-main"><span class="alt-text">Pues... organizo bodas. Para un restaurante de EE.UU., pero desde aquí.</span><span class="en">Well... I organize weddings. For a restaurant in the US, but from here.</span></div><span class="alt-tag">informal / con pausa</span></div>
+        <div class="alt-item"><span class="alt-num">6</span><div class="alt-main"><span class="alt-text">Mi trabajo es organizar bodas — todo el papeleo, los proveedores, la logística.</span><span class="en">My job is organizing weddings — all the paperwork, the vendors, the logistics.</span></div><span class="alt-tag">énfasis en tareas</span></div>
+        <div class="alt-item"><span class="alt-num">7</span><div class="alt-main"><span class="alt-text">Soy directora de bodas para un restaurante de EE.UU., pero llevo dos años viviendo aquí.</span><span class="en">I'm a wedding planner for a restaurant in the US, but I've been living here for two years.</span></div><span class="alt-tag">con el "cuánto tiempo"</span></div>
+        <div class="alt-item"><span class="alt-num">8</span><div class="alt-main"><span class="alt-text">Organizo bodas a distancia — es un trabajo curioso porque nunca piso el restaurante.</span><span class="en">I organize weddings remotely — it's a funny job because I never set foot in the restaurant.</span></div><span class="alt-tag">añade opinión</span></div>
+        <div class="alt-item"><span class="alt-num">9</span><div class="alt-main"><span class="alt-text">Digamos que soy la persona que hace que una boda en EE.UU. funcione, aunque yo esté aquí.</span><span class="en">Let's say I'm the person who makes a wedding in the US work, even though I'm here.</span></div><span class="alt-tag">con humor</span></div>
+        <div class="alt-item"><span class="alt-num">10</span><div class="alt-main"><span class="alt-text">Ahora mismo me dedico a las bodas, aunque antes trabajaba en otra cosa.</span><span class="en">Right now I work in weddings, though I used to work in something else.</span></div><span class="alt-tag">con contraste temporal</span></div>
+      </div>
+      <p class="exit-note" style="margin-top:18px;">Fíjate en que todas dicen exactamente lo mismo. Cambiar de una a otra según quién te pregunte — un desconocido en una cena, un vecino, alguien en una entrevista — es lo que hace que suene natural en vez de memorizado.
+        <span class="en">Notice that they all say exactly the same thing. Switching between them depending on who's asking — a stranger at dinner, a neighbour, someone at an interview — is what makes it sound natural instead of memorized.</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ 4. VERBOS + PREPOSICIONES ============ -->
+  <section class="block">
+    <div class="block-head">
+      <div class="block-num">4</div>
+      <h2>Verbos + preposiciones</h2>
+      <div class="time-tag">la caja de piezas</div>
+    </div>
+    <div class="panel">
+      <p style="font-size:14px; color:var(--ink-soft); margin:0 0 16px;">No es "organize = organizar". Es el verbo <strong>con su preposición</strong>, porque así cada uno te permite construir una frase entera. Toca la tarjeta para ver el ejemplo.
+        <span class="en">It's not "organize = organizar". It's the verb <strong>with its preposition</strong>, because that's what lets each one build a whole sentence. Tap the card to see the example.</span>
+      </p>
+      <p style="font-size:13.5px; color:var(--ink-faint); margin:0 0 18px;">Fíjate en que casi todas usan solo cinco preposiciones — <em>de, con, para, desde, a</em> — repetidas una y otra vez. No necesitas veinte piezas nuevas, necesitas soltura con estas cinco combinadas con el verbo correcto.
+        <span class="en">Notice that almost all of them use just five prepositions — <em>de, con, para, desde, a</em> — over and over. You don't need twenty new pieces, you need fluency with these five combined with the right verb.</span>
+      </p>
+      <div class="prep-grid" id="prep-grid"></div>
+      <p class="prep-hint">Toca cada tarjeta para ver cómo suena en una frase real. Hay 20 — no hace falta memorizarlas todas hoy.</p>
+    </div>
+  </section>
+
+  <!-- ============ 5. FÓRMULAS NATURALES ============ -->
+  <section class="block">
+    <div class="block-head">
+      <div class="block-num">5</div>
+      <h2>Fórmulas naturales</h2>
+      <div class="time-tag">para conectar piezas</div>
+    </div>
+    <div class="panel">
+      <div class="formula-grid">
+        <div class="formula-card"><div class="f-label">Para añadir un detalle</div><div class="f-text">"...y, además, me encargo de..."</div><span class="en">"...and, on top of that, I'm in charge of..."</span></div>
+        <div class="formula-card"><div class="f-label">Para explicar el "cómo"</div><div class="f-text">"Lo que hago es coordinarme con..."</div><span class="en">"What I do is coordinate with..."</span></div>
+        <div class="formula-card"><div class="f-label">Para el contraste remoto</div><div class="f-text">"Trabajo desde aquí, pero para..."</div><span class="en">"I work from here, but for..."</span></div>
+        <div class="formula-card"><div class="f-label">Para cerrar sin alargarte</div><div class="f-text">"Básicamente, de eso se trata."</div><span class="en">"Basically, that's what it comes down to."</span></div>
+        <div class="formula-card"><div class="f-label">Para matizar una dificultad</div><div class="f-text">"Lo complicado es sobre todo..."</div><span class="en">"The tricky part is mainly..."</span></div>
+        <div class="formula-card"><div class="f-label">Para dar un ejemplo concreto</div><div class="f-text">"Por ejemplo, esta semana estoy..."</div><span class="en">"For example, this week I'm..."</span></div>
+        <div class="formula-card"><div class="f-label">Para comparar con antes</div><div class="f-text">"Antes hacía..., ahora me dedico a..."</div><span class="en">"Before I used to do..., now I work in..."</span></div>
+        <div class="formula-card"><div class="f-label">Para devolver la pregunta</div><div class="f-text">"¿Y tú? ¿A qué te dedicas?"</div><span class="en">"And you? What do you do?"</span></div>
+      </div>
+      <p class="exit-note" style="margin-top:16px;">Estas fórmulas no dependen del tema de bodas — son conectores que puedes reutilizar cuando hables de tu perro, del barrio o de cualquier otra cosa. Aquí las practicamos con tu trabajo porque es donde más te falta soltura ahora mismo.
+        <span class="en">These formulas don't depend on the wedding topic — they're connectors you can reuse when talking about your dog, the neighbourhood, or anything else. We're practicing them here with your job because that's where you need the most fluency right now.</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ 5b. FRASES DE RESCATE ============ -->
+  <section class="block">
+    <div class="block-head">
+      <div class="block-num">5<span style="font-size:9px; vertical-align:super;">b</span></div>
+      <h2>Frases de rescate</h2>
+      <div class="time-tag">para cuando te falta la palabra</div>
+    </div>
+    <div class="panel">
+      <p style="font-size:14px; color:var(--ink-soft); margin:0 0 16px;">Ya las conoces de clase — aquí es donde de verdad las necesitas: a mitad de la explicación de tu trabajo es cuando más probable es que se te escape una palabra en español y tengas que tirar de una muletilla en vez de callarte.
+        <span class="en">You already know these from class — this is where you really need them: halfway through explaining your job is when a Spanish word is most likely to slip away, and you need a filler instead of going silent.</span>
+      </p>
+      <div class="rescue-grid">
+        <div class="rescue-card"><div class="rescue-phrase">A ver...</div><div class="rescue-use">Para ganar 2–3 segundos mientras ordenas la frase sobre proveedores o logística.<span class="en">To buy 2–3 seconds while you order the sentence about vendors or logistics.</span></div></div>
+        <div class="rescue-card"><div class="rescue-phrase">Es que no me acuerdo de la palabra</div><div class="rescue-use">Cuando sabes lo que quieres decir — "florista", "catering" — pero no te sale en español.<span class="en">When you know what you want to say — "florist", "catering" — but it won't come out in Spanish.</span></div></div>
+        <div class="rescue-card"><div class="rescue-phrase">Bueno...</div><div class="rescue-use">Para empezar una respuesta que no es un simple sí o no, como cuando te preguntan si es un trabajo complicado.<span class="en">To start an answer that isn't a simple yes or no, like when they ask if it's a complicated job.</span></div></div>
+        <div class="rescue-card"><div class="rescue-phrase">Digamos que...</div><div class="rescue-use">Para suavizar una explicación que estás simplificando sobre la marcha.<span class="en">To soften an explanation you're simplifying on the spot.</span></div></div>
+        <div class="rescue-card"><div class="rescue-phrase">¿Cómo se dice...?</div><div class="rescue-use">Cuando directamente no sabes la palabra y prefieres preguntar a describirla.<span class="en">When you flat out don't know the word and would rather ask than describe it.</span></div></div>
+        <div class="rescue-card"><div class="rescue-phrase">Tengo una cuestión...</div><div class="rescue-use">Menos útil aquí, pero reutilizable si tú misma necesitas preguntar algo a la otra persona.<span class="en">Less useful here, but reusable if you need to ask the other person something.</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 5c. SI PREGUNTAN MÁS ============ -->
+  <section class="block">
+    <div class="block-head">
+      <div class="block-num">5<span style="font-size:9px; vertical-align:super;">c</span></div>
+      <h2>Si preguntan más</h2>
+      <div class="time-tag">las tres preguntas que siempre vienen después</div>
+    </div>
+    <div class="panel">
+      <p style="font-size:14px; color:var(--ink-soft); margin:0 0 16px;">Cuando alguien tiene interés real, casi siempre pregunta una de estas tres cosas a continuación. Tener la respuesta lista evita el segundo bloqueo — el que viene justo cuando crees que ya has terminado de hablar.
+        <span class="en">When someone has real interest, they'll almost always ask one of these three things next. Having the answer ready avoids the second block — the one that hits right when you think you're done talking.</span>
+      </p>
+      <div class="followup-list">
+        <div class="followup-item">
+          <div class="followup-q">¿Y cómo es un día normal de trabajo para ti?
+            <span class="en" style="font-size:0.85em; margin-top:2px;">And what's a normal work day like for you?</span>
+          </div>
+          <div class="followup-a">Pues por la mañana suelo <strong>estar en contacto con</strong> el restaurante, y por la tarde me <strong>ocupo de</strong> hablar con los proveedores.
+            <span class="en">In the mornings I'm usually <strong>in contact with</strong> the restaurant, and in the afternoon I <strong>deal with</strong> talking to the vendors.</span>
+          </div>
+        </div>
+        <div class="followup-item">
+          <div class="followup-q">¿Y no es raro no conocer en persona a la gente con la que trabajas?
+            <span class="en" style="font-size:0.85em; margin-top:2px;">And isn't it strange not knowing the people you work with in person?</span>
+          </div>
+          <div class="followup-a">Al principio sí, pero ahora ya <strong>estoy acostumbrada a</strong> trabajar así — todo <strong>se resuelve a través</strong> de videollamadas.
+            <span class="en">At first it was, but now I'm <strong>used to</strong> working this way — everything gets sorted <strong>through</strong> video calls.</span>
+          </div>
+        </div>
+        <div class="followup-item">
+          <div class="followup-q">¿Y qué es lo más difícil de coordinar todo desde tan lejos?
+            <span class="en" style="font-size:0.85em; margin-top:2px;">And what's the hardest part of coordinating everything from so far away?</span>
+          </div>
+          <div class="followup-a">Sobre todo la diferencia horaria — a veces tengo que <strong>esperar a</strong> que sea de día en EE.UU. para <strong>hablar con</strong> alguien.
+            <span class="en">Mostly the time difference — sometimes I have to <strong>wait until</strong> it's daytime in the US to <strong>talk to</strong> someone.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 5d. REGISTRO ============ -->
+  <section class="block">
+    <div class="block-head">
+      <div class="block-num">5<span style="font-size:9px; vertical-align:super;">d</span></div>
+      <h2>Ajustar el registro</h2>
+      <div class="time-tag">la misma idea, distinto contexto</div>
+    </div>
+    <div class="panel">
+      <p style="font-size:14px; color:var(--ink-soft); margin:0 0 4px;">No hablas igual con el vecino en el rellano que en una posible reunión de trabajo. Aquí tienes la misma información adaptada a tres contextos que ya has vivido.
+        <span class="en">You don't talk the same way to the neighbour in the hallway as in a possible work meeting. Here's the same information adapted to three contexts you've already lived through.</span>
+      </p>
+      <table class="register-table">
+        <tr><th>Contexto</th><th>Cómo sonaría</th></tr>
+        <tr><td class="reg-tag">cena / social</td><td>Pues organizo bodas, para un restaurante de EE.UU. — así que trabajo desde aquí pero para allá.<span class="en">Well, I organize weddings, for a restaurant in the US — so I work from here but for there.</span></td></tr>
+        <tr><td class="reg-tag">vecino / cercano</td><td>Ya sabes, lo de siempre — con la boda que tengo entre manos ahora mismo, liadísima con los proveedores.<span class="en">You know, same as always — with the wedding I've got on my hands right now, up to my neck with the vendors.</span></td></tr>
+        <tr><td class="reg-tag">profesional / formal</td><td>Soy directora de bodas para un restaurante en EE.UU. Coordino proveedores, logística y clientes de forma remota desde España.<span class="en">I'm a wedding planner for a restaurant in the US. I coordinate vendors, logistics, and clients remotely from Spain.</span></td></tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============ 6. MINI-ROLEPLAY ============ -->
+  <section class="block">
+    <div class="block-head">
+      <div class="block-num">6</div>
+      <h2>Mini-roleplay</h2>
+      <div class="time-tag">la cena</div>
+    </div>
+    <div class="roleplay-panel">
+      <div class="scene-setup">
+        <div class="scene-icon">🍽️</div>
+        <div class="scene-text"><strong>Escena:</strong> sigues en la cena. La persona quiere saber más — usa lo que has visto arriba para responder con tus propias palabras.
+          <span class="en"><strong>Scene:</strong> you're still at the dinner. The person wants to know more — use what you've seen above to answer in your own words.</span>
+        </div>
+      </div>
+      <div class="dialogue">
+        <div class="line friend">
+          <div class="line-avatar">A</div>
+          <div class="line-body">
+            <div class="line-name">Alguien en la mesa</div>
+            <div class="line-bubble">¿Y a qué te dedicas exactamente?<span class="en">And what exactly do you do?</span></div>
+          </div>
+        </div>
+        <div class="line you">
+          <div class="line-avatar">L</div>
+          <div class="line-body">
+            <div class="line-name">Tú</div>
+            <textarea class="line-input" placeholder="Escribe tu respuesta usando encargarse de / trabajar para / desde..."></textarea>
+            <div class="line-hint">usa al menos un verbo + preposición del bloque 4</div>
+          </div>
+        </div>
+        <div class="line friend">
+          <div class="line-avatar">A</div>
+          <div class="line-body">
+            <div class="line-name">Alguien en la mesa</div>
+            <div class="line-bubble">Qué curioso, ¿y cómo te coordinas con la gente de allí si estás aquí?<span class="en">How curious — and how do you coordinate with the people over there if you're here?</span></div>
+          </div>
+        </div>
+        <div class="line you">
+          <div class="line-avatar">L</div>
+          <div class="line-body">
+            <div class="line-name">Tú</div>
+            <textarea class="line-input" placeholder="Explica cómo te organizas: coordinarse con / estar en contacto con / hacer seguimiento de..."></textarea>
+            <div class="line-hint">añade con quién trabajas y cómo os comunicáis</div>
+          </div>
+        </div>
+        <div class="line friend">
+          <div class="line-avatar">A</div>
+          <div class="line-body">
+            <div class="line-name">Alguien en la mesa</div>
+            <div class="line-bubble">¿Y no es un lío con los proveedores, con la diferencia horaria y todo eso?<span class="en">And isn't it a hassle with the vendors, the time difference, and all that?</span></div>
+          </div>
+        </div>
+        <div class="line you">
+          <div class="line-avatar">L</div>
+          <div class="line-body">
+            <div class="line-name">Tú</div>
+            <textarea class="line-input" placeholder="Reconoce la dificultad y sigue: es que... / a ver... / lo complicado es..."></textarea>
+            <div class="line-hint">puedes usar una muletilla si necesitas un segundo para pensar</div>
+          </div>
+        </div>
+      </div>
+      <div class="roleplay-tip"><strong>Truco:</strong> si te quedas en blanco a mitad de frase, no la abandones — vuelve a un verbo + preposición que ya conozcas y sigue desde ahí. La estructura te sostiene aunque falte una palabra.
+        <span class="en"><strong>Trick:</strong> if you blank out mid-sentence, don't abandon it — go back to a verb + preposition you already know and continue from there. The structure holds you up even if a word is missing.</span>
+      </div>
+
+      <div class="scene-setup" style="margin-top:28px;">
+        <div class="scene-icon">🚪</div>
+        <div class="scene-text"><strong>Segunda escena:</strong> ahora es el vecino, en el rellano, con el perro esperando para el paseo. Registro más cercano — no hace falta ser tan completa como en la cena.
+          <span class="en"><strong>Second scene:</strong> now it's the neighbour, in the hallway, with the dog waiting for its walk. More casual register — you don't need to be as thorough as at the dinner.</span>
+        </div>
+      </div>
+      <div class="dialogue" style="margin-top:16px;">
+        <div class="line friend">
+          <div class="line-avatar">V</div>
+          <div class="line-body">
+            <div class="line-name">Vecino</div>
+            <div class="line-bubble">Oye, ¿y tú a qué te dedicas? Nunca te veo salir a una hora fija.<span class="en">Hey, so what do you do? I never see you leave at a fixed time.</span></div>
+          </div>
+        </div>
+        <div class="line you">
+          <div class="line-avatar">L</div>
+          <div class="line-body">
+            <div class="line-name">Tú</div>
+            <textarea class="line-input" placeholder="Responde en registro cercano — puedes usar 'ya sabes' o 'pues...'"></textarea>
+            <div class="line-hint">prueba con una fórmula de la sección 5 antes de la explicación</div>
+          </div>
+        </div>
+        <div class="line friend">
+          <div class="line-avatar">V</div>
+          <div class="line-body">
+            <div class="line-name">Vecino</div>
+            <div class="line-bubble">Anda, qué curioso. ¿Y trabajas siempre desde casa entonces?<span class="en">Oh, how interesting. So you always work from home then?</span></div>
+          </div>
+        </div>
+        <div class="line you">
+          <div class="line-avatar">L</div>
+          <div class="line-body">
+            <div class="line-name">Tú</div>
+            <textarea class="line-input" placeholder="Usa trabajar desde / estar acostumbrada a..."></textarea>
+            <div class="line-hint">confirma y añade un pequeño matiz</div>
+          </div>
+        </div>
+      </div>
+      <div class="roleplay-tip" style="margin-top:20px;"><strong>Compara:</strong> vuelve a leer tu respuesta de la primera escena (la cena) y esta última. La información es la misma — lo que cambia es cuánto detalles das y qué tono usas. Ese ajuste es la parte que de verdad hace que suenes natural.
+        <span class="en"><strong>Compare:</strong> reread your answer from the first scene (the dinner) and this last one. The information is the same — what changes is how much detail you give and what tone you use. That adjustment is what really makes you sound natural.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 7. CHOOSE YOUR WORDS ============ -->
+  <section class="block">
+    <div class="block-head">
+      <div class="block-num">7</div>
+      <h2>Choose your words</h2>
+      <div class="time-tag">lo que te llevas</div>
+    </div>
+    <div class="panel choose-panel">
+      <p class="choose-intro">De las 20 expresiones de abajo, marca las 5–8 que realmente quieres tener listas la próxima vez que alguien te pregunte a qué te dedicas. No hace falta marcarlas todas — mejor pocas y bien interiorizadas que veinte a medias.
+        <span class="en">Of the 20 expressions below, mark the 5–8 you really want to have ready next time someone asks what you do. No need to mark them all — better a few well internalized than twenty half-learned.</span>
+      </p>
+      <div class="choose-grid" id="choose-grid"></div>
+      <div class="choose-footer">
+        <span id="choose-count">0 seleccionadas</span>
+        <button class="btn-primary" id="build-summary">Construir mi resumen</button>
+      </div>
+      <textarea id="final-summary" placeholder="Aquí aparecerán tus expresiones elegidas — edítalas o combínalas como quieras."></textarea>
+    </div>
+  </section>
+
+</main>
+
+<footer>ESCOLAR · Expansion Pack Mini · Wedding Planning</footer>
+
+<script>
+/* ---------- VERBOS + PREPOSICIONES ---------- */
+const PREPS = [
+  {verb:"encargarse", prep:"de", example:"Me encargo de organizar cada boda de principio a fin.", en:"I'm in charge of organizing every wedding from start to finish."},
+  {verb:"trabajar", prep:"para", example:"Trabajo para un restaurante de EE.UU.", en:"I work for a restaurant in the US."},
+  {verb:"trabajar", prep:"con", example:"Trabajo con los clientes durante meses antes del evento.", en:"I work with clients for months before the event."},
+  {verb:"trabajar", prep:"desde", example:"Trabajo desde España, aunque mis clientes están en EE.UU.", en:"I work from Spain, even though my clients are in the US."},
+  {verb:"coordinarse", prep:"con", example:"Me coordino con los proveedores — catering, flores, música.", en:"I coordinate with the vendors — catering, flowers, music."},
+  {verb:"ocuparse", prep:"de", example:"Me ocupo de toda la logística: horarios, invitados, local.", en:"I handle all the logistics: schedules, guests, venue."},
+  {verb:"estar a cargo", prep:"de", example:"Estoy a cargo de las bodas de todo el restaurante.", en:"I'm in charge of every wedding for the restaurant."},
+  {verb:"organizar", prep:"para", example:"Organizo bodas para gente que a veces ni conozco en persona.", en:"I organize weddings for people I sometimes never meet in person."},
+  {verb:"estar en contacto", prep:"con", example:"Estoy en contacto constante con el equipo de EE.UU.", en:"I'm in constant contact with the US team."},
+  {verb:"hacer seguimiento", prep:"de", example:"Hago seguimiento de cada detalle hasta el mismo día del evento.", en:"I follow up on every detail right up to the day of the event."},
+  {verb:"dedicarse", prep:"a", example:"Me dedico a esto desde hace unos cuantos años.", en:"I've been doing this for a few years now."},
+  {verb:"especializarse", prep:"en", example:"Me especializo en bodas grandes, de cien invitados o más.", en:"I specialize in large weddings, a hundred guests or more."},
+  {verb:"depender", prep:"de", example:"Todo depende de que el catering confirme la fecha a tiempo.", en:"Everything depends on the caterer confirming the date on time."},
+  {verb:"contar", prep:"con", example:"Cuento con un florista de confianza para casi todas las bodas.", en:"I rely on a trusted florist for almost every wedding."},
+  {verb:"llevarse bien", prep:"con", example:"Me llevo muy bien con la mayoría de los proveedores que uso.", en:"I get along well with most of the vendors I use."},
+  {verb:"estar acostumbrada", prep:"a", example:"Ya estoy acostumbrada a trabajar sin verlos en persona.", en:"I'm already used to working without seeing them in person."},
+  {verb:"empezar", prep:"por", example:"Siempre empiezo por confirmar la fecha y el local.", en:"I always start by confirming the date and the venue."},
+  {verb:"acabar", prep:"con", example:"El proceso acaba con una llamada final el día antes del evento.", en:"The process ends with a final call the day before the event."},
+  {verb:"tratar", prep:"con", example:"Trato directamente con las parejas, no solo con el restaurante.", en:"I deal directly with the couples, not just with the restaurant."},
+  {verb:"comunicarse", prep:"con", example:"Me comunico con el equipo de EE.UU. casi todos los días.", en:"I communicate with the US team almost every day."},
+];
+
+const grid = document.getElementById('prep-grid');
+PREPS.forEach(p=>{
+  const card = document.createElement('div');
+  card.className = 'prep-card';
+  card.tabIndex = 0;
+  card.innerHTML = `<div class="prep-verb">${p.verb} <span class="prep">${p.prep}</span></div><div class="prep-example">${p.example}<span class="en">${p.en}</span></div>`;
+  const flip = ()=> card.classList.toggle('flipped');
+  card.addEventListener('click', flip);
+  card.addEventListener('keydown', e=>{ if(e.key==='Enter' || e.key===' '){ e.preventDefault(); flip(); } });
+  grid.appendChild(card);
+});
+
+/* ---------- CHOOSE YOUR WORDS ---------- */
+const CHOICES = [
+  {es:"Me encargo de organizar bodas para un restaurante de EE.UU.", en:"I'm in charge of organizing weddings for a restaurant in the US."},
+  {es:"Trabajo desde España, pero para clientes de EE.UU.", en:"I work from Spain, but for clients in the US."},
+  {es:"Me coordino con los proveedores — catering, flores, local.", en:"I coordinate with vendors — catering, flowers, venue."},
+  {es:"Estoy a cargo de toda la logística del evento.", en:"I'm in charge of all the event's logistics."},
+  {es:"Trabajo con clientes de EE.UU. desde hace años.", en:"I've worked with clients in the US for years."},
+  {es:"Hago seguimiento de cada detalle hasta el día del evento.", en:"I follow up on every detail right up to the event."},
+  {es:"Estoy en contacto constante con el equipo de allí.", en:"I'm in constant contact with the team over there."},
+  {es:"Me dedico a organizar bodas, en remoto.", en:"I work in wedding planning, remotely."},
+  {es:"Es que a veces es un poco complicado con la diferencia horaria.", en:"It's just that it's sometimes a bit tricky with the time difference."},
+  {es:"Básicamente, de eso se trata.", en:"Basically, that's what it comes down to."},
+  {es:"Me especializo en bodas grandes, de cien invitados o más.", en:"I specialize in large weddings, a hundred guests or more."},
+  {es:"Cuento con un florista de confianza para casi todas las bodas.", en:"I rely on a trusted florist for almost every wedding."},
+  {es:"Ya estoy acostumbrada a trabajar sin verlos en persona.", en:"I'm already used to working without seeing them in person."},
+  {es:"Siempre empiezo por confirmar la fecha y el local.", en:"I always start by confirming the date and the venue."},
+  {es:"Trato directamente con las parejas, no solo con el restaurante.", en:"I deal directly with the couples, not just the restaurant."},
+  {es:"A ver... déjame pensar cómo explicarlo bien.", en:"Let's see... let me think how to explain this well."},
+  {es:"Digamos que soy la persona que hace que todo funcione desde aquí.", en:"Let's say I'm the person who makes everything work from here."},
+  {es:"Lo complicado es sobre todo la diferencia horaria.", en:"The tricky part is mainly the time difference."},
+  {es:"Antes hacía otra cosa, ahora me dedico a esto.", en:"I used to do something else, now I work in this."},
+  {es:"¿Y tú? ¿A qué te dedicas?", en:"And you? What do you do?"},
+];
+
+const chooseGrid = document.getElementById('choose-grid');
+const countEl = document.getElementById('choose-count');
+const picked = new Set();
+
+CHOICES.forEach((choice, i)=>{
+  const item = document.createElement('div');
+  item.className = 'choose-item';
+  item.innerHTML = `<div class="choose-checkbox"></div><div class="choose-text">${choice.es}<span class="en">${choice.en}</span></div>`;
+  item.addEventListener('click', ()=>{
+    item.classList.toggle('picked');
+    if(picked.has(i)){ picked.delete(i); item.querySelector('.choose-checkbox').textContent=''; }
+    else{ picked.add(i); item.querySelector('.choose-checkbox').textContent='✓'; }
+    countEl.textContent = `${picked.size} seleccionada${picked.size===1?'':'s'}`;
+  });
+  chooseGrid.appendChild(item);
+});
+
+document.getElementById('build-summary').addEventListener('click', ()=>{
+  const ta = document.getElementById('final-summary');
+  if(picked.size === 0){
+    ta.style.display = 'block';
+    ta.value = 'Marca al menos una expresión arriba para construir tu resumen.';
+    return;
+  }
+  const ordered = [...picked].sort((a,b)=>a-b).map(i=>CHOICES[i].es);
+  ta.style.display = 'block';
+  ta.value = ordered.join(' ');
+});
+
+/* ---------- LANG TOGGLE (ES / EN) ---------- */
+const langSwitch = document.getElementById('lang-switch');
+const esLabel = document.getElementById('lang-es-label');
+const enLabel = document.getElementById('lang-en-label');
+const setLang = (showEn)=>{
+  document.body.classList.toggle('show-en', showEn);
+  esLabel.classList.toggle('active', !showEn);
+  enLabel.classList.toggle('active', showEn);
+  langSwitch.setAttribute('aria-pressed', String(showEn));
+};
+langSwitch.addEventListener('click', ()=> setLang(!document.body.classList.contains('show-en')));
+langSwitch.addEventListener('keydown', (e)=>{
+  if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); setLang(!document.body.classList.contains('show-en')); }
+});
+setLang(false);
+</script>
+
+</body>
+</html>

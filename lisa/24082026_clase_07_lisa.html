@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clase 7 · Concordancia, el detalle que da seguridad — Lisa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+
+/* ╔══════════════════════════════════════════════════════════════╗
+   ║  ESCOLAR — sistema de diseño para clases de español online   ║
+   ║  Clase 7 · L2 Lista de invitados · "Concordancia"              ║
+   ╚══════════════════════════════════════════════════════════════╝ */
+
+:root{
+  --paper:        #FBF7EE;
+  --paper-raised: #FFFFFF;
+  --paper-alt:    #F3ECDA;
+  --ink:          #23291F;
+  --ink-soft:     #565F52;
+  --ink-faint:    #8B9184;
+  --line:         rgba(35,41,31,0.12);
+  --line-strong:  rgba(35,41,31,0.22);
+
+  --b1:      #2F6FED;  --b1-soft: #EAF1FE;  --b1-line: #C6D9FC;
+  --b2:      #2E9E6B;  --b2-soft: #E9F6EF;  --b2-line: #BEE6D3;
+  --family:  #B5502E;  --family-soft: #FBEBE3; --family-line: #EFC9B4;
+  --violet:  #7B4FC9;  --violet-soft: #F1EBFB; --violet-line: #D9C8F0;
+
+  --f-display: 'Fraunces', Georgia, serif;
+  --f-body:    'IBM Plex Sans', system-ui, sans-serif;
+  --f-data:    'IBM Plex Mono', monospace;
+
+  --r-sm: 8px;
+  --r-md: 14px;
+  --r-lg: 20px;
+
+  --shadow-1: 0 1px 2px rgba(35,41,31,0.05), 0 1px 8px rgba(35,41,31,0.04);
+}
+
+*{ box-sizing:border-box; }
+body{
+  margin:0;
+  background: var(--paper);
+  background-image: radial-gradient(circle at 1px 1px, var(--line) 1px, transparent 0);
+  background-size: 22px 22px;
+  color: var(--ink);
+  font-family: var(--f-body);
+  line-height:1.6;
+}
+::selection{ background: var(--b1-soft); }
+
+/* ---------- HEADER ---------- */
+header{ padding:44px 24px 28px; max-width:760px; margin:0 auto; }
+.eyebrow{
+  font-family: var(--f-data); font-size:12px; letter-spacing:.14em;
+  text-transform:uppercase; color: var(--b1); margin:0 0 10px;
+  display:flex; align-items:center; gap:10px;
+}
+.eyebrow .dot{ width:6px; height:6px; border-radius:50%; background: var(--b1); }
+h1{
+  font-family: var(--f-display); font-weight:600;
+  font-size:clamp(30px,5.6vw,46px); line-height:1.08;
+  margin:0 0 14px; letter-spacing:-.01em;
+}
+h1 em{ font-style:italic; color: var(--b1); }
+.lede{ font-size:16px; color: var(--ink-soft); max-width:56ch; margin:0; }
+
+.meta-row{
+  display:flex; flex-wrap:wrap; gap:20px; margin-top:26px;
+  font-family: var(--f-data); font-size:12px; color: var(--ink-faint);
+}
+.meta-row strong{
+  display:block; color: var(--ink); font-size:14.5px; font-weight:500;
+  font-family: var(--f-display); margin-top:3px;
+}
+
+/* ---------- STRUCTURE STRIP ---------- */
+.structure-strip{
+  display:grid; grid-template-columns:repeat(4,1fr); gap:2px; margin-top:24px;
+  border-radius: var(--r-md); overflow:hidden; border:1px solid var(--line);
+}
+.structure-cell{ background: var(--paper-raised); padding:12px 14px; }
+.structure-cell .s-icon{ font-size:16px; }
+.structure-cell .s-time{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin:4px 0 2px; }
+.structure-cell .s-label{ font-family: var(--f-body); font-weight:600; font-size:12.5px; color: var(--ink); }
+
+/* ---------- SECTIONS ---------- */
+main{ max-width:760px; margin:0 auto; padding:8px 24px 100px; }
+
+section.block{ margin-bottom:52px; }
+.block-head{ display:flex; align-items:baseline; gap:12px; margin-bottom:18px; }
+.time-tag{
+  font-family: var(--f-data); font-size:11px; color: var(--ink-faint);
+  background: var(--paper-alt); padding:3px 10px; border-radius:999px; margin-left:auto; flex:none;
+}
+.block-num{
+  font-family: var(--f-data); font-size:12px; color:#fff; background: var(--b1);
+  width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  flex:none;
+}
+.block-head h2{
+  font-family: var(--f-display); font-weight:500; font-style:italic; font-size:22px; margin:0;
+}
+.phase-label{
+  font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.08em;
+  color: var(--ink-faint); margin:0 0 8px; display:flex; align-items:center; gap:8px;
+}
+.phase-label .phase-icon{ font-size:14px; }
+
+.panel{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-lg);
+  box-shadow: var(--shadow-1); padding:26px 28px;
+}
+
+/* ---------- CONCORDANCE TABLE ---------- */
+.agree-table{ width:100%; border-collapse:collapse; margin-top:4px; }
+.agree-table th{
+  font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.05em;
+  color: var(--ink-faint); text-align:left; padding:0 6px 10px; border-bottom:1px solid var(--line);
+}
+.agree-table td{ padding:12px 6px; border-bottom:1px dashed var(--line); font-size:15px; vertical-align:top; }
+.agree-table tr:last-child td{ border-bottom:none; }
+.agree-table .ex-masc{ font-family: var(--f-display); font-weight:600; color: var(--b1); }
+.agree-table .ex-fem{ font-family: var(--f-display); font-weight:600; color: var(--family); }
+
+.note{
+  margin-top:18px; padding:14px 16px; background: var(--b1-soft); border:1px solid var(--b1-line);
+  border-radius: var(--r-md); font-size:14px; color: var(--ink-soft);
+}
+.note strong{ color: var(--ink); }
+
+/* ---------- VOCAB CARDS ---------- */
+.vocab-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:12px; }
+.vocab-card{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:14px 16px; cursor:pointer; perspective:600px; min-height:78px;
+  display:flex; flex-direction:column; justify-content:center; transition: border-color .15s ease;
+}
+.vocab-card:hover{ border-color: var(--b1-line); }
+.vocab-card:focus-visible{ outline:2px solid var(--b1); outline-offset:2px; }
+.vocab-front{ font-family: var(--f-body); font-weight:600; font-size:15px; }
+.vocab-back{ display:none; font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); margin-top:6px; }
+.vocab-card.flipped .vocab-back{ display:block; }
+.vocab-card.flipped{ background: var(--b1-soft); border-color: var(--b1-line); }
+.vocab-hint{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin:10px 2px 16px; }
+
+/* ---------- FIX-THE-ERROR EXERCISE ---------- */
+.exercise{ margin-bottom:20px; }
+.exercise:last-of-type{ margin-bottom:0; }
+.ex-sentence{ font-size:15.5px; margin-bottom:6px; }
+.ex-sentence .wrong-word{ text-decoration: line-through wavy var(--family); text-decoration-thickness:1.5px; color: var(--ink-faint); }
+.ex-badge{
+  font-family: var(--f-data); font-size:10.5px; text-transform:uppercase; letter-spacing:.05em;
+  color: var(--family); background: var(--family-soft); padding:2px 8px; border-radius:999px; margin-bottom:8px; display:inline-block;
+}
+.ex-options{ display:flex; flex-wrap:wrap; gap:8px; margin-top:8px; }
+.opt-btn{
+  font-family: var(--f-body); font-size:14px; background: var(--paper-raised);
+  border:1.5px solid var(--line); color: var(--ink); padding:7px 16px; border-radius:999px;
+  cursor:pointer; transition: all .15s ease;
+}
+.opt-btn:hover{ border-color: var(--ink-faint); }
+.opt-btn.picked{ background: var(--b1-soft); border-color: var(--b1); color: var(--b1); }
+.opt-btn.correct{ background: var(--b2-soft); border-color: var(--b2); color: var(--b2); }
+.opt-btn.wrong{ background: var(--family-soft); border-color: var(--family); color: var(--family); }
+.opt-btn:disabled{ cursor:default; }
+
+.check-bar{
+  display:flex; align-items:center; justify-content:space-between; gap:16px;
+  margin-top:22px; padding-top:18px; border-top:1px dashed var(--line);
+}
+.btn-primary{
+  font-family: var(--f-body); font-weight:600; font-size:14px; color:#fff; background: var(--b1);
+  border:none; padding:11px 22px; border-radius:999px; cursor:pointer; transition: transform .1s ease;
+}
+.btn-primary:hover{ transform: translateY(-1px); }
+#score-text{ font-family: var(--f-data); font-size:13px; color: var(--ink-faint); }
+.btn-ghost{
+  font-family: var(--f-body); font-weight:600; font-size:13px; color: var(--ink-soft); background:none;
+  border:1.5px solid var(--line); padding:9px 18px; border-radius:999px; cursor:pointer;
+}
+.btn-ghost:hover{ border-color: var(--ink-faint); }
+.ex-divider{
+  display:flex; align-items:center; gap:10px; margin:20px 0 16px;
+  font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.06em;
+  color: var(--ink-faint);
+}
+.ex-divider::before, .ex-divider::after{ content:""; flex:1; height:1px; background: var(--line); }
+.ex-divider.en-clase{ color: var(--b1); }
+.ex-divider.en-clase::before, .ex-divider.en-clase::after{ background: var(--b1-line); }
+
+/* ---------- ALEX CHARACTER CARD ---------- */
+.character-panel{ background: var(--b2-soft); border:1px solid var(--b2-line); border-radius: var(--r-lg); padding:24px 26px; display:flex; gap:20px; align-items:center; margin-bottom:8px; }
+.character-avatar{
+  flex:none; width:64px; height:64px; border-radius:50%; background: var(--paper-raised);
+  border:2px solid var(--b2-line); display:flex; align-items:center; justify-content:center; font-size:30px;
+}
+.character-body{ flex:1; }
+.character-name{ font-family: var(--f-display); font-weight:600; font-size:19px; margin:0 0 4px; }
+.character-desc{ font-size:14px; color: var(--ink-soft); margin:0; }
+
+/* ---------- FINAL TASK ---------- */
+.task-panel{ background: var(--family-soft); border:1px solid var(--family-line); border-radius: var(--r-lg); padding:26px 28px; }
+.task-panel .block-num{ background: var(--family); }
+textarea#final-task{
+  width:100%; min-height:130px; font-family: var(--f-body); font-size:15px; color: var(--ink);
+  background: var(--paper-raised); border:1px solid var(--family-line); border-radius: var(--r-md);
+  padding:14px 16px; resize:vertical; margin-top:14px;
+}
+textarea#final-task:focus{ outline:none; border-color: var(--family); }
+.task-footer{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:12px; flex-wrap:wrap; }
+#task-count{ font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); }
+.btn-secondary{
+  font-family: var(--f-body); font-weight:600; font-size:13.5px; color: var(--family); background:none;
+  border:1.5px solid var(--family-line); padding:9px 18px; border-radius:999px; cursor:pointer;
+}
+.saved-flag{ font-family: var(--f-data); font-size:12px; color: var(--b2); opacity:0; transition: opacity .3s ease; }
+.saved-flag.show{ opacity:1; }
+
+/* ---------- TÉCNICA ANTI-BLOQUEO: ganar tiempo sin callarse ---------- */
+.technique-panel{ background: var(--violet-soft, #F1EBFB); border:1px solid var(--violet-line, #D9C8F0); border-radius: var(--r-lg); padding:26px 28px; }
+.technique-panel .block-num{ background: var(--violet, #7B4FC9); }
+.stall-grid{ display:grid; gap:10px; margin:16px 0 18px; }
+.stall-item{
+  display:flex; gap:14px; align-items:flex-start; background: var(--paper-raised);
+  border:1px solid var(--violet-line, #D9C8F0); border-radius: var(--r-md); padding:12px 16px;
+}
+.stall-phrase{ font-family: var(--f-display); font-weight:600; font-size:16px; color: var(--violet, #7B4FC9); flex:none; min-width:150px; }
+.stall-use{ font-size:13.5px; color: var(--ink-soft); }
+.stall-use strong{ color: var(--ink); }
+.technique-practice{
+  margin-top:4px; padding:16px 18px; background: var(--paper-raised); border:1px solid var(--violet-line, #D9C8F0);
+  border-radius: var(--r-md);
+}
+.technique-practice p{ margin:0 0 10px; font-size:14px; color: var(--ink-soft); }
+.technique-practice textarea{
+  width:100%; font-family: var(--f-body); font-size:14.5px; color: var(--ink);
+  background:#fff; border:1px solid var(--violet-line, #D9C8F0); border-radius: var(--r-sm);
+  padding:10px 12px; resize:vertical; min-height:60px;
+}
+.technique-practice textarea:focus{ outline:none; border-color: var(--violet, #7B4FC9); }
+
+/* ---------- FOOTER NAV ---------- */
+footer{
+  max-width:760px; margin:0 auto; padding:0 24px 60px; display:flex;
+  justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;
+  font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint);
+}
+footer a{ color: var(--b1); text-decoration:none; }
+footer a:hover{ text-decoration:underline; }
+
+@media (max-width:600px){
+  header{ padding:34px 18px 22px; }
+  main{ padding:8px 18px 90px; }
+  .panel, .task-panel, .character-panel, .technique-panel{ padding:20px 18px; }
+  .character-panel{ flex-direction:column; text-align:center; }
+  .agree-table{ font-size:13.5px; }
+  .stall-item{ flex-direction:column; gap:4px; }
+  .stall-phrase{ min-width:0; }
+}
+@media (prefers-reduced-motion: reduce){ *{ transition:none !important; } }
+</style>
+</head>
+<body>
+
+<header>
+  <p class="eyebrow"><span class="dot"></span>Clase 7 de 36 · L2 Lista de invitados</p>
+  <h1>El detalle que da <em>seguridad</em></h1>
+  <p class="lede">Empieza una línea nueva: dejamos el pasillo por un momento y entramos en casa, en el trabajo y con Alex. Hoy trabajamos algo pequeño pero que se nota mucho — que el adjetivo y el sustantivo concuerden en género y número. No es una regla nueva, es afinar lo que ya usas cada día. Y arrancamos la semana de frases salvavidas: hoy tocan las muletillas para ganar tiempo sin quedarte callada.</p>
+  <div class="meta-row">
+    <div>Duración<strong>50 min</strong></div>
+    <div>Gramática<strong>Concordancia de género y número</strong></div>
+    <div>Nivel<strong>B1</strong></div>
+  </div>
+  <div class="structure-strip">
+    <div class="structure-cell"><span class="s-icon">🐾</span><p class="s-time">10 min</p><p class="s-label">Género y número, sin miedo</p></div>
+    <div class="structure-cell"><span class="s-icon">📇</span><p class="s-time">5 min</p><p class="s-label">Vocabulario</p></div>
+    <div class="structure-cell"><span class="s-icon">✏️</span><p class="s-time">12 min</p><p class="s-label">Corrige la frase</p></div>
+    <div class="structure-cell"><span class="s-icon">⏳</span><p class="s-time">7 min</p><p class="s-label">Ganar tiempo sin callarte</p></div>
+  </div>
+</header>
+
+<main>
+
+  <section class="block">
+    <div class="character-panel">
+      <div class="character-avatar">🐾</div>
+      <div class="character-body">
+        <p class="character-name">Alex, el pitbull</p>
+        <p class="character-desc">A partir de hoy, Alex aparece mucho en los ejercicios: es masculino singular, pero convive con palabras femeninas (la correa, la cita) y con frases sobre casa y trabajo. Perfecto para practicar concordancia con vocabulario que ya conoces.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">1</span><h2>Género y número, sin miedo</h2><span class="time-tag">10 min</span></div>
+    <div class="panel">
+      <p style="margin:0 0 16px; font-size:14.5px; color:var(--ink-soft);">La regla ya la conoces de memoria; hoy el objetivo es que el oído la detecte sola, sin pararte a calcularla.</p>
+      <table class="agree-table">
+        <tr><th>Regla</th><th>Ejemplo</th><th>Nota</th></tr>
+        <tr>
+          <td style="font-family:var(--f-data); font-size:12px; color:var(--ink-faint);">masc. sing.</td>
+          <td class="ex-masc">el perro guapo</td>
+          <td style="font-size:13.5px; color:var(--ink-soft);">Artículo, sustantivo y adjetivo, los tres en masculino singular.</td>
+        </tr>
+        <tr>
+          <td style="font-family:var(--f-data); font-size:12px; color:var(--ink-faint);">fem. sing.</td>
+          <td class="ex-fem">la correa nueva</td>
+          <td style="font-size:13.5px; color:var(--ink-soft);">Cambia el artículo y la terminación del adjetivo, no solo una cosa.</td>
+        </tr>
+        <tr>
+          <td style="font-family:var(--f-data); font-size:12px; color:var(--ink-faint);">masc. plur.</td>
+          <td class="ex-masc">los paseos largos</td>
+          <td style="font-size:13.5px; color:var(--ink-soft);">La -s del plural va en el sustantivo Y en el adjetivo, no solo en uno.</td>
+        </tr>
+        <tr>
+          <td style="font-family:var(--f-data); font-size:12px; color:var(--ink-faint);">fem. plur.</td>
+          <td class="ex-fem">las citas importantes</td>
+          <td style="font-size:13.5px; color:var(--ink-soft);">"Importante" no cambia de forma con el género, pero sí lleva -s en plural.</td>
+        </tr>
+        <tr>
+          <td style="font-family:var(--f-data); font-size:12px; color:var(--ink-faint);">mixto</td>
+          <td class="ex-masc">Alex y su dueña <span class="ex-fem">están cansadas</span></td>
+          <td style="font-size:13.5px; color:var(--ink-soft);">Con grupos mixtos, el adjetivo suele ir en masculino plural — pero aquí, si hablas solo de ti, va en femenino.</td>
+        </tr>
+      </table>
+      <div class="note"><strong>La idea de hoy:</strong> un error de concordancia no bloquea la comunicación — se te entiende igual — pero es de los detalles que un hispanohablante nota enseguida sin darse cuenta de por qué. Corregirlo no es por perfeccionismo, es para que la persona que te escucha deje de "notar" el acento extranjero y solo escuche lo que dices. Y si dudar entre "cariñoso" y "cariñosa" te hace parar a media frase, no te quedes en silencio — en el bloque 4 tienes justo las frases para ese segundo de duda.</div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">2</span><h2>Vocabulario</h2><span class="time-tag">5 min</span></div>
+    <p class="vocab-hint">Toca cada tarjeta para ver un ejemplo con tu vida real.</p>
+    <div class="vocab-grid" id="vocab-grid"></div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">3</span><h2>Corrige la frase</h2><span class="time-tag">12 min</span></div>
+    <div class="panel">
+      <p class="vocab-hint" style="margin-bottom:14px;">Cada frase tiene un error de concordancia. Elige la palabra corregida. Las primeras 8 se hacen en voz alta en clase; el resto queda como repaso para casa.</p>
+      <p style="margin:0 0 14px; font-size:13px; color:var(--ink-soft);">En voz alta, si dudas antes de decir la respuesta, prueba a rellenar el hueco con "es que..." o "a ver..." en vez de callarte — es la técnica del bloque 4, adelantada.</p>
+      <div id="exercises"></div>
+      <div class="check-bar">
+        <div style="display:flex; gap:10px;">
+          <button class="btn-primary" id="check-btn">Comprobar respuestas</button>
+          <button class="btn-ghost" id="reset-btn">Reiniciar</button>
+        </div>
+        <span id="score-text"></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="block technique-panel">
+    <p class="phase-label" style="color:var(--violet);"><span class="phase-icon">⏳</span>Técnica específica contra los bloqueos · Semana 3, sesión 7</p>
+    <div class="block-head"><span class="block-num">4</span><h2 style="color:var(--violet);">Ganar tiempo sin callarte</h2><span class="time-tag">7 min</span></div>
+    <p style="margin:0 0 4px; font-size:14.5px; color:var(--ink-soft);">Cuando necesitas pensar la concordancia correcta a media frase — ¿"cariñoso" o "cariñosa"? — el silencio total llama más la atención que una muletilla. Estas frases rellenan ese hueco de un segundo sin cortar la conversación.</p>
+    <div class="stall-grid">
+      <div class="stall-item">
+        <span class="stall-phrase">Es que...</span>
+        <span class="stall-use">Ganas tiempo mientras decides el género o el número. <strong>"Es que... Alex es un perro muy cariñoso."</strong></span>
+      </div>
+      <div class="stall-item">
+        <span class="stall-phrase">A ver, cómo lo digo...</span>
+        <span class="stall-use">Perfecta cuando dudas entre dos formas y quieres pensar en voz alta sin quedarte muda.</span>
+      </div>
+      <div class="stall-item">
+        <span class="stall-phrase">O sea, quiero decir...</span>
+        <span class="stall-use">Sirve para corregirte a ti misma si sale la palabra con el género equivocado — sin pedir disculpas, solo repites bien.</span>
+      </div>
+      <div class="stall-item">
+        <span class="stall-phrase">Vamos, que...</span>
+        <span class="stall-use">Une dos ideas mientras terminas de construir la frase en tu cabeza. Muy natural en español hablado.</span>
+      </div>
+    </div>
+    <div class="technique-practice">
+      <p><strong>Practica ahora:</strong> completa estas 3 frases sobre Alex empezando por una muletilla de la lista, y deja que la concordancia salga después, sin pararte a corregirla antes de escribir.</p>
+      <textarea placeholder="1. Es que... Alex es un perro muy...&#10;2. A ver, cómo lo digo... la correa que le compré es...&#10;3. Vamos, que los paseos con él son..."></textarea>
+    </div>
+    <div class="note" style="margin-top:16px;"><strong>La idea de hoy:</strong> una muletilla antes de un error de concordancia no delata que dudaste — al contrario, suena a que estás pensando bien lo que vas a decir. Es mejor "es que... es cariñoso" que un silencio de tres segundos buscando la "o" final.</div>
+  </section>
+
+  <section class="block task-panel">
+    <div class="block-head"><span class="block-num">5</span><h2 style="color:var(--family)">Tu tarea</h2><span class="time-tag">5 min</span></div>
+    <p style="margin:0; font-size:15px; color:var(--ink-soft);">Escribe <strong>8 frases sobre Alex</strong> — su rutina, su carácter, sus paseos — cuidando que cada adjetivo concuerde con el sustantivo que describe. Vale mezclar masculino y femenino, singular y plural: cuanta más variedad, mejor práctica. Empieza al menos dos frases con una de las muletillas de hoy.</p>
+    <textarea id="final-task" placeholder="1. Alex es un perro muy...&#10;2. Su correa nueva es...&#10;3. Los paseos por la montaña son..."></textarea>
+    <div class="task-footer">
+      <span id="task-count">0 palabras escritas</span>
+      <div style="display:flex; gap:10px; align-items:center;">
+        <span class="saved-flag" id="saved-flag">Guardado ✓</span>
+        <button class="btn-secondary" id="save-btn">Guardar tarea</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <span>Clase 7 · Concordancia, el detalle que da seguridad</span>
+  <span>Próxima clase → Clase 8: Objeto directo, lo/la/los/las</span>
+</footer>
+
+<script>
+/* ---------- VOCAB ---------- */
+const VOCAB = [
+  {front:"la correa", back:"Le pongo la correa a Alex antes de salir a pasear."},
+  {front:"el pitbull", back:"Alex es un pitbull muy cariñoso, aunque parezca serio."},
+  {front:"la cita", back:"Tengo una cita con el veterinario el jueves."},
+  {front:"cansado / cansada", back:"Después del paseo largo, Alex está cansado."},
+  {front:"el despacho", back:"Trabajo desde el despacho de casa la mayoría de los días."},
+  {front:"ocupado / ocupada", back:"Esta semana estoy muy ocupada con una boda grande."},
+];
+
+const grid = document.getElementById('vocab-grid');
+VOCAB.forEach(v=>{
+  const card = document.createElement('div');
+  card.className = 'vocab-card';
+  card.setAttribute('role', 'button');
+  card.setAttribute('tabindex', '0');
+  card.setAttribute('aria-pressed', 'false');
+  card.setAttribute('aria-label', `${v.front}. Pulsa para ver un ejemplo.`);
+  card.innerHTML = `<div class="vocab-front">${v.front}</div><div class="vocab-back">${v.back}</div>`;
+  const toggle = ()=>{
+    const flipped = card.classList.toggle('flipped');
+    card.setAttribute('aria-pressed', String(flipped));
+  };
+  card.addEventListener('click', toggle);
+  card.addEventListener('keydown', (e)=>{
+    if(e.key === 'Enter' || e.key === ' '){
+      e.preventDefault();
+      toggle();
+    }
+  });
+  grid.appendChild(card);
+});
+
+/* ---------- EXERCISES (fix the concordance error) ---------- */
+const EXERCISES = [
+  {"sentence":"Alex es un perro muy <span class=\"wrong-word\">cariñosa</span>.","options":["cariñoso","cariñosos","cariñosas"],"answer":"cariñoso"},
+  {"sentence":"La correa <span class=\"wrong-word\">nuevo</span> le queda perfecta.","options":["nueva","nuevas","nuevos"],"answer":"nueva"},
+  {"sentence":"Tengo dos citas <span class=\"wrong-word\">importante</span> esta semana.","options":["importantes","importante","importanta"],"answer":"importantes"},
+  {"sentence":"Los paseos por la montaña son <span class=\"wrong-word\">larga</span>.","options":["largos","larga","largas"],"answer":"largos"},
+  {"sentence":"Mi trabajo es muy <span class=\"wrong-word\">divertida</span>.","options":["divertido","divertidos","divertidas"],"answer":"divertido"},
+  {"sentence":"Esta semana estoy muy <span class=\"wrong-word\">ocupado</span> (hablando ella de sí misma).","options":["ocupada","ocupadas","ocupados"],"answer":"ocupada"},
+  {"sentence":"El veterinario tiene la sala de espera muy <span class=\"wrong-word\">pequeño</span>.","options":["pequeña","pequeños","pequeñas"],"answer":"pequeña"},
+  {"sentence":"Alex y su dueña llegan <span class=\"wrong-word\">cansado</span> del paseo.","options":["cansadas","cansado","cansados"],"answer":"cansadas"},
+  {"sentence":"Las bodas de verano son las más <span class=\"wrong-word\">complicado</span> de organizar.","options":["complicadas","complicado","complicados"],"answer":"complicadas"},
+  {"sentence":"El despacho de casa está bastante <span class=\"wrong-word\">desordenada</span> hoy.","options":["desordenado","desordenados","desordenadas"],"answer":"desordenado"},
+  {"sentence":"Sus vecinos son muy <span class=\"wrong-word\">simpática</span>.","options":["simpáticos","simpática","simpáticas"],"answer":"simpáticos"},
+  {"sentence":"La recepcionista de la veterinaria es muy <span class=\"wrong-word\">amables</span>.","options":["amable","amabla","amablas"],"answer":"amable"},
+  {"sentence":"Los clientes de esta boda están muy <span class=\"wrong-word\">nerviosa</span>.","options":["nerviosos","nerviosas","nervioso"],"answer":"nerviosos"},
+  {"sentence":"La cita del jueves es bastante <span class=\"wrong-word\">urgentes</span>.","options":["urgente","urgenta","urgentas"],"answer":"urgente"},
+  {"sentence":"Alex tiene las orejas muy <span class=\"wrong-word\">grande</span>.","options":["grandes","granda","grandas"],"answer":"grandes"},
+  {"sentence":"El itinerario de la boda está <span class=\"wrong-word\">organizados</span>.","options":["organizado","organizada","organizadas"],"answer":"organizado"},
+  {"sentence":"Las flores del evento son muy <span class=\"wrong-word\">bonito</span>.","options":["bonitas","bonitos","bonita"],"answer":"bonitas"},
+  {"sentence":"Su madre y ella están <span class=\"wrong-word\">contento</span> con el paseo de hoy.","options":["contentas","contento","contentos"],"answer":"contentas"}
+]
+;
+
+const exWrap = document.getElementById('exercises');
+EXERCISES.forEach((ex, i)=>{
+  if(i === 0){
+    const divider = document.createElement('div');
+    divider.className = 'ex-divider en-clase';
+    divider.textContent = 'en clase · ítems 1–8';
+    exWrap.appendChild(divider);
+  }
+  if(i === 8){
+    const divider = document.createElement('div');
+    divider.className = 'ex-divider';
+    divider.textContent = 'para casa · repaso opcional';
+    exWrap.appendChild(divider);
+  }
+  const el = document.createElement('div');
+  el.className = 'exercise';
+  el.dataset.answer = ex.answer;
+  el.innerHTML = `
+    <span class="ex-badge">corrige la concordancia</span>
+    <div class="ex-sentence">${i+1}. ${ex.sentence}</div>
+    <div class="ex-options">
+      ${ex.options.map(o=>`<button class="opt-btn" data-value="${o}">${o}</button>`).join('')}
+    </div>
+  `;
+  exWrap.appendChild(el);
+
+  el.querySelectorAll('.opt-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      el.querySelectorAll('.opt-btn').forEach(b=>b.classList.remove('picked'));
+      btn.classList.add('picked');
+    });
+  });
+});
+
+document.getElementById('check-btn').addEventListener('click', ()=>{
+  let correct = 0;
+  document.querySelectorAll('.exercise').forEach(el=>{
+    const answer = el.dataset.answer;
+    const picked = el.querySelector('.opt-btn.picked');
+    el.querySelectorAll('.opt-btn').forEach(b=>{
+      b.disabled = true;
+      if(b.dataset.value === answer) b.classList.add('correct');
+      else if(b === picked) b.classList.add('wrong');
+    });
+    if(picked && picked.dataset.value === answer) correct++;
+  });
+  document.getElementById('score-text').textContent = `${correct} / ${EXERCISES.length} correctas`;
+});
+
+document.getElementById('reset-btn').addEventListener('click', ()=>{
+  document.querySelectorAll('.exercise').forEach(el=>{
+    el.querySelectorAll('.opt-btn').forEach(b=>{
+      b.disabled = false;
+      b.classList.remove('picked','correct','wrong');
+    });
+  });
+  document.getElementById('score-text').textContent = '';
+});
+
+/* ---------- TÉCNICA: práctica de muletillas (autosave) ---------- */
+const STORAGE_KEY_TECHNIQUE = 'lisa-clase07-tecnica';
+const techniqueArea = document.querySelector('.technique-practice textarea');
+
+async function cargarTecnica(){
+  if (!window.storage || !techniqueArea) return;
+  try{
+    const res = await window.storage.get(STORAGE_KEY_TECHNIQUE);
+    if (res && typeof res.value === 'string') techniqueArea.value = res.value;
+  }catch(e){
+    // sin práctica previa
+  }
+}
+if (techniqueArea){
+  techniqueArea.addEventListener('input', ()=>{
+    clearTimeout(techniqueArea._saveTimer);
+    techniqueArea._saveTimer = setTimeout(()=>{
+      if (window.storage) window.storage.set(STORAGE_KEY_TECHNIQUE, techniqueArea.value).catch(()=>{ /* fallo silencioso */ });
+    }, 600);
+  });
+  cargarTecnica();
+}
+
+/* ---------- FINAL TASK ---------- */
+const STORAGE_KEY = 'lisa-clase07-tarea';
+const taskArea = document.getElementById('final-task');
+const taskCount = document.getElementById('task-count');
+const savedFlag = document.getElementById('saved-flag');
+
+async function cargarTarea(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(STORAGE_KEY);
+    if (res && typeof res.value === 'string') taskArea.value = res.value;
+  }catch(e){
+    // Clave inexistente todavía: no hay tarea previa, se queda en blanco.
+  }
+  updateCount();
+}
+
+function updateCount(){
+  const words = taskArea.value.trim().split(/\s+/).filter(Boolean).length;
+  taskCount.textContent = `${words} palabra${words===1?'':'s'} escrita${words===1?'':'s'}`;
+}
+taskArea.addEventListener('input', updateCount);
+updateCount();
+cargarTarea();
+
+document.getElementById('save-btn').addEventListener('click', async ()=>{
+  if (!window.storage){
+    savedFlag.textContent = 'Guardado no disponible aquí';
+    savedFlag.classList.add('show');
+    setTimeout(()=>{ savedFlag.classList.remove('show'); savedFlag.textContent = 'Guardado ✓'; }, 2200);
+    return;
+  }
+  try{
+    const ok = await window.storage.set(STORAGE_KEY, taskArea.value);
+    savedFlag.textContent = ok ? 'Guardado ✓' : 'No se pudo guardar';
+  }catch(e){
+    savedFlag.textContent = 'No se pudo guardar';
+  }
+  savedFlag.classList.add('show');
+  setTimeout(()=>{ savedFlag.classList.remove('show'); savedFlag.textContent = 'Guardado ✓'; }, 1800);
+});
+</script>
+
+</body>
+</html>

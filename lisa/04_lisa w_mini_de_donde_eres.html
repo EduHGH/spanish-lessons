@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mini · ¿De dónde eres? ¿Y dónde vives?</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+
+/* ╔══════════════════════════════════════════════════════════════╗
+   ║  ESCOLAR — Expansion Pack · Mini                              ║
+   ║  "¿De dónde eres? ¿Y dónde vives?" — Origen vs. ubicación       ║
+   ╚══════════════════════════════════════════════════════════════╝ */
+
+:root{
+  --paper:        #FBF7EE;
+  --paper-raised: #FFFFFF;
+  --paper-alt:    #F3ECDA;
+  --ink:          #23291F;
+  --ink-soft:     #565F52;
+  --ink-faint:    #8B9184;
+  --line:         rgba(35,41,31,0.12);
+  --line-strong:  rgba(35,41,31,0.22);
+
+  --b1:      #2F6FED;  --b1-soft: #EAF1FE;  --b1-line: #C6D9FC;
+  --b2:      #2E9E6B;  --b2-soft: #E9F6EF;  --b2-line: #BEE6D3;
+  --family:  #B5502E;  --family-soft: #FBEBE3; --family-line: #EFC9B4;
+  --violet:  #7B4FC9;  --violet-soft: #F1EBFB; --violet-line: #D9C8F0;
+
+  --f-display: 'Fraunces', Georgia, serif;
+  --f-body:    'IBM Plex Sans', system-ui, sans-serif;
+  --f-data:    'IBM Plex Mono', monospace;
+
+  --r-sm: 8px;
+  --r-md: 14px;
+  --r-lg: 20px;
+
+  --shadow-1: 0 1px 2px rgba(35,41,31,0.05), 0 1px 8px rgba(35,41,31,0.04);
+}
+
+*{ box-sizing:border-box; }
+body{
+  margin:0;
+  background: var(--paper);
+  background-image: radial-gradient(circle at 1px 1px, var(--line) 1px, transparent 0);
+  background-size: 22px 22px;
+  color: var(--ink);
+  font-family: var(--f-body);
+  line-height:1.6;
+}
+::selection{ background: var(--b1-soft); }
+
+/* ---------- HEADER ---------- */
+header{ padding:44px 24px 28px; max-width:760px; margin:0 auto; }
+.eyebrow{
+  font-family: var(--f-data); font-size:12px; letter-spacing:.14em;
+  text-transform:uppercase; color: var(--violet); margin:0 0 10px;
+  display:flex; align-items:center; gap:10px;
+}
+.eyebrow .dot{ width:6px; height:6px; border-radius:50%; background: var(--violet); }
+h1{
+  font-family: var(--f-display); font-weight:600;
+  font-size:clamp(30px,5.6vw,46px); line-height:1.08;
+  margin:0 0 14px; letter-spacing:-.01em;
+}
+h1 em{ font-style:italic; color: var(--violet); }
+.lede{ font-size:16px; color: var(--ink-soft); max-width:56ch; margin:0; }
+
+.meta-row{
+  display:flex; flex-wrap:wrap; gap:20px; margin-top:26px;
+  font-family: var(--f-data); font-size:12px; color: var(--ink-faint);
+}
+.meta-row strong{
+  display:block; color: var(--ink); font-size:14.5px; font-weight:500;
+  font-family: var(--f-display); margin-top:3px;
+}
+
+/* ---------- STRUCTURE STRIP ---------- */
+.structure-strip{
+  display:grid; grid-template-columns:repeat(5,1fr); gap:2px; margin-top:24px;
+  border-radius: var(--r-md); overflow:hidden; border:1px solid var(--line);
+}
+.structure-strip.row2{ margin-top:2px; }
+.structure-cell{ background: var(--paper-raised); padding:10px 8px; }
+.structure-cell .s-icon{ font-size:15px; }
+.structure-cell .s-label{ font-family: var(--f-body); font-weight:600; font-size:10.5px; color: var(--ink); margin-top:4px; line-height:1.25; }
+
+/* ---------- SECTIONS ---------- */
+main{ max-width:760px; margin:0 auto; padding:8px 24px 100px; }
+
+section.block{ margin-bottom:52px; }
+.block-head{ display:flex; align-items:baseline; gap:12px; margin-bottom:18px; }
+.time-tag{
+  font-family: var(--f-data); font-size:11px; color: var(--ink-faint);
+  background: var(--paper-alt); padding:3px 10px; border-radius:999px; margin-left:auto; flex:none;
+}
+.block-num{
+  font-family: var(--f-data); font-size:12px; color:#fff; background: var(--violet);
+  width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  flex:none;
+}
+.block-head h2{
+  font-family: var(--f-display); font-weight:500; font-style:italic; font-size:22px; margin:0;
+}
+.phase-label{
+  font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.08em;
+  color: var(--ink-faint); margin:0 0 8px; display:flex; align-items:center; gap:8px;
+}
+
+.panel{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-lg);
+  box-shadow: var(--shadow-1); padding:26px 28px;
+}
+
+/* ---------- 1. EL MOMENTO (scene) ---------- */
+.scene-panel{ background: var(--family-soft); border:1px solid var(--family-line); border-radius: var(--r-lg); padding:26px 28px; }
+.scene-panel .block-num{ background: var(--family); }
+.scene-setup{
+  display:flex; gap:14px; align-items:flex-start; background: var(--paper-raised);
+  border:1px solid var(--family-line); border-radius: var(--r-md); padding:16px 18px; margin-bottom:16px;
+}
+.scene-icon{ font-size:24px; flex:none; }
+.scene-text{ font-size:15px; color: var(--ink-soft); }
+.scene-text strong{ color: var(--ink); }
+.blocked-line{
+  margin-top:16px; padding:16px 18px; background: rgba(255,255,255,0.5); border:1px dashed var(--family-line);
+  border-radius: var(--r-md); font-family: var(--f-display); font-style:italic; font-size:16.5px; color: var(--ink);
+}
+.blocked-line .who{ font-family: var(--f-data); font-style:normal; font-size:11px; text-transform:uppercase;
+  letter-spacing:.05em; color: var(--family); display:block; margin-bottom:6px; }
+
+/* ---------- 2. LA SALIDA INMEDIATA ---------- */
+.exit-panel{ background: var(--violet-soft); border:1px solid var(--violet-line); }
+.exit-panel .block-num{ background: var(--violet); }
+.exit-line{
+  font-family: var(--f-display); font-weight:500; font-size:22px; color: var(--ink);
+  background: var(--paper-raised); border:1px solid var(--violet-line); border-radius: var(--r-md);
+  padding:20px 22px; margin-top:4px;
+}
+.exit-line .accent{ color: var(--violet); }
+.exit-note{ font-size:13.5px; color: var(--ink-soft); margin-top:14px; }
+.exit-note strong{ color: var(--ink); }
+
+/* ---------- 3. PAR MÍNIMO SER/ESTAR ---------- */
+.pair-wrap{ display:flex; flex-direction:column; gap:12px; margin-top:4px; }
+.pair-row{
+  display:grid; grid-template-columns:1fr 1fr; gap:14px; background: var(--paper-raised);
+  border:1px solid var(--line); border-radius: var(--r-md); padding:16px 18px;
+}
+@media(max-width:640px){ .pair-row{ grid-template-columns:1fr; } }
+.pair-cell{ display:flex; flex-direction:column; gap:4px; }
+.pair-cell.is-ser .pair-verb{ color: var(--b1); }
+.pair-cell.is-estar .pair-verb{ color: var(--b2); }
+.pair-verb{ font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.05em; }
+.pair-text{ font-family: var(--f-display); font-size:16px; color: var(--ink); }
+.pair-q{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin-bottom:6px; text-align:center; grid-column:1/-1; }
+
+/* ---------- 4. VERBOS + PREPOSICIONES ---------- */
+.prep-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(210px,1fr)); gap:12px; margin-top:4px; }
+.prep-card{
+  background: var(--paper-raised); border:1px solid var(--b1-line); border-radius: var(--r-md);
+  padding:16px 18px; cursor:pointer; min-height:96px; display:flex; flex-direction:column;
+  justify-content:center; transition: border-color .15s ease, transform .1s ease;
+}
+.prep-card:hover{ border-color: var(--b1); transform: translateY(-1px); }
+.prep-card:focus-visible{ outline:2px solid var(--b1); outline-offset:2px; }
+.prep-verb{ font-family: var(--f-display); font-weight:600; font-size:17px; color: var(--ink); }
+.prep-verb .prep{ color: var(--b1); font-style:italic; }
+.prep-example{ display:none; font-family: var(--f-body); font-size:13px; color: var(--ink-soft); margin-top:8px; line-height:1.5; }
+.prep-example .en{ margin-top:6px; }
+.prep-card.flipped .prep-example{ display:block; }
+.prep-card.flipped{ background: var(--b1-soft); border-color: var(--b1); }
+.prep-hint{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin:12px 2px 0; }
+
+/* ---------- 5. FÓRMULAS NATURALES ---------- */
+.formula-grid{ display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:4px; }
+@media(max-width:640px){ .formula-grid{ grid-template-columns:1fr; } }
+.formula-card{
+  background: var(--paper-raised); border:1px solid var(--b2-line); border-radius: var(--r-md);
+  padding:18px 20px;
+}
+.formula-card .f-label{ font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.05em; color: var(--b2); margin-bottom:8px; }
+.formula-card .f-text{ font-family: var(--f-display); font-size:16px; color: var(--ink); font-style:italic; }
+
+/* ---------- RESCUE PHRASES (muletillas) ---------- */
+.rescue-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:12px; margin-top:4px; }
+.rescue-card{
+  background: var(--paper-raised); border:1px solid var(--family-line); border-radius: var(--r-md);
+  padding:16px 18px;
+}
+.rescue-phrase{ font-family: var(--f-display); font-weight:600; font-style:italic; font-size:16px; color: var(--family); margin-bottom:6px; }
+.rescue-use{ font-size:13px; color: var(--ink-soft); }
+.rescue-use .en{ margin-top:8px; }
+
+/* ---------- FOLLOW-UP Qs ---------- */
+.followup-list{ display:flex; flex-direction:column; gap:14px; margin-top:4px; }
+.followup-item{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:16px 18px;
+}
+.followup-q{ font-family: var(--f-display); font-style:italic; font-size:15.5px; color: var(--ink); margin-bottom:8px; }
+.followup-q::before{ content:"— "; color: var(--ink-faint); }
+.followup-q .en{ font-family: var(--f-body); font-style:italic; }
+.followup-a{ font-size:14px; color: var(--ink-soft); padding-left:14px; border-left:2px solid var(--b1-line); }
+.followup-a strong{ color: var(--b1); font-weight:600; }
+.followup-a .en{ margin-top:8px; }
+
+/* ---------- REGISTER TABLE ---------- */
+.register-table{ width:100%; border-collapse:collapse; margin-top:4px; }
+.register-table th{
+  font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.05em;
+  color: var(--ink-faint); text-align:left; padding:0 10px 10px; border-bottom:1px solid var(--line);
+}
+.register-table td{ padding:12px 10px; border-bottom:1px dashed var(--line); font-size:14px; vertical-align:top; }
+.register-table tr:last-child td{ border-bottom:none; }
+.register-table .reg-tag{ font-family: var(--f-data); font-size:11px; text-transform:uppercase; color: var(--violet); white-space:nowrap; }
+
+/* ---------- 6. MINI-ROLEPLAY ---------- */
+.roleplay-panel{ background: var(--b1-soft); border:1px solid var(--b1-line); border-radius: var(--r-lg); padding:26px 28px; }
+.roleplay-panel .block-num{ background: var(--b1); }
+.dialogue{ display:flex; flex-direction:column; gap:14px; }
+.line{ display:flex; gap:12px; align-items:flex-start; }
+.line-avatar{
+  flex:none; width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  font-family: var(--f-display); font-weight:600; font-size:14px; color:#fff;
+}
+.line.friend .line-avatar{ background: var(--ink-faint); }
+.line.you .line-avatar{ background: var(--b1); }
+.line-body{ flex:1; }
+.line-name{ font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.05em; color: var(--ink-faint); margin:0 0 4px; }
+.line-bubble{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:12px 14px; font-size:14.5px; color: var(--ink);
+}
+.line.you .line-bubble{ background:#fff; border-color: var(--b1-line); }
+.line-input{
+  width:100%; font-family: var(--f-body); font-size:14.5px; color: var(--ink);
+  background:#fff; border:1px solid var(--b1-line); border-radius: var(--r-sm);
+  padding:10px 12px; resize:vertical; min-height:44px; margin-top:2px;
+}
+.line-input:focus{ outline:none; border-color: var(--b1); }
+.line-hint{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin-top:5px; }
+.roleplay-tip{
+  margin-top:22px; padding:14px 16px; background: var(--paper-raised); border:1px solid var(--b1-line);
+  border-radius: var(--r-md); font-size:13.5px; color: var(--ink-soft);
+}
+.roleplay-tip strong{ color: var(--ink); }
+
+/* ---------- 7. CHOOSE YOUR WORDS ---------- */
+.choose-panel{ background: var(--paper-raised); border:1px solid var(--line); }
+.choose-intro{ font-size:14px; color: var(--ink-soft); margin:0 0 18px; }
+.choose-grid{ display:flex; flex-direction:column; gap:10px; }
+.choose-item{
+  display:flex; align-items:center; gap:14px; padding:12px 14px; border:1px solid var(--line);
+  border-radius: var(--r-md); cursor:pointer; transition: all .15s ease; background: var(--paper-raised);
+}
+.choose-item:hover{ border-color: var(--violet-line); background: var(--violet-soft); }
+.choose-item.picked{ border-color: var(--violet); background: var(--violet-soft); }
+.choose-checkbox{
+  flex:none; width:20px; height:20px; border-radius:6px; border:1.5px solid var(--line-strong);
+  display:flex; align-items:center; justify-content:center; font-size:13px; color:#fff;
+  background: var(--paper-raised);
+}
+.choose-item.picked .choose-checkbox{ background: var(--violet); border-color: var(--violet); }
+.choose-text{ font-size:14.5px; color: var(--ink); flex:1; }
+.choose-text .en{ margin-top:4px; }
+.choose-footer{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:20px; padding-top:18px; border-top:1px dashed var(--line); flex-wrap:wrap; }
+#choose-count{ font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); }
+.btn-primary{
+  font-family: var(--f-body); font-weight:600; font-size:14px; color:#fff; background: var(--violet);
+  border:none; padding:11px 22px; border-radius:999px; cursor:pointer; transition: transform .1s ease;
+}
+.btn-primary:hover{ transform: translateY(-1px); }
+textarea#final-summary{
+  width:100%; min-height:100px; font-family: var(--f-body); font-size:14.5px; color: var(--ink);
+  background: var(--paper-alt); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:14px 16px; resize:vertical; margin-top:16px; display:none;
+}
+textarea#final-summary:focus{ outline:none; border-color: var(--violet); }
+
+footer{ max-width:760px; margin:0 auto; padding:0 24px 60px; font-family: var(--f-data); font-size:12px; color: var(--ink-faint); text-align:center; }
+
+/* ---------- LANG TOGGLE ---------- */
+.lang-toggle{
+  position:fixed; top:18px; right:18px; z-index:50;
+  display:flex; align-items:center; gap:8px;
+  background: var(--paper-raised); border:1px solid var(--line-strong); border-radius:999px;
+  padding:6px 8px; box-shadow: var(--shadow-1);
+  font-family: var(--f-data); font-size:11px;
+}
+.lang-toggle span{ color: var(--ink-faint); padding:0 2px; }
+.lang-toggle span.active{ color: var(--violet); font-weight:700; }
+.lang-switch{
+  position:relative; width:38px; height:20px; border-radius:999px; background: var(--paper-alt);
+  border:1px solid var(--line-strong); cursor:pointer; flex:none;
+}
+.lang-switch::after{
+  content:""; position:absolute; top:1px; left:1px; width:16px; height:16px; border-radius:50%;
+  background: var(--violet); transition: transform .15s ease;
+}
+body.show-en .lang-switch::after{ transform: translateX(18px); }
+
+.en{
+  display:none;
+  font-family: var(--f-body); font-size:0.92em; color: var(--ink-faint);
+  font-style:italic; margin-top:4px;
+}
+body.show-en .en{ display:block; }
+body.show-en .en.inline{ display:inline; margin-top:0; margin-left:6px; }
+.en::before{ content:"EN · "; font-family: var(--f-data); font-style:normal; font-size:0.85em; color: var(--violet); }
+
+</style>
+</head>
+<body>
+
+<div class="lang-toggle">
+  <span id="lang-es-label" class="active">ES</span>
+  <div class="lang-switch" id="lang-switch" role="button" tabindex="0" aria-label="Mostrar traducción al inglés"></div>
+  <span id="lang-en-label">EN</span>
+</div>
+
+
+<header>
+  <p class="eyebrow"><span class="dot"></span>Expansion Pack · Mini</p>
+  <h1>¿De dónde <em>eres</em>? ¿Y dónde <em>vives</em>?</h1>
+  <p class="lede">Dos preguntas casi idénticas en inglés — "where are you from" y "where do you live now" — que en español piden verbos distintos. Cuando llegan seguidas, es fácil arrastrar el primer verbo a la segunda pregunta sin darte cuenta.
+    <span class="en">Two almost identical questions in English — "where are you from" and "where do you live now" — that ask for different verbs in Spanish. When they arrive back to back, it's easy to drag the first verb into the second question without noticing.</span>
+  </p>
+
+  <div class="meta-row">
+    <div>Contexto <strong>Cena, vecino nuevo, cliente de boda</strong></div>
+    <div>Bloqueo <strong>"soy en Xàtiva" — origen (ser) vs. ubicación (estar)</strong></div>
+    <div>Duración <strong>~15 min</strong></div>
+  </div>
+
+  <div class="structure-strip">
+    <div class="structure-cell"><div class="s-icon">🧊</div><div class="s-label">El momento</div></div>
+    <div class="structure-cell"><div class="s-icon">🚪</div><div class="s-label">Salida inmediata</div></div>
+    <div class="structure-cell"><div class="s-icon">🔀</div><div class="s-label">Par mínimo</div></div>
+    <div class="structure-cell"><div class="s-icon">🧩</div><div class="s-label">Piezas</div></div>
+    <div class="structure-cell"><div class="s-icon">💬</div><div class="s-label">Fórmulas</div></div>
+  </div>
+  <div class="structure-strip row2">
+    <div class="structure-cell"><div class="s-icon">🆘</div><div class="s-label">Rescate</div></div>
+    <div class="structure-cell"><div class="s-icon">❓</div><div class="s-label">Si preguntan más</div></div>
+    <div class="structure-cell"><div class="s-icon">🎚️</div><div class="s-label">Registro</div></div>
+    <div class="structure-cell"><div class="s-icon">🎭</div><div class="s-label">Roleplay</div></div>
+    <div class="structure-cell"><div class="s-icon">✅</div><div class="s-label">Tus palabras</div></div>
+  </div>
+</header>
+
+<main>
+
+  <!-- ============ 1. EL MOMENTO ============ -->
+  <section class="block">
+    <div class="block-head">
+      <div class="block-num">1</div>
+      <h2>El momento</h2>
+      <div class="time-tag">bloqueo real</div>
+    </div>
+    <div class="scene-panel">
+      <div class="scene-setup">
+        <div class="scene-icon">🥂</div>
+        <div class="scene-text">Estás en una cena. Ya has dicho que eres de Chicago — la primera pregunta ha ido bien. Pero la conversación sigue, y llega la segunda pregunta, que suena casi igual.
+          <span class="en">You're at a dinner. You've already said you're from Chicago — the first question went fine. But the conversation continues, and the second question arrives, sounding almost the same.</span>
+        </div>
+      </div>
+      <div class="blocked-line">
+        <span class="who">Alguien en la mesa</span>
+        "Ah, ¿de Chicago? Qué interesante. ¿Y dónde vives ahora, aquí en España?"
+        <span class="en">"Oh, from Chicago? How interesting. And where do you live now, here in Spain?"</span>
+      </div>
+      <p class="scene-text" style="margin-top:16px;">Acabas de decir "soy de Chicago" — con <strong>ser</strong>, correcto. Y como la segunda pregunta suena parecida, el verbo que ya tienes activado en la boca es "soy": "soy en Xàtiva". Pero un lugar donde te encuentras ahora, a diferencia de tu origen, siempre es <strong>estar</strong> — nunca ser. El error no es no saber la regla; es que el verbo anterior todavía está "caliente" cuando llega la nueva pregunta.
+        <span class="en">You just said "I'm from Chicago" — with ser, correct. And since the second question sounds similar, the verb you already have loaded is "soy": "soy en Xàtiva". But a place where you currently are, unlike your origin, is always estar — never ser. The mistake isn't not knowing the rule; it's that the previous verb is still "warm" when the new question arrives.</span>
+      </p>
+      <p class="scene-text" style="margin-top:12px;">Este bloqueo aparece cada vez que alguien te pregunta origen y ubicación actual seguidos: en una cena, con un vecino nuevo, en la primera llamada con un cliente de boda que no te conoce todavía.
+        <span class="en">This block shows up any time someone asks you about origin and current location back to back: at a dinner, with a new neighbour, on the first call with a wedding client who doesn't know you yet.</span>
+      </p>
+      <div class="scene-setup" style="margin-top:16px; margin-bottom:0;">
+        <div class="scene-icon">🧠</div>
+        <div class="scene-text">Por qué se produce el bloqueo: no es una duda gramatical — es inercia. Acabas de usar "ser" con éxito, y tu cerebro reutiliza el verbo que ya funcionó, en vez de comprobar si la nueva pregunta pide el mismo.
+          <span class="en">Why the block happens: it's not a grammar doubt — it's inertia. You just used "ser" successfully, and your brain reuses the verb that already worked, instead of checking whether the new question calls for the same one.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 2. LA SALIDA INMEDIATA ============ -->
+  <section class="block">
+    <div class="block-head">
+      <div class="block-num">2</div>
+      <h2>La salida inmediata</h2>
+    </div>
+    <div class="panel exit-panel">
+      <div class="exit-line"><span class="accent">Soy</span> de Chicago, pero ahora <span class="accent">estoy</span> viviendo en Xàtiva.
+        <span class="en">I'<span class="accent">m</span> from Chicago, but right now I'<span class="accent">m</span> living in Xàtiva.</span>
+      </div>
+      <p class="exit-note">Esta frase junta las dos respuestas en una sola, con los dos verbos ya colocados en su sitio — así no tienes que decidir nada cuando llegue la segunda pregunta, porque ya la has respondido dentro de la primera.
+        <span class="en">This sentence joins both answers into one, with the two verbs already in place — so you don't have to decide anything when the second question arrives, because you've already answered it within the first.</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ 3. PAR MÍNIMO ============ -->
+  <section class="block">
+    <div class="block-head">
+      <div class="block-num">3</div>
+      <h2>Par mínimo: origen vs. ubicación</h2>
+      <div class="time-tag">la misma pregunta, dos respuestas distintas</div>
+    </div>
+    <div class="panel">
+      <p style="font-size:14px; color:var(--ink-soft); margin:0 0 16px;">Cinco pares — misma situación, dos preguntas que suenan parecidas pero piden verbos distintos. Practica decir las dos seguidas, en voz alta, sin pausa entre ellas.
+        <span class="en">Five pairs — same situation, two questions that sound similar but call for different verbs. Practice saying both back to back, out loud, with no pause between them.</span>
+      </p>
+      <div class="pair-wrap">
+        <div class="pair-row">
+          <p class="pair-q">¿De dónde eres? / ¿Dónde vives ahora?</p>
+          <div class="pair-cell is-ser"><span class="pair-verb">ser · origen</span><span class="pair-text">Soy de Chicago.</span></div>
+          <div class="pair-cell is-estar"><span class="pair-verb">estar · ubicación</span><span class="pair-text">Estoy en Xàtiva.</span></div>
+        </div>
+        <div class="pair-row">
+          <p class="pair-q">¿De dónde es Alex? / ¿Dónde está Alex ahora?</p>
+          <div class="pair-cell is-ser"><span class="pair-verb">ser · origen/raza</span><span class="pair-text">Alex es un pitbull americano.</span></div>
+          <div class="pair-cell is-estar"><span class="pair-verb">estar · ubicación</span><span class="pair-text">Alex está en el parque.</span></div>
+        </div>
+        <div class="pair-row">
+          <p class="pair-q">¿De dónde son tus clientes? / ¿Dónde está el restaurante?</p>
+          <div class="pair-cell is-ser"><span class="pair-verb">ser · origen</span><span class="pair-text">Mis clientes son de Chicago.</span></div>
+          <div class="pair-cell is-estar"><span class="pair-verb">estar · ubicación</span><span class="pair-text">El restaurante está en EE.UU.</span></div>
+        </div>
+        <div class="pair-row">
+          <p class="pair-q">¿De dónde es el anillo? / ¿Dónde está guardado?</p>
+          <div class="pair-cell is-ser"><span class="pair-verb">ser · material/origen</span><span class="pair-text">El anillo es de plata.</span></div>
+          <div class="pair-cell is-estar"><span class="pair-verb">estar · ubicación</span><span class="pair-text">El anillo está en la caja fuerte.</span></div>
+        </div>
+        <div class="pair-row">
+          <p class="pair-q">¿De dónde eres tú, Chris? / ¿Dónde está Chris ahora mismo?</p>
+          <div class="pair-cell is-ser"><span class="pair-verb">ser · origen</span><span class="pair-text">Chris es de aquí, de España.</span></div>
+          <div class="pair-cell is-estar"><span class="pair-verb">estar · ubicación</span><span class="pair-text">Chris está en el club de moteros.</span></div>
+        </div>
+      </div>
+      <p class="exit-note" style="margin-top:18px;"><strong>El atajo:</strong> "de dónde" casi siempre pide ser (origen, no cambia). "Dónde" a secas, sin "de", casi siempre pide estar (ubicación ahora). Fíjate en esa palabrita — "de" — antes de elegir el verbo.
+        <span class="en"><strong>The shortcut:</strong> "where from" almost always calls for ser (origin, doesn't change). "Where" on its own, without "from", almost always calls for estar (location now). Watch for that little word — "from" — before choosing the verb.</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ 4. VERBOS + PREPOSICIONES ============ -->
+  <section class="block">
+    <div class="block-head">
+      <div class="block-num">4</div>
+      <h2>Piezas para encadenar origen y ubicación</h2>
+      <div class="time-tag">la caja de piezas</div>
+    </div>
+    <div class="panel">
+      <p style="font-size:14px; color:var(--ink-soft); margin:0 0 16px;">Estructuras que unen las dos ideas en una sola frase, para no tener que cambiar de verbo a media conversación. Toca la tarjeta para ver el ejemplo.
+        <span class="en">Structures that join both ideas into one sentence, so you don't have to switch verbs mid-conversation. Tap the card to see the example.</span>
+      </p>
+      <div class="prep-grid" id="prep-grid"></div>
+      <p class="prep-hint">Toca cada tarjeta para ver cómo suena en una frase real.</p>
+    </div>
+  </section>
+
+  <!-- ============ 5. FÓRMULAS NATURALES ============ -->
+  <section class="block">
+    <div class="block-head">
+      <div class="block-num">5</div>
+      <h2>Fórmulas naturales</h2>
+      <div class="time-tag">para conectar piezas</div>
+    </div>
+    <div class="panel">
+      <div class="formula-grid">
+        <div class="formula-card"><div class="f-label">Para pasar de origen a ubicación</div><div class="f-text">"Soy de..., pero ahora estoy en..."</div><span class="en">"I'm from..., but now I'm in..."</span></div>
+        <div class="formula-card"><div class="f-label">Para el contraste temporal</div><div class="f-text">"Antes estaba en..., ahora estoy en..."</div><span class="en">"Before I was in..., now I'm in..."</span></div>
+        <div class="formula-card"><div class="f-label">Para matizar cuánto tiempo</div><div class="f-text">"Llevo dos años viviendo aquí."</div><span class="en">"I've been living here for two years."</span></div>
+        <div class="formula-card"><div class="f-label">Para anticipar la siguiente pregunta</div><div class="f-text">"...aunque no soy de aquí, claro."</div><span class="en">"...though I'm not from here, of course."</span></div>
+        <div class="formula-card"><div class="f-label">Para cerrar sin alargarte</div><div class="f-text">"Bueno, ya me entiendes: de allí, pero aquí."</div><span class="en">"Well, you know: from there, but here."</span></div>
+        <div class="formula-card"><div class="f-label">Para devolver la pregunta</div><div class="f-text">"¿Y tú? ¿Eres de aquí?"</div><span class="en">"And you? Are you from here?"</span></div>
+      </div>
+      <p class="exit-note" style="margin-top:16px;">Fíjate en que casi todas usan "pero" o "aunque" para marcar el cambio de origen a ubicación — esa palabra te avisa a ti misma de que toca cambiar de verbo.
+        <span class="en">Notice that almost all of them use "but" or "though" to mark the shift from origin to location — that word signals to you that it's time to switch verbs.</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ 5b. FRASES DE RESCATE ============ -->
+  <section class="block">
+    <div class="block-head">
+      <div class="block-num">5<span style="font-size:9px; vertical-align:super;">b</span></div>
+      <h2>Frases de rescate</h2>
+      <div class="time-tag">para cuando notas que has dicho "soy" por inercia</div>
+    </div>
+    <div class="panel">
+      <p style="font-size:14px; color:var(--ink-soft); margin:0 0 16px;">Si se te escapa "soy en Xàtiva", no pasa nada — corregirte con naturalidad suena mejor que pararte del todo.
+        <span class="en">If "soy en Xàtiva" slips out, it's not a big deal — correcting yourself naturally sounds better than stopping completely.</span>
+      </p>
+      <div class="rescue-grid">
+        <div class="rescue-card"><div class="rescue-phrase">Bueno, estoy, quiero decir</div><div class="rescue-use">La autocorrección más rápida: la dices y sigues sin frenar la conversación.<span class="en">The fastest self-correction: say it and keep going without stalling the conversation.</span></div></div>
+        <div class="rescue-card"><div class="rescue-phrase">A ver, cómo era...</div><div class="rescue-use">Para ganar el segundo que necesitas antes de decidir el verbo correcto.<span class="en">To buy the second you need before deciding on the right verb.</span></div></div>
+        <div class="rescue-card"><div class="rescue-phrase">Vivo en..., quería decir</div><div class="rescue-use">Cambia directamente a "vivir" si ser/estar se te resiste en ese momento — es un verbo seguro para hablar de ubicación.<span class="en">Switch straight to "vivir" (to live) if ser/estar resists you in the moment — it's a safe verb for talking about location.</span></div></div>
+        <div class="rescue-card"><div class="rescue-phrase">Es que a veces me lío con los dos</div><div class="rescue-use">Nombrar el propio lío en voz alta, con humor, quita presión y no interrumpe la conversación.<span class="en">Naming the mix-up out loud, with humor, takes off the pressure without interrupting the conversation.</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 5c. SI PREGUNTAN MÁS ============ -->
+  <section class="block">
+    <div class="block-head">
+      <div class="block-num">5<span style="font-size:9px; vertical-align:super;">c</span></div>
+      <h2>Si preguntan más</h2>
+      <div class="time-tag">las tres preguntas que siempre vienen después</div>
+    </div>
+    <div class="panel">
+      <p style="font-size:14px; color:var(--ink-soft); margin:0 0 16px;">Una vez resuelto el origen y la ubicación, casi siempre viene una de estas tres. Tenerlas listas evita el bloqueo justo cuando crees que ya has terminado con el tema.
+        <span class="en">Once origin and location are settled, one of these three almost always follows. Having them ready avoids the block right when you think you're done with the topic.</span>
+      </p>
+      <div class="followup-list">
+        <div class="followup-item">
+          <div class="followup-q">¿Y cuánto tiempo llevas viviendo aquí?
+            <span class="en" style="font-size:0.85em; margin-top:2px;">And how long have you been living here?</span>
+          </div>
+          <div class="followup-a"><strong>Llevo</strong> casi dos años en Xàtiva, sí.
+            <span class="en">I've been in Xàtiva for almost two years, yes.</span>
+          </div>
+        </div>
+        <div class="followup-item">
+          <div class="followup-q">¿Y por qué España, precisamente?
+            <span class="en" style="font-size:0.85em; margin-top:2px;">And why Spain, specifically?</span>
+          </div>
+          <div class="followup-a">Pues mi pareja <strong>es</strong> de aquí, y a mí <strong>me encanta</strong> el ritmo de vida.
+            <span class="en">Well, my partner is from here, and I love the pace of life.</span>
+          </div>
+        </div>
+        <div class="followup-item">
+          <div class="followup-q">¿Y tienes pensado quedarte, o es algo temporal?
+            <span class="en" style="font-size:0.85em; margin-top:2px;">And are you planning to stay, or is it temporary?</span>
+          </div>
+          <div class="followup-a">De momento <strong>estoy</strong> aquí sin fecha de vuelta — <strong>estoy</strong> muy a gusto.
+            <span class="en">For now I'm here with no return date — I'm very happy here.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 5d. REGISTRO ============ -->
+  <section class="block">
+    <div class="block-head">
+      <div class="block-num">5<span style="font-size:9px; vertical-align:super;">d</span></div>
+      <h2>Ajustar el registro</h2>
+      <div class="time-tag">la misma información, distinto contexto</div>
+    </div>
+    <div class="panel">
+      <p style="font-size:14px; color:var(--ink-soft); margin:0 0 4px;">Explicar origen y ubicación no suena igual en una cena que con un cliente nuevo. Aquí tienes la misma información en tres contextos que ya has vivido.
+        <span class="en">Explaining origin and location doesn't sound the same at a dinner as with a new client. Here's the same information across three contexts you've already lived through.</span>
+      </p>
+      <table class="register-table">
+        <tr><th>Contexto</th><th>Cómo sonaría</th></tr>
+        <tr><td class="reg-tag">cena / social</td><td>Soy de Chicago, pero ahora vivo en Xàtiva, un pueblo pequeño de Valencia.<span class="en">I'm from Chicago, but now I live in Xàtiva, a small town in Valencia.</span></td></tr>
+        <tr><td class="reg-tag">vecino nuevo / cercano</td><td>No soy de aquí, ¿eh? Soy de EE.UU., pero ya llevo un par de años en el barrio.<span class="en">I'm not from here, you know? I'm from the US, but I've been in the neighborhood for a couple of years already.</span></td></tr>
+        <tr><td class="reg-tag">cliente de boda / formal</td><td>Soy originaria de Chicago, aunque actualmente resido en España, desde donde coordino el evento.<span class="en">I'm originally from Chicago, though I currently reside in Spain, from where I coordinate the event.</span></td></tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============ 6. MINI-ROLEPLAY ============ -->
+  <section class="block">
+    <div class="block-head">
+      <div class="block-num">6</div>
+      <h2>Mini-roleplay</h2>
+      <div class="time-tag">la cena</div>
+    </div>
+    <div class="roleplay-panel">
+      <div class="scene-setup">
+        <div class="scene-icon">🥂</div>
+        <div class="scene-text"><strong>Escena:</strong> sigues en la cena. Usa la salida inmediata y el par mínimo de arriba para responder sin arrastrar el verbo de una pregunta a la otra.
+          <span class="en"><strong>Scene:</strong> you're still at the dinner. Use the exit line and the minimal pair above to answer without dragging the verb from one question into the other.</span>
+        </div>
+      </div>
+      <div class="dialogue">
+        <div class="line friend">
+          <div class="line-avatar">A</div>
+          <div class="line-body">
+            <div class="line-name">Alguien en la mesa</div>
+            <div class="line-bubble">Se te nota el acento — ¿de dónde eres?<span class="en">I can hear your accent — where are you from?</span></div>
+          </div>
+        </div>
+        <div class="line you">
+          <div class="line-avatar">L</div>
+          <div class="line-body">
+            <div class="line-name">Tú</div>
+            <textarea class="line-input" placeholder="Responde con ser (origen)..."></textarea>
+            <div class="line-hint">usa "soy de..."</div>
+          </div>
+        </div>
+        <div class="line friend">
+          <div class="line-avatar">A</div>
+          <div class="line-body">
+            <div class="line-name">Alguien en la mesa</div>
+            <div class="line-bubble">Ah, ¿de Chicago? Qué interesante. ¿Y dónde vives ahora, aquí en España?<span class="en">Oh, from Chicago? How interesting. And where do you live now, here in Spain?</span></div>
+          </div>
+        </div>
+        <div class="line you">
+          <div class="line-avatar">L</div>
+          <div class="line-body">
+            <div class="line-name">Tú</div>
+            <textarea class="line-input" placeholder="Cambia a estar (ubicación) — este es el punto exacto del bloqueo"></textarea>
+            <div class="line-hint">di "de" en voz baja antes de la primera respuesta, y nota que aquí no hay "de"</div>
+          </div>
+        </div>
+        <div class="line friend">
+          <div class="line-avatar">A</div>
+          <div class="line-body">
+            <div class="line-name">Alguien en la mesa</div>
+            <div class="line-bubble">¿Y cuánto tiempo llevas ya viviendo allí?<span class="en">And how long have you been living there now?</span></div>
+          </div>
+        </div>
+        <div class="line you">
+          <div class="line-avatar">L</div>
+          <div class="line-body">
+            <div class="line-name">Tú</div>
+            <textarea class="line-input" placeholder="Usa 'llevo + tiempo + gerundio'..."></textarea>
+            <div class="line-hint">del bloque 5c, "si preguntan más"</div>
+          </div>
+        </div>
+      </div>
+      <div class="roleplay-tip"><strong>Truco:</strong> si notas que has dicho "soy" donde tocaba "estoy", no vuelvas atrás a corregir del todo — usa "quiero decir, estoy..." y sigue. La autocorrección breve suena más natural que el silencio.
+        <span class="en"><strong>Trick:</strong> if you notice you said "soy" where "estoy" was needed, don't fully backtrack to fix it — use "I mean, estoy..." and continue. A brief self-correction sounds more natural than silence.</span>
+      </div>
+
+      <div class="scene-setup" style="margin-top:28px;">
+        <div class="scene-icon">💍</div>
+        <div class="scene-text"><strong>Segunda escena:</strong> ahora es la primera llamada con un cliente de boda que no te conoce. Registro más formal.
+          <span class="en"><strong>Second scene:</strong> now it's the first call with a wedding client who doesn't know you. More formal register.</span>
+        </div>
+      </div>
+      <div class="dialogue" style="margin-top:16px;">
+        <div class="line friend">
+          <div class="line-avatar">C</div>
+          <div class="line-body">
+            <div class="line-name">Cliente</div>
+            <div class="line-bubble">Antes de empezar, cuéntame un poco de ti — ¿eres de EE.UU.?<span class="en">Before we start, tell me a bit about yourself — are you from the US?</span></div>
+          </div>
+        </div>
+        <div class="line you">
+          <div class="line-avatar">L</div>
+          <div class="line-body">
+            <div class="line-name">Tú</div>
+            <textarea class="line-input" placeholder="Responde en registro formal, con ser..."></textarea>
+            <div class="line-hint">usa el bloque 5d para el tono</div>
+          </div>
+        </div>
+        <div class="line friend">
+          <div class="line-avatar">C</div>
+          <div class="line-body">
+            <div class="line-name">Cliente</div>
+            <div class="line-bubble">¿Y desde dónde coordinas todo, entonces?<span class="en">And from where do you coordinate everything, then?</span></div>
+          </div>
+        </div>
+        <div class="line you">
+          <div class="line-avatar">L</div>
+          <div class="line-body">
+            <div class="line-name">Tú</div>
+            <textarea class="line-input" placeholder="Cambia a estar/vivir en registro formal..."></textarea>
+            <div class="line-hint">"resido en" o "estoy en" — ambas funcionan aquí</div>
+          </div>
+        </div>
+      </div>
+      <div class="roleplay-tip" style="margin-top:20px;"><strong>Compara:</strong> vuelve a leer tu respuesta en la cena y esta con el cliente. La decisión ser/estar es la misma en las dos — lo que cambia es el vocabulario alrededor. Ese ajuste es lo que suena a profesional.
+        <span class="en"><strong>Compare:</strong> reread your answer at the dinner and this one with the client. The ser/estar decision is the same in both — what changes is the vocabulary around it. That adjustment is what sounds professional.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 7. CHOOSE YOUR WORDS ============ -->
+  <section class="block">
+    <div class="block-head">
+      <div class="block-num">7</div>
+      <h2>Choose your words</h2>
+      <div class="time-tag">lo que te llevas</div>
+    </div>
+    <div class="panel choose-panel">
+      <p class="choose-intro">De las 14 expresiones de abajo, marca las 5–8 que realmente quieres tener listas la próxima vez que alguien te pregunte de dónde eres y dónde vives. Mejor pocas y bien interiorizadas que todas a medias.
+        <span class="en">Of the 14 expressions below, mark the 5–8 you really want to have ready next time someone asks where you're from and where you live. Better a few well internalized than all of them half-learned.</span>
+      </p>
+      <div class="choose-grid" id="choose-grid"></div>
+      <div class="choose-footer">
+        <span id="choose-count">0 seleccionadas</span>
+        <button class="btn-primary" id="build-summary">Construir mi resumen</button>
+      </div>
+      <textarea id="final-summary" placeholder="Aquí aparecerán tus expresiones elegidas — edítalas o combínalas como quieras."></textarea>
+    </div>
+  </section>
+
+</main>
+
+<footer>ESCOLAR · Expansion Pack Mini · Origen vs. ubicación</footer>
+
+<script>
+/* ---------- PIEZAS PARA ENCADENAR ORIGEN Y UBICACIÓN ---------- */
+const PREPS = [
+  {verb:"soy", prep:"de, pero estoy en", example:"Soy de Chicago, pero estoy en Xàtiva.", en:"I'm from Chicago, but I'm in Xàtiva."},
+  {verb:"llevo", prep:"+ tiempo + gerundio", example:"Llevo dos años viviendo aquí.", en:"I've been living here for two years."},
+  {verb:"vivo", prep:"en", example:"Vivo en un pueblo pequeño de Valencia.", en:"I live in a small town in Valencia."},
+  {verb:"resido", prep:"en", example:"Actualmente resido en España.", en:"I currently reside in Spain."},
+  {verb:"me mudé", prep:"a", example:"Me mudé a España hace dos años.", en:"I moved to Spain two years ago."},
+  {verb:"no soy", prep:"de aquí", example:"No soy de aquí, pero ya me siento como en casa.", en:"I'm not from here, but I already feel at home."},
+];
+
+const grid = document.getElementById('prep-grid');
+PREPS.forEach(p=>{
+  const card = document.createElement('div');
+  card.className = 'prep-card';
+  card.tabIndex = 0;
+  card.innerHTML = `<div class="prep-verb">${p.verb} <span class="prep">${p.prep}</span></div><div class="prep-example">${p.example}<span class="en">${p.en}</span></div>`;
+  const flip = ()=> card.classList.toggle('flipped');
+  card.addEventListener('click', flip);
+  card.addEventListener('keydown', e=>{ if(e.key==='Enter' || e.key===' '){ e.preventDefault(); flip(); } });
+  grid.appendChild(card);
+});
+
+/* ---------- CHOOSE YOUR WORDS ---------- */
+const CHOICES = [
+  {es:"Soy de Chicago, pero ahora estoy en Xàtiva.", en:"I'm from Chicago, but now I'm in Xàtiva."},
+  {es:"Llevo casi dos años viviendo aquí.", en:"I've been living here for almost two years."},
+  {es:"No soy de aquí, aunque ya me siento como en casa.", en:"I'm not from here, though I already feel at home."},
+  {es:"Vivo en un pueblo pequeño de Valencia.", en:"I live in a small town in Valencia."},
+  {es:"Bueno, estoy, quiero decir.", en:"Well, I'm, I mean."},
+  {es:"Mi pareja es de aquí, por eso estoy en España.", en:"My partner is from here, that's why I'm in Spain."},
+  {es:"Actualmente resido en España, desde donde coordino todo.", en:"I currently reside in Spain, from where I coordinate everything."},
+  {es:"Es que a veces me lío entre ser y estar.", en:"It's just that sometimes I mix up ser and estar."},
+  {es:"De momento estoy aquí sin fecha de vuelta.", en:"For now I'm here with no return date."},
+  {es:"Me mudé a España hace un par de años.", en:"I moved to Spain a couple of years ago."},
+  {es:"Soy originaria de Chicago, aunque vivo en España.", en:"I'm originally from Chicago, though I live in Spain."},
+  {es:"¿Y tú? ¿Eres de aquí?", en:"And you? Are you from here?"},
+  {es:"A ver, cómo era... estoy en Xàtiva.", en:"Let's see, how was it... I'm in Xàtiva."},
+  {es:"No soy de aquí, ¿eh? Pero ya llevo un tiempo.", en:"I'm not from here, you know? But I've been here a while."},
+];
+
+const chooseGrid = document.getElementById('choose-grid');
+const countEl = document.getElementById('choose-count');
+const picked = new Set();
+
+CHOICES.forEach((choice, i)=>{
+  const item = document.createElement('div');
+  item.className = 'choose-item';
+  item.innerHTML = `<div class="choose-checkbox"></div><div class="choose-text">${choice.es}<span class="en">${choice.en}</span></div>`;
+  item.addEventListener('click', ()=>{
+    item.classList.toggle('picked');
+    if(picked.has(i)){ picked.delete(i); item.querySelector('.choose-checkbox').textContent=''; }
+    else{ picked.add(i); item.querySelector('.choose-checkbox').textContent='✓'; }
+    countEl.textContent = `${picked.size} seleccionada${picked.size===1?'':'s'}`;
+  });
+  chooseGrid.appendChild(item);
+});
+
+document.getElementById('build-summary').addEventListener('click', ()=>{
+  const ta = document.getElementById('final-summary');
+  if(picked.size === 0){
+    ta.style.display = 'block';
+    ta.value = 'Marca al menos una expresión arriba para construir tu resumen.';
+    return;
+  }
+  const ordered = [...picked].sort((a,b)=>a-b).map(i=>CHOICES[i].es);
+  ta.style.display = 'block';
+  ta.value = ordered.join(' ');
+});
+
+/* ---------- LANG TOGGLE (ES / EN) ---------- */
+const langSwitch = document.getElementById('lang-switch');
+const esLabel = document.getElementById('lang-es-label');
+const enLabel = document.getElementById('lang-en-label');
+const setLang = (showEn)=>{
+  document.body.classList.toggle('show-en', showEn);
+  esLabel.classList.toggle('active', !showEn);
+  enLabel.classList.toggle('active', showEn);
+  langSwitch.setAttribute('aria-pressed', String(showEn));
+};
+langSwitch.addEventListener('click', ()=> setLang(!document.body.classList.contains('show-en')));
+langSwitch.addEventListener('keydown', (e)=>{
+  if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); setLang(!document.body.classList.contains('show-en')); }
+});
+setLang(false);
+</script>
+
+</body>
+</html>

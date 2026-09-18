@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mini · ¿Cómo se dice...?</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+
+/* ╔══════════════════════════════════════════════════════════════╗
+   ║  ESCOLAR — Expansion Pack · Mini                              ║
+   ║  "¿Cómo se dice...?" — Reformular sin callarte                 ║
+   ╚══════════════════════════════════════════════════════════════╝ */
+
+:root{
+  --paper:        #FBF7EE;
+  --paper-raised: #FFFFFF;
+  --paper-alt:    #F3ECDA;
+  --ink:          #23291F;
+  --ink-soft:     #565F52;
+  --ink-faint:    #8B9184;
+  --line:         rgba(35,41,31,0.12);
+  --line-strong:  rgba(35,41,31,0.22);
+
+  --b1:      #2F6FED;  --b1-soft: #EAF1FE;  --b1-line: #C6D9FC;
+  --b2:      #2E9E6B;  --b2-soft: #E9F6EF;  --b2-line: #BEE6D3;
+  --family:  #B5502E;  --family-soft: #FBEBE3; --family-line: #EFC9B4;
+  --violet:  #7B4FC9;  --violet-soft: #F1EBFB; --violet-line: #D9C8F0;
+
+  --f-display: 'Fraunces', Georgia, serif;
+  --f-body:    'IBM Plex Sans', system-ui, sans-serif;
+  --f-data:    'IBM Plex Mono', monospace;
+
+  --r-sm: 8px;
+  --r-md: 14px;
+  --r-lg: 20px;
+
+  --shadow-1: 0 1px 2px rgba(35,41,31,0.05), 0 1px 8px rgba(35,41,31,0.04);
+}
+
+*{ box-sizing:border-box; }
+body{
+  margin:0;
+  background: var(--paper);
+  background-image: radial-gradient(circle at 1px 1px, var(--line) 1px, transparent 0);
+  background-size: 22px 22px;
+  color: var(--ink);
+  font-family: var(--f-body);
+  line-height:1.6;
+}
+::selection{ background: var(--b1-soft); }
+
+/* ---------- HEADER ---------- */
+header{ padding:44px 24px 28px; max-width:760px; margin:0 auto; }
+.eyebrow{
+  font-family: var(--f-data); font-size:12px; letter-spacing:.14em;
+  text-transform:uppercase; color: var(--violet); margin:0 0 10px;
+  display:flex; align-items:center; gap:10px;
+}
+.eyebrow .dot{ width:6px; height:6px; border-radius:50%; background: var(--violet); }
+h1{
+  font-family: var(--f-display); font-weight:600;
+  font-size:clamp(30px,5.6vw,46px); line-height:1.08;
+  margin:0 0 14px; letter-spacing:-.01em;
+}
+h1 em{ font-style:italic; color: var(--violet); }
+.lede{ font-size:16px; color: var(--ink-soft); max-width:56ch; margin:0; }
+
+.meta-row{
+  display:flex; flex-wrap:wrap; gap:20px; margin-top:26px;
+  font-family: var(--f-data); font-size:12px; color: var(--ink-faint);
+}
+.meta-row strong{
+  display:block; color: var(--ink); font-size:14.5px; font-weight:500;
+  font-family: var(--f-display); margin-top:3px;
+}
+
+/* ---------- STRUCTURE STRIP ---------- */
+.structure-strip{
+  display:grid; grid-template-columns:repeat(5,1fr); gap:2px; margin-top:24px;
+  border-radius: var(--r-md); overflow:hidden; border:1px solid var(--line);
+}
+.structure-strip.row2{ margin-top:2px; }
+.structure-cell{ background: var(--paper-raised); padding:10px 8px; }
+.structure-cell .s-icon{ font-size:15px; }
+.structure-cell .s-label{ font-family: var(--f-body); font-weight:600; font-size:10.5px; color: var(--ink); margin-top:4px; line-height:1.25; }
+
+/* ---------- SECTIONS ---------- */
+main{ max-width:760px; margin:0 auto; padding:8px 24px 100px; }
+
+section.block{ margin-bottom:52px; }
+.block-head{ display:flex; align-items:baseline; gap:12px; margin-bottom:18px; }
+.time-tag{
+  font-family: var(--f-data); font-size:11px; color: var(--ink-faint);
+  background: var(--paper-alt); padding:3px 10px; border-radius:999px; margin-left:auto; flex:none;
+}
+.block-num{
+  font-family: var(--f-data); font-size:12px; color:#fff; background: var(--violet);
+  width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  flex:none;
+}
+.block-head h2{
+  font-family: var(--f-display); font-weight:500; font-style:italic; font-size:22px; margin:0;
+}
+.phase-label{
+  font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.08em;
+  color: var(--ink-faint); margin:0 0 8px; display:flex; align-items:center; gap:8px;
+}
+
+.panel{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-lg);
+  box-shadow: var(--shadow-1); padding:26px 28px;
+}
+
+/* ---------- 1. EL MOMENTO (scene) ---------- */
+.scene-panel{ background: var(--family-soft); border:1px solid var(--family-line); border-radius: var(--r-lg); padding:26px 28px; }
+.scene-panel .block-num{ background: var(--family); }
+.scene-setup{
+  display:flex; gap:14px; align-items:flex-start; background: var(--paper-raised);
+  border:1px solid var(--family-line); border-radius: var(--r-md); padding:16px 18px; margin-bottom:16px;
+}
+.scene-icon{ font-size:24px; flex:none; }
+.scene-text{ font-size:15px; color: var(--ink-soft); }
+.scene-text strong{ color: var(--ink); }
+.blocked-line{
+  margin-top:16px; padding:16px 18px; background: rgba(255,255,255,0.5); border:1px dashed var(--family-line);
+  border-radius: var(--r-md); font-family: var(--f-display); font-style:italic; font-size:16.5px; color: var(--ink);
+}
+.blocked-line .who{ font-family: var(--f-data); font-style:normal; font-size:11px; text-transform:uppercase;
+  letter-spacing:.05em; color: var(--family); display:block; margin-bottom:6px; }
+
+/* ---------- 2. LA SALIDA INMEDIATA (4 pasos) ---------- */
+.exit-panel{ background: var(--violet-soft); border:1px solid var(--violet-line); }
+.exit-panel .block-num{ background: var(--violet); }
+.steps-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:12px; margin-top:4px; }
+@media(max-width:640px){ .steps-grid{ grid-template-columns:1fr; } }
+.step-card{
+  background: var(--paper-raised); border:1px solid var(--violet-line); border-radius: var(--r-md);
+  padding:16px 18px;
+}
+.step-num-badge{
+  display:inline-flex; align-items:center; justify-content:center; width:22px; height:22px; border-radius:50%;
+  background: var(--violet); color:#fff; font-family: var(--f-data); font-size:11px; margin-bottom:8px;
+}
+.step-title{ font-family: var(--f-display); font-weight:600; font-size:16px; color: var(--ink); margin:0 0 4px; }
+.step-ex{ font-size:13.5px; color: var(--ink-soft); font-style:italic; }
+.exit-note{ font-size:13.5px; color: var(--ink-soft); margin-top:14px; }
+.exit-note strong{ color: var(--ink); }
+
+/* ---------- 3. BANCO DE PALABRAS QUE SE ESCAPAN ---------- */
+.word-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:12px; margin-top:4px; }
+.word-card{
+  background: var(--paper-raised); border:1px solid var(--b1-line); border-radius: var(--r-md);
+  padding:16px 18px; cursor:pointer; min-height:110px; display:flex; flex-direction:column;
+  justify-content:center; transition: border-color .15s ease, transform .1s ease;
+}
+.word-card:hover{ border-color: var(--b1); transform: translateY(-1px); }
+.word-card:focus-visible{ outline:2px solid var(--b1); outline-offset:2px; }
+.word-missing{ font-family: var(--f-display); font-weight:600; font-size:17px; color: var(--family); text-decoration:line-through; }
+.word-context{ font-size:12px; color: var(--ink-faint); margin-top:4px; }
+.word-fix{ display:none; font-family: var(--f-body); font-size:13.5px; color: var(--b2); margin-top:10px; font-weight:600; line-height:1.5; }
+.word-fix .en{ color: var(--ink-faint); font-weight:400; margin-top:6px; }
+.word-card.flipped .word-fix{ display:block; }
+.word-card.flipped{ background: var(--b1-soft); border-color: var(--b1); }
+.word-hint{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin:12px 2px 0; }
+
+/* ---------- 4. VERBOS + PREPOSICIONES ---------- */
+.prep-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(210px,1fr)); gap:12px; margin-top:4px; }
+.prep-card{
+  background: var(--paper-raised); border:1px solid var(--b1-line); border-radius: var(--r-md);
+  padding:16px 18px; cursor:pointer; min-height:96px; display:flex; flex-direction:column;
+  justify-content:center; transition: border-color .15s ease, transform .1s ease;
+}
+.prep-card:hover{ border-color: var(--b1); transform: translateY(-1px); }
+.prep-card:focus-visible{ outline:2px solid var(--b1); outline-offset:2px; }
+.prep-verb{ font-family: var(--f-display); font-weight:600; font-size:17px; color: var(--ink); }
+.prep-verb .prep{ color: var(--b1); font-style:italic; }
+.prep-example{ display:none; font-family: var(--f-body); font-size:13px; color: var(--ink-soft); margin-top:8px; line-height:1.5; }
+.prep-example .en{ margin-top:6px; }
+.prep-card.flipped .prep-example{ display:block; }
+.prep-card.flipped{ background: var(--b1-soft); border-color: var(--b1); }
+.prep-hint{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin:12px 2px 0; }
+
+/* ---------- 5. FÓRMULAS NATURALES ---------- */
+.formula-grid{ display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:4px; }
+@media(max-width:640px){ .formula-grid{ grid-template-columns:1fr; } }
+.formula-card{
+  background: var(--paper-raised); border:1px solid var(--b2-line); border-radius: var(--r-md);
+  padding:18px 20px;
+}
+.formula-card .f-label{ font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.05em; color: var(--b2); margin-bottom:8px; }
+.formula-card .f-text{ font-family: var(--f-display); font-size:16px; color: var(--ink); font-style:italic; }
+
+/* ---------- RESCUE PHRASES (muletillas) ---------- */
+.rescue-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:12px; margin-top:4px; }
+.rescue-card{
+  background: var(--paper-raised); border:1px solid var(--family-line); border-radius: var(--r-md);
+  padding:16px 18px;
+}
+.rescue-phrase{ font-family: var(--f-display); font-weight:600; font-style:italic; font-size:16px; color: var(--family); margin-bottom:6px; }
+.rescue-use{ font-size:13px; color: var(--ink-soft); }
+.rescue-use .en{ margin-top:8px; }
+
+/* ---------- FOLLOW-UP Qs ---------- */
+.followup-list{ display:flex; flex-direction:column; gap:14px; margin-top:4px; }
+.followup-item{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:16px 18px;
+}
+.followup-q{ font-family: var(--f-display); font-style:italic; font-size:15.5px; color: var(--ink); margin-bottom:8px; }
+.followup-q::before{ content:"— "; color: var(--ink-faint); }
+.followup-q .en{ font-family: var(--f-body); font-style:italic; }
+.followup-a{ font-size:14px; color: var(--ink-soft); padding-left:14px; border-left:2px solid var(--b1-line); }
+.followup-a strong{ color: var(--b1); font-weight:600; }
+.followup-a .en{ margin-top:8px; }
+
+/* ---------- REGISTER TABLE ---------- */
+.register-table{ width:100%; border-collapse:collapse; margin-top:4px; }
+.register-table th{
+  font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.05em;
+  color: var(--ink-faint); text-align:left; padding:0 10px 10px; border-bottom:1px solid var(--line);
+}
+.register-table td{ padding:12px 10px; border-bottom:1px dashed var(--line); font-size:14px; vertical-align:top; }
+.register-table tr:last-child td{ border-bottom:none; }
+.register-table .reg-tag{ font-family: var(--f-data); font-size:11px; text-transform:uppercase; color: var(--violet); white-space:nowrap; }
+
+/* ---------- 6. MINI-ROLEPLAY ---------- */
+.roleplay-panel{ background: var(--b1-soft); border:1px solid var(--b1-line); border-radius: var(--r-lg); padding:26px 28px; }
+.roleplay-panel .block-num{ background: var(--b1); }
+.dialogue{ display:flex; flex-direction:column; gap:14px; }
+.line{ display:flex; gap:12px; align-items:flex-start; }
+.line-avatar{
+  flex:none; width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  font-family: var(--f-display); font-weight:600; font-size:14px; color:#fff;
+}
+.line.friend .line-avatar{ background: var(--ink-faint); }
+.line.you .line-avatar{ background: var(--b1); }
+.line-body{ flex:1; }
+.line-name{ font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.05em; color: var(--ink-faint); margin:0 0 4px; }
+.line-bubble{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:12px 14px; font-size:14.5px; color: var(--ink);
+}
+.line.you .line-bubble{ background:#fff; border-color: var(--b1-line); }
+.line-input{
+  width:100%; font-family: var(--f-body); font-size:14.5px; color: var(--ink);
+  background:#fff; border:1px solid var(--b1-line); border-radius: var(--r-sm);
+  padding:10px 12px; resize:vertical; min-height:44px; margin-top:2px;
+}
+.line-input:focus{ outline:none; border-color: var(--b1); }
+.line-hint{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin-top:5px; }
+.roleplay-tip{
+  margin-top:22px; padding:14px 16px; background: var(--paper-raised); border:1px solid var(--b1-line);
+  border-radius: var(--r-md); font-size:13.5px; color: var(--ink-soft);
+}
+.roleplay-tip strong{ color: var(--ink); }
+
+/* ---------- 7. CHOOSE YOUR WORDS ---------- */
+.choose-panel{ background: var(--paper-raised); border:1px solid var(--line); }
+.choose-intro{ font-size:14px; color: var(--ink-soft); margin:0 0 18px; }
+.choose-grid{ display:flex; flex-direction:column; gap:10px; }
+.choose-item{
+  display:flex; align-items:center; gap:14px; padding:12px 14px; border:1px solid var(--line);
+  border-radius: var(--r-md); cursor:pointer; transition: all .15s ease; background: var(--paper-raised);
+}
+.choose-item:hover{ border-color: var(--violet-line); background: var(--violet-soft); }
+.choose-item.picked{ border-color: var(--violet); background: var(--violet-soft); }
+.choose-checkbox{
+  flex:none; width:20px; height:20px; border-radius:6px; border:1.5px solid var(--line-strong);
+  display:flex; align-items:center; justify-content:center; font-size:13px; color:#fff;
+  background: var(--paper-raised);
+}
+.choose-item.picked .choose-checkbox{ background: var(--violet); border-color: var(--violet); }
+.choose-text{ font-size:14.5px; color: var(--ink); flex:1; }
+.choose-text .en{ margin-top:4px; }
+.choose-footer{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:20px; padding-top:18px; border-top:1px dashed var(--line); flex-wrap:wrap; }
+#choose-count{ font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); }
+.btn-primary{
+  font-family: var(--f-body); font-weight:600; font-size:14px; color:#fff; background: var(--violet);
+  border:none; padding:11px 22px; border-radius:999px; cursor:pointer; transition: transform .1s ease;
+}
+.btn-primary:hover{ transform: translateY(-1px); }
+textarea#final-summary{
+  width:100%; min-height:100px; font-family: var(--f-body); font-size:14.5px; color: var(--ink);
+  background: var(--paper-alt); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:14px 16px; resize:vertical; margin-top:16px; display:none;
+}
+textarea#final-summary:focus{ outline:none; border-color: var(--violet); }
+
+footer{ max-width:760px; margin:0 auto; padding:0 24px 60px; font-family: var(--f-data); font-size:12px; color: var(--ink-faint); text-align:center; }
+
+/* ---------- LANG TOGGLE ---------- */
+.lang-toggle{
+  position:fixed; top:18px; right:18px; z-index:50;
+  display:flex; align-items:center; gap:8px;
+  background: var(--paper-raised); border:1px solid var(--line-strong); border-radius:999px;
+  padding:6px 8px; box-shadow: var(--shadow-1);
+  font-family: var(--f-data); font-size:11px;
+}
+.lang-toggle span{ color: var(--ink-faint); padding:0 2px; }
+.lang-toggle span.active{ color: var(--violet); font-weight:700; }
+.lang-switch{
+  position:relative; width:38px; height:20px; border-radius:999px; background: var(--paper-alt);
+  border:1px solid var(--line-strong); cursor:pointer; flex:none;
+}
+.lang-switch::after{
+  content:""; position:absolute; top:1px; left:1px; width:16px; height:16px; border-radius:50%;
+  background: var(--violet); transition: transform .15s ease;
+}
+body.show-en .lang-switch::after{ transform: translateX(18px); }
+
+.en{
+  display:none;
+  font-family: var(--f-body); font-size:0.92em; color: var(--ink-faint);
+  font-style:italic; margin-top:4px;
+}
+body.show-en .en{ display:block; }
+body.show-en .en.inline{ display:inline; margin-top:0; margin-left:6px; }
+.en::before{ content:"EN · "; font-family: var(--f-data); font-style:normal; font-size:0.85em; color: var(--violet); }
+
+</style>
+</head>
+<body>
+
+<div class="lang-toggle">
+  <span id="lang-es-label" class="active">ES</span>
+  <div class="lang-switch" id="lang-switch" role="button" tabindex="0" aria-label="Mostrar traducción al inglés"></div>
+  <span id="lang-en-label">EN</span>
+</div>
+
+
+<header>
+  <p class="eyebrow"><span class="dot"></span>Expansion Pack · Mini</p>
+  <h1>¿Cómo <em>se dice</em>...?</h1>
+  <p class="lede">No es que te falte vocabulario — es que cuando se te escapa una palabra en medio de una frase, la reacción automática es callarte. Este Mini cambia esa reacción por otra: rodear la palabra en vez de pararte.
+    <span class="en">It's not that you lack vocabulary — it's that when a word slips away mid-sentence, the automatic reaction is to go silent. This Mini swaps that reaction for another one: work around the word instead of stopping.</span>
+  </p>
+
+  <div class="meta-row">
+    <div>Contexto <strong>Veterinaria, dentista, cliente de boda</strong></div>
+    <div>Bloqueo <strong>"¿Cómo se dice...?" — falta una palabra concreta</strong></div>
+    <div>Duración <strong>~20 min</strong></div>
+  </div>
+
+  <div class="structure-strip">
+    <div class="structure-cell"><div class="s-icon">🧊</div><div class="s-label">El momento</div></div>
+    <div class="structure-cell"><div class="s-icon">🚪</div><div class="s-label">4 pasos</div></div>
+    <div class="structure-cell"><div class="s-icon">🔀</div><div class="s-label">Banco de palabras</div></div>
+    <div class="structure-cell"><div class="s-icon">🧩</div><div class="s-label">Piezas</div></div>
+    <div class="structure-cell"><div class="s-icon">💬</div><div class="s-label">Fórmulas</div></div>
+  </div>
+  <div class="structure-strip row2">
+    <div class="structure-cell"><div class="s-icon">🆘</div><div class="s-label">Rescate</div></div>
+    <div class="structure-cell"><div class="s-icon">❓</div><div class="s-label">Si preguntan más</div></div>
+    <div class="structure-cell"><div class="s-icon">🎚️</div><div class="s-label">Registro</div></div>
+    <div class="structure-cell"><div class="s-icon">🎭</div><div class="s-label">Roleplay</div></div>
+    <div class="structure-cell"><div class="s-icon">✅</div><div class="s-label">Tus palabras</div></div>
+  </div>
+</header>
+
+<main>
+
+  <!-- ============ 1. EL MOMENTO ============ -->
+  <section class="block">
+    <div class="block-head">
+      <div class="block-num">1</div>
+      <h2>El momento</h2>
+      <div class="time-tag">bloqueo real</div>
+    </div>
+    <div class="scene-panel">
+      <div class="scene-setup">
+        <div class="scene-icon">🩺</div>
+        <div class="scene-text">Estás en la veterinaria explicando por qué has traído a Alex. Vas bien, la frase fluye — hasta que necesitas una palabra muy concreta y no te sale.
+          <span class="en">You're at the vet explaining why you brought Alex in. You're doing fine, the sentence is flowing — until you need one very specific word and it just won't come.</span>
+        </div>
+      </div>
+      <div class="blocked-line">
+        <span class="who">Tú, a media frase</span>
+        "Es que se le ha roto la... la cosa que se pone al perro para pasear, ¿cómo se dice?"
+        <span class="en">"It's that his... the thing you put on the dog to walk him has broken, how do you say that?"</span>
+      </div>
+      <p class="scene-text" style="margin-top:16px;">Sabías toda la frase menos una palabra — "correa". Y ahí, en vez de rodearla, la reacción automática es pararte del todo, como si toda la frase dependiera de esa única palabra. No dependía: seguiste hablando y llegaste hasta el final igual.
+        <span class="en">You knew the whole sentence except one word — "leash". And right there, instead of working around it, the automatic reaction is to stop completely, as if the whole sentence depended on that one word. It didn't: you kept talking and got to the end anyway.</span>
+      </p>
+      <p class="scene-text" style="margin-top:12px;">Este bloqueo no aparece solo con "correa". Aparece con cualquier palabra muy específica de tu día a día que nunca te ha tocado usar en clase: una pieza del vestido de novia, un síntoma en la dentista, un tipo de proveedor para la boda. Cuanto más concreta la palabra, más fácil que se te escape justo cuando más la necesitas.
+        <span class="en">This block doesn't only show up with "leash". It shows up with any very specific word from your daily life that class has never happened to cover: a piece of the wedding dress, a symptom at the dentist, a type of vendor for the wedding. The more specific the word, the more likely it slips away right when you need it most.</span>
+      </p>
+      <div class="scene-setup" style="margin-top:16px; margin-bottom:0;">
+        <div class="scene-icon">🧠</div>
+        <div class="scene-text">Por qué se produce el bloqueo: tratas la palabra que falta como si fuera obligatoria, no como una pieza más entre muchas posibles. En realidad casi cualquier objeto o situación se puede describir sin nombrarlo — es lo que hace un hablante nativo constantemente, sin darse cuenta.
+          <span class="en">Why the block happens: you treat the missing word as mandatory, not as one piece among many possible ones. In reality almost any object or situation can be described without naming it — that's what a native speaker does constantly, without even noticing.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 2. LOS 4 PASOS ============ -->
+  <section class="block">
+    <div class="block-head">
+      <div class="block-num">2</div>
+      <h2>Los 4 pasos</h2>
+      <div class="time-tag">la salida inmediata</div>
+    </div>
+    <div class="panel exit-panel">
+      <div class="steps-grid">
+        <div class="step-card">
+          <span class="step-num-badge">1</span>
+          <p class="step-title">Describe para qué sirve</p>
+          <p class="step-ex">"la cosa que usas para..."</p>
+        </div>
+        <div class="step-card">
+          <span class="step-num-badge">2</span>
+          <p class="step-title">Di lo contrario</p>
+          <p class="step-ex">si no sabes "barato", di "no es caro"</p>
+        </div>
+        <div class="step-card">
+          <span class="step-num-badge">3</span>
+          <p class="step-title">Usa una palabra más general</p>
+          <p class="step-ex">si no sabes "correa", di "la cosa del perro"</p>
+        </div>
+        <div class="step-card">
+          <span class="step-num-badge">4</span>
+          <p class="step-title">Pide ayuda con naturalidad</p>
+          <p class="step-ex">"¿cómo se dice cuando...?"</p>
+        </div>
+      </div>
+      <p class="exit-note">No hace falta elegir el paso "correcto" — cualquiera de los cuatro rompe el silencio y te deja seguir hablando. Con el tiempo notarás cuál te sale más rápido según la palabra que falte.
+        <span class="en">You don't need to pick the "right" step — any of the four breaks the silence and lets you keep talking. Over time you'll notice which one comes fastest depending on the word that's missing.</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ 3. BANCO DE PALABRAS QUE SE ESCAPAN ============ -->
+  <section class="block">
+    <div class="block-head">
+      <div class="block-num">3</div>
+      <h2>Banco de palabras que se escapan</h2>
+      <div class="time-tag">practica el rodeo antes de necesitarlo</div>
+    </div>
+    <div class="panel">
+      <p style="font-size:14px; color:var(--ink-soft); margin:0 0 16px;">Ocho palabras concretas de tu vida real que es fácil que se te olviden justo cuando las necesitas. Toca la tarjeta para ver cómo rodearla con los 4 pasos.
+        <span class="en">Eight specific words from your real life that are easy to forget right when you need them. Tap the card to see how to work around it using the 4 steps.</span>
+      </p>
+      <div class="word-grid" id="word-grid"></div>
+      <p class="word-hint">Toca cada tarjeta para ver el rodeo. La idea no es memorizar el rodeo exacto, sino ver que siempre hay uno.</p>
+    </div>
+  </section>
+
+  <!-- ============ 4. VERBOS + PREPOSICIONES ============ -->
+  <section class="block">
+    <div class="block-head">
+      <div class="block-num">4</div>
+      <h2>Piezas para rodear</h2>
+      <div class="time-tag">estructuras reutilizables</div>
+    </div>
+    <div class="panel">
+      <p style="font-size:14px; color:var(--ink-soft); margin:0 0 16px;">No son palabras nuevas — son estructuras que funcionan con cualquier palabra que se te escape, sea cual sea. Toca la tarjeta para ver el ejemplo.
+        <span class="en">These aren't new words — they're structures that work with any word that slips away, whatever it is. Tap the card to see the example.</span>
+      </p>
+      <div class="prep-grid" id="prep-grid"></div>
+      <p class="prep-hint">Toca cada tarjeta para ver cómo suena en una frase real.</p>
+    </div>
+  </section>
+
+  <!-- ============ 5. FÓRMULAS NATURALES ============ -->
+  <section class="block">
+    <div class="block-head">
+      <div class="block-num">5</div>
+      <h2>Fórmulas naturales</h2>
+      <div class="time-tag">para conectar piezas</div>
+    </div>
+    <div class="panel">
+      <div class="formula-grid">
+        <div class="formula-card"><div class="f-label">Para ganar un segundo</div><div class="f-text">"A ver, cómo lo digo..."</div><span class="en">"Let's see, how do I say this..."</span></div>
+        <div class="formula-card"><div class="f-label">Para introducir el rodeo</div><div class="f-text">"Es la cosa que..."</div><span class="en">"It's the thing that..."</span></div>
+        <div class="formula-card"><div class="f-label">Para pedir confirmación</div><div class="f-text">"¿Se entiende lo que digo?"</div><span class="en">"Does that make sense?"</span></div>
+        <div class="formula-card"><div class="f-label">Para seguir tras el rodeo</div><div class="f-text">"Bueno, esa cosa, se ha roto."</div><span class="en">"Well, that thing, it's broken."</span></div>
+        <div class="formula-card"><div class="f-label">Para cuando te la dicen</div><div class="f-text">"Ah, claro, eso es."</div><span class="en">"Ah, right, that's it."</span></div>
+        <div class="formula-card"><div class="f-label">Para restar importancia</div><div class="f-text">"Da igual la palabra exacta, es que..."</div><span class="en">"The exact word doesn't matter, it's that..."</span></div>
+      </div>
+      <p class="exit-note" style="margin-top:16px;">Estas fórmulas no dependen de qué palabra te falte — funcionan igual con "correa" que con "florista" o con un síntoma en la dentista. Cuanto más las repitas, menos falta te hará pensar en ellas.
+        <span class="en">These formulas don't depend on which word you're missing — they work the same with "leash" as with "florist" or a symptom at the dentist. The more you repeat them, the less you'll need to think about them.</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ 5b. FRASES DE RESCATE ============ -->
+  <section class="block">
+    <div class="block-head">
+      <div class="block-num">5<span style="font-size:9px; vertical-align:super;">b</span></div>
+      <h2>Frases de rescate</h2>
+      <div class="time-tag">para cuando el rodeo también se complica</div>
+    </div>
+    <div class="panel">
+      <p style="font-size:14px; color:var(--ink-soft); margin:0 0 16px;">A veces ni el rodeo sale fácil. Estas frases son la salida de emergencia dentro de la salida de emergencia.
+        <span class="en">Sometimes even the workaround doesn't come easily. These phrases are the emergency exit within the emergency exit.</span>
+      </p>
+      <div class="rescue-grid">
+        <div class="rescue-card"><div class="rescue-phrase">Es que no me acuerdo de la palabra</div><div class="rescue-use">Nombra el bloqueo directamente en vez de luchar en silencio contra él.<span class="en">Name the block directly instead of fighting it in silence.</span></div></div>
+        <div class="rescue-card"><div class="rescue-phrase">¿Cómo se dice...?</div><div class="rescue-use">Cuando prefieres que te den la palabra a seguir describiéndola.<span class="en">When you'd rather be given the word than keep describing it.</span></div></div>
+        <div class="rescue-card"><div class="rescue-phrase">Bueno, ya me entiendes</div><div class="rescue-use">Para cerrar el rodeo sin necesidad de la palabra exacta, si el contexto ya lo deja claro.<span class="en">To close the workaround without the exact word, if context already makes it clear.</span></div></div>
+        <div class="rescue-card"><div class="rescue-phrase">Espera, que lo busco</div><div class="rescue-use">Cuando tienes el móvil a mano y prefieres mirarlo un segundo antes que bloquearte.<span class="en">When your phone is at hand and you'd rather check it for a second than freeze up.</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 5c. SI PREGUNTAN MÁS ============ -->
+  <section class="block">
+    <div class="block-head">
+      <div class="block-num">5<span style="font-size:9px; vertical-align:super;">c</span></div>
+      <h2>Si preguntan más</h2>
+      <div class="time-tag">lo que suele pasar después del rodeo</div>
+    </div>
+    <div class="panel">
+      <p style="font-size:14px; color:var(--ink-soft); margin:0 0 16px;">Cuando rodeas bien una palabra, casi siempre la otra persona reacciona de una de estas tres formas. Reconocerlas te evita un segundo bloqueo justo cuando crees que ya has salido del primero.
+        <span class="en">When you work around a word well, the other person almost always reacts in one of these three ways. Recognizing them avoids a second block right when you think you're past the first one.</span>
+      </p>
+      <div class="followup-list">
+        <div class="followup-item">
+          <div class="followup-q">Ah, ¿la correa? Sí, claro, ¿de qué talla es Alex?
+            <span class="en" style="font-size:0.85em; margin-top:2px;">Ah, the leash? Sure, what size is Alex?</span>
+          </div>
+          <div class="followup-a">Sí, eso es, la correa. Es un pitbull, así que <strong>mediano-grande</strong>.
+            <span class="en">Yes, that's it, the leash. He's a pitbull, so medium-large.</span>
+          </div>
+        </div>
+        <div class="followup-item">
+          <div class="followup-q">No pasa nada, se entiende perfectamente. ¿Y desde cuándo está rota?
+            <span class="en" style="font-size:0.85em; margin-top:2px;">No worries, it's perfectly clear. And since when is it broken?</span>
+          </div>
+          <div class="followup-a">Pues <strong>desde hace</strong> un par de días, con el uso normal.
+            <span class="en">Well, for a couple of days now, from normal use.</span>
+          </div>
+        </div>
+        <div class="followup-item">
+          <div class="followup-q">Ah, te refieres a... — y te dice una palabra distinta a la que buscabas
+            <span class="en" style="font-size:0.85em; margin-top:2px;">Oh, do you mean... — and they say a different word than the one you were looking for</span>
+          </div>
+          <div class="followup-a">Ah, no, en realidad es <strong>más bien</strong> lo que te decía — la cosa que se engancha al collar.
+            <span class="en">Ah, no, it's actually more like what I said — the thing that clips onto the collar.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 5d. REGISTRO ============ -->
+  <section class="block">
+    <div class="block-head">
+      <div class="block-num">5<span style="font-size:9px; vertical-align:super;">d</span></div>
+      <h2>Ajustar el registro</h2>
+      <div class="time-tag">el mismo rodeo, distinto contexto</div>
+    </div>
+    <div class="panel">
+      <p style="font-size:14px; color:var(--ink-soft); margin:0 0 4px;">Rodear una palabra en la veterinaria no suena igual que rodearla con un cliente de boda. Aquí tienes el mismo rodeo adaptado a tres contextos que ya has vivido.
+        <span class="en">Working around a word at the vet doesn't sound the same as with a wedding client. Here's the same workaround adapted to three contexts you've already lived through.</span>
+      </p>
+      <table class="register-table">
+        <tr><th>Contexto</th><th>Cómo sonaría</th></tr>
+        <tr><td class="reg-tag">veterinaria / cercano</td><td>Es que se le ha roto la... ya sabes, la cosa para pasearlo. ¿Cómo se dice?<span class="en">It's that his... you know, the thing to walk him has broken. How do you say that?</span></td></tr>
+        <tr><td class="reg-tag">dentista / neutro</td><td>No sé cómo explicar bien la molestia — es como si algo estuviera flojo, pero no sé la palabra exacta.<span class="en">I don't know how to explain the discomfort well — it's like something is loose, but I don't know the exact word.</span></td></tr>
+        <tr><td class="reg-tag">cliente de boda / formal</td><td>Perdona, no encuentro la palabra exacta en español — me refiero a la persona que se encarga de la comida en el evento.<span class="en">Sorry, I can't find the exact word in Spanish — I mean the person in charge of the food at the event.</span></td></tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============ 6. MINI-ROLEPLAY ============ -->
+  <section class="block">
+    <div class="block-head">
+      <div class="block-num">6</div>
+      <h2>Mini-roleplay</h2>
+      <div class="time-tag">la veterinaria</div>
+    </div>
+    <div class="roleplay-panel">
+      <div class="scene-setup">
+        <div class="scene-icon">🩺</div>
+        <div class="scene-text"><strong>Escena:</strong> sigues en la veterinaria explicando lo de la correa rota. Usa los 4 pasos y las piezas de arriba para responder con tus propias palabras.
+          <span class="en"><strong>Scene:</strong> you're still at the vet explaining the broken leash. Use the 4 steps and the pieces above to answer in your own words.</span>
+        </div>
+      </div>
+      <div class="dialogue">
+        <div class="line friend">
+          <div class="line-avatar">R</div>
+          <div class="line-body">
+            <div class="line-name">Recepcionista</div>
+            <div class="line-bubble">Hola, ¿en qué puedo ayudarte?<span class="en">Hi, how can I help you?</span></div>
+          </div>
+        </div>
+        <div class="line you">
+          <div class="line-avatar">L</div>
+          <div class="line-body">
+            <div class="line-name">Tú</div>
+            <textarea class="line-input" placeholder="Explica lo de la correa rota sin usar la palabra — rodéala."></textarea>
+            <div class="line-hint">usa el paso 1 o el paso 3 de los 4 pasos</div>
+          </div>
+        </div>
+        <div class="line friend">
+          <div class="line-avatar">R</div>
+          <div class="line-body">
+            <div class="line-name">Recepcionista</div>
+            <div class="line-bubble">Ah, ¿la correa? Sí, claro. ¿De qué talla es Alex?<span class="en">Ah, the leash? Sure. What size is Alex?</span></div>
+          </div>
+        </div>
+        <div class="line you">
+          <div class="line-avatar">L</div>
+          <div class="line-body">
+            <div class="line-name">Tú</div>
+            <textarea class="line-input" placeholder="Confirma la palabra y sigue con la talla de Alex..."></textarea>
+            <div class="line-hint">usa una fórmula del bloque 5c ("sí, eso es")</div>
+          </div>
+        </div>
+        <div class="line friend">
+          <div class="line-avatar">R</div>
+          <div class="line-body">
+            <div class="line-name">Recepcionista</div>
+            <div class="line-bubble">Vale, y aprovechando, ¿tienes ya la cosa esa para que no se suba al sofá?<span class="en">Okay, and while we're at it, do you already have that thing so he doesn't get on the couch?</span></div>
+          </div>
+        </div>
+        <div class="line you">
+          <div class="line-avatar">L</div>
+          <div class="line-body">
+            <div class="line-name">Tú</div>
+            <textarea class="line-input" placeholder="Responde aunque no sepas exactamente a qué se refiere — pide que te lo aclare."></textarea>
+            <div class="line-hint">esta vez el rodeo lo hace la otra persona — practica entenderlo, no solo producirlo</div>
+          </div>
+        </div>
+      </div>
+      <div class="roleplay-tip"><strong>Truco:</strong> si te quedas en blanco a mitad de una descripción, no vuelvas atrás a corregir — sigue con otro de los 4 pasos. Encadenar dos rodeos suena más natural que pararte del todo.
+        <span class="en"><strong>Trick:</strong> if you blank out mid-description, don't backtrack to fix it — continue with another of the 4 steps. Chaining two workarounds sounds more natural than stopping completely.</span>
+      </div>
+
+      <div class="scene-setup" style="margin-top:28px;">
+        <div class="scene-icon">💍</div>
+        <div class="scene-text"><strong>Segunda escena:</strong> ahora es un cliente de boda por videollamada. Registro más formal — el rodeo tiene que sonar profesional, no torpe.
+          <span class="en"><strong>Second scene:</strong> now it's a wedding client on a video call. More formal register — the workaround needs to sound professional, not clumsy.</span>
+        </div>
+      </div>
+      <div class="dialogue" style="margin-top:16px;">
+        <div class="line friend">
+          <div class="line-avatar">C</div>
+          <div class="line-body">
+            <div class="line-name">Cliente</div>
+            <div class="line-bubble">¿Y ya tenéis confirmado quién se encarga de la comida?<span class="en">And do you already have confirmed who's in charge of the food?</span></div>
+          </div>
+        </div>
+        <div class="line you">
+          <div class="line-avatar">L</div>
+          <div class="line-body">
+            <div class="line-name">Tú</div>
+            <textarea class="line-input" placeholder="Si se te escapa 'catering' o 'proveedor', rodéalo con registro formal..."></textarea>
+            <div class="line-hint">usa el bloque 5d para el tono, no solo el vocabulario</div>
+          </div>
+        </div>
+        <div class="line friend">
+          <div class="line-avatar">C</div>
+          <div class="line-body">
+            <div class="line-name">Cliente</div>
+            <div class="line-bubble">Perfecto, entendido. ¿Y el sitio donde se sirve la comida ya está decidido?<span class="en">Perfect, understood. And is the place where the food is served already decided?</span></div>
+          </div>
+        </div>
+        <div class="line you">
+          <div class="line-avatar">L</div>
+          <div class="line-body">
+            <div class="line-name">Tú</div>
+            <textarea class="line-input" placeholder="Confirma con seguridad, aunque hayas tenido que rodear antes..."></textarea>
+            <div class="line-hint">cierra con seguridad — el rodeo anterior no resta profesionalidad</div>
+          </div>
+        </div>
+      </div>
+      <div class="roleplay-tip" style="margin-top:20px;"><strong>Compara:</strong> vuelve a leer tu rodeo con la recepcionista y con el cliente. La técnica es la misma en las dos — lo que cambia es el tono con el que la envuelves. Ese ajuste es lo que hace que un rodeo no suene a error, sino a estilo.
+        <span class="en"><strong>Compare:</strong> reread your workaround with the receptionist and with the client. The technique is the same in both — what changes is the tone you wrap it in. That adjustment is what makes a workaround sound like style, not a mistake.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 7. CHOOSE YOUR WORDS ============ -->
+  <section class="block">
+    <div class="block-head">
+      <div class="block-num">7</div>
+      <h2>Choose your words</h2>
+      <div class="time-tag">lo que te llevas</div>
+    </div>
+    <div class="panel choose-panel">
+      <p class="choose-intro">De las 16 expresiones de abajo, marca las 5–8 que realmente quieres tener listas la próxima vez que se te escape una palabra. Mejor pocas y bien interiorizadas que todas a medias.
+        <span class="en">Of the 16 expressions below, mark the 5–8 you really want to have ready next time a word slips away. Better a few well internalized than all of them half-learned.</span>
+      </p>
+      <div class="choose-grid" id="choose-grid"></div>
+      <div class="choose-footer">
+        <span id="choose-count">0 seleccionadas</span>
+        <button class="btn-primary" id="build-summary">Construir mi resumen</button>
+      </div>
+      <textarea id="final-summary" placeholder="Aquí aparecerán tus expresiones elegidas — edítalas o combínalas como quieras."></textarea>
+    </div>
+  </section>
+
+</main>
+
+<footer>ESCOLAR · Expansion Pack Mini · Reformular sin bloqueo</footer>
+
+<script>
+/* ---------- BANCO DE PALABRAS QUE SE ESCAPAN ---------- */
+const WORDS = [
+  {missing:"correa", context:"lo que usas para pasear a Alex", fix:"la cosa que se engancha al collar para pasear al perro", en:"the thing that clips onto the collar to walk the dog"},
+  {missing:"agotada", context:"cómo te sientes después del gimnasio", fix:"muy, muy cansada, más de lo normal", en:"very, very tired, more than usual"},
+  {missing:"catering", context:"quién sirve la comida en la boda", fix:"la empresa que se encarga de la comida en el evento", en:"the company in charge of the food at the event"},
+  {missing:"florista", context:"quién hace las flores de la boda", fix:"la persona que prepara las flores para el evento", en:"the person who prepares the flowers for the event"},
+  {missing:"correhuela / arnés", context:"otro accesorio para pasear al perro", fix:"lo contrario de dejarlo suelto — la cosa que le sujeta al cuerpo", en:"the opposite of letting him loose — the thing that holds onto his body"},
+  {missing:"encía", context:"algo que le duele en la boca, en la dentista", fix:"la parte de dentro de la boca, alrededor de los dientes", en:"the part inside the mouth, around the teeth"},
+  {missing:"proveedor", context:"alguien que trabaja contigo en la boda", fix:"la gente que trabaja para que la boda salga bien — flores, comida, música", en:"the people who work to make the wedding go well — flowers, food, music"},
+  {missing:"vacuna", context:"algo que necesita Alex en el veterinario", fix:"lo que le ponen para que no se ponga enfermo", en:"what they give him so he doesn't get sick"},
+];
+
+const wordGrid = document.getElementById('word-grid');
+WORDS.forEach(w=>{
+  const card = document.createElement('div');
+  card.className = 'word-card';
+  card.tabIndex = 0;
+  card.innerHTML = `<div class="word-missing">${w.missing}</div><div class="word-context">${w.context}</div><div class="word-fix">${w.fix}<div class="en">${w.en}</div></div>`;
+  const flip = ()=> card.classList.toggle('flipped');
+  card.addEventListener('click', flip);
+  card.addEventListener('keydown', e=>{ if(e.key==='Enter' || e.key===' '){ e.preventDefault(); flip(); } });
+  wordGrid.appendChild(card);
+});
+
+/* ---------- PIEZAS PARA RODEAR ---------- */
+const PREPS = [
+  {verb:"es la cosa", prep:"que", example:"Es la cosa que se pone al perro para pasear.", en:"It's the thing that you put on the dog to walk him."},
+  {verb:"es lo contrario", prep:"de", example:"Es lo contrario de dejarlo suelto.", en:"It's the opposite of letting him loose."},
+  {verb:"es como", prep:"pero", example:"Es como una correa, pero más ancha.", en:"It's like a leash, but wider."},
+  {verb:"es la persona", prep:"que", example:"Es la persona que se encarga de la comida.", en:"It's the person in charge of the food."},
+  {verb:"es cuando", prep:"", example:"Es cuando algo te duele al morder.", en:"It's when something hurts when you bite."},
+  {verb:"se usa", prep:"para", example:"Se usa para que no se suba al sofá.", en:"It's used so he doesn't get on the couch."},
+];
+
+const grid = document.getElementById('prep-grid');
+PREPS.forEach(p=>{
+  const card = document.createElement('div');
+  card.className = 'prep-card';
+  card.tabIndex = 0;
+  card.innerHTML = `<div class="prep-verb">${p.verb} <span class="prep">${p.prep}</span></div><div class="prep-example">${p.example}<span class="en">${p.en}</span></div>`;
+  const flip = ()=> card.classList.toggle('flipped');
+  card.addEventListener('click', flip);
+  card.addEventListener('keydown', e=>{ if(e.key==='Enter' || e.key===' '){ e.preventDefault(); flip(); } });
+  grid.appendChild(card);
+});
+
+/* ---------- CHOOSE YOUR WORDS ---------- */
+const CHOICES = [
+  {es:"Es que no me acuerdo de la palabra.", en:"It's that I don't remember the word."},
+  {es:"Es la cosa que se usa para...", en:"It's the thing you use to..."},
+  {es:"¿Cómo se dice cuando...?", en:"How do you say it when...?"},
+  {es:"A ver, cómo lo digo...", en:"Let's see, how do I say this..."},
+  {es:"Da igual la palabra exacta, es que...", en:"The exact word doesn't matter, it's that..."},
+  {es:"Bueno, ya me entiendes.", en:"Well, you know what I mean."},
+  {es:"Es lo contrario de...", en:"It's the opposite of..."},
+  {es:"Es la persona que se encarga de...", en:"It's the person in charge of..."},
+  {es:"¿Se entiende lo que digo?", en:"Does that make sense?"},
+  {es:"Ah, sí, eso es.", en:"Ah, yes, that's it."},
+  {es:"Perdona, no encuentro la palabra exacta en español.", en:"Sorry, I can't find the exact word in Spanish."},
+  {es:"Es más bien lo que te decía.", en:"It's more like what I said."},
+  {es:"Espera, que lo busco.", en:"Wait, let me look it up."},
+  {es:"Es como... pero más...", en:"It's like... but more..."},
+  {es:"No sé cómo explicarlo bien, pero es algo así como...", en:"I don't know how to explain it well, but it's something like..."},
+  {es:"Se usa para que no...", en:"It's used so that it doesn't..."},
+];
+
+const chooseGrid = document.getElementById('choose-grid');
+const countEl = document.getElementById('choose-count');
+const picked = new Set();
+
+CHOICES.forEach((choice, i)=>{
+  const item = document.createElement('div');
+  item.className = 'choose-item';
+  item.innerHTML = `<div class="choose-checkbox"></div><div class="choose-text">${choice.es}<span class="en">${choice.en}</span></div>`;
+  item.addEventListener('click', ()=>{
+    item.classList.toggle('picked');
+    if(picked.has(i)){ picked.delete(i); item.querySelector('.choose-checkbox').textContent=''; }
+    else{ picked.add(i); item.querySelector('.choose-checkbox').textContent='✓'; }
+    countEl.textContent = `${picked.size} seleccionada${picked.size===1?'':'s'}`;
+  });
+  chooseGrid.appendChild(item);
+});
+
+document.getElementById('build-summary').addEventListener('click', ()=>{
+  const ta = document.getElementById('final-summary');
+  if(picked.size === 0){
+    ta.style.display = 'block';
+    ta.value = 'Marca al menos una expresión arriba para construir tu resumen.';
+    return;
+  }
+  const ordered = [...picked].sort((a,b)=>a-b).map(i=>CHOICES[i].es);
+  ta.style.display = 'block';
+  ta.value = ordered.join(' ');
+});
+
+/* ---------- LANG TOGGLE (ES / EN) ---------- */
+const langSwitch = document.getElementById('lang-switch');
+const esLabel = document.getElementById('lang-es-label');
+const enLabel = document.getElementById('lang-en-label');
+const setLang = (showEn)=>{
+  document.body.classList.toggle('show-en', showEn);
+  esLabel.classList.toggle('active', !showEn);
+  enLabel.classList.toggle('active', showEn);
+  langSwitch.setAttribute('aria-pressed', String(showEn));
+};
+langSwitch.addEventListener('click', ()=> setLang(!document.body.classList.contains('show-en')));
+langSwitch.addEventListener('keydown', (e)=>{
+  if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); setLang(!document.body.classList.contains('show-en')); }
+});
+setLang(false);
+</script>
+
+</body>
+</html>

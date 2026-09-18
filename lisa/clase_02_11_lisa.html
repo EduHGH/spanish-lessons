@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Español con Óscar · Clase 11 — Lisa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+
+:root{
+  --paper:        #F5E9D3;
+  --paper-raised: #FFFFFF;
+  --paper-alt:    #EEDCB8;
+  --ink:          #23291F;
+  --ink-soft:     #565F52;
+  --ink-faint:    #8B9184;
+  --line:         rgba(35,41,31,0.12);
+  --line-strong:  rgba(35,41,31,0.22);
+
+  --ok:      #2F7D5C;  --ok-soft: #E7F3EC;  --ok-line: #BFE0CE;
+  --wrong:   #9A3B2E;  --wrong-soft: #FBEAE6; --wrong-line: #E8BFB4;
+  --info:    #2F6FED;  --info-soft: #EAF1FE; --info-line: #C6D9FC;
+
+  --accent:      #296A75;
+  --accent-soft: #E6F1F2;
+  --accent-line: #BEDDE1;
+
+  --f-display: 'Fraunces', Georgia, serif;
+  --f-body:    'IBM Plex Sans', system-ui, sans-serif;
+  --f-data:    'IBM Plex Mono', monospace;
+
+  --r-sm: 8px;
+  --r-md: 14px;
+  --r-lg: 20px;
+}
+
+*{ box-sizing:border-box; }
+body{
+  margin:0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--f-body);
+  line-height:1.6;
+}
+::selection{ background: var(--accent-soft); }
+
+.sticky-progress{ position:fixed; top:0; left:0; right:0; z-index:200; height:3px; background: rgba(35,41,31,0.10); }
+.sticky-progress-fill{ height:100%; width:0%; background: var(--accent); opacity:.55; }
+
+header{ padding:44px 24px 0; max-width:760px; margin:0 auto; }
+.header-top{ display:flex; align-items:center; justify-content:space-between; gap:24px; margin-bottom:16px; }
+.brand-row{ display:flex; align-items:center; gap:10px; }
+.brand-name{ font-family: var(--f-display); font-weight:600; font-style:italic; font-size:17px; color: var(--ink); letter-spacing:-.01em; }
+h1{ font-family: var(--f-display); font-weight:600; font-size:clamp(30px,5.6vw,46px); line-height:1.05; margin:0; letter-spacing:-.015em; }
+h1 em{ font-style:italic; color: var(--accent); }
+.lede{ font-size:15.5px; color: var(--ink-soft); max-width:56ch; margin:14px 0 0; }
+.meta-row{ display:flex; align-items:center; gap:12px; margin-top:22px; flex-wrap:wrap; }
+.level-pill{ font-family: var(--f-data); font-size:12px; font-weight:600; color: var(--ink); background: var(--paper-alt); border:1px solid var(--line); padding:6px 14px; border-radius:999px; }
+.time-pill{ display:flex; align-items:center; gap:6px; font-family: var(--f-data); font-size:12px; color: var(--ink-faint); }
+.header-rule{ height:1px; background: var(--line); margin-top:28px; }
+
+main{ max-width:760px; margin:0 auto; padding:8px 24px 100px; }
+section.block{ margin-bottom:40px; padding-top:24px; border-top:1px solid var(--line); }
+section.block:first-of-type{ border-top:none; padding-top:0; }
+.block-head{ display:flex; align-items:baseline; gap:12px; margin-bottom:18px; }
+.block-num{ font-family: var(--f-display); font-size:30px; font-weight:600; color: var(--accent); flex:none; line-height:1; letter-spacing:-.01em; }
+.block-head h2{ font-family: var(--f-body); font-weight:600; font-size:18px; margin:0; color: var(--ink); }
+.time-tag{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); background: var(--paper-alt); padding:3px 10px; border-radius:999px; margin-left:auto; flex:none; }
+
+.panel{ background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-lg); padding:26px 28px; }
+.block-intro{ margin:0 0 16px; font-size:14.5px; color: var(--ink-soft); }
+
+.note{ margin-top:18px; padding:14px 16px; background: var(--info-soft); border:1px solid var(--info-line); border-radius: var(--r-md); font-size:14px; color: var(--ink-soft); }
+.note strong{ color: var(--ink); }
+
+.exercise{ margin-bottom:20px; }
+.exercise:last-of-type{ margin-bottom:0; }
+.ex-sentence{ font-size:15.5px; margin-bottom:10px; }
+.ex-options{ display:flex; flex-wrap:wrap; gap:8px; }
+.opt-btn{ font-family: var(--f-body); font-size:14px; background: var(--paper-raised); border:1.5px solid var(--line); color: var(--ink); padding:7px 16px; border-radius:999px; cursor:pointer; }
+.opt-btn:hover{ border-color: var(--ink-faint); }
+.opt-btn.picked{ background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+.opt-btn.correct{ background: var(--ok-soft); border-color: var(--ok); color: var(--ok); }
+.opt-btn.wrong{ background: var(--wrong-soft); border-color: var(--wrong); color: var(--wrong); }
+.opt-btn:disabled{ cursor:default; }
+.check-bar{ display:flex; align-items:center; justify-content:space-between; gap:16px; margin-top:22px; padding-top:18px; border-top:1px dashed var(--line); flex-wrap:wrap; }
+.btn-primary{ font-family: var(--f-body); font-weight:600; font-size:14px; color:#fff; background: var(--accent); border:none; padding:11px 22px; border-radius:999px; cursor:pointer; }
+#score-text{ font-family: var(--f-data); font-size:13px; color: var(--ink-faint); }
+.btn-ghost{ font-family: var(--f-body); font-weight:600; font-size:13px; color: var(--ink-soft); background:none; border:1.5px solid var(--line); padding:9px 18px; border-radius:999px; cursor:pointer; }
+.btn-ghost:hover{ border-color: var(--ink-faint); }
+
+.vocab-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(160px,1fr)); gap:12px; }
+.vocab-card{ background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md); padding:14px 16px; cursor:pointer; min-height:78px; display:flex; flex-direction:column; justify-content:center; }
+.vocab-card:hover{ border-color: var(--accent-line); }
+.vocab-card:focus-visible{ outline:2px solid var(--accent); outline-offset:2px; }
+.vocab-front{ font-family: var(--f-body); font-weight:600; font-size:15px; }
+.vocab-back{ display:none; font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); margin-top:6px; }
+.vocab-card.flipped .vocab-back{ display:block; }
+.vocab-card.flipped{ background: var(--accent-soft); border-color: var(--accent-line); }
+.vocab-hint{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin:10px 2px 16px; }
+
+.reading-text{ font-family: var(--f-display); font-size:16.5px; line-height:1.7; color: var(--ink); background:#F7EFDE; border:1px solid #E8D9B8; border-radius: var(--r-md); padding:20px 22px; margin-bottom:20px; }
+.reading-text p{ margin:0 0 12px; }
+.reading-text p:last-child{ margin-bottom:0; }
+.reading-q{ background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md); padding:14px 16px; margin-bottom:12px; }
+.reading-q p.q{ font-size:14.5px; color: var(--ink); margin:0 0 10px; font-weight:500; }
+.reading-q .opts{ display:flex; flex-wrap:wrap; gap:8px; }
+
+.vf-item{ display:flex; align-items:center; justify-content:space-between; gap:14px; background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md); padding:14px 16px; margin-bottom:10px; }
+.vf-item p{ margin:0; font-size:14.5px; color:var(--ink); flex:1; }
+.vf-buttons{ display:flex; gap:8px; flex:none; }
+.vf-btn{ font-family: var(--f-body); font-size:13px; font-weight:600; background: var(--paper-alt); border:1.5px solid var(--line); color: var(--ink-soft); padding:6px 14px; border-radius:999px; cursor:pointer; }
+.vf-btn.picked{ background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+.vf-btn.correct{ background: var(--ok-soft); border-color: var(--ok); color: var(--ok); }
+.vf-btn.wrong{ background: var(--wrong-soft); border-color: var(--wrong); color: var(--wrong); }
+.vf-btn:disabled{ cursor:default; }
+
+.order-item{ background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md); padding:16px 18px; margin-bottom:14px; }
+.order-bank{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; min-height:38px; }
+.order-slot{ display:flex; flex-wrap:wrap; gap:8px; min-height:42px; padding:8px; background: var(--paper-alt); border:1.5px dashed var(--line-strong); border-radius: var(--r-sm); }
+.order-chip{ font-family: var(--f-data); font-size:13.5px; background: var(--paper-raised); border:1.5px solid var(--line); color: var(--ink); padding:6px 12px; border-radius:999px; cursor:pointer; user-select:none; }
+.order-chip.used{ background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+.order-item .order-feedback{ font-size:12.5px; color: var(--ink-faint); margin-top:8px; font-family: var(--f-data); }
+.order-item.correct .order-slot{ border-color: var(--ok); border-style:solid; background: var(--ok-soft); }
+.order-item.wrong .order-slot{ border-color: var(--wrong); border-style:solid; background: var(--wrong-soft); }
+
+.match-wrap{ display:grid; grid-template-columns:1fr 1fr; gap:24px; }
+.match-col{ display:flex; flex-direction:column; gap:8px; }
+.match-item{ font-family: var(--f-body); font-size:14px; text-align:left; background: var(--paper-raised); border:1.5px solid var(--line); color: var(--ink); padding:10px 14px; border-radius: var(--r-sm); cursor:pointer; }
+.match-item:hover{ border-color: var(--accent-line); }
+.match-item.selected{ background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+.match-item.linked{ background: var(--ok-soft); border-color: var(--ok); color: var(--ok); cursor:default; }
+.match-item.wrong-flash{ background: var(--wrong-soft); border-color: var(--wrong); color: var(--wrong); }
+
+.fill-block{ font-family: var(--f-display); font-size:16px; line-height:2.1; color: var(--ink); background: linear-gradient(155deg, #F7F1E1 0%, #F1E8D2 100%); border:1px solid var(--line); border-radius: var(--r-md); padding:20px 22px; }
+.fill-block input[type="text"]{ font-family: var(--f-data); font-size:14px; width:110px; text-align:center; background: var(--paper-raised); border:none; border-bottom:2px solid var(--accent-line); color: var(--ink); padding:2px 6px; margin:0 2px; }
+.fill-block input[type="text"]:focus{ outline:none; border-bottom-color: var(--accent); }
+.fill-block input.correct{ border-bottom-color: var(--ok); color: var(--ok); }
+.fill-block input.wrong{ border-bottom-color: var(--wrong); color: var(--wrong); text-decoration: line-through; }
+
+table.conj-table{ width:100%; border-collapse:collapse; font-size:13.5px; }
+table.conj-table th{ font-family: var(--f-data); font-size:10.5px; text-transform:uppercase; letter-spacing:.05em; color: var(--ink-faint); text-align:left; padding:8px 10px; border-bottom:1.5px solid var(--line-strong); }
+table.conj-table td{ padding:6px 10px; border-bottom:1px dashed var(--line); }
+table.conj-table tr:last-child td{ border-bottom:none; }
+table.conj-table td.pronoun{ font-family: var(--f-display); font-weight:600; color: var(--ink-soft); font-size:13px; }
+table.conj-table input[type="text"]{ width:100%; font-family: var(--f-data); font-size:13.5px; background: var(--paper-alt); border:1px solid var(--line); border-radius: var(--r-sm); padding:6px 9px; color: var(--ink); }
+table.conj-table input[type="text"]:focus{ outline:none; border-color: var(--accent); }
+table.conj-table input.correct{ border-color: var(--ok); background: var(--ok-soft); }
+table.conj-table input.wrong{ border-color: var(--wrong); background: var(--wrong-soft); }
+
+.culture-card{ background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-lg); padding:24px 26px; border-left:3px solid var(--accent); }
+.culture-eyebrow{ font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.08em; color: var(--accent); font-weight:600; margin:0 0 10px; }
+.culture-card h3{ font-family: var(--f-display); font-size:18px; font-weight:600; margin:0 0 8px; }
+.culture-card p{ font-size:14px; color: var(--ink-soft); line-height:1.6; margin:0; }
+
+.task-panel{ background: var(--paper-alt); border:1px solid var(--line); border-radius: var(--r-lg); padding:26px 28px; }
+textarea.final-task{ width:100%; min-height:140px; font-family: var(--f-body); font-size:15px; color: var(--ink); background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md); padding:14px 16px; resize:vertical; margin-top:14px; }
+textarea.final-task:focus{ outline:none; border-color: var(--accent); }
+.task-footer{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:12px; flex-wrap:wrap; }
+.task-count{ font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); }
+.btn-secondary{ font-family: var(--f-body); font-weight:600; font-size:13.5px; color: var(--ink-soft); background:none; border:1.5px solid var(--line); padding:9px 18px; border-radius:999px; cursor:pointer; }
+
+.phrase-card{
+  padding:28px 32px; border-radius: var(--r-lg); border:1px solid var(--accent-line);
+  background:
+    radial-gradient(ellipse 320px 260px at 12% -10%, color-mix(in srgb, var(--accent) 16%, transparent) 0%, transparent 60%),
+    radial-gradient(ellipse 260px 220px at 92% 115%, color-mix(in srgb, var(--accent) 13%, transparent) 0%, transparent 55%),
+    var(--accent-soft);
+  text-align:center;
+}
+.phrase-eyebrow{ font-family: var(--f-data); font-size:11.5px; letter-spacing:.1em; text-transform:uppercase; color: var(--accent); font-weight:600; margin:0 0 12px; }
+.phrase-main{ font-family: var(--f-display); font-weight:600; font-size:clamp(21px,3.4vw,28px); line-height:1.35; margin:0 0 10px; color:var(--ink); }
+.phrase-main em{ font-style:italic; color: var(--accent); font-weight:500; }
+.phrase-sub{ font-size:14px; color: var(--ink-soft); max-width:46ch; margin:0 auto; }
+.phrase-tags{ display:flex; gap:8px; flex-wrap:wrap; justify-content:center; margin-top:16px; }
+.phrase-tag{ font-family: var(--f-data); font-size:10.5px; padding:4px 10px; border-radius:999px; background: var(--paper-raised); border:1px solid var(--accent-line); color: var(--accent); }
+
+.timeline{ display:flex; flex-direction:column; gap:10px; }
+.timeline-item{ display:flex; align-items:flex-start; gap:14px; background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md); padding:14px 16px; }
+.timeline-num{ font-family: var(--f-display); font-weight:600; font-size:15px; color: var(--accent); flex:none; width:24px; }
+.timeline-body p{ margin:0; font-size:14px; color: var(--ink-soft); }
+.timeline-body p strong{ color: var(--ink); }
+
+footer{ max-width:760px; margin:0 auto; padding:0 24px 60px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); }
+
+@media (max-width:640px){
+  header{ padding:34px 18px 22px; }
+  main{ padding:8px 18px 90px; }
+  .panel, .task-panel, .correction-panel, .culture-card{ padding:20px 18px; }
+  .header-top{ flex-direction:column; align-items:flex-start; gap:14px; }
+  .match-wrap{ grid-template-columns:1fr; }
+}
+
+@media (prefers-reduced-motion: reduce){ *{ transition:none !important; } }
+</style>
+</head>
+<body data-accent="terracota">
+
+<div class="sticky-progress" id="sticky-progress"><div class="sticky-progress-fill" id="sticky-progress-fill"></div></div>
+
+<header>
+  <div class="header-top">
+    <div class="brand-row">
+      <span class="brand-name">Español con Óscar</span>
+    </div>
+  </div>
+  <h1>Lo que más <em>me gustó</em></h1>
+  <p class="lede">Hoy miramos hacia atrás: Bourdain, los desiertos, las catedrales, la música de los 80, el hip hop y el house, y el piano. Hablamos de tus clases favoritas con "gustar" en pasado: "me gustó", "me gustaron", "lo que más me gustó fue...".</p>
+  <div class="meta-row">
+    <span class="level-pill">A2</span>
+    <span class="time-pill">⏱ 150 min</span>
+  </div>
+  <div class="header-rule"></div>
+</header>
+
+<main>
+
+  <!-- 01 · VOCABULARIO -->
+  <section class="block">
+    <div class="block-head"><span class="block-num">01</span><h2>Vocabulario de hoy</h2><span class="time-tag">15 min</span></div>
+    <div class="panel">
+      <p class="block-intro">Toca cada tarjeta para ver un ejemplo con el vocabulario de la clase.</p>
+      <div class="vocab-grid" id="vocab-grid"></div>
+    </div>
+  </section>
+
+  <!-- 02 · REPASO EN LÍNEA DEL TIEMPO -->
+  <section class="block">
+    <div class="block-head"><span class="block-num">02</span><h2>Repaso de tus clases</h2><span class="time-tag">15 min</span></div>
+    <div class="panel">
+      <p class="block-intro">Antes de empezar, un repaso rápido de los temas que ya vimos juntos.</p>
+      <div class="timeline">
+        <div class="timeline-item"><span class="timeline-num">05</span><div class="timeline-body"><p><strong>Bourdain: viajar comiendo.</strong> Un mercado en Hanói, comida callejera, imperfecto e indefinido.</p></div></div>
+        <div class="timeline-item"><span class="timeline-num">06</span><div class="timeline-body"><p><strong>Desiertos del suroeste.</strong> Arizona, Nuevo México, Utah, planes de viaje con el futuro próximo.</p></div></div>
+        <div class="timeline-item"><span class="timeline-num">07</span><div class="timeline-body"><p><strong>Se construyó en el siglo XIII.</strong> Catedrales, castillos, monasterios, el "se" impersonal y pasivo.</p></div></div>
+        <div class="timeline-item"><span class="timeline-num">08</span><div class="timeline-body"><p><strong>Me encanta esta canción.</strong> Madonna, Prince, Duran Duran, pronombres de objeto directo e indirecto.</p></div></div>
+        <div class="timeline-item"><span class="timeline-num">09</span><div class="timeline-body"><p><strong>¡Sube el volumen!</strong> R&B, hip hop de Nueva York, house de Chicago, el imperativo informal.</p></div></div>
+        <div class="timeline-item"><span class="timeline-num">10</span><div class="timeline-body"><p><strong>Piano, música clásica y jazz.</strong> Tus quince años tocando piano, el condicional simple.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 · GRAMÁTICA: GUSTAR EN PASADO -->
+  <section class="block">
+    <div class="block-head"><span class="block-num">03</span><h2>Gramática: "gustar" en pasado</h2><span class="time-tag">20 min</span></div>
+    <div class="panel">
+      <p class="block-intro">"Gustar" funciona igual en pasado que en presente: el verbo va con la cosa que gusta, no con la persona.</p>
+      <div class="note">
+        <strong>me/te/le/nos/os/les + gustó (singular) / gustaron (plural)</strong><br>
+        Me gustó la clase de los desiertos. · Me gustaron las canciones de los 80. · ¿Te gustó tocar el piano de niña?
+      </div>
+      <p class="block-intro" style="margin-top:18px;">También podemos usar "lo que más me gustó fue..." para destacar una cosa entre varias.</p>
+      <div class="note">
+        <strong>lo que más me gustó fue + sustantivo / infinitivo</strong><br>
+        Lo que más me gustó fue la historia de la mujer del mercado. · Lo que más me gustó fue hablar del house de Chicago.
+      </div>
+
+      <div class="exercise" data-answer="a">
+        <p class="ex-sentence">1. La clase de las catedrales ___ mucho, sobre todo la del siglo XIII.</p>
+        <div class="ex-options">
+          <button class="opt-btn" data-value="a">me gustó</button>
+          <button class="opt-btn" data-value="b">me gustaron</button>
+        </div>
+      </div>
+      <div class="exercise" data-answer="b">
+        <p class="ex-sentence">2. Las canciones de Madonna y Prince ___ un montón.</p>
+        <div class="ex-options">
+          <button class="opt-btn" data-value="a">me gustó</button>
+          <button class="opt-btn" data-value="b">me gustaron</button>
+        </div>
+      </div>
+      <div class="exercise" data-answer="b">
+        <p class="ex-sentence">3. Lo que más me ___ fue hablar de Bourdain y su forma de viajar.</p>
+        <div class="ex-options">
+          <button class="opt-btn" data-value="a">gustaron</button>
+          <button class="opt-btn" data-value="b">gustó</button>
+        </div>
+      </div>
+      <div class="exercise" data-answer="a">
+        <p class="ex-sentence">4. A ti, ¿qué ___ más, el hip hop o la música clásica?</p>
+        <div class="ex-options">
+          <button class="opt-btn" data-value="a">te gustó</button>
+          <button class="opt-btn" data-value="b">te gustaste</button>
+        </div>
+      </div>
+      <div class="exercise" data-answer="b">
+        <p class="ex-sentence">5. Los desiertos de Arizona y Utah ___ mucha curiosidad.</p>
+        <div class="ex-options">
+          <button class="opt-btn" data-value="a">le gustó</button>
+          <button class="opt-btn" data-value="b">le gustaron</button>
+        </div>
+      </div>
+
+      <div class="check-bar">
+        <button class="btn-primary" id="check-btn">Comprobar respuestas</button>
+        <button class="btn-ghost" id="reset-btn">Reiniciar</button>
+        <span id="score-text"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 · LECTURA Y COMPRENSIÓN -->
+  <section class="block">
+    <div class="block-head"><span class="block-num">04</span><h2>Lectura y comprensión</h2><span class="time-tag">22 min</span></div>
+    <div class="panel">
+      <div class="reading-text">
+        <p>Óscar le preguntó a Lisa cuál había sido su clase favorita de los últimos meses, y ella se quedó pensando un momento. "Es difícil elegir una sola", dijo, "pero creo que la clase de Bourdain fue muy especial para mí. Me gustó mucho la historia de la mujer del mercado en Hanói: llevaba veinte años en el mismo puesto y aprendió la receta de su madre."</p>
+        <p>También le gustó bastante la clase de los desiertos del suroeste. "Me gustaron las fotos de Arizona y Utah", explicó. "Nunca había pensado en viajar a un desierto, pero después de esa clase me entraron muchas ganas." Sin embargo, admitió que las clases de música fueron las que más disfrutó, sobre todo la del hip hop y el house de Chicago.</p>
+        <p>"Lo que más me gustó de esa clase fue recordar los clubes de los 90", contó Lisa con una sonrisa. "Y también me encantó hablar de mis años tocando el piano. Me gustó mucho compartir esa parte de mi vida contigo." Al final, Lisa decidió que no podía elegir solo una clase: le gustaron todas por razones diferentes.</p>
+      </div>
+      <div class="reading-q" data-answer="b">
+        <p class="q">¿Qué le gustó a Lisa de la clase de Bourdain?</p>
+        <div class="opts">
+          <button class="opt-btn" data-value="a">Los precios del mercado</button>
+          <button class="opt-btn" data-value="b">La historia de la mujer del puesto de comida</button>
+        </div>
+      </div>
+      <div class="reading-q" data-answer="a">
+        <p class="q">¿Qué le gustaron a Lisa de la clase de los desiertos?</p>
+        <div class="opts">
+          <button class="opt-btn" data-value="a">Las fotos de Arizona y Utah</button>
+          <button class="opt-btn" data-value="b">Los nombres de los animales del desierto</button>
+        </div>
+      </div>
+      <div class="reading-q" data-answer="b">
+        <p class="q">Según el texto, ¿qué clases disfrutó más Lisa?</p>
+        <div class="opts">
+          <button class="opt-btn" data-value="a">Las de arquitectura medieval</button>
+          <button class="opt-btn" data-value="b">Las de música</button>
+        </div>
+      </div>
+      <div class="reading-q" data-answer="a">
+        <p class="q">¿Qué fue lo que más le gustó de la clase del hip hop y el house?</p>
+        <div class="opts">
+          <button class="opt-btn" data-value="a">Recordar los clubes de los 90</button>
+          <button class="opt-btn" data-value="b">Aprender los nombres de los DJs</button>
+        </div>
+      </div>
+      <div class="reading-q" data-answer="b">
+        <p class="q">Al final, ¿pudo Lisa elegir una sola clase favorita?</p>
+        <div class="opts">
+          <button class="opt-btn" data-value="a">Sí, eligió la clase de las catedrales</button>
+          <button class="opt-btn" data-value="b">No, le gustaron todas por razones diferentes</button>
+        </div>
+      </div>
+      <div class="check-bar">
+        <button class="btn-primary" id="check-reading-btn">Comprobar respuestas</button>
+        <button class="btn-ghost" id="reset-reading-btn">Reiniciar</button>
+        <span id="reading-score-text"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 · VERDADERO O FALSO -->
+  <section class="block">
+    <div class="block-head"><span class="block-num">05</span><h2>Verdadero o falso</h2><span class="time-tag">15 min</span></div>
+    <div class="panel">
+      <p class="block-intro">Sobre las clases que ya hiciste con Óscar.</p>
+      <div id="vf-list"></div>
+      <div class="check-bar">
+        <span id="vf-score" style="font-family:var(--f-data); font-size:13px; color:var(--ink-faint);"></span>
+        <button class="btn-ghost" id="vf-reset-btn">Reiniciar</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 · EMPAREJAR COLUMNAS -->
+  <section class="block">
+    <div class="block-head"><span class="block-num">06</span><h2>Emparejar columnas</h2><span class="time-tag">18 min</span></div>
+    <div class="panel">
+      <p class="block-intro">Une cada clase con el tema que trataba.</p>
+      <div class="match-wrap" id="match-wrap"></div>
+      <div class="check-bar">
+        <span id="match-score" style="font-family:var(--f-data); font-size:13px; color:var(--ink-faint);"></span>
+        <button class="btn-ghost" id="match-reset-btn">Reiniciar</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 07 · RELLENAR HUECOS -->
+  <section class="block">
+    <div class="block-head"><span class="block-num">07</span><h2>Rellenar huecos en texto</h2><span class="time-tag">22 min</span></div>
+    <div class="panel">
+      <p class="block-intro">Completa el texto con "gustó" o "gustaron".</p>
+      <div class="fill-block" id="fill-block"></div>
+      <div class="check-bar">
+        <button class="btn-primary" id="check-fill-btn">Comprobar huecos</button>
+        <button class="btn-ghost" id="reset-fill-btn">Reiniciar</button>
+        <span id="fill-score"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 08 · TABLA DE CONJUGACIÓN -->
+  <section class="block">
+    <div class="block-head"><span class="block-num">08</span><h2>Pronombres de "gustar"</h2><span class="time-tag">16 min</span></div>
+    <div class="panel">
+      <p class="block-intro">Completa la tabla de pronombres para "gustar": "___ gustó la clase de piano".</p>
+      <table class="conj-table">
+        <thead><tr><th>Sujeto</th><th>Pronombre + gustó/gustaron</th></tr></thead>
+        <tbody id="conj-tbody"></tbody>
+      </table>
+      <div class="check-bar">
+        <button class="btn-primary" id="check-conj-btn">Comprobar</button>
+        <button class="btn-ghost" id="reset-conj-btn">Reiniciar</button>
+        <span id="conj-score"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 09 · TARJETA CULTURAL -->
+  <section class="block">
+    <div class="block-head"><span class="block-num">09</span><h2>Tarjeta cultural</h2><span class="time-tag">aside</span></div>
+    <div class="culture-card">
+      <p class="culture-eyebrow">Dato cultural</p>
+      <h3>Repasar para avanzar</h3>
+      <p>En español, una buena forma de consolidar vocabulario es volver a hablar de temas que ya conoces, pero con estructuras nuevas. Hoy usamos "gustar" en pasado para hablar de temas que ya viste con el imperfecto, el indefinido, el "se" impersonal, los pronombres de objeto y el condicional.</p>
+    </div>
+    <div class="culture-card" style="margin-top:16px;">
+      <p class="culture-eyebrow">Dato cultural</p>
+      <h3>"Lo que más me gustó" en conversación real</h3>
+      <p>Los hispanohablantes usan mucho la estructura "lo que más me gustó fue..." para contar experiencias: un viaje, una película, una clase. Es una forma natural de destacar una cosa sin tener que comparar directamente con las demás.</p>
+    </div>
+  </section>
+
+  <!-- 10 · TAREA FINAL -->
+  <section class="block">
+    <div class="block-head"><span class="block-num">10</span><h2>Tarea final</h2><span class="time-tag">producción</span></div>
+    <div class="task-panel">
+      <p class="block-intro" style="margin:0;">Escribe un texto breve contando qué clases te gustaron más de las que hicimos (Bourdain, los desiertos, las catedrales, la música de los 80, el hip hop y el house, o el piano). Usa "me gustó" / "me gustaron" para varias clases, y termina con una frase con "lo que más me gustó fue...". Explica también por qué te gustó esa clase en concreto.</p>
+      <textarea class="final-task" placeholder="Escribe aquí..."></textarea>
+      <div class="task-footer">
+        <span class="task-count">0 palabras escritas</span>
+        <button class="btn-secondary">Marcar como enviada</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11 · FRASE DESTACADA DE CIERRE -->
+  <section class="block">
+    <div class="block-head"><span class="block-num">11</span><h2>Frase destacada de cierre</h2><span class="time-tag">resumen</span></div>
+    <div class="phrase-card">
+      <p class="phrase-eyebrow">Para recordar</p>
+      <p class="phrase-main">Lo que más me <em>gustó</em> fue hablar de música con Óscar.</p>
+      <p class="phrase-sub">"Gustar" va con la cosa que gusta: gustó (una cosa) / gustaron (varias cosas).</p>
+      <div class="phrase-tags">
+        <span class="phrase-tag">gustó / gustaron</span>
+        <span class="phrase-tag">lo que más me gustó fue...</span>
+        <span class="phrase-tag">repaso de clases</span>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <span>Español con Óscar · Clase con Lisa</span>
+</footer>
+
+<script>
+function shuffle(arr){
+  const a = arr.slice();
+  for(let i = a.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function markResult(el, isCorrect){
+  el.classList.toggle('correct', isCorrect);
+  el.classList.toggle('wrong', !isCorrect);
+}
+
+function normalizeText(s){
+  return s.trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/\s+/g,' ');
+}
+
+(function(){
+  const fills = [document.getElementById('sticky-progress-fill')].filter(Boolean);
+  if(!fills.length) return;
+  function update(){
+    const doc = document.documentElement;
+    const scrollable = doc.scrollHeight - doc.clientHeight;
+    const ratio = scrollable > 0 ? Math.min(1, Math.max(0, window.scrollY / scrollable)) : 0;
+    fills.forEach(f => f.style.width = (ratio * 100) + '%');
+  }
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if(ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => { update(); ticking = false; });
+  }, { passive:true });
+  window.addEventListener('resize', update);
+  update();
+})();
+
+/* ---------- 01 VOCABULARIO ---------- */
+const VOCAB = [
+  {front:"la clase favorita", back:"Mi clase favorita fue la de Bourdain, me gustó mucho el mercado de Hanói."},
+  {front:"recordar algo", back:"Al hacer el repaso, recordamos las canciones de los 80 que escuchamos."},
+  {front:"echar la vista atrás", back:"Hoy echamos la vista atrás y hablamos de todas las clases anteriores."},
+  {front:"lo que más me gustó", back:"Lo que más me gustó fue la clase del piano y el jazz."},
+  {front:"disfrutar de algo", back:"Disfruté mucho de la clase de las catedrales góticas."},
+  {front:"quedarse con ganas de algo", back:"Me quedé con ganas de saber más sobre los desiertos del suroeste."},
+  {front:"tener un recuerdo bonito", back:"Tengo un recuerdo muy bonito de la clase de música de los 80."},
+  {front:"la sorpresa", back:"La mayor sorpresa fue descubrir el house de Chicago."},
+  {front:"el repaso", back:"Hoy hacemos un repaso de todas las clases de los últimos meses."},
+  {front:"aprender algo nuevo", back:"En cada clase aprendí algo nuevo sobre cultura o gramática."},
+  {front:"la conversación", back:"Tuvimos una conversación larga sobre la música que escuchabas de joven."},
+  {front:"elegir una favorita", back:"Es difícil elegir una favorita porque todas me gustaron por algo distinto."},
+  {front:"comparar dos cosas", back:"Comparamos la música de los 80 con el hip hop de los 90."},
+  {front:"volver a un tema", back:"Hoy volvemos a los temas de las clases 5 a 10."},
+  {front:"contar una experiencia", back:"Le contó a Óscar su experiencia tocando el piano de niña."},
+  {front:"lo mejor de la clase", back:"Lo mejor de la clase fue la historia de la mujer del mercado."},
+  {front:"lo peor / lo más difícil", back:"Lo más difícil de la clase de catedrales fue el 'se' impersonal."},
+  {front:"un tema nuevo", back:"Cada semana hablamos de un tema nuevo: viajes, música, historia."},
+  {front:"despertar curiosidad", back:"La clase de los desiertos me despertó curiosidad por viajar a Arizona."},
+  {front:"quedar grabado en la memoria", back:"La escena de Bourdain en el mercado se quedó grabada en mi memoria."},
+];
+const vocabGrid = document.getElementById('vocab-grid');
+VOCAB.forEach(v => {
+  const card = document.createElement('div');
+  card.className = 'vocab-card';
+  card.tabIndex = 0;
+  card.innerHTML = `<div class="vocab-front">${v.front}</div><div class="vocab-back">${v.back}</div>`;
+  card.addEventListener('click', () => card.classList.toggle('flipped'));
+  card.addEventListener('keydown', e => { if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); card.classList.toggle('flipped'); } });
+  vocabGrid.appendChild(card);
+});
+
+/* ---------- 03 GRAMÁTICA: GUSTAR EN PASADO ---------- */
+document.querySelectorAll('.exercise').forEach(ex => {
+  ex.querySelectorAll('.opt-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      ex.querySelectorAll('.opt-btn').forEach(b => b.classList.remove('picked'));
+      btn.classList.add('picked');
+      ex.dataset.picked = btn.dataset.value;
+    });
+  });
+});
+document.getElementById('check-btn').addEventListener('click', () => {
+  let correct = 0;
+  const exercises = document.querySelectorAll('.exercise');
+  exercises.forEach(ex => {
+    const answer = ex.dataset.answer;
+    const picked = ex.dataset.picked;
+    ex.querySelectorAll('.opt-btn').forEach(btn => {
+      btn.disabled = true;
+      if(btn.dataset.value === answer) btn.classList.add('correct');
+      else if(btn.dataset.value === picked) btn.classList.add('wrong');
+    });
+    if(picked === answer) correct++;
+  });
+  document.getElementById('score-text').textContent = `${correct} / ${exercises.length} correctas`;
+});
+document.getElementById('reset-btn').addEventListener('click', () => {
+  document.querySelectorAll('.exercise').forEach(ex => {
+    delete ex.dataset.picked;
+    ex.querySelectorAll('.opt-btn').forEach(btn => {
+      btn.disabled = false;
+      btn.classList.remove('picked','correct','wrong');
+    });
+  });
+  document.getElementById('score-text').textContent = '';
+});
+
+/* ---------- 04 LECTURA Y COMPRENSIÓN ---------- */
+document.querySelectorAll('.reading-q').forEach(q => {
+  q.querySelectorAll('.opt-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      q.querySelectorAll('.opt-btn').forEach(b => b.classList.remove('picked'));
+      btn.classList.add('picked');
+      q.dataset.picked = btn.dataset.value;
+    });
+  });
+});
+document.getElementById('check-reading-btn').addEventListener('click', () => {
+  let correct = 0;
+  const qs = document.querySelectorAll('.reading-q');
+  qs.forEach(q => {
+    const answer = q.dataset.answer;
+    const picked = q.dataset.picked;
+    q.querySelectorAll('.opt-btn').forEach(btn => {
+      btn.disabled = true;
+      if(btn.dataset.value === answer) btn.classList.add('correct');
+      else if(btn.dataset.value === picked) btn.classList.add('wrong');
+    });
+    if(picked === answer) correct++;
+  });
+  document.getElementById('reading-score-text').textContent = `${correct} / ${qs.length} correctas`;
+});
+document.getElementById('reset-reading-btn').addEventListener('click', () => {
+  document.querySelectorAll('.reading-q').forEach(q => {
+    delete q.dataset.picked;
+    q.querySelectorAll('.opt-btn').forEach(btn => {
+      btn.disabled = false;
+      btn.classList.remove('picked','correct','wrong');
+    });
+  });
+  document.getElementById('reading-score-text').textContent = '';
+});
+
+/* ---------- 05 VERDADERO O FALSO ---------- */
+const VF_ITEMS = [
+  {text:"En la clase de Bourdain hablamos de un mercado en Hanói.", answer:true},
+  {text:"La clase de los desiertos trataba sobre Arizona, Nuevo México y Utah.", answer:true},
+  {text:"En la clase de las catedrales usamos el imperativo informal.", answer:false},
+  {text:"En la clase de música de los 80 hablamos de Madonna, Prince y Duran Duran.", answer:true},
+  {text:"La clase del hip hop y el house tocaba el condicional simple.", answer:false},
+  {text:"En la clase 10 hablamos de tus años tocando el piano.", answer:true},
+];
+const vfList = document.getElementById('vf-list');
+function buildVF(){
+  vfList.innerHTML = '';
+  shuffle(VF_ITEMS).forEach((item, i) => {
+    const div = document.createElement('div');
+    div.className = 'vf-item';
+    div.dataset.answer = item.answer ? 'v' : 'f';
+    div.innerHTML = `<p>${item.text}</p><div class="vf-buttons"><button class="vf-btn" data-value="v">Verdadero</button><button class="vf-btn" data-value="f">Falso</button></div>`;
+    vfList.appendChild(div);
+  });
+  vfList.querySelectorAll('.vf-item').forEach(item => {
+    item.querySelectorAll('.vf-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        if(btn.disabled) return;
+        const answer = item.dataset.answer;
+        const isCorrect = btn.dataset.value === answer;
+        item.querySelectorAll('.vf-btn').forEach(b => {
+          b.disabled = true;
+          if(b.dataset.value === answer) b.classList.add('correct');
+          else if(b === btn) b.classList.add('wrong');
+        });
+        updateVFScore();
+      });
+    });
+  });
+}
+function updateVFScore(){
+  const items = vfList.querySelectorAll('.vf-item');
+  let correctCount = 0;
+  items.forEach(item => {
+    const correctBtn = [...item.querySelectorAll('.vf-btn')].find(b => b.classList.contains('correct'));
+    const wrongBtn = [...item.querySelectorAll('.vf-btn')].find(b => b.classList.contains('wrong'));
+    if(correctBtn && !wrongBtn) correctCount++;
+  });
+  document.getElementById('vf-score').textContent = `${correctCount} / ${items.length} correctas`;
+}
+buildVF();
+document.getElementById('vf-reset-btn').addEventListener('click', () => {
+  buildVF();
+  document.getElementById('vf-score').textContent = '';
+});
+
+/* ---------- 06 EMPAREJAR COLUMNAS ---------- */
+const MATCH_PAIRS = [
+  {left:"Clase 5", right:"Bourdain y la comida callejera"},
+  {left:"Clase 6", right:"Los desiertos del suroeste"},
+  {left:"Clase 7", right:"Catedrales y castillos medievales"},
+  {left:"Clase 8", right:"Música de los años 80"},
+  {left:"Clase 9", right:"Hip hop de Nueva York y house de Chicago"},
+  {left:"Clase 10", right:"Piano, música clásica y jazz"},
+];
+let matchSelection = null;
+let matchFound = 0;
+const matchWrap = document.getElementById('match-wrap');
+function buildMatch(){
+  matchWrap.innerHTML = '';
+  matchSelection = null;
+  matchFound = 0;
+  const colL = document.createElement('div'); colL.className = 'match-col';
+  const colR = document.createElement('div'); colR.className = 'match-col';
+  shuffle(MATCH_PAIRS.map(p => p.left)).forEach(l => {
+    const b = document.createElement('button');
+    b.className = 'match-item'; b.textContent = l; b.dataset.side = 'l'; b.dataset.value = l;
+    colL.appendChild(b);
+  });
+  shuffle(MATCH_PAIRS.map(p => p.right)).forEach(r => {
+    const b = document.createElement('button');
+    b.className = 'match-item'; b.textContent = r; b.dataset.side = 'r'; b.dataset.value = r;
+    colR.appendChild(b);
+  });
+  matchWrap.append(colL, colR);
+  matchWrap.querySelectorAll('.match-item').forEach(item => {
+    item.addEventListener('click', () => {
+      if(item.classList.contains('linked')) return;
+      if(!matchSelection){ matchSelection = item; item.classList.add('selected'); return; }
+      if(matchSelection === item) return;
+      if(matchSelection.dataset.side === item.dataset.side){
+        matchSelection.classList.remove('selected');
+        matchSelection = item; item.classList.add('selected');
+        return;
+      }
+      const pair = MATCH_PAIRS.find(p =>
+        (p.left === matchSelection.dataset.value && p.right === item.dataset.value) ||
+        (p.left === item.dataset.value && p.right === matchSelection.dataset.value));
+      if(pair){
+        matchSelection.classList.remove('selected'); matchSelection.classList.add('linked');
+        item.classList.add('linked');
+        matchFound++;
+        if(matchFound === MATCH_PAIRS.length) document.getElementById('match-score').textContent = `¡Completo! ${matchFound} / ${MATCH_PAIRS.length}`;
+      } else {
+        item.classList.add('wrong-flash');
+        const prev = matchSelection;
+        setTimeout(() => { item.classList.remove('wrong-flash'); prev.classList.remove('selected'); }, 450);
+      }
+      matchSelection = null;
+    });
+  });
+}
+buildMatch();
+document.getElementById('match-reset-btn').addEventListener('click', buildMatch);
+
+/* ---------- 07 RELLENAR HUECOS ---------- */
+const FILL_TEXT = [
+  {before:"A Lisa le ", gap:"gustó", after:" mucho la clase de Bourdain y el mercado de Hanói. "},
+  {before:"También le ", gap:"gustaron", after:" las fotos de los desiertos de Arizona y Utah. "},
+  {before:"La clase de las catedrales le ", gap:"gustó", after:" por la parte de historia medieval. "},
+  {before:"Le ", gap:"gustaron", after:" mucho las canciones de Madonna y Prince de la clase 8. "},
+  {before:"Lo que más le ", gap:"gustó", after:" fue recordar los clubes de house de Chicago. "},
+  {before:"A Óscar le ", gap:"gustaron", after:" todas las historias que Lisa contó sobre el piano."},
+];
+const fillBlock = document.getElementById('fill-block');
+function buildFill(){
+  fillBlock.innerHTML = FILL_TEXT.map((seg, i) =>
+    `${seg.before}<input type="text" data-answer="${seg.gap}">${seg.after}`).join('');
+}
+buildFill();
+document.getElementById('check-fill-btn').addEventListener('click', () => {
+  let correct = 0;
+  const inputs = fillBlock.querySelectorAll('input[type="text"]');
+  inputs.forEach(input => {
+    const isCorrect = normalizeText(input.value) === normalizeText(input.dataset.answer);
+    markResult(input, isCorrect);
+    if(isCorrect) correct++;
+  });
+  document.getElementById('fill-score').textContent = `${correct} / ${inputs.length}`;
+});
+document.getElementById('reset-fill-btn').addEventListener('click', () => {
+  buildFill();
+  document.getElementById('fill-score').textContent = '';
+});
+
+/* ---------- 08 TABLA DE PRONOMBRES DE GUSTAR ---------- */
+const CONJ_ROWS = [
+  {pronoun:"yo", answer:"me gustó"},
+  {pronoun:"tú", answer:"te gustó"},
+  {pronoun:"él/ella", answer:"le gustó"},
+  {pronoun:"nosotros/as", answer:"nos gustó"},
+  {pronoun:"vosotros/as", answer:"os gustó"},
+  {pronoun:"ellos/ellas", answer:"les gustó"},
+];
+const conjTbody = document.getElementById('conj-tbody');
+function buildConj(){
+  conjTbody.innerHTML = CONJ_ROWS.map(r =>
+    `<tr><td class="pronoun">${r.pronoun}</td><td><input type="text" data-answer="${r.answer}"></td></tr>`).join('');
+}
+buildConj();
+document.getElementById('check-conj-btn').addEventListener('click', () => {
+  let correct = 0;
+  const inputs = conjTbody.querySelectorAll('input[type="text"]');
+  inputs.forEach(input => {
+    const isCorrect = normalizeText(input.value) === normalizeText(input.dataset.answer);
+    markResult(input, isCorrect);
+    if(isCorrect) correct++;
+  });
+  document.getElementById('conj-score').textContent = `${correct} / ${inputs.length}`;
+});
+document.getElementById('reset-conj-btn').addEventListener('click', () => {
+  buildConj();
+  document.getElementById('conj-score').textContent = '';
+});
+
+/* ---------- 10 TAREA FINAL: contador de palabras ---------- */
+const finalTask = document.querySelector('.final-task');
+const taskCount = document.querySelector('.task-count');
+finalTask.addEventListener('input', () => {
+  const words = finalTask.value.trim().split(/\s+/).filter(Boolean).length;
+  taskCount.textContent = `${words} palabra${words === 1 ? '' : 's'} escrita${words === 1 ? '' : 's'}`;
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lisa · Clase 18 — Repaso: el local y el catering</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+
+:root{
+  --paper:        #FBF7EE;
+  --paper-raised: #FFFFFF;
+  --paper-alt:    #F3ECDA;
+  --ink:          #23291F;
+  --ink-soft:     #565F52;
+  --ink-faint:    #8B9184;
+  --line:         rgba(35,41,31,0.12);
+  --line-strong:  rgba(35,41,31,0.22);
+
+  --b2:      #2F6FED;  --b2-soft: #EAF1FE;  --b2-line: #C6D9FC;
+  --ok:      #2F7D5C;  --ok-soft:  #E7F3EC;  --ok-line:  #BFE0CE;
+  --family:  #B5502E;  --family-soft: #FBEBE3; --family-line: #EFC9B4;
+  --amber:   #C1892F;  --amber-soft: #FBF1E1; --amber-line: #F0D9A8;
+
+  /* Acento: petróleo — Línea L3 "El local y el catering", clase 18 de Lisa (Habla sin Bloquearte) — cierre de la línea */
+  --accent:      #296A75;
+  --accent-soft: #E6F1F2;
+  --accent-line: #BEDDE1;
+  /* Violeta fijo del programa de Lisa — marca la "técnica anti-bloqueo" de cada clase, no cambia con el acento */
+  --violet:      #7B4FC9;
+  --violet-soft: #F1EBFB;
+  --violet-line: #D9C8F0;
+
+  --f-display: 'Fraunces', Georgia, serif;
+  --f-body:    'IBM Plex Sans', system-ui, sans-serif;
+  --f-data:    'IBM Plex Mono', monospace;
+
+  --r-sm: 8px;
+  --r-md: 14px;
+  --r-lg: 20px;
+
+  --shadow-1: 0 1px 2px rgba(35,41,31,0.05), 0 1px 8px rgba(35,41,31,0.04);
+}
+
+*{ box-sizing:border-box; }
+body{
+  margin:0;
+  background: var(--paper);
+  background-image: radial-gradient(circle at 1px 1px, var(--line) 1px, transparent 0);
+  background-size: 22px 22px;
+  color: var(--ink);
+  font-family: var(--f-body);
+  line-height:1.6;
+}
+::selection{ background: var(--accent-soft); }
+code{ font-family: var(--f-data); background: var(--paper-alt); padding:1px 5px; border-radius:5px; font-size:.92em; }
+.tecnica-badge{
+  display:inline-flex; align-items:center; gap:5px;
+  font-family: var(--f-data); font-size:11px; color: var(--violet);
+  background: var(--violet-soft); border:1px solid var(--violet-line);
+  padding:3px 11px; border-radius:999px; margin:0 0 12px;
+}
+
+/* ---------- ES/EN TOGGLE ---------- */
+.i18n-toggle{
+  position:fixed; top:18px; right:18px; z-index:50;
+  font-family: var(--f-data); font-size:11.5px; letter-spacing:.04em;
+  background: var(--paper-raised); border:1px solid var(--line-strong); color: var(--ink-soft);
+  padding:8px 14px; border-radius:999px; cursor:pointer; box-shadow: var(--shadow-1);
+  display:flex; align-items:center; gap:8px;
+}
+.i18n-toggle .dot{ width:7px; height:7px; border-radius:50%; background: var(--accent); }
+.i18n-toggle.off .dot{ background: var(--ink-faint); }
+body.i18n-hidden .en{ display:none; }
+.en{ display:block; font-size:0.82em; opacity:0.6; margin-top:2px; font-style:normal; }
+.en.inline{ display:inline; margin-top:0; margin-left:6px; }
+
+/* ---------- HEADER ---------- */
+header{ padding:44px 24px 28px; max-width:760px; margin:0 auto; }
+.header-top{ display:flex; align-items:flex-start; justify-content:space-between; gap:24px; }
+.eyebrow{
+  font-family: var(--f-data); font-size:12px; letter-spacing:.14em;
+  text-transform:uppercase; color: var(--accent); margin:0 0 10px;
+  display:flex; align-items:center; gap:10px;
+}
+.eyebrow .dot{ width:6px; height:6px; border-radius:50%; background: var(--accent); }
+h1{
+  font-family: var(--f-display); font-weight:600;
+  font-size:clamp(32px,5.8vw,50px); line-height:1.05;
+  margin:0; letter-spacing:-.015em;
+}
+h1 em{ font-style:italic; color: var(--accent); }
+.level-badge{
+  font-family: var(--f-display); font-weight:700; font-style:normal;
+  font-size:clamp(44px,9vw,80px); line-height:0.85; color: var(--accent);
+  letter-spacing:-.02em; flex:none; margin-top:-2px;
+}
+.lede{ font-size:15.5px; color: var(--ink-soft); max-width:58ch; margin:16px 0 0; }
+.lede .en{ margin-top:6px; }
+
+.meta-row{
+  display:grid; grid-template-columns:repeat(4,auto); column-gap:32px; row-gap:16px;
+  margin-top:30px; font-family: var(--f-data); font-size:11px; letter-spacing:.06em; text-transform:uppercase;
+  color: var(--ink); font-weight:600;
+}
+.meta-row strong{
+  display:block; color: var(--ink-faint); font-size:11px; font-weight:500;
+  font-family: var(--f-data); letter-spacing:.06em; text-transform:uppercase; margin-top:3px;
+}
+@media (max-width:600px){
+  .header-top{ flex-direction:column; gap:6px; }
+  .meta-row{ grid-template-columns:1fr 1fr; column-gap:24px; }
+}
+
+/* ---------- SECTIONS ---------- */
+main{ max-width:760px; margin:0 auto; padding:8px 24px 100px; }
+section.block{ margin-bottom:48px; }
+.block-head{ display:flex; align-items:baseline; gap:12px; margin-bottom:18px; }
+.time-tag{
+  font-family: var(--f-data); font-size:11px; color: var(--ink-faint);
+  background: var(--paper-alt); padding:3px 10px; border-radius:999px; margin-left:auto; flex:none;
+}
+.block-num{
+  font-family: var(--f-data); font-size:12px; color:#fff; background: var(--accent);
+  width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  flex:none;
+}
+.block-head h2{ font-family: var(--f-display); font-weight:500; font-style:italic; font-size:21px; margin:0; }
+
+.panel{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-lg);
+  box-shadow: var(--shadow-1); padding:24px 26px;
+}
+.intro-text{ margin:0 0 16px; font-size:14.5px; color: var(--ink-soft); }
+
+.note{
+  margin-top:18px; padding:14px 16px; background: var(--accent-soft); border:1px solid var(--accent-line);
+  border-radius: var(--r-md); font-size:14px; color: var(--ink-soft);
+}
+.note strong{ color: var(--ink); }
+.note.amber{ background: var(--amber-soft); border-color: var(--amber-line); }
+
+/* ---------- FRASE DESTACADA (mesh) ---------- */
+:root{ --mesh-color: var(--accent); }
+.mesh-surface{ position:relative; overflow:hidden; isolation:isolate; }
+.mesh-surface::before, .mesh-surface::after, .mesh-surface .mesh-blob{
+  content:""; position:absolute; border-radius:50%; filter: blur(46px);
+  z-index:-1; animation: mesh-drift 22s ease-in-out infinite alternate; pointer-events:none;
+}
+.mesh-surface::before{ width:60%; height:60%; top:-10%; left:-10%; background: var(--mesh-color); opacity:.16; }
+.mesh-surface::after{ width:50%; height:50%; bottom:-15%; right:-5%; background: var(--mesh-color); opacity:.13; animation-delay:-7s; }
+.mesh-surface .mesh-blob{ width:40%; height:40%; top:30%; right:20%; background: var(--mesh-color); opacity:.11; animation-delay:-14s; }
+@keyframes mesh-drift{
+  0%{ transform: translate(0,0) scale(1); }
+  50%{ transform: translate(6%,-4%) scale(1.08); }
+  100%{ transform: translate(-4%,5%) scale(.96); }
+}
+@media (prefers-reduced-motion: reduce){ .mesh-surface::before,.mesh-surface::after,.mesh-surface .mesh-blob{ animation:none; } }
+
+.phrase-card{ padding:30px 34px; border-radius: var(--r-lg); border:1px solid var(--line); text-align:center; }
+.phrase-eyebrow{ font-family: var(--f-data); font-size:11px; letter-spacing:.1em; text-transform:uppercase; color: var(--ink-faint); margin:0 0 12px; }
+.phrase-main{ font-family: var(--f-display); font-size:clamp(20px,3.6vw,28px); font-style:italic; margin:0 0 10px; color: var(--ink); }
+.phrase-sub{ font-size:13.5px; color: var(--ink-soft); margin:0; max-width:46ch; margin-left:auto; margin-right:auto; }
+
+/* ---------- ROLE: PRETÉRITO vs IMPERFECTO CONTRAST TABLE ---------- */
+.contrast-wrap{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+.contrast-col{ border-radius: var(--r-md); padding:18px 20px; border:1px solid; }
+.contrast-col.pret{ background: var(--accent-soft); border-color: var(--accent-line); }
+.contrast-col.imp{ background: var(--paper-alt); border-color: var(--line); }
+.contrast-col h3{ font-family: var(--f-display); font-size:16px; margin:0 0 4px; }
+.contrast-col.pret h3{ color: var(--accent); }
+.contrast-col.imp h3{ color: var(--ink-soft); }
+.contrast-col .en{ margin-bottom:12px; }
+.contrast-col ul{ margin:0; padding-left:18px; font-size:13.5px; color: var(--ink-soft); }
+.contrast-col li{ margin-bottom:8px; }
+.contrast-col li strong{ color: var(--ink); font-family: var(--f-data); font-size:12.5px; }
+@media (max-width:600px){ .contrast-wrap{ grid-template-columns:1fr; } }
+
+/* ---------- CONNECTOR CHIPS ---------- */
+.connector-grid{ display:flex; flex-wrap:wrap; gap:10px; margin-top:4px; }
+.connector-chip{
+  background: var(--paper-raised); border:1.5px solid var(--accent-line); border-radius: var(--r-md);
+  padding:10px 16px; font-family: var(--f-display); font-size:15px; color: var(--ink);
+  display:flex; flex-direction:column; min-width:110px;
+}
+.connector-chip .en{ font-family: var(--f-body); }
+
+/* ---------- STORY READING ---------- */
+.reading-panel{ background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-lg); padding:24px 26px; }
+.reading-text{
+  font-family: var(--f-display); font-size:16px; line-height:1.85; color: var(--ink);
+  background: var(--paper-alt); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:20px 22px; margin-bottom:8px;
+}
+.reading-text p{ margin:0 0 4px; }
+.reading-text p:last-child{ margin-bottom:0; }
+.reading-text .en{ font-family: var(--f-body); margin:2px 0 14px; }
+.tag-pret{ color: var(--accent); font-weight:600; }
+.tag-imp{ color: var(--ink-soft); font-weight:600; text-decoration: underline dotted var(--ink-faint); text-underline-offset:3px; }
+.legend{ display:flex; gap:18px; font-family: var(--f-data); font-size:11.5px; color: var(--ink-faint); margin:12px 2px 0; }
+.legend span{ display:flex; align-items:center; gap:6px; }
+.legend .sw{ width:10px; height:10px; border-radius:3px; }
+.legend .sw.pret{ background: var(--accent); }
+.legend .sw.imp{ background: var(--ink-faint); }
+
+/* ---------- TABLA DE COMPARATIVOS IRREGULARES ---------- */
+.irr-table-wrap{ overflow-x:auto; margin-top:4px; }
+table.irr-table{ width:100%; border-collapse:collapse; font-size:13.5px; min-width:420px; }
+table.irr-table th{
+  font-family: var(--f-data); font-size:10.5px; text-transform:uppercase; letter-spacing:.05em;
+  color: var(--ink-faint); text-align:left; padding:8px 10px; border-bottom:1.5px solid var(--line-strong);
+}
+table.irr-table td{ padding:9px 10px; border-bottom:1px dashed var(--line); color: var(--ink-soft); }
+table.irr-table tr:last-child td{ border-bottom:none; }
+table.irr-table td.verb{ font-family: var(--f-display); font-weight:600; color: var(--ink); }
+table.irr-table td.irr-form{ font-family: var(--f-data); color: var(--accent); }
+
+/* ---------- FILL GAPS (elige el conector/reacción) ---------- */
+.fill-block{
+  font-family: var(--f-display); font-size:15.5px; line-height:2.15; color: var(--ink);
+  background: var(--paper-alt); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:20px 22px;
+}
+.fill-block .en{ font-family: var(--f-body); font-size:0.7em; margin:0 0 10px; }
+.gap-select{
+  font-family: var(--f-data); font-size:13.5px; background: var(--paper-raised);
+  border:none; border-bottom:2px solid var(--accent-line); color: var(--ink);
+  padding:3px 6px; margin:0 2px; border-radius:4px 4px 0 0; cursor:pointer;
+}
+.gap-select:focus{ outline:none; border-bottom-color: var(--accent); }
+.gap-select.correct{ border-bottom-color: var(--ok); color: var(--ok); }
+.gap-select.wrong{ border-bottom-color: var(--family); color: var(--family); }
+
+.check-bar{
+  display:flex; align-items:center; justify-content:space-between; gap:16px;
+  margin-top:22px; padding-top:18px; border-top:1px dashed var(--line); flex-wrap:wrap;
+}
+.btn-primary{
+  font-family: var(--f-body); font-weight:600; font-size:14px; color:#fff; background: var(--accent);
+  border:none; padding:11px 22px; border-radius:999px; cursor:pointer; transition: transform .1s ease;
+}
+.btn-primary:hover{ transform: translateY(-1px); }
+#fill-score{ font-family: var(--f-data); font-size:13px; color: var(--ink-faint); }
+.btn-ghost{
+  font-family: var(--f-body); font-weight:600; font-size:13px; color: var(--ink-soft); background:none;
+  border:1.5px solid var(--line); padding:9px 18px; border-radius:999px; cursor:pointer;
+}
+.btn-ghost:hover{ border-color: var(--ink-faint); }
+
+/* ---------- ORDENAR LA HISTORIA (secuencia) ---------- */
+.order-item{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:16px 18px; margin-bottom:14px;
+}
+.order-bank{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
+.order-slot{
+  min-height:44px; border:1.5px dashed var(--line-strong); border-radius: var(--r-sm);
+  padding:8px; display:flex; flex-wrap:wrap; gap:6px; align-items:center; background: var(--paper-alt);
+}
+.order-chip{
+  font-family: var(--f-body); font-size:13.5px; font-weight:600; background: var(--paper-raised);
+  border:1.5px solid var(--line); color: var(--ink); padding:6px 12px; border-radius:999px;
+  cursor:pointer; transition: all .15s ease; user-select:none;
+}
+.order-chip:hover{ border-color: var(--accent-line); }
+.order-chip.used{ background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+.order-item .order-feedback{ font-size:12.5px; color: var(--ink-faint); margin-top:8px; font-family: var(--f-data); }
+.order-item.correct .order-slot{ border-color: var(--ok); border-style:solid; background: var(--ok-soft); }
+.order-item.wrong .order-slot{ border-color: var(--family); border-style:solid; background: var(--family-soft); }
+
+/* ---------- ROLEPLAY / STORY BUILD (usa --family) ---------- */
+.roleplay-panel{ background: var(--family-soft); border:1px solid var(--family-line); border-radius: var(--r-lg); padding:24px 26px; }
+.roleplay-panel .block-num{ background: var(--family); }
+.scene-setup{
+  display:flex; gap:14px; align-items:flex-start; background: var(--paper-raised);
+  border:1px solid var(--family-line); border-radius: var(--r-md); padding:14px 16px; margin-bottom:20px;
+}
+.scene-icon{ font-size:22px; flex:none; }
+.scene-text{ font-size:14px; color: var(--ink-soft); }
+.scene-text strong{ color: var(--ink); }
+.scene-text .en{ margin-top:4px; }
+
+.desc-card{
+  background: var(--paper-raised); border:1px solid var(--family-line); border-radius: var(--r-md);
+  padding:18px 20px;
+}
+.desc-card .desc-title{ font-family: var(--f-display); font-weight:600; font-size:16px; margin:0 0 8px; color: var(--ink); }
+.desc-card .desc-brief{ font-size:14px; color: var(--ink-soft); margin:0 0 4px; }
+.desc-card .desc-brief.en{ margin-bottom:14px; }
+.desc-card .desc-prompts{ margin:0; padding-left:18px; font-size:13.5px; color: var(--ink-soft); }
+.desc-card .desc-prompts li{ margin-bottom:10px; }
+.desc-card .desc-prompts li .en{ margin-top:1px; }
+.desc-card textarea{
+  width:100%; min-height:110px; font-family: var(--f-body); font-size:14.5px; color: var(--ink);
+  background:#fff; border:1px solid var(--family-line); border-radius: var(--r-sm);
+  padding:10px 12px; resize:vertical; margin-top:12px;
+}
+.desc-card textarea:focus{ outline:none; border-color: var(--family); }
+.roleplay-tip{
+  margin-top:22px; padding:14px 16px; background: var(--paper-raised); border:1px solid var(--family-line);
+  border-radius: var(--r-md); font-size:13.5px; color: var(--ink-soft);
+}
+.roleplay-tip strong{ color: var(--ink); }
+
+/* ---------- TAREA FINAL ---------- */
+.task-panel{ background: var(--paper-alt); border:1px solid var(--line); border-radius: var(--r-lg); padding:24px 26px; }
+.task-panel .block-num{ background: var(--ink-soft); }
+textarea.final-task{
+  width:100%; min-height:150px; font-family: var(--f-body); font-size:15px; color: var(--ink);
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:14px 16px; resize:vertical; margin-top:14px;
+}
+textarea.final-task:focus{ outline:none; border-color: var(--accent); }
+.task-footer{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:12px; flex-wrap:wrap; }
+.task-count{ font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); }
+.btn-secondary{
+  font-family: var(--f-body); font-weight:600; font-size:13.5px; color: var(--ink-soft); background:none;
+  border:1.5px solid var(--line); padding:9px 18px; border-radius:999px; cursor:pointer;
+}
+.saved-flag{ font-family: var(--f-data); font-size:12px; color: var(--b2); opacity:0; transition: opacity .3s ease; }
+.saved-flag.show{ opacity:1; }
+
+footer{
+  max-width:760px; margin:40px auto 0; padding:0 24px 60px;
+  font-family: var(--f-data); font-size:11.5px; color: var(--ink-faint);
+  display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px;
+}
+
+@media (max-width:600px){
+  header{ padding:36px 16px 22px; }
+  main{ padding:8px 16px 80px; }
+  .panel, .reading-panel, .roleplay-panel, .task-panel{ padding:18px 18px; }
+  .i18n-toggle{ top:12px; right:12px; padding:7px 12px; font-size:11px; }
+}
+@media (prefers-reduced-motion: reduce){ *{ transition:none !important; } }
+</style>
+</head>
+<body data-accent="petroleo-lisa18">
+
+<button class="i18n-toggle" id="i18n-toggle"><span class="dot"></span><span id="i18n-label">EN on</span></button>
+
+<header>
+  <div class="header-top">
+    <div>
+      <p class="eyebrow"><span class="dot"></span>Clase 18 · Semana 6 · L3 El local y el catering — cierre</p>
+      <h1>Repaso: <em>el local y el catering</em></h1>
+    </div>
+    <span class="level-badge">B1</span>
+  </div>
+  <p class="tecnica-badge">🎭 Juego de rol</p>
+  <p class="lede">Hoy cerramos la línea juntando todo lo de las últimas tres semanas: POR y PARA, y los comparativos y superlativos. Vas a hacer de compañera de gimnasio comparando rutinas de pesas — con un compañero improvisado que te hace preguntas sin avisar.
+    <span class="en">Today we close out the line, bringing together everything from the last three weeks: POR and PARA, plus comparatives and superlatives. You'll play a gym buddy comparing weightlifting routines — with an improvised partner who asks you questions without warning.</span>
+  </p>
+  <div class="meta-row">
+    <div>Fecha<strong>28 sep 2026</strong></div>
+    <div>Gramática<strong>POR/PARA + comparativos</strong></div>
+    <div>Tema<strong>Rutinas de gimnasio</strong></div>
+    <div>Clase<strong>18 / 36</strong></div>
+  </div>
+</header>
+
+<main>
+
+  <!-- 1. Frase destacada -->
+  <section class="block">
+    <div class="block-head"><span class="block-num">1</span><h2>Frase de hoy</h2><span class="time-tag">apertura</span></div>
+    <div class="phrase-card mesh-surface">
+      <span class="mesh-blob"></span>
+      <p class="phrase-eyebrow">Frase de hoy · Today's phrase</p>
+      <p class="phrase-main">"Levanto pesas por la salud, no para verme como una influencer — y esta rutina es mucho mejor que la anterior."</p>
+      <p class="phrase-sub en">"I lift weights for my health, not to look like an influencer — and this routine is much better than the last one." — three weeks of tools, one conversation to prove they're automatic now.</p>
+    </div>
+  </section>
+
+  <!-- 2. POR vs PARA -->
+  <section class="block">
+    <div class="block-head"><span class="block-num">2</span><h2>POR y PARA — repaso</h2><span class="time-tag">semana 5</span></div>
+    <div class="contrast-wrap">
+      <div class="contrast-col pret">
+        <h3>PARA</h3>
+        <p class="en">Purpose, destination, recipient, deadline</p>
+        <ul>
+          <li><strong>finalidad</strong> — entreno para estar más fuerte</li>
+          <li><strong>destinatario</strong> — este plan es para ti</li>
+          <li><strong>plazo</strong> — la rutina nueva empieza para el lunes</li>
+        </ul>
+      </div>
+      <div class="contrast-col imp">
+        <h3>POR</h3>
+        <p class="en">Cause, means, exchange, imprecise location</p>
+        <ul>
+          <li><strong>causa</strong> — no fui al gimnasio por el trabajo</li>
+          <li><strong>medio</strong> — hablamos por teléfono sobre la rutina</li>
+          <li><strong>lugar impreciso</strong> — paseamos por el gimnasio antes de empezar</li>
+        </ul>
+      </div>
+    </div>
+    <div class="note"><strong>El truco:</strong> PARA mira hacia adelante (objetivo, destino); POR mira hacia atrás o hacia los lados (causa, medio, recorrido).
+      <span class="en">The trick: PARA looks forward (goal, destination); POR looks backward or sideways (cause, means, route).</span>
+    </div>
+  </section>
+
+  <!-- 2b. Comparativos y superlativos -->
+  <section class="block">
+    <div class="block-head"><span class="block-num">3</span><h2>Comparativos y superlativos</h2><span class="time-tag">semana 6</span></div>
+    <div class="contrast-wrap">
+      <div class="contrast-col pret">
+        <h3>Comparativos</h3>
+        <p class="en">Between two things</p>
+        <ul>
+          <li><strong>más/menos...que</strong> — esta rutina es más dura que la anterior</li>
+          <li><strong>tan/tanto...como</strong> — levanto tanto peso como antes</li>
+          <li><strong>mejor/peor</strong> — esta máquina es mejor que la otra</li>
+        </ul>
+      </div>
+      <div class="contrast-col imp">
+        <h3>Superlativos</h3>
+        <p class="en">The most, within a group or absolute</p>
+        <ul>
+          <li><strong>el/la más...(de)</strong> — es el ejercicio más difícil del entrenamiento</li>
+          <li><strong>-ísimo/a</strong> — esta rutina es durísima</li>
+          <li><strong>el/la mejor/peor</strong> — es la mejor rutina que he probado</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Vocabulario nuevo -->
+  <section class="block">
+    <div class="block-head"><span class="block-num">4</span><h2>El vocabulario de hoy</h2><span class="time-tag">vocabulario nuevo</span></div>
+    <p class="intro-text">Estas son las palabras que vas a necesitar para hablar de tu rutina de pesas.
+      <span class="en">These are the words you'll need to talk about your weightlifting routine.</span>
+    </p>
+    <div class="connector-grid">
+      <div class="connector-chip">levantar pesas<span class="en">to lift weights</span></div>
+      <div class="connector-chip">la rutina<span class="en">the routine</span></div>
+      <div class="connector-chip">las repeticiones<span class="en">the reps</span></div>
+      <div class="connector-chip">el entrenador<span class="en">the trainer</span></div>
+      <div class="connector-chip">estar en forma<span class="en">to be in shape</span></div>
+      <div class="connector-chip">descansar<span class="en">to rest</span></div>
+    </div>
+  </section>
+
+  <!-- 5. Texto modelo con etiquetas -->
+  <section class="block reading-panel">
+    <div class="block-head"><span class="block-num">5</span><h2>Un diálogo modelo</h2><span class="time-tag">lectura</span></div>
+    <p class="intro-text">Lee esta conversación entre dos compañeros de gimnasio. Está marcado: <span class="tag-pret">verde = por/para</span>, <span class="tag-imp">subrayado = comparativo/superlativo</span>.
+      <span class="en">Read this conversation between two gym buddies. Marked: green = por/para, underlined = comparative/superlative.</span>
+    </p>
+    <div class="reading-text">
+      <p>— Vengo <span class="tag-pret">para</span> hacer piernas hoy. Esta rutina nueva es <span class="tag-imp">mucho más dura que</span> la anterior.</p>
+      <p class="en">— I've come to do legs today. This new routine is much harder than the last one.</p>
+      <p>— ¿En serio? A mí me la cambió el entrenador <span class="tag-pret">por</span> lesión, y ahora hago <span class="tag-imp">tantas repeticiones como</span> tú, pero con menos peso.</p>
+      <p class="en">— Really? Mine got changed by the trainer because of an injury, and now I do as many reps as you, but with less weight.</p>
+      <p>— Pues yo entreno tres veces <span class="tag-pret">por</span> semana <span class="tag-pret">para</span> estar más fuerte, no <span class="tag-pret">para</span> verme como una influencer.</p>
+      <p class="en">— Well I train three times a week to get stronger, not to look like an influencer.</p>
+      <p>— Totalmente. Y esta máquina es <span class="tag-imp">la mejor</span> del gimnasio <span class="tag-pret">para</span> la espalda, aunque el primer día me pareció <span class="tag-imp">dificilísima</span>.</p>
+      <p class="en">— Totally. And this machine is the best in the gym for your back, although the first day it seemed super difficult to me.</p>
+    </div>
+    <div class="legend">
+      <span><span class="sw pret"></span>por/para</span>
+      <span><span class="sw imp"></span>comparativo/superlativo</span>
+    </div>
+  </section>
+
+  <!-- 6. Tabla de referencia rápida -->
+  <section class="block">
+    <div class="block-head"><span class="block-num">6</span><h2>Los casos difíciles</h2><span class="time-tag">ojo aquí</span></div>
+    <div class="panel">
+      <p class="intro-text">Los errores más comunes en las últimas tres semanas — un repaso rápido antes del juego de rol.
+        <span class="en">The most common mistakes from the last three weeks — a quick review before the roleplay.</span>
+      </p>
+      <div class="irr-table-wrap">
+        <table class="irr-table">
+          <thead><tr><th>Caso</th><th>Forma</th><th>Ejemplo</th></tr></thead>
+          <tbody>
+            <tr><td class="verb">bueno/a</td><td class="irr-form">mejor / el·la mejor</td><td>esta rutina es mejor que la anterior</td></tr>
+            <tr><td class="verb">malo/a</td><td class="irr-form">peor / el·la peor</td><td>fue el peor entrenamiento de la semana</td></tr>
+            <tr><td class="verb">finalidad</td><td class="irr-form">para + infinitivo</td><td>entreno para estar más fuerte</td></tr>
+            <tr><td class="verb">causa</td><td class="irr-form">por + motivo</td><td>cambié de rutina por una lesión</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="note amber"><strong>Nota:</strong> "por" contesta a "¿por qué?" (la causa detrás); "para" contesta a "¿para qué?" (el objetivo delante). Si dudas, pregúntate cuál de las dos preguntas encaja.
+        <span class="en">Note: "por" answers "why?" (the cause behind); "para" answers "what for?" (the goal ahead). If unsure, ask yourself which of the two questions fits.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. Rellenar huecos: repaso integrado -->
+  <section class="block">
+    <div class="block-head"><span class="block-num">7</span><h2>Por, para o comparativo</h2><span class="time-tag">ejercicio</span></div>
+    <div class="panel">
+      <p class="intro-text">Completa cada frase eligiendo la forma correcta — puede ser por/para o un comparativo.
+        <span class="en">Complete each sentence by choosing the correct form — it might be por/para or a comparative.</span>
+      </p>
+      <div class="fill-block" id="fill-block"></div>
+      <div class="check-bar">
+        <button class="btn-primary" id="check-fill-btn">Comprobar</button>
+        <span id="fill-score"></span>
+        <button class="btn-ghost" id="reset-fill-btn">Reiniciar</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. Ordenar la frase -->
+  <section class="block">
+    <div class="block-head"><span class="block-num">8</span><h2>Ordena la frase</h2><span class="time-tag">secuencia</span></div>
+    <p class="intro-text">Pulsa las palabras en el orden correcto para reconstruir cada frase.
+      <span class="en">Click the words in the right order to rebuild each sentence.</span>
+    </p>
+    <div id="order-list"></div>
+  </section>
+
+  <!-- 9. Juego de rol -->
+  <section class="block roleplay-panel">
+    <div class="block-head"><span class="block-num">9</span><h2>En el gimnasio</h2><span class="time-tag">juego de rol</span></div>
+    <div class="scene-setup">
+      <span class="scene-icon">🏋️</span>
+      <div class="scene-text">
+        <strong>Ahora te toca improvisar.</strong> Vas a hacer de compañera de gimnasio hablando con otra persona sobre vuestras rutinas de pesas — usa POR/PARA y comparativos/superlativos, sin preparación previa.
+        <span class="en">Now it's time to improvise. You'll play a gym buddy talking with someone else about your weightlifting routines — use POR/PARA and comparatives/superlatives, with no preparation.</span>
+      </div>
+    </div>
+    <div class="desc-card">
+      <p class="desc-title">Algunas de las preguntas que te voy a hacer</p>
+      <p class="desc-brief">No hace falta que la respuesta sea perfecta — el objetivo es mezclar las herramientas de las últimas tres semanas y seguir hablando, aunque te bloquees a mitad de frase.</p>
+      <p class="desc-brief en">The answer doesn't need to be perfect — the goal is to mix the tools from the last three weeks and keep talking, even if you block mid-sentence.</p>
+      <ol class="desc-prompts">
+        <li>¿Por qué empezaste a levantar pesas?
+          <div class="en">Why did you start lifting weights?</div>
+        </li>
+        <li>¿Tu rutina actual es más dura que la anterior?
+          <div class="en">Is your current routine harder than the last one?</div>
+        </li>
+        <li>¿Para qué día quieres tener lista la rutina nueva?
+          <div class="en">By what day do you want the new routine ready?</div>
+        </li>
+        <li>¿Cuál es el mejor consejo que te ha dado tu entrenador?
+          <div class="en">What's the best advice your trainer has given you?</div>
+        </li>
+      </ol>
+      <textarea placeholder="Anota aquí alguna frase que quieras tener lista antes de que te pregunte... / Note down here a sentence you'd like to have ready before I ask..."></textarea>
+    </div>
+    <div class="roleplay-tip"><strong>Consejo:</strong> si te quedas en blanco, usa una muletilla ("a ver...", "es que...") y sigue — el objetivo de hoy es mezclar todo lo aprendido, no la frase perfecta.
+      <span class="en">Tip: if you blank out, use a filler word ("a ver...", "es que...") and keep going — today's goal is mixing everything learned, not the perfect sentence.</span>
+    </div>
+  </section>
+
+  <!-- 10. Tarea final -->
+  <section class="block task-panel">
+    <div class="block-head"><span class="block-num">10</span><h2>Tarea para casa</h2><span class="time-tag">esta semana</span></div>
+    <p class="intro-text">Autoevaluación breve: ¿qué te resulta más difícil, POR/PARA o los comparativos? Escribe unas frases explicando por qué, usando al menos un ejemplo de cada uno.
+      <span class="en">Brief self-assessment: what do you find harder, POR/PARA or the comparatives? Write a few sentences explaining why, using at least one example of each.</span>
+    </p>
+    <textarea class="final-task" placeholder="Lo que más me cuesta es... porque... Por ejemplo, con POR/PARA... Y con los comparativos..."></textarea>
+    <div class="task-footer">
+      <span class="task-count">0 palabras escritas</span>
+      <div style="display:flex; gap:10px; align-items:center;">
+        <span class="saved-flag" id="task-saved">Guardado ✓</span>
+        <button class="btn-secondary" id="save-task-btn">Guardar</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <span>Clase 18 de 36 · Semana 6 — L3 El local y el catering, cierre · Lisa · B1</span>
+  <span>ESCOLAR · acento petróleo</span>
+</footer>
+
+<script>
+/* ---------- ES/EN TOGGLE ---------- */
+const i18nBtn = document.getElementById('i18n-toggle');
+const i18nLabel = document.getElementById('i18n-label');
+i18nBtn.addEventListener('click', ()=>{
+  document.body.classList.toggle('i18n-hidden');
+  const hidden = document.body.classList.contains('i18n-hidden');
+  i18nBtn.classList.toggle('off', hidden);
+  i18nLabel.textContent = hidden ? 'EN off' : 'EN on';
+});
+
+/* ---------- RELLENAR HUECOS: repaso integrado ---------- */
+const FILL_STORY = [
+  {before:'Entreno tres veces ', word:'por', options:['por','para'], correct:'por', after:' semana, siempre por la mañana.'},
+  {before:'Cambié de rutina ', word:'por', options:['por','para'], correct:'por', after:' una lesión en la rodilla.'},
+  {before:'Voy al gimnasio ', word:'para', options:['por','para'], correct:'para', after:' estar más fuerte, no para verme como una influencer.'},
+  {before:'Esta rutina es ', word:'mucho más dura que', options:['mucho más dura que','tan dura como'], correct:'mucho más dura que', after:' la anterior, se nota mucho.'},
+  {before:'Ahora hago ', word:'tantas repeticiones como', options:['tantas repeticiones como','más repeticiones que'], correct:'tantas repeticiones como', after:' antes, pero con menos peso.'},
+  {before:'Esta máquina es ', word:'la mejor', options:['la mejor','buenísima'], correct:'la mejor', after:' del gimnasio para la espalda.'},
+];
+function buildFillBlock(){
+  const wrap = document.getElementById('fill-block');
+  wrap.innerHTML = '<p class="en">Choose the correct verb form for each gap.</p>';
+  const p = document.createElement('p');
+  FILL_STORY.forEach((g,i)=>{
+    p.appendChild(document.createTextNode(g.before));
+    const sel = document.createElement('select');
+    sel.className = 'gap-select';
+    sel.dataset.idx = i;
+    const opts = [...g.options].sort(()=>Math.random()-0.5);
+    const blank = document.createElement('option');
+    blank.textContent = '—'; blank.value = ''; sel.appendChild(blank);
+    opts.forEach(o=>{
+      const opt = document.createElement('option');
+      opt.value = o; opt.textContent = o;
+      sel.appendChild(opt);
+    });
+    p.appendChild(sel);
+    p.appendChild(document.createTextNode(g.after));
+  });
+  wrap.appendChild(p);
+}
+buildFillBlock();
+document.getElementById('check-fill-btn').addEventListener('click', ()=>{
+  let correct = 0;
+  document.querySelectorAll('.gap-select').forEach(sel=>{
+    const idx = Number(sel.dataset.idx);
+    sel.classList.remove('correct','wrong');
+    if(sel.value === FILL_STORY[idx].correct){
+      sel.classList.add('correct'); correct++;
+    } else if(sel.value){
+      sel.classList.add('wrong');
+    }
+  });
+  document.getElementById('fill-score').textContent = `${correct} / ${FILL_STORY.length} correctas`;
+});
+document.getElementById('reset-fill-btn').addEventListener('click', ()=>{
+  buildFillBlock();
+  document.getElementById('fill-score').textContent = '';
+});
+
+/* ---------- ORDENAR LA HISTORIA ---------- */
+const ORDER_EXERCISES = [
+  {words:["Entreno","para","estar","más","fuerte","."], answer:["Entreno","para","estar","más","fuerte","."]},
+  {words:["Esta","rutina","es","mejor","que","la","anterior","."], answer:["Esta","rutina","es","mejor","que","la","anterior","."]},
+  {words:["Cambié","de","rutina","por","una","lesión","."], answer:["Cambié","de","rutina","por","una","lesión","."]},
+];
+const orderList = document.getElementById('order-list');
+function buildOrderList(){
+  orderList.innerHTML = '';
+  ORDER_EXERCISES.forEach(ex=>{
+    const el = document.createElement('div');
+    el.className = 'order-item';
+    const shuffled = [...ex.words].sort(()=>Math.random()-0.5);
+    el.innerHTML = `
+      <div class="order-bank">${shuffled.map((w,idx)=>`<span class="order-chip" data-word="${w}" data-idx="${idx}">${w}</span>`).join('')}</div>
+      <div class="order-slot"></div>
+      <div class="order-feedback"></div>`;
+    const slot = el.querySelector('.order-slot');
+    const feedback = el.querySelector('.order-feedback');
+    el.querySelectorAll('.order-chip').forEach(chip=>{
+      chip.addEventListener('click', ()=>{
+        if(chip.classList.contains('used')) return;
+        chip.classList.add('used');
+        const placed = document.createElement('span');
+        placed.className = 'order-chip used';
+        placed.textContent = chip.dataset.word;
+        placed.addEventListener('click', ()=>{
+          placed.remove();
+          chip.classList.remove('used');
+          el.classList.remove('correct','wrong');
+          feedback.textContent = '';
+        });
+        slot.appendChild(placed);
+        const current = [...slot.children].map(c=>c.textContent);
+        if(current.length === ex.answer.length){
+          const ok = current.every((w,idx)=>w===ex.answer[idx]);
+          el.classList.toggle('correct', ok);
+          el.classList.toggle('wrong', !ok);
+          feedback.textContent = ok ? 'Correcto.' : `Prueba otra vez — respuesta: ${ex.answer.join(' ')}`;
+        }
+      });
+    });
+    orderList.appendChild(el);
+  });
+}
+buildOrderList();
+
+/* ---------- CONTADOR DE PALABRAS + GUARDAR TAREA ---------- */
+const ta = document.querySelector('.final-task');
+const tc = document.querySelector('.task-count');
+ta.addEventListener('input', ()=>{
+  const words = ta.value.trim().split(/\s+/).filter(Boolean).length;
+  tc.textContent = `${words} palabra${words===1?'':'s'} escrita${words===1?'':'s'}`;
+});
+
+const STORAGE_KEY = 'lisa-clase18-tarea';
+async function loadTask(){
+  if(!window.storage) return;
+  try{
+    const res = await window.storage.get(STORAGE_KEY);
+    if(res && typeof res.value === 'string'){
+      ta.value = res.value;
+      ta.dispatchEvent(new Event('input'));
+    }
+  }catch(e){ /* no saved task yet */ }
+}
+document.getElementById('save-task-btn').addEventListener('click', async ()=>{
+  if(window.storage){
+    try{ await window.storage.set(STORAGE_KEY, ta.value); }catch(e){ /* silent */ }
+  }
+  const flag = document.getElementById('task-saved');
+  flag.classList.add('show');
+  setTimeout(()=>flag.classList.remove('show'), 2000);
+});
+loadTask();
+</script>
+
+</body>
+</html>

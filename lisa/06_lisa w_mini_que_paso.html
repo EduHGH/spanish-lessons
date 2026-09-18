@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mini · ¿Qué pasó? (exploratorio)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+
+/* ╔══════════════════════════════════════════════════════════════╗
+   ║  ESCOLAR — Expansion Pack · Mini (EXPLORATORIO — SIN EVIDENCIA)║
+   ║  "¿Qué pasó?" — Narración espontánea de un evento, en pasado   ║
+   ╚══════════════════════════════════════════════════════════════╝ */
+
+:root{
+  --paper:        #FBF7EE;
+  --paper-raised: #FFFFFF;
+  --paper-alt:    #F3ECDA;
+  --ink:          #23291F;
+  --ink-soft:     #565F52;
+  --ink-faint:    #8B9184;
+  --line:         rgba(35,41,31,0.12);
+  --line-strong:  rgba(35,41,31,0.22);
+
+  --b1:      #2F6FED;  --b1-soft: #EAF1FE;  --b1-line: #C6D9FC;
+  --b2:      #2E9E6B;  --b2-soft: #E9F6EF;  --b2-line: #BEE6D3;
+  --family:  #B5502E;  --family-soft: #FBEBE3; --family-line: #EFC9B4;
+  --violet:  #7B4FC9;  --violet-soft: #F1EBFB; --violet-line: #D9C8F0;
+  --alert:   #B23A3A;  --alert-soft: #FBEAEA; --alert-line: #EFC0C0;
+
+  --f-display: 'Fraunces', Georgia, serif;
+  --f-body:    'IBM Plex Sans', system-ui, sans-serif;
+  --f-data:    'IBM Plex Mono', monospace;
+
+  --r-sm: 8px;
+  --r-md: 14px;
+  --r-lg: 20px;
+
+  --shadow-1: 0 1px 2px rgba(35,41,31,0.05), 0 1px 8px rgba(35,41,31,0.04);
+}
+
+*{ box-sizing:border-box; }
+body{
+  margin:0;
+  background: var(--paper);
+  background-image: radial-gradient(circle at 1px 1px, var(--line) 1px, transparent 0);
+  background-size: 22px 22px;
+  color: var(--ink);
+  font-family: var(--f-body);
+  line-height:1.6;
+}
+::selection{ background: var(--b1-soft); }
+
+/* ---------- EXPLORATORY BANNER (stronger — RED, not amber) ---------- */
+.exploratory-banner{
+  max-width:760px; margin:0 auto; padding:14px 24px 0;
+}
+.exploratory-inner{
+  background: var(--alert-soft); border:1px solid var(--alert-line); border-radius: var(--r-md);
+  padding:14px 18px; display:flex; gap:12px; align-items:flex-start;
+}
+.exploratory-inner .ex-icon{ font-size:18px; flex:none; line-height:1.4; }
+.exploratory-inner .ex-text{ font-size:13px; color: var(--ink-soft); }
+.exploratory-inner .ex-text strong{ color: var(--ink); font-weight:600; }
+.exploratory-inner .ex-text .en{ margin-top:6px; }
+
+/* ---------- HEADER ---------- */
+header{ padding:28px 24px 28px; max-width:760px; margin:0 auto; }
+.eyebrow{
+  font-family: var(--f-data); font-size:12px; letter-spacing:.14em;
+  text-transform:uppercase; color: var(--alert); margin:0 0 10px;
+  display:flex; align-items:center; gap:10px;
+}
+.eyebrow .dot{ width:6px; height:6px; border-radius:50%; background: var(--alert); }
+h1{
+  font-family: var(--f-display); font-weight:600;
+  font-size:clamp(30px,5.6vw,46px); line-height:1.08;
+  margin:0 0 14px; letter-spacing:-.01em;
+}
+h1 em{ font-style:italic; color: var(--alert); }
+.lede{ font-size:16px; color: var(--ink-soft); max-width:56ch; margin:0; }
+
+.meta-row{
+  display:flex; flex-wrap:wrap; gap:20px; margin-top:26px;
+  font-family: var(--f-data); font-size:12px; color: var(--ink-faint);
+}
+.meta-row strong{
+  display:block; color: var(--ink); font-size:14.5px; font-weight:500;
+  font-family: var(--f-display); margin-top:3px;
+}
+
+/* ---------- STRUCTURE STRIP ---------- */
+.structure-strip{
+  display:grid; grid-template-columns:repeat(5,1fr); gap:2px; margin-top:24px;
+  border-radius: var(--r-md); overflow:hidden; border:1px solid var(--line);
+}
+.structure-strip.row2{ margin-top:2px; }
+.structure-cell{ background: var(--paper-raised); padding:10px 8px; }
+.structure-cell .s-icon{ font-size:15px; }
+.structure-cell .s-label{ font-family: var(--f-body); font-weight:600; font-size:10.5px; color: var(--ink); margin-top:4px; line-height:1.25; }
+
+/* ---------- SECTIONS ---------- */
+main{ max-width:760px; margin:0 auto; padding:8px 24px 100px; }
+
+section.block{ margin-bottom:52px; }
+.block-head{ display:flex; align-items:baseline; gap:12px; margin-bottom:18px; }
+.time-tag{
+  font-family: var(--f-data); font-size:11px; color: var(--ink-faint);
+  background: var(--paper-alt); padding:3px 10px; border-radius:999px; margin-left:auto; flex:none;
+}
+.block-num{
+  font-family: var(--f-data); font-size:12px; color:#fff; background: var(--alert);
+  width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  flex:none;
+}
+.block-head h2{
+  font-family: var(--f-display); font-weight:500; font-style:italic; font-size:22px; margin:0;
+}
+.phase-label{
+  font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.08em;
+  color: var(--ink-faint); margin:0 0 8px; display:flex; align-items:center; gap:8px;
+}
+
+.panel{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-lg);
+  box-shadow: var(--shadow-1); padding:26px 28px;
+}
+
+/* ---------- 1. EL MOMENTO (scene) ---------- */
+.scene-panel{ background: var(--family-soft); border:1px solid var(--family-line); border-radius: var(--r-lg); padding:26px 28px; }
+.scene-panel .block-num{ background: var(--family); }
+.scene-setup{
+  display:flex; gap:14px; align-items:flex-start; background: var(--paper-raised);
+  border:1px solid var(--family-line); border-radius: var(--r-md); padding:16px 18px; margin-bottom:16px;
+}
+.scene-icon{ font-size:24px; flex:none; }
+.scene-text{ font-size:15px; color: var(--ink-soft); }
+.scene-text strong{ color: var(--ink); }
+.blocked-line{
+  margin-top:16px; padding:16px 18px; background: rgba(255,255,255,0.5); border:1px dashed var(--family-line);
+  border-radius: var(--r-md); font-family: var(--f-display); font-style:italic; font-size:16.5px; color: var(--ink);
+}
+.blocked-line .who{ font-family: var(--f-data); font-style:normal; font-size:11px; text-transform:uppercase;
+  letter-spacing:.05em; color: var(--family); display:block; margin-bottom:6px; }
+
+/* ---------- 2. LA SALIDA INMEDIATA ---------- */
+.exit-panel{ background: var(--alert-soft); border:1px solid var(--alert-line); }
+.exit-panel .block-num{ background: var(--alert); }
+.exit-line{
+  font-family: var(--f-display); font-weight:500; font-size:22px; color: var(--ink);
+  background: var(--paper-raised); border:1px solid var(--alert-line); border-radius: var(--r-md);
+  padding:20px 22px; margin-top:4px;
+}
+.exit-line .accent{ color: var(--alert); }
+.exit-note{ font-size:13.5px; color: var(--ink-soft); margin-top:14px; }
+.exit-note strong{ color: var(--ink); }
+
+/* ---------- PRETÉRITO VS IMPERFECTO — SPLIT PANEL ---------- */
+.split-grid{ display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:4px; }
+@media(max-width:640px){ .split-grid{ grid-template-columns:1fr; } }
+.split-card{
+  border-radius: var(--r-md); padding:18px 20px; border:1px solid;
+}
+.split-card.a{ background: var(--b1-soft); border-color: var(--b1-line); }
+.split-card.b{ background: var(--violet-soft); border-color: var(--violet-line); }
+.split-label{ font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.06em; margin-bottom:8px; display:flex; align-items:center; gap:6px; }
+.split-card.a .split-label{ color: var(--b1); }
+.split-card.b .split-label{ color: var(--violet); }
+.split-body{ font-size:14px; color: var(--ink-soft); }
+.split-body strong{ color: var(--ink); }
+.split-example{ font-family: var(--f-display); font-style:italic; font-size:15.5px; color: var(--ink); margin-top:10px; }
+
+/* ---------- ALTERNATIVAS ---------- */
+.alt-list{ display:flex; flex-direction:column; gap:10px; margin-top:4px; }
+.alt-item{
+  display:flex; align-items:center; gap:14px; flex-wrap:wrap; background: var(--paper-raised); border:1px solid var(--line);
+  border-radius: var(--r-md); padding:13px 16px; transition: border-color .15s ease;
+}
+.alt-item:hover{ border-color: var(--alert-line); }
+.alt-num{
+  font-family: var(--f-data); font-size:11px; color: var(--ink-faint); flex:none; width:18px;
+}
+.alt-main{ display:flex; flex-direction:column; flex:1; min-width:200px; }
+.alt-text{ font-size:15px; color: var(--ink); }
+.alt-tag{
+  flex:none; margin-left:auto; font-family: var(--f-data); font-size:10.5px; text-transform:uppercase;
+  letter-spacing:.04em; color: var(--alert); background: var(--alert-soft); padding:3px 9px; border-radius:999px;
+}
+
+/* ---------- VERBOS EN PASADO (flip cards) ---------- */
+.prep-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(210px,1fr)); gap:12px; margin-top:4px; }
+.prep-card{
+  background: var(--paper-raised); border:1px solid var(--b1-line); border-radius: var(--r-md);
+  padding:16px 18px; cursor:pointer; min-height:96px; display:flex; flex-direction:column;
+  justify-content:center; transition: border-color .15s ease, transform .1s ease;
+}
+.prep-card:hover{ border-color: var(--b1); transform: translateY(-1px); }
+.prep-card:focus-visible{ outline:2px solid var(--b1); outline-offset:2px; }
+.prep-verb{ font-family: var(--f-display); font-weight:600; font-size:17px; color: var(--ink); }
+.prep-verb .prep{ color: var(--b1); font-style:italic; }
+.prep-example{ display:none; font-family: var(--f-body); font-size:13px; color: var(--ink-soft); margin-top:8px; line-height:1.5; }
+.prep-example .en{ margin-top:6px; }
+.prep-card.flipped .prep-example{ display:block; }
+.prep-card.flipped{ background: var(--b1-soft); border-color: var(--b1); }
+.prep-hint{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin:12px 2px 0; }
+
+/* ---------- FÓRMULAS NATURALES ---------- */
+.formula-grid{ display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:4px; }
+@media(max-width:640px){ .formula-grid{ grid-template-columns:1fr; } }
+.formula-card{
+  background: var(--paper-raised); border:1px solid var(--b2-line); border-radius: var(--r-md);
+  padding:18px 20px;
+}
+.formula-card .f-label{ font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.05em; color: var(--b2); margin-bottom:8px; }
+.formula-card .f-text{ font-family: var(--f-display); font-size:16px; color: var(--ink); font-style:italic; }
+
+/* ---------- RESCUE PHRASES (muletillas) ---------- */
+.rescue-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:12px; margin-top:4px; }
+.rescue-card{
+  background: var(--paper-raised); border:1px solid var(--family-line); border-radius: var(--r-md);
+  padding:16px 18px;
+}
+.rescue-phrase{ font-family: var(--f-display); font-weight:600; font-style:italic; font-size:16px; color: var(--family); margin-bottom:6px; }
+.rescue-use{ font-size:13px; color: var(--ink-soft); }
+.rescue-use .en{ margin-top:8px; }
+
+/* ---------- REGISTER TABLE ---------- */
+.register-table{ width:100%; border-collapse:collapse; margin-top:4px; }
+.register-table th{
+  font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.05em;
+  color: var(--ink-faint); text-align:left; padding:0 10px 10px; border-bottom:1px solid var(--line);
+}
+.register-table td{ padding:12px 10px; border-bottom:1px dashed var(--line); font-size:14px; vertical-align:top; }
+.register-table tr:last-child td{ border-bottom:none; }
+.register-table .reg-tag{ font-family: var(--f-data); font-size:11px; text-transform:uppercase; color: var(--alert); white-space:nowrap; }
+
+/* ---------- MINI-ROLEPLAY ---------- */
+.roleplay-panel{ background: var(--b1-soft); border:1px solid var(--b1-line); border-radius: var(--r-lg); padding:26px 28px; }
+.roleplay-panel .block-num{ background: var(--b1); }
+.dialogue{ display:flex; flex-direction:column; gap:14px; }
+.line{ display:flex; gap:12px; align-items:flex-start; }
+.line-avatar{
+  flex:none; width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  font-family: var(--f-display); font-weight:600; font-size:14px; color:#fff;
+}
+.line.friend .line-avatar{ background: var(--ink-faint); }
+.line.you .line-avatar{ background: var(--b1); }
+.line-body{ flex:1; }
+.line-name{ font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.05em; color: var(--ink-faint); margin:0 0 4px; }
+.line-bubble{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:12px 14px; font-size:14.5px; color: var(--ink);
+}
+.line.you .line-bubble{ background:#fff; border-color: var(--b1-line); }
+.line-input{
+  width:100%; font-family: var(--f-body); font-size:14.5px; color: var(--ink);
+  background:#fff; border:1px solid var(--b1-line); border-radius: var(--r-sm);
+  padding:10px 12px; resize:vertical; min-height:44px; margin-top:2px;
+}
+.line-input:focus{ outline:none; border-color: var(--b1); }
+.line-hint{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin-top:5px; }
+.roleplay-tip{
+  margin-top:22px; padding:14px 16px; background: var(--paper-raised); border:1px solid var(--b1-line);
+  border-radius: var(--r-md); font-size:13.5px; color: var(--ink-soft);
+}
+.roleplay-tip strong{ color: var(--ink); }
+
+/* ---------- VALIDATION BLOCK ---------- */
+.validate-panel{ background: var(--alert-soft); border:1px solid var(--alert-line); }
+.validate-panel .block-num{ background: var(--alert); }
+.validate-q{ display:flex; flex-direction:column; gap:10px; margin-top:4px; }
+.validate-item{
+  background: var(--paper-raised); border:1px solid var(--alert-line); border-radius: var(--r-md);
+  padding:14px 16px;
+}
+.validate-item .vq{ font-size:14.5px; color: var(--ink); margin-bottom:8px; }
+.validate-item .vq .en{ margin-top:4px; }
+.validate-options{ display:flex; gap:8px; flex-wrap:wrap; }
+.validate-btn{
+  font-family: var(--f-body); font-size:13px; color: var(--ink); background: var(--paper-alt);
+  border:1px solid var(--line-strong); padding:7px 14px; border-radius:999px; cursor:pointer;
+  transition: all .15s ease;
+}
+.validate-btn:hover{ border-color: var(--alert); }
+.validate-btn.selected{ background: var(--alert); color:#fff; border-color: var(--alert); }
+.validate-summary{
+  margin-top:16px; padding:14px 16px; background: var(--paper-raised); border:1px dashed var(--alert-line);
+  border-radius: var(--r-md); font-size:13.5px; color: var(--ink-soft); display:none;
+}
+.validate-summary.show{ display:block; }
+.validate-summary strong{ color: var(--ink); }
+
+/* ---------- CHOOSE YOUR WORDS ---------- */
+.choose-panel{ background: var(--paper-raised); border:1px solid var(--line); }
+.choose-intro{ font-size:14px; color: var(--ink-soft); margin:0 0 18px; }
+.choose-grid{ display:flex; flex-direction:column; gap:10px; }
+.choose-item{
+  display:flex; align-items:center; gap:14px; padding:12px 14px; border:1px solid var(--line);
+  border-radius: var(--r-md); cursor:pointer; transition: all .15s ease; background: var(--paper-raised);
+}
+.choose-item:hover{ border-color: var(--alert-line); background: var(--alert-soft); }
+.choose-item.picked{ border-color: var(--alert); background: var(--alert-soft); }
+.choose-checkbox{
+  flex:none; width:20px; height:20px; border-radius:6px; border:1.5px solid var(--line-strong);
+  display:flex; align-items:center; justify-content:center; font-size:13px; color:#fff;
+  background: var(--paper-raised);
+}
+.choose-item.picked .choose-checkbox{ background: var(--alert); border-color: var(--alert); }
+.choose-text{ font-size:14.5px; color: var(--ink); flex:1; }
+.choose-footer{ display:flex; align-items:center; justify-content:space-between; margin-top:16px; }
+#choose-count{ font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); }
+.btn-primary{
+  font-family: var(--f-body); font-weight:600; font-size:14px; color:#fff; background: var(--alert);
+  border:none; padding:11px 22px; border-radius:999px; cursor:pointer; transition: transform .1s ease;
+}
+.btn-primary:hover{ transform: translateY(-1px); }
+textarea#final-summary{
+  width:100%; min-height:100px; font-family: var(--f-body); font-size:14.5px; color: var(--ink);
+  background: var(--paper-alt); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:14px 16px; resize:vertical; margin-top:16px; display:none;
+}
+textarea#final-summary:focus{ outline:none; border-color: var(--alert); }
+
+footer{ max-width:760px; margin:0 auto; padding:0 24px 60px; font-family: var(--f-data); font-size:12px; color: var(--ink-faint); text-align:center; }
+
+/* ---------- LANG TOGGLE ---------- */
+.lang-toggle{
+  position:fixed; top:18px; right:18px; z-index:50;
+  display:flex; align-items:center; gap:8px;
+  background: var(--paper-raised); border:1px solid var(--line-strong); border-radius:999px;
+  padding:6px 8px; box-shadow: var(--shadow-1);
+  font-family: var(--f-data); font-size:11px;
+}
+.lang-toggle span{ color: var(--ink-faint); padding:0 2px; }
+.lang-toggle span.active{ color: var(--alert); font-weight:700; }
+.lang-switch{
+  position:relative; width:38px; height:20px; border-radius:999px; background: var(--paper-alt);
+  border:1px solid var(--line-strong); cursor:pointer; flex:none;
+}
+.lang-switch::after{
+  content:""; position:absolute; top:1px; left:1px; width:16px; height:16px; border-radius:50%;
+  background: var(--alert); transition: transform .15s ease;
+}
+body.show-en .lang-switch::after{ transform: translateX(18px); }
+
+.en{
+  display:none;
+  font-family: var(--f-body); font-size:0.92em; color: var(--ink-faint);
+  font-style:italic; margin-top:4px;
+}
+body.show-en .en{ display:block; }
+body.show-en .en.inline{ display:inline; margin-top:0; margin-left:6px; }
+.en::before{ content:"EN · "; font-family: var(--f-data); font-style:normal; font-size:0.85em; color: var(--alert); }
+
+</style>
+</head>
+<body>
+
+<div class="lang-toggle">
+  <span id="lang-es-label" class="active">ES</span>
+  <div class="lang-switch" id="lang-switch" role="button" tabindex="0" aria-label="Mostrar traducción al inglés"></div>
+  <span id="lang-en-label">EN</span>
+</div>
+
+<div class="exploratory-banner">
+  <div class="exploratory-inner">
+    <div class="ex-icon">🔴</div>
+    <div class="ex-text">
+      <strong>Mini exploratorio — sin evidencia documentada en clases 1–3.</strong> A diferencia del Mini 05 (que al menos tenía vocabulario emocional trabajado en clase), este documento parte de una inferencia pedagógica: ningún Mini actual convierte la narración espontánea de un evento pasado, y es razonable pensar que en algún momento aparecerá. Pero eso no es lo mismo que un bloqueo documentado. Úsalo solo como sonda — la primera vez que Lisa cuente algo que le pasó de verdad, compara la escena real con la de aquí y anótalo en el bloque de validación.
+      <span class="en">Exploratory Mini — no documented evidence in classes 1–3. Unlike Mini 05 (which at least had emotional vocabulary already worked in class), this document starts from a pedagogical inference: no current Mini covers spontaneous narration of a past event, and it's reasonable to think it'll come up eventually. But that's not the same as a documented block. Use it only as a probe — the first time Lisa tells you something that actually happened, compare the real scene to this one and note it in the validation block.</span>
+    </div>
+  </div>
+</div>
+
+<header>
+  <p class="eyebrow"><span class="dot"></span>Expansion Pack · Mini · Exploratorio</p>
+  <h1>¿Qué <em>pasó?</em></h1>
+  <p class="lede">Hipótesis: los 4 Minis actuales viven en presente — decir quién eres, qué haces, cómo estás. Pero contar algo que ya pasó exige un tiempo verbal nuevo (pretérito/imperfecto) y una habilidad distinta: no responder una pregunta fija, sino construir una historia sobre la marcha. Este Mini prueba si ese salto produce un bloqueo real.
+    <span class="en">Hypothesis: the 4 current Minis all live in the present — saying who you are, what you do, how you are. But telling something that already happened requires a new verb tense (preterite/imperfect) and a different skill: not answering a fixed question, but building a story on the fly. This Mini tests whether that jump produces a real block.</span>
+  </p>
+
+  <div class="meta-row">
+    <div>Contexto <strong>Cliente de boda, vecino, amiga — algo salió mal o bien</strong></div>
+    <div>Bloqueo <strong>"¿Qué pasó?" — narrar un evento en pasado, sin guion</strong></div>
+    <div>Duración <strong>~20 min</strong></div>
+  </div>
+
+  <div class="structure-strip">
+    <div class="structure-cell"><div class="s-icon">🧊</div><div class="s-label">El momento</div></div>
+    <div class="structure-cell"><div class="s-icon">🚪</div><div class="s-label">Salida inmediata</div></div>
+    <div class="structure-cell"><div class="s-icon">⚖️</div><div class="s-label">Pretérito / imperfecto</div></div>
+    <div class="structure-cell"><div class="s-icon">🧩</div><div class="s-label">Verbos clave</div></div>
+    <div class="structure-cell"><div class="s-icon">🔗</div><div class="s-label">Conectores de historia</div></div>
+  </div>
+  <div class="structure-strip row2">
+    <div class="structure-cell"><div class="s-icon">🆘</div><div class="s-label">Rescate</div></div>
+    <div class="structure-cell"><div class="s-icon">🎚️</div><div class="s-label">Registro</div></div>
+    <div class="structure-cell"><div class="s-icon">🎬</div><div class="s-label">Roleplay</div></div>
+    <div class="structure-cell"><div class="s-icon">🔍</div><div class="s-label">Validar</div></div>
+    <div class="structure-cell"><div class="s-icon">✅</div><div class="s-label">Tus palabras</div></div>
+  </div>
+</header>
+
+<main>
+
+  <!-- ============ 1. EL MOMENTO ============ -->
+  <section class="block">
+    <div class="block-head">
+      <div class="block-num">1</div>
+      <h2>El momento</h2>
+      <div class="time-tag">bloqueo hipotético</div>
+    </div>
+    <div class="scene-panel">
+      <div class="scene-setup">
+        <div class="scene-icon">📞</div>
+        <div class="scene-text">Un cliente de boda te llama preocupado — algo ha cambiado desde la última vez que hablasteis. Quiere que le cuentes exactamente qué ocurrió.
+          <span class="en">A wedding client calls you worried — something has changed since you last spoke. They want you to tell them exactly what happened.</span>
+        </div>
+      </div>
+      <div class="blocked-line">
+        <span class="who">Cliente</span>
+        "Oye, ¿qué pasó con el florista? Me dijeron que hubo un problema."
+        <span class="en">"Hey, what happened with the florist? I heard there was a problem."</span>
+      </div>
+      <p class="scene-text" style="margin-top:16px;">Hasta ahora, cada Mini te prepara para <strong>describir cómo son las cosas ahora</strong>: tu trabajo, tu estado, tu origen. Pero aquí no te piden una foto fija — te piden una secuencia: qué pasó primero, qué pasó después, por qué. Y en español eso no es solo cambiar de tiempo verbal (presente → pasado); es elegir entre <strong>dos pasados distintos</strong> según si estás contando la acción o el fondo de la escena.
+        <span class="en">Until now, every Mini prepares you to <strong>describe how things are right now</strong>: your job, your state, your origin. But here you're not being asked for a snapshot — you're being asked for a sequence: what happened first, what happened next, why. And in Spanish that's not just switching tense (present → past); it's choosing between <strong>two different pasts</strong> depending on whether you're narrating the action or the background of the scene.</span>
+      </p>
+      <p class="scene-text" style="margin-top:12px;">Este momento (hipotético) podría aparecer en más sitios: contarle a una amiga qué tal fue el fin de semana, explicarle al vecino por qué llegaste tarde, contarle a un cliente por qué se retrasó algo. En todos esos casos, la primera palabra sale — pero sostener la historia entera, con los verbos cambiando de tiempo según el papel que juegan, es un terreno que ningún Mini actual pisa.
+        <span class="en">This (hypothetical) moment could show up in more places: telling a friend how the weekend went, explaining to the neighbour why you were late, telling a client why something was delayed. In all these cases, the first word comes out — but sustaining the whole story, with verbs changing tense depending on the role they play, is ground no current Mini covers.</span>
+      </p>
+      <div class="scene-setup" style="margin-top:16px; margin-bottom:0;">
+        <div class="scene-icon">🧠</div>
+        <div class="scene-text">Por qué podría ser un bloqueo distinto: en inglés "the florist cancelled while we were finalizing the flowers" usa el mismo tipo de pasado para las dos partes. En español necesitas <strong>canceló</strong> (algo que ocurrió, con principio y fin) y <strong>estábamos</strong> (algo que servía de fondo, sin principio ni fin marcados) — dos formas distintas para lo que en inglés es una sola.
+          <span class="en">Why this might be a different block: in English "the florist cancelled while we were finalizing the flowers" uses the same kind of past for both parts. In Spanish you need <strong>canceló</strong> (something that happened, with a clear start and end) and <strong>estábamos</strong> (something serving as background, without a marked start or end) — two different forms for what's one in English.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 2. LA SALIDA INMEDIATA ============ -->
+  <section class="block">
+    <div class="block-head">
+      <div class="block-num">2</div>
+      <h2>La salida inmediata</h2>
+    </div>
+    <div class="panel exit-panel">
+      <div class="exit-line">Pues <span class="accent">resulta que</span> el florista <span class="accent">canceló</span> — <span class="accent">estábamos</span> confirmando los detalles y, de repente, nos dijo que no podía.
+        <span class="en">Well, <span class="accent">it turns out</span> the florist <span class="accent">cancelled</span> — <span class="accent">we were</span> confirming the details and, suddenly, they told us they couldn't do it.</span>
+      </div>
+      <p class="exit-note">Esta frase sola ya resuelve el momento: <strong>resulta que</strong> anuncia que viene una historia, <strong>canceló</strong> es la acción concreta (pretérito), y <strong>estábamos confirmando</strong> es el fondo sobre el que ocurrió (imperfecto). No necesitas dominar toda la gramática — necesitas esta plantilla de tres piezas.
+        <span class="en">This sentence alone already solves the moment: <strong>resulta que</strong> announces a story is coming, <strong>canceló</strong> is the specific action (preterite), and <strong>estábamos confirmando</strong> is the background it happened against (imperfect). You don't need to master all the grammar — you need this three-piece template.</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ 3. PRETÉRITO VS IMPERFECTO ============ -->
+  <section class="block">
+    <div class="block-head">
+      <div class="block-num">3</div>
+      <h2>Pretérito o imperfecto</h2>
+      <div class="time-tag">la decisión que no existía en los otros Minis</div>
+    </div>
+    <div class="panel">
+      <p style="font-size:14px; color:var(--ink-soft); margin:0 0 16px;">No hace falta la regla completa — hace falta una pregunta rápida que puedas hacerte en el momento.
+        <span class="en">You don't need the full rule — you need a quick question you can ask yourself in the moment.</span>
+      </p>
+      <div class="split-grid">
+        <div class="split-card a">
+          <div class="split-label">⚡ Pretérito — la acción concreta</div>
+          <div class="split-body">Pregúntate: <strong>¿Esto pasó una vez, con principio y fin claros?</strong> Si sí, es pretérito.
+            <span class="en">Ask yourself: <strong>Did this happen once, with a clear start and end?</strong> If yes, it's preterite.</span>
+          </div>
+          <div class="split-example">El florista canceló. Llegué tarde. Llamé al cliente.</div>
+        </div>
+        <div class="split-card b">
+          <div class="split-label">🌫️ Imperfecto — el fondo de la escena</div>
+          <div class="split-body">Pregúntate: <strong>¿Esto describe cómo eran las cosas mientras pasaba otra cosa?</strong> Si sí, es imperfecto.
+            <span class="en">Ask yourself: <strong>Does this describe how things were while something else was happening?</strong> If yes, it's imperfect.</span>
+          </div>
+          <div class="split-example">Estábamos confirmando los detalles. Hacía mucho calor. Todo iba bien.</div>
+        </div>
+      </div>
+      <p class="exit-note" style="margin-top:18px;">La mayoría de historias reales mezclan los dos: el imperfecto pinta la escena, el pretérito la interrumpe con lo que pasó. "Estábamos cenando (imperfecto) cuando llamó el florista (pretérito)."
+        <span class="en">Most real stories mix both: the imperfect paints the scene, the preterite interrupts it with what happened. "We were having dinner (imperfect) when the florist called (preterite)."</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ 4. VERBOS CLAVE ============ -->
+  <section class="block">
+    <div class="block-head">
+      <div class="block-num">4</div>
+      <h2>Verbos clave para narrar</h2>
+      <div class="time-tag">las piezas que más vas a necesitar</div>
+    </div>
+    <div class="panel">
+      <p style="font-size:14px; color:var(--ink-soft); margin:0 0 16px;">Ocho verbos, en las dos formas, con un ejemplo de cuándo usar cada una. Toca la tarjeta para ver el contraste.
+        <span class="en">Eight verbs, in both forms, with an example of when to use each. Tap the card to see the contrast.</span>
+      </p>
+      <div class="prep-grid" id="prep-grid"></div>
+      <p class="prep-hint">Toca cada tarjeta para ver pretérito e imperfecto uno al lado del otro.</p>
+    </div>
+  </section>
+
+  <!-- ============ 5. CONECTORES DE HISTORIA ============ -->
+  <section class="block">
+    <div class="block-head">
+      <div class="block-num">5</div>
+      <h2>Conectores de historia</h2>
+      <div class="time-tag">para que no suene a lista de frases sueltas</div>
+    </div>
+    <div class="panel">
+      <div class="formula-grid">
+        <div class="formula-card"><div class="f-label">Para empezar</div><div class="f-text">"Resulta que..."</div><span class="en">"It turns out that..."</span></div>
+        <div class="formula-card"><div class="f-label">Para situar el fondo</div><div class="f-text">"Estábamos... cuando de repente..."</div><span class="en">"We were... when suddenly..."</span></div>
+        <div class="formula-card"><div class="f-label">Para la siguiente acción</div><div class="f-text">"Entonces..."</div><span class="en">"Then..."</span></div>
+        <div class="formula-card"><div class="f-label">Para añadir otro paso</div><div class="f-text">"Al final..."</div><span class="en">"In the end..."</span></div>
+        <div class="formula-card"><div class="f-label">Para dar la razón</div><div class="f-text">"Fue porque..."</div><span class="en">"It was because..."</span></div>
+        <div class="formula-card"><div class="f-label">Para cerrar la historia</div><div class="f-text">"Bueno, al final se solucionó."</div><span class="en">"Well, in the end it got sorted out."</span></div>
+      </div>
+      <p class="exit-note" style="margin-top:16px;">Con estos seis conectores puedes sostener una historia entera aunque los verbos concretos te fallen — son el esqueleto sobre el que cuelgas la acción.
+        <span class="en">With these six connectors you can hold up a whole story even if the specific verbs fail you — they're the skeleton you hang the action on.</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ 6. FRASES DE RESCATE ============ -->
+  <section class="block">
+    <div class="block-head">
+      <div class="block-num">6</div>
+      <h2>Frases de rescate</h2>
+      <div class="time-tag">para cuando dudas entre los dos pasados</div>
+    </div>
+    <div class="panel">
+      <div class="rescue-grid">
+        <div class="rescue-card"><div class="rescue-phrase">A ver, ¿cómo era...?</div><div class="rescue-use">Para ganar tiempo mientras decides si necesitas pretérito o imperfecto.<span class="en">To buy time while you decide if you need preterite or imperfect.</span></div></div>
+        <div class="rescue-card"><div class="rescue-phrase">Bueno, el caso es que...</div><div class="rescue-use">Para retomar el hilo si te has perdido a mitad de la historia.<span class="en">To pick the thread back up if you've lost it mid-story.</span></div></div>
+        <div class="rescue-card"><div class="rescue-phrase">No sé si me explico bien, pero...</div><div class="rescue-use">Para seguir aunque no estés segura de haber usado el tiempo correcto.<span class="en">To continue even if you're not sure you used the right tense.</span></div></div>
+        <div class="rescue-card"><div class="rescue-phrase">Total, que...</div><div class="rescue-use">Para saltar al resultado si te has enredado en los detalles.<span class="en">To jump to the result if you've gotten tangled in details.</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 7. REGISTRO ============ -->
+  <section class="block">
+    <div class="block-head">
+      <div class="block-num">7</div>
+      <h2>Ajustar el registro</h2>
+      <div class="time-tag">contar lo mismo, distinto peso</div>
+    </div>
+    <div class="panel">
+      <table class="register-table">
+        <tr><th>Contexto</th><th>Cómo sonaría</th></tr>
+        <tr><td class="reg-tag">amiga / cercano</td><td>Uf, no te lo vas a creer, el florista canceló de repente. Estábamos ya casi cerrando todo.<span class="en">Ugh, you won't believe it, the florist cancelled out of nowhere. We were already almost done closing everything.</span></td></tr>
+        <tr><td class="reg-tag">cliente / profesional</td><td>Le cuento: mientras confirmábamos los últimos detalles, el florista nos comunicó que no podía continuar. Ya hemos encontrado una alternativa.<span class="en">Let me explain: while we were confirming the last details, the florist informed us they couldn't continue. We've already found an alternative.</span></td></tr>
+        <tr><td class="reg-tag">vecino / de pasada</td><td>Nada, un lío con un proveedor. Al final se solucionó.<span class="en">Nothing, a mess with a vendor. It got sorted out in the end.</span></td></tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============ 8. MINI-ROLEPLAY ============ -->
+  <section class="block">
+    <div class="block-head">
+      <div class="block-num">8</div>
+      <h2>Mini-roleplay</h2>
+      <div class="time-tag">la llamada del cliente</div>
+    </div>
+    <div class="roleplay-panel">
+      <div class="scene-setup">
+        <div class="scene-icon">📞</div>
+        <div class="scene-text"><strong>Escena:</strong> el cliente sigue al teléfono, quiere la historia completa. Usa lo de arriba — no te preocupes por acertar siempre pretérito/imperfecto, preocúpate por terminar la historia.
+          <span class="en"><strong>Scene:</strong> the client is still on the phone, wants the full story. Use what's above — don't worry about always getting preterite/imperfect right, worry about finishing the story.</span>
+        </div>
+      </div>
+      <div class="dialogue">
+        <div class="line friend">
+          <div class="line-avatar">C</div>
+          <div class="line-body">
+            <div class="line-name">Cliente</div>
+            <div class="line-bubble">¿Qué pasó con el florista? Me dijeron que hubo un problema.<span class="en">What happened with the florist? I heard there was a problem.</span></div>
+          </div>
+        </div>
+        <div class="line you">
+          <div class="line-avatar">L</div>
+          <div class="line-body">
+            <div class="line-name">Tú</div>
+            <textarea class="line-input" placeholder="Empieza con 'resulta que...' y usa pretérito para la acción"></textarea>
+            <div class="line-hint">usa al menos un verbo en pretérito del bloque 4</div>
+          </div>
+        </div>
+        <div class="line friend">
+          <div class="line-avatar">C</div>
+          <div class="line-body">
+            <div class="line-name">Cliente</div>
+            <div class="line-bubble">Vaya. ¿Y qué estabais haciendo cuando pasó eso?<span class="en">Wow. And what were you doing when that happened?</span></div>
+          </div>
+        </div>
+        <div class="line you">
+          <div class="line-avatar">L</div>
+          <div class="line-body">
+            <div class="line-name">Tú</div>
+            <textarea class="line-input" placeholder="Describe el fondo con imperfecto: estábamos... / hacía..."></textarea>
+            <div class="line-hint">esta pregunta pide específicamente imperfecto — fíjate si te sale solo</div>
+          </div>
+        </div>
+        <div class="line friend">
+          <div class="line-avatar">C</div>
+          <div class="line-body">
+            <div class="line-name">Cliente</div>
+            <div class="line-bubble">¿Y cómo se solucionó al final?<span class="en">And how did it get resolved in the end?</span></div>
+          </div>
+        </div>
+        <div class="line you">
+          <div class="line-avatar">L</div>
+          <div class="line-body">
+            <div class="line-name">Tú</div>
+            <textarea class="line-input" placeholder="Cierra la historia: al final... / total, que..."></textarea>
+            <div class="line-hint">usa un conector de cierre del bloque 5</div>
+          </div>
+        </div>
+      </div>
+      <div class="roleplay-tip"><strong>Truco:</strong> si dudas entre pretérito e imperfecto en tiempo real, no pares la frase por eso — sigue con el que te salga primero y corrígete después si hace falta. Una historia con un tiempo verbal "mal elegido" pero completa comunica mejor que una historia perfecta que se corta.
+        <span class="en"><strong>Trick:</strong> if you hesitate between preterite and imperfect in real time, don't stop the sentence for it — go with whichever comes out first and correct yourself later if needed. A story with a "wrong" tense choice but complete communicates better than a perfect story that cuts off.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 9. VALIDAR CON LISA ============ -->
+  <section class="block">
+    <div class="block-head">
+      <div class="block-num">9</div>
+      <h2>Validar la hipótesis</h2>
+      <div class="time-tag">esto decide si el Mini sigue existiendo</div>
+    </div>
+    <div class="panel validate-panel">
+      <p style="font-size:14px; color:var(--ink-soft); margin:0 0 16px;">Este Mini parte de una inferencia, no de un bloqueo observado. Después del roleplay, responde con sinceridad — el objetivo es decidir si merece convertirse en material confirmado o si era una hipótesis equivocada.
+        <span class="en">This Mini starts from an inference, not an observed block. After the roleplay, answer honestly — the goal is to decide whether it deserves to become confirmed material or was a wrong hypothesis.</span>
+      </p>
+      <div class="validate-q">
+        <div class="validate-item">
+          <div class="vq">¿Te costó más construir la historia en sí (qué contar y en qué orden) o elegir entre pretérito e imperfecto?
+            <span class="en">Was it harder to build the story itself (what to tell and in what order) or to choose between preterite and imperfect?</span>
+          </div>
+          <div class="validate-options">
+            <button class="validate-btn" data-q="1" data-v="historia">La historia en sí</button>
+            <button class="validate-btn" data-q="1" data-v="verbo">Elegir el tiempo verbal</button>
+            <button class="validate-btn" data-q="1" data-v="ambos">Los dos por igual</button>
+            <button class="validate-btn" data-q="1" data-v="ninguno">No me costó</button>
+          </div>
+        </div>
+        <div class="validate-item">
+          <div class="vq">¿Recuerdas alguna vez reciente en la que quisiste contar algo que pasó y no supiste cómo empezar en español?
+            <span class="en">Do you remember a recent time you wanted to tell something that happened and didn't know how to start in Spanish?</span>
+          </div>
+          <div class="validate-options">
+            <button class="validate-btn" data-q="2" data-v="si-claro">Sí, claramente</button>
+            <button class="validate-btn" data-q="2" data-v="tal-vez">Tal vez, no estoy segura</button>
+            <button class="validate-btn" data-q="2" data-v="no">No que recuerde</button>
+          </div>
+        </div>
+        <div class="validate-item">
+          <div class="vq">¿Este tipo de situación (narrar un evento pasado) aparece a menudo en tu vida real, o fue difícil imaginar cuándo la usarías?
+            <span class="en">Does this kind of situation (narrating a past event) come up often in your real life, or was it hard to imagine when you'd use it?</span>
+          </div>
+          <div class="validate-options">
+            <button class="validate-btn" data-q="3" data-v="a-menudo">Aparece a menudo</button>
+            <button class="validate-btn" data-q="3" data-v="a-veces">A veces</button>
+            <button class="validate-btn" data-q="3" data-v="dificil-imaginar">Me costó imaginarlo</button>
+          </div>
+        </div>
+      </div>
+      <div class="validate-summary" id="validate-summary"></div>
+    </div>
+  </section>
+
+  <!-- ============ 10. CHOOSE YOUR WORDS ============ -->
+  <section class="block">
+    <div class="block-head">
+      <div class="block-num">10</div>
+      <h2>Choose your words</h2>
+      <div class="time-tag">lo que te llevas</div>
+    </div>
+    <div class="panel choose-panel">
+      <p class="choose-intro">De las expresiones de abajo, marca las 5–8 que quieres tener listas la próxima vez que tengas que contar algo que pasó.
+        <span class="en">From the expressions below, mark the 5–8 you want ready next time you need to tell something that happened.</span>
+      </p>
+      <div class="choose-grid" id="choose-grid"></div>
+      <div class="choose-footer">
+        <span id="choose-count">0 seleccionadas</span>
+        <button class="btn-primary" id="build-summary">Construir mi resumen</button>
+      </div>
+      <textarea id="final-summary" placeholder="Aquí aparecerán tus expresiones elegidas — edítalas o combínalas como quieras."></textarea>
+    </div>
+  </section>
+
+</main>
+
+<footer>ESCOLAR · Expansion Pack Mini · Exploratorio — pendiente de validar</footer>
+
+<script>
+/* ---------- VERBOS CLAVE PARA NARRAR (pretérito vs imperfecto) ---------- */
+const VERBS = [
+  {verb:"pasar", prep:"", example:"Pretérito: Pasó algo raro con el florista. Imperfecto: No sabía qué estaba pasando.", en:"Preterite: Something weird happened with the florist. Imperfect: I didn't know what was happening."},
+  {verb:"estar", prep:"", example:"Pretérito: Estuvo mal comunicado. Imperfecto: Estábamos confirmando los detalles.", en:"Preterite: It was poorly communicated. Imperfect: We were confirming the details."},
+  {verb:"decir", prep:"", example:"Pretérito: Me dijo que no podía. Imperfecto: Siempre decía que todo iba bien.", en:"Preterite: They told me they couldn't. Imperfect: They always used to say everything was fine."},
+  {verb:"llamar", prep:"", example:"Pretérito: Me llamó de repente. Imperfecto: Solía llamar cada semana.", en:"Preterite: They called me suddenly. Imperfect: They used to call every week."},
+  {verb:"ir", prep:"", example:"Pretérito: Fui a hablar con el proveedor. Imperfecto: Iba a llamarle, pero se me olvidó.", en:"Preterite: I went to talk to the vendor. Imperfect: I was going to call them, but I forgot."},
+  {verb:"tener", prep:"", example:"Pretérito: Tuve que buscar otro florista. Imperfecto: Ya tenía un plan B pensado.", en:"Preterite: I had to look for another florist. Imperfect: I already had a backup plan in mind."},
+  {verb:"saber", prep:"", example:"Pretérito: Supe que había un problema por un mensaje. Imperfecto: No sabía nada hasta esa mañana.", en:"Preterite: I found out there was a problem through a message. Imperfect: I didn't know anything until that morning."},
+  {verb:"poder", prep:"", example:"Pretérito: Al final pude solucionarlo. Imperfecto: No podía creerlo cuando lo escuché.", en:"Preterite: In the end I was able to solve it. Imperfect: I couldn't believe it when I heard it."},
+];
+
+const grid = document.getElementById('prep-grid');
+VERBS.forEach(v=>{
+  const card = document.createElement('div');
+  card.className = 'prep-card';
+  card.tabIndex = 0;
+  card.innerHTML = `<div class="prep-verb">${v.verb}</div><div class="prep-example">${v.example}<span class="en">${v.en}</span></div>`;
+  const flip = ()=> card.classList.toggle('flipped');
+  card.addEventListener('click', flip);
+  card.addEventListener('keydown', e=>{ if(e.key==='Enter' || e.key===' '){ e.preventDefault(); flip(); } });
+  grid.appendChild(card);
+});
+
+/* ---------- CHOOSE YOUR WORDS ---------- */
+const CHOICES = [
+  {es:"Resulta que el florista canceló de repente.", en:"It turns out the florist cancelled out of nowhere."},
+  {es:"Estábamos confirmando los detalles cuando pasó.", en:"We were confirming the details when it happened."},
+  {es:"Entonces tuve que buscar otra opción rápido.", en:"So I had to find another option quickly."},
+  {es:"Al final se solucionó, aunque fue un lío.", en:"In the end it got sorted out, though it was a mess."},
+  {es:"Fue porque hubo un malentendido con las fechas.", en:"It was because there was a misunderstanding with the dates."},
+  {es:"Bueno, el caso es que todo salió bien al final.", en:"Well, the thing is everything worked out fine in the end."},
+  {es:"No te lo vas a creer, pero pasó algo increíble.", en:"You won't believe it, but something incredible happened."},
+  {es:"Total, que tuvimos que cambiar de proveedor.", en:"Anyway, we had to change vendors."},
+  {es:"A ver, ¿cómo era...? Ah, sí, ya me acuerdo.", en:"Let's see, how did it go...? Ah yes, I remember now."},
+  {es:"Le cuento: mientras confirmábamos, nos avisaron del problema.", en:"Let me explain: while we were confirming, they told us about the problem."},
+  {es:"Nada, un lío con un proveedor. Ya está solucionado.", en:"Nothing, a mess with a vendor. It's already sorted."},
+  {es:"No sé si me explico bien, pero fue todo muy rápido.", en:"I don't know if I'm explaining it well, but it was all very fast."},
+];
+
+const chooseGrid = document.getElementById('choose-grid');
+const countEl = document.getElementById('choose-count');
+const picked = new Set();
+
+CHOICES.forEach((choice, i)=>{
+  const item = document.createElement('div');
+  item.className = 'choose-item';
+  item.innerHTML = `<div class="choose-checkbox"></div><div class="choose-text">${choice.es}<span class="en">${choice.en}</span></div>`;
+  item.addEventListener('click', ()=>{
+    item.classList.toggle('picked');
+    if(picked.has(i)){ picked.delete(i); item.querySelector('.choose-checkbox').textContent=''; }
+    else{ picked.add(i); item.querySelector('.choose-checkbox').textContent='✓'; }
+    countEl.textContent = `${picked.size} seleccionada${picked.size===1?'':'s'}`;
+  });
+  chooseGrid.appendChild(item);
+});
+
+document.getElementById('build-summary').addEventListener('click', ()=>{
+  const ta = document.getElementById('final-summary');
+  if(picked.size === 0){
+    ta.style.display = 'block';
+    ta.value = 'Marca al menos una expresión arriba para construir tu resumen.';
+    return;
+  }
+  const ordered = [...picked].sort((a,b)=>a-b).map(i=>CHOICES[i].es);
+  ta.style.display = 'block';
+  ta.value = ordered.join(' ');
+});
+
+/* ---------- VALIDATE HYPOTHESIS ---------- */
+const answers = {};
+document.querySelectorAll('.validate-btn').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    const q = btn.dataset.q;
+    document.querySelectorAll(`.validate-btn[data-q="${q}"]`).forEach(b=>b.classList.remove('selected'));
+    btn.classList.add('selected');
+    answers[q] = btn.dataset.v;
+    renderSummary();
+  });
+});
+
+function renderSummary(){
+  const summary = document.getElementById('validate-summary');
+  if(Object.keys(answers).length < 3){ summary.classList.remove('show'); return; }
+  let verdict = '';
+  if((answers['1'] === 'verbo' || answers['1'] === 'ambos') && answers['2'] === 'si-claro' && answers['3'] === 'a-menudo'){
+    verdict = '🟢 Evidencia fuerte a favor de mantener y desarrollar este Mini — el bloqueo del tiempo verbal es real y la situación aparece con frecuencia.';
+  } else if(answers['1'] === 'historia' && answers['3'] !== 'dificil-imaginar'){
+    verdict = '🟡 El problema parece ser más de estructura narrativa que de gramática — considera si esto encaja mejor como bloque añadido a un Mini existente que como documento de pretérito/imperfecto independiente.';
+  } else if(answers['3'] === 'dificil-imaginar' || answers['2'] === 'no'){
+    verdict = '🔴 Poca evidencia de que esta situación sea real para Lisa ahora mismo — probablemente era una inferencia pedagógica sin correspondencia en su vida actual. Aparca este Mini hasta que aparezca evidencia real.';
+  } else {
+    verdict = '🟡 Resultado mixto — repite este roleplay con otra situación real (no la boda) antes de decidir si el Mini se queda.';
+  }
+  summary.innerHTML = `<strong>Lectura provisional:</strong> ${verdict}`;
+  summary.classList.add('show');
+}
+
+/* ---------- LANG TOGGLE (ES / EN) ---------- */
+const langSwitch = document.getElementById('lang-switch');
+const esLabel = document.getElementById('lang-es-label');
+const enLabel = document.getElementById('lang-en-label');
+const setLang = (showEn)=>{
+  document.body.classList.toggle('show-en', showEn);
+  esLabel.classList.toggle('active', !showEn);
+  enLabel.classList.toggle('active', showEn);
+  langSwitch.setAttribute('aria-pressed', String(showEn));
+};
+langSwitch.addEventListener('click', ()=> setLang(!document.body.classList.contains('show-en')));
+langSwitch.addEventListener('keydown', (e)=>{
+  if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); setLang(!document.body.classList.contains('show-en')); }
+});
+setLang(false);
+</script>
+
+</body>
+</html>

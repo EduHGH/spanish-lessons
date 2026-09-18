@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clase 15 · POR y PARA en la vida diaria en Xàtiva — Lisa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Space+Mono:wght@400;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+
+/* ╔══════════════════════════════════════════════════════════════╗
+   ║  ESCOLAR × NOTHING — sistema de diseño para clases de         ║
+   ║  español online. Papel cálido + roles semánticos de ESCOLAR,  ║
+   ║  leídos a través del lenguaje visual de Nothing OS 5.         ║
+   ║  Clase 15 · L3 El local y el catering · repaso POR/PARA        ║
+   ╚══════════════════════════════════════════════════════════════╝ */
+
+:root{
+  --paper:        #F4EFE4;
+  --paper-deep:   #EAE3D2;
+  --glass:        rgba(255,255,255,0.55);
+  --glass-strong: rgba(255,255,255,0.75);
+  --ink:          #23291F;
+  --ink-soft:     #565F52;
+  --ink-faint:    #8B9184;
+  --line:         rgba(35,41,31,0.10);
+  --line-strong:  rgba(35,41,31,0.20);
+
+  --b1:      #2F6FED;  --b1-soft: rgba(47,111,237,0.10);  --b1-line: rgba(47,111,237,0.30);
+  --b2:      #2E9E6B;  --b2-soft: rgba(46,158,107,0.10);  --b2-line: rgba(46,158,107,0.30);
+  --b3:      #DB8A2E;  --b3-soft: rgba(219,138,46,0.10);  --b3-line: rgba(219,138,46,0.30);
+  --family:  #B5502E;  --family-soft: rgba(181,80,46,0.10); --family-line: rgba(181,80,46,0.30);
+  --violet:  #7B4FC9;  --violet-soft: rgba(123,79,201,0.10); --violet-line: rgba(123,79,201,0.30);
+
+  --f-display: 'Fraunces', Georgia, serif;
+  --f-body:    'IBM Plex Sans', system-ui, sans-serif;
+  --f-data:    'Space Mono', ui-monospace, monospace;
+
+  --r-sm: 8px;
+  --r-md: 16px;
+  --r-lg: 24px;
+
+  --blur: 22px;
+  --shadow-1: 0 8px 32px rgba(35,41,31,0.06), 0 1px 2px rgba(35,41,31,0.05);
+}
+
+*{ box-sizing:border-box; }
+html{ scroll-behavior:smooth; }
+body{
+  margin:0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--f-body);
+  line-height:1.6;
+  position:relative;
+  min-height:100vh;
+}
+
+/* Glyph grid de fondo */
+body::before{
+  content:"";
+  position: fixed; inset:0;
+  background-image: radial-gradient(circle, rgba(35,41,31,0.09) 1.5px, transparent 1.5px);
+  background-size: 28px 28px;
+  pointer-events:none; z-index:0;
+}
+body::after{
+  content:"";
+  position: fixed; inset:0;
+  background: radial-gradient(ellipse 70% 50% at 50% -10%, var(--paper-deep), transparent 60%);
+  pointer-events:none; z-index:0;
+}
+
+/* Mesh gradient del sistema — sigue en naranja (b3), cierre de la línea L3-a */
+:root{ --mesh-color: var(--b3); }
+.mesh-bg{
+  content:""; position: fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden;
+}
+.mesh-bg::before, .mesh-bg::after, .mesh-bg > .mesh-blob{
+  content:""; position:absolute; filter: blur(46px);
+  background: radial-gradient(circle, var(--mesh-color), transparent 70%);
+  animation: mesh-drift 22s ease-in-out infinite alternate;
+}
+.mesh-bg::before{ width:55%; height:75%; left:-12%; top:-12%; opacity:0.16; animation-delay:0s; }
+.mesh-bg::after{ width:60%; height:80%; right:-15%; top:-8%; opacity:0.13; animation-delay:-7s; }
+.mesh-bg > .mesh-blob{ width:45%; height:55%; left:22%; bottom:-15%; opacity:0.11; animation-delay:-14s; }
+@keyframes mesh-drift{
+  0%   { transform: translate(0,0) scale(1); }
+  50%  { transform: translate(3%,-2%) scale(1.05); }
+  100% { transform: translate(-2%,3%) scale(0.98); }
+}
+@media (prefers-reduced-motion: reduce){
+  .mesh-bg::before, .mesh-bg::after, .mesh-bg > .mesh-blob{ animation: none; }
+}
+
+::selection{ background: var(--b3-soft); }
+
+header, main, footer{ position:relative; z-index:1; }
+
+/* ---------- HEADER ---------- */
+header{ padding:44px 24px 28px; max-width:760px; margin:0 auto; }
+.eyebrow{
+  font-family: var(--f-data); font-size:12px; letter-spacing:.14em;
+  text-transform:uppercase; color: var(--b3); margin:0 0 10px;
+  display:flex; align-items:center; gap:10px;
+}
+.eyebrow .dot{ width:6px; height:6px; border-radius:50%; background: var(--b3); }
+h1{
+  font-family: var(--f-display); font-weight:600;
+  font-size:clamp(30px,5.6vw,46px); line-height:1.08;
+  margin:0 0 14px; letter-spacing:-.01em;
+}
+h1 em{ font-style:italic; color: var(--b3); }
+.lede{ font-size:16px; color: var(--ink-soft); max-width:56ch; margin:0; }
+
+.meta-row{
+  display:flex; flex-wrap:wrap; gap:20px; margin-top:26px;
+  font-family: var(--f-data); font-size:12px; color: var(--ink-faint);
+}
+.meta-row strong{
+  display:block; color: var(--ink); font-size:14.5px; font-weight:500;
+  font-family: var(--f-display); margin-top:3px;
+}
+
+/* ---------- SECTIONS ---------- */
+main{ max-width:760px; margin:0 auto; padding:8px 24px 100px; }
+
+section.block{ margin-bottom:52px; }
+.block-head{ display:flex; align-items:baseline; gap:12px; margin-bottom:18px; }
+.time-tag{
+  font-family: var(--f-data); font-size:11px; color: var(--ink-faint);
+  background: var(--glass-strong); border:1px solid rgba(255,255,255,0.6); padding:3px 10px; border-radius:999px; margin-left:auto; flex:none;
+}
+.block-num{
+  font-family: var(--f-data); font-size:12px; color:#fff; background: var(--b3);
+  width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  flex:none;
+}
+.block-head h2{
+  font-family: var(--f-display); font-weight:500; font-style:italic; font-size:22px; margin:0;
+}
+.phase-label{
+  font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.08em;
+  color: var(--ink-faint); margin:0 0 8px; display:flex; align-items:center; gap:8px;
+}
+.phase-label .phase-icon{ font-size:14px; }
+
+.panel{
+  background: var(--glass);
+  backdrop-filter: blur(var(--blur)); -webkit-backdrop-filter: blur(var(--blur));
+  border:1px solid rgba(255,255,255,0.6); border-radius: var(--r-lg);
+  box-shadow: var(--shadow-1); padding:26px 28px;
+}
+
+.note{
+  margin-top:18px; padding:14px 16px;
+  background: linear-gradient(var(--b3-soft),var(--b3-soft)), var(--glass);
+  backdrop-filter: blur(12px);
+  border:1px solid var(--b3-line);
+  border-radius: var(--r-md); font-size:14px; color: var(--ink-soft);
+}
+.note strong{ color: var(--ink); }
+
+/* ---------- INTRO PANEL ---------- */
+.mic-panel{ background: var(--ink); color: var(--paper); border-radius: var(--r-lg); padding:24px 26px; display:flex; gap:20px; align-items:center; margin-bottom:8px; }
+.mic-icon{ flex:none; width:56px; height:56px; border-radius:50%; background: rgba(255,255,255,0.1); display:flex; align-items:center; justify-content:center; font-size:26px; }
+.mic-body{ flex:1; }
+.mic-title{ font-family: var(--f-display); font-weight:600; font-size:19px; margin:0 0 4px; color:#fff; }
+.mic-desc{ font-size:14px; color: rgba(251,247,238,0.75); margin:0; }
+
+/* ---------- VOCAB CARDS ---------- */
+.vocab-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(210px,1fr)); gap:12px; }
+.vocab-card{
+  background: var(--glass-strong); backdrop-filter: blur(14px);
+  border:1px solid rgba(255,255,255,0.6); border-radius: var(--r-md);
+  padding:16px 18px; cursor:pointer; transition: all .2s ease; position:relative; min-height:74px;
+}
+.vocab-card:hover{ border-color: var(--b3-line); transform: translateY(-1px); }
+.vocab-front{ font-family: var(--f-display); font-weight:500; font-size:16px; color: var(--ink); }
+.vocab-back{
+  font-size:13px; color: var(--ink-soft); margin-top:8px; display:none;
+  border-top:1px dashed var(--line); padding-top:8px;
+}
+.vocab-card.flipped .vocab-back{ display:block; }
+.vocab-card.flipped{ background: var(--b3-soft); border-color: var(--b3-line); }
+.vocab-card::after{
+  content:"toca para ver ejemplo"; position:absolute; bottom:8px; right:14px;
+  font-family: var(--f-data); font-size:10px; color: var(--ink-faint); opacity:.7;
+}
+.vocab-card.flipped::after{ content:""; }
+
+/* ---------- ROUTINE TRACK (repaso integrado) ---------- */
+.routine-track{ display:flex; flex-direction:column; gap:14px; }
+.routine-step{
+  background: var(--glass-strong); backdrop-filter: blur(14px);
+  border:1px solid var(--b3-line); border-radius: var(--r-md); padding:14px 16px;
+}
+.routine-connector{
+  font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.06em;
+  color: var(--b3); margin:0 0 6px;
+}
+.routine-text{ font-size:14.5px; color: var(--ink); margin:0; }
+.routine-text strong{ color: var(--b3); }
+
+/* ---------- VOCABULARIO LIMITADO (técnica, tarjetas con palabra tachada) ---------- */
+.technique-panel{
+  background: linear-gradient(var(--violet-soft),var(--violet-soft)), var(--glass);
+  backdrop-filter: blur(var(--blur));
+  border:1px solid var(--violet-line); border-radius: var(--r-lg); padding:26px 28px;
+}
+.technique-panel .block-num{ background: var(--violet); }
+.limitword-list{ display:flex; flex-direction:column; gap:10px; margin:14px 0 18px; }
+.limitword-item{
+  background: var(--glass-strong); backdrop-filter: blur(14px);
+  border:1px solid var(--violet-line); border-radius: var(--r-md); padding:14px 16px;
+}
+.limitword-missing{ font-family: var(--f-display); font-weight:600; font-size:15px; color: var(--violet); text-decoration: line-through; text-decoration-color: var(--family); margin:0 0 6px; }
+.limitword-hint{ font-size:13.5px; color: var(--ink-soft); margin:0; }
+.limitword-hint strong{ color: var(--ink); }
+.technique-practice textarea{
+  width:100%; min-height:110px; font-family: var(--f-body); font-size:14.5px; color: var(--ink);
+  background: var(--glass-strong); backdrop-filter: blur(12px); border:1px solid var(--violet-line); border-radius: var(--r-md);
+  padding:14px 16px; resize:vertical;
+}
+.technique-practice textarea:focus{ outline:none; border-color: var(--violet); }
+
+/* ---------- EXERCISES ---------- */
+.gap{
+  display:inline-block; min-width:64px; text-align:center; border-bottom:2px dotted var(--ink-faint);
+  color: var(--ink-faint); font-family: var(--f-data);
+}
+.exercise{ padding:16px 0; border-bottom:1px solid var(--line); }
+.exercise:last-child{ border-bottom:none; }
+.ex-sentence{ font-size:15px; margin-bottom:10px; }
+.ex-options{ display:flex; flex-wrap:wrap; gap:8px; }
+.opt-btn{
+  font-family: var(--f-body); font-size:14px; background: var(--glass-strong);
+  backdrop-filter: blur(10px);
+  border:1.5px solid var(--line-strong); color: var(--ink); padding:7px 16px; border-radius:999px;
+  cursor:pointer; transition: all .15s ease;
+}
+.opt-btn:hover{ border-color: var(--ink-faint); }
+.opt-btn.picked{ background: var(--b3-soft); border-color: var(--b3); color: var(--b3); }
+.opt-btn.correct{ background: var(--b2-soft); border-color: var(--b2); color: var(--b2); }
+.opt-btn.wrong{ background: var(--family-soft); border-color: var(--family); color: var(--family); }
+.opt-btn:disabled{ cursor:default; }
+
+.check-bar{
+  display:flex; align-items:center; justify-content:space-between; gap:16px;
+  margin-top:22px; padding-top:18px; border-top:1px dashed var(--line);
+}
+.btn-primary{
+  font-family: var(--f-data); font-weight:700; font-size:12.5px; text-transform:uppercase; letter-spacing:.05em;
+  color: var(--paper); background: var(--ink);
+  border:none; padding:12px 24px; border-radius:999px; cursor:pointer; transition: transform .1s ease;
+}
+.btn-primary:hover{ transform: translateY(-1px); }
+#score-text{ font-family: var(--f-data); font-size:13px; color: var(--ink-faint); }
+.btn-ghost{
+  font-family: var(--f-body); font-weight:600; font-size:13px; color: var(--ink-soft); background: rgba(255,255,255,0.4);
+  border:1.5px solid var(--line-strong); padding:9px 18px; border-radius:999px; cursor:pointer;
+}
+.btn-ghost:hover{ border-color: var(--ink-faint); }
+
+/* ---------- MONÓLOGO: cronómetro de 1 minuto ---------- */
+.monologo-panel{
+  background: linear-gradient(var(--family-soft),var(--family-soft)), var(--glass);
+  backdrop-filter: blur(var(--blur));
+  border:1px solid var(--family-line); border-radius: var(--r-lg); padding:26px 28px;
+}
+.monologo-panel .block-num{ background: var(--family); }
+.timer-display{
+  display:flex; align-items:center; justify-content:center; flex-direction:column; gap:6px;
+  background: var(--ink); color:#fff; border-radius: var(--r-lg); padding:28px 20px; margin:18px 0;
+}
+.timer-clock{ font-family: var(--f-data); font-size:44px; font-weight:700; letter-spacing:.02em; font-variant-numeric: tabular-nums; }
+.timer-clock.warning{ color: var(--family); }
+.timer-label{ font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.08em; color: rgba(255,255,255,0.6); }
+.timer-controls{ display:flex; gap:10px; justify-content:center; margin-top:6px; }
+.timer-btn{
+  font-family: var(--f-data); font-weight:700; font-size:12px; text-transform:uppercase; letter-spacing:.05em;
+  border:none; padding:11px 22px; border-radius:999px; cursor:pointer; transition: transform .1s ease;
+}
+.timer-btn:hover{ transform: translateY(-1px); }
+.timer-btn.start{ background: var(--family); color:#fff; }
+.timer-btn.reset{ background: rgba(255,255,255,0.5); color: var(--ink); border:1.5px solid var(--line-strong); }
+
+.prompt-cards{ display:grid; gap:10px; margin:18px 0; }
+.prompt-card{
+  background: var(--glass-strong); backdrop-filter: blur(14px);
+  border:1px solid var(--family-line); border-radius: var(--r-md);
+  padding:14px 16px; display:flex; gap:12px; align-items:flex-start;
+}
+.prompt-icon{ flex:none; font-size:18px; }
+.prompt-text{ font-size:14px; color: var(--ink); }
+.prompt-text strong{ color: var(--family); }
+
+.monologo-notes textarea{
+  width:100%; min-height:100px; font-family: var(--f-body); font-size:14.5px; color: var(--ink);
+  background: var(--glass-strong); backdrop-filter: blur(12px); border:1px solid var(--family-line); border-radius: var(--r-md);
+  padding:14px 16px; resize:vertical; margin-top:8px;
+}
+.monologo-notes textarea:focus{ outline:none; border-color: var(--family); }
+
+/* ---------- FINAL TASK ---------- */
+.task-panel{
+  background: linear-gradient(var(--family-soft),var(--family-soft)), var(--glass);
+  backdrop-filter: blur(var(--blur));
+  border:1px solid var(--family-line); border-radius: var(--r-lg); padding:26px 28px;
+}
+.task-panel .block-num{ background: var(--family); }
+textarea#final-task{
+  width:100%; min-height:130px; font-family: var(--f-body); font-size:15px; color: var(--ink);
+  background: var(--glass-strong); backdrop-filter: blur(12px); border:1px solid var(--family-line); border-radius: var(--r-md);
+  padding:14px 16px; resize:vertical; margin-top:14px;
+}
+textarea#final-task:focus{ outline:none; border-color: var(--family); }
+.task-footer{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:12px; flex-wrap:wrap; }
+#task-count{ font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); }
+.saved-flag{
+  font-family: var(--f-data); font-size:11.5px; color: var(--b2); opacity:0; transition: opacity .3s ease;
+}
+.saved-flag.show{ opacity:1; }
+.btn-secondary{
+  font-family: var(--f-data); font-weight:700; font-size:12px; text-transform:uppercase; letter-spacing:.05em;
+  color:#fff; background: var(--family); border:none; padding:10px 20px; border-radius:999px; cursor:pointer;
+}
+
+/* ---------- FOOTER ---------- */
+footer{
+  max-width:760px; margin:0 auto; padding:0 24px 60px; display:flex;
+  justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;
+  font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint);
+}
+footer a{ color: var(--b3); text-decoration:none; }
+footer a:hover{ text-decoration:underline; }
+
+@media (max-width:600px){
+  header{ padding:34px 18px 22px; }
+  main{ padding:8px 18px 90px; }
+  .panel, .technique-panel, .monologo-panel, .task-panel{ padding:20px 18px; }
+  .mic-panel{ flex-direction:column; text-align:center; }
+  .timer-clock{ font-size:36px; }
+}
+@media (prefers-reduced-motion: reduce){ *{ transition:none !important; } }
+</style>
+</head>
+<body>
+<!-- Mesh gradient del sistema — fijo, detrás de todo, 100% CSS -->
+<div class="mesh-bg">
+  <div class="mesh-blob"></div>
+</div>
+
+<header>
+  <p class="eyebrow"><span class="dot"></span>Clase 15 de 36 · L3 El local y el catering</p>
+  <h1>POR y PARA en la <em>vida diaria</em></h1>
+  <p class="lede">Última clase de esta línea. Hoy sales del trabajo y hablas de ti — el senderismo por la montaña de Xàtiva, el gimnasio, levantar pesas. El reto no es la gramática, que ya dominas: es contar un plan aunque te falte vocabulario técnico. Vas a practicar comunicarte con lo que tienes, sin bloquearte por una palabra que no sabes.</p>
+  <div class="meta-row">
+    <div>Duración<strong>150 min</strong></div>
+    <div>Gramática<strong>Repaso integrado POR/PARA</strong></div>
+    <div>Nivel<strong>B1</strong></div>
+  </div>
+</header>
+
+<main>
+
+  <section class="block">
+    <div class="mic-panel">
+      <div class="mic-icon">🥾</div>
+      <div class="mic-body">
+        <p class="mic-title">Hablar con lo que tienes</p>
+        <p class="mic-desc">Hoy vas a describir tu última ruta de senderismo o tu rutina en el gimnasio, y seguro que te falta alguna palabra técnica — el nombre de un sendero, un tipo de ejercicio, una parte del cuerpo concreta. La habilidad de hoy es seguir hablando con el vocabulario que ya tienes, en vez de pararte a buscar la palabra exacta. POR y PARA van a estar en casi cada frase, así que aprovechas para automatizarlos del todo.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">1</span><h2>Vocabulario de senderismo y gimnasio</h2><span class="time-tag">16 min</span></div>
+    <div class="vocab-grid" id="vocab-grid"></div>
+    <div class="note"><strong>Antes de seguir:</strong> lee las catorce en voz alta, tapa la columna de ejemplo y comprueba cuántas recuerdas de memoria. Repite dos veces la ronda completa antes de pasar al siguiente bloque.</div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">2</span><h2>Un plan de senderismo, con POR y PARA</h2><span class="time-tag">26 min</span></div>
+    <div class="panel">
+      <p style="margin:0 0 18px; font-size:14.5px; color:var(--ink-soft);">Mira cómo se combinan las dos preposiciones al contar un plan real — POR para el camino y el motivo, PARA para el objetivo y el horario.</p>
+      <div class="routine-track">
+        <div class="routine-step">
+          <p class="routine-connector">El plan</p>
+          <p class="routine-text">Este domingo voy <strong>para</strong> el castillo, pasando <strong>por</strong> el camino del bosque.</p>
+        </div>
+        <div class="routine-step">
+          <p class="routine-connector">El motivo</p>
+          <p class="routine-text">Voy <strong>por</strong> la mañana temprano, <strong>por</strong> el calor de agosto.</p>
+        </div>
+        <div class="routine-step">
+          <p class="routine-connector">La preparación</p>
+          <p class="routine-text">Compro agua extra <strong>para</strong> la ruta, y llevo las botas nuevas <strong>para</strong> probarlas.</p>
+        </div>
+        <div class="routine-step">
+          <p class="routine-connector">El objetivo</p>
+          <p class="routine-text">Voy al gimnasio tres veces <strong>por</strong> semana <strong>para</strong> mantenerme fuerte para las rutas largas.</p>
+        </div>
+        <div class="routine-step">
+          <p class="routine-connector">La subida</p>
+          <p class="routine-text">Subimos <strong>por</strong> el sendero más corto <strong>para</strong> llegar a la cima antes del mediodía.</p>
+        </div>
+        <div class="routine-step">
+          <p class="routine-connector">El descanso</p>
+          <p class="routine-text">Paramos <strong>por</strong> unos minutos en el mirador <strong>para</strong> hacer fotos y estirar las piernas.</p>
+        </div>
+        <div class="routine-step">
+          <p class="routine-connector">El entrenamiento</p>
+          <p class="routine-text">Entreno con mancuernas <strong>por</strong> las tardes <strong>para</strong> aguantar mejor el desnivel de las rutas largas.</p>
+        </div>
+        <div class="routine-step">
+          <p class="routine-connector">La compañía</p>
+          <p class="routine-text">Voy <strong>por</strong> Chris a las ocho, y salimos juntos <strong>para</strong> la montaña antes de que apriete el calor.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">2b</span><h2>Práctica oral guiada</h2><span class="time-tag">8 min</span></div>
+    <div class="panel">
+      <p style="margin:0; font-size:14.5px; color:var(--ink-soft);">Antes de seguir, di en voz alta una frase propia para cada situación de arriba (ocho frases en total), usando tu propia rutina de senderismo o gimnasio. No las escribas todavía — solo habla, aunque te equivoques.</p>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">3</span><h2>Repaso integrado POR / PARA</h2><span class="time-tag">22 min</span></div>
+    <div class="panel">
+      <p style="margin:0 0 16px; font-size:14.5px; color:var(--ink-soft);">Última ronda mezclando trabajo, senderismo y gimnasio — veinte frases en total.</p>
+      <div id="exercises"></div>
+      <div class="check-bar">
+        <div style="display:flex; gap:10px;">
+          <button class="btn-primary" id="check-btn">Comprobar respuestas</button>
+          <button class="btn-ghost" id="reset-btn">Reiniciar</button>
+        </div>
+        <span id="score-text"></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="block technique-panel">
+    <p class="phase-label" style="color:var(--violet);"><span class="phase-icon">📖</span>Técnica específica contra los bloqueos · Semana 5, sesión 15</p>
+    <div class="block-head"><span class="block-num">4</span><h2 style="color:var(--violet);">Comunicación con vocabulario limitado</h2><span class="time-tag">22 min</span></div>
+    <p style="margin:0 0 4px; font-size:14.5px; color:var(--ink-soft);">Vas a describir un plan de senderismo aunque te falten palabras técnicas — el nombre de un desnivel, un tipo de calzado, una zona concreta de la montaña. La idea: rodea, simplifica, sigue. No necesitas cada palabra exacta para que se entienda el plan.</p>
+    <div class="limitword-list">
+      <div class="limitword-item">
+        <p class="limitword-missing">"el desnivel"</p>
+        <p class="limitword-hint"><strong>En vez de bloquearte:</strong> "la parte de la ruta que sube mucho" o "está muy inclinado por aquí".</p>
+      </div>
+      <div class="limitword-item">
+        <p class="limitword-missing">"el mirador"</p>
+        <p class="limitword-hint"><strong>En vez de bloquearte:</strong> "el sitio donde paras para ver toda la vista" o "un punto alto con buenas vistas".</p>
+      </div>
+      <div class="limitword-item">
+        <p class="limitword-missing">"las mancuernas"</p>
+        <p class="limitword-hint"><strong>En vez de bloquearte:</strong> "los pesos pequeños que llevas en la mano" o "las pesas de mano".</p>
+      </div>
+      <div class="limitword-item">
+        <p class="limitword-missing">"la cima"</p>
+        <p class="limitword-hint"><strong>En vez de bloquearte:</strong> "el punto más alto de la montaña" o "el final de la subida".</p>
+      </div>
+      <div class="limitword-item">
+        <p class="limitword-missing">"el sendero"</p>
+        <p class="limitword-hint"><strong>En vez de bloquearte:</strong> "el camino estrecho por donde caminas en la montaña".</p>
+      </div>
+      <div class="limitword-item">
+        <p class="limitword-missing">"estirar"</p>
+        <p class="limitword-hint"><strong>En vez de bloquearte:</strong> "mover las piernas despacio para que no duelan después".</p>
+      </div>
+      <div class="limitword-item">
+        <p class="limitword-missing">"agotado / con agujetas"</p>
+        <p class="limitword-hint"><strong>En vez de bloquearte:</strong> "muy cansado" o "me duele todo el cuerpo después de entrenar".</p>
+      </div>
+    </div>
+    <div class="technique-practice">
+      <p><strong>Practica ahora:</strong> describe tu última ruta de senderismo o tu última sesión de gimnasio, y cuando te falte una palabra técnica, rodéala en vez de pararte.</p>
+      <textarea placeholder="Fui por un camino que...&#10;Para llegar tuve que...&#10;En el gimnasio hice..."></textarea>
+    </div>
+    <div class="note" style="margin-top:16px;"><strong>La idea de hoy:</strong> con vocabulario limitado y las herramientas de este módulo (circunloquios, sinónimos, muletillas) puedes contar casi cualquier cosa. Lo que se entiende, comunica — no hace falta que sea perfecto.</div>
+  </section>
+
+  <section class="block monologo-panel">
+    <div class="block-head"><span class="block-num">5</span><h2 style="color:var(--family);">Graba tu ruta de senderismo</h2><span class="time-tag">14 min</span></div>
+    <p style="margin:0 0 4px; font-size:14.5px; color:var(--ink-soft);">Un minuto seguido describiendo tu última ruta de senderismo — dónde fuiste, por qué camino, para qué (para desconectar, para hacer ejercicio, para estar con Chris). Si te falta una palabra, rodéala o simplifica y sigue hasta el final. Haz dos rondas: la primera sobre la ruta, la segunda sobre el gimnasio.</p>
+    <div class="timer-display">
+      <div class="timer-clock" id="timer-clock">01:00</div>
+      <div class="timer-label" id="timer-label">listo para empezar</div>
+      <div class="timer-controls">
+        <button class="timer-btn start" id="timer-start">Empezar</button>
+        <button class="timer-btn reset" id="timer-reset">Reiniciar</button>
+      </div>
+    </div>
+    <div class="prompt-cards">
+      <div class="prompt-card"><span class="prompt-icon">🏔️</span><p class="prompt-text"><strong>Dónde:</strong> ¿qué ruta hiciste, por dónde pasaste?</p></div>
+      <div class="prompt-card"><span class="prompt-icon">🎯</span><p class="prompt-text"><strong>Para qué:</strong> ¿por qué fuiste, qué buscabas ese día?</p></div>
+      <div class="prompt-card"><span class="prompt-icon">🐾</span><p class="prompt-text"><strong>Con quién:</strong> ¿fuiste con Chris, con Alex, sola?</p></div>
+      <div class="prompt-card"><span class="prompt-icon">⏱️</span><p class="prompt-text"><strong>Cuánto:</strong> ¿cuánto tiempo duró, cuánto desnivel tenía?</p></div>
+      <div class="prompt-card"><span class="prompt-icon">💪</span><p class="prompt-text"><strong>Segunda ronda — gimnasio:</strong> ¿qué ejercicios hiciste, con qué peso, para qué objetivo?</p></div>
+    </div>
+    <div class="monologo-notes">
+      <p style="margin:0 0 4px; font-size:14px; color:var(--ink-soft);"><strong>Antes de grabar (opcional):</strong> anota tres o cuatro ideas sueltas, no frases completas.</p>
+      <textarea placeholder="La ruta...&#10;El motivo...&#10;Con quién..."></textarea>
+    </div>
+  </section>
+
+  <section class="block task-panel">
+    <div class="block-head"><span class="block-num">6</span><h2 style="color:var(--family)">Tu tarea</h2><span class="time-tag">20 min</span></div>
+    <p style="margin:0 0 14px; font-size:15px; color:var(--ink-soft);">Escribe 14 frases sobre tu senderismo o tu rutina de gimnasio, alternando POR y PARA a propósito — intenta cubrir causa, medio, tránsito, tiempo aproximado, finalidad, destinatario y plazo. Si te falta una palabra técnica, rodéala con lo que aprendiste hoy en vez de pararte.</p>
+    <textarea id="final-task" placeholder="1. ...&#10;2. ...&#10;3. ..."></textarea>
+    <div class="task-footer">
+      <span id="task-count">0 palabras escritas</span>
+      <div style="display:flex; gap:10px; align-items:center;">
+        <span class="saved-flag" id="saved-flag">Guardado ✓</span>
+        <button class="btn-secondary" id="save-btn">Guardar tarea</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <span>Clase 15 · POR y PARA en la vida diaria en Xàtiva</span>
+  <span>Próxima clase → Clase 16: Comparativos — Xàtiva y Chicago (semana 6)</span>
+</footer>
+
+<script>
+/* ---------- VOCAB ---------- */
+const VOCAB = [
+  {front:"el senderismo", back:"Hago senderismo casi todos los domingos, por la montaña cerca de Xàtiva."},
+  {front:"la montaña", back:"Subimos a la montaña por un camino que conozco desde hace años."},
+  {front:"el gimnasio", back:"Voy al gimnasio tres veces por semana para mantenerme fuerte."},
+  {front:"levantar pesas", back:"Levanto pesas para tener resistencia en las rutas largas de montaña."},
+  {front:"la ruta", back:"La ruta de hoy es más larga que la del domingo pasado."},
+  {front:"el camino", back:"Fuimos por el camino del bosque, que es más fresco por la mañana."},
+  {front:"el mirador", back:"Paramos en el mirador para ver toda la vista antes de bajar."},
+  {front:"el desnivel", back:"Esta ruta tiene mucho desnivel al principio, luego es más llana."},
+  {front:"las mancuernas", back:"Empiezo con mancuernas ligeras y voy subiendo el peso poco a poco."},
+  {front:"estirar", back:"Siempre estiro las piernas antes y después de una ruta larga."},
+  {front:"la cima", back:"Llegamos a la cima justo antes de las doce, con mucho calor."},
+  {front:"entrenar", back:"Entreno tres veces por semana para aguantar mejor las rutas largas."},
+]
+
+const grid = document.getElementById('vocab-grid');
+VOCAB.forEach(v=>{
+  const card = document.createElement('div');
+  card.className = 'vocab-card';
+  card.setAttribute('role', 'button');
+  card.setAttribute('tabindex', '0');
+  card.setAttribute('aria-pressed', 'false');
+  card.setAttribute('aria-label', `${v.front}. Pulsa para ver un ejemplo.`);
+  card.innerHTML = `<div class="vocab-front">${v.front}</div><div class="vocab-back">${v.back}</div>`;
+  const toggle = ()=>{
+    const flipped = card.classList.toggle('flipped');
+    card.setAttribute('aria-pressed', String(flipped));
+  };
+  card.addEventListener('click', toggle);
+  card.addEventListener('keydown', (e)=>{
+    if(e.key === 'Enter' || e.key === ' '){
+      e.preventDefault();
+      toggle();
+    }
+  });
+  grid.appendChild(card);
+});
+
+/* ---------- EXERCISES ---------- */
+const EXERCISES = [
+  {"sentence":"Voy <span class=\"gap\">___</span> la montaña los domingos, <span class=\"gap\">___</span> desconectar del trabajo.","options":["por / para","para / por","por / por"],"answer":"por / para"},
+  {"sentence":"Compro agua extra <span class=\"gap\">___</span> la ruta larga del sábado.","options":["para","por","en"],"answer":"para"},
+  {"sentence":"Vamos <span class=\"gap\">___</span> el castillo, pasando <span class=\"gap\">___</span> el bosque.","options":["para / por","por / para","para / para"],"answer":"para / por"},
+  {"sentence":"Voy al gimnasio tres veces <span class=\"gap\">___</span> semana.","options":["por","para","en"],"answer":"por"},
+  {"sentence":"Levanto pesas <span class=\"gap\">___</span> tener resistencia en las rutas largas.","options":["para","por","con"],"answer":"para"},
+  {"sentence":"Salimos <span class=\"gap\">___</span> la mañana, <span class=\"gap\">___</span> el calor de agosto.","options":["por / por","para / por","por / para"],"answer":"por / por"},
+  {"sentence":"Esta ruta es <span class=\"gap\">___</span> Chris, le va a encantar el mirador.","options":["para","por","de"],"answer":"para"},
+  {"sentence":"Pasamos <span class=\"gap\">___</span> el pueblo antes de subir a la montaña.","options":["por","para","en"],"answer":"por"},
+  {"sentence":"Cambié la ruta larga <span class=\"gap\">___</span> una más corta, <span class=\"gap\">___</span> el calor.","options":["por / por","para / por","por / para"],"answer":"por / por"},
+  {"sentence":"Llevo las botas nuevas <span class=\"gap\">___</span> probarlas en esta ruta.","options":["para","por","con"],"answer":"para"},
+  {"sentence":"Subimos <span class=\"gap\">___</span> el sendero corto <span class=\"gap\">___</span> llegar antes del mediodía.","options":["por / para","para / por","por / por"],"answer":"por / para"},
+  {"sentence":"Paramos <span class=\"gap\">___</span> unos minutos en el mirador.","options":["por","para","en"],"answer":"por"},
+  {"sentence":"Entreno con mancuernas <span class=\"gap\">___</span> las tardes.","options":["por","para","en"],"answer":"por"},
+  {"sentence":"Voy <span class=\"gap\">___</span> Chris a las ocho <span class=\"gap\">___</span> salir juntos temprano.","options":["por / para","para / por","por / por"],"answer":"por / para"},
+  {"sentence":"Necesito unas botas nuevas <span class=\"gap\">___</span> el desnivel de esta ruta.","options":["para","por","con"],"answer":"para"},
+  {"sentence":"Estiro las piernas <span class=\"gap\">___</span> evitar lesiones después de la ruta.","options":["para","por","con"],"answer":"para"},
+  {"sentence":"Este fin de semana entreno <span class=\"gap\">___</span> primera vez con mancuernas más pesadas.","options":["por","para","en"],"answer":"por"},
+  {"sentence":"Hacemos la ruta larga <span class=\"gap\">___</span> el buen tiempo que hace hoy.","options":["por","para","en"],"answer":"por"},
+  {"sentence":"Llegamos a la cima <span class=\"gap\">___</span> las doce, antes de que apriete el calor.","options":["para","por","en"],"answer":"para"},
+  {"sentence":"Cambio la ruta larga <span class=\"gap\">___</span> la corta si hace demasiado calor.","options":["por","para","con"],"answer":"por"}
+]
+;
+
+function shuffle(arr){
+  const a = arr.slice();
+  for(let i = a.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+const exWrap = document.getElementById('exercises');
+EXERCISES.forEach((ex, i)=>{
+  const el = document.createElement('div');
+  el.className = 'exercise';
+  el.dataset.answer = ex.answer;
+  const shuffledOptions = shuffle(ex.options);
+  el.innerHTML = `
+    <div class="ex-sentence">${i+1}. ${ex.sentence}</div>
+    <div class="ex-options">
+      ${shuffledOptions.map(o=>`<button class="opt-btn" data-value="${o}">${o}</button>`).join('')}
+    </div>
+  `;
+  exWrap.appendChild(el);
+
+  el.querySelectorAll('.opt-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      el.querySelectorAll('.opt-btn').forEach(b=>b.classList.remove('picked'));
+      btn.classList.add('picked');
+    });
+  });
+});
+
+document.getElementById('check-btn').addEventListener('click', ()=>{
+  let correct = 0;
+  document.querySelectorAll('.exercise').forEach(el=>{
+    const answer = el.dataset.answer;
+    const picked = el.querySelector('.opt-btn.picked');
+    el.querySelectorAll('.opt-btn').forEach(b=>{
+      b.disabled = true;
+      if(b.dataset.value === answer) b.classList.add('correct');
+      else if(b === picked) b.classList.add('wrong');
+    });
+    if(picked && picked.dataset.value === answer) correct++;
+  });
+  document.getElementById('score-text').textContent = `${correct} / ${EXERCISES.length} correctas`;
+});
+
+document.getElementById('reset-btn').addEventListener('click', ()=>{
+  document.querySelectorAll('.exercise').forEach(el=>{
+    el.querySelectorAll('.opt-btn').forEach(b=>{
+      b.disabled = false;
+      b.classList.remove('picked','correct','wrong');
+    });
+  });
+  document.getElementById('score-text').textContent = '';
+});
+
+/* ---------- MONÓLOGO: cronómetro de 1 minuto ---------- */
+const TOTAL_SECONDS = 60;
+let timerRemaining = TOTAL_SECONDS;
+let timerInterval = null;
+let timerRunning = false;
+
+const timerClock = document.getElementById('timer-clock');
+const timerLabel = document.getElementById('timer-label');
+const timerStartBtn = document.getElementById('timer-start');
+const timerResetBtn = document.getElementById('timer-reset');
+
+function formatTime(sec){
+  const m = Math.floor(sec / 60).toString().padStart(2,'0');
+  const s = (sec % 60).toString().padStart(2,'0');
+  return `${m}:${s}`;
+}
+
+function renderTimer(){
+  timerClock.textContent = formatTime(timerRemaining);
+  timerClock.classList.toggle('warning', timerRemaining <= 10 && timerRemaining > 0);
+  if(timerRemaining === 0){
+    timerLabel.textContent = '¡tiempo! sigue si quieres, pero ya has llegado al minuto';
+  } else if(timerRunning){
+    timerLabel.textContent = 'hablando...';
+  } else if(timerRemaining < TOTAL_SECONDS){
+    timerLabel.textContent = 'en pausa';
+  } else {
+    timerLabel.textContent = 'listo para empezar';
+  }
+}
+
+function tick(){
+  if(timerRemaining > 0){
+    timerRemaining--;
+    renderTimer();
+  }
+  if(timerRemaining === 0){
+    clearInterval(timerInterval);
+    timerRunning = false;
+    timerStartBtn.textContent = 'Empezar';
+  }
+}
+
+timerStartBtn.addEventListener('click', ()=>{
+  if(timerRunning){
+    clearInterval(timerInterval);
+    timerRunning = false;
+    timerStartBtn.textContent = 'Continuar';
+    renderTimer();
+    return;
+  }
+  if(timerRemaining === 0) return;
+  timerRunning = true;
+  timerStartBtn.textContent = 'Pausar';
+  renderTimer();
+  timerInterval = setInterval(tick, 1000);
+});
+
+timerResetBtn.addEventListener('click', ()=>{
+  clearInterval(timerInterval);
+  timerRunning = false;
+  timerRemaining = TOTAL_SECONDS;
+  timerStartBtn.textContent = 'Empezar';
+  renderTimer();
+});
+
+renderTimer();
+
+/* ---------- NOTAS DEL MONÓLOGO (autosave) ---------- */
+const STORAGE_KEY_MONOLOGO = 'lisa-clase15-monologo-notas';
+const monologoArea = document.querySelector('.monologo-notes textarea');
+
+async function cargarMonologo(){
+  if (!window.storage || !monologoArea) return;
+  try{
+    const res = await window.storage.get(STORAGE_KEY_MONOLOGO);
+    if (res && typeof res.value === 'string') monologoArea.value = res.value;
+  }catch(e){
+    // sin notas previas
+  }
+}
+if (monologoArea){
+  monologoArea.addEventListener('input', ()=>{
+    clearTimeout(monologoArea._saveTimer);
+    monologoArea._saveTimer = setTimeout(()=>{
+      if (window.storage) window.storage.set(STORAGE_KEY_MONOLOGO, monologoArea.value).catch(()=>{ /* fallo silencioso */ });
+    }, 600);
+  });
+  cargarMonologo();
+}
+
+/* ---------- NOTAS DE VOCABULARIO LIMITADO (autosave) ---------- */
+const STORAGE_KEY_LIMIT = 'lisa-clase15-limitword-notas';
+const limitArea = document.querySelector('.technique-practice textarea');
+
+async function cargarLimit(){
+  if (!window.storage || !limitArea) return;
+  try{
+    const res = await window.storage.get(STORAGE_KEY_LIMIT);
+    if (res && typeof res.value === 'string') limitArea.value = res.value;
+  }catch(e){
+    // sin notas previas
+  }
+}
+if (limitArea){
+  limitArea.addEventListener('input', ()=>{
+    clearTimeout(limitArea._saveTimer);
+    limitArea._saveTimer = setTimeout(()=>{
+      if (window.storage) window.storage.set(STORAGE_KEY_LIMIT, limitArea.value).catch(()=>{ /* fallo silencioso */ });
+    }, 600);
+  });
+  cargarLimit();
+}
+
+/* ---------- FINAL TASK ---------- */
+const STORAGE_KEY_TASK = 'lisa-clase15-tarea';
+const taskArea = document.getElementById('final-task');
+const taskCount = document.getElementById('task-count');
+const savedFlag = document.getElementById('saved-flag');
+
+async function cargarTarea(){
+  if (!window.storage || !taskArea) return;
+  try{
+    const res = await window.storage.get(STORAGE_KEY_TASK);
+    if (res && typeof res.value === 'string') taskArea.value = res.value;
+  }catch(e){
+    // Clave inexistente todavía: no hay tarea previa, se queda en blanco.
+  }
+  updateCount();
+}
+
+function updateCount(){
+  if (!taskArea || !taskCount) return;
+  const words = taskArea.value.trim().split(/\s+/).filter(Boolean).length;
+  taskCount.textContent = `${words} palabra${words===1?'':'s'} escrita${words===1?'':'s'}`;
+}
+if (taskArea){
+  taskArea.addEventListener('input', updateCount);
+  updateCount();
+  cargarTarea();
+}
+
+if (document.getElementById('save-btn')){
+  document.getElementById('save-btn').addEventListener('click', async ()=>{
+    if (!window.storage){
+      savedFlag.textContent = 'Guardado no disponible aquí';
+      savedFlag.classList.add('show');
+      setTimeout(()=>{ savedFlag.classList.remove('show'); savedFlag.textContent = 'Guardado ✓'; }, 2200);
+      return;
+    }
+    try{
+      const ok = await window.storage.set(STORAGE_KEY_TASK, taskArea.value);
+      savedFlag.textContent = ok ? 'Guardado ✓' : 'No se pudo guardar';
+    }catch(e){
+      savedFlag.textContent = 'No se pudo guardar';
+    }
+    savedFlag.classList.add('show');
+    setTimeout(()=>{ savedFlag.classList.remove('show'); savedFlag.textContent = 'Guardado ✓'; }, 1800);
+  });
+}
+</script>
+
+</body>
+</html>

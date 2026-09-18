@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clase 11 · En la veterinaria, narrar la rutina de Alex — Lisa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Space+Mono:wght@400;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+
+/* ╔══════════════════════════════════════════════════════════════╗
+   ║  ESCOLAR × NOTHING — sistema de diseño para clases de         ║
+   ║  español online. Papel cálido + roles semánticos de ESCOLAR,  ║
+   ║  leídos a través del lenguaje visual de Nothing OS 5.         ║
+   ║  Clase 11 · L2 Lista de invitados · "En la veterinaria"        ║
+   ╚══════════════════════════════════════════════════════════════╝ */
+
+:root{
+  --paper:        #F4EFE4;
+  --paper-deep:   #EAE3D2;
+  --glass:        rgba(255,255,255,0.55);
+  --glass-strong: rgba(255,255,255,0.75);
+  --ink:          #23291F;
+  --ink-soft:     #565F52;
+  --ink-faint:    #8B9184;
+  --line:         rgba(35,41,31,0.10);
+  --line-strong:  rgba(35,41,31,0.20);
+
+  --b1:      #2F6FED;  --b1-soft: rgba(47,111,237,0.10);  --b1-line: rgba(47,111,237,0.30);
+  --b2:      #2E9E6B;  --b2-soft: rgba(46,158,107,0.10);  --b2-line: rgba(46,158,107,0.30);
+  --family:  #B5502E;  --family-soft: rgba(181,80,46,0.10); --family-line: rgba(181,80,46,0.30);
+  --violet:  #7B4FC9;  --violet-soft: rgba(123,79,201,0.10); --violet-line: rgba(123,79,201,0.30);
+
+  --f-display: 'Fraunces', Georgia, serif;
+  --f-body:    'IBM Plex Sans', system-ui, sans-serif;
+  --f-data:    'Space Mono', ui-monospace, monospace;
+
+  --r-sm: 8px;
+  --r-md: 16px;
+  --r-lg: 24px;
+
+  --blur: 22px;
+  --shadow-1: 0 8px 32px rgba(35,41,31,0.06), 0 1px 2px rgba(35,41,31,0.05);
+}
+
+*{ box-sizing:border-box; }
+html{ scroll-behavior:smooth; }
+body{
+  margin:0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--f-body);
+  line-height:1.6;
+  position:relative;
+  min-height:100vh;
+}
+
+/* Glyph grid de fondo */
+body::before{
+  content:"";
+  position: fixed; inset:0;
+  background-image: radial-gradient(circle, rgba(35,41,31,0.09) 1.5px, transparent 1.5px);
+  background-size: 28px 28px;
+  pointer-events:none; z-index:0;
+}
+body::after{
+  content:"";
+  position: fixed; inset:0;
+  background: radial-gradient(ellipse 70% 50% at 50% -10%, var(--paper-deep), transparent 60%);
+  pointer-events:none; z-index:0;
+}
+
+/* Mesh gradient del sistema — sigue en b2 (verde), la línea L2 */
+:root{ --mesh-color: var(--b2); }
+.mesh-bg{
+  content:""; position: fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden;
+}
+.mesh-bg::before, .mesh-bg::after, .mesh-bg > .mesh-blob{
+  content:""; position:absolute; filter: blur(46px);
+  background: radial-gradient(circle, var(--mesh-color), transparent 70%);
+  animation: mesh-drift 22s ease-in-out infinite alternate;
+}
+.mesh-bg::before{ width:55%; height:75%; left:-12%; top:-12%; opacity:0.16; animation-delay:0s; }
+.mesh-bg::after{ width:60%; height:80%; right:-15%; top:-8%; opacity:0.13; animation-delay:-7s; }
+.mesh-bg > .mesh-blob{ width:45%; height:55%; left:22%; bottom:-15%; opacity:0.11; animation-delay:-14s; }
+@keyframes mesh-drift{
+  0%   { transform: translate(0,0) scale(1); }
+  50%  { transform: translate(3%,-2%) scale(1.05); }
+  100% { transform: translate(-2%,3%) scale(0.98); }
+}
+@media (prefers-reduced-motion: reduce){
+  .mesh-bg::before, .mesh-bg::after, .mesh-bg > .mesh-blob{ animation: none; }
+}
+
+::selection{ background: var(--b2-soft); }
+
+header, main, footer{ position:relative; z-index:1; }
+
+/* ---------- HEADER ---------- */
+header{ padding:44px 24px 28px; max-width:760px; margin:0 auto; }
+.eyebrow{
+  font-family: var(--f-data); font-size:12px; letter-spacing:.14em;
+  text-transform:uppercase; color: var(--b2); margin:0 0 10px;
+  display:flex; align-items:center; gap:10px;
+}
+.eyebrow .dot{ width:6px; height:6px; border-radius:50%; background: var(--b2); }
+h1{
+  font-family: var(--f-display); font-weight:600;
+  font-size:clamp(30px,5.6vw,46px); line-height:1.08;
+  margin:0 0 14px; letter-spacing:-.01em;
+}
+h1 em{ font-style:italic; color: var(--b2); }
+.lede{ font-size:16px; color: var(--ink-soft); max-width:56ch; margin:0; }
+
+.meta-row{
+  display:flex; flex-wrap:wrap; gap:20px; margin-top:26px;
+  font-family: var(--f-data); font-size:12px; color: var(--ink-faint);
+}
+.meta-row strong{
+  display:block; color: var(--ink); font-size:14.5px; font-weight:500;
+  font-family: var(--f-display); margin-top:3px;
+}
+
+/* ---------- SECTIONS ---------- */
+main{ max-width:760px; margin:0 auto; padding:8px 24px 100px; }
+
+section.block{ margin-bottom:52px; }
+.block-head{ display:flex; align-items:baseline; gap:12px; margin-bottom:18px; }
+.time-tag{
+  font-family: var(--f-data); font-size:11px; color: var(--ink-faint);
+  background: var(--glass-strong); border:1px solid rgba(255,255,255,0.6); padding:3px 10px; border-radius:999px; margin-left:auto; flex:none;
+}
+.block-num{
+  font-family: var(--f-data); font-size:12px; color:#fff; background: var(--b2);
+  width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  flex:none;
+}
+.block-head h2{
+  font-family: var(--f-display); font-weight:500; font-style:italic; font-size:22px; margin:0;
+}
+.phase-label{
+  font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.08em;
+  color: var(--ink-faint); margin:0 0 8px; display:flex; align-items:center; gap:8px;
+}
+.phase-label .phase-icon{ font-size:14px; }
+
+.panel{
+  background: var(--glass);
+  backdrop-filter: blur(var(--blur)); -webkit-backdrop-filter: blur(var(--blur));
+  border:1px solid rgba(255,255,255,0.6); border-radius: var(--r-lg);
+  box-shadow: var(--shadow-1); padding:26px 28px;
+}
+
+.note{
+  margin-top:18px; padding:14px 16px;
+  background: linear-gradient(var(--b2-soft),var(--b2-soft)), var(--glass);
+  backdrop-filter: blur(12px);
+  border:1px solid var(--b2-line);
+  border-radius: var(--r-md); font-size:14px; color: var(--ink-soft);
+}
+.note strong{ color: var(--ink); }
+
+/* ---------- INTRO PANEL ---------- */
+.mic-panel{ background: var(--ink); color: var(--paper); border-radius: var(--r-lg); padding:24px 26px; display:flex; gap:20px; align-items:center; margin-bottom:8px; }
+.mic-icon{ flex:none; width:56px; height:56px; border-radius:50%; background: rgba(255,255,255,0.1); display:flex; align-items:center; justify-content:center; font-size:26px; }
+.mic-body{ flex:1; }
+.mic-title{ font-family: var(--f-display); font-weight:600; font-size:19px; margin:0 0 4px; color:#fff; }
+.mic-desc{ font-size:14px; color: rgba(251,247,238,0.75); margin:0; }
+
+/* ---------- VOCAB CARDS ---------- */
+.vocab-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(210px,1fr)); gap:12px; }
+.vocab-card{
+  background: var(--glass-strong); backdrop-filter: blur(14px);
+  border:1px solid rgba(255,255,255,0.6); border-radius: var(--r-md);
+  padding:16px 18px; cursor:pointer; transition: all .2s ease; position:relative; min-height:74px;
+}
+.vocab-card:hover{ border-color: var(--b2-line); transform: translateY(-1px); }
+.vocab-front{ font-family: var(--f-display); font-weight:500; font-size:16px; color: var(--ink); }
+.vocab-back{
+  font-size:13px; color: var(--ink-soft); margin-top:8px; display:none;
+  border-top:1px dashed var(--line); padding-top:8px;
+}
+.vocab-card.flipped .vocab-back{ display:block; }
+.vocab-card.flipped{ background: var(--b2-soft); border-color: var(--b2-line); }
+.vocab-card::after{
+  content:"toca para ver ejemplo"; position:absolute; bottom:8px; right:14px;
+  font-family: var(--f-data); font-size:10px; color: var(--ink-faint); opacity:.7;
+}
+.vocab-card.flipped::after{ content:""; }
+
+/* ---------- NARRATION SEQUENCE (routine steps) ---------- */
+.routine-track{ position:relative; padding-left:30px; }
+.routine-track::before{
+  content:""; position:absolute; left:9px; top:6px; bottom:6px; width:2px;
+  background: var(--b2-line);
+}
+.routine-step{ position:relative; margin-bottom:18px; }
+.routine-step:last-child{ margin-bottom:0; }
+.routine-step::before{
+  content:""; position:absolute; left:-30px; top:4px; width:12px; height:12px;
+  border-radius:50%; background: var(--b2); border:3px solid var(--paper);
+  box-shadow: 0 0 0 1px var(--b2-line);
+}
+.routine-connector{
+  font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.06em;
+  color: var(--b2); margin:0 0 4px;
+}
+.routine-text{
+  background: var(--glass-strong); backdrop-filter: blur(12px);
+  border:1px solid rgba(255,255,255,0.6); border-radius: var(--r-md);
+  padding:12px 16px; font-size:14.5px; color: var(--ink);
+}
+.routine-text strong{ color: var(--b2); }
+
+/* ---------- QUESTION BANK (formal requests) ---------- */
+.question-grid{ display:grid; gap:12px; }
+.question-card{
+  background: linear-gradient(var(--b1-soft),var(--b1-soft)), var(--glass);
+  backdrop-filter: blur(14px);
+  border:1px solid var(--b1-line); border-radius: var(--r-md);
+  padding:14px 16px; display:flex; gap:14px; align-items:flex-start;
+}
+.question-icon{ flex:none; font-size:18px; }
+.question-body{ flex:1; }
+.question-phrase{ font-family: var(--f-display); font-weight:600; font-size:16px; color: var(--b1); margin:0 0 4px; }
+.question-context{ font-size:13.5px; color: var(--ink-soft); margin:0; }
+.question-context strong{ color: var(--ink); }
+
+/* ---------- EXERCISES ---------- */
+.gap{
+  display:inline-block; min-width:64px; text-align:center; border-bottom:2px dotted var(--ink-faint);
+  color: var(--ink-faint); font-family: var(--f-data);
+}
+.exercise{ padding:16px 0; border-bottom:1px solid var(--line); }
+.exercise:last-child{ border-bottom:none; }
+.ex-sentence{ font-size:15px; margin-bottom:10px; }
+.ex-options{ display:flex; flex-wrap:wrap; gap:8px; }
+.opt-btn{
+  font-family: var(--f-body); font-size:14px; background: var(--glass-strong);
+  backdrop-filter: blur(10px);
+  border:1.5px solid var(--line-strong); color: var(--ink); padding:7px 16px; border-radius:999px;
+  cursor:pointer; transition: all .15s ease;
+}
+.opt-btn:hover{ border-color: var(--ink-faint); }
+.opt-btn.picked{ background: var(--b2-soft); border-color: var(--b2); color: var(--b2); }
+.opt-btn.correct{ background: var(--b2-soft); border-color: var(--b2); color: var(--b2); }
+.opt-btn.wrong{ background: var(--family-soft); border-color: var(--family); color: var(--family); }
+.opt-btn:disabled{ cursor:default; }
+
+.check-bar{
+  display:flex; align-items:center; justify-content:space-between; gap:16px;
+  margin-top:22px; padding-top:18px; border-top:1px dashed var(--line);
+}
+.btn-primary{
+  font-family: var(--f-data); font-weight:700; font-size:12.5px; text-transform:uppercase; letter-spacing:.05em;
+  color: var(--paper); background: var(--ink);
+  border:none; padding:12px 24px; border-radius:999px; cursor:pointer; transition: transform .1s ease;
+}
+.btn-primary:hover{ transform: translateY(-1px); }
+#score-text{ font-family: var(--f-data); font-size:13px; color: var(--ink-faint); }
+.btn-ghost{
+  font-family: var(--f-body); font-weight:600; font-size:13px; color: var(--ink-soft); background: rgba(255,255,255,0.4);
+  border:1.5px solid var(--line-strong); padding:9px 18px; border-radius:999px; cursor:pointer;
+}
+.btn-ghost:hover{ border-color: var(--ink-faint); }
+.ex-divider{
+  display:flex; align-items:center; gap:10px; margin:20px 0 16px;
+  font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.06em;
+  color: var(--ink-faint);
+}
+.ex-divider::before, .ex-divider::after{ content:""; flex:1; height:1px; background: var(--line); }
+.ex-divider.en-clase{ color: var(--b2); }
+.ex-divider.en-clase::before, .ex-divider.en-clase::after{ background: var(--b2-line); }
+
+/* ---------- ROLEPLAY: recepción de la veterinaria ---------- */
+.roleplay-panel{
+  background: linear-gradient(var(--b1-soft),var(--b1-soft)), var(--glass);
+  backdrop-filter: blur(var(--blur));
+  border:1px solid var(--b1-line); border-radius: var(--r-lg); padding:26px 28px;
+}
+.roleplay-panel .block-num{ background: var(--b1); }
+.scene-setup{
+  display:flex; gap:14px; align-items:flex-start; background: var(--glass-strong);
+  backdrop-filter: blur(14px);
+  border:1px solid var(--b1-line); border-radius: var(--r-md); padding:14px 16px; margin-bottom:20px;
+}
+.scene-icon{ font-size:22px; flex:none; }
+.scene-text{ font-size:14px; color: var(--ink-soft); }
+.scene-text strong{ color: var(--ink); }
+
+.branch-wrap{ display:flex; flex-direction:column; gap:14px; }
+.branch-prompt{
+  background: var(--glass-strong);
+  backdrop-filter: blur(14px);
+  border:1px solid var(--b1-line); border-radius: var(--r-md);
+  padding:14px 16px;
+}
+.branch-prompt .line-name{ font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.05em; color: var(--ink-faint); margin:0 0 6px; }
+.branch-prompt .line-bubble{ font-size:14.5px; color: var(--ink); }
+.branch-options{ display:flex; flex-direction:column; gap:8px; margin-top:10px; }
+.branch-textarea{
+  width:100%; font-family: var(--f-body); font-size:14.5px; color: var(--ink);
+  background:rgba(255,255,255,0.7); border:1px solid var(--b1-line); border-radius: var(--r-sm);
+  padding:10px 12px; resize:vertical; min-height:44px;
+}
+.branch-textarea:focus{ outline:none; border-color: var(--b1); }
+.branch-hint{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin-top:5px; }
+
+.roleplay-tip{
+  margin-top:22px; padding:14px 16px; background: var(--glass-strong); backdrop-filter: blur(14px); border:1px solid var(--b1-line);
+  border-radius: var(--r-md); font-size:13.5px; color: var(--ink-soft);
+}
+.roleplay-tip strong{ color: var(--ink); }
+
+.imprevisto-tag{
+  display:inline-flex; align-items:center; gap:6px; font-family: var(--f-data); font-size:11px;
+  text-transform:uppercase; letter-spacing:.05em; color: var(--family); background: var(--family-soft);
+  border:1px solid var(--family-line); padding:4px 10px; border-radius:999px; margin-bottom:14px;
+}
+
+/* ---------- TECHNIQUE: narraciones sencillas ---------- */
+.technique-panel{
+  background: linear-gradient(var(--violet-soft),var(--violet-soft)), var(--glass);
+  backdrop-filter: blur(var(--blur));
+  border:1px solid var(--violet-line); border-radius: var(--r-lg); padding:26px 28px;
+}
+.technique-panel .block-num{ background: var(--violet); }
+.quickdesc-list{ display:flex; flex-direction:column; gap:10px; margin:14px 0 18px; }
+.quickdesc-item{
+  display:flex; justify-content:space-between; align-items:center; gap:14px;
+  background: var(--glass-strong); backdrop-filter: blur(14px);
+  border:1px solid var(--violet-line); border-radius: var(--r-md); padding:12px 16px;
+}
+.quickdesc-q{ font-size:14px; color: var(--ink); }
+.quickdesc-timer{
+  font-family: var(--f-data); font-size:11px; color: var(--violet); background: var(--violet-soft);
+  border:1px solid var(--violet-line); padding:3px 10px; border-radius:999px; flex:none;
+}
+.technique-practice textarea{
+  width:100%; min-height:110px; font-family: var(--f-body); font-size:14.5px; color: var(--ink);
+  background: var(--glass-strong); backdrop-filter: blur(12px); border:1px solid var(--violet-line); border-radius: var(--r-md);
+  padding:14px 16px; resize:vertical;
+}
+.technique-practice textarea:focus{ outline:none; border-color: var(--violet); }
+
+/* ---------- FINAL TASK ---------- */
+.task-panel{
+  background: linear-gradient(var(--family-soft),var(--family-soft)), var(--glass);
+  backdrop-filter: blur(var(--blur));
+  border:1px solid var(--family-line); border-radius: var(--r-lg); padding:26px 28px;
+}
+.task-panel .block-num{ background: var(--family); }
+textarea#final-task{
+  width:100%; min-height:130px; font-family: var(--f-body); font-size:15px; color: var(--ink);
+  background: var(--glass-strong); backdrop-filter: blur(12px); border:1px solid var(--family-line); border-radius: var(--r-md);
+  padding:14px 16px; resize:vertical; margin-top:14px;
+}
+textarea#final-task:focus{ outline:none; border-color: var(--family); }
+.task-footer{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:12px; flex-wrap:wrap; }
+#task-count{ font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); }
+.saved-flag{
+  font-family: var(--f-data); font-size:11.5px; color: var(--b2); opacity:0; transition: opacity .3s ease;
+}
+.saved-flag.show{ opacity:1; }
+.btn-secondary{
+  font-family: var(--f-data); font-weight:700; font-size:12px; text-transform:uppercase; letter-spacing:.05em;
+  color:#fff; background: var(--family); border:none; padding:10px 20px; border-radius:999px; cursor:pointer;
+}
+
+/* ---------- PREP QUESTIONS TASK ---------- */
+.prep-questions{ display:flex; flex-direction:column; gap:10px; margin-top:14px; }
+.prep-q-row{ display:flex; align-items:center; gap:10px; }
+.prep-q-num{
+  font-family: var(--f-data); font-size:12px; color:#fff; background: var(--family);
+  width:22px; height:22px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex:none;
+}
+.prep-q-input{
+  flex:1; font-family: var(--f-body); font-size:14.5px; color: var(--ink);
+  background: var(--glass-strong); backdrop-filter: blur(10px); border:1px solid var(--family-line);
+  border-radius: var(--r-sm); padding:9px 12px;
+}
+.prep-q-input:focus{ outline:none; border-color: var(--family); }
+
+/* ---------- FOOTER ---------- */
+footer{
+  max-width:760px; margin:0 auto; padding:0 24px 60px; display:flex;
+  justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;
+  font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint);
+}
+footer a{ color: var(--b2); text-decoration:none; }
+footer a:hover{ text-decoration:underline; }
+
+@media (max-width:600px){
+  header{ padding:34px 18px 22px; }
+  main{ padding:8px 18px 90px; }
+  .panel, .task-panel, .roleplay-panel, .technique-panel{ padding:20px 18px; }
+  .mic-panel{ flex-direction:column; text-align:center; }
+  .quickdesc-item{ flex-direction:column; align-items:flex-start; gap:6px; }
+}
+@media (prefers-reduced-motion: reduce){ *{ transition:none !important; } }
+</style>
+</head>
+<body>
+<!-- Mesh gradient del sistema — fijo, detrás de todo, 100% CSS -->
+<div class="mesh-bg">
+  <div class="mesh-blob"></div>
+</div>
+
+<header>
+  <p class="eyebrow"><span class="dot"></span>Clase 11 de 36 · L2 Lista de invitados</p>
+  <h1>En la <em>veterinaria</em></h1>
+  <p class="lede">Hoy tocamos otra situación que se repite en la vida de Alex: la veterinaria. La clase tiene dos partes — primero aprendes a narrar de principio a fin la rutina semanal de Alex, encadenando frases con conectores; después llamas (o vas) a la recepción y, como siempre, surge algo que no estaba en el guion.</p>
+  <div class="meta-row">
+    <div>Duración<strong>50 min</strong></div>
+    <div>Gramática<strong>Objeto directo/indirecto + preguntas formales</strong></div>
+    <div>Nivel<strong>B1</strong></div>
+  </div>
+</header>
+
+<main>
+
+  <section class="block">
+    <div class="mic-panel">
+      <div class="mic-icon">🩺</div>
+      <div class="mic-body">
+        <p class="mic-title">Narrar, no solo responder</p>
+        <p class="mic-desc">Hasta ahora has practicado sobre todo respuestas cortas a preguntas. Hoy el reto es distinto: contar algo de principio a fin sin que nadie te pregunte frase por frase — la rutina completa de Alex, con conectores que unen las ideas (primero, después, luego, al final). Es la misma habilidad que necesitas cuando alguien te pregunta "¿qué tal la semana?" y esperas una respuesta de verdad, no solo "bien".</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">1</span><h2>Vocabulario de la consulta</h2><span class="time-tag">6 min</span></div>
+    <div class="vocab-grid" id="vocab-grid"></div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">2</span><h2>La rutina de Alex, paso a paso</h2><span class="time-tag">10 min</span></div>
+    <div class="panel">
+      <p style="margin:0 0 18px; font-size:14.5px; color:var(--ink-soft);">Antes de narrarlo en voz alta, mira cómo se encadena una rutina simple con conectores. Fíjate en los objetos directos e indirectos: <strong>la</strong> (la cita), <strong>le</strong> (a Alex), <strong>lo</strong> (el historial).</p>
+      <div class="routine-track">
+        <div class="routine-step">
+          <p class="routine-connector">Primero</p>
+          <p class="routine-text">Llamo a la clínica y pido cita para Alex. La recepcionista <strong>me la</strong> da para el jueves.</p>
+        </div>
+        <div class="routine-step">
+          <p class="routine-connector">Después</p>
+          <p class="routine-text">Preparo el historial de Alex — siempre <strong>lo</strong> llevo en el bolso por si <strong>lo</strong> piden en la consulta.</p>
+        </div>
+        <div class="routine-step">
+          <p class="routine-connector">Luego</p>
+          <p class="routine-text">El veterinario examina a Alex y <strong>le</strong> pone la vacuna. A mí <strong>me</strong> explica todo con calma.</p>
+        </div>
+        <div class="routine-step">
+          <p class="routine-connector">Al final</p>
+          <p class="routine-text">Pago la consulta y pido cita para la próxima revisión. La recepcionista <strong>me</strong> dice que <strong>la</strong> apunta para dentro de un mes.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">3</span><h2>Preguntas formales de recepción</h2><span class="time-tag">8 min</span></div>
+    <p style="margin:0 0 16px; font-size:14.5px; color:var(--ink-soft);">En la veterinaria (o en cualquier consulta) casi siempre pides las cosas con cortesía formal. Estas son las estructuras que más vas a necesitar.</p>
+    <div class="question-grid">
+      <div class="question-card">
+        <span class="question-icon">🗓️</span>
+        <div class="question-body">
+          <p class="question-phrase">¿Me puede dar cita para...?</p>
+          <p class="question-context"><strong>Úsala para:</strong> pedir una cita nueva, dando el motivo (una revisión, una vacuna) y, si puedes, un día concreto.</p>
+        </div>
+      </div>
+      <div class="question-card">
+        <span class="question-icon">📋</span>
+        <div class="question-body">
+          <p class="question-phrase">¿Podría decirme si tienen su historial actualizado?</p>
+          <p class="question-context"><strong>Úsala para:</strong> confirmar que la clínica tiene los datos de Alex antes de una visita, sin tener que llevarlo todo tú.</p>
+        </div>
+      </div>
+      <div class="question-card">
+        <span class="question-icon">💉</span>
+        <div class="question-body">
+          <p class="question-phrase">¿Me puede confirmar qué vacuna le toca ahora?</p>
+          <p class="question-context"><strong>Úsala para:</strong> preguntar por el calendario de vacunas sin tener que recordarlo tú de memoria.</p>
+        </div>
+      </div>
+      <div class="question-card">
+        <span class="question-icon">🔁</span>
+        <div class="question-body">
+          <p class="question-phrase">¿Podría cambiarme la cita para la próxima semana?</p>
+          <p class="question-context"><strong>Úsala para:</strong> reorganizar una cita ya pedida, típico cuando surge un imprevisto de última hora.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">4</span><h2>Repaso mezclado antes de narrar</h2><span class="time-tag">10 min</span></div>
+    <div class="panel">
+      <p style="margin:0 0 16px; font-size:14.5px; color:var(--ink-soft);">Objetos directos e indirectos combinados, tal como aparecen cuando narras la rutina de Alex de principio a fin.</p>
+      <div id="exercises"></div>
+      <div class="check-bar">
+        <div style="display:flex; gap:10px;">
+          <button class="btn-primary" id="check-btn">Comprobar respuestas</button>
+          <button class="btn-ghost" id="reset-btn">Reiniciar</button>
+        </div>
+        <span id="score-text"></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="block roleplay-panel">
+    <div class="block-head"><span class="block-num">5</span><h2>En la recepción, con un imprevisto</h2><span class="time-tag">18 min</span></div>
+    <div class="scene-setup">
+      <span class="scene-icon">🏥</span>
+      <p class="scene-text"><strong>Escena:</strong> llegas a la clínica veterinaria con Alex para su cita. La recepcionista te atiende, pero a mitad de la conversación surge un imprevisto — igual que en el escenario del vecino de la clase pasada, aquí solo hay el arranque y algunas líneas sueltas; el resto lo improvisas en voz alta con tu profesor haciendo de recepcionista.</p>
+    </div>
+    <div class="branch-wrap">
+      <div class="branch-prompt">
+        <p class="line-name">Recepcionista (te ve entrar con Alex)</p>
+        <p class="line-bubble">¡Hola! ¿Tenéis cita hoy? Dime el nombre, por favor.</p>
+        <div class="branch-options">
+          <textarea class="branch-textarea" rows="2" placeholder="Confirma la cita y da el nombre de Alex..."></textarea>
+          <p class="branch-hint">Confirma que tienes cita, di el nombre de Alex y el motivo de la visita si te lo pide.</p>
+        </div>
+      </div>
+      <div class="branch-prompt">
+        <p class="line-name">Recepcionista</p>
+        <p class="line-bubble">(pregunta improvisada sobre el historial o la última vacuna de Alex — o algo que se le ocurra a tu profesor)</p>
+        <div class="branch-options">
+          <textarea class="branch-textarea" rows="2" placeholder="Responde usando lo/la/le según haga falta..."></textarea>
+          <p class="branch-hint">Aquí no hay pista fija — responde de forma natural a lo que pregunte tu profesor en el momento.</p>
+        </div>
+      </div>
+      <div class="branch-prompt">
+        <span class="imprevisto-tag">⚠️ imprevisto</span>
+        <p class="line-name">Recepcionista</p>
+        <p class="line-bubble">Ah, pues... parece que el veterinario se ha retrasado con otra urgencia. ¿Podéis esperar unos 20 minutos, o preferís que os demos otra cita?</p>
+        <div class="branch-options">
+          <textarea class="branch-textarea" rows="2" placeholder="Decide y responde con una de las preguntas formales que has visto hoy..."></textarea>
+          <p class="branch-hint">Usa una estructura de cortesía (¿podría..., me gustaría...) para decidir si esperáis o cambiáis la cita.</p>
+        </div>
+      </div>
+      <div class="branch-prompt">
+        <p class="line-name">Recepcionista</p>
+        <p class="line-bubble">Antes de que os vayáis a esperar, ¿queréis aprovechar y pedir ya la próxima cita de la vacuna anual?</p>
+        <div class="branch-options">
+          <textarea class="branch-textarea" rows="2" placeholder="Decide si pides la próxima cita ahora o prefieres llamar más adelante..."></textarea>
+          <p class="branch-hint">Usa una estructura formal (¿podría..., me gustaría...) para pedir la cita o para posponerla con cortesía.</p>
+        </div>
+      </div>
+      <div class="branch-prompt">
+        <span class="imprevisto-tag">⚠️ imprevisto</span>
+        <p class="line-name">Recepcionista</p>
+        <p class="line-bubble">Ah, espera — veo que el historial de Alex no está actualizado en el sistema. ¿Lo tienes contigo o prefieres que lo mandemos pedir a la otra clínica?</p>
+        <div class="branch-options">
+          <textarea class="branch-textarea" rows="2" placeholder="Responde usando lo/la/le según haga falta y decide qué opción prefieres..."></textarea>
+          <p class="branch-hint">Aclara si llevas el historial contigo (lo/la) y responde a la recepcionista (le) con una pregunta formal si necesitas más tiempo.</p>
+        </div>
+      </div>
+      <div class="branch-prompt">
+        <span class="imprevisto-tag">⚠️ imprevisto</span>
+        <p class="line-name">Recepcionista</p>
+        <p class="line-bubble">Uy, espera un momento... el sistema me dice que la tarjeta que tenéis en el archivo ya no es válida. ¿Tenéis otra forma de pago o preferís pasar luego?</p>
+        <div class="branch-options">
+          <textarea class="branch-textarea" rows="2" placeholder="Decide cómo resolver el pago con una pregunta o petición formal..."></textarea>
+          <p class="branch-hint">Usa una estructura de cortesía para proponer una solución (¿podría cobrarme en efectivo?, ¿le importaría...?).</p>
+        </div>
+      </div>
+      <div class="branch-prompt">
+        <p class="line-name">Recepcionista</p>
+        <p class="line-bubble">(la recepcionista te comenta algo sobre otro paciente que sale de la consulta, o hace una observación cualquiera sobre Alex — improvisa según lo que diga tu profesor)</p>
+        <div class="branch-options">
+          <textarea class="branch-textarea" rows="2" placeholder="Reacciona de forma natural, sin guion fijo..."></textarea>
+          <p class="branch-hint">No hay pista fija — mantén la conversación con una reacción breve y natural, usando lo/la/le si hace falta.</p>
+        </div>
+      </div>
+      <div class="branch-prompt">
+        <p class="line-name">Recepcionista</p>
+        <p class="line-bubble">Perfecto, pues ya está. ¡Que vaya bien con Alex!</p>
+        <div class="branch-options">
+          <textarea class="branch-textarea" rows="2" placeholder="Despídete..."></textarea>
+          <p class="branch-hint">Cierra la conversación con una despedida natural, agradeciendo la ayuda.</p>
+        </div>
+      </div>
+    </div>
+    <div class="roleplay-tip"><strong>En clase:</strong> tu profesor decide en el momento qué imprevisto añadir — puede ser el retraso de arriba u otro distinto. El objetivo es reaccionar con una pregunta formal en vez de quedarte callada, aunque no sea la frase perfecta.</div>
+  </section>
+
+  <section class="block technique-panel">
+    <p class="phase-label" style="color:var(--violet);"><span class="phase-icon">📖</span>Técnica específica contra los bloqueos · Semana 4, sesión 11</p>
+    <div class="block-head"><span class="block-num">6</span><h2 style="color:var(--violet);">Narraciones sencillas</h2><span class="time-tag">6 min</span></div>
+    <p style="margin:0 0 4px; font-size:14.5px; color:var(--ink-soft);">Contar algo de principio a fin, encadenando frases cortas con conectores, sin esperar a que te pregunten cada parte. Es justo lo que necesitas para narrar la rutina completa de Alex sin cortes.</p>
+    <div class="quickdesc-list">
+      <div class="quickdesc-item">
+        <span class="quickdesc-q">Cuenta en tres frases cómo fue tu última visita al veterinario con Alex.</span>
+        <span class="quickdesc-timer">20 seg</span>
+      </div>
+      <div class="quickdesc-item">
+        <span class="quickdesc-q">Narra tu rutina de esta mañana, de principio a fin, con "primero... después... luego".</span>
+        <span class="quickdesc-timer">20 seg</span>
+      </div>
+      <div class="quickdesc-item">
+        <span class="quickdesc-q">Cuenta qué vas a hacer mañana con Alex, en orden.</span>
+        <span class="quickdesc-timer">20 seg</span>
+      </div>
+    </div>
+    <div class="technique-practice">
+      <p><strong>Practica ahora:</strong> escribe la narración completa de la rutina de Alex en la veterinaria, usando al menos tres conectores (primero, después, luego, al final).</p>
+      <textarea placeholder="Primero...&#10;Después...&#10;Luego...&#10;Al final..."></textarea>
+    </div>
+    <div class="note" style="margin-top:16px;"><strong>La idea de hoy:</strong> una narración no tiene que ser perfecta ni completa la primera vez — lo importante es que no se corte. Si te falta una palabra, sigue con una muletilla y termina la idea.</div>
+  </section>
+
+  <section class="block task-panel">
+    <div class="block-head"><span class="block-num">7</span><h2 style="color:var(--family)">Tu tarea</h2><span class="time-tag">5 min</span></div>
+    <p style="margin:0 0 14px; font-size:15px; color:var(--ink-soft);">Prepara tres preguntas que sueles necesitar de verdad en la veterinaria, usando las estructuras formales de hoy (¿me puede...?, ¿podría...?).</p>
+    <div class="prep-questions">
+      <div class="prep-q-row">
+        <span class="prep-q-num">1</span>
+        <input class="prep-q-input" type="text" placeholder="Escribe tu primera pregunta...">
+      </div>
+      <div class="prep-q-row">
+        <span class="prep-q-num">2</span>
+        <input class="prep-q-input" type="text" placeholder="Escribe tu segunda pregunta...">
+      </div>
+      <div class="prep-q-row">
+        <span class="prep-q-num">3</span>
+        <input class="prep-q-input" type="text" placeholder="Escribe tu tercera pregunta...">
+      </div>
+    </div>
+    <p style="margin:18px 0 0; font-size:15px; color:var(--ink-soft);">Después, narra en voz alta (o por escrito aquí abajo) la rutina completa de Alex esta semana, de principio a fin, usando conectores.</p>
+    <textarea id="final-task" placeholder="Primero...&#10;Después...&#10;Luego...&#10;Al final..."></textarea>
+    <div class="task-footer">
+      <span id="task-count">0 palabras escritas</span>
+      <div style="display:flex; gap:10px; align-items:center;">
+        <span class="saved-flag" id="saved-flag">Guardado ✓</span>
+        <button class="btn-secondary" id="save-btn">Guardar tarea</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <span>Clase 11 · En la veterinaria, narrar la rutina de Alex</span>
+  <span>Próxima clase → Clase 12: Repaso, cierre de Lista de invitados</span>
+</footer>
+
+<script>
+/* ---------- VOCAB ---------- */
+const VOCAB = [
+  {front:"la cita", back:"Pido la cita para Alex y la recepcionista me la da para el jueves."},
+  {front:"la vacuna", back:"Al veterinario le toca ponerle la vacuna anual a Alex."},
+  {front:"la revisión", back:"Cada seis meses le hacemos una revisión completa a Alex."},
+  {front:"el historial", back:"Siempre llevo el historial de Alex por si lo piden en la consulta."},
+  {front:"la próxima semana", back:"La recepcionista me dice que apunta la cita para la próxima semana."},
+  {front:"¿me puede...?", back:"¿Me puede dar cita para una revisión de Alex?"},
+];
+
+const grid = document.getElementById('vocab-grid');
+VOCAB.forEach(v=>{
+  const card = document.createElement('div');
+  card.className = 'vocab-card';
+  card.setAttribute('role', 'button');
+  card.setAttribute('tabindex', '0');
+  card.setAttribute('aria-pressed', 'false');
+  card.setAttribute('aria-label', `${v.front}. Pulsa para ver un ejemplo.`);
+  card.innerHTML = `<div class="vocab-front">${v.front}</div><div class="vocab-back">${v.back}</div>`;
+  const toggle = ()=>{
+    const flipped = card.classList.toggle('flipped');
+    card.setAttribute('aria-pressed', String(flipped));
+  };
+  card.addEventListener('click', toggle);
+  card.addEventListener('keydown', (e)=>{
+    if(e.key === 'Enter' || e.key === ' '){
+      e.preventDefault();
+      toggle();
+    }
+  });
+  grid.appendChild(card);
+});
+
+/* ---------- EXERCISES (mixed review: DO, IO combined) ---------- */
+const EXERCISES = [
+  {"sentence":"Pido la cita para Alex → la recepcionista <span class=\"gap\">___</span> da para el jueves.","options":["me la","me lo","se la"],"answer":"me la"},
+  {"sentence":"Llevo el historial de Alex → siempre <span class=\"gap\">___</span> llevo en el bolso.","options":["lo","la","le"],"answer":"lo"},
+  {"sentence":"El veterinario pone la vacuna a Alex → <span class=\"gap\">___</span> pone la vacuna.","options":["le","lo","la"],"answer":"le"},
+  {"sentence":"Explico el problema al veterinario → <span class=\"gap\">___</span> explico todo con calma.","options":["Le","Lo","La"],"answer":"Le"},
+  {"sentence":"¿<span class=\"gap\">___</span> puede dar cita para el jueves?","options":["me","le","lo"],"answer":"me"},
+  {"sentence":"Pregunto al veterinario por la vacuna → <span class=\"gap\">___</span> pregunto por la vacuna.","options":["le","lo","la"],"answer":"le"},
+  {"sentence":"Compro el historial impreso → <span class=\"gap\">___</span> compro en la clínica.","options":["lo","la","le"],"answer":"lo"},
+  {"sentence":"La recepcionista da la cita a Chris y a mí → <span class=\"gap\">___</span> da para el jueves.","options":["nos la","nos lo","les la"],"answer":"nos la"},
+  {"sentence":"¿<span class=\"gap\">___</span> puede repetir la hora de la cita, por favor?","options":["me","le","lo"],"answer":"me"},
+  {"sentence":"Traigo a Alex en su transportín → <span class=\"gap\">___</span> traigo bien sujeto durante el viaje.","options":["lo","la","le"],"answer":"lo"},
+  {"sentence":"Enseño la vacuna anterior al veterinario → <span class=\"gap\">___</span> enseño el papel de la última vez.","options":["le","lo","la"],"answer":"le"},
+  {"sentence":"Recojo la medicina en la recepción → <span class=\"gap\">___</span> recojo antes de salir.","options":["la","lo","le"],"answer":"la"},
+  {"sentence":"¿<span class=\"gap\">___</span> importaría anotar la alergia de Alex en el historial?","options":["le","lo","la"],"answer":"le"},
+  {"sentence":"Escribo las dudas para el veterinario → <span class=\"gap\">___</span> escribo antes de entrar a la consulta.","options":["las","los","les"],"answer":"las"},
+  {"sentence":"El veterinario explica el tratamiento a Chris y a mí → <span class=\"gap\">___</span> explica con calma.","options":["nos lo","nos la","les lo"],"answer":"nos lo"},
+  {"sentence":"Saludo a la recepcionista al entrar → <span class=\"gap\">___</span> saludo con una sonrisa.","options":["la","lo","le"],"answer":"la"},
+  {"sentence":"¿<span class=\"gap\">___</span> podrían avisar cuando esté lista la analítica de Alex?","options":["me","le","lo"],"answer":"me"},
+  {"sentence":"Entrego el pago a la recepcionista → <span class=\"gap\">___</span> entrego en efectivo.","options":["se lo","se la","le lo"],"answer":"se lo"},
+  {"sentence":"¿<span class=\"gap\">___</span> podría cambiar la cita para la próxima semana?","options":["me","le","lo"],"answer":"me"},
+  {"sentence":"Veo al veterinario en la sala de espera → <span class=\"gap\">___</span> veo al fondo.","options":["Lo","Le","La"],"answer":"Lo"},
+  {"sentence":"Doy el historial a la recepcionista → <span class=\"gap\">___</span> doy en la entrada.","options":["Se lo","Se la","Le lo"],"answer":"Se lo"},
+  {"sentence":"Confirmo la revisión al veterinario → <span class=\"gap\">___</span> confirmo la revisión.","options":["le","lo","la"],"answer":"le"},
+  {"sentence":"Llevo a Alex a la consulta → <span class=\"gap\">___</span> llevo en brazos hasta la mesa.","options":["lo","la","le"],"answer":"lo"},
+  {"sentence":"¿Me puede decir si tienen el historial actualizado? → Sí, <span class=\"gap\">___</span> tenemos aquí.","options":["lo","la","le"],"answer":"lo"},
+  {"sentence":"Pido las próximas vacunas a la recepcionista → <span class=\"gap\">___</span> pido por escrito.","options":["se las","se los","le las"],"answer":"se las"},
+  {"sentence":"El veterinario revisa a Alex → <span class=\"gap\">___</span> revisa entero, de la cabeza a la cola.","options":["lo","la","le"],"answer":"lo"},
+  {"sentence":"Cuento la rutina de Alex al veterinario → <span class=\"gap\">___</span> cuento toda la semana.","options":["le","lo","la"],"answer":"le"},
+  {"sentence":"Pago la consulta con tarjeta → <span class=\"gap\">___</span> pago en la recepción.","options":["la","lo","le"],"answer":"la"},
+  {"sentence":"¿<span class=\"gap\">___</span> podría confirmar qué vacuna le toca ahora?","options":["me","le","lo"],"answer":"me"},
+  {"sentence":"Doy las gracias a la recepcionista → <span class=\"gap\">___</span> doy las gracias al salir.","options":["Le","Lo","La"],"answer":"Le"}
+]
+;
+
+function shuffle(arr){
+  const a = arr.slice();
+  for(let i = a.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+const exWrap = document.getElementById('exercises');
+EXERCISES.forEach((ex, i)=>{
+  if(i === 0){
+    const divider = document.createElement('div');
+    divider.className = 'ex-divider en-clase';
+    divider.textContent = 'en clase · ítems 1–20';
+    exWrap.appendChild(divider);
+  }
+  if(i === 20){
+    const divider = document.createElement('div');
+    divider.className = 'ex-divider';
+    divider.textContent = 'para casa · ítems 21–30 · repaso opcional';
+    exWrap.appendChild(divider);
+  }
+  const el = document.createElement('div');
+  el.className = 'exercise';
+  el.dataset.answer = ex.answer;
+  const shuffledOptions = shuffle(ex.options);
+  el.innerHTML = `
+    <div class="ex-sentence">${i+1}. ${ex.sentence}</div>
+    <div class="ex-options">
+      ${shuffledOptions.map(o=>`<button class="opt-btn" data-value="${o}">${o}</button>`).join('')}
+    </div>
+  `;
+  exWrap.appendChild(el);
+
+  el.querySelectorAll('.opt-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      el.querySelectorAll('.opt-btn').forEach(b=>b.classList.remove('picked'));
+      btn.classList.add('picked');
+    });
+  });
+});
+
+document.getElementById('check-btn').addEventListener('click', ()=>{
+  let correct = 0;
+  document.querySelectorAll('.exercise').forEach(el=>{
+    const answer = el.dataset.answer;
+    const picked = el.querySelector('.opt-btn.picked');
+    el.querySelectorAll('.opt-btn').forEach(b=>{
+      b.disabled = true;
+      if(b.dataset.value === answer) b.classList.add('correct');
+      else if(b === picked) b.classList.add('wrong');
+    });
+    if(picked && picked.dataset.value === answer) correct++;
+  });
+  document.getElementById('score-text').textContent = `${correct} / ${EXERCISES.length} correctas`;
+});
+
+document.getElementById('reset-btn').addEventListener('click', ()=>{
+  document.querySelectorAll('.exercise').forEach(el=>{
+    el.querySelectorAll('.opt-btn').forEach(b=>{
+      b.disabled = false;
+      b.classList.remove('picked','correct','wrong');
+    });
+  });
+  document.getElementById('score-text').textContent = '';
+});
+
+/* ---------- TÉCNICA: práctica de narraciones (autosave) ---------- */
+const STORAGE_KEY_TECHNIQUE = 'lisa-clase11-tecnica';
+const techniqueArea = document.querySelector('.technique-practice textarea');
+
+async function cargarTecnica(){
+  if (!window.storage || !techniqueArea) return;
+  try{
+    const res = await window.storage.get(STORAGE_KEY_TECHNIQUE);
+    if (res && typeof res.value === 'string') techniqueArea.value = res.value;
+  }catch(e){
+    // sin práctica previa
+  }
+}
+if (techniqueArea){
+  techniqueArea.addEventListener('input', ()=>{
+    clearTimeout(techniqueArea._saveTimer);
+    techniqueArea._saveTimer = setTimeout(()=>{
+      if (window.storage) window.storage.set(STORAGE_KEY_TECHNIQUE, techniqueArea.value).catch(()=>{ /* fallo silencioso */ });
+    }, 600);
+  });
+  cargarTecnica();
+}
+
+/* ---------- PREP QUESTIONS (autosave) ---------- */
+const STORAGE_KEY_PREP = 'lisa-clase11-preguntas';
+const prepInputs = document.querySelectorAll('.prep-q-input');
+
+async function cargarPreguntas(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(STORAGE_KEY_PREP);
+    if (res && typeof res.value === 'string'){
+      const values = JSON.parse(res.value);
+      prepInputs.forEach((input, i)=>{ if(values[i]) input.value = values[i]; });
+    }
+  }catch(e){
+    // sin preguntas previas
+  }
+}
+function guardarPreguntas(){
+  if (!window.storage) return;
+  const values = Array.from(prepInputs).map(i=>i.value);
+  window.storage.set(STORAGE_KEY_PREP, JSON.stringify(values)).catch(()=>{ /* fallo silencioso */ });
+}
+prepInputs.forEach(input=>{
+  input.addEventListener('input', ()=>{
+    clearTimeout(input._saveTimer);
+    input._saveTimer = setTimeout(guardarPreguntas, 600);
+  });
+});
+cargarPreguntas();
+
+/* ---------- FINAL TASK ---------- */
+const STORAGE_KEY = 'lisa-clase11-tarea';
+const taskArea = document.getElementById('final-task');
+const taskCount = document.getElementById('task-count');
+const savedFlag = document.getElementById('saved-flag');
+
+async function cargarTarea(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(STORAGE_KEY);
+    if (res && typeof res.value === 'string') taskArea.value = res.value;
+  }catch(e){
+    // Clave inexistente todavía: no hay tarea previa, se queda en blanco.
+  }
+  updateCount();
+}
+
+function updateCount(){
+  const words = taskArea.value.trim().split(/\s+/).filter(Boolean).length;
+  taskCount.textContent = `${words} palabra${words===1?'':'s'} escrita${words===1?'':'s'}`;
+}
+taskArea.addEventListener('input', updateCount);
+updateCount();
+cargarTarea();
+
+document.getElementById('save-btn').addEventListener('click', async ()=>{
+  if (!window.storage){
+    savedFlag.textContent = 'Guardado no disponible aquí';
+    savedFlag.classList.add('show');
+    setTimeout(()=>{ savedFlag.classList.remove('show'); savedFlag.textContent = 'Guardado ✓'; }, 2200);
+    return;
+  }
+  try{
+    const ok = await window.storage.set(STORAGE_KEY, taskArea.value);
+    savedFlag.textContent = ok ? 'Guardado ✓' : 'No se pudo guardar';
+  }catch(e){
+    savedFlag.textContent = 'No se pudo guardar';
+  }
+  savedFlag.classList.add('show');
+  setTimeout(()=>{ savedFlag.classList.remove('show'); savedFlag.textContent = 'Guardado ✓'; }, 1800);
+});
+</script>
+
+</body>
+</html>

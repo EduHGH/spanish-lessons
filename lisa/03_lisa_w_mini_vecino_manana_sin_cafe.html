@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mini · Vecino por la mañana, sin café</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+
+/* ╔══════════════════════════════════════════════════════════════╗
+   ║  ESCOLAR — Expansion Pack · Mini                              ║
+   ║  Vecino por la mañana, sin café — ramas según reacción         ║
+   ╚══════════════════════════════════════════════════════════════╝ */
+
+:root{
+  --paper:        #FBF7EE;
+  --paper-raised: #FFFFFF;
+  --paper-alt:    #F3ECDA;
+  --ink:          #23291F;
+  --ink-soft:     #565F52;
+  --ink-faint:    #8B9184;
+  --line:         rgba(35,41,31,0.12);
+  --line-strong:  rgba(35,41,31,0.22);
+
+  --b1:      #2F6FED;  --b1-soft: #EAF1FE;  --b1-line: #C6D9FC;
+  --b2:      #2E9E6B;  --b2-soft: #E9F6EF;  --b2-line: #BEE6D3;
+  --family:  #B5502E;  --family-soft: #FBEBE3; --family-line: #EFC9B4;
+  --violet:  #7B4FC9;  --violet-soft: #F1EBFB; --violet-line: #D9C8F0;
+  --amber:   #B8862E;  --amber-soft: #FBF1DE; --amber-line: #EEDBA9;
+
+  --f-display: 'Fraunces', Georgia, serif;
+  --f-body:    'IBM Plex Sans', system-ui, sans-serif;
+  --f-data:    'IBM Plex Mono', monospace;
+
+  --r-sm: 8px;
+  --r-md: 14px;
+  --r-lg: 20px;
+
+  --shadow-1: 0 1px 2px rgba(35,41,31,0.05), 0 1px 8px rgba(35,41,31,0.04);
+}
+
+*{ box-sizing:border-box; }
+body{
+  margin:0;
+  background: var(--paper);
+  background-image: radial-gradient(circle at 1px 1px, var(--line) 1px, transparent 0);
+  background-size: 22px 22px;
+  color: var(--ink);
+  font-family: var(--f-body);
+  line-height:1.6;
+}
+::selection{ background: var(--b1-soft); }
+
+/* ---------- HEADER ---------- */
+header{ padding:44px 24px 28px; max-width:760px; margin:0 auto; }
+.eyebrow{
+  font-family: var(--f-data); font-size:12px; letter-spacing:.14em;
+  text-transform:uppercase; color: var(--violet); margin:0 0 10px;
+  display:flex; align-items:center; gap:10px;
+}
+.eyebrow .dot{ width:6px; height:6px; border-radius:50%; background: var(--violet); }
+h1{
+  font-family: var(--f-display); font-weight:600;
+  font-size:clamp(30px,5.6vw,46px); line-height:1.08;
+  margin:0 0 14px; letter-spacing:-.01em;
+}
+h1 em{ font-style:italic; color: var(--violet); }
+.lede{ font-size:16px; color: var(--ink-soft); max-width:56ch; margin:0; }
+
+.meta-row{
+  display:flex; flex-wrap:wrap; gap:20px; margin-top:26px;
+  font-family: var(--f-data); font-size:12px; color: var(--ink-faint);
+}
+.meta-row strong{
+  display:block; color: var(--ink); font-size:14.5px; font-weight:500;
+  font-family: var(--f-display); margin-top:3px;
+}
+
+/* ---------- STRUCTURE STRIP ---------- */
+.structure-strip{
+  display:grid; grid-template-columns:repeat(5,1fr); gap:2px; margin-top:24px;
+  border-radius: var(--r-md); overflow:hidden; border:1px solid var(--line);
+}
+.structure-strip.row2{ margin-top:2px; }
+.structure-cell{ background: var(--paper-raised); padding:10px 8px; }
+.structure-cell .s-icon{ font-size:15px; }
+.structure-cell .s-label{ font-family: var(--f-body); font-weight:600; font-size:10.5px; color: var(--ink); margin-top:4px; line-height:1.25; }
+
+/* ---------- SECTIONS ---------- */
+main{ max-width:760px; margin:0 auto; padding:8px 24px 100px; }
+
+section.block{ margin-bottom:52px; }
+.block-head{ display:flex; align-items:baseline; gap:12px; margin-bottom:18px; }
+.time-tag{
+  font-family: var(--f-data); font-size:11px; color: var(--ink-faint);
+  background: var(--paper-alt); padding:3px 10px; border-radius:999px; margin-left:auto; flex:none;
+}
+.block-num{
+  font-family: var(--f-data); font-size:12px; color:#fff; background: var(--violet);
+  width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  flex:none;
+}
+.block-head h2{
+  font-family: var(--f-display); font-weight:500; font-style:italic; font-size:22px; margin:0;
+}
+.phase-label{
+  font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.08em;
+  color: var(--ink-faint); margin:0 0 8px; display:flex; align-items:center; gap:8px;
+}
+
+.panel{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-lg);
+  box-shadow: var(--shadow-1); padding:26px 28px;
+}
+
+/* ---------- 1. EL MOMENTO (scene) ---------- */
+.scene-panel{ background: var(--family-soft); border:1px solid var(--family-line); border-radius: var(--r-lg); padding:26px 28px; }
+.scene-panel .block-num{ background: var(--family); }
+.scene-setup{
+  display:flex; gap:14px; align-items:flex-start; background: var(--paper-raised);
+  border:1px solid var(--family-line); border-radius: var(--r-md); padding:16px 18px; margin-bottom:16px;
+}
+.scene-icon{ font-size:24px; flex:none; }
+.scene-text{ font-size:15px; color: var(--ink-soft); }
+.scene-text strong{ color: var(--ink); }
+.blocked-line{
+  margin-top:16px; padding:16px 18px; background: rgba(255,255,255,0.5); border:1px dashed var(--family-line);
+  border-radius: var(--r-md); font-family: var(--f-display); font-style:italic; font-size:16.5px; color: var(--ink);
+}
+.blocked-line .who{ font-family: var(--f-data); font-style:normal; font-size:11px; text-transform:uppercase;
+  letter-spacing:.05em; color: var(--family); display:block; margin-bottom:6px; }
+
+/* ---------- 2. LA SALIDA INMEDIATA ---------- */
+.exit-panel{ background: var(--violet-soft); border:1px solid var(--violet-line); }
+.exit-panel .block-num{ background: var(--violet); }
+.exit-line{
+  font-family: var(--f-display); font-weight:500; font-size:22px; color: var(--ink);
+  background: var(--paper-raised); border:1px solid var(--violet-line); border-radius: var(--r-md);
+  padding:20px 22px; margin-top:4px;
+}
+.exit-line .accent{ color: var(--violet); }
+.exit-note{ font-size:13.5px; color: var(--ink-soft); margin-top:14px; }
+.exit-note strong{ color: var(--ink); }
+
+/* ---------- 3. ÁRBOL DE RAMAS (según reacción) ---------- */
+.branch-wrap{ display:flex; flex-direction:column; gap:16px; margin-top:4px; }
+.branch-card{ border-radius: var(--r-md); border:1px solid; overflow:hidden; }
+.branch-card.stop{ background: var(--b1-soft); border-color: var(--b1-line); }
+.branch-card.walk{ background: var(--b2-soft); border-color: var(--b2-line); }
+.branch-card.chatty{ background: var(--family-soft); border-color: var(--family-line); }
+.branch-card.rush{ background: var(--amber-soft); border-color: var(--amber-line); }
+.branch-head{ display:flex; align-items:center; gap:10px; padding:14px 18px; }
+.branch-icon{ font-size:18px; flex:none; }
+.branch-title{ font-family: var(--f-display); font-weight:600; font-size:17px; color: var(--ink); }
+.branch-card.stop .branch-title{ color: var(--b1); }
+.branch-card.walk .branch-title{ color: var(--b2); }
+.branch-card.chatty .branch-title{ color: var(--family); }
+.branch-card.rush .branch-title{ color: var(--amber); }
+.branch-sub{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin-left:auto; text-align:right; }
+.branch-body{ background: var(--paper-raised); padding:16px 18px; border-top:1px solid var(--line); }
+.branch-line{ font-size:14.5px; color: var(--ink); margin-bottom:10px; }
+.branch-line:last-child{ margin-bottom:0; }
+.branch-line .who{ font-family: var(--f-data); font-size:10.5px; text-transform:uppercase; letter-spacing:.05em; color: var(--ink-faint); display:block; margin-bottom:3px; }
+.branch-line .txt{ font-family: var(--f-display); font-style:italic; }
+
+/* ---------- 4. VERBOS + PIEZAS ---------- */
+.prep-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(210px,1fr)); gap:12px; margin-top:4px; }
+.prep-card{
+  background: var(--paper-raised); border:1px solid var(--b1-line); border-radius: var(--r-md);
+  padding:16px 18px; cursor:pointer; min-height:96px; display:flex; flex-direction:column;
+  justify-content:center; transition: border-color .15s ease, transform .1s ease;
+}
+.prep-card:hover{ border-color: var(--b1); transform: translateY(-1px); }
+.prep-card:focus-visible{ outline:2px solid var(--b1); outline-offset:2px; }
+.prep-verb{ font-family: var(--f-display); font-weight:600; font-size:17px; color: var(--ink); }
+.prep-verb .prep{ color: var(--b1); font-style:italic; }
+.prep-example{ display:none; font-family: var(--f-body); font-size:13px; color: var(--ink-soft); margin-top:8px; line-height:1.5; }
+.prep-example .en{ margin-top:6px; }
+.prep-card.flipped .prep-example{ display:block; }
+.prep-card.flipped{ background: var(--b1-soft); border-color: var(--b1); }
+.prep-hint{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin:12px 2px 0; }
+
+/* ---------- 5. FÓRMULAS NATURALES ---------- */
+.formula-grid{ display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:4px; }
+@media(max-width:640px){ .formula-grid{ grid-template-columns:1fr; } }
+.formula-card{
+  background: var(--paper-raised); border:1px solid var(--b2-line); border-radius: var(--r-md);
+  padding:18px 20px;
+}
+.formula-card .f-label{ font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.05em; color: var(--b2); margin-bottom:8px; }
+.formula-card .f-text{ font-family: var(--f-display); font-size:16px; color: var(--ink); font-style:italic; }
+
+/* ---------- RESCUE PHRASES (muletillas) ---------- */
+.rescue-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:12px; margin-top:4px; }
+.rescue-card{
+  background: var(--paper-raised); border:1px solid var(--family-line); border-radius: var(--r-md);
+  padding:16px 18px;
+}
+.rescue-phrase{ font-family: var(--f-display); font-weight:600; font-style:italic; font-size:16px; color: var(--family); margin-bottom:6px; }
+.rescue-use{ font-size:13px; color: var(--ink-soft); }
+.rescue-use .en{ margin-top:8px; }
+
+/* ---------- REGISTER TABLE ---------- */
+.register-table{ width:100%; border-collapse:collapse; margin-top:4px; }
+.register-table th{
+  font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.05em;
+  color: var(--ink-faint); text-align:left; padding:0 10px 10px; border-bottom:1px solid var(--line);
+}
+.register-table td{ padding:12px 10px; border-bottom:1px dashed var(--line); font-size:14px; vertical-align:top; }
+.register-table tr:last-child td{ border-bottom:none; }
+.register-table .reg-tag{ font-family: var(--f-data); font-size:11px; text-transform:uppercase; color: var(--violet); white-space:nowrap; }
+
+/* ---------- 6. MINI-ROLEPLAY ---------- */
+.roleplay-panel{ background: var(--b1-soft); border:1px solid var(--b1-line); border-radius: var(--r-lg); padding:26px 28px; }
+.roleplay-panel .block-num{ background: var(--b1); }
+.dialogue{ display:flex; flex-direction:column; gap:14px; }
+.line{ display:flex; gap:12px; align-items:flex-start; }
+.line-avatar{
+  flex:none; width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  font-family: var(--f-display); font-weight:600; font-size:14px; color:#fff;
+}
+.line.friend .line-avatar{ background: var(--ink-faint); }
+.line.you .line-avatar{ background: var(--b1); }
+.line-body{ flex:1; }
+.line-name{ font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.05em; color: var(--ink-faint); margin:0 0 4px; }
+.line-bubble{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:12px 14px; font-size:14.5px; color: var(--ink);
+}
+.line.you .line-bubble{ background:#fff; border-color: var(--b1-line); }
+.line-input{
+  width:100%; font-family: var(--f-body); font-size:14.5px; color: var(--ink);
+  background:#fff; border:1px solid var(--b1-line); border-radius: var(--r-sm);
+  padding:10px 12px; resize:vertical; min-height:44px; margin-top:2px;
+}
+.line-input:focus{ outline:none; border-color: var(--b1); }
+.line-hint{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin-top:5px; }
+.roleplay-tip{
+  margin-top:22px; padding:14px 16px; background: var(--paper-raised); border:1px solid var(--b1-line);
+  border-radius: var(--r-md); font-size:13.5px; color: var(--ink-soft);
+}
+.roleplay-tip strong{ color: var(--ink); }
+
+/* ---------- 7. CHOOSE YOUR WORDS ---------- */
+.choose-panel{ background: var(--paper-raised); border:1px solid var(--line); }
+.choose-intro{ font-size:14px; color: var(--ink-soft); margin:0 0 18px; }
+.choose-grid{ display:flex; flex-direction:column; gap:10px; }
+.choose-item{
+  display:flex; align-items:center; gap:14px; padding:12px 14px; border:1px solid var(--line);
+  border-radius: var(--r-md); cursor:pointer; transition: all .15s ease; background: var(--paper-raised);
+}
+.choose-item:hover{ border-color: var(--violet-line); background: var(--violet-soft); }
+.choose-item.picked{ border-color: var(--violet); background: var(--violet-soft); }
+.choose-checkbox{
+  flex:none; width:20px; height:20px; border-radius:6px; border:1.5px solid var(--line-strong);
+  display:flex; align-items:center; justify-content:center; font-size:13px; color:#fff;
+  background: var(--paper-raised);
+}
+.choose-item.picked .choose-checkbox{ background: var(--violet); border-color: var(--violet); }
+.choose-text{ font-size:14.5px; color: var(--ink); flex:1; }
+.choose-text .en{ margin-top:4px; }
+.choose-footer{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:20px; padding-top:18px; border-top:1px dashed var(--line); flex-wrap:wrap; }
+#choose-count{ font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); }
+.btn-primary{
+  font-family: var(--f-body); font-weight:600; font-size:14px; color:#fff; background: var(--violet);
+  border:none; padding:11px 22px; border-radius:999px; cursor:pointer; transition: transform .1s ease;
+}
+.btn-primary:hover{ transform: translateY(-1px); }
+textarea#final-summary{
+  width:100%; min-height:100px; font-family: var(--f-body); font-size:14.5px; color: var(--ink);
+  background: var(--paper-alt); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:14px 16px; resize:vertical; margin-top:16px; display:none;
+}
+textarea#final-summary:focus{ outline:none; border-color: var(--violet); }
+
+footer{ max-width:760px; margin:0 auto; padding:0 24px 60px; font-family: var(--f-data); font-size:12px; color: var(--ink-faint); text-align:center; }
+
+/* ---------- LANG TOGGLE ---------- */
+.lang-toggle{
+  position:fixed; top:18px; right:18px; z-index:50;
+  display:flex; align-items:center; gap:8px;
+  background: var(--paper-raised); border:1px solid var(--line-strong); border-radius:999px;
+  padding:6px 8px; box-shadow: var(--shadow-1);
+  font-family: var(--f-data); font-size:11px;
+}
+.lang-toggle span{ color: var(--ink-faint); padding:0 2px; }
+.lang-toggle span.active{ color: var(--violet); font-weight:700; }
+.lang-switch{
+  position:relative; width:38px; height:20px; border-radius:999px; background: var(--paper-alt);
+  border:1px solid var(--line-strong); cursor:pointer; flex:none;
+}
+.lang-switch::after{
+  content:""; position:absolute; top:1px; left:1px; width:16px; height:16px; border-radius:50%;
+  background: var(--violet); transition: transform .15s ease;
+}
+body.show-en .lang-switch::after{ transform: translateX(18px); }
+
+.en{
+  display:none;
+  font-family: var(--f-body); font-size:0.92em; color: var(--ink-faint);
+  font-style:italic; margin-top:4px;
+}
+body.show-en .en{ display:block; }
+body.show-en .en.inline{ display:inline; margin-top:0; margin-left:6px; }
+.en::before{ content:"EN · "; font-family: var(--f-data); font-style:normal; font-size:0.85em; color: var(--violet); }
+
+/* ---------- PRINT BUTTON ---------- */
+.print-btn{
+  position:fixed; top:64px; right:18px; z-index:50;
+  display:flex; align-items:center; gap:7px;
+  background: var(--paper-raised); border:1px solid var(--line-strong); border-radius:999px;
+  padding:8px 14px 8px 12px; box-shadow: var(--shadow-1); cursor:pointer;
+  font-family: var(--f-body); font-weight:600; font-size:12px; color: var(--ink-soft);
+  transition: border-color .15s ease, color .15s ease;
+}
+.print-btn:hover{ border-color: var(--violet); color: var(--violet); }
+.print-btn:focus-visible{ outline:2px solid var(--violet); outline-offset:2px; }
+.print-btn svg{ width:15px; height:15px; flex:none; }
+
+/* ---------- DOWNLOAD BUTTON ---------- */
+.download-btn{
+  position:fixed; top:110px; right:18px; z-index:50;
+  display:flex; align-items:center; gap:7px;
+  background: var(--paper-raised); border:1px solid var(--line-strong); border-radius:999px;
+  padding:8px 14px 8px 12px; box-shadow: var(--shadow-1); cursor:pointer;
+  font-family: var(--f-body); font-weight:600; font-size:12px; color: var(--ink-soft);
+  transition: border-color .15s ease, color .15s ease;
+}
+.download-btn:hover{ border-color: var(--violet); color: var(--violet); }
+.download-btn:focus-visible{ outline:2px solid var(--violet); outline-offset:2px; }
+.download-btn svg{ width:15px; height:15px; flex:none; }
+
+/* ---------- PRINT MODE (ahorro de tinta) ---------- */
+@media print{
+  .lang-toggle, .print-btn, .download-btn{ display:none !important; }
+  body{
+    background: #fff !important;
+    background-image: none !important;
+    color:#000 !important;
+  }
+  .eyebrow, .eyebrow .dot, h1 em, .exit-line .accent,
+  .block-num, .branch-card.stop .branch-title, .branch-card.walk .branch-title,
+  .branch-card.chatty .branch-title, .branch-card.rush .branch-title,
+  .prep-verb .prep, .f-label, .rescue-phrase, .register-table .reg-tag,
+  .reg-tag, .line-avatar, #choose-count{
+    color:#000 !important;
+  }
+  .block-num{ background:#fff !important; border:1px solid #000 !important; }
+  .scene-panel, .exit-panel, .branch-card, .branch-card.stop, .branch-card.walk,
+  .branch-card.chatty, .branch-card.rush, .roleplay-panel, .panel, .prep-card,
+  .formula-card, .rescue-card, .choose-item, .choose-item.picked, .line-bubble,
+  .line.you .line-bubble, .line-input, .blocked-line, .exit-line, .structure-cell,
+  .time-tag, textarea#final-summary, .roleplay-tip{
+    background:#fff !important;
+    box-shadow:none !important;
+    border-color:#000 !important;
+  }
+  .line-avatar{ background:#fff !important; border:1px solid #000 !important; }
+  .prep-card.flipped{ background:#fff !important; }
+  .choose-checkbox{ background:#fff !important; border-color:#000 !important; }
+  .choose-item.picked .choose-checkbox{ background:#fff !important; color:#000 !important; }
+  .btn-primary{ display:none !important; }
+  a{ color:#000 !important; text-decoration:underline; }
+  .prep-example{ display:block !important; }
+  section.block{ page-break-inside:avoid; margin-bottom:28px; }
+}
+
+</style>
+</head>
+<body>
+
+<div class="lang-toggle">
+  <span id="lang-es-label" class="active">ES</span>
+  <div class="lang-switch" id="lang-switch" role="button" tabindex="0" aria-label="Mostrar traducción al inglés"></div>
+  <span id="lang-en-label">EN</span>
+</div>
+
+<button class="print-btn" id="print-btn" type="button" title="Imprimir en modo ahorro de tinta">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+  Imprimir
+</button>
+
+<button class="download-btn" id="download-btn" type="button" title="Descargar esta ficha como archivo HTML">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+  Descargar
+</button>
+
+
+<header>
+  <p class="eyebrow"><span class="dot"></span>Expansion Pack · Mini</p>
+  <h1>El vecino de <em>por la mañana</em>, sin café</h1>
+  <p class="lede">Todavía no has desayunado, apenas has hablado con nadie, y ya estás delante del vecino en el portal o en el pasillo. No tienes energía para improvisar una conversación entera en español — necesitas frases automáticas, listas de fábrica, que salgan solas aunque tu cerebro todavía esté medio dormido.
+    <span class="en">You haven't had breakfast yet, you've barely spoken to anyone, and you're already in front of the neighbour in the entryway or hallway. You don't have the energy to improvise a whole conversation in Spanish — you need automatic phrases, factory-ready, that come out on their own even while your brain is still half asleep.</span>
+  </p>
+
+  <div class="meta-row">
+    <div>Contexto <strong>Portal, pasillo, ascensor — antes del café</strong></div>
+    <div>Bloqueo <strong>Cero energía para improvisar, pero hay que responder</strong></div>
+    <div>Duración <strong>~20 min</strong></div>
+  </div>
+
+  <div class="structure-strip">
+    <div class="structure-cell"><div class="s-icon">☕</div><div class="s-label">El momento</div></div>
+    <div class="structure-cell"><div class="s-icon">🚪</div><div class="s-label">Salida inmediata</div></div>
+    <div class="structure-cell"><div class="s-icon">🌳</div><div class="s-label">Según reaccione</div></div>
+    <div class="structure-cell"><div class="s-icon">🧩</div><div class="s-label">Piezas</div></div>
+    <div class="structure-cell"><div class="s-icon">💬</div><div class="s-label">Fórmulas</div></div>
+  </div>
+  <div class="structure-strip row2">
+    <div class="structure-cell"><div class="s-icon">🆘</div><div class="s-label">Rescate</div></div>
+    <div class="structure-cell"><div class="s-icon">🎚️</div><div class="s-label">Registro</div></div>
+    <div class="structure-cell"><div class="s-icon">🎭</div><div class="s-label">Roleplay</div></div>
+    <div class="structure-cell"><div class="s-icon">✅</div><div class="s-label">Tus palabras</div></div>
+    <div class="structure-cell"><div class="s-icon">🔁</div><div class="s-label">Repaso</div></div>
+  </div>
+</header>
+
+<main>
+
+  <!-- ============ 1. EL MOMENTO ============ -->
+  <section class="block">
+    <div class="block-head">
+      <div class="block-num">1</div>
+      <h2>El momento</h2>
+      <div class="time-tag">bloqueo real</div>
+    </div>
+    <div class="scene-panel">
+      <div class="scene-setup">
+        <div class="scene-icon">☕</div>
+        <div class="scene-text">Bajas a por el pan, o sacas la basura, todavía en pijama mental aunque vayas vestida. Sin previo aviso, el vecino está ahí — en el portal, en el ascensor — con energía de las nueve de la mañana que tú todavía no tienes.
+          <span class="en">You go down for bread, or take out the trash, still mentally in pyjamas even if you're dressed. Without warning, the neighbour is there — in the entryway, in the lift — with nine-in-the-morning energy you don't have yet.</span>
+        </div>
+      </div>
+      <div class="blocked-line">
+        <span class="who">Vecino</span>
+        "¡Buenos días! Qué mañana más bonita, ¿verdad? ¿Ya has desayunado?"
+        <span class="en">"Good morning! What a lovely morning, isn't it? Have you had breakfast yet?"</span>
+      </div>
+      <p class="scene-text" style="margin-top:16px;">Tu cerebro, sin cafeína, tarda el doble en montar cualquier frase — y encima esta mañana toca hacerlo en español. No es que no sepas las palabras. Es que a las ocho de la mañana no tienes la energía de procesar, traducir y responder a la vez.
+        <span class="en">Your brain, without caffeine, takes twice as long to build any sentence — and on top of that, this morning it has to happen in Spanish. It's not that you don't know the words. It's that at eight in the morning you don't have the energy to process, translate, and respond all at once.</span>
+      </p>
+      <p class="scene-text" style="margin-top:12px;">La solución no es "espabilarte más rápido" — es tener ya montadas, de fábrica, dos o tres frases de mañana que no requieren pensar. Así tu boca responde sola mientras tu cerebro sigue arrancando.
+        <span class="en">The solution isn't "waking up faster" — it's already having two or three morning phrases pre-built that don't require thinking. That way your mouth responds on its own while your brain is still booting up.</span>
+      </p>
+      <div class="scene-setup" style="margin-top:16px; margin-bottom:0;">
+        <div class="scene-icon">🧠</div>
+        <div class="scene-text">Por qué se produce el bloqueo: por la mañana, sin cafeína, cualquier tarea cognitiva cuesta más — y hablar en un idioma que no es el tuyo es una tarea cognitiva. No es un fallo tuyo con el español, es simple fisiología. La solución es reducir la carga: frases fijas, no improvisación.
+          <span class="en">Why the block happens: in the morning, without caffeine, any cognitive task costs more — and speaking in a language that isn't your first is a cognitive task. It's not a failure with your Spanish, it's simple physiology. The fix is reducing the load: fixed phrases, not improvisation.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 2. LA SALIDA INMEDIATA ============ -->
+  <section class="block">
+    <div class="block-head">
+      <div class="block-num">2</div>
+      <h2>La salida inmediata</h2>
+    </div>
+    <div class="panel exit-panel">
+      <div class="exit-line">¡Buenos días! Todavía <span class="accent">no</span> he desayunado, voy medio dormida todavía.
+        <span class="en">Good morning! I <span class="accent">haven't</span> had breakfast yet, I'm still half asleep.</span>
+      </div>
+      <p class="exit-note">Esta frase hace dos cosas a la vez: saluda con normalidad y explica por qué vas a estar un poco menos habladora de lo normal — sin necesidad de disculparte ni de dar más explicaciones. El vecino lo va a entender perfectamente, porque a todo el mundo le pasa.
+        <span class="en">This line does two things at once: it greets normally and explains why you're going to be a bit less chatty than usual — without needing to apologize or give more explanation. The neighbour will understand perfectly, because it happens to everyone.</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ 3. SEGÚN CÓMO REACCIONE ============ -->
+  <section class="block">
+    <div class="block-head">
+      <div class="block-num">3</div>
+      <h2>Según cómo reaccione</h2>
+      <div class="time-tag">las cuatro ramas</div>
+    </div>
+    <div class="panel">
+      <p style="font-size:14px; color:var(--ink-soft); margin:0 0 16px;">Un "buenos días" por la mañana puede quedarse ahí, o puede convertirse en cinco minutos de charla que no tienes energía para sostener. Aquí tienes una rama para cada caso.
+        <span class="en">A "good morning" can stay right there, or it can turn into five minutes of chat you don't have the energy to sustain. Here's a branch for each case.</span>
+      </p>
+      <div class="branch-wrap">
+
+        <div class="branch-card stop">
+          <div class="branch-head">
+            <div class="branch-icon">🛑</div>
+            <div class="branch-title">Se para a hablar</div>
+            <div class="branch-sub">tiene tiempo, tú menos</div>
+          </div>
+          <div class="branch-body">
+            <div class="branch-line"><span class="who">Vecino</span><span class="txt">"¡Buenos días! ¿Qué tal la semana? Yo es que hoy he madrugado un montón..."</span></div>
+            <div class="branch-line"><span class="who">Tú</span><span class="txt">"Buenos días. Todo bien, aunque yo todavía sin café, jaja. ¿Y tú qué tal, cómo llevas la semana?"</span></div>
+            <div class="branch-line" style="color:var(--ink-soft); font-size:13.5px; margin-top:8px;">Reconoces tu estado con humor y le devuelves la pregunta — así puedes sostener un intercambio corto sin tener que generar contenido nuevo tú.<span class="en">You acknowledge your state with humor and bounce the question back — that way you can sustain a short exchange without having to generate new content yourself.</span></div>
+          </div>
+        </div>
+
+        <div class="branch-card walk">
+          <div class="branch-head">
+            <div class="branch-icon">🚶</div>
+            <div class="branch-title">Solo saluda y sigue</div>
+            <div class="branch-sub">cruce mínimo</div>
+          </div>
+          <div class="branch-body">
+            <div class="branch-line"><span class="who">Vecino</span><span class="txt">"¡Buenos días!" (sigue caminando)</span></div>
+            <div class="branch-line"><span class="who">Tú</span><span class="txt">"¡Buenos días!"</span></div>
+            <div class="branch-line" style="color:var(--ink-soft); font-size:13.5px; margin-top:8px;">Nada más hace falta. Es la mejor rama posible antes del café, y ocurre más de lo que crees.<span class="en">Nothing more is needed. It's the best possible branch before coffee, and it happens more often than you think.</span></div>
+          </div>
+        </div>
+
+        <div class="branch-card chatty">
+          <div class="branch-head">
+            <div class="branch-icon">💬</div>
+            <div class="branch-title">Quiere hablar mucho</div>
+            <div class="branch-sub">tiene tema y ganas</div>
+          </div>
+          <div class="branch-body">
+            <div class="branch-line"><span class="who">Vecino</span><span class="txt">"Oye, ¿te has enterado de lo del portal de al lado? Es que resulta que..."</span></div>
+            <div class="branch-line"><span class="who">Tú</span><span class="txt">"Uy, no, cuéntame — aunque te aviso que voy medio dormida, así que si repito algo, ya sabes por qué."</span></div>
+            <div class="branch-line" style="color:var(--ink-soft); font-size:13.5px; margin-top:8px;">Avisas de tu estado con humor antes de que la conversación empiece — así no te sientes mal si te trabas o repites algo.<span class="en">You give a heads-up about your state with humor before the conversation starts — that way you don't feel bad if you stumble or repeat something.</span></div>
+          </div>
+        </div>
+
+        <div class="branch-card rush">
+          <div class="branch-head">
+            <div class="branch-icon">⏱️</div>
+            <div class="branch-title">Tú tienes prisa</div>
+            <div class="branch-sub">cortar con cariño</div>
+          </div>
+          <div class="branch-body">
+            <div class="branch-line"><span class="who">Vecino</span><span class="txt">"¡Buenos días! Oye, ¿tienes un segundo?"</span></div>
+            <div class="branch-line"><span class="who">Tú</span><span class="txt">"¡Buenos días! Ahora mismo voy con el tiempo justo, ¿te parece si hablamos luego?"</span></div>
+            <div class="branch-line" style="color:var(--ink-soft); font-size:13.5px; margin-top:8px;">Cortas con educación sin tener que dar explicaciones largas — perfecto para cuando ni siquiera has terminado de despertarte.<span class="en">You cut it politely without needing long explanations — perfect for when you haven't even finished waking up.</span></div>
+          </div>
+        </div>
+
+      </div>
+      <p class="exit-note" style="margin-top:16px;"><strong>El patrón:</strong> por la mañana, tu prioridad es gastar la menor energía posible sin ser maleducada. Las cuatro ramas de arriba comparten la misma estructura: saludo corto, mención honesta de tu estado, y una pregunta o cierre que decide el resto.
+        <span class="en"><strong>The pattern:</strong> in the morning, your priority is spending the least possible energy without being rude. The four branches above share the same structure: short greeting, honest mention of your state, and a question or closer that decides the rest.</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ 4. PIEZAS REUTILIZABLES ============ -->
+  <section class="block">
+    <div class="block-head">
+      <div class="block-num">4</div>
+      <h2>Piezas reutilizables</h2>
+      <div class="time-tag">la caja de piezas</div>
+    </div>
+    <div class="panel">
+      <p style="font-size:14px; color:var(--ink-soft); margin:0 0 16px;">Frases de mañana que salen solas, sin pensar. Toca la tarjeta para ver el ejemplo.
+        <span class="en">Morning phrases that come out on their own, without thinking. Tap the card to see the example.</span>
+      </p>
+      <div class="prep-grid" id="prep-grid"></div>
+      <p class="prep-hint">Toca cada tarjeta para ver cómo suena en una frase real. No hace falta memorizarlas todas hoy.</p>
+    </div>
+  </section>
+
+  <!-- ============ 5. FÓRMULAS NATURALES ============ -->
+  <section class="block">
+    <div class="block-head">
+      <div class="block-num">5</div>
+      <h2>Fórmulas naturales</h2>
+      <div class="time-tag">para conectar piezas</div>
+    </div>
+    <div class="panel">
+      <div class="formula-grid">
+        <div class="formula-card"><div class="f-label">Para explicar sin disculparte</div><div class="f-text">"Voy medio dormida todavía."</div><span class="en">"I'm still half asleep."</span></div>
+        <div class="formula-card"><div class="f-label">Para reírte de ti misma</div><div class="f-text">"Sin café no soy persona, jaja."</div><span class="en">"Without coffee I'm not a person, haha."</span></div>
+        <div class="formula-card"><div class="f-label">Para devolver el saludo mínimo</div><div class="f-text">"¡Buenos días!"</div><span class="en">"Good morning!"</span></div>
+        <div class="formula-card"><div class="f-label">Para avisar de que vas a repetirte</div><div class="f-text">"Si repito algo, ya sabes por qué."</div><span class="en">"If I repeat something, now you know why."</span></div>
+        <div class="formula-card"><div class="f-label">Para cortar con cariño</div><div class="f-text">"¿Te parece si hablamos luego?"</div><span class="en">"How about we talk later?"</span></div>
+        <div class="formula-card"><div class="f-label">Para cerrar y seguir</div><div class="f-text">"Voy a por el café, ¡que tengas buen día!"</div><span class="en">"I'm off for coffee, have a good day!"</span></div>
+      </div>
+      <p class="exit-note" style="margin-top:16px;">Estas fórmulas funcionan igual con cualquier persona que te cruces antes de desayunar — no solo el vecino, también en la panadería o al recoger el paquete.
+        <span class="en">These formulas work the same with anyone you run into before breakfast — not just the neighbour, also at the bakery or picking up a package.</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ 5b. FRASES DE RESCATE ============ -->
+  <section class="block">
+    <div class="block-head">
+      <div class="block-num">5<span style="font-size:9px; vertical-align:super;">b</span></div>
+      <h2>Frases de rescate</h2>
+      <div class="time-tag">para cuando el cerebro va a medio gas</div>
+    </div>
+    <div class="panel">
+      <p style="font-size:14px; color:var(--ink-soft); margin:0 0 16px;">No es que te falte vocabulario — es que tu cerebro todavía no ha arrancado del todo. Estas frases ganan tiempo sin que suene raro.
+        <span class="en">It's not that you're missing vocabulary — it's that your brain hasn't fully booted up yet. These phrases buy time without sounding odd.</span>
+      </p>
+      <div class="rescue-grid">
+        <div class="rescue-card"><div class="rescue-phrase">A ver, a ver...</div><div class="rescue-use">Muletilla perfecta para ganar un par de segundos mientras se te ocurre la respuesta.<span class="en">A perfect filler to buy a couple of seconds while you come up with the answer.</span></div></div>
+        <div class="rescue-card"><div class="rescue-phrase">Uf, sin café todavía no...</div><div class="rescue-use">Explica tu estado con humor y da pie a que la otra persona no espere una respuesta elaborada.<span class="en">Explains your state with humor and signals the other person not to expect an elaborate answer.</span></div></div>
+        <div class="rescue-card"><div class="rescue-phrase">Perdona, ¿qué decías?</div><div class="rescue-use">Pide que repitan sin que suene a que no entiendes el idioma — suena a que estás dormida, que es la verdad.<span class="en">Asks them to repeat without sounding like you don't understand the language — sounds like you're sleepy, which is the truth.</span></div></div>
+        <div class="rescue-card"><div class="rescue-phrase">Nada, nada, nos vemos</div><div class="rescue-use">Cierre suave y corto cuando ya no te quedan fuerzas para seguir la conversación.<span class="en">A soft, short closer for when you're out of energy to keep the conversation going.</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 5c. REGISTRO ============ -->
+  <section class="block">
+    <div class="block-head">
+      <div class="block-num">5<span style="font-size:9px; vertical-align:super;">c</span></div>
+      <h2>Ajustar el registro</h2>
+      <div class="time-tag">según con quién y dónde</div>
+    </div>
+    <div class="panel">
+      <p style="font-size:14px; color:var(--ink-soft); margin:0 0 4px;">La misma escena de mañana suena distinta según sea el vecino de siempre, alguien nuevo en el portal, o el panadero al comprar el pan.
+        <span class="en">The same morning scene sounds different depending on whether it's the usual neighbour, someone new in the building, or the baker while buying bread.</span>
+      </p>
+      <table class="register-table">
+        <tr><th>Contexto</th><th>Cómo sonaría</th></tr>
+        <tr><td class="reg-tag">vecino de siempre</td><td>¡Buenos días! Todavía sin café, ya sabes cómo voy por las mañanas.<span class="en">Good morning! Still no coffee, you know how I am in the mornings.</span></td></tr>
+        <tr><td class="reg-tag">vecino nuevo / desconocido</td><td>Buenos días. Perdona, voy un poco dormida todavía — ¿todo bien por aquí?<span class="en">Good morning. Sorry, I'm still a bit sleepy — everything good around here?</span></td></tr>
+        <tr><td class="reg-tag">panadero / comercio</td><td>Buenos días, lo de siempre, por favor — todavía no me ha hecho efecto el día, jaja.<span class="en">Good morning, the usual please — the day hasn't kicked in for me yet, haha.</span></td></tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============ 6. MINI-ROLEPLAY ============ -->
+  <section class="block">
+    <div class="block-head">
+      <div class="block-num">6</div>
+      <h2>Mini-roleplay</h2>
+      <div class="time-tag">el portal, sin café</div>
+    </div>
+    <div class="roleplay-panel">
+      <div class="scene-setup">
+        <div class="scene-icon">☕</div>
+        <div class="scene-text"><strong>Escena A — el vecino se para:</strong> te lo encuentras en el portal, con energía de sobra y ganas de charlar.
+          <span class="en"><strong>Scene A — the neighbour stops:</strong> you run into him in the entryway, full of energy and eager to chat.</span>
+        </div>
+      </div>
+      <div class="dialogue">
+        <div class="line friend">
+          <div class="line-avatar">V</div>
+          <div class="line-body">
+            <div class="line-name">Vecino</div>
+            <div class="line-bubble">¡Buenos días! Qué mañana más bonita, ¿verdad? ¿Ya has desayunado?<span class="en">Good morning! What a lovely morning, isn't it? Have you had breakfast yet?</span></div>
+          </div>
+        </div>
+        <div class="line you">
+          <div class="line-avatar">L</div>
+          <div class="line-body">
+            <div class="line-name">Tú</div>
+            <textarea class="line-input" placeholder="Saluda, di que todavía no has desayunado, con humor..."></textarea>
+            <div class="line-hint">usa la salida inmediata del bloque 2 si necesitas apoyo</div>
+          </div>
+        </div>
+        <div class="line friend">
+          <div class="line-avatar">V</div>
+          <div class="line-body">
+            <div class="line-name">Vecino</div>
+            <div class="line-bubble">Ja, ja, te entiendo perfectamente. Oye, ¿te has enterado de lo de la obra del portal de al lado?<span class="en">Ha ha, I understand you perfectly. Hey, did you hear about the renovation next door?</span></div>
+          </div>
+        </div>
+        <div class="line you">
+          <div class="line-avatar">L</div>
+          <div class="line-body">
+            <div class="line-name">Tú</div>
+            <textarea class="line-input" placeholder="Muestra interés, aunque avisa de que vas medio dormida..."></textarea>
+            <div class="line-hint">esta rama admite alargar un poco la charla</div>
+          </div>
+        </div>
+      </div>
+      <div class="roleplay-tip"><strong>Truco:</strong> reconocer que "vas medio dormida" no es una excusa débil — es información útil que le das a la otra persona para que ajuste sus expectativas contigo.
+        <span class="en"><strong>Trick:</strong> admitting you're "half asleep" isn't a weak excuse — it's useful information you give the other person so they adjust their expectations with you.</span>
+      </div>
+
+      <div class="scene-setup" style="margin-top:28px;">
+        <div class="scene-icon">⏱️</div>
+        <div class="scene-text"><strong>Escena B — tú llevas prisa:</strong> el mismo vecino, pero hoy tienes que salir corriendo.
+          <span class="en"><strong>Scene B — you're in a hurry:</strong> the same neighbour, but today you have to rush out.</span>
+        </div>
+      </div>
+      <div class="dialogue" style="margin-top:16px;">
+        <div class="line friend">
+          <div class="line-avatar">V</div>
+          <div class="line-body">
+            <div class="line-name">Vecino</div>
+            <div class="line-bubble">¡Buenos días! Oye, ¿tienes un segundo? Es que quería preguntarte una cosa.<span class="en">Good morning! Hey, do you have a second? I wanted to ask you something.</span></div>
+          </div>
+        </div>
+        <div class="line you">
+          <div class="line-avatar">L</div>
+          <div class="line-body">
+            <div class="line-name">Tú</div>
+            <textarea class="line-input" placeholder="Corta con cariño: di que vas con prisa y propón hablar luego..."></textarea>
+            <div class="line-hint">usa la rama "tienes prisa" del bloque 3</div>
+          </div>
+        </div>
+        <div class="line friend">
+          <div class="line-avatar">V</div>
+          <div class="line-body">
+            <div class="line-name">Vecino</div>
+            <div class="line-bubble">Claro, sin problema. ¡Que tengas buen día!<span class="en">Sure, no problem. Have a good day!</span></div>
+          </div>
+        </div>
+        <div class="line you">
+          <div class="line-avatar">L</div>
+          <div class="line-body">
+            <div class="line-name">Tú</div>
+            <textarea class="line-input" placeholder="Despídete con una frase corta..."></textarea>
+            <div class="line-hint">cierra sin sonar brusca</div>
+          </div>
+        </div>
+      </div>
+      <div class="roleplay-tip" style="margin-top:20px;"><strong>Compara:</strong> en la Escena A tienes margen para alargar; en la Escena B necesitas cerrar rápido. Fíjate en que la primera frase — el saludo y tu estado — es casi idéntica en las dos. Solo cambia lo que viene después.
+        <span class="en"><strong>Compare:</strong> in Scene A you have room to stretch things out; in Scene B you need to close quickly. Notice that the first line — the greeting and your state — is almost identical in both. Only what comes after changes.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 7. CHOOSE YOUR WORDS ============ -->
+  <section class="block">
+    <div class="block-head">
+      <div class="block-num">7</div>
+      <h2>Choose your words</h2>
+      <div class="time-tag">lo que te llevas</div>
+    </div>
+    <div class="panel choose-panel">
+      <p class="choose-intro">De las expresiones de abajo, marca las 5–8 que quieres tener listas para la próxima mañana sin café. Mejor pocas y bien interiorizadas que todas a medias.
+        <span class="en">Of the expressions below, mark the 5–8 you want ready for the next coffee-less morning. Better a few well internalized than all of them half-learned.</span>
+      </p>
+      <div class="choose-grid" id="choose-grid"></div>
+      <div class="choose-footer">
+        <span id="choose-count">0 seleccionadas</span>
+        <button class="btn-primary" id="build-summary">Construir mi resumen</button>
+      </div>
+      <textarea id="final-summary" placeholder="Aquí aparecerán tus expresiones elegidas — edítalas o combínalas como quieras."></textarea>
+    </div>
+  </section>
+
+</main>
+
+<footer>ESCOLAR · Expansion Pack Mini · Vecino por la mañana, sin café</footer>
+
+<script>
+/* ---------- PIEZAS: FRASES DE MAÑANA ---------- */
+const PREPS = [
+  {verb:"todavía no", prep:"he desayunado", example:"Todavía no he desayunado, voy medio dormida.", en:"I haven't had breakfast yet, I'm half asleep."},
+  {verb:"sin café", prep:"no soy persona", example:"Sin café no soy persona, jaja.", en:"Without coffee I'm not a person, haha."},
+  {verb:"voy", prep:"medio dormida", example:"Voy medio dormida todavía, perdona.", en:"I'm still half asleep, sorry."},
+  {verb:"a ver", prep:"a ver...", example:"A ver, a ver... dame un segundo.", en:"Let's see, let's see... give me a second."},
+  {verb:"perdona", prep:"¿qué decías?", example:"Perdona, ¿qué decías? Iba en las nubes.", en:"Sorry, what were you saying? I was zoning out."},
+  {verb:"voy a por", prep:"el café", example:"Voy a por el café, que lo necesito ya.", en:"I'm off for coffee, I need it now."},
+  {verb:"me hace falta", prep:"cafeína", example:"Me hace falta cafeína urgentemente.", en:"I urgently need caffeine."},
+  {verb:"¿te parece si", prep:"hablamos luego?", example:"¿Te parece si hablamos luego con más calma?", en:"How about we talk later, more calmly?"},
+  {verb:"nada, nada", prep:"nos vemos", example:"Nada, nada, nos vemos luego.", en:"Never mind, see you later."},
+  {verb:"que tengas", prep:"buen día", example:"¡Que tengas muy buen día!", en:"Have a great day!"},
+  {verb:"todo bien", prep:"aunque cansada", example:"Todo bien, aunque un poco cansada esta mañana.", en:"All good, though a bit tired this morning."},
+  {verb:"como cada", prep:"mañana", example:"Como cada mañana, aquí, sin despertar del todo.", en:"Like every morning, here, not quite awake."},
+];
+
+const grid = document.getElementById('prep-grid');
+PREPS.forEach(p=>{
+  const card = document.createElement('div');
+  card.className = 'prep-card';
+  card.tabIndex = 0;
+  card.innerHTML = `<div class="prep-verb">${p.verb} <span class="prep">${p.prep}</span></div><div class="prep-example">${p.example}<span class="en">${p.en}</span></div>`;
+  const flip = ()=> card.classList.toggle('flipped');
+  card.addEventListener('click', flip);
+  card.addEventListener('keydown', e=>{ if(e.key==='Enter' || e.key===' '){ e.preventDefault(); flip(); } });
+  grid.appendChild(card);
+});
+
+/* ---------- CHOOSE YOUR WORDS ---------- */
+const CHOICES = [
+  {es:"¡Buenos días! Todavía no he desayunado.", en:"Good morning! I haven't had breakfast yet."},
+  {es:"Sin café no soy persona, jaja.", en:"Without coffee I'm not a person, haha."},
+  {es:"Voy medio dormida todavía, perdona.", en:"I'm still half asleep, sorry."},
+  {es:"A ver, a ver... dame un segundo.", en:"Let's see, let's see... give me a second."},
+  {es:"Perdona, ¿qué decías?", en:"Sorry, what were you saying?"},
+  {es:"Voy a por el café, que lo necesito ya.", en:"I'm off for coffee, I need it now."},
+  {es:"¿Te parece si hablamos luego con más calma?", en:"How about we talk later, more calmly?"},
+  {es:"Nada, nada, nos vemos luego.", en:"Never mind, see you later."},
+  {es:"¡Que tengas muy buen día!", en:"Have a great day!"},
+  {es:"Todo bien, aunque un poco cansada esta mañana.", en:"All good, though a bit tired this morning."},
+  {es:"Ahora mismo voy con el tiempo justo.", en:"I'm pressed for time right now."},
+  {es:"Cuéntame, aunque te aviso que voy medio dormida.", en:"Tell me, though I warn you I'm half asleep."},
+  {es:"¡Buenos días! ¿Todo bien por aquí?", en:"Good morning! Everything good around here?"},
+  {es:"Como cada mañana, aquí, sin despertar del todo.", en:"Like every morning, here, not quite awake."},
+  {es:"Perdona, voy un poco dormida todavía.", en:"Sorry, I'm still a bit sleepy."},
+  {es:"Claro, sin problema, ¡que tengas buen día!", en:"Sure, no problem, have a good day!"},
+];
+
+const chooseGrid = document.getElementById('choose-grid');
+const countEl = document.getElementById('choose-count');
+const picked = new Set();
+
+CHOICES.forEach((choice, i)=>{
+  const item = document.createElement('div');
+  item.className = 'choose-item';
+  item.innerHTML = `<div class="choose-checkbox"></div><div class="choose-text">${choice.es}<span class="en">${choice.en}</span></div>`;
+  item.addEventListener('click', ()=>{
+    item.classList.toggle('picked');
+    if(picked.has(i)){ picked.delete(i); item.querySelector('.choose-checkbox').textContent=''; }
+    else{ picked.add(i); item.querySelector('.choose-checkbox').textContent='✓'; }
+    countEl.textContent = `${picked.size} seleccionada${picked.size===1?'':'s'}`;
+  });
+  chooseGrid.appendChild(item);
+});
+
+document.getElementById('build-summary').addEventListener('click', ()=>{
+  const ta = document.getElementById('final-summary');
+  if(picked.size === 0){
+    ta.style.display = 'block';
+    ta.value = 'Marca al menos una expresión arriba para construir tu resumen.';
+    return;
+  }
+  const ordered = [...picked].sort((a,b)=>a-b).map(i=>CHOICES[i].es);
+  ta.style.display = 'block';
+  ta.value = ordered.join(' ');
+});
+
+/* ---------- LANG TOGGLE (ES / EN) ---------- */
+const langSwitch = document.getElementById('lang-switch');
+const esLabel = document.getElementById('lang-es-label');
+const enLabel = document.getElementById('lang-en-label');
+const setLang = (showEn)=>{
+  document.body.classList.toggle('show-en', showEn);
+  esLabel.classList.toggle('active', !showEn);
+  enLabel.classList.toggle('active', showEn);
+  langSwitch.setAttribute('aria-pressed', String(showEn));
+};
+langSwitch.addEventListener('click', ()=> setLang(!document.body.classList.contains('show-en')));
+langSwitch.addEventListener('keydown', (e)=>{
+  if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); setLang(!document.body.classList.contains('show-en')); }
+});
+setLang(false);
+
+/* ---------- PRINT (ahorro de tinta) ---------- */
+document.getElementById('print-btn').addEventListener('click', ()=> window.print());
+
+/* ---------- DESCARGAR (guarda este documento como archivo .html) ---------- */
+document.getElementById('download-btn').addEventListener('click', ()=>{
+  const htmlContent = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+  const blob = new Blob([htmlContent], { type: 'text/html' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = document.title.replace(/[^\w\-]+/g, '_').replace(/^_+|_+$/g, '') + '.html';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+});
+</script>
+
+</body>
+</html>

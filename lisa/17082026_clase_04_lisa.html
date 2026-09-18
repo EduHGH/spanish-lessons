@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clase 4 · Ensayo de mesa I, el vecino en el pasillo — Lisa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+
+/* ╔══════════════════════════════════════════════════════════════╗
+   ║  ESCOLAR — sistema de diseño para clases de español online   ║
+   ║  Clase 4 · L1 Save the date · "Ensayo de mesa I"               ║
+   ║  Módulo 1 · Semana 2, sesión 4 · Automatización de verbos      ║
+   ╚══════════════════════════════════════════════════════════════╝ */
+
+:root{
+  --paper:        #FBF7EE;
+  --paper-raised: #FFFFFF;
+  --paper-alt:    #F3ECDA;
+  --ink:          #23291F;
+  --ink-soft:     #565F52;
+  --ink-faint:    #8B9184;
+  --line:         rgba(35,41,31,0.12);
+  --line-strong:  rgba(35,41,31,0.22);
+
+  --b1:      #2F6FED;  --b1-soft: #EAF1FE;  --b1-line: #C6D9FC;
+  --b2:      #2E9E6B;  --b2-soft: #E9F6EF;  --b2-line: #BEE6D3;
+  --family:  #B5502E;  --family-soft: #FBEBE3; --family-line: #EFC9B4;
+  --violet:  #7B4FC9;  --violet-soft: #F1EBFB; --violet-line: #D9C8F0;
+
+  --f-display: 'Fraunces', Georgia, serif;
+  --f-body:    'IBM Plex Sans', system-ui, sans-serif;
+  --f-data:    'IBM Plex Mono', monospace;
+
+  --r-sm: 8px;
+  --r-md: 14px;
+  --r-lg: 20px;
+
+  --shadow-1: 0 1px 2px rgba(35,41,31,0.05), 0 1px 8px rgba(35,41,31,0.04);
+}
+
+*{ box-sizing:border-box; }
+body{
+  margin:0;
+  background: var(--paper);
+  background-image: radial-gradient(circle at 1px 1px, var(--line) 1px, transparent 0);
+  background-size: 22px 22px;
+  color: var(--ink);
+  font-family: var(--f-body);
+  line-height:1.6;
+}
+::selection{ background: var(--b2-soft); }
+
+/* ---------- HEADER ---------- */
+header{ padding:44px 24px 28px; max-width:760px; margin:0 auto; }
+.eyebrow{
+  font-family: var(--f-data); font-size:12px; letter-spacing:.14em;
+  text-transform:uppercase; color: var(--b2); margin:0 0 10px;
+  display:flex; align-items:center; gap:10px;
+}
+.eyebrow .dot{ width:6px; height:6px; border-radius:50%; background: var(--b2); }
+h1{
+  font-family: var(--f-display); font-weight:600;
+  font-size:clamp(30px,5.6vw,46px); line-height:1.08;
+  margin:0 0 14px; letter-spacing:-.01em;
+}
+h1 em{ font-style:italic; color: var(--b2); }
+.lede{ font-size:16px; color: var(--ink-soft); max-width:56ch; margin:0; }
+
+.meta-row{
+  display:flex; flex-wrap:wrap; gap:20px; margin-top:26px;
+  font-family: var(--f-data); font-size:12px; color: var(--ink-faint);
+}
+.meta-row strong{
+  display:block; color: var(--ink); font-size:14.5px; font-weight:500;
+  font-family: var(--f-display); margin-top:3px;
+}
+
+/* ---------- STRUCTURE STRIP ---------- */
+.structure-strip{
+  display:grid; grid-template-columns:repeat(4,1fr); gap:2px; margin-top:24px;
+  border-radius: var(--r-md); overflow:hidden; border:1px solid var(--line);
+}
+.structure-cell{ background: var(--paper-raised); padding:12px 14px; }
+.structure-cell .s-icon{ font-size:16px; }
+.structure-cell .s-time{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin:4px 0 2px; }
+.structure-cell .s-label{ font-family: var(--f-body); font-weight:600; font-size:12.5px; color: var(--ink); }
+
+/* ---------- SECTIONS ---------- */
+main{ max-width:760px; margin:0 auto; padding:8px 24px 100px; }
+
+section.block{ margin-bottom:52px; }
+.block-head{ display:flex; align-items:baseline; gap:12px; margin-bottom:18px; }
+.time-tag{
+  font-family: var(--f-data); font-size:11px; color: var(--ink-faint);
+  background: var(--paper-alt); padding:3px 10px; border-radius:999px; margin-left:auto; flex:none;
+}
+.block-num{
+  font-family: var(--f-data); font-size:12px; color:#fff; background: var(--b2);
+  width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  flex:none;
+}
+.block-head h2{
+  font-family: var(--f-display); font-weight:500; font-style:italic; font-size:22px; margin:0;
+}
+.phase-label{
+  font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.08em;
+  color: var(--ink-faint); margin:0 0 8px; display:flex; align-items:center; gap:8px;
+}
+.phase-label .phase-icon{ font-size:14px; }
+
+.panel{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-lg);
+  box-shadow: var(--shadow-1); padding:26px 28px;
+}
+
+/* ---------- FIXED PHRASES TABLE ---------- */
+.phrase-table{ width:100%; border-collapse:collapse; margin-top:4px; }
+.phrase-table td{ padding:10px 6px; border-bottom:1px dashed var(--line); font-size:15px; vertical-align:top; }
+.phrase-table tr:last-child td{ border-bottom:none; }
+.phrase-cat{ font-family: var(--f-data); color: var(--ink-faint); font-size:12px; width:110px; }
+.phrase-es{ font-family: var(--f-display); font-weight:600; font-size:16px; color: var(--b2); }
+.phrase-note{ color: var(--ink-soft); font-size:13.5px; }
+
+.note{
+  margin-top:18px; padding:14px 16px; background: var(--b2-soft); border:1px solid var(--b2-line);
+  border-radius: var(--r-md); font-size:14px; color: var(--ink-soft);
+}
+.note strong{ color: var(--ink); }
+
+/* ---------- VOCAB CARDS ---------- */
+.vocab-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:12px; }
+.vocab-card{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:14px 16px; cursor:pointer; perspective:600px; min-height:78px;
+  display:flex; flex-direction:column; justify-content:center; transition: border-color .15s ease;
+}
+.vocab-card:hover{ border-color: var(--b2-line); }
+.vocab-card:focus-visible{ outline:2px solid var(--b2); outline-offset:2px; }
+.vocab-front{ font-family: var(--f-body); font-weight:600; font-size:15px; }
+.vocab-back{ display:none; font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); margin-top:6px; }
+.vocab-card.flipped .vocab-back{ display:block; }
+.vocab-card.flipped{ background: var(--b2-soft); border-color: var(--b2-line); }
+.vocab-hint{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin:10px 2px 16px; }
+
+/* ---------- EXERCISE ---------- */
+.exercise{ margin-bottom:20px; }
+.exercise:last-of-type{ margin-bottom:0; }
+.ex-sentence{ font-size:15.5px; margin-bottom:10px; }
+.ex-sentence .gap{ font-family: var(--f-data); color: var(--ink-faint); }
+.ex-options{ display:flex; flex-wrap:wrap; gap:8px; }
+.opt-btn{
+  font-family: var(--f-body); font-size:14px; background: var(--paper-raised);
+  border:1.5px solid var(--line); color: var(--ink); padding:7px 16px; border-radius:999px;
+  cursor:pointer; transition: all .15s ease;
+}
+.opt-btn:hover{ border-color: var(--ink-faint); }
+.opt-btn.picked{ background: var(--b2-soft); border-color: var(--b2); color: var(--b2); }
+.opt-btn.correct{ background: var(--b2-soft); border-color: var(--b2); color: var(--b2); }
+.opt-btn.wrong{ background: var(--family-soft); border-color: var(--family); color: var(--family); }
+.opt-btn:disabled{ cursor:default; }
+
+.check-bar{
+  display:flex; align-items:center; justify-content:space-between; gap:16px;
+  margin-top:22px; padding-top:18px; border-top:1px dashed var(--line);
+}
+.btn-primary{
+  font-family: var(--f-body); font-weight:600; font-size:14px; color:#fff; background: var(--b2);
+  border:none; padding:11px 22px; border-radius:999px; cursor:pointer; transition: transform .1s ease;
+}
+.btn-primary:hover{ transform: translateY(-1px); }
+#score-text{ font-family: var(--f-data); font-size:13px; color: var(--ink-faint); }
+.btn-ghost{
+  font-family: var(--f-body); font-weight:600; font-size:13px; color: var(--ink-soft); background:none;
+  border:1.5px solid var(--line); padding:9px 18px; border-radius:999px; cursor:pointer;
+}
+.btn-ghost:hover{ border-color: var(--ink-faint); }
+.ex-divider{
+  display:flex; align-items:center; gap:10px; margin:20px 0 16px;
+  font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.06em;
+  color: var(--ink-faint);
+}
+.ex-divider::before, .ex-divider::after{ content:""; flex:1; height:1px; background: var(--line); }
+.ex-divider.en-clase{ color: var(--b2); }
+.ex-divider.en-clase::before, .ex-divider.en-clase::after{ background: var(--b2-line); }
+
+/* ---------- DRILL CHAIN (shadowing) ---------- */
+.drill-panel{ background: var(--violet-soft); border:1px solid var(--violet-line); border-radius: var(--r-lg); padding:26px 28px; }
+.drill-panel .block-num{ background: var(--violet); }
+.drill-list{ display:grid; gap:0; counter-reset: drill; }
+.drill-item{
+  display:flex; align-items:baseline; gap:12px; padding:11px 0; border-bottom:1px dashed var(--violet-line);
+  font-size:15px;
+}
+.drill-item:last-child{ border-bottom:none; }
+.drill-num{ font-family: var(--f-data); font-size:12px; color: var(--violet); width:22px; flex:none; }
+.drill-text{ color: var(--ink); }
+.drill-text strong{ color: var(--violet); font-family: var(--f-display); font-weight:600; }
+
+/* ---------- 3-SECOND DRILL ---------- */
+.threesec-panel{ margin-top:20px; padding:16px 18px; background: var(--paper-raised); border:1px solid var(--violet-line); border-radius: var(--r-md); }
+.threesec-title{ font-family: var(--f-data); font-size:11.5px; text-transform:uppercase; letter-spacing:.06em; color: var(--violet); margin:0 0 10px; }
+.threesec-list{ display:grid; gap:10px; }
+.threesec-item{ display:flex; gap:10px; align-items:center; }
+.threesec-q{ font-size:14px; color: var(--ink); flex:1; }
+.threesec-timer{
+  flex:none; font-family: var(--f-data); font-size:11px; color: var(--violet); background: var(--violet-soft);
+  padding:3px 9px; border-radius:999px; border:1px solid var(--violet-line);
+}
+.threesec-input{
+  width:100%; margin-top:6px; font-family: var(--f-body); font-size:14px; color: var(--ink);
+  background:#fff; border:1px solid var(--violet-line); border-radius: var(--r-sm);
+  padding:8px 10px; resize:vertical; min-height:36px;
+}
+.threesec-input:focus{ outline:none; border-color: var(--violet); }
+
+/* ---------- ROLEPLAY ---------- */
+.roleplay-panel{ background: var(--b1-soft); border:1px solid var(--b1-line); border-radius: var(--r-lg); padding:26px 28px; }
+.roleplay-panel .block-num{ background: var(--b1); }
+.scene-setup{
+  display:flex; gap:14px; align-items:flex-start; background: var(--paper-raised);
+  border:1px solid var(--b1-line); border-radius: var(--r-md); padding:14px 16px; margin-bottom:20px;
+}
+.scene-icon{ font-size:22px; flex:none; }
+.scene-text{ font-size:14px; color: var(--ink-soft); }
+.scene-text strong{ color: var(--ink); }
+
+.dialogue{ display:flex; flex-direction:column; gap:14px; }
+.scene-tabs{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:18px; }
+.scene-tab{
+  font-family: var(--f-data); font-size:12.5px; background: var(--paper-raised);
+  border:1.5px solid var(--b1-line); color: var(--ink-soft); padding:7px 14px;
+  border-radius:999px; cursor:pointer; transition: all .15s ease;
+}
+.scene-tab:hover{ border-color: var(--b1); }
+.scene-tab.active{ background: var(--b1); border-color: var(--b1); color:#fff; }
+.line{ display:flex; gap:12px; align-items:flex-start; }
+.line-avatar{
+  flex:none; width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  font-family: var(--f-display); font-weight:600; font-size:14px; color:#fff;
+}
+.line.friend .line-avatar{ background: var(--ink-faint); }
+.line.you .line-avatar{ background: var(--b1); }
+.line-body{ flex:1; }
+.line-name{ font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.05em; color: var(--ink-faint); margin:0 0 4px; }
+.line-bubble{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:12px 14px; font-size:14.5px; color: var(--ink);
+}
+.line.you .line-bubble{ background:#fff; border-color: var(--b1-line); }
+.line-input{
+  width:100%; font-family: var(--f-body); font-size:14.5px; color: var(--ink);
+  background:#fff; border:1px solid var(--b1-line); border-radius: var(--r-sm);
+  padding:10px 12px; resize:vertical; min-height:40px; margin-top:2px;
+}
+.line-input:focus{ outline:none; border-color: var(--b1); }
+.line-hint{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin-top:5px; }
+
+.roleplay-tip{
+  margin-top:22px; padding:14px 16px; background: var(--paper-raised); border:1px solid var(--b1-line);
+  border-radius: var(--r-md); font-size:13.5px; color: var(--ink-soft);
+}
+.roleplay-tip strong{ color: var(--ink); }
+
+/* ---------- RESCUE PHRASES ---------- */
+.rescue-panel{ background: var(--family-soft); border:1px solid var(--family-line); border-radius: var(--r-md); padding:18px 20px; margin-top:18px; }
+.rescue-title{ font-family: var(--f-data); font-size:11.5px; text-transform:uppercase; letter-spacing:.06em; color: var(--family); margin:0 0 10px; }
+.rescue-list{ display:flex; flex-wrap:wrap; gap:8px; }
+.rescue-chip{
+  font-family: var(--f-body); font-size:13.5px; background: var(--paper-raised); color: var(--ink);
+  border:1px solid var(--family-line); padding:7px 14px; border-radius:999px;
+}
+
+/* ---------- FINAL TASK ---------- */
+.task-panel{ background: var(--family-soft); border:1px solid var(--family-line); border-radius: var(--r-lg); padding:26px 28px; }
+.task-panel .block-num{ background: var(--family); }
+textarea#final-task{
+  width:100%; min-height:110px; font-family: var(--f-body); font-size:15px; color: var(--ink);
+  background: var(--paper-raised); border:1px solid var(--family-line); border-radius: var(--r-md);
+  padding:14px 16px; resize:vertical; margin-top:14px;
+}
+textarea#final-task:focus{ outline:none; border-color: var(--family); }
+.task-footer{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:12px; flex-wrap:wrap; }
+#task-count{ font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); }
+.btn-secondary{
+  font-family: var(--f-body); font-weight:600; font-size:13.5px; color: var(--family); background:none;
+  border:1.5px solid var(--family-line); padding:9px 18px; border-radius:999px; cursor:pointer;
+}
+.saved-flag{ font-family: var(--f-data); font-size:12px; color: var(--b2); opacity:0; transition: opacity .3s ease; }
+.saved-flag.show{ opacity:1; }
+
+/* ---------- FOOTER NAV ---------- */
+footer{
+  max-width:760px; margin:0 auto; padding:0 24px 60px; display:flex;
+  justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;
+  font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint);
+}
+footer a{ color: var(--b2); text-decoration:none; }
+footer a:hover{ text-decoration:underline; }
+
+@media (max-width:600px){
+  header{ padding:34px 18px 22px; }
+  main{ padding:8px 18px 90px; }
+  .panel, .task-panel, .roleplay-panel, .drill-panel{ padding:20px 18px; }
+}
+@media (prefers-reduced-motion: reduce){ *{ transition:none !important; } }
+</style>
+</head>
+<body>
+
+<header>
+  <p class="eyebrow"><span class="dot"></span>Clase 4 de 36 · L1 Save the date · Módulo 1, semana 2</p>
+  <h1>El vecino, <em>otra vez</em></h1>
+  <p class="lede">"Ser" y "estar" ya están automáticos por separado. Esta semana trabajamos <strong>velocidad</strong>: automatizar los verbos y fórmulas más frecuentes para que salgan solos, sin pensarlos. Hoy los juntamos en la situación real que más se repite en tu semana: el vecino en el pasillo. Practicamos los saludos fijos primero — las mismas cuatro frases, una y otra vez — y después el guion completo, sin cámara ni cronómetro.</p>
+  <div class="meta-row">
+    <div>Duración<strong>50 min</strong></div>
+    <div>Gramática<strong>Saludos fijos + Ser/Estar</strong></div>
+    <div>Nivel<strong>B1</strong></div>
+  </div>
+  <div class="structure-strip">
+    <div class="structure-cell"><span class="s-icon">🧠</span><p class="s-time">8 min</p><p class="s-label">Activación y calentamiento</p></div>
+    <div class="structure-cell"><span class="s-icon">⚡</span><p class="s-time">15 min</p><p class="s-label">Técnica anti-bloqueo</p></div>
+    <div class="structure-cell"><span class="s-icon">🗣️</span><p class="s-time">22 min</p><p class="s-label">Conversación con presión</p></div>
+    <div class="structure-cell"><span class="s-icon">📈</span><p class="s-time">3 min</p><p class="s-label">Feedback + tarea</p></div>
+  </div>
+</header>
+
+<main>
+
+  <section class="block">
+    <p class="phase-label"><span class="phase-icon">🧠</span>Activación y calentamiento oral</p>
+    <div class="block-head"><span class="block-num">1</span><h2>Fórmulas fijas — el 80% de cada encuentro</h2><span class="time-tag">8 min</span></div>
+    <div class="panel">
+      <p style="margin:0 0 16px; font-size:14.5px; color:var(--ink-soft);">La mayoría de un encuentro en el pasillo es siempre igual. Si estas frases están automáticas, te queda mucha más energía para lo imprevisible.</p>
+      <table class="phrase-table">
+        <tr><td class="phrase-cat">saludo</td><td class="phrase-es">¡Hola! ¿Qué tal?</td><td class="phrase-note">Fórmula fija, casi nunca cambia.</td></tr>
+        <tr><td class="phrase-cat">responder</td><td class="phrase-es">Estoy bien, ¿y tú?</td><td class="phrase-note">Devuelve la pregunta siempre — es de cortesía.</td></tr>
+        <tr><td class="phrase-cat">presentar</td><td class="phrase-es">Este es Alex, es mi perro.</td><td class="phrase-note">Ser para presentar quién es alguien.</td></tr>
+        <tr><td class="phrase-cat">despedirse</td><td class="phrase-es">¡Hasta luego! Que vaya bien.</td><td class="phrase-note">Frase corta, no hace falta improvisar.</td></tr>
+      </table>
+      <div class="note"><strong>La idea de hoy:</strong> el vecino no es un examen, es una rutina. Cuanto más automáticas estén las fórmulas de saludo y despedida, menos energía gastas en ellas — y te queda más para el contenido real (cómo está Alex, cómo va la boda, qué tiempo hace). Y si aun así te quedas en blanco a mitad de una fórmula, no la abandones: en el bloque 5 tienes las frases de rescate que la sostienen mientras piensas.</div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">2</span><h2>Vocabulario</h2><span class="time-tag">5 min</span></div>
+    <p class="vocab-hint">Toca cada tarjeta para ver un ejemplo con tu vida real.</p>
+    <div class="vocab-grid" id="vocab-grid"></div>
+  </section>
+
+  <section class="block drill-panel">
+    <p class="phase-label" style="color:var(--violet);"><span class="phase-icon">⚡</span>Técnica específica contra los bloqueos</p>
+    <div class="block-head"><span class="block-num">3</span><h2 style="color:var(--violet);">🎤 Shadowing — automatiza los verbos frecuentes</h2><span class="time-tag">8 min</span></div>
+    <p style="margin:0 0 14px; font-size:14.5px; color:var(--ink-soft);">Esta semana el objetivo es velocidad, no vocabulario nuevo. Tu profesor dice cada frase en voz alta y tú la repites inmediatamente después (shadowing), lo más rápido posible — el cerebro automatiza la forma cuando la repite muchas veces seguidas, sin pararse a pensar la conjugación. Son las mismas fórmulas fijas del bloque 1: cuanto más rápido salen solas, menos probabilidad hay de bloquearte a mitad de frase.</p>
+    <div class="drill-list" id="drill-list"></div>
+    <div class="threesec-panel">
+      <p class="threesec-title">Ronda de 3 segundos — responde sin pensarlo</p>
+      <div class="threesec-list">
+        <div class="threesec-item"><span class="threesec-q">¿Qué tal estás?</span><span class="threesec-timer">3 seg</span></div>
+        <div class="threesec-item"><span class="threesec-q">¿Quién es Alex?</span><span class="threesec-timer">3 seg</span></div>
+        <div class="threesec-item"><span class="threesec-q">¿Dónde está Chris ahora?</span><span class="threesec-timer">3 seg</span></div>
+      </div>
+      <textarea class="threesec-input" rows="2" placeholder="Escribe tu primera respuesta instintiva a cada pregunta, sin corregir después..."></textarea>
+      <p style="margin:10px 0 0; font-size:12.5px; color:var(--ink-soft);">Si se acaban los 3 segundos y no sale nada, usa una frase de rescate ("a ver...") para ganar tiempo — no te quedes en silencio. Las tienes todas en el bloque 5.</p>
+    </div>
+  </section>
+
+  <section class="block">
+    <p class="phase-label"><span class="phase-icon">🗣️</span>Conversación guiada con presión creciente</p>
+    <div class="block-head"><span class="block-num">4</span><h2>Practica — ser y estar combinados</h2><span class="time-tag">10 min</span></div>
+    <div class="panel">
+      <p class="vocab-hint" style="margin-bottom:14px;">24 frases mezclando ser y estar, tal como salen en una conversación real. Las primeras 10 se hacen en voz alta en clase; el resto queda como repaso para casa.</p>
+      <div id="exercises"></div>
+      <div class="check-bar">
+        <div style="display:flex; gap:10px;">
+          <button class="btn-primary" id="check-btn">Comprobar respuestas</button>
+          <button class="btn-ghost" id="reset-btn">Reiniciar</button>
+        </div>
+        <span id="score-text"></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="block roleplay-panel">
+    <div class="block-head"><span class="block-num">5</span><h2>Ensayo de mesa: el vecino en el pasillo</h2><span class="time-tag">22 min</span></div>
+    <p class="lede" style="margin-bottom:16px;">Sin cámara, sin cronómetro. 4 versiones del mismo encuentro, cada una con una variable distinta — así entrenas la fórmula fija y la parte que cambia por separado. Elige una o dos para practicar en voz alta en clase; el resto queda como banco de repaso para casa.</p>
+    <div class="scene-tabs" id="scene-tabs"></div>
+    <div id="scene-container"></div>
+    <div class="roleplay-tip"><strong>En clase:</strong> practicaremos al menos dos escenas en voz alta, cambiando de rol. El resto son para repasar por tu cuenta durante la semana — es ensayo, no el evento real, así que las pausas están permitidas.</div>
+    <div class="rescue-panel">
+      <p class="rescue-title">Frases de rescate — para cuando te quedas en blanco</p>
+      <div class="rescue-list">
+        <span class="rescue-chip">A ver...</span>
+        <span class="rescue-chip">Bueno...</span>
+        <span class="rescue-chip">Es que no me acuerdo de la palabra</span>
+        <span class="rescue-chip">¿Puedes repetir, por favor?</span>
+        <span class="rescue-chip">Tengo una cuestión...</span>
+        <span class="rescue-chip">¿Cómo se dice...?</span>
+      </div>
+      <p style="margin:14px 0 0; font-size:13px; color:var(--ink-soft);">Úsalas también cuando dudes entre ser y estar: "a ver... estoy... no, es..." es una frase real, no un error. Ganas el segundo que necesitas sin romper la fórmula fija.</p>
+    </div>
+  </section>
+
+  <section class="block task-panel">
+    <p class="phase-label" style="color:var(--family);"><span class="phase-icon">📈</span>Feedback y ejercicio para casa</p>
+    <div class="block-head"><span class="block-num">6</span><h2 style="color:var(--family)">Tu tarea</h2><span class="time-tag">3 min</span></div>
+    <p style="margin:0; font-size:15px; color:var(--ink-soft);">Practica el diálogo del vecino <strong>en voz alta, 3 veces</strong> esta semana — puede ser sola en casa, imaginando las respuestas. Anota aquí abajo qué escena elegiste y qué parte te costó más, para retomarlo en la clase 5.</p>
+    <textarea id="final-task" placeholder="Escena elegida:...&#10;Vez 1: qué tal me salió...&#10;Vez 2:...&#10;Vez 3: qué me costó más..."></textarea>
+    <div class="task-footer">
+      <span id="task-count">0 palabras escritas</span>
+      <div style="display:flex; gap:10px; align-items:center;">
+        <span class="saved-flag" id="saved-flag">Guardado ✓</span>
+        <button class="btn-secondary" id="save-btn">Guardar tarea</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <span>Clase 4 · Ensayo de mesa I, el vecino en el pasillo</span>
+  <span>Próxima clase → Clase 5: Frases de rescate</span>
+</footer>
+
+<script>
+/* ---------- DRILL (shadowing) ---------- */
+const DRILL = [
+  "Estoy bien, ¿y tú?",
+  "Soy directora de bodas.",
+  "Estoy en Xàtiva.",
+  "Este es Alex, mi perro.",
+  "Alex está muy guapo hoy.",
+  "Vamos a pasear.",
+  "Hasta luego, ¡que vaya bien!",
+  "¿Qué tal estás?",
+  "Estoy bastante ocupada esta semana.",
+  "Soy de Chicago.",
+  "Chris está en el club ahora.",
+  "Somos los nuevos del edificio.",
+  "Estamos encantados con el barrio.",
+  "El vecino es muy hablador.",
+  "Su madre está aquí también.",
+  "Sois muy majos, los vecinos.",
+  "Es hora de irnos.",
+  "¿Vais a pasear?",
+  "Hace muy buen día hoy.",
+  "Alex está listo para salir."
+];
+
+const drillList = document.getElementById('drill-list');
+DRILL.forEach((d,i)=>{
+  const item = document.createElement('div');
+  item.className = 'drill-item';
+  const highlighted = d.replace(/\b(soy|eres|es|somos|sois|son|estoy|estás|está|estamos|estáis|están)\b/i, m => `<strong>${m}</strong>`);
+  item.innerHTML = `<span class="drill-num">${i+1}</span><span class="drill-text">${highlighted}</span>`;
+  drillList.appendChild(item);
+});
+
+/* ---------- VOCAB ---------- */
+const VOCAB = [
+  {front:"el pasillo", back:"Me encuentro con mi vecino en el pasillo casi cada día."},
+  {front:"qué tal", back:"¡Hola! ¿Qué tal? — la pregunta más repetida del día."},
+  {front:"hasta luego", back:"¡Hasta luego! Que vaya bien el resto del día."},
+  {front:"la madre (del vecino)", back:"El vecino vive con su madre; ella también sale a veces."},
+  {front:"guapo / guapa", back:"Alex está muy guapo hoy, dice siempre el vecino."},
+  {front:"majo / maja", back:"Sois muy majos, los vecinos de este edificio."},
+];
+
+const grid = document.getElementById('vocab-grid');
+VOCAB.forEach(v=>{
+  const card = document.createElement('div');
+  card.className = 'vocab-card';
+  card.setAttribute('role', 'button');
+  card.setAttribute('tabindex', '0');
+  card.setAttribute('aria-pressed', 'false');
+  card.setAttribute('aria-label', `${v.front}. Pulsa para ver un ejemplo.`);
+  card.innerHTML = `<div class="vocab-front">${v.front}</div><div class="vocab-back">${v.back}</div>`;
+  const toggle = ()=>{
+    const flipped = card.classList.toggle('flipped');
+    card.setAttribute('aria-pressed', String(flipped));
+  };
+  card.addEventListener('click', toggle);
+  card.addEventListener('keydown', (e)=>{
+    if(e.key === 'Enter' || e.key === ' '){
+      e.preventDefault();
+      toggle();
+    }
+  });
+  grid.appendChild(card);
+});
+
+/* ---------- EXERCISES ---------- */
+const EXERCISES = [
+  {"sentence":"¡Hola! ¿Qué tal <span class=\"gap\">___</span>?","options":["eres","estás","es"],"answer":"estás"},
+  {"sentence":"Yo <span class=\"gap\">___</span> bien, gracias, ¿y tú?","options":["soy","estoy","es"],"answer":"estoy"},
+  {"sentence":"Este <span class=\"gap\">___</span> Alex, mi perro.","options":["está","es","son"],"answer":"es"},
+  {"sentence":"Alex <span class=\"gap\">___</span> muy guapo hoy.","options":["es","está","son"],"answer":"está"},
+  {"sentence":"El vecino <span class=\"gap\">___</span> muy hablador, siempre.","options":["está","es","son"],"answer":"es"},
+  {"sentence":"Hoy el vecino <span class=\"gap\">___</span> de buen humor.","options":["es","está","son"],"answer":"está"},
+  {"sentence":"Su madre <span class=\"gap\">___</span> muy amable.","options":["está","es","somos"],"answer":"es"},
+  {"sentence":"Su madre <span class=\"gap\">___</span> en el pasillo también hoy.","options":["es","está","son"],"answer":"está"},
+  {"sentence":"Vosotros <span class=\"gap\">___</span> muy majos, los vecinos.","options":["estáis","sois","son"],"answer":"sois"},
+  {"sentence":"¡Hasta luego! Que <span class=\"gap\">___</span> bien el resto del día.","options":["seas","estés","vaya"],"answer":"vaya"},
+  {"sentence":"Yo <span class=\"gap\">___</span> directora de bodas, y hoy <span class=\"gap\">___</span> muy ocupada.","options":["soy / estoy","estoy / soy","soy / soy"],"answer":"soy / estoy"},
+  {"sentence":"Chris no <span class=\"gap\">___</span> aquí ahora, <span class=\"gap\">___</span> en el club.","options":["está / es","es / está","está / está"],"answer":"es / está"},
+  {"sentence":"¿Tú <span class=\"gap\">___</span> de aquí, de Xàtiva?","options":["estás","eres","es"],"answer":"eres"},
+  {"sentence":"No, yo <span class=\"gap\">___</span> de Chicago, pero <span class=\"gap\">___</span> aquí desde hace dos años.","options":["soy / estoy","estoy / soy","soy / soy"],"answer":"soy / estoy"},
+  {"sentence":"¿Vais a pasear? <span class=\"gap\">___</span> muy buen día hoy.","options":["Es","Está","Hace"],"answer":"Hace"},
+  {"sentence":"Sí, Alex <span class=\"gap\">___</span> listo para salir.","options":["es","está","son"],"answer":"está"},
+  {"sentence":"Mi vecino <span class=\"gap\">___</span> simpático, pero hoy <span class=\"gap\">___</span> un poco cansado.","options":["es / está","está / es","es / es"],"answer":"es / está"},
+  {"sentence":"Nosotros <span class=\"gap\">___</span> los nuevos del edificio.","options":["estamos","somos","sois"],"answer":"somos"},
+  {"sentence":"Nosotros <span class=\"gap\">___</span> encantados con el barrio.","options":["somos","estamos","son"],"answer":"estamos"},
+  {"sentence":"El pasillo <span class=\"gap\">___</span> el sitio donde siempre nos encontramos.","options":["está","es","son"],"answer":"es"},
+  {"sentence":"Ahora mismo el pasillo <span class=\"gap\">___</span> vacío.","options":["es","está","son"],"answer":"está"},
+  {"sentence":"¿Cómo <span class=\"gap\">___</span> tu madre estos días?","options":["es","está","son"],"answer":"está"},
+  {"sentence":"Mi madre siempre <span class=\"gap\">___</span> muy activa.","options":["está","es","son"],"answer":"es"},
+  {"sentence":"Bueno, <span class=\"gap\">___</span> hora de irnos, ¡hasta luego!","options":["es","está","son"],"answer":"es"}
+]
+;
+
+const exWrap = document.getElementById('exercises');
+EXERCISES.forEach((ex, i)=>{
+  if(i === 0){
+    const divider = document.createElement('div');
+    divider.className = 'ex-divider en-clase';
+    divider.textContent = 'en clase · ítems 1–10';
+    exWrap.appendChild(divider);
+  }
+  if(i === 10){
+    const divider = document.createElement('div');
+    divider.className = 'ex-divider';
+    divider.textContent = 'para casa · repaso opcional';
+    exWrap.appendChild(divider);
+  }
+  const el = document.createElement('div');
+  el.className = 'exercise';
+  el.dataset.answer = ex.answer;
+  el.innerHTML = `
+    <div class="ex-sentence">${i+1}. ${ex.sentence}</div>
+    <div class="ex-options">
+      ${ex.options.map(o=>`<button class="opt-btn" data-value="${o}">${o}</button>`).join('')}
+    </div>
+  `;
+  exWrap.appendChild(el);
+
+  el.querySelectorAll('.opt-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      el.querySelectorAll('.opt-btn').forEach(b=>b.classList.remove('picked'));
+      btn.classList.add('picked');
+    });
+  });
+});
+
+document.getElementById('check-btn').addEventListener('click', ()=>{
+  let correct = 0;
+  document.querySelectorAll('.exercise').forEach(el=>{
+    const answer = el.dataset.answer;
+    const picked = el.querySelector('.opt-btn.picked');
+    el.querySelectorAll('.opt-btn').forEach(b=>{
+      b.disabled = true;
+      if(b.dataset.value === answer) b.classList.add('correct');
+      else if(b === picked) b.classList.add('wrong');
+    });
+    if(picked && picked.dataset.value === answer) correct++;
+  });
+  document.getElementById('score-text').textContent = `${correct} / ${EXERCISES.length} correctas`;
+});
+
+document.getElementById('reset-btn').addEventListener('click', ()=>{
+  document.querySelectorAll('.exercise').forEach(el=>{
+    el.querySelectorAll('.opt-btn').forEach(b=>{
+      b.disabled = false;
+      b.classList.remove('picked','correct','wrong');
+    });
+  });
+  document.getElementById('score-text').textContent = '';
+});
+
+/* ---------- ROLEPLAY SCENES ---------- */
+const SCENES = [
+  {
+    "id": "basico",
+    "tab": "Versión básica",
+    "icon": "🚪",
+    "setup": "Sales de tu piso con Alex y te encuentras a tu vecino en el pasillo. Es el encuentro más simple, solo con las fórmulas fijas.",
+    "lines": [
+      {"who":"friend","name":"Vecino","text":"¡Hola! ¿Qué tal estás?"},
+      {"who":"you","hint":"Responde con \"estar\" y devuelve la pregunta."},
+      {"who":"friend","name":"Vecino","text":"Muy bien, gracias. ¿Vais a pasear?"},
+      {"who":"you","hint":"Confirma el plan con una frase corta."},
+      {"who":"friend","name":"Vecino","text":"¡Que vaya bien!"},
+      {"who":"you","hint":"Despídete con \"hasta luego\" o similar."}
+    ]
+  },
+  {
+    "id": "madre",
+    "tab": "Con la madre del vecino",
+    "icon": "👵",
+    "setup": "Esta vez el vecino no está solo: su madre sale también y se une a la conversación. Tienes que presentarte y presentar a Alex a alguien nuevo.",
+    "lines": [
+      {"who":"friend","name":"Vecino","text":"¡Hola! Mira, esta es mi madre."},
+      {"who":"you","hint":"Salúdala y preséntate con \"ser\" (tu nombre)."},
+      {"who":"friend","name":"Madre","text":"Encantada. ¿Y este perro tan guapo?"},
+      {"who":"you","hint":"Presenta a Alex con \"ser\" (nombre y qué es)."},
+      {"who":"friend","name":"Madre","text":"¿Cuánto tiempo lleváis viviendo aquí?"},
+      {"who":"you","hint":"Responde con \"estar\" (llevar + tiempo) o \"desde hace\"."},
+      {"who":"friend","name":"Madre","text":"Qué bien, sois muy majos los dos."},
+      {"who":"you","hint":"Da las gracias y despídete."}
+    ]
+  },
+  {
+    "id":"trabajo",
+    "tab": "El vecino pregunta por tu trabajo",
+    "icon": "💍",
+    "setup": "El vecino ya sabe que organizas bodas y hoy te pregunta directamente cómo va todo. Tienes que combinar ser y estar sin pensarlo.",
+    "lines": [
+      {"who":"friend","name":"Vecino","text":"¡Hola! ¿Qué tal la boda que estás organizando?"},
+      {"who":"you","hint":"Responde con \"estar\" sobre cómo va la organización."},
+      {"who":"friend","name":"Vecino","text":"Qué interesante tu trabajo. ¿Es difícil?"},
+      {"who":"you","hint":"Responde con \"ser\" describiendo tu trabajo en general."},
+      {"who":"friend","name":"Vecino","text":"¿Y tú, estás muy ocupada estos días?"},
+      {"who":"you","hint":"Responde con \"estar\" sobre tu estado ahora."},
+      {"who":"friend","name":"Vecino","text":"Pues nada, ¡que te vaya bien todo!"},
+      {"who":"you","hint":"Da las gracias y despídete."}
+    ]
+  },
+  {
+    "id": "imprevisto",
+    "tab": "Con un imprevisto",
+    "icon": "❓",
+    "setup": "Hoy el vecino te hace una pregunta que no esperabas. Practica quedarte en blanco un segundo y seguir hablando de todas formas.",
+    "lines": [
+      {"who":"friend","name":"Vecino","text":"Oye, ¿tú y Chris sois de la misma ciudad de Estados Unidos?"},
+      {"who":"you","hint":"Responde con \"ser\" (de dónde sois cada uno) — puedes usar una frase de rescate si dudas."},
+      {"who":"friend","name":"Vecino","text":"Ah, qué curioso. ¿Y él está bien? Hace tiempo que no lo veo."},
+      {"who":"you","hint":"Responde con \"estar\" sobre Chris ahora mismo."},
+      {"who":"friend","name":"Vecino","text":"Dile que le manda saludos mi madre."},
+      {"who":"you","hint":"Responde dando las gracias y confirma que se lo dirás."},
+      {"who":"friend","name":"Vecino","text":"Bueno, ¡hasta luego, que vaya bien el paseo!"},
+      {"who":"you","hint":"Despídete con una frase corta."}
+    ]
+  }
+];
+
+const sceneTabs = document.getElementById('scene-tabs');
+const sceneContainer = document.getElementById('scene-container');
+let activeScene = 0;
+
+function renderTabs(){
+  sceneTabs.innerHTML = SCENES.map((s,i)=>
+    `<button class="scene-tab${i===activeScene?' active':''}" data-idx="${i}">${s.icon} ${s.tab}</button>`
+  ).join('');
+  sceneTabs.querySelectorAll('.scene-tab').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      activeScene = parseInt(btn.dataset.idx, 10);
+      renderTabs();
+      renderScene();
+    });
+  });
+}
+
+function renderScene(){
+  const scene = SCENES[activeScene];
+  const linesHtml = scene.lines.map((l)=>{
+    if(l.who === 'friend'){
+      return `
+        <div class="line friend">
+          <div class="line-avatar">${l.name.charAt(0)}</div>
+          <div class="line-body">
+            <p class="line-name">${l.name}</p>
+            <div class="line-bubble">${l.text}</div>
+          </div>
+        </div>`;
+    } else {
+      return `
+        <div class="line you">
+          <div class="line-avatar">Tú</div>
+          <div class="line-body">
+            <p class="line-name">Tú</p>
+            <textarea class="line-input" rows="2" placeholder="Escribe tu respuesta con 'ser' o 'estar'..."></textarea>
+            <p class="line-hint">${l.hint}</p>
+          </div>
+        </div>`;
+    }
+  }).join('');
+
+  sceneContainer.innerHTML = `
+    <div class="scene-setup">
+      <span class="scene-icon">${scene.icon}</span>
+      <p class="scene-text"><strong>${scene.tab}:</strong> ${scene.setup}</p>
+    </div>
+    <div class="dialogue">${linesHtml}</div>
+  `;
+}
+
+renderTabs();
+renderScene();
+
+/* ---------- FINAL TASK ---------- */
+const STORAGE_KEY = 'lisa-clase04-tarea';
+const taskArea = document.getElementById('final-task');
+const taskCount = document.getElementById('task-count');
+const savedFlag = document.getElementById('saved-flag');
+
+async function cargarTarea(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(STORAGE_KEY);
+    if (res && typeof res.value === 'string') taskArea.value = res.value;
+  }catch(e){
+    // Clave inexistente todavía: no hay tarea previa, se queda en blanco.
+  }
+  updateCount();
+}
+
+function updateCount(){
+  const words = taskArea.value.trim().split(/\s+/).filter(Boolean).length;
+  taskCount.textContent = `${words} palabra${words===1?'':'s'} escrita${words===1?'':'s'}`;
+}
+taskArea.addEventListener('input', updateCount);
+updateCount();
+cargarTarea();
+
+document.getElementById('save-btn').addEventListener('click', async ()=>{
+  if (!window.storage){
+    savedFlag.textContent = 'Guardado no disponible aquí';
+    savedFlag.classList.add('show');
+    setTimeout(()=>{ savedFlag.classList.remove('show'); savedFlag.textContent = 'Guardado ✓'; }, 2200);
+    return;
+  }
+  try{
+    const ok = await window.storage.set(STORAGE_KEY, taskArea.value);
+    savedFlag.textContent = ok ? 'Guardado ✓' : 'No se pudo guardar';
+  }catch(e){
+    savedFlag.textContent = 'No se pudo guardar';
+  }
+  savedFlag.classList.add('show');
+  setTimeout(()=>{ savedFlag.classList.remove('show'); savedFlag.textContent = 'Guardado ✓'; }, 1800);
+});
+</script>
+
+</body>
+</html>

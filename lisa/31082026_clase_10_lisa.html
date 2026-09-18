@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clase 10 · Prueba de sonido I, paseando a Alex por Xàtiva — Lisa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Space+Mono:wght@400;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+
+/* ╔══════════════════════════════════════════════════════════════╗
+   ║  ESCOLAR × NOTHING — sistema de diseño para clases de         ║
+   ║  español online. Papel cálido + roles semánticos de ESCOLAR,  ║
+   ║  leídos a través del lenguaje visual de Nothing OS 5.         ║
+   ║  Clase 10 · L2 Lista de invitados · "Prueba de sonido I"       ║
+   ╚══════════════════════════════════════════════════════════════╝ */
+
+:root{
+  --paper:        #F4EFE4;
+  --paper-deep:   #EAE3D2;
+  --glass:        rgba(255,255,255,0.55);
+  --glass-strong: rgba(255,255,255,0.75);
+  --ink:          #23291F;
+  --ink-soft:     #565F52;
+  --ink-faint:    #8B9184;
+  --line:         rgba(35,41,31,0.10);
+  --line-strong:  rgba(35,41,31,0.20);
+
+  --b1:      #2F6FED;  --b1-soft: rgba(47,111,237,0.10);  --b1-line: rgba(47,111,237,0.30);
+  --b2:      #2E9E6B;  --b2-soft: rgba(46,158,107,0.10);  --b2-line: rgba(46,158,107,0.30);
+  --family:  #B5502E;  --family-soft: rgba(181,80,46,0.10); --family-line: rgba(181,80,46,0.30);
+  --violet:  #7B4FC9;  --violet-soft: rgba(123,79,201,0.10); --violet-line: rgba(123,79,201,0.30);
+
+  --f-display: 'Fraunces', Georgia, serif;
+  --f-body:    'IBM Plex Sans', system-ui, sans-serif;
+  --f-data:    'Space Mono', ui-monospace, monospace;
+
+  --r-sm: 8px;
+  --r-md: 16px;
+  --r-lg: 24px;
+
+  --blur: 22px;
+  --shadow-1: 0 8px 32px rgba(35,41,31,0.06), 0 1px 2px rgba(35,41,31,0.05);
+}
+
+*{ box-sizing:border-box; }
+html{ scroll-behavior:smooth; }
+body{
+  margin:0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--f-body);
+  line-height:1.6;
+  position:relative;
+  min-height:100vh;
+}
+
+/* Glyph grid de fondo — la rejilla de puntos de ESCOLAR, más
+   grande y visible, al estilo de la matriz física de Nothing */
+body::before{
+  content:"";
+  position: fixed; inset:0;
+  background-image: radial-gradient(circle, rgba(35,41,31,0.09) 1.5px, transparent 1.5px);
+  background-size: 28px 28px;
+  pointer-events:none; z-index:0;
+}
+body::after{
+  content:"";
+  position: fixed; inset:0;
+  background: radial-gradient(ellipse 70% 50% at 50% -10%, var(--paper-deep), transparent 60%);
+  pointer-events:none; z-index:0;
+}
+
+/* Mesh gradient del sistema — el "wallpaper" de esta clase es
+   b2 (verde), el rol dominante de la línea L2 Lista de invitados */
+:root{ --mesh-color: var(--b2); }
+.mesh-bg{
+  content:""; position: fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden;
+}
+.mesh-bg::before, .mesh-bg::after, .mesh-bg > .mesh-blob{
+  content:""; position:absolute; filter: blur(46px);
+  background: radial-gradient(circle, var(--mesh-color), transparent 70%);
+  animation: mesh-drift 22s ease-in-out infinite alternate;
+}
+.mesh-bg::before{ width:55%; height:75%; left:-12%; top:-12%; opacity:0.16; animation-delay:0s; }
+.mesh-bg::after{ width:60%; height:80%; right:-15%; top:-8%; opacity:0.13; animation-delay:-7s; }
+.mesh-bg > .mesh-blob{ width:45%; height:55%; left:22%; bottom:-15%; opacity:0.11; animation-delay:-14s; }
+@keyframes mesh-drift{
+  0%   { transform: translate(0,0) scale(1); }
+  50%  { transform: translate(3%,-2%) scale(1.05); }
+  100% { transform: translate(-2%,3%) scale(0.98); }
+}
+@media (prefers-reduced-motion: reduce){
+  .mesh-bg::before, .mesh-bg::after, .mesh-bg > .mesh-blob{ animation: none; }
+}
+
+::selection{ background: var(--b2-soft); }
+
+header, main, footer{ position:relative; z-index:1; }
+
+/* ---------- HEADER ---------- */
+header{ padding:44px 24px 28px; max-width:760px; margin:0 auto; }
+.eyebrow{
+  font-family: var(--f-data); font-size:12px; letter-spacing:.14em;
+  text-transform:uppercase; color: var(--b2); margin:0 0 10px;
+  display:flex; align-items:center; gap:10px;
+}
+.eyebrow .dot{ width:6px; height:6px; border-radius:50%; background: var(--b2); }
+h1{
+  font-family: var(--f-display); font-weight:600;
+  font-size:clamp(30px,5.6vw,46px); line-height:1.08;
+  margin:0 0 14px; letter-spacing:-.01em;
+}
+h1 em{ font-style:italic; color: var(--b2); }
+.lede{ font-size:16px; color: var(--ink-soft); max-width:56ch; margin:0; }
+
+.meta-row{
+  display:flex; flex-wrap:wrap; gap:20px; margin-top:26px;
+  font-family: var(--f-data); font-size:12px; color: var(--ink-faint);
+}
+.meta-row strong{
+  display:block; color: var(--ink); font-size:14.5px; font-weight:500;
+  font-family: var(--f-display); margin-top:3px;
+}
+
+/* ---------- SECTIONS ---------- */
+main{ max-width:760px; margin:0 auto; padding:8px 24px 100px; }
+
+section.block{ margin-bottom:52px; }
+.block-head{ display:flex; align-items:baseline; gap:12px; margin-bottom:18px; }
+.time-tag{
+  font-family: var(--f-data); font-size:11px; color: var(--ink-faint);
+  background: var(--glass-strong); border:1px solid rgba(255,255,255,0.6); padding:3px 10px; border-radius:999px; margin-left:auto; flex:none;
+}
+.block-num{
+  font-family: var(--f-data); font-size:12px; color:#fff; background: var(--b2);
+  width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  flex:none;
+}
+.block-head h2{
+  font-family: var(--f-display); font-weight:500; font-style:italic; font-size:22px; margin:0;
+}
+.phase-label{
+  font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.08em;
+  color: var(--ink-faint); margin:0 0 8px; display:flex; align-items:center; gap:8px;
+}
+.phase-label .phase-icon{ font-size:14px; }
+
+.panel{
+  background: var(--glass);
+  backdrop-filter: blur(var(--blur)); -webkit-backdrop-filter: blur(var(--blur));
+  border:1px solid rgba(255,255,255,0.6); border-radius: var(--r-lg);
+  box-shadow: var(--shadow-1); padding:26px 28px;
+}
+
+.note{
+  margin-top:18px; padding:14px 16px;
+  background: linear-gradient(var(--b2-soft),var(--b2-soft)), var(--glass);
+  backdrop-filter: blur(12px);
+  border:1px solid var(--b2-line);
+  border-radius: var(--r-md); font-size:14px; color: var(--ink-soft);
+}
+.note strong{ color: var(--ink); }
+
+/* ---------- PRUEBA DE SONIDO INTRO ---------- */
+.mic-panel{ background: var(--ink); color: var(--paper); border-radius: var(--r-lg); padding:24px 26px; display:flex; gap:20px; align-items:center; margin-bottom:8px; }
+.mic-icon{ flex:none; width:56px; height:56px; border-radius:50%; background: rgba(255,255,255,0.1); display:flex; align-items:center; justify-content:center; font-size:26px; }
+.mic-body{ flex:1; }
+.mic-title{ font-family: var(--f-display); font-weight:600; font-size:19px; margin:0 0 4px; color:#fff; }
+.mic-desc{ font-size:14px; color: rgba(251,247,238,0.75); margin:0; }
+
+/* ---------- VOCAB CARDS ---------- */
+.vocab-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:12px; }
+.vocab-card{
+  background: var(--glass);
+  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  border:1px solid rgba(255,255,255,0.5); border-radius: var(--r-md);
+  padding:14px 16px; cursor:pointer; perspective:600px; min-height:78px;
+  display:flex; flex-direction:column; justify-content:center; transition: border-color .15s ease;
+}
+.vocab-card:hover{ border-color: var(--b2-line); }
+.vocab-card:focus-visible{ outline:2px solid var(--b2); outline-offset:2px; }
+.vocab-front{ font-family: var(--f-body); font-weight:600; font-size:15px; }
+.vocab-back{ display:none; font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); margin-top:6px; }
+.vocab-card.flipped .vocab-back{ display:block; }
+.vocab-card.flipped{ background: var(--b2-soft); border-color: var(--b2-line); }
+.vocab-hint{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin:10px 2px 16px; }
+
+/* ---------- EXERCISE (mixed direct/indirect + concordance) ---------- */
+.exercise{ margin-bottom:20px; }
+.exercise:last-of-type{ margin-bottom:0; }
+.ex-sentence{ font-size:15.5px; margin-bottom:10px; }
+.ex-sentence .gap{ font-family: var(--f-data); color: var(--ink-faint); }
+.ex-options{ display:flex; flex-wrap:wrap; gap:8px; }
+.opt-btn{
+  font-family: var(--f-body); font-size:14px; background: var(--glass-strong);
+  backdrop-filter: blur(10px);
+  border:1.5px solid var(--line-strong); color: var(--ink); padding:7px 16px; border-radius:999px;
+  cursor:pointer; transition: all .15s ease;
+}
+.opt-btn:hover{ border-color: var(--ink-faint); }
+.opt-btn.picked{ background: var(--b2-soft); border-color: var(--b2); color: var(--b2); }
+.opt-btn.correct{ background: var(--b2-soft); border-color: var(--b2); color: var(--b2); }
+.opt-btn.wrong{ background: var(--family-soft); border-color: var(--family); color: var(--family); }
+.opt-btn:disabled{ cursor:default; }
+
+.check-bar{
+  display:flex; align-items:center; justify-content:space-between; gap:16px;
+  margin-top:22px; padding-top:18px; border-top:1px dashed var(--line);
+}
+.btn-primary{
+  font-family: var(--f-data); font-weight:700; font-size:12.5px; text-transform:uppercase; letter-spacing:.05em;
+  color: var(--paper); background: var(--ink);
+  border:none; padding:12px 24px; border-radius:999px; cursor:pointer; transition: transform .1s ease;
+}
+.btn-primary:hover{ transform: translateY(-1px); }
+#score-text{ font-family: var(--f-data); font-size:13px; color: var(--ink-faint); }
+.btn-ghost{
+  font-family: var(--f-body); font-weight:600; font-size:13px; color: var(--ink-soft); background: rgba(255,255,255,0.4);
+  border:1.5px solid var(--line-strong); padding:9px 18px; border-radius:999px; cursor:pointer;
+}
+.btn-ghost:hover{ border-color: var(--ink-faint); }
+.ex-divider{
+  display:flex; align-items:center; gap:10px; margin:20px 0 16px;
+  font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.06em;
+  color: var(--ink-faint);
+}
+.ex-divider::before, .ex-divider::after{ content:""; flex:1; height:1px; background: var(--line); }
+.ex-divider.en-clase{ color: var(--b2); }
+.ex-divider.en-clase::before, .ex-divider.en-clase::after{ background: var(--b2-line); }
+
+/* ---------- COMPLIMENTS BANK (comentarios sobre el perro) ---------- */
+.compliment-grid{ display:grid; gap:12px; }
+.compliment-card{
+  background: linear-gradient(var(--family-soft),var(--family-soft)), var(--glass);
+  backdrop-filter: blur(14px);
+  border:1px solid var(--family-line); border-radius: var(--r-md);
+  padding:14px 16px; display:flex; gap:14px; align-items:flex-start;
+}
+.compliment-icon{ flex:none; font-size:18px; }
+.compliment-body{ flex:1; }
+.compliment-phrase{ font-family: var(--f-display); font-weight:600; font-size:16px; color: var(--family); margin:0 0 4px; }
+.compliment-reply{ font-size:13.5px; color: var(--ink-soft); margin:0; }
+.compliment-reply strong{ color: var(--ink); }
+
+/* ---------- ROLEPLAY: street encounter, minimal script ---------- */
+.roleplay-panel{
+  background: linear-gradient(var(--b1-soft),var(--b1-soft)), var(--glass);
+  backdrop-filter: blur(var(--blur));
+  border:1px solid var(--b1-line); border-radius: var(--r-lg); padding:26px 28px;
+}
+.roleplay-panel .block-num{ background: var(--b1); }
+.scene-setup{
+  display:flex; gap:14px; align-items:flex-start; background: var(--glass-strong);
+  backdrop-filter: blur(14px);
+  border:1px solid var(--b1-line); border-radius: var(--r-md); padding:14px 16px; margin-bottom:20px;
+}
+.scene-icon{ font-size:22px; flex:none; }
+.scene-text{ font-size:14px; color: var(--ink-soft); }
+.scene-text strong{ color: var(--ink); }
+
+.branch-wrap{ display:flex; flex-direction:column; gap:14px; }
+.branch-prompt{
+  background: var(--glass-strong);
+  backdrop-filter: blur(14px);
+  border:1px solid var(--b1-line); border-radius: var(--r-md);
+  padding:14px 16px;
+}
+.branch-prompt .line-name{ font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.05em; color: var(--ink-faint); margin:0 0 6px; }
+.branch-prompt .line-bubble{ font-size:14.5px; color: var(--ink); }
+.branch-options{ display:flex; flex-direction:column; gap:8px; margin-top:10px; }
+.branch-textarea{
+  width:100%; font-family: var(--f-body); font-size:14.5px; color: var(--ink);
+  background:rgba(255,255,255,0.7); border:1px solid var(--b1-line); border-radius: var(--r-sm);
+  padding:10px 12px; resize:vertical; min-height:44px;
+}
+.branch-textarea:focus{ outline:none; border-color: var(--b1); }
+.branch-hint{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin-top:5px; }
+
+.roleplay-tip{
+  margin-top:22px; padding:14px 16px; background: var(--glass-strong); backdrop-filter: blur(14px); border:1px solid var(--b1-line);
+  border-radius: var(--r-md); font-size:13.5px; color: var(--ink-soft);
+}
+.roleplay-tip strong{ color: var(--ink); }
+
+.scenario-tabs{
+  display:flex; gap:8px; margin-bottom:18px; flex-wrap:wrap;
+}
+.scenario-tab{
+  font-family: var(--f-body); font-weight:600; font-size:13.5px; color: var(--ink-soft);
+  background: var(--glass-strong); backdrop-filter: blur(10px);
+  border:1.5px solid var(--b1-line); padding:8px 16px; border-radius:999px; cursor:pointer;
+  transition: all .15s ease; display:flex; align-items:center; gap:7px;
+}
+.scenario-tab .scenario-tab-icon{ font-size:14px; }
+.scenario-tab:hover{ border-color: var(--b1); }
+.scenario-tab.active{ background: var(--b1); border-color: var(--b1); color:#fff; }
+.scenario-scene{ display:none; }
+.scenario-scene.active{ display:block; }
+
+/* ---------- FINAL TASK ---------- */
+.task-panel{
+  background: linear-gradient(var(--family-soft),var(--family-soft)), var(--glass);
+  backdrop-filter: blur(var(--blur));
+  border:1px solid var(--family-line); border-radius: var(--r-lg); padding:26px 28px;
+}
+.task-panel .block-num{ background: var(--family); }
+textarea#final-task{
+  width:100%; min-height:130px; font-family: var(--f-body); font-size:15px; color: var(--ink);
+  background: var(--glass-strong); backdrop-filter: blur(12px); border:1px solid var(--family-line); border-radius: var(--r-md);
+  padding:14px 16px; resize:vertical; margin-top:14px;
+}
+textarea#final-task:focus{ outline:none; border-color: var(--family); }
+.task-footer{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:12px; flex-wrap:wrap; }
+#task-count{ font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); }
+.btn-secondary{
+  font-family: var(--f-data); font-weight:700; font-size:12px; text-transform:uppercase; letter-spacing:.04em; color: var(--family); background: rgba(255,255,255,0.4);
+  border:1.5px solid var(--family-line); padding:9px 18px; border-radius:999px; cursor:pointer;
+}
+.saved-flag{ font-family: var(--f-data); font-size:12px; color: var(--b2); opacity:0; transition: opacity .3s ease; }
+.saved-flag.show{ opacity:1; }
+
+/* ---------- TÉCNICA ANTI-BLOQUEO: descripciones rápidas ---------- */
+.technique-panel{
+  background: linear-gradient(var(--violet-soft),var(--violet-soft)), var(--glass);
+  backdrop-filter: blur(var(--blur));
+  border:1px solid var(--violet-line); border-radius: var(--r-lg); padding:26px 28px;
+}
+.technique-panel .block-num{ background: var(--violet); }
+.quickdesc-list{ display:flex; flex-direction:column; gap:10px; margin:16px 0 18px; }
+.quickdesc-item{
+  display:flex; align-items:center; gap:14px; background: var(--glass-strong);
+  backdrop-filter: blur(12px);
+  border:1px solid var(--violet-line); border-radius: var(--r-md); padding:12px 16px;
+}
+.quickdesc-q{ flex:1; font-size:14.5px; color: var(--ink); }
+.quickdesc-timer{
+  flex:none; font-family: var(--f-data); font-size:11px; color: var(--violet);
+  background: var(--violet-soft); border:1px solid var(--violet-line); padding:3px 10px; border-radius:999px;
+}
+.technique-practice{
+  margin-top:4px; padding:16px 18px; background: var(--glass-strong); backdrop-filter: blur(12px); border:1px solid var(--violet-line);
+  border-radius: var(--r-md);
+}
+.technique-practice p{ margin:0 0 10px; font-size:14px; color: var(--ink-soft); }
+.technique-practice textarea{
+  width:100%; font-family: var(--f-body); font-size:14.5px; color: var(--ink);
+  background:rgba(255,255,255,0.7); border:1px solid var(--violet-line); border-radius: var(--r-sm);
+  padding:10px 12px; resize:vertical; min-height:70px;
+}
+.technique-practice textarea:focus{ outline:none; border-color: var(--violet); }
+
+/* ---------- FOOTER NAV ---------- */
+footer{
+  max-width:760px; margin:0 auto; padding:0 24px 60px; display:flex;
+  justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;
+  font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint);
+}
+footer a{ color: var(--b2); text-decoration:none; }
+footer a:hover{ text-decoration:underline; }
+
+@media (max-width:600px){
+  header{ padding:34px 18px 22px; }
+  main{ padding:8px 18px 90px; }
+  .panel, .task-panel, .roleplay-panel, .technique-panel{ padding:20px 18px; }
+  .mic-panel{ flex-direction:column; text-align:center; }
+  .quickdesc-item{ flex-direction:column; align-items:flex-start; gap:6px; }
+}
+@media (prefers-reduced-motion: reduce){ *{ transition:none !important; } }
+</style>
+</head>
+<body>
+<!-- Mesh gradient del sistema — fijo, detrás de todo, 100% CSS -->
+<div class="mesh-bg">
+  <div class="mesh-blob"></div>
+</div>
+
+<header>
+  <p class="eyebrow"><span class="dot"></span>Clase 10 de 36 · L2 Lista de invitados</p>
+  <h1>Prueba de <em>sonido</em></h1>
+  <p class="lede">Cada cierto número de clases hacemos una "prueba de sonido": salir del ejercicio controlado y ver cómo suena todo junto en una situación real, con menos guion y más improvisación. Hoy: sales a pasear a Alex por Xàtiva y un vecino se para a hablar del perro — como pasa de verdad, sin avisar. Empezamos también la semana de hablar sin pensar demasiado: descripciones rápidas, en pocos segundos y sin buscar la frase perfecta.</p>
+  <div class="meta-row">
+    <div>Duración<strong>50 min</strong></div>
+    <div>Gramática<strong>Objetos directos/indirectos + concordancia en contexto real</strong></div>
+    <div>Nivel<strong>B1</strong></div>
+  </div>
+</header>
+
+<main>
+
+  <section class="block">
+    <div class="mic-panel">
+      <div class="mic-icon">🎙️</div>
+      <div class="mic-body">
+        <p class="mic-title">¿Qué es una "prueba de sonido"?</p>
+        <p class="mic-desc">No es un examen ni un roleplay con guion fijo — es una situación real narrada con huecos abiertos donde tú decides qué decir, mezclando todo lo aprendido hasta ahora: ser/estar, lo/la/los/las, le/les y concordancia. El objetivo es notar qué sale ya automático y qué todavía necesita pensarse.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">1</span><h2>Repaso rápido antes de salir</h2><span class="time-tag">8 min</span></div>
+    <div class="panel">
+      <p style="margin:0 0 16px; font-size:14.5px; color:var(--ink-soft);">Un repaso mezclado de los tres bloques de esta línea, antes de ponerlos a prueba en la calle. En clase, si dudas antes de responder, no te pares en silencio — la técnica del bloque 5 es justo para ese momento.</p>
+      <div id="exercises"></div>
+      <div class="check-bar">
+        <div style="display:flex; gap:10px;">
+          <button class="btn-primary" id="check-btn">Comprobar respuestas</button>
+          <button class="btn-ghost" id="reset-btn">Reiniciar</button>
+        </div>
+        <span id="score-text"></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">2</span><h2>Vocabulario — la calle, los vecinos, los cumplidos</h2><span class="time-tag">6 min</span></div>
+    <p class="vocab-hint">Toca cada tarjeta para ver un ejemplo con tu vida real.</p>
+    <div class="vocab-grid" id="vocab-grid"></div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">3</span><h2>Cumplidos típicos sobre Alex</h2><span class="time-tag">6 min</span></div>
+    <p class="vocab-hint" style="margin-bottom:14px;">Un cumplido pide una respuesta rápida, no una frase pensada — practica contestar con lo primero que te salga, sin corregirte antes de hablar (es la técnica del bloque 5, ya en marcha).</p>
+    <div class="compliment-grid">
+      <div class="compliment-card">
+        <span class="compliment-icon">🐕</span>
+        <div class="compliment-body">
+          <p class="compliment-phrase">¡Qué perro más guapo!</p>
+          <p class="compliment-reply"><strong>Responde:</strong> "Gracias, es un pitbull, se llama Alex" — ser para presentarlo.</p>
+        </div>
+      </div>
+      <div class="compliment-card">
+        <span class="compliment-icon">🦮</span>
+        <div class="compliment-body">
+          <p class="compliment-phrase">Qué bien educado está</p>
+          <p class="compliment-reply"><strong>Responde:</strong> "Sí, la verdad, le cuesta un poco con otros perros, pero..." — combina estar y le.</p>
+        </div>
+      </div>
+      <div class="compliment-card">
+        <span class="compliment-icon">👀</span>
+        <div class="compliment-body">
+          <p class="compliment-phrase">¿Cuántos años tiene?</p>
+          <p class="compliment-reply"><strong>Responde:</strong> "Tiene X años, lo tenemos desde que..." — usa lo para referirte a Alex.</p>
+        </div>
+      </div>
+      <div class="compliment-card">
+        <span class="compliment-icon">😮</span>
+        <div class="compliment-body">
+          <p class="compliment-phrase">Uy, un pitbull, ¿no dan miedo?</p>
+          <p class="compliment-reply"><strong>Responde:</strong> un comentario que no siempre esperas — practica reaccionar con calma, sin ofenderte, defendiendo a Alex con naturalidad.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block roleplay-panel">
+    <div class="block-head"><span class="block-num">4</span><h2>En la calle, sin guion completo</h2><span class="time-tag">20 min</span></div>
+    <div class="scenario-tabs">
+      <button class="scenario-tab active" data-scenario="vecino"><span class="scenario-tab-icon">🐾</span>El vecino curioso</button>
+      <button class="scenario-tab" data-scenario="parque"><span class="scenario-tab-icon">🌳</span>El parque, otro perro suelto</button>
+      <button class="scenario-tab" data-scenario="tienda"><span class="scenario-tab-icon">🏪</span>La tienda de animales</button>
+    </div>
+
+    <div class="scenario-scene active" data-scenario="vecino">
+      <div class="scene-setup">
+        <span class="scene-icon">🐾</span>
+        <p class="scene-text"><strong>Escena:</strong> vas paseando a Alex por el centro de Xàtiva. Un vecino que os conoce de vista se para a hablar. La conversación tiene un ritmo natural — no sabes exactamente qué va a decir, así que aquí solo hay el arranque y algunas líneas sueltas; el resto lo improvisas en voz alta con tu profesor haciendo de vecino.</p>
+      </div>
+      <div class="branch-wrap">
+        <div class="branch-prompt">
+          <p class="line-name">Vecino (te ve venir con Alex)</p>
+          <p class="line-bubble">¡Anda, hola! Qué casualidad encontraros por aquí. ¡Qué perro más grande y qué guapo!</p>
+          <div class="branch-options">
+            <textarea class="branch-textarea" rows="2" placeholder="Reacciona al cumplido y preséntalo si hace falta..."></textarea>
+            <p class="branch-hint">Da las gracias por el cumplido y, si no os conocéis, preséntate y presenta a Alex.</p>
+          </div>
+        </div>
+        <div class="branch-prompt">
+          <p class="line-name">Vecino</p>
+          <p class="line-bubble">(pregunta improvisada sobre Alex — raza, edad, carácter, o algo que se le ocurra a tu profesor)</p>
+          <div class="branch-options">
+            <textarea class="branch-textarea" rows="2" placeholder="Responde a lo que te pregunte, usando lo/la si hace falta..."></textarea>
+            <p class="branch-hint">Aquí no hay pista fija — responde de forma natural a lo que pregunte tu profesor en el momento.</p>
+          </div>
+        </div>
+        <div class="branch-prompt">
+          <p class="line-name">Vecino</p>
+          <p class="line-bubble">(comentario sobre el barrio, el tiempo, o pregunta por tu trabajo o por Chris)</p>
+          <div class="branch-options">
+            <textarea class="branch-textarea" rows="2" placeholder="Sigue la conversación como te salga..."></textarea>
+            <p class="branch-hint">El tema puede saltar de Alex a cualquier otra cosa — sigue el hilo sin necesidad de volver al perro.</p>
+          </div>
+        </div>
+        <div class="branch-prompt">
+          <p class="line-name">Vecino</p>
+          <p class="line-bubble">Bueno, pues nada, ¡que disfrutéis del paseo! Un placer volver a veros.</p>
+          <div class="branch-options">
+            <textarea class="branch-textarea" rows="2" placeholder="Despídete..."></textarea>
+            <p class="branch-hint">Cierra la conversación con una despedida natural.</p>
+          </div>
+        </div>
+      </div>
+      <div class="roleplay-tip"><strong>En clase:</strong> tu profesor improvisa el papel del vecino sin seguir un guion fijo — las preguntas cambian cada vez. El objetivo no es acertar una respuesta "correcta", sino mantener la conversación viva: si te quedas en blanco, usa una muletilla ("a ver...", "es que...") y sigue.</div>
+    </div>
+
+    <div class="scenario-scene" data-scenario="parque">
+      <div class="scene-setup">
+        <span class="scene-icon">🌳</span>
+        <p class="scene-text"><strong>Escena:</strong> estás en el parque con Alex y, de repente, otro perro se acerca corriendo sin correa. El dueño llega un poco después, algo nervioso, y se disculpa. Improvisa la reacción: calmar a Alex, hablar con el dueño del otro perro y decidir cómo sigue el encuentro.</p>
+      </div>
+      <div class="branch-wrap">
+        <div class="branch-prompt">
+          <p class="line-name">Dueño del otro perro (llega corriendo)</p>
+          <p class="line-bubble">¡Perdona, perdona! Se me ha escapado, no suele acercarse así a otros perros...</p>
+          <div class="branch-options">
+            <textarea class="branch-textarea" rows="2" placeholder="Reacciona a la disculpa y comenta cómo está Alex..."></textarea>
+            <p class="branch-hint">Tranquiliza al dueño y comenta si Alex está nervioso, tranquilo, o si le ha sorprendido.</p>
+          </div>
+        </div>
+        <div class="branch-prompt">
+          <p class="line-name">Dueño del otro perro</p>
+          <p class="line-bubble">(pregunta improvisada sobre Alex — si muerde, si es bueno con otros perros, o algo que se le ocurra a tu profesor)</p>
+          <div class="branch-options">
+            <textarea class="branch-textarea" rows="2" placeholder="Responde explicando el carácter de Alex..."></textarea>
+            <p class="branch-hint">Aquí no hay pista fija — responde de forma natural, defendiendo a Alex si hace falta.</p>
+          </div>
+        </div>
+        <div class="branch-prompt">
+          <p class="line-name">Dueño del otro perro</p>
+          <p class="line-bubble">(comentario sobre lo difícil que es encontrar parques para perros sueltos, o pregunta si vienes mucho por aquí)</p>
+          <div class="branch-options">
+            <textarea class="branch-textarea" rows="2" placeholder="Sigue la conversación como te salga..."></textarea>
+            <p class="branch-hint">El tema puede alejarse del incidente — sigue el hilo con naturalidad.</p>
+          </div>
+        </div>
+        <div class="branch-prompt">
+          <p class="line-name">Dueño del otro perro</p>
+          <p class="line-bubble">Bueno, me lo llevo antes de que la líe otra vez. ¡Que vaya bien el resto del paseo!</p>
+          <div class="branch-options">
+            <textarea class="branch-textarea" rows="2" placeholder="Despídete..."></textarea>
+            <p class="branch-hint">Cierra la conversación con una despedida natural.</p>
+          </div>
+        </div>
+      </div>
+      <div class="roleplay-tip"><strong>En clase:</strong> este escenario tiene un poco más de tensión que el del vecino — practica mantener la calma y describir a Alex bajo presión, sin perder el hilo de la conversación.</div>
+    </div>
+
+    <div class="scenario-scene" data-scenario="tienda">
+      <div class="scene-setup">
+        <span class="scene-icon">🏪</span>
+        <p class="scene-text"><strong>Escena:</strong> entras con Alex en una tienda de animales del barrio a comprar una correa nueva. El dependiente te atiende y aprovecha para hacer conversación mientras buscas lo que necesitas. Improvisa la compra y la charla que surge mientras tanto.</p>
+      </div>
+      <div class="branch-wrap">
+        <div class="branch-prompt">
+          <p class="line-name">Dependiente (te ve entrar con Alex)</p>
+          <p class="line-bubble">¡Hola! Qué perro más tranquilo, ¿en qué puedo ayudarte hoy?</p>
+          <div class="branch-options">
+            <textarea class="branch-textarea" rows="2" placeholder="Explica qué necesitas comprar..."></textarea>
+            <p class="branch-hint">Da las gracias por el cumplido y explica qué buscas — una correa, comida, algún accesorio.</p>
+          </div>
+        </div>
+        <div class="branch-prompt">
+          <p class="line-name">Dependiente</p>
+          <p class="line-bubble">(pregunta improvisada sobre Alex — su tamaño, si necesita algo específico, o alguna recomendación que se le ocurra a tu profesor)</p>
+          <div class="branch-options">
+            <textarea class="branch-textarea" rows="2" placeholder="Responde a lo que te pregunte, usando lo/la si hace falta..."></textarea>
+            <p class="branch-hint">Aquí no hay pista fija — responde de forma natural a lo que pregunte tu profesor en el momento.</p>
+          </div>
+        </div>
+        <div class="branch-prompt">
+          <p class="line-name">Dependiente</p>
+          <p class="line-bubble">(comentario sobre alguna oferta, o pregunta si vienes mucho por la tienda o de dónde eres)</p>
+          <div class="branch-options">
+            <textarea class="branch-textarea" rows="2" placeholder="Sigue la conversación como te salga..."></textarea>
+            <p class="branch-hint">El tema puede saltar de la compra a cualquier otra cosa — sigue el hilo con naturalidad.</p>
+          </div>
+        </div>
+        <div class="branch-prompt">
+          <p class="line-name">Dependiente</p>
+          <p class="line-bubble">Perfecto, pues ya está todo. ¡Que disfrutéis del paseo!</p>
+          <div class="branch-options">
+            <textarea class="branch-textarea" rows="2" placeholder="Despídete..."></textarea>
+            <p class="branch-hint">Cierra la conversación con una despedida natural, agradeciendo la ayuda.</p>
+          </div>
+        </div>
+      </div>
+      <div class="roleplay-tip"><strong>En clase:</strong> este escenario añade vocabulario de tienda y de compra — practica pedir cosas y responder preguntas de un desconocido en un contexto distinto al de la calle.</div>
+    </div>
+
+  </section>
+
+  <section class="block technique-panel">
+    <p class="phase-label" style="color:var(--violet);"><span class="phase-icon">⚡</span>Técnica específica contra los bloqueos · Semana 4, sesión 10</p>
+    <div class="block-head"><span class="block-num">5</span><h2 style="color:var(--violet);">Descripciones rápidas</h2><span class="time-tag">6 min</span></div>
+    <p style="margin:0 0 4px; font-size:14.5px; color:var(--ink-soft);">Describir algo o alguien en pocos segundos, con lo primero que se te ocurra, sin buscar el adjetivo perfecto. Es justo lo que necesitas cuando el vecino te pregunta algo de repente en la calle.</p>
+    <div class="quickdesc-list">
+      <div class="quickdesc-item">
+        <span class="quickdesc-q">Describe a Alex en una frase, lo primero que se te ocurra.</span>
+        <span class="quickdesc-timer">10 seg</span>
+      </div>
+      <div class="quickdesc-item">
+        <span class="quickdesc-q">Describe al vecino que os para por la calle.</span>
+        <span class="quickdesc-timer">10 seg</span>
+      </div>
+      <div class="quickdesc-item">
+        <span class="quickdesc-q">Describe el barrio donde vives, en dos frases cortas.</span>
+        <span class="quickdesc-timer">10 seg</span>
+      </div>
+      <div class="quickdesc-item">
+        <span class="quickdesc-q">Describe cómo te sientes hoy paseando a Alex.</span>
+        <span class="quickdesc-timer">10 seg</span>
+      </div>
+    </div>
+    <div class="technique-practice">
+      <p><strong>Practica ahora:</strong> escribe tu primera respuesta instintiva a cada pregunta de arriba, sin corregir después. Si te quedas en blanco, usa una muletilla ("a ver...", "es que...") y sigue.</p>
+      <textarea placeholder="1. Alex es...&#10;2. El vecino es...&#10;3. Mi barrio es...&#10;4. Hoy me siento..."></textarea>
+    </div>
+    <div class="note" style="margin-top:16px;"><strong>La idea de hoy:</strong> una descripción rápida no tiene que ser precisa ni completa — solo tiene que salir. Cuantas más veces practiques describir algo en pocos segundos, menos tiempo necesitarás la próxima vez que alguien te pregunte algo sin avisar, como el vecino de hoy.</div>
+  </section>
+
+  <section class="block task-panel">
+    <div class="block-head"><span class="block-num">6</span><h2 style="color:var(--family)">Tu tarea</h2><span class="time-tag">3 min</span></div>
+    <p style="margin:0; font-size:15px; color:var(--ink-soft);">La próxima vez que alguien te hable de Alex por la calle (o en cualquier situación parecida), <strong>anota qué dijo la otra persona y qué le respondiste</strong> — y también qué te hubiera gustado decir si se te ocurrió después, en casa, la frase perfecta.</p>
+    <textarea id="final-task" placeholder="Quién me habló y qué dijo:...&#10;Qué le respondí:...&#10;Qué me hubiera gustado decir:..."></textarea>
+    <div class="task-footer">
+      <span id="task-count">0 palabras escritas</span>
+      <div style="display:flex; gap:10px; align-items:center;">
+        <span class="saved-flag" id="saved-flag">Guardado ✓</span>
+        <button class="btn-secondary" id="save-btn">Guardar tarea</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <span>Clase 10 · Prueba de sonido I, paseando a Alex por Xàtiva</span>
+  <span>Próxima clase → Clase 11: En la veterinaria, la recepcionista</span>
+</footer>
+
+<script>
+/* ---------- VOCAB ---------- */
+const VOCAB = [
+  {front:"el vecino que la conoce", back:"Hay un vecino que la conoce de vista y siempre se para a saludar."},
+  {front:"¡qué guapo!", back:"¡Qué guapo está Alex hoy! — un cumplido que escucha casi cada día."},
+  {front:"educado / educada", back:"Alex está muy educado con los otros perros del parque."},
+  {front:"dar miedo", back:"Algunas personas dicen que un pitbull da miedo, aunque no lo conozcan."},
+  {front:"de vista", back:"Nos conocemos de vista, pero no sabíamos ni el nombre."},
+  {front:"casualidad", back:"¡Qué casualidad encontraros aquí! — típico al cruzarse con alguien por la calle."},
+];
+
+const grid = document.getElementById('vocab-grid');
+VOCAB.forEach(v=>{
+  const card = document.createElement('div');
+  card.className = 'vocab-card';
+  card.setAttribute('role', 'button');
+  card.setAttribute('tabindex', '0');
+  card.setAttribute('aria-pressed', 'false');
+  card.setAttribute('aria-label', `${v.front}. Pulsa para ver un ejemplo.`);
+  card.innerHTML = `<div class="vocab-front">${v.front}</div><div class="vocab-back">${v.back}</div>`;
+  const toggle = ()=>{
+    const flipped = card.classList.toggle('flipped');
+    card.setAttribute('aria-pressed', String(flipped));
+  };
+  card.addEventListener('click', toggle);
+  card.addEventListener('keydown', (e)=>{
+    if(e.key === 'Enter' || e.key === ' '){
+      e.preventDefault();
+      toggle();
+    }
+  });
+  grid.appendChild(card);
+});
+
+/* ---------- EXERCISES (mixed review: DO, IO, concordance) ---------- */
+const EXERCISES = [
+  {"sentence":"¡Qué perro más <span class=\"gap\">___</span>!","options":["guapo","guapa","guapos"],"answer":"guapo"},
+  {"sentence":"Doy la correa a Alex → <span class=\"gap\">___</span> doy la correa.","options":["Le","Lo","La"],"answer":"Le"},
+  {"sentence":"Veo al vecino desde lejos → <span class=\"gap\">___</span> veo.","options":["Lo","Le","La"],"answer":"Lo"},
+  {"sentence":"Alex está muy <span class=\"gap\">___</span> con otros perros.","options":["educado","educada","educados"],"answer":"educado"},
+  {"sentence":"El vecino <span class=\"gap\">___</span> pregunta la edad de Alex.","options":["le","lo","les"],"answer":"le"},
+  {"sentence":"Las citas de esta semana son muy <span class=\"gap\">___</span>.","options":["importantes","importante","importanta"],"answer":"importantes"},
+  {"sentence":"Presento a Alex al vecino → <span class=\"gap\">___</span> presento.","options":["Lo","Le","La"],"answer":"Lo"},
+  {"sentence":"<span class=\"gap\">___</span> explico al vecino que Alex es un pitbull muy tranquilo.","options":["Le","Lo","Les"],"answer":"Le"},
+  {"sentence":"Alex y yo estamos <span class=\"gap\">___</span> después del paseo largo.","options":["cansados","cansado","cansada"],"answer":"cansados"},
+  {"sentence":"¿Cuántos años <span class=\"gap\">___</span> Alex?","options":["tiene","tienes","tengo"],"answer":"tiene"},
+  {"sentence":"La recepcionista es muy <span class=\"gap\">___</span>.","options":["amable","amabla","amables"],"answer":"amable"},
+  {"sentence":"Doy las gracias al vecino → <span class=\"gap\">___</span> doy las gracias.","options":["Le","Lo","Les"],"answer":"Le"},
+  {"sentence":"Llevo la correa nueva → <span class=\"gap\">___</span> llevo siempre en el bolso.","options":["La","Le","Las"],"answer":"La"},
+  {"sentence":"Este barrio es muy <span class=\"gap\">___</span> para pasear perros.","options":["tranquilo","tranquila","tranquilos"],"answer":"tranquilo"},
+  {"sentence":"<span class=\"gap\">___</span> cuento al vecino que Alex es de rescate.","options":["Le","Lo","La"],"answer":"Le"},
+  {"sentence":"Los comentarios de la gente son a veces muy <span class=\"gap\">___</span>.","options":["curiosos","curioso","curiosas"],"answer":"curiosos"},
+  {"sentence":"Conozco a esta vecina de vista → <span class=\"gap\">___</span> conozco desde hace tiempo.","options":["La","Le","Lo"],"answer":"La"},
+  {"sentence":"<span class=\"gap\">___</span> digo al vecino que ya nos vamos, que se hace tarde.","options":["Le","Lo","Les"],"answer":"Le"},
+  {"sentence":"Las respuestas de Alex a los desconocidos son bastante <span class=\"gap\">___</span>.","options":["tranquilas","tranquilo","tranquilos"],"answer":"tranquilas"},
+  {"sentence":"¡Qué casualidad <span class=\"gap\">___</span> por aquí!","options":["encontraros","encontraos","encontrarnos"],"answer":"encontraros"},
+  {"sentence":"Saludo al vecino cada mañana → <span class=\"gap\">___</span> saludo cada mañana.","options":["Lo","Le","La"],"answer":"Lo"},
+  {"sentence":"Alex y su correa nueva están muy <span class=\"gap\">___</span> hoy.","options":["elegantes","elegante","elegantas"],"answer":"elegantes"},
+  {"sentence":"<span class=\"gap\">___</span> cuesta un poco acercarse a los perros grandes.","options":["Le","Lo","Les"],"answer":"Le"},
+  {"sentence":"Compro una correa nueva → <span class=\"gap\">___</span> compro en la tienda del barrio.","options":["La","Lo","Le"],"answer":"La"},
+  {"sentence":"El vecino y su perro parecen muy <span class=\"gap\">___</span>.","options":["simpáticos","simpático","simpática"],"answer":"simpáticos"},
+  {"sentence":"Enseño el truco nuevo a Alex → <span class=\"gap\">___</span> enseño cada tarde.","options":["Le","Lo","La"],"answer":"Le"},
+  {"sentence":"Mando un mensaje al vecino → <span class=\"gap\">___</span> mando un mensaje luego.","options":["Le","Lo","La"],"answer":"Le"},
+  {"sentence":"Las calles del centro están muy <span class=\"gap\">___</span> a esta hora.","options":["tranquilas","tranquilo","tranquilos"],"answer":"tranquilas"},
+  {"sentence":"Sujeto a Alex fuerte → <span class=\"gap\">___</span> sujeto con las dos manos.","options":["Lo","Le","La"],"answer":"Lo"},
+  {"sentence":"<span class=\"gap\">___</span> pregunto al vecino si quiere acariciar a Alex.","options":["Le","Lo","Les"],"answer":"Le"}
+]
+;
+
+function shuffle(arr){
+  const a = arr.slice();
+  for(let i = a.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+const exWrap = document.getElementById('exercises');
+EXERCISES.forEach((ex, i)=>{
+  if(i === 0){
+    const divider = document.createElement('div');
+    divider.className = 'ex-divider en-clase';
+    divider.textContent = 'en clase · ítems 1–10';
+    exWrap.appendChild(divider);
+  }
+  if(i === 10){
+    const divider = document.createElement('div');
+    divider.className = 'ex-divider';
+    divider.textContent = 'para casa · ítems 11–30 · repaso opcional';
+    exWrap.appendChild(divider);
+  }
+  const el = document.createElement('div');
+  el.className = 'exercise';
+  el.dataset.answer = ex.answer;
+  const shuffledOptions = shuffle(ex.options);
+  el.innerHTML = `
+    <div class="ex-sentence">${i+1}. ${ex.sentence}</div>
+    <div class="ex-options">
+      ${shuffledOptions.map(o=>`<button class="opt-btn" data-value="${o}">${o}</button>`).join('')}
+    </div>
+  `;
+  exWrap.appendChild(el);
+
+  el.querySelectorAll('.opt-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      el.querySelectorAll('.opt-btn').forEach(b=>b.classList.remove('picked'));
+      btn.classList.add('picked');
+    });
+  });
+});
+
+document.getElementById('check-btn').addEventListener('click', ()=>{
+  let correct = 0;
+  document.querySelectorAll('.exercise').forEach(el=>{
+    const answer = el.dataset.answer;
+    const picked = el.querySelector('.opt-btn.picked');
+    el.querySelectorAll('.opt-btn').forEach(b=>{
+      b.disabled = true;
+      if(b.dataset.value === answer) b.classList.add('correct');
+      else if(b === picked) b.classList.add('wrong');
+    });
+    if(picked && picked.dataset.value === answer) correct++;
+  });
+  document.getElementById('score-text').textContent = `${correct} / ${EXERCISES.length} correctas`;
+});
+
+document.getElementById('reset-btn').addEventListener('click', ()=>{
+  document.querySelectorAll('.exercise').forEach(el=>{
+    el.querySelectorAll('.opt-btn').forEach(b=>{
+      b.disabled = false;
+      b.classList.remove('picked','correct','wrong');
+    });
+  });
+  document.getElementById('score-text').textContent = '';
+});
+
+/* ---------- ROLEPLAY: selector de escenarios ---------- */
+document.querySelectorAll('.scenario-tab').forEach(tab=>{
+  tab.addEventListener('click', ()=>{
+    const target = tab.dataset.scenario;
+    document.querySelectorAll('.scenario-tab').forEach(t=>t.classList.remove('active'));
+    document.querySelectorAll('.scenario-scene').forEach(s=>s.classList.remove('active'));
+    tab.classList.add('active');
+    document.querySelector(`.scenario-scene[data-scenario="${target}"]`).classList.add('active');
+  });
+});
+
+/* ---------- TÉCNICA: práctica de descripciones rápidas (autosave) ---------- */
+const STORAGE_KEY_TECHNIQUE = 'lisa-clase10-tecnica';
+const techniqueArea = document.querySelector('.technique-practice textarea');
+
+async function cargarTecnica(){
+  if (!window.storage || !techniqueArea) return;
+  try{
+    const res = await window.storage.get(STORAGE_KEY_TECHNIQUE);
+    if (res && typeof res.value === 'string') techniqueArea.value = res.value;
+  }catch(e){
+    // sin práctica previa
+  }
+}
+if (techniqueArea){
+  techniqueArea.addEventListener('input', ()=>{
+    clearTimeout(techniqueArea._saveTimer);
+    techniqueArea._saveTimer = setTimeout(()=>{
+      if (window.storage) window.storage.set(STORAGE_KEY_TECHNIQUE, techniqueArea.value).catch(()=>{ /* fallo silencioso */ });
+    }, 600);
+  });
+  cargarTecnica();
+}
+
+/* ---------- FINAL TASK ---------- */
+const STORAGE_KEY = 'lisa-clase10-tarea';
+const taskArea = document.getElementById('final-task');
+const taskCount = document.getElementById('task-count');
+const savedFlag = document.getElementById('saved-flag');
+
+async function cargarTarea(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(STORAGE_KEY);
+    if (res && typeof res.value === 'string') taskArea.value = res.value;
+  }catch(e){
+    // Clave inexistente todavía: no hay tarea previa, se queda en blanco.
+  }
+  updateCount();
+}
+
+function updateCount(){
+  const words = taskArea.value.trim().split(/\s+/).filter(Boolean).length;
+  taskCount.textContent = `${words} palabra${words===1?'':'s'} escrita${words===1?'':'s'}`;
+}
+taskArea.addEventListener('input', updateCount);
+updateCount();
+cargarTarea();
+
+document.getElementById('save-btn').addEventListener('click', async ()=>{
+  if (!window.storage){
+    savedFlag.textContent = 'Guardado no disponible aquí';
+    savedFlag.classList.add('show');
+    setTimeout(()=>{ savedFlag.classList.remove('show'); savedFlag.textContent = 'Guardado ✓'; }, 2200);
+    return;
+  }
+  try{
+    const ok = await window.storage.set(STORAGE_KEY, taskArea.value);
+    savedFlag.textContent = ok ? 'Guardado ✓' : 'No se pudo guardar';
+  }catch(e){
+    savedFlag.textContent = 'No se pudo guardar';
+  }
+  savedFlag.classList.add('show');
+  setTimeout(()=>{ savedFlag.classList.remove('show'); savedFlag.textContent = 'Guardado ✓'; }, 1800);
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clase de repaso · Nivel real — Harry Potter + D&D + Alex parlante</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:        #FBF7EE;
+  --paper-raised: #FFFFFF;
+  --paper-alt:    #F3ECDA;
+  --ink:          #23291F;
+  --ink-soft:     #565F52;
+  --ink-faint:    #8B9184;
+  --line:         rgba(35,41,31,0.12);
+  --line-strong:  rgba(35,41,31,0.22);
+  --b1:      #2F6FED;  --b1-soft: #EAF1FE;  --b1-line: #C6D9FC;
+  --b2:      #2E9E6B;  --b2-soft: #E9F6EF;  --b2-line: #BEE6D3;
+  --family:  #B5502E;  --family-soft: #FBEBE3; --family-line: #EFC9B4;
+  --violet:  #7B4FC9;  --violet-soft: #F1EBFB; --violet-line: #D9C8F0;
+  --f-display: 'Fraunces', Georgia, serif;
+  --f-body:    'IBM Plex Sans', system-ui, sans-serif;
+  --f-data:    'IBM Plex Mono', monospace;
+  --r-sm: 8px; --r-md: 14px; --r-lg: 20px;
+  --shadow-1: 0 1px 2px rgba(35,41,31,0.05), 0 1px 8px rgba(35,41,31,0.04);
+}
+*{ box-sizing:border-box; }
+body{
+  margin:0;
+  background: var(--paper);
+  background-image: radial-gradient(circle at 1px 1px, var(--line) 1px, transparent 0);
+  background-size: 22px 22px;
+  color: var(--ink);
+  font-family: var(--f-body);
+  line-height:1.6;
+}
+::selection{ background: var(--b1-soft); }
+
+/* ---------- TOGGLE DE IDIOMA ---------- */
+.lang-toggle{
+  position:fixed;
+  top:18px;
+  right:18px;
+  z-index:1000;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  background: var(--paper-raised);
+  border:1px solid var(--line-strong);
+  border-radius:999px;
+  padding:6px 10px 6px 14px;
+  box-shadow: var(--shadow-1);
+  font-family: var(--f-data);
+  font-size:12px;
+  user-select:none;
+}
+.lang-toggle span{
+  color: var(--ink-faint);
+  padding:0 2px;
+  transition: color 0.2s;
+}
+.lang-toggle span.active{
+  color: var(--violet);
+  font-weight:700;
+}
+.lang-switch{
+  position:relative;
+  width:38px;
+  height:20px;
+  border-radius:999px;
+  background: var(--paper-alt);
+  border:1px solid var(--line-strong);
+  cursor:pointer;
+  flex:none;
+  transition: background 0.2s;
+}
+.lang-switch::after{
+  content:"";
+  position:absolute;
+  top:1px;
+  left:1px;
+  width:16px;
+  height:16px;
+  border-radius:50%;
+  background: var(--violet);
+  transition: transform 0.2s ease;
+}
+body.show-en .lang-switch::after{
+  transform: translateX(18px);
+}
+body.show-en .lang-switch{
+  background: var(--violet-soft);
+}
+
+/* ---------- TEXTO EN INGLÉS (oculto por defecto) ---------- */
+.en{
+  display:none;
+  font-family: var(--f-body);
+  font-size:0.85em;
+  color: var(--ink-faint);
+  font-style:italic;
+  opacity:0.75;
+  margin-top:2px;
+}
+body.show-en .en{
+  display:block;
+}
+/* Para que el inglés aparezca en línea con el español (por ejemplo, en hints) */
+.en-inline{
+  display:none;
+  font-size:0.85em;
+  color: var(--ink-faint);
+  font-style:italic;
+  opacity:0.75;
+  margin-left:6px;
+}
+body.show-en .en-inline{
+  display:inline;
+}
+/* Para que el inglés sustituya al español en algunos textos (si se prefiere) */
+/* Pero en este diseño, ambos aparecen juntos */
+
+/* Ajuste para que el español no se vea afectado */
+.es{
+  display:inline;
+}
+
+/* ---------- RESTO DE ESTILOS (sin cambios) ---------- */
+header{ padding:44px 24px 28px; max-width:760px; margin:0 auto; }
+.eyebrow{
+  font-family: var(--f-data); font-size:12px; letter-spacing:.14em;
+  text-transform:uppercase; color: var(--violet); margin:0 0 10px;
+  display:flex; align-items:center; gap:10px;
+}
+.eyebrow .dot{ width:6px; height:6px; border-radius:50%; background: var(--violet); }
+h1{
+  font-family: var(--f-display); font-weight:600;
+  font-size:clamp(30px,5.6vw,46px); line-height:1.08;
+  margin:0 0 14px; letter-spacing:-.01em;
+}
+h1 em{ font-style:italic; color: var(--violet); }
+.lede{ font-size:16px; color: var(--ink-soft); max-width:56ch; margin:0; }
+.meta-row{
+  display:flex; flex-wrap:wrap; gap:20px; margin-top:26px;
+  font-family: var(--f-data); font-size:12px; color: var(--ink-faint);
+}
+.meta-row strong{
+  display:block; color: var(--ink); font-size:14.5px; font-weight:500;
+  font-family: var(--f-display); margin-top:3px;
+}
+.structure-strip{
+  display:grid; grid-template-columns:repeat(4,1fr); gap:2px; margin-top:24px;
+  border-radius: var(--r-md); overflow:hidden; border:1px solid var(--line);
+}
+.structure-cell{ background: var(--paper-raised); padding:12px 14px; }
+.structure-cell .s-icon{ font-size:16px; }
+.structure-cell .s-time{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin:4px 0 2px; }
+.structure-cell .s-label{ font-family: var(--f-body); font-weight:600; font-size:12.5px; color: var(--ink); }
+main{ max-width:760px; margin:0 auto; padding:8px 24px 100px; }
+section.block{ margin-bottom:52px; }
+.block-head{ display:flex; align-items:baseline; gap:12px; margin-bottom:18px; }
+.time-tag{
+  font-family: var(--f-data); font-size:11px; color: var(--ink-faint);
+  background: var(--paper-alt); padding:3px 10px; border-radius:999px; margin-left:auto; flex:none;
+}
+.block-num{
+  font-family: var(--f-data); font-size:12px; color:#fff; background: var(--violet);
+  width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  flex:none;
+}
+.block-head h2{
+  font-family: var(--f-display); font-weight:500; font-style:italic; font-size:22px; margin:0;
+}
+.panel{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-lg);
+  box-shadow: var(--shadow-1); padding:26px 28px;
+}
+.note{
+  margin-top:18px; padding:14px 16px; background: var(--b1-soft); border:1px solid var(--b1-line);
+  border-radius: var(--r-md); font-size:14px; color: var(--ink-soft);
+}
+.note strong{ color: var(--ink); }
+.exercise{ margin-bottom:26px; border-bottom:1px dashed var(--line); padding-bottom:20px; }
+.exercise:last-of-type{ border-bottom:none; padding-bottom:0; margin-bottom:0; }
+.ex-sentence{ font-size:15.5px; margin-bottom:6px; }
+.ex-sentence .gap{ font-family: var(--f-data); color: var(--ink-faint); }
+.ex-options{ display:flex; flex-wrap:wrap; gap:8px; margin-top:6px; }
+.opt-btn{
+  font-family: var(--f-body); font-size:14px; background: var(--paper-raised);
+  border:1.5px solid var(--line); color: var(--ink); padding:7px 16px; border-radius:999px;
+  cursor:pointer; transition: all .15s ease;
+}
+.opt-btn:hover{ border-color: var(--ink-faint); }
+.opt-btn.picked{ background: var(--b1-soft); border-color: var(--b1); color: var(--b1); }
+.opt-btn.correct{ background: var(--b2-soft); border-color: var(--b2); color: var(--b2); }
+.opt-btn.wrong{ background: var(--family-soft); border-color: var(--family); color: var(--family); }
+.opt-btn:disabled{ cursor:default; }
+.check-bar{
+  display:flex; align-items:center; justify-content:space-between; gap:16px;
+  margin-top:22px; padding-top:18px; border-top:1px dashed var(--line);
+}
+.btn-primary{
+  font-family: var(--f-body); font-weight:600; font-size:14px; color:#fff; background: var(--violet);
+  border:none; padding:11px 22px; border-radius:999px; cursor:pointer; transition: transform .1s ease;
+}
+.btn-primary:hover{ transform: translateY(-1px); }
+#score-text{ font-family: var(--f-data); font-size:13px; color: var(--ink-faint); }
+.btn-ghost{
+  font-family: var(--f-body); font-weight:600; font-size:13px; color: var(--ink-soft); background:none;
+  border:1.5px solid var(--line); padding:9px 18px; border-radius:999px; cursor:pointer;
+}
+.btn-ghost:hover{ border-color: var(--ink-faint); }
+.ex-divider{
+  display:flex; align-items:center; gap:10px; margin:20px 0 16px;
+  font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.06em;
+  color: var(--ink-faint);
+}
+.ex-divider::before, .ex-divider::after{ content:""; flex:1; height:1px; background: var(--line); }
+.ex-divider.en-clase{ color: var(--violet); }
+.ex-divider.en-clase::before, .ex-divider.en-clase::after{ background: var(--violet-line); }
+.roleplay-panel{ background: var(--b2-soft); border:1px solid var(--b2-line); border-radius: var(--r-lg); padding:26px 28px; }
+.roleplay-panel .block-num{ background: var(--b2); }
+.scene-setup{
+  display:flex; gap:14px; align-items:flex-start; background: var(--paper-raised);
+  border:1px solid var(--b2-line); border-radius: var(--r-md); padding:14px 16px; margin-bottom:20px;
+}
+.scene-icon{ font-size:22px; flex:none; }
+.scene-text{ font-size:14px; color: var(--ink-soft); }
+.scene-text strong{ color: var(--ink); }
+.dialogue{ display:flex; flex-direction:column; gap:14px; }
+.line{ display:flex; gap:12px; align-items:flex-start; }
+.line-avatar{
+  flex:none; width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  font-family: var(--f-display); font-weight:600; font-size:14px; color:#fff;
+}
+.line.friend .line-avatar{ background: var(--ink-faint); }
+.line.you .line-avatar{ background: var(--b2); }
+.line-body{ flex:1; }
+.line-name{ font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.05em; color: var(--ink-faint); margin:0 0 4px; }
+.line-bubble{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:12px 14px; font-size:14.5px; color: var(--ink);
+}
+.line.you .line-bubble{ background:#fff; border-color: var(--b2-line); }
+.line-input{
+  width:100%; font-family: var(--f-body); font-size:14.5px; color: var(--ink);
+  background:#fff; border:1px solid var(--b2-line); border-radius: var(--r-sm);
+  padding:10px 12px; resize:vertical; min-height:44px; margin-top:2px;
+}
+.line-input:focus{ outline:none; border-color: var(--b2); }
+.line-hint{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin-top:5px; }
+.roleplay-tip{
+  margin-top:22px; padding:14px 16px; background: var(--paper-raised); border:1px solid var(--b2-line);
+  border-radius: var(--r-md); font-size:13.5px; color: var(--ink-soft);
+}
+.roleplay-tip strong{ color: var(--ink); }
+.assess-panel{ background: var(--family-soft); border:1px solid var(--family-line); border-radius: var(--r-lg); padding:26px 28px; }
+.assess-panel .block-num{ background: var(--family); }
+.assess-grid{ display:grid; gap:10px; margin:16px 0 20px; }
+.assess-row{
+  display:flex; align-items:center; gap:14px; background: var(--paper-raised);
+  border:1px solid var(--family-line); border-radius: var(--r-md); padding:12px 16px;
+}
+.assess-label{ flex:1; font-size:14.5px; color: var(--ink); }
+.assess-scale{ display:flex; gap:6px; flex:none; }
+.assess-dot{
+  width:30px; height:30px; border-radius:50%; border:1.5px solid var(--family-line);
+  background: var(--paper-raised); cursor:pointer; font-family: var(--f-data); font-size:12px;
+  color: var(--ink-faint); display:flex; align-items:center; justify-content:center; transition: all .15s ease;
+}
+.assess-dot:hover{ border-color: var(--family); }
+.assess-dot.selected{ background: var(--family); border-color: var(--family); color:#fff; }
+textarea#final-task{
+  width:100%; min-height:80px; font-family: var(--f-body); font-size:15px; color: var(--ink);
+  background: var(--paper-raised); border:1px solid var(--family-line); border-radius: var(--r-md);
+  padding:14px 16px; resize:vertical; margin-top:14px;
+}
+textarea#final-task:focus{ outline:none; border-color: var(--family); }
+.task-footer{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:12px; flex-wrap:wrap; }
+#task-count{ font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); }
+.btn-secondary{
+  font-family: var(--f-body); font-weight:600; font-size:13.5px; color: var(--family); background:none;
+  border:1.5px solid var(--family-line); padding:9px 18px; border-radius:999px; cursor:pointer;
+}
+.saved-flag{ font-family: var(--f-data); font-size:12px; color: var(--b2); opacity:0; transition: opacity .3s ease; }
+.saved-flag.show{ opacity:1; }
+footer{
+  max-width:760px; margin:0 auto; padding:0 24px 60px; display:flex;
+  justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;
+  font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint);
+}
+footer a{ color: var(--violet); text-decoration:none; }
+@media (max-width:600px){
+  header{ padding:34px 18px 22px; }
+  main{ padding:8px 18px 90px; }
+  .panel, .task-panel, .roleplay-panel, .assess-panel{ padding:20px 18px; }
+  .assess-row{ flex-direction:column; align-items:flex-start; }
+  .lang-toggle{ top:12px; right:12px; padding:4px 8px 4px 10px; font-size:11px; }
+  .lang-switch{ width:32px; height:17px; }
+  .lang-switch::after{ width:13px; height:13px; }
+  body.show-en .lang-switch::after{ transform: translateX(15px); }
+}
+</style>
+</head>
+<body>
+
+<!-- TOGGLE DE IDIOMA -->
+<div class="lang-toggle">
+  <span id="lang-es-label" class="active">ES</span>
+  <div class="lang-switch" id="lang-switch" role="button" tabindex="0" aria-label="Mostrar traducción al inglés"></div>
+  <span id="lang-en-label">EN</span>
+</div>
+
+<header>
+  <p class="eyebrow"><span class="dot"></span>Clase de repaso · Nivel real</p>
+  <h1>Magia, dragones y <em>perros que hablan</em></h1>
+  <p class="lede">
+    <span class="es">De Hogwarts a la taberna de D&D, y ahora una nueva escena: tu perro Alex ha sido hechizado por una varita defectuosa y habla. Practica el cambio de registro, los pronombres y el pasado mientras descubres qué opina tu pitbull de tu vida.</span>
+    <span class="en">From Hogwarts to the D&D tavern, and now a new scene: your dog Alex has been enchanted by a faulty wand and speaks. Practice register switching, pronouns, and past tenses while discovering what your pitbull thinks of your life.</span>
+  </p>
+  <div class="meta-row">
+    <div>Duración<strong>50 min</strong></div>
+    <div>Contenido<strong>Ser/Estar · Pronombres · Pasado · Registro</strong></div>
+    <div>Nivel<strong>B2+</strong></div>
+  </div>
+  <div class="structure-strip">
+    <div class="structure-cell"><span class="s-icon">⚡</span><p class="s-time">5 min</p><p class="s-label">Activación</p></div>
+    <div class="structure-cell"><span class="s-icon">🧩</span><p class="s-time">15 min</p><p class="s-label">Test</p></div>
+    <div class="structure-cell"><span class="s-icon">🎭</span><p class="s-time">20 min</p><p class="s-label">Roleplay</p></div>
+    <div class="structure-cell"><span class="s-icon">📊</span><p class="s-time">10 min</p><p class="s-label">Autoevaluación</p></div>
+  </div>
+</header>
+<main>
+
+  <!-- BLOQUE 1: ACTIVACIÓN -->
+  <section class="block">
+    <div class="block-head"><span class="block-num">1</span><h2>Activación</h2><span class="time-tag">5 min</span></div>
+    <div class="panel">
+      <p style="margin:0 0 12px; font-size:14.5px; color:var(--ink-soft);">
+        <span class="es">Responde a las preguntas cambiando de tema sin aviso. Tu profesor te hará una pregunta y, cuando estés en mitad de la respuesta, cambiará a la siguiente.</span>
+        <span class="en">Answer the questions, changing topics without warning. Your teacher will ask a question, and mid‑answer, switch to the next one.</span>
+      </p>
+      <ul style="list-style:none; padding:0; margin:0; font-size:15px; line-height:2.2;">
+        <li style="display:flex; gap:10px;"><span style="font-family:var(--f-data); color:var(--violet);">01</span> <span class="es">Si tu perro hablara, ¿qué crees que te diría primero?</span><span class="en">If your dog could talk, what do you think he'd say first?</span></li>
+        <li style="display:flex; gap:10px;"><span style="font-family:var(--f-data); color:var(--violet);">02</span> <span class="es">¿Qué hechizo usarías para que tu vecino dejara de hablar tanto?</span><span class="en">What spell would you use to make your neighbour stop talking so much?</span></li>
+        <li style="display:flex; gap:10px;"><span style="font-family:var(--f-data); color:var(--violet);">03</span> <span class="es">En tu partida de D&D, ¿qué clase sería Alex?</span><span class="en">In your D&D game, what class would Alex be?</span></li>
+        <li style="display:flex; gap:10px;"><span style="font-family:var(--f-data); color:var(--violet);">04</span> <span class="es">¿Preferirías luchar contra un dragón o contra el acento valenciano de tu vecino?</span><span class="en">Would you rather fight a dragon or your neighbour's Valencian accent?</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- BLOQUE 2: TEST -->
+  <section class="block">
+    <div class="block-head"><span class="block-num">2</span><h2>Test de integración</h2><span class="time-tag">15 min</span></div>
+    <div class="panel">
+      <p style="margin:0 0 14px; font-size:14.5px; color:var(--ink-soft);">
+        <span class="es">18 preguntas que mezclan todo lo visto, con trampas gramaticales y cambios de tiempo.</span>
+        <span class="en">18 questions blending everything covered, with grammar traps and tense shifts.</span>
+      </p>
+      <div id="exercises"></div>
+      <div class="check-bar">
+        <div style="display:flex; gap:10px;">
+          <button class="btn-primary" id="check-btn"><span class="es">Comprobar</span><span class="en">Check</span></button>
+          <button class="btn-ghost" id="reset-btn"><span class="es">Reiniciar</span><span class="en">Reset</span></button>
+        </div>
+        <span id="score-text"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- BLOQUE 3: ROLEPLAY -->
+  <section class="block roleplay-panel">
+    <div class="block-head"><span class="block-num">3</span><h2>Roleplay · Tres escenas mágicas</h2><span class="time-tag">20 min</span></div>
+
+    <!-- ESCENA 1: HARRY POTTER -->
+    <div class="scene-setup">
+      <span class="scene-icon">🪄</span>
+      <p class="scene-text">
+        <span class="es"><strong>Escena 1 · Harry Potter — La tienda de varitas:</strong> Estás en el Callejón Diagon, en la tienda de Ollivanders. Necesitas una varita nueva. Ollivander es muy formal; Hermione está contigo y te da consejos informales. Cambias de registro entre ambos.</span>
+        <span class="en"><strong>Scene 1 · Harry Potter — The wand shop:</strong> You're in Diagon Alley at Ollivanders. You need a new wand. Ollivander is very formal; Hermione is with you, giving informal advice. Switch registers between them.</span>
+      </p>
+    </div>
+    <div class="dialogue">
+      <div class="line friend">
+        <div class="line-avatar">O</div>
+        <div class="line-body">
+          <p class="line-name">Ollivander (formal)</p>
+          <div class="line-bubble"><span class="es">Buenas tardes, señora. He oído que busca una varita nueva. ¿Podría decirme qué tipo de madera prefiere? La última que tuvo, ¿era de sauce o de tejo?</span><span class="en">Good afternoon, madam. I hear you're looking for a new wand. Could you tell me which wood you prefer? The last one you had, was it willow or yew?</span></div>
+        </div>
+      </div>
+      <div class="line you">
+        <div class="line-avatar">Tú</div>
+        <div class="line-body">
+          <p class="line-name">Tú</p>
+          <textarea class="line-input" rows="2" placeholder="Responde con registro formal, usando ser y estar para describir tu varita anterior..."></textarea>
+          <p class="line-hint"><span class="es">Formal: "le agradezco", "era de...", "me encantaría", "¿podría recomendarme...?"</span><span class="en">Formal: "I appreciate", "it was...", "I'd love", "could you recommend...?"</span></p>
+        </div>
+      </div>
+      <div class="line friend">
+        <div class="line-avatar">H</div>
+        <div class="line-body">
+          <p class="line-name">Hermione (informal)</p>
+          <div class="line-bubble"><span class="es">¡No te olvides de que necesitas que se adapte a tu estilo de hechicería! Si no, va a ser un desastre. Yo siempre <strong>la</strong> pruebo antes de comprar <strong>la</strong> varita.</span><span class="en">Don't forget you need it to fit your spellcasting style! Otherwise it'll be a disaster. I always <strong>test it</strong> before buying <strong>the</strong> wand.</span></div>
+        </div>
+      </div>
+      <div class="line you">
+        <div class="line-avatar">Tú</div>
+        <div class="line-body">
+          <p class="line-name">Tú</p>
+          <textarea class="line-input" rows="2" placeholder="Responde a Hermione con tono informal, usando pronombres de objeto directo..."></textarea>
+          <p class="line-hint"><span class="es">Informal: "ya lo sé", "gracias por el consejo", "tienes razón", "la probaré".</span><span class="en">Informal: "I know", "thanks for the advice", "you're right", "I'll try it".</span></p>
+        </div>
+      </div>
+      <div class="line friend">
+        <div class="line-avatar">O</div>
+        <div class="line-body">
+          <p class="line-name">Ollivander</p>
+          <div class="line-bubble"><span class="es">(mira a Hermione con desaprobación) La varita elige al mago, señorita. Pero si insiste... aquí tiene una de abeto y corazón de fénix. Pésela. Si <strong>le</strong> gusta, <strong>le</strong> hará un descuento por ser clienta habitual.</span><span class="en">(looks at Hermione disapprovingly) The wand chooses the wizard, miss. But if you insist... here's one of fir with phoenix feather core. Weigh it. If <strong>you like</strong> it, I'll <strong>give you</strong> a discount for being a regular customer.</span></div>
+        </div>
+      </div>
+      <div class="line you">
+        <div class="line-avatar">Tú</div>
+        <div class="line-body">
+          <p class="line-name">Tú</p>
+          <textarea class="line-input" rows="2" placeholder="Responde a Ollivander y a Hermione (ella te dice algo al oído) en la misma frase..."></textarea>
+          <p class="line-hint"><span class="es">Doble registro en una respuesta: "Agradezco su oferta, Ollivander, pero Hermione me recuerda que..."</span><span class="en">Double register in one answer: "I appreciate your offer, Ollivander, but Hermione reminds me that..."</span></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ESCENA 2: D&D -->
+    <div class="scene-setup" style="margin-top:28px;">
+      <span class="scene-icon">🐉</span>
+      <p class="scene-text">
+        <span class="es"><strong>Escena 2 · D&D — La taberna del Dragón Dormido:</strong> Has sido contratada para organizar la boda del señor de los enanos. Estás negociando el menú cuando entra un grupo de aventureros y uno te reconoce de una aventura anterior. Cambias de registro entre el enano y el aventurero.</span>
+        <span class="en"><strong>Scene 2 · D&D — The Sleeping Dragon tavern:</strong> You've been hired to organise the dwarf lord's wedding. You're negotiating the menu when a group of adventurers walks in and one recognises you from a previous quest. Switch registers between the dwarf and the adventurer.</span>
+      </p>
+    </div>
+    <div class="dialogue">
+      <div class="line friend">
+        <div class="line-avatar">E</div>
+        <div class="line-body">
+          <p class="line-name">Señor Enano (formal)</p>
+          <div class="line-bubble"><span class="es">Os he convocado para que organicéis el festín de mi hija. El hidromiel debe ser de la mejor cosecha, y el cordero, asado a fuego lento. ¿<strong>Me</strong> podéis asegurar que <strong>los</strong> proveedores no fallarán?</span><span class="en">I have summoned you to organise my daughter's feast. The mead must be of the finest vintage, and the lamb slow‑roasted. Can <strong>you</strong> assure <strong>me</strong> that the suppliers won't fail?</span></div>
+        </div>
+      </div>
+      <div class="line you">
+        <div class="line-avatar">Tú</div>
+        <div class="line-body">
+          <p class="line-name">Tú</p>
+          <textarea class="line-input" rows="2" placeholder="Responde con registro formal y pronombres de cortesía, dando garantías..."></textarea>
+          <p class="line-hint"><span class="es">Formal: "le aseguro", "me encargo yo", "les supervisaré", "si surge algo, lo solucionaré".</span><span class="en">Formal: "I assure you", "I'll handle it", "I'll supervise them", "if anything comes up, I'll sort it out".</span></p>
+        </div>
+      </div>
+      <div class="line friend">
+        <div class="line-avatar">A</div>
+        <div class="line-body">
+          <p class="line-name">Aventurero (informal, sorpresa)</p>
+          <div class="line-bubble"><span class="es">¡Pero si eres tú! La que <strong>nos</strong> salvó de aquel beholder en la mazmorra olvidada. ¿Qué haces aquí organizando bodas? ¿No <strong>te</strong> acuerdas de aquel día que casi <strong>nos</strong> devora un dragón?</span><span class="en">But it's you! The one who <strong>saved us</strong> from that beholder in the forgotten dungeon. What are you doing here organising weddings? Don't <strong>you</strong> remember that day a dragon almost <strong>ate us</strong>?</span></div>
+        </div>
+      </div>
+      <div class="line you">
+        <div class="line-avatar">Tú</div>
+        <div class="line-body">
+          <p class="line-name">Tú</p>
+          <textarea class="line-input" rows="2" placeholder="Cambia a registro informal, responde al aventurero con naturalidad..."></textarea>
+          <p class="line-hint"><span class="es">Informal: "¡claro que me acuerdo!", "qué casualidad", "menos mal que salimos vivos".</span><span class="en">Informal: "of course I remember!", "what a coincidence", "thank goodness we got out alive".</span></p>
+        </div>
+      </div>
+      <div class="line friend">
+        <div class="line-avatar">E</div>
+        <div class="line-body">
+          <p class="line-name">Enano (algo impaciente)</p>
+          <div class="line-bubble"><span class="es">¿Es que conocéis a esta persona? Bien, bien. Pero volviendo a lo nuestro: el pastel de bodas debe tener tres pisos y estar decorado con gemas. ¿<strong>Le</strong> puedo confiar ese encargo a usted?</span><span class="en">Do you know this person? Fine, fine. But back to business: the wedding cake must have three tiers and be decorated with gems. Can <strong>I</strong> entrust that task to <strong>you</strong>?</span></div>
+        </div>
+      </div>
+      <div class="line you">
+        <div class="line-avatar">Tú</div>
+        <div class="line-body">
+          <p class="line-name">Tú</p>
+          <textarea class="line-input" rows="2" placeholder="Vuelve al registro formal, cierra con el enano y despídete del aventurero..."></textarea>
+          <p class="line-hint"><span class="es">Vuelta al formal: "Por supuesto, señor", "me encargaré personalmente", y despídete del aventurero con "luego hablamos".</span><span class="en">Back to formal: "Of course, sir", "I'll personally see to it", and say goodbye to the adventurer with "we'll talk later".</span></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ESCENA 3: ALEX PARLANTE -->
+    <div class="scene-setup" style="margin-top:28px;">
+      <span class="scene-icon">🐕</span>
+      <p class="scene-text">
+        <span class="es"><strong>Escena 3 · Alex cobra el don del habla:</strong> Has vuelto a casa después de la tienda de varitas. Alex olfatea la varita nueva y, sin querer, la activa con la nariz. De repente, empieza a hablar. La conversación es íntima y sorprendente: Alex tiene mucho que decir sobre su vida contigo, la correa, los paseos y tu exceso de trabajo. Tienes que reaccionar con naturalidad, usando pronombres y cambiando de registro según lo que diga el perro.</span>
+        <span class="en"><strong>Scene 3 · Alex gains the gift of speech:</strong> You've come home after the wand shop. Alex sniffs the new wand and accidentally activates it with his nose. Suddenly, he starts talking. The conversation is intimate and surprising: Alex has a lot to say about his life with you, the leash, the walks, and your overwork. You have to react naturally, using pronouns and shifting register according to what the dog says.</span>
+      </p>
+    </div>
+    <div class="dialogue">
+      <div class="line friend">
+        <div class="line-avatar">A</div>
+        <div class="line-body">
+          <p class="line-name">Alex (sorprendido)</p>
+          <div class="line-bubble"><span class="es">(tos, carraspea) ¡Anda, vaya! ¿Esto es lo que se siente al tener cuerdas vocales? Lisa, <strong>te</strong> he oído hablar conmigo durante años, pero nunca <strong>te</strong> he podido responder. ¡Qué alivio!</span><span class="en">(cough, clears throat) Well, wow! So this is what it feels like to have vocal cords? Lisa, I've heard you talk to me for years, but I've never been able to answer. What a relief!</span></div>
+        </div>
+      </div>
+      <div class="line you">
+        <div class="line-avatar">Tú</div>
+        <div class="line-body">
+          <p class="line-name">Tú</p>
+          <textarea class="line-input" rows="2" placeholder="Responde con sorpresa y cariño, usando estar y algún pronombre..."></textarea>
+          <p class="line-hint"><span class="es">"¡No <strong>me</strong> lo puedo creer!", "¿<strong>te</strong> pasa algo?", "estoy alucinando", "¿cómo <strong>te</strong> sientes?"</span><span class="en">"I can't <strong>believe</strong> it!", "what's up?", "I'm freaking out", "how do <strong>you</strong> feel?"</span></p>
+        </div>
+      </div>
+      <div class="line friend">
+        <div class="line-avatar">A</div>
+        <div class="line-body">
+          <p class="line-name">Alex</p>
+          <div class="line-bubble"><span class="es">Pues <strong>me</strong> siento de maravilla, la verdad. Pero tengo que decirte algo que siempre he querido que sepas: esa correa nueva que <strong>me</strong> compraste es incómoda. Prefiero la vieja. ¿Por qué no <strong>me</strong> preguntaste a mí antes de comprarla?</span><span class="en">Well, I <strong>feel</strong> great, actually. But I have to tell you something I've always wanted you to know: that new leash you bought <strong>me</strong> is uncomfortable. I prefer the old one. Why didn't you ask <strong>me</strong> before buying it?</span></div>
+        </div>
+      </div>
+      <div class="line you">
+        <div class="line-avatar">Tú</div>
+        <div class="line-body">
+          <p class="line-name">Tú</p>
+          <textarea class="line-input" rows="2" placeholder="Responde justificándote, usando pronombres de objeto indirecto y pasado..."></textarea>
+          <p class="line-hint"><span class="es">"Es que no sabía que <strong>te</strong> molestaba", "la compré porque <strong>te</strong> vi contento en la tienda", "si <strong>te</strong> la cambio, ¿<strong>te</strong> parece bien?"</span><span class="en">"I didn't know it bothered <strong>you</strong>", "I bought it because I saw <strong>you</strong> happy in the shop", "if I change it, would <strong>you</strong> like that?"</span></p>
+        </div>
+      </div>
+      <div class="line friend">
+        <div class="line-avatar">A</div>
+        <div class="line-body">
+          <p class="line-name">Alex</p>
+          <div class="line-bubble"><span class="es">Bueno, vale, lo acepto. Pero también quería decirte que <strong>me</strong> encanta cuando <strong>nos</strong> vamos a la montaña los fines de semana. Eso sí que <strong>me</strong> hace feliz. Y Chris, tu novio, <strong>me</strong> cae bien, pero a veces <strong>le</strong> da demasiada comida y luego <strong>me</strong> duele la tripa.</span><span class="en">OK, fine, I accept that. But I also wanted to tell you that I love it when we go to the mountains on weekends. That really makes me happy. And Chris, your boyfriend, I like him, but sometimes he gives me too much food and then my stomach hurts.</span></div>
+        </div>
+      </div>
+      <div class="line you">
+        <div class="line-avatar">Tú</div>
+        <div class="line-body">
+          <p class="line-name">Tú</p>
+          <textarea class="line-input" rows="2" placeholder="Responde riéndote, usando ser y estar para describir a Chris y a ti..."></textarea>
+          <p class="line-hint"><span class="es">"Chris es así, es muy cariñoso", "estoy de acuerdo con lo de la montaña", "a veces <strong>le</strong> digo que no <strong>te</strong> dé tanta comida".</span><span class="en">"Chris is like that, he's very affectionate", "I agree about the mountains", "sometimes I tell him not to give you so much food".</span></p>
+        </div>
+      </div>
+      <div class="line friend">
+        <div class="line-avatar">A</div>
+        <div class="line-body">
+          <p class="line-name">Alex</p>
+          <div class="line-bubble"><span class="es">(con tono más serio) Y una última cosa, Lisa: <strong>te</strong> quiero, pero <strong>te</strong> estresas demasiado con las bodas. A veces <strong>me</strong> da pena verte tan agobiada. ¿No podrías tomarte las cosas con más calma? <strong>Te</strong> lo digo como amigo y como perro que <strong>te</strong> conoce mejor que nadie.</span><span class="en">(more serious tone) And one last thing, Lisa: I love you, but you stress out too much over weddings. Sometimes I feel sorry seeing you so overwhelmed. Couldn't you take things easier? I'm telling you this as a friend and as a dog who knows you better than anyone.</span></div>
+        </div>
+      </div>
+      <div class="line you">
+        <div class="line-avatar">Tú</div>
+        <div class="line-body">
+          <p class="line-name">Tú</p>
+          <textarea class="line-input" rows="2" placeholder="Cierra la conversación con emoción, usando pronombres y algún verbo en pasado..."></textarea>
+          <p class="line-hint"><span class="es">"<strong>Me</strong> has emocionado", "tienes razón, <strong>lo</strong> intentaré", "nunca <strong>te</strong> había oído hablar así", "gracias por decírmelo".</span><span class="en">"You've moved me", "you're right, I'll try", "I've never heard you talk like that", "thanks for telling me".</span></p>
+        </div>
+      </div>
+    </div>
+    <div class="roleplay-tip"><strong><span class="es">En clase:</span><span class="en">In class:</span></strong> <span class="es">tu profesor interpreta a Alex (y a los otros personajes). Se valora la agilidad para cambiar de registro, el uso correcto de pronombres de objeto (directo e indirecto) y la coherencia en el uso de ser/estar y el pasado. La escena de Alex es especialmente rica en pronombres: explota el "me", "te", "le", "nos" y "lo/la".</span><span class="en">your teacher plays Alex (and the other characters). Agility in switching registers, correct use of object pronouns (direct and indirect), and consistency in ser/estar and past tenses are assessed. Alex's scene is especially rich in pronouns: make the most of "me", "te", "le", "nos" and "lo/la".</span></div>
+  </section>
+
+  <!-- BLOQUE 4: AUTOEVALUACIÓN -->
+  <section class="block assess-panel">
+    <div class="block-head"><span class="block-num">4</span><h2 style="color:var(--family)">Autoevaluación</h2><span class="time-tag">10 min</span></div>
+    <p style="margin:0 0 4px; font-size:15px; color:var(--ink-soft);">
+      <span class="es">Puntúa del 1 al 5 cada ítem. 1 = necesito volver a estudiarlo, 5 = lo uso sin pensar.</span>
+      <span class="en">Rate each item from 1 to 5. 1 = I need to study it again, 5 = I use it without thinking.</span>
+    </p>
+    <div class="assess-grid" id="assess-grid"></div>
+    <p style="margin:14px 0 4px; font-size:15px; color:var(--ink-soft);">
+      <span class="es"><strong style="color:var(--ink);">Errores concretos:</strong> anota dos frases que hayas dicho hoy y que no sonaran naturales, y cómo las corregirías.</span>
+      <span class="en"><strong style="color:var(--ink);">Specific errors:</strong> write down two sentences you said today that didn't sound natural, and how you'd correct them.</span>
+    </p>
+    <textarea id="final-task" placeholder="1. Dije: ... → Mejor: ...&#10;2. Dije: ... → Mejor: ..."></textarea>
+    <div class="task-footer">
+      <span id="task-count">0 palabras escritas</span>
+      <div style="display:flex; gap:10px; align-items:center;">
+        <span class="saved-flag" id="saved-flag">Guardado ✓</span>
+        <button class="btn-secondary" id="save-btn"><span class="es">Guardar</span><span class="en">Save</span></button>
+      </div>
+    </div>
+  </section>
+
+</main>
+<footer>
+  <span>Clase de repaso · Harry Potter + D&D + Alex parlante</span>
+  <span>Próxima clase según resultados</span>
+</footer>
+<script>
+// ---------- TEST ----------
+const EXERCISES = [
+  {"sentence":"Cuando <span class=\"gap\">___</span> pequeña, <span class=\"gap\">___</span> en Chicago, pero ahora <span class=\"gap\">___</span> en Xàtiva.","options":["era / vivía / estoy","fui / viví / soy","era / viví / estoy"],"answer":"era / vivía / estoy"},
+  {"sentence":"Ayer <span class=\"gap\">___</span> a Alex al parque y <span class=\"gap\">___</span> con otro perro que <span class=\"gap\">___</span> muy nervioso.","options":["llevé / se encontró / estaba","llevaba / se encontraba / fue","llevé / se encontraba / era"],"answer":"llevé / se encontró / estaba"},
+  {"sentence":"<span class=\"gap\">___</span> explico a los clientes el itinerario, pero a veces <span class=\"gap\">___</span> cuesta entenderlo.","options":["Les / les","Los / les","Les / los"],"answer":"Les / les"},
+  {"sentence":"La recepcionista <span class=\"gap\">___</span> muy amable y <span class=\"gap\">___</span> la cita para el jueves.","options":["es / dio","está / dio","era / daba"],"answer":"es / dio"},
+  {"sentence":"¿<span class=\"gap\">___</span> podrías repetir el número de teléfono? <span class=\"gap\">___</span> perdido.","options":["Me / Lo he","Le / La he","Te / Lo he"],"answer":"Me / Lo he"},
+  {"sentence":"El vecino <span class=\"gap\">___</span> muy hablador, pero hoy <span class=\"gap\">___</span> callado porque <span class=\"gap\">___</span> un mal día.","options":["es / está / tiene","está / es / tuvo","es / está / tuvo"],"answer":"es / está / tuvo"},
+  {"sentence":"<span class=\"gap\">___</span> conté a mi madre lo que <span class=\"gap\">___</span> en la veterinaria, y <span class=\"gap\">___</span> dijo que <span class=\"gap\">___</span> tranquila.","options":["Le / pasó / me / estuviera","Se / pasaba / me / fuera","Le / pasó / me / estuviera"],"answer":"Le / pasó / me / estuviera"},
+  {"sentence":"Cuando <span class=\"gap\">___</span> en la universidad, <span class=\"gap\">___</span> estudiar mucho, pero ahora <span class=\"gap\">___</span> más relajada.","options":["estaba / tenía que / soy","estuve / tuve que / estoy","estaba / tenía que / estoy"],"answer":"estaba / tenía que / estoy"},
+  {"sentence":"<span class=\"gap\">___</span> compré una correa nueva a Alex, y a él <span class=\"gap\">___</span> parece que <span class=\"gap\">___</span> gusta mucho.","options":["Le / le / le","Lo / le / le","Le / lo / le"],"answer":"Le / le / le"},
+  {"sentence":"La madre del vecino <span class=\"gap\">___</span> muy simpática, pero ayer <span class=\"gap\">___</span> un poco enfadada por el ruido.","options":["es / estaba","era / estuvo","es / estuvo"],"answer":"es / estaba"},
+  {"sentence":"¿<span class=\"gap\">___</span> puedes decir a los proveedores que <span class=\"gap\">___</span> llamaré mañana?","options":["Les / les","Los / los","Les / los"],"answer":"Les / les"},
+  {"sentence":"La semana pasada <span class=\"gap\">___</span> una boda muy complicada, pero al final <span class=\"gap\">___</span> todo bien.","options":["tuve / salió","tenía / salía","tuve / salía"],"answer":"tuve / salió"},
+  {"sentence":"<span class=\"gap\">___</span> pregunto al veterinario por la vacuna, y <span class=\"gap\">___</span> dice que <span class=\"gap\">___</span> tengo que pedir cita aparte.","options":["Le / me / la","Lo / me / la","Le / me / lo"],"answer":"Le / me / la"},
+  {"sentence":"Si <span class=\"gap\">___</span> (tú) más organizada, no <span class=\"gap\">___</span> tanto estrés.","options":["fueras / tendrías","eras / tenías","estuvieras / tendrías"],"answer":"fueras / tendrías"},
+  {"sentence":"<span class=\"gap\">___</span> dio las gracias al cliente y <span class=\"gap\">___</span> prometió enviar el presupuesto.","options":["Le / le","Se / le","Le / se"],"answer":"Le / le"},
+  {"sentence":"Ahora mismo <span class=\"gap\">___</span> muy ocupada, pero la semana que viene <span class=\"gap\">___</span> más tiempo libre.","options":["estoy / tendré","soy / tendré","estoy / tengo"],"answer":"estoy / tendré"},
+  {"sentence":"¿<span class=\"gap\">___</span> acuerdas de cuando <span class=\"gap\">___</span> a Alex por primera vez?","options":["Te / viste","Te / veías","Se / viste"],"answer":"Te / viste"},
+  {"sentence":"<span class=\"gap\">___</span> dije a los novios que <span class=\"gap\">___</span> enviaría el vídeo de la boda en una semana.","options":["Les / les","Los / les","Les / los"],"answer":"Les / les"}
+];
+
+function shuffle(arr){ const a = arr.slice(); for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+
+const exWrap = document.getElementById('exercises');
+EXERCISES.forEach((ex, i)=>{
+  const el = document.createElement('div');
+  el.className = 'exercise';
+  el.dataset.answer = ex.answer;
+  const shuffledOptions = shuffle(ex.options);
+  el.innerHTML = `
+    <div class="ex-sentence">${i+1}. ${ex.sentence}</div>
+    <div class="ex-options">
+      ${shuffledOptions.map(o=>`<button class="opt-btn" data-value="${o}">${o}</button>`).join('')}
+    </div>
+  `;
+  exWrap.appendChild(el);
+  el.querySelectorAll('.opt-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      el.querySelectorAll('.opt-btn').forEach(b=>b.classList.remove('picked'));
+      btn.classList.add('picked');
+    });
+  });
+});
+
+document.getElementById('check-btn').addEventListener('click', ()=>{
+  let correct = 0;
+  document.querySelectorAll('.exercise').forEach(el=>{
+    const answer = el.dataset.answer;
+    const picked = el.querySelector('.opt-btn.picked');
+    el.querySelectorAll('.opt-btn').forEach(b=>{
+      b.disabled = true;
+      if(b.dataset.value === answer) b.classList.add('correct');
+      else if(b === picked) b.classList.add('wrong');
+    });
+    if(picked && picked.dataset.value === answer) correct++;
+  });
+  document.getElementById('score-text').textContent = `${correct} / ${EXERCISES.length} correctas`;
+});
+
+document.getElementById('reset-btn').addEventListener('click', ()=>{
+  document.querySelectorAll('.exercise').forEach(el=>{
+    el.querySelectorAll('.opt-btn').forEach(b=>{
+      b.disabled = false;
+      b.classList.remove('picked','correct','wrong');
+    });
+  });
+  document.getElementById('score-text').textContent = '';
+});
+
+// ---------- AUTOEVALUACIÓN ----------
+const ASSESS_ITEMS = [
+  {id:"serestar", label:"Ser/estar en tiempo real (sin pausa)"},
+  {id:"pasado", label:"Pretérito e imperfecto con sentido"},
+  {id:"pronombres", label:"Lo/la/le/les sin dudar"},
+  {id:"concordancia", label:"Concordancia automática (género/número)"},
+  {id:"registro", label:"Cambiar de registro formal/informal con naturalidad"},
+  {id:"muletillas", label:"Muletillas y conectores para no cortar el hilo"}
+];
+
+const STORAGE_KEY_ASSESS = 'lisa-repaso-fantasia-alex-autoeval';
+const assessGrid = document.getElementById('assess-grid');
+let assessState = {};
+
+function renderAssess(){
+  assessGrid.innerHTML = '';
+  ASSESS_ITEMS.forEach(item=>{
+    const row = document.createElement('div');
+    row.className = 'assess-row';
+    const dots = [1,2,3,4,5].map(n=>
+      `<button class="assess-dot${assessState[item.id]===n?' selected':''}" data-item="${item.id}" data-val="${n}" aria-label="${n} de 5">${n}</button>`
+    ).join('');
+    row.innerHTML = `<span class="assess-label">${item.label}</span><div class="assess-scale">${dots}</div>`;
+    assessGrid.appendChild(row);
+  });
+  assessGrid.querySelectorAll('.assess-dot').forEach(btn=>{
+    btn.addEventListener('click', async ()=>{
+      const itemId = btn.dataset.item;
+      const val = parseInt(btn.dataset.val, 10);
+      assessState[itemId] = val;
+      renderAssess();
+      if(window.storage){
+        try{ await window.storage.set(STORAGE_KEY_ASSESS, JSON.stringify(assessState)); }catch(e){}
+      }
+    });
+  });
+}
+
+async function cargarAssess(){
+  if(!window.storage){ renderAssess(); return; }
+  try{
+    const res = await window.storage.get(STORAGE_KEY_ASSESS);
+    if(res && typeof res.value === 'string') assessState = JSON.parse(res.value);
+  }catch(e){}
+  renderAssess();
+}
+cargarAssess();
+
+// ---------- FINAL TASK ----------
+const STORAGE_KEY = 'lisa-repaso-fantasia-alex-tarea';
+const taskArea = document.getElementById('final-task');
+const taskCount = document.getElementById('task-count');
+const savedFlag = document.getElementById('saved-flag');
+
+async function cargarTarea(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(STORAGE_KEY);
+    if (res && typeof res.value === 'string') taskArea.value = res.value;
+  }catch(e){}
+  updateCount();
+}
+
+function updateCount(){
+  const words = taskArea.value.trim().split(/\s+/).filter(Boolean).length;
+  taskCount.textContent = `${words} palabra${words===1?'':'s'} escrita${words===1?'':'s'}`;
+}
+taskArea.addEventListener('input', updateCount);
+updateCount();
+cargarTarea();
+
+document.getElementById('save-btn').addEventListener('click', async ()=>{
+  if (!window.storage){
+    savedFlag.textContent = 'Guardado no disponible';
+    savedFlag.classList.add('show');
+    setTimeout(()=>{ savedFlag.classList.remove('show'); savedFlag.textContent = 'Guardado ✓'; }, 2200);
+    return;
+  }
+  try{
+    const ok = await window.storage.set(STORAGE_KEY, taskArea.value);
+    savedFlag.textContent = ok ? 'Guardado ✓' : 'No se pudo guardar';
+  }catch(e){
+    savedFlag.textContent = 'No se pudo guardar';
+  }
+  savedFlag.classList.add('show');
+  setTimeout(()=>{ savedFlag.classList.remove('show'); savedFlag.textContent = 'Guardado ✓'; }, 1800);
+});
+
+// ---------- TOGGLE DE IDIOMA ----------
+const langSwitch = document.getElementById('lang-switch');
+const esLabel = document.getElementById('lang-es-label');
+const enLabel = document.getElementById('lang-en-label');
+
+function setLang(showEn) {
+  document.body.classList.toggle('show-en', showEn);
+  esLabel.classList.toggle('active', !showEn);
+  enLabel.classList.toggle('active', showEn);
+  langSwitch.setAttribute('aria-pressed', String(showEn));
+  if (window.storage) {
+    try { window.storage.set('lang-preference', showEn ? 'en' : 'es'); } catch(e) {}
+  }
+}
+
+langSwitch.addEventListener('click', () => {
+  setLang(!document.body.classList.contains('show-en'));
+});
+langSwitch.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter' || e.key === ' ') {
+    e.preventDefault();
+    setLang(!document.body.classList.contains('show-en'));
+  }
+});
+
+// Cargar preferencia guardada
+async function loadLangPreference() {
+  if (window.storage) {
+    try {
+      const res = await window.storage.get('lang-preference');
+      if (res && res.value === 'en') setLang(true);
+      else setLang(false);
+      return;
+    } catch(e) {}
+  }
+  setLang(false);
+}
+loadLangPreference();
+</script>
+</body>
+</html>

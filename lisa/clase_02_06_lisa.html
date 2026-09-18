@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Español con Óscar · Clase — Lisa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+
+:root{
+  --paper:        #F3E7D8;
+  --paper-raised: #FFFFFF;
+  --paper-alt:    #EAD9BC;
+  --ink:          #2B241C;
+  --ink-soft:     #5F5647;
+  --ink-faint:    #948A76;
+  --line:         rgba(43,36,28,0.12);
+  --line-strong:  rgba(43,36,28,0.22);
+
+  --ok:      #2F7D5C;  --ok-soft: #E7F3EC;  --ok-line: #BFE0CE;
+  --wrong:   #9A3B2E;  --wrong-soft: #FBEAE6; --wrong-line: #E8BFB4;
+  --info:    #2F6FED;  --info-soft: #EAF1FE; --info-line: #C6D9FC;
+
+  --accent:      #B15C2E;
+  --accent-soft: #F5E7DB;
+  --accent-line: #E3C3A6;
+
+  --f-display: 'Fraunces', Georgia, serif;
+  --f-body:    'IBM Plex Sans', system-ui, sans-serif;
+  --f-data:    'IBM Plex Mono', monospace;
+
+  --r-sm: 8px;
+  --r-md: 14px;
+  --r-lg: 20px;
+}
+
+*{ box-sizing:border-box; }
+body{
+  margin:0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--f-body);
+  line-height:1.6;
+}
+::selection{ background: var(--accent-soft); }
+
+.sticky-progress{ position:fixed; top:0; left:0; right:0; z-index:200; height:3px; background: rgba(43,36,28,0.10); }
+.sticky-progress-fill{ height:100%; width:0%; background: var(--accent); opacity:.55; }
+
+header{ padding:44px 24px 0; max-width:760px; margin:0 auto; }
+.header-top{ display:flex; align-items:center; justify-content:space-between; gap:24px; margin-bottom:16px; }
+.brand-row{ display:flex; align-items:center; gap:10px; }
+.brand-name{ font-family: var(--f-display); font-weight:600; font-style:italic; font-size:17px; color: var(--ink); letter-spacing:-.01em; }
+h1{ font-family: var(--f-display); font-weight:600; font-size:clamp(30px,5.6vw,46px); line-height:1.05; margin:0; letter-spacing:-.015em; }
+h1 em{ font-style:italic; color: var(--accent); }
+.lede{ font-size:15.5px; color: var(--ink-soft); max-width:56ch; margin:14px 0 0; }
+.meta-row{ display:flex; align-items:center; gap:12px; margin-top:22px; flex-wrap:wrap; }
+.level-pill{ font-family: var(--f-data); font-size:12px; font-weight:600; color: var(--ink); background: var(--paper-alt); border:1px solid var(--line); padding:6px 14px; border-radius:999px; }
+.time-pill{ display:flex; align-items:center; gap:6px; font-family: var(--f-data); font-size:12px; color: var(--ink-faint); }
+.header-rule{ height:1px; background: var(--line); margin-top:28px; }
+
+main{ max-width:760px; margin:0 auto; padding:8px 24px 100px; }
+section.block{ margin-bottom:40px; padding-top:24px; border-top:1px solid var(--line); }
+section.block:first-of-type{ border-top:none; padding-top:0; }
+.block-head{ display:flex; align-items:baseline; gap:12px; margin-bottom:18px; }
+.block-num{ font-family: var(--f-display); font-size:30px; font-weight:600; color: var(--accent); flex:none; line-height:1; letter-spacing:-.01em; }
+.block-head h2{ font-family: var(--f-body); font-weight:600; font-size:18px; margin:0; color: var(--ink); }
+.time-tag{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); background: var(--paper-alt); padding:3px 10px; border-radius:999px; margin-left:auto; flex:none; }
+
+.panel{ background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-lg); padding:26px 28px; }
+.block-intro{ margin:0 0 16px; font-size:14.5px; color: var(--ink-soft); }
+
+.note{ margin-top:18px; padding:14px 16px; background: var(--info-soft); border:1px solid var(--info-line); border-radius: var(--r-md); font-size:14px; color: var(--ink-soft); }
+.note strong{ color: var(--ink); }
+
+.exercise{ margin-bottom:20px; }
+.exercise:last-of-type{ margin-bottom:0; }
+.ex-sentence{ font-size:15.5px; margin-bottom:10px; }
+.ex-options{ display:flex; flex-wrap:wrap; gap:8px; }
+.opt-btn{ font-family: var(--f-body); font-size:14px; background: var(--paper-raised); border:1.5px solid var(--line); color: var(--ink); padding:7px 16px; border-radius:999px; cursor:pointer; }
+.opt-btn:hover{ border-color: var(--ink-faint); }
+.opt-btn.picked{ background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+.opt-btn.correct{ background: var(--ok-soft); border-color: var(--ok); color: var(--ok); }
+.opt-btn.wrong{ background: var(--wrong-soft); border-color: var(--wrong); color: var(--wrong); }
+.opt-btn:disabled{ cursor:default; }
+.check-bar{ display:flex; align-items:center; justify-content:space-between; gap:16px; margin-top:22px; padding-top:18px; border-top:1px dashed var(--line); flex-wrap:wrap; }
+.btn-primary{ font-family: var(--f-body); font-weight:600; font-size:14px; color:#fff; background: var(--accent); border:none; padding:11px 22px; border-radius:999px; cursor:pointer; }
+#score-text{ font-family: var(--f-data); font-size:13px; color: var(--ink-faint); }
+.btn-ghost{ font-family: var(--f-body); font-weight:600; font-size:13px; color: var(--ink-soft); background:none; border:1.5px solid var(--line); padding:9px 18px; border-radius:999px; cursor:pointer; }
+.btn-ghost:hover{ border-color: var(--ink-faint); }
+
+.vocab-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(160px,1fr)); gap:12px; }
+.vocab-card{ background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md); padding:14px 16px; cursor:pointer; min-height:78px; display:flex; flex-direction:column; justify-content:center; }
+.vocab-card:hover{ border-color: var(--accent-line); }
+.vocab-card:focus-visible{ outline:2px solid var(--accent); outline-offset:2px; }
+.vocab-front{ font-family: var(--f-body); font-weight:600; font-size:15px; }
+.vocab-back{ display:none; font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); margin-top:6px; }
+.vocab-card.flipped .vocab-back{ display:block; }
+.vocab-card.flipped{ background: var(--accent-soft); border-color: var(--accent-line); }
+.vocab-hint{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin:10px 2px 16px; }
+
+.reading-text{ font-family: var(--f-display); font-size:16.5px; line-height:1.7; color: var(--ink); background:#F7EFDE; border:1px solid #E8D9B8; border-radius: var(--r-md); padding:20px 22px; margin-bottom:20px; }
+.reading-text p{ margin:0 0 12px; }
+.reading-text p:last-child{ margin-bottom:0; }
+.reading-q{ background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md); padding:14px 16px; margin-bottom:12px; }
+.reading-q p.q{ font-size:14.5px; color: var(--ink); margin:0 0 10px; font-weight:500; }
+.reading-q .opts{ display:flex; flex-wrap:wrap; gap:8px; }
+
+.vf-item{ display:flex; align-items:center; justify-content:space-between; gap:14px; background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md); padding:14px 16px; margin-bottom:10px; }
+.vf-item p{ margin:0; font-size:14.5px; color:var(--ink); flex:1; }
+.vf-buttons{ display:flex; gap:8px; flex:none; }
+.vf-btn{ font-family: var(--f-body); font-size:13px; font-weight:600; background: var(--paper-alt); border:1.5px solid var(--line); color: var(--ink-soft); padding:6px 14px; border-radius:999px; cursor:pointer; }
+.vf-btn.picked{ background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+.vf-btn.correct{ background: var(--ok-soft); border-color: var(--ok); color: var(--ok); }
+.vf-btn.wrong{ background: var(--wrong-soft); border-color: var(--wrong); color: var(--wrong); }
+.vf-btn:disabled{ cursor:default; }
+
+.order-item{ background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md); padding:16px 18px; margin-bottom:14px; }
+.order-bank{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; min-height:38px; }
+.order-slot{ display:flex; flex-wrap:wrap; gap:8px; min-height:42px; padding:8px; background: var(--paper-alt); border:1.5px dashed var(--line-strong); border-radius: var(--r-sm); }
+.order-chip{ font-family: var(--f-data); font-size:13.5px; background: var(--paper-raised); border:1.5px solid var(--line); color: var(--ink); padding:6px 12px; border-radius:999px; cursor:pointer; user-select:none; }
+.order-chip.used{ background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+.order-item .order-feedback{ font-size:12.5px; color: var(--ink-faint); margin-top:8px; font-family: var(--f-data); }
+.order-item.correct .order-slot{ border-color: var(--ok); border-style:solid; background: var(--ok-soft); }
+.order-item.wrong .order-slot{ border-color: var(--wrong); border-style:solid; background: var(--wrong-soft); }
+
+.match-wrap{ display:grid; grid-template-columns:1fr 1fr; gap:24px; }
+.match-col{ display:flex; flex-direction:column; gap:8px; }
+.match-item{ font-family: var(--f-body); font-size:14px; text-align:left; background: var(--paper-raised); border:1.5px solid var(--line); color: var(--ink); padding:10px 14px; border-radius: var(--r-sm); cursor:pointer; }
+.match-item:hover{ border-color: var(--accent-line); }
+.match-item.selected{ background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+.match-item.linked{ background: var(--ok-soft); border-color: var(--ok); color: var(--ok); cursor:default; }
+.match-item.wrong-flash{ background: var(--wrong-soft); border-color: var(--wrong); color: var(--wrong); }
+
+.fill-block{ font-family: var(--f-display); font-size:16px; line-height:2.1; color: var(--ink); background: linear-gradient(155deg, #F7F1E1 0%, #F1E8D2 100%); border:1px solid var(--line); border-radius: var(--r-md); padding:20px 22px; }
+.fill-block input[type="text"]{ font-family: var(--f-data); font-size:14px; width:110px; text-align:center; background: var(--paper-raised); border:none; border-bottom:2px solid var(--accent-line); color: var(--ink); padding:2px 6px; margin:0 2px; }
+.fill-block input[type="text"]:focus{ outline:none; border-bottom-color: var(--accent); }
+.fill-block input.correct{ border-bottom-color: var(--ok); color: var(--ok); }
+.fill-block input.wrong{ border-bottom-color: var(--wrong); color: var(--wrong); text-decoration: line-through; }
+
+table.conj-table{ width:100%; border-collapse:collapse; font-size:13.5px; }
+table.conj-table th{ font-family: var(--f-data); font-size:10.5px; text-transform:uppercase; letter-spacing:.05em; color: var(--ink-faint); text-align:left; padding:8px 10px; border-bottom:1.5px solid var(--line-strong); }
+table.conj-table td{ padding:6px 10px; border-bottom:1px dashed var(--line); }
+table.conj-table tr:last-child td{ border-bottom:none; }
+table.conj-table td.pronoun{ font-family: var(--f-display); font-weight:600; color: var(--ink-soft); font-size:13px; }
+table.conj-table input[type="text"]{ width:100%; font-family: var(--f-data); font-size:13.5px; background: var(--paper-alt); border:1px solid var(--line); border-radius: var(--r-sm); padding:6px 9px; color: var(--ink); }
+table.conj-table input[type="text"]:focus{ outline:none; border-color: var(--accent); }
+table.conj-table input.correct{ border-color: var(--ok); background: var(--ok-soft); }
+table.conj-table input.wrong{ border-color: var(--wrong); background: var(--wrong-soft); }
+
+.culture-card{ background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-lg); padding:24px 26px; border-left:3px solid var(--accent); }
+.culture-eyebrow{ font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.08em; color: var(--accent); font-weight:600; margin:0 0 10px; }
+.culture-card h3{ font-family: var(--f-display); font-size:18px; font-weight:600; margin:0 0 8px; }
+.culture-card p{ font-size:14px; color: var(--ink-soft); line-height:1.6; margin:0; }
+
+.task-panel{ background: var(--paper-alt); border:1px solid var(--line); border-radius: var(--r-lg); padding:26px 28px; }
+textarea.final-task{ width:100%; min-height:140px; font-family: var(--f-body); font-size:15px; color: var(--ink); background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md); padding:14px 16px; resize:vertical; margin-top:14px; }
+textarea.final-task:focus{ outline:none; border-color: var(--accent); }
+.task-footer{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:12px; flex-wrap:wrap; }
+.task-count{ font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); }
+.btn-secondary{ font-family: var(--f-body); font-weight:600; font-size:13.5px; color: var(--ink-soft); background:none; border:1.5px solid var(--line); padding:9px 18px; border-radius:999px; cursor:pointer; }
+
+.phrase-card{
+  padding:28px 32px; border-radius: var(--r-lg); border:1px solid var(--accent-line);
+  background:
+    radial-gradient(ellipse 320px 260px at 12% -10%, color-mix(in srgb, var(--accent) 16%, transparent) 0%, transparent 60%),
+    radial-gradient(ellipse 260px 220px at 92% 115%, color-mix(in srgb, var(--accent) 13%, transparent) 0%, transparent 55%),
+    var(--accent-soft);
+  text-align:center;
+}
+.phrase-eyebrow{ font-family: var(--f-data); font-size:11.5px; letter-spacing:.1em; text-transform:uppercase; color: var(--accent); font-weight:600; margin:0 0 12px; }
+.phrase-main{ font-family: var(--f-display); font-weight:600; font-size:clamp(21px,3.4vw,28px); line-height:1.35; margin:0 0 10px; color:var(--ink); }
+.phrase-main em{ font-style:italic; color: var(--accent); font-weight:500; }
+.phrase-sub{ font-size:14px; color: var(--ink-soft); max-width:46ch; margin:0 auto; }
+.phrase-tags{ display:flex; gap:8px; flex-wrap:wrap; justify-content:center; margin-top:16px; }
+.phrase-tag{ font-family: var(--f-data); font-size:10.5px; padding:4px 10px; border-radius:999px; background: var(--paper-raised); border:1px solid var(--accent-line); color: var(--accent); }
+
+footer{ max-width:760px; margin:0 auto; padding:0 24px 60px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); }
+
+@media (max-width:640px){
+  header{ padding:34px 18px 22px; }
+  main{ padding:8px 18px 90px; }
+  .panel, .task-panel, .correction-panel, .culture-card{ padding:20px 18px; }
+  .header-top{ flex-direction:column; align-items:flex-start; gap:14px; }
+  .match-wrap{ grid-template-columns:1fr; }
+}
+
+@media (prefers-reduced-motion: reduce){ *{ transition:none !important; } }
+</style>
+</head>
+<body data-accent="terracota">
+
+<div class="sticky-progress" id="sticky-progress"><div class="sticky-progress-fill" id="sticky-progress-fill"></div></div>
+
+<header>
+  <div class="header-top">
+    <div class="brand-row">
+      <span class="brand-name">Español con Óscar</span>
+    </div>
+  </div>
+  <h1>Desiertos del <em>suroeste</em></h1>
+  <p class="lede">Hoy hablamos de los desiertos del suroeste de Estados Unidos: Arizona, Nuevo México, Utah. Aprendemos a hablar de planes de viaje con el futuro próximo ("voy a ir", "vamos a hacer") y vocabulario de paisaje desértico.</p>
+  <div class="meta-row">
+    <span class="level-pill">A2</span>
+    <span class="time-pill">⏱ 150 min</span>
+  </div>
+  <div class="header-rule"></div>
+</header>
+
+<main>
+
+  <!-- 01 · VOCABULARIO -->
+  <section class="block">
+    <div class="block-head"><span class="block-num">01</span><h2>Vocabulario de hoy</h2><span class="time-tag">15 min</span></div>
+    <div class="panel">
+      <p class="block-intro">Toca cada tarjeta para ver un ejemplo con el vocabulario de la clase.</p>
+      <div class="vocab-grid" id="vocab-grid"></div>
+    </div>
+  </section>
+
+  <!-- 02 · LECTURA Y COMPRENSIÓN -->
+  <section class="block">
+    <div class="block-head"><span class="block-num">02</span><h2>Lectura y comprensión</h2><span class="time-tag">24 min</span></div>
+    <div class="panel">
+      <div class="reading-text">
+        <p>Este verano, Lisa va a hacer un viaje en coche por el suroeste de Estados Unidos. Va a visitar tres estados: Arizona, Nuevo México y Utah. El plan es alquilar un coche en Phoenix y conducir durante diez días por el desierto, parando en varios parques nacionales.</p>
+        <p>La primera parada va a ser el Gran Cañón, en Arizona. Lisa va a llegar al amanecer, cuando hace menos calor y la luz es más suave sobre las rocas rojas. Va a caminar por uno de los senderos del borde sur, pero no va a bajar hasta el fondo del cañón porque no tiene suficiente tiempo.</p>
+        <p>Después va a conducir hasta Sedona, un pueblo rodeado de formaciones de roca roja muy famosas. Allí va a hacer una ruta en coche por el desierto para ver los cactus saguaro, unas plantas enormes que solo crecen en esa región. Por la tarde, cuando el sol empiece a bajar, las temperaturas van a cambiar mucho: de mucho calor a bastante frío en pocas horas.</p>
+        <p>La última parte del viaje va a ser en Utah, donde Lisa y su amiga van a visitar varios parques con cañones y formaciones de roca muy distintas a las de Arizona. Van a dormir en una tienda de campaña dos noches, así que van a llevar mucha agua, porque en el desierto es fácil deshidratarse si no bebes suficiente.</p>
+      </div>
+      <div class="reading-q" data-answer="b">
+        <p class="q">¿Qué va a hacer Lisa este verano?</p>
+        <div class="opts">
+          <button class="opt-btn" data-value="a">Un crucero por el Caribe</button>
+          <button class="opt-btn" data-value="b">Un viaje en coche por el suroeste de EE.UU.</button>
+        </div>
+      </div>
+      <div class="reading-q" data-answer="a">
+        <p class="q">¿Cuál va a ser la primera parada del viaje?</p>
+        <div class="opts">
+          <button class="opt-btn" data-value="a">El Gran Cañón, en Arizona</button>
+          <button class="opt-btn" data-value="b">Un parque nacional en Utah</button>
+        </div>
+      </div>
+      <div class="reading-q" data-answer="b">
+        <p class="q">¿Por qué va a llegar al Gran Cañón al amanecer?</p>
+        <div class="opts">
+          <button class="opt-btn" data-value="a">Porque el parque cierra por la tarde</button>
+          <button class="opt-btn" data-value="b">Porque hace menos calor y la luz es más suave</button>
+        </div>
+      </div>
+      <div class="reading-q" data-answer="a">
+        <p class="q">¿Qué va a ver en la ruta en coche cerca de Sedona?</p>
+        <div class="opts">
+          <button class="opt-btn" data-value="a">Cactus saguaro enormes</button>
+          <button class="opt-btn" data-value="b">Un lago muy grande</button>
+        </div>
+      </div>
+      <div class="reading-q" data-answer="b">
+        <p class="q">¿Qué va a pasar con la temperatura por la tarde cerca de Sedona?</p>
+        <div class="opts">
+          <button class="opt-btn" data-value="a">Va a quedarse igual todo el día</button>
+          <button class="opt-btn" data-value="b">Va a bajar mucho cuando el sol empiece a bajar</button>
+        </div>
+      </div>
+      <div class="reading-q" data-answer="a">
+        <p class="q">¿Qué van a llevar Lisa y su amiga en Utah, y por qué?</p>
+        <div class="opts">
+          <button class="opt-btn" data-value="a">Mucha agua, porque es fácil deshidratarse</button>
+          <button class="opt-btn" data-value="b">Un paraguas, porque va a llover mucho</button>
+        </div>
+      </div>
+      <div class="check-bar">
+        <button class="btn-primary" id="check-reading-btn">Comprobar comprensión</button>
+        <span id="reading-score"></span>
+        <button class="btn-ghost" id="reset-reading-btn">Reiniciar</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 · OPCIÓN MÚLTIPLE -->
+  <section class="block">
+    <div class="block-head"><span class="block-num">03</span><h2>Elige la opción correcta</h2><span class="time-tag">24 min</span></div>
+    <div class="panel">
+      <p class="block-intro">Futuro próximo: ir (presente) + a + infinitivo. Se usa para planes ya decididos.</p>
+      <div id="exercise-list"></div>
+      <div class="check-bar">
+        <button class="btn-primary" id="check-ex-btn">Comprobar</button>
+        <span id="ex-score"></span>
+        <button class="btn-ghost" id="reset-ex-btn">Reiniciar</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 · VERDADERO O FALSO -->
+  <section class="block">
+    <div class="block-head"><span class="block-num">04</span><h2>Verdadero o falso</h2><span class="time-tag">15 min</span></div>
+    <div class="panel">
+      <p class="block-intro">Sobre desiertos, paisajes y viajes por el suroeste.</p>
+      <div id="vf-list"></div>
+      <div class="check-bar">
+        <button class="btn-primary" id="check-vf-btn">Comprobar</button>
+        <span id="vf-score"></span>
+        <button class="btn-ghost" id="reset-vf-btn">Reiniciar</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 · ORDENAR PALABRAS -->
+  <section class="block">
+    <div class="block-head"><span class="block-num">05</span><h2>Ordenar palabras</h2><span class="time-tag">24 min</span></div>
+    <div class="panel">
+      <p class="block-intro">Pulsa las palabras del banco en el orden correcto.</p>
+      <div id="order-list"></div>
+      <div class="check-bar">
+        <button class="btn-ghost" id="order-reset-btn">Reiniciar</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 · EMPAREJAR COLUMNAS -->
+  <section class="block">
+    <div class="block-head"><span class="block-num">06</span><h2>Emparejar columnas</h2><span class="time-tag">18 min</span></div>
+    <div class="panel">
+      <p class="block-intro">Une la palabra de desierto o viaje con su significado.</p>
+      <div class="match-wrap" id="match-wrap"></div>
+      <div class="check-bar">
+        <span id="match-score" style="font-family:var(--f-data); font-size:13px; color:var(--ink-faint);"></span>
+        <button class="btn-ghost" id="match-reset-btn">Reiniciar</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 07 · RELLENAR HUECOS -->
+  <section class="block">
+    <div class="block-head"><span class="block-num">07</span><h2>Rellenar huecos en texto</h2><span class="time-tag">24 min</span></div>
+    <div class="panel">
+      <p class="block-intro">Completa el texto con la forma correcta de "ir a + infinitivo".</p>
+      <div class="fill-block" id="fill-block"></div>
+      <div class="check-bar">
+        <button class="btn-primary" id="check-fill-btn">Comprobar huecos</button>
+        <button class="btn-ghost" id="reset-fill-btn">Reiniciar</button>
+        <span id="fill-score"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 08 · TABLA DE CONJUGACIÓN -->
+  <section class="block">
+    <div class="block-head"><span class="block-num">08</span><h2>Presente de "ir" para el futuro próximo</h2><span class="time-tag">18 min</span></div>
+    <div class="panel">
+      <p class="block-intro">Completa la tabla del presente de "ir": "voy a visitar el desierto", "vamos a alquilar un coche"...</p>
+      <table class="conj-table">
+        <thead><tr><th>Pronombre</th><th>Forma (ir, presente)</th></tr></thead>
+        <tbody id="conj-tbody"></tbody>
+      </table>
+      <div class="check-bar">
+        <button class="btn-primary" id="check-conj-btn">Comprobar</button>
+        <button class="btn-ghost" id="reset-conj-btn">Reiniciar</button>
+        <span id="conj-score"></span>
+      </div>
+      <p class="block-intro" style="margin-top:22px;">Ahora completa con "ir a + infinitivo" usando el verbo "conducir": "yo voy a conducir", "nosotros vamos a conducir"...</p>
+      <table class="conj-table">
+        <thead><tr><th>Pronombre</th><th>Forma (ir a conducir)</th></tr></thead>
+        <tbody id="conj2-tbody"></tbody>
+      </table>
+      <div class="check-bar">
+        <button class="btn-primary" id="check-conj2-btn">Comprobar</button>
+        <button class="btn-ghost" id="reset-conj2-btn">Reiniciar</button>
+        <span id="conj2-score"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 09 · TARJETA CULTURAL -->
+  <section class="block">
+    <div class="block-head"><span class="block-num">09</span><h2>Tarjeta cultural</h2><span class="time-tag">aside</span></div>
+    <div class="culture-card">
+      <p class="culture-eyebrow">Dato cultural</p>
+      <h3>El Gran Cañón</h3>
+      <p>El Gran Cañón, en Arizona, tiene casi 450 kilómetros de largo y más de 1.800 metros de profundidad en algunas zonas. Lo formó el río Colorado a lo largo de millones de años. Es uno de los parques nacionales más visitados de Estados Unidos y también es sagrado para varias tribus nativas americanas.</p>
+    </div>
+    <div class="culture-card" style="margin-top:16px;">
+      <p class="culture-eyebrow">Dato cultural</p>
+      <h3>Sedona y sus rocas rojas</h3>
+      <p>Sedona es un pueblo pequeño de Arizona famoso por sus formaciones de roca roja, que cambian de color según la hora del día. Es un destino muy popular para hacer senderismo, y algunas personas creen que el lugar tiene una energía especial, por lo que también atrae a mucho turismo espiritual.</p>
+    </div>
+    <div class="culture-card" style="margin-top:16px;">
+      <p class="culture-eyebrow">Dato cultural</p>
+      <h3>El cactus saguaro</h3>
+      <p>El saguaro es un cactus gigante que solo crece de forma natural en el desierto de Sonora, en el sur de Arizona y el norte de México. Puede vivir más de 150 años y crecer hasta 15 metros de altura. Es el símbolo del desierto de Arizona y aparece en banderas, logotipos y postales de la región.</p>
+    </div>
+  </section>
+
+  <!-- 10 · TAREA FINAL -->
+  <section class="block">
+    <div class="block-head"><span class="block-num">10</span><h2>Tarea final</h2><span class="time-tag">producción</span></div>
+    <div class="task-panel">
+      <p class="block-intro" style="margin:0;">Escribe un plan de viaje breve usando el futuro próximo: "voy a visitar...", "vamos a alquilar...", "voy a dormir...". Puede ser un viaje real que quieras hacer o un viaje inventado por el desierto. Después, responde: ¿qué parque nacional de Estados Unidos quieres visitar? ¿Por qué?</p>
+      <textarea class="final-task" placeholder="Escribe aquí..."></textarea>
+      <div class="task-footer">
+        <span class="task-count">0 palabras escritas</span>
+        <button class="btn-secondary">Marcar como enviada</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11 · FRASE DESTACADA DE CIERRE -->
+  <section class="block">
+    <div class="block-head"><span class="block-num">11</span><h2>Frase destacada de cierre</h2><span class="time-tag">resumen</span></div>
+    <div class="phrase-card">
+      <p class="phrase-eyebrow">Para recordar</p>
+      <p class="phrase-main">Este verano <em>voy a hacer</em> un viaje por el desierto.</p>
+      <p class="phrase-sub">Ir (presente) + a + infinitivo = un plan ya decidido para el futuro.</p>
+      <div class="phrase-tags">
+        <span class="phrase-tag">futuro próximo</span>
+        <span class="phrase-tag">planes de viaje</span>
+        <span class="phrase-tag">paisaje desértico</span>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <span>Español con Óscar · Clase con Lisa</span>
+</footer>
+
+<script>
+function shuffle(arr){
+  const a = arr.slice();
+  for(let i = a.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function markResult(el, isCorrect){
+  el.classList.toggle('correct', isCorrect);
+  el.classList.toggle('wrong', !isCorrect);
+}
+
+function normalizeText(s){
+  return s.trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/\s+/g,' ');
+}
+
+(function(){
+  const fills = [document.getElementById('sticky-progress-fill')].filter(Boolean);
+  if(!fills.length) return;
+  function update(){
+    const doc = document.documentElement;
+    const scrollable = doc.scrollHeight - doc.clientHeight;
+    const ratio = scrollable > 0 ? Math.min(1, Math.max(0, window.scrollY / scrollable)) : 0;
+    fills.forEach(f => f.style.width = (ratio * 100) + '%');
+  }
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if(ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => { update(); ticking = false; });
+  }, { passive:true });
+  window.addEventListener('resize', update);
+  update();
+})();
+
+/* ---------- 01 VOCABULARIO ---------- */
+const VOCAB = [
+  {front:"el desierto", back:"El desierto de Sonora ocupa parte de Arizona y del norte de México."},
+  {front:"el cañón", back:"El Gran Cañón es uno de los cañones más famosos del mundo."},
+  {front:"el cactus", back:"Vimos cactus enormes durante toda la ruta en coche."},
+  {front:"la temperatura extrema", back:"En el desierto hay temperatura extrema: mucho calor de día y frío de noche."},
+  {front:"la ruta en coche", back:"Vamos a hacer una ruta en coche de diez días por el suroeste."},
+  {front:"la formación de roca", back:"Las formaciones de roca de Sedona tienen un color rojo muy particular."},
+  {front:"el sendero", back:"El sendero del borde sur es uno de los más populares del parque."},
+  {front:"el parque nacional", back:"Vamos a visitar tres parques nacionales en menos de dos semanas."},
+  {front:"el amanecer", back:"Llegamos al amanecer para evitar el calor y las multitudes."},
+  {front:"la puesta de sol", back:"La puesta de sol en el desierto tiene colores increíbles."},
+  {front:"alquilar un coche", back:"Vamos a alquilar un coche en Phoenix para todo el viaje."},
+  {front:"deshidratarse", back:"Es fácil deshidratarse en el desierto si no bebes suficiente agua."},
+  {front:"la tienda de campaña", back:"Vamos a dormir dos noches en una tienda de campaña."},
+  {front:"el terreno árido", back:"El terreno árido de Utah tiene muy poca vegetación."},
+  {front:"la roca roja", back:"Sedona es famosa por sus paredes de roca roja."},
+  {front:"el mirador", back:"Desde el mirador se ve todo el cañón de un lado a otro."},
+  {front:"la serpiente de cascabel", back:"Hay que tener cuidado con la serpiente de cascabel en el desierto."},
+  {front:"el escorpión", back:"Por la noche a veces aparece algún escorpión cerca del campamento."},
+  {front:"la duna", back:"Cerca de White Sands hay dunas blancas de arena de yeso."},
+  {front:"la reserva natural", back:"La reserva natural protege varias especies de plantas del desierto."},
+  {front:"conducir por carretera", back:"Vamos a conducir por carretera durante horas sin ver ningún pueblo."},
+  {front:"el clima seco", back:"El clima seco del desierto hace que la piel se reseque rápido."},
+  {front:"el paisaje desértico", back:"El paisaje desértico cambia mucho de un estado a otro."},
+  {front:"hacer senderismo", back:"El sábado vamos a hacer senderismo por el cañón durante toda la mañana."},
+];
+const vocabGrid = document.getElementById('vocab-grid');
+VOCAB.forEach(v => {
+  const card = document.createElement('div');
+  card.className = 'vocab-card';
+  card.tabIndex = 0;
+  card.innerHTML = `<div class="vocab-front">${v.front}</div><div class="vocab-back">${v.back}</div>`;
+  card.addEventListener('click', () => card.classList.toggle('flipped'));
+  vocabGrid.appendChild(card);
+});
+
+/* ---------- 02 LECTURA ---------- */
+document.querySelectorAll('.reading-q .opt-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    btn.closest('.opts').querySelectorAll('.opt-btn').forEach(b => b.classList.remove('picked'));
+    btn.classList.add('picked');
+  });
+});
+document.getElementById('check-reading-btn').addEventListener('click', () => {
+  let correct = 0, total = 0;
+  document.querySelectorAll('.reading-q').forEach(q => {
+    total++;
+    const picked = q.querySelector('.opt-btn.picked');
+    if(!picked) return;
+    const isCorrect = picked.dataset.value === q.dataset.answer;
+    markResult(picked, isCorrect);
+    if(isCorrect) correct++;
+  });
+  document.getElementById('reading-score').textContent = `${correct} / ${total}`;
+});
+document.getElementById('reset-reading-btn').addEventListener('click', () => {
+  document.querySelectorAll('.reading-q .opt-btn').forEach(b => b.classList.remove('picked','correct','wrong'));
+  document.getElementById('reading-score').textContent = '';
+});
+
+/* ---------- 03 OPCIÓN MÚLTIPLE ---------- */
+const EXERCISES_RAW = [
+  {sentence:"Este verano, Lisa ___ un viaje por el desierto de Arizona.", options:["va a hacer","hace"], answer:"va a hacer"},
+  {sentence:"Nosotros ___ un coche en Phoenix para todo el viaje.", options:["vamos a alquilar","alquilamos"], answer:"vamos a alquilar"},
+  {sentence:"¿Tú ___ al Gran Cañón al amanecer o por la tarde?", options:["vas a llegar","llegas"], answer:"vas a llegar"},
+  {sentence:"Ellos ___ dos noches en una tienda de campaña en Utah.", options:["van a dormir","duermen"], answer:"van a dormir"},
+  {sentence:"Yo ___ mucha agua porque en el desierto hace mucho calor.", options:["voy a llevar","llevo"], answer:"voy a llevar"},
+  {sentence:"En Sedona, vosotros ___ una ruta en coche por el desierto.", options:["vais a hacer","hacéis"], answer:"vais a hacer"},
+  {sentence:"El sábado, mi amiga y yo ___ senderismo por el cañón.", options:["vamos a hacer","hacemos"], answer:"vamos a hacer"},
+  {sentence:"¿Qué parque nacional ___ (tú) visitar primero?", options:["vas a","tienes que"], answer:"vas a"},
+  {sentence:"Con estas temperaturas, ___ mucho calor durante el día.", options:["va a hacer","hace"], answer:"va a hacer"},
+  {sentence:"Después del cañón, ellos ___ hasta Sedona en coche.", options:["van a conducir","conducen"], answer:"van a conducir"},
+];
+let EXERCISES = [];
+function buildExercises(){
+  EXERCISES = EXERCISES_RAW.map(ex => ({...ex, shuffled: shuffle(ex.options)}));
+}
+const exerciseList = document.getElementById('exercise-list');
+function renderExercises(){
+  exerciseList.innerHTML = EXERCISES.map((ex, i) => `
+    <div class="exercise" data-answer="${ex.answer}">
+      <p class="ex-sentence">${i+1}. ${ex.sentence}</p>
+      <div class="ex-options">
+        ${ex.shuffled.map(o => `<button class="opt-btn" data-value="${o}">${o}</button>`).join('')}
+      </div>
+    </div>`).join('');
+  exerciseList.querySelectorAll('.opt-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      btn.closest('.ex-options').querySelectorAll('.opt-btn').forEach(b => b.classList.remove('picked'));
+      btn.classList.add('picked');
+    });
+  });
+}
+buildExercises();
+renderExercises();
+document.getElementById('check-ex-btn').addEventListener('click', () => {
+  let correct = 0;
+  exerciseList.querySelectorAll('.exercise').forEach(group => {
+    const picked = group.querySelector('.opt-btn.picked');
+    if(!picked) return;
+    const isCorrect = picked.dataset.value === group.dataset.answer;
+    markResult(picked, isCorrect);
+    if(isCorrect) correct++;
+  });
+  document.getElementById('ex-score').textContent = `${correct} / ${EXERCISES.length}`;
+});
+function resetExercises(){
+  exerciseList.querySelectorAll('.opt-btn').forEach(b => b.classList.remove('picked','correct','wrong'));
+  document.getElementById('ex-score').textContent = '';
+}
+document.getElementById('reset-ex-btn').addEventListener('click', resetExercises);
+
+/* ---------- 04 VERDADERO/FALSO ---------- */
+const VF_ITEMS = [
+  {text:"El futuro próximo se forma con el verbo \"ir\" en presente + \"a\" + infinitivo.", answer:true},
+  {text:"El Gran Cañón está en el estado de Utah.", answer:false},
+  {text:"El cactus saguaro solo crece en el desierto de Sonora.", answer:true},
+  {text:"En el desierto, la temperatura es siempre igual de día y de noche.", answer:false},
+  {text:"El futuro próximo se usa normalmente para planes ya decididos.", answer:true},
+  {text:"\"Deshidratarse\" significa beber demasiada agua.", answer:false},
+  {text:"Sedona es famosa por sus formaciones de roca roja.", answer:true},
+  {text:"Un \"sendero\" y una \"carretera\" son exactamente lo mismo.", answer:false},
+  {text:"El río Colorado formó el Gran Cañón a lo largo de millones de años.", answer:true},
+  {text:"\"Voy a conducir\" y \"conduzco\" significan exactamente lo mismo en todos los contextos.", answer:false},
+  {text:"Arizona, Nuevo México y Utah están en el suroeste de Estados Unidos.", answer:true},
+  {text:"Una \"duna\" es un tipo de formación de agua, no de arena.", answer:false},
+];
+const vfList = document.getElementById('vf-list');
+VF_ITEMS.forEach((item, i) => {
+  const el = document.createElement('div');
+  el.className = 'vf-item';
+  el.dataset.answer = item.answer;
+  el.innerHTML = `<p>${item.text}</p><div class="vf-buttons"><button class="vf-btn" data-value="true">Verdadero</button><button class="vf-btn" data-value="false">Falso</button></div>`;
+  vfList.appendChild(el);
+});
+vfList.addEventListener('click', (e) => {
+  const btn = e.target.closest('.vf-btn');
+  if(!btn) return;
+  const group = btn.closest('.vf-item');
+  group.querySelectorAll('.vf-btn').forEach(b => b.classList.remove('picked'));
+  btn.classList.add('picked');
+});
+document.getElementById('check-vf-btn').addEventListener('click', () => {
+  let correct = 0;
+  vfList.querySelectorAll('.vf-item').forEach(group => {
+    const picked = group.querySelector('.vf-btn.picked');
+    if(!picked) return;
+    const isCorrect = String(picked.dataset.value === 'true') === group.dataset.answer;
+    markResult(picked, isCorrect);
+    if(isCorrect) correct++;
+  });
+  document.getElementById('vf-score').textContent = `${correct} / ${VF_ITEMS.length}`;
+});
+document.getElementById('reset-vf-btn').addEventListener('click', () => {
+  vfList.querySelectorAll('.vf-btn').forEach(b => b.classList.remove('picked','correct','wrong'));
+  document.getElementById('vf-score').textContent = '';
+});
+
+/* ---------- 05 ORDENAR PALABRAS ---------- */
+const ORDER_EXERCISES = [
+  {words:["Vamos","a","alquilar","un","coche","en","Phoenix"], answer:["Vamos","a","alquilar","un","coche","en","Phoenix"]},
+  {words:["Voy","a","visitar","el","Gran","Cañón","mañana"], answer:["Voy","a","visitar","el","Gran","Cañón","mañana"]},
+  {words:["Ellos","van","a","dormir","en","una","tienda","de","campaña"], answer:["Ellos","van","a","dormir","en","una","tienda","de","campaña"]},
+  {words:["¿Vas","a","llevar","suficiente","agua","al","desierto"], answer:["¿Vas","a","llevar","suficiente","agua","al","desierto"]},
+  {words:["El","sábado","vamos","a","hacer","senderismo"], answer:["El","sábado","vamos","a","hacer","senderismo"]},
+  {words:["Va","a","hacer","mucho","calor","esta","tarde"], answer:["Va","a","hacer","mucho","calor","esta","tarde"]},
+  {words:["Vamos","a","conducir","por","el","desierto","de","Sonora"], answer:["Vamos","a","conducir","por","el","desierto","de","Sonora"]},
+  {words:["Van","a","ver","cactus","enormes","en","la","ruta"], answer:["Van","a","ver","cactus","enormes","en","la","ruta"]},
+  {words:["Vamos","a","llegar","al","cañón","al","amanecer"], answer:["Vamos","a","llegar","al","cañón","al","amanecer"]},
+];
+const orderList = document.getElementById('order-list');
+function buildOrder(){
+  orderList.innerHTML = '';
+  ORDER_EXERCISES.forEach(ex => {
+    const el = document.createElement('div');
+    el.className = 'order-item';
+    el.innerHTML = `<div class="order-bank">${shuffle(ex.words).map(w => `<span class="order-chip" data-word="${w}">${w}</span>`).join('')}</div><div class="order-slot"></div><div class="order-feedback"></div>`;
+    const slot = el.querySelector('.order-slot');
+    const feedback = el.querySelector('.order-feedback');
+    el.querySelectorAll('.order-chip').forEach(chip => {
+      chip.addEventListener('click', () => {
+        if(chip.classList.contains('used')) return;
+        chip.classList.add('used');
+        const placed = document.createElement('span');
+        placed.className = 'order-chip used';
+        placed.textContent = chip.dataset.word;
+        placed.addEventListener('click', () => {
+          placed.remove();
+          chip.classList.remove('used');
+          el.classList.remove('correct','wrong');
+          feedback.textContent = '';
+        });
+        slot.appendChild(placed);
+        const current = [...slot.children].map(c => c.textContent);
+        if(current.length === ex.answer.length){
+          const ok = current.every((w, idx) => w === ex.answer[idx]);
+          markResult(slot, ok);
+          feedback.textContent = ok ? 'Correcto.' : `Prueba otra vez — respuesta: ${ex.answer.join(' ')}`;
+        }
+      });
+    });
+    orderList.appendChild(el);
+  });
+}
+buildOrder();
+document.getElementById('order-reset-btn').addEventListener('click', buildOrder);
+
+/* ---------- 06 EMPAREJAR COLUMNAS ---------- */
+const MATCH_PAIRS = [
+  {left:"el desierto", right:"región muy seca con poca lluvia y vegetación"},
+  {left:"el cañón", right:"valle profundo formado por un río"},
+  {left:"el cactus", right:"planta que guarda agua y vive en climas secos"},
+  {left:"la ruta en coche", right:"viaje planeado conduciendo de un lugar a otro"},
+  {left:"el sendero", right:"camino estrecho para caminar o hacer senderismo"},
+  {left:"el amanecer", right:"momento en que sale el sol por la mañana"},
+  {left:"deshidratarse", right:"perder demasiada agua del cuerpo"},
+  {left:"la tienda de campaña", right:"estructura ligera para dormir al aire libre"},
+  {left:"la duna", right:"montículo de arena formado por el viento"},
+  {left:"el mirador", right:"punto alto desde donde se ve el paisaje"},
+  {left:"la temperatura extrema", right:"cambios muy grandes de calor o frío"},
+  {left:"el clima seco", right:"tiempo con muy poca humedad o lluvia"},
+];
+const matchWrap = document.getElementById('match-wrap');
+let matchSelection = null, matchFound = 0;
+function buildMatch(){
+  matchWrap.innerHTML = '';
+  matchSelection = null; matchFound = 0;
+  document.getElementById('match-score').textContent = '';
+  const colL = document.createElement('div'); colL.className = 'match-col';
+  const colR = document.createElement('div'); colR.className = 'match-col';
+  MATCH_PAIRS.map(p => p.left).forEach(l => {
+    const b = document.createElement('button');
+    b.className = 'match-item'; b.textContent = l; b.dataset.side = 'l'; b.dataset.value = l;
+    colL.appendChild(b);
+  });
+  shuffle(MATCH_PAIRS.map(p => p.right)).forEach(r => {
+    const b = document.createElement('button');
+    b.className = 'match-item'; b.textContent = r; b.dataset.side = 'r'; b.dataset.value = r;
+    colR.appendChild(b);
+  });
+  matchWrap.append(colL, colR);
+  matchWrap.querySelectorAll('.match-item').forEach(item => {
+    item.addEventListener('click', () => {
+      if(item.classList.contains('linked')) return;
+      if(!matchSelection){ matchSelection = item; item.classList.add('selected'); return; }
+      if(matchSelection === item) return;
+      if(matchSelection.dataset.side === item.dataset.side){
+        matchSelection.classList.remove('selected');
+        matchSelection = item; item.classList.add('selected');
+        return;
+      }
+      const pair = MATCH_PAIRS.find(p =>
+        (p.left === matchSelection.dataset.value && p.right === item.dataset.value) ||
+        (p.left === item.dataset.value && p.right === matchSelection.dataset.value));
+      if(pair){
+        matchSelection.classList.remove('selected'); matchSelection.classList.add('linked');
+        item.classList.add('linked');
+        matchFound++;
+        if(matchFound === MATCH_PAIRS.length) document.getElementById('match-score').textContent = `¡Completo! ${matchFound} / ${MATCH_PAIRS.length}`;
+      } else {
+        item.classList.add('wrong-flash');
+        const prev = matchSelection;
+        setTimeout(() => { item.classList.remove('wrong-flash'); prev.classList.remove('selected'); }, 450);
+      }
+      matchSelection = null;
+    });
+  });
+}
+buildMatch();
+document.getElementById('match-reset-btn').addEventListener('click', buildMatch);
+
+/* ---------- 07 RELLENAR HUECOS ---------- */
+const FILL_TEXT = [
+  {before:"Este verano ", gap:"voy a hacer", after:" un viaje por el desierto de Arizona. "},
+  {before:"Primero, ", gap:"vamos a alquilar", after:" un coche en Phoenix. "},
+  {before:"Después, ", gap:"vamos a conducir", after:" hasta el Gran Cañón. "},
+  {before:"Allí, ", gap:"voy a caminar", after:" por uno de los senderos del borde sur. "},
+  {before:"En Sedona, mi amiga y yo ", gap:"vamos a ver", after:" cactus saguaro enormes. "},
+  {before:"Por la noche, ", gap:"vamos a dormir", after:" en una tienda de campaña."},
+];
+const fillBlock = document.getElementById('fill-block');
+function buildFill(){
+  fillBlock.innerHTML = FILL_TEXT.map((seg, i) =>
+    `${seg.before}<input type="text" data-answer="${seg.gap}">${seg.after}`).join('');
+}
+buildFill();
+document.getElementById('check-fill-btn').addEventListener('click', () => {
+  let correct = 0;
+  const inputs = fillBlock.querySelectorAll('input[type="text"]');
+  inputs.forEach(input => {
+    const isCorrect = normalizeText(input.value) === normalizeText(input.dataset.answer);
+    markResult(input, isCorrect);
+    if(isCorrect) correct++;
+  });
+  document.getElementById('fill-score').textContent = `${correct} / ${inputs.length}`;
+});
+document.getElementById('reset-fill-btn').addEventListener('click', () => {
+  buildFill();
+  document.getElementById('fill-score').textContent = '';
+});
+
+/* ---------- 08 TABLA DE CONJUGACIÓN ---------- */
+const CONJ_ROWS = [
+  {pronoun:"yo", answer:"voy"},
+  {pronoun:"tú", answer:"vas"},
+  {pronoun:"él/ella", answer:"va"},
+  {pronoun:"nosotros/as", answer:"vamos"},
+  {pronoun:"vosotros/as", answer:"vais"},
+  {pronoun:"ellos/ellas", answer:"van"},
+];
+const conjTbody = document.getElementById('conj-tbody');
+function buildConj(){
+  conjTbody.innerHTML = CONJ_ROWS.map(r =>
+    `<tr><td class="pronoun">${r.pronoun}</td><td><input type="text" data-answer="${r.answer}"></td></tr>`).join('');
+}
+buildConj();
+document.getElementById('check-conj-btn').addEventListener('click', () => {
+  let correct = 0;
+  const inputs = conjTbody.querySelectorAll('input[type="text"]');
+  inputs.forEach(input => {
+    const isCorrect = normalizeText(input.value) === normalizeText(input.dataset.answer);
+    markResult(input, isCorrect);
+    if(isCorrect) correct++;
+  });
+  document.getElementById('conj-score').textContent = `${correct} / ${inputs.length}`;
+});
+document.getElementById('reset-conj-btn').addEventListener('click', () => {
+  buildConj();
+  document.getElementById('conj-score').textContent = '';
+});
+
+/* ---------- 08b SEGUNDA TABLA DE CONJUGACIÓN (ir a conducir) ---------- */
+const CONJ2_ROWS = [
+  {pronoun:"yo", answer:"voy a conducir"},
+  {pronoun:"tú", answer:"vas a conducir"},
+  {pronoun:"él/ella", answer:"va a conducir"},
+  {pronoun:"nosotros/as", answer:"vamos a conducir"},
+  {pronoun:"vosotros/as", answer:"vais a conducir"},
+  {pronoun:"ellos/ellas", answer:"van a conducir"},
+];
+const conj2Tbody = document.getElementById('conj2-tbody');
+function buildConj2(){
+  conj2Tbody.innerHTML = CONJ2_ROWS.map(r =>
+    `<tr><td class="pronoun">${r.pronoun}</td><td><input type="text" data-answer="${r.answer}"></td></tr>`).join('');
+}
+buildConj2();
+document.getElementById('check-conj2-btn').addEventListener('click', () => {
+  let correct = 0;
+  const inputs = conj2Tbody.querySelectorAll('input[type="text"]');
+  inputs.forEach(input => {
+    const isCorrect = normalizeText(input.value) === normalizeText(input.dataset.answer);
+    markResult(input, isCorrect);
+    if(isCorrect) correct++;
+  });
+  document.getElementById('conj2-score').textContent = `${correct} / ${inputs.length}`;
+});
+document.getElementById('reset-conj2-btn').addEventListener('click', () => {
+  buildConj2();
+  document.getElementById('conj2-score').textContent = '';
+});
+
+/* ---------- 10 TAREA FINAL: contador de palabras ---------- */
+const finalTask = document.querySelector('.final-task');
+const taskCount = document.querySelector('.task-count');
+finalTask.addEventListener('input', () => {
+  const words = finalTask.value.trim().split(/\s+/).filter(Boolean).length;
+  taskCount.textContent = `${words} palabra${words === 1 ? '' : 's'} escrita${words === 1 ? '' : 's'}`;
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Español con Óscar · Clase — Lisa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+
+:root{
+  --paper:        #F5E9D3;
+  --paper-raised: #FFFFFF;
+  --paper-alt:    #EEDCB8;
+  --ink:          #23291F;
+  --ink-soft:     #565F52;
+  --ink-faint:    #8B9184;
+  --line:         rgba(35,41,31,0.12);
+  --line-strong:  rgba(35,41,31,0.22);
+
+  --ok:      #2F7D5C;  --ok-soft: #E7F3EC;  --ok-line: #BFE0CE;
+  --wrong:   #9A3B2E;  --wrong-soft: #FBEAE6; --wrong-line: #E8BFB4;
+  --info:    #2F6FED;  --info-soft: #EAF1FE; --info-line: #C6D9FC;
+
+  --accent:      #A9632B;
+  --accent-soft: #F4E9DC;
+  --accent-line: #E0C6A5;
+
+  --f-display: 'Fraunces', Georgia, serif;
+  --f-body:    'IBM Plex Sans', system-ui, sans-serif;
+  --f-data:    'IBM Plex Mono', monospace;
+
+  --r-sm: 8px;
+  --r-md: 14px;
+  --r-lg: 20px;
+}
+
+*{ box-sizing:border-box; }
+body{
+  margin:0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--f-body);
+  line-height:1.6;
+}
+::selection{ background: var(--accent-soft); }
+
+.sticky-progress{ position:fixed; top:0; left:0; right:0; z-index:200; height:3px; background: rgba(35,41,31,0.10); }
+.sticky-progress-fill{ height:100%; width:0%; background: var(--accent); opacity:.55; }
+
+header{ padding:44px 24px 0; max-width:760px; margin:0 auto; }
+.header-top{ display:flex; align-items:center; justify-content:space-between; gap:24px; margin-bottom:16px; }
+.brand-row{ display:flex; align-items:center; gap:10px; }
+.brand-name{ font-family: var(--f-display); font-weight:600; font-style:italic; font-size:17px; color: var(--ink); letter-spacing:-.01em; }
+h1{ font-family: var(--f-display); font-weight:600; font-size:clamp(30px,5.6vw,46px); line-height:1.05; margin:0; letter-spacing:-.015em; }
+h1 em{ font-style:italic; color: var(--accent); }
+.lede{ font-size:15.5px; color: var(--ink-soft); max-width:56ch; margin:14px 0 0; }
+.meta-row{ display:flex; align-items:center; gap:12px; margin-top:22px; flex-wrap:wrap; }
+.level-pill{ font-family: var(--f-data); font-size:12px; font-weight:600; color: var(--ink); background: var(--paper-alt); border:1px solid var(--line); padding:6px 14px; border-radius:999px; }
+.time-pill{ display:flex; align-items:center; gap:6px; font-family: var(--f-data); font-size:12px; color: var(--ink-faint); }
+.header-rule{ height:1px; background: var(--line); margin-top:28px; }
+
+main{ max-width:760px; margin:0 auto; padding:8px 24px 100px; }
+section.block{ margin-bottom:40px; padding-top:24px; border-top:1px solid var(--line); }
+section.block:first-of-type{ border-top:none; padding-top:0; }
+.block-head{ display:flex; align-items:baseline; gap:12px; margin-bottom:18px; }
+.block-num{ font-family: var(--f-display); font-size:30px; font-weight:600; color: var(--accent); flex:none; line-height:1; letter-spacing:-.01em; }
+.block-head h2{ font-family: var(--f-body); font-weight:600; font-size:18px; margin:0; color: var(--ink); }
+.time-tag{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); background: var(--paper-alt); padding:3px 10px; border-radius:999px; margin-left:auto; flex:none; }
+
+.panel{ background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-lg); padding:26px 28px; }
+.block-intro{ margin:0 0 16px; font-size:14.5px; color: var(--ink-soft); }
+
+.note{ margin-top:18px; padding:14px 16px; background: var(--info-soft); border:1px solid var(--info-line); border-radius: var(--r-md); font-size:14px; color: var(--ink-soft); }
+.note strong{ color: var(--ink); }
+
+.exercise{ margin-bottom:20px; }
+.exercise:last-of-type{ margin-bottom:0; }
+.ex-sentence{ font-size:15.5px; margin-bottom:10px; }
+.ex-options{ display:flex; flex-wrap:wrap; gap:8px; }
+.opt-btn{ font-family: var(--f-body); font-size:14px; background: var(--paper-raised); border:1.5px solid var(--line); color: var(--ink); padding:7px 16px; border-radius:999px; cursor:pointer; }
+.opt-btn:hover{ border-color: var(--ink-faint); }
+.opt-btn.picked{ background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+.opt-btn.correct{ background: var(--ok-soft); border-color: var(--ok); color: var(--ok); }
+.opt-btn.wrong{ background: var(--wrong-soft); border-color: var(--wrong); color: var(--wrong); }
+.opt-btn:disabled{ cursor:default; }
+.check-bar{ display:flex; align-items:center; justify-content:space-between; gap:16px; margin-top:22px; padding-top:18px; border-top:1px dashed var(--line); flex-wrap:wrap; }
+.btn-primary{ font-family: var(--f-body); font-weight:600; font-size:14px; color:#fff; background: var(--accent); border:none; padding:11px 22px; border-radius:999px; cursor:pointer; }
+#score-text{ font-family: var(--f-data); font-size:13px; color: var(--ink-faint); }
+.btn-ghost{ font-family: var(--f-body); font-weight:600; font-size:13px; color: var(--ink-soft); background:none; border:1.5px solid var(--line); padding:9px 18px; border-radius:999px; cursor:pointer; }
+.btn-ghost:hover{ border-color: var(--ink-faint); }
+
+.vocab-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(160px,1fr)); gap:12px; }
+.vocab-card{ background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md); padding:14px 16px; cursor:pointer; min-height:78px; display:flex; flex-direction:column; justify-content:center; }
+.vocab-card:hover{ border-color: var(--accent-line); }
+.vocab-card:focus-visible{ outline:2px solid var(--accent); outline-offset:2px; }
+.vocab-front{ font-family: var(--f-body); font-weight:600; font-size:15px; }
+.vocab-back{ display:none; font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); margin-top:6px; }
+.vocab-card.flipped .vocab-back{ display:block; }
+.vocab-card.flipped{ background: var(--accent-soft); border-color: var(--accent-line); }
+.vocab-hint{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin:10px 2px 16px; }
+
+.reading-text{ font-family: var(--f-display); font-size:16.5px; line-height:1.7; color: var(--ink); background:#F7EFDE; border:1px solid #E8D9B8; border-radius: var(--r-md); padding:20px 22px; margin-bottom:20px; }
+.reading-text p{ margin:0 0 12px; }
+.reading-text p:last-child{ margin-bottom:0; }
+.reading-q{ background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md); padding:14px 16px; margin-bottom:12px; }
+.reading-q p.q{ font-size:14.5px; color: var(--ink); margin:0 0 10px; font-weight:500; }
+.reading-q .opts{ display:flex; flex-wrap:wrap; gap:8px; }
+
+.vf-item{ display:flex; align-items:center; justify-content:space-between; gap:14px; background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md); padding:14px 16px; margin-bottom:10px; }
+.vf-item p{ margin:0; font-size:14.5px; color:var(--ink); flex:1; }
+.vf-buttons{ display:flex; gap:8px; flex:none; }
+.vf-btn{ font-family: var(--f-body); font-size:13px; font-weight:600; background: var(--paper-alt); border:1.5px solid var(--line); color: var(--ink-soft); padding:6px 14px; border-radius:999px; cursor:pointer; }
+.vf-btn.picked{ background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+.vf-btn.correct{ background: var(--ok-soft); border-color: var(--ok); color: var(--ok); }
+.vf-btn.wrong{ background: var(--wrong-soft); border-color: var(--wrong); color: var(--wrong); }
+.vf-btn:disabled{ cursor:default; }
+
+.order-item{ background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md); padding:16px 18px; margin-bottom:14px; }
+.order-bank{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; min-height:38px; }
+.order-slot{ display:flex; flex-wrap:wrap; gap:8px; min-height:42px; padding:8px; background: var(--paper-alt); border:1.5px dashed var(--line-strong); border-radius: var(--r-sm); }
+.order-chip{ font-family: var(--f-data); font-size:13.5px; background: var(--paper-raised); border:1.5px solid var(--line); color: var(--ink); padding:6px 12px; border-radius:999px; cursor:pointer; user-select:none; }
+.order-chip.used{ background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+.order-item .order-feedback{ font-size:12.5px; color: var(--ink-faint); margin-top:8px; font-family: var(--f-data); }
+.order-item.correct .order-slot{ border-color: var(--ok); border-style:solid; background: var(--ok-soft); }
+.order-item.wrong .order-slot{ border-color: var(--wrong); border-style:solid; background: var(--wrong-soft); }
+
+.match-wrap{ display:grid; grid-template-columns:1fr 1fr; gap:24px; }
+.match-col{ display:flex; flex-direction:column; gap:8px; }
+.match-item{ font-family: var(--f-body); font-size:14px; text-align:left; background: var(--paper-raised); border:1.5px solid var(--line); color: var(--ink); padding:10px 14px; border-radius: var(--r-sm); cursor:pointer; }
+.match-item:hover{ border-color: var(--accent-line); }
+.match-item.selected{ background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+.match-item.linked{ background: var(--ok-soft); border-color: var(--ok); color: var(--ok); cursor:default; }
+.match-item.wrong-flash{ background: var(--wrong-soft); border-color: var(--wrong); color: var(--wrong); }
+
+.fill-block{ font-family: var(--f-display); font-size:16px; line-height:2.1; color: var(--ink); background: linear-gradient(155deg, #F7F1E1 0%, #F1E8D2 100%); border:1px solid var(--line); border-radius: var(--r-md); padding:20px 22px; }
+.fill-block input[type="text"]{ font-family: var(--f-data); font-size:14px; width:110px; text-align:center; background: var(--paper-raised); border:none; border-bottom:2px solid var(--accent-line); color: var(--ink); padding:2px 6px; margin:0 2px; }
+.fill-block input[type="text"]:focus{ outline:none; border-bottom-color: var(--accent); }
+.fill-block input.correct{ border-bottom-color: var(--ok); color: var(--ok); }
+.fill-block input.wrong{ border-bottom-color: var(--wrong); color: var(--wrong); text-decoration: line-through; }
+
+table.conj-table{ width:100%; border-collapse:collapse; font-size:13.5px; }
+table.conj-table th{ font-family: var(--f-data); font-size:10.5px; text-transform:uppercase; letter-spacing:.05em; color: var(--ink-faint); text-align:left; padding:8px 10px; border-bottom:1.5px solid var(--line-strong); }
+table.conj-table td{ padding:6px 10px; border-bottom:1px dashed var(--line); }
+table.conj-table tr:last-child td{ border-bottom:none; }
+table.conj-table td.pronoun{ font-family: var(--f-display); font-weight:600; color: var(--ink-soft); font-size:13px; }
+table.conj-table input[type="text"]{ width:100%; font-family: var(--f-data); font-size:13.5px; background: var(--paper-alt); border:1px solid var(--line); border-radius: var(--r-sm); padding:6px 9px; color: var(--ink); }
+table.conj-table input[type="text"]:focus{ outline:none; border-color: var(--accent); }
+table.conj-table input.correct{ border-color: var(--ok); background: var(--ok-soft); }
+table.conj-table input.wrong{ border-color: var(--wrong); background: var(--wrong-soft); }
+
+.culture-card{ background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-lg); padding:24px 26px; border-left:3px solid var(--accent); }
+.culture-eyebrow{ font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.08em; color: var(--accent); font-weight:600; margin:0 0 10px; }
+.culture-card h3{ font-family: var(--f-display); font-size:18px; font-weight:600; margin:0 0 8px; }
+.culture-card p{ font-size:14px; color: var(--ink-soft); line-height:1.6; margin:0; }
+
+.task-panel{ background: var(--paper-alt); border:1px solid var(--line); border-radius: var(--r-lg); padding:26px 28px; }
+textarea.final-task{ width:100%; min-height:140px; font-family: var(--f-body); font-size:15px; color: var(--ink); background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md); padding:14px 16px; resize:vertical; margin-top:14px; }
+textarea.final-task:focus{ outline:none; border-color: var(--accent); }
+.task-footer{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:12px; flex-wrap:wrap; }
+.task-count{ font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); }
+.btn-secondary{ font-family: var(--f-body); font-weight:600; font-size:13.5px; color: var(--ink-soft); background:none; border:1.5px solid var(--line); padding:9px 18px; border-radius:999px; cursor:pointer; }
+
+.phrase-card{
+  padding:28px 32px; border-radius: var(--r-lg); border:1px solid var(--accent-line);
+  background:
+    radial-gradient(ellipse 320px 260px at 12% -10%, color-mix(in srgb, var(--accent) 16%, transparent) 0%, transparent 60%),
+    radial-gradient(ellipse 260px 220px at 92% 115%, color-mix(in srgb, var(--accent) 13%, transparent) 0%, transparent 55%),
+    var(--accent-soft);
+  text-align:center;
+}
+.phrase-eyebrow{ font-family: var(--f-data); font-size:11.5px; letter-spacing:.1em; text-transform:uppercase; color: var(--accent); font-weight:600; margin:0 0 12px; }
+.phrase-main{ font-family: var(--f-display); font-weight:600; font-size:clamp(21px,3.4vw,28px); line-height:1.35; margin:0 0 10px; color:var(--ink); }
+.phrase-main em{ font-style:italic; color: var(--accent); font-weight:500; }
+.phrase-sub{ font-size:14px; color: var(--ink-soft); max-width:46ch; margin:0 auto; }
+.phrase-tags{ display:flex; gap:8px; flex-wrap:wrap; justify-content:center; margin-top:16px; }
+.phrase-tag{ font-family: var(--f-data); font-size:10.5px; padding:4px 10px; border-radius:999px; background: var(--paper-raised); border:1px solid var(--accent-line); color: var(--accent); }
+
+footer{ max-width:760px; margin:0 auto; padding:0 24px 60px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); }
+
+@media (max-width:640px){
+  header{ padding:34px 18px 22px; }
+  main{ padding:8px 18px 90px; }
+  .panel, .task-panel, .correction-panel, .culture-card{ padding:20px 18px; }
+  .header-top{ flex-direction:column; align-items:flex-start; gap:14px; }
+  .match-wrap{ grid-template-columns:1fr; }
+}
+
+@media (prefers-reduced-motion: reduce){ *{ transition:none !important; } }
+</style>
+</head>
+<body data-accent="mostaza">
+
+<div class="sticky-progress" id="sticky-progress"><div class="sticky-progress-fill" id="sticky-progress-fill"></div></div>
+
+<header>
+  <div class="header-top">
+    <div class="brand-row">
+      <span class="brand-name">Español con Óscar</span>
+    </div>
+  </div>
+  <h1>Me <em>encanta</em> esta canción</h1>
+  <p class="lede">Madonna, Prince, Duran Duran, Depeche Mode, The Cure, Nine Inch Nails: hablamos de música de los 80 y practicamos los pronombres de objeto directo e indirecto ("la escucho todos los días", "le recomendé el álbum a mi amigo") con vocabulario de géneros, conciertos y álbumes.</p>
+  <div class="meta-row">
+    <span class="level-pill">A2</span>
+    <span class="time-pill">⏱ 50 min</span>
+  </div>
+  <div class="header-rule"></div>
+</header>
+
+<main>
+
+  <!-- 01 · VOCABULARIO -->
+  <section class="block">
+    <div class="block-head"><span class="block-num">01</span><h2>Vocabulario de hoy</h2><span class="time-tag">5 min</span></div>
+    <div class="panel">
+      <p class="block-intro">Toca cada tarjeta para ver un ejemplo con vocabulario de música de los 80.</p>
+      <div class="vocab-grid" id="vocab-grid"></div>
+    </div>
+  </section>
+
+  <!-- 02 · LECTURA Y COMPRENSIÓN -->
+  <section class="block">
+    <div class="block-head"><span class="block-num">02</span><h2>Lectura y comprensión</h2><span class="time-tag">8 min</span></div>
+    <div class="panel">
+      <div class="reading-text">
+        <p>Los años 80 fueron una década increíble para la música pop y el new wave. Madonna publicó "Like a Virgin" en 1984 y la convirtió en un éxito mundial; todavía hoy la escuchamos en las fiestas. Prince, por su parte, compuso "Purple Rain" y la tocó en directo cientos de veces; sus fans lo adoraban por su estilo único en el escenario.</p>
+        <p>Duran Duran y Depeche Mode representaron el sonido new wave con sintetizadores, mientras que The Cure le dio al género un toque más oscuro y melancólico. Robert Smith, el cantante de The Cure, escribía las letras él mismo y les mostraba las letras a la banda antes de grabar el álbum. Más tarde, en los 90, Nine Inch Nails llevó ese sonido oscuro hacia el rock industrial. Si te gusta esa década, te recomiendo un álbum: seguro que te va a encantar.</p>
+      </div>
+      <div class="reading-q" data-answer="a">
+        <p class="q">¿En qué año publicó Madonna "Like a Virgin"?</p>
+        <div class="opts">
+          <button class="opt-btn" data-value="a">En 1984</button>
+          <button class="opt-btn" data-value="b">En 1990</button>
+        </div>
+      </div>
+      <div class="reading-q" data-answer="b">
+        <p class="q">¿Qué canción compuso e interpretó Prince?</p>
+        <div class="opts">
+          <button class="opt-btn" data-value="a">"Like a Virgin"</button>
+          <button class="opt-btn" data-value="b">"Purple Rain"</button>
+        </div>
+      </div>
+      <div class="reading-q" data-answer="a">
+        <p class="q">¿Qué grupos representaron el sonido new wave según el texto?</p>
+        <div class="opts">
+          <button class="opt-btn" data-value="a">Duran Duran y Depeche Mode</button>
+          <button class="opt-btn" data-value="b">Nine Inch Nails y The Cure</button>
+        </div>
+      </div>
+      <div class="reading-q" data-answer="b">
+        <p class="q">¿Quién le daba un toque más oscuro y melancólico al new wave?</p>
+        <div class="opts">
+          <button class="opt-btn" data-value="a">Madonna</button>
+          <button class="opt-btn" data-value="b">The Cure</button>
+        </div>
+      </div>
+      <div class="reading-q" data-answer="a">
+        <p class="q">¿Qué hacía Robert Smith con las letras antes de grabar?</p>
+        <div class="opts">
+          <button class="opt-btn" data-value="a">Les mostraba las letras a la banda</button>
+          <button class="opt-btn" data-value="b">Las guardaba en secreto</button>
+        </div>
+      </div>
+      <div class="reading-q" data-answer="b">
+        <p class="q">¿Hacia qué género llevó Nine Inch Nails el sonido oscuro en los 90?</p>
+        <div class="opts">
+          <button class="opt-btn" data-value="a">El pop</button>
+          <button class="opt-btn" data-value="b">El rock industrial</button>
+        </div>
+      </div>
+      <div class="reading-q" data-answer="a">
+        <p class="q">Según el texto, ¿por qué adoraban los fans a Prince?</p>
+        <div class="opts">
+          <button class="opt-btn" data-value="a">Por su estilo único en el escenario</button>
+          <button class="opt-btn" data-value="b">Por sus entrevistas</button>
+        </div>
+      </div>
+      <div class="reading-q" data-answer="b">
+        <p class="q">¿Qué instrumento asocia el texto con el sonido new wave?</p>
+        <div class="opts">
+          <button class="opt-btn" data-value="a">La guitarra acústica</button>
+          <button class="opt-btn" data-value="b">Los sintetizadores</button>
+        </div>
+      </div>
+      <div class="check-bar">
+        <button class="btn-primary" id="check-reading-btn">Comprobar comprensión</button>
+        <span id="reading-score"></span>
+        <button class="btn-ghost" id="reset-reading-btn">Reiniciar</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 · OPCIÓN MÚLTIPLE -->
+  <section class="block">
+    <div class="block-head"><span class="block-num">03</span><h2>Elige la opción correcta</h2><span class="time-tag">8 min</span></div>
+    <div class="panel">
+      <p class="block-intro">Pronombres de objeto directo e indirecto: me, te, lo/la, le, nos, os, los/las, les.</p>
+      <div id="exercise-list"></div>
+      <div class="check-bar">
+        <button class="btn-primary" id="check-ex-btn">Comprobar</button>
+        <span id="ex-score"></span>
+        <button class="btn-ghost" id="reset-ex-btn">Reiniciar</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 · VERDADERO O FALSO -->
+  <section class="block">
+    <div class="block-head"><span class="block-num">04</span><h2>Verdadero o falso</h2><span class="time-tag">5 min</span></div>
+    <div class="panel">
+      <p class="block-intro">Sobre la lectura y los pronombres de objeto.</p>
+      <div id="vf-list"></div>
+      <div class="check-bar">
+        <button class="btn-primary" id="check-vf-btn">Comprobar</button>
+        <span id="vf-score"></span>
+        <button class="btn-ghost" id="reset-vf-btn">Reiniciar</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 · ORDENAR PALABRAS -->
+  <section class="block">
+    <div class="block-head"><span class="block-num">05</span><h2>Ordenar palabras</h2><span class="time-tag">8 min</span></div>
+    <div class="panel">
+      <p class="block-intro">Pulsa las palabras del banco en el orden correcto.</p>
+      <div id="order-list"></div>
+      <div class="check-bar">
+        <button class="btn-ghost" id="order-reset-btn">Reiniciar</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 · EMPAREJAR COLUMNAS -->
+  <section class="block">
+    <div class="block-head"><span class="block-num">06</span><h2>Emparejar columnas</h2><span class="time-tag">6 min</span></div>
+    <div class="panel">
+      <p class="block-intro">Une la palabra de música con su significado.</p>
+      <div class="match-wrap" id="match-wrap"></div>
+      <div class="check-bar">
+        <span id="match-score" style="font-family:var(--f-data); font-size:13px; color:var(--ink-faint);"></span>
+        <button class="btn-ghost" id="match-reset-btn">Reiniciar</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 07 · RELLENAR HUECOS -->
+  <section class="block">
+    <div class="block-head"><span class="block-num">07</span><h2>Rellenar huecos en texto</h2><span class="time-tag">8 min</span></div>
+    <div class="panel">
+      <p class="block-intro">Completa el texto con el pronombre de objeto directo o indirecto correcto.</p>
+      <div class="fill-block" id="fill-block"></div>
+      <div class="check-bar">
+        <button class="btn-primary" id="check-fill-btn">Comprobar huecos</button>
+        <button class="btn-ghost" id="reset-fill-btn">Reiniciar</button>
+        <span id="fill-score"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 08 · TABLA -->
+  <section class="block">
+    <div class="block-head"><span class="block-num">08</span><h2>Pronombre + verbo</h2><span class="time-tag">6 min</span></div>
+    <div class="panel">
+      <p class="block-intro">Completa la tabla con el pronombre de objeto correcto delante del verbo.</p>
+      <table class="conj-table">
+        <thead><tr><th>Frase original</th><th>Con pronombre</th></tr></thead>
+        <tbody id="conj-tbody"></tbody>
+      </table>
+      <div class="check-bar">
+        <button class="btn-primary" id="check-conj-btn">Comprobar</button>
+        <button class="btn-ghost" id="reset-conj-btn">Reiniciar</button>
+        <span id="conj-score"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 09 · TARJETA CULTURAL -->
+  <section class="block">
+    <div class="block-head"><span class="block-num">09</span><h2>Tarjeta cultural</h2><span class="time-tag">aside</span></div>
+    <div class="culture-card">
+      <p class="culture-eyebrow">Dato cultural</p>
+      <h3>MTV y el nacimiento del videoclip</h3>
+      <p>MTV empezó a emitir en 1981 y cambió para siempre la manera de vender música. Los artistas ya no solo componían canciones: también les daban mucha importancia a los videoclips. A Madonna, por ejemplo, la recordamos tanto por su música como por su imagen visual en la pantalla.</p>
+    </div>
+  </section>
+
+  <!-- 10 · TAREA FINAL -->
+  <section class="block">
+    <div class="block-head"><span class="block-num">10</span><h2>Tarea final</h2><span class="time-tag">producción</span></div>
+    <div class="task-panel">
+      <p class="block-intro" style="margin:0;">Escribe un texto breve sobre un artista o una canción de los 80 (o de cualquier época) que te encanta. ¿La escuchas mucho? ¿A quién le recomiendas esta canción? Usa pronombres de objeto directo e indirecto: la escucho, lo adoro, le recomiendo este álbum a mi amigo...</p>
+      <textarea class="final-task" placeholder="Escribe aquí..."></textarea>
+      <div class="task-footer">
+        <span class="task-count">0 palabras escritas</span>
+        <button class="btn-secondary">Marcar como enviada</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11 · FRASE DESTACADA DE CIERRE -->
+  <section class="block">
+    <div class="block-head"><span class="block-num">11</span><h2>Frase destacada de cierre</h2><span class="time-tag">resumen</span></div>
+    <div class="phrase-card">
+      <p class="phrase-eyebrow">Para recordar</p>
+      <p class="phrase-main">Me <em>encanta</em> esta canción, la <em>escucho</em> todos los días y se la <em>recomendé</em> a mi amigo.</p>
+      <p class="phrase-sub">Objeto directo (lo/la/los/las) responde a "¿qué?"; objeto indirecto (le/les, o "se" delante de lo/la) responde a "¿a quién?".</p>
+      <div class="phrase-tags">
+        <span class="phrase-tag">objeto directo</span>
+        <span class="phrase-tag">objeto indirecto</span>
+        <span class="phrase-tag">música de los 80</span>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <span>Español con Óscar · Clase con Lisa</span>
+</footer>
+
+<script>
+function shuffle(arr){
+  const a = arr.slice();
+  for(let i = a.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function markResult(el, isCorrect){
+  el.classList.toggle('correct', isCorrect);
+  el.classList.toggle('wrong', !isCorrect);
+}
+
+function normalizeText(s){
+  return s.trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/\s+/g,' ');
+}
+
+(function(){
+  const fills = [document.getElementById('sticky-progress-fill')].filter(Boolean);
+  if(!fills.length) return;
+  function update(){
+    const doc = document.documentElement;
+    const scrollable = doc.scrollHeight - doc.clientHeight;
+    const ratio = scrollable > 0 ? Math.min(1, Math.max(0, window.scrollY / scrollable)) : 0;
+    fills.forEach(f => f.style.width = (ratio * 100) + '%');
+  }
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if(ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => { update(); ticking = false; });
+  }, { passive:true });
+  window.addEventListener('resize', update);
+  update();
+})();
+
+/* ---------- 01 VOCABULARIO ---------- */
+const VOCAB = [
+  {front:"el sintetizador", back:"El sintetizador es el sonido típico del new wave."},
+  {front:"la letra (de una canción)", back:"Robert Smith escribía la letra antes de grabar."},
+  {front:"el álbum", back:"Prince publicó varios álbumes en los 80."},
+  {front:"el concierto en directo", back:"Vi a Duran Duran en un concierto en directo increíble."},
+  {front:"el escenario", back:"Prince tenía un estilo único en el escenario."},
+  {front:"el/la cantante", back:"Robert Smith es el cantante de The Cure."},
+  {front:"la banda / el grupo", back:"Depeche Mode es una banda inglesa de los 80."},
+  {front:"grabar (un disco)", back:"Grabaron el álbum en Londres en 1984."},
+  {front:"componer (una canción)", back:"Prince componía casi todas sus canciones."},
+  {front:"el éxito (musical)", back:"'Like a Virgin' fue un éxito mundial."},
+  {front:"la gira", back:"La banda hizo una gira por Europa en 1985."},
+  {front:"el ritmo", back:"El ritmo de esta canción es muy pegadizo."},
+  {front:"pegadizo/a", back:"Es una melodía súper pegadiza, no puedo dejar de cantarla."},
+  {front:"el videoclip", back:"MTV cambió la música gracias a los videoclips."},
+  {front:"la melodía", back:"La melodía de esta canción es inolvidable."},
+  {front:"el/la fan", back:"Los fans de Prince lo adoraban."},
+  {front:"el estilo (musical)", back:"El estilo de The Cure es oscuro y melancólico."},
+  {front:"la voz", back:"Tiene una voz muy reconocible."},
+  {front:"el/la solista", back:"Madonna empezó como solista después de dejar su banda."},
+  {front:"pinchar música", back:"El DJ pinchó música toda la noche en la fiesta."},
+  {front:"melancólico/a", back:"Esa canción tiene un tono melancólico."},
+  {front:"la portada (del álbum)", back:"La portada del álbum es muy famosa."},
+  {front:"emitir (radio/TV)", back:"MTV empezó a emitir videoclips en 1981."},
+];
+const vocabGrid = document.getElementById('vocab-grid');
+VOCAB.forEach(v => {
+  const card = document.createElement('div');
+  card.className = 'vocab-card';
+  card.tabIndex = 0;
+  card.innerHTML = `<div class="vocab-front">${v.front}</div><div class="vocab-back">${v.back}</div>`;
+  card.addEventListener('click', () => card.classList.toggle('flipped'));
+  vocabGrid.appendChild(card);
+});
+
+/* ---------- 02 LECTURA ---------- */
+document.querySelectorAll('.reading-q .opt-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    btn.closest('.opts').querySelectorAll('.opt-btn').forEach(b => b.classList.remove('picked'));
+    btn.classList.add('picked');
+  });
+});
+document.getElementById('check-reading-btn').addEventListener('click', () => {
+  let correct = 0, total = 0;
+  document.querySelectorAll('.reading-q').forEach(q => {
+    total++;
+    const picked = q.querySelector('.opt-btn.picked');
+    if(!picked) return;
+    const isCorrect = picked.dataset.value === q.dataset.answer;
+    markResult(picked, isCorrect);
+    if(isCorrect) correct++;
+  });
+  document.getElementById('reading-score').textContent = `${correct} / ${total}`;
+});
+document.getElementById('reset-reading-btn').addEventListener('click', () => {
+  document.querySelectorAll('.reading-q .opt-btn').forEach(b => b.classList.remove('picked','correct','wrong'));
+  document.getElementById('reading-score').textContent = '';
+});
+
+/* ---------- 03 OPCIÓN MÚLTIPLE ---------- */
+const EXERCISES_RAW = [
+  {sentence:"¿La canción nueva de Madonna? ___ escuché ayer.", options:["La","Le"], answer:"La"},
+  {sentence:"A mi amigo ___ recomendé el álbum de Prince.", options:["le","lo"], answer:"le"},
+  {sentence:"Esta canción ___ encanta, la escucho todos los días.", options:["me","yo"], answer:"me"},
+  {sentence:"¿El disco de The Cure? Ya ___ tengo en casa.", options:["lo","le"], answer:"lo"},
+  {sentence:"A mis padres ___ gusta mucho la música de los 80.", options:["les","los"], answer:"les"},
+  {sentence:"¿Las entradas para el concierto? ___ compré la semana pasada.", options:["Las","Los"], answer:"Las"},
+  {sentence:"A ti ___ voy a enseñar mi álbum favorito de Depeche Mode.", options:["te","tú"], answer:"te"},
+  {sentence:"Esa letra es muy triste, no ___ entiendo bien.", options:["la","le"], answer:"la"},
+  {sentence:"El videoclip de 'Like a Virgin' ___ vi con mi hermana.", options:["lo","le"], answer:"lo"},
+  {sentence:"A nosotros ___ fascina el sonido new wave.", options:["nos","nosotros"], answer:"nos"},
+  {sentence:"Los álbumes de Prince, ___ tengo todos.", options:["los","les"], answer:"los"},
+  {sentence:"A los fans ___ encantó el concierto en directo.", options:["les","los"], answer:"les"},
+  {sentence:"A mi novio ___ voy a poner esta canción esta noche.", options:["le","lo"], answer:"le"},
+  {sentence:"¿El sintetizador? Robert Smith ___ usaba en casi todas sus canciones.", options:["lo","le"], answer:"lo"},
+  {sentence:"A mí ___ parece que Prince era un genio.", options:["me","yo"], answer:"me"},
+];
+const EXERCISES = EXERCISES_RAW.map(ex => ({...ex, options: shuffle(ex.options)}));
+const exerciseList = document.getElementById('exercise-list');
+EXERCISES.forEach((ex, i) => {
+  const el = document.createElement('div');
+  el.className = 'exercise';
+  el.dataset.answer = ex.answer;
+  el.innerHTML = `<p class="ex-sentence">${ex.sentence}</p><div class="ex-options">${ex.options.map(o => `<button class="opt-btn" data-value="${o}">${o}</button>`).join('')}</div>`;
+  exerciseList.appendChild(el);
+});
+exerciseList.addEventListener('click', (e) => {
+  const btn = e.target.closest('.opt-btn');
+  if(!btn) return;
+  const group = btn.closest('.exercise');
+  group.querySelectorAll('.opt-btn').forEach(b => b.classList.remove('picked'));
+  btn.classList.add('picked');
+});
+document.getElementById('check-ex-btn').addEventListener('click', () => {
+  let correct = 0;
+  exerciseList.querySelectorAll('.exercise').forEach(group => {
+    const picked = group.querySelector('.opt-btn.picked');
+    if(!picked) return;
+    const isCorrect = picked.dataset.value === group.dataset.answer;
+    markResult(picked, isCorrect);
+    if(isCorrect) correct++;
+  });
+  document.getElementById('ex-score').textContent = `${correct} / ${EXERCISES.length}`;
+});
+function resetExercises(){
+  exerciseList.querySelectorAll('.opt-btn').forEach(b => b.classList.remove('picked','correct','wrong'));
+  document.getElementById('ex-score').textContent = '';
+}
+document.getElementById('reset-ex-btn').addEventListener('click', resetExercises);
+
+/* ---------- 04 VERDADERO/FALSO ---------- */
+const VF_ITEMS = [
+  {text:"El objeto directo responde a la pregunta \"¿qué?\" o \"¿a quién?\" (sin preposición).", answer:true},
+  {text:"\"Le\" y \"les\" son pronombres de objeto directo.", answer:false},
+  {text:"Madonna publicó \"Like a Virgin\" en 1990.", answer:false},
+  {text:"Prince compuso e interpretó \"Purple Rain\".", answer:true},
+  {text:"\"La escucho\" usa un pronombre de objeto directo.", answer:true},
+  {text:"Duran Duran y Depeche Mode son grupos de rock industrial.", answer:false},
+  {text:"Robert Smith les mostraba las letras a la banda antes de grabar.", answer:true},
+  {text:"Nine Inch Nails llevó el sonido oscuro hacia el rock industrial en los 90.", answer:true},
+  {text:"\"Le\" y \"les\" son pronombres de objeto indirecto.", answer:true},
+  {text:"MTV empezó a emitir en 1981.", answer:true},
+  {text:"El texto dice que a los fans no les gustaba el estilo de Prince en el escenario.", answer:false},
+  {text:"El objeto indirecto siempre lleva la preposición \"a\" cuando se especifica la persona.", answer:true},
+];
+const vfList = document.getElementById('vf-list');
+VF_ITEMS.forEach((item, i) => {
+  const el = document.createElement('div');
+  el.className = 'vf-item';
+  el.dataset.answer = item.answer;
+  el.innerHTML = `<p>${item.text}</p><div class="vf-buttons"><button class="vf-btn" data-value="true">Verdadero</button><button class="vf-btn" data-value="false">Falso</button></div>`;
+  vfList.appendChild(el);
+});
+vfList.addEventListener('click', (e) => {
+  const btn = e.target.closest('.vf-btn');
+  if(!btn) return;
+  const group = btn.closest('.vf-item');
+  group.querySelectorAll('.vf-btn').forEach(b => b.classList.remove('picked'));
+  btn.classList.add('picked');
+});
+document.getElementById('check-vf-btn').addEventListener('click', () => {
+  let correct = 0;
+  vfList.querySelectorAll('.vf-item').forEach(group => {
+    const picked = group.querySelector('.vf-btn.picked');
+    if(!picked) return;
+    const isCorrect = String(picked.dataset.value === 'true') === group.dataset.answer;
+    markResult(picked, isCorrect);
+    if(isCorrect) correct++;
+  });
+  document.getElementById('vf-score').textContent = `${correct} / ${VF_ITEMS.length}`;
+});
+document.getElementById('reset-vf-btn').addEventListener('click', () => {
+  vfList.querySelectorAll('.vf-btn').forEach(b => b.classList.remove('picked','correct','wrong'));
+  document.getElementById('vf-score').textContent = '';
+});
+
+/* ---------- 05 ORDENAR PALABRAS ---------- */
+const ORDER_EXERCISES = [
+  {words:["Me","encanta","esta","canción","de","Prince"], answer:["Me","encanta","esta","canción","de","Prince"]},
+  {words:["La","escucho","todos","los","días"], answer:["La","escucho","todos","los","días"]},
+  {words:["A","mi","amigo","le","recomendé","el","álbum"], answer:["A","mi","amigo","le","recomendé","el","álbum"]},
+  {words:["A","mis","padres","les","gusta","el","new","wave"], answer:["A","mis","padres","les","gusta","el","new","wave"]},
+  {words:["El","álbum","lo","compré","el","año","pasado"], answer:["El","álbum","lo","compré","el","año","pasado"]},
+  {words:["Robert","Smith","les","mostraba","las","letras"], answer:["Robert","Smith","les","mostraba","las","letras"]},
+  {words:["A","ti","te","voy","a","enseñar","el","videoclip"], answer:["A","ti","te","voy","a","enseñar","el","videoclip"]},
+  {words:["Las","entradas","las","compramos","juntos"], answer:["Las","entradas","las","compramos","juntos"]},
+  {words:["Nos","fascina","el","sonido","de","los","80"], answer:["Nos","fascina","el","sonido","de","los","80"]},
+];
+const orderList = document.getElementById('order-list');
+function buildOrder(){
+  orderList.innerHTML = '';
+  ORDER_EXERCISES.forEach(ex => {
+    const el = document.createElement('div');
+    el.className = 'order-item';
+    el.innerHTML = `<div class="order-bank">${shuffle(ex.words).map(w => `<span class="order-chip" data-word="${w}">${w}</span>`).join('')}</div><div class="order-slot"></div><div class="order-feedback"></div>`;
+    const slot = el.querySelector('.order-slot');
+    const feedback = el.querySelector('.order-feedback');
+    el.querySelectorAll('.order-chip').forEach(chip => {
+      chip.addEventListener('click', () => {
+        if(chip.classList.contains('used')) return;
+        chip.classList.add('used');
+        const placed = document.createElement('span');
+        placed.className = 'order-chip used';
+        placed.textContent = chip.dataset.word;
+        placed.addEventListener('click', () => {
+          placed.remove();
+          chip.classList.remove('used');
+          el.classList.remove('correct','wrong');
+          feedback.textContent = '';
+        });
+        slot.appendChild(placed);
+        const current = [...slot.children].map(c => c.textContent);
+        if(current.length === ex.answer.length){
+          const ok = current.every((w, idx) => w === ex.answer[idx]);
+          markResult(slot, ok);
+          feedback.textContent = ok ? 'Correcto.' : `Prueba otra vez — respuesta: ${ex.answer.join(' ')}`;
+        }
+      });
+    });
+    orderList.appendChild(el);
+  });
+}
+buildOrder();
+document.getElementById('order-reset-btn').addEventListener('click', buildOrder);
+
+/* ---------- 06 EMPAREJAR COLUMNAS ---------- */
+const MATCH_PAIRS = [
+  {left:"el sintetizador", right:"instrumento electrónico típico del sonido new wave"},
+  {left:"la letra", right:"palabras cantadas de una canción"},
+  {left:"el escenario", right:"lugar donde actúa un artista en un concierto"},
+  {left:"la gira", right:"serie de conciertos de un artista en distintas ciudades"},
+  {left:"pegadizo/a", right:"melodía fácil de recordar y cantar"},
+  {left:"el/la fan", right:"persona que admira mucho a un artista"},
+  {left:"grabar", right:"registrar sonido para hacer un disco"},
+  {left:"el videoclip", right:"vídeo que acompaña a una canción"},
+  {left:"la portada", right:"imagen que va en la parte de fuera de un álbum"},
+  {left:"pinchar música", right:"poner canciones un DJ en una fiesta o club"},
+  {left:"melancólico/a", right:"que transmite tristeza suave o nostalgia"},
+  {left:"componer", right:"crear la música o la letra de una canción"},
+];
+const matchWrap = document.getElementById('match-wrap');
+let matchSelection = null, matchFound = 0;
+function buildMatch(){
+  matchWrap.innerHTML = '';
+  matchSelection = null; matchFound = 0;
+  document.getElementById('match-score').textContent = '';
+  const colL = document.createElement('div'); colL.className = 'match-col';
+  const colR = document.createElement('div'); colR.className = 'match-col';
+  MATCH_PAIRS.map(p => p.left).forEach(l => {
+    const b = document.createElement('button');
+    b.className = 'match-item'; b.textContent = l; b.dataset.side = 'l'; b.dataset.value = l;
+    colL.appendChild(b);
+  });
+  shuffle(MATCH_PAIRS.map(p => p.right)).forEach(r => {
+    const b = document.createElement('button');
+    b.className = 'match-item'; b.textContent = r; b.dataset.side = 'r'; b.dataset.value = r;
+    colR.appendChild(b);
+  });
+  matchWrap.append(colL, colR);
+  matchWrap.querySelectorAll('.match-item').forEach(item => {
+    item.addEventListener('click', () => {
+      if(item.classList.contains('linked')) return;
+      if(!matchSelection){ matchSelection = item; item.classList.add('selected'); return; }
+      if(matchSelection === item) return;
+      if(matchSelection.dataset.side === item.dataset.side){
+        matchSelection.classList.remove('selected');
+        matchSelection = item; item.classList.add('selected');
+        return;
+      }
+      const pair = MATCH_PAIRS.find(p =>
+        (p.left === matchSelection.dataset.value && p.right === item.dataset.value) ||
+        (p.left === item.dataset.value && p.right === matchSelection.dataset.value));
+      if(pair){
+        matchSelection.classList.remove('selected'); matchSelection.classList.add('linked');
+        item.classList.add('linked');
+        matchFound++;
+        if(matchFound === MATCH_PAIRS.length) document.getElementById('match-score').textContent = `¡Completo! ${matchFound} / ${MATCH_PAIRS.length}`;
+      } else {
+        item.classList.add('wrong-flash');
+        const prev = matchSelection;
+        setTimeout(() => { item.classList.remove('wrong-flash'); prev.classList.remove('selected'); }, 450);
+      }
+      matchSelection = null;
+    });
+  });
+}
+buildMatch();
+document.getElementById('match-reset-btn').addEventListener('click', buildMatch);
+
+/* ---------- 07 RELLENAR HUECOS ---------- */
+const FILL_TEXT = [
+  {before:"Esta canción de Madonna ", gap:"me", after:" encanta muchísimo. "},
+  {before:"", gap:"La", after:" escucho todos los días en casa. "},
+  {before:"A mi hermana ", gap:"le", after:" fascina Prince. "},
+  {before:"El álbum de The Cure, ", gap:"lo", after:" compré ayer. "},
+  {before:"A mis amigos ", gap:"les", after:" encanta el new wave. "},
+  {before:"A mi novio ", gap:"le", after:" enseñé este videoclip. "},
+];
+const fillBlock = document.getElementById('fill-block');
+function buildFill(){
+  fillBlock.innerHTML = FILL_TEXT.map((seg, i) =>
+    `${seg.before}<input type="text" data-answer="${seg.gap}">${seg.after}`).join('');
+}
+buildFill();
+document.getElementById('check-fill-btn').addEventListener('click', () => {
+  let correct = 0;
+  const inputs = fillBlock.querySelectorAll('input[type="text"]');
+  inputs.forEach(input => {
+    const isCorrect = normalizeText(input.value) === normalizeText(input.dataset.answer);
+    markResult(input, isCorrect);
+    if(isCorrect) correct++;
+  });
+  document.getElementById('fill-score').textContent = `${correct} / ${inputs.length}`;
+});
+document.getElementById('reset-fill-btn').addEventListener('click', () => {
+  buildFill();
+  document.getElementById('fill-score').textContent = '';
+});
+
+/* ---------- 08 TABLA: PRONOMBRE + VERBO ---------- */
+const CONJ_ROWS = [
+  {pronoun:"Escucho la canción → ___ escucho", answer:"la"},
+  {pronoun:"Compré el álbum → ___ compré", answer:"lo"},
+  {pronoun:"Recomiendo un álbum a mi amigo → ___ recomiendo un álbum", answer:"le"},
+  {pronoun:"Enseñé el videoclip a mi hermana → ___ enseñé el videoclip", answer:"le"},
+  {pronoun:"Gusta la música a nosotros → ___ gusta", answer:"nos"},
+  {pronoun:"Vi las entradas → ___ vi", answer:"las"},
+  {pronoun:"Fascina el sonido a ti → ___ fascina", answer:"te"},
+  {pronoun:"Encanta esta canción a mí → ___ encanta", answer:"me"},
+  {pronoun:"Mostré las letras a la banda → ___ mostré las letras", answer:"les"},
+  {pronoun:"Gusta el concierto a ellos → ___ gusta", answer:"les"},
+  {pronoun:"Grabé los discos → ___ grabé", answer:"los"},
+  {pronoun:"Di el álbum a mi amigo → ___ di el álbum", answer:"le"},
+];
+const conjTbody = document.getElementById('conj-tbody');
+function buildConj(){
+  conjTbody.innerHTML = CONJ_ROWS.map(r =>
+    `<tr><td class="pronoun">${r.pronoun}</td><td><input type="text" data-answer="${r.answer}"></td></tr>`).join('');
+}
+buildConj();
+document.getElementById('check-conj-btn').addEventListener('click', () => {
+  let correct = 0;
+  conjTbody.querySelectorAll('input[type="text"]').forEach(input => {
+    const isCorrect = normalizeText(input.value) === normalizeText(input.dataset.answer);
+    markResult(input, isCorrect);
+    if(isCorrect) correct++;
+  });
+  document.getElementById('conj-score').textContent = `${correct} / ${CONJ_ROWS.length}`;
+});
+document.getElementById('reset-conj-btn').addEventListener('click', () => {
+  buildConj();
+  document.getElementById('conj-score').textContent = '';
+});
+
+/* ---------- 10 TAREA FINAL: contador de palabras ---------- */
+const finalTask = document.querySelector('.final-task');
+const taskCount = document.querySelector('.task-count');
+finalTask.addEventListener('input', () => {
+  const words = finalTask.value.trim().split(/\s+/).filter(Boolean).length;
+  taskCount.textContent = `${words} palabra${words === 1 ? '' : 's'} escrita${words === 1 ? '' : 's'}`;
+});
+</script>
+
+</body>
+</html>

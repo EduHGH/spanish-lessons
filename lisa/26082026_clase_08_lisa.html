@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clase 8 · Objeto directo, lo/la/los/las — Lisa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+
+/* ╔══════════════════════════════════════════════════════════════╗
+   ║  ESCOLAR — sistema de diseño para clases de español online   ║
+   ║  Clase 8 · L2 Lista de invitados · "Objeto directo"            ║
+   ╚══════════════════════════════════════════════════════════════╝ */
+
+:root{
+  --paper:        #FBF7EE;
+  --paper-raised: #FFFFFF;
+  --paper-alt:    #F3ECDA;
+  --ink:          #23291F;
+  --ink-soft:     #565F52;
+  --ink-faint:    #8B9184;
+  --line:         rgba(35,41,31,0.12);
+  --line-strong:  rgba(35,41,31,0.22);
+
+  --b1:      #2F6FED;  --b1-soft: #EAF1FE;  --b1-line: #C6D9FC;
+  --b2:      #2E9E6B;  --b2-soft: #E9F6EF;  --b2-line: #BEE6D3;
+  --family:  #B5502E;  --family-soft: #FBEBE3; --family-line: #EFC9B4;
+  --violet:  #7B4FC9;  --violet-soft: #F1EBFB; --violet-line: #D9C8F0;
+
+  --f-display: 'Fraunces', Georgia, serif;
+  --f-body:    'IBM Plex Sans', system-ui, sans-serif;
+  --f-data:    'IBM Plex Mono', monospace;
+
+  --r-sm: 8px;
+  --r-md: 14px;
+  --r-lg: 20px;
+
+  --shadow-1: 0 1px 2px rgba(35,41,31,0.05), 0 1px 8px rgba(35,41,31,0.04);
+}
+
+*{ box-sizing:border-box; }
+body{
+  margin:0;
+  background: var(--paper);
+  background-image: radial-gradient(circle at 1px 1px, var(--line) 1px, transparent 0);
+  background-size: 22px 22px;
+  color: var(--ink);
+  font-family: var(--f-body);
+  line-height:1.6;
+}
+::selection{ background: var(--b1-soft); }
+
+/* ---------- HEADER ---------- */
+header{ padding:44px 24px 28px; max-width:760px; margin:0 auto; }
+.eyebrow{
+  font-family: var(--f-data); font-size:12px; letter-spacing:.14em;
+  text-transform:uppercase; color: var(--b1); margin:0 0 10px;
+  display:flex; align-items:center; gap:10px;
+}
+.eyebrow .dot{ width:6px; height:6px; border-radius:50%; background: var(--b1); }
+h1{
+  font-family: var(--f-display); font-weight:600;
+  font-size:clamp(30px,5.6vw,46px); line-height:1.08;
+  margin:0 0 14px; letter-spacing:-.01em;
+}
+h1 em{ font-style:italic; color: var(--b1); }
+.lede{ font-size:16px; color: var(--ink-soft); max-width:56ch; margin:0; }
+
+.meta-row{
+  display:flex; flex-wrap:wrap; gap:20px; margin-top:26px;
+  font-family: var(--f-data); font-size:12px; color: var(--ink-faint);
+}
+.meta-row strong{
+  display:block; color: var(--ink); font-size:14.5px; font-weight:500;
+  font-family: var(--f-display); margin-top:3px;
+}
+
+/* ---------- STRUCTURE STRIP ---------- */
+.structure-strip{
+  display:grid; grid-template-columns:repeat(4,1fr); gap:2px; margin-top:24px;
+  border-radius: var(--r-md); overflow:hidden; border:1px solid var(--line);
+}
+.structure-cell{ background: var(--paper-raised); padding:12px 14px; }
+.structure-cell .s-icon{ font-size:16px; }
+.structure-cell .s-time{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin:4px 0 2px; }
+.structure-cell .s-label{ font-family: var(--f-body); font-weight:600; font-size:12.5px; color: var(--ink); }
+
+/* ---------- SECTIONS ---------- */
+main{ max-width:760px; margin:0 auto; padding:8px 24px 100px; }
+
+section.block{ margin-bottom:52px; }
+.block-head{ display:flex; align-items:baseline; gap:12px; margin-bottom:18px; }
+.time-tag{
+  font-family: var(--f-data); font-size:11px; color: var(--ink-faint);
+  background: var(--paper-alt); padding:3px 10px; border-radius:999px; margin-left:auto; flex:none;
+}
+.block-num{
+  font-family: var(--f-data); font-size:12px; color:#fff; background: var(--b1);
+  width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  flex:none;
+}
+.block-head h2{
+  font-family: var(--f-display); font-weight:500; font-style:italic; font-size:22px; margin:0;
+}
+.phase-label{
+  font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.08em;
+  color: var(--ink-faint); margin:0 0 8px; display:flex; align-items:center; gap:8px;
+}
+.phase-label .phase-icon{ font-size:14px; }
+
+.panel{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-lg);
+  box-shadow: var(--shadow-1); padding:26px 28px;
+}
+
+/* ---------- PRONOUN GRID ---------- */
+.pronoun-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:12px; margin-top:4px; }
+.pronoun-card{
+  background: var(--paper-raised); border:1px solid var(--b1-line); border-radius: var(--r-md);
+  padding:16px 18px; text-align:center;
+}
+.pronoun-word{ font-family: var(--f-display); font-weight:600; font-size:26px; color: var(--b1); margin:0 0 4px; }
+.pronoun-use{ font-family: var(--f-data); font-size:11.5px; color: var(--ink-faint); text-transform:uppercase; letter-spacing:.04em; }
+.pronoun-example{ font-size:13.5px; color: var(--ink-soft); margin-top:8px; }
+
+.note{
+  margin-top:18px; padding:14px 16px; background: var(--b1-soft); border:1px solid var(--b1-line);
+  border-radius: var(--r-md); font-size:14px; color: var(--ink-soft);
+}
+.note strong{ color: var(--ink); }
+
+/* ---------- VOCAB CARDS ---------- */
+.vocab-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:12px; }
+.vocab-card{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:14px 16px; cursor:pointer; perspective:600px; min-height:78px;
+  display:flex; flex-direction:column; justify-content:center; transition: border-color .15s ease;
+}
+.vocab-card:hover{ border-color: var(--b1-line); }
+.vocab-card:focus-visible{ outline:2px solid var(--b1); outline-offset:2px; }
+.vocab-front{ font-family: var(--f-body); font-weight:600; font-size:15px; }
+.vocab-back{ display:none; font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); margin-top:6px; }
+.vocab-card.flipped .vocab-back{ display:block; }
+.vocab-card.flipped{ background: var(--b1-soft); border-color: var(--b1-line); }
+.vocab-hint{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin:10px 2px 16px; }
+
+/* ---------- SUBSTITUTION EXERCISE ---------- */
+.exercise{ margin-bottom:22px; }
+.exercise:last-of-type{ margin-bottom:0; }
+.ex-original{ font-size:15.5px; margin-bottom:4px; color: var(--ink); }
+.ex-original .obj-word{ color: var(--b1); font-weight:600; }
+.ex-arrow{ font-family: var(--f-data); font-size:12px; color: var(--ink-faint); margin:6px 0; }
+.ex-options{ display:flex; flex-wrap:wrap; gap:8px; }
+.opt-btn{
+  font-family: var(--f-body); font-size:14px; background: var(--paper-raised);
+  border:1.5px solid var(--line); color: var(--ink); padding:7px 16px; border-radius:999px;
+  cursor:pointer; transition: all .15s ease;
+}
+.opt-btn:hover{ border-color: var(--ink-faint); }
+.opt-btn.picked{ background: var(--b1-soft); border-color: var(--b1); color: var(--b1); }
+.opt-btn.correct{ background: var(--b2-soft); border-color: var(--b2); color: var(--b2); }
+.opt-btn.wrong{ background: var(--family-soft); border-color: var(--family); color: var(--family); }
+.opt-btn:disabled{ cursor:default; }
+
+.check-bar{
+  display:flex; align-items:center; justify-content:space-between; gap:16px;
+  margin-top:22px; padding-top:18px; border-top:1px dashed var(--line);
+}
+.btn-primary{
+  font-family: var(--f-body); font-weight:600; font-size:14px; color:#fff; background: var(--b1);
+  border:none; padding:11px 22px; border-radius:999px; cursor:pointer; transition: transform .1s ease;
+}
+.btn-primary:hover{ transform: translateY(-1px); }
+#score-text{ font-family: var(--f-data); font-size:13px; color: var(--ink-faint); }
+.btn-ghost{
+  font-family: var(--f-body); font-weight:600; font-size:13px; color: var(--ink-soft); background:none;
+  border:1.5px solid var(--line); padding:9px 18px; border-radius:999px; cursor:pointer;
+}
+.btn-ghost:hover{ border-color: var(--ink-faint); }
+.ex-divider{
+  display:flex; align-items:center; gap:10px; margin:20px 0 16px;
+  font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.06em;
+  color: var(--ink-faint);
+}
+.ex-divider::before, .ex-divider::after{ content:""; flex:1; height:1px; background: var(--line); }
+.ex-divider.en-clase{ color: var(--b1); }
+.ex-divider.en-clase::before, .ex-divider.en-clase::after{ background: var(--b1-line); }
+
+/* ---------- REWRITE (para casa preview) ---------- */
+.rewrite-panel{ background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md); padding:16px 18px; }
+.rewrite-item{ margin-bottom:16px; }
+.rewrite-item:last-child{ margin-bottom:0; }
+.rewrite-prompt{ font-size:14.5px; color: var(--ink); margin:0 0 8px; }
+.rewrite-input{
+  width:100%; font-family: var(--f-body); font-size:14.5px; color: var(--ink);
+  background:#fff; border:1px solid var(--b1-line); border-radius: var(--r-sm);
+  padding:10px 12px; resize:vertical; min-height:40px;
+}
+.rewrite-input:focus{ outline:none; border-color: var(--b1); }
+
+/* ---------- FINAL TASK ---------- */
+.task-panel{ background: var(--family-soft); border:1px solid var(--family-line); border-radius: var(--r-lg); padding:26px 28px; }
+.task-panel .block-num{ background: var(--family); }
+textarea#final-task{
+  width:100%; min-height:130px; font-family: var(--f-body); font-size:15px; color: var(--ink);
+  background: var(--paper-raised); border:1px solid var(--family-line); border-radius: var(--r-md);
+  padding:14px 16px; resize:vertical; margin-top:14px;
+}
+textarea#final-task:focus{ outline:none; border-color: var(--family); }
+.task-footer{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:12px; flex-wrap:wrap; }
+#task-count{ font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); }
+.btn-secondary{
+  font-family: var(--f-body); font-weight:600; font-size:13.5px; color: var(--family); background:none;
+  border:1.5px solid var(--family-line); padding:9px 18px; border-radius:999px; cursor:pointer;
+}
+.saved-flag{ font-family: var(--f-data); font-size:12px; color: var(--b2); opacity:0; transition: opacity .3s ease; }
+.saved-flag.show{ opacity:1; }
+
+/* ---------- TÉCNICA ANTI-BLOQUEO: conectores automáticos ---------- */
+.technique-panel{ background: var(--violet-soft); border:1px solid var(--violet-line); border-radius: var(--r-lg); padding:26px 28px; }
+.technique-panel .block-num{ background: var(--violet); }
+.connector-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:12px; margin:16px 0 18px; }
+.connector-group{
+  background: var(--paper-raised); border:1px solid var(--violet-line); border-radius: var(--r-md); padding:14px 16px;
+}
+.connector-group-title{ font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.05em; color: var(--violet); margin:0 0 8px; }
+.connector-list{ display:flex; flex-wrap:wrap; gap:6px; }
+.connector-chip{
+  font-family: var(--f-display); font-weight:600; font-size:14px; color: var(--ink);
+  background: var(--violet-soft); border:1px solid var(--violet-line); padding:5px 12px; border-radius:999px;
+}
+.technique-practice{
+  margin-top:4px; padding:16px 18px; background: var(--paper-raised); border:1px solid var(--violet-line);
+  border-radius: var(--r-md);
+}
+.technique-practice p{ margin:0 0 10px; font-size:14px; color: var(--ink-soft); }
+.technique-practice textarea{
+  width:100%; font-family: var(--f-body); font-size:14.5px; color: var(--ink);
+  background:#fff; border:1px solid var(--violet-line); border-radius: var(--r-sm);
+  padding:10px 12px; resize:vertical; min-height:70px;
+}
+.technique-practice textarea:focus{ outline:none; border-color: var(--violet); }
+
+/* ---------- FOOTER NAV ---------- */
+footer{
+  max-width:760px; margin:0 auto; padding:0 24px 60px; display:flex;
+  justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;
+  font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint);
+}
+footer a{ color: var(--b1); text-decoration:none; }
+footer a:hover{ text-decoration:underline; }
+
+@media (max-width:600px){
+  header{ padding:34px 18px 22px; }
+  main{ padding:8px 18px 90px; }
+  .panel, .task-panel, .technique-panel{ padding:20px 18px; }
+  .pronoun-grid{ grid-template-columns:1fr 1fr; gap:10px; }
+  .pronoun-word{ font-size:22px; }
+}
+@media (prefers-reduced-motion: reduce){ *{ transition:none !important; } }
+</style>
+</head>
+<body>
+
+<header>
+  <p class="eyebrow"><span class="dot"></span>Clase 8 de 36 · L2 Lista de invitados</p>
+  <h1>Lo veo, <em>la llevo</em></h1>
+  <p class="lede">Hoy dejamos de repetir el sustantivo cada vez. En vez de "veo a Alex" tres veces en la misma conversación, decimos "lo veo" — así habla cualquier persona nativa, de forma natural y sin pensarlo. Empezamos por el objeto directo: lo, la, los, las. Y seguimos con las frases salvavidas: hoy tocan los conectores que enlazan una idea con la siguiente sin cortar el ritmo.</p>
+  <div class="meta-row">
+    <div>Duración<strong>50 min</strong></div>
+    <div>Gramática<strong>Pronombres de objeto directo</strong></div>
+    <div>Nivel<strong>B1</strong></div>
+  </div>
+  <div class="structure-strip">
+    <div class="structure-cell"><span class="s-icon">🔁</span><p class="s-time">10 min</p><p class="s-label">Los cuatro pronombres</p></div>
+    <div class="structure-cell"><span class="s-icon">📇</span><p class="s-time">5 min</p><p class="s-label">Vocabulario</p></div>
+    <div class="structure-cell"><span class="s-icon">✏️</span><p class="s-time">12 min</p><p class="s-label">Sustituye el objeto</p></div>
+    <div class="structure-cell"><span class="s-icon">🔗</span><p class="s-time">6 min</p><p class="s-label">Conectores automáticos</p></div>
+  </div>
+</header>
+
+<main>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">1</span><h2>Los cuatro pronombres</h2><span class="time-tag">10 min</span></div>
+    <div class="panel">
+      <p style="margin:0 0 16px; font-size:14.5px; color:var(--ink-soft);">El objeto directo es lo que recibe la acción del verbo — a quién o qué ves, llevas, o preparas. Sustituirlo por un pronombre evita repetir el sustantivo una y otra vez.</p>
+      <div class="pronoun-grid">
+        <div class="pronoun-card">
+          <p class="pronoun-word">lo</p>
+          <p class="pronoun-use">masc. singular</p>
+          <p class="pronoun-example">Veo a Alex → <strong>Lo</strong> veo.</p>
+        </div>
+        <div class="pronoun-card">
+          <p class="pronoun-word">la</p>
+          <p class="pronoun-use">fem. singular</p>
+          <p class="pronoun-example">Llevo la correa → <strong>La</strong> llevo.</p>
+        </div>
+        <div class="pronoun-card">
+          <p class="pronoun-word">los</p>
+          <p class="pronoun-use">masc. plural</p>
+          <p class="pronoun-example">Preparo los papeles → <strong>Los</strong> preparo.</p>
+        </div>
+        <div class="pronoun-card">
+          <p class="pronoun-word">las</p>
+          <p class="pronoun-use">fem. plural</p>
+          <p class="pronoun-example">Organizo las citas → <strong>Las</strong> organizo.</p>
+        </div>
+      </div>
+      <div class="note"><strong>La idea de hoy:</strong> el pronombre va normalmente <em>antes</em> del verbo conjugado ("lo veo", no "veo lo"). El género y número del pronombre coinciden con el sustantivo que sustituye, no con quien habla — "la correa" es femenino aunque seas tú quien la lleva. Este pronombre ya ahorra una repetición; en el bloque 5 verás cómo un conector hace lo mismo entre frases enteras, sin dejar huecos de silencio.</div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">2</span><h2>Vocabulario</h2><span class="time-tag">5 min</span></div>
+    <p class="vocab-hint">Toca cada tarjeta para ver un ejemplo con tu vida real.</p>
+    <div class="vocab-grid" id="vocab-grid"></div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">3</span><h2>Sustituye el objeto</h2><span class="time-tag">12 min</span></div>
+    <div class="panel">
+      <p class="vocab-hint" style="margin-bottom:14px;">Elige el pronombre correcto para sustituir la parte en azul. Las primeras 8 se hacen en voz alta en clase; el resto queda como repaso para casa.</p>
+      <div id="exercises"></div>
+      <div class="check-bar">
+        <div style="display:flex; gap:10px;">
+          <button class="btn-primary" id="check-btn">Comprobar respuestas</button>
+          <button class="btn-ghost" id="reset-btn">Reiniciar</button>
+        </div>
+        <span id="score-text"></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">4</span><h2>Reescribe la rutina de Alex</h2><span class="time-tag">8 min</span></div>
+    <div class="rewrite-panel">
+      <p class="vocab-hint" style="margin-bottom:14px;">Reescribe cada frase sustituyendo el objeto directo por lo, la, los o las. No hay corrección automática — se revisa en voz alta en clase.</p>
+      <p style="margin:0 0 14px; font-size:13px; color:var(--ink-soft);">Guarda estas frases sueltas: en el bloque 5 las vas a encadenar entre sí con conectores, en vez de decirlas una por una con pausas.</p>
+      <div class="rewrite-item">
+        <p class="rewrite-prompt">1. Paseo a Alex todas las mañanas.</p>
+        <textarea class="rewrite-input" rows="1" placeholder="Lo paseo todas las mañanas."></textarea>
+      </div>
+      <div class="rewrite-item">
+        <p class="rewrite-prompt">2. Llevo la correa nueva al parque.</p>
+        <textarea class="rewrite-input" rows="1"></textarea>
+      </div>
+      <div class="rewrite-item">
+        <p class="rewrite-prompt">3. Preparo los documentos de la boda por la noche.</p>
+        <textarea class="rewrite-input" rows="1"></textarea>
+      </div>
+      <div class="rewrite-item">
+        <p class="rewrite-prompt">4. Organizo las citas con los proveedores los lunes.</p>
+        <textarea class="rewrite-input" rows="1"></textarea>
+      </div>
+      <div class="rewrite-item">
+        <p class="rewrite-prompt">5. Llamo al veterinario cuando Alex está enfermo.</p>
+        <textarea class="rewrite-input" rows="1"></textarea>
+      </div>
+      <div class="rewrite-item">
+        <p class="rewrite-prompt">6. Chris cuida a Alex cuando yo tengo un evento.</p>
+        <textarea class="rewrite-input" rows="1"></textarea>
+      </div>
+    </div>
+  </section>
+
+  <section class="block technique-panel">
+    <p class="phase-label" style="color:var(--violet);"><span class="phase-icon">🔗</span>Técnica específica contra los bloqueos · Semana 3, sesión 8</p>
+    <div class="block-head"><span class="block-num">5</span><h2 style="color:var(--violet);">Conectores automáticos</h2><span class="time-tag">6 min</span></div>
+    <p style="margin:0 0 4px; font-size:14.5px; color:var(--ink-soft);">Un conector no aporta información nueva, pero mantiene el hilo mientras decides qué viene después — igual que "lo" evita repetir "Alex", un conector evita el silencio entre una frase y la siguiente.</p>
+    <div class="connector-grid">
+      <div class="connector-group">
+        <p class="connector-group-title">Para añadir</p>
+        <div class="connector-list">
+          <span class="connector-chip">Además</span>
+          <span class="connector-chip">Y también</span>
+          <span class="connector-chip">Encima</span>
+        </div>
+      </div>
+      <div class="connector-group">
+        <p class="connector-group-title">Para contrastar</p>
+        <div class="connector-list">
+          <span class="connector-chip">Pero</span>
+          <span class="connector-chip">Aunque</span>
+          <span class="connector-chip">Eso sí</span>
+        </div>
+      </div>
+      <div class="connector-group">
+        <p class="connector-group-title">Para explicar</p>
+        <div class="connector-list">
+          <span class="connector-chip">Porque</span>
+          <span class="connector-chip">Es que</span>
+          <span class="connector-chip">Por eso</span>
+        </div>
+      </div>
+      <div class="connector-group">
+        <p class="connector-group-title">Para ordenar</p>
+        <div class="connector-list">
+          <span class="connector-chip">Primero</span>
+          <span class="connector-chip">Luego</span>
+          <span class="connector-chip">Al final</span>
+        </div>
+      </div>
+    </div>
+    <div class="technique-practice">
+      <p><strong>Practica ahora:</strong> describe la rutina de Alex en 3-4 frases seguidas, encadenándolas con conectores de la lista y usando lo/la/los/las cuando puedas, sin pararte entre frase y frase.</p>
+      <textarea placeholder="Primero lo saco a pasear... luego le doy de comer... por eso..."></textarea>
+    </div>
+    <div class="note" style="margin-top:16px;"><strong>La idea de hoy:</strong> encadenar frases con conectores hace que suenes fluida aunque cada frase individual sea sencilla. "Lo veo, pero está lejos, así que..." dice más y suena mejor que tres frases cortas sueltas con silencios entre medio.</div>
+  </section>
+
+  <section class="block task-panel">
+    <div class="block-head"><span class="block-num">6</span><h2 style="color:var(--family)">Tu tarea</h2><span class="time-tag">5 min</span></div>
+    <p style="margin:0; font-size:15px; color:var(--ink-soft);">Reescribe <strong>6 frases</strong> sobre tu semana sustituyendo el objeto por lo/la/los/las — pueden ser sobre Alex, el trabajo o cualquier cosa de tu rutina real. Escribe primero la frase completa y después la versión con el pronombre. Une al menos dos de las frases con un conector de hoy.</p>
+    <textarea id="final-task" placeholder="1. Frase completa: ...&#10;   Con pronombre: ...&#10;2. ..."></textarea>
+    <div class="task-footer">
+      <span id="task-count">0 palabras escritas</span>
+      <div style="display:flex; gap:10px; align-items:center;">
+        <span class="saved-flag" id="saved-flag">Guardado ✓</span>
+        <button class="btn-secondary" id="save-btn">Guardar tarea</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <span>Clase 8 · Objeto directo, lo/la/los/las</span>
+  <span>Próxima clase → Clase 9: Objeto indirecto, le/les</span>
+</footer>
+
+<script>
+/* ---------- VOCAB ---------- */
+const VOCAB = [
+  {front:"el veterinario", back:"Llevo a Alex al veterinario cada seis meses para su revisión."},
+  {front:"la recepcionista", back:"La recepcionista de la veterinaria siempre es muy amable."},
+  {front:"la cita", back:"Tengo una cita con el veterinario el jueves a las cinco."},
+  {front:"el paseo", back:"El paseo de la mañana es siempre el más largo del día."},
+  {front:"la vacuna", back:"A Alex le toca la vacuna anual este mes."},
+  {front:"la revisión", back:"La revisión de Alex salió muy bien, está sano."},
+];
+
+const grid = document.getElementById('vocab-grid');
+VOCAB.forEach(v=>{
+  const card = document.createElement('div');
+  card.className = 'vocab-card';
+  card.setAttribute('role', 'button');
+  card.setAttribute('tabindex', '0');
+  card.setAttribute('aria-pressed', 'false');
+  card.setAttribute('aria-label', `${v.front}. Pulsa para ver un ejemplo.`);
+  card.innerHTML = `<div class="vocab-front">${v.front}</div><div class="vocab-back">${v.back}</div>`;
+  const toggle = ()=>{
+    const flipped = card.classList.toggle('flipped');
+    card.setAttribute('aria-pressed', String(flipped));
+  };
+  card.addEventListener('click', toggle);
+  card.addEventListener('keydown', (e)=>{
+    if(e.key === 'Enter' || e.key === ' '){
+      e.preventDefault();
+      toggle();
+    }
+  });
+  grid.appendChild(card);
+});
+
+/* ---------- EXERCISES (substitution) ---------- */
+const EXERCISES = [
+  {"sentence":"Veo a <span class=\"obj-word\">Alex</span> desde la ventana.","options":["Lo","La","Los"],"answer":"Lo"},
+  {"sentence":"Llevo <span class=\"obj-word\">la correa</span> siempre en el bolso.","options":["La","Lo","Las"],"answer":"La"},
+  {"sentence":"Preparo <span class=\"obj-word\">los documentos</span> antes de cada boda.","options":["Los","Las","Lo"],"answer":"Los"},
+  {"sentence":"Organizo <span class=\"obj-word\">las citas</span> los lunes por la mañana.","options":["Las","Los","La"],"answer":"Las"},
+  {"sentence":"Llamo a <span class=\"obj-word\">la recepcionista</span> para confirmar la hora.","options":["La","Lo","Las"],"answer":"La"},
+  {"sentence":"Chris cuida a <span class=\"obj-word\">Alex</span> los fines de semana.","options":["Lo","La","Los"],"answer":"Lo"},
+  {"sentence":"Compro <span class=\"obj-word\">el pienso</span> en la tienda del barrio.","options":["Lo","La","Los"],"answer":"Lo"},
+  {"sentence":"Reviso <span class=\"obj-word\">el itinerario</span> de la boda cada noche.","options":["Lo","La","Los"],"answer":"Lo"},
+  {"sentence":"Conozco <span class=\"obj-word\">a los proveedores</span> desde hace años.","options":["Los","Las","Lo"],"answer":"Los"},
+  {"sentence":"El vecino saluda a <span class=\"obj-word\">Alex</span> cada mañana.","options":["lo","la","los"],"answer":"lo"},
+  {"sentence":"Preparo <span class=\"obj-word\">la comida de Alex</span> antes de salir.","options":["La","Lo","Las"],"answer":"La"},
+  {"sentence":"El veterinario examina <span class=\"obj-word\">las orejas</span> de Alex.","options":["las","los","la"],"answer":"las"},
+  {"sentence":"Escribo <span class=\"obj-word\">el mensaje</span> a la clienta esta tarde.","options":["Lo","La","Los"],"answer":"Lo"},
+  {"sentence":"Vemos <span class=\"obj-word\">a la médica</span> el mismo día que al dentista.","options":["la","lo","las"],"answer":"la"},
+  {"sentence":"Guardo <span class=\"obj-word\">las facturas</span> en una carpeta especial.","options":["las","los","la"],"answer":"las"},
+  {"sentence":"Chris lleva <span class=\"obj-word\">las maletas</span> hasta el coche.","options":["las","los","la"],"answer":"las"},
+  {"sentence":"Ella busca <span class=\"obj-word\">al florista</span> por internet.","options":["lo","la","los"],"answer":"lo"},
+  {"sentence":"Preparamos <span class=\"obj-word\">los regalos</span> para los invitados.","options":["los","las","lo"],"answer":"los"}
+]
+;
+
+const exWrap = document.getElementById('exercises');
+EXERCISES.forEach((ex, i)=>{
+  if(i === 0){
+    const divider = document.createElement('div');
+    divider.className = 'ex-divider en-clase';
+    divider.textContent = 'en clase · ítems 1–8';
+    exWrap.appendChild(divider);
+  }
+  if(i === 8){
+    const divider = document.createElement('div');
+    divider.className = 'ex-divider';
+    divider.textContent = 'para casa · repaso opcional';
+    exWrap.appendChild(divider);
+  }
+  const el = document.createElement('div');
+  el.className = 'exercise';
+  el.dataset.answer = ex.answer;
+  el.innerHTML = `
+    <p class="ex-original">${i+1}. ${ex.sentence}</p>
+    <p class="ex-arrow">→ ¿qué pronombre sustituye la parte en azul?</p>
+    <div class="ex-options">
+      ${ex.options.map(o=>`<button class="opt-btn" data-value="${o}">${o}</button>`).join('')}
+    </div>
+  `;
+  exWrap.appendChild(el);
+
+  el.querySelectorAll('.opt-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      el.querySelectorAll('.opt-btn').forEach(b=>b.classList.remove('picked'));
+      btn.classList.add('picked');
+    });
+  });
+});
+
+document.getElementById('check-btn').addEventListener('click', ()=>{
+  let correct = 0;
+  document.querySelectorAll('.exercise').forEach(el=>{
+    const answer = el.dataset.answer;
+    const picked = el.querySelector('.opt-btn.picked');
+    el.querySelectorAll('.opt-btn').forEach(b=>{
+      b.disabled = true;
+      if(b.dataset.value === answer) b.classList.add('correct');
+      else if(b === picked) b.classList.add('wrong');
+    });
+    if(picked && picked.dataset.value === answer) correct++;
+  });
+  document.getElementById('score-text').textContent = `${correct} / ${EXERCISES.length} correctas`;
+});
+
+document.getElementById('reset-btn').addEventListener('click', ()=>{
+  document.querySelectorAll('.exercise').forEach(el=>{
+    el.querySelectorAll('.opt-btn').forEach(b=>{
+      b.disabled = false;
+      b.classList.remove('picked','correct','wrong');
+    });
+  });
+  document.getElementById('score-text').textContent = '';
+});
+
+/* ---------- REWRITE (autosave) ---------- */
+const STORAGE_KEY_REWRITE = 'lisa-clase08-reescritura';
+const rewriteInputs = document.querySelectorAll('.rewrite-input');
+
+async function cargarReescritura(){
+  if(!window.storage) return;
+  try{
+    const res = await window.storage.get(STORAGE_KEY_REWRITE);
+    if(res && typeof res.value === 'string'){
+      const values = JSON.parse(res.value);
+      rewriteInputs.forEach((input, i)=>{ if(values[i]) input.value = values[i]; });
+    }
+  }catch(e){
+    // sin datos previos
+  }
+}
+function guardarReescritura(){
+  if(!window.storage) return;
+  const values = Array.from(rewriteInputs).map(i=>i.value);
+  window.storage.set(STORAGE_KEY_REWRITE, JSON.stringify(values)).catch(()=>{ /* fallo silencioso */ });
+}
+rewriteInputs.forEach(input=>{
+  input.addEventListener('input', ()=>{
+    clearTimeout(input._saveTimer);
+    input._saveTimer = setTimeout(guardarReescritura, 600);
+  });
+});
+cargarReescritura();
+
+/* ---------- TÉCNICA: práctica de conectores (autosave) ---------- */
+const STORAGE_KEY_TECHNIQUE = 'lisa-clase08-tecnica';
+const techniqueArea = document.querySelector('.technique-practice textarea');
+
+async function cargarTecnica(){
+  if (!window.storage || !techniqueArea) return;
+  try{
+    const res = await window.storage.get(STORAGE_KEY_TECHNIQUE);
+    if (res && typeof res.value === 'string') techniqueArea.value = res.value;
+  }catch(e){
+    // sin práctica previa
+  }
+}
+if (techniqueArea){
+  techniqueArea.addEventListener('input', ()=>{
+    clearTimeout(techniqueArea._saveTimer);
+    techniqueArea._saveTimer = setTimeout(()=>{
+      if (window.storage) window.storage.set(STORAGE_KEY_TECHNIQUE, techniqueArea.value).catch(()=>{ /* fallo silencioso */ });
+    }, 600);
+  });
+  cargarTecnica();
+}
+
+/* ---------- FINAL TASK ---------- */
+const STORAGE_KEY = 'lisa-clase08-tarea';
+const taskArea = document.getElementById('final-task');
+const taskCount = document.getElementById('task-count');
+const savedFlag = document.getElementById('saved-flag');
+
+async function cargarTarea(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(STORAGE_KEY);
+    if (res && typeof res.value === 'string') taskArea.value = res.value;
+  }catch(e){
+    // Clave inexistente todavía: no hay tarea previa, se queda en blanco.
+  }
+  updateCount();
+}
+
+function updateCount(){
+  const words = taskArea.value.trim().split(/\s+/).filter(Boolean).length;
+  taskCount.textContent = `${words} palabra${words===1?'':'s'} escrita${words===1?'':'s'}`;
+}
+taskArea.addEventListener('input', updateCount);
+updateCount();
+cargarTarea();
+
+document.getElementById('save-btn').addEventListener('click', async ()=>{
+  if (!window.storage){
+    savedFlag.textContent = 'Guardado no disponible aquí';
+    savedFlag.classList.add('show');
+    setTimeout(()=>{ savedFlag.classList.remove('show'); savedFlag.textContent = 'Guardado ✓'; }, 2200);
+    return;
+  }
+  try{
+    const ok = await window.storage.set(STORAGE_KEY, taskArea.value);
+    savedFlag.textContent = ok ? 'Guardado ✓' : 'No se pudo guardar';
+  }catch(e){
+    savedFlag.textContent = 'No se pudo guardar';
+  }
+  savedFlag.classList.add('show');
+  setTimeout(()=>{ savedFlag.classList.remove('show'); savedFlag.textContent = 'Guardado ✓'; }, 1800);
+});
+</script>
+
+</body>
+</html>

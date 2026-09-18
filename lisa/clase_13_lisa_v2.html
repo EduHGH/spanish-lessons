@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clase 13 · PARA — propósito, destino, destinatario — Lisa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Space+Mono:wght@400;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+
+/* ╔══════════════════════════════════════════════════════════════╗
+   ║  ESCOLAR × NOTHING — sistema de diseño para clases de         ║
+   ║  español online. Papel cálido + roles semánticos de ESCOLAR,  ║
+   ║  leídos a través del lenguaje visual de Nothing OS 5.         ║
+   ║  Clase 13 · L3 El local y el catering · "PARA" (ampliada)     ║
+   ╚══════════════════════════════════════════════════════════════╝ */
+
+:root{
+  --paper:        #F4EFE4;
+  --paper-deep:   #EAE3D2;
+  --glass:        rgba(255,255,255,0.55);
+  --glass-strong: rgba(255,255,255,0.75);
+  --ink:          #23291F;
+  --ink-soft:     #565F52;
+  --ink-faint:    #8B9184;
+  --line:         rgba(35,41,31,0.10);
+  --line-strong:  rgba(35,41,31,0.20);
+
+  --b1:      #2F6FED;  --b1-soft: rgba(47,111,237,0.10);  --b1-line: rgba(47,111,237,0.30);
+  --b2:      #2E9E6B;  --b2-soft: rgba(46,158,107,0.10);  --b2-line: rgba(46,158,107,0.30);
+  --b3:      #DB8A2E;  --b3-soft: rgba(219,138,46,0.10);  --b3-line: rgba(219,138,46,0.30);
+  --family:  #B5502E;  --family-soft: rgba(181,80,46,0.10); --family-line: rgba(181,80,46,0.30);
+  --violet:  #7B4FC9;  --violet-soft: rgba(123,79,201,0.10); --violet-line: rgba(123,79,201,0.30);
+
+  --f-display: 'Fraunces', Georgia, serif;
+  --f-body:    'IBM Plex Sans', system-ui, sans-serif;
+  --f-data:    'Space Mono', ui-monospace, monospace;
+
+  --r-sm: 8px;
+  --r-md: 16px;
+  --r-lg: 24px;
+
+  --blur: 22px;
+  --shadow-1: 0 8px 32px rgba(35,41,31,0.06), 0 1px 2px rgba(35,41,31,0.05);
+}
+
+*{ box-sizing:border-box; }
+html{ scroll-behavior:smooth; }
+body{
+  margin:0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--f-body);
+  line-height:1.6;
+  position:relative;
+  min-height:100vh;
+}
+
+body::before{
+  content:"";
+  position: fixed; inset:0;
+  background-image: radial-gradient(circle, rgba(35,41,31,0.09) 1.5px, transparent 1.5px);
+  background-size: 28px 28px;
+  pointer-events:none; z-index:0;
+}
+body::after{
+  content:"";
+  position: fixed; inset:0;
+  background: radial-gradient(ellipse 70% 50% at 50% -10%, var(--paper-deep), transparent 60%);
+  pointer-events:none; z-index:0;
+}
+
+:root{ --mesh-color: var(--b3); }
+.mesh-bg{
+  content:""; position: fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden;
+}
+.mesh-bg::before, .mesh-bg::after, .mesh-bg > .mesh-blob{
+  content:""; position:absolute; filter: blur(46px);
+  background: radial-gradient(circle, var(--mesh-color), transparent 70%);
+  animation: mesh-drift 22s ease-in-out infinite alternate;
+}
+.mesh-bg::before{ width:55%; height:75%; left:-12%; top:-12%; opacity:0.16; animation-delay:0s; }
+.mesh-bg::after{ width:60%; height:80%; right:-15%; top:-8%; opacity:0.13; animation-delay:-7s; }
+.mesh-bg > .mesh-blob{ width:45%; height:55%; left:22%; bottom:-15%; opacity:0.11; animation-delay:-14s; }
+@keyframes mesh-drift{
+  0%   { transform: translate(0,0) scale(1); }
+  50%  { transform: translate(3%,-2%) scale(1.05); }
+  100% { transform: translate(-2%,3%) scale(0.98); }
+}
+@media (prefers-reduced-motion: reduce){
+  .mesh-bg::before, .mesh-bg::after, .mesh-bg > .mesh-blob{ animation: none; }
+}
+
+::selection{ background: var(--b3-soft); }
+
+header, main, footer{ position:relative; z-index:1; }
+
+/* ---------- HEADER ---------- */
+header{ padding:44px 24px 28px; max-width:760px; margin:0 auto; }
+.eyebrow{
+  font-family: var(--f-data); font-size:12px; letter-spacing:.14em;
+  text-transform:uppercase; color: var(--b3); margin:0 0 10px;
+  display:flex; align-items:center; gap:10px;
+}
+.eyebrow .dot{ width:6px; height:6px; border-radius:50%; background: var(--b3); }
+h1{
+  font-family: var(--f-display); font-weight:600;
+  font-size:clamp(30px,5.6vw,46px); line-height:1.08;
+  margin:0 0 14px; letter-spacing:-.01em;
+}
+h1 em{ font-style:italic; color: var(--b3); }
+.lede{ font-size:16px; color: var(--ink-soft); max-width:56ch; margin:0; }
+
+.meta-row{
+  display:flex; flex-wrap:wrap; gap:20px; margin-top:26px;
+  font-family: var(--f-data); font-size:12px; color: var(--ink-faint);
+}
+.meta-row strong{
+  display:block; color: var(--ink); font-size:14.5px; font-weight:500;
+  font-family: var(--f-display); margin-top:3px;
+}
+
+/* ---------- SECTIONS ---------- */
+main{ max-width:760px; margin:0 auto; padding:8px 24px 100px; }
+
+section.block{ margin-bottom:52px; }
+.block-head{ display:flex; align-items:baseline; gap:12px; margin-bottom:18px; }
+.time-tag{
+  font-family: var(--f-data); font-size:11px; color: var(--ink-faint);
+  background: var(--glass-strong); border:1px solid rgba(255,255,255,0.6); padding:3px 10px; border-radius:999px; margin-left:auto; flex:none;
+}
+.block-num{
+  font-family: var(--f-data); font-size:12px; color:#fff; background: var(--b3);
+  width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  flex:none;
+}
+.block-head h2{
+  font-family: var(--f-display); font-weight:500; font-style:italic; font-size:22px; margin:0;
+}
+.phase-label{
+  font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.08em;
+  color: var(--ink-faint); margin:0 0 8px; display:flex; align-items:center; gap:8px;
+}
+.phase-label .phase-icon{ font-size:14px; }
+
+.panel{
+  background: var(--glass);
+  backdrop-filter: blur(var(--blur)); -webkit-backdrop-filter: blur(var(--blur));
+  border:1px solid rgba(255,255,255,0.6); border-radius: var(--r-lg);
+  box-shadow: var(--shadow-1); padding:26px 28px;
+}
+
+.note{
+  margin-top:18px; padding:14px 16px;
+  background: linear-gradient(var(--b3-soft),var(--b3-soft)), var(--glass);
+  backdrop-filter: blur(12px);
+  border:1px solid var(--b3-line);
+  border-radius: var(--r-md); font-size:14px; color: var(--ink-soft);
+}
+.note strong{ color: var(--ink); }
+
+/* ---------- INTRO PANEL ---------- */
+.mic-panel{ background: var(--ink); color: var(--paper); border-radius: var(--r-lg); padding:24px 26px; display:flex; gap:20px; align-items:center; margin-bottom:8px; }
+.mic-icon{ flex:none; width:56px; height:56px; border-radius:50%; background: rgba(255,255,255,0.1); display:flex; align-items:center; justify-content:center; font-size:26px; }
+.mic-body{ flex:1; }
+.mic-title{ font-family: var(--f-display); font-weight:600; font-size:19px; margin:0 0 4px; color:#fff; }
+.mic-desc{ font-size:14px; color: rgba(251,247,238,0.75); margin:0; }
+
+/* ---------- VOCAB CARDS ---------- */
+.vocab-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(210px,1fr)); gap:12px; }
+.vocab-card{
+  background: var(--glass-strong); backdrop-filter: blur(14px);
+  border:1px solid rgba(255,255,255,0.6); border-radius: var(--r-md);
+  padding:16px 18px; cursor:pointer; transition: all .2s ease; position:relative; min-height:74px;
+}
+.vocab-card:hover{ border-color: var(--b3-line); transform: translateY(-1px); }
+.vocab-front{ font-family: var(--f-display); font-weight:500; font-size:16px; color: var(--ink); }
+.vocab-back{
+  font-size:13px; color: var(--ink-soft); margin-top:8px; display:none;
+  border-top:1px dashed var(--line); padding-top:8px;
+}
+.vocab-card.flipped .vocab-back{ display:block; }
+.vocab-card.flipped{ background: var(--b3-soft); border-color: var(--b3-line); }
+.vocab-card::after{
+  content:"toca para ver ejemplo"; position:absolute; bottom:8px; right:14px;
+  font-family: var(--f-data); font-size:10px; color: var(--ink-faint); opacity:.7;
+}
+.vocab-card.flipped::after{ content:""; }
+
+/* ---------- USOS DE PARA (routine-track reutilizado) ---------- */
+.routine-track{ display:flex; flex-direction:column; gap:14px; }
+.routine-step{
+  background: var(--glass-strong); backdrop-filter: blur(14px);
+  border:1px solid var(--b3-line); border-radius: var(--r-md); padding:14px 16px;
+}
+.routine-connector{
+  font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.06em;
+  color: var(--b3); margin:0 0 6px;
+}
+.routine-text{ font-size:14.5px; color: var(--ink); margin:0; }
+.routine-text strong{ color: var(--b3); }
+
+/* ---------- CIRCUNLOQUIOS / question-grid ---------- */
+.question-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:12px; }
+.question-card{
+  display:flex; gap:12px; align-items:flex-start;
+  background: var(--glass-strong); backdrop-filter: blur(14px);
+  border:1px solid rgba(255,255,255,0.6); border-radius: var(--r-md); padding:14px 16px;
+}
+.question-icon{ font-size:20px; flex:none; }
+.question-phrase{ font-family: var(--f-display); font-weight:500; font-size:15px; color: var(--ink); margin:0 0 4px; }
+.question-context{ font-size:13px; color: var(--ink-soft); margin:0; }
+.question-context strong{ color: var(--ink); }
+
+/* ---------- EXERCISES ---------- */
+.gap{
+  display:inline-block; min-width:64px; text-align:center; border-bottom:2px dotted var(--ink-faint);
+  color: var(--ink-faint); font-family: var(--f-data);
+}
+.exercise{ padding:16px 0; border-bottom:1px solid var(--line); }
+.exercise:last-child{ border-bottom:none; }
+.ex-sentence{ font-size:15px; margin-bottom:10px; }
+.ex-options{ display:flex; flex-wrap:wrap; gap:8px; }
+.opt-btn{
+  font-family: var(--f-body); font-size:14px; background: var(--glass-strong);
+  backdrop-filter: blur(10px);
+  border:1.5px solid var(--line-strong); color: var(--ink); padding:7px 16px; border-radius:999px;
+  cursor:pointer; transition: all .15s ease;
+}
+.opt-btn:hover{ border-color: var(--ink-faint); }
+.opt-btn.picked{ background: var(--b3-soft); border-color: var(--b3); color: var(--b3); }
+.opt-btn.correct{ background: var(--b2-soft); border-color: var(--b2); color: var(--b2); }
+.opt-btn.wrong{ background: var(--family-soft); border-color: var(--family); color: var(--family); }
+.opt-btn:disabled{ cursor:default; }
+
+.check-bar{
+  display:flex; align-items:center; justify-content:space-between; gap:16px;
+  margin-top:22px; padding-top:18px; border-top:1px dashed var(--line);
+}
+.btn-primary{
+  font-family: var(--f-data); font-weight:700; font-size:12.5px; text-transform:uppercase; letter-spacing:.05em;
+  color: var(--paper); background: var(--ink);
+  border:none; padding:12px 24px; border-radius:999px; cursor:pointer; transition: transform .1s ease;
+}
+.btn-primary:hover{ transform: translateY(-1px); }
+#score-text{ font-family: var(--f-data); font-size:13px; color: var(--ink-faint); }
+.btn-ghost{
+  font-family: var(--f-body); font-weight:600; font-size:13px; color: var(--ink-soft); background: rgba(255,255,255,0.4);
+  border:1.5px solid var(--line-strong); padding:9px 18px; border-radius:999px; cursor:pointer;
+}
+.btn-ghost:hover{ border-color: var(--ink-faint); }
+.ex-divider{
+  display:flex; align-items:center; gap:10px; margin:20px 0 16px;
+  font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.06em;
+  color: var(--ink-faint);
+}
+.ex-divider::before, .ex-divider::after{ content:""; flex:1; height:1px; background: var(--line); }
+.ex-divider.en-clase{ color: var(--b3); }
+.ex-divider.en-clase::before, .ex-divider.en-clase::after{ background: var(--b3-line); }
+
+/* ---------- ROLEPLAY: reunión con el local ---------- */
+.roleplay-panel{
+  background: linear-gradient(var(--b1-soft),var(--b1-soft)), var(--glass);
+  backdrop-filter: blur(var(--blur));
+  border:1px solid var(--b1-line); border-radius: var(--r-lg); padding:26px 28px;
+}
+.roleplay-panel .block-num{ background: var(--b1); }
+.scene-setup{
+  display:flex; gap:14px; align-items:flex-start; background: var(--glass-strong);
+  backdrop-filter: blur(14px);
+  border:1px solid var(--b1-line); border-radius: var(--r-md); padding:14px 16px; margin-bottom:20px;
+}
+.scene-icon{ font-size:22px; flex:none; }
+.scene-text{ font-size:14px; color: var(--ink-soft); }
+.scene-text strong{ color: var(--ink); }
+
+.branch-wrap{ display:flex; flex-direction:column; gap:14px; }
+.branch-prompt{
+  background: var(--glass-strong);
+  backdrop-filter: blur(14px);
+  border:1px solid var(--b1-line); border-radius: var(--r-md);
+  padding:14px 16px;
+}
+.branch-prompt .line-name{ font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.05em; color: var(--ink-faint); margin:0 0 6px; }
+.branch-prompt .line-bubble{ font-size:14.5px; color: var(--ink); }
+.branch-options{ display:flex; flex-direction:column; gap:8px; margin-top:10px; }
+.branch-textarea{
+  width:100%; font-family: var(--f-body); font-size:14.5px; color: var(--ink);
+  background:rgba(255,255,255,0.7); border:1px solid var(--b1-line); border-radius: var(--r-sm);
+  padding:10px 12px; resize:vertical; min-height:44px;
+}
+.branch-textarea:focus{ outline:none; border-color: var(--b1); }
+.branch-hint{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin-top:5px; }
+
+.roleplay-tip{
+  margin-top:22px; padding:14px 16px; background: var(--glass-strong); backdrop-filter: blur(14px); border:1px solid var(--b1-line);
+  border-radius: var(--r-md); font-size:13.5px; color: var(--ink-soft);
+}
+.roleplay-tip strong{ color: var(--ink); }
+
+.imprevisto-tag{
+  display:inline-flex; align-items:center; gap:6px; font-family: var(--f-data); font-size:11px;
+  text-transform:uppercase; letter-spacing:.05em; color: var(--family); background: var(--family-soft);
+  border:1px solid var(--family-line); padding:4px 10px; border-radius:999px; margin-bottom:14px;
+}
+
+/* ---------- CIRCUNLOQUIO PRACTICE (técnica) ---------- */
+.technique-panel{
+  background: linear-gradient(var(--violet-soft),var(--violet-soft)), var(--glass);
+  backdrop-filter: blur(var(--blur));
+  border:1px solid var(--violet-line); border-radius: var(--r-lg); padding:26px 28px;
+}
+.technique-panel .block-num{ background: var(--violet); }
+.quickdesc-list{ display:flex; flex-direction:column; gap:10px; margin:14px 0 18px; }
+.quickdesc-item{
+  display:flex; justify-content:space-between; align-items:center; gap:14px;
+  background: var(--glass-strong); backdrop-filter: blur(14px);
+  border:1px solid var(--violet-line); border-radius: var(--r-md); padding:12px 16px;
+}
+.quickdesc-q{ font-size:14px; color: var(--ink); }
+.quickdesc-timer{
+  font-family: var(--f-data); font-size:11px; color: var(--violet); background: var(--violet-soft);
+  border:1px solid var(--violet-line); padding:3px 10px; border-radius:999px; flex:none;
+}
+.technique-practice textarea{
+  width:100%; min-height:110px; font-family: var(--f-body); font-size:14.5px; color: var(--ink);
+  background: var(--glass-strong); backdrop-filter: blur(12px); border:1px solid var(--violet-line); border-radius: var(--r-md);
+  padding:14px 16px; resize:vertical;
+}
+.technique-practice textarea:focus{ outline:none; border-color: var(--violet); }
+
+/* ---------- LECTURA / DIÁLOGO (reading panel) ---------- */
+.reading-panel{
+  background: linear-gradient(var(--b2-soft),var(--b2-soft)), var(--glass);
+  backdrop-filter: blur(var(--blur));
+  border:1px solid var(--b2-line); border-radius: var(--r-lg); padding:26px 28px;
+}
+.reading-panel .block-num{ background: var(--b2); }
+.dialogue-line{ display:flex; gap:12px; margin-bottom:14px; align-items:flex-start; }
+.dialogue-line:last-child{ margin-bottom:0; }
+.dialogue-speaker{
+  flex:none; font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.04em;
+  color:#fff; background: var(--b2); padding:4px 10px; border-radius:999px; margin-top:2px;
+}
+.dialogue-speaker.alt{ background: var(--ink-faint); }
+.dialogue-text{ font-size:14.5px; color: var(--ink); flex:1; }
+.dialogue-text strong{ color: var(--b2); }
+.comp-questions{ margin-top:20px; display:flex; flex-direction:column; gap:12px; }
+.comp-q{ }
+.comp-q label{ display:block; font-family: var(--f-display); font-weight:500; font-size:14.5px; color: var(--ink); margin-bottom:6px; }
+.comp-q textarea{
+  width:100%; min-height:52px; font-family: var(--f-body); font-size:14px; color: var(--ink);
+  background: var(--glass-strong); backdrop-filter: blur(12px); border:1px solid var(--b2-line); border-radius: var(--r-sm);
+  padding:10px 14px; resize:vertical;
+}
+.comp-q textarea:focus{ outline:none; border-color: var(--b2); }
+
+/* ---------- FINAL TASK ---------- */
+.task-panel{
+  background: linear-gradient(var(--family-soft),var(--family-soft)), var(--glass);
+  backdrop-filter: blur(var(--blur));
+  border:1px solid var(--family-line); border-radius: var(--r-lg); padding:26px 28px;
+}
+.task-panel .block-num{ background: var(--family); }
+textarea#final-task{
+  width:100%; min-height:130px; font-family: var(--f-body); font-size:15px; color: var(--ink);
+  background: var(--glass-strong); backdrop-filter: blur(12px); border:1px solid var(--family-line); border-radius: var(--r-md);
+  padding:14px 16px; resize:vertical; margin-top:14px;
+}
+textarea#final-task:focus{ outline:none; border-color: var(--family); }
+.task-footer{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:12px; flex-wrap:wrap; }
+#task-count{ font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); }
+.saved-flag{
+  font-family: var(--f-data); font-size:11.5px; color: var(--b2); opacity:0; transition: opacity .3s ease;
+}
+.saved-flag.show{ opacity:1; }
+.btn-secondary{
+  font-family: var(--f-data); font-weight:700; font-size:12px; text-transform:uppercase; letter-spacing:.05em;
+  color:#fff; background: var(--family); border:none; padding:10px 20px; border-radius:999px; cursor:pointer;
+}
+
+/* ---------- PREP QUESTIONS TASK ---------- */
+.prep-questions{ display:flex; flex-direction:column; gap:10px; margin-top:14px; }
+.prep-q-row{ display:flex; align-items:center; gap:10px; }
+.prep-q-num{
+  font-family: var(--f-data); font-size:12px; color:#fff; background: var(--family);
+  width:22px; height:22px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex:none;
+}
+.prep-q-input{
+  flex:1; font-family: var(--f-body); font-size:14.5px; color: var(--ink);
+  background: var(--glass-strong); backdrop-filter: blur(10px); border:1px solid var(--family-line);
+  border-radius: var(--r-sm); padding:9px 12px;
+}
+.prep-q-input:focus{ outline:none; border-color: var(--family); }
+
+/* ---------- FOOTER ---------- */
+footer{
+  max-width:760px; margin:0 auto; padding:0 24px 60px; display:flex;
+  justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;
+  font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint);
+}
+footer a{ color: var(--b3); text-decoration:none; }
+footer a:hover{ text-decoration:underline; }
+
+@media (max-width:600px){
+  header{ padding:34px 18px 22px; }
+  main{ padding:8px 18px 90px; }
+  .panel, .task-panel, .technique-panel, .roleplay-panel, .reading-panel{ padding:20px 18px; }
+  .mic-panel{ flex-direction:column; text-align:center; }
+  .quickdesc-item{ flex-direction:column; align-items:flex-start; gap:6px; }
+}
+@media (prefers-reduced-motion: reduce){ *{ transition:none !important; } }
+</style>
+</head>
+<body>
+<div class="mesh-bg">
+  <div class="mesh-blob"></div>
+</div>
+
+<header>
+  <p class="eyebrow"><span class="dot"></span>Clase 13 de 36 · L3 El local y el catering</p>
+  <h1>PARA — propósito, <em>destino</em></h1>
+  <p class="lede">Empieza un módulo nuevo y una línea nueva: "El local y el catering". Hoy dejas atrás el ritmo cerrado de Alex y el vecino para entrar en algo más abstracto — cómo explicar el <em>para qué</em> de las cosas en tu trabajo como directora de bodas. Vas a aprender los usos clave de PARA, leer un diálogo real de visita a un local, hacer un roleplay completo con un imprevisto y, sobre todo, entrenar el circunloquio: rodear una palabra que no recuerdas en vez de quedarte callada.</p>
+  <div class="meta-row">
+    <div>Duración<strong>150 min</strong></div>
+    <div>Gramática<strong>PARA: finalidad, destinatario, plazo</strong></div>
+    <div>Nivel<strong>B1</strong></div>
+  </div>
+</header>
+
+<main>
+
+  <section class="block">
+    <div class="mic-panel">
+      <div class="mic-icon">🎯</div>
+      <div class="mic-body">
+        <p class="mic-title">Nombrar el "para qué"</p>
+        <p class="mic-desc">Como directora de bodas, casi todo lo que dices tiene un propósito detrás: esta flor es para la mesa principal, este documento es para el catering, esta llamada es para confirmar el local. PARA es la palabra que conecta una acción con su finalidad. Hoy la vas a automatizar con ejemplos de tu propio trabajo, vas a leer y comentar una visita real a un local, vas a hacer un roleplay completo con un proveedor y vas a entrenar qué hacer cuando te falte una palabra: en vez de bloquearte, rodearla con un circunloquio.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">1</span><h2>Vocabulario del local y el catering</h2><span class="time-tag">10 min</span></div>
+    <div class="vocab-grid" id="vocab-grid"></div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">2</span><h2>Los cinco usos clave de PARA</h2><span class="time-tag">14 min</span></div>
+    <div class="panel">
+      <p style="margin:0 0 18px; font-size:14.5px; color:var(--ink-soft);">PARA aparece constantemente cuando organizas un evento: para quién es algo, para qué sirve, para cuándo tiene que estar listo. Fíjate en el patrón — casi siempre responde a la pregunta "¿para qué?" o "¿para quién?".</p>
+      <div class="routine-track">
+        <div class="routine-step">
+          <p class="routine-connector">Finalidad</p>
+          <p class="routine-text">Reservo el jardín <strong>para</strong> celebrar la ceremonia al aire libre. Estas sillas son <strong>para</strong> decorar el pasillo de entrada.</p>
+        </div>
+        <div class="routine-step">
+          <p class="routine-connector">Destinatario</p>
+          <p class="routine-text">Este ramo es <strong>para</strong> la madrina. La lista de alérgenos es <strong>para</strong> el catering, no <strong>para</strong> los novios.</p>
+        </div>
+        <div class="routine-step">
+          <p class="routine-connector">Plazo / fecha límite</p>
+          <p class="routine-text">Necesito el presupuesto cerrado <strong>para</strong> el viernes. El local tiene que estar decorado <strong>para</strong> las seis de la tarde.</p>
+        </div>
+        <div class="routine-step">
+          <p class="routine-connector">Opinión / punto de vista</p>
+          <p class="routine-text"><strong>Para</strong> mí, este local es demasiado pequeño <strong>para</strong> ciento cincuenta invitados.</p>
+        </div>
+        <div class="routine-step">
+          <p class="routine-connector">Dirección / destino</p>
+          <p class="routine-text">Salimos <strong>para</strong> el local a las diez, antes de que lleguen los del catering.</p>
+        </div>
+        <div class="routine-step">
+          <p class="routine-connector">Comparación implícita</p>
+          <p class="routine-text"><strong>Para</strong> ser un local tan nuevo, tiene muy buena acústica. <strong>Para</strong> lo que cuesta, el catering incluye poco.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">3</span><h2>PARA en el trabajo de directora de bodas</h2><span class="time-tag">10 min</span></div>
+    <p style="margin:0 0 16px; font-size:14.5px; color:var(--ink-soft);">Estas son frases de tu día a día real — reconoce qué uso de PARA aparece en cada una antes de practicar tú misma.</p>
+    <div class="question-grid">
+      <div class="question-card">
+        <span class="question-icon">🌸</span>
+        <div class="question-body">
+          <p class="question-phrase">Estas flores son para el centro de mesa.</p>
+          <p class="question-context"><strong>Uso:</strong> destinatario/finalidad — para qué o para quién se usa algo.</p>
+        </div>
+      </div>
+      <div class="question-card">
+        <span class="question-icon">📅</span>
+        <div class="question-body">
+          <p class="question-phrase">Necesito confirmar el catering para el jueves.</p>
+          <p class="question-context"><strong>Uso:</strong> plazo — una fecha límite concreta.</p>
+        </div>
+      </div>
+      <div class="question-card">
+        <span class="question-icon">🏛️</span>
+        <div class="question-body">
+          <p class="question-phrase">Para una boda de verano, este jardín es perfecto.</p>
+          <p class="question-context"><strong>Uso:</strong> opinión/contexto — valorar algo según una circunstancia.</p>
+        </div>
+      </div>
+      <div class="question-card">
+        <span class="question-icon">🚗</span>
+        <div class="question-body">
+          <p class="question-phrase">Salgo para el local en diez minutos.</p>
+          <p class="question-context"><strong>Uso:</strong> dirección — hacia dónde te mueves.</p>
+        </div>
+      </div>
+      <div class="question-card">
+        <span class="question-icon">💰</span>
+        <div class="question-body">
+          <p class="question-phrase">Para lo que cuesta, esperaba más servicio.</p>
+          <p class="question-context"><strong>Uso:</strong> comparación implícita — algo frente a lo esperado.</p>
+        </div>
+      </div>
+      <div class="question-card">
+        <span class="question-icon">👰</span>
+        <div class="question-body">
+          <p class="question-phrase">Este vestido es para la boda de septiembre.</p>
+          <p class="question-context"><strong>Uso:</strong> finalidad — para qué evento concreto es algo.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block reading-panel">
+    <div class="block-head"><span class="block-num">4</span><h2 style="color:var(--b2);">Lectura: visitando un local nuevo</h2><span class="time-tag">14 min</span></div>
+    <p style="margin:0 0 16px; font-size:14.5px; color:var(--ink-soft);">Lee este diálogo en voz alta con tu profesor, alternando los papeles. Fíjate en cada PARA — hay ocho en total.</p>
+    <div class="dialogue-line">
+      <span class="dialogue-speaker">Gestor</span>
+      <p class="dialogue-text">Buenos días, ¿es usted la persona que llamó <strong>para</strong> ver el jardín de las bodas?</p>
+    </div>
+    <div class="dialogue-line">
+      <span class="dialogue-speaker alt">Lisa</span>
+      <p class="dialogue-text">Sí, exacto. Estoy buscando un espacio <strong>para</strong> una boda de ciento veinte invitados, <strong>para</strong> finales de junio.</p>
+    </div>
+    <div class="dialogue-line">
+      <span class="dialogue-speaker">Gestor</span>
+      <p class="dialogue-text">Perfecto. El jardín tiene capacidad <strong>para</strong> hasta ciento cincuenta personas sentadas. ¿Es <strong>para</strong> usted o <strong>para</strong> un cliente?</p>
+    </div>
+    <div class="dialogue-line">
+      <span class="dialogue-speaker alt">Lisa</span>
+      <p class="dialogue-text">Es <strong>para</strong> un cliente — soy directora de bodas. <strong>Para</strong> mí es importante ver también la sala interior, por si llueve.</p>
+    </div>
+    <div class="dialogue-line">
+      <span class="dialogue-speaker">Gestor</span>
+      <p class="dialogue-text">Claro, se la enseño ahora mismo. Necesitaríamos el contrato firmado <strong>para</strong> finales de mes, si les interesa la fecha.</p>
+    </div>
+    <div class="comp-questions">
+      <div class="comp-q">
+        <label>1. ¿Qué usos de PARA reconoces en el diálogo? Escribe al menos tres.</label>
+        <textarea placeholder="Finalidad: ...&#10;Plazo: ...&#10;Opinión: ..."></textarea>
+      </div>
+      <div class="comp-q">
+        <label>2. Ahora tú: si tuvieras que describir el local de tus sueños para una boda, ¿qué le pedirías al gestor? Usa PARA al menos dos veces.</label>
+        <textarea placeholder="Necesitaría un espacio para..."></textarea>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">5</span><h2>Practica con PARA</h2><span class="time-tag">16 min</span></div>
+    <div class="panel">
+      <p style="margin:0 0 16px; font-size:14.5px; color:var(--ink-soft);">Elige el uso correcto de PARA en cada frase sobre tu trabajo. Los primeros veinte se corrigen en clase; el resto es repaso opcional para casa.</p>
+      <div id="exercises"></div>
+      <div class="check-bar">
+        <div style="display:flex; gap:10px;">
+          <button class="btn-primary" id="check-btn">Comprobar respuestas</button>
+          <button class="btn-ghost" id="reset-btn">Reiniciar</button>
+        </div>
+        <span id="score-text"></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="block roleplay-panel">
+    <div class="block-head"><span class="block-num">6</span><h2>Reunión con el gestor del local</h2><span class="time-tag">22 min</span></div>
+    <div class="scene-setup">
+      <span class="scene-icon">🏛️</span>
+      <p class="scene-text"><strong>Escena:</strong> visitas un local nuevo para una boda de verano. El gestor te enseña el espacio, pero surgen dudas sobre capacidad, fechas y presupuesto que no estaban previstas. Aquí tienes el arranque y algunas líneas sueltas; el resto lo improvisas en voz alta con tu profesor haciendo de gestor.</p>
+    </div>
+    <div class="branch-wrap">
+      <div class="branch-prompt">
+        <p class="line-name">Gestor (te recibe en la entrada)</p>
+        <p class="line-bubble">Bienvenida, pase por aquí. ¿Para qué fecha están buscando el espacio?</p>
+        <div class="branch-options">
+          <textarea class="branch-textarea" rows="2" placeholder="Responde con la fecha y el motivo, usando PARA..."></textarea>
+          <p class="branch-hint">Usa PARA para dar la fecha y para explicar el tipo de evento.</p>
+        </div>
+      </div>
+      <div class="branch-prompt">
+        <p class="line-name">Gestor</p>
+        <p class="line-bubble">(te pregunta el número aproximado de invitados y si necesitáis zona cubierta — improvisa según lo que diga tu profesor)</p>
+        <div class="branch-options">
+          <textarea class="branch-textarea" rows="2" placeholder="Responde de forma natural..."></textarea>
+          <p class="branch-hint">Aquí no hay pista fija — responde con naturalidad a lo que pregunte tu profesor en el momento.</p>
+        </div>
+      </div>
+      <div class="branch-prompt">
+        <span class="imprevisto-tag">⚠️ imprevisto</span>
+        <p class="line-name">Gestor</p>
+        <p class="line-bubble">Ah, pues... para esa fecha ya tenemos otra reserva confirmada por la mañana. Podríamos ofrecerle la tarde, o buscar otra fecha cercana. ¿Qué prefiere?</p>
+        <div class="branch-options">
+          <textarea class="branch-textarea" rows="2" placeholder="Decide y responde usando PARA para explicar tu preferencia..."></textarea>
+          <p class="branch-hint">Explica para qué necesitas la fecha concreta o si te sirve la alternativa.</p>
+        </div>
+      </div>
+      <div class="branch-prompt">
+        <p class="line-name">Gestor</p>
+        <p class="line-bubble">Perfecto. Y hablando del presupuesto — ¿tienen ya una cifra en mente para el alquiler del espacio?</p>
+        <div class="branch-options">
+          <textarea class="branch-textarea" rows="2" placeholder="Da una cifra aproximada o pide más información, usando PARA..."></textarea>
+          <p class="branch-hint">Puedes usar "para lo que..." para comparar precio y servicio.</p>
+        </div>
+      </div>
+      <div class="branch-prompt">
+        <span class="imprevisto-tag">⚠️ imprevisto</span>
+        <p class="line-name">Gestor</p>
+        <p class="line-bubble">Espere, tengo que comprobar una cosa... parece que el jardín estará en obras esa semana. ¿Le interesaría ver la sala interior como alternativa?</p>
+        <div class="branch-options">
+          <textarea class="branch-textarea" rows="2" placeholder="Decide qué opción prefieres y explica para qué te serviría..."></textarea>
+          <p class="branch-hint">Usa PARA para explicar qué necesitas del espacio (para bailar, para las mesas, etc.).</p>
+        </div>
+      </div>
+      <div class="branch-prompt">
+        <p class="line-name">Gestor</p>
+        <p class="line-bubble">Entendido. Le voy a preparar un documento con todo esto para que se lo enseñe a sus clientes.</p>
+        <div class="branch-options">
+          <textarea class="branch-textarea" rows="2" placeholder="Agradece y confirma los siguientes pasos, usando PARA..."></textarea>
+          <p class="branch-hint">Confirma para cuándo necesitas el documento y da las gracias.</p>
+        </div>
+      </div>
+      <div class="branch-prompt">
+        <p class="line-name">Gestor</p>
+        <p class="line-bubble">Perfecto, pues quedamos así. ¡Que tenga buen día!</p>
+        <div class="branch-options">
+          <textarea class="branch-textarea" rows="2" placeholder="Despídete..."></textarea>
+          <p class="branch-hint">Cierra la conversación con una despedida natural.</p>
+        </div>
+      </div>
+    </div>
+    <div class="roleplay-tip"><strong>En clase:</strong> tu profesor decide en el momento qué imprevisto añadir — puede ser uno de los de arriba u otro distinto. El objetivo es seguir usando PARA con naturalidad aunque cambie el plan sobre la marcha.</div>
+  </section>
+
+  <section class="block technique-panel">
+    <p class="phase-label" style="color:var(--violet);"><span class="phase-icon">📖</span>Técnica específica contra los bloqueos · Semana 5, sesión 13</p>
+    <div class="block-head"><span class="block-num">7</span><h2 style="color:var(--violet);">Circunloquios</h2><span class="time-tag">18 min</span></div>
+    <p style="margin:0 0 4px; font-size:14.5px; color:var(--ink-soft);">Un circunloquio es rodear una palabra que no recuerdas, describiéndola con las palabras que sí tienes. En vez de pararte a buscar "mantel" en tu cabeza, dices "la tela que se pone en la mesa" y sigues hablando. Se usa mucho con PARA: "esto es para... la cosa que va encima de la mesa, para no manchar".</p>
+    <div class="quickdesc-list">
+      <div class="quickdesc-item">
+        <span class="quickdesc-q">Describe "el mantel" sin decir la palabra, usando PARA (para qué sirve).</span>
+        <span class="quickdesc-timer">20 seg</span>
+      </div>
+      <div class="quickdesc-item">
+        <span class="quickdesc-q">Describe "la carpa" (para bodas al aire libre) sin decir la palabra.</span>
+        <span class="quickdesc-timer">20 seg</span>
+      </div>
+      <div class="quickdesc-item">
+        <span class="quickdesc-q">Describe "el menú degustación" sin decir la palabra, explicando para qué sirve.</span>
+        <span class="quickdesc-timer">20 seg</span>
+      </div>
+      <div class="quickdesc-item">
+        <span class="quickdesc-q">Describe "el fotomatón" sin decir la palabra.</span>
+        <span class="quickdesc-timer">20 seg</span>
+      </div>
+      <div class="quickdesc-item">
+        <span class="quickdesc-q">Describe "el centro de mesa" sin decir la palabra, usando PARA.</span>
+        <span class="quickdesc-timer">20 seg</span>
+      </div>
+    </div>
+    <div class="technique-practice">
+      <p><strong>Practica ahora:</strong> piensa en cinco objetos o servicios de tu trabajo que te cuesten nombrar en español, y escribe cómo los rodearías usando PARA.</p>
+      <textarea placeholder="Es una cosa que se usa para...&#10;Es para cuando...&#10;Es para que los invitados..."></textarea>
+    </div>
+    <div class="note" style="margin-top:16px;"><strong>La idea de hoy:</strong> el circunloquio no es una trampa, es una herramienta real que usan hasta los hablantes nativos. Si te falta la palabra exacta, rodéala con PARA y sigue hablando.</div>
+  </section>
+
+  <section class="block task-panel">
+    <div class="block-head"><span class="block-num">8</span><h2 style="color:var(--family)">Tu tarea</h2><span class="time-tag">10 min</span></div>
+    <p style="margin:0 0 14px; font-size:15px; color:var(--ink-soft);">Prepara tres preguntas que le harías a un gestor de local nuevo, usando PARA.</p>
+    <div class="prep-questions">
+      <div class="prep-q-row">
+        <span class="prep-q-num">1</span>
+        <input class="prep-q-input" type="text" placeholder="Escribe tu primera pregunta...">
+      </div>
+      <div class="prep-q-row">
+        <span class="prep-q-num">2</span>
+        <input class="prep-q-input" type="text" placeholder="Escribe tu segunda pregunta...">
+      </div>
+      <div class="prep-q-row">
+        <span class="prep-q-num">3</span>
+        <input class="prep-q-input" type="text" placeholder="Escribe tu tercera pregunta...">
+      </div>
+    </div>
+    <p style="margin:18px 0 0; font-size:15px; color:var(--ink-soft);">Después, escribe 8 frases con "para" sobre tu trabajo como directora de bodas — intenta cubrir al menos cuatro usos distintos (finalidad, destinatario, plazo, opinión, dirección o comparación implícita).</p>
+    <textarea id="final-task" placeholder="Reservo el local para...&#10;Este documento es para...&#10;Para mí, lo más importante en una boda es..."></textarea>
+    <div class="task-footer">
+      <span id="task-count">0 palabras escritas</span>
+      <div style="display:flex; gap:10px; align-items:center;">
+        <span class="saved-flag" id="saved-flag">Guardado ✓</span>
+        <button class="btn-secondary" id="save-btn">Guardar tarea</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <span>Clase 13 · PARA — propósito, destino, destinatario</span>
+  <span>Próxima clase → Clase 14: POR — causa, medio, intercambio, lugar impreciso</span>
+</footer>
+
+<script>
+/* ---------- VOCAB ---------- */
+const VOCAB = [
+  {front:"el local", back:"Estamos visitando el local para la boda de junio — tiene jardín y una sala interior."},
+  {front:"el catering", back:"El catering nos manda el menú para el jueves, con las opciones vegetarianas aparte."},
+  {front:"organizar", back:"Organizo todo el evento para que los novios no tengan que preocuparse de nada."},
+  {front:"gestionar", back:"Gestiono los proveedores desde tres meses antes de la boda."},
+  {front:"planificar", back:"Planifico el horario del día para que todo encaje: ceremonia, cóctel, banquete."},
+  {front:"el presupuesto", back:"El presupuesto tiene que estar cerrado para el viernes que viene."},
+  {front:"el aforo", back:"El aforo del jardín es para ciento cincuenta personas sentadas."},
+  {front:"el proveedor", back:"Llamo al proveedor de flores para confirmar el pedido de la semana."},
+  {front:"la carpa", back:"Alquilamos una carpa para el jardín, por si llueve el día de la boda."},
+  {front:"el menú degustación", back:"El catering nos propone un menú degustación para probar antes de decidir."},
+]
+
+const grid = document.getElementById('vocab-grid');
+VOCAB.forEach(v=>{
+  const card = document.createElement('div');
+  card.className = 'vocab-card';
+  card.setAttribute('role', 'button');
+  card.setAttribute('tabindex', '0');
+  card.setAttribute('aria-pressed', 'false');
+  card.setAttribute('aria-label', `${v.front}. Pulsa para ver un ejemplo.`);
+  card.innerHTML = `<div class="vocab-front">${v.front}</div><div class="vocab-back">${v.back}</div>`;
+  const toggle = ()=>{
+    const flipped = card.classList.toggle('flipped');
+    card.setAttribute('aria-pressed', String(flipped));
+  };
+  card.addEventListener('click', toggle);
+  card.addEventListener('keydown', (e)=>{
+    if(e.key === 'Enter' || e.key === ' '){
+      e.preventDefault();
+      toggle();
+    }
+  });
+  grid.appendChild(card);
+});
+
+/* ---------- EXERCISES ---------- */
+const EXERCISES = [
+  {"sentence":"Estas flores son <span class=\"gap\">___</span> el centro de mesa.","options":["para","por","en"],"answer":"para"},
+  {"sentence":"Necesito el presupuesto cerrado <span class=\"gap\">___</span> el viernes.","options":["para","por","desde"],"answer":"para"},
+  {"sentence":"<span class=\"gap\">___</span> mí, este jardín es perfecto para bodas de verano.","options":["Para","Por","A"],"answer":"Para"},
+  {"sentence":"Salgo <span class=\"gap\">___</span> el local en diez minutos.","options":["para","por","a"],"answer":"para"},
+  {"sentence":"Este documento es <span class=\"gap\">___</span> el catering, no <span class=\"gap\">___</span> los novios.","options":["para / para","por / por","para / a"],"answer":"para / para"},
+  {"sentence":"Compro las sillas <span class=\"gap\">___</span> decorar el pasillo de entrada.","options":["para","por","con"],"answer":"para"},
+  {"sentence":"El vestido tiene que estar listo <span class=\"gap\">___</span> las cinco de la tarde.","options":["para","por","en"],"answer":"para"},
+  {"sentence":"<span class=\"gap\">___</span> una boda de cien invitados, esta sala es demasiado pequeña.","options":["Para","Por","Con"],"answer":"Para"},
+  {"sentence":"Este ramo es <span class=\"gap\">___</span> la madrina, no <span class=\"gap\">___</span> la novia.","options":["para / para","por / por","a / a"],"answer":"para / para"},
+  {"sentence":"Llamo al catering <span class=\"gap\">___</span> confirmar el menú de mañana.","options":["para","por","de"],"answer":"para"},
+  {"sentence":"El local está reservado <span class=\"gap\">___</span> la boda de junio.","options":["para","por","en"],"answer":"para"},
+  {"sentence":"Salimos <span class=\"gap\">___</span> el jardín en cuanto llegue el fotógrafo.","options":["para","por","a"],"answer":"para"},
+  {"sentence":"<span class=\"gap\">___</span> lo que cuesta este local, esperaba más servicio incluido.","options":["Para","Por","Con"],"answer":"Para"},
+  {"sentence":"El aforo del jardín es <span class=\"gap\">___</span> ciento cincuenta personas.","options":["para","por","de"],"answer":"para"},
+  {"sentence":"Necesitamos el contrato firmado <span class=\"gap\">___</span> final de mes.","options":["para","por","en"],"answer":"para"},
+  {"sentence":"Este menú degustación es <span class=\"gap\">___</span> probar antes de decidir.","options":["para","por","a"],"answer":"para"},
+  {"sentence":"<span class=\"gap\">___</span> ser un local tan nuevo, tiene muy buena acústica.","options":["Para","Por","Con"],"answer":"Para"},
+  {"sentence":"Alquilamos la carpa <span class=\"gap\">___</span> el jardín, por si llueve.","options":["para","por","en"],"answer":"para"},
+  {"sentence":"Preparo un documento <span class=\"gap\">___</span> que lo vean mis clientes.","options":["para","por","con"],"answer":"para"},
+  {"sentence":"El fotógrafo llega <span class=\"gap\">___</span> las cuatro, antes que los invitados.","options":["para","por","en"],"answer":"para"},
+  {"sentence":"Este contrato es <span class=\"gap\">___</span> firmar antes del viernes.","options":["para","por","de"],"answer":"para"},
+  {"sentence":"<span class=\"gap\">___</span> mí, el jardín interior es mejor opción que el exterior.","options":["Para","Por","Con"],"answer":"Para"},
+  {"sentence":"Confirmo la reserva del local <span class=\"gap\">___</span> la pareja de junio.","options":["para","por","a"],"answer":"para"},
+  {"sentence":"Compramos las luces <span class=\"gap\">___</span> decorar el jardín de noche.","options":["para","por","con"],"answer":"para"},
+  {"sentence":"El catering necesita la lista de alérgenos <span class=\"gap\">___</span> el lunes.","options":["para","por","en"],"answer":"para"}
+]
+;
+
+function shuffle(arr){
+  const a = arr.slice();
+  for(let i = a.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+const exWrap = document.getElementById('exercises');
+EXERCISES.forEach((ex, i)=>{
+  if(i === 0){
+    const divider = document.createElement('div');
+    divider.className = 'ex-divider en-clase';
+    divider.textContent = 'en clase · ítems 1–20';
+    exWrap.appendChild(divider);
+  }
+  if(i === 20){
+    const divider = document.createElement('div');
+    divider.className = 'ex-divider';
+    divider.textContent = 'para casa · ítems 21–25 · repaso opcional';
+    exWrap.appendChild(divider);
+  }
+  const el = document.createElement('div');
+  el.className = 'exercise';
+  el.dataset.answer = ex.answer;
+  const shuffledOptions = shuffle(ex.options);
+  el.innerHTML = `
+    <div class="ex-sentence">${i+1}. ${ex.sentence}</div>
+    <div class="ex-options">
+      ${shuffledOptions.map(o=>`<button class="opt-btn" data-value="${o}">${o}</button>`).join('')}
+    </div>
+  `;
+  exWrap.appendChild(el);
+
+  el.querySelectorAll('.opt-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      el.querySelectorAll('.opt-btn').forEach(b=>b.classList.remove('picked'));
+      btn.classList.add('picked');
+    });
+  });
+});
+
+document.getElementById('check-btn').addEventListener('click', ()=>{
+  let correct = 0;
+  document.querySelectorAll('.exercise').forEach(el=>{
+    const answer = el.dataset.answer;
+    const picked = el.querySelector('.opt-btn.picked');
+    el.querySelectorAll('.opt-btn').forEach(b=>{
+      b.disabled = true;
+      if(b.dataset.value === answer) b.classList.add('correct');
+      else if(b === picked) b.classList.add('wrong');
+    });
+    if(picked && picked.dataset.value === answer) correct++;
+  });
+  document.getElementById('score-text').textContent = `${correct} / ${EXERCISES.length} correctas`;
+});
+
+document.getElementById('reset-btn').addEventListener('click', ()=>{
+  document.querySelectorAll('.exercise').forEach(el=>{
+    el.querySelectorAll('.opt-btn').forEach(b=>{
+      b.disabled = false;
+      b.classList.remove('picked','correct','wrong');
+    });
+  });
+  document.getElementById('score-text').textContent = '';
+});
+
+/* ---------- LECTURA: preguntas de comprensión (autosave) ---------- */
+const STORAGE_KEY_READING = 'lisa-clase13-lectura';
+const readingInputs = document.querySelectorAll('.comp-q textarea');
+
+async function cargarLectura(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(STORAGE_KEY_READING);
+    if (res && typeof res.value === 'string'){
+      const values = JSON.parse(res.value);
+      readingInputs.forEach((input, i)=>{ if(values[i]) input.value = values[i]; });
+    }
+  }catch(e){
+    // sin respuestas previas
+  }
+}
+function guardarLectura(){
+  if (!window.storage) return;
+  const values = Array.from(readingInputs).map(i=>i.value);
+  window.storage.set(STORAGE_KEY_READING, JSON.stringify(values)).catch(()=>{ /* fallo silencioso */ });
+}
+readingInputs.forEach(input=>{
+  input.addEventListener('input', ()=>{
+    clearTimeout(input._saveTimer);
+    input._saveTimer = setTimeout(guardarLectura, 600);
+  });
+});
+cargarLectura();
+
+/* ---------- TÉCNICA: práctica de circunloquios (autosave) ---------- */
+const STORAGE_KEY_TECHNIQUE = 'lisa-clase13-tecnica';
+const techniqueArea = document.querySelector('.technique-practice textarea');
+
+async function cargarTecnica(){
+  if (!window.storage || !techniqueArea) return;
+  try{
+    const res = await window.storage.get(STORAGE_KEY_TECHNIQUE);
+    if (res && typeof res.value === 'string') techniqueArea.value = res.value;
+  }catch(e){
+    // sin práctica previa
+  }
+}
+if (techniqueArea){
+  techniqueArea.addEventListener('input', ()=>{
+    clearTimeout(techniqueArea._saveTimer);
+    techniqueArea._saveTimer = setTimeout(()=>{
+      if (window.storage) window.storage.set(STORAGE_KEY_TECHNIQUE, techniqueArea.value).catch(()=>{ /* fallo silencioso */ });
+    }, 600);
+  });
+  cargarTecnica();
+}
+
+/* ---------- PREP QUESTIONS (autosave) ---------- */
+const STORAGE_KEY_PREP = 'lisa-clase13-preguntas';
+const prepInputs = document.querySelectorAll('.prep-q-input');
+
+async function cargarPreguntas(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(STORAGE_KEY_PREP);
+    if (res && typeof res.value === 'string'){
+      const values = JSON.parse(res.value);
+      prepInputs.forEach((input, i)=>{ if(values[i]) input.value = values[i]; });
+    }
+  }catch(e){
+    // sin preguntas previas
+  }
+}
+function guardarPreguntas(){
+  if (!window.storage) return;
+  const values = Array.from(prepInputs).map(i=>i.value);
+  window.storage.set(STORAGE_KEY_PREP, JSON.stringify(values)).catch(()=>{ /* fallo silencioso */ });
+}
+prepInputs.forEach(input=>{
+  input.addEventListener('input', ()=>{
+    clearTimeout(input._saveTimer);
+    input._saveTimer = setTimeout(guardarPreguntas, 600);
+  });
+});
+cargarPreguntas();
+
+/* ---------- FINAL TASK ---------- */
+const STORAGE_KEY = 'lisa-clase13-tarea';
+const taskArea = document.getElementById('final-task');
+const taskCount = document.getElementById('task-count');
+const savedFlag = document.getElementById('saved-flag');
+
+async function cargarTarea(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(STORAGE_KEY);
+    if (res && typeof res.value === 'string') taskArea.value = res.value;
+  }catch(e){
+    // Clave inexistente todavía: no hay tarea previa, se queda en blanco.
+  }
+  updateCount();
+}
+
+function updateCount(){
+  const words = taskArea.value.trim().split(/\s+/).filter(Boolean).length;
+  taskCount.textContent = `${words} palabra${words===1?'':'s'} escrita${words===1?'':'s'}`;
+}
+taskArea.addEventListener('input', updateCount);
+updateCount();
+cargarTarea();
+
+document.getElementById('save-btn').addEventListener('click', async ()=>{
+  if (!window.storage){
+    savedFlag.textContent = 'Guardado no disponible aquí';
+    savedFlag.classList.add('show');
+    setTimeout(()=>{ savedFlag.classList.remove('show'); savedFlag.textContent = 'Guardado ✓'; }, 2200);
+    return;
+  }
+  try{
+    const ok = await window.storage.set(STORAGE_KEY, taskArea.value);
+    savedFlag.textContent = ok ? 'Guardado ✓' : 'No se pudo guardar';
+  }catch(e){
+    savedFlag.textContent = 'No se pudo guardar';
+  }
+  savedFlag.classList.add('show');
+  setTimeout(()=>{ savedFlag.classList.remove('show'); savedFlag.textContent = 'Guardado ✓'; }, 1800);
+});
+</script>
+
+</body>
+</html>

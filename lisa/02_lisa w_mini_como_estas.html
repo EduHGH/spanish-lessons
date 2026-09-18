@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mini · ¿Cómo estás? / ¿Va todo bien?</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+
+/* ╔══════════════════════════════════════════════════════════════╗
+   ║  ESCOLAR — Expansion Pack · Mini                              ║
+   ║  "¿Cómo estás?" — Ser/Estar bajo presión, sin bloqueo          ║
+   ╚══════════════════════════════════════════════════════════════╝ */
+
+:root{
+  --paper:        #FBF7EE;
+  --paper-raised: #FFFFFF;
+  --paper-alt:    #F3ECDA;
+  --ink:          #23291F;
+  --ink-soft:     #565F52;
+  --ink-faint:    #8B9184;
+  --line:         rgba(35,41,31,0.12);
+  --line-strong:  rgba(35,41,31,0.22);
+
+  --b1:      #2F6FED;  --b1-soft: #EAF1FE;  --b1-line: #C6D9FC;
+  --b2:      #2E9E6B;  --b2-soft: #E9F6EF;  --b2-line: #BEE6D3;
+  --family:  #B5502E;  --family-soft: #FBEBE3; --family-line: #EFC9B4;
+  --violet:  #7B4FC9;  --violet-soft: #F1EBFB; --violet-line: #D9C8F0;
+
+  --f-display: 'Fraunces', Georgia, serif;
+  --f-body:    'IBM Plex Sans', system-ui, sans-serif;
+  --f-data:    'IBM Plex Mono', monospace;
+
+  --r-sm: 8px;
+  --r-md: 14px;
+  --r-lg: 20px;
+
+  --shadow-1: 0 1px 2px rgba(35,41,31,0.05), 0 1px 8px rgba(35,41,31,0.04);
+}
+
+*{ box-sizing:border-box; }
+body{
+  margin:0;
+  background: var(--paper);
+  background-image: radial-gradient(circle at 1px 1px, var(--line) 1px, transparent 0);
+  background-size: 22px 22px;
+  color: var(--ink);
+  font-family: var(--f-body);
+  line-height:1.6;
+}
+::selection{ background: var(--b1-soft); }
+
+/* ---------- HEADER ---------- */
+header{ padding:44px 24px 28px; max-width:760px; margin:0 auto; }
+.eyebrow{
+  font-family: var(--f-data); font-size:12px; letter-spacing:.14em;
+  text-transform:uppercase; color: var(--violet); margin:0 0 10px;
+  display:flex; align-items:center; gap:10px;
+}
+.eyebrow .dot{ width:6px; height:6px; border-radius:50%; background: var(--violet); }
+h1{
+  font-family: var(--f-display); font-weight:600;
+  font-size:clamp(30px,5.6vw,46px); line-height:1.08;
+  margin:0 0 14px; letter-spacing:-.01em;
+}
+h1 em{ font-style:italic; color: var(--violet); }
+.lede{ font-size:16px; color: var(--ink-soft); max-width:56ch; margin:0; }
+
+.meta-row{
+  display:flex; flex-wrap:wrap; gap:20px; margin-top:26px;
+  font-family: var(--f-data); font-size:12px; color: var(--ink-faint);
+}
+.meta-row strong{
+  display:block; color: var(--ink); font-size:14.5px; font-weight:500;
+  font-family: var(--f-display); margin-top:3px;
+}
+
+/* ---------- STRUCTURE STRIP ---------- */
+.structure-strip{
+  display:grid; grid-template-columns:repeat(5,1fr); gap:2px; margin-top:24px;
+  border-radius: var(--r-md); overflow:hidden; border:1px solid var(--line);
+}
+.structure-strip.row2{ margin-top:2px; }
+.structure-cell{ background: var(--paper-raised); padding:10px 8px; }
+.structure-cell .s-icon{ font-size:15px; }
+.structure-cell .s-label{ font-family: var(--f-body); font-weight:600; font-size:10.5px; color: var(--ink); margin-top:4px; line-height:1.25; }
+
+/* ---------- SECTIONS ---------- */
+main{ max-width:760px; margin:0 auto; padding:8px 24px 100px; }
+
+section.block{ margin-bottom:52px; }
+.block-head{ display:flex; align-items:baseline; gap:12px; margin-bottom:18px; }
+.time-tag{
+  font-family: var(--f-data); font-size:11px; color: var(--ink-faint);
+  background: var(--paper-alt); padding:3px 10px; border-radius:999px; margin-left:auto; flex:none;
+}
+.block-num{
+  font-family: var(--f-data); font-size:12px; color:#fff; background: var(--violet);
+  width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  flex:none;
+}
+.block-head h2{
+  font-family: var(--f-display); font-weight:500; font-style:italic; font-size:22px; margin:0;
+}
+.phase-label{
+  font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.08em;
+  color: var(--ink-faint); margin:0 0 8px; display:flex; align-items:center; gap:8px;
+}
+
+.panel{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-lg);
+  box-shadow: var(--shadow-1); padding:26px 28px;
+}
+
+/* ---------- 1. EL MOMENTO (scene) ---------- */
+.scene-panel{ background: var(--family-soft); border:1px solid var(--family-line); border-radius: var(--r-lg); padding:26px 28px; }
+.scene-panel .block-num{ background: var(--family); }
+.scene-setup{
+  display:flex; gap:14px; align-items:flex-start; background: var(--paper-raised);
+  border:1px solid var(--family-line); border-radius: var(--r-md); padding:16px 18px; margin-bottom:16px;
+}
+.scene-icon{ font-size:24px; flex:none; }
+.scene-text{ font-size:15px; color: var(--ink-soft); }
+.scene-text strong{ color: var(--ink); }
+.blocked-line{
+  margin-top:16px; padding:16px 18px; background: rgba(255,255,255,0.5); border:1px dashed var(--family-line);
+  border-radius: var(--r-md); font-family: var(--f-display); font-style:italic; font-size:16.5px; color: var(--ink);
+}
+.blocked-line .who{ font-family: var(--f-data); font-style:normal; font-size:11px; text-transform:uppercase;
+  letter-spacing:.05em; color: var(--family); display:block; margin-bottom:6px; }
+
+/* ---------- 2. LA SALIDA INMEDIATA ---------- */
+.exit-panel{ background: var(--violet-soft); border:1px solid var(--violet-line); }
+.exit-panel .block-num{ background: var(--violet); }
+.exit-line{
+  font-family: var(--f-display); font-weight:500; font-size:22px; color: var(--ink);
+  background: var(--paper-raised); border:1px solid var(--violet-line); border-radius: var(--r-md);
+  padding:20px 22px; margin-top:4px;
+}
+.exit-line .accent{ color: var(--violet); }
+.exit-note{ font-size:13.5px; color: var(--ink-soft); margin-top:14px; }
+.exit-note strong{ color: var(--ink); }
+
+/* ---------- 3. DECISION TREE (nuevo: ser vs estar según pregunta) ---------- */
+.tree-wrap{ display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:4px; }
+@media(max-width:640px){ .tree-wrap{ grid-template-columns:1fr; } }
+.tree-col{ border-radius: var(--r-md); padding:18px 20px; border:1px solid; }
+.tree-col.is-ser{ background: var(--b1-soft); border-color: var(--b1-line); }
+.tree-col.is-estar{ background: var(--b2-soft); border-color: var(--b2-line); }
+.tree-head{ display:flex; align-items:center; gap:8px; margin:0 0 10px; }
+.tree-verb{ font-family: var(--f-display); font-weight:600; font-size:19px; }
+.is-ser .tree-verb{ color: var(--b1); }
+.is-estar .tree-verb{ color: var(--b2); }
+.tree-sub{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); }
+.tree-q{
+  background: var(--paper-raised); border-radius: var(--r-sm); padding:10px 12px; margin-top:10px;
+  font-size:14px; color: var(--ink);
+}
+.tree-q strong{ font-family: var(--f-display); font-style:italic; }
+
+/* ---------- 3. ALTERNATIVAS ---------- */
+.alt-list{ display:flex; flex-direction:column; gap:10px; margin-top:4px; }
+.alt-item{
+  display:flex; align-items:center; gap:14px; flex-wrap:wrap; background: var(--paper-raised); border:1px solid var(--line);
+  border-radius: var(--r-md); padding:13px 16px; transition: border-color .15s ease;
+}
+.alt-item:hover{ border-color: var(--violet-line); }
+.alt-num{
+  font-family: var(--f-data); font-size:11px; color: var(--ink-faint); flex:none; width:18px;
+}
+.alt-main{ display:flex; flex-direction:column; flex:1; min-width:200px; }
+.alt-text{ font-size:15px; color: var(--ink); }
+.alt-tag{
+  flex:none; margin-left:auto; font-family: var(--f-data); font-size:10.5px; text-transform:uppercase;
+  letter-spacing:.04em; color: var(--violet); background: var(--violet-soft); padding:3px 9px; border-radius:999px;
+}
+
+/* ---------- 4. VERBOS + PREPOSICIONES / ADJETIVOS ---------- */
+.prep-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(210px,1fr)); gap:12px; margin-top:4px; }
+.prep-card{
+  background: var(--paper-raised); border:1px solid var(--b1-line); border-radius: var(--r-md);
+  padding:16px 18px; cursor:pointer; min-height:96px; display:flex; flex-direction:column;
+  justify-content:center; transition: border-color .15s ease, transform .1s ease;
+}
+.prep-card:hover{ border-color: var(--b1); transform: translateY(-1px); }
+.prep-card:focus-visible{ outline:2px solid var(--b1); outline-offset:2px; }
+.prep-verb{ font-family: var(--f-display); font-weight:600; font-size:17px; color: var(--ink); }
+.prep-verb .prep{ color: var(--b1); font-style:italic; }
+.prep-example{ display:none; font-family: var(--f-body); font-size:13px; color: var(--ink-soft); margin-top:8px; line-height:1.5; }
+.prep-example .en{ margin-top:6px; }
+.prep-card.flipped .prep-example{ display:block; }
+.prep-card.flipped{ background: var(--b1-soft); border-color: var(--b1); }
+.prep-hint{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin:12px 2px 0; }
+
+/* ---------- 5. FÓRMULAS NATURALES ---------- */
+.formula-grid{ display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:4px; }
+@media(max-width:640px){ .formula-grid{ grid-template-columns:1fr; } }
+.formula-card{
+  background: var(--paper-raised); border:1px solid var(--b2-line); border-radius: var(--r-md);
+  padding:18px 20px;
+}
+.formula-card .f-label{ font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.05em; color: var(--b2); margin-bottom:8px; }
+.formula-card .f-text{ font-family: var(--f-display); font-size:16px; color: var(--ink); font-style:italic; }
+
+/* ---------- RESCUE PHRASES (muletillas) ---------- */
+.rescue-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:12px; margin-top:4px; }
+.rescue-card{
+  background: var(--paper-raised); border:1px solid var(--family-line); border-radius: var(--r-md);
+  padding:16px 18px;
+}
+.rescue-phrase{ font-family: var(--f-display); font-weight:600; font-style:italic; font-size:16px; color: var(--family); margin-bottom:6px; }
+.rescue-use{ font-size:13px; color: var(--ink-soft); }
+.rescue-use .en{ margin-top:8px; }
+
+/* ---------- FOLLOW-UP Qs ---------- */
+.followup-list{ display:flex; flex-direction:column; gap:14px; margin-top:4px; }
+.followup-item{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:16px 18px;
+}
+.followup-q{ font-family: var(--f-display); font-style:italic; font-size:15.5px; color: var(--ink); margin-bottom:8px; }
+.followup-q::before{ content:"— "; color: var(--ink-faint); }
+.followup-q .en{ font-family: var(--f-body); font-style:italic; }
+.followup-a{ font-size:14px; color: var(--ink-soft); padding-left:14px; border-left:2px solid var(--b1-line); }
+.followup-a strong{ color: var(--b1); font-weight:600; }
+.followup-a .en{ margin-top:8px; }
+
+/* ---------- REGISTER TABLE ---------- */
+.register-table{ width:100%; border-collapse:collapse; margin-top:4px; }
+.register-table th{
+  font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.05em;
+  color: var(--ink-faint); text-align:left; padding:0 10px 10px; border-bottom:1px solid var(--line);
+}
+.register-table td{ padding:12px 10px; border-bottom:1px dashed var(--line); font-size:14px; vertical-align:top; }
+.register-table tr:last-child td{ border-bottom:none; }
+.register-table .reg-tag{ font-family: var(--f-data); font-size:11px; text-transform:uppercase; color: var(--violet); white-space:nowrap; }
+
+/* ---------- 6. MINI-ROLEPLAY ---------- */
+.roleplay-panel{ background: var(--b1-soft); border:1px solid var(--b1-line); border-radius: var(--r-lg); padding:26px 28px; }
+.roleplay-panel .block-num{ background: var(--b1); }
+.dialogue{ display:flex; flex-direction:column; gap:14px; }
+.line{ display:flex; gap:12px; align-items:flex-start; }
+.line-avatar{
+  flex:none; width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  font-family: var(--f-display); font-weight:600; font-size:14px; color:#fff;
+}
+.line.friend .line-avatar{ background: var(--ink-faint); }
+.line.you .line-avatar{ background: var(--b1); }
+.line-body{ flex:1; }
+.line-name{ font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.05em; color: var(--ink-faint); margin:0 0 4px; }
+.line-bubble{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:12px 14px; font-size:14.5px; color: var(--ink);
+}
+.line.you .line-bubble{ background:#fff; border-color: var(--b1-line); }
+.line-input{
+  width:100%; font-family: var(--f-body); font-size:14.5px; color: var(--ink);
+  background:#fff; border:1px solid var(--b1-line); border-radius: var(--r-sm);
+  padding:10px 12px; resize:vertical; min-height:44px; margin-top:2px;
+}
+.line-input:focus{ outline:none; border-color: var(--b1); }
+.line-hint{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin-top:5px; }
+.roleplay-tip{
+  margin-top:22px; padding:14px 16px; background: var(--paper-raised); border:1px solid var(--b1-line);
+  border-radius: var(--r-md); font-size:13.5px; color: var(--ink-soft);
+}
+.roleplay-tip strong{ color: var(--ink); }
+
+/* ---------- 7. CHOOSE YOUR WORDS ---------- */
+.choose-panel{ background: var(--paper-raised); border:1px solid var(--line); }
+.choose-intro{ font-size:14px; color: var(--ink-soft); margin:0 0 18px; }
+.choose-grid{ display:flex; flex-direction:column; gap:10px; }
+.choose-item{
+  display:flex; align-items:center; gap:14px; padding:12px 14px; border:1px solid var(--line);
+  border-radius: var(--r-md); cursor:pointer; transition: all .15s ease; background: var(--paper-raised);
+}
+.choose-item:hover{ border-color: var(--violet-line); background: var(--violet-soft); }
+.choose-item.picked{ border-color: var(--violet); background: var(--violet-soft); }
+.choose-checkbox{
+  flex:none; width:20px; height:20px; border-radius:6px; border:1.5px solid var(--line-strong);
+  display:flex; align-items:center; justify-content:center; font-size:13px; color:#fff;
+  background: var(--paper-raised);
+}
+.choose-item.picked .choose-checkbox{ background: var(--violet); border-color: var(--violet); }
+.choose-text{ font-size:14.5px; color: var(--ink); flex:1; }
+.choose-text .en{ margin-top:4px; }
+.choose-footer{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:20px; padding-top:18px; border-top:1px dashed var(--line); flex-wrap:wrap; }
+#choose-count{ font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); }
+.btn-primary{
+  font-family: var(--f-body); font-weight:600; font-size:14px; color:#fff; background: var(--violet);
+  border:none; padding:11px 22px; border-radius:999px; cursor:pointer; transition: transform .1s ease;
+}
+.btn-primary:hover{ transform: translateY(-1px); }
+textarea#final-summary{
+  width:100%; min-height:100px; font-family: var(--f-body); font-size:14.5px; color: var(--ink);
+  background: var(--paper-alt); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:14px 16px; resize:vertical; margin-top:16px; display:none;
+}
+textarea#final-summary:focus{ outline:none; border-color: var(--violet); }
+
+footer{ max-width:760px; margin:0 auto; padding:0 24px 60px; font-family: var(--f-data); font-size:12px; color: var(--ink-faint); text-align:center; }
+
+/* ---------- LANG TOGGLE ---------- */
+.lang-toggle{
+  position:fixed; top:18px; right:18px; z-index:50;
+  display:flex; align-items:center; gap:8px;
+  background: var(--paper-raised); border:1px solid var(--line-strong); border-radius:999px;
+  padding:6px 8px; box-shadow: var(--shadow-1);
+  font-family: var(--f-data); font-size:11px;
+}
+.lang-toggle span{ color: var(--ink-faint); padding:0 2px; }
+.lang-toggle span.active{ color: var(--violet); font-weight:700; }
+.lang-switch{
+  position:relative; width:38px; height:20px; border-radius:999px; background: var(--paper-alt);
+  border:1px solid var(--line-strong); cursor:pointer; flex:none;
+}
+.lang-switch::after{
+  content:""; position:absolute; top:1px; left:1px; width:16px; height:16px; border-radius:50%;
+  background: var(--violet); transition: transform .15s ease;
+}
+body.show-en .lang-switch::after{ transform: translateX(18px); }
+
+.en{
+  display:none;
+  font-family: var(--f-body); font-size:0.92em; color: var(--ink-faint);
+  font-style:italic; margin-top:4px;
+}
+body.show-en .en{ display:block; }
+body.show-en .en.inline{ display:inline; margin-top:0; margin-left:6px; }
+.en::before{ content:"EN · "; font-family: var(--f-data); font-style:normal; font-size:0.85em; color: var(--violet); }
+
+</style>
+</head>
+<body>
+
+<div class="lang-toggle">
+  <span id="lang-es-label" class="active">ES</span>
+  <div class="lang-switch" id="lang-switch" role="button" tabindex="0" aria-label="Mostrar traducción al inglés"></div>
+  <span id="lang-en-label">EN</span>
+</div>
+
+
+<header>
+  <p class="eyebrow"><span class="dot"></span>Expansion Pack · Mini</p>
+  <h1>¿Cómo <em>estás</em>? ¿Va todo <em>bien</em>?</h1>
+  <p class="lede">No es que confundas ser y estar — es que la pregunta llega rápido, en medio de otra cosa (paseando a Alex, en el pasillo), y tienes menos de un segundo para decidir cuál de los dos toca antes de que la frase se rompa.
+    <span class="en">It's not that you confuse ser and estar — it's that the question arrives fast, in the middle of something else (walking Alex, in the hallway), and you have less than a second to decide which one fits before the sentence breaks.</span>
+  </p>
+
+  <div class="meta-row">
+    <div>Contexto <strong>Vecino, veterinaria, cliente de boda</strong></div>
+    <div>Bloqueo <strong>"¿Cómo estás?" / "¿Va todo bien?" — decidir en tiempo real</strong></div>
+    <div>Duración <strong>~20 min</strong></div>
+  </div>
+
+  <div class="structure-strip">
+    <div class="structure-cell"><div class="s-icon">🧊</div><div class="s-label">El momento</div></div>
+    <div class="structure-cell"><div class="s-icon">🚪</div><div class="s-label">Salida inmediata</div></div>
+    <div class="structure-cell"><div class="s-icon">🔀</div><div class="s-label">¿Ser o estar?</div></div>
+    <div class="structure-cell"><div class="s-icon">🧩</div><div class="s-label">Piezas</div></div>
+    <div class="structure-cell"><div class="s-icon">💬</div><div class="s-label">Fórmulas</div></div>
+  </div>
+  <div class="structure-strip row2">
+    <div class="structure-cell"><div class="s-icon">🆘</div><div class="s-label">Rescate</div></div>
+    <div class="structure-cell"><div class="s-icon">❓</div><div class="s-label">Si preguntan más</div></div>
+    <div class="structure-cell"><div class="s-icon">🎚️</div><div class="s-label">Registro</div></div>
+    <div class="structure-cell"><div class="s-icon">🎭</div><div class="s-label">Roleplay</div></div>
+    <div class="structure-cell"><div class="s-icon">✅</div><div class="s-label">Tus palabras</div></div>
+  </div>
+</header>
+
+<main>
+
+  <!-- ============ 1. EL MOMENTO ============ -->
+  <section class="block">
+    <div class="block-head">
+      <div class="block-num">1</div>
+      <h2>El momento</h2>
+      <div class="time-tag">bloqueo real</div>
+    </div>
+    <div class="scene-panel">
+      <div class="scene-setup">
+        <div class="scene-icon">🚪</div>
+        <div class="scene-text">Sales del piso con Alex. El vecino está en el pasillo, como siempre, y no solo saluda — se para, te mira y espera respuesta real.
+          <span class="en">You leave the flat with Alex. The neighbour is in the hallway, as always, and doesn't just say hi — he stops, looks at you, and waits for a real answer.</span>
+        </div>
+      </div>
+      <div class="blocked-line">
+        <span class="who">Vecino</span>
+        "¡Hola! ¿Qué tal? ¿Cómo estás? ¿Va todo bien con la boda que estás organizando?"
+        <span class="en">"Hi! How's it going? How are you? Is everything going well with the wedding you're organizing?"</span>
+      </div>
+      <p class="scene-text" style="margin-top:16px;">Dos preguntas en una respiración. La primera — "¿cómo estás?" — pide <strong>estar</strong>, tu estado ahora. La segunda — "¿va todo bien con la boda?" — también pide <strong>estar</strong>, pero de la boda, no de ti. Y si luego añade "¿tú eres la que se encarga de todo?", de repente necesitas <strong>ser</strong>. El verbo cambia tres veces en diez segundos, y es ahí donde te quedas en blanco — no porque no sepas ninguno de los dos, sino porque no te da tiempo a decidir cuál toca cada vez.
+        <span class="en">Two questions in one breath. The first — "how are you?" — asks for <strong>estar</strong>, your state right now. The second — "is the wedding going well?" — also asks for <strong>estar</strong>, but about the wedding, not about you. And if they then add "are you the one in charge of everything?", suddenly you need <strong>ser</strong>. The verb changes three times in ten seconds, and that's where you blank out — not because you don't know either verb, but because you don't have time to decide which one fits each time.</span>
+      </p>
+      <p class="scene-text" style="margin-top:12px;">Este bloqueo no aparece solo con el vecino. Aparece cada vez que alguien te hace <strong>varias preguntas seguidas de este tipo</strong>: la recepcionista de la veterinaria, tu dentista al empezar la consulta, un cliente de boda al principio de una llamada. La primera frase sale bien — el problema es sostener el cambio de verbo sin pararte a traducir cada vez.
+        <span class="en">This block doesn't only show up with the neighbour. It shows up any time someone asks you <strong>several questions of this kind in a row</strong>: the vet receptionist, your dentist at the start of the appointment, a wedding client at the beginning of a call. The first sentence comes out fine — the problem is sustaining the verb switch without stopping to translate each time.</span>
+      </p>
+      <div class="scene-setup" style="margin-top:16px; margin-bottom:0;">
+        <div class="scene-icon">🧠</div>
+        <div class="scene-text">Por qué se produce el bloqueo: en inglés "be" cubre los dos casos, así que tu cerebro nunca ha tenido que decidir. En español sí hay que decidir, y si lo haces traduciendo palabra por palabra ("how are you" → "cómo... eres... no, estás"), pierdes el segundo que tenías para responder con naturalidad.
+          <span class="en">Why the block happens: in English "be" covers both cases, so your brain has never had to decide. In Spanish you do have to decide, and if you do it by translating word for word ("how are you" → "cómo... eres... no, estás"), you lose the second you had to respond naturally.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 2. LA SALIDA INMEDIATA ============ -->
+  <section class="block">
+    <div class="block-head">
+      <div class="block-num">2</div>
+      <h2>La salida inmediata</h2>
+    </div>
+    <div class="panel exit-panel">
+      <div class="exit-line">Pues <span class="accent">estoy</span> bien — un poco liada con la boda, pero <span class="accent">está</span> casi todo listo.
+        <span class="en">Well, <span class="accent">I'm</span> good — a bit swamped with the wedding, but it's <span class="accent">almost</span> all ready.</span>
+      </div>
+      <p class="exit-note">Esta frase sola cubre las dos preguntas más frecuentes — "¿cómo estás?" y "¿va todo bien?" — sin decidir nada sobre la marcha: son siempre <strong>estar</strong>, porque ambas preguntan por un estado ahora mismo, tuyo o de la boda. Todo lo que viene después en este Mini es para cuando la conversación sigue y aparece un "¿eres tú la que...?"
+        <span class="en">This one sentence alone covers the two most frequent questions — "how are you?" and "is it going well?" — without deciding anything on the fly: they're always <strong>estar</strong>, because both ask about a state right now, yours or the wedding's. Everything that follows in this Mini is for when the conversation continues and a "are you the one who...?" shows up.</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ 3. ¿SER O ESTAR? ============ -->
+  <section class="block">
+    <div class="block-head">
+      <div class="block-num">3</div>
+      <h2>¿Ser o estar?</h2>
+      <div class="time-tag">el atajo, no la traducción</div>
+    </div>
+    <div class="panel">
+      <p style="font-size:14px; color:var(--ink-soft); margin:0 0 16px;">No traduzcas "how are you" o "are you the one who...". Pregúntate directamente: ¿esto puede cambiar en un minuto (estado, lugar, algo en curso) o es quién eres siempre (identidad, profesión, carácter)?
+        <span class="en">Don't translate "how are you" or "are you the one who...". Ask yourself directly: can this change in a minute (state, place, something in progress) or is it who you always are (identity, profession, character)?</span>
+      </p>
+      <div class="tree-wrap">
+        <div class="tree-col is-estar">
+          <div class="tree-head"><span class="tree-verb">ESTAR</span><span class="tree-sub">— cambia ahora mismo</span></div>
+          <div class="tree-q">"¿Cómo estás?" → <strong>estoy</strong> bien / liada / nerviosa</div>
+          <div class="tree-q">"¿Va todo bien con la boda?" → <strong>está</strong> casi listo</div>
+          <div class="tree-q">"¿Qué tal está Alex?" → <strong>está</strong> cansado</div>
+          <div class="tree-q">"¿Estás organizando algo ahora?" → <strong>estoy</strong> organizando una boda</div>
+        </div>
+        <div class="tree-col is-ser">
+          <div class="tree-head"><span class="tree-verb">SER</span><span class="tree-sub">— identidad, no cambia</span></div>
+          <div class="tree-q">"¿Eres tú la que se encarga?" → <strong>soy</strong> yo, sí</div>
+          <div class="tree-q">"¿A qué te dedicas?" → <strong>soy</strong> directora de bodas</div>
+          <div class="tree-q">"¿Eres de aquí?" → <strong>soy</strong> de Chicago</div>
+          <div class="tree-q">"¿Cómo eres trabajando?" → <strong>soy</strong> bastante organizada</div>
+        </div>
+      </div>
+      <p class="exit-note" style="margin-top:18px;"><strong>El patrón:</strong> casi cualquier pregunta con "cómo" + estado, lugar o "ahora" es estar. Casi cualquier pregunta con "quién", "a qué te dedicas" o "de dónde" es ser. Si dudas a media frase, quédate en el verbo que ya has empezado y termina la idea — no vuelvas atrás a corregir.
+        <span class="en"><strong>The pattern:</strong> almost any question with "how" + state, place, or "right now" is estar. Almost any question with "who", "what do you do", or "where from" is ser. If you hesitate mid-sentence, stay with the verb you already started and finish the idea — don't backtrack to correct it.</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ 4. PIEZAS: ADJETIVOS + ESTRUCTURAS ============ -->
+  <section class="block">
+    <div class="block-head">
+      <div class="block-num">4</div>
+      <h2>Piezas reutilizables</h2>
+      <div class="time-tag">la caja de piezas</div>
+    </div>
+    <div class="panel">
+      <p style="font-size:14px; color:var(--ink-soft); margin:0 0 16px;">No es memorizar "bien / mal". Es tener seis piezas listas que puedes combinar con <strong>estoy</strong> o <strong>está</strong> según la situación, sin pensarlas en inglés primero. Toca la tarjeta para ver el ejemplo.
+        <span class="en">It's not about memorizing "good / bad". It's having six pieces ready that you can combine with <strong>estoy</strong> or <strong>está</strong> depending on the situation, without thinking them in English first. Tap the card to see the example.</span>
+      </p>
+      <div class="prep-grid" id="prep-grid"></div>
+      <p class="prep-hint">Toca cada tarjeta para ver cómo suena en una frase real. No hace falta memorizarlas todas hoy.</p>
+    </div>
+  </section>
+
+  <!-- ============ 5. FÓRMULAS NATURALES ============ -->
+  <section class="block">
+    <div class="block-head">
+      <div class="block-num">5</div>
+      <h2>Fórmulas naturales</h2>
+      <div class="time-tag">para conectar piezas</div>
+    </div>
+    <div class="panel">
+      <div class="formula-grid">
+        <div class="formula-card"><div class="f-label">Para pasar de estado a boda</div><div class="f-text">"Estoy bien, y la boda está..."</div><span class="en">"I'm good, and the wedding is..."</span></div>
+        <div class="formula-card"><div class="f-label">Para confirmar identidad</div><div class="f-text">"Sí, soy yo la que..."</div><span class="en">"Yes, I'm the one who..."</span></div>
+        <div class="formula-card"><div class="f-label">Para matizar el estado</div><div class="f-text">"Estoy bien, aunque un poco..."</div><span class="en">"I'm good, though a bit..."</span></div>
+        <div class="formula-card"><div class="f-label">Para ganar un segundo</div><div class="f-text">"Estoy... a ver... estoy..."</div><span class="en">"I'm... let's see... I'm..."</span></div>
+        <div class="formula-card"><div class="f-label">Para cerrar sin alargarte</div><div class="f-text">"Bien, bien, todo en marcha."</div><span class="en">"Good, good, everything's moving along."</span></div>
+        <div class="formula-card"><div class="f-label">Para devolver la pregunta</div><div class="f-text">"¿Y tú? ¿Cómo estás?"</div><span class="en">"And you? How are you?"</span></div>
+      </div>
+      <p class="exit-note" style="margin-top:16px;">Estas fórmulas no dependen de la boda — son conectores que reutilizas cuando te pregunten por Alex, por Chris o por el gimnasio. Aquí las practicamos en el contexto del vecino y la boda porque es donde más te falta soltura ahora mismo.
+        <span class="en">These formulas don't depend on the wedding — they're connectors you reuse when asked about Alex, Chris, or the gym. We're practicing them here in the neighbour-and-wedding context because that's where you need the most fluency right now.</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ 5b. FRASES DE RESCATE ============ -->
+  <section class="block">
+    <div class="block-head">
+      <div class="block-num">5<span style="font-size:9px; vertical-align:super;">b</span></div>
+      <h2>Frases de rescate</h2>
+      <div class="time-tag">para cuando dudas entre los dos</div>
+    </div>
+    <div class="panel">
+      <p style="font-size:14px; color:var(--ink-soft); margin:0 0 16px;">Aquí no te falta una palabra — te falta un segundo para decidir el verbo. Estas frases te lo dan sin que suene a que te has quedado en blanco.
+        <span class="en">Here you're not missing a word — you're missing a second to decide the verb. These phrases buy you that without sounding like you've blanked out.</span>
+      </p>
+      <div class="rescue-grid">
+        <div class="rescue-card"><div class="rescue-phrase">Estoy... a ver...</div><div class="rescue-use">Para ganar 2–3 segundos justo cuando dudas si la respuesta es de estado o de identidad.<span class="en">To buy 2–3 seconds right when you're unsure if the answer is about state or identity.</span></div></div>
+        <div class="rescue-card"><div class="rescue-phrase">Pues sí, soy yo</div><div class="rescue-use">Respuesta corta y segura cuando confirman quién eres — no necesitas más para seguir hablando.<span class="en">Short, confident answer when they confirm who you are — you don't need more to keep talking.</span></div></div>
+        <div class="rescue-card"><div class="rescue-phrase">Bueno, la verdad es que...</div><div class="rescue-use">Para empezar una respuesta que no es un simple "bien", como cuando el día ha sido complicado.<span class="en">To start an answer that isn't a simple "good", like when the day has been complicated.</span></div></div>
+        <div class="rescue-card"><div class="rescue-phrase">Todo en orden, sobre todo...</div><div class="rescue-use">Para responder sobre el estado de la boda sin dar todos los detalles de golpe.<span class="en">To answer about the wedding's status without giving every detail at once.</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 5c. SI PREGUNTAN MÁS ============ -->
+  <section class="block">
+    <div class="block-head">
+      <div class="block-num">5<span style="font-size:9px; vertical-align:super;">c</span></div>
+      <h2>Si preguntan más</h2>
+      <div class="time-tag">las tres preguntas que siempre vienen después</div>
+    </div>
+    <div class="panel">
+      <p style="font-size:14px; color:var(--ink-soft); margin:0 0 16px;">Cuando alguien pregunta "¿cómo estás?" con interés real, casi siempre sigue con una de estas tres. Tenerlas listas evita el segundo bloqueo, justo cuando cambian de estar a ser sin avisar.
+        <span class="en">When someone asks "how are you?" with real interest, they almost always follow up with one of these three. Having them ready avoids the second block, right when they switch from estar to ser without warning.</span>
+      </p>
+      <div class="followup-list">
+        <div class="followup-item">
+          <div class="followup-q">¿Y tú eres la que organiza todo, o trabajas con más gente?
+            <span class="en" style="font-size:0.85em; margin-top:2px;">And are you the one organizing everything, or do you work with more people?</span>
+          </div>
+          <div class="followup-a"><strong>Soy</strong> la que coordina, sí, pero <strong>estoy</strong> en contacto con varios proveedores.
+            <span class="en">I'm the one who coordinates, yes, but I'm in contact with several vendors.</span>
+          </div>
+        </div>
+        <div class="followup-item">
+          <div class="followup-q">¿Y siempre estás así de liada, o es solo esta semana?
+            <span class="en" style="font-size:0.85em; margin-top:2px;">And are you always this swamped, or is it just this week?</span>
+          </div>
+          <div class="followup-a">Normalmente no <strong>estoy</strong> tan liada — es que esta boda <strong>es</strong> bastante grande.
+            <span class="en">Normally I'm not this swamped — it's that this wedding is quite big.</span>
+          </div>
+        </div>
+        <div class="followup-item">
+          <div class="followup-q">¿Y cómo está Alex con todo este lío tuyo?
+            <span class="en" style="font-size:0.85em; margin-top:2px;">And how's Alex with all this fuss of yours?</span>
+          </div>
+          <div class="followup-a"><strong>Está</strong> bien, tranquilo como siempre — él <strong>es</strong> así, no se entera de nada.
+            <span class="en">He's fine, calm as always — he's just like that, he's oblivious to everything.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 5d. REGISTRO ============ -->
+  <section class="block">
+    <div class="block-head">
+      <div class="block-num">5<span style="font-size:9px; vertical-align:super;">d</span></div>
+      <h2>Ajustar el registro</h2>
+      <div class="time-tag">la misma pregunta, distinto contexto</div>
+    </div>
+    <div class="panel">
+      <p style="font-size:14px; color:var(--ink-soft); margin:0 0 4px;">"¿Cómo estás?" no se responde igual al vecino que a un cliente de boda. Aquí tienes la misma información adaptada a tres contextos que ya has vivido.
+        <span class="en">"How are you?" isn't answered the same way to the neighbour as to a wedding client. Here's the same information adapted to three contexts you've already lived through.</span>
+      </p>
+      <table class="register-table">
+        <tr><th>Contexto</th><th>Cómo sonaría</th></tr>
+        <tr><td class="reg-tag">vecino / cercano</td><td>Pues bien, liada con la boda, ya sabes. ¿Y tú qué tal?<span class="en">Well, good, swamped with the wedding, you know. And how about you?</span></td></tr>
+        <tr><td class="reg-tag">veterinaria / recepción</td><td>Muy bien, gracias. Alex está un poco cansado del paseo, nada más.<span class="en">Very well, thanks. Alex is a bit tired from the walk, that's all.</span></td></tr>
+        <tr><td class="reg-tag">cliente de boda / formal</td><td>Estoy bien, gracias por preguntar. El local está casi listo, y sí, soy yo quien está al frente del evento.<span class="en">I'm well, thank you for asking. The venue is almost ready, and yes, I'm the one leading the event.</span></td></tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============ 6. MINI-ROLEPLAY ============ -->
+  <section class="block">
+    <div class="block-head">
+      <div class="block-num">6</div>
+      <h2>Mini-roleplay</h2>
+      <div class="time-tag">el pasillo</div>
+    </div>
+    <div class="roleplay-panel">
+      <div class="scene-setup">
+        <div class="scene-icon">🚪</div>
+        <div class="scene-text"><strong>Escena:</strong> sigues en el pasillo con Alex. El vecino no se conforma con un "bien" — usa lo que has visto arriba para responder con tus propias palabras, cambiando de estar a ser cuando toque.
+          <span class="en"><strong>Scene:</strong> you're still in the hallway with Alex. The neighbour won't settle for a "good" — use what you've seen above to answer in your own words, switching from estar to ser when it's needed.</span>
+        </div>
+      </div>
+      <div class="dialogue">
+        <div class="line friend">
+          <div class="line-avatar">V</div>
+          <div class="line-body">
+            <div class="line-name">Vecino</div>
+            <div class="line-bubble">¡Hola! ¿Qué tal? ¿Cómo estás? ¿Va todo bien con la boda que estás organizando?<span class="en">Hi! How's it going? How are you? Is everything going well with the wedding you're organizing?</span></div>
+          </div>
+        </div>
+        <div class="line you">
+          <div class="line-avatar">L</div>
+          <div class="line-body">
+            <div class="line-name">Tú</div>
+            <textarea class="line-input" placeholder="Responde con estar sobre ti y sobre la boda..."></textarea>
+            <div class="line-hint">usa la salida inmediata del bloque 2 si necesitas apoyo</div>
+          </div>
+        </div>
+        <div class="line friend">
+          <div class="line-avatar">V</div>
+          <div class="line-body">
+            <div class="line-name">Vecino</div>
+            <div class="line-bubble">Anda, qué interesante. ¿Y tú eres la que se encarga de todo, o trabajas con más gente?<span class="en">Oh, how interesting. And are you the one in charge of everything, or do you work with more people?</span></div>
+          </div>
+        </div>
+        <div class="line you">
+          <div class="line-avatar">L</div>
+          <div class="line-body">
+            <div class="line-name">Tú</div>
+            <textarea class="line-input" placeholder="Cambia a ser: soy la que... / soy yo..."></textarea>
+            <div class="line-hint">este es el cambio de verbo que dispara el bloqueo — hazlo despacio</div>
+          </div>
+        </div>
+        <div class="line friend">
+          <div class="line-avatar">V</div>
+          <div class="line-body">
+            <div class="line-name">Vecino</div>
+            <div class="line-bubble">¿Y cómo está Alex con todo este lío? Lo veo tranquilo, la verdad.<span class="en">And how's Alex with all this fuss? He looks calm, to be honest.</span></div>
+          </div>
+        </div>
+        <div class="line you">
+          <div class="line-avatar">L</div>
+          <div class="line-body">
+            <div class="line-name">Tú</div>
+            <textarea class="line-input" placeholder="Responde con estar (cómo está ahora) y ser (cómo es él siempre)..."></textarea>
+            <div class="line-hint">esta pregunta pide los dos verbos en la misma frase</div>
+          </div>
+        </div>
+      </div>
+      <div class="roleplay-tip"><strong>Truco:</strong> si dudas a media frase entre ser y estar, no la abandones — vuelve al atajo del bloque 3 ("¿cambia ahora o es siempre?") y termina con el que ya has empezado. Corregir a mitad de frase bloquea más que un pequeño error.
+        <span class="en"><strong>Trick:</strong> if you hesitate mid-sentence between ser and estar, don't abandon it — go back to the shortcut from block 3 ("does it change now or is it always?") and finish with the one you already started. Correcting mid-sentence blocks more than a small mistake does.</span>
+      </div>
+
+      <div class="scene-setup" style="margin-top:28px;">
+        <div class="scene-icon">🩺</div>
+        <div class="scene-text"><strong>Segunda escena:</strong> ahora es la recepcionista de la veterinaria, por teléfono. Registro más neutro — no hay tanta confianza como con el vecino.
+          <span class="en"><strong>Second scene:</strong> now it's the vet receptionist, on the phone. More neutral register — not as much closeness as with the neighbour.</span>
+        </div>
+      </div>
+      <div class="dialogue" style="margin-top:16px;">
+        <div class="line friend">
+          <div class="line-avatar">R</div>
+          <div class="line-body">
+            <div class="line-name">Recepcionista</div>
+            <div class="line-bubble">Hola, buenas. ¿Qué tal está Alex? ¿Todo bien con él?<span class="en">Hello there. How's Alex? Everything alright with him?</span></div>
+          </div>
+        </div>
+        <div class="line you">
+          <div class="line-avatar">L</div>
+          <div class="line-body">
+            <div class="line-name">Tú</div>
+            <textarea class="line-input" placeholder="Responde con estar sobre el estado de Alex..."></textarea>
+            <div class="line-hint">pregunta sobre estado, no sobre identidad</div>
+          </div>
+        </div>
+        <div class="line friend">
+          <div class="line-avatar">R</div>
+          <div class="line-body">
+            <div class="line-name">Recepcionista</div>
+            <div class="line-bubble">Perfecto. ¿Y usted es la propietaria que llamó la semana pasada?<span class="en">Perfect. And are you the owner who called last week?</span></div>
+          </div>
+        </div>
+        <div class="line you">
+          <div class="line-avatar">L</div>
+          <div class="line-body">
+            <div class="line-name">Tú</div>
+            <textarea class="line-input" placeholder="Confirma con ser: sí, soy yo..."></textarea>
+            <div class="line-hint">registro formal — usa una fórmula del bloque 5d</div>
+          </div>
+        </div>
+      </div>
+      <div class="roleplay-tip" style="margin-top:20px;"><strong>Compara:</strong> vuelve a leer tu respuesta al vecino y esta última a la recepcionista. La decisión ser/estar es la misma en las dos — lo que cambia es el tono. Ese es el ajuste que de verdad hace que suenes natural.
+        <span class="en"><strong>Compare:</strong> reread your answer to the neighbour and this last one to the receptionist. The ser/estar decision is the same in both — what changes is the tone. That's the adjustment that really makes you sound natural.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 7. CHOOSE YOUR WORDS ============ -->
+  <section class="block">
+    <div class="block-head">
+      <div class="block-num">7</div>
+      <h2>Choose your words</h2>
+      <div class="time-tag">lo que te llevas</div>
+    </div>
+    <div class="panel choose-panel">
+      <p class="choose-intro">De las 16 expresiones de abajo, marca las 5–8 que realmente quieres tener listas la próxima vez que alguien te pregunte cómo estás o si va todo bien. Mejor pocas y bien interiorizadas que todas a medias.
+        <span class="en">Of the 16 expressions below, mark the 5–8 you really want to have ready next time someone asks how you are or if things are going well. Better a few well internalized than all of them half-learned.</span>
+      </p>
+      <div class="choose-grid" id="choose-grid"></div>
+      <div class="choose-footer">
+        <span id="choose-count">0 seleccionadas</span>
+        <button class="btn-primary" id="build-summary">Construir mi resumen</button>
+      </div>
+      <textarea id="final-summary" placeholder="Aquí aparecerán tus expresiones elegidas — edítalas o combínalas como quieras."></textarea>
+    </div>
+  </section>
+
+</main>
+
+<footer>ESCOLAR · Expansion Pack Mini · Ser/Estar bajo presión</footer>
+
+<script>
+/* ---------- PIEZAS: ADJETIVOS + ESTRUCTURAS ---------- */
+const PREPS = [
+  {verb:"estoy", prep:"liada", example:"Estoy liada con la boda esta semana.", en:"I'm swamped with the wedding this week."},
+  {verb:"estoy", prep:"tranquila", example:"Ahora mismo estoy bastante tranquila, la verdad.", en:"Right now I'm actually pretty calm, to be honest."},
+  {verb:"está", prep:"casi listo", example:"El local está casi listo para la boda.", en:"The venue is almost ready for the wedding."},
+  {verb:"está", prep:"en marcha", example:"Todo está en marcha, sin sorpresas de momento.", en:"Everything's moving along, no surprises so far."},
+  {verb:"estoy", prep:"organizando", example:"Estoy organizando una boda bastante grande.", en:"I'm organizing a fairly big wedding."},
+  {verb:"soy", prep:"la que", example:"Soy la que coordina todo desde España.", en:"I'm the one who coordinates everything from Spain."},
+  {verb:"soy", prep:"yo", example:"Sí, soy yo — encantada.", en:"Yes, that's me — nice to meet you."},
+  {verb:"es", prep:"así", example:"Alex es así, muy tranquilo siempre.", en:"Alex is just like that, always very calm."},
+  {verb:"está", prep:"cansado", example:"Alex está cansado después del paseo.", en:"Alex is tired after the walk."},
+  {verb:"es", prep:"grande", example:"Esta boda es bastante grande, por eso ando liada.", en:"This wedding is quite big, that's why I'm swamped."},
+  {verb:"estoy", prep:"acostumbrada", example:"Ya estoy acostumbrada a este ritmo de trabajo.", en:"I'm already used to this pace of work."},
+  {verb:"estoy", prep:"al frente de", example:"Estoy al frente del evento yo sola.", en:"I'm leading the event on my own."},
+];
+
+const grid = document.getElementById('prep-grid');
+PREPS.forEach(p=>{
+  const card = document.createElement('div');
+  card.className = 'prep-card';
+  card.tabIndex = 0;
+  card.innerHTML = `<div class="prep-verb">${p.verb} <span class="prep">${p.prep}</span></div><div class="prep-example">${p.example}<span class="en">${p.en}</span></div>`;
+  const flip = ()=> card.classList.toggle('flipped');
+  card.addEventListener('click', flip);
+  card.addEventListener('keydown', e=>{ if(e.key==='Enter' || e.key===' '){ e.preventDefault(); flip(); } });
+  grid.appendChild(card);
+});
+
+/* ---------- CHOOSE YOUR WORDS ---------- */
+const CHOICES = [
+  {es:"Estoy bien, un poco liada con la boda.", en:"I'm good, a bit swamped with the wedding."},
+  {es:"Va todo bien, está casi todo listo.", en:"Everything's going well, it's almost all ready."},
+  {es:"Sí, soy yo la que se encarga de todo.", en:"Yes, I'm the one in charge of everything."},
+  {es:"Normalmente no estoy tan liada, es que esta boda es grande.", en:"Normally I'm not this swamped, it's that this wedding is big."},
+  {es:"Alex está bien, tranquilo como siempre.", en:"Alex is fine, calm as always."},
+  {es:"Estoy... a ver... estoy bastante bien, la verdad.", en:"I'm... let's see... I'm actually pretty good."},
+  {es:"Todo en orden, sobre todo con el local.", en:"Everything's in order, especially with the venue."},
+  {es:"Bueno, la verdad es que ha sido una semana intensa.", en:"Well, to be honest it's been an intense week."},
+  {es:"Estoy acostumbrada a este ritmo ya.", en:"I'm already used to this pace."},
+  {es:"Soy la que está al frente del evento.", en:"I'm the one leading the event."},
+  {es:"¿Y tú? ¿Cómo estás?", en:"And you? How are you?"},
+  {es:"Pues sí, soy yo, encantada.", en:"Well yes, that's me, nice to meet you."},
+  {es:"Está casi todo listo, sin sorpresas.", en:"It's almost all ready, no surprises."},
+  {es:"Estoy bien, gracias por preguntar.", en:"I'm well, thank you for asking."},
+  {es:"Él es así, no se entera de nada.", en:"He's just like that, he's oblivious to everything."},
+  {es:"Ahora mismo estoy bastante tranquila.", en:"Right now I'm actually pretty calm."},
+];
+
+const chooseGrid = document.getElementById('choose-grid');
+const countEl = document.getElementById('choose-count');
+const picked = new Set();
+
+CHOICES.forEach((choice, i)=>{
+  const item = document.createElement('div');
+  item.className = 'choose-item';
+  item.innerHTML = `<div class="choose-checkbox"></div><div class="choose-text">${choice.es}<span class="en">${choice.en}</span></div>`;
+  item.addEventListener('click', ()=>{
+    item.classList.toggle('picked');
+    if(picked.has(i)){ picked.delete(i); item.querySelector('.choose-checkbox').textContent=''; }
+    else{ picked.add(i); item.querySelector('.choose-checkbox').textContent='✓'; }
+    countEl.textContent = `${picked.size} seleccionada${picked.size===1?'':'s'}`;
+  });
+  chooseGrid.appendChild(item);
+});
+
+document.getElementById('build-summary').addEventListener('click', ()=>{
+  const ta = document.getElementById('final-summary');
+  if(picked.size === 0){
+    ta.style.display = 'block';
+    ta.value = 'Marca al menos una expresión arriba para construir tu resumen.';
+    return;
+  }
+  const ordered = [...picked].sort((a,b)=>a-b).map(i=>CHOICES[i].es);
+  ta.style.display = 'block';
+  ta.value = ordered.join(' ');
+});
+
+/* ---------- LANG TOGGLE (ES / EN) ---------- */
+const langSwitch = document.getElementById('lang-switch');
+const esLabel = document.getElementById('lang-es-label');
+const enLabel = document.getElementById('lang-en-label');
+const setLang = (showEn)=>{
+  document.body.classList.toggle('show-en', showEn);
+  esLabel.classList.toggle('active', !showEn);
+  enLabel.classList.toggle('active', showEn);
+  langSwitch.setAttribute('aria-pressed', String(showEn));
+};
+langSwitch.addEventListener('click', ()=> setLang(!document.body.classList.contains('show-en')));
+langSwitch.addEventListener('keydown', (e)=>{
+  if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); setLang(!document.body.classList.contains('show-en')); }
+});
+setLang(false);
+</script>
+
+</body>
+</html>
