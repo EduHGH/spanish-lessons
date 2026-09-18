@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clase 15 · When nobody speaks English — Andrei</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+
+/* ╔══════════════════════════════════════════════════════════════╗
+   ║  ESCOLAR — sistema de diseño para clases de español online   ║
+   ║  Clase 15 · L3 Conversación con ritmo · "When nobody speaks English"   ║
+   ╚══════════════════════════════════════════════════════════════╝ */
+
+:root{
+  --paper:        #FBF7EE;
+  --paper-raised: #FFFFFF;
+  --paper-alt:    #F3ECDA;
+  --ink:          #23291F;
+  --ink-soft:     #565F52;
+  --ink-faint:    #8B9184;
+  --line:         rgba(35,41,31,0.12);
+  --line-strong:  rgba(35,41,31,0.22);
+
+  --b1:      #2F6FED;  --b1-soft: #EAF1FE;  --b1-line: #C6D9FC;
+  --b2:      #2E9E6B;  --b2-soft: #E9F6EF;  --b2-line: #BEE6D3;
+  --b3:      #DB8A2E;  --b3-soft: #FCF1E1;  --b3-line: #F3D9AF;
+  --family:  #B5502E;  --family-soft: #FBEBE3; --family-line: #EFC9B4;
+
+  --f-display: 'Fraunces', Georgia, serif;
+  --f-body:    'IBM Plex Sans', system-ui, sans-serif;
+  --f-data:    'IBM Plex Mono', monospace;
+
+  --r-sm: 8px;
+  --r-md: 14px;
+  --r-lg: 20px;
+
+  --shadow-1: 0 1px 2px rgba(35,41,31,0.05), 0 1px 8px rgba(35,41,31,0.04);
+}
+
+*{ box-sizing:border-box; }
+body{
+  margin:0;
+  background: var(--paper);
+  background-image: radial-gradient(circle at 1px 1px, var(--line) 1px, transparent 0);
+  background-size: 22px 22px;
+  color: var(--ink);
+  font-family: var(--f-body);
+  line-height:1.6;
+}
+::selection{ background: var(--b3-soft); }
+
+/* ---------- HEADER ---------- */
+header{ padding:44px 24px 28px; max-width:760px; margin:0 auto; }
+.eyebrow{
+  font-family: var(--f-data); font-size:12px; letter-spacing:.14em;
+  text-transform:uppercase; color: var(--b3); margin:0 0 10px;
+  display:flex; align-items:center; gap:10px;
+}
+.eyebrow .dot{ width:6px; height:6px; border-radius:50%; background: var(--b3); }
+h1{
+  font-family: var(--f-display); font-weight:600;
+  font-size:clamp(30px,5.6vw,46px); line-height:1.08;
+  margin:0 0 14px; letter-spacing:-.01em;
+}
+h1 em{ font-style:italic; color: var(--b3); }
+.lede{ font-size:16px; color: var(--ink-soft); max-width:56ch; margin:0; }
+
+.meta-row{
+  display:flex; flex-wrap:wrap; gap:20px; margin-top:26px;
+  font-family: var(--f-data); font-size:12px; color: var(--ink-faint);
+}
+.meta-row strong{
+  display:block; color: var(--ink); font-size:14.5px; font-weight:500;
+  font-family: var(--f-display); margin-top:3px;
+}
+
+/* ---------- SECTIONS ---------- */
+main{ max-width:760px; margin:0 auto; padding:8px 24px 100px; }
+
+section.block{ margin-bottom:52px; }
+.block-head{ display:flex; align-items:baseline; gap:12px; margin-bottom:18px; }
+.time-tag{
+  font-family: var(--f-data); font-size:11px; color: var(--ink-faint);
+  background: var(--paper-alt); padding:3px 10px; border-radius:999px; margin-left:auto; flex:none;
+}
+.block-num{
+  font-family: var(--f-data); font-size:12px; color:#fff; background: var(--b3);
+  width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  flex:none;
+}
+.block-head h2{
+  font-family: var(--f-display); font-weight:500; font-style:italic; font-size:22px; margin:0;
+}
+
+.panel{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-lg);
+  box-shadow: var(--shadow-1); padding:26px 28px;
+}
+
+/* ---------- PHRASE GRID ---------- */
+.conj-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:14px; margin-top:20px; }
+.conj-card{ border-radius: var(--r-md); padding:16px 18px; border:1px solid var(--line); background: var(--paper-alt); }
+.conj-head{ display:flex; align-items:center; gap:8px; margin:0 0 10px; }
+.conj-main{ font-family: var(--f-display); font-weight:600; font-size:17px; color: var(--b3); }
+.conj-reg{ font-family: var(--f-data); font-size:10.5px; color: var(--ink-faint); text-transform:uppercase; letter-spacing:.04em; }
+.conj-rows{ display:grid; gap:4px; font-family: var(--f-data); font-size:13px; color: var(--ink-soft); }
+.conj-rows span.pron{ color: var(--ink-faint); display:inline-block; width:76px; }
+.en{ display:block; font-style:italic; color: var(--ink-faint); font-size:0.92em; margin-top:3px; }
+
+.irregular-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:12px; margin-top:14px; }
+.irr-card{ background: var(--paper-raised); border:1px solid var(--b3-line); border-radius: var(--r-md); padding:12px 14px; text-align:center; }
+.irr-inf{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); text-transform:uppercase; }
+.irr-form{ font-family: var(--f-display); font-weight:600; font-size:18px; color: var(--b3); margin-top:4px; }
+
+.note{
+  margin-top:18px; padding:14px 16px; background: var(--b3-soft); border:1px solid var(--b3-line);
+  border-radius: var(--r-md); font-size:14px; color: var(--ink-soft);
+}
+.note strong{ color: var(--ink); }
+
+.pron-note{
+  margin-top:14px; padding:14px 16px; background: var(--paper-alt); border:1px solid var(--line);
+  border-radius: var(--r-md); font-size:14px; color: var(--ink-soft);
+}
+.pron-note strong{ color: var(--ink); }
+
+.compare-warning{
+  margin-top:14px; padding:14px 16px; background: var(--family-soft); border:1px solid var(--family-line);
+  border-radius: var(--r-md); font-size:13.5px; color: var(--ink-soft);
+}
+.compare-warning strong{ color: var(--family); }
+
+/* ---------- VOCAB CARDS ---------- */
+.vocab-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:12px; }
+.vocab-card{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:14px 16px; cursor:pointer; perspective:600px; min-height:78px;
+  display:flex; flex-direction:column; justify-content:center; transition: border-color .15s ease;
+}
+.vocab-card:hover{ border-color: var(--b3-line); }
+.vocab-card:focus-visible{ outline:2px solid var(--b3); outline-offset:2px; }
+.vocab-front{ font-family: var(--f-body); font-weight:600; font-size:15px; }
+.vocab-back{ display:none; font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); margin-top:6px; }
+.vocab-card.flipped .vocab-back{ display:block; }
+.vocab-card.flipped{ background: var(--b3-soft); border-color: var(--b3-line); }
+.vocab-hint{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin:10px 2px 16px; }
+
+/* ---------- EXERCISE ---------- */
+.exercise{ margin-bottom:20px; }
+.exercise:last-of-type{ margin-bottom:0; }
+.ex-sentence{ font-size:15.5px; margin-bottom:10px; }
+.ex-sentence .gap{ font-family: var(--f-data); color: var(--ink-faint); }
+.ex-options{ display:flex; flex-wrap:wrap; gap:8px; }
+.opt-btn{
+  font-family: var(--f-body); font-size:14px; background: var(--paper-raised);
+  border:1.5px solid var(--line); color: var(--ink); padding:7px 16px; border-radius:999px;
+  cursor:pointer; transition: all .15s ease;
+}
+.opt-btn:hover{ border-color: var(--ink-faint); }
+.opt-btn.picked{ background: var(--b3-soft); border-color: var(--b3); color: var(--b3); }
+.opt-btn.correct{ background: var(--b2-soft); border-color: var(--b2); color: var(--b2); }
+.opt-btn.wrong{ background: var(--family-soft); border-color: var(--family); color: var(--family); }
+.opt-btn:disabled{ cursor:default; }
+
+.check-bar{
+  display:flex; align-items:center; justify-content:space-between; gap:16px;
+  margin-top:22px; padding-top:18px; border-top:1px dashed var(--line);
+}
+.btn-primary{
+  font-family: var(--f-body); font-weight:600; font-size:14px; color:#fff; background: var(--b3);
+  border:none; padding:11px 22px; border-radius:999px; cursor:pointer; transition: transform .1s ease;
+}
+.btn-primary:hover{ transform: translateY(-1px); }
+#score-text{ font-family: var(--f-data); font-size:13px; color: var(--ink-faint); }
+.btn-ghost{
+  font-family: var(--f-body); font-weight:600; font-size:13px; color: var(--ink-soft); background:none;
+  border:1.5px solid var(--line); padding:9px 18px; border-radius:999px; cursor:pointer;
+}
+.btn-ghost:hover{ border-color: var(--ink-faint); }
+.ex-divider{
+  display:flex; align-items:center; gap:10px; margin:20px 0 16px;
+  font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.06em;
+  color: var(--ink-faint);
+}
+.ex-divider::before, .ex-divider::after{ content:""; flex:1; height:1px; background: var(--line); }
+.ex-divider.en-clase{ color: var(--b3); }
+.ex-divider.en-clase::before, .ex-divider.en-clase::after{ background: var(--b3-line); }
+
+/* ---------- CHARACTER CARDS ---------- */
+.characters{ display:grid; gap:16px; }
+.char-card{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-lg);
+  padding:20px 22px; display:flex; gap:16px; align-items:flex-start;
+}
+.char-avatar{
+  flex:none; width:44px; height:44px; border-radius:50%; background: var(--b3-soft);
+  display:flex; align-items:center; justify-content:center; font-family: var(--f-display);
+  font-weight:600; font-size:17px; color: var(--b3);
+}
+.char-body{ flex:1; }
+.char-name{ font-family: var(--f-display); font-weight:600; font-size:17px; margin:0 0 4px; }
+.char-role{ font-family: var(--f-data); font-size:11.5px; text-transform:uppercase; letter-spacing:.05em; color: var(--ink-faint); margin:0 0 10px; }
+.char-facts{ display:flex; flex-wrap:wrap; gap:6px; margin-bottom:10px; }
+.fact-tag{
+  font-family: var(--f-data); font-size:12px; background: var(--paper-alt); color: var(--ink-soft);
+  padding:4px 10px; border-radius:999px;
+}
+.char-prompt{ font-size:14px; color: var(--ink-soft); }
+.char-input{
+  width:100%; margin-top:8px; font-family: var(--f-body); font-size:14.5px; color: var(--ink);
+  background: var(--paper); border:1px solid var(--line); border-radius: var(--r-sm);
+  padding:10px 12px; resize:vertical; min-height:44px;
+}
+.char-input:focus{ outline:none; border-color: var(--b3-line); background: var(--paper-raised); }
+
+/* ---------- ROLEPLAY ---------- */
+.roleplay-panel{ background: var(--b1-soft); border:1px solid var(--b1-line); border-radius: var(--r-lg); padding:26px 28px; }
+.roleplay-panel .block-num{ background: var(--b1); }
+.scene-setup{
+  display:flex; gap:14px; align-items:flex-start; background: var(--paper-raised);
+  border:1px solid var(--b1-line); border-radius: var(--r-md); padding:14px 16px; margin-bottom:20px;
+}
+.scene-icon{ font-size:22px; flex:none; }
+.scene-text{ font-size:14px; color: var(--ink-soft); }
+.scene-text strong{ color: var(--ink); }
+
+.dialogue{ display:flex; flex-direction:column; gap:14px; }
+.scene-tabs{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:18px; }
+.scene-tab{
+  font-family: var(--f-data); font-size:12.5px; background: var(--paper-raised);
+  border:1.5px solid var(--b1-line); color: var(--ink-soft); padding:7px 14px;
+  border-radius:999px; cursor:pointer; transition: all .15s ease;
+}
+.scene-tab:hover{ border-color: var(--b1); }
+.scene-tab.active{ background: var(--b1); border-color: var(--b1); color:#fff; }
+.line{ display:flex; gap:12px; align-items:flex-start; }
+.line-avatar{
+  flex:none; width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  font-family: var(--f-display); font-weight:600; font-size:14px; color:#fff;
+}
+.line.friend .line-avatar{ background: var(--ink-faint); }
+.line.you .line-avatar{ background: var(--b1); }
+.line-body{ flex:1; }
+.line-name{ font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.05em; color: var(--ink-faint); margin:0 0 4px; }
+.line-bubble{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:12px 14px; font-size:14.5px; color: var(--ink);
+}
+.line.you .line-bubble{ background:#fff; border-color: var(--b1-line); }
+.line-input{
+  width:100%; font-family: var(--f-body); font-size:14.5px; color: var(--ink);
+  background:#fff; border:1px solid var(--b1-line); border-radius: var(--r-sm);
+  padding:10px 12px; resize:vertical; min-height:40px; margin-top:2px;
+}
+.line-input:focus{ outline:none; border-color: var(--b1); }
+.line-hint{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin-top:5px; }
+
+.roleplay-tip{
+  margin-top:22px; padding:14px 16px; background: var(--paper-raised); border:1px solid var(--b1-line);
+  border-radius: var(--r-md); font-size:13.5px; color: var(--ink-soft);
+}
+.roleplay-tip strong{ color: var(--ink); }
+
+/* ---------- FINAL TASK ---------- */
+.task-panel{ background: var(--family-soft); border:1px solid var(--family-line); border-radius: var(--r-lg); padding:26px 28px; }
+.task-panel .block-num{ background: var(--family); }
+textarea#final-task{
+  width:100%; min-height:110px; font-family: var(--f-body); font-size:15px; color: var(--ink);
+  background: var(--paper-raised); border:1px solid var(--family-line); border-radius: var(--r-md);
+  padding:14px 16px; resize:vertical; margin-top:14px;
+}
+textarea#final-task:focus{ outline:none; border-color: var(--family); }
+.task-footer{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:12px; flex-wrap:wrap; }
+#task-count{ font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); }
+.btn-secondary{
+  font-family: var(--f-body); font-weight:600; font-size:13.5px; color: var(--family); background:none;
+  border:1.5px solid var(--family-line); padding:9px 18px; border-radius:999px; cursor:pointer;
+}
+.saved-flag{ font-family: var(--f-data); font-size:12px; color: var(--b2); opacity:0; transition: opacity .3s ease; }
+.saved-flag.show{ opacity:1; }
+
+/* ---------- FOOTER NAV ---------- */
+footer{
+  max-width:760px; margin:0 auto; padding:0 24px 60px; display:flex;
+  justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;
+  font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint);
+}
+footer a{ color: var(--b3); text-decoration:none; }
+footer a:hover{ text-decoration:underline; }
+
+@media (max-width:600px){
+  header{ padding:34px 18px 22px; }
+  main{ padding:8px 18px 90px; }
+  .panel, .task-panel{ padding:20px 18px; }
+  .char-card{ flex-direction:column; }
+}
+@media (prefers-reduced-motion: reduce){ *{ transition:none !important; } }
+</style>
+</head>
+<body>
+
+<header>
+  <p class="eyebrow"><span class="dot"></span>Clase 15 de 27 · L3 Conversación con ritmo · Preguntas de aclaración</p>
+  <h1>Cuando nadie <em>traduce</em></h1>
+  <p class="lede">La clase pasada aprendiste a mantenerte dentro de un grupo. Hoy aprendes a sobrevivir cuando de verdad no entiendes algo — sin recurrir al inglés, sin desconectar de la conversación y sin sonar cortante al pedir que repitan. Pedir aclaración bien es una de las habilidades más útiles que puedes tener en español: te permite seguir en la conversación en vez de fingir que entendiste.</p>
+  <div class="meta-row">
+    <div>Duración<strong>50 min</strong></div>
+    <div>Construye sobre<strong>Clases 1–14</strong></div>
+    <div>Nivel<strong>A2 → B1</strong></div>
+  </div>
+</header>
+
+<main>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">1</span><h2>Pedir aclaración sin sonar cortante</h2><span class="time-tag">10 min</span></div>
+    <div class="panel">
+      <p style="margin:0 0 6px; font-size:14.5px; color:var(--ink-soft);">No todas las formas de pedir que te repitan algo suenan igual. "¿Qué?" a secas puede sonar brusco; hay formas más suaves y naturales que un hablante nativo usa constantemente sin que suene a que no entendiste nada.</p>
+
+      <div class="conj-grid">
+        <div class="conj-card">
+          <div class="conj-head"><span class="conj-main">¿cómo?</span><span class="conj-reg">no oí bien</span></div>
+          <div class="conj-rows">
+            <div><span class="pron">uso</span>no escuchaste una palabra o frase</div>
+            <div><span class="pron">ejemplo</span>¿<strong>cómo</strong>? no te he oído bien</div>
+          </div>
+        </div>
+        <div class="conj-card">
+          <div class="conj-head"><span class="conj-main">¿puedes repetir?</span><span class="conj-reg">pedir repetición</span></div>
+          <div class="conj-rows">
+            <div><span class="pron">uso</span>pedir que digan lo mismo otra vez</div>
+            <div><span class="pron">ejemplo</span>¿<strong>puedes repetir</strong> eso último?</div>
+          </div>
+        </div>
+        <div class="conj-card">
+          <div class="conj-head"><span class="conj-main">¿qué quiere decir...?</span><span class="conj-reg">no conoces la palabra</span></div>
+          <div class="conj-rows">
+            <div><span class="pron">uso</span>preguntar el significado de algo</div>
+            <div><span class="pron">ejemplo</span>¿<strong>qué quiere decir</strong> "chungo"?</div>
+          </div>
+        </div>
+        <div class="conj-card">
+          <div class="conj-head"><span class="conj-main">más despacio, por favor</span><span class="conj-reg">van muy rápido</span></div>
+          <div class="conj-rows">
+            <div><span class="pron">uso</span>pedir que bajen el ritmo, no que repitan</div>
+            <div><span class="pron">ejemplo</span>¿puedes hablar <strong>más despacio</strong>?</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="note"><strong>El truco:</strong> pedir aclaración no es una señal de debilidad en español — es completamente normal, incluso entre nativos. Cuanto más rápido lo pidas de forma natural, más fluida parecerá la conversación, no menos.</div>
+
+      <p style="margin:20px 0 6px; font-size:14.5px; color:var(--ink-soft);">Más formas de mantener la conversación viva mientras aclaras algo:</p>
+      <div class="irregular-grid">
+        <div class="irr-card"><div class="irr-inf">no entendiste nada</div><div class="irr-form">perdona, no te sigo</div></div>
+        <div class="irr-card"><div class="irr-inf">confirmar que entendiste</div><div class="irr-form">o sea, quieres decir que...</div></div>
+        <div class="irr-card"><div class="irr-inf">pedir que deletreen</div><div class="irr-form">¿cómo se escribe eso?</div></div>
+        <div class="irr-card"><div class="irr-inf">ganar tiempo para procesar</div><div class="irr-form">a ver, espera un momento</div></div>
+      </div>
+
+      <div class="pron-note">🔊 <strong>Pronunciación de hoy:</strong> pedir aclaraciones sin sonar cortante depende mucho de la entonación — sube ligeramente el tono al final de "¿puedes repetir?" para que suene a petición amable, no a orden. Practica la diferencia entre un tono plano (brusco) y un tono ascendente (amable).</div>
+
+      <div class="compare-warning">
+        <strong>Cuándo vale usar inglés:</strong> si después de dos intentos de aclaración sigues completamente perdido, está bien decir una palabra en inglés para desatascar la conversación — mejor eso que desconectarte del todo. Pero intenta siempre agotar primero las opciones en español.
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">2</span><h2>Repaso relámpago</h2><span class="time-tag">6 min</span></div>
+    <p class="vocab-hint">Seis piezas de vocabulario para mantener viva una conversación cuando no entiendes algo. Toca cada tarjeta para ver un ejemplo. Dilo en voz alta antes de mirar el reverso.</p>
+    <div class="vocab-grid" id="vocab-grid"></div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">3</span><h2>Practica</h2><span class="time-tag">12 min</span></div>
+    <div class="panel">
+      <p class="vocab-hint" style="margin-bottom:14px;">30 frases eligiendo la pregunta de aclaración correcta según la situación: las primeras 10 se hacen en voz alta en clase — di la opción correcta antes de tocar el botón; el resto queda como repaso auditivo para casa.</p>
+      <div id="exercises"></div>
+      <div class="check-bar">
+        <div style="display:flex; gap:10px;">
+          <button class="btn-primary" id="check-btn">Comprobar respuestas</button>
+          <button class="btn-ghost" id="reset-btn">Reiniciar</button>
+        </div>
+        <span id="score-text"></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">4</span><h2>Pide que te aclaren</h2><span class="time-tag">8 min</span></div>
+    <p class="lede" style="margin-bottom:16px;">Cada tarjeta te da una situación donde te has perdido algo y tienes que pedir aclaración de forma natural. Las primeras 6 se trabajan en clase; el resto queda como banco de repaso para casa.</p>
+    <div class="characters" id="characters"></div>
+  </section>
+
+  <section class="block roleplay-panel">
+    <div class="block-head"><span class="block-num">5</span><h2>Roleplay: cena familiar sin inglés</h2><span class="time-tag">14 min</span></div>
+    <p class="lede" style="margin-bottom:16px;">5 escenas donde estás con gente que no habla inglés y tienes que pedir aclaración cuando algo se te escapa — todo con las expresiones de hoy. Practicamos en voz alta la escena principal en clase; el resto son para escuchar y practicar por tu cuenta durante la semana.</p>
+    <div class="scene-tabs" id="scene-tabs"></div>
+    <div id="scene-container"></div>
+    <div class="roleplay-tip"><strong>En clase:</strong> practicaremos la escena "Cena con la familia de tu novia" en voz alta, cambiando de rol. El resto de escenas son para escuchar y repetir por tu cuenta durante la semana — la idea es que las digas, no que las escribas. Vale responder alguna vez en inglés si te atascas de verdad, pero solo como último recurso.</div>
+  </section>
+
+  <section class="block task-panel">
+    <div class="block-head"><span class="block-num">6</span><h2 style="color:var(--family)">Tu tarea</h2><span class="time-tag">3 min</span></div>
+    <p style="margin:0; font-size:15px; color:var(--ink-soft);">Escucha un audio a velocidad normal sobre cualquier tema y luego otro más lento del mismo tema (puedes usar el mismo podcast a distintas velocidades de reproducción). Nota oralmente la diferencia entre lo que entendiste en cada uno — no hace falta transcribir nada.</p>
+    <textarea id="final-task" placeholder="Notas rápidas sobre qué escuchaste y qué diferencia notaste (opcional)..."></textarea>
+    <p style="margin:10px 2px 0; font-size:12.5px; color:var(--ink-faint);">Esto es solo un apoyo para ti — no hace falta que esté perfecto. Lo importante es decirlo en voz alta, no el texto escrito.</p>
+    <div class="task-footer">
+      <span id="task-count">0 líneas escritas</span>
+      <div style="display:flex; gap:10px; align-items:center;">
+        <span class="saved-flag" id="saved-flag">Guardado ✓</span>
+        <button class="btn-secondary" id="save-btn">Guardar tarea</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <span>Clase 15 · When nobody speaks English</span>
+  <span>Próxima clase → Clase 16: Talking business, Madrid style</span>
+</footer>
+
+<script>
+/* ---------- VOCAB ---------- */
+const VOCAB = [
+  {front:"no te sigo", back:"Perdona, no te sigo, ¿puedes explicarlo de otra manera?", en:"Sorry, I'm not following you, can you explain it another way?"},
+  {front:"se me ha escapado", back:"Se me ha escapado esa palabra, ¿qué significa?", en:"That word slipped past me, what does it mean?"},
+  {front:"ir al grano", back:"Perdona si voy al grano, pero no entendí la última parte.", en:"Sorry if I'm getting straight to the point, but I didn't understand the last part."},
+  {front:"quedarse en blanco", back:"Me he quedado en blanco, ¿me lo puedes repetir?", en:"My mind went blank, can you repeat it for me?"},
+  {front:"a mi ritmo", back:"Prefiero ir a mi ritmo cuando hablo español, sin prisa.", en:"I prefer to go at my own pace when I speak Spanish, no rush."},
+  {front:"entender a medias", back:"He entendido a medias, mejor cuéntamelo otra vez.", en:"I half understood, better tell me again."},
+];
+
+const grid = document.getElementById('vocab-grid');
+VOCAB.forEach(v=>{
+  const card = document.createElement('div');
+  card.className = 'vocab-card';
+  card.setAttribute('role', 'button');
+  card.setAttribute('tabindex', '0');
+  card.setAttribute('aria-pressed', 'false');
+  card.setAttribute('aria-label', `${v.front}. Pulsa para ver un ejemplo.`);
+  card.innerHTML = `<div class="vocab-front">${v.front}</div><div class="vocab-back">${v.back}<span class="en">${v.en}</span></div>`;
+  const toggle = ()=>{
+    const flipped = card.classList.toggle('flipped');
+    card.setAttribute('aria-pressed', String(flipped));
+  };
+  card.addEventListener('click', toggle);
+  card.addEventListener('keydown', (e)=>{
+    if(e.key === 'Enter' || e.key === ' '){
+      e.preventDefault();
+      toggle();
+    }
+  });
+  grid.appendChild(card);
+});
+
+/* ---------- EXERCISES ---------- */
+const EXERCISES = [
+  {"sentence": "¿<span class=\"gap\">___</span>? No te he oído bien, hay mucho ruido aquí.", "options": ["Cómo","Qué quiere decir","Más despacio"], "answer": "Cómo", "en": "What? I didn't hear you well, there's a lot of noise here."},
+  {"sentence": "¿<span class=\"gap\">___</span> eso último que has dicho, por favor?", "options": ["Puedes repetir","Cómo se escribe","No te sigo"], "answer": "Puedes repetir", "en": "Can you repeat that last thing you said, please?"},
+  {"sentence": "¿<span class=\"gap\">___</span> \"chungo\"? No he escuchado esa palabra nunca.", "options": ["Qué quiere decir","Cómo","Puedes repetir"], "answer": "Qué quiere decir", "en": "What does \"chungo\" mean? I've never heard that word."},
+  {"sentence": "¿Puedes hablar <span class=\"gap\">___</span>? Vas un poco rápido para mí.", "options": ["más despacio","más alto","más bajo"], "answer": "más despacio", "en": "Can you speak more slowly? You're going a bit fast for me."},
+  {"sentence": "Perdona, <span class=\"gap\">___</span>, ¿me lo explicas de otra manera?", "options": ["no te sigo","cómo se escribe","a mi ritmo"], "answer": "no te sigo", "en": "Sorry, I'm not following, can you explain it another way?"},
+  {"sentence": "O sea, <span class=\"gap\">___</span> que el plan es para mañana, ¿no?", "options": ["quieres decir","qué quiere decir","cómo"], "answer": "quieres decir", "en": "So, you mean the plan is for tomorrow, right?"},
+  {"sentence": "¿<span class=\"gap\">___</span> esa palabra? No la conozco.", "options": ["Cómo se escribe","Más despacio","No te sigo"], "answer": "Cómo se escribe", "en": "How do you spell that word? I don't know it."},
+  {"sentence": "A ver, <span class=\"gap\">___</span> un momento, necesito pensarlo.", "options": ["espera","repite","escribe"], "answer": "espera", "en": "Hold on, wait a moment, I need to think about it."},
+  {"sentence": "Se me <span class=\"gap\">___</span> esa parte, ¿me la repites?", "options": ["ha escapado","ha quedado","ha entendido"], "answer": "ha escapado", "en": "That part slipped past me, can you repeat it?"},
+  {"sentence": "Me he <span class=\"gap\">___</span> en blanco, no me acuerdo de qué hablábamos.", "options": ["quedado","escapado","entendido"], "answer": "quedado", "en": "My mind went blank, I don't remember what we were talking about."},
+  {"sentence": "¿<span class=\"gap\">___</span>? Perdona, estaba pensando en otra cosa.", "options": ["Cómo","Cómo se escribe","A mi ritmo"], "answer": "Cómo", "en": "What? Sorry, I was thinking about something else."},
+  {"sentence": "Prefiero ir <span class=\"gap\">___</span> cuando hablo español, sin prisa.", "options": ["a mi ritmo","al grano","en blanco"], "answer": "a mi ritmo", "en": "I prefer to go at my own pace when I speak Spanish, no rush."},
+  {"sentence": "He entendido <span class=\"gap\">___</span>, mejor cuéntamelo otra vez.", "options": ["a medias","a mi ritmo","al grano"], "answer": "a medias", "en": "I half understood, better tell me again."},
+  {"sentence": "¿<span class=\"gap\">___</span> lo que acabas de decir? No lo he pillado bien.", "options": ["Puedes repetir","Cómo se escribe","A mi ritmo"], "answer": "Puedes repetir", "en": "Can you repeat what you just said? I didn't quite catch it."},
+  {"sentence": "Perdona si voy <span class=\"gap\">___</span>, pero no entendí la última parte.", "options": ["al grano","a mi ritmo","en blanco"], "answer": "al grano", "en": "Sorry if I'm getting straight to the point, but I didn't understand the last part."},
+  {"sentence": "¿<span class=\"gap\">___</span> \"vaya tela\"? Lo he escuchado varias veces hoy.", "options": ["Qué quiere decir","Cómo","Más despacio"], "answer": "Qué quiere decir", "en": "What does \"vaya tela\" mean? I've heard it several times today."},
+  {"sentence": "¿Podrías hablar un poco <span class=\"gap\">___</span>? Me cuesta seguirte.", "options": ["más despacio","más rápido","más bajo"], "answer": "más despacio", "en": "Could you speak a bit more slowly? I'm having trouble following you."},
+  {"sentence": "Bueno, <span class=\"gap\">___</span> un segundo, que me he perdido.", "options": ["a ver, espera","cómo se escribe","al grano"], "answer": "a ver, espera", "en": "Well, hold on a second, I got lost."},
+  {"sentence": "¿<span class=\"gap\">___</span> que no vas a poder venir mañana?", "options": ["Quieres decir","Qué quiere decir","Cómo se escribe"], "answer": "Quieres decir", "en": "Do you mean you won't be able to come tomorrow?"},
+  {"sentence": "No entendí <span class=\"gap\">___</span> nada, ¿me lo cuentas todo otra vez?", "options": ["prácticamente","al grano","a mi ritmo"], "answer": "prácticamente", "en": "I practically understood nothing, can you tell me the whole thing again?"},
+  {"sentence": "¿<span class=\"gap\">___</span>, por favor? Es que hay mucho ruido de fondo.", "options": ["Puedes repetir","Cómo se escribe","A mi ritmo"], "answer": "Puedes repetir", "en": "Can you repeat, please? There's a lot of background noise."},
+  {"sentence": "Se me <span class=\"gap\">___</span> el nombre de la calle, ¿me lo dices otra vez?", "options": ["ha escapado","ha quedado","ha entendido"], "answer": "ha escapado", "en": "The street name slipped past me, can you tell me again?"},
+  {"sentence": "¿<span class=\"gap\">___</span> \"agobiado\"? Es una palabra nueva para mí.", "options": ["Qué quiere decir","Cómo se escribe","Más despacio"], "answer": "Qué quiere decir", "en": "What does \"agobiado\" mean? It's a new word for me."},
+  {"sentence": "Perdona, me he quedado <span class=\"gap\">___</span> con esa expresión.", "options": ["en blanco","a mi ritmo","al grano"], "answer": "en blanco", "en": "Sorry, I blanked out with that expression."},
+  {"sentence": "¿<span class=\"gap\">___</span>? No he entendido nada de lo que has dicho.", "options": ["Cómo","Cómo se escribe","A mi ritmo"], "answer": "Cómo", "en": "What? I didn't understand anything you said."},
+  {"sentence": "¿Me lo <span class=\"gap\">___</span> más despacio, por favor?", "options": ["explicas","escribes","escapas"], "answer": "explicas", "en": "Can you explain it to me more slowly, please?"},
+  {"sentence": "O sea, <span class=\"gap\">___</span> que el examen es el jueves, no el viernes.", "options": ["quieres decir","qué quiere decir","cómo"], "answer": "quieres decir", "en": "I mean, you mean the exam is on Thursday, not Friday."},
+  {"sentence": "Voy <span class=\"gap\">___</span>, sin prisa, para poder entenderlo todo bien.", "options": ["a mi ritmo","al grano","en blanco"], "answer": "a mi ritmo", "en": "I'm going at my own pace, no rush, so I can understand everything well."},
+  {"sentence": "¿<span class=\"gap\">___</span> esa palabra? Quiero apuntarla para no olvidarla.", "options": ["Cómo se escribe","Más despacio","No te sigo"], "answer": "Cómo se escribe", "en": "How do you spell that word? I want to write it down so I don't forget it."},
+  {"sentence": "Perdona, <span class=\"gap\">___</span> del todo, ¿puedes explicármelo desde el principio?", "options": ["no te sigo","cómo se escribe","a mi ritmo"], "answer": "no te sigo", "en": "Sorry, I'm not following at all, can you explain it to me from the start?"}
+];
+
+const exWrap = document.getElementById('exercises');
+EXERCISES.forEach((ex, i)=>{
+  if(i === 0){
+    const divider = document.createElement('div');
+    divider.className = 'ex-divider en-clase';
+    divider.textContent = 'en clase · ítems 1–10';
+    exWrap.appendChild(divider);
+  }
+  if(i === 10){
+    const divider = document.createElement('div');
+    divider.className = 'ex-divider';
+    divider.textContent = 'para casa · repaso auditivo opcional';
+    exWrap.appendChild(divider);
+  }
+  const el = document.createElement('div');
+  el.className = 'exercise';
+  el.dataset.answer = ex.answer;
+  el.innerHTML = `
+    <div class="ex-sentence">${i+1}. ${ex.sentence}</div>
+    <div class="ex-options">
+      ${ex.options.map(o=>`<button class="opt-btn" data-value="${o}">${o}</button>`).join('')}
+    </div>
+    <p class="en" style="margin-top:8px;">${ex.en}</p>
+  `;
+  exWrap.appendChild(el);
+
+  el.querySelectorAll('.opt-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      el.querySelectorAll('.opt-btn').forEach(b=>b.classList.remove('picked'));
+      btn.classList.add('picked');
+    });
+  });
+});
+
+document.getElementById('check-btn').addEventListener('click', ()=>{
+  let correct = 0;
+  document.querySelectorAll('.exercise').forEach(el=>{
+    const answer = el.dataset.answer;
+    const picked = el.querySelector('.opt-btn.picked');
+    el.querySelectorAll('.opt-btn').forEach(b=>{
+      b.disabled = true;
+      if(b.dataset.value === answer) b.classList.add('correct');
+      else if(b === picked) b.classList.add('wrong');
+    });
+    if(picked && picked.dataset.value === answer) correct++;
+  });
+  document.getElementById('score-text').textContent = `${correct} / ${EXERCISES.length} correctas`;
+});
+
+document.getElementById('reset-btn').addEventListener('click', ()=>{
+  document.querySelectorAll('.exercise').forEach(el=>{
+    el.querySelectorAll('.opt-btn').forEach(b=>{
+      b.disabled = false;
+      b.classList.remove('picked','correct','wrong');
+    });
+  });
+  document.getElementById('score-text').textContent = '';
+});
+
+/* ---------- CHARACTER CARDS ---------- */
+const CHARACTERS = [
+  {"name": "Madre de Marta", "role": "Habla rápido y con acento de su región, y se te escapa una palabra clave", "roleEn": "She speaks fast with a regional accent, and a key word slips past you", "facts": ["clase 15","qué quiere decir","familia, cariñosa"], "prompt": "Pídele que te explique una palabra usando \"¿qué quiere decir...?\":", "promptEn": "Ask her to explain a word using \"what does... mean?\":"},
+  {"name": "Iker", "role": "Te cuenta algo de fútbol muy rápido y te pide que sigas su ritmo", "roleEn": "He tells you something about football very fast and expects you to keep up", "facts": ["clase 15","más despacio","fútbol, rápido"], "prompt": "Pídele que hable más despacio:", "promptEn": "Ask him to speak more slowly:"},
+  {"name": "Padre de Marta", "role": "Usa una expresión que no conoces en medio de una frase larga", "roleEn": "He uses an expression you don't know in the middle of a long sentence", "facts": ["clase 15","qué quiere decir","formal, familia"], "prompt": "Pregúntale el significado de la expresión, usando \"¿qué quiere decir...?\":", "promptEn": "Ask him the meaning of the expression, using \"what does... mean?\":"},
+  {"name": "Rubén", "role": "Te ha dicho algo pero no le has oído bien por el ruido del bar", "roleEn": "He told you something but you didn't hear him well because of the bar noise", "facts": ["clase 15","cómo / puedes repetir","informal, ruido"], "prompt": "Pídele que repita usando \"¿cómo?\" o \"¿puedes repetir?\":", "promptEn": "Ask him to repeat using \"what?\" or \"can you repeat?\":"},
+  {"name": "Sole", "role": "Confirma contigo algo que dijiste, pero tú no estás seguro de haber entendido bien", "roleEn": "She confirms something you said, but you're not sure you understood correctly", "facts": ["clase 15","o sea, quieres decir","atenta, curiosa"], "prompt": "Confirma lo que ha entendido usando \"o sea, quieres decir que...\":", "promptEn": "Confirm what you understood using \"I mean, you mean that...\":"},
+  {"name": "Un camarero en un bar con música alta", "role": "Te toma nota pero con la música fuerte no le entiendes bien", "roleEn": "He's taking your order but with the loud music you can't understand him well", "facts": ["clase 15","más despacio","ruido, formal"], "prompt": "Pídele que hable más alto o más despacio:", "promptEn": "Ask him to speak louder or more slowly:"},
+  {"name": "Un compañero de máster con acento fuerte", "role": "Habla con un acento regional marcado y te cuesta seguirle", "roleEn": "He speaks with a strong regional accent and you have trouble following him", "facts": ["clase 15","no te sigo","académico"], "prompt": "Dile que no le sigues del todo y pide que aclare:", "promptEn": "Tell him you're not quite following and ask him to clarify:"},
+  {"name": "Un vecino mayor", "role": "Usa palabras y expresiones más antiguas que no conoces", "roleEn": "He uses older words and expressions you don't know", "facts": ["formal","qué quiere decir","mayor, amable"], "prompt": "Pregúntale el significado de una expresión que no conoces:", "promptEn": "Ask him the meaning of an expression you don't know:"},
+  {"name": "Diego", "role": "Te habla muy rápido sobre un plan y no captas todos los detalles", "roleEn": "He talks very fast about a plan and you don't catch all the details", "facts": ["clase 15","más despacio / repites","informal, rápido"], "prompt": "Pídele que repita los detalles más despacio:", "promptEn": "Ask him to repeat the details more slowly:"},
+  {"name": "Tú mismo, al teléfono", "role": "Hablas por teléfono con alguien y sin ver su cara te resulta más difícil entender", "roleEn": "You're on the phone with someone and without seeing their face it's harder to understand", "facts": ["informal","cómo / repites","teléfono"], "prompt": "Pide aclaración por teléfono usando alguna de las expresiones de hoy:", "promptEn": "Ask for clarification on the phone using one of today's expressions:"}
+];
+
+const charWrap = document.getElementById('characters');
+CHARACTERS.forEach((c, i)=>{
+  if(i === 0){
+    const divider = document.createElement('div');
+    divider.className = 'ex-divider en-clase';
+    divider.textContent = 'en clase · tarjetas 1–6';
+    charWrap.appendChild(divider);
+  }
+  if(i === 6){
+    const divider = document.createElement('div');
+    divider.className = 'ex-divider';
+    divider.textContent = 'para casa · banco de repaso';
+    charWrap.appendChild(divider);
+  }
+  const card = document.createElement('div');
+  card.className = 'char-card';
+  card.innerHTML = `
+    <div class="char-avatar">${c.name.charAt(0)}</div>
+    <div class="char-body">
+      <p class="char-name">${c.name}</p>
+      <p class="char-role">${c.role}<span class="en">${c.roleEn}</span></p>
+      <div class="char-facts">${c.facts.map(f=>`<span class="fact-tag">${f}</span>`).join('')}</div>
+      <p class="char-prompt">${c.prompt}<span class="en">${c.promptEn}</span></p>
+      <textarea class="char-input" rows="2" placeholder="¿Cómo? / ¿Puedes repetir? / ¿Qué quiere decir...?"></textarea>
+    </div>
+  `;
+  charWrap.appendChild(card);
+});
+
+/* ---------- ROLEPLAY SCENES ---------- */
+const SCENES = [
+  {
+    "id": "cena-familia",
+    "tab": "Cena con la familia de tu novia",
+    "icon": "🍽️",
+    "setup": "Estás cenando con la familia de Marta, que no habla inglés. Hablan rápido y usan expresiones que no conoces, y tienes que seguir la conversación pidiendo aclaración cuando lo necesites.",
+    "setupEn": "You're having dinner with Marta's family, who don't speak English. They talk fast and use expressions you don't know, and you have to follow along by asking for clarification when needed.",
+    "lines": [
+      {"who": "friend", "name": "Madre de Marta", "text": "Bueno, cuéntanos, ¿qué tal va el máster? Últimamente vais fatal de tiempo, ¿no?", "textEn": "Well, tell us, how's the master's going? You all seem really pressed for time lately, right?"},
+      {"who": "you", "hint": "Pide aclaración de \"vais fatal de tiempo\" si no la conoces, y luego responde.", "hintEn": "Ask for clarification on \"you're really pressed for time\" if you don't know it, then answer."},
+      {"who": "friend", "name": "Padre de Marta", "text": "Es que con tanto lío, seguro que no dais abasto.", "textEn": "With so much going on, I bet you can't keep up."},
+      {"who": "you", "hint": "Pregunta qué significa \"dar abasto\" usando \"¿qué quiere decir...?\".", "hintEn": "Ask what \"to keep up\" means using \"what does... mean?\"."},
+      {"who": "friend", "name": "Madre de Marta", "text": "Ay, perdona, hablo muy rápido cuando me pongo nerviosa.", "textEn": "Oh, sorry, I talk very fast when I get nervous."},
+      {"who": "you", "hint": "Pídele amablemente que hable un poco más despacio.", "hintEn": "Kindly ask her to speak a bit more slowly."},
+      {"who": "friend", "name": "Padre de Marta", "text": "¿Y tenéis pensado quedaros en Madrid cuando acabéis, o qué?", "textEn": "And are you planning to stay in Madrid when you finish, or what?"},
+      {"who": "you", "hint": "Responde a la pregunta con tus planes.", "hintEn": "Answer the question with your plans."}
+    ]
+  },
+  {
+    "id": "bar-ruido",
+    "tab": "Bar con música muy alta",
+    "icon": "🔊",
+    "setup": "En un bar con música muy alta, Iker te cuenta algo importante pero apenas se le oye entre el ruido.",
+    "setupEn": "In a bar with very loud music, Iker tells you something important but you can barely hear him over the noise.",
+    "lines": [
+      {"who": "friend", "name": "Iker", "text": "Oye, tengo que contarte algo del partido del sábado, fue una locura.", "textEn": "Hey, I have to tell you something about Saturday's match, it was crazy."},
+      {"who": "you", "hint": "Pide que repita porque no le has oído bien.", "hintEn": "Ask him to repeat because you didn't hear him well."},
+      {"who": "friend", "name": "Iker", "text": "Que el árbitro pitó un penalti que no era, ¡una vergüenza!", "textEn": "The referee called a penalty that wasn't one, a disgrace!"},
+      {"who": "you", "hint": "Reacciona a lo que ha dicho, pidiendo aclaración si algo se te escapa.", "hintEn": "React to what he said, asking for clarification if something slips past you."},
+      {"who": "friend", "name": "Iker", "text": "¿Puedes creerte que encima el VAR no lo revisó?", "textEn": "Can you believe the VAR didn't even review it?"},
+      {"who": "you", "hint": "Pregunta qué significa VAR si no lo sabes, o reacciona si lo sabes.", "hintEn": "Ask what VAR means if you don't know, or react if you do."},
+      {"who": "friend", "name": "Iker", "text": "En fin, menos mal que remontamos en la segunda parte.", "textEn": "Anyway, thank goodness we came back in the second half."},
+      {"who": "you", "hint": "Cierra la conversación con tu reacción final.", "hintEn": "Close the conversation with your final reaction."}
+    ]
+  },
+  {
+    "id": "clase-master",
+    "tab": "Compañero de máster con acento fuerte",
+    "icon": "🎒",
+    "setup": "Un compañero de máster con un acento regional muy marcado te explica un trabajo en grupo y te cuesta seguirle.",
+    "setupEn": "A classmate with a strong regional accent explains a group assignment and you struggle to follow him.",
+    "lines": [
+      {"who": "friend", "name": "Compañero", "text": "Entonces pa'l trabajo tenemos que entregarlo pa'l jueves, ¿vale?", "textEn": "So for the assignment we have to hand it in by Thursday, okay?"},
+      {"who": "you", "hint": "Confirma lo que has entendido, aclarando si hace falta.", "hintEn": "Confirm what you understood, clarifying if needed."},
+      {"who": "friend", "name": "Compañero", "text": "Y hay que meter también los datos del segundo trimestre, que se me olvidaba.", "textEn": "And we also have to include the second quarter's data, I almost forgot."},
+      {"who": "you", "hint": "Pide que repita la parte de los datos si no la has captado.", "hintEn": "Ask him to repeat the data part if you didn't catch it."},
+      {"who": "friend", "name": "Compañero", "text": "Vamos, que no es pa' tanto, en un par de horas lo tenemos.", "textEn": "Come on, it's not a big deal, we'll have it done in a couple of hours."},
+      {"who": "you", "hint": "Reacciona y propón cuándo quedar para hacerlo juntos.", "hintEn": "React and propose when to meet to do it together."},
+      {"who": "friend", "name": "Compañero", "text": "Vale, pues quedamos mañana en la biblioteca a primera hora.", "textEn": "Okay, so let's meet tomorrow at the library first thing."},
+      {"who": "you", "hint": "Confirma el plan de quedar mañana.", "hintEn": "Confirm the plan to meet tomorrow."}
+    ]
+  },
+  {
+    "id": "vecina-mayor",
+    "tab": "Charla con una vecina mayor en el portal",
+    "icon": "🏠",
+    "setup": "En el portal de tu edificio, una vecina mayor te cuenta una historia larga usando expresiones que no conoces.",
+    "setupEn": "In your building's lobby, an older neighbor tells you a long story using expressions you don't know.",
+    "lines": [
+      {"who": "friend", "name": "Vecina", "text": "Ay, hijo, lo que me pasó ayer fue de traca, no veas.", "textEn": "Oh dear, what happened to me yesterday was unbelievable, you have no idea."},
+      {"who": "you", "hint": "Pregunta qué quiere decir \"de traca\" si no lo conoces.", "hintEn": "Ask what \"de traca\" means if you don't know it."},
+      {"who": "friend", "name": "Vecina", "text": "Se me averió el ascensor y tuve que subir seis pisos a pata.", "textEn": "My elevator broke down and I had to walk up six flights on foot."},
+      {"who": "you", "hint": "Reacciona con sorpresa y comprensión.", "hintEn": "React with surprise and understanding."},
+      {"who": "friend", "name": "Vecina", "text": "Con el jaleo que hay hoy en día para arreglar cualquier cosa...", "textEn": "With all the hassle there is nowadays to fix anything..."},
+      {"who": "you", "hint": "Pídele que hable un poco más despacio si va rápido, y sigue la conversación.", "hintEn": "Ask her to speak a bit more slowly if she's going fast, and continue the conversation."},
+      {"who": "friend", "name": "Vecina", "text": "En fin, hijo, que tengas un buen día. Un placer charlar contigo.", "textEn": "Anyway, dear, have a good day. A pleasure chatting with you."},
+      {"who": "you", "hint": "Despídete amablemente de la vecina.", "hintEn": "Say a kind goodbye to the neighbor."}
+    ]
+  },
+  {
+    "id": "llamada-telefonica",
+    "tab": "Llamada telefónica con un amigo de Marta",
+    "icon": "📞",
+    "setup": "Un amigo de Marta te llama por teléfono para confirmar un plan, y sin ver su cara te resulta más difícil entender todo.",
+    "setupEn": "A friend of Marta's calls you on the phone to confirm a plan, and without seeing his face it's harder to understand everything.",
+    "lines": [
+      {"who": "friend", "name": "Diego (por teléfono)", "text": "¡Ey! Oye, que llamo pa' confirmar lo de mañana, ¿te viene bien a las ocho?", "textEn": "Hey! I'm calling to confirm about tomorrow, does eight work for you?"},
+      {"who": "you", "hint": "Confirma la hora, pidiendo que repita si no la has oído bien.", "hintEn": "Confirm the time, asking him to repeat if you didn't hear it well."},
+      {"who": "friend", "name": "Diego (por teléfono)", "text": "Genial, pues nos vemos donde siempre, ya sabes.", "textEn": "Great, so we'll meet at the usual place, you know."},
+      {"who": "you", "hint": "Pregunta a qué lugar se refiere si no estás seguro.", "hintEn": "Ask which place he means if you're not sure."},
+      {"who": "friend", "name": "Diego (por teléfono)", "text": "El bar de la esquina de tu casa, el de siempre, tío.", "textEn": "The bar on the corner by your place, the usual one, man."},
+      {"who": "you", "hint": "Confirma que has entendido el lugar.", "hintEn": "Confirm that you understood the location."},
+      {"who": "friend", "name": "Diego (por teléfono)", "text": "Perfecto, pues nos vemos mañana. ¡Un abrazo!", "textEn": "Perfect, see you tomorrow then. Take care!"},
+      {"who": "you", "hint": "Despídete de forma natural por teléfono.", "hintEn": "Say goodbye naturally on the phone."}
+    ]
+  }
+];
+
+const sceneTabs = document.getElementById('scene-tabs');
+const sceneContainer = document.getElementById('scene-container');
+let activeScene = 0;
+
+function renderTabs(){
+  sceneTabs.innerHTML = SCENES.map((s,i)=>
+    `<button class="scene-tab${i===activeScene?' active':''}" data-idx="${i}">${s.icon} ${s.tab}</button>`
+  ).join('');
+  sceneTabs.querySelectorAll('.scene-tab').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      activeScene = parseInt(btn.dataset.idx, 10);
+      renderTabs();
+      renderScene();
+    });
+  });
+}
+
+function renderScene(){
+  const scene = SCENES[activeScene];
+  const linesHtml = scene.lines.map((l)=>{
+    if(l.who === 'friend'){
+      return `
+        <div class="line friend">
+          <div class="line-avatar">${l.name.charAt(0)}</div>
+          <div class="line-body">
+            <p class="line-name">${l.name}</p>
+            <div class="line-bubble">${l.text}<span class="en">${l.textEn}</span></div>
+          </div>
+        </div>`;
+    } else {
+      return `
+        <div class="line you">
+          <div class="line-avatar">Tú</div>
+          <div class="line-body">
+            <p class="line-name">Tú</p>
+            <textarea class="line-input" rows="2" placeholder="Di tu respuesta en voz alta (anota solo si te ayuda)..."></textarea>
+            <p class="line-hint">${l.hint}<span class="en">${l.hintEn}</span></p>
+          </div>
+        </div>`;
+    }
+  }).join('');
+
+  sceneContainer.innerHTML = `
+    <div class="scene-setup">
+      <span class="scene-icon">${scene.icon}</span>
+      <p class="scene-text"><strong>${scene.tab}:</strong> ${scene.setup}<span class="en">${scene.setupEn}</span></p>
+    </div>
+    <div class="dialogue">${linesHtml}</div>
+  `;
+}
+
+renderTabs();
+renderScene();
+
+/* ---------- FINAL TASK ---------- */
+const STORAGE_KEY = 'andrei-clase15-tarea';
+const taskArea = document.getElementById('final-task');
+const taskCount = document.getElementById('task-count');
+const savedFlag = document.getElementById('saved-flag');
+
+async function cargarTarea(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(STORAGE_KEY);
+    if (res && typeof res.value === 'string') taskArea.value = res.value;
+  }catch(e){
+    // Clave inexistente todavía: no hay tarea previa, se queda en blanco.
+  }
+  updateCount();
+}
+
+function updateCount(){
+  const lines = taskArea.value.split('\n').filter(l => l.trim().length > 0).length;
+  taskCount.textContent = `${lines} línea${lines===1?'':'s'} escrita${lines===1?'':'s'}`;
+}
+taskArea.addEventListener('input', updateCount);
+updateCount();
+cargarTarea();
+
+document.getElementById('save-btn').addEventListener('click', async ()=>{
+  if (!window.storage){
+    savedFlag.textContent = 'Guardado no disponible aquí';
+    savedFlag.classList.add('show');
+    setTimeout(()=>{ savedFlag.classList.remove('show'); savedFlag.textContent = 'Guardado ✓'; }, 2200);
+    return;
+  }
+  try{
+    const ok = await window.storage.set(STORAGE_KEY, taskArea.value);
+    savedFlag.textContent = ok ? 'Guardado ✓' : 'No se pudo guardar';
+  }catch(e){
+    savedFlag.textContent = 'No se pudo guardar';
+  }
+  savedFlag.classList.add('show');
+  setTimeout(()=>{ savedFlag.classList.remove('show'); savedFlag.textContent = 'Guardado ✓'; }, 1800);
+});
+</script>
+
+</body>
+</html>
