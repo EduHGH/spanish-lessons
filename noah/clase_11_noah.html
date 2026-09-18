@@ -1,0 +1,1079 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Class 11 · Más grande que Londres — Noah</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+
+/* ╔══════════════════════════════════════════════════════════════╗
+   ║  ESCOLAR × NOTHING — sistema de diseño                        ║
+   ║  Class 11 · L5 · "Más grande que Londres" — comparatives       ║
+   ╚══════════════════════════════════════════════════════════════╝ */
+
+:root{
+  --paper:        #FBF7EE;
+  --paper-raised: #FFFFFF;
+  --paper-alt:    #F3ECDA;
+  --ink:          #23291F;
+  --ink-soft:     #565F52;
+  --ink-faint:    #8B9184;
+  --line:         rgba(35,41,31,0.12);
+  --line-strong:  rgba(35,41,31,0.22);
+
+  --b1:      #2F6FED;  --b1-soft: #EAF1FE;  --b1-line: #C6D9FC;  /* azul — grammar (L5 color, per programa) */
+  --b2:      #2E9E6B;  --b2-soft: #E9F6EF;  --b2-line: #BEE6D3;  /* verde — roleplay */
+  --family:  #DB8A2E;  --family-soft: #FCF1E1; --family-line: #F3D9AF; /* ámbar — task/family */
+
+  --ok:      #2E9E6B;  --ok-soft: #E9F6EF;  --ok-line: #BEE6D3;  /* verde — correcto/completado, universal */
+
+  --f-display: 'Fraunces', Georgia, serif;
+  --f-body:    'IBM Plex Sans', system-ui, sans-serif;
+  --f-data:    'IBM Plex Mono', monospace;
+
+  --r-sm: 8px;
+  --r-md: 14px;
+  --r-lg: 20px;
+
+  --spring: cubic-bezier(.34,1.56,.64,1);
+  --shadow-1: 0 1px 2px rgba(35,41,31,0.05), 0 1px 8px rgba(35,41,31,0.04);
+  --blur-glass: blur(22px);
+  --blur-light: blur(13px);
+}
+
+*{ box-sizing:border-box; }
+body{
+  margin:0;
+  background: var(--paper);
+  background-image: radial-gradient(circle at 1px 1px, var(--line) 1px, transparent 0);
+  background-size: 22px 22px;
+  color: var(--ink);
+  font-family: var(--f-body);
+  line-height:1.6;
+}
+::selection{ background: var(--b1-soft); }
+
+/* ---------- PROGRESS RAIL (sticky, global) ---------- */
+.progress-rail{
+  position:sticky; top:0; z-index:50; height:4px; width:100%;
+  background: var(--paper-alt); border-bottom:1px solid var(--line);
+}
+.progress-fill{
+  height:100%; width:0%; background: var(--b1);
+  transition: width .4s var(--spring);
+}
+.progress-chip{
+  position:fixed; top:14px; right:14px; z-index:50;
+  display:flex; align-items:center; gap:8px;
+  background: rgba(255,255,255,.72); backdrop-filter: var(--blur-light); -webkit-backdrop-filter: var(--blur-light);
+  border:1px solid var(--line); border-radius:999px;
+  padding:6px 8px 6px 14px; box-shadow: var(--shadow-1);
+  font-family: var(--f-data); font-size:11.5px; color: var(--ink-soft);
+}
+.sound-toggle{
+  width:26px; height:26px; border-radius:50%; border:1px solid var(--line); background: var(--paper-alt);
+  cursor:pointer; font-size:12px; display:flex; align-items:center; justify-content:center;
+  transition: transform .15s var(--spring);
+}
+.sound-toggle:active{ transform: scale(.9); }
+.sound-toggle[aria-pressed="true"]{ background: var(--b1-soft); border-color: var(--b1-line); }
+
+@keyframes shake{
+  10%,90%{ transform: translateX(-1px); }
+  20%,80%{ transform: translateX(2px); }
+  30%,50%,70%{ transform: translateX(-4px); }
+  40%,60%{ transform: translateX(4px); }
+}
+@keyframes rise{
+  from{ opacity:0; transform: translateY(8px); }
+  to{ opacity:1; transform: translateY(0); }
+}
+@keyframes bounce{
+  0%,60%,100%{ transform: translateY(0); }
+  30%{ transform: translateY(-4px); }
+}
+@keyframes popIn{
+  0%{ transform: scale(1); }
+  40%{ transform: scale(1.18); }
+  100%{ transform: scale(1); }
+}
+
+/* ---------- HEADER ---------- */
+header{ padding:44px 24px 28px; max-width:760px; margin:0 auto; }
+.eyebrow{
+  font-family: var(--f-data); font-size:12px; letter-spacing:.14em;
+  text-transform:uppercase; color: var(--b1); margin:0 0 10px;
+  display:flex; align-items:center; gap:10px;
+}
+.eyebrow .dot{ width:6px; height:6px; border-radius:50%; background: var(--b1); }
+h1{
+  font-family: var(--f-display); font-weight:600;
+  font-size:clamp(30px,5.6vw,46px); line-height:1.08;
+  margin:0 0 14px; letter-spacing:-.01em;
+}
+h1 em{ font-style:italic; color: var(--b1); }
+.lede{ font-size:16px; color: var(--ink-soft); max-width:56ch; margin:0; }
+
+.meta-row{
+  display:flex; flex-wrap:wrap; gap:20px; margin-top:26px;
+  font-family: var(--f-data); font-size:12px; color: var(--ink-faint);
+}
+.meta-row strong{
+  display:block; color: var(--ink); font-size:14.5px; font-weight:500;
+  font-family: var(--f-display); margin-top:3px;
+}
+.cycle-flag{
+  margin-top:16px; padding:10px 14px; background: var(--b2-soft); border:1px solid var(--b2-line);
+  border-radius: var(--r-md); font-family: var(--f-data); font-size:12px; color: var(--b2);
+  display:inline-flex; align-items:center; gap:8px;
+}
+
+/* ---------- SECTIONS ---------- */
+main{ max-width:760px; margin:0 auto; padding:8px 24px 100px; }
+
+section.block{ margin-bottom:52px; }
+.block-head{ display:flex; align-items:baseline; gap:12px; margin-bottom:18px; }
+.time-tag{
+  font-family: var(--f-data); font-size:11px; color: var(--ink-faint);
+  background: var(--paper-alt); padding:3px 10px; border-radius:999px; margin-left:auto; flex:none;
+}
+.block-num{
+  font-family: var(--f-data); font-size:12px; color:#fff; background: var(--b1);
+  width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  flex:none; transition: background .25s var(--spring);
+}
+.block-num.is-done{ background: var(--ok); animation: popIn .35s var(--spring); }
+.block-head h2{
+  font-family: var(--f-display); font-weight:500; font-style:italic; font-size:22px; margin:0;
+}
+
+.panel{
+  background: rgba(255,255,255,.78); backdrop-filter: var(--blur-glass); -webkit-backdrop-filter: var(--blur-glass);
+  border:1px solid var(--line); border-radius: var(--r-lg);
+  box-shadow: var(--shadow-1); padding:26px 28px;
+}
+
+/* ---------- LOCKING ---------- */
+.is-locked .panel,
+.is-locked .roleplay-panel,
+.is-locked .task-panel{
+  opacity:.4; pointer-events:none; filter: grayscale(.3);
+  transition: opacity .3s ease, filter .3s ease;
+}
+.unlock-nudge{
+  display:none; font-family: var(--f-data); font-size:11.5px; color: var(--ink-faint);
+  margin-top:8px; padding-left:2px;
+}
+.is-locked .unlock-nudge{ display:block; }
+
+/* ---------- VERB REVIEW TABLE ---------- */
+.verb-table{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+@media (max-width:560px){ .verb-table{ grid-template-columns:1fr; } }
+.verb-col{ border-radius: var(--r-md); padding:16px 18px; border:1px solid var(--b1-line); background: var(--b1-soft); }
+.verb-title{ font-family: var(--f-display); font-weight:600; font-size:17px; color: var(--b1); margin:0 0 2px; }
+.verb-sub{ font-family: var(--f-data); font-size:10.5px; color: var(--ink-faint); text-transform:uppercase; letter-spacing:.05em; margin:0 0 10px; }
+.verb-list{ margin:0; padding:0; list-style:none; }
+.verb-list li{ font-size:13.5px; color: var(--ink-soft); padding:6px 0; border-top:1px dashed var(--line); display:flex; gap:8px; }
+.verb-list li:first-child{ border-top:none; }
+.verb-list .pron{ font-family: var(--f-data); font-size:11.5px; color: var(--ink-faint); min-width:64px; flex:none; padding-top:1px; }
+.verb-list strong{ color: var(--ink); font-weight:600; }
+
+.note{
+  margin-top:18px; padding:14px 16px; background: var(--b1-soft); border:1px solid var(--b1-line);
+  border-radius: var(--r-md); font-size:14px; color: var(--ink-soft);
+}
+.note strong{ color: var(--ink); }
+
+/* ---------- IRREGULAR SPOTLIGHT ---------- */
+.irregular-wrap{ margin-top:22px; }
+.irregular-title{
+  font-family: var(--f-data); font-size:11.5px; text-transform:uppercase; letter-spacing:.06em;
+  color: var(--ink-faint); margin:0 0 10px;
+}
+.feature-list{ display:grid; gap:12px; }
+.feature-card{
+  border-radius: var(--r-md); padding:14px 16px; border:1px solid var(--line); background: var(--paper-raised);
+  transition: border-color .15s ease;
+}
+.feature-name{ font-family: var(--f-display); font-weight:600; font-size:16px; color: var(--ink); margin:0 0 6px; }
+.feature-desc{ font-size:13.5px; color: var(--ink-soft); margin:0 0 8px; }
+.feature-pair{ display:flex; gap:10px; align-items:center; flex-wrap:wrap; font-family: var(--f-data); font-size:13.5px; }
+.feature-standard{ color: var(--ink-faint); }
+.feature-arrow{ color: var(--ink-faint); }
+.feature-andaluz{ color: var(--b1); font-weight:600; }
+
+.compare-warning{
+  margin-top:14px; padding:14px 16px; background: var(--family-soft); border:1px solid var(--family-line);
+  border-radius: var(--r-md); font-size:13.5px; color: var(--ink-soft);
+}
+.compare-warning strong{ color: var(--family); }
+
+/* ---------- VOCAB CARDS ---------- */
+.vocab-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:12px; }
+.vocab-card{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:14px 16px; cursor:pointer; perspective:600px; min-height:78px;
+  display:flex; flex-direction:column; justify-content:center;
+  transition: border-color .15s ease, transform .18s var(--spring);
+}
+.vocab-card:hover{ border-color: var(--b1-line); transform: translateY(-2px); }
+.vocab-card:focus-visible{ outline:2px solid var(--b1); outline-offset:2px; }
+.vocab-front{ font-family: var(--f-body); font-weight:600; font-size:15px; }
+.vocab-back{ display:none; font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); margin-top:6px; }
+.vocab-card.flipped .vocab-back{ display:block; }
+.vocab-card.flipped{ background: var(--b1-soft); border-color: var(--b1-line); transform: scale(1.02); }
+.vocab-hint{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin:10px 2px 16px; }
+
+/* ---------- LISTENING (transcript pairs) ---------- */
+.listen-card{
+  background: rgba(255,255,255,.78); backdrop-filter: var(--blur-light); -webkit-backdrop-filter: var(--blur-light);
+  border:1px solid var(--line); border-radius: var(--r-lg);
+  padding:18px 20px; margin-bottom:14px;
+}
+.listen-card:last-child{ margin-bottom:0; }
+.listen-head{ display:flex; align-items:center; gap:10px; margin-bottom:12px; }
+.listen-icon{
+  width:30px; height:30px; border-radius:50%; background: var(--b1-soft); color: var(--b1);
+  display:flex; align-items:center; justify-content:center; font-size:14px; flex:none;
+}
+.listen-title{ font-family: var(--f-display); font-weight:600; font-size:15.5px; margin:0; }
+.listen-toggle{
+  font-family: var(--f-data); font-size:11.5px; color: var(--b1); background:none; border:1.5px solid var(--b1-line);
+  padding:5px 12px; border-radius:999px; cursor:pointer; margin-left:auto;
+  transition: transform .12s var(--spring), border-color .15s ease;
+}
+.listen-toggle:hover{ border-color: var(--b1); }
+.listen-toggle:active{ transform: scale(.94); }
+.listen-andaluz{ font-size:15.5px; color: var(--ink); margin:0 0 8px; }
+.listen-standard{ display:none; font-size:13.5px; color: var(--ink-faint); font-style:italic; padding-top:8px; border-top:1px dashed var(--line); }
+.listen-standard.show{ display:block; }
+.listen-note{ font-family: var(--f-data); font-size:11.5px; color: var(--ink-faint); margin-top:8px; }
+
+/* ---------- EXERCISES ---------- */
+.exercise{ margin-bottom:20px; }
+.exercise:last-of-type{ margin-bottom:0; }
+.ex-sentence{ font-size:15.5px; margin-bottom:10px; }
+.ex-sentence .gap{ font-family: var(--f-data); color: var(--ink-faint); }
+.ex-options{ display:flex; flex-wrap:wrap; gap:8px; }
+.answer-flag{ font-size:13px; margin-left:4px; opacity:0; transition: opacity .15s ease; }
+.answer-flag.show{ opacity:1; }
+.answer-flag.ok{ color: var(--ok); }
+.answer-flag.no{ color: var(--b1); }
+.opt-btn{
+  font-family: var(--f-body); font-size:14px; background: var(--paper-raised);
+  border:1.5px solid var(--line); color: var(--ink); padding:7px 16px; border-radius:999px;
+  cursor:pointer; transition: transform .1s var(--spring), background .15s ease, border-color .15s ease, color .15s ease;
+}
+.opt-btn:hover{ border-color: var(--ink-faint); }
+.opt-btn:active{ transform: scale(.94); }
+.opt-btn.picked{ background: var(--b1-soft); border-color: var(--b1); color: var(--b1); }
+.opt-btn.correct{ background: var(--ok-soft); border-color: var(--ok); color: var(--ok); }
+.opt-btn.wrong{ background: var(--family-soft); border-color: var(--family); color: var(--family); animation: shake .32s var(--spring); }
+.opt-btn:disabled{ cursor:default; }
+
+.check-bar{
+  display:flex; align-items:center; justify-content:space-between; gap:16px;
+  margin-top:22px; padding-top:18px; border-top:1px dashed var(--line);
+}
+.btn-primary{
+  font-family: var(--f-body); font-weight:600; font-size:14px; color:#fff; background: var(--b1);
+  border:none; padding:11px 22px; border-radius:999px; cursor:pointer; transition: transform .12s var(--spring);
+}
+.btn-primary:hover{ transform: translateY(-1px); }
+.btn-primary:active{ transform: scale(.95); }
+#score-text{ font-family: var(--f-data); font-size:13px; color: var(--ink-faint); display:flex; align-items:center; gap:4px; }
+#score-num{ display:inline-block; color: var(--ok); font-weight:600; transition: transform .15s var(--spring); }
+#score-num.bump{ transform: scale(1.3); }
+.btn-ghost{
+  font-family: var(--f-body); font-weight:600; font-size:13px; color: var(--ink-soft); background:none;
+  border:1.5px solid var(--line); padding:9px 18px; border-radius:999px; cursor:pointer; transition: transform .12s var(--spring), border-color .15s ease;
+}
+.btn-ghost:hover{ border-color: var(--ink-faint); }
+.btn-ghost:active{ transform: scale(.95); }
+
+/* ---------- ROLEPLAY ---------- */
+.roleplay-panel{ background: var(--b2-soft); border:1px solid var(--b2-line); border-radius: var(--r-lg); padding:26px 28px; }
+.roleplay-panel .block-num{ background: var(--b2); }
+.roleplay-panel .block-num.is-done{ background: var(--ok); }
+.scene-setup{
+  display:flex; gap:14px; align-items:flex-start; background: var(--paper-raised);
+  border:1px solid var(--b2-line); border-radius: var(--r-md); padding:14px 16px; margin-bottom:20px;
+}
+.scene-icon{ font-size:22px; flex:none; }
+.scene-text{ font-size:14px; color: var(--ink-soft); }
+.scene-text strong{ color: var(--ink); }
+
+.dialogue{ display:flex; flex-direction:column; gap:14px; }
+.scene-tabs{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:18px; }
+.scene-tab{
+  font-family: var(--f-data); font-size:12.5px; background: var(--paper-raised);
+  border:1.5px solid var(--b2-line); color: var(--ink-soft); padding:7px 14px;
+  border-radius:999px; cursor:pointer; transition: transform .12s var(--spring), background .15s ease, border-color .15s ease, color .15s ease;
+}
+.scene-tab:hover{ border-color: var(--b2); }
+.scene-tab:active{ transform: scale(.95); }
+.scene-tab.active{ background: var(--b2); border-color: var(--b2); color:#fff; }
+.line{ display:flex; gap:12px; align-items:flex-start; animation: rise .32s var(--spring) both; }
+.line-avatar{
+  flex:none; width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  font-family: var(--f-display); font-weight:600; font-size:14px; color:#fff;
+}
+.line.friend .line-avatar{ background: var(--ink-faint); }
+.line.you .line-avatar{ background: var(--b2); }
+.line-body{ flex:1; }
+.line-name{ font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.05em; color: var(--ink-faint); margin:0 0 4px; }
+.line-bubble{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:12px 14px; font-size:14.5px; color: var(--ink);
+}
+.line.you .line-bubble{ background:#fff; border-color: var(--b2-line); }
+.line-input-wrap{ position:relative; }
+.line-input{
+  width:100%; min-height:64px; font-family: var(--f-body); font-size:14.5px; color: var(--ink);
+  background:#fff; border:1px solid var(--b2-line); border-radius: var(--r-md);
+  padding:12px 14px; resize:vertical;
+}
+.line-input:focus{ outline:none; border-color: var(--b2); }
+.typing-dots{
+  position:absolute; bottom:8px; right:10px; display:none; gap:3px;
+}
+.typing-dots.show{ display:flex; }
+.typing-dots span{
+  width:5px; height:5px; border-radius:50%; background: var(--b2); opacity:.5;
+  animation: bounce 1s infinite;
+}
+.typing-dots span:nth-child(2){ animation-delay:.15s; }
+.typing-dots span:nth-child(3){ animation-delay:.3s; }
+.line-hint{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin:6px 0 0 2px; }
+.roleplay-tip{
+  margin-top:20px; padding:12px 14px; background: var(--paper-raised); border:1px dashed var(--b2-line);
+  border-radius: var(--r-md); font-size:13px; color: var(--ink-soft);
+}
+.roleplay-tip strong{ color: var(--ink); }
+
+/* ---------- FINAL TASK ---------- */
+.task-panel{ background: var(--family-soft); border:1px solid var(--family-line); border-radius: var(--r-lg); padding:26px 28px; }
+.task-panel .block-num{ background: var(--family); }
+.task-panel .block-num.is-done{ background: var(--ok); }
+textarea#final-task{
+  width:100%; min-height:110px; font-family: var(--f-body); font-size:15px; color: var(--ink);
+  background: var(--paper-raised); border:1px solid var(--family-line); border-radius: var(--r-md);
+  padding:14px 16px; resize:vertical; margin-top:14px;
+}
+textarea#final-task:focus{ outline:none; border-color: var(--family); }
+.task-footer{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:12px; flex-wrap:wrap; }
+#task-count{ font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); }
+.btn-secondary{
+  font-family: var(--f-body); font-weight:600; font-size:13.5px; color: var(--family); background:none;
+  border:1.5px solid var(--family-line); padding:9px 18px; border-radius:999px; cursor:pointer;
+  transition: transform .12s var(--spring);
+}
+.btn-secondary:active{ transform: scale(.95); }
+.saved-flag{ font-family: var(--f-data); font-size:12px; color: var(--ok); opacity:0; transition: opacity .3s ease; }
+.saved-flag.show{ opacity:1; }
+
+.listen-reminder{
+  display:flex; align-items:center; gap:14px; margin-top:16px; padding:14px 16px;
+  background: var(--paper-raised); border:1px solid var(--family-line); border-radius: var(--r-md);
+}
+.rec-dot{ width:12px; height:12px; border-radius:50%; background: var(--family); flex:none; }
+.rec-text{ font-size:13.5px; color: var(--ink-soft); }
+.rec-text strong{ color: var(--ink); }
+
+/* ---------- CYCLE OPEN BANNER ---------- */
+.complete-panel{
+  background: linear-gradient(135deg, var(--b1-soft) 0%, var(--b2-soft) 100%);
+  border:1px solid var(--b1-line); border-radius: var(--r-lg); padding:28px 30px; text-align:center;
+}
+.complete-title{ font-family: var(--f-display); font-weight:600; font-style:italic; font-size:24px; margin:0 0 8px; }
+.complete-text{ font-size:14.5px; color: var(--ink-soft); max-width:48ch; margin:0 auto; }
+
+/* ---------- FOOTER NAV ---------- */
+footer{
+  max-width:760px; margin:0 auto; padding:0 24px 60px; display:flex;
+  justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;
+  font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint);
+}
+footer a{ color: var(--b1); text-decoration:none; }
+footer a:hover{ text-decoration:underline; }
+
+@media (max-width:600px){
+  header{ padding:34px 18px 22px; }
+  main{ padding:8px 18px 90px; }
+  .panel, .task-panel{ padding:20px 18px; }
+  .progress-chip{ top:10px; right:10px; padding:5px 6px 5px 12px; }
+}
+@media (prefers-reduced-motion: reduce){
+  *{ transition:none !important; animation:none !important; }
+}
+</style>
+</head>
+<body>
+
+<div class="progress-rail"><div class="progress-fill" id="progress-fill"></div></div>
+<div class="progress-chip">
+  <span id="progress-text">0/7 blocks</span>
+  <button class="sound-toggle" id="sound-toggle" aria-pressed="false" aria-label="Toggle sound">🔇</button>
+</div>
+
+<header>
+  <p class="eyebrow"><span class="dot"></span>Class 11 · L5, class 3 · Comparing two lives</p>
+  <h1>Más grande que <em>Londres</em></h1>
+  <p class="lede">You've told stories about the past and talked about the future. Today you compare: Sevilla vs your hometown, tapas vs a Sunday roast, Sofía's big family vs your own. <strong>Comparatives and superlatives</strong> let you say something is bigger, better, or the best of all — exactly what you need when everyone keeps asking you to compare England and Andalucía.</p>
+  <div class="meta-row">
+    <div>Duration<strong>50 min</strong></div>
+    <div>Focus<strong>Comparatives & superlatives</strong></div>
+    <div>Level<strong>A2</strong></div>
+  </div>
+  <div class="cycle-flag">🌱 L5 · Describing the past — imperfecto, future plans and comparisons</div>
+</header>
+
+<main>
+
+  <section class="block" id="block-1" data-block="1">
+    <div class="block-head"><span class="block-num">1</span><h2>Más...que, menos...que, tan...como</h2><span class="time-tag">12 min</span></div>
+    <div class="panel">
+      <p class="lede" style="margin-bottom:16px; font-size:14.5px;">Spanish builds comparisons with a simple sandwich: <strong>más/menos + adjective + que</strong> for "more/less than", and <strong>tan + adjective + como</strong> for "as...as". No special comparative form of the adjective — you just wrap it.</p>
+      <div class="verb-table">
+        <div class="verb-col">
+          <p class="verb-title">Más / menos ... que</p>
+          <p class="verb-sub">more / less than</p>
+          <ul class="verb-list">
+            <li><span class="pron">+</span><span>Sevilla es <strong>más</strong> calurosa <strong>que</strong> Manchester.</span></li>
+            <li><span class="pron">−</span><span>Mi ciudad es <strong>menos</strong> ruidosa <strong>que</strong> Sevilla.</span></li>
+            <li><span class="pron">+</span><span>La familia de Sofía es <strong>más</strong> grande <strong>que</strong> la mía.</span></li>
+            <li><span class="pron">−</span><span>El pescaíto frito tiene <strong>menos</strong> especias <strong>que</strong> un curry.</span></li>
+          </ul>
+        </div>
+        <div class="verb-col">
+          <p class="verb-title">Tan ... como</p>
+          <p class="verb-sub">as ... as (equal comparison)</p>
+          <ul class="verb-list">
+            <li><span class="pron">=</span><span>Sevilla es <strong>tan</strong> bonita <strong>como</strong> Londres.</span></li>
+            <li><span class="pron">=</span><span>Manolo es <strong>tan</strong> hablador <strong>como</strong> su hija.</span></li>
+            <li><span class="pron">=</span><span>La Feria es <strong>tan</strong> divertida <strong>como</strong> una boda.</span></li>
+            <li><span class="pron">=</span><span>No como <strong>tanto</strong> jamón <strong>como</strong> Manolo.</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="note"><strong>Pattern to notice:</strong> the adjective in the middle never changes — <em>más grande que, menos grande que, tan grande como</em> all use the same "grande". English speakers often reach for "-er" endings out of habit; Spanish just doesn't have that shortcut except for a few irregulars, which is block 2.</div>
+      <div class="unlock-nudge">↳ Scroll to read this block fully to unlock the next one.</div>
+    </div>
+  </section>
+
+  <section class="block" id="block-2" data-block="2">
+    <div class="block-head"><span class="block-num">2</span><h2>Irregular comparatives, and superlatives</h2><span class="time-tag">10 min</span></div>
+    <div class="panel">
+      <p class="lede" style="margin-bottom:16px; font-size:14.5px;">A handful of common adjectives skip "más + adjective" entirely and use their own irregular comparative word. And to say something is "the most" of a group, you add el/la/los/las in front.</p>
+      <div class="irregular-wrap">
+        <p class="irregular-title">Four irregulars worth memorising</p>
+        <div class="feature-list">
+          <div class="feature-card">
+            <p class="feature-name">Bueno → mejor</p>
+            <p class="feature-desc">Not "más bueno" — mejor covers both "better" and, with el/la, "best".</p>
+            <div class="feature-pair">
+              <span class="feature-standard">Este bar es mejor que el otro.</span>
+              <span class="feature-arrow">=</span>
+              <span class="feature-andaluz">This bar is better than the other one.</span>
+            </div>
+          </div>
+          <div class="feature-card">
+            <p class="feature-name">Malo → peor</p>
+            <p class="feature-desc">The opposite of mejor — same pattern, no "más malo" needed.</p>
+            <div class="feature-pair">
+              <span class="feature-standard">El tráfico en Sevilla es peor que en mi pueblo.</span>
+              <span class="feature-arrow">=</span>
+              <span class="feature-andaluz">Traffic in Sevilla is worse than in my town.</span>
+            </div>
+          </div>
+          <div class="feature-card">
+            <p class="feature-name">Grande → mayor</p>
+            <p class="feature-desc">Mayor usually means "older" for people; "más grande" still works for size.</p>
+            <div class="feature-pair">
+              <span class="feature-standard">Sofía es mayor que su prima.</span>
+              <span class="feature-arrow">=</span>
+              <span class="feature-andaluz">Sofía is older than her cousin.</span>
+            </div>
+          </div>
+          <div class="feature-card">
+            <p class="feature-name">Pequeño → menor</p>
+            <p class="feature-desc">Menor usually means "younger"; "más pequeño" is fine for physical size.</p>
+            <div class="feature-pair">
+              <span class="feature-standard">Manolo es el menor de sus hermanos.</span>
+              <span class="feature-arrow">=</span>
+              <span class="feature-andaluz">Manolo is the youngest of his brothers.</span>
+            </div>
+          </div>
+        </div>
+        <div class="compare-warning">
+          <strong>Superlatives — el/la + más/menos + adjective + de:</strong> to say "the most" or "the best of all", add the article before más/menos, and use <em>de</em> for the group. <em>Este bar es el mejor de todos.</em> "This bar is the best of all." <em>La Feria es la fiesta más grande de Sevilla.</em> "The Feria is the biggest festival in Sevilla."
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="block-3" data-block="3">
+    <div class="block-head"><span class="block-num">3</span><h2>Vocabulary: comparing two places</h2><span class="time-tag">6 min</span></div>
+    <p class="vocab-hint">Tap each card to see an example sentence.</p>
+    <div class="vocab-grid" id="vocab-grid"></div>
+  </section>
+
+  <section class="block" id="block-4" data-block="4">
+    <div class="block-head"><span class="block-num">4</span><h2>Listening: Manolo picks a favourite</h2><span class="time-tag">8 min</span></div>
+    <p class="lede" style="margin-bottom:16px;">Four short lines comparing Sevilla, England, and the family's favourite tapas bar, in relaxed Andaluz. Read the line out loud first, then tap to reveal the standard version.</p>
+    <div id="listening"></div>
+  </section>
+
+  <section class="block" id="block-5" data-block="5">
+    <div class="block-head"><span class="block-num">5</span><h2>Quick check</h2><span class="time-tag">6 min</span></div>
+    <div class="panel">
+      <p class="vocab-hint" style="margin-bottom:14px;">Choosing between más...que, menos...que, tan...como, the irregulars, and superlatives.</p>
+      <div id="exercises"></div>
+      <div class="check-bar">
+        <div style="display:flex; gap:10px;">
+          <button class="btn-primary" id="check-btn">Check answers</button>
+          <button class="btn-ghost" id="reset-btn">Reset</button>
+        </div>
+        <span id="score-text"></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="block roleplay-panel" id="block-6" data-block="6">
+    <div class="block-head"><span class="block-num">6</span><h2>Roleplay: settling the arguments</h2><span class="time-tag">8 min</span></div>
+    <p class="lede" style="margin-bottom:16px;">Three real conversations built entirely on comparing things — weather, food, family, cities. Choose one scene to practise out loud in class; the rest stay as a review bank.</p>
+    <div class="scene-tabs" id="scene-tabs"></div>
+    <div id="scene-container"></div>
+    <div class="roleplay-tip"><strong>In class:</strong> we'll practise one scene out loud, swapping roles. The other two are for you to practise on your own during the week.</div>
+  </section>
+
+  <section class="block task-panel" id="block-7" data-block="7">
+    <div class="block-head"><span class="block-num">7</span><h2 style="color:var(--family)">Your task</h2><span class="time-tag">3 min</span></div>
+    <p style="margin:0 0 4px; font-size:15px; color:var(--ink-soft);">Write <strong>5 comparisons</strong> between Sevilla and your hometown, using at least one <strong>superlative</strong>.</p>
+    <div class="listen-reminder">
+      <span class="rec-dot"></span>
+      <span class="rec-text"><strong>Idea:</strong> "Sevilla es más... que / Mi ciudad es menos... que / ...es tan... como / el/la mejor... de" — weather, food, pace of life, family closeness all work well.</span>
+    </div>
+    <textarea id="final-task" placeholder="1. &#10;2. &#10;3. &#10;4. &#10;5. "></textarea>
+    <div class="task-footer">
+      <span id="task-count">0 lines written</span>
+      <div style="display:flex; gap:10px; align-items:center;">
+        <span class="saved-flag" id="saved-flag">Saved ✓</span>
+        <button class="btn-secondary" id="save-btn">Save task</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="complete-panel">
+      <p class="complete-title">Más, menos, tan... como toda una vida</p>
+      <p class="complete-text">You can now hold your own in any "which is better" conversation — England or Spain, tapas or Sunday roast, Manolo's stories or anyone else's. Next: talking about gifts and news, with direct and indirect object pronouns.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <span>Class 11 · L5, class 3</span>
+  <span>Next: direct and indirect object pronouns — se lo di a ella</span>
+</footer>
+
+<script>
+/* ================= PROGRESS ENGINE ================= */
+const TOTAL_BLOCKS = 7;
+const completed = new Set();
+
+function completeBlock(n){
+  if(completed.has(n)) return;
+  completed.add(n);
+  const numEl = document.querySelector(`#block-${n} .block-num`);
+  if(numEl) numEl.classList.add('is-done');
+  const section = document.getElementById(`block-${n}`);
+  if(section) section.classList.remove('is-locked');
+  updateProgress();
+  soundUnlock();
+  unlockNext(n);
+}
+
+function unlockNext(n){
+  const next = document.getElementById(`block-${n+1}`);
+  if(next) next.classList.remove('is-locked');
+}
+
+function updateProgress(){
+  const pct = Math.round((completed.size / TOTAL_BLOCKS) * 100);
+  document.getElementById('progress-fill').style.width = pct + '%';
+  document.getElementById('progress-text').textContent = `${completed.size}/${TOTAL_BLOCKS} blocks`;
+}
+
+/* ================= SOUND (Web Audio, no assets) ================= */
+let soundOn = false;
+let audioCtx = null;
+
+function playTone(freq, dur){
+  if(!soundOn) return;
+  try{
+    if(!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    osc.type = 'sine';
+    osc.frequency.value = freq;
+    gain.gain.setValueAtTime(0.0001, audioCtx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.12, audioCtx.currentTime + 0.01);
+    gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + dur);
+    osc.connect(gain).connect(audioCtx.destination);
+    osc.start();
+    osc.stop(audioCtx.currentTime + dur);
+  }catch(e){ /* silent failure */ }
+}
+function soundCorrect(){ playTone(660, 0.18); }
+function soundWrong(){ playTone(220, 0.22); }
+function soundUnlock(){
+  playTone(880, 0.1);
+  setTimeout(()=>playTone(1180, 0.14), 90);
+}
+
+const soundToggle = document.getElementById('sound-toggle');
+soundToggle.addEventListener('click', ()=>{
+  soundOn = !soundOn;
+  soundToggle.setAttribute('aria-pressed', String(soundOn));
+  soundToggle.textContent = soundOn ? '🔊' : '🔇';
+});
+
+/* ================= SCROLL-UNLOCK for passive blocks (1, 2, 4) ================= */
+const scrollUnlockObserver = new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      const n = parseInt(entry.target.dataset.block, 10);
+      completeBlock(n);
+      scrollUnlockObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.6 });
+
+[1, 2, 4].forEach(n=>{
+  const el = document.getElementById(`block-${n}`);
+  if(el) scrollUnlockObserver.observe(el);
+});
+
+/* Blocks 3, 5, 6, 7 require real interaction — completed via callbacks below */
+[3,4,5,6,7].forEach(n=>{
+  const el = document.getElementById(`block-${n}`);
+  if(el) el.classList.add('is-locked');
+});
+document.getElementById('block-4').classList.remove('is-locked');
+
+/* ================= VOCAB ================= */
+const VOCAB = [
+  {front:"más...que (more than)", back:"Sevilla es más calurosa que Manchester."},
+  {front:"menos...que (less than)", back:"Mi barrio es menos animado que el de Sofía."},
+  {front:"tan...como (as...as)", back:"La Feria es tan divertida como una boda inglesa."},
+  {front:"el/la mejor (the best)", back:"Este bar de tapas es el mejor de toda Sevilla."},
+  {front:"el/la peor (the worst)", back:"El calor de agosto es lo peor del verano."},
+  {front:"mayor / menor (older / younger)", back:"Manolo es mayor que su hermana, pero menor que su primo."},
+];
+
+const grid = document.getElementById('vocab-grid');
+let vocabFlips = 0;
+VOCAB.forEach(v=>{
+  const card = document.createElement('div');
+  card.className = 'vocab-card';
+  card.setAttribute('role', 'button');
+  card.setAttribute('tabindex', '0');
+  card.setAttribute('aria-pressed', 'false');
+  card.setAttribute('aria-label', `${v.front}. Tap to see an example.`);
+  card.innerHTML = `<div class="vocab-front">${v.front}</div><div class="vocab-back">${v.back}</div>`;
+  const toggle = ()=>{
+    const flipped = card.classList.toggle('flipped');
+    card.setAttribute('aria-pressed', String(flipped));
+    if(flipped){
+      vocabFlips++;
+      soundCorrect();
+      if(vocabFlips >= 4) completeBlock(3);
+    }
+  };
+  card.addEventListener('click', toggle);
+  card.addEventListener('keydown', (e)=>{
+    if(e.key === 'Enter' || e.key === ' '){
+      e.preventDefault();
+      toggle();
+    }
+  });
+  grid.appendChild(card);
+});
+
+/* ================= LISTENING PRACTICE ================= */
+const LISTENING = [
+  {
+    andaluz: "\u201cEl bar de Manolo é\u2019 mejón que to\u2019 lo demá\u2019, illo.\u201d",
+    standard: "\u201cEl bar de Manolo es mejor que todo lo demás, illo.\u201d — \u201cManolo's bar is better than everything else.\u201d",
+    note: "\u201cEs\u201d se relaja a \u201cé\u2019\u201d y \u201cmejor\u201d suena casi \u201cmejón\u201d — sigue siendo el comparativo irregular de bueno."
+  },
+  {
+    andaluz: "\u201cSevilla é\u2019 muchí\u2019imo má\u2019 grande que mi pueblo.\u201d",
+    standard: "\u201cSevilla es muchísimo más grande que mi pueblo.\u201d — \u201cSevilla is so much bigger than my town.\u201d",
+    note: "\u201cMuchísimo\u201d refuerza el más...que; las eses finales se pierden en el habla relajada."
+  },
+  {
+    andaluz: "\u201cEl jamón de aquí no é\u2019 tan bueno como er de mi pueblo, ¿eh?\u201d",
+    standard: "\u201cEl jamón de aquí no es tan bueno como el de mi pueblo, ¿eh?\u201d — \u201cThe ham here isn't as good as the one from my town, right?\u201d",
+    note: "\u201cEl\u201d se pronuncia \u201cer\u201d — un rasgo típico andaluz; la estructura tan...como queda intacta."
+  },
+  {
+    andaluz: "\u201cLa Feria e\u2019 la fiehta má\u2019 grande de toa Sevilla.\u201d",
+    standard: "\u201cLa Feria es la fiesta más grande de toda Sevilla.\u201d — \u201cThe Feria is the biggest festival in all of Sevilla.\u201d",
+    note: "Superlativo completo: el/la + más + adjetivo + de. \u201cFiesta\u201d y \u201ctoda\u201d pierden consonantes en el habla rápida."
+  }
+];
+
+const listenWrap = document.getElementById('listening');
+LISTENING.forEach((l, i)=>{
+  const card = document.createElement('div');
+  card.className = 'listen-card';
+  card.innerHTML = `
+    <div class="listen-head">
+      <span class="listen-icon">🎧</span>
+      <p class="listen-title">Line ${i+1}</p>
+      <button class="listen-toggle" data-idx="${i}">Reveal standard</button>
+    </div>
+    <p class="listen-andaluz">${l.andaluz}</p>
+    <p class="listen-standard" id="standard-${i}">${l.standard}</p>
+    <p class="listen-note">${l.note}</p>
+  `;
+  listenWrap.appendChild(card);
+});
+
+let revealedLines = 0;
+listenWrap.addEventListener('click', (e)=>{
+  const btn = e.target.closest('.listen-toggle');
+  if(!btn) return;
+  const idx = btn.dataset.idx;
+  const standardEl = document.getElementById(`standard-${idx}`);
+  const shown = standardEl.classList.toggle('show');
+  btn.textContent = shown ? 'Hide standard' : 'Reveal standard';
+  if(shown){
+    revealedLines++;
+    soundCorrect();
+  }
+});
+
+/* ================= EXERCISES ================= */
+const EXERCISES = [
+  {
+    "sentence": "Sevilla es <span class=\"gap\">___</span> calurosa que Manchester.",
+    "options": ["más", "tan", "el más"],
+    "answer": "más"
+  },
+  {
+    "sentence": "Mi pueblo es <span class=\"gap\">___</span> ruidoso como Sevilla.",
+    "options": ["tan", "más", "menos que"],
+    "answer": "tan"
+  },
+  {
+    "sentence": "Este bar de tapas es <span class=\"gap\">___</span> de toda la ciudad.",
+    "options": ["mejor", "el mejor", "más bueno"],
+    "answer": "el mejor"
+  },
+  {
+    "sentence": "El tráfico de Sevilla es <span class=\"gap\">___</span> que el de mi ciudad.",
+    "options": ["peor", "más malo", "el peor"],
+    "answer": "peor"
+  },
+  {
+    "sentence": "Sofía es <span class=\"gap\">___</span> que su prima pequeña.",
+    "options": ["mayor", "más grande", "el mayor"],
+    "answer": "mayor"
+  },
+  {
+    "sentence": "La Feria es la fiesta más grande <span class=\"gap\">___</span> Sevilla.",
+    "options": ["de", "que", "como"],
+    "answer": "de"
+  },
+  {
+    "sentence": "No como <span class=\"gap\">___</span> jamón como Manolo.",
+    "options": ["tanto", "tan", "más"],
+    "answer": "tanto"
+  },
+  {
+    "sentence": "Manolo es <span class=\"gap\">___</span> de sus hermanos.",
+    "options": ["el menor", "menor que", "más pequeño"],
+    "answer": "el menor"
+  },
+  {
+    "sentence": "\u201cEr\u201d en \u201cer de mi pueblo\u201d es la pronunciación andaluza de <span class=\"gap\">___</span>.",
+    "options": ["el", "es", "en"],
+    "answer": "el"
+  },
+  {
+    "sentence": "Mi ciudad tiene <span class=\"gap\">___</span> gente que Sevilla en verano.",
+    "options": ["menos", "menor", "peor"],
+    "answer": "menos"
+  }
+];
+
+const exWrap = document.getElementById('exercises');
+EXERCISES.forEach((ex, i)=>{
+  const el = document.createElement('div');
+  el.className = 'exercise';
+  el.dataset.answer = ex.answer;
+  el.innerHTML = `
+    <div class="ex-sentence">${i+1}. ${ex.sentence} <span class="answer-flag" data-flag="${i}"></span></div>
+    <div class="ex-options">
+      ${ex.options.map(o=>`<button class="opt-btn" data-value="${o}">${o}</button>`).join('')}
+    </div>
+  `;
+  exWrap.appendChild(el);
+
+  el.querySelectorAll('.opt-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      el.querySelectorAll('.opt-btn').forEach(b=>b.classList.remove('picked'));
+      btn.classList.add('picked');
+    });
+  });
+});
+
+function animateCount(el, target){
+  let current = 0;
+  el.classList.add('bump');
+  const step = ()=>{
+    current++;
+    el.textContent = current;
+    if(current < target){
+      requestAnimationFrame(()=>setTimeout(step, 55));
+    } else {
+      setTimeout(()=>el.classList.remove('bump'), 150);
+    }
+  };
+  if(target === 0){ el.textContent = 0; return; }
+  step();
+}
+
+document.getElementById('check-btn').addEventListener('click', ()=>{
+  let correct = 0;
+  document.querySelectorAll('.exercise').forEach((el, i)=>{
+    const answer = el.dataset.answer;
+    const picked = el.querySelector('.opt-btn.picked');
+    const flag = el.querySelector('.answer-flag');
+    el.querySelectorAll('.opt-btn').forEach(b=>{
+      b.disabled = true;
+      if(b.dataset.value === answer) b.classList.add('correct');
+      else if(b === picked) b.classList.add('wrong');
+    });
+    const isCorrect = picked && picked.dataset.value === answer;
+    if(isCorrect){
+      correct++;
+      flag.textContent = '✓';
+      flag.classList.add('ok');
+      flag.setAttribute('aria-label', 'correct');
+    } else {
+      flag.textContent = '✗';
+      flag.classList.add('no');
+      flag.setAttribute('aria-label', 'incorrect');
+    }
+    flag.classList.add('show');
+  });
+  document.getElementById('score-text').innerHTML = `<span id="score-num">0</span> / ${EXERCISES.length} correct`;
+  animateCount(document.getElementById('score-num'), correct);
+  if(correct > 0) soundCorrect(); else soundWrong();
+  completeBlock(5);
+});
+
+document.getElementById('reset-btn').addEventListener('click', ()=>{
+  document.querySelectorAll('.exercise').forEach(el=>{
+    el.querySelectorAll('.opt-btn').forEach(b=>{
+      b.disabled = false;
+      b.classList.remove('picked','correct','wrong');
+    });
+    const flag = el.querySelector('.answer-flag');
+    flag.classList.remove('show','ok','no');
+    flag.textContent = '';
+  });
+  document.getElementById('score-text').textContent = '';
+});
+
+/* ================= ROLEPLAY SCENES ================= */
+const SCENES = [
+  {
+    "id": "sofia-comparar",
+    "tab": "Sofía asks you to compare",
+    "icon": "🏙️",
+    "setup": "Sofía is curious how Sevilla really compares to your hometown, now that you've spent time in both.",
+    "lines": [
+      { "who": "friend", "name": "Sofía", "text": "¿Qué es más bonito, Sevilla o tu ciudad?" },
+      { "who": "you", "hint": "Answer using más...que or tan...como." },
+      { "who": "friend", "name": "Sofía", "text": "¿Y el clima? Aquí hace mucho calor en verano." },
+      { "who": "you", "hint": "Compare the weather, using más calor/frío que." },
+      { "who": "friend", "name": "Sofía", "text": "¿La gente es más simpática aquí o allí?" },
+      { "who": "you", "hint": "Give your honest opinion using a comparative." },
+      { "who": "friend", "name": "Sofía", "text": "Creo que mi familia es más grande que la tuya, ¿no?" },
+      { "who": "you", "hint": "Agree or compare family sizes, using más/menos...que." },
+      { "who": "friend", "name": "Sofía", "text": "Bueno, para mí Sevilla siempre será la mejor." },
+      { "who": "you", "hint": "React using a superlative — el/la mejor/peor de..." }
+    ]
+  },
+  {
+    "id": "manolo-tapas",
+    "tab": "Manolo defends his tapas bar",
+    "icon": "🍤",
+    "setup": "Manolo is convinced his favourite tapas bar beats every restaurant you've ever mentioned.",
+    "lines": [
+      { "who": "friend", "name": "Manolo", "text": "¿A que este bar es mejor que cualquier restaurante de Londres?" },
+      { "who": "you", "hint": "Answer using mejor que or el mejor de." },
+      { "who": "friend", "name": "Manolo", "text": "¿Habéis comido jamón tan bueno como este en Inglaterra?" },
+      { "who": "you", "hint": "Answer using tan...como." },
+      { "who": "friend", "name": "Manolo", "text": "El pescaíto frito de aquí es el mejor de toda Andalucía." },
+      { "who": "you", "hint": "Agree, or gently disagree, using a superlative." },
+      { "who": "friend", "name": "Manolo", "text": "¿Y los precios? Aquí son más baratos, seguro." },
+      { "who": "you", "hint": "Compare prices, using más/menos caro que." },
+      { "who": "friend", "name": "Manolo", "text": "Ya verás, este bar es el número uno." },
+      { "who": "you", "hint": "React and close the conversation with a comparative or superlative." }
+    ]
+  },
+  {
+    "id": "amigo-comparar",
+    "tab": "Telling a friend back home",
+    "icon": "📱",
+    "setup": "An English friend keeps asking you to compare everything about your new life in Sevilla.",
+    "lines": [
+      { "who": "friend", "name": "Friend", "text": "Is the food actually better there, or is that just what everyone says?" },
+      { "who": "you", "hint": "Reply in Spanish using mejor que or tan bueno como." },
+      { "who": "friend", "name": "Friend", "text": "Is Sofía's family bigger than yours?" },
+      { "who": "you", "hint": "Answer using más grande que or menos...que." },
+      { "who": "friend", "name": "Friend", "text": "What's the biggest difference in daily life?" },
+      { "who": "you", "hint": "Use a comparative to describe the pace of life, más/menos...que." },
+      { "who": "friend", "name": "Friend", "text": "Which city do you actually prefer?" },
+      { "who": "you", "hint": "Give an honest answer using a comparative or superlative." },
+      { "who": "friend", "name": "Friend", "text": "Sounds like you've really settled in." },
+      { "who": "you", "hint": "Agree and add one more comparison to wrap up." }
+    ]
+  }
+];
+
+const sceneTabs = document.getElementById('scene-tabs');
+const sceneContainer = document.getElementById('scene-container');
+let activeScene = 0;
+let filledOnce = new Set();
+
+function renderTabs(){
+  sceneTabs.innerHTML = SCENES.map((s,i)=>
+    `<button class="scene-tab${i===activeScene?' active':''}" data-idx="${i}">${s.icon} ${s.tab}</button>`
+  ).join('');
+  sceneTabs.querySelectorAll('.scene-tab').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      activeScene = parseInt(btn.dataset.idx, 10);
+      renderTabs();
+      renderScene();
+    });
+  });
+}
+
+function renderScene(){
+  const scene = SCENES[activeScene];
+  const linesHtml = scene.lines.map((l, li)=>{
+    if(l.who === 'friend'){
+      return `
+        <div class="line friend">
+          <div class="line-avatar">${l.name.charAt(0)}</div>
+          <div class="line-body">
+            <p class="line-name">${l.name}</p>
+            <div class="line-bubble">${l.text}</div>
+          </div>
+        </div>`;
+    } else {
+      return `
+        <div class="line you">
+          <div class="line-avatar">You</div>
+          <div class="line-body">
+            <p class="line-name">You</p>
+            <div class="line-input-wrap">
+              <textarea class="line-input" rows="2" placeholder="Write your reply..." data-scene="${scene.id}" data-line="${li}"></textarea>
+              <div class="typing-dots"><span></span><span></span><span></span></div>
+            </div>
+            <p class="line-hint">${l.hint}</p>
+          </div>
+        </div>`;
+    }
+  }).join('');
+
+  sceneContainer.innerHTML = `
+    <div class="scene-setup">
+      <span class="scene-icon">${scene.icon}</span>
+      <p class="scene-text"><strong>${scene.tab}:</strong> ${scene.setup}</p>
+    </div>
+    <div class="dialogue">${linesHtml}</div>
+  `;
+
+  sceneContainer.querySelectorAll('.line-input').forEach(ta=>{
+    const dots = ta.nextElementSibling;
+    let typingTimer;
+    ta.addEventListener('input', ()=>{
+      dots.classList.add('show');
+      clearTimeout(typingTimer);
+      typingTimer = setTimeout(()=>dots.classList.remove('show'), 900);
+
+      const key = `${ta.dataset.scene}-${ta.dataset.line}`;
+      if(ta.value.trim().length > 0 && !filledOnce.has(key)){
+        filledOnce.add(key);
+        if(filledOnce.size >= 3) completeBlock(6);
+      }
+    });
+    ta.addEventListener('blur', ()=>{
+      clearTimeout(typingTimer);
+      dots.classList.remove('show');
+    });
+  });
+}
+
+renderTabs();
+renderScene();
+
+/* ================= FINAL TASK ================= */
+const STORAGE_KEY = 'noah-clase11-tarea';
+const taskArea = document.getElementById('final-task');
+const taskCount = document.getElementById('task-count');
+const savedFlag = document.getElementById('saved-flag');
+
+async function cargarTarea(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(STORAGE_KEY);
+    if (res && typeof res.value === 'string') taskArea.value = res.value;
+  }catch(e){
+    // Key doesn't exist yet: no previous task, stays blank.
+  }
+  updateCount();
+}
+
+function updateCount(){
+  const lines = taskArea.value.split('\n').filter(l => l.trim().length > 0).length;
+  taskCount.textContent = `${lines} line${lines===1?'':'s'} written`;
+  if(lines >= 5) completeBlock(7);
+}
+taskArea.addEventListener('input', updateCount);
+updateCount();
+cargarTarea();
+
+document.getElementById('save-btn').addEventListener('click', async ()=>{
+  if (!window.storage){
+    savedFlag.textContent = 'Saving not available here';
+    savedFlag.classList.add('show');
+    setTimeout(()=>{ savedFlag.classList.remove('show'); savedFlag.textContent = 'Saved ✓'; }, 2200);
+    return;
+  }
+  try{
+    const ok = await window.storage.set(STORAGE_KEY, taskArea.value);
+    savedFlag.textContent = ok ? 'Saved ✓' : 'Could not save';
+  }catch(e){
+    savedFlag.textContent = 'Could not save';
+  }
+  savedFlag.classList.add('show');
+  setTimeout(()=>{ savedFlag.classList.remove('show'); savedFlag.textContent = 'Saved ✓'; }, 1800);
+});
+
+updateProgress();
+</script>
+
+</body>
+</html>

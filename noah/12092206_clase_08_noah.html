@@ -1,0 +1,1179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Class 8 · Fue, dijo, vino — Noah</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Space+Mono:wght@400;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+
+/* ╔══════════════════════════════════════════════════════════════╗
+   ║  ESCOLAR × NOTHING — sistema de diseño para clases de        ║
+   ║  español online, leído a través del lenguaje visual de       ║
+   ║  Nothing OS 5: transparencia con propósito, tipografía de    ║
+   ║  sistema marcada, roles semánticos intactos.                 ║
+   ║  Clase 8 · L4 New cycle · "Fue, dijo, vino"                    ║
+   ║  Motor de progreso + sonido + spring + scroll-unlock          ║
+   ╚══════════════════════════════════════════════════════════════╝ */
+
+:root{
+  --paper:        #F4EFE4;
+  --paper-deep:   #EAE3D2;
+  --paper-raised: rgba(255,255,255,0.55);
+  --paper-alt:    rgba(255,255,255,0.75);
+  --glass:        rgba(255,255,255,0.55);
+  --glass-strong: rgba(255,255,255,0.75);
+  --ink:          #23291F;
+  --ink-soft:     #565F52;
+  --ink-faint:    #8B9184;
+  --line:         rgba(35,41,31,0.10);
+  --line-strong:  rgba(35,41,31,0.20);
+
+  --b1:      #B5502E;  --b1-soft: rgba(181,80,46,0.10);  --b1-line: rgba(181,80,46,0.30);
+  --b2:      #2F6FED;  --b2-soft: rgba(47,111,237,0.10);  --b2-line: rgba(47,111,237,0.30);
+  --family:  #DB8A2E;  --family-soft: rgba(219,138,46,0.10); --family-line: rgba(219,138,46,0.30);
+
+  --ok:      #2E9E6B;  --ok-soft: rgba(46,158,107,0.10);  --ok-line: rgba(46,158,107,0.30);
+
+  --f-display: 'Fraunces', Georgia, serif;
+  --f-body:    'IBM Plex Sans', system-ui, sans-serif;
+  --f-data:    'Space Mono', ui-monospace, monospace;
+
+  --r-sm: 8px;
+  --r-md: 16px;
+  --r-lg: 24px;
+
+  --blur: 22px;
+  --spring: cubic-bezier(.34,1.56,.64,1);
+  --shadow-1: 0 8px 32px rgba(35,41,31,0.06), 0 1px 2px rgba(35,41,31,0.05);
+}
+
+*{ box-sizing:border-box; }
+html{ scroll-behavior:smooth; }
+body{
+  margin:0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--f-body);
+  line-height:1.6;
+  position:relative;
+  min-height:100vh;
+}
+body::before{
+  content:"";
+  position: fixed; inset:0;
+  background-image: radial-gradient(circle, rgba(35,41,31,0.09) 1.5px, transparent 1.5px);
+  background-size: 28px 28px;
+  pointer-events:none; z-index:0;
+}
+body::after{
+  content:"";
+  position: fixed; inset:0;
+  background: radial-gradient(ellipse 70% 50% at 50% -10%, var(--paper-deep), transparent 60%);
+  pointer-events:none; z-index:0;
+}
+header, main, footer, .progress-rail, .progress-chip{ position:relative; z-index:1; }
+::selection{ background: var(--b1-soft); }
+
+/* ---------- PROGRESS RAIL (sticky, global) ---------- */
+.progress-rail{
+  position:sticky; top:0; z-index:50; height:4px; width:100%;
+  background: rgba(255,255,255,0.4); border-bottom:1px solid var(--line);
+  backdrop-filter: blur(var(--blur)); -webkit-backdrop-filter: blur(var(--blur));
+}
+.progress-fill{
+  height:100%; width:0%; background: var(--b1);
+  transition: width .4s var(--spring);
+}
+.progress-chip{
+  position:fixed; top:14px; right:14px; z-index:50;
+  display:flex; align-items:center; gap:8px;
+  background: var(--glass-strong); border:1px solid rgba(255,255,255,0.7); border-radius:999px;
+  backdrop-filter: blur(var(--blur)); -webkit-backdrop-filter: blur(var(--blur));
+  padding:6px 8px 6px 14px; box-shadow: var(--shadow-1);
+  font-family: var(--f-data); font-size:11.5px; color: var(--ink-soft);
+}
+.sound-toggle{
+  width:26px; height:26px; border-radius:50%; border:1px solid var(--line); background: rgba(255,255,255,0.5);
+  cursor:pointer; font-size:12px; display:flex; align-items:center; justify-content:center;
+  transition: transform .18s var(--spring);
+}
+.sound-toggle:active{ transform: scale(.9); transition-duration: .08s; }
+.sound-toggle[aria-pressed="true"]{ background: var(--b1-soft); border-color: var(--b1-line); }
+
+@keyframes shake{
+  10%,90%{ transform: translateX(-1px); }
+  20%,80%{ transform: translateX(2px); }
+  30%,50%,70%{ transform: translateX(-4px); }
+  40%,60%{ transform: translateX(4px); }
+}
+@keyframes rise{
+  from{ opacity:0; transform: translateY(8px); }
+  to{ opacity:1; transform: translateY(0); }
+}
+@keyframes bounce{
+  0%,60%,100%{ transform: translateY(0); }
+  30%{ transform: translateY(-4px); }
+}
+@keyframes popIn{
+  0%{ transform: scale(1); }
+  40%{ transform: scale(1.18); }
+  100%{ transform: scale(1); }
+}
+
+/* ---------- HEADER ---------- */
+header{ padding:56px 24px 28px; max-width:760px; margin:0 auto; }
+.eyebrow{
+  font-family: var(--f-data); font-size:12px; letter-spacing:.14em;
+  text-transform:uppercase; color: var(--b1); margin:0 0 10px;
+  display:flex; align-items:center; gap:10px;
+}
+.eyebrow .dot{ width:6px; height:6px; border-radius:50%; background: var(--b1); box-shadow: 0 0 0 4px var(--b1-soft); }
+h1{
+  font-family: var(--f-display); font-weight:500;
+  font-size:clamp(30px,5.6vw,46px); line-height:1.08;
+  margin:0 0 14px; letter-spacing:-.01em;
+}
+h1 em{ font-style:italic; color: var(--b1); }
+.lede{ font-size:16px; color: var(--ink-soft); max-width:56ch; margin:0; }
+
+.meta-row{
+  display:flex; flex-wrap:wrap; gap:20px; margin-top:26px;
+  font-family: var(--f-data); font-size:12px; color: var(--ink-faint);
+}
+.meta-row strong{
+  display:block; color: var(--ink); font-size:14.5px; font-weight:500;
+  font-family: var(--f-display); margin-top:3px;
+}
+.cycle-flag{
+  margin-top:16px; padding:10px 14px;
+  background: linear-gradient(var(--b2-soft), var(--b2-soft)), var(--glass);
+  border:1px solid var(--b2-line);
+  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  border-radius: var(--r-md); font-family: var(--f-data); font-size:12px; color: var(--b2);
+  display:inline-flex; align-items:center; gap:8px;
+}
+
+/* ---------- SECTIONS ---------- */
+main{ max-width:760px; margin:0 auto; padding:8px 24px 100px; }
+
+section.block{ margin-bottom:52px; }
+.block-head{ display:flex; align-items:baseline; gap:12px; margin-bottom:18px; }
+.time-tag{
+  font-family: var(--f-data); font-size:11px; color: var(--ink-faint);
+  background: rgba(255,255,255,0.5); border:1px solid var(--line);
+  padding:3px 10px; border-radius:999px; margin-left:auto; flex:none;
+}
+.block-num{
+  font-family: var(--f-data); font-size:12px; color:#fff; background: var(--b1);
+  width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  flex:none; transition: background .25s var(--spring);
+}
+.block-num.is-done{ background: var(--ok); animation: popIn .35s var(--spring); }
+.block-head h2{
+  font-family: var(--f-display); font-weight:500; font-style:italic; font-size:22px; margin:0;
+}
+
+.panel{
+  background: var(--glass);
+  backdrop-filter: blur(var(--blur)); -webkit-backdrop-filter: blur(var(--blur));
+  border:1px solid rgba(255,255,255,0.6); border-radius: var(--r-lg);
+  box-shadow: var(--shadow-1); padding:28px 30px;
+}
+
+/* ---------- LOCKING ---------- */
+.is-locked .panel,
+.is-locked .roleplay-panel,
+.is-locked .task-panel{
+  opacity:.4; pointer-events:none; filter: grayscale(.3);
+  transition: opacity .3s ease, filter .3s ease;
+}
+.unlock-nudge{
+  display:none; font-family: var(--f-data); font-size:11.5px; color: var(--ink-faint);
+  margin-top:8px; padding-left:2px;
+}
+.is-locked .unlock-nudge{ display:block; }
+
+/* ---------- VERB REVIEW TABLE ---------- */
+.verb-table{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+@media (max-width:560px){ .verb-table{ grid-template-columns:1fr; } }
+.verb-col{ border-radius: var(--r-md); padding:16px 18px; border:1px solid var(--b1-line); background: linear-gradient(var(--b1-soft), var(--b1-soft)), var(--glass); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
+.verb-title{ font-family: var(--f-display); font-weight:600; font-size:17px; color: var(--b1); margin:0 0 2px; }
+.verb-sub{ font-family: var(--f-data); font-size:10.5px; color: var(--ink-faint); text-transform:uppercase; letter-spacing:.05em; margin:0 0 10px; }
+.verb-list{ margin:0; padding:0; list-style:none; }
+.verb-list li{ font-size:13.5px; color: var(--ink-soft); padding:6px 0; border-top:1px dashed var(--line); display:flex; gap:8px; }
+.verb-list li:first-child{ border-top:none; }
+.verb-list .pron{ font-family: var(--f-data); font-size:11.5px; color: var(--ink-faint); min-width:64px; flex:none; padding-top:1px; }
+.verb-list strong{ color: var(--ink); font-weight:600; }
+
+.note{
+  margin-top:18px; padding:14px 16px;
+  background: linear-gradient(var(--b1-soft), var(--b1-soft)), var(--glass);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  border:1px solid var(--b1-line);
+  border-radius: var(--r-md); font-size:14px; color: var(--ink-soft);
+}
+.note strong{ color: var(--ink); }
+
+/* ---------- IRREGULAR SPOTLIGHT ---------- */
+.irregular-wrap{ margin-top:22px; }
+.irregular-title{
+  font-family: var(--f-data); font-size:11.5px; text-transform:uppercase; letter-spacing:.06em;
+  color: var(--ink-faint); margin:0 0 10px;
+}
+.feature-list{ display:grid; gap:12px; }
+.feature-card{
+  border-radius: var(--r-md); padding:14px 16px; border:1px solid var(--line); background: var(--glass);
+  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  transition: border-color .15s ease;
+}
+.feature-name{ font-family: var(--f-display); font-weight:600; font-size:16px; color: var(--ink); margin:0 0 6px; }
+.feature-desc{ font-size:13.5px; color: var(--ink-soft); margin:0 0 8px; }
+.feature-pair{ display:flex; gap:10px; align-items:center; flex-wrap:wrap; font-family: var(--f-data); font-size:13.5px; }
+.feature-standard{ color: var(--ink-faint); }
+.feature-arrow{ color: var(--ink-faint); }
+.feature-andaluz{ color: var(--b1); font-weight:600; }
+
+.compare-warning{
+  margin-top:14px; padding:14px 16px;
+  background: linear-gradient(var(--family-soft), var(--family-soft)), var(--glass);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  border:1px solid var(--family-line);
+  border-radius: var(--r-md); font-size:13.5px; color: var(--ink-soft);
+}
+.compare-warning strong{ color: var(--family); }
+
+/* ---------- VOCAB CARDS ---------- */
+.vocab-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:12px; }
+.vocab-card{
+  background: var(--glass); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  border:1px solid rgba(255,255,255,0.5); border-radius: var(--r-md);
+  padding:14px 16px; cursor:pointer; perspective:600px; min-height:78px;
+  display:flex; flex-direction:column; justify-content:center;
+  transition: border-color .15s ease, transform .18s var(--spring);
+}
+.vocab-card:hover{ border-color: var(--b1-line); transform: translateY(-2px); }
+.vocab-card:active{ transform: scale(.97); transition-duration: .08s; }
+.vocab-card:focus-visible{ outline:2px solid var(--b1); outline-offset:2px; }
+.vocab-front{ font-family: var(--f-body); font-weight:600; font-size:15px; }
+.vocab-back{ display:none; font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); margin-top:6px; }
+.vocab-card.flipped .vocab-back{ display:block; }
+.vocab-card.flipped{ background: linear-gradient(var(--b1-soft), var(--b1-soft)), var(--glass); border-color: var(--b1-line); transform: scale(1.02); }
+.vocab-hint{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin:10px 2px 16px; }
+
+/* ---------- SEQUENCING (drag reorder via up/down) ---------- */
+.sequence-wrap{ display:flex; flex-direction:column; gap:10px; }
+.seq-item{
+  display:flex; align-items:center; gap:12px;
+  background: var(--glass); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  border:1px solid rgba(255,255,255,0.5); border-radius: var(--r-md);
+  padding:12px 14px; transition: border-color .15s ease, background .2s ease;
+}
+.seq-item.correct-pos{ border-color: var(--ok-line); background: linear-gradient(var(--ok-soft), var(--ok-soft)), var(--glass); }
+.seq-pos{
+  font-family: var(--f-data); font-size:12px; color:#fff; background: var(--ink-faint);
+  width:24px; height:24px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex:none;
+  transition: background .2s ease;
+}
+.seq-item.correct-pos .seq-pos{ background: var(--ok); }
+.seq-text{ flex:1; font-size:14.5px; color: var(--ink); }
+.seq-controls{ display:flex; gap:4px; flex:none; }
+.seq-btn{
+  width:26px; height:26px; border-radius:6px; border:1px solid var(--line); background: rgba(255,255,255,0.5);
+  color: var(--ink-soft); cursor:pointer; font-size:12px; display:flex; align-items:center; justify-content:center;
+  transition: transform .18s var(--spring), border-color .15s ease;
+}
+.seq-btn:hover{ border-color: var(--ink-faint); }
+.seq-btn:active{ transform: scale(.92); transition-duration: .08s; }
+.seq-btn:disabled{ opacity:.3; cursor:default; }
+.seq-feedback{
+  margin-top:16px; padding:12px 14px; border-radius: var(--r-md); font-size:13.5px;
+  display:none; align-items:center; gap:8px;
+}
+.seq-feedback.show{ display:flex; }
+.seq-feedback.ok{ background: linear-gradient(var(--ok-soft), var(--ok-soft)), var(--glass); border:1px solid var(--ok-line); color: var(--ok); }
+.seq-feedback.pending{ background: rgba(255,255,255,0.5); border:1px solid var(--line); color: var(--ink-soft); }
+
+/* ---------- EXERCISES ---------- */
+.exercise{ margin-bottom:20px; }
+.exercise:last-of-type{ margin-bottom:0; }
+.ex-sentence{ font-size:15.5px; margin-bottom:10px; }
+.ex-sentence .gap{ font-family: var(--f-data); color: var(--ink-faint); }
+.ex-options{ display:flex; flex-wrap:wrap; gap:8px; }
+.answer-flag{ font-size:13px; margin-left:4px; opacity:0; transition: opacity .15s ease; }
+.answer-flag.show{ opacity:1; }
+.answer-flag.ok{ color: var(--ok); }
+.answer-flag.no{ color: var(--b1); }
+.opt-btn{
+  font-family: var(--f-body); font-size:14px; background: var(--glass-strong);
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  border:1.5px solid var(--line-strong); color: var(--ink); padding:8px 17px; border-radius:999px;
+  cursor:pointer; transition: transform .18s var(--spring), background .15s ease, border-color .15s ease, color .15s ease;
+}
+.opt-btn:hover{ border-color: var(--ink-faint); }
+.opt-btn:active{ transform: scale(.94); transition-duration: .08s; }
+.opt-btn.picked{ background: linear-gradient(var(--b1-soft), var(--b1-soft)), var(--glass-strong); border-color: var(--b1); color: var(--b1); }
+.opt-btn.correct{ background: linear-gradient(var(--ok-soft), var(--ok-soft)), var(--glass-strong); border-color: var(--ok); color: var(--ok); }
+.opt-btn.wrong{ background: linear-gradient(var(--family-soft), var(--family-soft)), var(--glass-strong); border-color: var(--family); color: var(--family); animation: shake .32s var(--spring); }
+.opt-btn:disabled{ cursor:default; }
+
+.check-bar{
+  display:flex; align-items:center; justify-content:space-between; gap:16px;
+  margin-top:22px; padding-top:18px; border-top:1px dashed var(--line);
+}
+.btn-primary{
+  font-family: var(--f-body); font-weight:600; font-size:14px; color:#fff; background: var(--b1);
+  border:none; padding:11px 22px; border-radius:999px; cursor:pointer; transition: transform .18s var(--spring);
+}
+.btn-primary:hover{ transform: translateY(-1px); }
+.btn-primary:active{ transform: scale(.95); transition-duration: .08s; }
+#score-text{ font-family: var(--f-data); font-size:13px; color: var(--ink-faint); display:flex; align-items:center; gap:4px; }
+#score-num{ display:inline-block; color: var(--ok); font-weight:600; transition: transform .15s var(--spring); }
+#score-num.bump{ transform: scale(1.3); }
+.btn-ghost{
+  font-family: var(--f-body); font-weight:600; font-size:13px; color: var(--ink-soft); background:none;
+  border:1.5px solid var(--line); padding:9px 18px; border-radius:999px; cursor:pointer; transition: transform .18s var(--spring), border-color .15s ease;
+}
+.btn-ghost:hover{ border-color: var(--ink-faint); }
+.btn-ghost:active{ transform: scale(.95); transition-duration: .08s; }
+
+/* ---------- ROLEPLAY ---------- */
+.roleplay-panel{
+  background: linear-gradient(var(--b2-soft), var(--b2-soft)), var(--glass);
+  backdrop-filter: blur(var(--blur)); -webkit-backdrop-filter: blur(var(--blur));
+  border:1px solid var(--b2-line); border-radius: var(--r-lg); padding:28px 30px;
+}
+.roleplay-panel .block-num{ background: var(--b2); }
+.roleplay-panel .block-num.is-done{ background: var(--ok); }
+.scene-setup{
+  display:flex; gap:14px; align-items:flex-start; background: var(--glass-strong);
+  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  border:1px solid rgba(255,255,255,0.6); border-radius: var(--r-md); padding:14px 16px; margin-bottom:20px;
+}
+.scene-icon{ font-size:22px; flex:none; }
+.scene-text{ font-size:14px; color: var(--ink-soft); }
+.scene-text strong{ color: var(--ink); }
+
+.dialogue{ display:flex; flex-direction:column; gap:14px; }
+.scene-tabs{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:18px; }
+.scene-tab{
+  font-family: var(--f-data); font-size:11.5px; text-transform:uppercase; letter-spacing:.04em;
+  background: rgba(255,255,255,0.4);
+  border:1.5px solid var(--b2-line); color: var(--ink-soft); padding:8px 16px;
+  border-radius:999px; cursor:pointer; transition: transform .18s var(--spring), background .15s ease, border-color .15s ease, color .15s ease;
+}
+.scene-tab:hover{ border-color: var(--b2); }
+.scene-tab:active{ transform: scale(.95); transition-duration: .08s; }
+.scene-tab.active{ background: var(--b2); border-color: var(--b2); color:#fff; }
+.line{ display:flex; gap:12px; align-items:flex-start; animation: rise .32s var(--spring) both; }
+.line-avatar{
+  flex:none; width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  font-family: var(--f-display); font-weight:600; font-size:14px; color:#fff;
+}
+.line.friend .line-avatar{ background: var(--ink-faint); }
+.line.you .line-avatar{ background: var(--b2); }
+.line-body{ flex:1; }
+.line-name{ font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.05em; color: var(--ink-faint); margin:0 0 4px; }
+.line-bubble{
+  background: var(--glass-strong); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  border:1px solid rgba(255,255,255,0.6); border-radius: var(--r-md);
+  padding:12px 14px; font-size:14.5px; color: var(--ink);
+}
+.line.you .line-bubble{ background: var(--glass-strong); border-color: var(--b2-line); }
+.line-input-wrap{ position:relative; }
+.line-input{
+  width:100%; font-family: var(--f-body); font-size:14.5px; color: var(--ink);
+  background: rgba(255,255,255,0.7); border:1px solid var(--b2-line); border-radius: var(--r-sm);
+  padding:10px 12px; resize:vertical; min-height:40px; margin-top:2px;
+}
+.line-input:focus{ outline:none; border-color: var(--b2); }
+.line-hint{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin-top:5px; }
+
+.typing-dots{
+  display:none; align-items:center; gap:3px; margin-top:6px; padding-left:2px;
+}
+.typing-dots.show{ display:flex; }
+.typing-dots span{
+  width:5px; height:5px; border-radius:50%; background: var(--b2); opacity:.6;
+  animation: bounce 1s infinite ease-in-out;
+}
+.typing-dots span:nth-child(2){ animation-delay:.15s; }
+.typing-dots span:nth-child(3){ animation-delay:.3s; }
+
+.roleplay-tip{
+  margin-top:22px; padding:14px 16px; background: var(--glass-strong);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  border:1px solid var(--b2-line);
+  border-radius: var(--r-md); font-size:13.5px; color: var(--ink-soft);
+}
+.roleplay-tip strong{ color: var(--ink); }
+
+/* ---------- FINAL TASK ---------- */
+.task-panel{
+  background: linear-gradient(var(--family-soft), var(--family-soft)), var(--glass);
+  backdrop-filter: blur(var(--blur)); -webkit-backdrop-filter: blur(var(--blur));
+  border:1px solid var(--family-line); border-radius: var(--r-lg); padding:28px 30px;
+}
+.task-panel .block-num{ background: var(--family); }
+.task-panel .block-num.is-done{ background: var(--ok); }
+textarea#final-task{
+  width:100%; min-height:110px; font-family: var(--f-body); font-size:15px; color: var(--ink);
+  background: rgba(255,255,255,0.6); border:1px solid var(--family-line); border-radius: var(--r-md);
+  padding:14px 16px; resize:vertical; margin-top:14px;
+}
+textarea#final-task:focus{ outline:none; border-color: var(--family); }
+.task-footer{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:12px; flex-wrap:wrap; }
+#task-count{ font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); }
+.btn-secondary{
+  font-family: var(--f-body); font-weight:600; font-size:13.5px; color: var(--family); background:none;
+  border:1.5px solid var(--family-line); padding:9px 18px; border-radius:999px; cursor:pointer;
+  transition: transform .18s var(--spring);
+}
+.btn-secondary:active{ transform: scale(.95); transition-duration: .08s; }
+.saved-flag{ font-family: var(--f-data); font-size:12px; color: var(--ok); opacity:0; transition: opacity .3s ease; }
+.saved-flag.show{ opacity:1; }
+
+.listen-reminder{
+  display:flex; align-items:center; gap:14px; margin-top:16px; padding:14px 16px;
+  background: var(--glass-strong); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  border:1px solid var(--family-line); border-radius: var(--r-md);
+}
+.rec-dot{ width:12px; height:12px; border-radius:50%; background: var(--family); flex:none; box-shadow: 0 0 0 4px var(--family-soft); }
+.rec-text{ font-size:13.5px; color: var(--ink-soft); }
+.rec-text strong{ color: var(--ink); }
+
+/* ---------- CYCLE OPEN BANNER ---------- */
+.complete-panel{
+  background: linear-gradient(135deg, var(--b1-soft) 0%, var(--b2-soft) 100%), var(--glass);
+  backdrop-filter: blur(var(--blur)); -webkit-backdrop-filter: blur(var(--blur));
+  border:1px solid var(--b1-line); border-radius: var(--r-lg); padding:28px 30px; text-align:center;
+}
+.complete-title{ font-family: var(--f-display); font-weight:600; font-style:italic; font-size:24px; margin:0 0 8px; }
+.complete-text{ font-size:14.5px; color: var(--ink-soft); max-width:48ch; margin:0 auto; }
+
+/* ---------- FOOTER NAV ---------- */
+footer{
+  max-width:760px; margin:0 auto; padding:0 24px 60px; display:flex;
+  justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;
+  font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint);
+}
+footer a{ color: var(--b1); text-decoration:none; }
+footer a:hover{ text-decoration:underline; }
+
+@media (max-width:600px){
+  header{ padding:34px 18px 22px; }
+  main{ padding:8px 18px 90px; }
+  .panel, .task-panel{ padding:20px 18px; }
+  .progress-chip{ top:10px; right:10px; padding:5px 6px 5px 12px; }
+}
+@media (prefers-reduced-motion: reduce){
+  *{ transition:none !important; animation:none !important; }
+}
+</style>
+</head>
+<body>
+
+<div class="progress-rail"><div class="progress-fill" id="progress-fill"></div></div>
+<div class="progress-chip">
+  <span id="progress-text">0/7 blocks</span>
+  <button class="sound-toggle" id="sound-toggle" aria-pressed="false" aria-label="Toggle sound">🔇</button>
+</div>
+
+<header>
+  <p class="eyebrow"><span class="dot"></span>Class 8 · New cycle, class 2 · Cuéntame tu día</p>
+  <h1>Fue, dijo, <em>vino</em></h1>
+  <p class="lede">Last class opened the pretérito with fui, tuve, hice and estuve. Today you get the other irregulars you'll need constantly — <strong>fue, dijo, vino, pudo, puso</strong> — plus the sequencing words that turn scattered sentences into an actual story: primero, después, luego, al final.</p>
+  <div class="meta-row">
+    <div>Duration<strong>50 min</strong></div>
+    <div>Focus<strong>More irregular pretérito + sequencing</strong></div>
+    <div>Level<strong>A1→A2</strong></div>
+  </div>
+  <div class="cycle-flag">🌱 New cycle, class 2 — building directly on Class 7's pretérito indefinido</div>
+</header>
+
+<main>
+
+  <section class="block" id="block-1" data-block="1">
+    <div class="block-head"><span class="block-num">1</span><h2>Five more irregulars for telling stories</h2><span class="time-tag">12 min</span></div>
+    <div class="panel">
+      <p class="lede" style="margin-bottom:16px; font-size:14.5px;">You already know fui, tuve, hice, estuve. These five come up just as often when Sofía's family tells you what happened — learn them together and the pattern starts to feel familiar rather than random.</p>
+      <div class="verb-table">
+        <div class="verb-col">
+          <p class="verb-title">Ser/ir · fue</p>
+          <p class="verb-sub">to be / to go (same form)</p>
+          <ul class="verb-list">
+            <li><span class="pron">yo</span><span><strong>Fui</strong> a la boda de mi primo.</span></li>
+            <li><span class="pron">tú</span><span>¿<strong>Fuiste</strong> tú quien llamó?</span></li>
+            <li><span class="pron">él/ella</span><span>La cena <strong>fue</strong> estupenda.</span></li>
+            <li><span class="pron">ellos</span><span><strong>Fueron</strong> a buscar a Sofía.</span></li>
+          </ul>
+        </div>
+        <div class="verb-col">
+          <p class="verb-title">Decir · dijo</p>
+          <p class="verb-sub">to say, to tell</p>
+          <ul class="verb-list">
+            <li><span class="pron">yo</span><span><strong>Dije</strong> que sí sin pensarlo.</span></li>
+            <li><span class="pron">tú</span><span>¿Qué le <strong>dijiste</strong> a Manolo?</span></li>
+            <li><span class="pron">él/ella</span><span>Sofía me <strong>dijo</strong> la verdad.</span></li>
+            <li><span class="pron">ellos</span><span>Nos <strong>dijeron</strong> que sí.</span></li>
+          </ul>
+        </div>
+        <div class="verb-col">
+          <p class="verb-title">Venir · vino</p>
+          <p class="verb-sub">to come</p>
+          <ul class="verb-list">
+            <li><span class="pron">yo</span><span><strong>Vine</strong> directo desde el aeropuerto.</span></li>
+            <li><span class="pron">tú</span><span>¿Cuándo <strong>viniste</strong> a Sevilla?</span></li>
+            <li><span class="pron">él/ella</span><span>Rocío <strong>vino</strong> a recogerme.</span></li>
+            <li><span class="pron">ellos</span><span>Todos <strong>vinieron</strong> a la cena.</span></li>
+          </ul>
+        </div>
+        <div class="verb-col">
+          <p class="verb-title">Poder/poner · pudo, puso</p>
+          <p class="verb-sub">could / put, set</p>
+          <ul class="verb-list">
+            <li><span class="pron">yo</span><span>No <strong>pude</strong> llegar antes.</span></li>
+            <li><span class="pron">tú</span><span>¿<strong>Pudiste</strong> hablar con ella?</span></li>
+            <li><span class="pron">él/ella</span><span>Manolo <strong>puso</strong> la mesa.</span></li>
+            <li><span class="pron">ellos</span><span>No <strong>pudieron</strong> venir al final.</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="note"><strong>Pattern to notice:</strong> dije, vine, pude and puse all drop their normal endings and share the same irregular set (-e, -iste, -o, -imos, -isteis, -ieron) — with one twist: after dije, the "ellos" form is dijeron, not "dijieron".</div>
+      <div class="unlock-nudge">↳ Scroll to read this block fully to unlock the next one.</div>
+    </div>
+  </section>
+
+  <section class="block" id="block-2" data-block="2">
+    <div class="block-head"><span class="block-num">2</span><h2>Fue vs. estuvo — a trap to watch for</h2><span class="time-tag">8 min</span></div>
+    <div class="panel">
+      <p class="lede" style="margin-bottom:16px; font-size:14.5px;">Both fue and estuvo can translate as "was" in English, but they're not interchangeable — and it's the single most common mix-up at this level.</p>
+      <div class="irregular-wrap">
+        <p class="irregular-title">Two different "was"</p>
+        <div class="feature-list">
+          <div class="feature-card">
+            <p class="feature-name">Fue → describes an event or a permanent quality</p>
+            <p class="feature-desc">Use fue to judge or describe how something was as an event — a party, a trip, a day.</p>
+            <div class="feature-pair">
+              <span class="feature-standard">La boda fue preciosa.</span>
+              <span class="feature-arrow">=</span>
+              <span class="feature-andaluz">The wedding was beautiful.</span>
+            </div>
+          </div>
+          <div class="feature-card">
+            <p class="feature-name">Estuvo → describes a temporary state or location</p>
+            <p class="feature-desc">Use estuvo for where someone was, or how they felt at a specific moment.</p>
+            <div class="feature-pair">
+              <span class="feature-standard">Sofía estuvo nerviosa antes de la boda.</span>
+              <span class="feature-arrow">=</span>
+              <span class="feature-andaluz">Sofía was nervous before the wedding.</span>
+            </div>
+          </div>
+          <div class="feature-card">
+            <p class="feature-name">Dijo que + past info</p>
+            <p class="feature-desc">Dijo que is how you report what someone else told you — the backbone of retelling a conversation.</p>
+            <div class="feature-pair">
+              <span class="feature-standard">Manolo dijo que vino en tren.</span>
+              <span class="feature-arrow">=</span>
+              <span class="feature-andaluz">Manolo said he came by train.</span>
+            </div>
+          </div>
+        </div>
+        <div class="compare-warning">
+          <strong>Quick test:</strong> if you're describing an occasion as a whole (good, bad, long, beautiful), reach for fue. If you're placing someone somewhere or naming how they felt at that moment, reach for estuvo.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="block-3" data-block="3">
+    <div class="block-head"><span class="block-num">3</span><h2>Vocabulary: sequencing a story</h2><span class="time-tag">6 min</span></div>
+    <p class="vocab-hint">Tap each card to see an example sentence.</p>
+    <div class="vocab-grid" id="vocab-grid"></div>
+  </section>
+
+  <section class="block" id="block-4" data-block="4">
+    <div class="block-head"><span class="block-num">4</span><h2>Put the story in order</h2><span class="time-tag">8 min</span></div>
+    <div class="panel">
+      <p class="lede" style="margin-bottom:16px; font-size:14.5px;">Sofía told you about her cousin's wedding, but the lines got mixed up. Use the arrows to put them back in the right order — the sequencing words are your clues.</p>
+      <div class="sequence-wrap" id="sequence-wrap"></div>
+      <div class="seq-feedback pending" id="seq-feedback">
+        <span>Use the arrows to reorder the lines, then check below.</span>
+      </div>
+      <div class="check-bar">
+        <button class="btn-primary" id="seq-check-btn">Check order</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="block-5" data-block="5">
+    <div class="block-head"><span class="block-num">5</span><h2>Quick check</h2><span class="time-tag">6 min</span></div>
+    <div class="panel">
+      <p class="vocab-hint" style="margin-bottom:14px;">Mixing today's irregulars (fue, dijo, vino, pudo, puso) with what you already know from Class 7.</p>
+      <div id="exercises"></div>
+      <div class="check-bar">
+        <div style="display:flex; gap:10px;">
+          <button class="btn-primary" id="check-btn">Check answers</button>
+          <button class="btn-ghost" id="reset-btn">Reset</button>
+        </div>
+        <span id="score-text"></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="block roleplay-panel" id="block-6" data-block="6">
+    <div class="block-head"><span class="block-num">6</span><h2>Roleplay: telling your own story</h2><span class="time-tag">8 min</span></div>
+    <p class="lede" style="margin-bottom:16px;">Three real conversations where you'll need to sequence events and use the new irregulars. Choose one scene to practise out loud in class; the rest stay as a review bank.</p>
+    <div class="scene-tabs" id="scene-tabs"></div>
+    <div id="scene-container"></div>
+    <div class="roleplay-tip"><strong>In class:</strong> we'll practise one scene out loud, swapping roles. The other two are for you to practise on your own during the week.</div>
+  </section>
+
+  <section class="block task-panel" id="block-7" data-block="7">
+    <div class="block-head"><span class="block-num">7</span><h2 style="color:var(--family)">Your task</h2><span class="time-tag">3 min</span></div>
+    <p style="margin:0 0 4px; font-size:15px; color:var(--ink-soft);">Write a <strong>6-sentence story</strong> about a recent weekend, using primero, después, luego and al final to sequence it. Mix in at least two irregular preterites from today (fue, dijo, vino, pudo, puso) — plus any from Class 7 if you need them.</p>
+    <div class="listen-reminder">
+      <span class="rec-dot"></span>
+      <span class="rec-text"><strong>Idea:</strong> "Primero fui a... Después vino... Luego dijimos... Al final pude..." — a real weekend, told in order, works best.</span>
+    </div>
+    <textarea id="final-task" placeholder="1. &#10;2. &#10;3. &#10;4. &#10;5. &#10;6. "></textarea>
+    <div class="task-footer">
+      <span id="task-count">0 lines written</span>
+      <div style="display:flex; gap:10px; align-items:center;">
+        <span class="saved-flag" id="saved-flag">Saved ✓</span>
+        <button class="btn-secondary" id="save-btn">Save task</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="complete-panel">
+      <p class="complete-title">Ya sabes contar una historia entera, Noah</p>
+      <p class="complete-text">Fue, dijo, vino, pudo, puso — with these five plus fui, tuve, hice, estuve from Class 7, you have every irregular you'll need to tell almost any story that's already happened. Next: what things were like, not just what happened.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <span>Class 8 · New cycle, class 2</span>
+  <span>Next: the imperfecto — describing what things used to be like</span>
+</footer>
+
+<script>
+/* ================= PROGRESS ENGINE ================= */
+const TOTAL_BLOCKS = 7;
+const completed = new Set();
+
+function completeBlock(n){
+  if(completed.has(n)) return;
+  completed.add(n);
+  const numEl = document.querySelector(`#block-${n} .block-num`);
+  if(numEl) numEl.classList.add('is-done');
+  updateProgress();
+  soundUnlock();
+}
+
+function updateProgress(){
+  const pct = Math.round((completed.size / TOTAL_BLOCKS) * 100);
+  document.getElementById('progress-fill').style.width = pct + '%';
+  document.getElementById('progress-text').textContent = `${completed.size}/${TOTAL_BLOCKS} blocks`;
+}
+
+/* ================= SOUND (Web Audio, no assets) ================= */
+let soundOn = false;
+let audioCtx = null;
+
+function playTone(freq, dur){
+  if(!soundOn) return;
+  try{
+    if(!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    osc.type = 'sine';
+    osc.frequency.value = freq;
+    gain.gain.setValueAtTime(0.0001, audioCtx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.12, audioCtx.currentTime + 0.01);
+    gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + dur);
+    osc.connect(gain).connect(audioCtx.destination);
+    osc.start();
+    osc.stop(audioCtx.currentTime + dur);
+  }catch(e){ /* silent failure */ }
+}
+function soundCorrect(){ playTone(660, 0.18); }
+function soundWrong(){ playTone(220, 0.22); }
+function soundUnlock(){
+  playTone(880, 0.1);
+  setTimeout(()=>playTone(1180, 0.14), 90);
+}
+
+const soundToggle = document.getElementById('sound-toggle');
+soundToggle.addEventListener('click', ()=>{
+  soundOn = !soundOn;
+  soundToggle.setAttribute('aria-pressed', String(soundOn));
+  soundToggle.textContent = soundOn ? '🔊' : '🔇';
+});
+
+/* ================= SCROLL-UNLOCK — every block unlocks (becomes
+   visible/interactive) as soon as it's scrolled into view. Blocks
+   1 and 2 have no interaction of their own, so reaching them also
+   marks them complete for the progress counter. Blocks 3-7 unlock
+   on scroll too, but the progress counter still only advances when
+   the learner actually interacts (quiz check, roleplay typing,
+   sequence check, task writing) — see the callbacks below. ================= */
+const scrollUnlockObserver = new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      const n = parseInt(entry.target.dataset.block, 10);
+      entry.target.classList.remove('is-locked');
+      if(n === 1 || n === 2) completeBlock(n);
+      scrollUnlockObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.25 });
+
+[1,2,3,4,5,6,7].forEach(n=>{
+  const el = document.getElementById(`block-${n}`);
+  if(el) scrollUnlockObserver.observe(el);
+});
+
+/* Blocks 2-7 start locked (dimmed) until scrolled into view; block 1
+   is visible immediately so the class opens without a locked screen. */
+[2,3,4,5,6,7].forEach(n=>{
+  const el = document.getElementById(`block-${n}`);
+  if(el) el.classList.add('is-locked');
+});
+
+/* ================= VOCAB ================= */
+const VOCAB = [
+  {front:"primero (first)", back:"Primero fui al aeropuerto a buscarla."},
+  {front:"después (after, then)", back:"Después comimos todos juntos."},
+  {front:"luego (then, next)", back:"Luego dijimos unas palabras."},
+  {front:"al final (in the end)", back:"Al final, todos bailaron hasta tarde."},
+  {front:"mientras tanto (meanwhile)", back:"Mientras tanto, Manolo puso la mesa."},
+  {front:"esa misma noche (that same night)", back:"Esa misma noche, vino toda la familia."},
+];
+
+const grid = document.getElementById('vocab-grid');
+let vocabFlips = 0;
+VOCAB.forEach(v=>{
+  const card = document.createElement('div');
+  card.className = 'vocab-card';
+  card.setAttribute('role', 'button');
+  card.setAttribute('tabindex', '0');
+  card.setAttribute('aria-pressed', 'false');
+  card.setAttribute('aria-label', `${v.front}. Tap to see an example.`);
+  card.innerHTML = `<div class="vocab-front">${v.front}</div><div class="vocab-back">${v.back}</div>`;
+  const toggle = ()=>{
+    const flipped = card.classList.toggle('flipped');
+    card.setAttribute('aria-pressed', String(flipped));
+    if(flipped){
+      vocabFlips++;
+      soundCorrect();
+      if(vocabFlips >= 4) completeBlock(3);
+    }
+  };
+  card.addEventListener('click', toggle);
+  card.addEventListener('keydown', (e)=>{
+    if(e.key === 'Enter' || e.key === ' '){
+      e.preventDefault();
+      toggle();
+    }
+  });
+  grid.appendChild(card);
+});
+
+/* ================= SEQUENCING EXERCISE ================= */
+const SEQUENCE_CORRECT = [
+  "Primero, mi prima se puso muy nerviosa antes de la ceremonia.",
+  "Después, todos fuimos a la iglesia juntos.",
+  "Luego, vino la comida con toda la familia en la caseta.",
+  "Mientras tanto, Manolo puso la música para después.",
+  "Al final, mi prima dijo que fue el mejor día de su vida."
+];
+
+let sequenceItems = shuffle([...SEQUENCE_CORRECT]);
+
+function shuffle(arr){
+  const a = [...arr];
+  for(let i = a.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  // Guard against an accidental already-correct shuffle
+  if(a.every((v, i) => v === SEQUENCE_CORRECT[i])){
+    return shuffle(arr);
+  }
+  return a;
+}
+
+const seqWrap = document.getElementById('sequence-wrap');
+const seqFeedback = document.getElementById('seq-feedback');
+
+function renderSequence(){
+  seqWrap.innerHTML = sequenceItems.map((text, i)=>`
+    <div class="seq-item" data-idx="${i}">
+      <span class="seq-pos">${i+1}</span>
+      <span class="seq-text">${text}</span>
+      <div class="seq-controls">
+        <button class="seq-btn" data-dir="up" data-idx="${i}" ${i===0?'disabled':''} aria-label="Move up">↑</button>
+        <button class="seq-btn" data-dir="down" data-idx="${i}" ${i===sequenceItems.length-1?'disabled':''} aria-label="Move down">↓</button>
+      </div>
+    </div>
+  `).join('');
+}
+renderSequence();
+
+seqWrap.addEventListener('click', (e)=>{
+  const btn = e.target.closest('.seq-btn');
+  if(!btn) return;
+  const idx = parseInt(btn.dataset.idx, 10);
+  const dir = btn.dataset.dir;
+  const swapWith = dir === 'up' ? idx - 1 : idx + 1;
+  if(swapWith < 0 || swapWith >= sequenceItems.length) return;
+  [sequenceItems[idx], sequenceItems[swapWith]] = [sequenceItems[swapWith], sequenceItems[idx]];
+  renderSequence();
+  seqFeedback.classList.remove('show', 'ok');
+  seqFeedback.classList.add('pending');
+  seqFeedback.innerHTML = '<span>Use the arrows to reorder the lines, then check below.</span>';
+});
+
+document.getElementById('seq-check-btn').addEventListener('click', ()=>{
+  const isCorrect = sequenceItems.every((v, i) => v === SEQUENCE_CORRECT[i]);
+  document.querySelectorAll('.seq-item').forEach((el, i)=>{
+    el.classList.toggle('correct-pos', sequenceItems[i] === SEQUENCE_CORRECT[i]);
+  });
+  seqFeedback.classList.add('show');
+  seqFeedback.classList.remove('pending');
+  if(isCorrect){
+    seqFeedback.classList.add('ok');
+    seqFeedback.innerHTML = '<span>✓ Perfecto — that\u2019s the right order.</span>';
+    soundCorrect();
+    completeBlock(4);
+  } else {
+    seqFeedback.classList.add('pending');
+    seqFeedback.innerHTML = '<span>Not quite yet — the highlighted lines are already in place. Keep adjusting the rest.</span>';
+    soundWrong();
+  }
+});
+
+/* ================= EXERCISES ================= */
+const EXERCISES = [
+  {
+    "sentence": "Mi prima <span class=\"gap\">___</span> que estaba muy nerviosa antes de la boda.",
+    "options": ["dice", "dijo", "dijiste"],
+    "answer": "dijo"
+  },
+  {
+    "sentence": "Toda la familia <span class=\"gap\">___</span> desde Sevilla para la boda.",
+    "options": ["viene", "vino", "vinieron"],
+    "answer": "vinieron"
+  },
+  {
+    "sentence": "La ceremonia <span class=\"gap\">___</span> muy emotiva.",
+    "options": ["estuvo", "fue", "es"],
+    "answer": "fue"
+  },
+  {
+    "sentence": "Sofía <span class=\"gap\">___</span> muy nerviosa antes de hablar en público.",
+    "options": ["fue", "estuvo", "estaba"],
+    "answer": "estuvo"
+  },
+  {
+    "sentence": "Al final, Manolo no <span class=\"gap\">___</span> venir por el trabajo.",
+    "options": ["pudo", "puso", "podía"],
+    "answer": "pudo"
+  },
+  {
+    "sentence": "Yo <span class=\"gap\">___</span> la mesa antes de que llegaran los invitados.",
+    "options": ["puse", "pude", "pongo"],
+    "answer": "puse"
+  },
+  {
+    "sentence": "<span class=\"gap\">___</span>, fuimos a la iglesia; después, comimos todos juntos.",
+    "options": ["Al final", "Primero", "Mientras tanto"],
+    "answer": "Primero"
+  },
+  {
+    "sentence": "¿Qué te <span class=\"gap\">___</span> Sofía sobre la boda de su prima?",
+    "options": ["dijo", "dije", "dice"],
+    "answer": "dijo"
+  },
+  {
+    "sentence": "Nosotros <span class=\"gap\">___</span> a la fiesta juntos, en el mismo coche.",
+    "options": ["fuimos", "estuvimos", "vinimos"],
+    "answer": "fuimos"
+  },
+  {
+    "sentence": "<span class=\"gap\">___</span> tanto, la orquesta preparaba las canciones para el baile.",
+    "options": ["Mientras", "Después", "Al final"],
+    "answer": "Mientras"
+  }
+];
+
+const exWrap = document.getElementById('exercises');
+EXERCISES.forEach((ex, i)=>{
+  const el = document.createElement('div');
+  el.className = 'exercise';
+  el.dataset.answer = ex.answer;
+  el.innerHTML = `
+    <div class="ex-sentence">${i+1}. ${ex.sentence} <span class="answer-flag" data-flag="${i}"></span></div>
+    <div class="ex-options">
+      ${ex.options.map(o=>`<button class="opt-btn" data-value="${o}">${o}</button>`).join('')}
+    </div>
+  `;
+  exWrap.appendChild(el);
+
+  el.querySelectorAll('.opt-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      el.querySelectorAll('.opt-btn').forEach(b=>b.classList.remove('picked'));
+      btn.classList.add('picked');
+    });
+  });
+});
+
+function animateCount(el, target){
+  let current = 0;
+  el.classList.add('bump');
+  const step = ()=>{
+    current++;
+    el.textContent = current;
+    if(current < target){
+      requestAnimationFrame(()=>setTimeout(step, 55));
+    } else {
+      setTimeout(()=>el.classList.remove('bump'), 150);
+    }
+  };
+  if(target === 0){ el.textContent = 0; return; }
+  step();
+}
+
+document.getElementById('check-btn').addEventListener('click', ()=>{
+  let correct = 0;
+  document.querySelectorAll('.exercise').forEach((el, i)=>{
+    const answer = el.dataset.answer;
+    const picked = el.querySelector('.opt-btn.picked');
+    const flag = el.querySelector('.answer-flag');
+    el.querySelectorAll('.opt-btn').forEach(b=>{
+      b.disabled = true;
+      if(b.dataset.value === answer) b.classList.add('correct');
+      else if(b === picked) b.classList.add('wrong');
+    });
+    const isCorrect = picked && picked.dataset.value === answer;
+    if(isCorrect){
+      correct++;
+      flag.textContent = '✓';
+      flag.classList.add('ok');
+      flag.setAttribute('aria-label', 'correct');
+    } else {
+      flag.textContent = '✗';
+      flag.classList.add('no');
+      flag.setAttribute('aria-label', 'incorrect');
+    }
+    flag.classList.add('show');
+  });
+  document.getElementById('score-text').innerHTML = `<span id="score-num">0</span> / ${EXERCISES.length} correct`;
+  animateCount(document.getElementById('score-num'), correct);
+  if(correct === EXERCISES.length) soundCorrect(); else if(correct > 0) soundCorrect(); else soundWrong();
+  completeBlock(5);
+});
+
+document.getElementById('reset-btn').addEventListener('click', ()=>{
+  document.querySelectorAll('.exercise').forEach(el=>{
+    el.querySelectorAll('.opt-btn').forEach(b=>{
+      b.disabled = false;
+      b.classList.remove('picked','correct','wrong');
+    });
+    const flag = el.querySelector('.answer-flag');
+    flag.classList.remove('show','ok','no');
+    flag.textContent = '';
+  });
+  document.getElementById('score-text').textContent = '';
+});
+
+/* ================= ROLEPLAY SCENES ================= */
+const SCENES = [
+  {
+    "id": "boda-prima",
+    "tab": "Telling Sofía about a wedding back home",
+    "icon": "💍",
+    "setup": "Sofía asks about a wedding you went to recently — she wants the whole story, in order.",
+    "lines": [
+      { "who": "friend", "name": "Sofía", "text": "¿Qué tal la boda? Cuéntamelo todo, illo." },
+      { "who": "you", "hint": "Start with \"primero\", using fui or fuimos." },
+      { "who": "friend", "name": "Sofía", "text": "¿Y después qué pasó?" },
+      { "who": "you", "hint": "Continue with \"después\", using an irregular preterite (vino, dijo, pudo...)." },
+      { "who": "friend", "name": "Sofía", "text": "¿La novia estuvo muy nerviosa?" },
+      { "who": "you", "hint": "Answer using \"estuvo\" or \"estaba\"." },
+      { "who": "friend", "name": "Sofía", "text": "¿Y al final qué tal fue todo?" },
+      { "who": "you", "hint": "Answer using \"fue\", describing the day as a whole." },
+      { "who": "friend", "name": "Sofía", "text": "Qué bonito, me encantaría ir a una boda inglesa algún día." },
+      { "who": "you", "hint": "React and say something you'd like, using \"me gustaría\" or \"quiero\"." }
+    ]
+  },
+  {
+    "id": "manolo-anecdota",
+    "tab": "Manolo tells a family story",
+    "icon": "📖",
+    "setup": "Manolo is telling you a long story about the day he met Sofía's mother — and expects you to follow along.",
+    "lines": [
+      { "who": "friend", "name": "Manolo", "text": "¿Sabes cómo conocí a la madre de Sofía? Fue en una boda, illo." },
+      { "who": "you", "hint": "React with interest, using \"¿en serio?\" or a question." },
+      { "who": "friend", "name": "Manolo", "text": "Primero la vi bailando, y luego vino a hablar conmigo." },
+      { "who": "you", "hint": "React, using \"y qué más\" or repeat back what happened using \"vino\"." },
+      { "who": "friend", "name": "Manolo", "text": "Me dijo su nombre y yo no pude decir nada, ¡estaba nervioso!" },
+      { "who": "you", "hint": "React warmly, using \"qué bonito\" or a similar phrase." },
+      { "who": "friend", "name": "Manolo", "text": "Al final, bailamos toda la noche." },
+      { "who": "you", "hint": "Ask a follow-up question about what happened next, using the pretérito." },
+      { "who": "friend", "name": "Manolo", "text": "Y aquí estamos, treinta años después." },
+      { "who": "you", "hint": "React and say something nice, using \"qué historia tan bonita\" or similar." }
+    ]
+  },
+  {
+    "id": "amiga-cotilleo",
+    "tab": "Catching up with a friend",
+    "icon": "☕",
+    "setup": "An English friend asks what's been going on with Sofía's family lately.",
+    "lines": [
+      { "who": "friend", "name": "Friend", "text": "So what happened with Sofía's family recently? Anything new?" },
+      { "who": "you", "hint": "Start in Spanish with \"primero\" and an irregular preterite." },
+      { "who": "friend", "name": "Friend", "text": "And then what?" },
+      { "who": "you", "hint": "Continue with \"después\" or \"luego\", using another irregular verb." },
+      { "who": "friend", "name": "Friend", "text": "Did anyone say anything interesting?" },
+      { "who": "you", "hint": "Answer using \"dijo\" or \"dijeron\"." },
+      { "who": "friend", "name": "Friend", "text": "How did it all end?" },
+      { "who": "you", "hint": "Answer using \"al final\" and \"fue\"." },
+      { "who": "friend", "name": "Friend", "text": "Wow, quite a story!" },
+      { "who": "you", "hint": "Agree and add a connector (y, pero, porque, entonces)." }
+    ]
+  }
+]
+;
+
+const sceneTabs = document.getElementById('scene-tabs');
+const sceneContainer = document.getElementById('scene-container');
+let activeScene = 0;
+let filledOnce = new Set();
+
+function renderTabs(){
+  sceneTabs.innerHTML = SCENES.map((s,i)=>
+    `<button class="scene-tab${i===activeScene?' active':''}" data-idx="${i}">${s.icon} ${s.tab}</button>`
+  ).join('');
+  sceneTabs.querySelectorAll('.scene-tab').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      activeScene = parseInt(btn.dataset.idx, 10);
+      renderTabs();
+      renderScene();
+    });
+  });
+}
+
+function renderScene(){
+  const scene = SCENES[activeScene];
+  const linesHtml = scene.lines.map((l, li)=>{
+    if(l.who === 'friend'){
+      return `
+        <div class="line friend">
+          <div class="line-avatar">${l.name.charAt(0)}</div>
+          <div class="line-body">
+            <p class="line-name">${l.name}</p>
+            <div class="line-bubble">${l.text}</div>
+          </div>
+        </div>`;
+    } else {
+      return `
+        <div class="line you">
+          <div class="line-avatar">You</div>
+          <div class="line-body">
+            <p class="line-name">You</p>
+            <div class="line-input-wrap">
+              <textarea class="line-input" rows="2" placeholder="Write your reply..." data-scene="${scene.id}" data-line="${li}"></textarea>
+              <div class="typing-dots"><span></span><span></span><span></span></div>
+            </div>
+            <p class="line-hint">${l.hint}</p>
+          </div>
+        </div>`;
+    }
+  }).join('');
+
+  sceneContainer.innerHTML = `
+    <div class="scene-setup">
+      <span class="scene-icon">${scene.icon}</span>
+      <p class="scene-text"><strong>${scene.tab}:</strong> ${scene.setup}</p>
+    </div>
+    <div class="dialogue">${linesHtml}</div>
+  `;
+
+  sceneContainer.querySelectorAll('.line-input').forEach(ta=>{
+    const dots = ta.nextElementSibling;
+    let typingTimer;
+    ta.addEventListener('input', ()=>{
+      dots.classList.add('show');
+      clearTimeout(typingTimer);
+      typingTimer = setTimeout(()=>dots.classList.remove('show'), 900);
+
+      const key = `${ta.dataset.scene}-${ta.dataset.line}`;
+      if(ta.value.trim().length > 0 && !filledOnce.has(key)){
+        filledOnce.add(key);
+        if(filledOnce.size >= 3) completeBlock(6);
+      }
+    });
+    ta.addEventListener('blur', ()=>{
+      clearTimeout(typingTimer);
+      dots.classList.remove('show');
+    });
+  });
+}
+
+renderTabs();
+renderScene();
+
+/* ================= FINAL TASK ================= */
+const STORAGE_KEY = 'noah-clase08-tarea';
+const taskArea = document.getElementById('final-task');
+const taskCount = document.getElementById('task-count');
+const savedFlag = document.getElementById('saved-flag');
+
+async function cargarTarea(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(STORAGE_KEY);
+    if (res && typeof res.value === 'string') taskArea.value = res.value;
+  }catch(e){
+    // Key doesn't exist yet: no previous task, stays blank.
+  }
+  updateCount();
+}
+
+function updateCount(){
+  const lines = taskArea.value.split('\n').filter(l => l.trim().length > 0).length;
+  taskCount.textContent = `${lines} line${lines===1?'':'s'} written`;
+  if(lines >= 6) completeBlock(7);
+}
+taskArea.addEventListener('input', updateCount);
+updateCount();
+cargarTarea();
+
+document.getElementById('save-btn').addEventListener('click', async ()=>{
+  if (!window.storage){
+    savedFlag.textContent = 'Saving not available here';
+    savedFlag.classList.add('show');
+    setTimeout(()=>{ savedFlag.classList.remove('show'); savedFlag.textContent = 'Saved ✓'; }, 2200);
+    return;
+  }
+  try{
+    const ok = await window.storage.set(STORAGE_KEY, taskArea.value);
+    savedFlag.textContent = ok ? 'Saved ✓' : 'Could not save';
+  }catch(e){
+    savedFlag.textContent = 'Could not save';
+  }
+  savedFlag.classList.add('show');
+  setTimeout(()=>{ savedFlag.classList.remove('show'); savedFlag.textContent = 'Saved ✓'; }, 1800);
+});
+
+updateProgress();
+</script>
+
+</body>
+</html>
