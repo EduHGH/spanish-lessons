@@ -1,0 +1,1366 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clase 4 · ¿Qué desea? — Angelika</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+
+/* ╔══════════════════════════════════════════════════════════════╗
+   ║  ESCOLAR — sistema de diseño para clases de español online   ║
+   ║  Clase 4 · L2 Línea del pedido · "¿Qué desea?"                 ║
+   ╚══════════════════════════════════════════════════════════════╝ */
+
+:root{
+  --paper:        #FBF7EE;
+  --paper-raised: #FFFFFF;
+  --paper-alt:    #F3ECDA;
+  --ink:          #23291F;
+  --ink-soft:     #565F52;
+  --ink-faint:    #8B9184;
+  --line:         rgba(35,41,31,0.12);
+  --line-strong:  rgba(35,41,31,0.22);
+
+  --b1:      #2F6FED;  --b1-soft: #EAF1FE;  --b1-line: #C6D9FC;
+  --b2:      #2E9E6B;  --b2-soft: #E9F6EF;  --b2-line: #BEE6D3;
+  --b3:      #DB8A2E;  --b3-soft: #FCF1E1;  --b3-line: #F3D9AF;
+  --family:  #B5502E;  --family-soft: #FBEBE3; --family-line: #EFC9B4;
+
+  --f-display: 'Fraunces', Georgia, serif;
+  --f-body:    'IBM Plex Sans', system-ui, sans-serif;
+  --f-data:    'IBM Plex Mono', monospace;
+
+  --r-sm: 8px;
+  --r-md: 14px;
+  --r-lg: 20px;
+
+  --shadow-1: 0 1px 2px rgba(35,41,31,0.05), 0 1px 8px rgba(35,41,31,0.04);
+}
+
+*{ box-sizing:border-box; }
+body{
+  margin:0;
+  background: var(--paper);
+  background-image: radial-gradient(circle at 1px 1px, var(--line) 1px, transparent 0);
+  background-size: 22px 22px;
+  color: var(--ink);
+  font-family: var(--f-body);
+  line-height:1.6;
+}
+::selection{ background: var(--b3-soft); }
+
+/* ---------- HEADER ---------- */
+header{ padding:44px 24px 28px; max-width:760px; margin:0 auto; }
+.eyebrow{
+  font-family: var(--f-data); font-size:12px; letter-spacing:.14em;
+  text-transform:uppercase; color: var(--b3); margin:0 0 10px;
+  display:flex; align-items:center; gap:10px;
+}
+.eyebrow .dot{ width:6px; height:6px; border-radius:50%; background: var(--b3); }
+h1{
+  font-family: var(--f-display); font-weight:600;
+  font-size:clamp(30px,5.6vw,46px); line-height:1.08;
+  margin:0 0 14px; letter-spacing:-.01em;
+}
+h1 em{ font-style:italic; color: var(--b3); }
+.lede{ font-size:16px; color: var(--ink-soft); max-width:56ch; margin:0; }
+
+.meta-row{
+  display:flex; flex-wrap:wrap; gap:20px; margin-top:26px;
+  font-family: var(--f-data); font-size:12px; color: var(--ink-faint);
+}
+.meta-row strong{
+  display:block; color: var(--ink); font-size:14.5px; font-weight:500;
+  font-family: var(--f-display); margin-top:3px;
+}
+
+/* ---------- SECTIONS ---------- */
+main{ max-width:760px; margin:0 auto; padding:8px 24px 100px; }
+
+section.block{ margin-bottom:52px; }
+.block-head{ display:flex; align-items:baseline; gap:12px; margin-bottom:18px; }
+.time-tag{
+  font-family: var(--f-data); font-size:11px; color: var(--ink-faint);
+  background: var(--paper-alt); padding:3px 10px; border-radius:999px; margin-left:auto; flex:none;
+}
+.block-num{
+  font-family: var(--f-data); font-size:12px; color:#fff; background: var(--b3);
+  width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  flex:none;
+}
+.block-head h2{
+  font-family: var(--f-display); font-weight:500; font-style:italic; font-size:22px; margin:0;
+}
+
+.panel{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-lg);
+  box-shadow: var(--shadow-1); padding:26px 28px;
+}
+
+/* ---------- GRAMMAR TABLE ---------- */
+.conj-table{ width:100%; border-collapse:collapse; margin-top:4px; }
+.conj-table td{ padding:10px 6px; border-bottom:1px dashed var(--line); font-size:15px; }
+.conj-table tr:last-child td{ border-bottom:none; }
+.conj-pron{ font-family: var(--f-data); color: var(--ink-faint); font-size:13px; width:90px; }
+.conj-form{ font-family: var(--f-display); font-weight:600; font-size:19px; color: var(--b3); }
+.conj-ex{ color: var(--ink-soft); font-size:14px; }
+
+.note{
+  margin-top:18px; padding:14px 16px; background: var(--b3-soft); border:1px solid var(--b3-line);
+  border-radius: var(--r-md); font-size:14px; color: var(--ink-soft);
+}
+.note strong{ color: var(--ink); }
+
+/* ---------- THREE VERBS COMPARE ---------- */
+.compare-wrap{ margin-top:22px; }
+.compare-title{
+  font-family: var(--f-data); font-size:11.5px; text-transform:uppercase; letter-spacing:.06em;
+  color: var(--ink-faint); margin:0 0 10px;
+}
+.compare-grid{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px; }
+@media (max-width:680px){ .compare-grid{ grid-template-columns:1fr; } }
+.compare-col{ border-radius: var(--r-md); padding:16px 18px; border:1px solid; }
+.compare-col.is-ar{ background: var(--b1-soft); border-color: var(--b1-line); }
+.compare-col.is-er{ background: var(--b2-soft); border-color: var(--b2-line); }
+.compare-col.is-ir{ background: var(--b3-soft); border-color: var(--b3-line); }
+.compare-head{ display:flex; align-items:center; gap:8px; margin:0 0 10px; }
+.compare-verb{ font-family: var(--f-display); font-weight:600; font-size:19px; }
+.is-ar .compare-verb{ color: var(--b1); }
+.is-er .compare-verb{ color: var(--b2); }
+.is-ir .compare-verb{ color: var(--b3); }
+.compare-sub{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); }
+.compare-list{ margin:0; padding:0; list-style:none; }
+.compare-list li{ font-size:13.5px; color: var(--ink-soft); padding:6px 0; border-top:1px dashed var(--line); }
+.compare-list li:first-child{ border-top:none; }
+.compare-list strong{ color: var(--ink); font-weight:600; }
+.compare-warning{
+  margin-top:14px; padding:14px 16px; background: var(--family-soft); border:1px solid var(--family-line);
+  border-radius: var(--r-md); font-size:13.5px; color: var(--ink-soft);
+}
+.compare-warning strong{ color: var(--family); }
+
+/* ---------- VOCAB CARDS ---------- */
+.vocab-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:12px; }
+.vocab-card{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:14px 16px; cursor:pointer; perspective:600px; min-height:78px;
+  display:flex; flex-direction:column; justify-content:center; transition: border-color .15s ease;
+}
+.vocab-card:hover{ border-color: var(--b3-line); }
+.vocab-card:focus-visible{ outline:2px solid var(--b3); outline-offset:2px; }
+.vocab-front{ font-family: var(--f-body); font-weight:600; font-size:15px; }
+.vocab-back{ display:none; font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); margin-top:6px; }
+.vocab-card.flipped .vocab-back{ display:block; }
+.vocab-card.flipped{ background: var(--b3-soft); border-color: var(--b3-line); }
+.vocab-hint{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin:10px 2px 16px; }
+
+/* ---------- EXERCISE ---------- */
+.exercise{ margin-bottom:20px; }
+.exercise:last-of-type{ margin-bottom:0; }
+.ex-sentence{ font-size:15.5px; margin-bottom:10px; }
+.ex-sentence .gap{ font-family: var(--f-data); color: var(--ink-faint); }
+.ex-translation{ font-family: var(--f-data); font-size:12px; color: var(--ink-faint); margin:-4px 0 10px; }
+.ex-options{ display:flex; flex-wrap:wrap; gap:8px; }
+.opt-btn{
+  font-family: var(--f-body); font-size:14px; background: var(--paper-raised);
+  border:1.5px solid var(--line); color: var(--ink); padding:7px 16px; border-radius:999px;
+  cursor:pointer; transition: all .15s ease;
+}
+.opt-btn:hover{ border-color: var(--ink-faint); }
+.opt-btn.picked{ background: var(--b3-soft); border-color: var(--b3); color: var(--b3); }
+.opt-btn.correct{ background: var(--b2-soft); border-color: var(--b2); color: var(--b2); }
+.opt-btn.wrong{ background: var(--family-soft); border-color: var(--family); color: var(--family); }
+.opt-btn:disabled{ cursor:default; }
+
+.check-bar{
+  display:flex; align-items:center; justify-content:space-between; gap:16px;
+  margin-top:22px; padding-top:18px; border-top:1px dashed var(--line);
+}
+.btn-primary{
+  font-family: var(--f-body); font-weight:600; font-size:14px; color:#fff; background: var(--b3);
+  border:none; padding:11px 22px; border-radius:999px; cursor:pointer; transition: transform .1s ease;
+}
+.btn-primary:hover{ transform: translateY(-1px); }
+#score-text{ font-family: var(--f-data); font-size:13px; color: var(--ink-faint); }
+.btn-ghost{
+  font-family: var(--f-body); font-weight:600; font-size:13px; color: var(--ink-soft); background:none;
+  border:1.5px solid var(--line); padding:9px 18px; border-radius:999px; cursor:pointer;
+}
+.btn-ghost:hover{ border-color: var(--ink-faint); }
+.ex-divider{
+  display:flex; align-items:center; gap:10px; margin:20px 0 16px;
+  font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.06em;
+  color: var(--ink-faint);
+}
+.ex-divider::before, .ex-divider::after{ content:""; flex:1; height:1px; background: var(--line); }
+.ex-divider.en-clase{ color: var(--b3); }
+.ex-divider.en-clase::before, .ex-divider.en-clase::after{ background: var(--b3-line); }
+
+/* ---------- SARCASM TOGGLE ---------- */
+.sarcasm-bar{
+  display:flex; align-items:center; gap:12px; margin-bottom:16px;
+  background: var(--family-soft); border:1px solid var(--family-line); border-radius: var(--r-md);
+  padding:12px 16px;
+}
+.sarcasm-switch{
+  position:relative; flex:none; width:44px; height:24px; border-radius:999px;
+  background: var(--line-strong); border:none; cursor:pointer; transition: background .2s ease;
+}
+.sarcasm-switch::before{
+  content:""; position:absolute; top:2px; left:2px; width:20px; height:20px; border-radius:50%;
+  background: var(--paper-raised); box-shadow: var(--shadow-1); transition: transform .2s ease;
+}
+.sarcasm-switch.on{ background: var(--family); }
+.sarcasm-switch.on::before{ transform: translateX(20px); }
+.sarcasm-label{ font-family: var(--f-body); font-weight:600; font-size:13.5px; color: var(--ink); }
+.sarcasm-label span{ display:block; font-family: var(--f-data); font-weight:400; font-size:11.5px; color: var(--ink-faint); margin-top:1px; }
+.ex-sentence .sarcasm-icon{ margin-right:4px; }
+
+/* ---------- CHARACTER CARDS ---------- */
+.characters{ display:grid; gap:16px; }
+.char-card{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-lg);
+  padding:20px 22px; display:flex; gap:16px; align-items:flex-start;
+}
+.char-avatar{
+  flex:none; width:44px; height:44px; border-radius:50%; background: var(--b3-soft);
+  display:flex; align-items:center; justify-content:center; font-family: var(--f-display);
+  font-weight:600; font-size:17px; color: var(--b3);
+}
+.char-body{ flex:1; }
+.char-name{ font-family: var(--f-display); font-weight:600; font-size:17px; margin:0 0 4px; }
+.char-role{ font-family: var(--f-data); font-size:11.5px; text-transform:uppercase; letter-spacing:.05em; color: var(--ink-faint); margin:0 0 10px; }
+.char-facts{ display:flex; flex-wrap:wrap; gap:6px; margin-bottom:10px; }
+.fact-tag{
+  font-family: var(--f-data); font-size:12px; background: var(--paper-alt); color: var(--ink-soft);
+  padding:4px 10px; border-radius:999px;
+}
+.char-prompt{ font-size:14px; color: var(--ink-soft); }
+.char-input{
+  width:100%; margin-top:8px; font-family: var(--f-body); font-size:14.5px; color: var(--ink);
+  background: var(--paper); border:1px solid var(--line); border-radius: var(--r-sm);
+  padding:10px 12px; resize:vertical; min-height:44px;
+}
+.char-input:focus{ outline:none; border-color: var(--b3-line); background: var(--paper-raised); }
+
+/* ---------- ROLEPLAY ---------- */
+.roleplay-panel{ background: var(--b2-soft); border:1px solid var(--b2-line); border-radius: var(--r-lg); padding:26px 28px; }
+.roleplay-panel .block-num{ background: var(--b2); }
+.scene-setup{
+  display:flex; gap:14px; align-items:flex-start; background: var(--paper-raised);
+  border:1px solid var(--b2-line); border-radius: var(--r-md); padding:14px 16px; margin-bottom:20px;
+}
+.scene-icon{ font-size:22px; flex:none; }
+.scene-text{ font-size:14px; color: var(--ink-soft); }
+.scene-text strong{ color: var(--ink); }
+
+.dialogue{ display:flex; flex-direction:column; gap:14px; }
+.scene-tabs{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:18px; }
+.scene-tab{
+  font-family: var(--f-data); font-size:12.5px; background: var(--paper-raised);
+  border:1.5px solid var(--b2-line); color: var(--ink-soft); padding:7px 14px;
+  border-radius:999px; cursor:pointer; transition: all .15s ease;
+}
+.scene-tab:hover{ border-color: var(--b2); }
+.scene-tab.active{ background: var(--b2); border-color: var(--b2); color:#fff; }
+.line{ display:flex; gap:12px; align-items:flex-start; }
+.line-avatar{
+  flex:none; width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  font-family: var(--f-display); font-weight:600; font-size:14px; color:#fff;
+}
+.line.friend .line-avatar{ background: var(--ink-faint); }
+.line.you .line-avatar{ background: var(--b2); }
+.line-body{ flex:1; }
+.line-name{ font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.05em; color: var(--ink-faint); margin:0 0 4px; }
+.line-bubble{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:12px 14px; font-size:14.5px; color: var(--ink);
+}
+.line.you .line-bubble{ background:#fff; border-color: var(--b2-line); }
+.line-input{
+  width:100%; font-family: var(--f-body); font-size:14.5px; color: var(--ink);
+  background:#fff; border:1px solid var(--b2-line); border-radius: var(--r-sm);
+  padding:10px 12px; resize:vertical; min-height:40px; margin-top:2px;
+}
+.line-input:focus{ outline:none; border-color: var(--b2); }
+.line-hint{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin-top:5px; }
+.line-translation{ font-family: var(--f-data); font-size:11.5px; color: var(--ink-faint); margin-top:6px; }
+
+.roleplay-tip{
+  margin-top:22px; padding:14px 16px; background: var(--paper-raised); border:1px solid var(--b2-line);
+  border-radius: var(--r-md); font-size:13.5px; color: var(--ink-soft);
+}
+.roleplay-tip strong{ color: var(--ink); }
+
+/* ---------- FINAL TASK ---------- */
+.task-panel{ background: var(--family-soft); border:1px solid var(--family-line); border-radius: var(--r-lg); padding:26px 28px; }
+.task-panel .block-num{ background: var(--family); }
+textarea#final-task{
+  width:100%; min-height:110px; font-family: var(--f-body); font-size:15px; color: var(--ink);
+  background: var(--paper-raised); border:1px solid var(--family-line); border-radius: var(--r-md);
+  padding:14px 16px; resize:vertical; margin-top:14px;
+}
+textarea#final-task:focus{ outline:none; border-color: var(--family); }
+.task-footer{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:12px; flex-wrap:wrap; }
+#task-count{ font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); }
+.btn-secondary{
+  font-family: var(--f-body); font-weight:600; font-size:13.5px; color: var(--family); background:none;
+  border:1.5px solid var(--family-line); padding:9px 18px; border-radius:999px; cursor:pointer;
+}
+.saved-flag{ font-family: var(--f-data); font-size:12px; color: var(--b2); opacity:0; transition: opacity .3s ease; }
+.saved-flag.show{ opacity:1; }
+
+/* ---------- FOOTER NAV ---------- */
+footer{
+  max-width:760px; margin:0 auto; padding:0 24px 60px; display:flex;
+  justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;
+  font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint);
+}
+footer a{ color: var(--b3); text-decoration:none; }
+footer a:hover{ text-decoration:underline; }
+
+@media (max-width:600px){
+  header{ padding:34px 18px 22px; }
+  main{ padding:8px 18px 90px; }
+  .panel, .task-panel{ padding:20px 18px; }
+  .char-card{ flex-direction:column; }
+}
+@media (prefers-reduced-motion: reduce){ *{ transition:none !important; } }
+</style>
+</head>
+<body>
+
+<header>
+  <p class="eyebrow"><span class="dot"></span>Clase 4 de 12 · L2 Línea del pedido</p>
+  <h1>¿Qué <em>desea</em>?</h1>
+  <p class="lede">Ya sabes decir quién eres y saludar a un cliente. Hoy damos el siguiente paso: hablar de acciones habituales en el trabajo con los verbos regulares en <strong>-AR, -ER e -IR</strong>, y usarlos para tomar tu primer pedido completo.</p>
+  <div class="meta-row">
+    <div>Duración<strong>50 min</strong></div>
+    <div>Gramática<strong>Presente regular -ar/-er/-ir</strong></div>
+    <div>Nivel<strong>A1</strong></div>
+  </div>
+</header>
+
+<main>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">1</span><h2>Presente de indicativo regular</h2><span class="time-tag">10 min</span></div>
+    <div class="panel">
+      <p class="vocab-hint" style="margin-bottom:10px;">Los verbos regulares se agrupan en tres familias según su terminación: <strong>-AR</strong>, <strong>-ER</strong> e <strong>-IR</strong>. Cada familia tiene sus propias terminaciones, pero siguen un patrón fijo.</p>
+
+      <div class="compare-wrap">
+        <p class="compare-title">Las tres familias, en la misma frase de trabajo</p>
+        <div class="compare-grid">
+          <div class="compare-col is-ar">
+            <div class="compare-head">
+              <span class="compare-verb">TRABAJAR</span>
+              <span class="compare-sub">— verbo -AR</span>
+            </div>
+            <ul class="compare-list">
+              <li><strong>yo</strong> trabajo <em style="display:block;color:var(--ink-faint);font-size:12.5px;">Trabajo en un barco.</em></li>
+              <li><strong>tú</strong> trabajas</li>
+              <li><strong>él/ella</strong> trabaja <em style="display:block;color:var(--ink-faint);font-size:12.5px;">Ella trabaja de camarera.</em></li>
+              <li><strong>nosotros/as</strong> trabajamos</li>
+              <li><strong>vosotros/as</strong> trabajáis</li>
+              <li><strong>ellos/as</strong> trabajan</li>
+            </ul>
+          </div>
+          <div class="compare-col is-er">
+            <div class="compare-head">
+              <span class="compare-verb">TOMAR / QUERER</span>
+              <span class="compare-sub">— querer es irregular (e→ie)</span>
+            </div>
+            <ul class="compare-list">
+              <li><strong>yo</strong> quiero <em style="display:block;color:var(--ink-faint);font-size:12.5px;">Quiero un café, por favor.</em></li>
+              <li><strong>tú</strong> quieres</li>
+              <li><strong>él/ella</strong> quiere <em style="display:block;color:var(--ink-faint);font-size:12.5px;">El cliente quiere un agua.</em></li>
+              <li><strong>nosotros/as</strong> queremos</li>
+              <li><strong>vosotros/as</strong> queréis</li>
+              <li><strong>ellos/as</strong> quieren</li>
+            </ul>
+          </div>
+          <div class="compare-col is-ir">
+            <div class="compare-head">
+              <span class="compare-verb">SERVIR</span>
+              <span class="compare-sub">— servir es irregular (e→i)</span>
+            </div>
+            <ul class="compare-list">
+              <li><strong>yo</strong> sirvo <em style="display:block;color:var(--ink-faint);font-size:12.5px;">Sirvo la mesa 6.</em></li>
+              <li><strong>tú</strong> sirves</li>
+              <li><strong>él/ella</strong> sirve <em style="display:block;color:var(--ink-faint);font-size:12.5px;">El camarero sirve el café.</em></li>
+              <li><strong>nosotros/as</strong> servimos</li>
+              <li><strong>vosotros/as</strong> servís</li>
+              <li><strong>ellos/as</strong> sirven</li>
+            </ul>
+          </div>
+        </div>
+        <div class="compare-warning">
+          <strong>Ojo:</strong> "trabajar" es 100% regular (sigue el patrón -ar sin cambios). Pero "querer" y "servir" son los dos verbos que vas a usar más para tomar pedidos, y ambos cambian la vocal de la raíz en algunas personas (quiero, quieres, quiere, quieren — pero queremos/queréis no cambian). Apréndelos como bloque completo, no solo la terminación.
+        </div>
+      </div>
+
+      <div class="note" style="margin-top:20px;"><strong>La fórmula clave del pedido:</strong> ¿Qué desea? / ¿Qué quiere tomar? → (Yo) quiero + sustantivo. Es la estructura que vas a repetir en casi todos los pedidos de tu trabajo.</div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">2</span><h2>Vocabulario</h2><span class="time-tag">6 min</span></div>
+    <p class="vocab-hint">Toca cada tarjeta para ver un ejemplo.</p>
+    <div class="vocab-grid" id="vocab-grid"></div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">3</span><h2>Practica</h2><span class="time-tag">12 min</span></div>
+    <div class="panel">
+      <p class="vocab-hint" style="margin-bottom:14px;">30 frases: las primeras 12 se hacen en voz alta en clase; el resto queda como repaso para casa.</p>
+      <div class="sarcasm-bar">
+        <button class="sarcasm-switch" id="sarcasm-toggle" role="switch" aria-checked="false" aria-label="Activar modo sarcástico"></button>
+        <p class="sarcasm-label">Modo sarcástico <span>Mismas frases, con un poco (mucho) de retintín</span></p>
+      </div>
+      <div id="exercises"></div>
+      <div class="check-bar">
+        <div style="display:flex; gap:10px;">
+          <button class="btn-primary" id="check-btn">Comprobar respuestas</button>
+          <button class="btn-ghost" id="reset-btn">Reiniciar</button>
+        </div>
+        <span id="score-text"></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">4</span><h2>Tarjetas de personajes</h2><span class="time-tag">8 min</span></div>
+    <p class="lede" style="margin-bottom:16px;">Escribe una frase con <strong>trabajar, querer o servir</strong> sobre cada persona. Usa los datos de la tarjeta como pista. Las primeras 6 se trabajan en clase; el resto queda como banco de repaso para casa.</p>
+    <div class="characters" id="characters"></div>
+  </section>
+
+  <section class="block roleplay-panel">
+    <div class="block-head"><span class="block-num">5</span><h2>Roleplay: tomar el primer pedido</h2><span class="time-tag">13 min</span></div>
+    <p class="lede" style="margin-bottom:16px;">Situaciones reales de atención al cliente en el barco. Elige una escena para practicar en clase; el resto queda como banco de repaso para casa.</p>
+    <div class="scene-tabs" id="scene-tabs"></div>
+    <div id="scene-container"></div>
+    <div class="roleplay-tip"><strong>En clase:</strong> practicaremos una escena en voz alta, cambiando de rol. El resto de escenas son para practicar por tu cuenta durante la semana.</div>
+  </section>
+
+  <section class="block task-panel">
+    <div class="block-head"><span class="block-num">6</span><h2 style="color:var(--family)">Tu tarea</h2><span class="time-tag">3 min</span></div>
+    <p style="margin:0; font-size:15px; color:var(--ink-soft);">Repasa el diálogo del pedido en voz alta. Escribe aquí <strong>un pedido completo</strong> como si lo tomaras a un cliente: pregunta qué desea, escribe lo que quiere y confirma el pedido usando <strong>trabajar, querer</strong> y <strong>servir</strong> al menos una vez cada uno.</p>
+    <textarea id="final-task" placeholder="¿Qué desea?&#10;Quiero...&#10;Enseguida le sirvo..."></textarea>
+    <div class="task-footer">
+      <span id="task-count">0 verbos clave detectados</span>
+      <div style="display:flex; gap:10px; align-items:center;">
+        <span class="saved-flag" id="saved-flag">Guardado ✓</span>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <span>Clase 4 · Línea del pedido</span>
+  <span>Próxima clase → Clase 5: mi rutina de trabajo (reflexivos + hora)</span>
+</footer>
+
+<script>
+/* ---------- VOCAB ---------- */
+const VOCAB = [
+  {front:"trabajar", back:"Trabajo en la cafetería del barco."},
+  {front:"tomar (un pedido)", back:"Ahora tomo el pedido de la mesa 3."},
+  {front:"servir", back:"Sirvo el café enseguida."},
+  {front:"querer", back:"¿Qué quiere tomar, un té o un café?"},
+  {front:"¿qué desea?", back:"Buenos días, ¿qué desea tomar hoy?"},
+  {front:"un café / un agua", back:"Quiero un café con leche, por favor."},
+  {front:"la comanda", back:"Escribo la comanda en la libreta."},
+  {front:"enseguida", back:"Enseguida le traigo su pedido."},
+];
+
+const grid = document.getElementById('vocab-grid');
+VOCAB.forEach(v=>{
+  const card = document.createElement('div');
+  card.className = 'vocab-card';
+  card.setAttribute('role', 'button');
+  card.setAttribute('tabindex', '0');
+  card.setAttribute('aria-pressed', 'false');
+  card.setAttribute('aria-label', `${v.front}. Pulsa para ver un ejemplo.`);
+  card.innerHTML = `<div class="vocab-front">${v.front}</div><div class="vocab-back">${v.back}</div>`;
+  const toggle = ()=>{
+    const flipped = card.classList.toggle('flipped');
+    card.setAttribute('aria-pressed', String(flipped));
+  };
+  card.addEventListener('click', toggle);
+  card.addEventListener('keydown', (e)=>{
+    if(e.key === 'Enter' || e.key === ' '){
+      e.preventDefault();
+      toggle();
+    }
+  });
+  grid.appendChild(card);
+});
+
+/* ---------- EXERCISES ---------- */
+const EXERCISES = [
+  {
+    "sentence": "Yo <span class=\"gap\">___</span> en un barco.",
+    "options": [
+      "trabajo",
+      "trabaja",
+      "trabajamos"
+    ],
+    "answer": "trabajo",
+    "sentenceSarcastic": "Yo <span class=\"gap\">___</span> en un barco, es decir, en un spa de lujo con propina opcional (nunca dada).",
+    "translationDE": "Ich arbeite auf einem Schiff.",
+    "translationDESarcastic": "Ich arbeite auf einem Schiff, also in einem Luxusspa mit optionalem Trinkgeld (nie gegeben)."
+  },
+  {
+    "sentence": "Yo <span class=\"gap\">___</span> un café, por favor.",
+    "options": [
+      "quiere",
+      "quiero",
+      "queremos"
+    ],
+    "answer": "quiero",
+    "sentenceSarcastic": "Yo <span class=\"gap\">___</span> un café, por favor, el número quinientos de hoy, gracias.",
+    "translationDE": "Ich möchte einen Kaffee, bitte.",
+    "translationDESarcastic": "Ich möchte einen Kaffee, bitte, die fünfhundertste heutige Bestellung, danke."
+  },
+  {
+    "sentence": "Ahora <span class=\"gap\">___</span> el pedido de la mesa 3.",
+    "options": [
+      "tomo",
+      "toma",
+      "toman"
+    ],
+    "answer": "tomo",
+    "sentenceSarcastic": "Ahora <span class=\"gap\">___</span> el pedido de la mesa 3, que ya lleva cambiando de opinión diez minutos.",
+    "translationDE": "Jetzt nehme ich die Bestellung von Tisch 3 auf.",
+    "translationDESarcastic": "Jetzt nehme ich die Bestellung von Tisch 3 auf, der seit zehn Minuten seine Meinung ändert."
+  },
+  {
+    "sentence": "Yo <span class=\"gap\">___</span> el café enseguida.",
+    "options": [
+      "sirve",
+      "sirvo",
+      "servimos"
+    ],
+    "answer": "sirvo",
+    "sentenceSarcastic": "Yo le <span class=\"gap\">___</span> el café enseguida, en cuanto termine de teletransportarme.",
+    "translationDE": "Ich serviere den Kaffee sofort.",
+    "translationDESarcastic": "Ich serviere den Kaffee sofort, sobald ich mich fertig teleportiert habe."
+  },
+  {
+    "sentence": "¿Tú <span class=\"gap\">___</span> también los sábados?",
+    "options": [
+      "trabajas",
+      "trabajo",
+      "trabaja"
+    ],
+    "answer": "trabajas",
+    "sentenceSarcastic": "¿Tú <span class=\"gap\">___</span> también los sábados? Qué envidia me da tu vida social.",
+    "translationDE": "Arbeitest du auch samstags?",
+    "translationDESarcastic": "Arbeitest du auch samstags? Was für ein Neid auf dein Sozialleben."
+  },
+  {
+    "sentence": "¿Qué <span class=\"gap\">___</span> tomar, señora?",
+    "options": [
+      "quiere",
+      "quieres",
+      "quiero"
+    ],
+    "answer": "quiere",
+    "sentenceSarcastic": "¿Qué <span class=\"gap\">___</span> tomar, señora? Aparte de mi paciencia, claro.",
+    "translationDE": "Was möchten Sie trinken, meine Dame?",
+    "translationDESarcastic": "Was möchten Sie trinken, meine Dame? Außer meiner Geduld, natürlich."
+  },
+  {
+    "sentence": "El cliente <span class=\"gap\">___</span> un agua sin gas.",
+    "options": [
+      "quiero",
+      "quiere",
+      "queremos"
+    ],
+    "answer": "quiere",
+    "sentenceSarcastic": "El cliente <span class=\"gap\">___</span> un agua sin gas, faltaría más, con esta cara de urgencia.",
+    "translationDE": "Der Kunde möchte ein stilles Wasser.",
+    "translationDESarcastic": "Der Kunde möchte ein stilles Wasser, na klar, bei dieser dringenden Miene."
+  },
+  {
+    "sentence": "Mi compañero <span class=\"gap\">___</span> las mesas de la terraza.",
+    "options": [
+      "sirvo",
+      "sirve",
+      "sirven"
+    ],
+    "answer": "sirve",
+    "sentenceSarcastic": "Mi compañero <span class=\"gap\">___</span> las mesas de la terraza, bajo el sol, sin sombra ni quejas (mías, no las de él).",
+    "translationDE": "Mein Kollege bedient die Tische auf der Terrasse.",
+    "translationDESarcastic": "Mein Kollege bedient die Terrassentische, in der Sonne, ohne Schatten oder Beschwerden (von mir, nicht von ihm)."
+  },
+  {
+    "sentence": "Nosotros <span class=\"gap\">___</span> en el mismo turno.",
+    "options": [
+      "trabajamos",
+      "trabajáis",
+      "trabajan"
+    ],
+    "answer": "trabajamos",
+    "sentenceSarcastic": "Nosotros <span class=\"gap\">___</span> en el mismo turno, la pareja perfecta de sufrimiento compartido.",
+    "translationDE": "Wir arbeiten in derselben Schicht.",
+    "translationDESarcastic": "Wir arbeiten in derselben Schicht, das perfekte Paar geteilten Leidens."
+  },
+  {
+    "sentence": "¿Vosotros <span class=\"gap\">___</span> un té o un café?",
+    "options": [
+      "queréis",
+      "quieren",
+      "queremos"
+    ],
+    "answer": "queréis",
+    "sentenceSarcastic": "¿Vosotros <span class=\"gap\">___</span> un té o un café? O directamente algo más fuerte, no juzgo.",
+    "translationDE": "Möchtet ihr einen Tee oder einen Kaffee?",
+    "translationDESarcastic": "Möchtet ihr einen Tee oder einen Kaffee? Oder gleich etwas Stärkeres, ich urteile nicht."
+  },
+  {
+    "sentence": "Nosotras <span class=\"gap\">___</span> el desayuno a las 8.",
+    "options": [
+      "sirven",
+      "servís",
+      "servimos"
+    ],
+    "answer": "servimos",
+    "sentenceSarcastic": "Nosotras <span class=\"gap\">___</span> el desayuno a las 8, con el entusiasmo de quien madruga por gusto.",
+    "translationDE": "Wir servieren das Frühstück um 8 Uhr.",
+    "translationDESarcastic": "Wir servieren das Frühstück um 8, mit der Begeisterung von jemandem, der freiwillig früh aufsteht."
+  },
+  {
+    "sentence": "Los clientes de la mesa 5 <span class=\"gap\">___</span> la cuenta ya.",
+    "options": [
+      "quiere",
+      "quieren",
+      "queremos"
+    ],
+    "answer": "quieren",
+    "sentenceSarcastic": "Los clientes de la mesa 5 <span class=\"gap\">___</span> la cuenta ya, antes incluso de terminar el postre.",
+    "translationDE": "Die Kunden von Tisch 5 möchten jetzt die Rechnung.",
+    "translationDESarcastic": "Die Kunden von Tisch 5 wollen jetzt schon die Rechnung, noch vor dem Nachtisch."
+  },
+  {
+    "sentence": "Yo <span class=\"gap\">___</span> de camarera desde hace un año.",
+    "options": [
+      "trabajo",
+      "trabajas",
+      "trabaja"
+    ],
+    "answer": "trabajo",
+    "sentenceSarcastic": "Yo <span class=\"gap\">___</span> de camarera desde hace un año, un año lleno de anécdotas que no puedo contar.",
+    "translationDE": "Ich arbeite seit einem Jahr als Kellnerin.",
+    "translationDESarcastic": "Ich arbeite seit einem Jahr als Kellnerin, ein Jahr voller Anekdoten, die ich nicht erzählen darf."
+  },
+  {
+    "sentence": "Yo <span class=\"gap\">___</span> un zumo de naranja, gracias.",
+    "options": [
+      "quiero",
+      "quieres",
+      "quiere"
+    ],
+    "answer": "quiero",
+    "sentenceSarcastic": "Yo <span class=\"gap\">___</span> un zumo de naranja, gracias, el único vicio saludable que me queda.",
+    "translationDE": "Ich möchte einen Orangensaft, danke.",
+    "translationDESarcastic": "Ich möchte einen Orangensaft, danke, das einzige gesunde Laster, das mir geblieben ist."
+  },
+  {
+    "sentence": "Yo le <span class=\"gap\">___</span> la mesa enseguida, señor.",
+    "options": [
+      "sirvo",
+      "sirve",
+      "sirves"
+    ],
+    "answer": "sirvo",
+    "sentenceSarcastic": "Yo le <span class=\"gap\">___</span> la mesa enseguida, señor, justo después de clonarme a mí misma.",
+    "translationDE": "Ich bediene Ihren Tisch sofort, mein Herr.",
+    "translationDESarcastic": "Ich bediene Ihren Tisch sofort, mein Herr, gleich nachdem ich mich geklont habe."
+  },
+  {
+    "sentence": "Tú <span class=\"gap\">___</span> muy rápido las mesas.",
+    "options": [
+      "sirves",
+      "sirvo",
+      "sirve"
+    ],
+    "answer": "sirves",
+    "sentenceSarcastic": "Tú <span class=\"gap\">___</span> muy rápido las mesas, casi tanto como yo perdiendo la paciencia.",
+    "translationDE": "Du bedienst die Tische sehr schnell.",
+    "translationDESarcastic": "Du bedienst die Tische sehr schnell, fast so schnell wie ich die Geduld verliere."
+  },
+  {
+    "sentence": "Ella <span class=\"gap\">___</span> en la cocina del barco.",
+    "options": [
+      "trabaja",
+      "trabajo",
+      "trabajas"
+    ],
+    "answer": "trabaja",
+    "sentenceSarcastic": "Ella <span class=\"gap\">___</span> en la cocina del barco, sobreviviendo entre ollas y gritos de 'marchando'.",
+    "translationDE": "Sie arbeitet in der Küche des Schiffs.",
+    "translationDESarcastic": "Sie arbeitet in der Küche des Schiffs, überlebend zwischen Töpfen und 'Es kommt'-Rufen."
+  },
+  {
+    "sentence": "¿Y usted, qué <span class=\"gap\">___</span> tomar?",
+    "options": [
+      "quieres",
+      "quiere",
+      "queremos"
+    ],
+    "answer": "quiere",
+    "sentenceSarcastic": "¿Y usted, qué <span class=\"gap\">___</span> tomar? Aparte de hacerme veinte preguntas antes de decidir.",
+    "translationDE": "Und Sie, was möchten Sie trinken?",
+    "translationDESarcastic": "Und Sie, was möchten Sie trinken? Außer mir zwanzig Fragen zu stellen, bevor Sie sich entscheiden."
+  },
+  {
+    "sentence": "Nosotros <span class=\"gap\">___</span> un café para cada uno.",
+    "options": [
+      "queremos",
+      "queréis",
+      "quieren"
+    ],
+    "answer": "queremos",
+    "sentenceSarcastic": "Nosotros <span class=\"gap\">___</span> un café para cada uno, el combustible oficial de este turno.",
+    "translationDE": "Wir möchten für jeden einen Kaffee.",
+    "translationDESarcastic": "Wir möchten für jeden einen Kaffee, den offiziellen Treibstoff dieser Schicht."
+  },
+  {
+    "sentence": "El camarero nuevo <span class=\"gap\">___</span> los desayunos hoy.",
+    "options": [
+      "sirve",
+      "sirven",
+      "sirvo"
+    ],
+    "answer": "sirve",
+    "sentenceSarcastic": "El camarero nuevo <span class=\"gap\">___</span> los desayunos hoy, que Dios lo ayude.",
+    "translationDE": "Der neue Kellner serviert heute die Frühstücke.",
+    "translationDESarcastic": "Der neue Kellner serviert heute die Frühstücke, Gott steh ihm bei."
+  },
+  {
+    "sentence": "Vosotros <span class=\"gap\">___</span> los fines de semana, ¿no?",
+    "options": [
+      "trabajáis",
+      "trabajamos",
+      "trabajan"
+    ],
+    "answer": "trabajáis",
+    "sentenceSarcastic": "Vosotros <span class=\"gap\">___</span> los fines de semana, ¿no? Como todos aquí, faltaría más.",
+    "translationDE": "Ihr arbeitet am Wochenende, nicht wahr?",
+    "translationDESarcastic": "Ihr arbeitet am Wochenende, oder? Wie alle hier, natürlich."
+  },
+  {
+    "sentence": "Ellos <span class=\"gap\">___</span> siempre lo mismo: un café solo.",
+    "options": [
+      "quiere",
+      "queremos",
+      "quieren"
+    ],
+    "answer": "quieren",
+    "sentenceSarcastic": "Ellos <span class=\"gap\">___</span> siempre lo mismo: un café solo, la decisión más difícil de su día.",
+    "translationDE": "Sie wollen immer dasselbe: einen schwarzen Kaffee.",
+    "translationDESarcastic": "Sie wollen immer dasselbe: einen schwarzen Kaffee, die schwierigste Entscheidung ihres Tages."
+  },
+  {
+    "sentence": "Nosotras <span class=\"gap\">___</span> las bebidas antes que la comida.",
+    "options": [
+      "servimos",
+      "sirven",
+      "servís"
+    ],
+    "answer": "servimos",
+    "sentenceSarcastic": "Nosotras <span class=\"gap\">___</span> las bebidas antes que la comida, prioridades claras en este barco.",
+    "translationDE": "Wir servieren die Getränke vor dem Essen.",
+    "translationDESarcastic": "Wir servieren die Getränke vor dem Essen, klare Prioritäten auf diesem Schiff."
+  },
+  {
+    "sentence": "¿Tú <span class=\"gap\">___</span> un agua con gas o sin gas?",
+    "options": [
+      "quiere",
+      "quieres",
+      "queréis"
+    ],
+    "answer": "quieres",
+    "sentenceSarcastic": "¿Tú <span class=\"gap\">___</span> un agua con gas o sin gas? La pregunta existencial de cada mesa.",
+    "translationDE": "Möchtest du ein Wasser mit oder ohne Kohlensäure?",
+    "translationDESarcastic": "Möchtest du ein Wasser mit oder ohne Kohlensäure? Die existenzielle Frage jedes Tisches."
+  },
+  {
+    "sentence": "Mis compañeras <span class=\"gap\">___</span> en el turno de noche.",
+    "options": [
+      "trabajan",
+      "trabajamos",
+      "trabaja"
+    ],
+    "answer": "trabajan",
+    "sentenceSarcastic": "Mis compañeras <span class=\"gap\">___</span> en el turno de noche, cuando el barco se vuelve una fiesta interminable.",
+    "translationDE": "Meine Kolleginnen arbeiten in der Nachtschicht.",
+    "translationDESarcastic": "Meine Kolleginnen arbeiten in der Nachtschicht, wenn das Schiff zur Dauerparty wird."
+  },
+  {
+    "sentence": "Yo siempre <span class=\"gap\">___</span> el café con leche fría.",
+    "options": [
+      "sirve",
+      "sirvo",
+      "sirves"
+    ],
+    "answer": "sirvo",
+    "sentenceSarcastic": "Yo siempre <span class=\"gap\">___</span> el café con leche fría, porque nunca hay tiempo de calentarlo dos veces.",
+    "translationDE": "Ich serviere den Kaffee immer mit kalter Milch.",
+    "translationDESarcastic": "Ich serviere den Kaffee mit Milch immer kalt, weil nie Zeit ist, ihn zweimal zu erwärmen."
+  },
+  {
+    "sentence": "¿Qué <span class=\"gap\">___</span> tomar los niños?",
+    "options": [
+      "quieren",
+      "quiere",
+      "queremos"
+    ],
+    "answer": "quieren",
+    "sentenceSarcastic": "¿Qué <span class=\"gap\">___</span> tomar los niños? Aparte de correr entre las mesas, claro.",
+    "translationDE": "Was möchten die Kinder trinken?",
+    "translationDESarcastic": "Was möchten die Kinder trinken? Außer zwischen den Tischen herumzurennen, natürlich."
+  },
+  {
+    "sentence": "Nosotros <span class=\"gap\">___</span> juntos todos los martes.",
+    "options": [
+      "trabajamos",
+      "trabaja",
+      "trabajan"
+    ],
+    "answer": "trabajamos",
+    "sentenceSarcastic": "Nosotros <span class=\"gap\">___</span> juntos todos los martes, el día sagrado de aguantarnos mutuamente.",
+    "translationDE": "Wir arbeiten jeden Dienstag zusammen.",
+    "translationDESarcastic": "Wir arbeiten jeden Dienstag zusammen, der heilige Tag, uns gegenseitig zu ertragen."
+  },
+  {
+    "sentence": "Ella siempre <span class=\"gap\">___</span> un té verde por la tarde.",
+    "options": [
+      "quiero",
+      "quiere",
+      "quieres"
+    ],
+    "answer": "quiere",
+    "sentenceSarcastic": "Ella siempre <span class=\"gap\">___</span> un té verde por la tarde, la única calma en medio del caos.",
+    "translationDE": "Sie möchte am Nachmittag immer einen grünen Tee.",
+    "translationDESarcastic": "Sie möchte nachmittags immer einen grünen Tee, die einzige Ruhe inmitten des Chaos."
+  },
+  {
+    "sentence": "Los camareros <span class=\"gap\">___</span> las mesas por turnos.",
+    "options": [
+      "sirve",
+      "servimos",
+      "sirven"
+    ],
+    "answer": "sirven",
+    "sentenceSarcastic": "Los camareros <span class=\"gap\">___</span> las mesas por turnos, como en una coreografía sin ensayo previo.",
+    "translationDE": "Die Kellner bedienen die Tische im Wechsel.",
+    "translationDESarcastic": "Die Kellner bedienen die Tische im Wechsel, wie in einer Choreografie ohne Probe."
+  }
+]
+;
+
+const exWrap = document.getElementById('exercises');
+let sarcasmOn = false;
+const EXERCISES_STORAGE_KEY = 'angelika-clase04-practica';
+let exerciseState = { picked: {}, checked: false };
+
+async function guardarPractica(){
+  if (!window.storage) return;
+  try{ await window.storage.set(EXERCISES_STORAGE_KEY, JSON.stringify(exerciseState)); }catch(e){}
+}
+async function cargarPractica(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(EXERCISES_STORAGE_KEY);
+    if (res && typeof res.value === 'string'){
+      const parsed = JSON.parse(res.value);
+      if(parsed && typeof parsed === 'object'){
+        exerciseState = { picked: parsed.picked || {}, checked: !!parsed.checked };
+      }
+    }
+  }catch(e){
+    // Sin práctica guardada todavía.
+  }
+}
+
+function renderExercises(){
+  exWrap.innerHTML = '';
+  EXERCISES.forEach((ex, i)=>{
+    if(i === 0){
+      const divider = document.createElement('div');
+      divider.className = 'ex-divider en-clase';
+      divider.textContent = 'en clase · ítems 1–12';
+      exWrap.appendChild(divider);
+    }
+    if(i === 12){
+      const divider = document.createElement('div');
+      divider.className = 'ex-divider';
+      divider.textContent = 'para casa · repaso opcional';
+      exWrap.appendChild(divider);
+    }
+    const el = document.createElement('div');
+    el.className = 'exercise';
+    el.dataset.answer = ex.answer;
+    el.dataset.index = i;
+    const sentenceToShow = (sarcasmOn && ex.sentenceSarcastic) ? ex.sentenceSarcastic : ex.sentence;
+    el.innerHTML = `
+      <div class="ex-sentence">${i+1}. ${sarcasmOn ? '<span class="sarcasm-icon">🙄</span>' : ''}${sentenceToShow}</div>
+      ${(sarcasmOn && ex.translationDESarcastic) ? `<div class="ex-translation">${ex.translationDESarcastic}</div>` : (ex.translationDE ? `<div class="ex-translation">${ex.translationDE}</div>` : '')}
+      <div class="ex-options">
+        ${ex.options.map(o=>`<button class="opt-btn" data-value="${o}">${o}</button>`).join('')}
+      </div>
+    `;
+    exWrap.appendChild(el);
+
+    el.querySelectorAll('.opt-btn').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        if(exerciseState.checked) return;
+        el.querySelectorAll('.opt-btn').forEach(b=>b.classList.remove('picked'));
+        btn.classList.add('picked');
+        exerciseState.picked[i] = btn.dataset.value;
+        guardarPractica();
+      });
+    });
+  });
+  pintarEstadoPractica();
+}
+
+function pintarEstadoPractica(){
+  document.querySelectorAll('.exercise').forEach(el=>{
+    const i = el.dataset.index;
+    const answer = el.dataset.answer;
+    const pickedValue = exerciseState.picked[i];
+    if(!pickedValue) return;
+    const pickedBtn = el.querySelector(`.opt-btn[data-value="${CSS.escape(pickedValue)}"]`);
+    if(exerciseState.checked){
+      el.querySelectorAll('.opt-btn').forEach(b=>{
+        b.disabled = true;
+        if(b.dataset.value === answer) b.classList.add('correct');
+        else if(b === pickedBtn) b.classList.add('wrong');
+      });
+    } else if(pickedBtn){
+      pickedBtn.classList.add('picked');
+    }
+  });
+  if(exerciseState.checked){
+    let correct = 0;
+    document.querySelectorAll('.exercise').forEach(el=>{
+      const i = el.dataset.index;
+      if(exerciseState.picked[i] === el.dataset.answer) correct++;
+    });
+    document.getElementById('score-text').textContent = `${correct} / ${EXERCISES.length} correctas`;
+  }
+}
+
+async function cargarPracticaYRenderizar(){
+  await cargarPractica();
+  renderExercises();
+}
+cargarPracticaYRenderizar();
+
+document.getElementById('sarcasm-toggle').addEventListener('click', (e)=>{
+  sarcasmOn = !sarcasmOn;
+  e.currentTarget.classList.toggle('on', sarcasmOn);
+  e.currentTarget.setAttribute('aria-checked', String(sarcasmOn));
+  renderExercises();
+});
+
+document.getElementById('check-btn').addEventListener('click', ()=>{
+  let correct = 0;
+  document.querySelectorAll('.exercise').forEach(el=>{
+    const answer = el.dataset.answer;
+    const picked = el.querySelector('.opt-btn.picked');
+    el.querySelectorAll('.opt-btn').forEach(b=>{
+      b.disabled = true;
+      if(b.dataset.value === answer) b.classList.add('correct');
+      else if(b === picked) b.classList.add('wrong');
+    });
+    if(picked && picked.dataset.value === answer) correct++;
+  });
+  document.getElementById('score-text').textContent = `${correct} / ${EXERCISES.length} correctas`;
+  exerciseState.checked = true;
+  guardarPractica();
+});
+
+document.getElementById('reset-btn').addEventListener('click', ()=>{
+  exerciseState = { picked: {}, checked: false };
+  renderExercises();
+});
+
+
+/* ---------- CHARACTER CARDS ---------- */
+const CHARACTERS = [
+  {
+    "name": "Tú",
+    "role": "Tu primer día tomando pedidos",
+    "facts": ["camarera", "café con leche", "mesa 2"],
+    "prompt": "Escribe una frase con \"trabajar\" o \"tomar\":"
+  },
+  {
+    "name": "Klaus",
+    "role": "Tu jefe en el barco",
+    "facts": ["capitán", "siempre quiere café solo", "muy puntual"],
+    "prompt": "Descríbelo con \"querer\" o \"trabajar\":"
+  },
+  {
+    "name": "Marisol",
+    "role": "Tu compañera de turno",
+    "facts": ["camarera", "sirve las mesas rápido", "turno de mañana"],
+    "prompt": "Escribe una frase con \"servir\":"
+  },
+  {
+    "name": "Sr. Berger",
+    "role": "Cliente habitual",
+    "facts": ["siempre quiere un té", "muy educado", "mesa junto a la ventana"],
+    "prompt": "Escribe una frase con \"querer\":"
+  },
+  {
+    "name": "Ismael",
+    "role": "El cocinero del barco",
+    "facts": ["trabaja en la cocina", "sirve platos calientes", "muy rápido"],
+    "prompt": "Escribe una frase con \"trabajar\" o \"servir\":"
+  },
+  {
+    "name": "Familia Weber",
+    "role": "Turistas alemanes",
+    "facts": ["quieren cuatro cafés", "mesa 7", "tienen prisa"],
+    "prompt": "Escribe una frase con \"querer\":"
+  },
+  {
+    "name": "Petra",
+    "role": "Otra camarera del barco",
+    "facts": ["trabaja los fines de semana", "sirve el desayuno", "polaca"],
+    "prompt": "Escribe una frase con \"trabajar\" o \"servir\":"
+  },
+  {
+    "name": "Sra. Martínez",
+    "role": "Clienta habitual",
+    "facts": ["quiere agua con gas", "muy amable", "mesa de siempre"],
+    "prompt": "Escribe una frase con \"querer\":"
+  },
+  {
+    "name": "Carlos",
+    "role": "Tu vecino, también camarero",
+    "facts": ["trabaja en otro barco", "sirve cenas", "muy hablador"],
+    "prompt": "Escribe una frase con \"trabajar\" o \"servir\":"
+  },
+  {
+    "name": "Thomas",
+    "role": "Tu pareja",
+    "facts": ["quiere aprender español", "trabaja de arquitecto", "muy tranquilo"],
+    "prompt": "Escribe una frase con \"querer\" o \"trabajar\":"
+  }
+];
+
+const charWrap = document.getElementById('characters');
+const CHAR_INPUT_STORAGE_KEY = 'angelika-clase04-personajes';
+let charInputState = {};
+
+async function guardarCharInputs(){
+  if (!window.storage) return;
+  try{ await window.storage.set(CHAR_INPUT_STORAGE_KEY, JSON.stringify(charInputState)); }catch(e){}
+}
+async function cargarCharInputs(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(CHAR_INPUT_STORAGE_KEY);
+    if (res && typeof res.value === 'string'){
+      const parsed = JSON.parse(res.value);
+      if(parsed && typeof parsed === 'object') charInputState = parsed;
+    }
+  }catch(e){}
+}
+
+CHARACTERS.forEach((c, i)=>{
+  if(i === 0){
+    const divider = document.createElement('div');
+    divider.className = 'ex-divider en-clase';
+    divider.textContent = 'en clase · personajes 1–6';
+    charWrap.appendChild(divider);
+  }
+  if(i === 6){
+    const divider = document.createElement('div');
+    divider.className = 'ex-divider';
+    divider.textContent = 'para casa · banco de repaso';
+    charWrap.appendChild(divider);
+  }
+  const card = document.createElement('div');
+  card.className = 'char-card';
+  card.innerHTML = `
+    <div class="char-avatar">${c.name.charAt(0)}</div>
+    <div class="char-body">
+      <p class="char-name">${c.name}</p>
+      <p class="char-role">${c.role}</p>
+      <div class="char-facts">${c.facts.map(f=>`<span class="fact-tag">${f}</span>`).join('')}</div>
+      <p class="char-prompt">${c.prompt}</p>
+      <textarea class="char-input" rows="2" placeholder="Trabaja / Quiere / Sirve ..." data-char-idx="${i}"></textarea>
+    </div>
+  `;
+  charWrap.appendChild(card);
+});
+
+let charInputTimer = null;
+charWrap.querySelectorAll('.char-input').forEach(ta=>{
+  const idx = ta.dataset.charIdx;
+  ta.addEventListener('input', ()=>{
+    charInputState[idx] = ta.value;
+    clearTimeout(charInputTimer);
+    charInputTimer = setTimeout(guardarCharInputs, 800);
+  });
+});
+cargarCharInputs().then(()=>{
+  charWrap.querySelectorAll('.char-input').forEach(ta=>{
+    const idx = ta.dataset.charIdx;
+    if (charInputState[idx]) ta.value = charInputState[idx];
+  });
+});
+
+/* ---------- ROLEPLAY SCENES ---------- */
+const SCENES = [
+  {
+    "id": "primer_pedido",
+    "tab": "El primer pedido",
+    "icon": "☕",
+    "setup": "Un cliente se sienta en tu mesa por primera vez esta mañana.",
+    "lines": [
+      { "who": "friend", "name": "Cliente", "text": "Buenos días, ¿qué me recomienda para desayunar?", "translationDE": "Guten Morgen, was empfehlen Sie zum Frühstück?" },
+      { "who": "you", "hint": "Salúdale y pregunta qué desea tomar." },
+      { "who": "friend", "name": "Cliente", "text": "Quiero un café con leche y una tostada.", "translationDE": "Ich möchte einen Milchkaffee und einen Toast." },
+      { "who": "you", "hint": "Confirma el pedido usando \"querer\" o \"tomar\"." },
+      { "who": "friend", "name": "Cliente", "text": "¿Y me lo puede servir rápido? Tengo prisa.", "translationDE": "Und können Sie es mir schnell servieren? Ich habe es eilig." },
+      { "who": "you", "hint": "Responde con \"servir\" (yo sirvo...) y \"enseguida\"." },
+      { "who": "friend", "name": "Cliente", "text": "Perfecto, muchas gracias.", "translationDE": "Perfekt, vielen Dank." },
+      { "who": "you", "hint": "Despídete y di que trabajas en esa zona." }
+    ]
+  },
+  {
+    "id": "dos_clientes",
+    "tab": "Mesa para dos",
+    "icon": "🍽️",
+    "setup": "Dos clientes se sientan juntos y piden cosas diferentes.",
+    "lines": [
+      { "who": "friend", "name": "Cliente 1", "text": "Yo quiero un té verde, por favor.", "translationDE": "Ich möchte bitte einen grünen Tee." },
+      { "who": "you", "hint": "Confirma su pedido con \"querer\"." },
+      { "who": "friend", "name": "Cliente 2", "text": "Y yo quiero un zumo de naranja.", "translationDE": "Und ich möchte einen Orangensaft." },
+      { "who": "you", "hint": "Confirma el segundo pedido con \"querer\"." },
+      { "who": "friend", "name": "Cliente 1", "text": "¿Trabaja usted todos los días aquí?", "translationDE": "Arbeiten Sie hier jeden Tag?" },
+      { "who": "you", "hint": "Responde con \"trabajar\" sobre tu horario." },
+      { "who": "friend", "name": "Cliente 2", "text": "¿Y quién sirve las mesas de la terraza?", "translationDE": "Und wer bedient die Tische auf der Terrasse?" },
+      { "who": "you", "hint": "Responde con \"servir\" sobre ti o un compañero." }
+    ]
+  },
+  {
+    "id": "familia_apurada",
+    "tab": "La familia con prisa",
+    "icon": "👨‍👩‍👧",
+    "setup": "Una familia con niños llega justo antes de que zarpe el barco.",
+    "lines": [
+      { "who": "friend", "name": "Sra. Weber", "text": "Hola, queremos cuatro cafés, por favor.", "translationDE": "Hallo, wir möchten vier Kaffees, bitte." },
+      { "who": "you", "hint": "Confirma el pedido con \"querer\"." },
+      { "who": "friend", "name": "Sra. Weber", "text": "Y los niños quieren dos zumos.", "translationDE": "Und die Kinder möchten zwei Säfte." },
+      { "who": "you", "hint": "Responde confirmando con \"querer\" o \"servir\"." },
+      { "who": "friend", "name": "Sra. Weber", "text": "¿Puede servirlo todo rápido? Tenemos poco tiempo.", "translationDE": "Können Sie das alles schnell servieren? Wir haben wenig Zeit." },
+      { "who": "you", "hint": "Responde con \"servir\" (yo sirvo...) y \"enseguida\"." },
+      { "who": "friend", "name": "Sra. Weber", "text": "Muchas gracias por su ayuda.", "translationDE": "Vielen Dank für Ihre Hilfe." },
+      { "who": "you", "hint": "Despídete amablemente usando algún verbo de hoy." }
+    ]
+  },
+  {
+    "id": "companero_nuevo",
+    "tab": "Explicar el trabajo a un compañero",
+    "icon": "🧑‍🍳",
+    "setup": "Un compañero nuevo empieza hoy y te pregunta cómo funciona el servicio.",
+    "lines": [
+      { "who": "friend", "name": "Compañero", "text": "¿Tú trabajas siempre en esta zona del barco?", "translationDE": "Arbeitest du immer in diesem Bereich des Schiffs?" },
+      { "who": "you", "hint": "Responde con \"trabajar\" sobre tu zona o turno." },
+      { "who": "friend", "name": "Compañero", "text": "¿Y cómo tomas el pedido, con papel o con tablet?", "translationDE": "Und wie nimmst du die Bestellung auf, auf Papier oder mit Tablet?" },
+      { "who": "you", "hint": "Responde con \"tomar\" explicando cómo lo haces." },
+      { "who": "friend", "name": "Compañero", "text": "¿Quién sirve las bebidas, tú o el cocinero?", "translationDE": "Wer serviert die Getränke, du oder der Koch?" },
+      { "who": "you", "hint": "Responde con \"servir\"." },
+      { "who": "friend", "name": "Compañero", "text": "Genial, gracias por explicarme todo.", "translationDE": "Toll, danke, dass du mir alles erklärt hast." },
+      { "who": "you", "hint": "Responde y anímale con una frase con \"querer\" o \"trabajar\"." }
+    ]
+  },
+  {
+    "id": "cita_bcn",
+    "tab": "Quedada en Barcelona",
+    "icon": "🏙️",
+    "setup": "Estás en una cafetería de Barcelona con Thomas fuera del trabajo.",
+    "lines": [
+      { "who": "friend", "name": "Camarero", "text": "Buenas tardes, ¿qué desean tomar?", "translationDE": "Guten Abend, was möchten Sie trinken?" },
+      { "who": "you", "hint": "Responde con \"querer\" pidiendo algo para ti." },
+      { "who": "friend", "name": "Camarero", "text": "¿Y para su acompañante?", "translationDE": "Und für Ihre Begleitung?" },
+      { "who": "you", "hint": "Responde con \"querer\" pidiendo algo para Thomas." },
+      { "who": "friend", "name": "Camarero", "text": "Enseguida se lo sirvo.", "translationDE": "Ich bringe es Ihnen sofort." },
+      { "who": "you", "hint": "Da las gracias y comenta con \"trabajar\" sobre tu propio trabajo en el barco." },
+      { "who": "friend", "name": "Camarero", "text": "¿Trabaja usted también en hostelería?", "translationDE": "Arbeiten Sie auch im Gastgewerbe?" },
+      { "who": "you", "hint": "Responde con \"trabajar\" confirmando tu profesión." }
+    ]
+  },
+  {
+    "id": "sarcastico",
+    "tab": "El cliente que se cree gracioso",
+    "icon": "🙄",
+    "setup": "Un cliente decide que hoy es el día perfecto para hacer bromas con cada pedido.",
+    "lines": [
+      { "who": "friend", "name": "Cliente sarcástico", "text": "Buenos días. ¿Usted trabaja aquí o es una alucinación mía por falta de café?", "translationDE": "Guten Morgen. Arbeiten Sie hier, oder ist das nur eine Halluzination aus Kaffeemangel?" },
+      { "who": "you", "hint": "Responde con \"trabajar\" con toda la paciencia del mundo." },
+      { "who": "friend", "name": "Cliente sarcástico", "text": "Vale, pues quiero un café. Sorpréndame con la rapidez.", "translationDE": "Na gut, dann möchte ich einen Kaffee. Überraschen Sie mich mit der Schnelligkeit." },
+      { "who": "you", "hint": "Confirma el pedido con \"querer\" o \"tomar\", sin morder el anzuelo." },
+      { "who": "friend", "name": "Cliente sarcástico", "text": "¿Y quién sirve aquí, usted o algún robot escondido en la cocina?", "translationDE": "Und wer bedient hier, Sie oder irgendein versteckter Roboter in der Küche?" },
+      { "who": "you", "hint": "Responde con \"servir\" sobre quién sirve las mesas." },
+      { "who": "friend", "name": "Cliente sarcástico", "text": "Ja, qué gracioso. ¿Y toma nota en papel o telepáticamente?", "translationDE": "Ha, sehr witzig. Und nehmen Sie die Bestellung auf Papier auf oder telepathisch?" },
+      { "who": "you", "hint": "Responde con \"tomar\" explicando cómo tomas el pedido." },
+      { "who": "friend", "name": "Cliente sarcástico", "text": "Bueno, al final resulta que es usted bastante profesional. Casi me decepciona.", "translationDE": "Nun, am Ende sind Sie ja ziemlich professionell. Fast enttäuschend." },
+      { "who": "you", "hint": "Responde con una frase con \"querer\" o \"trabajar\", manteniendo la calma profesional." }
+    ]
+  }
+];
+
+const sceneTabs = document.getElementById('scene-tabs');
+const sceneContainer = document.getElementById('scene-container');
+let activeScene = 0;
+const LINE_INPUT_STORAGE_KEY = 'angelika-clase04-roleplay';
+let lineInputState = {};
+let lineInputTimer = null;
+
+async function guardarLineInputs(){
+  if (!window.storage) return;
+  try{ await window.storage.set(LINE_INPUT_STORAGE_KEY, JSON.stringify(lineInputState)); }catch(e){}
+}
+async function cargarLineInputs(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(LINE_INPUT_STORAGE_KEY);
+    if (res && typeof res.value === 'string'){
+      const parsed = JSON.parse(res.value);
+      if(parsed && typeof parsed === 'object') lineInputState = parsed;
+    }
+  }catch(e){}
+}
+
+function renderTabs(){
+  sceneTabs.innerHTML = SCENES.map((s,i)=>
+    `<button class="scene-tab${i===activeScene?' active':''}" data-idx="${i}">${s.icon} ${s.tab}</button>`
+  ).join('');
+  sceneTabs.querySelectorAll('.scene-tab').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      activeScene = parseInt(btn.dataset.idx, 10);
+      renderTabs();
+      renderScene();
+    });
+  });
+}
+
+function renderScene(){
+  const scene = SCENES[activeScene];
+  let lineIdx = 0;
+  const linesHtml = scene.lines.map((l)=>{
+    if(l.who === 'friend'){
+      return `
+        <div class="line friend">
+          <div class="line-avatar">${l.name.charAt(0)}</div>
+          <div class="line-body">
+            <p class="line-name">${l.name}</p>
+            <div class="line-bubble">${l.text}</div>
+            ${l.translationDE ? `<p class="line-translation">${l.translationDE}</p>` : ''}
+          </div>
+        </div>`;
+    } else {
+      const key = `${activeScene}-${lineIdx}`;
+      lineIdx++;
+      const saved = lineInputState[key] || '';
+      return `
+        <div class="line you">
+          <div class="line-avatar">Tú</div>
+          <div class="line-body">
+            <p class="line-name">Tú</p>
+            <textarea class="line-input" rows="2" placeholder="Escribe tu respuesta..." data-line-key="${key}">${saved}</textarea>
+            <p class="line-hint">${l.hint}</p>
+          </div>
+        </div>`;
+    }
+  }).join('');
+
+  sceneContainer.innerHTML = `
+    <div class="scene-setup">
+      <span class="scene-icon">${scene.icon}</span>
+      <p class="scene-text"><strong>${scene.tab}:</strong> ${scene.setup}</p>
+    </div>
+    <div class="dialogue">${linesHtml}</div>
+  `;
+
+  sceneContainer.querySelectorAll('.line-input').forEach(ta=>{
+    const key = ta.dataset.lineKey;
+    ta.addEventListener('input', ()=>{
+      lineInputState[key] = ta.value;
+      clearTimeout(lineInputTimer);
+      lineInputTimer = setTimeout(guardarLineInputs, 800);
+    });
+  });
+}
+
+cargarLineInputs().then(()=>{
+  renderTabs();
+  renderScene();
+});
+
+/* ---------- FINAL TASK ---------- */
+const STORAGE_KEY = 'angelika-clase04-tarea';
+const taskArea = document.getElementById('final-task');
+const taskCount = document.getElementById('task-count');
+const savedFlag = document.getElementById('saved-flag');
+
+async function cargarTarea(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(STORAGE_KEY);
+    if (res && typeof res.value === 'string') taskArea.value = res.value;
+  }catch(e){
+    // Clave inexistente todavía: no hay tarea previa, se queda en blanco.
+  }
+  updateCount();
+}
+
+function updateCount(){
+  const text = taskArea.value;
+  const trabajar = (text.match(/\btrabaj\w*/gi) || []).length;
+  const querer = (text.match(/\bquier\w*/gi) || []).length;
+  const servir = (text.match(/\bsirv\w*/gi) || []).length;
+  const total = trabajar + querer + servir;
+  taskCount.textContent = `${total} verbo${total===1?'':'s'} clave detectado${total===1?'':'s'}`;
+}
+let autosaveTimer = null;
+async function autoguardar(){
+  if (!window.storage){
+    savedFlag.textContent = 'Guardado no disponible aquí';
+    savedFlag.classList.add('show');
+    setTimeout(()=>{ savedFlag.classList.remove('show'); savedFlag.textContent = 'Guardado ✓'; }, 2200);
+    return;
+  }
+  try{
+    const ok = await window.storage.set(STORAGE_KEY, taskArea.value);
+    savedFlag.textContent = ok ? 'Guardado ✓' : 'No se pudo guardar';
+  }catch(e){
+    savedFlag.textContent = 'No se pudo guardar';
+  }
+  savedFlag.classList.add('show');
+  setTimeout(()=>{ savedFlag.classList.remove('show'); savedFlag.textContent = 'Guardado ✓'; }, 1800);
+}
+
+taskArea.addEventListener('input', ()=>{
+  updateCount();
+  clearTimeout(autosaveTimer);
+  autosaveTimer = setTimeout(autoguardar, 800);
+});
+updateCount();
+cargarTarea();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1445 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clase 12 · Un turno completo — Angelika</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+
+/* ╔══════════════════════════════════════════════════════════════╗
+   ║  ESCOLAR — sistema de diseño para clases de español online   ║
+   ║  Clase 12 · L4 Línea de Barcelona · "Un turno completo" (cierre) ║
+   ╚══════════════════════════════════════════════════════════════╝ */
+
+:root{
+  --paper:        #FBF7EE;
+  --paper-raised: #FFFFFF;
+  --paper-alt:    #F3ECDA;
+  --ink:          #23291F;
+  --ink-soft:     #565F52;
+  --ink-faint:    #8B9184;
+  --line:         rgba(35,41,31,0.12);
+  --line-strong:  rgba(35,41,31,0.22);
+
+  --b1:      #2F6FED;  --b1-soft: #EAF1FE;  --b1-line: #C6D9FC;
+  --b2:      #2E9E6B;  --b2-soft: #E9F6EF;  --b2-line: #BEE6D3;
+  --b3:      #DB8A2E;  --b3-soft: #FCF1E1;  --b3-line: #F3D9AF;
+  --family:  #B5502E;  --family-soft: #FBEBE3; --family-line: #EFC9B4;
+
+  --f-display: 'Fraunces', Georgia, serif;
+  --f-body:    'IBM Plex Sans', system-ui, sans-serif;
+  --f-data:    'IBM Plex Mono', monospace;
+
+  --r-sm: 8px;
+  --r-md: 14px;
+  --r-lg: 20px;
+
+  --shadow-1: 0 1px 2px rgba(35,41,31,0.05), 0 1px 8px rgba(35,41,31,0.04);
+}
+
+*{ box-sizing:border-box; }
+body{
+  margin:0;
+  background: var(--paper);
+  background-image: radial-gradient(circle at 1px 1px, var(--line) 1px, transparent 0);
+  background-size: 22px 22px;
+  color: var(--ink);
+  font-family: var(--f-body);
+  line-height:1.6;
+}
+::selection{ background: var(--b1-soft); }
+
+/* ---------- HEADER ---------- */
+header{ padding:44px 24px 28px; max-width:760px; margin:0 auto; }
+.eyebrow{
+  font-family: var(--f-data); font-size:12px; letter-spacing:.14em;
+  text-transform:uppercase; color: var(--b1); margin:0 0 10px;
+  display:flex; align-items:center; gap:10px;
+}
+.eyebrow .dot{ width:6px; height:6px; border-radius:50%; background: var(--b1); }
+h1{
+  font-family: var(--f-display); font-weight:600;
+  font-size:clamp(30px,5.6vw,46px); line-height:1.08;
+  margin:0 0 14px; letter-spacing:-.01em;
+}
+h1 em{ font-style:italic; color: var(--b1); }
+.lede{ font-size:16px; color: var(--ink-soft); max-width:56ch; margin:0; }
+
+.meta-row{
+  display:flex; flex-wrap:wrap; gap:20px; margin-top:26px;
+  font-family: var(--f-data); font-size:12px; color: var(--ink-faint);
+}
+.meta-row strong{
+  display:block; color: var(--ink); font-size:14.5px; font-weight:500;
+  font-family: var(--f-display); margin-top:3px;
+}
+
+/* ---------- SECTIONS ---------- */
+main{ max-width:760px; margin:0 auto; padding:8px 24px 100px; }
+
+section.block{ margin-bottom:52px; }
+.block-head{ display:flex; align-items:baseline; gap:12px; margin-bottom:18px; }
+.time-tag{
+  font-family: var(--f-data); font-size:11px; color: var(--ink-faint);
+  background: var(--paper-alt); padding:3px 10px; border-radius:999px; margin-left:auto; flex:none;
+}
+.block-num{
+  font-family: var(--f-data); font-size:12px; color:#fff; background: var(--b1);
+  width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  flex:none;
+}
+.block-head h2{
+  font-family: var(--f-display); font-weight:500; font-style:italic; font-size:22px; margin:0;
+}
+
+.panel{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-lg);
+  box-shadow: var(--shadow-1); padding:26px 28px;
+}
+
+/* ---------- GRAMMAR TABLE ---------- */
+.conj-table{ width:100%; border-collapse:collapse; margin-top:4px; }
+.conj-table td{ padding:10px 6px; border-bottom:1px dashed var(--line); font-size:15px; }
+.conj-table tr:last-child td{ border-bottom:none; }
+.conj-pron{ font-family: var(--f-data); color: var(--ink-faint); font-size:13px; width:90px; }
+.conj-form{ font-family: var(--f-display); font-weight:600; font-size:19px; color: var(--b1); }
+.conj-ex{ color: var(--ink-soft); font-size:14px; }
+
+.note{
+  margin-top:18px; padding:14px 16px; background: var(--b1-soft); border:1px solid var(--b1-line);
+  border-radius: var(--r-md); font-size:14px; color: var(--ink-soft);
+}
+.note strong{ color: var(--ink); }
+
+/* ---------- COMPARATIVA: TÚ vs USTED en repaso ---------- */
+.compare-wrap{ margin-top:22px; }
+.compare-title{
+  font-family: var(--f-data); font-size:11.5px; text-transform:uppercase; letter-spacing:.06em;
+  color: var(--ink-faint); margin:0 0 10px;
+}
+.compare-grid{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+@media (max-width:560px){ .compare-grid{ grid-template-columns:1fr; } }
+.compare-col{ border-radius: var(--r-md); padding:16px 18px; border:1px solid; }
+.compare-col.is-ser{ background: var(--b1-soft); border-color: var(--b1-line); }
+.compare-col.is-estar{ background: var(--b2-soft); border-color: var(--b2-line); }
+.compare-head{ display:flex; align-items:center; gap:8px; margin:0 0 10px; }
+.compare-verb{ font-family: var(--f-display); font-weight:600; font-size:17px; }
+.is-ser .compare-verb{ color: var(--b1); }
+.is-estar .compare-verb{ color: var(--b2); }
+.compare-sub{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); }
+.compare-list{ margin:0; padding:0; list-style:none; }
+.compare-list li{ font-size:13.5px; color: var(--ink-soft); padding:6px 0; border-top:1px dashed var(--line); }
+.compare-list li:first-child{ border-top:none; }
+.compare-list strong{ color: var(--ink); font-weight:600; }
+.compare-list em{ display:block; font-style:normal; color: var(--ink-faint); font-size:12.5px; margin-top:2px; }
+.compare-warning{
+  margin-top:14px; padding:14px 16px; background: var(--family-soft); border:1px solid var(--family-line);
+  border-radius: var(--r-md); font-size:13.5px; color: var(--ink-soft);
+}
+.compare-warning strong{ color: var(--family); }
+
+/* ---------- VOCAB CARDS ---------- */
+.vocab-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:12px; }
+.vocab-card{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:14px 16px; cursor:pointer; perspective:600px; min-height:78px;
+  display:flex; flex-direction:column; justify-content:center; transition: border-color .15s ease;
+}
+.vocab-card:hover{ border-color: var(--b1-line); }
+.vocab-card:focus-visible{ outline:2px solid var(--b1); outline-offset:2px; }
+.vocab-front{ font-family: var(--f-body); font-weight:600; font-size:15px; }
+.vocab-back{ display:none; font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); margin-top:6px; }
+.vocab-card.flipped .vocab-back{ display:block; }
+.vocab-card.flipped{ background: var(--b1-soft); border-color: var(--b1-line); }
+.vocab-hint{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin:10px 2px 16px; }
+
+/* ---------- EXERCISE ---------- */
+.exercise{ margin-bottom:20px; }
+.exercise:last-of-type{ margin-bottom:0; }
+.ex-sentence{ font-size:15.5px; margin-bottom:10px; }
+.ex-sentence .gap{ font-family: var(--f-data); color: var(--ink-faint); }
+.ex-translation{ font-family: var(--f-data); font-size:12px; color: var(--ink-faint); margin:-4px 0 10px; }
+.ex-options{ display:flex; flex-wrap:wrap; gap:8px; }
+.opt-btn{
+  font-family: var(--f-body); font-size:14px; background: var(--paper-raised);
+  border:1.5px solid var(--line); color: var(--ink); padding:7px 16px; border-radius:999px;
+  cursor:pointer; transition: all .15s ease;
+}
+.opt-btn:hover{ border-color: var(--ink-faint); }
+.opt-btn.picked{ background: var(--b1-soft); border-color: var(--b1); color: var(--b1); }
+.opt-btn.correct{ background: var(--b2-soft); border-color: var(--b2); color: var(--b2); }
+.opt-btn.wrong{ background: var(--family-soft); border-color: var(--family); color: var(--family); }
+.opt-btn:disabled{ cursor:default; }
+
+.check-bar{
+  display:flex; align-items:center; justify-content:space-between; gap:16px;
+  margin-top:22px; padding-top:18px; border-top:1px dashed var(--line);
+}
+.btn-primary{
+  font-family: var(--f-body); font-weight:600; font-size:14px; color:#fff; background: var(--b1);
+  border:none; padding:11px 22px; border-radius:999px; cursor:pointer; transition: transform .1s ease;
+}
+.btn-primary:hover{ transform: translateY(-1px); }
+#score-text{ font-family: var(--f-data); font-size:13px; color: var(--ink-faint); }
+.btn-ghost{
+  font-family: var(--f-body); font-weight:600; font-size:13px; color: var(--ink-soft); background:none;
+  border:1.5px solid var(--line); padding:9px 18px; border-radius:999px; cursor:pointer;
+}
+.btn-ghost:hover{ border-color: var(--ink-faint); }
+.ex-divider{
+  display:flex; align-items:center; gap:10px; margin:20px 0 16px;
+  font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.06em;
+  color: var(--ink-faint);
+}
+.ex-divider::before, .ex-divider::after{ content:""; flex:1; height:1px; background: var(--line); }
+.ex-divider.en-clase{ color: var(--b1); }
+.ex-divider.en-clase::before, .ex-divider.en-clase::after{ background: var(--b1-line); }
+
+/* ---------- SARCASM TOGGLE ---------- */
+.sarcasm-bar{
+  display:flex; align-items:center; gap:12px; margin-bottom:16px;
+  background: var(--family-soft); border:1px solid var(--family-line); border-radius: var(--r-md);
+  padding:12px 16px;
+}
+.sarcasm-switch{
+  position:relative; flex:none; width:44px; height:24px; border-radius:999px;
+  background: var(--line-strong); border:none; cursor:pointer; transition: background .2s ease;
+}
+.sarcasm-switch::before{
+  content:""; position:absolute; top:2px; left:2px; width:20px; height:20px; border-radius:50%;
+  background: var(--paper-raised); box-shadow: var(--shadow-1); transition: transform .2s ease;
+}
+.sarcasm-switch.on{ background: var(--family); }
+.sarcasm-switch.on::before{ transform: translateX(20px); }
+.sarcasm-label{ font-family: var(--f-body); font-weight:600; font-size:13.5px; color: var(--ink); }
+.sarcasm-label span{ display:block; font-family: var(--f-data); font-weight:400; font-size:11.5px; color: var(--ink-faint); margin-top:1px; }
+.ex-sentence .sarcasm-icon{ margin-right:4px; }
+
+/* ---------- SITUATION CARDS ---------- */
+.characters{ display:grid; gap:16px; }
+.char-card{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-lg);
+  padding:20px 22px; display:flex; gap:16px; align-items:flex-start;
+}
+.char-avatar{
+  flex:none; width:44px; height:44px; border-radius:50%; background: var(--b1-soft);
+  display:flex; align-items:center; justify-content:center; font-family: var(--f-display);
+  font-weight:600; font-size:19px; color: var(--b1);
+}
+.char-body{ flex:1; }
+.char-name{ font-family: var(--f-display); font-weight:600; font-size:17px; margin:0 0 4px; }
+.char-role{ font-family: var(--f-data); font-size:11.5px; text-transform:uppercase; letter-spacing:.05em; color: var(--ink-faint); margin:0 0 10px; }
+.char-facts{ display:flex; flex-wrap:wrap; gap:6px; margin-bottom:10px; }
+.fact-tag{
+  font-family: var(--f-data); font-size:12px; background: var(--paper-alt); color: var(--ink-soft);
+  padding:4px 10px; border-radius:999px;
+}
+.char-prompt{ font-size:14px; color: var(--ink-soft); }
+.char-input{
+  width:100%; margin-top:8px; font-family: var(--f-body); font-size:14.5px; color: var(--ink);
+  background: var(--paper); border:1px solid var(--line); border-radius: var(--r-sm);
+  padding:10px 12px; resize:vertical; min-height:44px;
+}
+.char-input:focus{ outline:none; border-color: var(--b1-line); background: var(--paper-raised); }
+
+/* ---------- ROLEPLAY ---------- */
+.roleplay-panel{ background: var(--b2-soft); border:1px solid var(--b2-line); border-radius: var(--r-lg); padding:26px 28px; }
+.roleplay-panel .block-num{ background: var(--b2); }
+.scene-setup{
+  display:flex; gap:14px; align-items:flex-start; background: var(--paper-raised);
+  border:1px solid var(--b2-line); border-radius: var(--r-md); padding:14px 16px; margin-bottom:20px;
+}
+.scene-icon{ font-size:22px; flex:none; }
+.scene-text{ font-size:14px; color: var(--ink-soft); }
+.scene-text strong{ color: var(--ink); }
+
+.dialogue{ display:flex; flex-direction:column; gap:14px; }
+.scene-tabs{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:18px; }
+.scene-tab{
+  font-family: var(--f-data); font-size:12.5px; background: var(--paper-raised);
+  border:1.5px solid var(--b2-line); color: var(--ink-soft); padding:7px 14px;
+  border-radius:999px; cursor:pointer; transition: all .15s ease;
+}
+.scene-tab:hover{ border-color: var(--b2); }
+.scene-tab.active{ background: var(--b2); border-color: var(--b2); color:#fff; }
+.line{ display:flex; gap:12px; align-items:flex-start; }
+.line-avatar{
+  flex:none; width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  font-family: var(--f-display); font-weight:600; font-size:14px; color:#fff;
+}
+.line.friend .line-avatar{ background: var(--ink-faint); }
+.line.you .line-avatar{ background: var(--b2); }
+.line-body{ flex:1; }
+.line-name{ font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.05em; color: var(--ink-faint); margin:0 0 4px; }
+.line-bubble{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:12px 14px; font-size:14.5px; color: var(--ink);
+}
+.line.you .line-bubble{ background:#fff; border-color: var(--b2-line); }
+.line-input{
+  width:100%; font-family: var(--f-body); font-size:14.5px; color: var(--ink);
+  background:#fff; border:1px solid var(--b2-line); border-radius: var(--r-sm);
+  padding:10px 12px; resize:vertical; min-height:40px; margin-top:2px;
+}
+.line-input:focus{ outline:none; border-color: var(--b2); }
+.line-hint{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin-top:5px; }
+.line-translation{ font-family: var(--f-data); font-size:11.5px; color: var(--ink-faint); margin-top:6px; }
+
+.roleplay-tip{
+  margin-top:22px; padding:14px 16px; background: var(--paper-raised); border:1px solid var(--b2-line);
+  border-radius: var(--r-md); font-size:13.5px; color: var(--ink-soft);
+}
+.roleplay-tip strong{ color: var(--ink); }
+
+/* ---------- SELF-ASSESSMENT ---------- */
+.self-panel{ background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-lg); box-shadow: var(--shadow-1); padding:26px 28px; }
+.self-grid{ display:grid; gap:14px; margin-top:6px; }
+.self-item{
+  display:grid; grid-template-columns:1fr auto; align-items:center; gap:14px;
+  padding:14px 16px; background: var(--paper); border:1px solid var(--line); border-radius: var(--r-md);
+}
+.self-topic{ font-size:14.5px; color: var(--ink); }
+.self-topic span{ display:block; font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin-top:3px; }
+.self-scale{ display:flex; gap:6px; }
+.self-btn{
+  width:34px; height:34px; border-radius:50%; border:1.5px solid var(--line); background: var(--paper-raised);
+  font-family: var(--f-data); font-size:13px; color: var(--ink-faint); cursor:pointer; transition: all .15s ease;
+}
+.self-btn:hover{ border-color: var(--ink-faint); }
+.self-btn.active{ background: var(--b2); border-color: var(--b2); color:#fff; }
+.self-summary{
+  margin-top:20px; padding:14px 16px; background: var(--b2-soft); border:1px solid var(--b2-line);
+  border-radius: var(--r-md); font-size:13.5px; color: var(--ink-soft); display:none;
+}
+.self-summary.show{ display:block; }
+.self-summary strong{ color: var(--ink); }
+
+/* ---------- FINAL TASK ---------- */
+.task-panel{ background: var(--family-soft); border:1px solid var(--family-line); border-radius: var(--r-lg); padding:26px 28px; }
+.task-panel .block-num{ background: var(--family); }
+textarea#final-task{
+  width:100%; min-height:130px; font-family: var(--f-body); font-size:15px; color: var(--ink);
+  background: var(--paper-raised); border:1px solid var(--family-line); border-radius: var(--r-md);
+  padding:14px 16px; resize:vertical; margin-top:14px;
+}
+textarea#final-task:focus{ outline:none; border-color: var(--family); }
+.task-footer{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:12px; flex-wrap:wrap; }
+#task-count{ font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); }
+.btn-secondary{
+  font-family: var(--f-body); font-weight:600; font-size:13.5px; color: var(--family); background:none;
+  border:1.5px solid var(--family-line); padding:9px 18px; border-radius:999px; cursor:pointer;
+}
+.saved-flag{ font-family: var(--f-data); font-size:12px; color: var(--b2); opacity:0; transition: opacity .3s ease; }
+.saved-flag.show{ opacity:1; }
+
+/* ---------- CLOSING BANNER ---------- */
+.closing-panel{
+  background: linear-gradient(135deg, var(--ink) 0%, #2E362A 100%);
+  border-radius: var(--r-lg); padding:34px 30px; color: var(--paper);
+  text-align:center; position:relative; overflow:hidden;
+}
+.closing-panel::before{
+  content:""; position:absolute; inset:0 0 auto 0; height:5px;
+  background: linear-gradient(90deg, var(--b1) 0 33.3%, var(--b2) 33.3% 66.6%, var(--b3) 66.6% 100%);
+}
+.closing-panel h2{
+  font-family: var(--f-display); font-style:italic; font-weight:500; font-size:26px; margin:0 0 12px;
+  color:#fff;
+}
+.closing-panel p{ font-size:15px; color: rgba(251,247,238,0.78); max-width:52ch; margin:0 auto; }
+.closing-stats{ display:flex; justify-content:center; gap:36px; margin-top:24px; flex-wrap:wrap; }
+.closing-stat{ text-align:center; }
+.closing-stat strong{ display:block; font-family: var(--f-display); font-size:28px; color:#fff; }
+.closing-stat span{ font-family: var(--f-data); font-size:11px; color: rgba(251,247,238,0.6); text-transform:uppercase; letter-spacing:.05em; }
+
+/* ---------- FOOTER NAV ---------- */
+footer{
+  max-width:760px; margin:0 auto; padding:0 24px 60px; display:flex;
+  justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;
+  font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint);
+}
+footer a{ color: var(--b1); text-decoration:none; }
+footer a:hover{ text-decoration:underline; }
+
+@media (max-width:600px){
+  header{ padding:34px 18px 22px; }
+  main{ padding:8px 18px 90px; }
+  .panel, .task-panel, .self-panel{ padding:20px 18px; }
+  .char-card{ flex-direction:column; }
+  .self-item{ grid-template-columns:1fr; }
+}
+@media (prefers-reduced-motion: reduce){ *{ transition:none !important; } }
+</style>
+</head>
+<body>
+
+<header>
+  <p class="eyebrow"><span class="dot"></span>Clase 12 de 12 · L4 Línea de Barcelona · Cierre del curso</p>
+  <h1>Un <em>turno completo</em></h1>
+  <p class="lede">Última clase del curso: hoy juntamos todo lo aprendido en una simulación completa de un turno de trabajo en el barco — recibir, recomendar, tomar nota, servir y cobrar a un cliente — usando presente, imperativo y expresiones de cortesía. Cerramos con tu autoevaluación y un plan para seguir practicando.</p>
+  <div class="meta-row">
+    <div>Duración<strong>50 min</strong></div>
+    <div>Gramática<strong>Repaso integrado: presente, imperativo, cortesía</strong></div>
+    <div>Nivel<strong>A1</strong></div>
+  </div>
+</header>
+
+<main>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">1</span><h2>Repaso rápido: las tres piezas</h2><span class="time-tag">8 min</span></div>
+    <div class="panel">
+      <table class="conj-table">
+        <tr><td class="conj-pron">presente</td><td class="conj-form">recomiendo</td><td class="conj-ex">Le recomiendo el pescado del día.</td></tr>
+        <tr><td class="conj-pron">imperativo (usted)</td><td class="conj-form">siga, gire</td><td class="conj-ex">Siga todo recto y gire a la izquierda.</td></tr>
+        <tr><td class="conj-pron">cortesía</td><td class="conj-form">¿podría...?</td><td class="conj-ex">¿Podría traerme la cuenta, por favor?</td></tr>
+        <tr><td class="conj-pron">cortesía</td><td class="conj-form">me gustaría</td><td class="conj-ex">Me gustaría recomendarle el postre de la casa.</td></tr>
+        <tr><td class="conj-pron">posesivos</td><td class="conj-form">su, sus</td><td class="conj-ex">Aquí tiene su mesa y su carta.</td></tr>
+      </table>
+      <div class="note"><strong>Hoy no aprendemos gramática nueva:</strong> juntamos las tres estructuras del curso — presente para describir y ofrecer, imperativo formal para dar indicaciones a un cliente, y condicional de cortesía para pedir y ofrecer con educación. Todo en el contexto de un turno de trabajo, de principio a fin.</div>
+
+      <div class="compare-wrap">
+        <p class="compare-title">Recordatorio: imperativo tú vs usted, según el contexto</p>
+        <div class="compare-grid">
+          <div class="compare-col is-ser">
+            <div class="compare-head">
+              <span class="compare-verb">USTED</span>
+              <span class="compare-sub">— con clientes, siempre</span>
+            </div>
+            <ul class="compare-list">
+              <li><strong>Siga, gire, tome asiento, disculpe.</strong>
+                <em>Con cualquier cliente en el barco, sin excepción.</em>
+              </li>
+              <li><strong>Tono profesional y respetuoso</strong> — el que usas cada día en tu trabajo.</li>
+              <li><strong>Ejemplo:</strong> Siga por aquí, por favor, su mesa está lista.</li>
+            </ul>
+          </div>
+          <div class="compare-col is-estar">
+            <div class="compare-head">
+              <span class="compare-verb">TÚ</span>
+              <span class="compare-sub">— fuera del trabajo</span>
+            </div>
+            <ul class="compare-list">
+              <li><strong>Sigue, gira, toma, cruza.</strong>
+                <em>Con amigos, turistas jóvenes o gente de tu edad en la calle.</em>
+              </li>
+              <li><strong>Tono cercano</strong> — el que usas en Barcelona fuera del trabajo.</li>
+              <li><strong>Ejemplo:</strong> Sigue todo recto y gira en la plaza.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="compare-warning">
+          <strong>Repaso final:</strong> el error más común es mezclar los dos registros — usar "tú" con un cliente o "usted" con un amigo. En el turno de hoy, todo el vocabulario de trabajo va siempre con "usted": es la clave para sonar profesional en español.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">2</span><h2>Vocabulario acumulado</h2><span class="time-tag">5 min</span></div>
+    <p class="vocab-hint">Toca cada tarjeta para ver un ejemplo. Repaso de las clases 7 a 11.</p>
+    <div class="vocab-grid" id="vocab-grid"></div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">3</span><h2>Practica</h2><span class="time-tag">10 min</span></div>
+    <div class="panel">
+      <p class="vocab-hint" style="margin-bottom:14px;">25 frases de repaso acumulativo: las primeras 12 se hacen en voz alta en clase; el resto queda como repaso final para casa.</p>
+      <div class="sarcasm-bar">
+        <button class="sarcasm-switch" id="sarcasm-toggle" role="switch" aria-checked="false" aria-label="Activar modo sarcástico"></button>
+        <p class="sarcasm-label">Modo sarcástico <span>Mismas frases, con un poco (mucho) de retintín</span></p>
+      </div>
+      <div id="exercises"></div>
+      <div class="check-bar">
+        <div style="display:flex; gap:10px;">
+          <button class="btn-primary" id="check-btn">Comprobar respuestas</button>
+          <button class="btn-ghost" id="reset-btn">Reiniciar</button>
+        </div>
+        <span id="score-text"></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">4</span><h2>Clientes del turno</h2><span class="time-tag">7 min</span></div>
+    <p class="lede" style="margin-bottom:16px;">Cada cliente necesita algo distinto durante el turno: recibirlo, recomendarle algo, darle indicaciones o cobrarle. Responde usando presente, imperativo (usted) o cortesía. Las primeras 6 se trabajan en clase; el resto queda como banco de repaso.</p>
+    <div class="characters" id="characters"></div>
+  </section>
+
+  <section class="block roleplay-panel">
+    <div class="block-head"><span class="block-num">5</span><h2>Simulación completa: un turno entero</h2><span class="time-tag">15 min</span></div>
+    <p class="lede" style="margin-bottom:16px;">Esta es la simulación final del curso: recibir a un cliente, recomendar, tomar nota, servir y cobrar — todo en una sola escena, de principio a fin. Practica la escena completa en clase, en voz alta.</p>
+    <div class="scene-tabs" id="scene-tabs"></div>
+    <div id="scene-container"></div>
+    <div class="roleplay-tip"><strong>En clase:</strong> vamos a representar el turno completo cambiando de rol — tú como camarera y yo como cliente, y después al revés. Es el cierre práctico de las 12 clases.</div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">6</span><h2>Autoevaluación final</h2><span class="time-tag">3 min</span></div>
+    <div class="self-panel">
+      <p class="vocab-hint" style="margin:0 0 4px;">Valora del 1 (todavía inseguro) al 5 (muy cómodo) cómo te sientes con cada bloque del curso.</p>
+      <div class="self-grid" id="self-grid"></div>
+      <div class="self-summary" id="self-summary"></div>
+    </div>
+  </section>
+
+  <section class="block task-panel">
+    <div class="block-head"><span class="block-num">7</span><h2 style="color:var(--family)">Tu plan de continuación</h2><span class="time-tag">2 min</span></div>
+    <p style="margin:0; font-size:15px; color:var(--ink-soft);">Escribe tu plan para seguir practicando español después del curso: qué vas a repasar primero, con qué frecuencia, y qué recursos vas a usar (por ejemplo, repasar las tarjetas de vocabulario o volver a hacer los roleplays de las clases anteriores).</p>
+    <textarea id="final-task" placeholder="Voy a repasar...&#10;Cada semana voy a...&#10;Quiero seguir practicando..."></textarea>
+    <div class="task-footer">
+      <span id="task-count">Escribe tu plan de continuación</span>
+      <div style="display:flex; gap:10px; align-items:center;">
+        <span class="saved-flag" id="saved-flag">Guardado ✓</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="block closing-panel">
+    <h2>¡Enhorabuena, Angelika!</h2>
+    <p>Has completado las 12 clases del curso: desde presentarte y hablar de tu día a día en el barco, hasta dar indicaciones por Barcelona y llevar un turno completo de servicio en español. El camino sigue — sigue practicando un poco cada semana.</p>
+    <div class="closing-stats">
+      <div class="closing-stat"><strong>12</strong><span>Clases completadas</span></div>
+      <div class="closing-stat"><strong>4</strong><span>Líneas del programa</span></div>
+      <div class="closing-stat"><strong>A1</strong><span>Nivel alcanzado</span></div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <span>Clase 12 · Fin del curso</span>
+  <span>¡Gracias por estas 12 clases, Angelika! 🚢</span>
+</footer>
+
+<script>
+/* ---------- VOCAB ---------- */
+const VOCAB = [
+  {front:"la cuenta", back:"¿Podría traerme la cuenta, por favor?"},
+  {front:"recomendar", back:"Le recomiendo el pescado del día."},
+  {front:"tomar nota", back:"Voy a tomar nota de su pedido."},
+  {front:"a la derecha", back:"Su mesa está a la derecha, siga por aquí."},
+  {front:"me gustaría", back:"Me gustaría ofrecerle nuestro menú del día."},
+  {front:"la propina", back:"La propina no está incluida en la cuenta."},
+];
+
+const grid = document.getElementById('vocab-grid');
+VOCAB.forEach(v=>{
+  const card = document.createElement('div');
+  card.className = 'vocab-card';
+  card.setAttribute('role', 'button');
+  card.setAttribute('tabindex', '0');
+  card.setAttribute('aria-pressed', 'false');
+  card.setAttribute('aria-label', `${v.front}. Pulsa para ver un ejemplo.`);
+  card.innerHTML = `<div class="vocab-front">${v.front}</div><div class="vocab-back">${v.back}</div>`;
+  const toggle = ()=>{
+    const flipped = card.classList.toggle('flipped');
+    card.setAttribute('aria-pressed', String(flipped));
+  };
+  card.addEventListener('click', toggle);
+  card.addEventListener('keydown', (e)=>{
+    if(e.key === 'Enter' || e.key === ' '){
+      e.preventDefault();
+      toggle();
+    }
+  });
+  grid.appendChild(card);
+});
+
+/* ---------- EXERCISES ---------- */
+const EXERCISES = [
+  {
+    "sentence": "<span class=\"gap\">___</span> por aquí, por favor, su mesa está lista.",
+    "options": [
+      "Siga",
+      "Sigue",
+      "Seguir"
+    ],
+    "answer": "Siga",
+    "sentenceSarcastic": "<span class=\"gap\">___</span> por aquí, por favor, su mesa está lista, tras solo cuarenta minutos de espera.",
+    "translationDE": "Gehen Sie bitte hier entlang, Ihr Tisch ist bereit.",
+    "translationDESarcastic": "Gehen Sie bitte hier entlang, Ihr Tisch ist bereit, nach nur vierzig Minuten Wartezeit."
+  },
+  {
+    "sentence": "¿<span class=\"gap\">___</span> traerme la carta, por favor?",
+    "options": [
+      "podría",
+      "puedo",
+      "puede"
+    ],
+    "answer": "podría",
+    "sentenceSarcastic": "¿<span class=\"gap\">___</span> traerme la carta, por favor? La misma carta que llevo viendo desde que entré.",
+    "translationDE": "Könnten Sie mir bitte die Speisekarte bringen?",
+    "translationDESarcastic": "Könnten Sie mir bitte die Speisekarte bringen? Dieselbe Karte, die ich schon seit meinem Eintreten sehe."
+  },
+  {
+    "sentence": "Le <span class=\"gap\">___</span> el pescado del día.",
+    "options": [
+      "recomiendo",
+      "recomienda",
+      "recomiendas"
+    ],
+    "answer": "recomiendo",
+    "sentenceSarcastic": "Le <span class=\"gap\">___</span> el pescado del día, es decir, el único plato que queda a estas alturas.",
+    "translationDE": "Ich empfehle Ihnen den Fisch des Tages.",
+    "translationDESarcastic": "Ich empfehle Ihnen den Fisch des Tages, das heißt, das einzige Gericht, das um diese Zeit noch übrig ist."
+  },
+  {
+    "sentence": "<span class=\"gap\">___</span> asiento, ahora mismo le atiendo.",
+    "options": [
+      "Tome",
+      "Toma",
+      "Tomar"
+    ],
+    "answer": "Tome",
+    "sentenceSarcastic": "<span class=\"gap\">___</span> asiento, ahora mismo le atiendo, en cuanto termine de estar en cinco sitios a la vez.",
+    "translationDE": "Nehmen Sie Platz, ich bediene Sie sofort.",
+    "translationDESarcastic": "Nehmen Sie Platz, ich bediene Sie sofort, sobald ich aufhöre, an fünf Orten gleichzeitig zu sein."
+  },
+  {
+    "sentence": "Me <span class=\"gap\">___</span> ofrecerle nuestro postre de la casa.",
+    "options": [
+      "gustaría",
+      "gusta",
+      "gustaba"
+    ],
+    "answer": "gustaría",
+    "sentenceSarcastic": "Me <span class=\"gap\">___</span> ofrecerle nuestro postre de la casa, el que sobra siempre al final del día.",
+    "translationDE": "Ich möchte Ihnen gerne unseren hausgemachten Nachtisch anbieten.",
+    "translationDESarcastic": "Ich möchte Ihnen gerne unseren hausgemachten Nachtisch anbieten, den, der am Ende des Tages immer übrig bleibt."
+  },
+  {
+    "sentence": "<span class=\"gap\">___</span> nota de su pedido enseguida.",
+    "options": [
+      "Voy a tomar",
+      "Tomo",
+      "Tomaré"
+    ],
+    "answer": "Voy a tomar",
+    "sentenceSarcastic": "<span class=\"gap\">___</span> nota de su pedido enseguida, con la memoria de elefante que ya no me queda.",
+    "translationDE": "Ich nehme sofort Ihre Bestellung auf.",
+    "translationDESarcastic": "Ich nehme sofort Ihre Bestellung auf, mit dem Elefantengedächtnis, das mir nicht mehr geblieben ist."
+  },
+  {
+    "sentence": "¿Cómo <span class=\"gap\">___</span> a pagar, con tarjeta o en efectivo?",
+    "options": [
+      "va",
+      "vas",
+      "voy"
+    ],
+    "answer": "va",
+    "sentenceSarcastic": "¿Cómo <span class=\"gap\">___</span> a pagar, con tarjeta o en efectivo? La pregunta más filosófica de la noche.",
+    "translationDE": "Wie werden Sie bezahlen, mit Karte oder bar?",
+    "translationDESarcastic": "Wie werden Sie bezahlen, mit Karte oder bar? Die philosophischste Frage des Abends."
+  },
+  {
+    "sentence": "<span class=\"gap\">___</span> todo recto y gire a la izquierda para llegar al baño.",
+    "options": [
+      "Siga",
+      "Sigue",
+      "Seguir"
+    ],
+    "answer": "Siga",
+    "sentenceSarcastic": "<span class=\"gap\">___</span> todo recto y gire a la izquierda para llegar al baño, toda una expedición, la verdad.",
+    "translationDE": "Gehen Sie geradeaus und biegen Sie links ab, um zur Toilette zu kommen.",
+    "translationDESarcastic": "Gehen Sie geradeaus und biegen Sie links ab, um zur Toilette zu kommen, eine echte Expedition, ehrlich gesagt."
+  },
+  {
+    "sentence": "¿<span class=\"gap\">___</span> traerme la cuenta, por favor?",
+    "options": [
+      "podría",
+      "puedo",
+      "puedes"
+    ],
+    "answer": "podría",
+    "sentenceSarcastic": "¿<span class=\"gap\">___</span> traerme la cuenta, por favor? Por quinta vez esta noche, con todo mi cariño.",
+    "translationDE": "Könnten Sie mir bitte die Rechnung bringen?",
+    "translationDESarcastic": "Könnten Sie mir bitte die Rechnung bringen? Zum fünften Mal heute Abend, mit aller Zuneigung."
+  },
+  {
+    "sentence": "Aquí tiene <span class=\"gap\">___</span> mesa y su carta.",
+    "options": [
+      "su",
+      "sus",
+      "sú"
+    ],
+    "answer": "su",
+    "sentenceSarcastic": "Aquí tiene <span class=\"gap\">___</span> mesa y su carta, justo al lado de la cocina, sorpresa incluida.",
+    "translationDE": "Hier sind Ihr Tisch und Ihre Speisekarte.",
+    "translationDESarcastic": "Hier sind Ihr Tisch und Ihre Speisekarte, direkt neben der Küche, Überraschung inklusive."
+  },
+  {
+    "sentence": "La propina no <span class=\"gap\">___</span> incluida en la cuenta.",
+    "options": [
+      "está",
+      "es",
+      "esta"
+    ],
+    "answer": "está",
+    "sentenceSarcastic": "La propina no <span class=\"gap\">___</span> incluida en la cuenta, por si esperaba que se calculara sola.",
+    "translationDE": "Das Trinkgeld ist nicht in der Rechnung enthalten.",
+    "translationDESarcastic": "Das Trinkgeld ist nicht in der Rechnung enthalten, falls Sie erwartet haben, es berechnet sich von selbst."
+  },
+  {
+    "sentence": "<span class=\"gap\">___</span> me disculpa un momento, vuelvo enseguida.",
+    "options": [
+      "Si",
+      "Sí",
+      "Se"
+    ],
+    "answer": "Si",
+    "sentenceSarcastic": "<span class=\"gap\">___</span> me disculpa un momento, vuelvo enseguida, es decir, en veinte minutos o así.",
+    "translationDE": "Wenn Sie mich kurz entschuldigen, bin ich gleich wieder da.",
+    "translationDESarcastic": "Wenn Sie mich kurz entschuldigen, bin ich gleich wieder da, also in etwa zwanzig Minuten."
+  },
+  {
+    "sentence": "El pescado del día <span class=\"gap\">___</span> muy fresco.",
+    "options": [
+      "está",
+      "es",
+      "esta"
+    ],
+    "answer": "está",
+    "sentenceSarcastic": "El pescado del día <span class=\"gap\">___</span> muy fresco, palabra de quien lo acaba de sacar del congelador.",
+    "translationDE": "Der Fisch des Tages ist sehr frisch.",
+    "translationDESarcastic": "Der Fisch des Tages ist sehr frisch, Ehrenwort von jemandem, der ihn gerade aus dem Gefrierfach geholt hat."
+  },
+  {
+    "sentence": "¿<span class=\"gap\">___</span> algo más para beber?",
+    "options": [
+      "Desea",
+      "Deseas",
+      "Deseo"
+    ],
+    "answer": "Desea",
+    "sentenceSarcastic": "¿<span class=\"gap\">___</span> algo más para beber? Aparte de mi paciencia, que ya se está evaporando.",
+    "translationDE": "Möchten Sie noch etwas zu trinken?",
+    "translationDESarcastic": "Möchten Sie noch etwas zu trinken? Außer meiner Geduld, die gerade verdunstet."
+  },
+  {
+    "sentence": "<span class=\"gap\">___</span> a la derecha para llegar a la terraza.",
+    "options": [
+      "Gire",
+      "Gira",
+      "Girar"
+    ],
+    "answer": "Gire",
+    "sentenceSarcastic": "<span class=\"gap\">___</span> a la derecha para llegar a la terraza, la terraza que llevo señalando desde el principio.",
+    "translationDE": "Biegen Sie rechts ab, um zur Terrasse zu gelangen.",
+    "translationDESarcastic": "Biegen Sie rechts ab, um zur Terrasse zu gelangen, die Terrasse, auf die ich von Anfang an zeige."
+  },
+  {
+    "sentence": "Me <span class=\"gap\">___</span> recomendarle el menú del día.",
+    "options": [
+      "gustaría",
+      "gusta",
+      "gustan"
+    ],
+    "answer": "gustaría",
+    "sentenceSarcastic": "Me <span class=\"gap\">___</span> recomendarle el menú del día, el mismo que llevamos ofreciendo toda la semana.",
+    "translationDE": "Ich möchte Ihnen gerne das Tagesmenü empfehlen.",
+    "translationDESarcastic": "Ich möchte Ihnen gerne das Tagesmenü empfehlen, dasselbe, das wir schon die ganze Woche anbieten."
+  },
+  {
+    "sentence": "¿<span class=\"gap\">___</span> cobrarle ya o prefiere esperar?",
+    "options": [
+      "Puedo",
+      "Podría",
+      "Puedes"
+    ],
+    "answer": "Puedo",
+    "sentenceSarcastic": "¿<span class=\"gap\">___</span> cobrarle ya o prefiere esperar? Porque yo ya tengo el datáfono en la mano, por si acaso.",
+    "translationDE": "Könnte ich Sie schon abkassieren, oder möchten Sie noch warten?",
+    "translationDESarcastic": "Könnte ich Sie schon abkassieren, oder möchten Sie noch warten? Denn ich habe das Kartenlesegerät schon in der Hand, sicherheitshalber."
+  },
+  {
+    "sentence": "<span class=\"gap\">___</span> conmigo, su mesa está lista.",
+    "options": [
+      "Venga",
+      "Ven",
+      "Vienes"
+    ],
+    "answer": "Venga",
+    "sentenceSarcastic": "<span class=\"gap\">___</span> conmigo, su mesa está lista, tras solo una pequeña espera de media hora.",
+    "translationDE": "Kommen Sie mit mir, Ihr Tisch ist bereit.",
+    "translationDESarcastic": "Kommen Sie mit mir, Ihr Tisch ist bereit, nach nur einer kleinen halben Stunde Wartezeit."
+  },
+  {
+    "sentence": "El total <span class=\"gap\">___</span> treinta y dos euros.",
+    "options": [
+      "es",
+      "está",
+      "hay"
+    ],
+    "answer": "es",
+    "sentenceSarcastic": "El total <span class=\"gap\">___</span> treinta y dos euros, sorpresa que nunca falla en generar cara de asombro.",
+    "translationDE": "Der Gesamtbetrag beträgt zweiunddreißig Euro.",
+    "translationDESarcastic": "Der Gesamtbetrag beträgt zweiunddreißig Euro, eine Überraschung, die nie versagt, ein erstauntes Gesicht zu erzeugen."
+  },
+  {
+    "sentence": "¿<span class=\"gap\">___</span> traerle algo más antes de cobrar?",
+    "options": [
+      "Puedo",
+      "Podría",
+      "Puedo"
+    ],
+    "answer": "Puedo",
+    "sentenceSarcastic": "¿<span class=\"gap\">___</span> traerle algo más antes de cobrar? Última oportunidad antes de que aparezca la cuenta.",
+    "translationDE": "Könnte ich Ihnen noch etwas bringen, bevor ich abkassiere?",
+    "translationDESarcastic": "Könnte ich Ihnen noch etwas bringen, bevor ich abkassiere? Letzte Chance, bevor die Rechnung erscheint."
+  },
+  {
+    "sentence": "<span class=\"gap\">___</span> el postre de chocolate, está buenísimo.",
+    "options": [
+      "Pruebe",
+      "Prueba",
+      "Probar"
+    ],
+    "answer": "Pruebe",
+    "sentenceSarcastic": "<span class=\"gap\">___</span> el postre de chocolate, está buenísimo, o eso me han dicho, porque yo nunca lo pruebo.",
+    "translationDE": "Probieren Sie den Schokoladennachtisch, er ist köstlich.",
+    "translationDESarcastic": "Probieren Sie den Schokoladennachtisch, er ist köstlich, oder das hat man mir zumindest gesagt, denn ich probiere ihn nie."
+  },
+  {
+    "sentence": "¿Cómo <span class=\"gap\">___</span> a pagar, tarjeta o efectivo?",
+    "options": [
+      "prefiere",
+      "prefieres",
+      "prefiero"
+    ],
+    "answer": "prefiere",
+    "sentenceSarcastic": "¿Cómo <span class=\"gap\">___</span> a pagar, tarjeta o efectivo? Como si no fuera la misma pregunta de siempre.",
+    "translationDE": "Wie bezahlen Sie lieber, mit Karte oder bar?",
+    "translationDESarcastic": "Wie bezahlen Sie lieber, mit Karte oder bar? Als wäre es nicht immer dieselbe Frage."
+  },
+  {
+    "sentence": "<span class=\"gap\">___</span> perdone la espera, ya casi está.",
+    "options": [
+      "Disculpe",
+      "Disculpa",
+      "Disculpar"
+    ],
+    "answer": "Disculpe",
+    "sentenceSarcastic": "<span class=\"gap\">___</span> perdone la espera, ya casi está, la frase más repetida de este barco.",
+    "translationDE": "Entschuldigen Sie die Wartezeit, es ist gleich so weit.",
+    "translationDESarcastic": "Entschuldigen Sie die Wartezeit, es ist gleich so weit, der meistwiederholte Satz auf diesem Schiff."
+  },
+  {
+    "sentence": "Gracias por su visita, que <span class=\"gap\">___</span> un buen día.",
+    "options": [
+      "tenga",
+      "tiene",
+      "tienes"
+    ],
+    "answer": "tenga",
+    "sentenceSarcastic": "Gracias por su visita, que <span class=\"gap\">___</span> un buen día, aunque yo ya no recuerde qué es eso.",
+    "translationDE": "Danke für Ihren Besuch, einen schönen Tag noch.",
+    "translationDESarcastic": "Danke für Ihren Besuch, einen schönen Tag noch, auch wenn ich mich nicht mehr erinnere, was das ist."
+  },
+  {
+    "sentence": "<span class=\"gap\">___</span> traerle la cuenta enseguida.",
+    "options": [
+      "Voy a",
+      "Va a",
+      "Vamos a"
+    ],
+    "answer": "Voy a",
+    "sentenceSarcastic": "<span class=\"gap\">___</span> traerle la cuenta enseguida, en cuanto reúna las fuerzas necesarias para levantarme.",
+    "translationDE": "Ich bringe Ihnen sofort die Rechnung.",
+    "translationDESarcastic": "Ich bringe Ihnen sofort die Rechnung, sobald ich die nötige Kraft zum Aufstehen finde."
+  }
+]
+;
+
+const exContainer = document.getElementById('exercises');
+const userAnswers = {};
+let sarcasmOn = false;
+const EXERCISES_STORAGE_KEY = 'angelika-clase12-practica';
+let exerciseChecked = false;
+
+async function guardarPractica(){
+  if (!window.storage) return;
+  try{ await window.storage.set(EXERCISES_STORAGE_KEY, JSON.stringify({ picked: userAnswers, checked: exerciseChecked })); }catch(e){}
+}
+async function cargarPractica(){
+  if (!window.storage) return { picked: {}, checked: false };
+  try{
+    const res = await window.storage.get(EXERCISES_STORAGE_KEY);
+    if (res && typeof res.value === 'string'){
+      const parsed = JSON.parse(res.value);
+      if(parsed && typeof parsed === 'object') return { picked: parsed.picked || {}, checked: !!parsed.checked };
+    }
+  }catch(e){
+    // Sin práctica guardada todavía.
+  }
+  return { picked: {}, checked: false };
+}
+
+function renderExercises(){
+  exContainer.innerHTML = '';
+  Object.keys(userAnswers).forEach(k=>delete userAnswers[k]);
+  EXERCISES.forEach((ex, i)=>{
+    const wrap = document.createElement('div');
+    wrap.className = 'exercise';
+    if(i === 12){
+      const divider = document.createElement('div');
+      divider.className = 'ex-divider';
+      divider.textContent = 'Repaso final para casa';
+      exContainer.appendChild(divider);
+    } else if(i === 0){
+      const divider = document.createElement('div');
+      divider.className = 'ex-divider en-clase';
+      divider.textContent = 'En clase';
+      exContainer.appendChild(divider);
+    }
+    const sentenceToShow = (sarcasmOn && ex.sentenceSarcastic) ? ex.sentenceSarcastic : ex.sentence;
+    wrap.innerHTML = `
+      <p class="ex-sentence">${i+1}. ${sarcasmOn ? '<span class="sarcasm-icon">🙄</span>' : ''}${sentenceToShow}</p>
+      ${(sarcasmOn && ex.translationDESarcastic) ? `<p class="ex-translation">${ex.translationDESarcastic}</p>` : (ex.translationDE ? `<p class="ex-translation">${ex.translationDE}</p>` : '')}
+      <div class="ex-options">
+        ${ex.options.map(o=>`<button class="opt-btn" data-value="${o}">${o}</button>`).join('')}
+      </div>
+    `;
+    exContainer.appendChild(wrap);
+
+    wrap.querySelectorAll('.opt-btn').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        if(exerciseChecked) return;
+        wrap.querySelectorAll('.opt-btn').forEach(b=>b.classList.remove('picked'));
+        btn.classList.add('picked');
+        userAnswers[i] = btn.dataset.value;
+        guardarPractica();
+      });
+    });
+  });
+  pintarEstadoPractica();
+}
+
+function pintarEstadoPractica(){
+  EXERCISES.forEach((ex,i)=>{
+    const wrap = exContainer.querySelectorAll('.exercise')[i];
+    const pickedValue = userAnswers[i];
+    if(!pickedValue) return;
+    const pickedBtn = wrap.querySelector(`.opt-btn[data-value="${CSS.escape(pickedValue)}"]`);
+    if(exerciseChecked){
+      wrap.querySelectorAll('.opt-btn').forEach(btn=>{
+        btn.disabled = true;
+        if(btn.dataset.value === ex.answer) btn.classList.add('correct');
+        else if(btn === pickedBtn) btn.classList.add('wrong');
+      });
+    } else if(pickedBtn){
+      pickedBtn.classList.add('picked');
+    }
+  });
+  if(exerciseChecked){
+    let correct = 0;
+    EXERCISES.forEach((ex,i)=>{ if(userAnswers[i] === ex.answer) correct++; });
+    document.getElementById('score-text').textContent = `${correct} / ${EXERCISES.length} correctas`;
+  }
+}
+
+async function iniciarPractica(){
+  const saved = await cargarPractica();
+  Object.assign(userAnswers, saved.picked);
+  exerciseChecked = saved.checked;
+  renderExercises();
+}
+iniciarPractica();
+
+document.getElementById('sarcasm-toggle').addEventListener('click', (e)=>{
+  sarcasmOn = !sarcasmOn;
+  e.currentTarget.classList.toggle('on', sarcasmOn);
+  e.currentTarget.setAttribute('aria-checked', String(sarcasmOn));
+  const saved = { ...userAnswers };
+  const wasChecked = exerciseChecked;
+  renderExercises();
+  Object.assign(userAnswers, saved);
+  exerciseChecked = wasChecked;
+  pintarEstadoPractica();
+});
+
+document.getElementById('check-btn').addEventListener('click', ()=>{
+  let correct = 0;
+  EXERCISES.forEach((ex,i)=>{
+    const wrap = exContainer.querySelectorAll('.exercise')[i];
+    wrap.querySelectorAll('.opt-btn').forEach(btn=>{
+      btn.disabled = true;
+      if(btn.dataset.value === ex.answer){
+        btn.classList.add('correct');
+      } else if(btn.classList.contains('picked')){
+        btn.classList.add('wrong');
+      }
+    });
+    if(userAnswers[i] === ex.answer) correct++;
+  });
+  document.getElementById('score-text').textContent = `${correct} / ${EXERCISES.length} correctas`;
+  exerciseChecked = true;
+  guardarPractica();
+});
+
+document.getElementById('reset-btn').addEventListener('click', ()=>{
+  exerciseChecked = false;
+  Object.keys(userAnswers).forEach(k=>delete userAnswers[k]);
+  renderExercises();
+  document.getElementById('score-text').textContent = '';
+  guardarPractica();
+});
+
+
+/* ---------- CLIENTES DEL TURNO ---------- */
+const CHARACTERS = [
+  {
+    initial: "🍽️",
+    name: "Pareja — mesa junto a la ventana",
+    role: "En clase",
+    facts: ["acaban de llegar", "piden recomendación del día", "hablan poco español"],
+    prompt: "Recíbelos y recomiéndales algo, usando usted."
+  },
+  {
+    initial: "👴",
+    name: "Señor mayor — pregunta por el baño",
+    role: "En clase",
+    facts: ["no encuentra el baño", "necesita indicaciones claras", "es cliente habitual"],
+    prompt: "Dale indicaciones con imperativo formal (usted)."
+  },
+  {
+    initial: "👩‍👧",
+    name: "Madre con niña — piden la cuenta",
+    role: "En clase",
+    facts: ["tienen prisa", "piden la cuenta con cortesía", "pagan con tarjeta"],
+    prompt: "Responde con una expresión de cortesía y cobra."
+  },
+  {
+    initial: "🧑‍💼",
+    name: "Cliente de negocios — pide recomendación",
+    role: "En clase",
+    facts: ["quiere algo ligero", "tiene poco tiempo", "pregunta por el plato del día"],
+    prompt: "Recomienda un plato usando el presente."
+  },
+  {
+    initial: "👫",
+    name: "Turistas jóvenes — piden indicaciones a la terraza",
+    role: "En clase",
+    facts: ["quieren sentarse fuera", "no conocen el barco", "son simpáticos y hablan alto"],
+    prompt: "Dales indicaciones con imperativo formal."
+  },
+  {
+    initial: "🥂",
+    name: "Grupo grande — celebración",
+    role: "En clase",
+    facts: ["celebran un cumpleaños", "piden varias recomendaciones", "van a pedir la cuenta al final"],
+    prompt: "Recíbelos, recomienda y prepárate para cobrar al final."
+  },
+  {
+    initial: "🧓",
+    name: "Cliente habitual — pide lo de siempre",
+    role: "Repaso para casa",
+    facts: ["viene cada semana", "conoce bien el menú", "pide con confianza"],
+    prompt: "Salúdalo con cercanía profesional y toma su pedido."
+  },
+  {
+    initial: "🍷",
+    name: "Pareja — pide vino y postre",
+    role: "Repaso para casa",
+    facts: ["celebran un aniversario", "piden recomendación de vino", "quieren algo especial de postre"],
+    prompt: "Recomienda con cortesía y presente."
+  },
+  {
+    initial: "👨‍👩‍👦",
+    name: "Familia con niño pequeño",
+    role: "Repaso para casa",
+    facts: ["el niño está inquieto", "piden algo rápido", "necesitan indicaciones al parque infantil del barco"],
+    prompt: "Ayúdales con indicaciones e imperativo formal."
+  },
+  {
+    initial: "💳",
+    name: "Cliente que paga por separado",
+    role: "Repaso para casa",
+    facts: ["quiere pagar su parte sola", "pregunta el total exacto", "paga en efectivo"],
+    prompt: "Explica el total y cobra con cortesía."
+  },
+  {
+    initial: "🌊",
+    name: "Cliente que pregunta por el itinerario",
+    role: "Repaso para casa",
+    facts: ["quiere saber la próxima parada", "también pregunta por el menú", "tiene curiosidad por todo"],
+    prompt: "Responde combinando presente e imperativo."
+  },
+  {
+    initial: "🙋",
+    name: "Cliente con una queja pequeña",
+    role: "Repaso para casa",
+    facts: ["el plato tardó un poco", "no está enfadado, solo comenta", "aprecia una disculpa amable"],
+    prompt: "Discúlpate con cortesía y ofrece una solución."
+  }
+];
+
+const charContainer = document.getElementById('characters');
+const CHAR_INPUT_STORAGE_KEY = 'angelika-clase12-personajes';
+let charInputState = {};
+
+async function guardarCharInputs(){
+  if (!window.storage) return;
+  try{ await window.storage.set(CHAR_INPUT_STORAGE_KEY, JSON.stringify(charInputState)); }catch(e){}
+}
+async function cargarCharInputs(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(CHAR_INPUT_STORAGE_KEY);
+    if (res && typeof res.value === 'string'){
+      const parsed = JSON.parse(res.value);
+      if(parsed && typeof parsed === 'object') charInputState = parsed;
+    }
+  }catch(e){}
+}
+
+CHARACTERS.forEach((c, idx)=>{
+  const card = document.createElement('div');
+  card.className = 'char-card';
+  card.innerHTML = `
+    <div class="char-avatar">${c.initial}</div>
+    <div class="char-body">
+      <p class="char-name">${c.name}</p>
+      <p class="char-role">${c.role}</p>
+      <div class="char-facts">${c.facts.map(f=>`<span class="fact-tag">${f}</span>`).join('')}</div>
+      <p class="char-prompt">${c.prompt}</p>
+      <textarea class="char-input" rows="2" placeholder="Escribe tu respuesta usando usted, presente o cortesía..." data-char-idx="${idx}"></textarea>
+    </div>
+  `;
+  charContainer.appendChild(card);
+});
+
+let charInputTimer = null;
+charContainer.querySelectorAll('.char-input').forEach(ta=>{
+  const idx = ta.dataset.charIdx;
+  ta.addEventListener('input', ()=>{
+    charInputState[idx] = ta.value;
+    clearTimeout(charInputTimer);
+    charInputTimer = setTimeout(guardarCharInputs, 800);
+  });
+});
+cargarCharInputs().then(()=>{
+  charContainer.querySelectorAll('.char-input').forEach(ta=>{
+    const idx = ta.dataset.charIdx;
+    if (charInputState[idx]) ta.value = charInputState[idx];
+  });
+});
+
+/* ---------- SIMULACIÓN COMPLETA ---------- */
+const SCENES = [
+  {
+    id: "turno_completo",
+    tab: "Turno completo",
+    icon: "🚢",
+    setup: "La simulación final: un cliente llega, se sienta, pide recomendación, hace su pedido, pregunta por el baño, y al final pide la cuenta. Todo el turno, de principio a fin.",
+    lines: [
+      { who: "friend", name: "Cliente", text: "Buenas tardes, ¿tienen mesa para dos?", "translationDE": "Guten Abend, haben Sie einen Tisch für zwei?" },
+      { who: "you", hint: "Recíbelo y ofrécele una mesa, usando usted." },
+      { who: "friend", name: "Cliente", text: "Perfecto, ¿qué nos recomienda hoy?", "translationDE": "Perfekt, was empfehlen Sie uns heute?" },
+      { who: "you", hint: "Recomienda un plato usando el presente." },
+      { who: "friend", name: "Cliente", text: "Suena muy bien, tomaremos eso. ¿Dónde está el baño?", "translationDE": "Klingt sehr gut, das nehmen wir. Wo ist die Toilette?" },
+      { who: "you", hint: "Da indicaciones con imperativo formal (usted)." },
+      { who: "friend", name: "Cliente", text: "Gracias. Una cosa más, ¿podría traernos también un poco de pan?", "translationDE": "Danke. Noch etwas, könnten Sie uns auch etwas Brot bringen?" },
+      { who: "you", hint: "Responde con cortesía, aceptando la petición." },
+      { who: "friend", name: "Cliente", text: "Perfecto, ya hemos terminado. ¿Nos trae la cuenta, por favor?", "translationDE": "Perfekt, wir sind fertig. Bringen Sie uns bitte die Rechnung?" },
+      { who: "you", hint: "Responde con cortesía y prepárate para cobrar." },
+      { who: "friend", name: "Cliente", text: "Aquí tiene, con tarjeta. Muchas gracias por todo.", "translationDE": "Hier bitte, mit Karte. Vielen Dank für alles." },
+      { who: "you", hint: "Despídete con una frase profesional y amable." }
+    ]
+  },
+  {
+    id: "grupo_celebracion",
+    tab: "Grupo en celebración",
+    icon: "🥂",
+    setup: "Un grupo grande celebra un cumpleaños. Recíbelos, recomienda, toma nota de varios pedidos y cierra la mesa al final.",
+    lines: [
+      { who: "friend", name: "Grupo", text: "Hola, somos seis personas, celebramos un cumpleaños.", "translationDE": "Hallo, wir sind sechs Personen, wir feiern einen Geburtstag." },
+      { who: "you", hint: "Recíbelos con cortesía y ofréceles una mesa." },
+      { who: "friend", name: "Grupo", text: "¿Qué nos recomienda para compartir?", "translationDE": "Was empfehlen Sie uns zum Teilen?" },
+      { who: "you", hint: "Recomienda algo para compartir, usando presente." },
+      { who: "friend", name: "Grupo", text: "Genial, y para el cumpleaños, ¿tienen algún postre especial?", "translationDE": "Toll, und für den Geburtstag, haben Sie einen besonderen Nachtisch?" },
+      { who: "you", hint: "Ofrece un postre especial con cortesía." },
+      { who: "friend", name: "Grupo", text: "Perfecto, cuando pueda nos trae la cuenta, vamos a pagar juntos.", "translationDE": "Perfekt, wenn Sie können, bringen Sie uns die Rechnung, wir zahlen zusammen." },
+      { who: "you", hint: "Confirma el pago y prepárate para cobrar." },
+      { who: "friend", name: "Grupo", text: "Muchísimas gracias, todo ha estado perfecto.", "translationDE": "Vielen herzlichen Dank, alles war perfekt." },
+      { who: "you", hint: "Despídete y agradece la visita." }
+    ]
+  },
+  {
+    id: "cliente_prisa",
+    tab: "Cliente con prisa",
+    icon: "🧑‍💼",
+    setup: "Un cliente de negocios tiene poco tiempo y necesita atención rápida y eficiente, pero siempre con cortesía.",
+    lines: [
+      { who: "friend", name: "Cliente", text: "Buenas, tengo poco tiempo, ¿qué me recomienda que sea rápido?", "translationDE": "Guten Tag, ich habe wenig Zeit, was empfehlen Sie, das schnell geht?" },
+      { who: "you", hint: "Recomienda algo rápido usando presente." },
+      { who: "friend", name: "Cliente", text: "Perfecto, eso mismo. ¿Podría traerlo lo antes posible?", "translationDE": "Perfekt, genau das. Könnten Sie es so schnell wie möglich bringen?" },
+      { who: "you", hint: "Responde con cortesía, confirmando la rapidez." },
+      { who: "friend", name: "Cliente", text: "Genial. Y ya que estoy, ¿me trae la cuenta con el pedido?", "translationDE": "Toll. Und wo ich schon dabei bin, bringen Sie mir die Rechnung mit der Bestellung?" },
+      { who: "you", hint: "Confirma que traerás todo junto." },
+      { who: "friend", name: "Cliente", text: "Muchas gracias por la rapidez.", "translationDE": "Vielen Dank für die Schnelligkeit." },
+      { who: "you", hint: "Despídete de forma profesional y breve." }
+    ]
+  },
+  {
+    id: "turistas_terraza",
+    tab: "Turistas en la terraza",
+    icon: "🌅",
+    setup: "Unos turistas jóvenes quieren sentarse en la terraza y necesitan indicaciones y recomendaciones.",
+    lines: [
+      { who: "friend", name: "Turistas", text: "¡Hola! ¿Podemos sentarnos en la terraza?", "translationDE": "Hallo! Können wir uns auf die Terrasse setzen?" },
+      { who: "you", hint: "Confirma y da indicaciones con imperativo formal." },
+      { who: "friend", name: "Turistas", text: "Perfecto, ¿qué nos recomienda para beber con esta vista?", "translationDE": "Perfekt, was empfehlen Sie uns zum Trinken bei dieser Aussicht?" },
+      { who: "you", hint: "Recomienda una bebida usando presente." },
+      { who: "friend", name: "Turistas", text: "Suena genial. ¿Y podría explicarnos algo del menú?", "translationDE": "Klingt toll. Und könnten Sie uns etwas zur Speisekarte erklären?" },
+      { who: "you", hint: "Explica brevemente el menú con cortesía." },
+      { who: "friend", name: "Turistas", text: "Gracias, ¡todo muy claro!", "translationDE": "Danke, alles sehr klar!" },
+      { who: "you", hint: "Responde amablemente y ofrece ayuda si necesitan algo más." }
+    ]
+  },
+  {
+    id: "queja_amable",
+    tab: "Pequeña queja",
+    icon: "🙋",
+    setup: "Un cliente comenta amablemente que el plato tardó un poco más de lo esperado.",
+    lines: [
+      { who: "friend", name: "Cliente", text: "Disculpe, el plato ha tardado un poco más de lo normal.", "translationDE": "Entschuldigung, das Gericht hat etwas länger gedauert als normal." },
+      { who: "you", hint: "Discúlpate con cortesía." },
+      { who: "friend", name: "Cliente", text: "No pasa nada, solo lo comento.", "translationDE": "Kein Problem, ich sage es nur." },
+      { who: "you", hint: "Ofrece algo como compensación, usando cortesía." },
+      { who: "friend", name: "Cliente", text: "Muy amable, muchas gracias.", "translationDE": "Sehr freundlich, vielen Dank." },
+      { who: "you", hint: "Cierra la conversación de forma profesional." }
+    ]
+  },
+  {
+    id: "sarcastico",
+    tab: "El turno del cliente imposible",
+    icon: "🙄",
+    setup: "El repaso final, pero con el cliente más sarcástico de todo el barco: pide recomendación, se queja un poco, pregunta direcciones y termina pidiendo la cuenta con retintín en cada frase.",
+    lines: [
+      { who: "friend", name: "Cliente sarcástico", text: "Buenas tardes. ¿Tienen mesa, o hay que reservar con seis meses de antelación como en los sitios 'de verdad'?", "translationDE": "Guten Abend. Haben Sie einen Tisch, oder muss man sechs Monate im Voraus reservieren wie in den 'echten' Lokalen?" },
+      { who: "you", hint: "Recíbelo con cortesía y ofrécele una mesa, usando usted, sin perder la compostura." },
+      { who: "friend", name: "Cliente sarcástico", text: "¿Y qué me recomienda? Algo que no sea 'lo de siempre', sorpréndame.", "translationDE": "Und was empfehlen Sie mir? Etwas, das nicht 'das Übliche' ist, überraschen Sie mich." },
+      { who: "you", hint: "Recomienda un plato usando presente, con toda la elegancia posible." },
+      { who: "friend", name: "Cliente sarcástico", text: "Vaya, ha tardado un poco en traerlo, ¿no? Pensaba que lo cultivaban ustedes mismos.", "translationDE": "Na so was, das hat aber gedauert, oder? Ich dachte, Sie bauen es selbst an." },
+      { who: "you", hint: "Discúlpate con cortesía por la espera, sin dramatizar." },
+      { who: "friend", name: "Cliente sarcástico", text: "No pasa nada, ya que estoy aquí, ¿dónde está el baño? Espero que no sea una expedición.", "translationDE": "Kein Problem, wo ich schon hier bin, wo ist die Toilette? Hoffentlich keine Expedition." },
+      { who: "you", hint: "Da indicaciones con imperativo formal (usted), con total normalidad." },
+      { who: "friend", name: "Cliente sarcástico", text: "Perfecto. Y para terminar, ¿me trae la cuenta? Intente que la propina no aparezca 'misteriosamente'.", "translationDE": "Perfekt. Und zum Schluss, bringen Sie mir die Rechnung? Versuchen Sie, dass das Trinkgeld nicht 'mysteriös' verschwindet." },
+      { who: "you", hint: "Responde con cortesía y despídete de forma profesional, cerrando el turno con estilo." }
+    ]
+  }
+];
+
+const sceneTabs = document.getElementById('scene-tabs');
+const sceneContainer = document.getElementById('scene-container');
+let activeScene = 0;
+const LINE_INPUT_STORAGE_KEY = 'angelika-clase12-roleplay';
+let lineInputState = {};
+let lineInputTimer = null;
+
+async function guardarLineInputs(){
+  if (!window.storage) return;
+  try{ await window.storage.set(LINE_INPUT_STORAGE_KEY, JSON.stringify(lineInputState)); }catch(e){}
+}
+async function cargarLineInputs(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(LINE_INPUT_STORAGE_KEY);
+    if (res && typeof res.value === 'string'){
+      const parsed = JSON.parse(res.value);
+      if(parsed && typeof parsed === 'object') lineInputState = parsed;
+    }
+  }catch(e){}
+}
+
+function renderTabs(){
+  sceneTabs.innerHTML = SCENES.map((s,i)=>
+    `<button class="scene-tab${i===activeScene?' active':''}" data-idx="${i}">${s.icon} ${s.tab}</button>`
+  ).join('');
+  sceneTabs.querySelectorAll('.scene-tab').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      activeScene = parseInt(btn.dataset.idx, 10);
+      renderTabs();
+      renderScene();
+    });
+  });
+}
+
+function renderScene(){
+  const scene = SCENES[activeScene];
+  let lineIdx = 0;
+  const linesHtml = scene.lines.map((l)=>{
+    if(l.who === 'friend'){
+      return `
+        <div class="line friend">
+          <div class="line-avatar">${l.name.charAt(0)}</div>
+          <div class="line-body">
+            <p class="line-name">${l.name}</p>
+            <div class="line-bubble">${l.text}</div>
+            ${l.translationDE ? `<p class="line-translation">${l.translationDE}</p>` : ''}
+          </div>
+        </div>`;
+    } else {
+      const key = `${activeScene}-${lineIdx}`;
+      lineIdx++;
+      const saved = lineInputState[key] || '';
+      return `
+        <div class="line you">
+          <div class="line-avatar">Tú</div>
+          <div class="line-body">
+            <p class="line-name">Tú</p>
+            <textarea class="line-input" rows="2" placeholder="Escribe tu respuesta usando usted, presente o cortesía..." data-line-key="${key}">${saved}</textarea>
+            <p class="line-hint">${l.hint}</p>
+          </div>
+        </div>`;
+    }
+  }).join('');
+
+  sceneContainer.innerHTML = `
+    <div class="scene-setup">
+      <span class="scene-icon">${scene.icon}</span>
+      <p class="scene-text"><strong>${scene.tab}:</strong> ${scene.setup}</p>
+    </div>
+    <div class="dialogue">${linesHtml}</div>
+  `;
+
+  sceneContainer.querySelectorAll('.line-input').forEach(ta=>{
+    const key = ta.dataset.lineKey;
+    ta.addEventListener('input', ()=>{
+      lineInputState[key] = ta.value;
+      clearTimeout(lineInputTimer);
+      lineInputTimer = setTimeout(guardarLineInputs, 800);
+    });
+  });
+}
+
+cargarLineInputs().then(()=>{
+  renderTabs();
+  renderScene();
+});
+
+/* ---------- AUTOEVALUACIÓN ---------- */
+const SELF_TOPICS = [
+  {id:"presente", label:"Presente de indicativo", sub:"describir, ofrecer, recomendar"},
+  {id:"imperativo_tu", label:"Imperativo informal (tú)", sub:"indicaciones con amigos y turistas"},
+  {id:"imperativo_usted", label:"Imperativo formal (usted)", sub:"indicaciones con clientes"},
+  {id:"cortesia", label:"Condicional de cortesía", sub:"¿podría...?, me gustaría"},
+  {id:"posesivos", label:"Posesivos", sub:"mi, tu, su + me gusta/me encanta"},
+  {id:"vocab_servicio", label:"Vocabulario de servicio", sub:"la cuenta, cobrar, propina, recomendar"},
+];
+
+const SELF_STORAGE_KEY = 'angelika-clase12-autoevaluacion';
+let selfValues = {};
+
+async function loadSelf(){
+  if (!window.storage) return {};
+  try{
+    const res = await window.storage.get(SELF_STORAGE_KEY);
+    return (res && typeof res.value === 'string') ? JSON.parse(res.value) : {};
+  }catch(e){
+    return {};
+  }
+}
+async function saveSelf(){
+  if (!window.storage) return;
+  try{ await window.storage.set(SELF_STORAGE_KEY, JSON.stringify(selfValues)); }catch(e){ /* fallo silencioso */ }
+}
+
+const selfGrid = document.getElementById('self-grid');
+const selfSummary = document.getElementById('self-summary');
+
+function renderSelf(){
+  selfGrid.innerHTML = SELF_TOPICS.map(t => `
+    <div class="self-item" data-id="${t.id}">
+      <div class="self-topic">${t.label}<span>${t.sub}</span></div>
+      <div class="self-scale">
+        ${[1,2,3,4,5].map(n => `<button class="self-btn${selfValues[t.id]===n?' active':''}" data-val="${n}">${n}</button>`).join('')}
+      </div>
+    </div>
+  `).join('');
+
+  selfGrid.querySelectorAll('.self-item').forEach(item => {
+    const id = item.dataset.id;
+    item.querySelectorAll('.self-btn').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        selfValues[id] = parseInt(btn.dataset.val, 10);
+        item.querySelectorAll('.self-btn').forEach(b => b.classList.toggle('active', b === btn));
+        updateSummary();
+        await saveSelf();
+      });
+    });
+  });
+  updateSummary();
+}
+
+function updateSummary(){
+  const answered = Object.keys(selfValues).length;
+  if(answered < SELF_TOPICS.length){
+    selfSummary.classList.remove('show');
+    return;
+  }
+  const total = Object.values(selfValues).reduce((s,v)=>s+v,0);
+  const avg = (total / SELF_TOPICS.length).toFixed(1);
+  const weakest = SELF_TOPICS.reduce((min, t) => selfValues[t.id] < selfValues[min.id] ? t : min, SELF_TOPICS[0]);
+  selfSummary.innerHTML = `<strong>Media: ${avg} / 5.</strong> El bloque que quizás conviene repasar más es "${weakest.label}" — puedes volver a las clases anteriores para reforzarlo.`;
+  selfSummary.classList.add('show');
+}
+
+(async function initSelf(){
+  selfValues = await loadSelf();
+  renderSelf();
+})();
+
+/* ---------- FINAL TASK ---------- */
+const STORAGE_KEY = 'angelika-clase12-plan';
+const taskArea = document.getElementById('final-task');
+const taskCount = document.getElementById('task-count');
+const savedFlag = document.getElementById('saved-flag');
+
+async function cargarTarea(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(STORAGE_KEY);
+    if (res && typeof res.value === 'string') taskArea.value = res.value;
+  }catch(e){
+    // Clave inexistente todavía: no hay plan previo, se queda en blanco.
+  }
+  updateCount();
+}
+
+function updateCount(){
+  const words = taskArea.value.trim().length ? taskArea.value.trim().split(/\s+/).length : 0;
+  taskCount.textContent = words === 0 ? 'Escribe tu plan de continuación' : `${words} palabra${words===1?'':'s'} escritas`;
+}
+let autosaveTimer = null;
+async function autoguardar(){
+  if (!window.storage){
+    savedFlag.textContent = 'Guardado no disponible aquí';
+    savedFlag.classList.add('show');
+    setTimeout(()=>{ savedFlag.classList.remove('show'); savedFlag.textContent = 'Guardado ✓'; }, 2200);
+    return;
+  }
+  try{
+    const ok = await window.storage.set(STORAGE_KEY, taskArea.value);
+    savedFlag.textContent = ok ? 'Guardado ✓' : 'No se pudo guardar';
+  }catch(e){
+    savedFlag.textContent = 'No se pudo guardar';
+  }
+  savedFlag.classList.add('show');
+  setTimeout(()=>{ savedFlag.classList.remove('show'); savedFlag.textContent = 'Guardado ✓'; }, 1800);
+}
+
+taskArea.addEventListener('input', ()=>{
+  updateCount();
+  clearTimeout(autosaveTimer);
+  autosaveTimer = setTimeout(autoguardar, 800);
+});
+updateCount();
+cargarTarea();
+</script>
+
+</body>
+</html>

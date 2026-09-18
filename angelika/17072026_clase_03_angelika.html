@@ -1,0 +1,1752 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clase 3 · ¿Dónde está? — Angelika</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+
+/* ╔══════════════════════════════════════════════════════════════╗
+   ║  ESCOLAR — sistema de diseño para clases de español online   ║
+   ║  Clase 3 · L1 Primeros pasos a bordo · "¿Dónde está?"          ║
+   ╚══════════════════════════════════════════════════════════════╝ */
+
+:root{
+  --paper:        #FBF7EE;
+  --paper-raised: #FFFFFF;
+  --paper-alt:    #F3ECDA;
+  --ink:          #23291F;
+  --ink-soft:     #565F52;
+  --ink-faint:    #8B9184;
+  --line:         rgba(35,41,31,0.12);
+  --line-strong:  rgba(35,41,31,0.22);
+
+  --b1:      #2F6FED;  --b1-soft: #EAF1FE;  --b1-line: #C6D9FC;
+  --b2:      #2E9E6B;  --b2-soft: #E9F6EF;  --b2-line: #BEE6D3;
+  --b3:      #DB8A2E;  --b3-soft: #FCF1E1;  --b3-line: #F3D9AF;
+  --family:  #B5502E;  --family-soft: #FBEBE3; --family-line: #EFC9B4;
+
+  --f-display: 'Fraunces', Georgia, serif;
+  --f-body:    'IBM Plex Sans', system-ui, sans-serif;
+  --f-data:    'IBM Plex Mono', monospace;
+
+  --r-sm: 8px;
+  --r-md: 14px;
+  --r-lg: 20px;
+
+  --shadow-1: 0 1px 2px rgba(35,41,31,0.05), 0 1px 8px rgba(35,41,31,0.04);
+}
+
+*{ box-sizing:border-box; }
+body{
+  margin:0;
+  background: var(--paper);
+  background-image: radial-gradient(circle at 1px 1px, var(--line) 1px, transparent 0);
+  background-size: 22px 22px;
+  color: var(--ink);
+  font-family: var(--f-body);
+  line-height:1.6;
+}
+::selection{ background: var(--b3-soft); }
+
+/* ---------- HEADER ---------- */
+header{ padding:44px 24px 28px; max-width:760px; margin:0 auto; }
+.eyebrow{
+  font-family: var(--f-data); font-size:12px; letter-spacing:.14em;
+  text-transform:uppercase; color: var(--b3); margin:0 0 10px;
+  display:flex; align-items:center; gap:10px;
+}
+.eyebrow .dot{ width:6px; height:6px; border-radius:50%; background: var(--b3); }
+h1{
+  font-family: var(--f-display); font-weight:600;
+  font-size:clamp(30px,5.6vw,46px); line-height:1.08;
+  margin:0 0 14px; letter-spacing:-.01em;
+}
+h1 em{ font-style:italic; color: var(--b3); }
+.lede{ font-size:16px; color: var(--ink-soft); max-width:56ch; margin:0; }
+
+.meta-row{
+  display:flex; flex-wrap:wrap; gap:20px; margin-top:26px;
+  font-family: var(--f-data); font-size:12px; color: var(--ink-faint);
+}
+.meta-row strong{
+  display:block; color: var(--ink); font-size:14.5px; font-weight:500;
+  font-family: var(--f-display); margin-top:3px;
+}
+
+/* ---------- SECTIONS ---------- */
+main{ max-width:760px; margin:0 auto; padding:8px 24px 100px; }
+
+section.block{ margin-bottom:52px; }
+.block-head{ display:flex; align-items:baseline; gap:12px; margin-bottom:18px; }
+.time-tag{
+  font-family: var(--f-data); font-size:11px; color: var(--ink-faint);
+  background: var(--paper-alt); padding:3px 10px; border-radius:999px; margin-left:auto; flex:none;
+}
+.block-num{
+  font-family: var(--f-data); font-size:12px; color:#fff; background: var(--b3);
+  width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  flex:none;
+}
+.block-head h2{
+  font-family: var(--f-display); font-weight:500; font-style:italic; font-size:22px; margin:0;
+}
+
+.panel{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-lg);
+  box-shadow: var(--shadow-1); padding:26px 28px;
+}
+
+/* ---------- GRAMMAR TABLE ---------- */
+.conj-table{ width:100%; border-collapse:collapse; margin-top:4px; }
+.conj-table td{ padding:10px 6px; border-bottom:1px dashed var(--line); font-size:15px; }
+.conj-table tr:last-child td{ border-bottom:none; }
+.conj-pron{ font-family: var(--f-data); color: var(--ink-faint); font-size:13px; width:90px; }
+.conj-form{ font-family: var(--f-display); font-weight:600; font-size:19px; color: var(--b3); }
+.conj-ex{ color: var(--ink-soft); font-size:14px; }
+
+.note{
+  margin-top:18px; padding:14px 16px; background: var(--b3-soft); border:1px solid var(--b3-line);
+  border-radius: var(--r-md); font-size:14px; color: var(--ink-soft);
+}
+.note strong{ color: var(--ink); }
+
+/* ---------- HAY vs ESTAR ---------- */
+.compare-wrap{ margin-top:22px; }
+.compare-title{
+  font-family: var(--f-data); font-size:11.5px; text-transform:uppercase; letter-spacing:.06em;
+  color: var(--ink-faint); margin:0 0 10px;
+}
+.compare-grid{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+@media (max-width:560px){ .compare-grid{ grid-template-columns:1fr; } }
+.compare-col{ border-radius: var(--r-md); padding:16px 18px; border:1px solid; }
+.compare-col.is-ser{ background: var(--b1-soft); border-color: var(--b1-line); }
+.compare-col.is-estar{ background: var(--b2-soft); border-color: var(--b2-line); }
+.compare-head{ display:flex; align-items:center; gap:8px; margin:0 0 10px; }
+.compare-verb{ font-family: var(--f-display); font-weight:600; font-size:19px; }
+.is-ser .compare-verb{ color: var(--b1); }
+.is-estar .compare-verb{ color: var(--b2); }
+.compare-sub{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); }
+.compare-list{ margin:0; padding:0; list-style:none; }
+.compare-list li{ font-size:13.5px; color: var(--ink-soft); padding:6px 0; border-top:1px dashed var(--line); }
+.compare-list li:first-child{ border-top:none; }
+.compare-list strong{ color: var(--ink); font-weight:600; }
+.compare-list em{ display:block; font-style:normal; color: var(--ink-faint); font-size:12.5px; margin-top:2px; }
+.compare-warning{
+  margin-top:14px; padding:14px 16px; background: var(--family-soft); border:1px solid var(--family-line);
+  border-radius: var(--r-md); font-size:13.5px; color: var(--ink-soft);
+}
+.compare-warning strong{ color: var(--family); }
+
+/* ---------- GENDER MINI-GUIDE ---------- */
+.gender-wrap{ margin-top:22px; display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+@media (max-width:560px){ .gender-wrap{ grid-template-columns:1fr; } }
+.gender-col{ border-radius: var(--r-md); padding:16px 18px; border:1px solid; }
+.gender-col.is-el{ background: var(--b1-soft); border-color: var(--b1-line); }
+.gender-col.is-la{ background: var(--family-soft); border-color: var(--family-line); }
+.gender-head{ display:flex; align-items:center; gap:8px; margin:0 0 10px; }
+.gender-word{ font-family: var(--f-display); font-weight:600; font-size:19px; }
+.is-el .gender-word{ color: var(--b1); }
+.is-la .gender-word{ color: var(--family); }
+.gender-list{ margin:0; padding:0; list-style:none; }
+.gender-list li{ font-size:13.5px; color: var(--ink-soft); padding:5px 0; border-top:1px dashed var(--line); }
+.gender-list li:first-child{ border-top:none; }
+.gender-list strong{ color: var(--ink); font-weight:600; }
+
+/* ---------- VOCAB CARDS ---------- */
+.vocab-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:12px; }
+.vocab-card{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:14px 16px; cursor:pointer; perspective:600px; min-height:78px;
+  display:flex; flex-direction:column; justify-content:center; transition: border-color .15s ease;
+}
+.vocab-card:hover{ border-color: var(--b3-line); }
+.vocab-card:focus-visible{ outline:2px solid var(--b3); outline-offset:2px; }
+.vocab-front{ font-family: var(--f-body); font-weight:600; font-size:15px; }
+.vocab-back{ display:none; font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); margin-top:6px; }
+.vocab-card.flipped .vocab-back{ display:block; }
+.vocab-card.flipped{ background: var(--b3-soft); border-color: var(--b3-line); }
+.vocab-hint{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin:10px 2px 16px; }
+
+/* ---------- EXERCISE ---------- */
+.exercise{ margin-bottom:20px; }
+.exercise:last-of-type{ margin-bottom:0; }
+.ex-sentence{ font-size:15.5px; margin-bottom:10px; }
+.ex-sentence .gap{ font-family: var(--f-data); color: var(--ink-faint); }
+.ex-translation{ font-family: var(--f-data); font-size:12px; color: var(--ink-faint); margin:-4px 0 10px; }
+.ex-options{ display:flex; flex-wrap:wrap; gap:8px; }
+.opt-btn{
+  font-family: var(--f-body); font-size:14px; background: var(--paper-raised);
+  border:1.5px solid var(--line); color: var(--ink); padding:7px 16px; border-radius:999px;
+  cursor:pointer; transition: all .15s ease;
+}
+.opt-btn:hover{ border-color: var(--ink-faint); }
+.opt-btn.picked{ background: var(--b3-soft); border-color: var(--b3); color: var(--b3); }
+.opt-btn.correct{ background: var(--b2-soft); border-color: var(--b2); color: var(--b2); }
+.opt-btn.wrong{ background: var(--family-soft); border-color: var(--family); color: var(--family); }
+.opt-btn:disabled{ cursor:default; }
+
+.check-bar{
+  display:flex; align-items:center; justify-content:space-between; gap:16px;
+  margin-top:22px; padding-top:18px; border-top:1px dashed var(--line);
+}
+.btn-primary{
+  font-family: var(--f-body); font-weight:600; font-size:14px; color:#fff; background: var(--b3);
+  border:none; padding:11px 22px; border-radius:999px; cursor:pointer; transition: transform .1s ease;
+}
+.btn-primary:hover{ transform: translateY(-1px); }
+#score-text{ font-family: var(--f-data); font-size:13px; color: var(--ink-faint); }
+.btn-ghost{
+  font-family: var(--f-body); font-weight:600; font-size:13px; color: var(--ink-soft); background:none;
+  border:1.5px solid var(--line); padding:9px 18px; border-radius:999px; cursor:pointer;
+}
+.btn-ghost:hover{ border-color: var(--ink-faint); }
+.ex-divider{
+  display:flex; align-items:center; gap:10px; margin:20px 0 16px;
+  font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.06em;
+  color: var(--ink-faint);
+}
+.ex-divider::before, .ex-divider::after{ content:""; flex:1; height:1px; background: var(--line); }
+.ex-divider.en-clase{ color: var(--b3); }
+.ex-divider.en-clase::before, .ex-divider.en-clase::after{ background: var(--b3-line); }
+
+/* ---------- SARCASM TOGGLE ---------- */
+.sarcasm-bar{
+  display:flex; align-items:center; gap:12px; margin-bottom:16px;
+  background: var(--family-soft); border:1px solid var(--family-line); border-radius: var(--r-md);
+  padding:12px 16px;
+}
+.sarcasm-switch{
+  position:relative; flex:none; width:44px; height:24px; border-radius:999px;
+  background: var(--line-strong); border:none; cursor:pointer; transition: background .2s ease;
+}
+.sarcasm-switch::before{
+  content:""; position:absolute; top:2px; left:2px; width:20px; height:20px; border-radius:50%;
+  background: var(--paper-raised); box-shadow: var(--shadow-1); transition: transform .2s ease;
+}
+.sarcasm-switch.on{ background: var(--family); }
+.sarcasm-switch.on::before{ transform: translateX(20px); }
+.sarcasm-label{ font-family: var(--f-body); font-weight:600; font-size:13.5px; color: var(--ink); }
+.sarcasm-label span{ display:block; font-family: var(--f-data); font-weight:400; font-size:11.5px; color: var(--ink-faint); margin-top:1px; }
+.ex-sentence .sarcasm-icon{ margin-right:4px; }
+
+/* ---------- LOCATION CARDS ---------- */
+.characters{ display:grid; gap:16px; }
+.char-card{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-lg);
+  padding:20px 22px; display:flex; gap:16px; align-items:flex-start;
+}
+.char-avatar{
+  flex:none; width:44px; height:44px; border-radius:50%; background: var(--b3-soft);
+  display:flex; align-items:center; justify-content:center; font-family: var(--f-display);
+  font-weight:600; font-size:17px; color: var(--b3);
+}
+.char-body{ flex:1; }
+.char-name{ font-family: var(--f-display); font-weight:600; font-size:17px; margin:0 0 4px; }
+.char-role{ font-family: var(--f-data); font-size:11.5px; text-transform:uppercase; letter-spacing:.05em; color: var(--ink-faint); margin:0 0 10px; }
+.char-facts{ display:flex; flex-wrap:wrap; gap:6px; margin-bottom:10px; }
+.fact-tag{
+  font-family: var(--f-data); font-size:12px; background: var(--paper-alt); color: var(--ink-soft);
+  padding:4px 10px; border-radius:999px;
+}
+.char-prompt{ font-size:14px; color: var(--ink-soft); }
+.char-input{
+  width:100%; margin-top:8px; font-family: var(--f-body); font-size:14.5px; color: var(--ink);
+  background: var(--paper); border:1px solid var(--line); border-radius: var(--r-sm);
+  padding:10px 12px; resize:vertical; min-height:44px;
+}
+.char-input:focus{ outline:none; border-color: var(--b3-line); background: var(--paper-raised); }
+
+/* ---------- ROLEPLAY ---------- */
+.roleplay-panel{ background: var(--b1-soft); border:1px solid var(--b1-line); border-radius: var(--r-lg); padding:26px 28px; }
+.roleplay-panel .block-num{ background: var(--b1); }
+.scene-setup{
+  display:flex; gap:14px; align-items:flex-start; background: var(--paper-raised);
+  border:1px solid var(--b1-line); border-radius: var(--r-md); padding:14px 16px; margin-bottom:20px;
+}
+.scene-icon{ font-size:22px; flex:none; }
+.scene-text{ font-size:14px; color: var(--ink-soft); }
+.scene-text strong{ color: var(--ink); }
+
+.dialogue{ display:flex; flex-direction:column; gap:14px; }
+.scene-tabs{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:18px; }
+.scene-tab{
+  font-family: var(--f-data); font-size:12.5px; background: var(--paper-raised);
+  border:1.5px solid var(--b1-line); color: var(--ink-soft); padding:7px 14px;
+  border-radius:999px; cursor:pointer; transition: all .15s ease;
+}
+.scene-tab:hover{ border-color: var(--b1); }
+.scene-tab.active{ background: var(--b1); border-color: var(--b1); color:#fff; }
+.line{ display:flex; gap:12px; align-items:flex-start; }
+.line-avatar{
+  flex:none; width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  font-family: var(--f-display); font-weight:600; font-size:14px; color:#fff;
+}
+.line.friend .line-avatar{ background: var(--ink-faint); }
+.line.you .line-avatar{ background: var(--b1); }
+.line-body{ flex:1; }
+.line-name{ font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.05em; color: var(--ink-faint); margin:0 0 4px; }
+.line-bubble{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:12px 14px; font-size:14.5px; color: var(--ink);
+}
+.line.you .line-bubble{ background:#fff; border-color: var(--b1-line); }
+.line-input{
+  width:100%; font-family: var(--f-body); font-size:14.5px; color: var(--ink);
+  background:#fff; border:1px solid var(--b1-line); border-radius: var(--r-sm);
+  padding:10px 12px; resize:vertical; min-height:40px; margin-top:2px;
+}
+.line-input:focus{ outline:none; border-color: var(--b1); }
+.line-hint{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin-top:5px; }
+.line-translation{ font-family: var(--f-data); font-size:11.5px; color: var(--ink-faint); margin-top:6px; }
+
+.roleplay-tip{
+  margin-top:22px; padding:14px 16px; background: var(--paper-raised); border:1px solid var(--b1-line);
+  border-radius: var(--r-md); font-size:13.5px; color: var(--ink-soft);
+}
+.roleplay-tip strong{ color: var(--ink); }
+
+/* ---------- FINAL TASK ---------- */
+.task-panel{ background: var(--family-soft); border:1px solid var(--family-line); border-radius: var(--r-lg); padding:26px 28px; }
+.task-panel .block-num{ background: var(--family); }
+textarea#final-task{
+  width:100%; min-height:110px; font-family: var(--f-body); font-size:15px; color: var(--ink);
+  background: var(--paper-raised); border:1px solid var(--family-line); border-radius: var(--r-md);
+  padding:14px 16px; resize:vertical; margin-top:14px;
+}
+textarea#final-task:focus{ outline:none; border-color: var(--family); }
+.task-footer{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:12px; flex-wrap:wrap; }
+#task-count{ font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); }
+.btn-secondary{
+  font-family: var(--f-body); font-weight:600; font-size:13.5px; color: var(--family); background:none;
+  border:1.5px solid var(--family-line); padding:9px 18px; border-radius:999px; cursor:pointer;
+}
+.saved-flag{ font-family: var(--f-data); font-size:12px; color: var(--b2); opacity:0; transition: opacity .3s ease; }
+.saved-flag.show{ opacity:1; }
+
+/* ---------- FOOTER NAV ---------- */
+footer{
+  max-width:760px; margin:0 auto; padding:0 24px 60px; display:flex;
+  justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;
+  font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint);
+}
+footer a{ color: var(--b3); text-decoration:none; }
+footer a:hover{ text-decoration:underline; }
+
+@media (max-width:600px){
+  header{ padding:34px 18px 22px; }
+  main{ padding:8px 18px 90px; }
+  .panel, .task-panel{ padding:20px 18px; }
+  .char-card{ flex-direction:column; }
+}
+@media (prefers-reduced-motion: reduce){ *{ transition:none !important; } }
+</style>
+</head>
+<body>
+
+<header>
+  <p class="eyebrow"><span class="dot"></span>Clase 3 de 12 · L1 Primeros pasos a bordo</p>
+  <h1>¿Dónde <em>está</em>?</h1>
+  <p class="lede">Ya sabes saludar a un cliente. Ahora aprendes a indicarle dónde están las cosas en el barco: el baño, su mesa, la carta. Hoy combinamos <strong>hay</strong> y <strong>estar</strong> con preposiciones de lugar, y repasamos el género básico (el/la).</p>
+  <div class="meta-row">
+    <div>Duración<strong>50 min</strong></div>
+    <div>Gramática<strong>Hay / estar + lugar</strong></div>
+    <div>Nivel<strong>A1</strong></div>
+  </div>
+</header>
+
+<main>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">1</span><h2>Hay y estar + lugar</h2><span class="time-tag">8 min</span></div>
+    <div class="panel">
+      <table class="conj-table">
+        <tr><td class="conj-pron">hay</td><td class="conj-form">hay</td><td class="conj-ex">Hay un baño al lado del bar.</td></tr>
+        <tr><td class="conj-pron">yo</td><td class="conj-form">estoy</td><td class="conj-ex">Estoy en la barra.</td></tr>
+        <tr><td class="conj-pron">tú / usted</td><td class="conj-form">estás / está</td><td class="conj-ex">Su mesa está cerca de la ventana.</td></tr>
+        <tr><td class="conj-pron">él / ella</td><td class="conj-form">está</td><td class="conj-ex">La carta está en la mesa.</td></tr>
+        <tr><td class="conj-pron">nosotros/as</td><td class="conj-form">estamos</td><td class="conj-ex">Estamos cerca de la cocina.</td></tr>
+        <tr><td class="conj-pron">ellos/as</td><td class="conj-form">están</td><td class="conj-ex">Los baños están al fondo.</td></tr>
+      </table>
+      <div class="note"><strong>Dos formas de hablar del lugar:</strong> "hay" dice que algo existe en general (sin artículo definido o con "un/una"), y "estar" dice dónde está algo concreto que ya conoces (con "el/la"). Es una distinción constante cuando ayudas a un cliente a orientarse en el barco.</div>
+
+      <div class="compare-wrap">
+        <p class="compare-title">Hay vs. estar — la trampa más común en tu trabajo</p>
+        <div class="compare-grid">
+          <div class="compare-col is-ser">
+            <div class="compare-head">
+              <span class="compare-verb">HAY</span>
+              <span class="compare-sub">— existencia, algo general</span>
+            </div>
+            <ul class="compare-list">
+              <li><strong>Existencia:</strong> Hay un baño en esta planta.
+                <em>No sabemos cuál, solo que existe.</em>
+              </li>
+              <li><strong>Cantidad:</strong> Hay dos restaurantes en el barco.</li>
+              <li><strong>Nunca cambia de forma:</strong> hay (singular y plural).</li>
+            </ul>
+          </div>
+          <div class="compare-col is-estar">
+            <div class="compare-head">
+              <span class="compare-verb">ESTAR</span>
+              <span class="compare-sub">— ubicación concreta</span>
+            </div>
+            <ul class="compare-list">
+              <li><strong>Ubicación de algo concreto:</strong> El baño está a la derecha.
+                <em>Ya sabemos cuál — "el baño", con artículo.</em>
+              </li>
+              <li><strong>Cambia según la persona:</strong> está, están, estoy...</li>
+              <li><strong>Con nombres propios o "el/la":</strong> Su mesa está junto a la ventana.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="compare-warning">
+          <strong>Truco rápido:</strong> si el cliente pregunta "¿hay un baño?", respondes con "estar": "Sí, el baño está al fondo a la derecha." Primero confirmas que existe (implícito), luego dices dónde está usando "estar" + artículo definido.
+        </div>
+      </div>
+
+      <div class="gender-wrap">
+        <div class="gender-col is-el">
+          <div class="gender-head"><span class="gender-word">EL</span><span class="compare-sub">masculino</span></div>
+          <ul class="gender-list">
+            <li><strong>el barco</strong> — normalmente en -o</li>
+            <li><strong>el restaurante</strong> — excepción en -e</li>
+            <li><strong>el menú</strong> — excepción en -ú</li>
+          </ul>
+        </div>
+        <div class="gender-col is-la">
+          <div class="gender-head"><span class="gender-word">LA</span><span class="compare-sub">femenino</span></div>
+          <ul class="gender-list">
+            <li><strong>la cubierta</strong> — normalmente en -a</li>
+            <li><strong>la cocina</strong> — normalmente en -a</li>
+            <li><strong>la carta</strong> / <strong>la mesa</strong> — normalmente en -a</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">2</span><h2>Vocabulario</h2><span class="time-tag">6 min</span></div>
+    <p class="vocab-hint">Toca cada tarjeta para ver un ejemplo.</p>
+    <div class="vocab-grid" id="vocab-grid"></div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">3</span><h2>Practica</h2><span class="time-tag">12 min</span></div>
+    <div class="panel">
+      <p class="vocab-hint" style="margin-bottom:14px;">50 frases: las primeras 12 se hacen en voz alta en clase; el resto queda como repaso para casa.</p>
+      <div class="sarcasm-bar">
+        <button class="sarcasm-switch" id="sarcasm-toggle" role="switch" aria-checked="false" aria-label="Activar modo sarcástico"></button>
+        <p class="sarcasm-label">Modo sarcástico <span>Mismas frases, con un poco (mucho) de retintín</span></p>
+      </div>
+      <div id="exercises"></div>
+      <div class="check-bar">
+        <div style="display:flex; gap:10px;">
+          <button class="btn-primary" id="check-btn">Comprobar respuestas</button>
+          <button class="btn-ghost" id="reset-btn">Reiniciar</button>
+        </div>
+        <span id="score-text"></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">4</span><h2>Tarjetas de lugares del barco</h2><span class="time-tag">8 min</span></div>
+    <p class="lede" style="margin-bottom:16px;">Indica dónde está cada lugar usando <strong>estar</strong> + preposición, con el artículo correcto (el/la). Usa los datos de la tarjeta como pista. Las primeras 6 se trabajan en clase; el resto queda como banco de repaso para casa.</p>
+    <div class="characters" id="characters"></div>
+  </section>
+
+  <section class="block roleplay-panel">
+    <div class="block-head"><span class="block-num">5</span><h2>Roleplay: 5 escenas indicando el camino</h2><span class="time-tag">13 min</span></div>
+    <p class="lede" style="margin-bottom:16px;">50 intercambios repartidos en 5 situaciones reales de tu turno. Elige una escena para practicar en clase; el resto queda como banco de repaso para casa.</p>
+    <div class="scene-tabs" id="scene-tabs"></div>
+    <div id="scene-container"></div>
+    <div class="roleplay-tip"><strong>En clase:</strong> practicaremos una escena en voz alta, cambiando de rol. El resto de escenas son para practicar por tu cuenta durante la semana.</div>
+  </section>
+
+  <section class="block task-panel">
+    <div class="block-head"><span class="block-num">6</span><h2 style="color:var(--family)">Tu tarea</h2><span class="time-tag">3 min</span></div>
+    <p style="margin:0; font-size:15px; color:var(--ink-soft);">Haz <strong>10 flashcards</strong> con vocabulario del barco: escribe cada palabra con su artículo (el/la) y una frase corta con "estar" indicando dónde está. Por ejemplo: "la cocina — La cocina está al lado del restaurante."</p>
+    <textarea id="final-task" placeholder="el baño — El baño está al fondo a la derecha.&#10;la carta — La carta está en la mesa.&#10;..."></textarea>
+    <div class="task-footer">
+      <span id="task-count">0 frases con "está" detectadas</span>
+      <div style="display:flex; gap:10px; align-items:center;">
+        <span class="saved-flag" id="saved-flag">Guardado ✓</span>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <span>Clase 3 · Primeros pasos a bordo</span>
+  <span>Próxima clase → Clase 4: tomar el primer pedido (presente -ar/-er/-ir)</span>
+</footer>
+
+<script>
+/* ---------- VOCAB ---------- */
+const VOCAB = [
+  {front:"el barco", back:"El barco está en el puerto de Barcelona."},
+  {front:"la cubierta", back:"La cubierta está en la parte de arriba."},
+  {front:"el restaurante", back:"El restaurante está al lado del bar."},
+  {front:"la cocina", back:"La cocina está detrás de la barra."},
+  {front:"la mesa", back:"Su mesa está junto a la ventana."},
+  {front:"la carta / el menú", back:"La carta está encima de la mesa."},
+];
+
+const grid = document.getElementById('vocab-grid');
+VOCAB.forEach(v=>{
+  const card = document.createElement('div');
+  card.className = 'vocab-card';
+  card.setAttribute('role', 'button');
+  card.setAttribute('tabindex', '0');
+  card.setAttribute('aria-pressed', 'false');
+  card.setAttribute('aria-label', `${v.front}. Pulsa para ver un ejemplo.`);
+  card.innerHTML = `<div class="vocab-front">${v.front}</div><div class="vocab-back">${v.back}</div>`;
+  const toggle = ()=>{
+    const flipped = card.classList.toggle('flipped');
+    card.setAttribute('aria-pressed', String(flipped));
+  };
+  card.addEventListener('click', toggle);
+  card.addEventListener('keydown', (e)=>{
+    if(e.key === 'Enter' || e.key === ' '){
+      e.preventDefault();
+      toggle();
+    }
+  });
+  grid.appendChild(card);
+});
+
+/* ---------- EXERCISES ---------- */
+const EXERCISES = [
+  {
+    "sentence": "<span class=\"gap\">___</span> un baño en esta planta.",
+    "options": [
+      "está",
+      "hay",
+      "es"
+    ],
+    "answer": "hay",
+    "sentenceSarcastic": "¿Un baño? Qué casualidad, <span class=\"gap\">___</span> justo uno en esta planta, milagro.",
+    "translationDE": "Es gibt eine Toilette auf dieser Etage.",
+    "translationDESarcastic": "Eine Toilette? Was für ein Zufall, es gibt tatsächlich genau eine auf dieser Etage, ein Wunder."
+  },
+  {
+    "sentence": "<span class=\"gap\">___</span> dos restaurantes en el barco.",
+    "options": [
+      "hay",
+      "están",
+      "es"
+    ],
+    "answer": "hay",
+    "sentenceSarcastic": "Sorpresa: <span class=\"gap\">___</span> nada menos que dos restaurantes en el barco. Menudo lujo.",
+    "translationDE": "Es gibt zwei Restaurants auf dem Schiff.",
+    "translationDESarcastic": "Überraschung: Es gibt nicht weniger als zwei Restaurants auf dem Schiff. Was für ein Luxus."
+  },
+  {
+    "sentence": "<span class=\"gap\">___</span> una mesa libre cerca de la ventana.",
+    "options": [
+      "está",
+      "hay",
+      "son"
+    ],
+    "answer": "hay",
+    "sentenceSarcastic": "Ah mira, <span class=\"gap\">___</span> una mesa libre cerca de la ventana, la única del barco.",
+    "translationDE": "Es gibt einen freien Tisch in der Nähe des Fensters.",
+    "translationDESarcastic": "Ach schau an, es gibt einen freien Tisch am Fenster, den einzigen auf dem ganzen Schiff."
+  },
+  {
+    "sentence": "¿<span class=\"gap\">___</span> wifi en el restaurante?",
+    "options": [
+      "hay",
+      "está",
+      "son"
+    ],
+    "answer": "hay",
+    "sentenceSarcastic": "¿<span class=\"gap\">___</span> wifi en el restaurante? Claro, y también café gratis, ¿no?",
+    "translationDE": "Gibt es WLAN im Restaurant?",
+    "translationDESarcastic": "Gibt es WLAN im Restaurant? Klar, und bestimmt auch kostenlosen Kaffee, oder?"
+  },
+  {
+    "sentence": "<span class=\"gap\">___</span> varias cartas en inglés en la barra.",
+    "options": [
+      "hay",
+      "están",
+      "es"
+    ],
+    "answer": "hay",
+    "sentenceSarcastic": "<span class=\"gap\">___</span> varias cartas en inglés en la barra, por si acaso viene la reina de Inglaterra.",
+    "translationDE": "Es gibt mehrere Speisekarten auf Englisch an der Bar.",
+    "translationDESarcastic": "Es gibt mehrere englische Speisekarten an der Bar, für den Fall, dass die Queen vorbeikommt."
+  },
+  {
+    "sentence": "¿<span class=\"gap\">___</span> mesas libres para seis personas?",
+    "options": [
+      "está",
+      "hay",
+      "son"
+    ],
+    "answer": "hay",
+    "sentenceSarcastic": "¿<span class=\"gap\">___</span> mesas libres para seis? Sí, hombre, y también un yate propio.",
+    "translationDE": "Gibt es freie Tische für sechs Personen?",
+    "translationDESarcastic": "Gibt es freie Tische für sechs? Klar, und auch eine eigene Yacht."
+  },
+  {
+    "sentence": "<span class=\"gap\">___</span> un bar en la cubierta superior.",
+    "options": [
+      "hay",
+      "está",
+      "es"
+    ],
+    "answer": "hay",
+    "sentenceSarcastic": "<span class=\"gap\">___</span> un bar en la cubierta superior, para quien todavía tenga fuerzas de subir.",
+    "translationDE": "Es gibt eine Bar auf dem oberen Deck.",
+    "translationDESarcastic": "Es gibt eine Bar auf dem oberen Deck, für alle, die noch die Kraft zum Hochsteigen haben."
+  },
+  {
+    "sentence": "El baño <span class=\"gap\">___</span> al fondo a la derecha.",
+    "options": [
+      "hay",
+      "está",
+      "son"
+    ],
+    "answer": "está",
+    "sentenceSarcastic": "El baño <span class=\"gap\">___</span> al fondo a la derecha, a solo un pequeño maratón de distancia.",
+    "translationDE": "Die Toilette ist hinten rechts.",
+    "translationDESarcastic": "Die Toilette ist hinten rechts, nur einen kleinen Marathon entfernt."
+  },
+  {
+    "sentence": "La cocina <span class=\"gap\">___</span> detrás de la barra.",
+    "options": [
+      "hay",
+      "está",
+      "es"
+    ],
+    "answer": "está",
+    "sentenceSarcastic": "La cocina <span class=\"gap\">___</span> detrás de la barra, escondida como un tesoro nacional.",
+    "translationDE": "Die Küche ist hinter der Bar.",
+    "translationDESarcastic": "Die Küche ist hinter der Bar, versteckt wie ein Nationalschatz."
+  },
+  {
+    "sentence": "Su mesa <span class=\"gap\">___</span> junto a la ventana.",
+    "options": [
+      "hay",
+      "es",
+      "está"
+    ],
+    "answer": "está",
+    "sentenceSarcastic": "Su mesa <span class=\"gap\">___</span> junto a la ventana, la vista más cara del barco, cortesía de la casa.",
+    "translationDE": "Ihr Tisch ist neben dem Fenster.",
+    "translationDESarcastic": "Ihr Tisch ist am Fenster, die teuerste Aussicht auf dem Schiff, aufs Haus."
+  },
+  {
+    "sentence": "La carta <span class=\"gap\">___</span> encima de la mesa.",
+    "options": [
+      "está",
+      "hay",
+      "son"
+    ],
+    "answer": "está",
+    "sentenceSarcastic": "La carta <span class=\"gap\">___</span> encima de la mesa, por si no la había visto usted ya tres veces.",
+    "translationDE": "Die Speisekarte liegt auf dem Tisch.",
+    "translationDESarcastic": "Die Speisekarte liegt auf dem Tisch, falls Sie sie nicht schon dreimal gesehen haben."
+  },
+  {
+    "sentence": "El restaurante <span class=\"gap\">___</span> al lado del bar.",
+    "options": [
+      "hay",
+      "está",
+      "es"
+    ],
+    "answer": "está",
+    "sentenceSarcastic": "El restaurante <span class=\"gap\">___</span> al lado del bar, para minimizar el esfuerzo de caminar.",
+    "translationDE": "Das Restaurant ist neben der Bar.",
+    "translationDESarcastic": "Das Restaurant ist neben der Bar, um den Laufaufwand zu minimieren."
+  },
+  {
+    "sentence": "La cubierta principal <span class=\"gap\">___</span> arriba del todo.",
+    "options": [
+      "hay",
+      "está",
+      "son"
+    ],
+    "answer": "está",
+    "sentenceSarcastic": "La cubierta principal <span class=\"gap\">___</span> arriba del todo, evidentemente, como todas las cubiertas principales.",
+    "translationDE": "Das Hauptdeck ist ganz oben.",
+    "translationDESarcastic": "Das Hauptdeck ist ganz oben, natürlich, wie alle Hauptdecks eben."
+  },
+  {
+    "sentence": "El barco <span class=\"gap\">___</span> en el puerto ahora mismo.",
+    "options": [
+      "está",
+      "hay",
+      "es"
+    ],
+    "answer": "está",
+    "sentenceSarcastic": "El barco <span class=\"gap\">___</span> en el puerto ahora mismo, no en pleno vuelo, por si tenía dudas.",
+    "translationDE": "Das Schiff liegt gerade im Hafen.",
+    "translationDESarcastic": "Das Schiff liegt gerade im Hafen, nicht mitten im Flug, falls Sie Zweifel hatten."
+  },
+  {
+    "sentence": "El bar <span class=\"gap\">___</span> cerca de la cubierta principal.",
+    "options": [
+      "hay",
+      "está",
+      "son"
+    ],
+    "answer": "está",
+    "sentenceSarcastic": "El bar <span class=\"gap\">___</span> cerca de la cubierta principal, qué conveniente para todos menos para mí.",
+    "translationDE": "Die Bar ist in der Nähe des Hauptdecks.",
+    "translationDESarcastic": "Die Bar ist in der Nähe des Hauptdecks, wie praktisch für alle außer mir."
+  },
+  {
+    "sentence": "Los baños <span class=\"gap\">___</span> al fondo del pasillo.",
+    "options": [
+      "hay",
+      "están",
+      "es"
+    ],
+    "answer": "están",
+    "sentenceSarcastic": "Los baños <span class=\"gap\">___</span> al fondo del pasillo, la caminata perfecta después de tres cafés.",
+    "translationDE": "Die Toiletten sind am Ende des Flurs.",
+    "translationDESarcastic": "Die Toiletten sind am Ende des Flurs, der perfekte Spaziergang nach drei Kaffees."
+  },
+  {
+    "sentence": "Las mesas libres <span class=\"gap\">___</span> en la terraza.",
+    "options": [
+      "hay",
+      "están",
+      "es"
+    ],
+    "answer": "están",
+    "sentenceSarcastic": "Las mesas libres <span class=\"gap\">___</span> en la terraza, es decir, bajo el sol de justicia.",
+    "translationDE": "Die freien Tische sind auf der Terrasse.",
+    "translationDESarcastic": "Die freien Tische sind auf der Terrasse, das heißt, in der prallen Sonne."
+  },
+  {
+    "sentence": "Las cartas nuevas <span class=\"gap\">___</span> en la barra.",
+    "options": [
+      "están",
+      "hay",
+      "es"
+    ],
+    "answer": "están",
+    "sentenceSarcastic": "Las cartas nuevas <span class=\"gap\">___</span> en la barra, recién impresas con los mismos platos de siempre.",
+    "translationDE": "Die neuen Speisekarten sind an der Bar.",
+    "translationDESarcastic": "Die neuen Speisekarten sind an der Bar, frisch gedruckt mit denselben Gerichten wie immer."
+  },
+  {
+    "sentence": "Los clientes <span class=\"gap\">___</span> cerca de la entrada.",
+    "options": [
+      "hay",
+      "están",
+      "es"
+    ],
+    "answer": "están",
+    "sentenceSarcastic": "Los clientes <span class=\"gap\">___</span> cerca de la entrada, listos para juzgar cada paso que doy.",
+    "translationDE": "Die Kunden sind in der Nähe des Eingangs.",
+    "translationDESarcastic": "Die Kunden sind in der Nähe des Eingangs, bereit, jeden meiner Schritte zu beurteilen."
+  },
+  {
+    "sentence": "Las cocinas del barco <span class=\"gap\">___</span> muy cerca una de otra.",
+    "options": [
+      "hay",
+      "están",
+      "son"
+    ],
+    "answer": "están",
+    "sentenceSarcastic": "Las cocinas del barco <span class=\"gap\">___</span> muy cerca una de otra, por si el caos no fuera suficiente.",
+    "translationDE": "Die Küchen des Schiffs liegen sehr nah beieinander.",
+    "translationDESarcastic": "Die Küchen des Schiffs liegen sehr nah beieinander, als wäre das Chaos noch nicht genug."
+  },
+  {
+    "sentence": "Los servicios <span class=\"gap\">___</span> justo al lado del bar.",
+    "options": [
+      "están",
+      "hay",
+      "es"
+    ],
+    "answer": "están",
+    "sentenceSarcastic": "Los servicios <span class=\"gap\">___</span> justo al lado del bar, previsión perfecta para las diez copas.",
+    "translationDE": "Die Toiletten sind direkt neben der Bar.",
+    "translationDESarcastic": "Die Toiletten sind direkt neben der Bar, perfekt geplant für die zehnte Runde Drinks."
+  },
+  {
+    "sentence": "Yo <span class=\"gap\">___</span> cerca de la barra si necesita algo.",
+    "options": [
+      "hay",
+      "estoy",
+      "es"
+    ],
+    "answer": "estoy",
+    "sentenceSarcastic": "Yo <span class=\"gap\">___</span> cerca de la barra si necesita algo, es decir, siempre disponible, faltaría más.",
+    "translationDE": "Ich bin in der Nähe der Bar, falls Sie etwas brauchen.",
+    "translationDESarcastic": "Ich bin in der Nähe der Bar, falls Sie etwas brauchen, das heißt, immer verfügbar, natürlich."
+  },
+  {
+    "sentence": "Yo <span class=\"gap\">___</span> al lado de la mesa 5 todo el turno.",
+    "options": [
+      "estoy",
+      "hay",
+      "está"
+    ],
+    "answer": "estoy",
+    "sentenceSarcastic": "Yo <span class=\"gap\">___</span> al lado de la mesa 5 todo el turno, mi hogar dulce hogar de ocho horas.",
+    "translationDE": "Ich bin die ganze Schicht in der Nähe von Tisch 5.",
+    "translationDESarcastic": "Ich bin die ganze Schicht neben Tisch 5, mein süßes Zuhause für acht Stunden."
+  },
+  {
+    "sentence": "Compañera, ¿dónde <span class=\"gap\">___</span> tú ahora?",
+    "options": [
+      "hay",
+      "estás",
+      "está"
+    ],
+    "answer": "estás",
+    "sentenceSarcastic": "Compañera, ¿dónde <span class=\"gap\">___</span> tú ahora? Porque yo llevo sirviendo desde el amanecer.",
+    "translationDE": "Kollegin, wo bist du jetzt?",
+    "translationDESarcastic": "Kollegin, wo bist du jetzt? Denn ich bediene schon seit Sonnenaufgang."
+  },
+  {
+    "sentence": "Tú <span class=\"gap\">___</span> cerca de la cocina, ¿verdad?",
+    "options": [
+      "estás",
+      "hay",
+      "está"
+    ],
+    "answer": "estás",
+    "sentenceSarcastic": "Tú <span class=\"gap\">___</span> cerca de la cocina, ¿verdad? Qué envidia, el aire acondicionado del horno.",
+    "translationDE": "Du bist in der Nähe der Küche, oder?",
+    "translationDESarcastic": "Du bist in der Nähe der Küche, oder? So ein Neid, die Klimaanlage vom Ofen."
+  },
+  {
+    "sentence": "Nosotros <span class=\"gap\">___</span> cerca de la salida.",
+    "options": [
+      "hay",
+      "estamos",
+      "está"
+    ],
+    "answer": "estamos",
+    "sentenceSarcastic": "Nosotros <span class=\"gap\">___</span> cerca de la salida, ideal para huir en cuanto termine el turno.",
+    "translationDE": "Wir sind in der Nähe des Ausgangs.",
+    "translationDESarcastic": "Wir sind in der Nähe des Ausgangs, ideal, um direkt nach Schichtende zu fliehen."
+  },
+  {
+    "sentence": "Nosotras <span class=\"gap\">___</span> al lado de la barra hoy.",
+    "options": [
+      "estamos",
+      "hay",
+      "es"
+    ],
+    "answer": "estamos",
+    "sentenceSarcastic": "Nosotras <span class=\"gap\">___</span> al lado de la barra hoy, primera fila para todos los dramas.",
+    "translationDE": "Wir sind heute neben der Bar.",
+    "translationDESarcastic": "Wir sind heute neben der Bar, erste Reihe für jedes Drama."
+  },
+  {
+    "sentence": "El baño de señoras <span class=\"gap\">___</span> a la izquierda.",
+    "options": [
+      "hay",
+      "está",
+      "son"
+    ],
+    "answer": "está",
+    "sentenceSarcastic": "El baño de señoras <span class=\"gap\">___</span> a la izquierda, justo donde nunca se acuerda nadie.",
+    "translationDE": "Die Damentoilette ist links.",
+    "translationDESarcastic": "Die Damentoilette ist links, genau da, woran sich nie jemand erinnert."
+  },
+  {
+    "sentence": "¿Dónde <span class=\"gap\">___</span> la salida de emergencia?",
+    "options": [
+      "hay",
+      "está",
+      "son"
+    ],
+    "answer": "está",
+    "sentenceSarcastic": "¿Dónde <span class=\"gap\">___</span> la salida de emergencia? Pregunta que me hago yo cada turno.",
+    "translationDE": "Wo ist der Notausgang?",
+    "translationDESarcastic": "Wo ist der Notausgang? Eine Frage, die ich mir jede Schicht selbst stelle."
+  },
+  {
+    "sentence": "La terraza <span class=\"gap\">___</span> encima del restaurante.",
+    "options": [
+      "hay",
+      "está",
+      "es"
+    ],
+    "answer": "está",
+    "sentenceSarcastic": "La terraza <span class=\"gap\">___</span> encima del restaurante, con vistas al mar y a mi paciencia agotándose.",
+    "translationDE": "Die Terrasse ist über dem Restaurant.",
+    "translationDESarcastic": "Die Terrasse ist über dem Restaurant, mit Meerblick und meiner schwindenden Geduld."
+  },
+  {
+    "sentence": "<span class=\"gap\">___</span> una terraza muy bonita en la parte de arriba.",
+    "options": [
+      "hay",
+      "está",
+      "es"
+    ],
+    "answer": "hay",
+    "sentenceSarcastic": "<span class=\"gap\">___</span> una terraza muy bonita en la parte de arriba, que nadie usa hasta que llueve.",
+    "translationDE": "Es gibt eine sehr schöne Terrasse ganz oben.",
+    "translationDESarcastic": "Es gibt eine sehr schöne Terrasse ganz oben, die niemand benutzt, bis es regnet."
+  },
+  {
+    "sentence": "El ascensor <span class=\"gap\">___</span> al lado de las escaleras.",
+    "options": [
+      "hay",
+      "está",
+      "son"
+    ],
+    "answer": "está",
+    "sentenceSarcastic": "El ascensor <span class=\"gap\">___</span> al lado de las escaleras, para los que prefieren esperar diez minutos.",
+    "translationDE": "Der Aufzug ist neben der Treppe.",
+    "translationDESarcastic": "Der Aufzug ist neben der Treppe, für alle, die lieber zehn Minuten warten."
+  },
+  {
+    "sentence": "<span class=\"gap\">___</span> un ascensor cerca de la recepción.",
+    "options": [
+      "hay",
+      "está",
+      "es"
+    ],
+    "answer": "hay",
+    "sentenceSarcastic": "<span class=\"gap\">___</span> un ascensor cerca de la recepción, cuando decide funcionar, claro.",
+    "translationDE": "Es gibt einen Aufzug in der Nähe der Rezeption.",
+    "translationDESarcastic": "Es gibt einen Aufzug in der Nähe der Rezeption, wenn er sich mal zum Funktionieren entscheidet."
+  },
+  {
+    "sentence": "La barra <span class=\"gap\">___</span> justo en el centro del salón.",
+    "options": [
+      "hay",
+      "está",
+      "son"
+    ],
+    "answer": "está",
+    "sentenceSarcastic": "La barra <span class=\"gap\">___</span> justo en el centro del salón, epicentro de todos mis males.",
+    "translationDE": "Die Bar liegt genau in der Mitte des Saals.",
+    "translationDESarcastic": "Die Bar liegt genau in der Mitte des Saals, Epizentrum all meines Leidens."
+  },
+  {
+    "sentence": "<span class=\"gap\">___</span> dos barras en el barco, una arriba y otra abajo.",
+    "options": [
+      "hay",
+      "están",
+      "es"
+    ],
+    "answer": "hay",
+    "sentenceSarcastic": "<span class=\"gap\">___</span> dos barras en el barco, una arriba y otra abajo, dobles turnos, doble alegría.",
+    "translationDE": "Es gibt zwei Bars auf dem Schiff, eine oben und eine unten.",
+    "translationDESarcastic": "Es gibt zwei Bars auf dem Schiff, eine oben und eine unten, doppelte Schicht, doppelte Freude."
+  },
+  {
+    "sentence": "La mesa 12 <span class=\"gap\">___</span> muy cerca de la cocina.",
+    "options": [
+      "hay",
+      "está",
+      "son"
+    ],
+    "answer": "está",
+    "sentenceSarcastic": "La mesa 12 <span class=\"gap\">___</span> muy cerca de la cocina, con sonido ambiente incluido de sartenes.",
+    "translationDE": "Tisch 12 liegt sehr nah an der Küche.",
+    "translationDESarcastic": "Tisch 12 liegt sehr nah an der Küche, mit Geräuschkulisse aus klappernden Pfannen inklusive."
+  },
+  {
+    "sentence": "<span class=\"gap\">___</span> varias mesas libres cerca de la ventana.",
+    "options": [
+      "hay",
+      "están",
+      "es"
+    ],
+    "answer": "hay",
+    "sentenceSarcastic": "<span class=\"gap\">___</span> varias mesas libres cerca de la ventana, aunque usted igual pedirá la del fondo.",
+    "translationDE": "Es gibt mehrere freie Tische in der Nähe des Fensters.",
+    "translationDESarcastic": "Es gibt mehrere freie Tische am Fenster, obwohl Sie sowieso den hintersten wollen werden."
+  },
+  {
+    "sentence": "El almacén <span class=\"gap\">___</span> al lado de la cocina.",
+    "options": [
+      "hay",
+      "está",
+      "son"
+    ],
+    "answer": "está",
+    "sentenceSarcastic": "El almacén <span class=\"gap\">___</span> al lado de la cocina, a un paso de todo, menos de mi paciencia.",
+    "translationDE": "Das Lager ist neben der Küche.",
+    "translationDESarcastic": "Das Lager ist neben der Küche, einen Schritt von allem entfernt, außer von meiner Geduld."
+  },
+  {
+    "sentence": "<span class=\"gap\">___</span> un almacén pequeño detrás de la barra.",
+    "options": [
+      "hay",
+      "está",
+      "es"
+    ],
+    "answer": "hay",
+    "sentenceSarcastic": "<span class=\"gap\">___</span> un almacén pequeño detrás de la barra, del tamaño de mi armario en casa.",
+    "translationDE": "Es gibt ein kleines Lager hinter der Bar.",
+    "translationDESarcastic": "Es gibt ein kleines Lager hinter der Bar, so groß wie mein Kleiderschrank zu Hause."
+  },
+  {
+    "sentence": "La entrada principal <span class=\"gap\">___</span> al lado de la recepción.",
+    "options": [
+      "hay",
+      "está",
+      "son"
+    ],
+    "answer": "está",
+    "sentenceSarcastic": "La entrada principal <span class=\"gap\">___</span> al lado de la recepción, un descubrimiento asombroso.",
+    "translationDE": "Der Haupteingang ist neben der Rezeption.",
+    "translationDESarcastic": "Der Haupteingang ist neben der Rezeption, eine erstaunliche Entdeckung."
+  },
+  {
+    "sentence": "¿<span class=\"gap\">___</span> otra entrada más cerca del bar?",
+    "options": [
+      "hay",
+      "está",
+      "es"
+    ],
+    "answer": "hay",
+    "sentenceSarcastic": "¿<span class=\"gap\">___</span> otra entrada más cerca del bar? Sí, la que nadie encuentra jamás.",
+    "translationDE": "Gibt es einen anderen Eingang näher an der Bar?",
+    "translationDESarcastic": "Gibt es einen anderen Eingang näher an der Bar? Ja, den, den niemand jemals findet."
+  },
+  {
+    "sentence": "El guardarropa <span class=\"gap\">___</span> justo a la entrada.",
+    "options": [
+      "hay",
+      "está",
+      "son"
+    ],
+    "answer": "está",
+    "sentenceSarcastic": "El guardarropa <span class=\"gap\">___</span> justo a la entrada, para perder su abrigo con estilo.",
+    "translationDE": "Die Garderobe ist direkt am Eingang.",
+    "translationDESarcastic": "Die Garderobe ist direkt am Eingang, um Ihren Mantel stilvoll zu verlieren."
+  },
+  {
+    "sentence": "<span class=\"gap\">___</span> un guardarropa gratuito en la entrada.",
+    "options": [
+      "hay",
+      "está",
+      "es"
+    ],
+    "answer": "hay",
+    "sentenceSarcastic": "<span class=\"gap\">___</span> un guardarropa gratuito en la entrada, la única cosa gratis en este barco.",
+    "translationDE": "Es gibt eine kostenlose Garderobe am Eingang.",
+    "translationDESarcastic": "Es gibt eine kostenlose Garderobe am Eingang, das einzig Kostenlose auf diesem Schiff."
+  },
+  {
+    "sentence": "Las escaleras <span class=\"gap\">___</span> al lado del ascensor.",
+    "options": [
+      "hay",
+      "están",
+      "es"
+    ],
+    "answer": "están",
+    "sentenceSarcastic": "Las escaleras <span class=\"gap\">___</span> al lado del ascensor, por si el ascensor decide tomarse el día libre.",
+    "translationDE": "Die Treppe ist neben dem Aufzug.",
+    "translationDESarcastic": "Die Treppe ist neben dem Aufzug, falls der Aufzug beschließt, sich freizunehmen."
+  },
+  {
+    "sentence": "<span class=\"gap\">___</span> escaleras y ascensor para subir a la terraza.",
+    "options": [
+      "hay",
+      "están",
+      "es"
+    ],
+    "answer": "hay",
+    "sentenceSarcastic": "<span class=\"gap\">___</span> escaleras y ascensor para subir a la terraza, dos formas de arrepentirse.",
+    "translationDE": "Es gibt eine Treppe und einen Aufzug, um zur Terrasse zu gelangen.",
+    "translationDESarcastic": "Es gibt Treppe und Aufzug zur Terrasse, zwei Arten, es zu bereuen."
+  },
+  {
+    "sentence": "Su mesa <span class=\"gap\">___</span> lista, pueden pasar.",
+    "options": [
+      "hay",
+      "está",
+      "son"
+    ],
+    "answer": "está",
+    "sentenceSarcastic": "Su mesa <span class=\"gap\">___</span> lista, pueden pasar, tras solo veinte minutos de espera.",
+    "translationDE": "Ihr Tisch ist fertig, Sie können hineingehen.",
+    "translationDESarcastic": "Ihr Tisch ist bereit, Sie können hineingehen, nach nur zwanzig Minuten Wartezeit."
+  },
+  {
+    "sentence": "<span class=\"gap\">___</span> mesa libre para cuatro personas.",
+    "options": [
+      "hay",
+      "está",
+      "es"
+    ],
+    "answer": "hay",
+    "sentenceSarcastic": "<span class=\"gap\">___</span> mesa libre para cuatro personas, aunque lleguen ocho, como siempre.",
+    "translationDE": "Es gibt einen freien Tisch für vier Personen.",
+    "translationDESarcastic": "Es gibt einen freien Tisch für vier Personen, auch wenn acht kommen, wie immer."
+  },
+  {
+    "sentence": "El teléfono de reservas <span class=\"gap\">___</span> en la recepción.",
+    "options": [
+      "hay",
+      "está",
+      "son"
+    ],
+    "answer": "está",
+    "sentenceSarcastic": "El teléfono de reservas <span class=\"gap\">___</span> en la recepción, sonando sin que nadie lo coja nunca.",
+    "translationDE": "Das Reservierungstelefon ist an der Rezeption.",
+    "translationDESarcastic": "Das Reservierungstelefon ist an der Rezeption, es klingelt, ohne dass es je jemand abnimmt."
+  },
+  {
+    "sentence": "<span class=\"gap\">___</span> un teléfono en cada mesa para llamar al camarero.",
+    "options": [
+      "hay",
+      "está",
+      "es"
+    ],
+    "answer": "hay",
+    "sentenceSarcastic": "<span class=\"gap\">___</span> un teléfono en cada mesa para llamar al camarero, es decir, a mí, otra vez.",
+    "translationDE": "Es gibt an jedem Tisch ein Telefon, um den Kellner zu rufen.",
+    "translationDESarcastic": "Es gibt an jedem Tisch ein Telefon, um den Kellner zu rufen, also mich, schon wieder."
+  },
+  {
+    "sentence": "Las bebidas frías <span class=\"gap\">___</span> en la nevera de la barra.",
+    "options": [
+      "hay",
+      "están",
+      "es"
+    ],
+    "answer": "están",
+    "sentenceSarcastic": "Las bebidas frías <span class=\"gap\">___</span> en la nevera de la barra, o eso dice la leyenda.",
+    "translationDE": "Die kalten Getränke sind im Kühlschrank an der Bar.",
+    "translationDESarcastic": "Die kalten Getränke sind im Kühlschrank an der Bar, jedenfalls sagt man das so."
+  }
+]
+;
+
+const exWrap = document.getElementById('exercises');
+let sarcasmOn = false;
+const EXERCISES_STORAGE_KEY = 'angelika-clase03-practica';
+let exerciseState = { picked: {}, checked: false };
+
+async function guardarPractica(){
+  if (!window.storage) return;
+  try{ await window.storage.set(EXERCISES_STORAGE_KEY, JSON.stringify(exerciseState)); }catch(e){}
+}
+async function cargarPractica(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(EXERCISES_STORAGE_KEY);
+    if (res && typeof res.value === 'string'){
+      const parsed = JSON.parse(res.value);
+      if(parsed && typeof parsed === 'object'){
+        exerciseState = { picked: parsed.picked || {}, checked: !!parsed.checked };
+      }
+    }
+  }catch(e){
+    // Sin práctica guardada todavía.
+  }
+}
+
+function renderExercises(){
+  exWrap.innerHTML = '';
+  EXERCISES.forEach((ex, i)=>{
+    if(i === 0){
+      const divider = document.createElement('div');
+      divider.className = 'ex-divider en-clase';
+      divider.textContent = 'en clase · ítems 1–12';
+      exWrap.appendChild(divider);
+    }
+    if(i === 12){
+      const divider = document.createElement('div');
+      divider.className = 'ex-divider';
+      divider.textContent = 'para casa · repaso opcional';
+      exWrap.appendChild(divider);
+    }
+    const el = document.createElement('div');
+    el.className = 'exercise';
+    el.dataset.answer = ex.answer;
+    el.dataset.index = i;
+    const sentenceToShow = (sarcasmOn && ex.sentenceSarcastic) ? ex.sentenceSarcastic : ex.sentence;
+    el.innerHTML = `
+      <div class="ex-sentence">${i+1}. ${sarcasmOn ? '<span class="sarcasm-icon">🙄</span>' : ''}${sentenceToShow}</div>
+      ${(sarcasmOn && ex.translationDESarcastic) ? `<div class="ex-translation">${ex.translationDESarcastic}</div>` : (ex.translationDE ? `<div class="ex-translation">${ex.translationDE}</div>` : '')}
+      <div class="ex-options">
+        ${ex.options.map(o=>`<button class="opt-btn" data-value="${o}">${o}</button>`).join('')}
+      </div>
+    `;
+    exWrap.appendChild(el);
+
+    el.querySelectorAll('.opt-btn').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        if(exerciseState.checked) return;
+        el.querySelectorAll('.opt-btn').forEach(b=>b.classList.remove('picked'));
+        btn.classList.add('picked');
+        exerciseState.picked[i] = btn.dataset.value;
+        guardarPractica();
+      });
+    });
+  });
+  pintarEstadoPractica();
+}
+
+function pintarEstadoPractica(){
+  document.querySelectorAll('.exercise').forEach(el=>{
+    const i = el.dataset.index;
+    const answer = el.dataset.answer;
+    const pickedValue = exerciseState.picked[i];
+    if(!pickedValue) return;
+    const pickedBtn = el.querySelector(`.opt-btn[data-value="${CSS.escape(pickedValue)}"]`);
+    if(exerciseState.checked){
+      el.querySelectorAll('.opt-btn').forEach(b=>{
+        b.disabled = true;
+        if(b.dataset.value === answer) b.classList.add('correct');
+        else if(b === pickedBtn) b.classList.add('wrong');
+      });
+    } else if(pickedBtn){
+      pickedBtn.classList.add('picked');
+    }
+  });
+  if(exerciseState.checked){
+    let correct = 0;
+    document.querySelectorAll('.exercise').forEach(el=>{
+      const i = el.dataset.index;
+      if(exerciseState.picked[i] === el.dataset.answer) correct++;
+    });
+    document.getElementById('score-text').textContent = `${correct} / ${EXERCISES.length} correctas`;
+  }
+}
+
+async function cargarPracticaYRenderizar(){
+  await cargarPractica();
+  renderExercises();
+}
+cargarPracticaYRenderizar();
+
+document.getElementById('sarcasm-toggle').addEventListener('click', (e)=>{
+  sarcasmOn = !sarcasmOn;
+  e.currentTarget.classList.toggle('on', sarcasmOn);
+  e.currentTarget.setAttribute('aria-checked', String(sarcasmOn));
+  renderExercises();
+});
+
+document.getElementById('check-btn').addEventListener('click', ()=>{
+  let correct = 0;
+  document.querySelectorAll('.exercise').forEach(el=>{
+    const answer = el.dataset.answer;
+    const picked = el.querySelector('.opt-btn.picked');
+    el.querySelectorAll('.opt-btn').forEach(b=>{
+      b.disabled = true;
+      if(b.dataset.value === answer) b.classList.add('correct');
+      else if(b === picked) b.classList.add('wrong');
+    });
+    if(picked && picked.dataset.value === answer) correct++;
+  });
+  document.getElementById('score-text').textContent = `${correct} / ${EXERCISES.length} correctas`;
+  exerciseState.checked = true;
+  guardarPractica();
+});
+
+document.getElementById('reset-btn').addEventListener('click', ()=>{
+  exerciseState = { picked: {}, checked: false };
+  renderExercises();
+});
+
+
+/* ---------- LOCATION CARDS ---------- */
+const CHARACTERS = [
+  {
+    "name": "El baño",
+    "role": "Un cliente pregunta dónde está",
+    "facts": ["el baño", "al fondo", "a la derecha"],
+    "prompt": "Indica dónde está con \"estar\":"
+  },
+  {
+    "name": "La mesa del cliente",
+    "role": "Acabas de sentar a un cliente nuevo",
+    "facts": ["la mesa", "junto a la ventana", "mesa 5"],
+    "prompt": "Indica dónde está su mesa:"
+  },
+  {
+    "name": "La carta",
+    "role": "El cliente no encuentra el menú",
+    "facts": ["la carta", "encima de la mesa", "también en inglés"],
+    "prompt": "Indica dónde está con \"estar\":"
+  },
+  {
+    "name": "La cocina",
+    "role": "Un compañero nuevo pregunta por la cocina",
+    "facts": ["la cocina", "detrás de la barra", "cerca del almacén"],
+    "prompt": "Indica dónde está con \"estar\":"
+  },
+  {
+    "name": "El bar",
+    "role": "Un cliente busca el bar de la cubierta",
+    "facts": ["el bar", "cubierta superior", "cerca de la terraza"],
+    "prompt": "Indica dónde está con \"estar\":"
+  },
+  {
+    "name": "La salida de emergencia",
+    "role": "Información de seguridad para un cliente",
+    "facts": ["la salida", "al lado del ascensor", "señalizada en verde"],
+    "prompt": "Indica dónde está con \"estar\":"
+  },
+  {
+    "name": "El guardarropa",
+    "role": "Un cliente quiere dejar el abrigo",
+    "facts": ["el guardarropa", "justo a la entrada", "gratuito"],
+    "prompt": "Indica dónde está con \"estar\":"
+  },
+  {
+    "name": "La terraza",
+    "role": "Un cliente quiere tomar el sol",
+    "facts": ["la terraza", "encima del restaurante", "muy bonita"],
+    "prompt": "Indica dónde está con \"estar\":"
+  },
+  {
+    "name": "El almacén",
+    "role": "Un compañero busca material de limpieza",
+    "facts": ["el almacén", "al lado de la cocina", "pequeño"],
+    "prompt": "Indica dónde está con \"estar\":"
+  },
+  {
+    "name": "La recepción",
+    "role": "Un cliente busca información general",
+    "facts": ["la recepción", "cerca de la entrada principal", "con teléfono de reservas"],
+    "prompt": "Indica dónde está con \"estar\":"
+  },
+  {
+    "name": "El ascensor",
+    "role": "Un cliente mayor pregunta cómo subir",
+    "facts": ["el ascensor", "al lado de las escaleras", "va a todas las plantas"],
+    "prompt": "Indica dónde está con \"estar\":"
+  },
+  {
+    "name": "Las escaleras",
+    "role": "Alternativa al ascensor",
+    "facts": ["las escaleras", "al lado del ascensor", "llevan a la terraza"],
+    "prompt": "Indica dónde están con \"estar\":"
+  },
+  {
+    "name": "La barra",
+    "role": "Un cliente quiere pedir en la barra",
+    "facts": ["la barra", "centro del salón", "con dos camareros"],
+    "prompt": "Indica dónde está con \"estar\":"
+  },
+  {
+    "name": "El teléfono de mesa",
+    "role": "Un cliente pregunta cómo llamar al camarero",
+    "facts": ["el teléfono", "en cada mesa", "para llamar al camarero"],
+    "prompt": "Indica dónde está con \"estar\":"
+  },
+  {
+    "name": "La nevera de bebidas",
+    "role": "Un compañero busca bebidas frías",
+    "facts": ["la nevera", "en la barra", "bebidas frías"],
+    "prompt": "Indica dónde está con \"estar\":"
+  },
+  {
+    "name": "Los baños de señoras",
+    "role": "Una clienta pregunta por el baño",
+    "facts": ["los baños", "a la izquierda", "junto al bar"],
+    "prompt": "Indica dónde están con \"estar\":"
+  },
+  {
+    "name": "La mesa 12",
+    "role": "Un cliente busca su mesa reservada",
+    "facts": ["la mesa 12", "muy cerca de la cocina", "reservada a su nombre"],
+    "prompt": "Indica dónde está con \"estar\":"
+  },
+  {
+    "name": "El segundo restaurante",
+    "role": "Un cliente pregunta por otras opciones",
+    "facts": ["el restaurante", "en la cubierta inferior", "más informal"],
+    "prompt": "Indica dónde está con \"estar\":"
+  },
+  {
+    "name": "La entrada de la cocina",
+    "role": "Un compañero pregunta por dónde entrar",
+    "facts": ["la entrada", "al lado del almacén", "solo para personal"],
+    "prompt": "Indica dónde está con \"estar\":"
+  },
+  {
+    "name": "El punto de información",
+    "role": "Un cliente busca un mapa del barco",
+    "facts": ["el punto de información", "junto a la recepción", "con mapas gratuitos"],
+    "prompt": "Indica dónde está con \"estar\":"
+  },
+  {
+    "name": "La zona de fumadores",
+    "role": "Un cliente pregunta dónde puede fumar",
+    "facts": ["la zona de fumadores", "en la cubierta exterior", "al fondo"],
+    "prompt": "Indica dónde está con \"estar\":"
+  },
+  {
+    "name": "El cajero automático",
+    "role": "Un cliente necesita efectivo",
+    "facts": ["el cajero", "cerca de la recepción", "acepta varias tarjetas"],
+    "prompt": "Indica dónde está con \"estar\":"
+  },
+  {
+    "name": "La zona de niños",
+    "role": "Una familia busca entretenimiento infantil",
+    "facts": ["la zona de niños", "en la cubierta superior", "con juegos"],
+    "prompt": "Indica dónde está con \"estar\":"
+  },
+  {
+    "name": "El servicio de habitaciones",
+    "role": "Un cliente pregunta por su camarote",
+    "facts": ["los camarotes", "en las cubiertas inferiores", "numerados por pasillo"],
+    "prompt": "Indica dónde están con \"estar\":"
+  }
+]
+;
+
+const charWrap = document.getElementById('characters');
+const CHAR_INPUT_STORAGE_KEY = 'angelika-clase03-personajes';
+let charInputState = {};
+
+async function guardarCharInputs(){
+  if (!window.storage) return;
+  try{ await window.storage.set(CHAR_INPUT_STORAGE_KEY, JSON.stringify(charInputState)); }catch(e){}
+}
+async function cargarCharInputs(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(CHAR_INPUT_STORAGE_KEY);
+    if (res && typeof res.value === 'string'){
+      const parsed = JSON.parse(res.value);
+      if(parsed && typeof parsed === 'object') charInputState = parsed;
+    }
+  }catch(e){}
+}
+
+CHARACTERS.forEach((c, i)=>{
+  if(i === 0){
+    const divider = document.createElement('div');
+    divider.className = 'ex-divider en-clase';
+    divider.textContent = 'en clase · personajes 1–6';
+    charWrap.appendChild(divider);
+  }
+  if(i === 6){
+    const divider = document.createElement('div');
+    divider.className = 'ex-divider';
+    divider.textContent = 'para casa · banco de repaso';
+    charWrap.appendChild(divider);
+  }
+  const card = document.createElement('div');
+  card.className = 'char-card';
+  card.innerHTML = `
+    <div class="char-avatar">${c.name.charAt(0)}</div>
+    <div class="char-body">
+      <p class="char-name">${c.name}</p>
+      <p class="char-role">${c.role}</p>
+      <div class="char-facts">${c.facts.map(f=>`<span class="fact-tag">${f}</span>`).join('')}</div>
+      <p class="char-prompt">${c.prompt}</p>
+      <textarea class="char-input" rows="2" placeholder="Está / Están ..." data-char-idx="${i}"></textarea>
+    </div>
+  `;
+  charWrap.appendChild(card);
+});
+
+let charInputTimer = null;
+charWrap.querySelectorAll('.char-input').forEach(ta=>{
+  const idx = ta.dataset.charIdx;
+  ta.addEventListener('input', ()=>{
+    charInputState[idx] = ta.value;
+    clearTimeout(charInputTimer);
+    charInputTimer = setTimeout(guardarCharInputs, 800);
+  });
+});
+cargarCharInputs().then(()=>{
+  charWrap.querySelectorAll('.char-input').forEach(ta=>{
+    const idx = ta.dataset.charIdx;
+    if (charInputState[idx]) ta.value = charInputState[idx];
+  });
+});
+
+/* ---------- ROLEPLAY SCENES ---------- */
+const SCENES = [
+  {
+    "id": "bano",
+    "tab": "¿Dónde está el baño?",
+    "icon": "🚻",
+    "setup": "Un cliente busca el baño. Trato formal (usted).",
+    "lines": [
+      {"who":"friend","name":"Cliente","text":"Perdone, ¿hay un baño por aquí?", "translationDE": "Entschuldigung, gibt es hier in der Nähe eine Toilette?"},
+      {"who":"you","hint":"Confirma con \"hay\" y luego indica con \"estar\" dónde está."},
+      {"who":"friend","name":"Cliente","text":"¿Está muy lejos?", "translationDE": "Ist es sehr weit?"},
+      {"who":"you","hint":"Responde con \"estar\" sobre la distancia."},
+      {"who":"friend","name":"Cliente","text":"Perfecto. ¿Y hay baño también para sillas de ruedas?", "translationDE": "Perfekt. Und gibt es auch eine Toilette für Rollstuhlfahrer?"},
+      {"who":"you","hint":"Responde con \"hay\" y \"estar\" indicando dónde."},
+      {"who":"friend","name":"Cliente","text":"Genial, muchas gracias.", "translationDE": "Toll, vielen Dank."},
+      {"who":"you","hint":"Responde formalmente."},
+      {"who":"friend","name":"Cliente","text":"Una cosa más, ¿el ascensor está cerca de allí?", "translationDE": "Noch etwas, ist der Aufzug in der Nähe davon?"},
+      {"who":"you","hint":"Responde con \"estar\" sobre el ascensor."},
+      {"who":"friend","name":"Cliente","text":"Estupendo, ¿y hay escaleras también?", "translationDE": "Ausgezeichnet, und gibt es auch eine Treppe?"},
+      {"who":"you","hint":"Responde con \"hay\" y \"estar\"."},
+      {"who":"friend","name":"Cliente","text":"Perfecto, muchas gracias por la ayuda.", "translationDE": "Perfekt, vielen Dank für die Hilfe."},
+      {"who":"you","hint":"Despídete formalmente."},
+      {"who":"friend","name":"Cliente","text":"Una última pregunta, ¿hay toallas de papel dentro?", "translationDE": "Eine letzte Frage, gibt es Papierhandtücher drinnen?"},
+      {"who":"you","hint":"Responde con \"hay\"."}
+    ]
+  },
+  {
+    "id": "mesa",
+    "tab": "Acompañar a la mesa",
+    "icon": "🍽️",
+    "setup": "Acompañas a un cliente nuevo a su mesa. Trato formal.",
+    "lines": [
+      {"who":"friend","name":"Cliente","text":"Buenas tardes, tengo una mesa reservada.", "translationDE": "Guten Tag, ich habe einen Tisch reserviert."},
+      {"who":"you","hint":"Saluda e indica con \"estar\" dónde está su mesa."},
+      {"who":"friend","name":"Cliente","text":"¿Está cerca de la ventana?", "translationDE": "Ist er in der Nähe des Fensters?"},
+      {"who":"you","hint":"Responde con \"estar\" confirmando la ubicación."},
+      {"who":"friend","name":"Cliente","text":"Perfecto. ¿Dónde está la carta?", "translationDE": "Perfekt. Wo ist die Speisekarte?"},
+      {"who":"you","hint":"Responde con \"estar\" indicando dónde está la carta."},
+      {"who":"friend","name":"Cliente","text":"Gracias. ¿Hay menú también en alemán?", "translationDE": "Danke. Gibt es die Speisekarte auch auf Deutsch?"},
+      {"who":"you","hint":"Responde con \"hay\" sobre los idiomas del menú."},
+      {"who":"friend","name":"Cliente","text":"Estupendo. ¿Dónde está el baño más cercano?", "translationDE": "Ausgezeichnet. Wo ist die nächste Toilette?"},
+      {"who":"you","hint":"Indica con \"estar\" la ubicación del baño."},
+      {"who":"friend","name":"Cliente","text":"Genial, gracias por toda la información.", "translationDE": "Toll, danke für all die Informationen."},
+      {"who":"you","hint":"Responde formalmente."},
+      {"who":"friend","name":"Cliente","text":"¿Está el camarero disponible ya para pedir?", "translationDE": "Ist der Kellner schon verfügbar, um die Bestellung aufzunehmen?"},
+      {"who":"you","hint":"Responde con \"estar\" sobre la disponibilidad."},
+      {"who":"friend","name":"Cliente","text":"Perfecto, entonces esperamos un momento.", "translationDE": "Perfekt, dann warten wir einen Moment."},
+      {"who":"you","hint":"Responde con \"estar\" cerrando la conversación."}
+    ]
+  },
+  {
+    "id": "companero",
+    "tab": "Con un compañero nuevo",
+    "icon": "🧑‍🍳",
+    "setup": "Un compañero nuevo pregunta dónde está todo en el barco. Trato informal.",
+    "lines": [
+      {"who":"friend","name":"Bruno","text":"Oye, ¿dónde está el almacén de bebidas?", "translationDE": "Sag mal, wo ist das Getränkelager?"},
+      {"who":"you","hint":"Indica con \"estar\" dónde está el almacén."},
+      {"who":"friend","name":"Bruno","text":"Vale, ¿y la cocina está muy lejos de aquí?", "translationDE": "Okay, und ist die Küche sehr weit von hier?"},
+      {"who":"you","hint":"Responde con \"estar\" sobre la distancia."},
+      {"who":"friend","name":"Bruno","text":"¿Hay otro almacén más pequeño en algún sitio?", "translationDE": "Gibt es noch ein kleineres Lager irgendwo?"},
+      {"who":"you","hint":"Responde con \"hay\" y \"estar\" indicando dónde."},
+      {"who":"friend","name":"Bruno","text":"¿Dónde están los baños de personal?", "translationDE": "Wo sind die Personaltoiletten?"},
+      {"who":"you","hint":"Indica con \"estar\" dónde están."},
+      {"who":"friend","name":"Bruno","text":"Genial. ¿Y el jefe de sala, dónde está ahora?", "translationDE": "Super. Und wo ist der Saalleiter gerade?"},
+      {"who":"you","hint":"Responde con \"estar\" sobre el jefe de sala."},
+      {"who":"friend","name":"Bruno","text":"Vale, voy a buscarlo. ¿Hay algo más que deba saber?", "translationDE": "Okay, ich suche ihn. Gibt es sonst noch etwas, das ich wissen sollte?"},
+      {"who":"you","hint":"Responde con \"hay\" mencionando algo útil."},
+      {"who":"friend","name":"Bruno","text":"Perfecto, gracias por la ayuda.", "translationDE": "Perfekt, danke für die Hilfe."},
+      {"who":"you","hint":"Responde de forma informal."},
+      {"who":"friend","name":"Bruno","text":"¿Estás tú en la barra hoy también?", "translationDE": "Bist du heute auch an der Bar?"},
+      {"who":"you","hint":"Responde con \"estar\" sobre tu ubicación hoy."}
+    ]
+  },
+  {
+    "id":"perdido",
+    "tab": "Cliente perdido",
+    "icon": "🧭",
+    "setup": "Un cliente se ha perdido buscando su camarote. Trato formal.",
+    "lines": [
+      {"who":"friend","name":"Cliente","text":"Disculpe, no encuentro mi camarote.", "translationDE": "Entschuldigung, ich finde meine Kabine nicht."},
+      {"who":"you","hint":"Pregunta el número y responde con \"estar\" sobre dónde suelen estar."},
+      {"who":"friend","name":"Cliente","text":"Es el número 214.", "translationDE": "Es ist die Nummer 214."},
+      {"who":"you","hint":"Indica con \"estar\" en qué cubierta está aproximadamente."},
+      {"who":"friend","name":"Cliente","text":"¿Está muy lejos desde aquí?", "translationDE": "Ist es sehr weit von hier?"},
+      {"who":"you","hint":"Responde con \"estar\" sobre la distancia."},
+      {"who":"friend","name":"Cliente","text":"¿Hay ascensor para bajar hasta allí?", "translationDE": "Gibt es einen Aufzug, um dorthin zu kommen?"},
+      {"who":"you","hint":"Responde con \"hay\" y \"estar\" indicando dónde está el ascensor."},
+      {"who":"friend","name":"Cliente","text":"Perfecto. ¿Y hay alguien que me pueda acompañar?", "translationDE": "Perfekt. Und gibt es jemanden, der mich begleiten kann?"},
+      {"who":"you","hint":"Responde con \"hay\" o \"estar\" sobre quién puede ayudar."},
+      {"who":"friend","name":"Cliente","text":"Se lo agradezco mucho.", "translationDE": "Vielen Dank dafür."},
+      {"who":"you","hint":"Responde formalmente."},
+      {"who":"friend","name":"Cliente","text":"¿Está la recepción también por ahí cerca?", "translationDE": "Ist die Rezeption auch in der Nähe?"},
+      {"who":"you","hint":"Responde con \"estar\" sobre la recepción."},
+      {"who":"friend","name":"Cliente","text":"Genial, muchísimas gracias por todo.", "translationDE": "Toll, vielen herzlichen Dank für alles."},
+      {"who":"you","hint":"Despídete formalmente."}
+    ]
+  },
+  {
+    "id":"turista",
+    "tab": "Turista con preguntas",
+    "icon": "🗺️",
+    "setup": "Un turista pregunta por varias zonas del barco a la vez. Trato formal (plural, ustedes).",
+    "lines": [
+      {"who":"friend","name":"Turistas","text":"Hola, ¿hay un mapa del barco en algún sitio?", "translationDE": "Hallo, gibt es irgendwo eine Karte des Schiffs?"},
+      {"who":"you","hint":"Responde con \"hay\" y \"estar\" indicando dónde conseguirlo."},
+      {"who":"friend","name":"Turistas","text":"Genial. ¿Dónde está la piscina, si es que hay?", "translationDE": "Toll. Wo ist der Pool, falls es einen gibt?"},
+      {"who":"you","hint":"Responde con \"hay\"/\"estar\" sobre la piscina."},
+      {"who":"friend","name":"Turistas","text":"¿Y hay alguna tienda de recuerdos a bordo?", "translationDE": "Und gibt es an Bord auch einen Souvenirladen?"},
+      {"who":"you","hint":"Responde con \"hay\" y \"estar\" sobre la tienda."},
+      {"who":"friend","name":"Turistas","text":"Perfecto. ¿Está muy lejos de la recepción?", "translationDE": "Perfekt. Ist es sehr weit von der Rezeption entfernt?"},
+      {"who":"you","hint":"Responde con \"estar\" sobre la distancia."},
+      {"who":"friend","name":"Turistas","text":"¿Hay zona de niños para nuestros hijos?", "translationDE": "Gibt es einen Kinderbereich für unsere Kinder?"},
+      {"who":"you","hint":"Responde con \"hay\" y \"estar\" indicando dónde está."},
+      {"who":"friend","name":"Turistas","text":"Estupendo. ¿Y dónde están los camarotes familiares?", "translationDE": "Ausgezeichnet. Und wo sind die Familienkabinen?"},
+      {"who":"you","hint":"Responde con \"estar\" sobre los camarotes."},
+      {"who":"friend","name":"Turistas","text":"Muchas gracias por toda la información.", "translationDE": "Vielen Dank für all die Informationen."},
+      {"who":"you","hint":"Responde formalmente (ustedes)."},
+      {"who":"friend","name":"Turistas","text":"¿Están ustedes todo el día trabajando aquí?", "translationDE": "Arbeiten Sie hier den ganzen Tag?"},
+      {"who":"you","hint":"Responde con \"estar\" sobre tu turno."}
+    ]
+  },
+  {
+    "id":"sarcastico",
+    "tab": "Cliente sarcástico",
+    "icon": "🙄",
+    "setup": "Un cliente que se cree muy gracioso pregunta por todo el barco con retintín. Trato formal, pero él no colabora.",
+    "lines": [
+      {"who":"friend","name":"Cliente sarcástico","text":"Vaya, qué barco tan grande... ¿hay algún mapa, o hay que ir descubriéndolo como en una expedición?", "translationDE": "Was für ein großes Schiff... gibt es überhaupt einen Plan, oder muss man es wie bei einer Expedition selbst entdecken?"},
+      {"who":"you","hint":"Responde con \"hay\" y \"estar\" indicando dónde conseguir el mapa, sin perder la sonrisa."},
+      {"who":"friend","name":"Cliente sarcástico","text":"Ah, genial. ¿Y el baño está cerca, o es otra de esas 'aventuras'?", "translationDE": "Ach, wie schön. Und ist die Toilette in der Nähe, oder ist das auch eines dieser 'Abenteuer'?"},
+      {"who":"you","hint":"Responde con \"estar\" indicando la distancia, con toda la paciencia del mundo."},
+      {"who":"friend","name":"Cliente sarcástico","text":"Qué suerte la mía. ¿Hay wifi aquí, o eso también es 'parte de la experiencia'?", "translationDE": "Was für ein Glück ich habe. Gibt es hier WLAN, oder gehört das auch 'zum Erlebnis'?"},
+      {"who":"you","hint":"Responde con \"hay\" sobre el wifi."},
+      {"who":"friend","name":"Cliente sarcástico","text":"Por fin algo bueno. ¿Dónde está mi mesa, la VIP que reservé, obviamente?", "translationDE": "Endlich mal etwas Gutes. Wo ist mein Tisch, der VIP-Tisch, den ich natürlich reserviert habe?"},
+      {"who":"you","hint":"Responde con \"estar\" indicando su mesa, formal y sin morder el anzuelo."},
+      {"who":"friend","name":"Cliente sarcástico","text":"¿En serio está ahí? Pensaba que tendría vistas al mar, no a la cocina.", "translationDE": "Ist der wirklich da? Ich dachte, ich hätte Meerblick, nicht Küchenblick."},
+      {"who":"you","hint":"Responde con \"estar\" sobre la ubicación, ofreciendo alguna alternativa si la hay."},
+      {"who":"friend","name":"Cliente sarcástico","text":"Bueno, algo es algo. ¿Hay alguna terraza donde uno pueda 'respirar aire de verdad'?", "translationDE": "Na gut, immerhin etwas. Gibt es eine Terrasse, wo man 'echte Luft atmen' kann?"},
+      {"who":"you","hint":"Responde con \"hay\" y \"estar\" indicando dónde está la terraza."},
+      {"who":"friend","name":"Cliente sarcástico","text":"Vale, vale. Última pregunta: ¿está usted siempre así de contenta trabajando aquí?", "translationDE": "Gut, gut. Letzte Frage: Sind Sie hier bei der Arbeit immer so fröhlich drauf?"},
+      {"who":"you","hint":"Responde con \"estar\", mantén la compostura profesional pase lo que pase."}
+    ]
+  }
+];
+
+const sceneTabs = document.getElementById('scene-tabs');
+const sceneContainer = document.getElementById('scene-container');
+let activeScene = 0;
+const LINE_INPUT_STORAGE_KEY = 'angelika-clase03-roleplay';
+let lineInputState = {};
+let lineInputTimer = null;
+
+async function guardarLineInputs(){
+  if (!window.storage) return;
+  try{ await window.storage.set(LINE_INPUT_STORAGE_KEY, JSON.stringify(lineInputState)); }catch(e){}
+}
+async function cargarLineInputs(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(LINE_INPUT_STORAGE_KEY);
+    if (res && typeof res.value === 'string'){
+      const parsed = JSON.parse(res.value);
+      if(parsed && typeof parsed === 'object') lineInputState = parsed;
+    }
+  }catch(e){}
+}
+
+function renderTabs(){
+  sceneTabs.innerHTML = SCENES.map((s,i)=>
+    `<button class="scene-tab${i===activeScene?' active':''}" data-idx="${i}">${s.icon} ${s.tab}</button>`
+  ).join('');
+  sceneTabs.querySelectorAll('.scene-tab').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      activeScene = parseInt(btn.dataset.idx, 10);
+      renderTabs();
+      renderScene();
+    });
+  });
+}
+
+function renderScene(){
+  const scene = SCENES[activeScene];
+  let lineIdx = 0;
+  const linesHtml = scene.lines.map((l)=>{
+    if(l.who === 'friend'){
+      return `
+        <div class="line friend">
+          <div class="line-avatar">${l.name.charAt(0)}</div>
+          <div class="line-body">
+            <p class="line-name">${l.name}</p>
+            <div class="line-bubble">${l.text}</div>
+            ${l.translationDE ? `<p class="line-translation">${l.translationDE}</p>` : ''}
+          </div>
+        </div>`;
+    } else {
+      const key = `${activeScene}-${lineIdx}`;
+      lineIdx++;
+      const saved = lineInputState[key] || '';
+      return `
+        <div class="line you">
+          <div class="line-avatar">Tú</div>
+          <div class="line-body">
+            <p class="line-name">Tú</p>
+            <textarea class="line-input" rows="2" placeholder="Escribe tu respuesta con 'hay'/'estar'..." data-line-key="${key}">${saved}</textarea>
+            <p class="line-hint">${l.hint}</p>
+          </div>
+        </div>`;
+    }
+  }).join('');
+
+  sceneContainer.innerHTML = `
+    <div class="scene-setup">
+      <span class="scene-icon">${scene.icon}</span>
+      <p class="scene-text"><strong>${scene.tab}:</strong> ${scene.setup}</p>
+    </div>
+    <div class="dialogue">${linesHtml}</div>
+  `;
+
+  sceneContainer.querySelectorAll('.line-input').forEach(ta=>{
+    const key = ta.dataset.lineKey;
+    ta.addEventListener('input', ()=>{
+      lineInputState[key] = ta.value;
+      clearTimeout(lineInputTimer);
+      lineInputTimer = setTimeout(guardarLineInputs, 800);
+    });
+  });
+}
+
+cargarLineInputs().then(()=>{
+  renderTabs();
+  renderScene();
+});
+
+/* ---------- FINAL TASK ---------- */
+const STORAGE_KEY = 'angelika-clase03-tarea';
+const taskArea = document.getElementById('final-task');
+const taskCount = document.getElementById('task-count');
+const savedFlag = document.getElementById('saved-flag');
+
+async function cargarTarea(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(STORAGE_KEY);
+    if (res && typeof res.value === 'string') taskArea.value = res.value;
+  }catch(e){
+    // Clave inexistente todavía: no hay tarea previa, se queda en blanco.
+  }
+  updateCount();
+}
+
+function updateCount(){
+  const matches = (taskArea.value.match(/\bestá[n]?\b/gi) || []).length;
+  taskCount.textContent = `${matches} frase${matches===1?'':'s'} con "está" detectada${matches===1?'':'s'}`;
+}
+let autosaveTimer = null;
+async function autoguardar(){
+  if (!window.storage){
+    savedFlag.textContent = 'Guardado no disponible aquí';
+    savedFlag.classList.add('show');
+    setTimeout(()=>{ savedFlag.classList.remove('show'); savedFlag.textContent = 'Guardado ✓'; }, 2200);
+    return;
+  }
+  try{
+    const ok = await window.storage.set(STORAGE_KEY, taskArea.value);
+    savedFlag.textContent = ok ? 'Guardado ✓' : 'No se pudo guardar';
+  }catch(e){
+    savedFlag.textContent = 'No se pudo guardar';
+  }
+  savedFlag.classList.add('show');
+  setTimeout(()=>{ savedFlag.classList.remove('show'); savedFlag.textContent = 'Guardado ✓'; }, 1800);
+}
+
+taskArea.addEventListener('input', ()=>{
+  updateCount();
+  clearTimeout(autosaveTimer);
+  autosaveTimer = setTimeout(autoguardar, 800);
+});
+updateCount();
+cargarTarea();
+</script>
+
+</body>
+</html>

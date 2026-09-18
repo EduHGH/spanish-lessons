@@ -1,0 +1,1308 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clase 2 · Saludar a los clientes — Angelika</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+
+/* ╔══════════════════════════════════════════════════════════════╗
+   ║  ESCOLAR — sistema de diseño para clases de español online   ║
+   ║  Clase 2 · L1 Primeros pasos a bordo · "Saludar a los clientes" ║
+   ╚══════════════════════════════════════════════════════════════╝ */
+
+:root{
+  --paper:        #FBF7EE;
+  --paper-raised: #FFFFFF;
+  --paper-alt:    #F3ECDA;
+  --ink:          #23291F;
+  --ink-soft:     #565F52;
+  --ink-faint:    #8B9184;
+  --line:         rgba(35,41,31,0.12);
+  --line-strong:  rgba(35,41,31,0.22);
+
+  --b1:      #2F6FED;  --b1-soft: #EAF1FE;  --b1-line: #C6D9FC;
+  --b2:      #2E9E6B;  --b2-soft: #E9F6EF;  --b2-line: #BEE6D3;
+  --family:  #B5502E;  --family-soft: #FBEBE3; --family-line: #EFC9B4;
+
+  --f-display: 'Fraunces', Georgia, serif;
+  --f-body:    'IBM Plex Sans', system-ui, sans-serif;
+  --f-data:    'IBM Plex Mono', monospace;
+
+  --r-sm: 8px;
+  --r-md: 14px;
+  --r-lg: 20px;
+
+  --shadow-1: 0 1px 2px rgba(35,41,31,0.05), 0 1px 8px rgba(35,41,31,0.04);
+}
+
+*{ box-sizing:border-box; }
+body{
+  margin:0;
+  background: var(--paper);
+  background-image: radial-gradient(circle at 1px 1px, var(--line) 1px, transparent 0);
+  background-size: 22px 22px;
+  color: var(--ink);
+  font-family: var(--f-body);
+  line-height:1.6;
+}
+::selection{ background: var(--b2-soft); }
+
+/* ---------- HEADER ---------- */
+header{ padding:44px 24px 28px; max-width:760px; margin:0 auto; }
+.eyebrow{
+  font-family: var(--f-data); font-size:12px; letter-spacing:.14em;
+  text-transform:uppercase; color: var(--b2); margin:0 0 10px;
+  display:flex; align-items:center; gap:10px;
+}
+.eyebrow .dot{ width:6px; height:6px; border-radius:50%; background: var(--b2); }
+h1{
+  font-family: var(--f-display); font-weight:600;
+  font-size:clamp(30px,5.6vw,46px); line-height:1.08;
+  margin:0 0 14px; letter-spacing:-.01em;
+}
+h1 em{ font-style:italic; color: var(--b2); }
+.lede{ font-size:16px; color: var(--ink-soft); max-width:56ch; margin:0; }
+
+.meta-row{
+  display:flex; flex-wrap:wrap; gap:20px; margin-top:26px;
+  font-family: var(--f-data); font-size:12px; color: var(--ink-faint);
+}
+.meta-row strong{
+  display:block; color: var(--ink); font-size:14.5px; font-weight:500;
+  font-family: var(--f-display); margin-top:3px;
+}
+
+/* ---------- SECTIONS ---------- */
+main{ max-width:760px; margin:0 auto; padding:8px 24px 100px; }
+
+section.block{ margin-bottom:52px; }
+.block-head{ display:flex; align-items:baseline; gap:12px; margin-bottom:18px; }
+.time-tag{
+  font-family: var(--f-data); font-size:11px; color: var(--ink-faint);
+  background: var(--paper-alt); padding:3px 10px; border-radius:999px; margin-left:auto; flex:none;
+}
+.block-num{
+  font-family: var(--f-data); font-size:12px; color:#fff; background: var(--b2);
+  width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  flex:none;
+}
+.block-head h2{
+  font-family: var(--f-display); font-weight:500; font-style:italic; font-size:22px; margin:0;
+}
+
+.panel{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-lg);
+  box-shadow: var(--shadow-1); padding:26px 28px;
+}
+
+/* ---------- GRAMMAR TABLE ---------- */
+.conj-table{ width:100%; border-collapse:collapse; margin-top:4px; }
+.conj-table td{ padding:10px 6px; border-bottom:1px dashed var(--line); font-size:15px; }
+.conj-table tr:last-child td{ border-bottom:none; }
+.conj-pron{ font-family: var(--f-data); color: var(--ink-faint); font-size:13px; width:90px; }
+.conj-form{ font-family: var(--f-display); font-weight:600; font-size:19px; color: var(--b2); }
+.conj-ex{ color: var(--ink-soft); font-size:14px; }
+
+.note{
+  margin-top:18px; padding:14px 16px; background: var(--b2-soft); border:1px solid var(--b2-line);
+  border-radius: var(--r-md); font-size:14px; color: var(--ink-soft);
+}
+.note strong{ color: var(--ink); }
+
+/* ---------- FORMAL vs INFORMAL ---------- */
+.compare-wrap{ margin-top:22px; }
+.compare-title{
+  font-family: var(--f-data); font-size:11.5px; text-transform:uppercase; letter-spacing:.06em;
+  color: var(--ink-faint); margin:0 0 10px;
+}
+.compare-grid{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+@media (max-width:560px){ .compare-grid{ grid-template-columns:1fr; } }
+.compare-col{ border-radius: var(--r-md); padding:16px 18px; border:1px solid; }
+.compare-col.is-ser{ background: var(--b1-soft); border-color: var(--b1-line); }
+.compare-col.is-estar{ background: var(--b2-soft); border-color: var(--b2-line); }
+.compare-head{ display:flex; align-items:center; gap:8px; margin:0 0 10px; }
+.compare-verb{ font-family: var(--f-display); font-weight:600; font-size:19px; }
+.is-ser .compare-verb{ color: var(--b1); }
+.is-estar .compare-verb{ color: var(--b2); }
+.compare-sub{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); }
+.compare-list{ margin:0; padding:0; list-style:none; }
+.compare-list li{ font-size:13.5px; color: var(--ink-soft); padding:6px 0; border-top:1px dashed var(--line); }
+.compare-list li:first-child{ border-top:none; }
+.compare-list strong{ color: var(--ink); font-weight:600; }
+.compare-list em{ display:block; font-style:normal; color: var(--ink-faint); font-size:12.5px; margin-top:2px; }
+.compare-warning{
+  margin-top:14px; padding:14px 16px; background: var(--family-soft); border:1px solid var(--family-line);
+  border-radius: var(--r-md); font-size:13.5px; color: var(--ink-soft);
+}
+.compare-warning strong{ color: var(--family); }
+
+/* ---------- VOCAB CARDS ---------- */
+.vocab-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:12px; }
+.vocab-card{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:14px 16px; cursor:pointer; perspective:600px; min-height:78px;
+  display:flex; flex-direction:column; justify-content:center; transition: border-color .15s ease;
+}
+.vocab-card:hover{ border-color: var(--b2-line); }
+.vocab-card:focus-visible{ outline:2px solid var(--b2); outline-offset:2px; }
+.vocab-front{ font-family: var(--f-body); font-weight:600; font-size:15px; }
+.vocab-back{ display:none; font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); margin-top:6px; }
+.vocab-card.flipped .vocab-back{ display:block; }
+.vocab-card.flipped{ background: var(--b2-soft); border-color: var(--b2-line); }
+.vocab-hint{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin:10px 2px 16px; }
+
+/* ---------- EXERCISE ---------- */
+.exercise{ margin-bottom:20px; }
+.exercise:last-of-type{ margin-bottom:0; }
+.ex-sentence{ font-size:15.5px; margin-bottom:10px; }
+.ex-sentence .gap{ font-family: var(--f-data); color: var(--ink-faint); }
+.ex-options{ display:flex; flex-wrap:wrap; gap:8px; }
+.opt-btn{
+  font-family: var(--f-body); font-size:14px; background: var(--paper-raised);
+  border:1.5px solid var(--line); color: var(--ink); padding:7px 16px; border-radius:999px;
+  cursor:pointer; transition: all .15s ease;
+}
+.opt-btn:hover{ border-color: var(--ink-faint); }
+.opt-btn.picked{ background: var(--b2-soft); border-color: var(--b2); color: var(--b2); }
+.opt-btn.correct{ background: var(--b2-soft); border-color: var(--b2); color: var(--b2); }
+.opt-btn.wrong{ background: var(--family-soft); border-color: var(--family); color: var(--family); }
+.opt-btn:disabled{ cursor:default; }
+
+.check-bar{
+  display:flex; align-items:center; justify-content:space-between; gap:16px;
+  margin-top:22px; padding-top:18px; border-top:1px dashed var(--line);
+}
+.btn-primary{
+  font-family: var(--f-body); font-weight:600; font-size:14px; color:#fff; background: var(--b2);
+  border:none; padding:11px 22px; border-radius:999px; cursor:pointer; transition: transform .1s ease;
+}
+.btn-primary:hover{ transform: translateY(-1px); }
+#score-text{ font-family: var(--f-data); font-size:13px; color: var(--ink-faint); }
+.btn-ghost{
+  font-family: var(--f-body); font-weight:600; font-size:13px; color: var(--ink-soft); background:none;
+  border:1.5px solid var(--line); padding:9px 18px; border-radius:999px; cursor:pointer;
+}
+.btn-ghost:hover{ border-color: var(--ink-faint); }
+.ex-divider{
+  display:flex; align-items:center; gap:10px; margin:20px 0 16px;
+  font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.06em;
+  color: var(--ink-faint);
+}
+.ex-divider::before, .ex-divider::after{ content:""; flex:1; height:1px; background: var(--line); }
+.ex-divider.en-clase{ color: var(--b2); }
+.ex-divider.en-clase::before, .ex-divider.en-clase::after{ background: var(--b2-line); }
+
+/* ---------- CLIENT CARDS ---------- */
+.characters{ display:grid; gap:16px; }
+.char-card{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-lg);
+  padding:20px 22px; display:flex; gap:16px; align-items:flex-start;
+}
+.char-avatar{
+  flex:none; width:44px; height:44px; border-radius:50%; background: var(--b2-soft);
+  display:flex; align-items:center; justify-content:center; font-family: var(--f-display);
+  font-weight:600; font-size:17px; color: var(--b2);
+}
+.char-body{ flex:1; }
+.char-name{ font-family: var(--f-display); font-weight:600; font-size:17px; margin:0 0 4px; }
+.char-role{ font-family: var(--f-data); font-size:11.5px; text-transform:uppercase; letter-spacing:.05em; color: var(--ink-faint); margin:0 0 10px; }
+.char-facts{ display:flex; flex-wrap:wrap; gap:6px; margin-bottom:10px; }
+.fact-tag{
+  font-family: var(--f-data); font-size:12px; background: var(--paper-alt); color: var(--ink-soft);
+  padding:4px 10px; border-radius:999px;
+}
+.char-prompt{ font-size:14px; color: var(--ink-soft); }
+.char-input{
+  width:100%; margin-top:8px; font-family: var(--f-body); font-size:14.5px; color: var(--ink);
+  background: var(--paper); border:1px solid var(--line); border-radius: var(--r-sm);
+  padding:10px 12px; resize:vertical; min-height:44px;
+}
+.char-input:focus{ outline:none; border-color: var(--b2-line); background: var(--paper-raised); }
+
+/* ---------- ROLEPLAY ---------- */
+.roleplay-panel{ background: var(--b1-soft); border:1px solid var(--b1-line); border-radius: var(--r-lg); padding:26px 28px; }
+.roleplay-panel .block-num{ background: var(--b1); }
+.scene-setup{
+  display:flex; gap:14px; align-items:flex-start; background: var(--paper-raised);
+  border:1px solid var(--b1-line); border-radius: var(--r-md); padding:14px 16px; margin-bottom:20px;
+}
+.scene-icon{ font-size:22px; flex:none; }
+.scene-text{ font-size:14px; color: var(--ink-soft); }
+.scene-text strong{ color: var(--ink); }
+
+.dialogue{ display:flex; flex-direction:column; gap:14px; }
+.scene-tabs{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:18px; }
+.scene-tab{
+  font-family: var(--f-data); font-size:12.5px; background: var(--paper-raised);
+  border:1.5px solid var(--b1-line); color: var(--ink-soft); padding:7px 14px;
+  border-radius:999px; cursor:pointer; transition: all .15s ease;
+}
+.scene-tab:hover{ border-color: var(--b1); }
+.scene-tab.active{ background: var(--b1); border-color: var(--b1); color:#fff; }
+.line{ display:flex; gap:12px; align-items:flex-start; }
+.line-avatar{
+  flex:none; width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  font-family: var(--f-display); font-weight:600; font-size:14px; color:#fff;
+}
+.line.friend .line-avatar{ background: var(--ink-faint); }
+.line.you .line-avatar{ background: var(--b1); }
+.line-body{ flex:1; }
+.line-name{ font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.05em; color: var(--ink-faint); margin:0 0 4px; }
+.line-bubble{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:12px 14px; font-size:14.5px; color: var(--ink);
+}
+.line.you .line-bubble{ background:#fff; border-color: var(--b1-line); }
+.line-input{
+  width:100%; font-family: var(--f-body); font-size:14.5px; color: var(--ink);
+  background:#fff; border:1px solid var(--b1-line); border-radius: var(--r-sm);
+  padding:10px 12px; resize:vertical; min-height:40px; margin-top:2px;
+}
+.line-input:focus{ outline:none; border-color: var(--b1); }
+.line-hint{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin-top:5px; }
+
+.roleplay-tip{
+  margin-top:22px; padding:14px 16px; background: var(--paper-raised); border:1px solid var(--b1-line);
+  border-radius: var(--r-md); font-size:13.5px; color: var(--ink-soft);
+}
+.roleplay-tip strong{ color: var(--ink); }
+
+/* ---------- FINAL TASK ---------- */
+.task-panel{ background: var(--family-soft); border:1px solid var(--family-line); border-radius: var(--r-lg); padding:26px 28px; }
+.task-panel .block-num{ background: var(--family); }
+textarea#final-task{
+  width:100%; min-height:110px; font-family: var(--f-body); font-size:15px; color: var(--ink);
+  background: var(--paper-raised); border:1px solid var(--family-line); border-radius: var(--r-md);
+  padding:14px 16px; resize:vertical; margin-top:14px;
+}
+textarea#final-task:focus{ outline:none; border-color: var(--family); }
+.task-footer{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:12px; flex-wrap:wrap; }
+#task-count{ font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); }
+.btn-secondary{
+  font-family: var(--f-body); font-weight:600; font-size:13.5px; color: var(--family); background:none;
+  border:1.5px solid var(--family-line); padding:9px 18px; border-radius:999px; cursor:pointer;
+}
+.saved-flag{ font-family: var(--f-data); font-size:12px; color: var(--b2); opacity:0; transition: opacity .3s ease; }
+.saved-flag.show{ opacity:1; }
+
+/* ---------- FOOTER NAV ---------- */
+footer{
+  max-width:760px; margin:0 auto; padding:0 24px 60px; display:flex;
+  justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;
+  font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint);
+}
+footer a{ color: var(--b2); text-decoration:none; }
+footer a:hover{ text-decoration:underline; }
+
+@media (max-width:600px){
+  header{ padding:34px 18px 22px; }
+  main{ padding:8px 18px 90px; }
+  .panel, .task-panel{ padding:20px 18px; }
+  .char-card{ flex-direction:column; }
+}
+@media (prefers-reduced-motion: reduce){ *{ transition:none !important; } }
+</style>
+</head>
+<body>
+
+<header>
+  <p class="eyebrow"><span class="dot"></span>Clase 2 de 12 · L1 Primeros pasos a bordo</p>
+  <h1>Saludar a los <em>clientes</em></h1>
+  <p class="lede">Ya sabes presentarte. Ahora aprendemos a recibir a un cliente en la cafetería del barco: saludar, preguntar cómo está y acompañarlo a su mesa. Hoy trabajamos el verbo <strong>estar</strong> y las fórmulas de cortesía.</p>
+  <div class="meta-row">
+    <div>Duración<strong>50 min</strong></div>
+    <div>Gramática<strong>Estar + saludos</strong></div>
+    <div>Nivel<strong>A1</strong></div>
+  </div>
+</header>
+
+<main>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">1</span><h2>El verbo estar y los saludos</h2><span class="time-tag">8 min</span></div>
+    <div class="panel">
+      <table class="conj-table">
+        <tr><td class="conj-pron">yo</td><td class="conj-form">estoy</td><td class="conj-ex">Estoy bien, gracias.</td></tr>
+        <tr><td class="conj-pron">tú</td><td class="conj-form">estás</td><td class="conj-ex">¿Cómo estás hoy?</td></tr>
+        <tr><td class="conj-pron">usted</td><td class="conj-form">está</td><td class="conj-ex">¿Cómo está usted?</td></tr>
+        <tr><td class="conj-pron">nosotros/as</td><td class="conj-form">estamos</td><td class="conj-ex">Estamos encantados de atenderle.</td></tr>
+        <tr><td class="conj-pron">vosotros/as</td><td class="conj-form">estáis</td><td class="conj-ex">¿Estáis listos para pedir?</td></tr>
+        <tr><td class="conj-pron">ustedes</td><td class="conj-form">están</td><td class="conj-ex">¿Están listos para pedir?</td></tr>
+      </table>
+      <div class="note"><strong>En el trabajo con clientes</strong> usamos "estar" constantemente para saludar: "¿cómo está?" es la pregunta de cortesía más frecuente al recibir a alguien. También sirve para decir cómo estás tú: "estoy bien", "estamos encantados de atenderle".</div>
+
+      <div class="compare-wrap">
+        <p class="compare-title">Trato formal (usted) vs. informal (tú) — clave en tu trabajo</p>
+        <div class="compare-grid">
+          <div class="compare-col is-ser">
+            <div class="compare-head">
+              <span class="compare-verb">USTED</span>
+              <span class="compare-sub">— formal, con clientes</span>
+            </div>
+            <ul class="compare-list">
+              <li><strong>Saludo:</strong> Buenos días, ¿cómo está?</li>
+              <li><strong>Bienvenida:</strong> Bienvenido/a, ¿tiene reserva?</li>
+              <li><strong>Ofrecer ayuda:</strong> ¿Le acompaño a su mesa?
+                <em>Usa "está", "tiene", "le" — nunca "tú".</em>
+              </li>
+              <li><strong>Plural:</strong> ¿Están listos para pedir?</li>
+            </ul>
+          </div>
+          <div class="compare-col is-estar">
+            <div class="compare-head">
+              <span class="compare-verb">TÚ</span>
+              <span class="compare-sub">— informal, con compañeros</span>
+            </div>
+            <ul class="compare-list">
+              <li><strong>Saludo:</strong> Hola, ¿cómo estás?</li>
+              <li><strong>Bienvenida:</strong> Hola, ¿qué tal?</li>
+              <li><strong>Ofrecer ayuda:</strong> ¿Te acompaño a la mesa?
+                <em>Usa "estás", "tienes", "te".</em>
+              </li>
+              <li><strong>Plural:</strong> ¿Estáis listos para pedir?</li>
+            </ul>
+          </div>
+        </div>
+        <div class="compare-warning">
+          <strong>Regla de oro en tu trabajo:</strong> con clientes que no conoces, siempre "usted" — es la norma de cortesía en hostelería en España. Reserva el "tú" para compañeros de trabajo o si el propio cliente te lo pide explícitamente ("puedes tutearme").
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">2</span><h2>Vocabulario</h2><span class="time-tag">6 min</span></div>
+    <p class="vocab-hint">Toca cada tarjeta para ver un ejemplo.</p>
+    <div class="vocab-grid" id="vocab-grid"></div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">3</span><h2>Practica</h2><span class="time-tag">12 min</span></div>
+    <div class="panel">
+      <p class="vocab-hint" style="margin-bottom:14px;">50 frases: las primeras 12 se hacen en voz alta en clase; el resto queda como repaso para casa.</p>
+      <div id="exercises"></div>
+      <div class="check-bar">
+        <div style="display:flex; gap:10px;">
+          <button class="btn-primary" id="check-btn">Comprobar respuestas</button>
+          <button class="btn-ghost" id="reset-btn">Reiniciar</button>
+        </div>
+        <span id="score-text"></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">4</span><h2>Tarjetas de clientes</h2><span class="time-tag">8 min</span></div>
+    <p class="lede" style="margin-bottom:16px;">Saluda a cada cliente usando <strong>estar</strong> y el trato correcto (usted/tú, según el perfil). Usa los datos de la tarjeta como pista. Los primeros 6 se trabajan en clase; el resto queda como banco de repaso para casa.</p>
+    <div class="characters" id="characters"></div>
+  </section>
+
+  <section class="block roleplay-panel">
+    <div class="block-head"><span class="block-num">5</span><h2>Roleplay: 5 escenas en la cafetería del barco</h2><span class="time-tag">13 min</span></div>
+    <p class="lede" style="margin-bottom:16px;">50 intercambios repartidos en 5 situaciones reales de tu turno. Elige una escena para practicar en clase; el resto queda como banco de repaso para casa.</p>
+    <div class="scene-tabs" id="scene-tabs"></div>
+    <div id="scene-container"></div>
+    <div class="roleplay-tip"><strong>En clase:</strong> practicaremos una escena en voz alta, cambiando de rol. El resto de escenas son para practicar por tu cuenta durante la semana.</div>
+  </section>
+
+  <section class="block task-panel">
+    <div class="block-head"><span class="block-num">6</span><h2 style="color:var(--family)">Tu tarea</h2><span class="time-tag">3 min</span></div>
+    <p style="margin:0; font-size:15px; color:var(--ink-soft);">Escribe <strong>5 fórmulas de saludo</strong> que podrías usar en tu turno: al menos 3 en trato formal (usted) para clientes nuevos y 2 en trato informal (tú) para compañeros. Practícalas en voz alta antes de la próxima clase.</p>
+    <textarea id="final-task" placeholder="Buenos días, ¿cómo está?&#10;¿Tiene reserva?&#10;¿Le acompaño a su mesa?&#10;Hola, ¿qué tal?&#10;¿Estás lista para el turno?"></textarea>
+    <div class="task-footer">
+      <span id="task-count">0 frases con "está/estás" detectadas</span>
+      <div style="display:flex; gap:10px; align-items:center;">
+        <span class="saved-flag" id="saved-flag">Guardado ✓</span>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <span>Clase 2 · Primeros pasos a bordo</span>
+  <span>Próxima clase → Clase 3: dónde están las cosas (hay / estar + lugar)</span>
+</footer>
+
+<script>
+/* ---------- VOCAB ---------- */
+const VOCAB = [
+  {front:"buenos días", back:"Buenos días, bienvenido a bordo."},
+  {front:"bienvenido / bienvenida", back:"Bienvenida, ¿tiene reserva?"},
+  {front:"¿cómo está?", back:"Buenas tardes, ¿cómo está usted hoy?"},
+  {front:"encantada", back:"Encantada de atenderle esta mañana."},
+  {front:"¿le acompaño?", back:"¿Le acompaño a su mesa, por favor?"},
+  {front:"por aquí, por favor", back:"Por aquí, por favor, su mesa está lista."},
+];
+
+const grid = document.getElementById('vocab-grid');
+VOCAB.forEach(v=>{
+  const card = document.createElement('div');
+  card.className = 'vocab-card';
+  card.setAttribute('role', 'button');
+  card.setAttribute('tabindex', '0');
+  card.setAttribute('aria-pressed', 'false');
+  card.setAttribute('aria-label', `${v.front}. Pulsa para ver un ejemplo.`);
+  card.innerHTML = `<div class="vocab-front">${v.front}</div><div class="vocab-back">${v.back}</div>`;
+  const toggle = ()=>{
+    const flipped = card.classList.toggle('flipped');
+    card.setAttribute('aria-pressed', String(flipped));
+  };
+  card.addEventListener('click', toggle);
+  card.addEventListener('keydown', (e)=>{
+    if(e.key === 'Enter' || e.key === ' '){
+      e.preventDefault();
+      toggle();
+    }
+  });
+  grid.appendChild(card);
+});
+
+/* ---------- EXERCISES ---------- */
+const EXERCISES = [
+  {
+    "sentence": "Yo <span class=\"gap\">___</span> encantada de atenderle.",
+    "options": ["estoy", "estamos", "está"],
+    "answer": "estoy"
+  },
+  {
+    "sentence": "Yo <span class=\"gap\">___</span> lista para tomar su pedido.",
+    "options": ["está", "estoy", "están"],
+    "answer": "estoy"
+  },
+  {
+    "sentence": "Yo <span class=\"gap\">___</span> muy contenta con mi turno de hoy.",
+    "options": ["están", "estoy", "estáis"],
+    "answer": "estoy"
+  },
+  {
+    "sentence": "Yo <span class=\"gap\">___</span> en la barra si me necesita.",
+    "options": ["estáis", "estoy", "estás"],
+    "answer": "estoy"
+  },
+  {
+    "sentence": "Yo <span class=\"gap\">___</span> a su disposición para lo que necesite.",
+    "options": ["está", "estás", "estoy"],
+    "answer": "estoy"
+  },
+  {
+    "sentence": "Hoy <span class=\"gap\">___</span> algo cansada, ha sido un turno largo.",
+    "options": ["está", "estoy", "estás"],
+    "answer": "estoy"
+  },
+  {
+    "sentence": "Yo <span class=\"gap\">___</span> encantada de trabajar en este barco.",
+    "options": ["estáis", "estoy", "estamos"],
+    "answer": "estoy"
+  },
+  {
+    "sentence": "Compañera, ¿tú <span class=\"gap\">___</span> lista para el turno?",
+    "options": ["estamos", "están", "estás"],
+    "answer": "estás"
+  },
+  {
+    "sentence": "Tú <span class=\"gap\">___</span> muy tranquila hoy con los clientes.",
+    "options": ["estás", "estoy", "está"],
+    "answer": "estás"
+  },
+  {
+    "sentence": "¿Dónde <span class=\"gap\">___</span> tú ahora, en la cubierta o en la cocina?",
+    "options": ["estoy", "están", "estás"],
+    "answer": "estás"
+  },
+  {
+    "sentence": "Tú <span class=\"gap\">___</span> en la mesa 5, ¿verdad?",
+    "options": ["están", "estás", "está"],
+    "answer": "estás"
+  },
+  {
+    "sentence": "Tú <span class=\"gap\">___</span> muy ocupada esta mañana, ¿te ayudo?",
+    "options": ["estamos", "estáis", "estás"],
+    "answer": "estás"
+  },
+  {
+    "sentence": "Tú <span class=\"gap\">___</span> nerviosa por tu primer turno sola, ¿no?",
+    "options": ["están", "estás", "estamos"],
+    "answer": "estás"
+  },
+  {
+    "sentence": "Tú <span class=\"gap\">___</span> en el restaurante los martes, ¿verdad?",
+    "options": ["está", "estoy", "estás"],
+    "answer": "estás"
+  },
+  {
+    "sentence": "Buenas tardes, ¿cómo <span class=\"gap\">___</span> usted hoy?",
+    "options": ["están", "está", "estáis"],
+    "answer": "está"
+  },
+  {
+    "sentence": "El cliente <span class=\"gap\">___</span> esperando en la entrada.",
+    "options": ["está", "estoy", "estamos"],
+    "answer": "está"
+  },
+  {
+    "sentence": "Su mesa ya <span class=\"gap\">___</span> lista, señor.",
+    "options": ["está", "estás", "están"],
+    "answer": "está"
+  },
+  {
+    "sentence": "La cliente de la mesa 3 <span class=\"gap\">___</span> esperando la cuenta.",
+    "options": ["estoy", "está", "estamos"],
+    "answer": "está"
+  },
+  {
+    "sentence": "El bar <span class=\"gap\">___</span> muy cerca de la cubierta principal.",
+    "options": ["está", "son", "es"],
+    "answer": "está"
+  },
+  {
+    "sentence": "¿Cómo <span class=\"gap\">___</span> el señor hoy, todo bien con la comida?",
+    "options": ["están", "está", "estás"],
+    "answer": "está"
+  },
+  {
+    "sentence": "Mi jefe <span class=\"gap\">___</span> en la cocina revisando el pedido.",
+    "options": ["estoy", "estamos", "está"],
+    "answer": "está"
+  },
+  {
+    "sentence": "La cliente <span class=\"gap\">___</span> muy contenta con el servicio.",
+    "options": ["estamos", "está", "estáis"],
+    "answer": "está"
+  },
+  {
+    "sentence": "El camarero nuevo <span class=\"gap\">___</span> en la barra por la mañana.",
+    "options": ["está", "están", "estás"],
+    "answer": "está"
+  },
+  {
+    "sentence": "La pareja de la mesa 8 <span class=\"gap\">___</span> de vacaciones.",
+    "options": ["estoy", "está", "estamos"],
+    "answer": "está"
+  },
+  {
+    "sentence": "Nosotras <span class=\"gap\">___</span> encantadas de atenderles hoy.",
+    "options": ["estamos", "estás", "estoy"],
+    "answer": "estamos"
+  },
+  {
+    "sentence": "Nosotros <span class=\"gap\">___</span> listos para el turno de noche.",
+    "options": ["está", "estamos", "estás"],
+    "answer": "estamos"
+  },
+  {
+    "sentence": "Mi compañera y yo <span class=\"gap\">___</span> muy ocupadas esta tarde.",
+    "options": ["estamos", "estáis", "están"],
+    "answer": "estamos"
+  },
+  {
+    "sentence": "Nosotras <span class=\"gap\">___</span> a su disposición, señora.",
+    "options": ["estás", "estamos", "estáis"],
+    "answer": "estamos"
+  },
+  {
+    "sentence": "Nosotros <span class=\"gap\">___</span> en el restaurante hasta las once.",
+    "options": ["estáis", "están", "estamos"],
+    "answer": "estamos"
+  },
+  {
+    "sentence": "Nosotras no <span class=\"gap\">___</span> nerviosas, estamos bien preparadas.",
+    "options": ["estáis", "estamos", "está"],
+    "answer": "estamos"
+  },
+  {
+    "sentence": "Mi compañero y yo <span class=\"gap\">___</span> en la cubierta esta noche.",
+    "options": ["están", "estamos", "estás"],
+    "answer": "estamos"
+  },
+  {
+    "sentence": "Nosotros <span class=\"gap\">___</span> muy cerca si necesita algo.",
+    "options": ["están", "estás", "estamos"],
+    "answer": "estamos"
+  },
+  {
+    "sentence": "Chicos, ¿<span class=\"gap\">___</span> listos para abrir el restaurante?",
+    "options": ["estamos", "está", "estáis"],
+    "answer": "estáis"
+  },
+  {
+    "sentence": "¿Vosotros <span class=\"gap\">___</span> en la barra o en las mesas hoy?",
+    "options": ["están", "estáis", "está"],
+    "answer": "estáis"
+  },
+  {
+    "sentence": "Vosotras <span class=\"gap\">___</span> las nuevas del turno de mañana, ¿no?",
+    "options": ["estamos", "está", "estáis"],
+    "answer": "estáis"
+  },
+  {
+    "sentence": "Chicas, ¿<span class=\"gap\">___</span> contentas con el nuevo horario?",
+    "options": ["estás", "estáis", "estoy"],
+    "answer": "estáis"
+  },
+  {
+    "sentence": "Vosotros <span class=\"gap\">___</span> muy cansados después del turno doble.",
+    "options": ["estáis", "estamos", "están"],
+    "answer": "estáis"
+  },
+  {
+    "sentence": "¿Dónde <span class=\"gap\">___</span> vosotras ahora mismo, en la cocina?",
+    "options": ["están", "estamos", "estáis"],
+    "answer": "estáis"
+  },
+  {
+    "sentence": "Vosotros <span class=\"gap\">___</span> encargados de la terraza esta noche.",
+    "options": ["estáis", "está", "estás"],
+    "answer": "estáis"
+  },
+  {
+    "sentence": "Vosotras <span class=\"gap\">___</span> muy atentas con los clientes, se nota.",
+    "options": ["está", "estoy", "estáis"],
+    "answer": "estáis"
+  },
+  {
+    "sentence": "Los clientes de la mesa 6 <span class=\"gap\">___</span> esperando la carta.",
+    "options": ["estáis", "estoy", "están"],
+    "answer": "están"
+  },
+  {
+    "sentence": "Los señores <span class=\"gap\">___</span> listos para pedir.",
+    "options": ["están", "estáis", "estoy"],
+    "answer": "están"
+  },
+  {
+    "sentence": "Ellos <span class=\"gap\">___</span> muy contentos con el menú del día.",
+    "options": ["estoy", "estás", "están"],
+    "answer": "están"
+  },
+  {
+    "sentence": "Mis compañeros <span class=\"gap\">___</span> muy ocupados en la cocina.",
+    "options": ["estás", "están", "está"],
+    "answer": "están"
+  },
+  {
+    "sentence": "¿Dónde <span class=\"gap\">___</span> los clientes de la mesa 2 ahora?",
+    "options": ["están", "estoy", "estamos"],
+    "answer": "están"
+  },
+  {
+    "sentence": "Ellos <span class=\"gap\">___</span> en la terraza tomando el café.",
+    "options": ["estamos", "están", "estáis"],
+    "answer": "están"
+  },
+  {
+    "sentence": "Las clientas de la mesa 4 <span class=\"gap\">___</span> muy contentas con el servicio.",
+    "options": ["están", "estás", "estoy"],
+    "answer": "están"
+  },
+  {
+    "sentence": "Mis nuevos compañeros <span class=\"gap\">___</span> en el turno de tarde.",
+    "options": ["estamos", "está", "están"],
+    "answer": "están"
+  },
+  {
+    "sentence": "Los clientes habituales <span class=\"gap\">___</span> encantados con la carta nueva.",
+    "options": ["están", "estoy", "estáis"],
+    "answer": "están"
+  },
+  {
+    "sentence": "Los señores de la mesa 10 <span class=\"gap\">___</span> esperando la cuenta.",
+    "options": ["estamos", "está", "están"],
+    "answer": "están"
+  }
+]
+;
+
+const exWrap = document.getElementById('exercises');
+const EXERCISES_STORAGE_KEY = 'angelika-clase02-practica';
+let exerciseState = { picked: {}, checked: false };
+
+async function guardarPractica(){
+  if (!window.storage) return;
+  try{ await window.storage.set(EXERCISES_STORAGE_KEY, JSON.stringify(exerciseState)); }catch(e){}
+}
+async function cargarPractica(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(EXERCISES_STORAGE_KEY);
+    if (res && typeof res.value === 'string'){
+      const parsed = JSON.parse(res.value);
+      if(parsed && typeof parsed === 'object'){
+        exerciseState = { picked: parsed.picked || {}, checked: !!parsed.checked };
+      }
+    }
+  }catch(e){
+    // Sin práctica guardada todavía.
+  }
+}
+
+EXERCISES.forEach((ex, i)=>{
+  if(i === 0){
+    const divider = document.createElement('div');
+    divider.className = 'ex-divider en-clase';
+    divider.textContent = 'en clase · ítems 1–12';
+    exWrap.appendChild(divider);
+  }
+  if(i === 12){
+    const divider = document.createElement('div');
+    divider.className = 'ex-divider';
+    divider.textContent = 'para casa · repaso opcional';
+    exWrap.appendChild(divider);
+  }
+  const el = document.createElement('div');
+  el.className = 'exercise';
+  el.dataset.answer = ex.answer;
+  el.dataset.index = i;
+  el.innerHTML = `
+    <div class="ex-sentence">${i+1}. ${ex.sentence}</div>
+    <div class="ex-options">
+      ${ex.options.map(o=>`<button class="opt-btn" data-value="${o}">${o}</button>`).join('')}
+    </div>
+  `;
+  exWrap.appendChild(el);
+
+  el.querySelectorAll('.opt-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      if(exerciseState.checked) return;
+      el.querySelectorAll('.opt-btn').forEach(b=>b.classList.remove('picked'));
+      btn.classList.add('picked');
+      exerciseState.picked[i] = btn.dataset.value;
+      guardarPractica();
+    });
+  });
+});
+
+function pintarEstadoPractica(){
+  document.querySelectorAll('.exercise').forEach(el=>{
+    const i = el.dataset.index;
+    const answer = el.dataset.answer;
+    const pickedValue = exerciseState.picked[i];
+    if(!pickedValue) return;
+    const pickedBtn = el.querySelector(`.opt-btn[data-value="${CSS.escape(pickedValue)}"]`);
+    if(exerciseState.checked){
+      el.querySelectorAll('.opt-btn').forEach(b=>{
+        b.disabled = true;
+        if(b.dataset.value === answer) b.classList.add('correct');
+        else if(b === pickedBtn) b.classList.add('wrong');
+      });
+    } else if(pickedBtn){
+      pickedBtn.classList.add('picked');
+    }
+  });
+  if(exerciseState.checked){
+    let correct = 0;
+    document.querySelectorAll('.exercise').forEach(el=>{
+      const i = el.dataset.index;
+      if(exerciseState.picked[i] === el.dataset.answer) correct++;
+    });
+    document.getElementById('score-text').textContent = `${correct} / ${EXERCISES.length} correctas`;
+  }
+}
+
+cargarPractica().then(pintarEstadoPractica);
+
+document.getElementById('check-btn').addEventListener('click', ()=>{
+  let correct = 0;
+  document.querySelectorAll('.exercise').forEach(el=>{
+    const answer = el.dataset.answer;
+    const picked = el.querySelector('.opt-btn.picked');
+    el.querySelectorAll('.opt-btn').forEach(b=>{
+      b.disabled = true;
+      if(b.dataset.value === answer) b.classList.add('correct');
+      else if(b === picked) b.classList.add('wrong');
+    });
+    if(picked && picked.dataset.value === answer) correct++;
+  });
+  document.getElementById('score-text').textContent = `${correct} / ${EXERCISES.length} correctas`;
+  exerciseState.checked = true;
+  guardarPractica();
+});
+
+document.getElementById('reset-btn').addEventListener('click', ()=>{
+  exerciseState = { picked: {}, checked: false };
+  document.querySelectorAll('.exercise').forEach(el=>{
+    el.querySelectorAll('.opt-btn').forEach(b=>{
+      b.disabled = false;
+      b.classList.remove('picked','correct','wrong');
+    });
+  });
+  document.getElementById('score-text').textContent = '';
+  guardarPractica();
+});
+
+/* ---------- CLIENT CARDS ---------- */
+const CHARACTERS = [
+  {
+    "name": "Tú",
+    "role": "Saluda a tu jefa al empezar el turno",
+    "facts": ["trato informal", "buenos días", "¿cómo estás?"],
+    "prompt": "Escribe el saludo completo con \"estar\":"
+  },
+  {
+    "name": "Sr. Martínez",
+    "role": "Cliente nuevo, mesa 3, trato formal",
+    "facts": ["usted", "recién llegado", "sin reserva"],
+    "prompt": "Salúdale formalmente con \"estar\":"
+  },
+  {
+    "name": "Sra. Vidal",
+    "role": "Clienta habitual, trato formal",
+    "facts": ["usted", "siempre la mesa 5", "muy amable"],
+    "prompt": "Salúdala y pregunta cómo está:"
+  },
+  {
+    "name": "Marc",
+    "role": "Compañero de barra, trato informal",
+    "facts": ["tú", "empieza turno", "cubierta principal"],
+    "prompt": "Salúdale de forma informal con \"estar\":"
+  },
+  {
+    "name": "Familia Torres",
+    "role": "Clientes con reserva, trato formal (plural)",
+    "facts": ["ustedes", "mesa reservada", "4 personas"],
+    "prompt": "Dales la bienvenida formalmente:"
+  },
+  {
+    "name": "Laura",
+    "role": "Compañera nueva, primer día",
+    "facts": ["tú", "algo nerviosa", "turno de mañana"],
+    "prompt": "Salúdala y pregúntale cómo está:"
+  },
+  {
+    "name": "Sr. y Sra. Klein",
+    "role": "Pareja de turistas, trato formal (plural)",
+    "facts": ["ustedes", "recién llegados", "no hablan mucho español"],
+    "prompt": "Dales la bienvenida con \"estar\":"
+  },
+  {
+    "name": "Toni",
+    "role": "El jefe de sala, trato informal",
+    "facts": ["tú", "revisando las mesas", "algo estresado"],
+    "prompt": "Salúdale con \"estar\":"
+  },
+  {
+    "name": "Sra. Puig",
+    "role": "Clienta habitual, siempre pide la misma mesa",
+    "facts": ["usted", "mesa 7", "muy puntual"],
+    "prompt": "Salúdala formalmente con \"estar\":"
+  },
+  {
+    "name": "Grupo de empresa",
+    "role": "Reserva de 8 personas, trato formal (plural)",
+    "facts": ["ustedes", "reunión de trabajo", "mesa grande"],
+    "prompt": "Dales la bienvenida con \"estar\":"
+  },
+  {
+    "name": "Bruno",
+    "role": "Compañero de cocina, trato informal",
+    "facts": ["tú", "en la cocina", "preparando el turno"],
+    "prompt": "Salúdale con \"estar\":"
+  },
+  {
+    "name": "Sr. Ferrer",
+    "role": "Cliente solo, trato formal",
+    "facts": ["usted", "mesa para uno", "lee el periódico"],
+    "prompt": "Salúdale formalmente con \"estar\":"
+  },
+  {
+    "name": "Elena",
+    "role": "Compañera del turno de tarde",
+    "facts": ["tú", "acaba de llegar", "algo cansada"],
+    "prompt": "Salúdala con \"estar\":"
+  },
+  {
+    "name": "Sra. Roig",
+    "role": "Clienta con niños, trato formal",
+    "facts": ["usted", "dos niños", "busca mesa tranquila"],
+    "prompt": "Dale la bienvenida con \"estar\":"
+  },
+  {
+    "name": "Pareja joven",
+    "role": "Clientes nuevos, trato formal (plural)",
+    "facts": ["ustedes", "primera visita", "mesa junto a la ventana"],
+    "prompt": "Dales la bienvenida con \"estar\":"
+  },
+  {
+    "name": "Adrià",
+    "role": "El chef, trato informal",
+    "facts": ["tú", "en la cocina", "muy ocupado"],
+    "prompt": "Salúdale con \"estar\":"
+  },
+  {
+    "name": "Sr. Soler",
+    "role": "Cliente habitual, muy formal siempre",
+    "facts": ["usted", "mesa de siempre", "muy educado"],
+    "prompt": "Salúdale formalmente con \"estar\":"
+  },
+  {
+    "name": "Grupo de amigas",
+    "role": "Reserva de 5 personas, trato formal (plural)",
+    "facts": ["ustedes", "celebración", "mesa decorada"],
+    "prompt": "Dales la bienvenida con \"estar\":"
+  },
+  {
+    "name": "Nil",
+    "role": "El nuevo camarero en prácticas",
+    "facts": ["tú", "primer día", "algo perdido"],
+    "prompt": "Salúdale y anímale con \"estar\":"
+  },
+  {
+    "name": "Sra. Camps",
+    "role": "Clienta mayor, trato formal",
+    "facts": ["usted", "necesita ayuda para sentarse", "muy amable"],
+    "prompt": "Salúdala y ofrécele ayuda con \"estar\":"
+  },
+  {
+    "name": "Sara",
+    "role": "Compañera de barra, trato informal",
+    "facts": ["tú", "turno de noche", "muy simpática"],
+    "prompt": "Salúdala con \"estar\":"
+  },
+  {
+    "name": "Sr. Aymerich",
+    "role": "Inspector de sanidad, trato formal",
+    "facts": ["usted", "visita sorpresa", "revisión rutinaria"],
+    "prompt": "Salúdale formalmente con \"estar\":"
+  },
+  {
+    "name": "Familia numerosa",
+    "role": "Clientes con reserva grande, trato formal (plural)",
+    "facts": ["ustedes", "6 personas", "dos mesas juntas"],
+    "prompt": "Dales la bienvenida con \"estar\":"
+  },
+  {
+    "name": "Dolors",
+    "role": "La encargada del turno de fin de semana",
+    "facts": ["usted", "revisando el servicio", "muy exigente"],
+    "prompt": "Salúdala formalmente con \"estar\":"
+  }
+]
+;
+
+const charWrap = document.getElementById('characters');
+const CHAR_INPUT_STORAGE_KEY = 'angelika-clase02-personajes';
+let charInputState = {};
+
+async function guardarCharInputs(){
+  if (!window.storage) return;
+  try{ await window.storage.set(CHAR_INPUT_STORAGE_KEY, JSON.stringify(charInputState)); }catch(e){}
+}
+async function cargarCharInputs(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(CHAR_INPUT_STORAGE_KEY);
+    if (res && typeof res.value === 'string'){
+      const parsed = JSON.parse(res.value);
+      if(parsed && typeof parsed === 'object') charInputState = parsed;
+    }
+  }catch(e){}
+}
+
+CHARACTERS.forEach((c, i)=>{
+  if(i === 0){
+    const divider = document.createElement('div');
+    divider.className = 'ex-divider en-clase';
+    divider.textContent = 'en clase · personajes 1–6';
+    charWrap.appendChild(divider);
+  }
+  if(i === 6){
+    const divider = document.createElement('div');
+    divider.className = 'ex-divider';
+    divider.textContent = 'para casa · banco de repaso';
+    charWrap.appendChild(divider);
+  }
+  const card = document.createElement('div');
+  card.className = 'char-card';
+  card.innerHTML = `
+    <div class="char-avatar">${c.name.charAt(0)}</div>
+    <div class="char-body">
+      <p class="char-name">${c.name}</p>
+      <p class="char-role">${c.role}</p>
+      <div class="char-facts">${c.facts.map(f=>`<span class="fact-tag">${f}</span>`).join('')}</div>
+      <p class="char-prompt">${c.prompt}</p>
+      <textarea class="char-input" rows="2" placeholder="Buenos días / Hola, ¿cómo está(s)?..." data-char-idx="${i}"></textarea>
+    </div>
+  `;
+  charWrap.appendChild(card);
+});
+
+let charInputTimer = null;
+charWrap.querySelectorAll('.char-input').forEach(ta=>{
+  const idx = ta.dataset.charIdx;
+  ta.addEventListener('input', ()=>{
+    charInputState[idx] = ta.value;
+    clearTimeout(charInputTimer);
+    charInputTimer = setTimeout(guardarCharInputs, 800);
+  });
+});
+cargarCharInputs().then(()=>{
+  charWrap.querySelectorAll('.char-input').forEach(ta=>{
+    const idx = ta.dataset.charIdx;
+    if (charInputState[idx]) ta.value = charInputState[idx];
+  });
+});
+
+/* ---------- ROLEPLAY SCENES ---------- */
+const SCENES = [
+  {
+    "id": "entrada",
+    "tab": "En la entrada",
+    "icon": "🚪",
+    "setup": "Un cliente nuevo llega a la cafetería del barco. Debes recibirlo con trato formal.",
+    "lines": [
+      {"who":"friend","name":"Cliente","text":"Buenos días."},
+      {"who":"you","hint":"Saluda formalmente con \"estar\" y pregunta cómo está."},
+      {"who":"friend","name":"Cliente","text":"Muy bien, gracias. ¿Tienen mesa libre?"},
+      {"who":"you","hint":"Responde con \"estar\" confirmando si hay mesa."},
+      {"who":"friend","name":"Cliente","text":"Perfecto. ¿Está muy llena la cafetería hoy?"},
+      {"who":"you","hint":"Responde con \"estar\" sobre la ocupación."},
+      {"who":"friend","name":"Cliente","text":"¿Dónde está la mesa, cerca de la ventana?"},
+      {"who":"you","hint":"Responde con \"estar\" indicando dónde está la mesa."},
+      {"who":"friend","name":"Cliente","text":"Genial. ¿Está el menú en inglés también?"},
+      {"who":"you","hint":"Responde con \"estar\" sobre el menú."},
+      {"who":"friend","name":"Cliente","text":"Perfecto, muchas gracias."},
+      {"who":"you","hint":"Despídete formalmente con \"estar\"."},
+      {"who":"friend","name":"Cliente","text":"¿Está usted todo el turno hoy?"},
+      {"who":"you","hint":"Responde con \"estar\" sobre tu turno."},
+      {"who":"friend","name":"Cliente","text":"Estupendo, hasta ahora entonces."},
+      {"who":"you","hint":"Despídete de nuevo con \"estar\"."}
+    ]
+  },
+  {
+    "id": "compañera",
+    "tab": "Con una compañera",
+    "icon": "👋",
+    "setup": "Llegas al turno de mañana y saludas a Laura, tu compañera, con trato informal.",
+    "lines": [
+      {"who":"friend","name":"Laura","text":"¡Hola! ¿Qué tal, cómo estás?"},
+      {"who":"you","hint":"Responde de forma informal con \"estar\"."},
+      {"who":"friend","name":"Laura","text":"¿Estás lista para el turno de hoy?"},
+      {"who":"you","hint":"Responde con \"estar\" sobre tu estado."},
+      {"who":"friend","name":"Laura","text":"Yo estoy un poco nerviosa, es mi primer día sola en la barra."},
+      {"who":"you","hint":"Anímala con \"estar\"."},
+      {"who":"friend","name":"Laura","text":"¿Dónde estás tú hoy, en las mesas o en la barra?"},
+      {"who":"you","hint":"Di dónde estás con \"estar\"."},
+      {"who":"friend","name":"Laura","text":"¿Está Toni ya en el restaurante?"},
+      {"who":"you","hint":"Responde con \"estar\" sobre Toni."},
+      {"who":"friend","name":"Laura","text":"Genial. ¿Estamos las dos en el turno de mañana entonces?"},
+      {"who":"you","hint":"Responde con \"estar\" confirmando."},
+      {"who":"friend","name":"Laura","text":"Perfecto, así te ayudo si hace falta."},
+      {"who":"you","hint":"Da las gracias y responde con \"estar\"."},
+      {"who":"friend","name":"Laura","text":"¡Vamos, que empieza el turno!"},
+      {"who":"you","hint":"Responde con \"estar\" antes de empezar."}
+    ]
+  },
+  {
+    "id": "reserva",
+    "tab": "Cliente con reserva",
+    "icon": "📋",
+    "setup": "Una pareja de clientes llega con reserva. Trato formal (ustedes).",
+    "lines": [
+      {"who":"friend","name":"Cliente","text":"Buenas tardes, tenemos una reserva a nombre de Klein."},
+      {"who":"you","hint":"Saluda formalmente con \"estar\" y confirma la reserva."},
+      {"who":"friend","name":"Cliente","text":"¿Está la mesa cerca de la terraza?"},
+      {"who":"you","hint":"Responde con \"estar\" sobre la ubicación de la mesa."},
+      {"who":"friend","name":"Cliente","text":"Perfecto. ¿Cómo están ustedes de servicio hoy, muy ocupados?"},
+      {"who":"you","hint":"Responde con \"estar\" sobre el nivel de trabajo."},
+      {"who":"friend","name":"Cliente","text":"No hay prisa, estamos de vacaciones."},
+      {"who":"you","hint":"Reacciona con \"estar\" sobre ellos."},
+      {"who":"friend","name":"Cliente","text":"¿Está disponible el chef para una recomendación?"},
+      {"who":"you","hint":"Responde con \"estar\" sobre el chef."},
+      {"who":"friend","name":"Cliente","text":"Estupendo, muchas gracias por su ayuda."},
+      {"who":"you","hint":"Responde formalmente con \"estar\"."},
+      {"who":"friend","name":"Cliente","text":"¿Están ustedes todo el día en el barco?"},
+      {"who":"you","hint":"Responde con \"estar\" sobre tu turno."},
+      {"who":"friend","name":"Cliente","text":"Perfecto, nos vemos en un rato."},
+      {"who":"you","hint":"Despídete formalmente con \"estar\"."}
+    ]
+  },
+  {
+    "id":"jefe",
+    "tab": "Con el jefe de sala",
+    "icon": "🧑‍💼",
+    "setup": "Toni, el jefe de sala, revisa cómo va el turno contigo. Trato informal.",
+    "lines": [
+      {"who":"friend","name":"Toni","text":"Hola, ¿cómo va todo, estás bien?"},
+      {"who":"you","hint":"Responde con \"estar\" sobre tu estado."},
+      {"who":"friend","name":"Toni","text":"¿Están todas las mesas listas para el servicio?"},
+      {"who":"you","hint":"Responde con \"estar\" confirmando las mesas."},
+      {"who":"friend","name":"Toni","text":"¿Dónde está la carta nueva, ya está impresa?"},
+      {"who":"you","hint":"Responde con \"estar\" sobre la carta."},
+      {"who":"friend","name":"Toni","text":"Los clientes de la mesa 3 están esperando desde hace rato."},
+      {"who":"you","hint":"Reacciona con \"estar\" y responde qué vas a hacer."},
+      {"who":"friend","name":"Toni","text":"¿Estás cómoda con el turno de hoy o necesitas ayuda?"},
+      {"who":"you","hint":"Responde con \"estar\" sobre tu comodidad."},
+      {"who":"friend","name":"Toni","text":"Perfecto, confío en ti."},
+      {"who":"you","hint":"Da las gracias y responde con \"estar\"."},
+      {"who":"friend","name":"Toni","text":"¿Estamos bien de personal para el turno de noche?"},
+      {"who":"you","hint":"Responde con \"estar\" sobre el personal."},
+      {"who":"friend","name":"Toni","text":"Genial, avísame si necesitas algo."},
+      {"who":"you","hint":"Responde con \"estar\" cerrando la conversación."}
+    ]
+  },
+  {
+    "id":"grupo",
+    "tab": "Grupo grande",
+    "icon": "🍽️",
+    "setup": "Un grupo de 6 personas llega sin reserva. Trato formal (ustedes).",
+    "lines": [
+      {"who":"friend","name":"Cliente","text":"Hola, somos seis, ¿tienen mesa disponible?"},
+      {"who":"you","hint":"Saluda formalmente con \"estar\" y responde sobre la disponibilidad."},
+      {"who":"friend","name":"Cliente","text":"¿Está muy ocupado el restaurante ahora mismo?"},
+      {"who":"you","hint":"Responde con \"estar\" sobre la ocupación."},
+      {"who":"friend","name":"Cliente","text":"¿Cuánto tiempo estará libre la mesa grande?"},
+      {"who":"you","hint":"Responde con \"estar\" dando un tiempo aproximado."},
+      {"who":"friend","name":"Cliente","text":"Perfecto, esperamos entonces. ¿Está bien aquí en la barra?"},
+      {"who":"you","hint":"Responde con \"estar\" confirmando dónde pueden esperar."},
+      {"who":"friend","name":"Cliente","text":"¿Están ya listas las bebidas que pedimos?"},
+      {"who":"you","hint":"Responde con \"estar\" sobre las bebidas."},
+      {"who":"friend","name":"Cliente","text":"Genial. ¿Está su compañera libre para ayudarnos también?"},
+      {"who":"you","hint":"Responde con \"estar\" sobre tu compañera."},
+      {"who":"friend","name":"Cliente","text":"Perfecto, muchas gracias por la paciencia."},
+      {"who":"you","hint":"Responde formalmente con \"estar\"."},
+      {"who":"friend","name":"Cliente","text":"Ya está lista la mesa, ¿verdad?"},
+      {"who":"you","hint":"Confirma con \"estar\" que la mesa está lista."}
+    ]
+  }
+];
+
+const sceneTabs = document.getElementById('scene-tabs');
+const sceneContainer = document.getElementById('scene-container');
+let activeScene = 0;
+const LINE_INPUT_STORAGE_KEY = 'angelika-clase02-roleplay';
+let lineInputState = {};
+let lineInputTimer = null;
+
+async function guardarLineInputs(){
+  if (!window.storage) return;
+  try{ await window.storage.set(LINE_INPUT_STORAGE_KEY, JSON.stringify(lineInputState)); }catch(e){}
+}
+async function cargarLineInputs(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(LINE_INPUT_STORAGE_KEY);
+    if (res && typeof res.value === 'string'){
+      const parsed = JSON.parse(res.value);
+      if(parsed && typeof parsed === 'object') lineInputState = parsed;
+    }
+  }catch(e){}
+}
+
+function renderTabs(){
+  sceneTabs.innerHTML = SCENES.map((s,i)=>
+    `<button class="scene-tab${i===activeScene?' active':''}" data-idx="${i}">${s.icon} ${s.tab}</button>`
+  ).join('');
+  sceneTabs.querySelectorAll('.scene-tab').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      activeScene = parseInt(btn.dataset.idx, 10);
+      renderTabs();
+      renderScene();
+    });
+  });
+}
+
+function renderScene(){
+  const scene = SCENES[activeScene];
+  let lineIdx = 0;
+  const linesHtml = scene.lines.map((l)=>{
+    if(l.who === 'friend'){
+      return `
+        <div class="line friend">
+          <div class="line-avatar">${l.name.charAt(0)}</div>
+          <div class="line-body">
+            <p class="line-name">${l.name}</p>
+            <div class="line-bubble">${l.text}</div>
+          </div>
+        </div>`;
+    } else {
+      const key = `${activeScene}-${lineIdx}`;
+      lineIdx++;
+      const saved = lineInputState[key] || '';
+      return `
+        <div class="line you">
+          <div class="line-avatar">Tú</div>
+          <div class="line-body">
+            <p class="line-name">Tú</p>
+            <textarea class="line-input" rows="2" placeholder="Escribe tu respuesta con 'estar'..." data-line-key="${key}">${saved}</textarea>
+            <p class="line-hint">${l.hint}</p>
+          </div>
+        </div>`;
+    }
+  }).join('');
+
+  sceneContainer.innerHTML = `
+    <div class="scene-setup">
+      <span class="scene-icon">${scene.icon}</span>
+      <p class="scene-text"><strong>${scene.tab}:</strong> ${scene.setup}</p>
+    </div>
+    <div class="dialogue">${linesHtml}</div>
+  `;
+
+  sceneContainer.querySelectorAll('.line-input').forEach(ta=>{
+    const key = ta.dataset.lineKey;
+    ta.addEventListener('input', ()=>{
+      lineInputState[key] = ta.value;
+      clearTimeout(lineInputTimer);
+      lineInputTimer = setTimeout(guardarLineInputs, 800);
+    });
+  });
+}
+
+cargarLineInputs().then(()=>{
+  renderTabs();
+  renderScene();
+});
+
+/* ---------- FINAL TASK ---------- */
+const STORAGE_KEY = 'angelika-clase02-tarea';
+const taskArea = document.getElementById('final-task');
+const taskCount = document.getElementById('task-count');
+const savedFlag = document.getElementById('saved-flag');
+
+async function cargarTarea(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(STORAGE_KEY);
+    if (res && typeof res.value === 'string') taskArea.value = res.value;
+  }catch(e){
+    // Clave inexistente todavía: no hay tarea previa, se queda en blanco.
+  }
+  updateCount();
+}
+
+function updateCount(){
+  const matches = (taskArea.value.match(/\best[aá]s?\b/gi) || []).length;
+  taskCount.textContent = `${matches} frase${matches===1?'':'s'} con "está/estás" detectada${matches===1?'':'s'}`;
+}
+let autosaveTimer = null;
+async function autoguardar(){
+  if (!window.storage){
+    savedFlag.textContent = 'Guardado no disponible aquí';
+    savedFlag.classList.add('show');
+    setTimeout(()=>{ savedFlag.classList.remove('show'); savedFlag.textContent = 'Guardado ✓'; }, 2200);
+    return;
+  }
+  try{
+    const ok = await window.storage.set(STORAGE_KEY, taskArea.value);
+    savedFlag.textContent = ok ? 'Guardado ✓' : 'No se pudo guardar';
+  }catch(e){
+    savedFlag.textContent = 'No se pudo guardar';
+  }
+  savedFlag.classList.add('show');
+  setTimeout(()=>{ savedFlag.classList.remove('show'); savedFlag.textContent = 'Guardado ✓'; }, 1800);
+}
+
+taskArea.addEventListener('input', ()=>{
+  updateCount();
+  clearTimeout(autosaveTimer);
+  autosaveTimer = setTimeout(autoguardar, 800);
+});
+updateCount();
+cargarTarea();
+</script>
+
+</body>
+</html>
