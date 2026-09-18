@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clase 4 · Fuera de casa — Elise</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:        #FBF7EE;
+  --paper-raised: #FFFFFF;
+  --paper-alt:    #F3ECDA;
+  --ink:          #23291F;
+  --ink-soft:     #565F52;
+  --ink-faint:    #8B9184;
+  --line:         rgba(35,41,31,0.12);
+  --line-strong:  rgba(35,41,31,0.22);
+  --b1:      #DB8A2E;  --b1-soft: #FCF1E1;  --b1-line: #F3D9AF;
+  --b2:      #2E9E6B;  --b2-soft: #E9F6EF;  --b2-line: #BEE6D3;
+  --family:  #B5502E;  --family-soft: #FBEBE3; --family-line: #EFC9B4;
+  --f-display: 'Fraunces', Georgia, serif;
+  --f-body:    'IBM Plex Sans', system-ui, sans-serif;
+  --f-data:    'IBM Plex Mono', monospace;
+  --r-sm: 8px; --r-md: 14px; --r-lg: 20px;
+  --shadow-1: 0 1px 2px rgba(35,41,31,0.05), 0 1px 8px rgba(35,41,31,0.04);
+}
+*{ box-sizing:border-box; }
+body{
+  margin:0; background: var(--paper);
+  background-image: radial-gradient(circle at 1px 1px, var(--line) 1px, transparent 0);
+  background-size: 22px 22px; color: var(--ink); font-family: var(--f-body); line-height:1.6;
+}
+::selection{ background: var(--b1-soft); }
+header{ padding:44px 24px 28px; max-width:760px; margin:0 auto; }
+.eyebrow{ font-family: var(--f-data); font-size:12px; letter-spacing:.14em; text-transform:uppercase; color: var(--b1); margin:0 0 10px; display:flex; align-items:center; gap:10px; }
+.eyebrow .dot{ width:6px; height:6px; border-radius:50%; background: var(--b1); }
+h1{ font-family: var(--f-display); font-weight:600; font-size:clamp(30px,5.6vw,46px); line-height:1.08; margin:0 0 14px; letter-spacing:-.01em; }
+h1 em{ font-style:italic; color: var(--b1); }
+.lede{ font-size:16px; color: var(--ink-soft); max-width:56ch; margin:0; }
+.meta-row{ display:flex; flex-wrap:wrap; gap:20px; margin-top:26px; font-family: var(--f-data); font-size:12px; color: var(--ink-faint); }
+.meta-row strong{ display:block; color: var(--ink); font-size:14.5px; font-weight:500; font-family: var(--f-display); margin-top:3px; }
+main{ max-width:760px; margin:0 auto; padding:8px 24px 100px; }
+section.block{ margin-bottom:52px; }
+.block-head{ display:flex; align-items:baseline; gap:12px; margin-bottom:18px; }
+.time-tag{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); background: var(--paper-alt); padding:3px 10px; border-radius:999px; margin-left:auto; flex:none; }
+.block-num{ font-family: var(--f-data); font-size:12px; color:#fff; background: var(--b1); width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex:none; }
+.block-head h2{ font-family: var(--f-display); font-weight:500; font-style:italic; font-size:22px; margin:0; }
+.panel{ background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-lg); box-shadow: var(--shadow-1); padding:26px 28px; }
+.conj-table{ width:100%; border-collapse:collapse; margin-top:4px; }
+.conj-table td{ padding:10px 6px; border-bottom:1px dashed var(--line); font-size:15px; }
+.conj-table tr:last-child td{ border-bottom:none; }
+.conj-pron{ font-family: var(--f-data); color: var(--ink-faint); font-size:13px; width:110px; }
+.conj-form{ font-family: var(--f-display); font-weight:600; font-size:19px; color: var(--b1); }
+.conj-ex{ color: var(--ink-soft); font-size:14px; }
+.note{ margin-top:18px; padding:14px 16px; background: var(--b1-soft); border:1px solid var(--b1-line); border-radius: var(--r-md); font-size:14px; color: var(--ink-soft); }
+.note strong{ color: var(--ink); }
+.compare-wrap{ margin-top:22px; }
+.compare-title{ font-family: var(--f-data); font-size:11.5px; text-transform:uppercase; letter-spacing:.06em; color: var(--ink-faint); margin:0 0 10px; }
+.compare-grid{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+@media (max-width:560px){ .compare-grid{ grid-template-columns:1fr; } }
+.compare-col{ border-radius: var(--r-md); padding:16px 18px; border:1px solid; }
+.compare-col.is-fam{ background: var(--family-soft); border-color: var(--family-line); }
+.compare-col.is-adj{ background: var(--b1-soft); border-color: var(--b1-line); }
+.compare-head{ display:flex; align-items:center; gap:8px; margin:0 0 10px; }
+.compare-verb{ font-family: var(--f-display); font-weight:600; font-size:19px; }
+.is-fam .compare-verb{ color: var(--family); }
+.is-adj .compare-verb{ color: var(--b1); }
+.compare-sub{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); }
+.compare-list{ margin:0; padding:0; list-style:none; }
+.compare-list li{ font-size:13.5px; color: var(--ink-soft); padding:6px 0; border-top:1px dashed var(--line); }
+.compare-list li:first-child{ border-top:none; }
+.compare-list strong{ color: var(--ink); font-weight:600; }
+.compare-list em{ display:block; font-style:normal; color: var(--ink-faint); font-size:12.5px; margin-top:2px; }
+.compare-warning{ margin-top:14px; padding:14px 16px; background: var(--b2-soft); border:1px solid var(--b2-line); border-radius: var(--r-md); font-size:13.5px; color: var(--ink-soft); }
+.compare-warning strong{ color: var(--b2); }
+.vocab-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:12px; }
+.vocab-card{ background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md); padding:14px 16px; cursor:pointer; perspective:600px; min-height:78px; display:flex; flex-direction:column; justify-content:center; transition: border-color .15s ease; }
+.vocab-card:hover{ border-color: var(--b1-line); }
+.vocab-card:focus-visible{ outline:2px solid var(--b1); outline-offset:2px; }
+.vocab-front{ font-family: var(--f-body); font-weight:600; font-size:15px; }
+.vocab-back{ display:none; font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); margin-top:6px; }
+.vocab-card.flipped .vocab-back{ display:block; }
+.vocab-card.flipped{ background: var(--b1-soft); border-color: var(--b1-line); }
+.vocab-hint{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin:10px 2px 16px; }
+.exercise{ margin-bottom:20px; }
+.exercise:last-of-type{ margin-bottom:0; }
+.ex-sentence{ font-size:15.5px; margin-bottom:10px; }
+.ex-sentence .gap{ font-family: var(--f-data); color: var(--ink-faint); }
+.ex-options{ display:flex; flex-wrap:wrap; gap:8px; }
+.opt-btn{ font-family: var(--f-body); font-size:14px; background: var(--paper-raised); border:1.5px solid var(--line); color: var(--ink); padding:7px 16px; border-radius:999px; cursor:pointer; transition: all .15s ease; }
+.opt-btn:hover{ border-color: var(--ink-faint); }
+.opt-btn.picked{ background: var(--b1-soft); border-color: var(--b1); color: var(--b1); }
+.opt-btn.correct{ background: var(--b2-soft); border-color: var(--b2); color: var(--b2); }
+.opt-btn.wrong{ background: var(--family-soft); border-color: var(--family); color: var(--family); }
+.opt-btn:disabled{ cursor:default; }
+.check-bar{ display:flex; align-items:center; justify-content:space-between; gap:16px; margin-top:22px; padding-top:18px; border-top:1px dashed var(--line); }
+.btn-primary{ font-family: var(--f-body); font-weight:600; font-size:14px; color:#fff; background: var(--b1); border:none; padding:11px 22px; border-radius:999px; cursor:pointer; transition: transform .1s ease; }
+.btn-primary:hover{ transform: translateY(-1px); }
+#score-text{ font-family: var(--f-data); font-size:13px; color: var(--ink-faint); }
+.btn-ghost{ font-family: var(--f-body); font-weight:600; font-size:13px; color: var(--ink-soft); background:none; border:1.5px solid var(--line); padding:9px 18px; border-radius:999px; cursor:pointer; }
+.btn-ghost:hover{ border-color: var(--ink-faint); }
+.ex-divider{ display:flex; align-items:center; gap:10px; margin:20px 0 16px; font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.06em; color: var(--ink-faint); }
+.ex-divider::before, .ex-divider::after{ content:""; flex:1; height:1px; background: var(--line); }
+.ex-divider.en-clase{ color: var(--b1); }
+.ex-divider.en-clase::before, .ex-divider.en-clase::after{ background: var(--b1-line); }
+.characters{ display:grid; gap:16px; }
+.char-card{ background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-lg); padding:20px 22px; display:flex; gap:16px; align-items:flex-start; }
+.char-avatar{ flex:none; width:44px; height:44px; border-radius:50%; background: var(--b2-soft); display:flex; align-items:center; justify-content:center; font-family: var(--f-display); font-weight:600; font-size:17px; color: var(--b2); }
+.char-body{ flex:1; }
+.char-name{ font-family: var(--f-display); font-weight:600; font-size:17px; margin:0 0 4px; }
+.char-role{ font-family: var(--f-data); font-size:11.5px; text-transform:uppercase; letter-spacing:.05em; color: var(--ink-faint); margin:0 0 10px; }
+.char-facts{ display:flex; flex-wrap:wrap; gap:6px; margin-bottom:10px; }
+.fact-tag{ font-family: var(--f-data); font-size:12px; background: var(--paper-alt); color: var(--ink-soft); padding:4px 10px; border-radius:999px; }
+.char-prompt{ font-size:14px; color: var(--ink-soft); }
+.char-input{ width:100%; margin-top:8px; font-family: var(--f-body); font-size:14.5px; color: var(--ink); background: var(--paper); border:1px solid var(--line); border-radius: var(--r-sm); padding:10px 12px; resize:vertical; min-height:44px; }
+.char-input:focus{ outline:none; border-color: var(--b2-line); background: var(--paper-raised); }
+.roleplay-panel{ background: var(--b2-soft); border:1px solid var(--b2-line); border-radius: var(--r-lg); padding:26px 28px; }
+.roleplay-panel .block-num{ background: var(--b2); }
+.scene-setup{ display:flex; gap:14px; align-items:flex-start; background: var(--paper-raised); border:1px solid var(--b2-line); border-radius: var(--r-md); padding:14px 16px; margin-bottom:20px; }
+.scene-icon{ font-size:22px; flex:none; }
+.scene-text{ font-size:14px; color: var(--ink-soft); }
+.scene-text strong{ color: var(--ink); }
+.dialogue{ display:flex; flex-direction:column; gap:14px; }
+.scene-tabs{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:18px; }
+.scene-tab{ font-family: var(--f-data); font-size:12.5px; background: var(--paper-raised); border:1.5px solid var(--b2-line); color: var(--ink-soft); padding:7px 14px; border-radius:999px; cursor:pointer; transition: all .15s ease; }
+.scene-tab:hover{ border-color: var(--b2); }
+.scene-tab.active{ background: var(--b2); border-color: var(--b2); color:#fff; }
+.line{ display:flex; gap:12px; align-items:flex-start; }
+.line-avatar{ flex:none; width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-family: var(--f-display); font-weight:600; font-size:14px; color:#fff; }
+.line.friend .line-avatar{ background: var(--ink-faint); }
+.line.you .line-avatar{ background: var(--b2); }
+.line-body{ flex:1; }
+.line-name{ font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.05em; color: var(--ink-faint); margin:0 0 4px; }
+.line-bubble{ background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md); padding:12px 14px; font-size:14.5px; color: var(--ink); }
+.line.you .line-bubble{ background:#fff; border-color: var(--b2-line); }
+.line-input{ width:100%; font-family: var(--f-body); font-size:14.5px; color: var(--ink); background:#fff; border:1px solid var(--b2-line); border-radius: var(--r-sm); padding:10px 12px; resize:vertical; min-height:40px; margin-top:2px; }
+.line-input:focus{ outline:none; border-color: var(--b2); }
+.line-hint{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin-top:5px; }
+.roleplay-tip{ margin-top:22px; padding:14px 16px; background: var(--paper-raised); border:1px solid var(--b2-line); border-radius: var(--r-md); font-size:13.5px; color: var(--ink-soft); }
+.roleplay-tip strong{ color: var(--ink); }
+.task-panel{ background: var(--family-soft); border:1px solid var(--family-line); border-radius: var(--r-lg); padding:26px 28px; }
+.task-panel .block-num{ background: var(--family); }
+textarea#final-task{ width:100%; min-height:110px; font-family: var(--f-body); font-size:15px; color: var(--ink); background: var(--paper-raised); border:1px solid var(--family-line); border-radius: var(--r-md); padding:14px 16px; resize:vertical; margin-top:14px; }
+textarea#final-task:focus{ outline:none; border-color: var(--family); }
+.task-footer{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:12px; flex-wrap:wrap; }
+#task-count{ font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); }
+.btn-secondary{ font-family: var(--f-body); font-weight:600; font-size:13.5px; color: var(--family); background:none; border:1.5px solid var(--family-line); padding:9px 18px; border-radius:999px; cursor:pointer; }
+.saved-flag{ font-family: var(--f-data); font-size:12px; color: var(--b2); opacity:0; transition: opacity .3s ease; }
+.saved-flag.show{ opacity:1; }
+.pill-list{ display:flex; flex-wrap:wrap; gap:8px; margin-top:10px; }
+.pill{ font-family: var(--f-data); font-size:12.5px; background: var(--paper-alt); color: var(--ink-soft); padding:5px 12px; border-radius:999px; }
+footer{ max-width:760px; margin:0 auto; padding:0 24px 60px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); }
+footer a{ color: var(--b1); text-decoration:none; }
+footer a:hover{ text-decoration:underline; }
+@media (max-width:600px){ header{ padding:34px 18px 22px; } main{ padding:8px 18px 90px; } .panel, .task-panel{ padding:20px 18px; } .char-card{ flex-direction:column; } }
+@media (prefers-reduced-motion: reduce){ *{ transition:none !important; } }
+
+.en {
+  color: gray;
+  font-size: 0.85em;
+  display: block;
+  margin-top: 2px;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <p class="eyebrow"><span class="dot"></span>Clase 4 de 5 · L3 Reconnecting after the break
+    <span class="en">Class 4 of 5 · L3 Reconnecting after the break</span>
+  </p>
+  <h1>Fuera de <em>casa</em>
+    <span class="en">Out and <em>about</em></span>
+  </h1>
+  <p class="lede">Hoy salimos de la rutina diaria para hablar de restaurantes, mercados y viajes: las situaciones típicas de cuando estás fuera de casa. Practicaremos desde la perspectiva de España, pero apuntando algunas diferencias con Colombia — justo lo que vas a necesitar en tu próximo viaje para conocer a la familia de David.
+    <span class="en">Today we leave the daily routine to talk about restaurants, markets and travel: the typical situations when you are out and about. We will practice from the Spanish perspective, but noting some differences with Colombia — exactly what you'll need on your next trip to meet David's family.</span>
+  </p>
+  <div class="meta-row">
+    <div>Duración<strong>50 min</strong>
+      <span class="en">Duration</span>
+    </div>
+    <div>Gramática<strong>Me gusta(ría) + cantidades</strong>
+      <span class="en">Grammar</span>
+    </div>
+    <div>Nivel<strong>A1</strong>
+      <span class="en">Level</span>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">1</span><h2>Me gusta / me gustaría + cantidades
+      <span class="en">Me gusta / me gustaría + quantities</span>
+    </h2><span class="time-tag">12 min
+      <span class="en">12 min</span>
+    </span></div>
+    <div class="panel">
+      <table class="conj-table">
+        <tr><td class="conj-pron">me gusta
+          <span class="en">I like</span>
+        </td><td class="conj-form">me gusta
+          <span class="en">I like</span>
+        </td><td class="conj-ex">Me gusta el café colombiano.
+          <span class="en">I like Colombian coffee.</span>
+        </td></tr>
+        <tr><td class="conj-pron">me gustan
+          <span class="en">I like (plural)</span>
+        </td><td class="conj-form">me gustan
+          <span class="en">I like</span>
+        </td><td class="conj-ex">Me gustan las arepas.
+          <span class="en">I like arepas.</span>
+        </td></tr>
+        <tr><td class="conj-pron">me gustaría
+          <span class="en">I would like</span>
+        </td><td class="conj-form">me gustaría
+          <span class="en">I would like</span>
+        </td><td class="conj-ex">Me gustaría probar el ajiaco.
+          <span class="en">I would like to try ajiaco.</span>
+        </td></tr>
+        <tr><td class="conj-pron">te gustaría
+          <span class="en">you would like</span>
+        </td><td class="conj-form">te gustaría
+          <span class="en">you would like</span>
+        </td><td class="conj-ex">¿Te gustaría ir al mercado conmigo?
+          <span class="en">Would you like to go to the market with me?</span>
+        </td></tr>
+        <tr><td class="conj-pron">quisiera
+          <span class="en">I would like</span>
+        </td><td class="conj-form">quisiera
+          <span class="en">I would like</span>
+        </td><td class="conj-ex">Quisiera la carta, por favor.
+          <span class="en">I would like the menu, please.</span>
+        </td></tr>
+        <tr><td class="conj-pron">quantity
+          <span class="en">quantity</span>
+        </td><td class="conj-form">un kilo de
+          <span class="en">a kilo of</span>
+        </td><td class="conj-ex">Un kilo de tomates, por favor.
+          <span class="en">A kilo of tomatoes, please.</span>
+        </td></tr>
+      </table>
+      <div class="note"><strong>Me gusta vs. me gustaría:</strong> "me gusta" describe un gusto general (Me gusta la fruta), mientras que "me gustaría" es más educado y se usa para pedir o proponer algo (Me gustaría un café). "Quisiera" funciona igual que "me gustaría" y es muy común en tiendas y restaurantes.
+        <span class="en"><strong>Me gusta vs. me gustaría:</strong> "me gusta" describes a general liking (I like fruit), while "me gustaría" is more polite and is used to ask or propose something (I would like a coffee). "Quisiera" works the same as "me gustaría" and is very common in shops and restaurants.</span>
+      </div>
+
+      <div class="compare-wrap">
+        <p class="compare-title">Pedir y preguntar por cantidades
+          <span class="en">Asking and asking for quantities</span>
+        </p>
+        <div class="compare-grid">
+          <div class="compare-col is-fam">
+            <div class="compare-head">
+              <span class="compare-verb">Cantidades
+                <span class="en">Quantities</span>
+              </span>
+              <span class="compare-sub">— en el mercado
+                <span class="en">— at the market</span>
+              </span>
+            </div>
+            <ul class="compare-list">
+              <li><strong>un kilo de:
+                <span class="en">a kilo of:</span></strong> para fruta y verdura.
+                <span class="en">for fruit and vegetables.</span>
+                <em>Un kilo de naranjas, por favor.
+                  <span class="en">A kilo of oranges, please.</span>
+                </em>
+              </li>
+              <li><strong>un poco de:
+                <span class="en">a little bit of:</span></strong> cantidad pequeña e informal.
+                <span class="en">small and informal quantity.</span>
+                <em>Un poco de queso, nada más.
+                  <span class="en">A little bit of cheese, nothing else.</span>
+                </em>
+              </li>
+              <li><strong>medio kilo de:
+                <span class="en">half a kilo of:</span></strong> la mitad.
+                <span class="en">half.</span>
+                <em>Medio kilo de café, por favor.
+                  <span class="en">Half a kilo of coffee, please.</span>
+                </em>
+              </li>
+            </ul>
+          </div>
+          <div class="compare-col is-adj">
+            <div class="compare-head">
+              <span class="compare-verb">Preguntas
+                <span class="en">Questions</span>
+              </span>
+              <span class="compare-sub">— repaso general
+                <span class="en">— general review</span>
+              </span>
+            </div>
+            <ul class="compare-list">
+              <li><strong>¿Cuánto cuesta?
+                <span class="en">How much does it cost?</span></strong> para el precio.
+                <span class="en">for price.</span>
+                <em>¿Cuánto cuesta el billete de ida y vuelta?
+                  <span class="en">How much does the round‑trip ticket cost?</span>
+                </em>
+              </li>
+              <li><strong>¿Qué recomienda?
+                <span class="en">What do you recommend?</span></strong> para pedir consejo.
+                <span class="en">to ask for advice.</span>
+                <em>¿Qué recomienda usted de la carta?
+                  <span class="en">What do you recommend from the menu?</span>
+                </em>
+              </li>
+              <li><strong>¿Dónde está?
+                <span class="en">Where is?</span></strong> para ubicar un lugar.
+                <span class="en">to locate a place.</span>
+                <em>¿Dónde está el mercado más cercano?
+                  <span class="en">Where is the nearest market?</span>
+                </em>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="compare-warning">
+          <strong>Diferencia España–Colombia:
+            <span class="en">Spain–Colombia difference:</span></strong> en España se dice "quisiera la cuenta, por favor" al camarero; en Colombia es más común escuchar "¿me regala la cuenta?", una forma muy educada y habitual que no significa "regalar" literalmente. Prepárate para escuchar este uso cuando estés allí.
+          <span class="en">in Spain you say "quisiera la cuenta, por favor" to the waiter; in Colombia it is more common to hear "¿me regala la cuenta?", a very polite and common way that does not literally mean "give as a gift". Be ready to hear this usage when you are there.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">2</span><h2>Vocabulario
+      <span class="en">Vocabulary</span>
+    </h2><span class="time-tag">6 min
+      <span class="en">6 min</span>
+    </span></div>
+    <p class="vocab-hint">Toca cada tarjeta para ver un ejemplo.
+      <span class="en">Tap each card to see an example.</span>
+    </p>
+    <div class="vocab-grid" id="vocab-grid"></div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">3</span><h2>Practica
+      <span class="en">Practice</span>
+    </h2><span class="time-tag">12 min
+      <span class="en">12 min</span>
+    </span></div>
+    <div class="panel">
+      <p class="vocab-hint" style="margin-bottom:14px;">50 frases: las primeras 12 se hacen en voz alta en clase; el resto queda como repaso para casa.
+        <span class="en">50 sentences: the first 12 are done out loud in class; the rest are for home review.</span>
+      </p>
+      <div id="exercises"></div>
+      <div class="check-bar">
+        <div style="display:flex; gap:10px;">
+          <button class="btn-primary" id="check-btn">Comprobar respuestas
+            <span class="en">Check answers</span>
+          </button>
+          <button class="btn-ghost" id="reset-btn">Reiniciar
+            <span class="en">Reset</span>
+          </button>
+        </div>
+        <span id="score-text"></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">4</span><h2>En el restaurante y en el mercado
+      <span class="en">At the restaurant and at the market</span>
+    </h2><span class="time-tag">8 min
+      <span class="en">8 min</span>
+    </span></div>
+    <p class="lede" style="margin-bottom:16px;">Describe qué le gusta o qué pide cada persona usando me gusta / me gustaría / quisiera + cantidades. Las primeras 6 se trabajan en clase; el resto queda como banco de repaso para casa.
+      <span class="en">Describe what each person likes or orders using me gusta / me gustaría / quisiera + quantities. The first 6 are done in class; the rest are a review bank for home.</span>
+    </p>
+    <div class="characters" id="characters"></div>
+  </section>
+
+  <section class="block roleplay-panel">
+    <div class="block-head"><span class="block-num">5</span><h2>Roleplay: restaurante, mercado y repaso general
+      <span class="en">Roleplay: restaurant, market and general review</span>
+    </h2><span class="time-tag">9 min
+      <span class="en">9 min</span>
+    </span></div>
+    <p class="lede" style="margin-bottom:16px;">50 intercambios repartidos en 5 situaciones reales, con perspectiva de España y notas de Colombia. Elige una escena para practicar en clase; el resto queda como banco de repaso para casa.
+      <span class="en">50 exchanges spread over 5 real situations, with a Spanish perspective and notes from Colombia. Choose one scene to practice in class; the rest are a review bank for home.</span>
+    </p>
+    <div class="scene-tabs" id="scene-tabs"></div>
+    <div id="scene-container"></div>
+    <div class="roleplay-tip"><strong>En clase:</strong> practicaremos una escena en voz alta, cambiando de rol. El resto de escenas son para practicar por tu cuenta durante la semana.
+      <span class="en"><strong>In class:</strong> we will practice one scene out loud, switching roles. The rest of the scenes are for you to practice on your own during the week.</span>
+    </div>
+  </section>
+
+  <section class="block task-panel">
+    <div class="block-head"><span class="block-num">6</span><h2 style="color:var(--family)">Tu tarea
+      <span class="en">Your homework</span>
+    </h2><span class="time-tag">3 min
+      <span class="en">3 min</span>
+    </span></div>
+    <p style="margin:0; font-size:15px; color:var(--ink-soft);">Practica en voz alta el <strong>diálogo del restaurante</strong> de la escena de roleplay, y escribe <strong>3 palabras nuevas</strong> que quieras repasar la semana que viene.
+      <span class="en">Practice out loud the <strong>restaurant dialogue</strong> from the roleplay scene, and write <strong>3 new words</strong> you want to review next week.</span>
+    </p>
+    <textarea id="final-task" placeholder="Palabra 1:&#10;Palabra 2:&#10;Palabra 3:"></textarea>
+    <div class="task-footer">
+      <span id="task-count">0 palabras anotadas
+        <span class="en">0 words noted</span>
+      </span>
+      <div style="display:flex; gap:10px; align-items:center;">
+        <span class="saved-flag" id="saved-flag">Guardado ✓
+          <span class="en">Saved ✓</span>
+        </span>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <span>Clase 4 · Out and about
+    <span class="en">Class 4 · Out and about</span>
+  </span>
+  <span>Próxima clase → Clase 5: Planes de futuro y cierre del curso
+    <span class="en">Next class → Class 5: Future plans and course wrap‑up</span>
+  </span>
+</footer>
+
+<script>
+const VOCAB = [
+  {front:"la carta", back:"¿Nos trae la carta, por favor?", frontEn:"la carta (menu)", backEn:"Could you bring us the menu, please?"},
+  {front:"camarero/a", back:"El camarero recomienda el plato del día.", frontEn:"camarero/a (waiter/waitress)", backEn:"The waiter recommends the dish of the day."},
+  {front:"la cuenta", back:"Quisiera la cuenta, por favor.", frontEn:"la cuenta (the bill)", backEn:"I would like the bill, please."},
+  {front:"quisiera", back:"Quisiera un café con leche.", frontEn:"quisiera (I would like)", backEn:"I would like a coffee with milk."},
+  {front:"este/esta", back:"Quiero probar esta fruta, por favor.", frontEn:"este/esta (this)", backEn:"I want to try this fruit, please."},
+  {front:"el mercado", back:"Vamos al mercado a comprar verdura.", frontEn:"el mercado (market)", backEn:"We go to the market to buy vegetables."},
+  {front:"ida y vuelta", back:"Un billete de ida y vuelta a Bogotá.", frontEn:"ida y vuelta (round trip)", backEn:"A round‑trip ticket to Bogotá."},
+  {front:"el billete", back:"¿Cuánto cuesta el billete de tren?", frontEn:"el billete (ticket)", backEn:"How much does the train ticket cost?"},
+];
+
+const grid = document.getElementById('vocab-grid');
+VOCAB.forEach(v=>{
+  const card = document.createElement('div');
+  card.className = 'vocab-card';
+  card.setAttribute('role', 'button');
+  card.setAttribute('tabindex', '0');
+  card.setAttribute('aria-pressed', 'false');
+  card.setAttribute('aria-label', `${v.front}. Pulsa para ver un ejemplo.`);
+  card.innerHTML = `
+    <div class="vocab-front">${v.front}
+      <span class="en">${v.frontEn}</span>
+    </div>
+    <div class="vocab-back">${v.back}
+      <span class="en">${v.backEn}</span>
+    </div>
+  `;
+  const toggle = ()=>{
+    const flipped = card.classList.toggle('flipped');
+    card.setAttribute('aria-pressed', String(flipped));
+  };
+  card.addEventListener('click', toggle);
+  card.addEventListener('keydown', (e)=>{
+    if(e.key === 'Enter' || e.key === ' '){
+      e.preventDefault();
+      toggle();
+    }
+  });
+  grid.appendChild(card);
+});
+
+const EXERCISES = [
+  {"sentence":"<span class=\"gap\">___</span> la carta, por favor.","sentenceEn":"<span class=\"gap\">___</span> the menu, please.","options":["Quisiera","Quisieras","Quisiéramos"],"optionsEn":["Quisiera (I would like)","Quisieras (you would like)","Quisiéramos (we would like)"],"answer":"Quisiera"},
+  {"sentence":"Me <span class=\"gap\">___</span> mucho el café colombiano.","sentenceEn":"I <span class=\"gap\">___</span> Colombian coffee a lot.","options":["gusta","gustan","gustas"],"optionsEn":["gusta (like sg.)","gustan (like pl.)","gustas (you like)"],"answer":"gusta"},
+  {"sentence":"Me <span class=\"gap\">___</span> las arepas con queso.","sentenceEn":"I <span class=\"gap\">___</span> arepas with cheese.","options":["gustan","gusta","gustas"],"optionsEn":["gustan (like pl.)","gusta (like sg.)","gustas (you like)"],"answer":"gustan"},
+  {"sentence":"Me <span class=\"gap\">___</span> probar el ajiaco algún día.","sentenceEn":"I <span class=\"gap\">___</span> to try ajiaco someday.","options":["gustaría","gustarían","gusta"],"optionsEn":["gustaría (would like sg.)","gustarían (would like pl.)","gusta (like sg.)"],"answer":"gustaría"},
+  {"sentence":"¿Te <span class=\"gap\">___</span> venir al mercado conmigo?","sentenceEn":"Would you <span class=\"gap\">___</span> to come to the market with me?","options":["gustaría","gusta","gustan"],"optionsEn":["gustaría (would like)","gusta (like)","gustan (like pl.)"],"answer":"gustaría"},
+  {"sentence":"Un <span class=\"gap\">___</span> de tomates, por favor.","sentenceEn":"A <span class=\"gap\">___</span> of tomatoes, please.","options":["kilo","kilos","kilogramo de"],"optionsEn":["kilo (kilo)","kilos (kilos)","kilogramo de (kilogram of)"],"answer":"kilo"},
+  {"sentence":"¿<span class=\"gap\">___</span> cuesta el billete de tren?","sentenceEn":"How <span class=\"gap\">___</span> does the train ticket cost?","options":["Cuánto","Cuántos","Cómo"],"optionsEn":["Cuánto (How much)","Cuántos (How many)","Cómo (How)"],"answer":"Cuánto"},
+  {"sentence":"¿Nos trae <span class=\"gap\">___</span>, por favor?","sentenceEn":"Could you bring us <span class=\"gap\">___</span>, please?","options":["la carta","el carta","las cartas"],"optionsEn":["la carta (the menu)","el carta (incorrect)","las cartas (the menus)"],"answer":"la carta"},
+  {"sentence":"Quisiera <span class=\"gap\">___</span>, por favor, para pagar.","sentenceEn":"I would like <span class=\"gap\">___</span>, please, to pay.","options":["la cuenta","el cuenta","las cuentas"],"optionsEn":["la cuenta (the bill)","el cuenta (incorrect)","las cuentas (the bills)"],"answer":"la cuenta"},
+  {"sentence":"¿Qué <span class=\"gap\">___</span> usted de la carta?","sentenceEn":"What do you <span class=\"gap\">___</span> from the menu?","options":["recomienda","recomiendan","recomiendas"],"optionsEn":["recomienda (recommend formal)","recomiendan (recommend pl.)","recomiendas (recommend inf.)"],"answer":"recomienda"},
+  {"sentence":"Quiero un billete de <span class=\"gap\">___</span> a Bogotá.","sentenceEn":"I want a <span class=\"gap\">___</span> ticket to Bogotá.","options":["ida y vuelta","ida","vuelta"],"optionsEn":["ida y vuelta (round trip)","ida (one way)","vuelta (return)"],"answer":"ida y vuelta"},
+  {"sentence":"Un <span class=\"gap\">___</span> de queso, nada más.","sentenceEn":"A little <span class=\"gap\">___</span> of cheese, nothing else.","options":["poco","poca","pocos"],"optionsEn":["poco (little sg. masc.)","poca (little sg. fem.)","pocos (little pl.)"],"answer":"poco"},
+  {"sentence":"¿Dónde <span class=\"gap\">___</span> el mercado más cercano?","sentenceEn":"Where <span class=\"gap\">___</span> the nearest market?","options":["está","es","hay"],"optionsEn":["está (is located)","es (is)","hay (there is)"],"answer":"está"},
+  {"sentence":"Me <span class=\"gap\">___</span> la fruta fresca del mercado.","sentenceEn":"I <span class=\"gap\">___</span> fresh fruit from the market.","options":["gusta","gustan","gustas"],"optionsEn":["gusta (like sg.)","gustan (like pl.)","gustas (you like)"],"answer":"gusta"},
+  {"sentence":"Nos <span class=\"gap\">___</span> mucho los mercados locales.","sentenceEn":"We <span class=\"gap\">___</span> local markets a lot.","options":["gustan","gusta","gustamos"],"optionsEn":["gustan (like pl.)","gusta (like sg.)","gustamos (we like)"],"answer":"gustan"},
+  {"sentence":"¿Te <span class=\"gap\">___</span> este plato, o prefieres otro?","sentenceEn":"Do you <span class=\"gap\">___</span> this dish, or do you prefer another?","options":["gusta","gustaría","gustan"],"optionsEn":["gusta (like)","gustaría (would like)","gustan (like pl.)"],"answer":"gusta"},
+  {"sentence":"Medio <span class=\"gap\">___</span> de café, por favor.","sentenceEn":"Half a <span class=\"gap\">___</span> of coffee, please.","options":["kilo","kilos","kilogramos"],"optionsEn":["kilo (kilo)","kilos (kilos)","kilogramos (kilograms)"],"answer":"kilo"},
+  {"sentence":"Quisiera <span class=\"gap\">___</span> mesa, por favor.","sentenceEn":"I would like <span class=\"gap\">___</span> table, please.","options":["esta","este","estos"],"optionsEn":["esta (this fem.)","este (this masc.)","estos (these)"],"answer":"esta"},
+  {"sentence":"¿<span class=\"gap\">___</span> me recomienda para beber?","sentenceEn":"What <span class=\"gap\">___</span> do you recommend for drinking?","options":["Qué","Cuál","Cómo"],"optionsEn":["Qué (What)","Cuál (Which)","Cómo (How)"],"answer":"Qué"},
+  {"sentence":"Nos gustaría <span class=\"gap\">___</span> el especial del día.","sentenceEn":"We would like <span class=\"gap\">___</span> the daily special.","options":["probar","probamos","probando"],"optionsEn":["probar (to try)","probamos (we try)","probando (trying)"],"answer":"probar"},
+  {"sentence":"¿Cuánto <span class=\"gap\">___</span> estos tomates?","sentenceEn":"How much <span class=\"gap\">___</span> these tomatoes?","options":["cuestan","cuesta","cuesto"],"optionsEn":["cuestan (cost pl.)","cuesta (cost sg.)","cuesto (I cost)"],"answer":"cuestan"},
+  {"sentence":"Un billete de <span class=\"gap\">___</span>, por favor, para mañana.","sentenceEn":"A <span class=\"gap\">___</span> ticket, please, for tomorrow.","options":["ida","vuelta","idas"],"optionsEn":["ida (one way)","vuelta (return)","idas (one ways)"],"answer":"ida"},
+  {"sentence":"¿Nos puede traer <span class=\"gap\">___</span>, por favor?","sentenceEn":"Could you bring us <span class=\"gap\">___</span>, please?","options":["la cuenta","el cuenta","las cartas"],"optionsEn":["la cuenta (the bill)","el cuenta (incorrect)","las cartas (the menus)"],"answer":"la cuenta"},
+  {"sentence":"Me gustaría un <span class=\"gap\">___</span> de esa fruta.","sentenceEn":"I would like a <span class=\"gap\">___</span> of that fruit.","options":["kilo","carta","billete"],"optionsEn":["kilo (kilo)","carta (menu)","billete (ticket)"],"answer":"kilo"},
+  {"sentence":"¿Te <span class=\"gap\">___</span> los mercados de Bogotá?","sentenceEn":"Do you <span class=\"gap\">___</span> the markets in Bogotá?","options":["gustan","gusta","gustaría"],"optionsEn":["gustan (like pl.)","gusta (like sg.)","gustaría (would like)"],"answer":"gustan"},
+  {"sentence":"Quisiera reservar <span class=\"gap\">___</span> mesa para dos.","sentenceEn":"I would like to book <span class=\"gap\">___</span> table for two.","options":["esta","este","estas"],"optionsEn":["esta (this fem.)","este (this masc.)","estas (these fem.)"],"answer":"esta"},
+  {"sentence":"¿Qué <span class=\"gap\">___</span> de postre?","sentenceEn":"What do you <span class=\"gap\">___</span> for dessert?","options":["recomienda","recomiendo","recomiendas"],"optionsEn":["recomienda (recommend formal)","recomiendo (I recommend)","recomiendas (you recommend)"],"answer":"recomienda"},
+  {"sentence":"Nos gustaría <span class=\"gap\">___</span> la especialidad de la casa.","sentenceEn":"We would like <span class=\"gap\">___</span> the house speciality.","options":["pedir","pedimos","pediendo"],"optionsEn":["pedir (to order)","pedimos (we order)","pediendo (ordering)"],"answer":"pedir"},
+  {"sentence":"Un poco <span class=\"gap\">___</span> arroz, por favor.","sentenceEn":"A little bit <span class=\"gap\">___</span> rice, please.","options":["de","del","de la"],"optionsEn":["de (of)","del (of the masc.)","de la (of the fem.)"],"answer":"de"},
+  {"sentence":"¿A qué hora <span class=\"gap\">___</span> el tren?","sentenceEn":"What time <span class=\"gap\">___</span> the train?","options":["sale","salen","salgo"],"optionsEn":["sale (leaves sg.)","salen (leaves pl.)","salgo (I leave)"],"answer":"sale"},
+  {"sentence":"Me gustaría probar <span class=\"gap\">___</span> plato colombiano.","sentenceEn":"I would like to try <span class=\"gap\">___</span> Colombian dish.","options":["este","esta","estos"],"optionsEn":["este (this masc.)","esta (this fem.)","estos (these)"],"answer":"este"},
+  {"sentence":"¿Cuántos billetes de <span class=\"gap\">___</span> necesitamos?","sentenceEn":"How many <span class=\"gap\">___</span> tickets do we need?","options":["ida y vuelta","ida","vuelta"],"optionsEn":["ida y vuelta (round trip)","ida (one way)","vuelta (return)"],"answer":"ida y vuelta"},
+  {"sentence":"El camarero <span class=\"gap\">___</span> el plato especial.","sentenceEn":"The waiter <span class=\"gap\">___</span> the special dish.","options":["recomienda","recomiendan","recomiendo"],"optionsEn":["recomienda (recommends)","recomiendan (recommend pl.)","recomiendo (I recommend)"],"answer":"recomienda"},
+  {"sentence":"En el mercado siempre <span class=\"gap\">___</span> fruta fresca.","sentenceEn":"At the market I always <span class=\"gap\">___</span> fresh fruit.","options":["compro","compra","compras"],"optionsEn":["compro (I buy)","compra (he/she buys)","compras (you buy)"],"answer":"compro"},
+  {"sentence":"¿Le <span class=\"gap\">___</span> algo más, señora?","sentenceEn":"Would you <span class=\"gap\">___</span> anything else, madam?","options":["gustaría","gusta","gustan"],"optionsEn":["gustaría (would like)","gusta (like)","gustan (like pl.)"],"answer":"gustaría"},
+  {"sentence":"Un kilo <span class=\"gap\">___</span> naranjas, por favor.","sentenceEn":"A kilo <span class=\"gap\">___</span> oranges, please.","options":["de","del","de la"],"optionsEn":["de (of)","del (of the masc.)","de la (of the fem.)"],"answer":"de"},
+  {"sentence":"Perdone, ¿<span class=\"gap\">___</span> me regala la cuenta?","sentenceEn":"Excuse me, could you <span class=\"gap\">___</span> give me the bill?","options":["me","le","se"],"optionsEn":["me (me)","le (you formal)","se (him/her/them)"],"answer":"me"},
+  {"sentence":"¿Cuánto <span class=\"gap\">___</span> el billete de vuelta?","sentenceEn":"How much <span class=\"gap\">___</span> the return ticket?","options":["cuesta","cuestan","cuesto"],"optionsEn":["cuesta (costs sg.)","cuestan (cost pl.)","cuesto (I cost)"],"answer":"cuesta"},
+  {"sentence":"Me gustaría <span class=\"gap\">___</span> un café con leche.","sentenceEn":"I would like <span class=\"gap\">___</span> a coffee with milk.","options":["tomar","tomo","tomando"],"optionsEn":["tomar (to have)","tomo (I have)","tomando (having)"],"answer":"tomar"},
+  {"sentence":"¿Nos <span class=\"gap\">___</span> traer más pan, por favor?","sentenceEn":"Could you <span class=\"gap\">___</span> bring us more bread, please?","options":["puede","pueden","puedo"],"optionsEn":["puede (can formal)","pueden (can pl.)","puedo (I can)"],"answer":"puede"},
+  {"sentence":"Quisiera <span class=\"gap\">___</span> kilo de café colombiano.","sentenceEn":"I would like <span class=\"gap\">___</span> kilo of Colombian coffee.","options":["medio","media","mediana"],"optionsEn":["medio (half masc.)","media (half fem.)","mediana (medium)"],"answer":"medio"},
+  {"sentence":"¿Te <span class=\"gap\">___</span> ir de compras esta tarde?","sentenceEn":"Would you <span class=\"gap\">___</span> to go shopping this afternoon?","options":["gustaría","gusta","gustan"],"optionsEn":["gustaría (would like)","gusta (like)","gustan (like pl.)"],"answer":"gustaría"},
+  {"sentence":"Nos gustan <span class=\"gap\">___</span> frutas tropicales.","sentenceEn":"We like <span class=\"gap\">___</span> tropical fruits.","options":["las","los","la"],"optionsEn":["las (the fem. pl.)","los (the masc. pl.)","la (the fem. sg.)"],"answer":"las"},
+  {"sentence":"¿Qué me <span class=\"gap\">___</span> para el desayuno?","sentenceEn":"What do you <span class=\"gap\">___</span> me for breakfast?","options":["recomienda","recomiendo","recomiendas"],"optionsEn":["recomienda (recommend formal)","recomiendo (I recommend)","recomiendas (you recommend)"],"answer":"recomienda"},
+  {"sentence":"Un billete sencillo, no de <span class=\"gap\">___</span>.","sentenceEn":"A one‑way ticket, not <span class=\"gap\">___</span>.","options":["ida y vuelta","ida","vuelta"],"optionsEn":["ida y vuelta (round trip)","ida (one way)","vuelta (return)"],"answer":"ida y vuelta"},
+  {"sentence":"Me gustaría comprar <span class=\"gap\">___</span> flores para mi madre.","sentenceEn":"I would like to buy <span class=\"gap\">___</span> flowers for my mother.","options":["estas","este","esta"],"optionsEn":["estas (these fem.)","este (this masc.)","esta (this fem.)"],"answer":"estas"},
+  {"sentence":"¿Dónde <span class=\"gap\">___</span> comprar billetes de tren?","sentenceEn":"Where <span class=\"gap\">___</span> I buy train tickets?","options":["puedo","puede","puedes"],"optionsEn":["puedo (can I)","puede (can he/she/formal)","puedes (can you)"],"answer":"puedo"},
+  {"sentence":"Un poco <span class=\"gap\">___</span> paciencia, por favor, ya vamos.","sentenceEn":"A little bit <span class=\"gap\">___</span> patience, please, we're going.","options":["de","del","de la"],"optionsEn":["de (of)","del (of the masc.)","de la (of the fem.)"],"answer":"de"},
+  {"sentence":"Nos gustaría <span class=\"gap\">___</span> la carta otra vez.","sentenceEn":"We would like <span class=\"gap\">___</span> the menu again.","options":["ver","vemos","viendo"],"optionsEn":["ver (to see)","vemos (we see)","viendo (seeing)"],"answer":"ver"},
+  {"sentence":"¿Cuánto <span class=\"gap\">___</span> este billete de tren?","sentenceEn":"How much <span class=\"gap\">___</span> this train ticket?","options":["cuesta","cuestan","cuesto"],"optionsEn":["cuesta (costs sg.)","cuestan (cost pl.)","cuesto (I cost)"],"answer":"cuesta"}
+];
+
+const exWrap = document.getElementById('exercises');
+EXERCISES.forEach((ex, i)=>{
+  if(i === 0){
+    const divider = document.createElement('div');
+    divider.className = 'ex-divider en-clase';
+    divider.textContent = 'en clase · ítems 1–12';
+    divider.innerHTML += '<span class="en">in class · items 1–12</span>';
+    exWrap.appendChild(divider);
+  }
+  if(i === 12){
+    const divider = document.createElement('div');
+    divider.className = 'ex-divider';
+    divider.textContent = 'para casa · repaso opcional';
+    divider.innerHTML += '<span class="en">for home · optional review</span>';
+    exWrap.appendChild(divider);
+  }
+  const el = document.createElement('div');
+  el.className = 'exercise';
+  el.dataset.answer = ex.answer;
+  const optionsHtml = ex.options.map((o, idx) => 
+    `<button class="opt-btn" data-value="${o}">${o} <span class="en">${ex.optionsEn[idx]}</span></button>`
+  ).join('');
+  el.innerHTML = `
+    <div class="ex-sentence">${i+1}. ${ex.sentence}
+      <span class="en">${ex.sentenceEn}</span>
+    </div>
+    <div class="ex-options">${optionsHtml}</div>
+  `;
+  exWrap.appendChild(el);
+
+  el.querySelectorAll('.opt-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      el.querySelectorAll('.opt-btn').forEach(b=>b.classList.remove('picked'));
+      btn.classList.add('picked');
+    });
+  });
+});
+
+document.getElementById('check-btn').addEventListener('click', ()=>{
+  let correct = 0;
+  document.querySelectorAll('.exercise').forEach(el=>{
+    const answer = el.dataset.answer;
+    const picked = el.querySelector('.opt-btn.picked');
+    el.querySelectorAll('.opt-btn').forEach(b=>{
+      b.disabled = true;
+      if(b.dataset.value === answer) b.classList.add('correct');
+      else if(b === picked) b.classList.add('wrong');
+    });
+    if(picked && picked.dataset.value === answer) correct++;
+  });
+  document.getElementById('score-text').textContent = `${correct} / ${EXERCISES.length} correctas`;
+});
+
+document.getElementById('reset-btn').addEventListener('click', ()=>{
+  document.querySelectorAll('.exercise').forEach(el=>{
+    el.querySelectorAll('.opt-btn').forEach(b=>{
+      b.disabled = false;
+      b.classList.remove('picked','correct','wrong');
+    });
+  });
+  document.getElementById('score-text').textContent = '';
+});
+
+const CHARACTERS = [
+  {name:"Tú", nameEn:"You", role:"Pidiendo en un restaurante español", roleEn:"Ordering at a Spanish restaurant", facts:["quisiera la carta","me gustaría probar el especial","pide la cuenta al final"], factsEn:["would like the menu","would like to try the special","asks for the bill at the end"], prompt:"Escribe una frase con me gusta / me gustaría / quisiera:", promptEn:"Write a sentence with me gusta / me gustaría / quisiera:"},
+  {name:"David", nameEn:"David", role:"Tu novio, esperando en el restaurante", roleEn:"Your boyfriend, waiting at the restaurant", facts:["le gusta la comida picante","le gustaría pedir el plato del día","prefiere pagar con tarjeta"], factsEn:["likes spicy food","would like to order the dish of the day","prefers to pay by card"], prompt:"Escribe una frase sobre lo que le gusta o pide:", promptEn:"Write a sentence about what he likes or orders:"},
+  {name:"El camarero", nameEn:"The waiter", role:"Atiende la mesa", roleEn:"Serves the table", facts:["recomienda el plato de la casa","trae la carta enseguida","pregunta si quieren postre"], factsEn:["recommends the house dish","brings the menu right away","asks if they want dessert"], prompt:"Escribe una frase con un verbo de restaurante:", promptEn:"Write a sentence with a restaurant verb:"},
+  {name:"La vendedora del mercado", nameEn:"The market seller", role:"Vende fruta y verdura", roleEn:"Sells fruit and vegetables", facts:["vende un kilo de tomates","recomienda la fruta de temporada","pregunta cuánto quieres"], factsEn:["sells a kilo of tomatoes","recommends seasonal fruit","asks how much you want"], prompt:"Escribe una frase con una cantidad (kilo, poco de...):", promptEn:"Write a sentence with a quantity (kilo, a little bit of...):"},
+  {name:"Marta", nameEn:"Marta", role:"La madre de David", roleEn:"David's mother", facts:["le gusta cocinar los domingos","le gustaría enseñarte una receta","compra en el mercado cada semana"], factsEn:["likes to cook on Sundays","would like to teach you a recipe","buys at the market every week"], prompt:"Escribe una frase con me/le gusta(ría):", promptEn:"Write a sentence with me/le gusta(ría):"},
+  {name:"Jorge", nameEn:"Jorge", role:"El padre de David", roleEn:"David's father", facts:["le gusta el café fuerte por la mañana","quisiera enseñarte el mercado local","prefiere comprar fruta fresca"], factsEn:["likes strong coffee in the morning","would like to show you the local market","prefers to buy fresh fruit"], prompt:"Escribe una frase sobre sus gustos:", promptEn:"Write a sentence about his likes:"},
+  {name:"Camila", nameEn:"Camila", role:"La hermana de David", roleEn:"David's sister", facts:["le gustaría llevarte de compras","le gustan los mercados de artesanía","prefiere pagar en efectivo"], factsEn:["would like to take you shopping","likes craft markets","prefers to pay in cash"], prompt:"Escribe una frase con le gusta(ría):", promptEn:"Write a sentence with le gusta(ría):"},
+  {name:"Doña Rosa", nameEn:"Doña Rosa", role:"La abuela de David", roleEn:"David's grandmother", facts:["le gusta el mercado de los sábados","quisiera comprarte flores","recomienda siempre regatear un poco"], factsEn:["likes the Saturday market","would like to buy you flowers","always recommends haggling a bit"], prompt:"Escribe una frase sobre sus preferencias:", promptEn:"Write a sentence about her preferences:"},
+  {name:"Andrés", nameEn:"Andrés", role:"El tío de David, comerciante", roleEn:"David's uncle, merchant", facts:["vende un kilo de café cada mañana","recomienda su propio producto","le gusta charlar con los clientes"], factsEn:["sells a kilo of coffee every morning","recommends his own product","likes to chat with customers"], prompt:"Escribe una frase con un verbo de tienda:", promptEn:"Write a sentence with a shop verb:"},
+  {name:"Sarah", nameEn:"Sarah", role:"Otra House Parent, colega tuya", roleEn:"Another House Parent, your colleague", facts:["le gustaría visitar Colombia algún día","le gusta probar comida nueva","quisiera aprender a cocinar arepas"], factsEn:["would like to visit Colombia someday","likes to try new food","would like to learn to cook arepas"], prompt:"Escribe una frase con me/le gusta(ría):", promptEn:"Write a sentence with me/le gusta(ría):"},
+  {name:"El señor Hughes", nameEn:"Mr. Hughes", role:"El director del internado", roleEn:"The boarding school headteacher", facts:["le gusta el té por la tarde","prefiere reservar mesa con antelación","recomienda un buen restaurante local"], factsEn:["likes tea in the afternoon","prefers to book a table in advance","recommends a good local restaurant"], prompt:"Escribe una frase sobre sus preferencias:", promptEn:"Write a sentence about his preferences:"},
+  {name:"Emma", nameEn:"Emma", role:"Compañera de departamento en el internado", roleEn:"Department colleague at the boarding school", facts:["le gustaría viajar a Sudamérica","le gusta el café con leche","prefiere ir de compras temprano"], factsEn:["would like to travel to South America","likes coffee with milk","prefers to go shopping early"], prompt:"Escribe una frase con le gusta(ría):", promptEn:"Write a sentence with le gusta(ría):"},
+  {name:"Tom", nameEn:"Tom", role:"Profesor de deportes en el internado", roleEn:"Sports teacher at the boarding school", facts:["le gusta comer mucho después de entrenar","quisiera probar comida picante","prefiere pagar rápido y salir"], factsEn:["likes to eat a lot after training","would like to try spicy food","prefers to pay quickly and leave"], prompt:"Escribe una frase con un verbo de restaurante:", promptEn:"Write a sentence with a restaurant verb:"},
+  {name:"La enfermera del internado", nameEn:"The boarding school nurse", role:"Cuida la salud de los estudiantes", roleEn:"Cares for the students' health", facts:["le gusta la fruta fresca del mercado","recomienda comer verdura cada día","prefiere comprar productos locales"], factsEn:["likes fresh fruit from the market","recommends eating vegetables every day","prefers to buy local products"], prompt:"Escribe una frase sobre sus preferencias:", promptEn:"Write a sentence about her preferences:"},
+  {name:"El jardinero del internado", nameEn:"The boarding school gardener", role:"Mantiene los jardines del colegio", roleEn:"Maintains the school gardens", facts:["le gusta comprar semillas en el mercado","quisiera plantar algo nuevo","prefiere el mercado de los domingos"], factsEn:["likes to buy seeds at the market","would like to plant something new","prefers the Sunday market"], prompt:"Escribe una frase con le gusta(ría):", promptEn:"Write a sentence with le gusta(ría):"},
+  {name:"Los profesores nuevos", nameEn:"The new teachers", role:"Empiezan este curso en el internado", roleEn:"They start this year at the boarding school", facts:["les gustaría conocer restaurantes cercanos","les gusta probar la cocina local","prefieren comer en grupo"], factsEn:["they would like to know nearby restaurants","they like to try local cuisine","they prefer to eat in a group"], prompt:"Escribe una frase con les gusta(ría):", promptEn:"Write a sentence with les gusta(ría):"},
+  {name:"Lucía", nameEn:"Lucía", role:"La tía de David, enfermera", roleEn:"David's aunt, nurse", facts:["le gusta comprar en el mercado los sábados","recomienda la fruta más fresca","quisiera enseñarte una receta familiar"], factsEn:["likes to buy at the market on Saturdays","recommends the freshest fruit","would like to teach you a family recipe"], prompt:"Escribe una frase con le gusta(ría):", promptEn:"Write a sentence with le gusta(ría):"},
+  {name:"Felipe", nameEn:"Felipe", role:"El primo pequeño de David", roleEn:"David's young cousin", facts:["le gustan mucho las arepas","le gustaría ir contigo al mercado","prefiere el jugo de mango"], factsEn:["he likes arepas a lot","would like to go to the market with you","prefers mango juice"], prompt:"Escribe una frase con le gusta(n):", promptEn:"Write a sentence with le gusta(n):"},
+  {name:"Valentina", nameEn:"Valentina", role:"La prima universitaria de David", roleEn:"David's university cousin", facts:["le gustaría llevarte a un restaurante típico","le gusta probar platos nuevos","prefiere pagar la cuenta entre todos"], factsEn:["would like to take you to a typical restaurant","likes to try new dishes","prefers to split the bill"], prompt:"Escribe una frase con le gusta(ría):", promptEn:"Write a sentence with le gusta(ría):"},
+  {name:"Don Carlos", nameEn:"Don Carlos", role:"El abuelo de David, agricultor jubilado", roleEn:"David's grandfather, retired farmer", facts:["vende un poco de su cosecha en el mercado","le gusta hablar con los compradores","recomienda comer fruta de temporada"], factsEn:["sells a bit of his harvest at the market","likes to talk to buyers","recommends eating seasonal fruit"], prompt:"Escribe una frase con un verbo de mercado:", promptEn:"Write a sentence with a market verb:"},
+  {name:"Sofía", nameEn:"Sofía", role:"La mejor amiga de David, abogada", roleEn:"David's best friend, lawyer", facts:["le gustaría reservar mesa para el sábado","le gusta la comida internacional","prefiere restaurantes tranquilos"], factsEn:["would like to book a table for Saturday","likes international food","prefers quiet restaurants"], prompt:"Escribe una frase con le gusta(ría):", promptEn:"Write a sentence with le gusta(ría):"},
+  {name:"Mateo", nameEn:"Mateo", role:"Compañero de trabajo de David, profesor de matemáticas", roleEn:"David's work colleague, maths teacher", facts:["le gusta desayunar fuera de casa","quisiera probar un café colombiano auténtico","prefiere pagar con tarjeta"], factsEn:["likes to have breakfast out","would like to try an authentic Colombian coffee","prefers to pay by card"], prompt:"Escribe una frase con le gusta(ría):", promptEn:"Write a sentence with le gusta(ría):"},
+  {name:"Laura", nameEn:"Laura", role:"Compañera de trabajo de David, profesora de arte", roleEn:"David's work colleague, art teacher", facts:["le gusta comprar flores en el mercado","le gustaría pintar el mercado algún día","prefiere ir temprano para evitar el calor"], factsEn:["likes to buy flowers at the market","would like to paint the market someday","prefers to go early to avoid the heat"], prompt:"Escribe una frase con le gusta(ría):", promptEn:"Write a sentence with le gusta(ría):"},
+  {name:"Diego", nameEn:"Diego", role:"El vecino de la familia, taxista", roleEn:"The family's neighbour, taxi driver", facts:["recomienda un buen restaurante del barrio","le gusta parar a comer entre turnos","prefiere comida rápida y sabrosa"], factsEn:["recommends a good restaurant in the neighbourhood","likes to stop for a meal between shifts","prefers fast and tasty food"], prompt:"Escribe una frase con un verbo de comida:", promptEn:"Write a sentence with a food verb:"},
+  {name:"Isabella", nameEn:"Isabella", role:"La vecina de la familia, peluquera", roleEn:"The family's neighbour, hairdresser", facts:["le gustaría probar el nuevo restaurante","le gusta comprar fruta cada mañana","prefiere el mercado cercano a su casa"], factsEn:["would like to try the new restaurant","likes to buy fruit every morning","prefers the market close to her house"], prompt:"Escribe una frase con le gusta(ría):", promptEn:"Write a sentence with le gusta(ría):"},
+  {name:"Julián", nameEn:"Julián", role:"El hermano pequeño de David", roleEn:"David's younger brother", facts:["le gustan mucho los dulces del mercado","le gustaría acompañarte a comprar","prefiere el jugo de guayaba"], factsEn:["he likes sweets from the market a lot","would like to go shopping with you","prefers guava juice"], prompt:"Escribe una frase con le gusta(n):", promptEn:"Write a sentence with le gusta(n):"},
+  {name:"Natalia", nameEn:"Natalia", role:"La cuñada de David, dentista", roleEn:"David's sister‑in‑law, dentist", facts:["prefiere comida saludable en los restaurantes","le gusta el mercado de productos orgánicos","recomienda evitar el exceso de azúcar"], factsEn:["prefers healthy food in restaurants","likes the organic products market","recommends avoiding excess sugar"], prompt:"Escribe una frase con le gusta(ría):", promptEn:"Write a sentence with le gusta(ría):"},
+  {name:"Ricardo", nameEn:"Ricardo", role:"El padrino de David, médico jubilado", roleEn:"David's godfather, retired doctor", facts:["le gusta desayunar en el mercado los domingos","recomienda la fruta fresca cada día","prefiere un café suave"], factsEn:["likes to have breakfast at the market on Sundays","recommends fresh fruit every day","prefers a mild coffee"], prompt:"Escribe una frase con le gusta(ría):", promptEn:"Write a sentence with le gusta(ría):"},
+  {name:"Paula", nameEn:"Paula", role:"La madrina de David, profesora jubilada", roleEn:"David's godmother, retired teacher", facts:["le gustaría enseñarte una receta tradicional","le gusta comprar despacio en el mercado","prefiere pagar en efectivo"], factsEn:["would like to teach you a traditional recipe","likes to buy slowly at the market","prefers to pay in cash"], prompt:"Escribe una frase con le gusta(ría):", promptEn:"Write a sentence with le gusta(ría):"},
+  {name:"Santiago", nameEn:"Santiago", role:"Amigo de David de la universidad, arquitecto", roleEn:"David's university friend, architect", facts:["le gustaría reservar un restaurante moderno","le gusta probar cocina de autor","prefiere cenar tarde"], factsEn:["would like to book a modern restaurant","likes to try author cuisine","prefers to have dinner late"], prompt:"Escribe una frase con le gusta(ría):", promptEn:"Write a sentence with le gusta(ría):"},
+  {name:"Manuela", nameEn:"Manuela", role:"La pareja de Santiago, diseñadora", roleEn:"Santiago's partner, designer", facts:["le gusta comprar artesanía en el mercado","le gustaría diseñar un menú algún día","prefiere restaurantes con buena luz"], factsEn:["likes to buy crafts at the market","would like to design a menu someday","prefers restaurants with good lighting"], prompt:"Escribe una frase con le gusta(ría):", promptEn:"Write a sentence with le gusta(ría):"},
+  {name:"Alejandro", nameEn:"Alejandro", role:"El sobrino pequeño de David", roleEn:"David's young nephew", facts:["le gustan mucho las frutas del mercado","le gustaría un helado después de comer","prefiere sentarse cerca de la ventana"], factsEn:["he likes the market fruits a lot","would like an ice cream after eating","prefers to sit near the window"], prompt:"Escribe una frase con le gusta(n):", promptEn:"Write a sentence with le gusta(n):"},
+  {name:"Daniela", nameEn:"Daniela", role:"La sobrina de David", roleEn:"David's niece", facts:["le gusta ayudar a elegir la fruta","le gustaría probar un plato nuevo","prefiere comer despacio"], factsEn:["she likes to help choose the fruit","would like to try a new dish","prefers to eat slowly"], prompt:"Escribe una frase con le gusta(ría):", promptEn:"Write a sentence with le gusta(ría):"},
+  {name:"Óscar", nameEn:"Óscar", role:"El compañero de piso de David en Bogotá", roleEn:"David's flatmate in Bogotá", facts:["prefiere cocinar en casa entre semana","le gusta comprar barato en el mercado","quisiera aprender a regatear mejor"], factsEn:["prefers to cook at home during the week","likes to buy cheap at the market","would like to learn to haggle better"], prompt:"Escribe una frase con le gusta(ría):", promptEn:"Write a sentence with le gusta(ría):"},
+  {name:"Catalina", nameEn:"Catalina", role:"Amiga de la familia, chef", roleEn:"Family friend, chef", facts:["recomienda siempre el plato del día","le gusta comprar ingredientes frescos","prefiere el mercado más grande de la ciudad"], factsEn:["always recommends the dish of the day","likes to buy fresh ingredients","prefers the biggest market in the city"], prompt:"Escribe una frase con le gusta(ría):", promptEn:"Write a sentence with le gusta(ría):"},
+  {name:"Esteban", nameEn:"Esteban", role:"El marido de Catalina, músico", roleEn:"Catalina's husband, musician", facts:["le gusta comer tarde después de un concierto","prefiere restaurantes con música en vivo","le gustaría invitarte a cenar"], factsEn:["likes to eat late after a concert","prefers restaurants with live music","would like to invite you to dinner"], prompt:"Escribe una frase con le gusta(ría):", promptEn:"Write a sentence with le gusta(ría):"},
+  {name:"Gabriela", nameEn:"Gabriela", role:"Prima lejana de David, veterinaria", roleEn:"David's distant cousin, vet", facts:["prefiere comida sencilla y rápida","le gusta el mercado de animales y plantas","quisiera comprar semillas nuevas"], factsEn:["prefers simple and fast food","likes the animal and plant market","would like to buy new seeds"], prompt:"Escribe una frase con le gusta(ría):", promptEn:"Write a sentence with le gusta(ría):"},
+  {name:"Tomás", nameEn:"Tomás", role:"El primo mayor de David, piloto", roleEn:"David's older cousin, pilot", facts:["le gusta probar comida de cada país que visita","prefiere restaurantes cerca del aeropuerto","le gustaría llevarte a un sitio especial"], factsEn:["likes to try food from each country he visits","prefers restaurants near the airport","would like to take you to a special place"], prompt:"Escribe una frase con le gusta(ría):", promptEn:"Write a sentence with le gusta(ría):"},
+  {name:"Renata", nameEn:"Renata", role:"La pareja de Tomás, periodista", roleEn:"Tomás's partner, journalist", facts:["le gusta entrevistar a vendedores del mercado","prefiere cafés tranquilos para escribir","le gustaría probar un café auténtico"], factsEn:["likes to interview market sellers","prefers quiet cafés to write","would like to try an authentic coffee"], prompt:"Escribe una frase con le gusta(ría):", promptEn:"Write a sentence with le gusta(ría):"},
+  {name:"Vicente", nameEn:"Vicente", role:"Amigo de la infancia de David, cocinero", roleEn:"David's childhood friend, cook", facts:["recomienda siempre su receta favorita","le gusta comprar en el mercado cada mañana","prefiere ingredientes de temporada"], factsEn:["always recommends his favourite recipe","likes to buy at the market every morning","prefers seasonal ingredients"], prompt:"Escribe una frase con le gusta(ría):", promptEn:"Write a sentence with le gusta(ría):"},
+  {name:"Carolina", nameEn:"Carolina", role:"La hermana mayor de David, psicóloga", roleEn:"David's older sister, psychologist", facts:["le gusta desayunar tranquila fuera de casa","prefiere restaurantes silenciosos","quisiera probar comida vegetariana"], factsEn:["likes to have a quiet breakfast out","prefers quiet restaurants","would like to try vegetarian food"], prompt:"Escribe una frase con le gusta(ría):", promptEn:"Write a sentence with le gusta(ría):"},
+  {name:"Nicolás", nameEn:"Nicolás", role:"El cuñado de David, contador", roleEn:"David's brother‑in‑law, accountant", facts:["prefiere pagar siempre con tarjeta","le gusta comer algo rápido al mediodía","le gustaría probar el nuevo restaurante"], factsEn:["prefers to always pay by card","likes to eat something quick at noon","would like to try the new restaurant"], prompt:"Escribe una frase con le gusta(ría):", promptEn:"Write a sentence with le gusta(ría):"},
+  {name:"Emilia", nameEn:"Emilia", role:"La hija pequeña de Carolina y Nicolás", roleEn:"Carolina and Nicolás's young daughter", facts:["le gustan mucho las frutas dulces","le gustaría un helado de postre","prefiere sentarse al lado de su madre"], factsEn:["she likes sweet fruits a lot","would like an ice cream for dessert","prefers to sit next to her mother"], prompt:"Escribe una frase con le gusta(n):", promptEn:"Write a sentence with le gusta(n):"},
+  {name:"Simón", nameEn:"Simón", role:"El hijo de Carolina y Nicolás", roleEn:"Carolina and Nicolás's son", facts:["le gusta pedir siempre lo mismo","le gustaría probar algo diferente hoy","prefiere comer con las manos"], factsEn:["likes to always order the same thing","would like to try something different today","prefers to eat with his hands"], prompt:"Escribe una frase con le gusta(ría):", promptEn:"Write a sentence with le gusta(ría):"},
+  {name:"Beatriz", nameEn:"Beatriz", role:"La vecina más mayor del barrio", roleEn:"The oldest neighbour in the neighbourhood", facts:["prefiere el mercado de toda la vida","le gusta charlar con los vendedores","recomienda comprar temprano por la mañana"], factsEn:["prefers the old‑fashioned market","likes to chat with the sellers","recommends buying early in the morning"], prompt:"Escribe una frase con le gusta(ría):", promptEn:"Write a sentence with le gusta(ría):"},
+  {name:"Rafael", nameEn:"Rafael", role:"El chófer de la familia", roleEn:"The family's driver", facts:["prefiere comer algo rápido entre viajes","le gusta el café del puesto de la esquina","quisiera probar un restaurante nuevo"], factsEn:["prefers to eat something quick between trips","likes the coffee from the corner stall","would like to try a new restaurant"], prompt:"Escribe una frase con le gusta(ría):", promptEn:"Write a sentence with le gusta(ría):"},
+  {name:"Ximena", nameEn:"Ximena", role:"Organizadora de eventos familiares", roleEn:"Family event organiser", facts:["recomienda siempre el mejor restaurante para celebrar","le gusta comprar flores en el mercado","prefiere reservar con mucha antelación"], factsEn:["always recommends the best restaurant to celebrate","likes to buy flowers at the market","prefers to book well in advance"], prompt:"Escribe una frase con le gusta(ría):", promptEn:"Write a sentence with le gusta(ría):"},
+  {name:"Federico", nameEn:"Federico", role:"El pastor de la iglesia familiar", roleEn:"The family's church pastor", facts:["prefiere comidas sencillas después de misa","le gusta el mercado dominical","recomienda compartir la comida en comunidad"], factsEn:["prefers simple meals after mass","likes the Sunday market","recommends sharing food in community"], prompt:"Escribe una frase con le gusta(ría):", promptEn:"Write a sentence with le gusta(ría):"},
+  {name:"Iván", nameEn:"Iván", role:"El mejor amigo actual de David, fotógrafo", roleEn:"David's current best friend, photographer", facts:["le gusta fotografiar los puestos del mercado","prefiere probar comida callejera","le gustaría llevarte a su sitio favorito"], factsEn:["likes to photograph the market stalls","prefers to try street food","would like to take you to his favourite spot"], prompt:"Escribe una frase con le gusta(ría):", promptEn:"Write a sentence with le gusta(ría):"},
+  {name:"Ana María", nameEn:"Ana María", role:"Tía de David, bibliotecaria", roleEn:"David's aunt, librarian", facts:["le gusta el café tranquilo por las tardes","prefiere restaurantes silenciosos para leer","le gustaría recomendarte un libro sobre Colombia"], factsEn:["likes a quiet coffee in the afternoons","prefers quiet restaurants to read","would like to recommend you a book about Colombia"], prompt:"Escribe una frase con le gusta(ría):", promptEn:"Write a sentence with le gusta(ría):"}
+];
+
+const charWrap = document.getElementById('characters');
+CHARACTERS.forEach((c, i)=>{
+  if(i === 0){
+    const divider = document.createElement('div');
+    divider.className = 'ex-divider en-clase';
+    divider.textContent = 'en clase · personajes 1–6';
+    divider.innerHTML += '<span class="en">in class · characters 1–6</span>';
+    charWrap.appendChild(divider);
+  }
+  if(i === 6){
+    const divider = document.createElement('div');
+    divider.className = 'ex-divider';
+    divider.textContent = 'para casa · banco de repaso';
+    divider.innerHTML += '<span class="en">for home · review bank</span>';
+    charWrap.appendChild(divider);
+  }
+  const card = document.createElement('div');
+  card.className = 'char-card';
+  const factsHtml = c.facts.map((f, idx) => 
+    `<span class="fact-tag">${f} <span class="en">${c.factsEn[idx]}</span></span>`
+  ).join('');
+  card.innerHTML = `
+    <div class="char-avatar">${c.name.charAt(0)}</div>
+    <div class="char-body">
+      <p class="char-name">${c.name} <span class="en">${c.nameEn}</span></p>
+      <p class="char-role">${c.role} <span class="en">${c.roleEn}</span></p>
+      <div class="char-facts">${factsHtml}</div>
+      <p class="char-prompt">${c.prompt} <span class="en">${c.promptEn}</span></p>
+      <textarea class="char-input" rows="2" placeholder="Escribe tu frase aquí..."></textarea>
+    </div>
+  `;
+  charWrap.appendChild(card);
+});
+
+const SCENES = [
+  {
+    id:"restaurante-espana", tab:"En un restaurante en España", tabEn:"At a restaurant in Spain", icon:"🍽️",
+    setup:"Estás cenando con David en un restaurante en España, pidiendo comida y hablando con el camarero.",
+    setupEn:"You are having dinner with David at a restaurant in Spain, ordering food and talking to the waiter.",
+    lines:[
+      {who:"friend", name:"Camarero", text:"Buenas noches, ¿les traigo la carta?", textEn:"Good evening, shall I bring you the menu?"},
+      {who:"you", hint:"Responde afirmativamente, con \"quisiera\" o \"sí, por favor\".", hintEn:"Reply affirmatively, with \"quisiera\" or \"yes, please\"."},
+      {who:"friend", name:"Camarero", text:"¿Qué les gustaría beber?", textEn:"What would you like to drink?"},
+      {who:"you", hint:"Responde con \"me gustaría\" + una bebida.", hintEn:"Answer with \"me gustaría\" + a drink."},
+      {who:"friend", name:"Camarero", text:"¿Y de primero, qué les apetece?", textEn:"And for a starter, what would you like?"},
+      {who:"you", hint:"Responde con \"me gustaría\" o \"quisiera\" + un plato.", hintEn:"Answer with \"me gustaría\" or \"quisiera\" + a dish."},
+      {who:"friend", name:"Camarero", text:"¿Alguna alergia o algo que no coman?", textEn:"Any allergies or anything you don't eat?"},
+      {who:"you", hint:"Responde sí o no, brevemente.", hintEn:"Answer yes or no, briefly."},
+      {who:"friend", name:"Camarero", text:"¿Quieren postre o café al final?", textEn:"Do you want dessert or coffee at the end?"},
+      {who:"you", hint:"Responde con tu preferencia.", hintEn:"Answer with your preference."},
+      {who:"friend", name:"Camarero", text:"Perfecto, ahora mismo se lo traigo.", textEn:"Perfect, I'll bring it right away."},
+      {who:"you", hint:"Agradece al camarero.", hintEn:"Thank the waiter."},
+      {who:"friend", name:"Camarero", text:"¿Necesitan algo más antes de la cuenta?", textEn:"Do you need anything else before the bill?"},
+      {who:"you", hint:"Responde que no, y pide la cuenta.", hintEn:"Reply no, and ask for the bill."},
+      {who:"friend", name:"Camarero", text:"Aquí tienen la cuenta, cuando quieran.", textEn:"Here is the bill, whenever you want."},
+      {who:"you", hint:"Pregunta si se puede pagar con tarjeta.", hintEn:"Ask if you can pay by card."},
+      {who:"friend", name:"Camarero", text:"Sí, claro, sin problema.", textEn:"Yes, of course, no problem."},
+      {who:"you", hint:"Despídete agradeciendo la cena.", hintEn:"Say goodbye thanking for the dinner."}
+    ]
+  },
+  {
+    id:"mercado-espana", tab:"En un mercado en España", tabEn:"At a market in Spain", icon:"🧺",
+    setup:"Estás en un mercado local comprando fruta y verdura para la semana.",
+    setupEn:"You are at a local market buying fruit and vegetables for the week.",
+    lines:[
+      {who:"friend", name:"Vendedora", text:"Buenos días, ¿qué le pongo?", textEn:"Good morning, what can I get you?"},
+      {who:"you", hint:"Pide una cantidad de fruta usando \"un kilo de\" o \"un poco de\".", hintEn:"Ask for a quantity of fruit using \"un kilo de\" or \"un poco de\"."},
+      {who:"friend", name:"Vendedora", text:"¿Algo más? Tenemos naranjas muy buenas hoy.", textEn:"Anything else? We have very good oranges today."},
+      {who:"you", hint:"Responde si quieres o no naranjas.", hintEn:"Reply whether you want oranges or not."},
+      {who:"friend", name:"Vendedora", text:"¿Cuánta cantidad de naranjas quiere?", textEn:"How many oranges do you want?"},
+      {who:"you", hint:"Responde con una cantidad.", hintEn:"Answer with a quantity."},
+      {who:"friend", name:"Vendedora", text:"¿Le gustaría probar este queso también?", textEn:"Would you like to try this cheese too?"},
+      {who:"you", hint:"Responde con \"me gustaría\" o \"no, gracias\".", hintEn:"Answer with \"me gustaría\" or \"no, thanks\"."},
+      {who:"friend", name:"Vendedora", text:"Son 8 euros en total.", textEn:"That's 8 euros in total."},
+      {who:"you", hint:"Confirma que vas a pagar.", hintEn:"Confirm you are going to pay."},
+      {who:"friend", name:"Vendedora", text:"Aquí tiene, gracias por su compra.", textEn:"Here you go, thank you for your purchase."},
+      {who:"you", hint:"Despídete amablemente.", hintEn:"Say goodbye kindly."},
+      {who:"friend", name:"Vendedora", text:"¿Volverá la semana que viene?", textEn:"Will you come back next week?"},
+      {who:"you", hint:"Responde con una intención de futuro sencilla.", hintEn:"Answer with a simple future intention."},
+      {who:"friend", name:"Vendedora", text:"Perfecto, aquí la espero.", textEn:"Perfect, I'll wait for you here."},
+      {who:"you", hint:"Cierra la conversación con cortesía.", hintEn:"Close the conversation politely."}
+    ]
+  },
+  {
+    id:"comprando-billete", tab:"Comprando un billete de tren", tabEn:"Buying a train ticket", icon:"🚆",
+    setup:"Estás en la estación comprando un billete de tren para un viaje corto.",
+    setupEn:"You are at the station buying a train ticket for a short trip.",
+    lines:[
+      {who:"friend", name:"Empleado", text:"Buenos días, ¿en qué le puedo ayudar?", textEn:"Good morning, how can I help you?"},
+      {who:"you", hint:"Pide un billete usando \"quisiera\" o \"me gustaría\".", hintEn:"Ask for a ticket using \"quisiera\" or \"me gustaría\"."},
+      {who:"friend", name:"Empleado", text:"¿Ida y vuelta, o solo ida?", textEn:"Round trip, or one way?"},
+      {who:"you", hint:"Responde con tu preferencia.", hintEn:"Answer with your preference."},
+      {who:"friend", name:"Empleado", text:"¿Para qué fecha lo necesita?", textEn:"For what date do you need it?"},
+      {who:"you", hint:"Responde con una fecha o \"para hoy\".", hintEn:"Answer with a date or \"for today\"."},
+      {who:"friend", name:"Empleado", text:"¿Cuánto cuesta? Son 24 euros.", textEn:"How much does it cost? It's 24 euros."},
+      {who:"you", hint:"Confirma que aceptas el precio.", hintEn:"Confirm you accept the price."},
+      {who:"friend", name:"Empleado", text:"¿Paga con tarjeta o en efectivo?", textEn:"Do you pay by card or cash?"},
+      {who:"you", hint:"Responde con tu método de pago.", hintEn:"Answer with your payment method."},
+      {who:"friend", name:"Empleado", text:"Aquí tiene su billete, buen viaje.", textEn:"Here is your ticket, have a good trip."},
+      {who:"you", hint:"Agradece y despídete.", hintEn:"Thank and say goodbye."}
+    ]
+  },
+  {
+    id:"colombia-notas", tab:"Notas de Colombia con David", tabEn:"Colombia notes with David", icon:"🌎",
+    setup:"David te está explicando algunas diferencias de vocabulario que vas a escuchar en Colombia, antes de tu viaje.",
+    setupEn:"David is explaining some vocabulary differences you will hear in Colombia, before your trip.",
+    lines:[
+      {who:"friend", name:"David", text:"Cuando estés allá, en vez de \"vale\" vas a escuchar mucho \"listo\".", textEn:"When you are there, instead of \"vale\" you will hear \"listo\" a lot."},
+      {who:"you", hint:"Responde mostrando interés, quizá con \"¿ah, sí?\".", hintEn:"Reply showing interest, perhaps with \"oh, really?\"."},
+      {who:"friend", name:"David", text:"Y en los restaurantes dicen \"¿me regala la cuenta?\", no \"quisiera la cuenta\".", textEn:"And in restaurants they say \"¿me regala la cuenta?\", not \"quisiera la cuenta\"."},
+      {who:"you", hint:"Pregunta si eso significa que te regalan algo.", hintEn:"Ask if that means they give you something for free."},
+      {who:"friend", name:"David", text:"No, no, es solo una forma educada de pedir, no significa \"regalar\" literalmente.", textEn:"No, no, it's just a polite way of asking, it doesn't literally mean \"to give as a gift\"."},
+      {who:"you", hint:"Responde que ahora lo entiendes.", hintEn:"Reply that now you understand."},
+      {who:"friend", name:"David", text:"También decimos \"tinto\" para el café solo, no para el vino.", textEn:"We also say \"tinto\" for black coffee, not for wine."},
+      {who:"you", hint:"Responde con sorpresa o curiosidad.", hintEn:"Reply with surprise or curiosity."},
+      {who:"friend", name:"David", text:"Ya verás, mi familia te va a enseñar muchas palabras nuevas.", textEn:"You'll see, my family will teach you many new words."},
+      {who:"you", hint:"Responde que te hace ilusión aprenderlas.", hintEn:"Reply that you are excited to learn them."},
+      {who:"friend", name:"David", text:"¿Te gustaría que practicáramos alguna frase más antes del viaje?", textEn:"Would you like us to practice some more phrases before the trip?"},
+      {who:"you", hint:"Responde con \"me gustaría\" + algo que quieras practicar.", hintEn:"Answer with \"me gustaría\" + something you want to practice."}
+    ]
+  },
+  {
+    id:"comprando-mercado-bogota", tab:"Comprando en un mercado de Bogotá (imaginado)", tabEn:"Shopping at a Bogotá market (imagined)", icon:"🥭",
+    setup:"Imaginas cómo será tu primera visita a un mercado en Bogotá con la familia de David.",
+    setupEn:"You imagine what your first visit to a market in Bogotá with David's family will be like.",
+    lines:[
+      {who:"friend", name:"Marta", text:"Aquí en el mercado tenemos frutas que quizás no conozcas.", textEn:"Here at the market we have fruits you might not know."},
+      {who:"you", hint:"Responde con \"me gustaría probar\" + algo nuevo.", hintEn:"Answer with \"me gustaría probar\" + something new."},
+      {who:"friend", name:"Marta", text:"Esta se llama lulo, es un poco ácida.", textEn:"This is called lulo, it's a bit sour."},
+      {who:"you", hint:"Pregunta el precio usando \"¿cuánto cuesta?\".", hintEn:"Ask the price using \"¿cuánto cuesta?\"."},
+      {who:"friend", name:"Marta", text:"Un kilo cuesta muy poco, no te preocupes.", textEn:"A kilo costs very little, don't worry."},
+      {who:"you", hint:"Responde que quieres comprar un kilo.", hintEn:"Reply that you want to buy a kilo."},
+      {who:"friend", name:"Marta", text:"¿Te gustaría probar también el tinto de aquí?", textEn:"Would you also like to try the \"tinto\" (coffee) from here?"},
+      {who:"you", hint:"Responde afirmativamente con \"me gustaría\".", hintEn:"Answer affirmatively with \"me gustaría\"."},
+      {who:"friend", name:"Marta", text:"Perfecto, vas a aprender mucho en esta visita.", textEn:"Perfect, you are going to learn a lot on this visit."},
+      {who:"you", hint:"Responde con ilusión sobre el viaje.", hintEn:"Reply enthusiastically about the trip."},
+      {who:"friend", name:"Marta", text:"David estará muy contento de enseñarte todo esto.", textEn:"David will be very happy to show you all this."},
+      {who:"you", hint:"Cierra la conversación con cariño hacia David y su familia.", hintEn:"Close the conversation affectionately towards David and his family."}
+    ]
+  }
+];
+
+const sceneTabs = document.getElementById('scene-tabs');
+const sceneContainer = document.getElementById('scene-container');
+let activeScene = 0;
+
+function renderTabs(){
+  sceneTabs.innerHTML = SCENES.map((s,i)=>
+    `<button class="scene-tab${i===activeScene?' active':''}" data-idx="${i}">${s.icon} ${s.tab} <span class="en">${s.tabEn}</span></button>`
+  ).join('');
+  sceneTabs.querySelectorAll('.scene-tab').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      activeScene = parseInt(btn.dataset.idx, 10);
+      renderTabs();
+      renderScene();
+      cargarRoleplay();
+    });
+  });
+}
+
+function renderScene(){
+  const scene = SCENES[activeScene];
+  const linesHtml = scene.lines.map((l)=>{
+    if(l.who === 'friend'){
+      return `
+        <div class="line friend">
+          <div class="line-avatar">${l.name.charAt(0)}</div>
+          <div class="line-body">
+            <p class="line-name">${l.name}</p>
+            <div class="line-bubble">${l.text} <span class="en">${l.textEn}</span></div>
+          </div>
+        </div>`;
+    } else {
+      return `
+        <div class="line you">
+          <div class="line-avatar">Tú</div>
+          <div class="line-body">
+            <p class="line-name">Tú <span class="en">You</span></p>
+            <textarea class="line-input" rows="2" placeholder="Escribe tu respuesta..."></textarea>
+            <p class="line-hint">${l.hint} <span class="en">${l.hintEn}</span></p>
+          </div>
+        </div>`;
+    }
+  }).join('');
+
+  sceneContainer.innerHTML = `
+    <div class="scene-setup">
+      <span class="scene-icon">${scene.icon}</span>
+      <p class="scene-text"><strong>${scene.tab}:</strong> ${scene.setup} <span class="en">${scene.setupEn}</span></p>
+    </div>
+    <div class="dialogue">${linesHtml}</div>
+  `;
+}
+
+renderTabs();
+renderScene();
+cargarRoleplay();
+
+const STORAGE_KEY = 'elise-clase04-tarea';
+const taskArea = document.getElementById('final-task');
+const taskCount = document.getElementById('task-count');
+const savedFlag = document.getElementById('saved-flag');
+
+async function cargarTarea(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(STORAGE_KEY);
+    if (res && typeof res.value === 'string') taskArea.value = res.value;
+  }catch(e){}
+  updateCount();
+}
+
+function updateCount(){
+  const lines = taskArea.value.split('\n').map(l=>l.trim()).filter(l=>l.length > 0);
+  taskCount.textContent = `${lines.length} palabra${lines.length===1?'':'s'} anotada${lines.length===1?'':'s'}`;
+}
+
+let taskSaveTimer = null;
+function guardarTareaAuto(){
+  clearTimeout(taskSaveTimer);
+  taskSaveTimer = setTimeout(async ()=>{
+    if (!window.storage) return;
+    try{
+      await window.storage.set(STORAGE_KEY, taskArea.value);
+      savedFlag.textContent = 'Guardado ✓';
+      savedFlag.classList.add('show');
+      setTimeout(()=>{ savedFlag.classList.remove('show'); }, 1600);
+    }catch(e){ /* fallo silencioso: se reintentará en el próximo cambio */ }
+  }, 800);
+}
+taskArea.addEventListener('input', ()=>{ updateCount(); guardarTareaAuto(); });
+updateCount();
+cargarTarea();
+
+/* ---------- Autoguardado: Práctica (ejercicios de opción múltiple) ---------- */
+const PRACTICE_KEY = 'elise-clase04-practica';
+let practiceSaveTimer = null;
+function guardarPracticaAuto(){
+  clearTimeout(practiceSaveTimer);
+  practiceSaveTimer = setTimeout(async ()=>{
+    if (!window.storage) return;
+    const respuestas = {};
+    document.querySelectorAll('.exercise').forEach((el, idx)=>{
+      const picked = el.querySelector('.opt-btn.picked');
+      if (picked) respuestas[idx] = picked.dataset.value;
+    });
+    try{ await window.storage.set(PRACTICE_KEY, JSON.stringify(respuestas)); }catch(e){}
+  }, 800);
+}
+async function cargarPractica(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(PRACTICE_KEY);
+    if (!res || typeof res.value !== 'string') return;
+    const respuestas = JSON.parse(res.value);
+    document.querySelectorAll('.exercise').forEach((el, idx)=>{
+      const valor = respuestas[idx];
+      if (valor === undefined) return;
+      const btn = [...el.querySelectorAll('.opt-btn')].find(b => b.dataset.value === valor);
+      if (btn){
+        el.querySelectorAll('.opt-btn').forEach(b=>b.classList.remove('picked'));
+        btn.classList.add('picked');
+      }
+    });
+  }catch(e){}
+}
+
+/* ---------- Autoguardado: Personajes ---------- */
+const CHAR_KEY = 'elise-clase04-personajes';
+let charSaveTimer = null;
+function guardarPersonajesAuto(){
+  clearTimeout(charSaveTimer);
+  charSaveTimer = setTimeout(async ()=>{
+    if (!window.storage) return;
+    const valores = {};
+    document.querySelectorAll('.char-input').forEach((el, idx)=>{
+      if (el.value) valores[idx] = el.value;
+    });
+    try{ await window.storage.set(CHAR_KEY, JSON.stringify(valores)); }catch(e){}
+  }, 800);
+}
+async function cargarPersonajes(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(CHAR_KEY);
+    if (!res || typeof res.value !== 'string') return;
+    const valores = JSON.parse(res.value);
+    document.querySelectorAll('.char-input').forEach((el, idx)=>{
+      if (valores[idx] !== undefined) el.value = valores[idx];
+    });
+  }catch(e){}
+}
+
+/* ---------- Autoguardado: Roleplay ---------- */
+const ROLEPLAY_KEY = 'elise-clase04-roleplay';
+let roleplaySaveTimer = null;
+function guardarRoleplayAuto(){
+  clearTimeout(roleplaySaveTimer);
+  roleplaySaveTimer = setTimeout(async ()=>{
+    if (!window.storage) return;
+    const valores = {};
+    document.querySelectorAll('.line-input').forEach((el, idx)=>{
+      if (el.value) valores[`${activeScene}_${idx}`] = el.value;
+    });
+    let previo = {};
+    try{
+      const res = await window.storage.get(ROLEPLAY_KEY);
+      if (res && typeof res.value === 'string') previo = JSON.parse(res.value);
+    }catch(e){}
+    Object.keys(previo).forEach(k=>{
+      if (!(k in valores) && !k.startsWith(`${activeScene}_`)) valores[k] = previo[k];
+    });
+    try{ await window.storage.set(ROLEPLAY_KEY, JSON.stringify(valores)); }catch(e){}
+  }, 800);
+}
+async function cargarRoleplay(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(ROLEPLAY_KEY);
+    if (!res || typeof res.value !== 'string') return;
+    const valores = JSON.parse(res.value);
+    document.querySelectorAll('.line-input').forEach((el, idx)=>{
+      const key = `${activeScene}_${idx}`;
+      if (valores[key] !== undefined) el.value = valores[key];
+    });
+  }catch(e){}
+}
+
+document.getElementById('exercises').addEventListener('click', (e)=>{
+  if (e.target.classList && e.target.classList.contains('opt-btn')) guardarPracticaAuto();
+});
+cargarPractica();
+
+document.getElementById('characters').addEventListener('input', (e)=>{
+  if (e.target.classList && e.target.classList.contains('char-input')) guardarPersonajesAuto();
+});
+cargarPersonajes();
+
+document.getElementById('scene-container').addEventListener('input', (e)=>{
+  if (e.target.classList && e.target.classList.contains('line-input')) guardarRoleplayAuto();
+});
+cargarRoleplay();
+</script>
+
+</body>
+</html>

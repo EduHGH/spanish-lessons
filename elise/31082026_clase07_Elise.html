@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clase 7 · Lo que fue — Elise</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:        #FBF7EE;
+  --paper-raised: #FFFFFF;
+  --paper-alt:    #F3ECDA;
+  --ink:          #23291F;
+  --ink-soft:     #565F52;
+  --ink-faint:    #8B9184;
+  --line:         rgba(35,41,31,0.12);
+  --line-strong:  rgba(35,41,31,0.22);
+  --b1:      #DB8A2E;  --b1-soft: #FCF1E1;  --b1-line: #F3D9AF;
+  --b2:      #2F6FED;  --b2-soft: #EAF1FE;  --b2-line: #C6D9FC;
+  --family:  #B5502E;  --family-soft: #FBEBE3; --family-line: #EFC9B4;
+  --f-display: 'Fraunces', Georgia, serif;
+  --f-body:    'IBM Plex Sans', system-ui, sans-serif;
+  --f-data:    'IBM Plex Mono', monospace;
+  --r-sm: 8px; --r-md: 14px; --r-lg: 20px;
+  --shadow-1: 0 1px 2px rgba(35,41,31,0.05), 0 1px 8px rgba(35,41,31,0.04);
+}
+*{ box-sizing:border-box; }
+body{
+  margin:0; background: var(--paper);
+  background-image: radial-gradient(circle at 1px 1px, var(--line) 1px, transparent 0);
+  background-size: 22px 22px; color: var(--ink); font-family: var(--f-body); line-height:1.6;
+}
+::selection{ background: var(--b1-soft); }
+header{ padding:44px 24px 28px; max-width:760px; margin:0 auto; }
+.eyebrow{ font-family: var(--f-data); font-size:12px; letter-spacing:.14em; text-transform:uppercase; color: var(--b1); margin:0 0 10px; display:flex; align-items:center; gap:10px; }
+.eyebrow .dot{ width:6px; height:6px; border-radius:50%; background: var(--b1); }
+h1{ font-family: var(--f-display); font-weight:600; font-size:clamp(30px,5.6vw,46px); line-height:1.08; margin:0 0 14px; letter-spacing:-.01em; }
+h1 em{ font-style:italic; color: var(--b1); }
+.lede{ font-size:16px; color: var(--ink-soft); max-width:56ch; margin:0; }
+.meta-row{ display:flex; flex-wrap:wrap; gap:20px; margin-top:26px; font-family: var(--f-data); font-size:12px; color: var(--ink-faint); }
+.meta-row strong{ display:block; color: var(--ink); font-size:14.5px; font-weight:500; font-family: var(--f-display); margin-top:3px; }
+main{ max-width:760px; margin:0 auto; padding:8px 24px 100px; }
+section.block{ margin-bottom:52px; }
+.block-head{ display:flex; align-items:baseline; gap:12px; margin-bottom:18px; }
+.time-tag{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); background: var(--paper-alt); padding:3px 10px; border-radius:999px; margin-left:auto; flex:none; }
+.block-num{ font-family: var(--f-data); font-size:12px; color:#fff; background: var(--b1); width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex:none; }
+.block-head h2{ font-family: var(--f-display); font-weight:500; font-style:italic; font-size:22px; margin:0; }
+.panel{ background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-lg); box-shadow: var(--shadow-1); padding:26px 28px; }
+.conj-table{ width:100%; border-collapse:collapse; margin-top:4px; }
+.conj-table td{ padding:10px 6px; border-bottom:1px dashed var(--line); font-size:15px; }
+.conj-table tr:last-child td{ border-bottom:none; }
+.conj-pron{ font-family: var(--f-data); color: var(--ink-faint); font-size:13px; width:110px; }
+.conj-form{ font-family: var(--f-display); font-weight:600; font-size:19px; color: var(--b1); }
+.conj-ex{ color: var(--ink-soft); font-size:14px; }
+.note{ margin-top:18px; padding:14px 16px; background: var(--b1-soft); border:1px solid var(--b1-line); border-radius: var(--r-md); font-size:14px; color: var(--ink-soft); }
+.note strong{ color: var(--ink); }
+.compare-wrap{ margin-top:22px; }
+.compare-title{ font-family: var(--f-data); font-size:11.5px; text-transform:uppercase; letter-spacing:.06em; color: var(--ink-faint); margin:0 0 10px; }
+.compare-grid{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+@media (max-width:560px){ .compare-grid{ grid-template-columns:1fr; } }
+.compare-col{ border-radius: var(--r-md); padding:16px 18px; border:1px solid; }
+.compare-col.is-fam{ background: var(--family-soft); border-color: var(--family-line); }
+.compare-col.is-adj{ background: var(--b1-soft); border-color: var(--b1-line); }
+.compare-head{ display:flex; align-items:center; gap:8px; margin:0 0 10px; }
+.compare-verb{ font-family: var(--f-display); font-weight:600; font-size:19px; }
+.is-fam .compare-verb{ color: var(--family); }
+.is-adj .compare-verb{ color: var(--b1); }
+.compare-sub{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); }
+.compare-list{ margin:0; padding:0; list-style:none; }
+.compare-list li{ font-size:13.5px; color: var(--ink-soft); padding:6px 0; border-top:1px dashed var(--line); }
+.compare-list li:first-child{ border-top:none; }
+.compare-list strong{ color: var(--ink); font-weight:600; }
+.compare-list em{ display:block; font-style:normal; color: var(--ink-faint); font-size:12.5px; margin-top:2px; }
+.compare-warning{ margin-top:14px; padding:14px 16px; background: var(--b2-soft); border:1px solid var(--b2-line); border-radius: var(--r-md); font-size:13.5px; color: var(--ink-soft); }
+.compare-warning strong{ color: var(--b2); }
+.vocab-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:12px; }
+.vocab-card{ background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md); padding:14px 16px; cursor:pointer; perspective:600px; min-height:78px; display:flex; flex-direction:column; justify-content:center; transition: border-color .15s ease; }
+.vocab-card:hover{ border-color: var(--b1-line); }
+.vocab-card:focus-visible{ outline:2px solid var(--b1); outline-offset:2px; }
+.vocab-front{ font-family: var(--f-body); font-weight:600; font-size:15px; }
+.vocab-back{ display:none; font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); margin-top:6px; }
+.vocab-card.flipped .vocab-back{ display:block; }
+.vocab-card.flipped{ background: var(--b1-soft); border-color: var(--b1-line); }
+.vocab-hint{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin:10px 2px 16px; }
+.exercise{ margin-bottom:20px; }
+.exercise:last-of-type{ margin-bottom:0; }
+.ex-sentence{ font-size:15.5px; margin-bottom:10px; }
+.ex-sentence .gap{ font-family: var(--f-data); color: var(--ink-faint); }
+.ex-options{ display:flex; flex-wrap:wrap; gap:8px; }
+.opt-btn{ font-family: var(--f-body); font-size:14px; background: var(--paper-raised); border:1.5px solid var(--line); color: var(--ink); padding:7px 16px; border-radius:999px; cursor:pointer; transition: all .15s ease; }
+.opt-btn:hover{ border-color: var(--ink-faint); }
+.opt-btn.picked{ background: var(--b1-soft); border-color: var(--b1); color: var(--b1); }
+.opt-btn.correct{ background: var(--b2-soft); border-color: var(--b2); color: var(--b2); }
+.opt-btn.wrong{ background: var(--family-soft); border-color: var(--family); color: var(--family); }
+.opt-btn:disabled{ cursor:default; }
+.check-bar{ display:flex; align-items:center; justify-content:space-between; gap:16px; margin-top:22px; padding-top:18px; border-top:1px dashed var(--line); }
+.btn-primary{ font-family: var(--f-body); font-weight:600; font-size:14px; color:#fff; background: var(--b1); border:none; padding:11px 22px; border-radius:999px; cursor:pointer; transition: transform .1s ease; }
+.btn-primary:hover{ transform: translateY(-1px); }
+#score-text{ font-family: var(--f-data); font-size:13px; color: var(--ink-faint); }
+.btn-ghost{ font-family: var(--f-body); font-weight:600; font-size:13px; color: var(--ink-soft); background:none; border:1.5px solid var(--line); padding:9px 18px; border-radius:999px; cursor:pointer; }
+.btn-ghost:hover{ border-color: var(--ink-faint); }
+.ex-divider{ display:flex; align-items:center; gap:10px; margin:20px 0 16px; font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.06em; color: var(--ink-faint); }
+.ex-divider::before, .ex-divider::after{ content:""; flex:1; height:1px; background: var(--line); }
+.ex-divider.en-clase{ color: var(--b1); }
+.ex-divider.en-clase::before, .ex-divider.en-clase::after{ background: var(--b1-line); }
+.characters{ display:grid; gap:16px; }
+.char-card{ background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-lg); padding:20px 22px; display:flex; gap:16px; align-items:flex-start; }
+.char-avatar{ flex:none; width:44px; height:44px; border-radius:50%; background: var(--b2-soft); display:flex; align-items:center; justify-content:center; font-family: var(--f-display); font-weight:600; font-size:17px; color: var(--b2); }
+.char-body{ flex:1; }
+.char-name{ font-family: var(--f-display); font-weight:600; font-size:17px; margin:0 0 4px; }
+.char-role{ font-family: var(--f-data); font-size:11.5px; text-transform:uppercase; letter-spacing:.05em; color: var(--ink-faint); margin:0 0 10px; }
+.char-facts{ display:flex; flex-wrap:wrap; gap:6px; margin-bottom:10px; }
+.fact-tag{ font-family: var(--f-data); font-size:12px; background: var(--paper-alt); color: var(--ink-soft); padding:4px 10px; border-radius:999px; }
+.char-prompt{ font-size:14px; color: var(--ink-soft); }
+.char-input{ width:100%; margin-top:8px; font-family: var(--f-body); font-size:14.5px; color: var(--ink); background: var(--paper); border:1px solid var(--line); border-radius: var(--r-sm); padding:10px 12px; resize:vertical; min-height:44px; }
+.char-input:focus{ outline:none; border-color: var(--b2-line); background: var(--paper-raised); }
+.roleplay-panel{ background: var(--b2-soft); border:1px solid var(--b2-line); border-radius: var(--r-lg); padding:26px 28px; }
+.roleplay-panel .block-num{ background: var(--b2); }
+.scene-setup{ display:flex; gap:14px; align-items:flex-start; background: var(--paper-raised); border:1px solid var(--b2-line); border-radius: var(--r-md); padding:14px 16px; margin-bottom:20px; }
+.scene-icon{ font-size:22px; flex:none; }
+.scene-text{ font-size:14px; color: var(--ink-soft); }
+.scene-text strong{ color: var(--ink); }
+.dialogue{ display:flex; flex-direction:column; gap:14px; }
+.scene-tabs{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:18px; }
+.scene-tab{ font-family: var(--f-data); font-size:12.5px; background: var(--paper-raised); border:1.5px solid var(--b2-line); color: var(--ink-soft); padding:7px 14px; border-radius:999px; cursor:pointer; transition: all .15s ease; }
+.scene-tab:hover{ border-color: var(--b2); }
+.scene-tab.active{ background: var(--b2); border-color: var(--b2); color:#fff; }
+.line{ display:flex; gap:12px; align-items:flex-start; }
+.line-avatar{ flex:none; width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-family: var(--f-display); font-weight:600; font-size:14px; color:#fff; }
+.line.friend .line-avatar{ background: var(--ink-faint); }
+.line.you .line-avatar{ background: var(--b2); }
+.line-body{ flex:1; }
+.line-name{ font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.05em; color: var(--ink-faint); margin:0 0 4px; }
+.line-bubble{ background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md); padding:12px 14px; font-size:14.5px; color: var(--ink); }
+.line.you .line-bubble{ background:#fff; border-color: var(--b2-line); }
+.line-input{ width:100%; font-family: var(--f-body); font-size:14.5px; color: var(--ink); background:#fff; border:1px solid var(--b2-line); border-radius: var(--r-sm); padding:10px 12px; resize:vertical; min-height:40px; margin-top:2px; }
+.line-input:focus{ outline:none; border-color: var(--b2); }
+.line-hint{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin-top:5px; }
+.roleplay-tip{ margin-top:22px; padding:14px 16px; background: var(--paper-raised); border:1px solid var(--b2-line); border-radius: var(--r-md); font-size:13.5px; color: var(--ink-soft); }
+.roleplay-tip strong{ color: var(--ink); }
+.task-panel{ background: var(--family-soft); border:1px solid var(--family-line); border-radius: var(--r-lg); padding:26px 28px; }
+.task-panel .block-num{ background: var(--family); }
+textarea#final-task{ width:100%; min-height:110px; font-family: var(--f-body); font-size:15px; color: var(--ink); background: var(--paper-raised); border:1px solid var(--family-line); border-radius: var(--r-md); padding:14px 16px; resize:vertical; margin-top:14px; }
+textarea#final-task:focus{ outline:none; border-color: var(--family); }
+.task-footer{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:12px; flex-wrap:wrap; }
+#task-count{ font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); }
+.btn-secondary{ font-family: var(--f-body); font-weight:600; font-size:13.5px; color: var(--family); background:none; border:1.5px solid var(--family-line); padding:9px 18px; border-radius:999px; cursor:pointer; }
+.saved-flag{ font-family: var(--f-data); font-size:12px; color: var(--b2); opacity:0; transition: opacity .3s ease; }
+.saved-flag.show{ opacity:1; }
+.pill-list{ display:flex; flex-wrap:wrap; gap:8px; margin-top:10px; }
+.pill{ font-family: var(--f-data); font-size:12.5px; background: var(--paper-alt); color: var(--ink-soft); padding:5px 12px; border-radius:999px; }
+footer{ max-width:760px; margin:0 auto; padding:0 24px 60px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); }
+footer a{ color: var(--b1); text-decoration:none; }
+footer a:hover{ text-decoration:underline; }
+@media (max-width:600px){ header{ padding:34px 18px 22px; } main{ padding:8px 18px 90px; } .panel, .task-panel{ padding:20px 18px; } .char-card{ flex-direction:column; } }
+@media (prefers-reduced-motion: reduce){ *{ transition:none !important; } }
+
+.en {
+  color: gray;
+  font-size: 0.85em;
+  display: block;
+  margin-top: 2px;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <p class="eyebrow"><span class="dot"></span>Clase 7 de 17 · L4 The past comes into play
+    <span class="en">Class 7 of 17 · L4 The past comes into play</span>
+  </p>
+  <h1>Lo que <em>fue</em>
+    <span class="en">What it <em>was</em></span>
+  </h1>
+  <p class="lede">Seguimos en el pasado: esta vez con los pretéritos irregulares más frecuentes — ser, ir, tener, hacer y estar — para contar una anécdota memorable de la familia de David: una cena, una celebración, un viaje.
+    <span class="en">We continue in the past: this time with the most frequent irregular preterites — ser, ir, tener, hacer and estar — to tell a memorable anecdote about David's family: a dinner, a celebration, a trip.</span>
+  </p>
+  <div class="meta-row">
+    <div>Duración<strong>50 min</strong>
+      <span class="en">Duration</span>
+    </div>
+    <div>Gramática<strong>Pretérito irregular</strong>
+      <span class="en">Grammar</span>
+    </div>
+    <div>Nivel<strong>A1</strong>
+      <span class="en">Level</span>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">1</span><h2>Los pretéritos irregulares
+      <span class="en">The irregular preterites</span>
+    </h2><span class="time-tag">14 min
+      <span class="en">14 min</span>
+    </span></div>
+    <div class="panel">
+      <table class="conj-table">
+        <tr><td class="conj-pron">ser (yo/él)
+          <span class="en">to be</span>
+        </td><td class="conj-form">fui / fue
+          <span class="en">I was / he-she was</span>
+        </td><td class="conj-ex">Fue un día inolvidable para toda la familia.
+          <span class="en">It was an unforgettable day for the whole family.</span>
+        </td></tr>
+        <tr><td class="conj-pron">ir (yo/él)
+          <span class="en">to go</span>
+        </td><td class="conj-form">fui / fue
+          <span class="en">I went / he-she went</span>
+        </td><td class="conj-ex">Fui al mercado con Jorge esa mañana.
+          <span class="en">I went to the market with Jorge that morning.</span>
+        </td></tr>
+        <tr><td class="conj-pron">tener (yo/él)
+          <span class="en">to have</span>
+        </td><td class="conj-form">tuve / tuvo
+          <span class="en">I had / he-she had</span>
+        </td><td class="conj-ex">Tuve mucha suerte de conocer a la familia.
+          <span class="en">I was very lucky to meet the family.</span>
+        </td></tr>
+        <tr><td class="conj-pron">hacer (yo/él)
+          <span class="en">to do/make</span>
+        </td><td class="conj-form">hice / hizo
+          <span class="en">I did / he-she did</span>
+        </td><td class="conj-ex">Marta hizo una cena especial esa noche.
+          <span class="en">Marta made a special dinner that night.</span>
+        </td></tr>
+        <tr><td class="conj-pron">estar (yo/él)
+          <span class="en">to be</span>
+        </td><td class="conj-form">estuve / estuvo
+          <span class="en">I was / he-she was</span>
+        </td><td class="conj-ex">Estuve muy nerviosa antes de la cena.
+          <span class="en">I was very nervous before the dinner.</span>
+        </td></tr>
+      </table>
+      <div class="note"><strong>Los pretéritos irregulares</strong> no siguen el patrón de -é/-ó de los verbos regulares: cambian la raíz y no llevan acento. Fíjate en que <strong>ser</strong> e <strong>ir</strong> comparten exactamente las mismas formas (fui, fuiste, fue...) — el contexto es lo que indica cuál de los dos significa cada frase.
+        <span class="en"><strong>Irregular preterites</strong> don't follow the -é/-ó pattern of regular verbs: they change the stem and carry no written accent. Notice that <strong>ser</strong> and <strong>ir</strong> share exactly the same forms (fui, fuiste, fue...) — context tells you which of the two a sentence means.</span>
+      </div>
+
+      <div class="compare-wrap">
+        <p class="compare-title">Ser/ir vs. tener/hacer/estar
+          <span class="en">Ser/ir vs. tener/hacer/estar</span>
+        </p>
+        <div class="compare-grid">
+          <div class="compare-col is-fam">
+            <div class="compare-head">
+              <span class="compare-verb">fui, fuiste, fue
+                <span class="en">was/went forms</span>
+              </span>
+              <span class="compare-sub">ser / ir — mismas formas
+                <span class="en">ser / ir — identical forms</span>
+              </span>
+            </div>
+            <ul class="compare-list">
+              <li><strong>Fue un día especial:
+                <span class="en">It was a special day:</span></strong> aquí "fue" es de ser.
+                <span class="en">here "fue" is from ser.</span>
+                <em>Fue la primera vez que la vi tan feliz.
+                  <span class="en">It was the first time I saw her so happy.</span>
+                </em>
+              </li>
+              <li><strong>Fue al mercado con Jorge:
+                <span class="en">He went to the market with Jorge:</span></strong> aquí "fue" es de ir.
+                <span class="en">here "fue" is from ir.</span>
+                <em>David fue a comprar pan esa mañana.
+                  <span class="en">David went to buy bread that morning.</span>
+                </em>
+              </li>
+            </ul>
+          </div>
+          <div class="compare-col is-adj">
+            <div class="compare-head">
+              <span class="compare-verb">tuve/tuvo, hice/hizo, estuve/estuvo
+                <span class="en">had, did, was forms</span>
+              </span>
+              <span class="compare-sub">raíz irregular sin acento
+                <span class="en">irregular stem, no accent</span>
+              </span>
+            </div>
+            <ul class="compare-list">
+              <li><strong>tener → tuv-:
+                <span class="en">tener → tuv-:</span></strong> tuve, tuvo, tuvimos...
+                <span class="en">tuve, tuvo, tuvimos...</span>
+                <em>Tuvimos una cena inolvidable con toda la familia.
+                  <span class="en">We had an unforgettable dinner with the whole family.</span>
+                </em>
+              </li>
+              <li><strong>hacer → hic-/hiz-:
+                <span class="en">hacer → hic-/hiz-:</span></strong> hice, hizo, hicimos...
+                <span class="en">hice, hizo, hicimos...</span>
+                <em>¿Qué hiciste el día de la celebración?
+                  <span class="en">What did you do on the day of the celebration?</span>
+                </em>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="compare-warning">
+          <strong>Ojo:
+            <span class="en">Watch out:</span></strong> los pretéritos irregulares de "yo" y "él/ella" <strong>no llevan acento</strong>, a diferencia de los regulares (hablé, llegó). Por eso "tuve", "hice" y "estuvo" se pronuncian con el golpe de voz en la penúltima sílaba, no en la última.
+          <span class="en">The "yo" and "él/ella" irregular preterite forms carry <strong>no written accent</strong>, unlike regular ones (hablé, llegó). That's why "tuve", "hice" and "estuvo" are stressed on the second-to-last syllable, not the last.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">2</span><h2>Vocabulario
+      <span class="en">Vocabulary</span>
+    </h2><span class="time-tag">6 min
+      <span class="en">6 min</span>
+    </span></div>
+    <p class="vocab-hint">Toca cada tarjeta para ver un ejemplo.
+      <span class="en">Tap each card to see an example.</span>
+    </p>
+    <div class="vocab-grid" id="vocab-grid"></div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">3</span><h2>Practica
+      <span class="en">Practice</span>
+    </h2><span class="time-tag">10 min
+      <span class="en">10 min</span>
+    </span></div>
+    <div class="panel">
+      <p class="vocab-hint" style="margin-bottom:14px;">24 frases: las primeras 12 se hacen en voz alta en clase; el resto queda como repaso para casa.
+        <span class="en">24 sentences: the first 12 are done out loud in class; the rest are for home review.</span>
+      </p>
+      <div id="exercises"></div>
+      <div class="check-bar">
+        <div style="display:flex; gap:10px;">
+          <button class="btn-primary" id="check-btn">Comprobar respuestas
+            <span class="en">Check answers</span>
+          </button>
+          <button class="btn-ghost" id="reset-btn">Reiniciar
+            <span class="en">Reset</span>
+          </button>
+        </div>
+        <span id="score-text"></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">4</span><h2>¿Qué fue, tuvo o hizo cada uno?
+      <span class="en">What was, had, or did each person?</span>
+    </h2><span class="time-tag">8 min
+      <span class="en">8 min</span>
+    </span></div>
+    <p class="lede" style="margin-bottom:16px;">Describe lo que fue, tuvo, hizo o estuvo cada persona usando el pretérito irregular. Las primeras 6 se trabajan en clase; el resto queda como banco de repaso para casa.
+      <span class="en">Describe what each person was, had, did, or where they were using the irregular preterite. The first 6 are done in class; the rest are a review bank for home.</span>
+    </p>
+    <div class="characters" id="characters"></div>
+  </section>
+
+  <section class="block roleplay-panel">
+    <div class="block-head"><span class="block-num">5</span><h2>Roleplay: contando una anécdota familiar
+      <span class="en">Roleplay: telling a family anecdote</span>
+    </h2><span class="time-tag">10 min
+      <span class="en">10 min</span>
+    </span></div>
+    <p class="lede" style="margin-bottom:16px;">Cinco situaciones reales para narrar una anécdota memorable de la familia de David, mezclando pretéritos regulares e irregulares. Elige una escena para practicar en clase; el resto queda como banco de repaso para casa.
+      <span class="en">Five real situations to narrate a memorable anecdote about David's family, mixing regular and irregular preterites. Choose one scene to practice in class; the rest are a review bank for home.</span>
+    </p>
+    <div class="scene-tabs" id="scene-tabs"></div>
+    <div id="scene-container"></div>
+    <div class="roleplay-tip"><strong>En clase:</strong> practicaremos una escena en voz alta, cambiando de rol, prestando atención a que "fui/fuiste/fue" y las demás formas irregulares no llevan acento.
+      <span class="en"><strong>In class:</strong> we will practice one scene out loud, switching roles, paying attention to the fact that "fui/fuiste/fue" and the other irregular forms carry no written accent.</span>
+    </div>
+  </section>
+
+  <section class="block task-panel">
+    <div class="block-head"><span class="block-num">6</span><h2 style="color:var(--family)">Tu tarea
+      <span class="en">Your homework</span>
+    </h2><span class="time-tag">2 min
+      <span class="en">2 min</span>
+    </span></div>
+    <p style="margin:0; font-size:15px; color:var(--ink-soft);">Graba una nota de voz de <strong>1 minuto</strong> contando una anécdota breve, usando al menos <strong>4 verbos en pretérito irregular</strong> (ser, ir, tener, hacer, estar). Aquí puedes escribir un borrador antes de grabar.
+      <span class="en">Record a <strong>1-minute</strong> voice note telling a short anecdote, using at least <strong>4 irregular preterite verbs</strong> (ser, ir, tener, hacer, estar). Here you can write a draft before recording.</span>
+    </p>
+    <textarea id="final-task" placeholder="Un día...&#10;Fui a...&#10;Tuve...&#10;Estuve..."></textarea>
+    <div class="task-footer">
+      <span id="task-count">0 verbos irregulares detectados
+        <span class="en">0 irregular verbs detected</span>
+      </span>
+      <div style="display:flex; gap:10px; align-items:center;">
+        <span class="saved-flag" id="saved-flag">Guardado ✓
+          <span class="en">Saved ✓</span>
+        </span>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <span>Clase 7 · What it was
+    <span class="en">Class 7 · What it was</span>
+  </span>
+  <span>Siguiente: expresar gustos y preferencias con detalle
+    <span class="en">Next: expressing likes and preferences in detail</span>
+  </span>
+</footer>
+
+<script>
+const VOCAB = [
+  {front:"fui / fuiste / fue", back:"Fue un día inolvidable para toda la familia.", frontEn:"fui / fuiste / fue (was/went)", backEn:"It was an unforgettable day for the whole family."},
+  {front:"tuve / tuviste / tuvo", back:"Tuve mucha suerte de conocer a la familia.", frontEn:"tuve / tuviste / tuvo (had)", backEn:"I was very lucky to meet the family."},
+  {front:"hice / hiciste / hizo", back:"Marta hizo una cena especial esa noche.", frontEn:"hice / hiciste / hizo (did/made)", backEn:"Marta made a special dinner that night."},
+  {front:"estuve / estuviste / estuvo", back:"Estuve muy nerviosa antes de la cena.", frontEn:"estuve / estuviste / estuvo (was)", backEn:"I was very nervous before the dinner."},
+  {front:"una anécdota", back:"Te voy a contar una anécdota de mi viaje.", frontEn:"una anécdota (an anecdote)", backEn:"I'm going to tell you an anecdote from my trip."},
+  {front:"una celebración", back:"Fue una celebración muy especial para todos.", frontEn:"una celebración (a celebration)", backEn:"It was a very special celebration for everyone."},
+  {front:"inolvidable", back:"Fue un momento inolvidable para mí.", frontEn:"inolvidable (unforgettable)", backEn:"It was an unforgettable moment for me."},
+  {front:"por primera vez", back:"Tuve que hablar español en público por primera vez.", frontEn:"por primera vez (for the first time)", backEn:"I had to speak Spanish in public for the first time."},
+];
+
+const grid = document.getElementById('vocab-grid');
+VOCAB.forEach(v=>{
+  const card = document.createElement('div');
+  card.className = 'vocab-card';
+  card.setAttribute('role', 'button');
+  card.setAttribute('tabindex', '0');
+  card.setAttribute('aria-pressed', 'false');
+  card.setAttribute('aria-label', `${v.front}. Pulsa para ver un ejemplo.`);
+  card.innerHTML = `
+    <div class="vocab-front">${v.front}
+      <span class="en">${v.frontEn}</span>
+    </div>
+    <div class="vocab-back">${v.back}
+      <span class="en">${v.backEn}</span>
+    </div>
+  `;
+  const toggle = ()=>{
+    const flipped = card.classList.toggle('flipped');
+    card.setAttribute('aria-pressed', String(flipped));
+  };
+  card.addEventListener('click', toggle);
+  card.addEventListener('keydown', (e)=>{
+    if(e.key === 'Enter' || e.key === ' '){
+      e.preventDefault();
+      toggle();
+    }
+  });
+  grid.appendChild(card);
+});
+
+const EXERCISES = [
+  {"sentence":"Yo <span class=\"gap\">___</span> muy feliz el día que conocí a la familia.","sentenceEn":"I <span class=\"gap\">___</span> very happy the day I met the family.","options":["estuve","estuvo","estuviste"],"optionsEn":["estuve (I was)","estuvo (he/she was)","estuviste (you were)"],"answer":"estuve"},
+  {"sentence":"David <span class=\"gap\">___</span> al mercado a comprar pan esa mañana.","sentenceEn":"David <span class=\"gap\">___</span> to the market to buy bread that morning.","options":["fue","fui","fuiste"],"optionsEn":["fue (he went)","fui (I went)","fuiste (you went)"],"answer":"fue"},
+  {"sentence":"Nosotros <span class=\"gap\">___</span> una cena inolvidable esa noche.","sentenceEn":"We <span class=\"gap\">___</span> an unforgettable dinner that night.","options":["tuvimos","tuvisteis","tuvieron"],"optionsEn":["tuvimos (we had)","tuvisteis (you pl. had)","tuvieron (they had)"],"answer":"tuvimos"},
+  {"sentence":"Marta <span class=\"gap\">___</span> una comida especial para la ocasión.","sentenceEn":"Marta <span class=\"gap\">___</span> a special meal for the occasion.","options":["hizo","hice","hiciste"],"optionsEn":["hizo (she made)","hice (I made)","hiciste (you made)"],"answer":"hizo"},
+  {"sentence":"¿Tú <span class=\"gap\">___</span> a Bogotá alguna vez antes de este viaje?","sentenceEn":"Had you <span class=\"gap\">___</span> to Bogotá before this trip?","options":["fuiste","fue","fui"],"optionsEn":["fuiste (you went)","fue (he/she went)","fui (I went)"],"answer":"fuiste"},
+  {"sentence":"Fue un día <span class=\"gap\">___</span> para toda la familia.","sentenceEn":"It was an <span class=\"gap\">___</span> day for the whole family.","options":["inolvidable","olvidado","normal"],"optionsEn":["inolvidable (unforgettable)","olvidado (forgotten)","normal (normal)"],"answer":"inolvidable"},
+  {"sentence":"Yo <span class=\"gap\">___</span> mucha suerte de conocer a gente tan buena.","sentenceEn":"I <span class=\"gap\">___</span> very lucky to meet such good people.","options":["tuve","tuvo","tuviste"],"optionsEn":["tuve (I had)","tuvo (he/she had)","tuviste (you had)"],"answer":"tuve"},
+  {"sentence":"¿Qué <span class=\"gap\">___</span> vosotros el día de la celebración?","sentenceEn":"What did you (pl.) <span class=\"gap\">___</span> on the day of the celebration?","options":["hicisteis","hicimos","hicieron"],"optionsEn":["hicisteis (you pl. did)","hicimos (we did)","hicieron (they did)"],"answer":"hicisteis"},
+  {"sentence":"Camila me <span class=\"gap\">___</span> una anécdota de cuando era pequeña.","sentenceEn":"Camila told me an <span class=\"gap\">___</span> from when she was little.","options":["anécdota","celebración","costumbre"],"optionsEn":["anécdota (anecdote)","celebración (celebration)","costumbre (custom)"],"answer":"anécdota"},
+  {"sentence":"Doña Rosa <span class=\"gap\">___</span> muy contenta con la visita.","sentenceEn":"Doña Rosa <span class=\"gap\">___</span> very happy about the visit.","options":["estuvo","estuve","estuviste"],"optionsEn":["estuvo (she was)","estuve (I was)","estuviste (you were)"],"answer":"estuvo"},
+  {"sentence":"Fue la primera vez que hablé español en público, <span class=\"gap\">___</span> nerviosa.","sentenceEn":"It was the first time I spoke Spanish in public, I <span class=\"gap\">___</span> nervous.","options":["estuve","estuvo","fuiste"],"optionsEn":["estuve (I was)","estuvo (he/she was)","fuiste (you went/were)"],"answer":"estuve"},
+  {"sentence":"David y su padre <span class=\"gap\">___</span> a recibirnos al aeropuerto.","sentenceEn":"David and his father <span class=\"gap\">___</span> to welcome us at the airport.","options":["fueron","fuimos","fuisteis"],"optionsEn":["fueron (they went)","fuimos (we went)","fuisteis (you pl. went)"],"answer":"fueron"},
+  {"sentence":"Recuerda: yo <span class=\"gap\">___</span> a Colombia el año pasado.","sentenceEn":"Remember: I <span class=\"gap\">___</span> to Colombia last year.","options":["viajé","viajaste","viajó"],"optionsEn":["viajé (I travelled)","viajaste (you travelled)","viajó (he/she travelled)"],"answer":"viajé"},
+  {"sentence":"Jorge <span class=\"gap\">___</span> muchas historias esa noche.","sentenceEn":"Jorge <span class=\"gap\">___</span> a lot of stories that night.","options":["contó","conté","contaste"],"optionsEn":["contó (he told)","conté (I told)","contaste (you told)"],"answer":"contó"},
+  {"sentence":"¿Cuándo <span class=\"gap\">___</span> tú a la familia de David?","sentenceEn":"When did you <span class=\"gap\">___</span> David's family?","options":["conociste","conocí","conoció"],"optionsEn":["conociste (you met)","conocí (I met)","conoció (he/she met)"],"answer":"conociste"},
+  {"sentence":"Fue una <span class=\"gap\">___</span> muy especial para toda la familia.","sentenceEn":"It was a very special <span class=\"gap\">___</span> for the whole family.","options":["celebración","costumbre","anécdota"],"optionsEn":["celebración (celebration)","costumbre (custom)","anécdota (anecdote)"],"answer":"celebración"},
+  {"sentence":"Los abuelos <span class=\"gap\">___</span> a la fiesta con mucha ilusión.","sentenceEn":"The grandparents <span class=\"gap\">___</span> to the party very excitedly.","options":["fueron","fuimos","fue"],"optionsEn":["fueron (they went)","fuimos (we went)","fue (he/she went)"],"answer":"fueron"},
+  {"sentence":"Sofía <span class=\"gap\">___</span> una cena para presentarme a sus amigos.","sentenceEn":"Sofía <span class=\"gap\">___</span> a dinner to introduce me to her friends.","options":["organizó","organicé","organizaste"],"optionsEn":["organizó (she organised)","organicé (I organised)","organizaste (you organised)"],"answer":"organizó"},
+  {"sentence":"Yo nunca <span class=\"gap\">___</span> a un país tan diferente antes.","sentenceEn":"I had never <span class=\"gap\">___</span> to such a different country before.","options":["fui","fue","fuiste"],"optionsEn":["fui (I went)","fue (he/she went)","fuiste (you went)"],"answer":"fui"},
+  {"sentence":"Nosotros <span class=\"gap\">___</span> que cambiar los planes por la lluvia.","sentenceEn":"We <span class=\"gap\">___</span> to change the plans because of the rain.","options":["tuvimos","tuvisteis","tuvieron"],"optionsEn":["tuvimos (we had)","tuvisteis (you pl. had)","tuvieron (they had)"],"answer":"tuvimos"},
+  {"sentence":"¿Qué <span class=\"gap\">___</span> lo más difícil de entender ese día?","sentenceEn":"What was the hardest thing to understand that day?","options":["fue","fui","fuiste"],"optionsEn":["fue (was)","fui (I was)","fuiste (you were)"],"answer":"fue"},
+  {"sentence":"Recuerda: David me <span class=\"gap\">___</span> a toda su familia el primer día.","sentenceEn":"Remember: David <span class=\"gap\">___</span> me to his whole family on the first day.","options":["presentó","presenté","presentaste"],"optionsEn":["presentó (he introduced)","presenté (I introduced)","presentaste (you introduced)"],"answer":"presentó"},
+  {"sentence":"Yo <span class=\"gap\">___</span> mucho miedo antes de subir al avión.","sentenceEn":"I <span class=\"gap\">___</span> very scared before boarding the plane.","options":["tuve","tuvo","tuviste"],"optionsEn":["tuve (I had)","tuvo (he/she had)","tuviste (you had)"],"answer":"tuve"},
+  {"sentence":"Al final, todo <span class=\"gap\">___</span> mejor de lo que esperaba.","sentenceEn":"In the end, everything <span class=\"gap\">___</span> better than I expected.","options":["fue","fui","fuiste"],"optionsEn":["fue (was)","fui (I was)","fuiste (you were)"],"answer":"fue"}
+];
+
+const exWrap = document.getElementById('exercises');
+EXERCISES.forEach((ex, i)=>{
+  if(i === 0){
+    const divider = document.createElement('div');
+    divider.className = 'ex-divider en-clase';
+    divider.textContent = 'en clase · ítems 1–12';
+    divider.innerHTML += '<span class="en">in class · items 1–12</span>';
+    exWrap.appendChild(divider);
+  }
+  if(i === 12){
+    const divider = document.createElement('div');
+    divider.className = 'ex-divider';
+    divider.textContent = 'para casa · repaso opcional';
+    divider.innerHTML += '<span class="en">for home · optional review</span>';
+    exWrap.appendChild(divider);
+  }
+  const el = document.createElement('div');
+  el.className = 'exercise';
+  el.dataset.answer = ex.answer;
+  // Baraja las opciones (con sus traducciones en pareja) para que la
+  // respuesta correcta no caiga siempre en la primera posición.
+  const shuffled = ex.options.map((o, idx) => ({ o, en: ex.optionsEn[idx] }));
+  for (let k = shuffled.length - 1; k > 0; k--) {
+    const j = Math.floor(Math.random() * (k + 1));
+    [shuffled[k], shuffled[j]] = [shuffled[j], shuffled[k]];
+  }
+  const optionsHtml = shuffled.map(({o, en}) => 
+    `<button class="opt-btn" data-value="${o}">${o} <span class="en">${en}</span></button>`
+  ).join('');
+  el.innerHTML = `
+    <div class="ex-sentence">${i+1}. ${ex.sentence}
+      <span class="en">${ex.sentenceEn}</span>
+    </div>
+    <div class="ex-options">${optionsHtml}</div>
+  `;
+  exWrap.appendChild(el);
+
+  el.querySelectorAll('.opt-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      el.querySelectorAll('.opt-btn').forEach(b=>b.classList.remove('picked'));
+      btn.classList.add('picked');
+    });
+  });
+});
+
+document.getElementById('check-btn').addEventListener('click', ()=>{
+  let correct = 0;
+  document.querySelectorAll('.exercise').forEach(el=>{
+    const answer = el.dataset.answer;
+    const picked = el.querySelector('.opt-btn.picked');
+    el.querySelectorAll('.opt-btn').forEach(b=>{
+      b.disabled = true;
+      if(b.dataset.value === answer) b.classList.add('correct');
+      else if(b === picked) b.classList.add('wrong');
+    });
+    if(picked && picked.dataset.value === answer) correct++;
+  });
+  document.getElementById('score-text').textContent = `${correct} / ${EXERCISES.length} correctas`;
+});
+
+document.getElementById('reset-btn').addEventListener('click', ()=>{
+  document.querySelectorAll('.exercise').forEach(el=>{
+    el.querySelectorAll('.opt-btn').forEach(b=>{
+      b.disabled = false;
+      b.classList.remove('picked','correct','wrong');
+    });
+  });
+  document.getElementById('score-text').textContent = '';
+});
+
+const CHARACTERS = [
+  {name:"Tú", nameEn:"You", role:"Contando cómo fue tu primera visita", roleEn:"Telling the story of your first visit", facts:["tuviste mucha suerte de conocer a la familia","estuviste nerviosa antes de la cena","fuiste al mercado con Jorge"], factsEn:["you were very lucky to meet the family","you were nervous before the dinner","you went to the market with Jorge"], prompt:"Escribe una frase con un pretérito irregular:", promptEn:"Write a sentence with an irregular preterite:"},
+  {name:"David", nameEn:"David", role:"Tu novio, recordando el día", roleEn:"Your boyfriend, remembering the day", facts:["fue a recibirte al aeropuerto","tuvo que organizar toda la visita","estuvo muy orgulloso de presentarte"], factsEn:["he went to welcome you at the airport","he had to organise the whole visit","he was very proud to introduce you"], prompt:"Escribe una frase con un pretérito irregular:", promptEn:"Write a sentence with an irregular preterite:"},
+  {name:"Marta", nameEn:"Marta", role:"La madre de David", roleEn:"David's mother", facts:["hizo una cena especial esa noche","estuvo cocinando toda la tarde","fue muy cariñosa contigo"], factsEn:["she made a special dinner that night","she was cooking all afternoon","she was very warm with you"], prompt:"Escribe una frase con un pretérito irregular:", promptEn:"Write a sentence with an irregular preterite:"},
+  {name:"Jorge", nameEn:"Jorge", role:"El padre de David", roleEn:"David's father", facts:["fue contigo al mercado","tuvo que trabajar esa mañana","estuvo contando historias toda la cena"], factsEn:["he went with you to the market","he had to work that morning","he was telling stories all through dinner"], prompt:"Escribe una frase con un pretérito irregular:", promptEn:"Write a sentence with an irregular preterite:"},
+  {name:"Camila", nameEn:"Camila", role:"La hermana de David", roleEn:"David's sister", facts:["fue de compras contigo","tuvo una idea para sorprenderte","estuvo muy contenta de conocerte"], factsEn:["she went shopping with you","she had an idea to surprise you","she was very happy to meet you"], prompt:"Escribe una frase con un pretérito irregular:", promptEn:"Write a sentence with an irregular preterite:"},
+  {name:"Doña Rosa", nameEn:"Doña Rosa", role:"La abuela de David", roleEn:"David's grandmother", facts:["fue la que organizó la celebración","tuvo una vida muy interesante","estuvo contando anécdotas toda la tarde"], factsEn:["she was the one who organised the celebration","she had a very interesting life","she was telling anecdotes all afternoon"], prompt:"Escribe una frase con un pretérito irregular:", promptEn:"Write a sentence with an irregular preterite:"},
+  {name:"Sarah", nameEn:"Sarah", role:"Otra House Parent, colega tuya", roleEn:"Another House Parent, your colleague", facts:["tuvo que cubrir tu turno","fue muy comprensiva con el cambio de planes","estuvo esperando tus fotos del viaje"], factsEn:["she had to cover your shift","she was very understanding about the change of plans","she was waiting for your trip photos"], prompt:"Escribe una frase con un pretérito irregular:", promptEn:"Write a sentence with an irregular preterite:"},
+  {name:"El señor Hughes", nameEn:"Mr. Hughes", role:"El director del internado", roleEn:"The boarding school headteacher", facts:["fue muy flexible con los días libres","tuvo una reunión sobre tu progreso","estuvo interesado en la experiencia"], factsEn:["he was very flexible about the days off","he had a meeting about your progress","he was interested in the experience"], prompt:"Escribe una frase con un pretérito irregular:", promptEn:"Write a sentence with an irregular preterite:"},
+  {name:"Emma", nameEn:"Emma", role:"Compañera de departamento en el internado", roleEn:"Department colleague at the boarding school", facts:["fue la primera en pedir fotos del viaje","tuvo que esperar hasta el lunes para verlas","estuvo emocionada al escuchar la anécdota"], factsEn:["she was the first to ask for photos of the trip","she had to wait until Monday to see them","she was excited to hear the anecdote"], prompt:"Escribe una frase con un pretérito irregular:", promptEn:"Write a sentence with an irregular preterite:"},
+  {name:"Tom", nameEn:"Tom", role:"Profesor de deportes en el internado", roleEn:"Sports teacher at the boarding school", facts:["fue el que preguntó por el fútbol colombiano","tuvo curiosidad por las costumbres","estuvo practicando frases nuevas contigo"], factsEn:["he was the one who asked about Colombian football","he was curious about the customs","he was practising new phrases with you"], prompt:"Escribe una frase con un pretérito irregular:", promptEn:"Write a sentence with an irregular preterite:"},
+  {name:"Andrés", nameEn:"Andrés", role:"El tío de David, comerciante", roleEn:"David's uncle, merchant", facts:["fue el que te regaló café colombiano","tuvo la tienda abierta especialmente para vosotros","estuvo contando cómo empezó su negocio"], factsEn:["he was the one who gave you Colombian coffee","he had the shop open especially for you both","he was telling how he started his business"], prompt:"Escribe una frase con un pretérito irregular:", promptEn:"Write a sentence with an irregular preterite:"},
+  {name:"Lucía", nameEn:"Lucía", role:"La tía de David, enfermera", roleEn:"David's aunt, nurse", facts:["fue la que os llevó a ver el hospital","tuvo un turno largo esa semana","estuvo encantada de invitaros a comer"], factsEn:["she was the one who took you to see the hospital","she had a long shift that week","she was delighted to invite you for lunch"], prompt:"Escribe una frase con un pretérito irregular:", promptEn:"Write a sentence with an irregular preterite:"},
+  {name:"Felipe", nameEn:"Felipe", role:"El primo pequeño de David", roleEn:"David's young cousin", facts:["fue el que más rió durante la cena","tuvo que irse pronto a dormir","estuvo enseñando sus juguetes toda la tarde"], factsEn:["he was the one who laughed the most at dinner","he had to go to bed early","he was showing his toys all afternoon"], prompt:"Escribe una frase con un pretérito irregular:", promptEn:"Write a sentence with an irregular preterite:"},
+  {name:"Valentina", nameEn:"Valentina", role:"La prima universitaria de David", roleEn:"David's university cousin", facts:["fue la que os llevó a un restaurante típico","tuvo que estudiar esa misma noche","estuvo hablando de sus estudios toda la cena"], factsEn:["she was the one who took you to a typical restaurant","she had to study that same night","she was talking about her studies all through dinner"], prompt:"Escribe una frase con un pretérito irregular:", promptEn:"Write a sentence with an irregular preterite:"},
+  {name:"Don Carlos", nameEn:"Don Carlos", role:"El abuelo de David, agricultor jubilado", roleEn:"David's grandfather, retired farmer", facts:["fue el que os enseñó el huerto","tuvo una vida entera dedicada al campo","estuvo regalando fruta fresca toda la tarde"], factsEn:["he was the one who showed you the vegetable garden","he had a whole life dedicated to farming","he was giving away fresh fruit all afternoon"], prompt:"Escribe una frase con un pretérito irregular:", promptEn:"Write a sentence with an irregular preterite:"},
+  {name:"Sofía", nameEn:"Sofía", role:"La mejor amiga de David, abogada", roleEn:"David's best friend, lawyer", facts:["fue la que organizó la cena para conoceros","tuvo que salir antes del trabajo","estuvo encantada de haceros tantas preguntas"], factsEn:["she was the one who organised the dinner to meet you","she had to leave work early","she was delighted to ask you so many questions"], prompt:"Escribe una frase con un pretérito irregular:", promptEn:"Write a sentence with an irregular preterite:"},
+  {name:"Mateo", nameEn:"Mateo", role:"Compañero de trabajo de David, profesor de matemáticas", roleEn:"David's work colleague, maths teacher", facts:["fue el que os invitó a cenar","tuvo mucha curiosidad por el sistema inglés","estuvo enseñando el colegio de David con orgullo"], factsEn:["he was the one who invited you to dinner","he was very curious about the English system","he was proudly showing David's school"], prompt:"Escribe una frase con un pretérito irregular:", promptEn:"Write a sentence with an irregular preterite:"},
+  {name:"Laura", nameEn:"Laura", role:"Compañera de trabajo de David, profesora de arte", roleEn:"David's work colleague, art teacher", facts:["fue la que os invitó a la exposición","tuvo que terminar un cuadro esa semana","estuvo hablando de arte colombiano toda la tarde"], factsEn:["she was the one who invited you to the exhibition","she had to finish a painting that week","she was talking about Colombian art all afternoon"], prompt:"Escribe una frase con un pretérito irregular:", promptEn:"Write a sentence with an irregular preterite:"},
+  {name:"Diego", nameEn:"Diego", role:"El vecino de la familia, taxista", roleEn:"The family's neighbour, taxi driver", facts:["fue el que os llevó al aeropuerto","tuvo que madrugar mucho ese día","estuvo enseñando la ciudad de camino"], factsEn:["he was the one who took you to the airport","he had to get up very early that day","he was showing the city on the way"], prompt:"Escribe una frase con un pretérito irregular:", promptEn:"Write a sentence with an irregular preterite:"},
+  {name:"Isabella", nameEn:"Isabella", role:"La vecina de la familia, peluquera", roleEn:"The family's neighbour, hairdresser", facts:["fue la que os invitó a tomar un café","tuvo que abrir la peluquería temprano","estuvo presentando a otras vecinas"], factsEn:["she was the one who invited you for coffee","she had to open the salon early","she was introducing other neighbours"], prompt:"Escribe una frase con un pretérito irregular:", promptEn:"Write a sentence with an irregular preterite:"},
+  {name:"Julián", nameEn:"Julián", role:"El hermano pequeño de David", roleEn:"David's younger brother", facts:["fue el que os acompañó al mercado","tuvo que hacer sus deberes esa tarde","estuvo enseñando sus dibujos con mucho orgullo"], factsEn:["he was the one who accompanied you to the market","he had to do his homework that afternoon","he was proudly showing his drawings"], prompt:"Escribe una frase con un pretérito irregular:", promptEn:"Write a sentence with an irregular preterite:"},
+  {name:"Natalia", nameEn:"Natalia", role:"La cuñada de David, dentista", roleEn:"David's sister‑in‑law, dentist", facts:["fue la que os invitó a su consulta","tuvo un día muy ocupado en el trabajo","estuvo preguntando por el clima en Inglaterra"], factsEn:["she was the one who invited you to her practice","she had a very busy day at work","she was asking about the weather in England"], prompt:"Escribe una frase con un pretérito irregular:", promptEn:"Write a sentence with an irregular preterite:"},
+];
+
+const charWrap = document.getElementById('characters');
+CHARACTERS.forEach((c)=>{
+  const card = document.createElement('div');
+  card.className = 'char-card';
+  const factsHtml = c.facts.map((f, idx)=>`<span class="fact-tag">${f} <span class="en">${c.factsEn[idx]}</span></span>`).join('');
+  card.innerHTML = `
+    <div class="char-avatar">${c.name.charAt(0)}</div>
+    <div class="char-body">
+      <p class="char-name">${c.name} <span class="en">${c.nameEn}</span></p>
+      <p class="char-role">${c.role} <span class="en">${c.roleEn}</span></p>
+      <div class="char-facts">${factsHtml}</div>
+      <p class="char-prompt">${c.prompt} <span class="en">${c.promptEn}</span></p>
+      <textarea class="char-input" rows="2" placeholder="Escribe aquí..."></textarea>
+    </div>
+  `;
+  charWrap.appendChild(card);
+});
+
+const SCENES = [
+  {
+    id:"cena-especial", tab:"La cena especial de bienvenida", tabEn:"The special welcome dinner", icon:"🍽️",
+    setup:"Le cuentas a una amiga en Inglaterra cómo fue la cena de bienvenida que Marta preparó.",
+    setupEn:"You are telling a friend in England what the welcome dinner Marta prepared was like.",
+    lines:[
+      {who:"friend", name:"Amiga", text:"¿Qué hizo la madre de David para recibirte?", textEn:"What did David's mother do to welcome you?"},
+      {who:"you", hint:"Responde con \"hizo\" + algo que preparó.", hintEn:"Answer with \"hizo\" + something she prepared."},
+      {who:"friend", name:"Amiga", text:"¿Y tú cómo estuviste esa noche, nerviosa?", textEn:"And how were you that night, nervous?"},
+      {who:"you", hint:"Responde con \"estuve\" + un sentimiento.", hintEn:"Answer with \"estuve\" + a feeling."},
+      {who:"friend", name:"Amiga", text:"¿Fue difícil seguir la conversación en español?", textEn:"Was it hard to follow the conversation in Spanish?"},
+      {who:"you", hint:"Responde con \"fue\" + fácil/difícil y por qué.", hintEn:"Answer with \"fue\" + easy/difficult and why."},
+      {who:"friend", name:"Amiga", text:"¿Tuviste que repetir algo varias veces?", textEn:"Did you have to repeat something several times?"},
+      {who:"you", hint:"Responde con \"tuve que\" + algo.", hintEn:"Answer with \"tuve que\" + something."},
+      {who:"friend", name:"Amiga", text:"¿Quién más estuvo en la cena?", textEn:"Who else was at the dinner?"},
+      {who:"you", hint:"Responde nombrando a quién estuvo, usando \"estuvo/estuvieron\".", hintEn:"Answer naming who was there, using \"estuvo/estuvieron\"."},
+      {who:"friend", name:"Amiga", text:"Suena como una noche preciosa.", textEn:"Sounds like a lovely night."},
+      {who:"you", hint:"Cierra la conversación estando de acuerdo, con \"fue\" + un adjetivo.", hintEn:"Close the conversation agreeing, with \"fue\" + an adjective."}
+    ]
+  },
+  {
+    id:"viaje-mercado", tab:"El viaje al mercado con Jorge", tabEn:"The trip to the market with Jorge", icon:"🧺",
+    setup:"Le cuentas a David cómo fue la salida al mercado con su padre, Jorge.",
+    setupEn:"You are telling David what the outing to the market with his father, Jorge, was like.",
+    lines:[
+      {who:"friend", name:"David", text:"¿A dónde fuiste con mi padre esa mañana?", textEn:"Where did you go with my father that morning?"},
+      {who:"you", hint:"Responde con \"fui a\" + el lugar.", hintEn:"Answer with \"fui a\" + the place."},
+      {who:"friend", name:"David", text:"¿Tuvisteis tiempo de ver todo el mercado?", textEn:"Did you have time to see the whole market?"},
+      {who:"you", hint:"Responde con \"tuvimos\" + tiempo o no.", hintEn:"Answer with \"tuvimos\" + time or not."},
+      {who:"friend", name:"David", text:"¿Qué hizo mi padre que te sorprendió?", textEn:"What did my father do that surprised you?"},
+      {who:"you", hint:"Responde con \"hizo\" + algo sorprendente.", hintEn:"Answer with \"hizo\" + something surprising."},
+      {who:"friend", name:"David", text:"¿Estuvo hablando con todos los vendedores?", textEn:"Was he talking to all the sellers?"},
+      {who:"you", hint:"Responde confirmando con \"estuvo\".", hintEn:"Reply confirming with \"estuvo\"."},
+      {who:"friend", name:"David", text:"¿Fue la primera vez que probaste alguna fruta nueva?", textEn:"Was it the first time you tried a new fruit?"},
+      {who:"you", hint:"Responde con \"fue\" + sí/no y una fruta.", hintEn:"Answer with \"fue\" + yes/no and a fruit."},
+      {who:"friend", name:"David", text:"Me alegra que os llevarais tan bien.", textEn:"I'm glad you two got on so well."},
+      {who:"you", hint:"Cierra la conversación con un comentario positivo en pretérito.", hintEn:"Close the conversation with a positive comment in the preterite."}
+    ]
+  },
+  {
+    id:"celebracion-abuela", tab:"La celebración de doña Rosa", tabEn:"Doña Rosa's celebration", icon:"🎉",
+    setup:"Hablas con Camila sobre la celebración especial que organizó doña Rosa.",
+    setupEn:"You are talking with Camila about the special celebration doña Rosa organised.",
+    lines:[
+      {who:"friend", name:"Camila", text:"¿Qué te pareció la celebración de mi abuela?", textEn:"What did you think of my grandmother's celebration?"},
+      {who:"you", hint:"Responde con \"fue\" + un adjetivo.", hintEn:"Answer with \"fue\" + an adjective."},
+      {who:"friend", name:"Camila", text:"¿Tuviste oportunidad de hablar mucho con ella?", textEn:"Did you get the chance to talk to her a lot?"},
+      {who:"you", hint:"Responde con \"tuve\" + oportunidad o tiempo.", hintEn:"Answer with \"tuve\" + opportunity or time."},
+      {who:"friend", name:"Camila", text:"¿Qué hizo ella que más te gustó?", textEn:"What did she do that you liked the most?"},
+      {who:"you", hint:"Responde con \"hizo\" + algo concreto.", hintEn:"Answer with \"hizo\" + something specific."},
+      {who:"friend", name:"Camila", text:"¿Estuviste emocionada escuchando sus historias?", textEn:"Were you moved listening to her stories?"},
+      {who:"you", hint:"Responde con \"estuve\" + un sentimiento.", hintEn:"Answer with \"estuve\" + a feeling."},
+      {who:"friend", name:"Camila", text:"¿Fuiste tú quien le regaló algo de Inglaterra?", textEn:"Was it you who gave her something from England?"},
+      {who:"you", hint:"Responde con \"fui\" + sí/no y qué le diste.", hintEn:"Answer with \"fui\" + yes/no and what you gave her."},
+      {who:"friend", name:"Camila", text:"Fue un día muy especial para toda la familia.", textEn:"It was a very special day for the whole family."},
+      {who:"you", hint:"Cierra la conversación estando de acuerdo.", hintEn:"Close the conversation agreeing."}
+    ]
+  },
+  {
+    id:"vuelo-tormenta", tab:"El vuelo con la tormenta", tabEn:"The flight with the storm", icon:"✈️",
+    setup:"Le cuentas a Sarah, tu colega, cómo fue el vuelo de vuelta con mal tiempo.",
+    setupEn:"You are telling Sarah, your colleague, what the return flight in bad weather was like.",
+    lines:[
+      {who:"friend", name:"Sarah", text:"¿Cómo fue el vuelo de vuelta?", textEn:"How was the flight back?"},
+      {who:"you", hint:"Responde con \"fue\" + un adjetivo.", hintEn:"Answer with \"fue\" + an adjective."},
+      {who:"friend", name:"Sarah", text:"¿Tuvisteis algún problema por la tormenta?", textEn:"Did you have any problem because of the storm?"},
+      {who:"you", hint:"Responde con \"tuvimos\" + sí/no y un detalle.", hintEn:"Answer with \"tuvimos\" + yes/no and a detail."},
+      {who:"friend", name:"Sarah", text:"¿Estuviste muy nerviosa durante el despegue?", textEn:"Were you very nervous during take-off?"},
+      {who:"you", hint:"Responde con \"estuve\" + un sentimiento.", hintEn:"Answer with \"estuve\" + a feeling."},
+      {who:"friend", name:"Sarah", text:"¿Qué hizo David para calmarte?", textEn:"What did David do to calm you down?"},
+      {who:"you", hint:"Responde con \"hizo\" + algo concreto.", hintEn:"Answer with \"hizo\" + something specific."},
+      {who:"friend", name:"Sarah", text:"¿Fue la primera vez que volaste con tanto viento?", textEn:"Was it the first time you flew with so much wind?"},
+      {who:"you", hint:"Responde con \"fue\" + sí/no.", hintEn:"Answer with \"fue\" + yes/no."},
+      {who:"friend", name:"Sarah", text:"Menos mal que llegasteis bien.", textEn:"Good thing you arrived safely."},
+      {who:"you", hint:"Cierra la conversación de acuerdo, con un pretérito.", hintEn:"Close the conversation agreeing, with a preterite."}
+    ]
+  },
+  {
+    id:"clase-profesora", tab:"Contándoselo a tu profesora", tabEn:"Telling your teacher about it", icon:"📚",
+    setup:"Hablas con tu profesora de español sobre cómo te fue con el pretérito irregular durante el viaje.",
+    setupEn:"You are talking with your Spanish teacher about how the irregular preterite went for you during the trip.",
+    lines:[
+      {who:"friend", name:"Tu profesora", text:"¿Fuiste capaz de usar el pretérito irregular en el viaje?", textEn:"Were you able to use the irregular preterite during the trip?"},
+      {who:"you", hint:"Responde con \"fui\" + sí/no y un ejemplo.", hintEn:"Answer with \"fui\" + yes/no and an example."},
+      {who:"friend", name:"Tu profesora", text:"¿Qué anécdota tuviste que contar más veces?", textEn:"Which anecdote did you have to tell the most times?"},
+      {who:"you", hint:"Responde con \"tuve que\" + contar algo.", hintEn:"Answer with \"tuve que\" + tell something."},
+      {who:"friend", name:"Tu profesora", text:"¿Qué fue lo más difícil de entender?", textEn:"What was the hardest thing to understand?"},
+      {who:"you", hint:"Responde con \"fue\" + una dificultad concreta.", hintEn:"Answer with \"fue\" + a specific difficulty."},
+      {who:"friend", name:"Tu profesora", text:"¿Estuviste practicando en voz alta antes de ir?", textEn:"Were you practising out loud before going?"},
+      {who:"you", hint:"Responde con \"estuve\" + sí/no.", hintEn:"Answer with \"estuve\" + yes/no."},
+      {who:"friend", name:"Tu profesora", text:"¿Qué hiciste cuando no entendiste algo?", textEn:"What did you do when you didn't understand something?"},
+      {who:"you", hint:"Responde con \"hice\" + una estrategia.", hintEn:"Answer with \"hice\" + a strategy."},
+      {who:"friend", name:"Tu profesora", text:"Me alegra mucho que todo saliera tan bien.", textEn:"I'm very glad everything went so well."},
+      {who:"you", hint:"Responde agradeciendo la preparación de las clases.", hintEn:"Reply thanking her for preparing you in class."}
+    ]
+  }
+];
+
+const sceneTabs = document.getElementById('scene-tabs');
+const sceneContainer = document.getElementById('scene-container');
+let activeScene = 0;
+
+function renderTabs(){
+  sceneTabs.innerHTML = SCENES.map((s,i)=>
+    `<button class="scene-tab${i===activeScene?' active':''}" data-idx="${i}">${s.icon} ${s.tab} <span class="en">${s.tabEn}</span></button>`
+  ).join('');
+  sceneTabs.querySelectorAll('.scene-tab').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      activeScene = parseInt(btn.dataset.idx, 10);
+      renderTabs();
+      renderScene();
+      cargarRoleplay();
+    });
+  });
+}
+
+function renderScene(){
+  const scene = SCENES[activeScene];
+  const linesHtml = scene.lines.map((l)=>{
+    if(l.who === 'friend'){
+      return `
+        <div class="line friend">
+          <div class="line-avatar">${l.name.charAt(0)}</div>
+          <div class="line-body">
+            <p class="line-name">${l.name}</p>
+            <div class="line-bubble">${l.text} <span class="en">${l.textEn}</span></div>
+          </div>
+        </div>`;
+    } else {
+      return `
+        <div class="line you">
+          <div class="line-avatar">Tú</div>
+          <div class="line-body">
+            <p class="line-name">Tú <span class="en">You</span></p>
+            <textarea class="line-input" rows="2" placeholder="Escribe tu respuesta..."></textarea>
+            <p class="line-hint">${l.hint} <span class="en">${l.hintEn}</span></p>
+          </div>
+        </div>`;
+    }
+  }).join('');
+
+  sceneContainer.innerHTML = `
+    <div class="scene-setup">
+      <span class="scene-icon">${scene.icon}</span>
+      <p class="scene-text"><strong>${scene.tab}:</strong> ${scene.setup} <span class="en">${scene.setupEn}</span></p>
+    </div>
+    <div class="dialogue">${linesHtml}</div>
+  `;
+}
+
+renderTabs();
+renderScene();
+cargarRoleplay();
+
+const STORAGE_KEY = 'elise-clase07-tarea';
+const taskArea = document.getElementById('final-task');
+const taskCount = document.getElementById('task-count');
+const savedFlag = document.getElementById('saved-flag');
+
+async function cargarTarea(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(STORAGE_KEY);
+    if (res && typeof res.value === 'string'){
+      taskArea.value = res.value;
+      updateCount();
+    }
+  }catch(e){ /* sin datos previos */ }
+}
+
+function updateCount(){
+  const matches = (taskArea.value.match(/\b\w*(fui|fuiste|fue|fuimos|fuisteis|fueron|tuve|tuviste|tuvo|tuvimos|tuvisteis|tuvieron|hice|hiciste|hizo|hicimos|hicisteis|hicieron|estuve|estuviste|estuvo|estuvimos|estuvisteis|estuvieron)\b/gi) || []).length;
+  taskCount.textContent = `${matches} verbo${matches===1?'':'s'} irregular${matches===1?'':'es'} detectado${matches===1?'':'s'}`;
+}
+
+let taskSaveTimer = null;
+function guardarTareaAuto(){
+  clearTimeout(taskSaveTimer);
+  taskSaveTimer = setTimeout(async ()=>{
+    if (!window.storage) return;
+    try{
+      await window.storage.set(STORAGE_KEY, taskArea.value);
+      savedFlag.textContent = 'Guardado ✓';
+      savedFlag.classList.add('show');
+      setTimeout(()=>{ savedFlag.classList.remove('show'); }, 1600);
+    }catch(e){ /* fallo silencioso: se reintentará en el próximo cambio */ }
+  }, 800);
+}
+taskArea.addEventListener('input', ()=>{ updateCount(); guardarTareaAuto(); });
+updateCount();
+cargarTarea();
+
+/* ---------- Autoguardado: Práctica (ejercicios de opción múltiple) ---------- */
+const PRACTICE_KEY = 'elise-clase07-practica';
+let practiceSaveTimer = null;
+function guardarPracticaAuto(){
+  clearTimeout(practiceSaveTimer);
+  practiceSaveTimer = setTimeout(async ()=>{
+    if (!window.storage) return;
+    const respuestas = {};
+    document.querySelectorAll('.exercise').forEach((el, idx)=>{
+      const picked = el.querySelector('.opt-btn.picked');
+      if (picked) respuestas[idx] = picked.dataset.value;
+    });
+    try{ await window.storage.set(PRACTICE_KEY, JSON.stringify(respuestas)); }catch(e){}
+  }, 800);
+}
+async function cargarPractica(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(PRACTICE_KEY);
+    if (!res || typeof res.value !== 'string') return;
+    const respuestas = JSON.parse(res.value);
+    document.querySelectorAll('.exercise').forEach((el, idx)=>{
+      const valor = respuestas[idx];
+      if (valor === undefined) return;
+      const btn = [...el.querySelectorAll('.opt-btn')].find(b => b.dataset.value === valor);
+      if (btn){
+        el.querySelectorAll('.opt-btn').forEach(b=>b.classList.remove('picked'));
+        btn.classList.add('picked');
+      }
+    });
+  }catch(e){}
+}
+
+/* ---------- Autoguardado: Personajes ---------- */
+const CHAR_KEY = 'elise-clase07-personajes';
+let charSaveTimer = null;
+function guardarPersonajesAuto(){
+  clearTimeout(charSaveTimer);
+  charSaveTimer = setTimeout(async ()=>{
+    if (!window.storage) return;
+    const valores = {};
+    document.querySelectorAll('.char-input').forEach((el, idx)=>{
+      if (el.value) valores[idx] = el.value;
+    });
+    try{ await window.storage.set(CHAR_KEY, JSON.stringify(valores)); }catch(e){}
+  }, 800);
+}
+async function cargarPersonajes(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(CHAR_KEY);
+    if (!res || typeof res.value !== 'string') return;
+    const valores = JSON.parse(res.value);
+    document.querySelectorAll('.char-input').forEach((el, idx)=>{
+      if (valores[idx] !== undefined) el.value = valores[idx];
+    });
+  }catch(e){}
+}
+
+/* ---------- Autoguardado: Roleplay ---------- */
+const ROLEPLAY_KEY = 'elise-clase07-roleplay';
+let roleplaySaveTimer = null;
+function guardarRoleplayAuto(){
+  clearTimeout(roleplaySaveTimer);
+  roleplaySaveTimer = setTimeout(async ()=>{
+    if (!window.storage) return;
+    const valores = {};
+    document.querySelectorAll('.line-input').forEach((el, idx)=>{
+      if (el.value) valores[`${activeScene}_${idx}`] = el.value;
+    });
+    let previo = {};
+    try{
+      const res = await window.storage.get(ROLEPLAY_KEY);
+      if (res && typeof res.value === 'string') previo = JSON.parse(res.value);
+    }catch(e){}
+    Object.keys(previo).forEach(k=>{
+      if (!(k in valores) && !k.startsWith(`${activeScene}_`)) valores[k] = previo[k];
+    });
+    try{ await window.storage.set(ROLEPLAY_KEY, JSON.stringify(valores)); }catch(e){}
+  }, 800);
+}
+async function cargarRoleplay(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(ROLEPLAY_KEY);
+    if (!res || typeof res.value !== 'string') return;
+    const valores = JSON.parse(res.value);
+    document.querySelectorAll('.line-input').forEach((el, idx)=>{
+      const key = `${activeScene}_${idx}`;
+      if (valores[key] !== undefined) el.value = valores[key];
+    });
+  }catch(e){}
+}
+
+document.getElementById('exercises').addEventListener('click', (e)=>{
+  if (e.target.classList && e.target.classList.contains('opt-btn')) guardarPracticaAuto();
+});
+cargarPractica();
+
+document.getElementById('characters').addEventListener('input', (e)=>{
+  if (e.target.classList && e.target.classList.contains('char-input')) guardarPersonajesAuto();
+});
+cargarPersonajes();
+
+document.getElementById('scene-container').addEventListener('input', (e)=>{
+  if (e.target.classList && e.target.classList.contains('line-input')) guardarRoleplayAuto();
+});
+cargarRoleplay();
+</script>
+
+</body>
+</html>
