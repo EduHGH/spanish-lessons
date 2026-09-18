@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clase 12 · Por qué y para qué — Daniela</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+
+/* ╔══════════════════════════════════════════════════════════════╗
+   ║  ESCOLAR — sistema de diseño para clases de español online   ║
+   ║  Clase 12 · Bloque 3 Condicional y pronombres                 ║
+   ║  "Por qué y para qué" — por/para consolidación final          ║
+   ╚══════════════════════════════════════════════════════════════╝ */
+
+:root{
+  --paper:        #FBF7EE;
+  --paper-raised: #FFFFFF;
+  --paper-alt:    #F3ECDA;
+  --ink:          #23291F;
+  --ink-soft:     #565F52;
+  --ink-faint:    #8B9184;
+  --line:         rgba(35,41,31,0.12);
+  --line-strong:  rgba(35,41,31,0.22);
+
+  --b1:      #DB8A2E;  --b1-soft: #FCF1E1;  --b1-line: #F3D9AF;
+  --b2:      #2F6FED;  --b2-soft: #EAF1FE;  --b2-line: #C6D9FC;
+  --family:  #B5502E;  --family-soft: #FBEBE3; --family-line: #EFC9B4;
+  --amber:   #C1892F;  --amber-soft: #FBF1E1; --amber-line: #F0D9A8;
+
+  --f-display: 'Fraunces', Georgia, serif;
+  --f-body:    'IBM Plex Sans', system-ui, sans-serif;
+  --f-data:    'IBM Plex Mono', monospace;
+
+  --r-sm: 8px;
+  --r-md: 14px;
+  --r-lg: 20px;
+
+  --shadow-1: 0 1px 2px rgba(35,41,31,0.05), 0 1px 8px rgba(35,41,31,0.04);
+}
+
+*{ box-sizing:border-box; }
+body{
+  margin:0;
+  background: var(--paper);
+  background-image: radial-gradient(circle at 1px 1px, var(--line) 1px, transparent 0);
+  background-size: 22px 22px;
+  color: var(--ink);
+  font-family: var(--f-body);
+  line-height:1.6;
+}
+::selection{ background: var(--b1-soft); }
+
+/* ---------- HEADER ---------- */
+header{ padding:44px 24px 28px; max-width:760px; margin:0 auto; }
+.eyebrow{
+  font-family: var(--f-data); font-size:12px; letter-spacing:.14em;
+  text-transform:uppercase; color: var(--b1); margin:0 0 10px;
+  display:flex; align-items:center; gap:10px;
+}
+.eyebrow .dot{ width:6px; height:6px; border-radius:50%; background: var(--b1); }
+h1{
+  font-family: var(--f-display); font-weight:600;
+  font-size:clamp(30px,5.6vw,46px); line-height:1.08;
+  margin:0 0 14px; letter-spacing:-.01em;
+}
+h1 em{ font-style:italic; color: var(--b1); }
+.lede{ font-size:16px; color: var(--ink-soft); max-width:56ch; margin:0; }
+
+.meta-row{
+  display:flex; flex-wrap:wrap; gap:20px; margin-top:26px;
+  font-family: var(--f-data); font-size:12px; color: var(--ink-faint);
+}
+.meta-row strong{
+  display:block; color: var(--ink); font-size:14.5px; font-weight:500;
+  font-family: var(--f-display); margin-top:3px;
+}
+
+/* ---------- SECTIONS ---------- */
+main{ max-width:760px; margin:0 auto; padding:8px 24px 100px; }
+
+section.block{ margin-bottom:48px; }
+.block-head{ display:flex; align-items:baseline; gap:12px; margin-bottom:18px; }
+.time-tag{
+  font-family: var(--f-data); font-size:11px; color: var(--ink-faint);
+  background: var(--paper-alt); padding:3px 10px; border-radius:999px; margin-left:auto; flex:none;
+}
+.block-num{
+  font-family: var(--f-data); font-size:12px; color:#fff; background: var(--b1);
+  width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  flex:none;
+}
+.block-head h2{
+  font-family: var(--f-display); font-weight:500; font-style:italic; font-size:22px; margin:0;
+}
+
+.panel{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-lg);
+  box-shadow: var(--shadow-1); padding:26px 28px;
+}
+
+.note{
+  margin-top:18px; padding:14px 16px; background: var(--b1-soft); border:1px solid var(--b1-line);
+  border-radius: var(--r-md); font-size:14px; color: var(--ink-soft);
+}
+.note strong{ color: var(--ink); }
+
+/* ---------- CORRECTION BLOCK ---------- */
+.correction-panel{ background: var(--paper-alt); border:1px solid var(--line); border-radius: var(--r-lg); padding:26px 28px; }
+.correction-panel .block-num{ background: var(--ink-soft); }
+.correction-item{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:14px 16px; margin-bottom:12px;
+}
+.correction-item:last-child{ margin-bottom:0; }
+.correction-item .wrong-line{ font-size:14.5px; color: var(--family); text-decoration: line-through; text-decoration-color: var(--family-line); }
+.correction-item .right-line{ font-size:14.5px; color: var(--b2); margin-top:6px; font-weight:500; }
+.correction-item .why{ font-size:13px; color: var(--ink-faint); margin-top:6px; }
+
+/* ---------- COMPARE (por vs. para) ---------- */
+.compare-wrap{ margin-top:4px; }
+.compare-title{
+  font-family: var(--f-data); font-size:11.5px; text-transform:uppercase; letter-spacing:.06em;
+  color: var(--ink-faint); margin:0 0 10px;
+}
+.compare-grid{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+@media (max-width:560px){ .compare-grid{ grid-template-columns:1fr; } }
+.compare-col{ border-radius: var(--r-md); padding:16px 18px; border:1px solid; }
+.compare-col.is-por{ background: var(--b1-soft); border-color: var(--b1-line); }
+.compare-col.is-para{ background: var(--b2-soft); border-color: var(--b2-line); }
+.compare-head{ display:flex; align-items:center; gap:8px; margin:0 0 10px; }
+.compare-verb{ font-family: var(--f-display); font-weight:600; font-size:19px; }
+.is-por .compare-verb{ color: var(--b1); }
+.is-para .compare-verb{ color: var(--b2); }
+.compare-sub{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); }
+.compare-list{ margin:0; padding:0; list-style:none; }
+.compare-list li{ font-size:13.5px; color: var(--ink-soft); padding:6px 0; border-top:1px dashed var(--line); }
+.compare-list li:first-child{ border-top:none; }
+.compare-list strong{ color: var(--ink); font-weight:600; }
+.compare-list em{ display:block; font-style:normal; color: var(--ink-faint); font-size:12.5px; margin-top:2px; }
+
+.warning-box{
+  margin-top:18px; padding:14px 16px; background: var(--amber-soft); border:1px solid var(--amber-line);
+  border-radius: var(--r-md); font-size:14px; color: var(--ink-soft);
+}
+.warning-box strong{ color: #96591A; }
+.exception-tags{ display:flex; flex-wrap:wrap; gap:6px; margin-top:8px; }
+.exception-tag{
+  font-family: var(--f-data); font-size:12px; background: var(--paper-raised); color: var(--ink-soft);
+  border:1px solid var(--line); padding:3px 9px; border-radius:999px;
+}
+
+/* ---------- FIXED PHRASES GRID ---------- */
+.fixed-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:12px; margin-top:16px; }
+.fixed-card{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:14px 16px;
+}
+.fixed-phrase{ font-family: var(--f-display); font-weight:600; font-size:16px; margin:0 0 6px; }
+.fixed-phrase.por{ color: var(--b1); }
+.fixed-phrase.para{ color: var(--b2); }
+.fixed-mean{ font-size:12.5px; color: var(--ink-faint); margin:0 0 8px; text-transform:uppercase; letter-spacing:.03em; font-family: var(--f-data); }
+.fixed-ex{ font-size:13.5px; color: var(--ink-soft); margin:0; }
+
+/* ---------- VOCAB CARDS ---------- */
+.vocab-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(160px,1fr)); gap:12px; }
+.vocab-card{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:14px 16px; cursor:pointer; perspective:600px; min-height:78px;
+  display:flex; flex-direction:column; justify-content:center; transition: border-color .15s ease;
+}
+.vocab-card:hover{ border-color: var(--b1-line); }
+.vocab-card:focus-visible{ outline:2px solid var(--b1); outline-offset:2px; }
+.vocab-front{ font-family: var(--f-body); font-weight:600; font-size:15px; }
+.vocab-back{ display:none; font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); margin-top:6px; }
+.vocab-card.flipped .vocab-back{ display:block; }
+.vocab-card.flipped{ background: var(--b1-soft); border-color: var(--b1-line); }
+.vocab-hint{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin:10px 2px 16px; }
+
+/* ---------- MINI TEST ---------- */
+.exercise{ margin-bottom:20px; }
+.exercise:last-of-type{ margin-bottom:0; }
+.ex-sentence{ font-size:15.5px; margin-bottom:10px; }
+.ex-sentence .gap{ font-family: var(--f-data); color: var(--ink-faint); }
+.ex-options{ display:flex; flex-wrap:wrap; gap:8px; }
+.opt-btn{
+  font-family: var(--f-body); font-size:14px; background: var(--paper-raised);
+  border:1.5px solid var(--line); color: var(--ink); padding:7px 16px; border-radius:999px;
+  cursor:pointer; transition: all .15s ease;
+}
+.opt-btn:hover{ border-color: var(--ink-faint); }
+.opt-btn.picked{ background: var(--b1-soft); border-color: var(--b1); color: var(--b1); }
+.opt-btn.correct{ background: var(--b2-soft); border-color: var(--b2); color: var(--b2); }
+.opt-btn.wrong{ background: var(--family-soft); border-color: var(--family); color: var(--family); }
+.opt-btn:disabled{ cursor:default; }
+
+.check-bar{
+  display:flex; align-items:center; justify-content:space-between; gap:16px;
+  margin-top:22px; padding-top:18px; border-top:1px dashed var(--line);
+}
+.btn-primary{
+  font-family: var(--f-body); font-weight:600; font-size:14px; color:#fff; background: var(--b1);
+  border:none; padding:11px 22px; border-radius:999px; cursor:pointer; transition: transform .1s ease;
+}
+.btn-primary:hover{ transform: translateY(-1px); }
+#score-text{ font-family: var(--f-data); font-size:13px; color: var(--ink-faint); }
+.btn-ghost{
+  font-family: var(--f-body); font-weight:600; font-size:13px; color: var(--ink-soft); background:none;
+  border:1.5px solid var(--line); padding:9px 18px; border-radius:999px; cursor:pointer;
+}
+.btn-ghost:hover{ border-color: var(--ink-faint); }
+
+/* ---------- ROLEPLAY / SCENES ---------- */
+.roleplay-panel{ background: var(--family-soft); border:1px solid var(--family-line); border-radius: var(--r-lg); padding:26px 28px; }
+.roleplay-panel .block-num{ background: var(--family); }
+.scene-setup{
+  display:flex; gap:14px; align-items:flex-start; background: var(--paper-raised);
+  border:1px solid var(--family-line); border-radius: var(--r-md); padding:14px 16px; margin-bottom:20px;
+}
+.scene-icon{ font-size:22px; flex:none; }
+.scene-text{ font-size:14px; color: var(--ink-soft); }
+.scene-text strong{ color: var(--ink); }
+
+.scene-tabs{ display:flex; gap:8px; margin-bottom:16px; flex-wrap:wrap; }
+.scene-tab{
+  font-family: var(--f-body); font-size:13.5px; font-weight:600; color: var(--ink-soft);
+  background: var(--paper-raised); border:1.5px solid var(--family-line); padding:8px 16px;
+  border-radius:999px; cursor:pointer; transition: all .15s ease;
+}
+.scene-tab.active{ background: var(--family); color:#fff; border-color: var(--family); }
+.scene-tab:hover:not(.active){ border-color: var(--family); }
+
+.desc-card{
+  background: var(--paper-raised); border:1px solid var(--family-line); border-radius: var(--r-md);
+  padding:18px 20px;
+}
+.desc-card .desc-title{ font-family: var(--f-display); font-weight:600; font-size:16px; margin:0 0 8px; color: var(--ink); }
+.desc-card .desc-brief{ font-size:14px; color: var(--ink-soft); margin:0 0 14px; }
+.desc-card .desc-prompts{ margin:0; padding-left:18px; font-size:13.5px; color: var(--ink-soft); }
+.desc-card .desc-prompts li{ margin-bottom:6px; }
+.desc-card textarea{
+  width:100%; min-height:90px; font-family: var(--f-body); font-size:14.5px; color: var(--ink);
+  background:#fff; border:1px solid var(--family-line); border-radius: var(--r-sm);
+  padding:10px 12px; resize:vertical; margin-top:12px;
+}
+.desc-card textarea:focus{ outline:none; border-color: var(--family); }
+
+.roleplay-tip{
+  margin-top:22px; padding:14px 16px; background: var(--paper-raised); border:1px solid var(--family-line);
+  border-radius: var(--r-md); font-size:13.5px; color: var(--ink-soft);
+}
+.roleplay-tip strong{ color: var(--ink); }
+
+/* ---------- FINAL TASK (mini test propio) ---------- */
+.task-panel{ background: var(--paper-alt); border:1px solid var(--line); border-radius: var(--r-lg); padding:26px 28px; }
+.task-panel .block-num{ background: var(--ink-soft); }
+textarea#final-task{
+  width:100%; min-height:140px; font-family: var(--f-body); font-size:15px; color: var(--ink);
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:14px 16px; resize:vertical; margin-top:14px;
+}
+textarea#final-task:focus{ outline:none; border-color: var(--b1); }
+.task-footer{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:12px; flex-wrap:wrap; }
+#task-count{ font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); }
+.btn-secondary{
+  font-family: var(--f-body); font-weight:600; font-size:13.5px; color: var(--ink-soft); background:none;
+  border:1.5px solid var(--line); padding:9px 18px; border-radius:999px; cursor:pointer;
+}
+.saved-flag{ font-family: var(--f-data); font-size:12px; color: var(--b2); opacity:0; transition: opacity .3s ease; }
+.saved-flag.show{ opacity:1; }
+
+/* ---------- FOOTER NAV ---------- */
+footer{
+  max-width:760px; margin:0 auto; padding:0 24px 60px; display:flex;
+  justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;
+  font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint);
+}
+footer a{ color: var(--b1); text-decoration:none; }
+footer a:hover{ text-decoration:underline; }
+
+@media (max-width:600px){
+  header{ padding:34px 18px 22px; }
+  main{ padding:8px 18px 90px; }
+  .panel, .task-panel, .roleplay-panel, .correction-panel{ padding:20px 18px; }
+}
+@media (prefers-reduced-motion: reduce){ *{ transition:none !important; } }
+</style>
+</head>
+<body>
+
+<header>
+  <p class="eyebrow"><span class="dot"></span>Clase 12 de 16 · Bloque 3 · Condicional y pronombres</p>
+  <h1>Por qué y <em>para qué</em></h1>
+  <p class="lede">Cerramos el segundo gran hilo del curso: por vs. para. Desde la Clase 2 los hemos ido viendo por partes — hoy los juntamos todos, incluidas las expresiones fijas y los casos que más confusión generan, con un mini test final.</p>
+  <div class="meta-row">
+    <div>Duración<strong>60 min</strong></div>
+    <div>Gramática<strong>Por vs. para — consolidación final</strong></div>
+    <div>Nivel<strong>B1 → B2</strong></div>
+  </div>
+</header>
+
+<main>
+
+  <section class="block correction-panel">
+    <div class="block-head"><span class="block-num">1</span><h2>Corrección de la tarea: tienda de arte</h2><span class="time-tag">6 min</span></div>
+    <p class="vocab-hint" style="margin-top:0;">Repaso de errores frecuentes en la tarea de la Clase 11. Revisamos juntas antes de avanzar.</p>
+    <div class="correction-item">
+      <p class="wrong-line">✗ "El catálogo, *le* revisé dos veces." (OD confundido con OI)</p>
+      <p class="right-line">✓ El catálogo, lo revisé dos veces.</p>
+      <p class="why">"El catálogo" es objeto directo (lo revisas a él), no indirecto — "le" solo se usa para personas o entidades que reciben la acción de forma indirecta (le expliqué, le di).</p>
+    </div>
+    <div class="correction-item">
+      <p class="wrong-line">✗ "Las invitaciones *se los* envié a los artistas." (discordancia de género en el OD)</p>
+      <p class="right-line">✓ Las invitaciones se las envié a los artistas.</p>
+      <p class="why">"Las invitaciones" es femenino plural → el OD debe ser "las", no "los", aunque "los artistas" (el receptor) sea masculino. El género del pronombre depende del objeto sustituido, no de quién lo recibe.</p>
+    </div>
+    <div class="note" style="margin-top:16px;"><strong>En clase:</strong> hoy cerramos otro hilo grande del curso — por y para — con un repaso completo y un mini test al final de la sesión.</div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">2</span><h2>Por vs. para: el mapa completo</h2><span class="time-tag">14 min</span></div>
+    <div class="panel">
+      <div class="compare-wrap">
+        <p class="compare-title">Todos los usos vistos en el curso, juntos</p>
+        <div class="compare-grid">
+          <div class="compare-col is-por">
+            <div class="compare-head"><span class="compare-verb">POR</span></div>
+            <p class="compare-sub">causa, medio, tiempo aproximado, cambio</p>
+            <ul class="compare-list">
+              <li><strong>Causa / motivo</strong>Lo hice por ti.<em>razón detrás de la acción</em></li>
+              <li><strong>A través de / medio</strong>Viajamos por el sur de España.<em>lugar de paso, no destino final</em></li>
+              <li><strong>Tiempo aproximado</strong>Vino por la tarde.<em>momento aproximado, no plazo límite</em></li>
+              <li><strong>Cambio / sustitución</strong>Cambié el cuadro por otro.<em>intercambio de una cosa por otra</em></li>
+              <li><strong>Precio</strong>Lo compré por 20 euros.<em>cantidad pagada</em></li>
+            </ul>
+          </div>
+          <div class="compare-col is-para">
+            <div class="compare-head"><span class="compare-verb">PARA</span></div>
+            <p class="compare-sub">destino, finalidad, plazo, destinatario</p>
+            <ul class="compare-list">
+              <li><strong>Finalidad / propósito</strong>Estudio para aprobar el DELE.<em>objetivo de la acción</em></li>
+              <li><strong>Destino</strong>Salimos para Madrid mañana.<em>lugar de llegada</em></li>
+              <li><strong>Plazo límite</strong>Lo necesito para el viernes.<em>fecha tope concreta</em></li>
+              <li><strong>Destinatario</strong>Este regalo es para ti.<em>quién recibe algo</em></li>
+              <li><strong>Opinión personal</strong>Para mí, es la mejor exposición del año.<em>punto de vista</em></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="warning-box">
+        <strong>Los casos que más confusión generan:</strong>
+        <p style="margin:8px 0 0;">"Trabajo para el museo" (destinatario/empleador) frente a "Trabajo por el museo" (con motivación o beneficio, más raro); "Lo hice por amor" (causa) frente a "Lo hice para impresionarte" (finalidad) — la pregunta clave es siempre: ¿por qué? (por) o ¿para qué? (para).</p>
+        <div class="exception-tags">
+          <span class="exception-tag">por + causa</span>
+          <span class="exception-tag">para + finalidad</span>
+          <span class="exception-tag">por la mañana/tarde</span>
+          <span class="exception-tag">para + fecha límite</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">3</span><h2>Expresiones fijas con por y para</h2><span class="time-tag">8 min</span></div>
+    <div class="panel">
+      <p style="margin:0 0 4px; font-size:14.5px; color:var(--ink-soft);">Estas expresiones se memorizan como bloque — no siguen siempre la lógica general de por/para.</p>
+      <div class="fixed-grid">
+        <div class="fixed-card">
+          <p class="fixed-phrase por">por cierto</p>
+          <p class="fixed-mean">cambio de tema</p>
+          <p class="fixed-ex">Por cierto, ¿ya viste la nueva sala?</p>
+        </div>
+        <div class="fixed-card">
+          <p class="fixed-phrase por">por fin</p>
+          <p class="fixed-mean">al fin, tras esperar</p>
+          <p class="fixed-ex">Por fin terminé el informe.</p>
+        </div>
+        <div class="fixed-card">
+          <p class="fixed-phrase por">por si acaso</p>
+          <p class="fixed-mean">por precaución</p>
+          <p class="fixed-ex">Llevo el paraguas por si acaso.</p>
+        </div>
+        <div class="fixed-card">
+          <p class="fixed-phrase por">por supuesto</p>
+          <p class="fixed-mean">claro, sin duda</p>
+          <p class="fixed-ex">¿Vienes a la inauguración? Por supuesto.</p>
+        </div>
+        <div class="fixed-card">
+          <p class="fixed-phrase para">para siempre</p>
+          <p class="fixed-mean">de forma permanente</p>
+          <p class="fixed-ex">Esta pieza se queda para siempre en el museo.</p>
+        </div>
+        <div class="fixed-card">
+          <p class="fixed-phrase para">para nada</p>
+          <p class="fixed-mean">en absoluto</p>
+          <p class="fixed-ex">No me molesta para nada.</p>
+        </div>
+        <div class="fixed-card">
+          <p class="fixed-phrase para">para variar</p>
+          <p class="fixed-mean">con tono irónico, "como siempre"</p>
+          <p class="fixed-ex">Llegó tarde, para variar.</p>
+        </div>
+        <div class="fixed-card">
+          <p class="fixed-phrase para">no ser para tanto</p>
+          <p class="fixed-mean">no ser tan grave</p>
+          <p class="fixed-ex">Tranquila, no es para tanto.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">4</span><h2>Vocabulario de hoy</h2><span class="time-tag">5 min</span></div>
+    <p class="vocab-hint">Toca cada tarjeta para ver un ejemplo con por o para.</p>
+    <div class="vocab-grid" id="vocab-grid"></div>
+  </section>
+
+  <section class="block roleplay-panel">
+    <div class="block-head"><span class="block-num">5</span><h2>Explica motivo y destino de un viaje</h2><span class="time-tag">10 min</span></div>
+    <p class="lede" style="margin-bottom:16px;">Elige uno de los tres contextos y explica un viaje (real o inventado) contrastando por (causa/medio) y para (destino/finalidad).</p>
+    <div class="scene-setup">
+      <span class="scene-icon">✈️</span>
+      <p class="scene-text"><strong>Practica en clase:</strong> el profesor puede pedirte que expliques oralmente tu viaje. Intenta usar al menos tres frases distintas alternando por y para.</p>
+    </div>
+    <div class="scene-tabs" id="scene-tabs"></div>
+    <div id="scene-container"></div>
+    <div class="roleplay-tip"><strong>En clase:</strong> antes de cada frase, pregúntate: ¿estoy explicando el motivo (por) o el destino/objetivo (para)?</div>
+  </section>
+
+  <section class="block task-panel">
+    <div class="block-head"><span class="block-num">6</span><h2>Mini test final: por vs. para</h2><span class="time-tag">10 min</span></div>
+    <p style="margin:0 0 14px; font-size:15px; color:var(--ink-soft);">14 frases que combinan todos los usos vistos en el curso, incluidas las expresiones fijas. Es el cierre de este hilo gramatical.</p>
+    <div id="exercises"></div>
+    <div class="check-bar">
+      <div style="display:flex; gap:10px;">
+        <button class="btn-primary" id="check-btn">Comprobar respuestas</button>
+        <button class="btn-ghost" id="reset-btn">Reiniciar</button>
+      </div>
+      <span id="score-text"></span>
+    </div>
+  </section>
+
+  <section class="block task-panel">
+    <div class="block-head"><span class="block-num">7</span><h2>Tu tarea</h2><span class="time-tag">2 min</span></div>
+    <p style="margin:0; font-size:15px; color:var(--ink-soft);">Escribe 6-8 frases explicando un viaje (de trabajo o personal), usando <strong>al menos tres veces "por"</strong> y <strong>al menos tres veces "para"</strong> con usos distintos cada vez.</p>
+    <textarea id="final-task" placeholder="Viajé por el norte de España...&#10;Fui para visitar una exposición...&#10;Lo hice por curiosidad..."></textarea>
+    <div class="task-footer">
+      <span id="task-count">0 palabras escritas</span>
+      <div style="display:flex; gap:10px; align-items:center;">
+        <span class="saved-flag" id="saved-flag">Guardado ✓</span>
+        <button class="btn-secondary" id="save-btn">Guardar tarea</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <span>Clase 12 · Bloque 3 · Condicional y pronombres</span>
+  <span>Próxima clase → Clase 13: Repaso integrado y simulacro DELE (17 ago)</span>
+</footer>
+
+<script>
+/* ---------- MEMORIA PERSISTENTE (localStorage) ---------- */
+if (!window.storage) {
+  window.storage = {
+    get: function(key) {
+      return new Promise((resolve) => {
+        try {
+          const value = localStorage.getItem(key);
+          resolve(value !== null ? { value: value } : null);
+        } catch (e) {
+          resolve(null);
+        }
+      });
+    },
+    set: function(key, value) {
+      return new Promise((resolve) => {
+        try {
+          localStorage.setItem(key, value);
+          resolve(true);
+        } catch (e) {
+          resolve(false);
+        }
+      });
+    }
+  };
+}
+
+/* ---------- VOCAB ---------- */
+const VOCAB = [
+  {front:"por casualidad", back:"Encontré esta pieza por casualidad en un mercadillo."},
+  {front:"para colmo", back:"Perdí el tren y, para colmo, empezó a llover."},
+  {front:"por lo general", back:"Por lo general, el museo abre a las diez."},
+  {front:"para empezar", back:"Para empezar, veamos la sala principal."},
+  {front:"pasar por (un lugar)", back:"Pasamos por Toledo antes de llegar a Madrid."},
+  {front:"estar por (+ infinitivo)", back:"Estoy por cancelar la reunión de mañana."},
+  {front:"quedar para (+ hora/fecha)", back:"Quedamos para las cinco en la entrada del museo."},
+  {front:"servir para (algo)", back:"Esta sala sirve para exposiciones temporales."},
+];
+
+const grid = document.getElementById('vocab-grid');
+VOCAB.forEach(v=>{
+  const card = document.createElement('div');
+  card.className = 'vocab-card';
+  card.setAttribute('role', 'button');
+  card.setAttribute('tabindex', '0');
+  card.setAttribute('aria-pressed', 'false');
+  card.setAttribute('aria-label', `${v.front}. Pulsa para ver un ejemplo.`);
+  card.innerHTML = `<div class="vocab-front">${v.front}</div><div class="vocab-back">${v.back}</div>`;
+  const toggle = ()=>{
+    const flipped = card.classList.toggle('flipped');
+    card.setAttribute('aria-pressed', String(flipped));
+  };
+  card.addEventListener('click', toggle);
+  card.addEventListener('keydown', (e)=>{
+    if(e.key === 'Enter' || e.key === ' '){
+      e.preventDefault();
+      toggle();
+    }
+  });
+  grid.appendChild(card);
+});
+
+/* ---------- ROLEPLAY SCENES ---------- */
+const SCENES = [
+  {
+    id: 'viaje-trabajo',
+    label: 'Un viaje de trabajo',
+    title: 'Explica un viaje relacionado con el museo',
+    brief: 'Cuenta el motivo y el destino de un viaje de trabajo (real o inventado), como una feria de arte o un préstamo de obras.',
+    prompts: [
+      '¿Por qué motivo hiciste ese viaje?',
+      '¿Para qué ciudad o lugar viajaste?',
+      '¿Pasaste por algún lugar interesante en el camino?',
+      '¿Para cuándo tenías que estar allí?'
+    ]
+  },
+  {
+    id: 'viaje-personal',
+    label: 'Un viaje personal',
+    title: 'Explica un viaje personal reciente o soñado',
+    brief: 'Describe un viaje personal contrastando causa (por) y finalidad (para).',
+    prompts: [
+      '¿Por qué elegiste ese destino?',
+      '¿Para qué fuiste — descanso, aprender algo, visitar a alguien?',
+      '¿Viajaste por carretera, por tren o por avión?',
+      '¿Para cuánto tiempo fue el viaje?'
+    ]
+  },
+  {
+    id: 'viaje-examen',
+    label: 'Un viaje para el examen',
+    title: 'Explica un viaje relacionado con tu preparación del DELE',
+    brief: 'Imagina un viaje a un país hispanohablante para practicar antes del examen.',
+    prompts: [
+      '¿Por qué motivo elegirías ir justo antes del examen?',
+      '¿Para qué te serviría ese viaje?',
+      '¿Por dónde te gustaría pasar en ese viaje?',
+      '¿Para cuándo tendrías que volver, pensando en la fecha del examen?'
+    ]
+  }
+];
+
+const tabsWrap = document.getElementById('scene-tabs');
+const sceneContainer = document.getElementById('scene-container');
+
+function renderScene(id){
+  const scene = SCENES.find(s=>s.id===id);
+  sceneContainer.innerHTML = `
+    <div class="desc-card">
+      <p class="desc-title">${scene.title}</p>
+      <p class="desc-brief">${scene.brief}</p>
+      <ul class="desc-prompts">
+        ${scene.prompts.map(p=>`<li>${p}</li>`).join('')}
+      </ul>
+      <textarea placeholder="Escribe tus notas aquí..."></textarea>
+    </div>
+  `;
+}
+
+SCENES.forEach((s, i)=>{
+  const tab = document.createElement('button');
+  tab.className = 'scene-tab' + (i===0 ? ' active' : '');
+  tab.textContent = s.label;
+  tab.addEventListener('click', ()=>{
+    tabsWrap.querySelectorAll('.scene-tab').forEach(t=>t.classList.remove('active'));
+    tab.classList.add('active');
+    renderScene(s.id);
+  });
+  tabsWrap.appendChild(tab);
+});
+renderScene(SCENES[0].id);
+
+/* ---------- MINI TEST ---------- */
+const EXERCISES = [
+  { "sentence": "Estudio <span class=\"gap\">___</span> aprobar el examen DELE.", "options": ["para","por"], "answer": "para" },
+  { "sentence": "Lo hice <span class=\"gap\">___</span> amor al arte, no <span class=\"gap\">___</span> dinero.", "options": ["por / por","para / para"], "answer": "por / por" },
+  { "sentence": "Este regalo es <span class=\"gap\">___</span> ti.", "options": ["para","por"], "answer": "para" },
+  { "sentence": "Necesito el informe <span class=\"gap\">___</span> el viernes.", "options": ["para","por"], "answer": "para" },
+  { "sentence": "Vino <span class=\"gap\">___</span> la tarde, no sé exactamente a qué hora.", "options": ["por","para"], "answer": "por" },
+  { "sentence": "Cambié el cuadro <span class=\"gap\">___</span> otro más pequeño.", "options": ["por","para"], "answer": "por" },
+  { "sentence": "<span class=\"gap\">___</span> mí, esta es la mejor exposición del año.", "options": ["Para","Por"], "answer": "Para" },
+  { "sentence": "Viajamos <span class=\"gap\">___</span> el sur de España antes de llegar a Sevilla.", "options": ["por","para"], "answer": "por" },
+  { "sentence": "Salimos <span class=\"gap\">___</span> Madrid mañana por la mañana.", "options": ["para","por"], "answer": "para" },
+  { "sentence": "<span class=\"gap\">___</span> cierto, ¿ya viste la nueva sala?", "options": ["Por","Para"], "answer": "Por" },
+  { "sentence": "<span class=\"gap\">___</span> fin terminé el informe.", "options": ["Por","Para"], "answer": "Por" },
+  { "sentence": "Esta pieza se queda <span class=\"gap\">___</span> siempre en el museo.", "options": ["para","por"], "answer": "para" },
+  { "sentence": "Lo compré <span class=\"gap\">___</span> 20 euros en el mercadillo.", "options": ["por","para"], "answer": "por" },
+  { "sentence": "Trabajo <span class=\"gap\">___</span> el museo desde hace tres años.", "options": ["para","por"], "answer": "para" }
+];
+
+const exWrap = document.getElementById('exercises');
+EXERCISES.forEach((ex, i)=>{
+  const el = document.createElement('div');
+  el.className = 'exercise';
+  el.dataset.answer = ex.answer;
+  el.innerHTML = `
+    <div class="ex-sentence">${i+1}. ${ex.sentence}</div>
+    <div class="ex-options">
+      ${ex.options.map(o=>`<button class="opt-btn" data-value="${o}">${o}</button>`).join('')}
+    </div>
+  `;
+  exWrap.appendChild(el);
+
+  el.querySelectorAll('.opt-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      el.querySelectorAll('.opt-btn').forEach(b=>b.classList.remove('picked'));
+      btn.classList.add('picked');
+    });
+  });
+});
+
+document.getElementById('check-btn').addEventListener('click', ()=>{
+  let correct = 0;
+  document.querySelectorAll('.exercise').forEach(el=>{
+    const answer = el.dataset.answer;
+    const picked = el.querySelector('.opt-btn.picked');
+    el.querySelectorAll('.opt-btn').forEach(b=>{
+      b.disabled = true;
+      if(b.dataset.value === answer) b.classList.add('correct');
+      else if(b === picked) b.classList.add('wrong');
+    });
+    if(picked && picked.dataset.value === answer) correct++;
+  });
+  document.getElementById('score-text').textContent = `${correct} / ${EXERCISES.length} correctas`;
+});
+
+document.getElementById('reset-btn').addEventListener('click', ()=>{
+  document.querySelectorAll('.exercise').forEach(el=>{
+    el.querySelectorAll('.opt-btn').forEach(b=>{
+      b.disabled = false;
+      b.classList.remove('picked','correct','wrong');
+    });
+  });
+  document.getElementById('score-text').textContent = '';
+});
+
+/* ---------- FINAL TASK ---------- */
+const STORAGE_KEY = 'daniela-clase12-tarea';
+const taskArea = document.getElementById('final-task');
+const taskCount = document.getElementById('task-count');
+const savedFlag = document.getElementById('saved-flag');
+
+async function cargarTarea(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(STORAGE_KEY);
+    if (res && typeof res.value === 'string') taskArea.value = res.value;
+  }catch(e){
+    // Clave inexistente todavía: no hay tarea previa, se queda en blanco.
+  }
+  updateCount();
+}
+
+function updateCount(){
+  const words = taskArea.value.trim().split(/\s+/).filter(Boolean).length;
+  taskCount.textContent = `${words} palabra${words===1?'':'s'} escrita${words===1?'':'s'}`;
+}
+taskArea.addEventListener('input', updateCount);
+updateCount();
+cargarTarea();
+
+document.getElementById('save-btn').addEventListener('click', async ()=>{
+  if (!window.storage){
+    savedFlag.textContent = 'Guardado no disponible aquí';
+    savedFlag.classList.add('show');
+    setTimeout(()=>{ savedFlag.classList.remove('show'); savedFlag.textContent = 'Guardado ✓'; }, 2200);
+    return;
+  }
+  try{
+    const ok = await window.storage.set(STORAGE_KEY, taskArea.value);
+    savedFlag.textContent = ok ? 'Guardado ✓' : 'No se pudo guardar';
+  }catch(e){
+    savedFlag.textContent = 'No se pudo guardar';
+  }
+  savedFlag.classList.add('show');
+  setTimeout(()=>{ savedFlag.classList.remove('show'); savedFlag.textContent = 'Guardado ✓'; }, 1800);
+});
+
+let taskAutosaveTimer = null;
+taskArea.addEventListener('input', ()=>{
+  clearTimeout(taskAutosaveTimer);
+  taskAutosaveTimer = setTimeout(()=>{
+    document.getElementById('save-btn').click();
+  }, 900);
+});
+</script>
+
+</body>
+</html>

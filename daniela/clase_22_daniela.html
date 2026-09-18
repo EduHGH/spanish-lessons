@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daniela A. · Clase 22 · Estilo indirecto — preguntas y órdenes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ╔══════════════════════════════════════════════════════════════════╗
+   ║  ESCOLAR — sistema de diseño para clases de español online        ║
+   ║  Versión: paleta pergamino original + ACENTO PRINCIPAL VARIABLE    ║
+   ╚══════════════════════════════════════════════════════════════════╝ */
+
+:root{
+  --paper:        #FBF7EE;
+  --paper-raised: #FFFFFF;
+  --paper-alt:    #F3ECDA;
+  --ink:          #23291F;
+  --ink-soft:     #565F52;
+  --ink-faint:    #8B9184;
+  --line:         rgba(35,41,31,0.12);
+  --line-strong:  rgba(35,41,31,0.22);
+
+  --b2:      #2F6FED;  --b2-soft: #EAF1FE;  --b2-line: #C6D9FC;
+  --ok:      #2F7D5C;  --ok-soft:  #E7F3EC;  --ok-line:  #BFE0CE;
+  --family:  #B5502E;  --family-soft: #FBEBE3; --family-line: #EFC9B4;
+  --amber:   #C1892F;  --amber-soft: #FBF1E1; --amber-line: #F0D9A8;
+
+  --accent:      #2E9E6B;
+  --accent-soft: #E9F6EF;
+  --accent-line: #BEE6D3;
+
+  --f-display: 'Fraunces', Georgia, serif;
+  --f-body:    'IBM Plex Sans', system-ui, sans-serif;
+  --f-data:    'IBM Plex Mono', monospace;
+
+  --r-sm: 8px;
+  --r-md: 14px;
+  --r-lg: 20px;
+
+  --shadow-1: 0 1px 2px rgba(35,41,31,0.05), 0 1px 8px rgba(35,41,31,0.04);
+}
+
+[data-accent="teja"]{ --accent:#C1473F; --accent-soft:#FBEAE8; --accent-line:#F0C4C0; }
+[data-accent="azul"]{ --accent:#2F6FED; --accent-soft:#EAF1FE; --accent-line:#C6D9FC; }
+[data-accent="verde"]{ --accent:#2F7D5C; --accent-soft:#E7F3EC; --accent-line:#BFE0CE; }
+[data-accent="morado"]{ --accent:#7A4FBF; --accent-soft:#F1EBFB; --accent-line:#D8C6F0; }
+[data-accent="terracota"]{ --accent:#B5502E; --accent-soft:#FBEBE3; --accent-line:#EFC9B4; }
+[data-accent="mostaza"]{ --accent:#C1892F; --accent-soft:#FBF1E1; --accent-line:#F0D9A8; }
+[data-accent="petroleo"]{ --accent:#296A75; --accent-soft:#E6F1F2; --accent-line:#BEDDE1; }
+[data-accent="rosa"]{ --accent:#C15B7C; --accent-soft:#FBEAF0; --accent-line:#F0C6D5; }
+
+*{ box-sizing:border-box; }
+body{
+  margin:0;
+  background: var(--paper);
+  background-image: radial-gradient(circle at 1px 1px, var(--line) 1px, transparent 0);
+  background-size: 22px 22px;
+  color: var(--ink);
+  font-family: var(--f-body);
+  line-height:1.6;
+}
+::selection{ background: var(--accent-soft); }
+
+/* ---------- HEADER ---------- */
+header{ padding:44px 24px 28px; max-width:760px; margin:0 auto; }
+.header-top{ display:flex; align-items:flex-start; justify-content:space-between; gap:24px; }
+.eyebrow{
+  font-family: var(--f-data); font-size:12px; letter-spacing:.14em;
+  text-transform:uppercase; color: var(--accent); margin:0 0 10px;
+  display:flex; align-items:center; gap:10px;
+}
+.eyebrow .dot{ width:6px; height:6px; border-radius:50%; background: var(--accent); }
+h1{
+  font-family: var(--f-display); font-weight:600;
+  font-size:clamp(34px,6.4vw,54px); line-height:1.02;
+  margin:0; letter-spacing:-.015em;
+}
+h1 em{ font-style:italic; color: var(--accent); }
+.level-badge{
+  font-family: var(--f-display); font-weight:700; font-style:normal;
+  font-size:clamp(52px,11vw,96px); line-height:0.85; color: var(--accent);
+  letter-spacing:-.02em; flex:none; margin-top:-4px;
+}
+.lede{ font-size:16px; color: var(--ink-soft); max-width:56ch; margin:18px 0 0; }
+
+.meta-row{
+  display:grid; grid-template-columns:1fr 1fr; column-gap:40px; row-gap:22px;
+  margin-top:34px; max-width:520px;
+  font-family: var(--f-data); font-size:11px; letter-spacing:.06em; text-transform:uppercase;
+  color: var(--ink); font-weight:600;
+}
+.meta-row div{ line-height:1.6; }
+.meta-row strong{
+  display:block; color: var(--ink-faint); font-size:11px; font-weight:500;
+  font-family: var(--f-data); letter-spacing:.06em; text-transform:uppercase; margin-top:3px;
+}
+@media (max-width:600px){
+  .header-top{ flex-direction:column; gap:6px; }
+  .level-badge{ margin-top:0; }
+  .meta-row{ max-width:none; column-gap:24px; }
+}
+
+/* ---------- SECTIONS ---------- */
+main{ max-width:760px; margin:0 auto; padding:8px 24px 100px; }
+
+section.block{ margin-bottom:48px; }
+.block-head{ display:flex; align-items:baseline; gap:12px; margin-bottom:18px; }
+.time-tag{
+  font-family: var(--f-data); font-size:11px; color: var(--ink-faint);
+  background: var(--paper-alt); padding:3px 10px; border-radius:999px; margin-left:auto; flex:none;
+}
+.block-num{
+  font-family: var(--f-data); font-size:12px; color:#fff; background: var(--accent);
+  width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  flex:none;
+}
+.block-head h2{ font-family: var(--f-display); font-weight:500; font-style:italic; font-size:22px; margin:0; }
+
+.panel{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-lg);
+  box-shadow: var(--shadow-1); padding:26px 28px;
+}
+
+.note{
+  margin-top:18px; padding:14px 16px; background: var(--accent-soft); border:1px solid var(--accent-line);
+  border-radius: var(--r-md); font-size:14px; color: var(--ink-soft);
+}
+.note strong{ color: var(--ink); }
+.note.amber{ background: var(--amber-soft); border-color: var(--amber-line); }
+
+.correction-panel{ background: var(--paper-alt); border:1px solid var(--line); border-radius: var(--r-lg); padding:26px 28px; }
+.correction-panel .block-num{ background: var(--ink-soft); }
+.correction-item{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:14px 16px; margin-bottom:12px;
+}
+.correction-item:last-child{ margin-bottom:0; }
+.correction-item .wrong-line{ font-size:14.5px; color: var(--family); text-decoration: line-through; text-decoration-color: var(--family-line); }
+.correction-item .right-line{ font-size:14.5px; color: var(--b2); margin-top:6px; font-weight:500; }
+.correction-item .why{ font-size:13px; color: var(--ink-faint); margin-top:6px; }
+
+.irr-table-wrap{ overflow-x:auto; margin-top:4px; }
+table.irr-table{ width:100%; border-collapse:collapse; font-size:13.5px; min-width:560px; }
+table.irr-table th{
+  font-family: var(--f-data); font-size:10.5px; text-transform:uppercase; letter-spacing:.05em;
+  color: var(--ink-faint); text-align:left; padding:8px 10px; border-bottom:1.5px solid var(--line-strong);
+}
+table.irr-table td{ padding:9px 10px; border-bottom:1px dashed var(--line); color: var(--ink-soft); }
+table.irr-table tr:last-child td{ border-bottom:none; }
+table.irr-table td.verb{ font-family: var(--f-display); font-weight:600; color: var(--ink); }
+table.irr-table td.irr-form{ font-family: var(--f-data); color: var(--accent); }
+
+.tense-tabs{ display:flex; gap:8px; margin-bottom:16px; flex-wrap:wrap; }
+.tense-tab{
+  font-family: var(--f-body); font-size:13px; font-weight:600; color: var(--ink-soft);
+  background: var(--paper-alt); border:1.5px solid var(--line); padding:7px 14px;
+  border-radius:999px; cursor:pointer; transition: all .15s ease;
+}
+.tense-tab.active{ background: var(--accent); color:#fff; border-color: var(--accent); }
+.tense-tab:hover:not(.active){ border-color: var(--ink-faint); }
+
+.reading-panel{ background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-lg); padding:26px 28px; }
+.reading-text{
+  font-family: var(--f-display); font-size:16.5px; line-height:1.7; color: var(--ink);
+  background: var(--paper-alt); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:20px 22px; margin-bottom:20px;
+}
+.reading-text p{ margin:0 0 12px; }
+.reading-text p:last-child{ margin-bottom:0; }
+.reading-q{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:14px 16px; margin-bottom:12px;
+}
+.reading-q:last-child{ margin-bottom:0; }
+.reading-q p.q{ font-size:14.5px; color: var(--ink); margin:0 0 10px; font-weight:500; }
+.reading-q .opts{ display:flex; flex-wrap:wrap; gap:8px; }
+
+.vocab-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(160px,1fr)); gap:12px; }
+.vocab-card{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:14px 16px; cursor:pointer; perspective:600px; min-height:78px;
+  display:flex; flex-direction:column; justify-content:center; transition: border-color .15s ease;
+}
+.vocab-card:hover{ border-color: var(--accent-line); }
+.vocab-card:focus-visible{ outline:2px solid var(--accent); outline-offset:2px; }
+.vocab-front{ font-family: var(--f-body); font-weight:600; font-size:15px; }
+.vocab-back{ display:none; font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); margin-top:6px; }
+.vocab-card.flipped .vocab-back{ display:block; }
+.vocab-card.flipped{ background: var(--accent-soft); border-color: var(--accent-line); }
+.vocab-hint{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin:10px 2px 16px; }
+
+.exercise{ margin-bottom:20px; }
+.exercise:last-of-type{ margin-bottom:0; }
+.ex-sentence{ font-size:15.5px; margin-bottom:10px; }
+.ex-sentence .gap{ font-family: var(--f-data); color: var(--ink-faint); }
+.ex-options{ display:flex; flex-wrap:wrap; gap:8px; }
+.opt-btn{
+  font-family: var(--f-body); font-size:14px; background: var(--paper-raised);
+  border:1.5px solid var(--line); color: var(--ink); padding:7px 16px; border-radius:999px;
+  cursor:pointer; transition: all .15s ease;
+}
+.opt-btn:hover{ border-color: var(--ink-faint); }
+.opt-btn.picked{ background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+.opt-btn.correct{ background: var(--ok-soft); border-color: var(--ok); color: var(--ok); }
+.opt-btn.wrong{ background: var(--family-soft); border-color: var(--family); color: var(--family); }
+.opt-btn:disabled{ cursor:default; }
+
+.check-bar{
+  display:flex; align-items:center; justify-content:space-between; gap:16px;
+  margin-top:22px; padding-top:18px; border-top:1px dashed var(--line);
+}
+.btn-primary{
+  font-family: var(--f-body); font-weight:600; font-size:14px; color:#fff; background: var(--accent);
+  border:none; padding:11px 22px; border-radius:999px; cursor:pointer; transition: transform .1s ease;
+}
+.btn-primary:hover{ transform: translateY(-1px); }
+#score-text{ font-family: var(--f-data); font-size:13px; color: var(--ink-faint); }
+.btn-ghost{
+  font-family: var(--f-body); font-weight:600; font-size:13px; color: var(--ink-soft); background:none;
+  border:1.5px solid var(--line); padding:9px 18px; border-radius:999px; cursor:pointer;
+}
+.btn-ghost:hover{ border-color: var(--ink-faint); }
+
+.roleplay-panel{ background: var(--family-soft); border:1px solid var(--family-line); border-radius: var(--r-lg); padding:26px 28px; }
+.roleplay-panel .block-num{ background: var(--family); }
+.scene-setup{
+  display:flex; gap:14px; align-items:flex-start; background: var(--paper-raised);
+  border:1px solid var(--family-line); border-radius: var(--r-md); padding:14px 16px; margin-bottom:20px;
+}
+.scene-icon{ font-size:22px; flex:none; }
+.scene-text{ font-size:14px; color: var(--ink-soft); }
+.scene-text strong{ color: var(--ink); }
+
+.scene-tabs{ display:flex; gap:8px; margin-bottom:16px; flex-wrap:wrap; }
+.scene-tab{
+  font-family: var(--f-body); font-size:13.5px; font-weight:600; color: var(--ink-soft);
+  background: var(--paper-raised); border:1.5px solid var(--family-line); padding:8px 16px;
+  border-radius:999px; cursor:pointer; transition: all .15s ease;
+}
+.scene-tab.active{ background: var(--family); color:#fff; border-color: var(--family); }
+.scene-tab:hover:not(.active){ border-color: var(--family); }
+
+.desc-card{
+  background: var(--paper-raised); border:1px solid var(--family-line); border-radius: var(--r-md);
+  padding:18px 20px;
+}
+.desc-card .desc-title{ font-family: var(--f-display); font-weight:600; font-size:16px; margin:0 0 8px; color: var(--ink); }
+.desc-card .desc-brief{ font-size:14px; color: var(--ink-soft); margin:0 0 14px; }
+.desc-card .desc-prompts{ margin:0; padding-left:18px; font-size:13.5px; color: var(--ink-soft); }
+.desc-card .desc-prompts li{ margin-bottom:6px; }
+.desc-card textarea{
+  width:100%; min-height:90px; font-family: var(--f-body); font-size:14.5px; color: var(--ink);
+  background:#fff; border:1px solid var(--family-line); border-radius: var(--r-sm);
+  padding:10px 12px; resize:vertical; margin-top:12px;
+}
+.desc-card textarea:focus{ outline:none; border-color: var(--family); }
+
+.roleplay-tip{
+  margin-top:22px; padding:14px 16px; background: var(--paper-raised); border:1px solid var(--family-line);
+  border-radius: var(--r-md); font-size:13.5px; color: var(--ink-soft);
+}
+.roleplay-tip strong{ color: var(--ink); }
+
+.task-panel{ background: var(--paper-alt); border:1px solid var(--line); border-radius: var(--r-lg); padding:26px 28px; }
+.task-panel .block-num{ background: var(--ink-soft); }
+textarea.final-task{
+  width:100%; min-height:140px; font-family: var(--f-body); font-size:15px; color: var(--ink);
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:14px 16px; resize:vertical; margin-top:14px;
+}
+textarea.final-task:focus{ outline:none; border-color: var(--accent); }
+.task-footer{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:12px; flex-wrap:wrap; }
+.task-count{ font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); }
+.btn-secondary{
+  font-family: var(--f-body); font-weight:600; font-size:13.5px; color: var(--ink-soft); background:none;
+  border:1.5px solid var(--line); padding:9px 18px; border-radius:999px; cursor:pointer;
+}
+.saved-flag{ font-family: var(--f-data); font-size:12px; color: var(--b2); opacity:0; transition: opacity .3s ease; }
+.saved-flag.show{ opacity:1; }
+
+.fill-block{ font-size:15.5px; line-height:2.1; color: var(--ink); }
+.fill-block input[type="text"]{
+  font-family: var(--f-data); font-size:14px; color: var(--ink); background: var(--paper-alt);
+  border:none; border-bottom:2px solid var(--accent-line); padding:2px 6px; text-align:center;
+  min-width:70px; margin:0 2px;
+}
+.fill-block input[type="text"]:focus{ outline:none; border-bottom-color: var(--accent); }
+.fill-block input.correct{ border-bottom-color: var(--ok); color: var(--ok); }
+.fill-block input.wrong{ border-bottom-color: var(--family); color: var(--family); text-decoration: line-through; }
+
+.dictation-item{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:16px 18px; margin-bottom:12px;
+}
+.dictation-item:last-child{ margin-bottom:0; }
+.dictation-controls{ display:flex; align-items:center; gap:10px; margin-bottom:12px; }
+.play-btn{
+  font-family: var(--f-body); font-weight:600; font-size:13px; color:#fff; background: var(--accent);
+  border:none; width:34px; height:34px; border-radius:50%; cursor:pointer; flex:none;
+  display:flex; align-items:center; justify-content:center;
+}
+.bubble-row{ display:flex; margin-bottom:14px; }
+.bubble-row.them{ justify-content:flex-start; }
+.bubble-row.you{ justify-content:flex-end; }
+.bubble{
+  max-width:78%; padding:12px 16px; border-radius:16px; font-size:14.5px; line-height:1.5;
+}
+.bubble-row.them .bubble{ background: var(--paper-raised); border:1px solid var(--family-line); border-bottom-left-radius:4px; color: var(--ink); }
+.bubble-row.you .bubble{ background: var(--family); color:#fff; border-bottom-right-radius:4px; }
+.bubble-options{ display:flex; flex-wrap:wrap; gap:8px; margin-top:4px; justify-content:flex-end; }
+
+.sort-board{ display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:14px; margin-bottom:16px; }
+.sort-bucket{
+  background: var(--paper-alt); border:1.5px dashed var(--line-strong); border-radius: var(--r-md);
+  padding:12px; min-height:120px;
+}
+.sort-bucket h4{
+  font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.05em;
+  color: var(--ink-faint); margin:0 0 10px;
+}
+.sort-bucket-items{ display:flex; flex-wrap:wrap; gap:6px; min-height:30px; }
+.sort-pool{ display:flex; flex-wrap:wrap; gap:8px; padding:12px; background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md); margin-bottom:14px; }
+.sort-chip{
+  font-family: var(--f-body); font-size:13px; font-weight:600; background: var(--paper-raised);
+  border:1.5px solid var(--line); color: var(--ink); padding:6px 12px; border-radius:999px;
+  cursor:pointer; transition: all .15s ease;
+}
+.sort-chip:hover{ border-color: var(--accent-line); }
+.sort-chip.placed{ background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+.sort-chip.correct{ background: var(--ok-soft); border-color: var(--ok); color: var(--ok); }
+.sort-chip.wrong{ background: var(--family-soft); border-color: var(--family); color: var(--family); }
+
+.register-item{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:14px 16px; margin-bottom:10px; display:flex; align-items:center; justify-content:space-between; gap:14px;
+}
+.register-item:last-child{ margin-bottom:0; }
+.register-item p{ margin:0; font-size:14.5px; color:var(--ink); flex:1; font-family: var(--f-display); }
+.register-toggle{ display:flex; gap:0; flex:none; border:1.5px solid var(--line); border-radius:999px; overflow:hidden; }
+.register-toggle button{
+  font-family: var(--f-body); font-size:12.5px; font-weight:600; background: var(--paper-raised);
+  border:none; color: var(--ink-soft); padding:7px 13px; cursor:pointer; transition: all .15s ease;
+}
+.register-toggle button.picked{ background: var(--accent); color:#fff; }
+.register-toggle button.correct{ background: var(--ok); color:#fff; }
+.register-toggle button.wrong{ background: var(--family); color:#fff; }
+
+.spot-item{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:14px 16px; margin-bottom:12px;
+}
+.spot-item:last-child{ margin-bottom:0; }
+.spot-sentence{ font-size:15px; line-height:1.9; }
+.spot-word{ cursor:pointer; border-radius:4px; padding:1px 3px; transition: all .15s ease; }
+.spot-word:hover{ background: var(--accent-soft); }
+.spot-word.picked{ background: var(--accent-soft); color: var(--accent); font-weight:600; }
+.spot-word.correct{ background: var(--ok-soft); color: var(--ok); font-weight:600; }
+.spot-word.wrong{ background: var(--family-soft); color: var(--family); text-decoration: line-through; }
+.spot-fix{ font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); margin-top:8px; display:none; }
+.spot-item.checked .spot-fix{ display:block; }
+
+table.conj-table{ width:100%; border-collapse:collapse; font-size:13.5px; }
+table.conj-table th{
+  font-family: var(--f-data); font-size:10.5px; text-transform:uppercase; letter-spacing:.05em;
+  color: var(--ink-faint); text-align:left; padding:8px 10px; border-bottom:1.5px solid var(--line-strong);
+}
+table.conj-table td{ padding:6px 10px; border-bottom:1px dashed var(--line); }
+table.conj-table tr:last-child td{ border-bottom:none; }
+table.conj-table td.pronoun{ font-family: var(--f-display); font-weight:600; color: var(--ink-soft); font-size:13px; }
+table.conj-table input[type="text"]{
+  width:100%; font-family: var(--f-data); font-size:13.5px; background: var(--paper-alt);
+  border:1px solid var(--line); border-radius: var(--r-sm); padding:6px 9px; color: var(--ink);
+}
+table.conj-table input[type="text"]:focus{ outline:none; border-color: var(--accent); }
+table.conj-table input.correct{ border-color: var(--ok); background: var(--ok-soft); }
+table.conj-table input.wrong{ border-color: var(--family); background: var(--family-soft); }
+
+.similar-item{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:14px 16px; margin-bottom:12px;
+}
+.similar-item:last-child{ margin-bottom:0; }
+.similar-item .ctx{ font-size:14.5px; color: var(--ink); margin:0 0 10px; }
+.similar-options{ display:flex; flex-wrap:wrap; gap:8px; }
+.similar-options .opt-btn small{ display:block; font-family: var(--f-data); font-size:10.5px; color: var(--ink-faint); font-weight:400; margin-top:2px; }
+
+:root{ --mesh-color: var(--accent); }
+.mesh-surface{ position:relative; overflow:hidden; isolation:isolate; }
+.mesh-surface::before,
+.mesh-surface::after,
+.mesh-surface .mesh-blob{
+  content:""; position:absolute; border-radius:50%; filter: blur(46px);
+  z-index:-1; animation: mesh-drift 22s ease-in-out infinite alternate; pointer-events:none;
+}
+.mesh-surface::before{ width:60%; height:60%; top:-10%; left:-10%; background: var(--mesh-color); opacity:.16; }
+.mesh-surface::after{ width:50%; height:50%; bottom:-15%; right:-5%; background: var(--mesh-color); opacity:.13; animation-delay:-7s; }
+.mesh-surface .mesh-blob{ width:40%; height:40%; top:30%; right:20%; background: var(--mesh-color); opacity:.11; animation-delay:-14s; }
+@keyframes mesh-drift{
+  0%{ transform: translate(0,0) scale(1); }
+  50%{ transform: translate(6%,-4%) scale(1.08); }
+  100%{ transform: translate(-4%,5%) scale(.96); }
+}
+@media (prefers-reduced-motion: reduce){
+  .mesh-surface::before, .mesh-surface::after, .mesh-surface .mesh-blob{ animation:none; }
+}
+
+.phrase-card{ padding:32px 36px; border-radius: var(--r-lg); border:1px solid var(--line); text-align:center; }
+.phrase-eyebrow{
+  font-family: var(--f-data); font-size:11.5px; letter-spacing:.1em; text-transform:uppercase;
+  color: var(--accent); font-weight:600; margin:0 0 12px;
+}
+.phrase-main{ font-family: var(--f-display); font-weight:600; font-size:clamp(21px,3.4vw,28px); line-height:1.35; margin:0 0 10px; }
+.phrase-main em{ font-style:italic; color: var(--accent); font-weight:500; }
+.phrase-sub{ font-size:14px; color: var(--ink-soft); max-width:46ch; margin:0 auto; }
+.phrase-card.complex{ text-align:left; }
+.phrase-card.complex .phrase-main{ font-size:clamp(18px,2.6vw,23px); line-height:1.5; max-width:58ch; margin:0 0 12px; }
+.phrase-card.complex .phrase-sub{ max-width:58ch; margin:0; }
+.phrase-tags{ display:flex; gap:8px; flex-wrap:wrap; margin-top:16px; }
+.phrase-card.complex .phrase-tags{ justify-content:flex-start; }
+.phrase-card:not(.complex) .phrase-tags{ justify-content:center; }
+.phrase-tag{
+  font-family: var(--f-data); font-size:10.5px; padding:4px 10px; border-radius:999px;
+  background: var(--accent-soft); border:1px solid var(--accent-line); color: var(--accent);
+}
+
+.feedback-card{
+  position:relative; overflow:hidden; isolation:isolate; border-radius: var(--r-md);
+  padding:18px 22px; display:flex; align-items:center; gap:16px; background: var(--ink); color: var(--paper);
+}
+.feedback-card::before{
+  content:""; position:absolute; inset:-20%; z-index:-1;
+  background:
+    radial-gradient(circle at 20% 30%, var(--b2) 0%, transparent 55%),
+    radial-gradient(circle at 80% 20%, var(--accent) 0%, transparent 55%),
+    radial-gradient(circle at 50% 80%, var(--b2) 0%, transparent 55%);
+  filter: blur(30px); opacity:.55; animation: mesh-drift 6s ease-in-out infinite alternate;
+}
+@media (prefers-reduced-motion: reduce){ .feedback-card::before{ animation:none; } }
+.feedback-icon{
+  width:40px; height:40px; border-radius:50%; background: var(--b2); color: var(--ink);
+  font-weight:700; font-size:19px; display:flex; align-items:center; justify-content:center; flex:none;
+}
+.feedback-text strong{ font-family: var(--f-display); font-size:15.5px; display:block; }
+.feedback-text span{ font-size:12.5px; color: rgba(251,247,238,.72); }
+
+.culture-card{ border-radius: var(--r-lg); border:1px solid var(--line); padding:4px; }
+.culture-card-inner{
+  background: color-mix(in srgb, var(--paper-raised) 88%, transparent);
+  border-radius: calc(var(--r-lg) - 4px); padding:24px 26px;
+}
+.culture-eyebrow{
+  font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.08em;
+  color: var(--accent); font-weight:600; margin:0 0 10px;
+}
+.culture-card h3{ font-family: var(--f-display); font-size:18px; font-weight:600; margin:0 0 8px; }
+.culture-card p{ font-size:14px; color: var(--ink-soft); line-height:1.6; margin:0; }
+
+.vocab-card.mesh-surface::before,
+.vocab-card.mesh-surface::after,
+.vocab-card.mesh-surface .mesh-blob{ opacity:.1; }
+.vocab-card.flipped.mesh-surface::before,
+.vocab-card.flipped.mesh-surface::after,
+.vocab-card.flipped.mesh-surface .mesh-blob{ display:none; }
+
+.swatch-row{ display:flex; flex-wrap:wrap; gap:10px; }
+.swatch{
+  display:flex; align-items:center; gap:8px; font-family:var(--f-body); font-size:13px; font-weight:600;
+  background: var(--paper-raised); border:1.5px solid var(--line); padding:8px 14px 8px 10px;
+  border-radius:999px; cursor:pointer; color:var(--ink-soft); transition: all .15s ease;
+}
+.swatch .chip{ width:16px; height:16px; border-radius:50%; flex:none; border:1px solid rgba(0,0,0,0.1); }
+.swatch.active{ border-color: var(--accent); color:var(--ink); box-shadow: 0 0 0 2px var(--accent-soft); }
+.swatch:hover{ border-color: var(--ink-faint); }
+
+/* ---------- FOOTER ---------- */
+footer{
+  max-width:760px; margin:0 auto; padding:0 24px 60px; display:flex;
+  justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;
+  font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint);
+}
+footer a{ color: var(--accent); text-decoration:none; }
+footer a:hover{ text-decoration:underline; }
+
+@media (max-width:600px){
+  header{ padding:34px 18px 22px; }
+  main{ padding:8px 18px 90px; }
+  .panel, .task-panel, .roleplay-panel, .correction-panel, .reading-panel{ padding:20px 18px; }
+}
+@media (prefers-reduced-motion: reduce){ *{ transition:none !important; } }
+</style>
+</head>
+<body data-accent="verde">
+
+<header>
+  <div class="header-top">
+    <div>
+      <p class="eyebrow"><span class="dot"></span>Clase 22 · Programa B2 · Daniela A.</p>
+      <h1>Me <em>preguntó</em> si podía ayudarla</h1>
+    </div>
+    <span class="level-badge">B2</span>
+  </div>
+  <p class="lede">Seguimos con el estilo indirecto, ahora con dos casos especiales: las preguntas ("¿Vienes?" → me preguntó si venía) y las órdenes o peticiones ("¡Ven aquí!" → me pidió que viniera). Las preguntas de sí/no usan "si", las preguntas con partícula interrogativa mantienen esa partícula, y las órdenes exigen subjuntivo. Hoy conectamos esta pieza con el subjuntivo que ya dominas.</p>
+  <div class="meta-row">
+    <div>Duración<strong>50 minutos</strong></div>
+    <div>Línea<strong>L6 · Estilo indirecto y voz pasiva</strong></div>
+    <div>Gramática<strong>Estilo indirecto con preguntas y órdenes</strong></div>
+    <div>Producción<strong>Contar una conversación con instrucciones recibidas</strong></div>
+  </div>
+</header>
+
+<main>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">1</span><h2>Frase de hoy</h2><span class="time-tag">0–1 min</span></div>
+    <div class="phrase-card mesh-surface">
+      <span class="mesh-blob"></span>
+      <p class="phrase-eyebrow">Frase de hoy</p>
+      <p class="phrase-main">Me preguntó: "¿Puedes venir mañana?" → Me preguntó si <em>podía</em> ir al día siguiente.</p>
+      <p class="phrase-sub">Cuando reportamos una pregunta, "puedes" se convierte en "podía" (igual que la semana pasada) y además añadimos "si" porque era una pregunta de sí/no. Hoy vemos las dos formas de reportar preguntas y cómo reportar órdenes.</p>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">2</span><h2>Preguntas indirectas: con "si" y con partícula</h2><span class="time-tag">1–9 min</span></div>
+    <div class="panel">
+      <p style="margin:0 0 16px; font-size:14.5px; color:var(--ink-soft);">Hay dos tipos de preguntas directas, y cada una se reporta de forma distinta. Los signos de interrogación desaparecen siempre en estilo indirecto.</p>
+      <div class="irr-table-wrap">
+        <table class="irr-table">
+          <thead><tr><th>Pregunta directa</th><th>Estilo indirecto</th><th>Tipo</th></tr></thead>
+          <tbody>
+            <tr><td class="verb">"¿Vienes a la fiesta?"</td><td class="irr-form">Me preguntó si venía a la fiesta</td><td>sí/no → si</td></tr>
+            <tr><td class="verb">"¿Has terminado el informe?"</td><td class="irr-form">Me preguntó si había terminado el informe</td><td>sí/no → si</td></tr>
+            <tr><td class="verb">"¿Dónde vives?"</td><td class="irr-form">Me preguntó dónde vivía</td><td>partícula → se mantiene</td></tr>
+            <tr><td class="verb">"¿Qué hora es?"</td><td class="irr-form">Me preguntó qué hora era</td><td>partícula → se mantiene</td></tr>
+            <tr><td class="verb">"¿Por qué llegaste tarde?"</td><td class="irr-form">Me preguntó por qué había llegado tarde</td><td>partícula → se mantiene</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="note"><strong>Regla clave:</strong> pregunta de sí/no → añade "si" y quita los signos de interrogación. Pregunta con qué/dónde/cuándo/cómo/por qué/quién → mantén esa palabra, quita los signos. El verbo se transforma igual que en la clase 21 (presente→imperfecto, etc.).</div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">3</span><h2>Órdenes y peticiones: "me pidió que + subjuntivo"</h2><span class="time-tag">9–17 min</span></div>
+    <div class="panel">
+      <p style="margin:0 0 16px; font-size:14.5px; color:var(--ink-soft);">Cuando alguien nos da una orden o nos pide algo, el imperativo original se convierte en subjuntivo al reportarlo — nunca en indicativo. Es el mismo subjuntivo que ya usas con "quiero que" o "es importante que".</p>
+      <div class="irr-table-wrap">
+        <table class="irr-table">
+          <thead><tr><th>Orden/petición directa</th><th>Estilo indirecto</th><th>Verbo introductorio</th></tr></thead>
+          <tbody>
+            <tr><td class="verb">"¡Ven aquí!"</td><td class="irr-form">Me pidió que fuera allí</td><td>pedir que + subj.</td></tr>
+            <tr><td class="verb">"Cierra la puerta, por favor"</td><td class="irr-form">Me pidió que cerrara la puerta</td><td>pedir que + subj.</td></tr>
+            <tr><td class="verb">"¡No llegues tarde!"</td><td class="irr-form">Me ordenó que no llegara tarde</td><td>ordenar que + subj.</td></tr>
+            <tr><td class="verb">"Termina esto para el viernes"</td><td class="irr-form">Me dijo que terminara esto para el viernes</td><td>decir que + subj.</td></tr>
+            <tr><td class="verb">"Ayúdame con esto"</td><td class="irr-form">Me rogó que la ayudara con eso</td><td>rogar que + subj.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="note amber"><strong>Ojo:</strong> con órdenes usamos "pedir", "ordenar", "rogar", "mandar" + que + subjuntivo (nunca "preguntar" — eso es solo para preguntas). El imperfecto de subjuntivo (-ra) es el que aparece casi siempre aquí, porque el verbo introductorio está en pasado.</div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">4</span><h2>Clasifica: pregunta sí/no, pregunta con partícula u orden</h2><span class="time-tag">17–23 min</span></div>
+    <div class="panel">
+      <p style="margin:0 0 16px; font-size:14.5px; color:var(--ink-soft);">Cada frase original pertenece a un tipo. Elige la categoría correcta antes de ver cómo se transformaría.</p>
+      <div class="tense-tabs" id="tense-tabs"></div>
+      <div class="irr-table-wrap"><table class="irr-table" id="irr-tbody-wrap"><thead><tr><th>Frase directa</th><th>Estilo indirecto</th><th>Nota</th></tr></thead><tbody id="irr-tbody"></tbody></table></div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">5</span><h2>Mini test — elige la transformación correcta</h2><span class="time-tag">23–29 min</span></div>
+    <div class="panel">
+      <p style="margin:0 0 16px; font-size:14.5px; color:var(--ink-soft);">Cada frase original está en estilo directo (pregunta u orden). Elige la versión correctamente transformada a estilo indirecto.</p>
+      <div id="mini-test-list"></div>
+      <div class="check-bar">
+        <button class="btn-primary" id="check-mini-btn">Comprobar</button>
+        <span id="mini-score"></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">6</span><h2>Rellenar huecos en texto</h2><span class="time-tag">29–35 min</span></div>
+    <div class="panel">
+      <p style="margin:0 0 16px; font-size:14.5px; color:var(--ink-soft);">Escribe la forma verbal correcta en estilo indirecto (subjuntivo para órdenes, tiempo transformado para preguntas) para completar cada hueco.</p>
+      <div class="fill-block" id="fill-block"></div>
+      <div class="check-bar">
+        <button class="btn-primary" id="check-fill-btn">Comprobar huecos</button>
+        <span id="fill-score"></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">7</span><h2>Encontrar el error</h2><span class="time-tag">35–40 min</span></div>
+    <div class="panel">
+      <p style="margin:0 0 16px; font-size:14.5px; color:var(--ink-soft);">Cada frase tiene un error en la transformación de la pregunta o la orden al estilo indirecto. Pulsa la palabra incorrecta.</p>
+      <div id="spot-list"></div>
+    </div>
+  </section>
+
+  <section class="block roleplay-panel">
+    <div class="block-head"><span class="block-num">8</span><h2>Contar una conversación con instrucciones</h2><span class="time-tag">40–46 min</span></div>
+    <div class="scene-setup">
+      <span class="scene-icon">📋</span>
+      <p class="scene-text"><strong>Contexto:</strong> Tu jefe/a te llamó ayer y te hizo preguntas y te dio instrucciones para un proyecto. Ahora un compañero te pregunta qué te dijo. Responde usando estilo indirecto.</p>
+    </div>
+    <div class="dialogue-panel" id="dialogue-panel"></div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">9</span><h2>Dato cultural</h2><span class="time-tag">46–48 min</span></div>
+    <div class="culture-card mesh-surface">
+      <span class="mesh-blob"></span>
+      <div class="culture-card-inner">
+        <p class="culture-eyebrow">Dato cultural</p>
+        <h3>El "me preguntó que si..." coloquial</h3>
+        <p>En el habla informal de España y de gran parte de Latinoamérica es muy común escuchar "me preguntó que si vienes" en lugar de "me preguntó si venías", combinando "que" y "si" y a veces sin transformar el verbo. Es un uso extendido en la conversación oral, aunque la norma culta y el examen DELE prefieren la forma sin "que": "me preguntó si venía". Reconocerlo te ayudará a entender a hablantes nativos sin que te confunda.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="block task-panel">
+    <div class="block-head"><span class="block-num">10</span><h2>Tarea final</h2><span class="time-tag">48–50 min</span></div>
+    <p style="margin:0 0 4px; font-size:14.5px; color:var(--ink-soft);">Piensa en una conversación reciente (real o inventada) en la que alguien te hizo preguntas y/o te pidió algo. Repórtala en estilo indirecto. Usa al menos:</p>
+    <ul style="margin:10px 0 0; padding-left:18px; font-size:14px; color:var(--ink-soft); line-height:1.7;">
+      <li>Una pregunta indirecta de sí/no (con "si")</li>
+      <li>Una pregunta indirecta con partícula (dónde, qué, cuándo...)</li>
+      <li>Una orden o petición indirecta (que + subjuntivo)</li>
+    </ul>
+    <textarea class="final-task" placeholder="Escribe aquí tu texto reportando la conversación..."></textarea>
+    <div class="task-footer">
+      <span class="task-count">0 palabras escritas</span>
+      <button class="btn-secondary" id="save-task-btn">Guardar tarea</button>
+      <span class="saved-flag" id="saved-flag">Guardado ✓</span>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">11</span><h2>Frase de cierre</h2><span class="time-tag">50 min</span></div>
+    <div class="phrase-card complex mesh-surface">
+      <span class="mesh-blob"></span>
+      <p class="phrase-main">El museo fue <em>inaugurado</em> en 1990 y sus salas <em>se renovaron</em> por completo el año pasado.</p>
+      <p class="phrase-sub">Voz pasiva con "ser" (fue inaugurado) y pasiva refleja con "se" (se renovaron) son las dos formas de expresar una acción sin protagonista claro que veremos en la clase 23.</p>
+      <div class="phrase-tags">
+        <span class="phrase-tag">preguntas indirectas</span>
+        <span class="phrase-tag">órdenes con subjuntivo</span>
+        <span class="phrase-tag">estilo indirecto</span>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <span>ESCOLAR · Programa Daniela A. · Clase 22 de 32</span>
+  <span>Sistema de diseño: escolar_multiacento · acento: verde</span>
+</footer>
+
+<script>
+function normalizeText(s){
+  return s.trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/\s+/g,' ');
+}
+
+/* ---------- 4. TABLA COMPARATIVA: tipos de transformación (con tabs) ---------- */
+const TENSES = {
+  sino: [
+    {verb:"\"¿Te gusta el arte moderno?\"", form:"Me preguntó si me gustaba el arte moderno.", ex:"pregunta de sí/no → añade \"si\""},
+    {verb:"\"¿Has visto la exposición?\"", form:"Me preguntó si había visto la exposición.", ex:"pret. perfecto → pluscuamperfecto + \"si\""},
+    {verb:"\"¿Vendrás a la inauguración?\"", form:"Me preguntó si vendría a la inauguración.", ex:"futuro → condicional + \"si\""},
+  ],
+  particula: [
+    {verb:"\"¿Cuándo abre el museo?\"", form:"Me preguntó cuándo abría el museo.", ex:"partícula \"cuándo\" se mantiene"},
+    {verb:"\"¿Cómo se llama el artista?\"", form:"Me preguntó cómo se llamaba el artista.", ex:"partícula \"cómo\" se mantiene"},
+    {verb:"\"¿Quién pintó ese cuadro?\"", form:"Me preguntó quién había pintado ese cuadro.", ex:"partícula \"quién\" se mantiene"},
+  ],
+  ordenes: [
+    {verb:"\"Recoge las entradas en la taquilla\"", form:"Me pidió que recogiera las entradas en la taquilla.", ex:"pedir que + subjuntivo"},
+    {verb:"\"No toques las esculturas\"", form:"Me ordenó que no tocara las esculturas.", ex:"ordenar que + subjuntivo (negativo)"},
+    {verb:"\"Llega diez minutos antes\"", form:"Me dijo que llegara diez minutos antes.", ex:"decir que + subjuntivo"},
+  ]
+};
+const tenseTabsWrap = document.getElementById('tense-tabs');
+const irrBody = document.getElementById('irr-tbody');
+function renderTense(key){
+  irrBody.innerHTML = TENSES[key].map(r=>`<tr><td class="verb">${r.verb}</td><td class="irr-form">${r.form}</td><td>${r.ex}</td></tr>`).join('');
+}
+const TENSE_LABELS = {sino:"Preguntas sí/no", particula:"Preguntas con partícula", ordenes:"Órdenes y peticiones"};
+Object.keys(TENSES).forEach((key,i)=>{
+  const tab = document.createElement('button');
+  tab.className = 'tense-tab' + (i===0?' active':'');
+  tab.textContent = TENSE_LABELS[key];
+  tab.addEventListener('click', ()=>{
+    tenseTabsWrap.querySelectorAll('.tense-tab').forEach(t=>t.classList.remove('active'));
+    tab.classList.add('active');
+    renderTense(key);
+  });
+  tenseTabsWrap.appendChild(tab);
+});
+renderTense('sino');
+
+/* ---------- 5. MINI TEST (elige la transformación correcta) ---------- */
+const MINI_TEST = [
+  {sentence:"\"¿Vienes a la reunión?\" → Me preguntó...", options:["si venía a la reunión","que si vengo a la reunión"], answer:"si venía a la reunión"},
+  {sentence:"\"¿Dónde está la galería?\" → Me preguntó...", options:["si dónde estaba la galería","dónde estaba la galería"], answer:"dónde estaba la galería"},
+  {sentence:"\"Termina el informe hoy\" → Me pidió...", options:["que terminara el informe ese día","que termino el informe hoy"], answer:"que terminara el informe ese día"},
+  {sentence:"\"¿Has llamado al cliente?\" → Me preguntó...", options:["si había llamado al cliente","si he llamado al cliente"], answer:"si había llamado al cliente"},
+  {sentence:"\"No llegues tarde\" → Me ordenó...", options:["que no llegara tarde","que no llego tarde"], answer:"que no llegara tarde"},
+];
+const miniList = document.getElementById('mini-test-list');
+MINI_TEST.forEach((item,i)=>{
+  const el = document.createElement('div');
+  el.className = 'exercise';
+  el.dataset.answer = item.answer;
+  const shuffled = [...item.options].sort(()=>Math.random()-0.5);
+  el.innerHTML = `<p class="ex-sentence">${i+1}. ${item.sentence}</p>
+    <div class="ex-options">${shuffled.map(o=>`<button class="opt-btn" data-value="${o}">${o}</button>`).join('')}</div>`;
+  el.querySelectorAll('.opt-btn').forEach(b=>{
+    b.addEventListener('click', ()=>{
+      el.querySelectorAll('.opt-btn').forEach(x=>x.classList.remove('picked'));
+      b.classList.add('picked');
+    });
+  });
+  miniList.appendChild(el);
+});
+document.getElementById('check-mini-btn').addEventListener('click', ()=>{
+  let correct = 0;
+  miniList.querySelectorAll('.exercise').forEach(el=>{
+    const answer = el.dataset.answer;
+    const picked = el.querySelector('.opt-btn.picked');
+    el.querySelectorAll('.opt-btn').forEach(b=>{
+      b.disabled = true;
+      if(b.dataset.value === answer) b.classList.add('correct');
+      else if(b === picked) b.classList.add('wrong');
+    });
+    if(picked && picked.dataset.value === answer) correct++;
+  });
+  document.getElementById('mini-score').textContent = `${correct} / ${MINI_TEST.length} correctas`;
+});
+
+/* ---------- 6. RELLENAR HUECOS EN TEXTO ---------- */
+const FILL_TEXT = [
+  {before:"Me preguntó si ", answer:"quería", after:" (querer) ir a la inauguración con ella. "},
+  {before:"El profesor me pidió que ", answer:"entregara", after:" (entregar) el trabajo antes del viernes. "},
+  {before:"Me preguntó dónde ", answer:"había comprado", after:" (comprar) las entradas. "},
+  {before:"Mi jefa me ordenó que no ", answer:"llegara", after:" (llegar) tarde a la reunión. "},
+];
+const fillBlock = document.getElementById('fill-block');
+fillBlock.innerHTML = FILL_TEXT.map((part)=>
+  `${part.before}<input type="text" data-answer="${part.answer}" size="${Math.max(part.answer.length,6)}">${part.after}`
+).join('');
+document.getElementById('check-fill-btn').addEventListener('click', ()=>{
+  let correct = 0; let total = 0;
+  fillBlock.querySelectorAll('input').forEach(input=>{
+    total++;
+    const ok = normalizeText(input.value) === normalizeText(input.dataset.answer);
+    input.classList.toggle('correct', ok);
+    input.classList.toggle('wrong', !ok);
+    if(ok) correct++;
+  });
+  document.getElementById('fill-score').textContent = `${correct} / ${total} correctas`;
+});
+
+/* ---------- 7. ENCONTRAR EL ERROR ---------- */
+const SPOT_REAL = [
+  {sentence:"Me preguntó que si quiero ir al cine con ella.", words:["Me","preguntó","que","si","quiero","ir","al","cine","con","ella","."], wrongIndex:4, fix:"quiero → quería (presente → imperfecto tras verbo introductorio en pasado)"},
+  {sentence:"Me preguntó si dónde vivía en la ciudad.", words:["Me","preguntó","si","dónde","vivía","en","la","ciudad","."], wrongIndex:2, fix:"se elimina \"si\" (las preguntas con partícula no llevan \"si\", solo las de sí/no)"},
+  {sentence:"El médico me pidió que descanso más.", words:["El","médico","me","pidió","que","descanso","más","."], wrongIndex:5, fix:"descanso → descansara (pedir que + subjuntivo, no indicativo)"},
+  {sentence:"Me preguntó si había terminado ya el proyecto.", words:["Me","preguntó","si","había","terminado","ya","el","proyecto","."], wrongIndex:-1, fix:"Esta frase es correcta — no hay ningún error"},
+];
+const spotList = document.getElementById('spot-list');
+SPOT_REAL.forEach((item,i)=>{
+  const el = document.createElement('div');
+  el.className = 'spot-item';
+  el.innerHTML = `<p class="spot-sentence">${i+1}. ${item.words.map((w,wi)=>`<span class="spot-word" data-idx="${wi}">${w}</span>`).join(' ')}</p>
+    <p class="spot-fix">Corrección: ${item.fix}</p>`;
+  el.querySelectorAll('.spot-word').forEach(w=>{
+    w.addEventListener('click', ()=>{
+      if(el.classList.contains('checked')) return;
+      el.querySelectorAll('.spot-word').forEach(x=>x.classList.remove('picked'));
+      w.classList.add('picked');
+      const idx = parseInt(w.dataset.idx);
+      el.querySelectorAll('.spot-word').forEach((x,xi)=>{
+        if(xi === item.wrongIndex) x.classList.add('correct');
+        if(xi === idx && idx !== item.wrongIndex) x.classList.add('wrong');
+      });
+      el.classList.add('checked');
+    });
+  });
+  spotList.appendChild(el);
+});
+
+/* ---------- 8. DIÁLOGO GUIADO (burbujas) ---------- */
+const DIALOGUE = [
+  {from:'them', text:'¿Qué te preguntó tu jefa cuando te llamó ayer?'},
+  {from:'you', options:['Me preguntó si había terminado el informe y cuándo podía enviárselo.', 'Me pregunta si he terminado el informe y cuándo puedo enviárselo.']},
+  {from:'them', text:'¿Y te dio alguna instrucción?'},
+  {from:'you', options:['Sí, me pidió que revisara los datos otra vez y que se los mandara antes del mediodía.', 'Sí, me pide que reviso los datos otra vez y que se los mando antes del mediodía.']},
+];
+const dialoguePanel = document.getElementById('dialogue-panel');
+DIALOGUE.forEach(turn=>{
+  const row = document.createElement('div');
+  row.className = 'bubble-row ' + turn.from;
+  if(turn.from === 'them'){
+    row.innerHTML = `<div class="bubble">${turn.text}</div>`;
+  } else {
+    row.innerHTML = `<div class="bubble-options">${turn.options.map(o=>`<button class="opt-btn" data-value="${o}">${o}</button>`).join('')}</div>`;
+  }
+  dialoguePanel.appendChild(row);
+});
+dialoguePanel.querySelectorAll('.bubble-options .opt-btn').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    const wrap = btn.closest('.bubble-options');
+    const bubble = document.createElement('div'); bubble.className = 'bubble';
+    bubble.textContent = btn.dataset.value;
+    const row = wrap.closest('.bubble-row');
+    row.innerHTML = '';
+    row.appendChild(bubble);
+  });
+});
+
+/* ---------- 10. TAREA FINAL: contador + guardado ---------- */
+const ta = document.querySelector('.final-task');
+const tc = document.querySelector('.task-count');
+ta.addEventListener('input', ()=>{
+  const words = ta.value.trim().split(/\s+/).filter(Boolean).length;
+  tc.textContent = `${words} palabra${words===1?'':'s'} escrita${words===1?'':'s'}`;
+});
+const STORAGE_KEY = 'daniela-clase22-tarea';
+async function loadTask(){
+  if(!window.storage) return;
+  try{
+    const res = await window.storage.get(STORAGE_KEY);
+    if(res && typeof res.value === 'string'){
+      ta.value = res.value;
+      ta.dispatchEvent(new Event('input'));
+    }
+  }catch(e){ /* sin tarea guardada todavía */ }
+}
+document.getElementById('save-task-btn').addEventListener('click', async ()=>{
+  if(window.storage){
+    try{ await window.storage.set(STORAGE_KEY, ta.value); }catch(e){ /* fallo silencioso */ }
+  }
+  const flag = document.getElementById('saved-flag');
+  flag.classList.add('show');
+  setTimeout(()=>flag.classList.remove('show'), 2000);
+});
+loadTask();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,746 @@
+```html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicios de Escritura — Español con Óscar</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: #f5f5f7;
+            color: #1d1d1f;
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 16px;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+        }
+
+        .header .subtitle {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        .level-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-top: 10px;
+        }
+
+        .module-section {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+
+        .module-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #667eea;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .module-dates {
+            font-size: 0.85rem;
+            color: #86868b;
+            margin-bottom: 20px;
+        }
+
+        .exercise-card {
+            background: #fafafa;
+            border: 1px solid #e5e5e7;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 16px;
+            position: relative;
+        }
+
+        .exercise-number {
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            background: #667eea;
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        .exercise-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+            margin-top: 8px;
+        }
+
+        .exercise-theme {
+            font-size: 0.85rem;
+            color: #86868b;
+            margin-bottom: 12px;
+            font-style: italic;
+        }
+
+        .exercise-instructions {
+            font-size: 0.95rem;
+            margin-bottom: 12px;
+        }
+
+        .exercise-instructions ul {
+            margin-left: 20px;
+            margin-top: 8px;
+        }
+
+        .exercise-instructions li {
+            margin-bottom: 6px;
+        }
+
+        .challenge-box {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin-top: 12px;
+            font-size: 0.9rem;
+        }
+
+        .challenge-box::before {
+            content: "🎯 ";
+        }
+
+        .example-box {
+            background: #e8f5e9;
+            border: 1px solid #4caf50;
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin-top: 12px;
+            font-size: 0.9rem;
+        }
+
+        .example-box::before {
+            content: "💡 ";
+        }
+
+        .grammar-note {
+            background: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 12px 16px;
+            margin: 12px 0;
+            border-radius: 0 8px 8px 0;
+            font-size: 0.9rem;
+        }
+
+        .grammar-note strong {
+            color: #1565c0;
+        }
+
+        .master-challenge {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            border-radius: 16px;
+            padding: 30px;
+            margin-top: 30px;
+        }
+
+        .master-challenge h2 {
+            font-size: 1.4rem;
+            margin-bottom: 12px;
+        }
+
+        .master-challenge .requirements {
+            background: rgba(255,255,255,0.15);
+            border-radius: 10px;
+            padding: 16px;
+            margin-top: 16px;
+        }
+
+        .master-challenge .requirements li {
+            margin-bottom: 8px;
+            list-style: none;
+        }
+
+        .master-challenge .requirements li::before {
+            content: "✓ ";
+            font-weight: bold;
+        }
+
+        .correction-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+            font-size: 0.9rem;
+        }
+
+        .correction-table th {
+            background: #667eea;
+            color: white;
+            padding: 10px;
+            text-align: left;
+        }
+
+        .correction-table td {
+            padding: 10px;
+            border-bottom: 1px solid #e5e5e7;
+        }
+
+        .correction-table tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+
+        .tip-box {
+            background: #f3e5f5;
+            border: 1px solid #9c27b0;
+            border-radius: 10px;
+            padding: 16px;
+            margin-top: 20px;
+        }
+
+        .tip-box h3 {
+            color: #6a1b9a;
+            margin-bottom: 8px;
+            font-size: 1rem;
+        }
+
+        .tip-box ul {
+            margin-left: 20px;
+        }
+
+        .tip-box li {
+            margin-bottom: 6px;
+            font-size: 0.9rem;
+        }
+
+        .divider {
+            height: 1px;
+            background: #e5e5e7;
+            margin: 20px 0;
+        }
+
+        .writing-area {
+            border: 2px dashed #ccc;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 12px;
+            min-height: 120px;
+            background: white;
+            font-size: 0.9rem;
+            color: #86868b;
+            text-align: center;
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+            padding: 16px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+
+        .nav-links a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .tag {
+            display: inline-block;
+            background: #e8eaf6;
+            color: #3f51b5;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-right: 4px;
+        }
+
+        .tag.grammar { background: #e3f2fd; color: #1565c0; }
+        .tag.production { background: #e8f5e9; color: #2e7d32; }
+        .tag.writing { background: #fff3e0; color: #e65100; }
+
+        @media (max-width: 600px) {
+            body { padding: 10px; }
+            .header { padding: 20px; }
+            .header h1 { font-size: 1.4rem; }
+            .module-section { padding: 16px; }
+            .exercise-card { padding: 16px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>✍️ Ejercicios de Escritura</h1>
+        <p class="subtitle">Práctica progresiva de gramática y vocabulario</p>
+        <span class="level-badge">B1 → B2 · 12 ejercicios + reto final</span>
+    </div>
+
+    <!-- ==================== L1 ==================== -->
+    <div class="module-section">
+        <div class="module-title">🏛️ L1 — Cimientos</div>
+        <div class="module-dates">Presente y estructura básica · Clases 1–4 · 6–15 julio</div>
+
+        <!-- Ejercicio 1 -->
+        <div class="exercise-card">
+            <div class="exercise-number">01</div>
+            <div class="exercise-title">El Correo Formal</div>
+            <div class="exercise-theme">
+                <span class="tag grammar">Presente</span>
+                <span class="tag grammar">Ser/Estar</span>
+                <span class="tag grammar">Pronombres OD</span>
+            </div>
+            <div class="exercise-instructions">
+                <p>Escribe un correo electrónico formal al director de un museo solicitando una entrevista para presentar tu portafolio.</p>
+                <ul>
+                    <li>Describe quién <strong>eres</strong> (tu profesión) y dónde <strong>estás</strong> ahora mismo (tu ciudad/estudio).</li>
+                    <li>Usa al menos 2 pronombres de Objeto Directo (lo/la/los/las) para referirte a tu trabajo o portafolio.</li>
+                </ul>
+            </div>
+            <div class="grammar-note">
+                <strong>Recuerda:</strong> <em>Ser</em> para identidades permanentes (profesión, origen). <em>Estar</em> para estados temporales y ubicación. Los pronombres OD van antes del verbo conjugado o unidos al infinitivo/gerundio.
+            </div>
+            <div class="example-box">
+                <em>"Estimado director, soy María, fotógrafa profesional. Actualmente estoy en Madrid trabajando en un nuevo proyecto. Le envío el portafolio adjunto; <strong>lo</strong> he organizado por temas. Las obras más recientes <strong>las</strong> puede ver en la sección final."</em>
+            </div>
+            <div class="challenge-box">
+                Mantener un tono muy formal durante todo el correo.
+            </div>
+            <div class="writing-area">✏️ Escribe tu correo aquí...</div>
+        </div>
+
+        <!-- Ejercicio 2 -->
+        <div class="exercise-card">
+            <div class="exercise-number">02</div>
+            <div class="exercise-title">Crítica de Arte en un Blog</div>
+            <div class="exercise-theme">
+                <span class="tag grammar">Irregulares presente</span>
+                <span class="tag grammar">Por/Para</span>
+            </div>
+            <div class="exercise-instructions">
+                <p>Escribe una reseña corta (150 palabras) sobre una exposición que acabas de visitar.</p>
+                <ul>
+                    <li>Usa verbos irregulares: <em>tener, venir, poner, decir, salir</em>.</li>
+                    <li>Explica <strong>por qué</strong> fuiste (causa/motivo) y <strong>para quién</strong> es la exposición (destinatario).</li>
+                </ul>
+            </div>
+            <div class="grammar-note">
+                <strong>Por</strong> = causa, motivo, razón, intercambio, duración.<br>
+                <strong>Para</strong> = destino, finalidad, destinatario, opinión, plazo.
+            </div>
+            <div class="example-box">
+                <em>"Fui a la exposición <strong>porque</strong> quería ver la obra de Dalí. La muestra es <strong>para</strong> los amantes del surrealismo. La galería <strong>tiene</strong> más de 50 obras. El guía nos <strong>dijo</strong> que la pieza principal <strong>viene</strong> de una colección privada..."</em>
+            </div>
+            <div class="writing-area">✏️ Escribe tu reseña aquí...</div>
+        </div>
+
+        <!-- Ejercicio 3 -->
+        <div class="exercise-card">
+            <div class="exercise-number">03</div>
+            <div class="exercise-title">El Informe Semanal</div>
+            <div class="exercise-theme">
+                <span class="tag grammar">Pretérito Perfecto Compuesto</span>
+                <span class="tag grammar">Pronombres OI</span>
+            </div>
+            <div class="exercise-instructions">
+                <p>Imagina que eres el asistente de un curador. Escribe un breve informe de "lo que ha pasado esta semana" en la galería.</p>
+                <ul>
+                    <li>Usa <em>haber + participio</em> (he hecho, hemos visto, han llegado).</li>
+                    <li>Usa pronombres de Objeto Indirecto (le/les) con verbos de comunicación o gestión.</li>
+                </ul>
+            </div>
+            <div class="grammar-note">
+                <strong>Pretérito Perfecto:</strong> haber (presente) + participio pasado. Se usa para acciones recientes o en un periodo de tiempo no terminado (esta semana, hoy, este mes).<br>
+                <strong>Pronombres OI:</strong> le (a él/ella/usted), les (a ellos/ellas/ustedes). Indican <em>a quién</em> se dirige la acción.
+            </div>
+            <div class="example-box">
+                <em>"Esta semana <strong>hemos recibido</strong> tres obras nuevas. <strong>Le he enviado</strong> el catálogo al crítico de arte. <strong>Les he dicho</strong> a los artistas que la inauguración será el viernes."</em>
+            </div>
+            <div class="writing-area">✏️ Escribe tu informe aquí...</div>
+        </div>
+
+        <!-- Ejercicio 4 -->
+        <div class="exercise-card">
+            <div class="exercise-number">04</div>
+            <div class="exercise-title">La Anécdota del Viaje</div>
+            <div class="exercise-theme">
+                <span class="tag grammar">Pretérito Indefinido</span>
+                <span class="tag writing">Narración</span>
+            </div>
+            <div class="exercise-instructions">
+                <p>Narra una historia breve sobre un viaje a una bienal de arte o un museo famoso donde algo salió mal o fue inesperado.</p>
+                <ul>
+                    <li>Enfócate en acciones terminadas y consecutivas.</li>
+                    <li>Usa irregulares frecuentes: <em>ir, ser, tener, estar, hacer, poder</em>.</li>
+                </ul>
+            </div>
+            <div class="grammar-note">
+                <strong>Pretérito Indefinido:</strong> acciones completadas en el pasado, con inicio y fin claros. Marcadores: ayer, el año pasado, una vez, de repente...
+            </div>
+            <div class="example-box">
+                <em>"El año pasado <strong>fui</strong> a la Bienal de Venecia. <strong>Tuve</strong> un problema con el vuelo y <strong>llegué</strong> dos horas tarde. Cuando <strong>estuve</strong> dentro, <strong>hice</strong> fotos increíbles. No <strong>pude</strong> ver la última sala porque <strong>cerraron</strong> temprano."</em>
+            </div>
+            <div class="writing-area">✏️ Escribe tu anécdota aquí...</div>
+        </div>
+    </div>
+
+    <!-- ==================== L2 ==================== -->
+    <div class="module-section">
+        <div class="module-title">⏳ L2 — Pasado y Adverbios de Tiempo</div>
+        <div class="module-dates">Clases 5–8 · 20–29 julio</div>
+
+        <!-- Ejercicio 5 -->
+        <div class="exercise-card">
+            <div class="exercise-number">05</div>
+            <div class="exercise-title">Biografía de un Artista</div>
+            <div class="exercise-theme">
+                <span class="tag grammar">Imperfecto vs. Indefinido</span>
+                <span class="tag writing">Contraste pasado</span>
+            </div>
+            <div class="exercise-instructions">
+                <p>Escribe la biografía de un pintor ficticio (o real).</p>
+                <ul>
+                    <li>Usa el <strong>Imperfecto</strong> para describir su infancia, personalidad y contexto histórico.</li>
+                    <li>Usa el <strong>Indefinido</strong> para los hitos concretos de su carrera.</li>
+                </ul>
+            </div>
+            <div class="grammar-note">
+                <strong>Imperfecto</strong> = descripciones, hábitos, contexto, "escenario" del pasado.<br>
+                <strong>Indefinido</strong> = acciones puntuales, eventos concretos, "lo que pasó".
+            </div>
+
+            <table class="correction-table">
+                <thead>
+                    <tr>
+                        <th>Imperfecto (contexto)</th>
+                        <th>Indefinido (acción)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Cuando <em>era</em> niño, <em>vivía</em> en...</td>
+                        <td>En 1990 <em>pintó</em> su primera obra.</td>
+                    </tr>
+                    <tr>
+                        <td>La guerra <em>era</em> terrible...</td>
+                        <td>Un día <em>decidió</em> mudarse a París.</td>
+                    </tr>
+                    <tr>
+                        <td>Siempre <em>soñaba</em> con...</td>
+                        <td>Y finalmente <em>logró</em> exponer.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="writing-area">✏️ Escribe la biografía aquí...</div>
+        </div>
+
+        <!-- Ejercicio 6 -->
+        <div class="exercise-card">
+            <div class="exercise-number">06</div>
+            <div class="exercise-title">Mi Trayectoria Profesional</div>
+            <div class="exercise-theme">
+                <span class="tag grammar">Marcadores temporales</span>
+                <span class="tag grammar">Pronombres combinados (se lo/la)</span>
+            </div>
+            <div class="exercise-instructions">
+                <p>Escribe un texto para tu web personal ("Sobre mí") explicando tu carrera.</p>
+                <ul>
+                    <li>Debes usar obligatoriamente: <em>hace, desde hace, a finales de, dentro de</em>.</li>
+                    <li>Incluye una anécdota donde uses la combinación "se lo" (OD + OI).</li>
+                </ul>
+            </div>
+            <div class="grammar-note">
+                <strong>Marcadores:</strong><br>
+                • <em>Hace 3 años</em> = punto en el pasado (hace + tiempo + pretérito)<br>
+                • <em>Desde hace 3 años</em> = acción que continúa (desde hace + tiempo + presente)<br>
+                • <em>A finales de</em> = al final de un periodo<br>
+                • <em>Dentro de</em> = en un futuro desde ahora<br><br>
+                <strong>Pronombres combinados:</strong> Cuando OI (le/les) + OD (lo/la/los/las) → <strong>SE</strong> + lo/la/los/las
+            </div>
+            <div class="example-box">
+                <em>"<strong>Hace</strong> cinco años empecé a pintar. <strong>Desde hace</strong> dos, trabajo como ilustradora. <strong>A finales de</strong> 2022 expuse por primera vez. <strong>Dentro de</strong> un mes inauguro mi segunda muestra."<br><br>
+                "Un cliente quería un cuadro, pero no <strong>se lo</strong> vendí porque era mi pieza favorita."</em>
+            </div>
+            <div class="writing-area">✏️ Escribe tu texto aquí...</div>
+        </div>
+
+        <!-- Ejercicio 7 -->
+        <div class="exercise-card">
+            <div class="exercise-number">07</div>
+            <div class="exercise-title">Carta al Futuro</div>
+            <div class="exercise-theme">
+                <span class="tag grammar">Futuro Simple</span>
+                <span class="tag writing">Predicciones y promesas</span>
+            </div>
+            <div class="exercise-instructions">
+                <p>Escribe una carta a ti mismo fechada en septiembre del próximo año.</p>
+                <ul>
+                    <li>Haz predicciones sobre tu vida, tu trabajo en el museo o tus estudios.</li>
+                    <li>Usa el futuro para promesas y suposiciones.</li>
+                </ul>
+            </div>
+            <div class="grammar-note">
+                <strong>Futuro Simple:</strong> infinitivo + é, ás, á, emos, éis, án. Se usa para predicciones, promesas, suposiciones y planes.
+            </div>
+            <div class="example-box">
+                <em>"Querido yo del pasado: ahora ya <strong>tendrás</strong> tu exposición lista. Seguramente <strong>habrás aprendido</strong> mucho. El año que viene <strong>expondrás</strong> en Barcelona. <strong>Será</strong> un año increíble."</em>
+            </div>
+            <div class="writing-area">✏️ Escribe tu carta aquí...</div>
+        </div>
+
+        <!-- Ejercicio 8 -->
+        <div class="exercise-card">
+            <div class="exercise-number">08</div>
+            <div class="exercise-title">La Lista de Tareas</div>
+            <div class="exercise-theme">
+                <span class="tag grammar">Futuro Compuesto</span>
+                <span class="tag writing">Logros anticipados</span>
+            </div>
+            <div class="exercise-instructions">
+                <p>Estás a punto de inaugurar una exposición el 30 de agosto. Escribe una lista de cosas que <strong>ya habrás hecho</strong> para esa fecha.</p>
+            </div>
+            <div class="grammar-note">
+                <strong>Futuro Compuesto:</strong> haber (futuro) + participio. Expresa acciones que estarán completadas antes de un momento futuro.<br>
+                <em>habré, habrás, habrá, habremos, habréis, habrán</em> + participio
+            </div>
+            <div class="example-box">
+                <em>"Para el día de la inauguración:<br>
+                ✓ Ya <strong>habré terminado</strong> el catálogo.<br>
+                ✓ Ya <strong>habré enviado</strong> las invitaciones.<br>
+                ✓ <strong>Habré elegido</strong> la música.<br>
+                ✓ <strong>Habré hablado</strong> con la prensa."</em>
+            </div>
+            <div class="writing-area">✏️ Escribe tu lista aquí...</div>
+        </div>
+    </div>
+
+    <!-- ==================== L3 ==================== -->
+    <div class="module-section">
+        <div class="module-title">🎨 L3 — Condicional y Pronombres</div>
+        <div class="module-dates">Clases 9–12 · 3–12 agosto</div>
+
+        <!-- Ejercicio 9 -->
+        <div class="exercise-card">
+            <div class="exercise-number">09</div>
+            <div class="exercise-title">La Columna de Consejos</div>
+            <div class="exercise-theme">
+                <span class="tag grammar">Condicional Simple</span>
+                <span class="tag writing">Cortesía y consejo</span>
+            </div>
+            <div class="exercise-instructions">
+                <p>Un joven estudiante de arte te escribe diciendo que está agotado y quiere dejarlo. Respóndele dando consejos.</p>
+                <ul>
+                    <li>Usa estructuras como: <em>"Yo en tu lugar...", "Te recomendaría que...", "Podrías intentar..."</em></li>
+                    <li>Usa el condicional para suavizar las críticas o sugerencias.</li>
+                </ul>
+            </div>
+            <div class="grammar-note">
+                <strong>Condicional Simple:</strong> infinitivo + ía, ías, ía, íamos, íais, ían. Se usa para consejos, peticiones corteses, hipótesis y futuro desde el pasado.
+            </div>
+            <div class="example-box">
+                <em>"Querido estudiante: entiendo tu situación. <strong>Podrías</strong> tomarte un descanso sin abandonar. <strong>Te recomendaría</strong> que hablaras con tu profesor. <strong>Yo en tu lugar</strong> buscaría inspiración en otro medio. No <strong>sería</strong> buena idea tomar una decisión tan importante ahora."</em>
+            </div>
+            <div class="writing-area">✏️ Escribe tu respuesta aquí...</div>
+        </div>
+
+        <!-- Ejercicio 10 -->
+        <div class="exercise-card">
+            <div class="exercise-number">10</div>
+            <div class="exercise-title">Arrepentimientos y Oportunidades</div>
+            <div class="exercise-theme">
+                <span class="tag grammar">Condicional Compuesto</span>
+                <span class="tag writing">Hipótesis pasadas</span>
+            </div>
+            <div class="exercise-instructions">
+                <p>Escribe un diario reflexionando sobre una oportunidad de trabajo o beca que perdiste en el pasado.</p>
+                <ul>
+                    <li>Explica qué <strong>habrías hecho</strong> si las circunstancias hubieran sido diferentes.</li>
+                </ul>
+            </div>
+            <div class="grammar-note">
+                <strong>Condicional Compuesto:</strong> haber (condicional) + participio. Expresa hipótesis sobre el pasado, arrepentimientos o consecuencias no realizadas.<br>
+                <em>habría, habrías, habría, habríamos, habríais, habrían</em> + participio
+            </div>
+            <div class="example-box">
+                <em>"Si <strong>hubiera sabido</strong> que el museo cerraba, <strong>habría ido</strong> antes. No <strong>habría aceptado</strong> ese proyecto si <strong>hubiera conocido</strong> las condiciones. <strong>Habría sido</strong> mejor quedarme en mi ciudad."</em>
+            </div>
+            <div class="writing-area">✏️ Escribe tu reflexión aquí...</div>
+        </div>
+
+        <!-- Ejercicio 11 -->
+        <div class="exercise-card">
+            <div class="exercise-number">11</div>
+            <div class="exercise-title">La Transacción en la Galería</div>
+            <div class="exercise-theme">
+                <span class="tag grammar">Pronombres OD/OI</span>
+                <span class="tag grammar">Consolidación final</span>
+                <span class="tag writing">Drilling escrito</span>
+            </div>
+            <div class="exercise-instructions">
+                <p>Reescribe el siguiente diálogo narrativo sustituyendo los objetos por pronombres (lo, la, le, se lo, se la):</p>
+            </div>
+            <div class="grammar-note">
+                <strong>Regla clave:</strong> Cuando combinamos OI (le/les) + OD (lo/la/los/las), el OI se transforma en <strong>SE</strong>.<br>
+                ✗ <em>Le lo di</em> → ✓ <em><strong>Se lo</strong> di</em>
+            </div>
+
+            <table class="correction-table">
+                <thead>
+                    <tr>
+                        <th>Borrador (sin pronombres)</th>
+                        <th>Tu versión (con pronombres)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>El coleccionista pidió <u>el cuadro</u>.</td>
+                        <td>El coleccionista <strong>lo</strong> pidió.</td>
+                    </tr>
+                    <tr>
+                        <td>La galerista dio <u>el precio</u> <u>al coleccionista</u>.</td>
+                        <td>La galerista <strong>se lo</strong> dio.</td>
+                    </tr>
+                    <tr>
+                        <td>El coleccionista pagó <u>el precio</u> <u>a la galerista</u>.</td>
+                        <td>El coleccionista <strong>se lo</strong> pagó.</td>
+                    </tr>
+                    <tr>
+                        <td>La galerista entregó <u>el cuadro</u> <u>al coleccionista</u>.</td>
+                        <td>La galerista <strong>se lo</strong> entregó.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p style="margin-top: 12px; font-size: 0.9rem;"><strong>Ahora tú:</strong> Escribe un párrafo fluido narrando toda la transacción usando pronombres en cada frase:</p>
+            <div class="writing-area">✏️ Escribe tu párrafo aquí...</div>
+        </div>
+
+        <!-- Ejercicio 12 -->
+        <div class="exercise-card">
+            <div class="exercise-number">12</div>
+            <div class="exercise-title">Postal desde la Residencia</div>
+            <div class="exercise-theme">
+                <span class="tag grammar">Por vs. Para</span>
+                <span class="tag grammar">Consolidación final</span>
+            </div>
+            <div class="exercise-instructions">
+                <p>Escribe una postal o email desde una residencia artística en el extranjero.</p>
+                <ul>
+                    <li>Explica el <strong>motivo</strong> del viaje (Por: gracias a, a causa de, durante).</li>
+                    <li>Explica el <strong>destino</strong> o finalidad (Para: con el objetivo de, hacia, para quién).</li>
+                </ul>
+            </div>
+
+            <table class="correction-table">
+                <thead>
+                    <tr>
+                        <th>POR (causa/motivo/intercambio)</th>
+                        <th>PARA (destino/finalidad)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Estoy aquí <strong>por</strong> una beca.</td>
+                        <td>El trabajo es <strong>para</strong> la comunidad.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Por</strong> las mañanas pinto.</td>
+                        <td>Salgo <strong>para</strong> el estudio a las 9.</td>
+                    </tr>
+                    <tr>
+                        <td>Lo hice <strong>por</strong> ti.</td>
+                        <td>Lo hice <strong>para</strong> ti.</td>
+                    </tr>
+                    <tr>
+                        <td>Gracias <strong>por</strong> la oportunidad.</td>
+                        <td>Es hora <strong>para</strong> descansar.</td>
+                    </tr>
+                    <tr>
+                        <td>Pagué 100€ <strong>por</strong> el lienzo.</td>
+                        <td>Este regalo es <strong>para</strong> mi madre.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="example-box">
+                <em>"Querida familia: estoy en Florencia <strong>por</strong> una residencia de tres meses. <strong>Para</strong> mí es una oportunidad única. Trabajo <strong>para</strong> terminar mi serie sobre el Renacimiento. <strong>Por</strong> las tardes visito museos. Las fotos son <strong>para</strong> vosotros. Os quiero <strong>para</strong> siempre."</em>
+            </div>
+            <div class="writing-area">✏️ Escribe tu postal aquí...</div>
+        </div>
+    </div>
+
+    <!-- ==================== RETO FINAL ==================== -->
+    <div class="master-challenge">
+        <h2>🏆 Reto Final: El Discurso de Inauguración</h2>
+        <p>Estás inaugurando tu primera gran exposición. Escribe el discurso (250-300 palabras) integrando todo lo aprendido.</p>
+
+        <div class="requirements">
+            <p><strong>Requisitos obligatorios:</strong></p>
+            <ul>
+                <li>Agradece a los asistentes → <em>Presente + pronombres OI (les)</em></li>
+                <li>Describe cómo era tu vida cuando empezaste → <em>Imperfecto</em></li>
+                <li>Narra el momento clave en que decidiste hacer esta obra → <em>Indefinido</em></li>
+                <li>Explica por qué (Por) y para qué (Para) hiciste esta serie → <em>Por/Para</em></li>
+                <li>Termina con una promesa de futuro → <em>Futuro</em> o un consejo a los jóvenes artistas → <em>Condicional</em></li>
+            </ul>
+        </div>
+
+        <div class="writing-area" style="min-height: 200px; margin-top: 20px; background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.4); color: rgba(255,255,255,0.7);">
+            ✏️ Escribe tu discurso aquí...
+        </div>
+    </div>
+
+    <!-- ==================== CONSEJOS ==================== -->
+    <div class="tip-box">
+        <h3>📋 Consejos para la autocorrección</h3>
+        <ul>
+            <li><strong>L1:</strong> Revisa que no mezcles <em>ser/estar</em> en descripciones temporales vs. permanentes. Los pronombres OD deben concordar en género y número con el sustantivo que reemplazan.</li>
+            <li><strong>L2:</strong> Presta atención a la diferencia entre <em>hace</em> (punto en el pasado) y <em>desde hace</em> (acción que continúa). En el Pretérito Perfecto, revisa la formación del participio.</li>
+            <li><strong>L3:</strong> El uso de <strong>"se"</strong> en lugar de "le" antes de "lo/la" (ej: <em>se lo</em> en vez de <em>le lo</em>) es el error más común. Practica especialmente el ejercicio 11.</li>
+            <li><strong>General:</strong> Después de escribir cada ejercicio, lee en voz alta. Si suena natural, probablemente es correcto.</li>
+        </ul>
+    </div>
+
+    <!-- ==================== NAV ==================== -->
+    <div class="nav-links">
+        <a href="#">← Volver a Clases</a>
+        <a href="#">Ver Correcciones Modelo →</a>
+    </div>
+
+</body>
+</html>
+```

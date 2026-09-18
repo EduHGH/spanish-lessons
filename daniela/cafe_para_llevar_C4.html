@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Café para llevar — Comprensión C4</title>
+<style>
+  :root{
+    --paper:#faf7f2;
+    --ink:#1e1c1a;
+    --ink-soft:#5c5651;
+    --line:#ddd5c9;
+    --accent:#a8442e;
+    --accent-soft:#f2e2da;
+    --ok:#3f6b4f;
+    --ok-bg:#e8f0e9;
+    --serif:'Georgia','Iowan Old Style', serif;
+    --sans:'Helvetica Neue', Arial, sans-serif;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--sans);
+    line-height:1.5;
+  }
+  .wrap{
+    max-width:760px;
+    margin:0 auto;
+    padding:32px 24px 80px;
+  }
+  header{
+    border-bottom:2px solid var(--ink);
+    padding-bottom:16px;
+    margin-bottom:24px;
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    gap:16px;
+    flex-wrap:wrap;
+  }
+  .kicker{
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:0.14em;
+    color:var(--accent);
+    font-weight:700;
+  }
+  h1{
+    font-family:var(--serif);
+    font-size:28px;
+    margin:4px 0 0;
+    font-weight:400;
+  }
+  .meta{
+    font-size:13px;
+    color:var(--ink-soft);
+    text-align:right;
+  }
+  #timer-box{
+    text-align:right;
+  }
+  #timer{
+    font-family:var(--serif);
+    font-size:32px;
+    font-variant-numeric:tabular-nums;
+  }
+  #timer.warn{color:var(--accent);}
+  .timer-controls{
+    margin-top:4px;
+  }
+  button.tiny{
+    font-size:11px;
+    padding:4px 10px;
+    border:1px solid var(--ink);
+    background:transparent;
+    color:var(--ink);
+    border-radius:20px;
+    cursor:pointer;
+    font-family:var(--sans);
+  }
+  button.tiny:hover{background:var(--ink);color:var(--paper);}
+
+  .intro{
+    background:var(--accent-soft);
+    border-left:3px solid var(--accent);
+    padding:14px 18px;
+    font-size:14.5px;
+    margin-bottom:28px;
+  }
+  .intro strong{color:var(--accent);}
+
+  .ficha{
+    display:flex;
+    gap:24px;
+    font-size:13px;
+    color:var(--ink-soft);
+    margin-bottom:28px;
+    flex-wrap:wrap;
+  }
+  .ficha span b{color:var(--ink);}
+
+  section.block{
+    margin-bottom:36px;
+  }
+  .block-title{
+    font-family:var(--serif);
+    font-size:19px;
+    border-bottom:1px solid var(--line);
+    padding-bottom:8px;
+    margin-bottom:16px;
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+  }
+  .block-title .tag{
+    font-family:var(--sans);
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+    color:var(--ink-soft);
+    font-weight:600;
+  }
+  .q{
+    margin-bottom:18px;
+    padding:14px 16px;
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:4px;
+  }
+  .q p.enun{
+    margin:0 0 10px;
+    font-size:15px;
+  }
+  .q .num{
+    color:var(--accent);
+    font-weight:700;
+    margin-right:6px;
+  }
+  .options{
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+  }
+  .opt{
+    padding:8px 12px;
+    border:1px solid var(--line);
+    border-radius:4px;
+    cursor:pointer;
+    font-size:14px;
+    transition:background 0.15s;
+  }
+  .opt:hover{background:var(--accent-soft);}
+  .opt.selected{border-color:var(--ink);background:#f0ece4;}
+  .opt.correct{background:var(--ok-bg);border-color:var(--ok);}
+  .opt.incorrect{background:#f5e2de;border-color:var(--accent);}
+
+  textarea, input[type=text]{
+    width:100%;
+    font-family:var(--sans);
+    font-size:14px;
+    padding:8px 10px;
+    border:1px solid var(--line);
+    border-radius:4px;
+    resize:vertical;
+    background:#fdfcfa;
+  }
+  .blank{
+    display:inline-block;
+    border-bottom:2px solid var(--accent);
+    min-width:90px;
+    padding:0 4px;
+  }
+  .cita{
+    font-style:italic;
+    color:var(--ink-soft);
+    font-size:13.5px;
+    border-left:2px solid var(--line);
+    padding-left:10px;
+    margin:8px 0;
+  }
+  .feedback{
+    margin-top:8px;
+    font-size:13px;
+    display:none;
+  }
+  .feedback.show{display:block;}
+  .feedback.ok{color:var(--ok);}
+  .feedback.bad{color:var(--accent);}
+
+  .grid2{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+  }
+  @media (max-width:560px){
+    .grid2{grid-template-columns:1fr;}
+    header{flex-direction:column;align-items:flex-start;}
+    .meta{text-align:left;}
+  }
+
+  .roleplay-box{
+    background:#fff;
+    border:1px dashed var(--accent);
+    padding:16px;
+    border-radius:4px;
+  }
+  .roleplay-box h4{
+    margin:0 0 8px;
+    font-family:var(--serif);
+    font-weight:400;
+    font-size:16px;
+  }
+  ul.frases{
+    margin:8px 0 0;
+    padding-left:18px;
+    font-size:13.5px;
+    color:var(--ink-soft);
+  }
+
+  footer{
+    margin-top:40px;
+    padding-top:16px;
+    border-top:1px solid var(--line);
+    font-size:12px;
+    color:var(--ink-soft);
+    display:flex;
+    justify-content:space-between;
+  }
+
+  .score-pill{
+    display:inline-block;
+    background:var(--ink);
+    color:var(--paper);
+    padding:3px 12px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:600;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div>
+      <div class="kicker">Comprensión audiovisual · C4</div>
+      <h1>Café para llevar</h1>
+    </div>
+    <div id="timer-box">
+      <div id="timer">10:00</div>
+      <div class="timer-controls">
+        <button class="tiny" onclick="toggleTimer()" id="playBtn">Iniciar</button>
+        <button class="tiny" onclick="resetTimer()">Reiniciar</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="ficha">
+    <span><b>Cortometraje:</b> Café para llevar (2014)</span>
+    <span><b>Dirección:</b> Patricia Font</span>
+    <span><b>Duración:</b> 13 min · Premio Goya</span>
+  </div>
+
+  <div class="intro">
+    <strong>Antes de ver:</strong> Alicia está organizando su boda. Un día entra en un bar a pedir un café para llevar y se encuentra, por casualidad, con Javi — alguien que conoce de antes. Mira el corto (13 min) y luego completa este ejercicio en <strong>10 minutos</strong>. Usa el presente, el pretérito indefinido y el pretérito perfecto que ya conoces de las clases 1 a 4.
+  </div>
+
+  <!-- BLOQUE 1 -->
+  <section class="block">
+    <div class="block-title">1 · Comprensión general <span class="tag">Presente · ser/estar</span></div>
+
+    <div class="q" data-q="1">
+      <p class="enun"><span class="num">1.</span> ¿Dónde <b>está</b> Alicia al principio del vídeo?</p>
+      <div class="options">
+        <div class="opt" data-correct="false">En su casa, hablando con su madre</div>
+        <div class="opt" data-correct="true">En la calle, hablando por teléfono sobre su boda</div>
+        <div class="opt" data-correct="false">En el bar, esperando a Javi</div>
+      </div>
+      <div class="feedback"></div>
+    </div>
+
+    <div class="q" data-q="2">
+      <p class="enun"><span class="num">2.</span> Completa con <b>ser</b> o <b>estar</b>: Alicia ______ nerviosa porque su boda ______ muy cerca.</p>
+      <input type="text" placeholder="Escribe aquí: ... / ...">
+      <div class="feedback"></div>
+    </div>
+
+    <div class="q" data-q="3">
+      <p class="enun"><span class="num">3.</span> ¿Por qué entra Alicia en el bar?</p>
+      <div class="options">
+        <div class="opt" data-correct="true">Para pedir un café para llevar</div>
+        <div class="opt" data-correct="false">Para quedar con una amiga</div>
+        <div class="opt" data-correct="false">Para hacer una llamada tranquila</div>
+      </div>
+      <div class="feedback"></div>
+    </div>
+
+    <div class="q" data-q="4">
+      <p class="enun"><span class="num">4.</span> Javi le pregunta a Alicia sobre los manteles y las dalias de la boda. ¿Qué relación tiene esto con <b>ser/estar</b>? Marca la frase correcta que podría decir Alicia:</p>
+      <div class="options">
+        <div class="opt" data-correct="true">"Los manteles son blancos, clásicos, sin colorines"</div>
+        <div class="opt" data-correct="false">"Los manteles están blancos, clásicos, sin colorines"</div>
+      </div>
+      <div class="feedback"></div>
+    </div>
+  </section>
+
+  <!-- BLOQUE 2 -->
+  <section class="block">
+    <div class="block-title">2 · Pronombres OD/OI <span class="tag">C1 · C3</span></div>
+
+    <div class="q" data-q="5">
+      <p class="enun"><span class="num">5.</span> En el vídeo, alguien dice: <span class="cita">"llámame luego"</span>. ¿Qué tipo de pronombre es <b>-me</b> aquí?</p>
+      <div class="options">
+        <div class="opt" data-correct="false">Objeto directo (OD)</div>
+        <div class="opt" data-correct="true">Objeto indirecto (OI)</div>
+      </div>
+      <div class="feedback"></div>
+    </div>
+
+    <div class="q" data-q="6">
+      <p class="enun"><span class="num">6.</span> Reescribe usando un pronombre de OD: <i>"¿Conoces a la nueva pareja de Javi?"</i> → "Sí, ______ conozco."</p>
+      <input type="text" placeholder="Completa la frase">
+      <div class="feedback"></div>
+    </div>
+
+    <div class="q" data-q="7">
+      <p class="enun"><span class="num">7.</span> Javi le da explicaciones a Alicia sobre por qué no quiso tener una relación seria. ¿Qué pronombre usarías en esta frase? "Javi ______ explica sus razones a Alicia."</p>
+      <div class="options">
+        <div class="opt" data-correct="true">le</div>
+        <div class="opt" data-correct="false">la</div>
+        <div class="opt" data-correct="false">lo</div>
+      </div>
+      <div class="feedback"></div>
+    </div>
+  </section>
+
+  <!-- BLOQUE 3 -->
+  <section class="block">
+    <div class="block-title">3 · Pretérito perfecto e indefinido <span class="tag">C3 · C4</span></div>
+
+    <div class="q" data-q="8">
+      <p class="enun"><span class="num">8.</span> Alicia dice que le <span class="blank">han hecho</span> jefa de departamento. ¿Por qué usa el <b>pretérito perfecto</b> y no el indefinido?</p>
+      <div class="options">
+        <div class="opt" data-correct="true">Porque habla de algo reciente, conectado con el presente</div>
+        <div class="opt" data-correct="false">Porque habla de un momento concreto y cerrado del pasado</div>
+      </div>
+      <div class="feedback"></div>
+    </div>
+
+    <div class="q" data-q="9">
+      <p class="enun"><span class="num">9.</span> Javi cuenta: <span class="cita">"Estuve un año dando vueltas por el mundo"</span>. Este verbo está en pretérito indefinido. ¿Cuál es el infinitivo?</p>
+      <input type="text" placeholder="Infinitivo">
+      <div class="feedback"></div>
+    </div>
+
+    <div class="q" data-q="10">
+      <p class="enun"><span class="num">10.</span> Completa la frase de Javi con el verbo en <b>indefinido</b>: "Cuando ______ (volver) a mi casa, no ______ (tener) nada."</p>
+      <div class="grid2">
+        <input type="text" placeholder="volver">
+        <input type="text" placeholder="tener">
+      </div>
+      <div class="feedback"></div>
+    </div>
+
+    <div class="q" data-q="11">
+      <p class="enun"><span class="num">11.</span> ¿Cuánto tiempo hace que Alicia y Javi no se ven, según la conversación?</p>
+      <div class="options">
+        <div class="opt" data-correct="true">Dos años</div>
+        <div class="opt" data-correct="false">Un año</div>
+        <div class="opt" data-correct="false">Cinco años</div>
+      </div>
+      <div class="feedback"></div>
+    </div>
+  </section>
+
+  <!-- BLOQUE 4: PRODUCCIÓN / ROLEPLAY -->
+  <section class="block">
+    <div class="block-title">4 · Producción breve <span class="tag">Narración de un evento pasado</span></div>
+    <div class="roleplay-box">
+      <h4>Escribe 4-5 frases (oral o escrito)</h4>
+      <p style="font-size:14px;margin-top:0;">Imagina que eres Alicia o Javi. Cuéntale a tu pareja de clase <b>qué has hecho</b> en los últimos dos años (pretérito perfecto) y <b>qué pasó</b> el día que te encontraste con tu ex en el bar (pretérito indefinido).</p>
+      <ul class="frases">
+        <li>Usa al menos un verbo con <b>he/has + participio</b></li>
+        <li>Usa al menos dos verbos en <b>indefinido</b></li>
+        <li>Usa un pronombre de OD o OI (lo, la, le...)</li>
+      </ul>
+      <textarea rows="4" placeholder="Escribe tu narración aquí..."></textarea>
+    </div>
+  </section>
+
+  <footer>
+    <span>DATUM · Español A2 · Bloque 1, Clase 4</span>
+    <span class="score-pill" id="scoreDisplay">0 / 6 revisadas</span>
+  </footer>
+
+</div>
+
+<script>
+  // Quiz interactions
+  document.querySelectorAll('.q').forEach(q=>{
+    const opts = q.querySelectorAll('.opt');
+    if(opts.length===0) return;
+    opts.forEach(opt=>{
+      opt.addEventListener('click', ()=>{
+        if(opt.classList.contains('correct') || opt.classList.contains('incorrect')) return;
+        opts.forEach(o=>o.classList.remove('selected'));
+        opt.classList.add('selected');
+        const isCorrect = opt.dataset.correct === 'true';
+        opts.forEach(o=>{
+          if(o.dataset.correct==='true'){ o.classList.add('correct'); }
+        });
+        if(!isCorrect){ opt.classList.add('incorrect'); }
+        updateScore();
+      });
+    });
+  });
+
+  function updateScore(){
+    const answered = document.querySelectorAll('.q .opt.selected').length;
+    const totalMC = document.querySelectorAll('.q .options').length;
+    document.getElementById('scoreDisplay').textContent = answered + ' / ' + totalMC + ' revisadas';
+  }
+
+  // Timer
+  let duration = 600; // 10 minutes
+  let remaining = duration;
+  let interval = null;
+  const timerEl = document.getElementById('timer');
+  const playBtn = document.getElementById('playBtn');
+
+  function render(){
+    const m = Math.floor(remaining/60).toString().padStart(2,'0');
+    const s = (remaining%60).toString().padStart(2,'0');
+    timerEl.textContent = m+':'+s;
+    timerEl.classList.toggle('warn', remaining <= 60);
+  }
+
+  function toggleTimer(){
+    if(interval){
+      clearInterval(interval);
+      interval = null;
+      playBtn.textContent = 'Continuar';
+    } else {
+      playBtn.textContent = 'Pausar';
+      interval = setInterval(()=>{
+        remaining--;
+        render();
+        if(remaining<=0){
+          clearInterval(interval);
+          interval=null;
+          playBtn.textContent='Iniciar';
+          timerEl.textContent = '¡Tiempo!';
+        }
+      },1000);
+    }
+  }
+
+  function resetTimer(){
+    clearInterval(interval);
+    interval=null;
+    remaining=duration;
+    playBtn.textContent='Iniciar';
+    render();
+  }
+
+  render();
+</script>
+
+</body>
+</html>

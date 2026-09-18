@@ -1,0 +1,1229 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clase 1 · Daniela A. — Cimientos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+
+/* ╔══════════════════════════════════════════════════════════════╗
+   ║  ESCOLAR — clase individual · hereda del programa de Daniela  ║
+   ╚══════════════════════════════════════════════════════════════╝ */
+
+:root{
+  --paper:        #FBF7EE;
+  --paper-raised: #FFFFFF;
+  --paper-alt:    #F3ECDA;
+  --ink:          #23291F;
+  --ink-soft:     #565F52;
+  --ink-faint:    #8B9184;
+  --line:         rgba(35,41,31,0.12);
+  --line-strong:  rgba(35,41,31,0.22);
+
+  --b1:      #2F6FED;  --b1-soft: #EAF1FE;  --b1-line: #C6D9FC;
+  --b2:      #2E9E6B;  --b2-soft: #E9F6EF;  --b2-line: #BEE6D3;
+  --b3:      #DB8A2E;  --b3-soft: #FCF1E1;  --b3-line: #F3D9AF;
+  --b4:      #C1473F;  --b4-soft: #FBEAE8;  --b4-line: #F0C4C0;
+
+  --accent:      var(--b1);
+  --accent-soft: var(--b1-soft);
+  --accent-line: var(--b1-line);
+
+  --f-display: 'Fraunces', Georgia, serif;
+  --f-body:    'IBM Plex Sans', system-ui, sans-serif;
+  --f-data:    'IBM Plex Mono', monospace;
+
+  --r-sm: 8px;
+  --r-md: 14px;
+  --r-lg: 20px;
+
+  --shadow-1: 0 1px 2px rgba(35,41,31,0.05), 0 1px 8px rgba(35,41,31,0.04);
+  --shadow-2: 0 4px 16px rgba(35,41,31,0.08);
+}
+
+*{ box-sizing:border-box; }
+html{ -webkit-text-size-adjust:100%; }
+body{
+  margin:0;
+  background: var(--paper);
+  background-image: radial-gradient(circle at 1px 1px, var(--line) 1px, transparent 0);
+  background-size: 22px 22px;
+  color: var(--ink);
+  font-family: var(--f-body);
+  line-height:1.55;
+  padding: 40px 16px 80px;
+}
+.page{ max-width: 900px; margin:0 auto; }
+
+/* ── HERO ── */
+.hero{
+  background: var(--paper-raised);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  padding: 36px 36px 30px;
+  box-shadow: var(--shadow-1);
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+.hero::before{
+  content:"";
+  position:absolute; inset:0 0 auto 0; height:6px;
+  background: var(--accent);
+}
+.hero-top{ display:flex; align-items:flex-start; justify-content:space-between; gap:16px; flex-wrap:wrap; }
+.hero-eyebrow{
+  font-family: var(--f-data);
+  font-size: 11.5px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin: 0 0 10px;
+}
+.hero h1{
+  font-family: var(--f-display);
+  font-weight: 500;
+  font-size: clamp(26px, 4vw, 36px);
+  margin: 0 0 6px;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+.hero .sub{
+  font-family: var(--f-display);
+  font-style: italic;
+  font-size: 17px;
+  color: var(--ink-soft);
+  margin: 0 0 22px;
+}
+.hero-badge{
+  font-family: var(--f-display);
+  font-weight:600;
+  font-size: 44px;
+  color: var(--accent);
+  line-height: 1;
+  flex: none;
+}
+.hero-badge span{
+  display:block;
+  font-family: var(--f-data);
+  font-size: 11px;
+  color: var(--ink-faint);
+  font-weight: 500;
+  margin-top: 4px;
+  text-align: center;
+}
+.hero-meta{ display:flex; flex-wrap:wrap; gap:10px; }
+.meta-chip{
+  display:flex; align-items:center; gap:7px;
+  background: var(--paper-alt);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 7px 14px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink-soft);
+}
+.meta-chip b{ color: var(--ink); font-weight:600; }
+
+/* ── OBJETIVOS ── */
+.objetivos{
+  background: var(--accent-soft);
+  border: 1px solid var(--accent-line);
+  border-radius: var(--r-lg);
+  padding: 24px 30px;
+  margin-bottom: 24px;
+}
+.objetivos h2{
+  font-family: var(--f-display);
+  font-weight: 500;
+  font-size: 19px;
+  margin: 0 0 14px;
+  color: var(--ink);
+}
+.objetivos ul{ margin:0; padding-left: 20px; }
+.objetivos li{ margin-bottom: 6px; font-size: 14.5px; color: var(--ink-soft); }
+.objetivos li::marker{ color: var(--accent); }
+
+/* ── SECCIONES ── */
+.seccion{
+  background: var(--paper-raised);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  margin-bottom: 22px;
+  box-shadow: var(--shadow-1);
+  overflow: hidden;
+}
+.seccion-head{
+  padding: 20px 32px;
+  display:flex; align-items:center; justify-content:space-between; gap:16px;
+  flex-wrap: wrap;
+  background: var(--paper-alt);
+  border-bottom: 1px solid var(--line);
+}
+.seccion-head h2{
+  font-family: var(--f-display);
+  font-weight: 500;
+  font-size: 21px;
+  margin:0;
+  display:flex; align-items:center; gap:10px;
+}
+.seccion-head .num{
+  font-family: var(--f-data);
+  font-size: 13px;
+  color: var(--ink-faint);
+  background: var(--paper-raised);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  width: 26px; height: 26px;
+  display:flex; align-items:center; justify-content:center;
+  flex: none;
+}
+.seccion-head .tiempo{
+  font-family: var(--f-data);
+  font-size: 12px;
+  color: var(--ink-faint);
+  letter-spacing: .02em;
+}
+.seccion-body{ padding: 26px 32px 30px; }
+.seccion-body p{ margin: 0 0 12px; font-size: 14.5px; color: var(--ink-soft); }
+.seccion-body p:last-child{ margin-bottom: 0; }
+
+/* ── TABLAS DE CONJUGACIÓN ── */
+.conjug-grid{
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin: 16px 0 20px;
+}
+.conjug-card{
+  background: var(--paper-alt);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  padding: 16px 18px;
+}
+.conjug-card h4{
+  margin: 0 0 10px;
+  font-family: var(--f-display);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--accent);
+}
+.conjug-card table{ width:100%; border-collapse: collapse; }
+.conjug-card td{ padding: 3px 0; font-size: 13.5px; }
+.conjug-card td.pron{ color: var(--ink-faint); font-family: var(--f-data); font-size: 11.5px; width: 60px; }
+.conjug-card td.form{ font-weight: 600; color: var(--ink); }
+
+/* ── TABLA SER/ESTAR ── */
+.contraste{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 16px 0 8px;
+}
+.contraste-col{
+  border-radius: var(--r-md);
+  padding: 18px 20px;
+  border: 1px solid var(--line);
+}
+.contraste-col.ser{ background: var(--b1-soft); border-color: var(--b1-line); }
+.contraste-col.estar{ background: var(--b3-soft); border-color: var(--b3-line); }
+.contraste-col h4{
+  margin: 0 0 10px;
+  font-family: var(--f-display);
+  font-size: 17px;
+  font-weight: 600;
+}
+.contraste-col.ser h4{ color: var(--b1); }
+.contraste-col.estar h4{ color: #96591A; }
+.contraste-col ul{ margin:0; padding-left: 18px; }
+.contraste-col li{ font-size: 13.5px; color: var(--ink-soft); margin-bottom: 7px; }
+.contraste-col li b{ color: var(--ink); font-weight: 600; }
+
+.par-ejemplos{
+  margin-top: 18px;
+  border-top: 1px dashed var(--line-strong);
+  padding-top: 16px;
+}
+.par-ejemplos .par{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 10px;
+  font-size: 13.5px;
+}
+.par-ejemplos .par span{ padding: 8px 12px; border-radius: var(--r-sm); background: var(--paper-alt); }
+.par-ejemplos .par span b{ font-family: var(--f-data); font-size: 11px; text-transform:uppercase; letter-spacing: .04em; color: var(--ink-faint); display:block; margin-bottom: 3px; }
+
+/* ── VOCABULARIO ── */
+.vocab-box{
+  background: var(--paper-alt);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  padding: 18px 20px;
+  margin: 14px 0;
+}
+.vocab-box h4{
+  margin: 0 0 10px;
+  font-family: var(--f-data);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: var(--ink-faint);
+}
+.chip-row{ display:flex; flex-wrap:wrap; gap: 8px; }
+.chip{
+  font-size: 13px;
+  background: var(--paper-raised);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 5px 12px;
+  color: var(--ink);
+  font-weight: 500;
+}
+.chip.glosa{ padding-right: 6px; }
+.chip.glosa .g{
+  color: var(--ink-faint);
+  font-style: italic;
+  font-weight: 400;
+  margin-left: 5px;
+}
+
+/* ── PRACTICE BOX (escritura) ── */
+.practice-box{
+  border: 1.5px dashed var(--line-strong);
+  border-radius: var(--r-md);
+  padding: 18px 20px;
+  margin-top: 16px;
+  background: var(--paper);
+}
+.practice-box .prompt{
+  font-family: var(--f-display);
+  font-style: italic;
+  font-size: 15.5px;
+  color: var(--ink);
+  margin: 0 0 12px;
+}
+textarea.write-area{
+  width: 100%;
+  min-height: 110px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  background: var(--paper-raised);
+  font-family: var(--f-body);
+  font-size: 14px;
+  color: var(--ink);
+  padding: 12px 14px;
+  resize: vertical;
+}
+textarea.write-area:focus{ outline: none; border-color: var(--accent); }
+.save-status{
+  font-family: var(--f-data);
+  font-size: 11px;
+  color: var(--ink-faint);
+  margin-top: 6px;
+  min-height: 14px;
+}
+
+/* ── ROLEPLAY / DIÁLOGO ── */
+.roles{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 16px 0 18px;
+}
+.role-card{
+  border-radius: var(--r-md);
+  padding: 16px 18px;
+  border: 1px solid var(--line);
+  background: var(--paper-alt);
+}
+.role-card h4{
+  margin: 0 0 8px;
+  font-family: var(--f-display);
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--accent);
+}
+.role-card p{ font-size: 13.5px; margin: 0; color: var(--ink-soft); }
+
+.dialogue{
+  border-left: 3px solid var(--accent-line);
+  padding-left: 18px;
+  margin: 16px 0;
+}
+.dialogue .linea{ margin-bottom: 10px; font-size: 14px; }
+.dialogue .linea b{
+  font-family: var(--f-data);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  color: var(--accent);
+  margin-right: 8px;
+}
+
+/* ── EJERCICIOS ── */
+.ejercicio{
+  background: var(--paper-alt);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  padding: 18px 20px;
+  margin: 16px 0;
+}
+.ejercicio h4{
+  margin: 0 0 4px;
+  font-family: var(--f-display);
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--ink);
+}
+.ejercicio .instr{
+  font-size: 13px;
+  color: var(--ink-faint);
+  margin: 0 0 12px;
+}
+.ejercicio ol{ margin: 0; padding-left: 20px; }
+.ejercicio li{ font-size: 14px; margin-bottom: 9px; color: var(--ink); }
+.ejercicio li .hueco{
+  display:inline-block;
+  min-width: 90px;
+  border-bottom: 1.5px solid var(--line-strong);
+  margin: 0 2px;
+}
+.ejercicio li .hueco.hueco-largo{ min-width: 160px; }
+.ejercicio li .pista{ color: var(--ink-faint); font-size: 12.5px; font-family: var(--f-data); }
+.corte-clase{
+  display:flex; align-items:center; gap:10px;
+  margin: 4px 0 14px;
+  font-family: var(--f-data);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--accent);
+}
+.corte-clase::before, .corte-clase::after{
+  content:"";
+  flex:1;
+  height:1px;
+  background: var(--accent-line);
+}
+.corte-casa{
+  display:flex; align-items:center; gap:10px;
+  margin: 18px 0 14px;
+  font-family: var(--f-data);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--ink-faint);
+}
+.corte-casa::before, .corte-casa::after{
+  content:"";
+  flex:1;
+  height:1px;
+  background: var(--line);
+}
+
+details.respuestas{ margin-top: 12px; }
+details.respuestas summary{
+  cursor: pointer;
+  font-family: var(--f-data);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--accent);
+  font-weight: 600;
+  padding: 8px 0;
+  list-style: none;
+}
+details.respuestas summary::-webkit-details-marker{ display:none; }
+details.respuestas summary::before{ content: "▸ "; }
+details.respuestas[open] summary::before{ content: "▾ "; }
+details.respuestas .respuestas-body{
+  background: var(--paper-raised);
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  padding: 12px 16px;
+  margin-top: 4px;
+  font-size: 13.5px;
+  color: var(--ink-soft);
+  line-height: 1.7;
+}
+details.respuestas .respuestas-body b{ color: var(--ink); }
+details.bloque-respuestas{ margin-top: 6px; }
+details.bloque-respuestas summary{
+  cursor: pointer;
+  font-family: var(--f-data);
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  color: var(--ink-faint);
+  font-weight: 600;
+  padding: 4px 0;
+  list-style: none;
+}
+details.bloque-respuestas summary::-webkit-details-marker{ display:none; }
+details.bloque-respuestas summary::before{ content: "▸ "; }
+details.bloque-respuestas[open] summary::before{ content: "▾ "; }
+details.bloque-respuestas .respuestas-body{
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  padding: 10px 14px;
+  margin: 4px 0 10px;
+  font-size: 13px;
+  color: var(--ink-soft);
+  line-height: 1.7;
+}
+details.bloque-respuestas .respuestas-body b{ color: var(--ink); }
+
+.starter-list{ display:flex; flex-direction:column; gap:8px; margin: 14px 0; }
+.starter{
+  font-size: 13.5px;
+  color: var(--ink-soft);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  padding: 8px 12px;
+}
+.starter b{ color: var(--ink); font-family: var(--f-data); font-size: 11px; text-transform:uppercase; margin-right:6px; }
+
+.modelo{
+  border-left: 3px solid var(--accent-line);
+  padding: 4px 0 4px 16px;
+  margin: 14px 0;
+  font-family: var(--f-display);
+  font-style: italic;
+  font-size: 14.5px;
+  color: var(--ink-soft);
+}
+
+/* ── CALLOUTS ── */
+.callout{
+  border-radius: var(--r-lg);
+  padding: 22px 28px;
+  margin-bottom: 20px;
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-1);
+}
+.callout h3{
+  font-family: var(--f-display);
+  font-size: 18px;
+  font-weight: 500;
+  margin: 0 0 8px;
+  display:flex; align-items:center; gap:8px;
+}
+.callout p{ margin: 0 0 6px; font-size: 14.5px; color: var(--ink-soft); }
+.callout p:last-child{ margin-bottom: 0; }
+.callout.movie{ background: var(--b1-soft); border-color: var(--b1-line); }
+.callout.movie h3{ color: var(--b1); }
+
+/* ── CHECKLIST DE PROGRESO ── */
+.progress-card{
+  background: var(--paper-raised);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  padding: 20px 28px;
+  margin-bottom: 24px;
+  box-shadow: var(--shadow-1);
+}
+.progress-card h3{
+  font-family: var(--f-display);
+  font-size: 16px;
+  font-weight: 500;
+  margin: 0 0 12px;
+  color: var(--ink);
+}
+.progress-bar-track{
+  height: 8px;
+  border-radius: 999px;
+  background: var(--paper-alt);
+  overflow: hidden;
+  margin-bottom: 14px;
+}
+.progress-bar-fill{
+  height: 100%;
+  width: 0%;
+  background: var(--accent);
+  border-radius: 999px;
+  transition: width .35s ease;
+}
+.check-list{ display:flex; flex-direction:column; gap: 8px; }
+.check-item{ display:flex; align-items:center; gap: 10px; font-size: 13.5px; color: var(--ink-soft); cursor:pointer; }
+.check-item input{ accent-color: var(--accent); width: 16px; height:16px; }
+.check-item.done{ color: var(--ink-faint); text-decoration: line-through; }
+
+footer{
+  text-align:center;
+  font-size: 11.5px;
+  color: var(--ink-faint);
+  margin-top: 36px;
+  font-family: var(--f-data);
+}
+
+@media (max-width: 720px){
+  body{ padding: 24px 10px 60px; }
+  .hero{ padding: 26px 20px 22px; }
+  .seccion-head, .seccion-body, .objetivos, .callout, .progress-card{ padding-left: 18px; padding-right: 18px; }
+  .conjug-grid{ grid-template-columns: 1fr; }
+  .contraste, .roles, .par-ejemplos .par{ grid-template-columns: 1fr; }
+  .hero-top{ flex-direction: column-reverse; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-top">
+      <div>
+        <p class="hero-eyebrow">Bloque 1 · Cimientos — Presente y estructura básica</p>
+        <h1>Clase 1</h1>
+        <p class="sub">Repaso de presente + ser/estar, y primer contacto formal en español</p>
+      </div>
+      <div class="hero-badge">C1<span>6 jul · lun</span></div>
+    </div>
+    <div class="hero-meta">
+      <span class="meta-chip"><span aria-hidden="true">⏱️</span> <b>50 min</b></span>
+      <span class="meta-chip"><span aria-hidden="true">📘</span> Gramática <b>Presente + ser/estar</b></span>
+      <span class="meta-chip"><span aria-hidden="true">✍️</span> Producción <b>Rutina diaria</b></span>
+      <span class="meta-chip"><span aria-hidden="true">🎭</span> Roleplay <b>Entrevista en un museo</b></span>
+      <span class="meta-chip"><span aria-hidden="true">🎬</span> <b>Asignar película 1</b></span>
+    </div>
+  </div>
+
+  <!-- PROGRESO -->
+  <div class="progress-card">
+    <h3>Progreso de la clase</h3>
+    <div class="progress-bar-track"><div class="progress-bar-fill" id="barra"></div></div>
+    <div class="check-list" id="lista">
+      <label class="check-item"><input type="checkbox" data-step> 1 · Calentamiento</label>
+      <label class="check-item"><input type="checkbox" data-step> 2 · Gramática: presente + ser/estar</label>
+      <label class="check-item"><input type="checkbox" data-step> 3 · Producción: rutina diaria</label>
+      <label class="check-item"><input type="checkbox" data-step> 4 · Roleplay: entrevista en un museo</label>
+      <label class="check-item"><input type="checkbox" data-step> 5 · Tarea y película 1</label>
+    </div>
+  </div>
+
+  <!-- OBJETIVOS -->
+  <div class="objetivos">
+    <h2><span aria-hidden="true">🎯</span> Objetivos de la clase</h2>
+    <ul>
+      <li>Repasar y automatizar la conjugación del presente regular (-ar, -er, -ir).</li>
+      <li>Consolidar los usos clave de <b>ser</b> y <b>estar</b>, incluyendo los pares que cambian de significado.</li>
+      <li>Producir un texto breve y natural sobre la rutina diaria usando conectores temporales.</li>
+      <li>Practicar el registro formal en una situación de entrevista de trabajo (contexto museo/arte).</li>
+    </ul>
+  </div>
+
+  <!-- 1. CALENTAMIENTO -->
+  <div class="seccion">
+    <div class="seccion-head">
+      <h2><span class="num">1</span>Calentamiento</h2>
+      <span class="tiempo">5 min</span>
+    </div>
+    <div class="seccion-body">
+      <p>Preguntas rápidas en presente para activar el idioma antes de entrar en la gramática. Daniela responde en frases completas, no en una palabra.</p>
+      <div class="vocab-box">
+        <h4>Preguntas de entrada</h4>
+        <div class="chip-row">
+          <span class="chip">¿Cómo estás hoy?</span>
+          <span class="chip">¿Qué haces normalmente los lunes?</span>
+          <span class="chip">¿Dónde trabajas / estudias ahora?</span>
+          <span class="chip">¿Cómo es tu semana habitualmente?</span>
+          <span class="chip">¿Qué tal el fin de semana?</span>
+          <span class="chip">¿Cómo es tu ciudad?</span>
+        </div>
+      </div>
+      <p>Si las respuestas salen con fluidez, se puede insistir con un "¿por qué?" o "¿y normalmente?" para forzar una segunda frase — el objetivo es calentar la voz, no solo contestar en una palabra.</p>
+    </div>
+  </div>
+
+  <!-- 2. GRAMÁTICA -->
+  <div class="seccion">
+    <div class="seccion-head">
+      <h2><span class="num">2</span>Gramática</h2>
+      <span class="tiempo">15 min</span>
+    </div>
+    <div class="seccion-body">
+      <p><b>Presente regular.</b> Repaso rápido de las tres conjugaciones antes de pasar a ser/estar, que es el verdadero foco de esta clase.</p>
+
+      <div class="conjug-grid">
+        <div class="conjug-card">
+          <h4>-AR · hablar</h4>
+          <table>
+            <tr><td class="pron">yo</td><td class="form">hablo</td></tr>
+            <tr><td class="pron">tú</td><td class="form">hablas</td></tr>
+            <tr><td class="pron">él/ella</td><td class="form">habla</td></tr>
+            <tr><td class="pron">nosotros</td><td class="form">hablamos</td></tr>
+            <tr><td class="pron">vosotros</td><td class="form">habláis</td></tr>
+            <tr><td class="pron">ellos</td><td class="form">hablan</td></tr>
+          </table>
+        </div>
+        <div class="conjug-card">
+          <h4>-ER · comer</h4>
+          <table>
+            <tr><td class="pron">yo</td><td class="form">como</td></tr>
+            <tr><td class="pron">tú</td><td class="form">comes</td></tr>
+            <tr><td class="pron">él/ella</td><td class="form">come</td></tr>
+            <tr><td class="pron">nosotros</td><td class="form">comemos</td></tr>
+            <tr><td class="pron">vosotros</td><td class="form">coméis</td></tr>
+            <tr><td class="pron">ellos</td><td class="form">comen</td></tr>
+          </table>
+        </div>
+        <div class="conjug-card">
+          <h4>-IR · vivir</h4>
+          <table>
+            <tr><td class="pron">yo</td><td class="form">vivo</td></tr>
+            <tr><td class="pron">tú</td><td class="form">vives</td></tr>
+            <tr><td class="pron">él/ella</td><td class="form">vive</td></tr>
+            <tr><td class="pron">nosotros</td><td class="form">vivimos</td></tr>
+            <tr><td class="pron">vosotros</td><td class="form">vivís</td></tr>
+            <tr><td class="pron">ellos</td><td class="form">viven</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="ejercicio">
+        <h4>Ejercicio 1 · Conjugar en presente (50 frases)</h4>
+        <p class="instr">Completa con la forma correcta del verbo entre paréntesis. No hace falta hacerlas todas en clase — sirven también como banco de repaso para casa.</p>
+        <div class="corte-clase">en clase · ítems 1–8</div>
+        <ol>
+          <li>Yo <span class="hueco"></span> <span class="pista">(trabajar)</span> en un museo del centro.</li>
+          <li>Tú <span class="hueco"></span> <span class="pista">(comer)</span> muy rápido a mediodía.</li>
+          <li>Ella <span class="hueco"></span> <span class="pista">(vivir)</span> cerca de la estación de tren.</li>
+          <li>Nosotros <span class="hueco"></span> <span class="pista">(estudiar)</span> historia del arte los martes.</li>
+          <li>Vosotros <span class="hueco"></span> <span class="pista">(leer)</span> el catálogo antes de entrar.</li>
+          <li>Ellos <span class="hueco"></span> <span class="pista">(hablar)</span> tres idiomas con los turistas.</li>
+          <li>Yo <span class="hueco"></span> <span class="pista">(abrir)</span> la sala principal a las nueve.</li>
+          <li>Tú <span class="hueco"></span> <span class="pista">(escribir)</span> un informe cada semana.</li>
+          <li>Usted <span class="hueco"></span> <span class="pista">(necesitar)</span> más información sobre el horario.</li>
+          <li>Nosotras <span class="hueco"></span> <span class="pista">(cocinar)</span> juntas los domingos.</li>
+        </ol>
+        <div class="corte-casa">para casa · repaso opcional</div>
+        <ol start="9">
+          <li>Ella <span class="hueco"></span> <span class="pista">(correr)</span> por el parque antes del trabajo.</li>
+          <li>Yo <span class="hueco"></span> <span class="pista">(subir)</span> las escaleras del museo cada mañana.</li>
+          <li>Vosotros <span class="hueco"></span> <span class="pista">(compartir)</span> la oficina con otro departamento.</li>
+          <li>Ellos <span class="hueco"></span> <span class="pista">(decidir)</span> el tema de la próxima exposición.</li>
+          <li>Tú <span class="hueco"></span> <span class="pista">(llegar)</span> siempre puntual a las reuniones.</li>
+          <li>Yo <span class="hueco"></span> <span class="pista">(beber)</span> un café antes de empezar el turno.</li>
+          <li>Nosotros <span class="hueco"></span> <span class="pista">(compartir)</span> las tareas de la recepción.</li>
+          <li>Ella <span class="hueco"></span> <span class="pista">(ayudar)</span> a los visitantes con las audioguías.</li>
+          <li>Ustedes <span class="hueco"></span> <span class="pista">(comprender)</span> bien las normas del museo.</li>
+          <li>Yo <span class="hueco"></span> <span class="pista">(recibir)</span> los envíos de obras nuevas.</li>
+          <li>Tú <span class="hueco"></span> <span class="pista">(viajar)</span> mucho por motivos de trabajo.</li>
+          <li>Vosotros <span class="hueco"></span> <span class="pista">(vender)</span> entradas en la taquilla.</li>
+          <li>Ella <span class="hueco"></span> <span class="pista">(describir)</span> las obras a los grupos escolares.</li>
+          <li>Nosotros <span class="hueco"></span> <span class="pista">(cenar)</span> tarde los viernes.</li>
+          <li>Yo <span class="hueco"></span> <span class="pista">(permitir)</span> la entrada con mochila pequeña.</li>
+          <li>Tú <span class="hueco"></span> <span class="pista">(prometer)</span> terminar el informe hoy.</li>
+          <li>Ellos <span class="hueco"></span> <span class="pista">(mirar)</span> los cuadros con mucha atención.</li>
+          <li>Ella <span class="hueco"></span> <span class="pista">(insistir)</span> en la importancia de la conservación.</li>
+          <li>Nosotros <span class="hueco"></span> <span class="pista">(terminar)</span> el turno a las seis.</li>
+          <li>Yo <span class="hueco"></span> <span class="pista">(responder)</span> a los correos por la mañana.</li>
+          <li>Vosotros <span class="hueco"></span> <span class="pista">(cumplir)</span> siempre los plazos de entrega.</li>
+          <li>Tú <span class="hueco"></span> <span class="pista">(preguntar)</span> por el horario de la próxima visita.</li>
+          <li>Ella <span class="hueco"></span> <span class="pista">(deber)</span> revisar la iluminación de la sala.</li>
+          <li>Nosotros <span class="hueco"></span> <span class="pista">(discutir)</span> el proyecto con la dirección.</li>
+          <li>Yo <span class="hueco"></span> <span class="pista">(necesitar)</span> un permiso especial para fotografiar.</li>
+          <li>Ellos <span class="hueco"></span> <span class="pista">(organizar)</span> la exposición temporal de otoño.</li>
+          <li>Tú <span class="hueco"></span> <span class="pista">(limpiar)</span> las vitrinas antes de abrir.</li>
+          <li>Ella <span class="hueco"></span> <span class="pista">(arreglar)</span> la iluminación de la sala tres.</li>
+          <li>Nosotros <span class="hueco"></span> <span class="pista">(visitar)</span> otros museos para comparar métodos.</li>
+          <li>Yo <span class="hueco"></span> <span class="pista">(esperar)</span> al grupo en la entrada principal.</li>
+          <li>Vosotros <span class="hueco"></span> <span class="pista">(ganar)</span> experiencia con cada visita guiada.</li>
+          <li>Ellos <span class="hueco"></span> <span class="pista">(presentar)</span> el proyecto a los patrocinadores.</li>
+          <li>Tú <span class="hueco"></span> <span class="pista">(dibujar)</span> los planos de la nueva sala.</li>
+          <li>Ella <span class="hueco"></span> <span class="pista">(llamar)</span> al proveedor para confirmar la entrega.</li>
+          <li>Nosotros <span class="hueco"></span> <span class="pista">(buscar)</span> información sobre el artista.</li>
+          <li>Yo <span class="hueco"></span> <span class="pista">(caminar)</span> hasta el museo todos los días.</li>
+          <li>Vosotros <span class="hueco"></span> <span class="pista">(invitar)</span> a los colegios a la inauguración.</li>
+          <li>Ellos <span class="hueco"></span> <span class="pista">(comprar)</span> el material para el taller infantil.</li>
+          <li>Tú <span class="hueco"></span> <span class="pista">(escuchar)</span> las explicaciones del guía con atención.</li>
+          <li>Nosotros <span class="hueco"></span> <span class="pista">(creer)</span> que la exposición será un éxito.</li>
+        </ol>
+        <details class="respuestas">
+          <summary>Ver respuestas</summary>
+          <div class="respuestas-body">
+            <details class="bloque-respuestas">
+              <summary>1–10</summary>
+              <div class="respuestas-body">1. <b>trabajo</b> · 2. <b>comes</b> · 3. <b>vive</b> · 4. <b>estudiamos</b> · 5. <b>leéis</b> · 6. <b>hablan</b> · 7. <b>abro</b> · 8. <b>escribes</b> · 9. <b>necesita</b> · 10. <b>cocinamos</b></div>
+            </details>
+            <details class="bloque-respuestas">
+              <summary>11–20</summary>
+              <div class="respuestas-body">11. <b>corre</b> · 12. <b>subo</b> · 13. <b>compartís</b> · 14. <b>deciden</b> · 15. <b>llegas</b> · 16. <b>bebo</b> · 17. <b>compartimos</b> · 18. <b>ayuda</b> · 19. <b>comprenden</b> · 20. <b>recibo</b></div>
+            </details>
+            <details class="bloque-respuestas">
+              <summary>21–30</summary>
+              <div class="respuestas-body">21. <b>viajas</b> · 22. <b>vendéis</b> · 23. <b>describe</b> · 24. <b>cenamos</b> · 25. <b>permito</b> · 26. <b>prometes</b> · 27. <b>miran</b> · 28. <b>insiste</b> · 29. <b>terminamos</b> · 30. <b>respondo</b></div>
+            </details>
+            <details class="bloque-respuestas">
+              <summary>31–40</summary>
+              <div class="respuestas-body">31. <b>cumplís</b> · 32. <b>preguntas</b> · 33. <b>debe</b> · 34. <b>discutimos</b> · 35. <b>necesito</b> · 36. <b>organizan</b> · 37. <b>limpias</b> · 38. <b>arregla</b> · 39. <b>visitamos</b> · 40. <b>espero</b></div>
+            </details>
+            <details class="bloque-respuestas">
+              <summary>41–50</summary>
+              <div class="respuestas-body">41. <b>ganáis</b> · 42. <b>presentan</b> · 43. <b>dibujas</b> · 44. <b>llama</b> · 45. <b>buscamos</b> · 46. <b>camino</b> · 47. <b>invitáis</b> · 48. <b>compran</b> · 49. <b>escuchas</b> · 50. <b>creemos</b></div>
+            </details>
+          </div>
+        </details>
+      </div>
+
+      <p><b>Ser vs. estar — usos clave.</b> Este es el punto donde suelen aparecer errores incluso en niveles más altos que A1, así que conviene fijarlo bien desde el principio.</p>
+
+      <div class="contraste">
+        <div class="contraste-col ser">
+          <h4>SER</h4>
+          <ul>
+            <li><b>Identidad / profesión:</b> Soy comisaria de arte.</li>
+            <li><b>Nacionalidad / origen:</b> Es de Italia.</li>
+            <li><b>Características permanentes:</b> El museo es antiguo.</li>
+            <li><b>Hora y fecha:</b> Son las diez. Hoy es lunes.</li>
+            <li><b>Material:</b> La escultura es de bronce.</li>
+          </ul>
+        </div>
+        <div class="contraste-col estar">
+          <h4>ESTAR</h4>
+          <ul>
+            <li><b>Ubicación:</b> El museo está en el centro.</li>
+            <li><b>Estados temporales:</b> Estoy cansada hoy.</li>
+            <li><b>Emociones:</b> Está muy contenta con la exposición.</li>
+            <li><b>Resultado de una acción:</b> La sala está cerrada.</li>
+            <li><b>Estar + gerundio:</b> Estoy preparando la visita.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="par-ejemplos">
+        <div class="par">
+          <span><b>Ser aburrido</b> = tener poco interés (permanente)</span>
+          <span><b>Estar aburrido</b> = sentir aburrimiento ahora</span>
+        </div>
+        <div class="par">
+          <span><b>Ser listo</b> = ser inteligente</span>
+          <span><b>Estar listo</b> = estar preparado, a punto</span>
+        </div>
+        <div class="par">
+          <span><b>Ser bueno</b> = tener buen carácter / buena calidad</span>
+          <span><b>Estar bueno</b> = tener buen sabor / buen aspecto en un momento dado</span>
+        </div>
+      </div>
+
+      <div class="ejercicio">
+        <h4>Ejercicio 2 · Ser o estar (50 frases)</h4>
+        <p class="instr">Completa con la forma correcta de <b>ser</b> o <b>estar</b> en presente. Igual que el ejercicio anterior, se puede repartir entre clase y repaso en casa.</p>
+        <div class="corte-clase">en clase · ítems 1–8</div>
+        <ol>
+          <li>El museo <span class="hueco"></span> en el centro de la ciudad.</li>
+          <li>Ella <span class="hueco"></span> la nueva directora del museo.</li>
+          <li>Hoy <span class="hueco"></span> lunes.</li>
+          <li>El museo <span class="hueco"></span> cerrado los lunes.</li>
+          <li>Los cuadros <span class="hueco"></span> de un artista español.</li>
+          <li>Yo <span class="hueco"></span> muy cansada después del viaje.</li>
+          <li>La exposición nueva <span class="hueco"></span> muy interesante.</li>
+          <li>¿Dónde <span class="hueco"></span> la sala de arte moderno?</li>
+        </ol>
+        <div class="corte-casa">para casa · repaso opcional</div>
+        <ol start="9">
+          <li>Nosotros <span class="hueco"></span> preparando la visita guiada.</li>
+          <li>Mi hermano <span class="hueco"></span> muy inteligente.</li>
+          <li>La sopa del restaurante <span class="hueco"></span> muy buena hoy.</li>
+          <li>Tú <span class="hueco"></span> de Argentina, ¿verdad?</li>
+          <li>Vosotros <span class="hueco"></span> muy ocupados esta semana.</li>
+          <li>Ellos <span class="hueco"></span> estudiantes de historia del arte.</li>
+          <li>La entrada <span class="hueco"></span> gratuita los domingos.</li>
+          <li>Yo <span class="hueco"></span> contenta con el resultado del proyecto.</li>
+          <li>El edificio <span class="hueco"></span> del siglo XIX.</li>
+          <li>Nosotros <span class="hueco"></span> listos para la inauguración.</li>
+          <li>Ella <span class="hueco"></span> aburrida porque la reunión es muy larga.</li>
+          <li>El café de la cafetería <span class="hueco"></span> muy bueno.</li>
+          <li>Ustedes <span class="hueco"></span> los responsables de la seguridad.</li>
+          <li>La escultura <span class="hueco"></span> de bronce.</li>
+          <li>Yo <span class="hueco"></span> trabajando en la nueva exposición.</li>
+          <li>El museo <span class="hueco"></span> muy grande.</li>
+          <li>Tú <span class="hueco"></span> nerviosa antes de la entrevista.</li>
+          <li>Nosotras <span class="hueco"></span> hermanas.</li>
+          <li>La sala tres <span class="hueco"></span> cerrada por mantenimiento.</li>
+          <li>Él <span class="hueco"></span> un pintor muy conocido.</li>
+          <li>Vosotros <span class="hueco"></span> en la sala equivocada.</li>
+          <li>Ella <span class="hueco"></span> lista para la presentación.</li>
+          <li>El horario de invierno <span class="hueco"></span> diferente al de verano.</li>
+          <li>Yo <span class="hueco"></span> segura de mi respuesta.</li>
+          <li>El cuadro <span class="hueco"></span> pintado por un artista local.</li>
+          <li>Nosotros <span class="hueco"></span> hablando con los patrocinadores.</li>
+          <li>La visita guiada <span class="hueco"></span> a las once.</li>
+          <li>Tú <span class="hueco"></span> muy simpático con los visitantes.</li>
+          <li>Los billetes <span class="hueco"></span> agotados para hoy.</li>
+          <li>Ella <span class="hueco"></span> enferma y no viene hoy.</li>
+          <li>El museo <span class="hueco"></span> abierto todos los días excepto el lunes.</li>
+          <li>Yo <span class="hueco"></span> orgullosa del equipo.</li>
+          <li>Vosotros <span class="hueco"></span> profesores de historia.</li>
+          <li>La conferencia <span class="hueco"></span> el próximo viernes.</li>
+          <li>Nosotros <span class="hueco"></span> cerca de la salida de emergencia.</li>
+          <li>Ella <span class="hueco"></span> la comisaria de la exposición.</li>
+          <li>El ambiente en la sala <span class="hueco"></span> muy tranquilo.</li>
+          <li>Tú <span class="hueco"></span> un poco distraído hoy.</li>
+          <li>Los turistas <span class="hueco"></span> esperando en la puerta.</li>
+          <li>Las obras <span class="hueco"></span> prestadas por otro museo.</li>
+          <li>Yo <span class="hueco"></span> de Madrid, pero vivo aquí desde hace años.</li>
+          <li>El museo <span class="hueco"></span> situado junto al parque.</li>
+        </ol>
+        <details class="respuestas">
+          <summary>Ver respuestas</summary>
+          <div class="respuestas-body">
+            <details class="bloque-respuestas">
+              <summary>1–10</summary>
+              <div class="respuestas-body">1. <b>está</b> · 2. <b>es</b> · 3. <b>es</b> · 4. <b>está</b> · 5. <b>son</b> · 6. <b>estoy</b> · 7. <b>es</b> · 8. <b>está</b> · 9. <b>estamos</b> · 10. <b>es</b></div>
+            </details>
+            <details class="bloque-respuestas">
+              <summary>11–20</summary>
+              <div class="respuestas-body">11. <b>está</b> · 12. <b>eres</b> · 13. <b>estáis</b> · 14. <b>son</b> · 15. <b>es</b> · 16. <b>estoy</b> · 17. <b>es</b> · 18. <b>estamos</b> · 19. <b>está</b> · 20. <b>es</b></div>
+            </details>
+            <details class="bloque-respuestas">
+              <summary>21–30</summary>
+              <div class="respuestas-body">21. <b>son</b> · 22. <b>es</b> · 23. <b>estoy</b> · 24. <b>es</b> · 25. <b>estás</b> · 26. <b>somos</b> · 27. <b>está</b> · 28. <b>es</b> · 29. <b>estáis</b> · 30. <b>está</b></div>
+            </details>
+            <details class="bloque-respuestas">
+              <summary>31–40</summary>
+              <div class="respuestas-body">31. <b>es</b> · 32. <b>estoy</b> · 33. <b>está</b> · 34. <b>estamos</b> · 35. <b>es</b> · 36. <b>eres</b> · 37. <b>están</b> · 38. <b>está</b> · 39. <b>está</b> · 40. <b>estoy</b></div>
+            </details>
+            <details class="bloque-respuestas">
+              <summary>41–50</summary>
+              <div class="respuestas-body">41. <b>sois</b> · 42. <b>es</b> · 43. <b>estamos</b> · 44. <b>es</b> · 45. <b>está</b> · 46. <b>estás</b> · 47. <b>están</b> · 48. <b>están</b> · 49. <b>soy</b> · 50. <b>está</b></div>
+            </details>
+          </div>
+        </details>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. PRODUCCIÓN -->
+  <div class="seccion">
+    <div class="seccion-head">
+      <h2><span class="num">3</span>Producción: rutina diaria</h2>
+      <span class="tiempo">10 min</span>
+    </div>
+    <div class="seccion-body">
+      <p>Daniela escribe un párrafo corto describiendo un día normal, usando el presente regular y al menos dos usos de ser/estar. El objetivo es la fluidez, no la perfección: corregimos después, en voz alta.</p>
+
+      <div class="vocab-box">
+        <h4>Conectores temporales útiles</h4>
+        <div class="chip-row">
+          <span class="chip">por la mañana</span>
+          <span class="chip">a mediodía</span>
+          <span class="chip">por la tarde</span>
+          <span class="chip">por la noche</span>
+          <span class="chip">primero</span>
+          <span class="chip">luego</span>
+          <span class="chip">después</span>
+          <span class="chip">finalmente</span>
+          <span class="chip">antes de + infinitivo</span>
+          <span class="chip">después de + infinitivo</span>
+        </div>
+      </div>
+
+      <div class="modelo">
+        "Normalmente me levanto a las siete. Por la mañana trabajo en el museo y estoy muy ocupada. A mediodía como con mis compañeros y luego seguimos con las visitas guiadas. Por la tarde estoy más tranquila. Por la noche ceno en casa y leo un poco antes de dormir."
+      </div>
+
+      <div class="starter-list">
+        <div class="starter"><b>Mañana</b> Me levanto a las... / Primero... / Por la mañana trabajo/estudio en...</div>
+        <div class="starter"><b>Mediodía</b> A mediodía como... / Luego...</div>
+        <div class="starter"><b>Tarde</b> Por la tarde estoy... / Después...</div>
+        <div class="starter"><b>Noche</b> Por la noche... / Finalmente...</div>
+      </div>
+
+      <div class="ejercicio">
+        <h4>Ejercicio 3 · Frases de práctica sobre la rutina diaria (50 frases)</h4>
+        <p class="instr">Completa cada frase con información real antes de pasar al texto libre. Sirve para activar vocabulario y conectores antes de escribir el párrafo completo; no hace falta terminarlas todas en clase.</p>
+        <div class="corte-clase">en clase · ítems 1–10</div>
+        <ol>
+          <li>Todos los días me levanto a las <span class="hueco"></span>.</li>
+          <li>Por la mañana, lo primero que hago es <span class="hueco hueco-largo"></span>.</li>
+          <li>Antes de salir de casa, yo <span class="hueco hueco-largo"></span>.</li>
+          <li>Normalmente llego al trabajo/museo a las <span class="hueco"></span>.</li>
+          <li>Durante la mañana estoy <span class="hueco"></span> (adjetivo de estado).</li>
+          <li>A mediodía como con <span class="hueco"></span>.</li>
+          <li>Después de comer, generalmente <span class="hueco hueco-largo"></span>.</li>
+          <li>Por la tarde suelo <span class="hueco hueco-largo"></span>.</li>
+          <li>Antes de cenar, normalmente <span class="hueco hueco-largo"></span>.</li>
+          <li>Por la noche, antes de dormir, <span class="hueco hueco-largo"></span>.</li>
+        </ol>
+        <div class="corte-casa">para casa · repaso opcional</div>
+        <ol start="11">
+          <li>Los fines de semana mi rutina es diferente porque <span class="hueco hueco-largo"></span>.</li>
+          <li>Lo que más me gusta de mi rutina diaria es <span class="hueco hueco-largo"></span>.</li>
+          <li>Me despierto sin despertador / con despertador porque <span class="hueco hueco-largo"></span>.</li>
+          <li>Desayuno <span class="hueco"></span> antes de salir de casa.</li>
+          <li>Voy al trabajo/museo en <span class="hueco"></span> (transporte).</li>
+          <li>El trayecto hasta el trabajo dura <span class="hueco"></span>.</li>
+          <li>Nada más llegar al museo, yo <span class="hueco hueco-largo"></span>.</li>
+          <li>Mi primera tarea del día suele ser <span class="hueco"></span>.</li>
+          <li>A media mañana suelo tomar <span class="hueco"></span>.</li>
+          <li>Los martes y jueves, además, yo <span class="hueco"></span>.</li>
+          <li>Antes de la pausa de mediodía, normalmente <span class="hueco hueco-largo"></span>.</li>
+          <li>Durante la pausa de comer, me gusta <span class="hueco hueco-largo"></span>.</li>
+          <li>Después de comer, mi energía está <span class="hueco"></span>.</li>
+          <li>Por la tarde tengo reuniones sobre <span class="hueco"></span>.</li>
+          <li>A media tarde suelo sentirme <span class="hueco"></span>.</li>
+          <li>Termino mi jornada laboral a las <span class="hueco"></span>.</li>
+          <li>Al salir del trabajo, normalmente <span class="hueco"></span>.</li>
+          <li>De camino a casa, suelo <span class="hueco"></span>.</li>
+          <li>Al llegar a casa, lo primero que hago es <span class="hueco hueco-largo"></span>.</li>
+          <li>Antes de cenar suelo <span class="hueco"></span>.</li>
+          <li>Ceno normalmente a las <span class="hueco"></span>.</li>
+          <li>Después de cenar me gusta <span class="hueco"></span>.</li>
+          <li>Antes de dormir, suelo leer / ver / escuchar <span class="hueco"></span>.</li>
+          <li>Me acuesto normalmente a las <span class="hueco"></span>.</li>
+          <li>Duermo alrededor de <span class="hueco"></span> horas cada noche.</li>
+          <li>Los lunes mi rutina es un poco diferente porque <span class="hueco hueco-largo"></span>.</li>
+          <li>Los viernes por la tarde suelo <span class="hueco"></span>.</li>
+          <li>Los sábados por la mañana, normalmente <span class="hueco"></span>.</li>
+          <li>Los domingos me gusta <span class="hueco"></span>.</li>
+          <li>Una vez a la semana suelo <span class="hueco"></span>.</li>
+          <li>Cuando tengo tiempo libre entre semana, yo <span class="hueco hueco-largo"></span>.</li>
+          <li>Lo más estresante de mi rutina diaria es <span class="hueco hueco-largo"></span>.</li>
+          <li>Lo más relajante de mi día es <span class="hueco hueco-largo"></span>.</li>
+          <li>Si pudiera cambiar algo de mi rutina, cambiaría <span class="hueco hueco-largo"></span>.</li>
+          <li>Cuando estoy muy ocupada, normalmente <span class="hueco hueco-largo"></span>.</li>
+          <li>Cuando tengo un día tranquilo en el museo, suelo <span class="hueco hueco-largo"></span>.</li>
+          <li>Antes de una visita guiada importante, siempre <span class="hueco hueco-largo"></span>.</li>
+          <li>Después de una jornada larga, me siento <span class="hueco hueco-largo"></span>.</li>
+          <li>Mi rutina diaria es muy diferente en verano porque <span class="hueco hueco-largo"></span>.</li>
+          <li>En general, describiría mi rutina diaria como <span class="hueco hueco-largo"></span>.</li>
+        </ol>
+      </div>
+
+      <div class="practice-box">
+        <p class="prompt">"Describe tu rutina de un día normal: ¿a qué hora te levantas, qué haces, dónde estás durante el día, cómo te sientes? Usa al menos dos verbos en presente regular y dos usos de ser/estar."</p>
+        <textarea class="write-area" id="texto-rutina" placeholder="Escribe aquí durante la clase..."></textarea>
+        <div class="save-status" id="save-status-rutina" aria-live="polite"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. ROLEPLAY -->
+  <div class="seccion">
+    <div class="seccion-head">
+      <h2><span class="num">4</span>Roleplay: entrevista en un museo</h2>
+      <span class="tiempo">15 min</span>
+    </div>
+    <div class="seccion-body">
+      <p>Situación formal: Daniela se presenta a una entrevista de trabajo en un museo. Se practica el registro formal (usted) y el vocabulario de presentación personal y profesional.</p>
+
+      <div class="vocab-box">
+        <h4>Vocabulario de apoyo</h4>
+        <div class="chip-row">
+          <span class="chip">currículum</span>
+          <span class="chip">experiencia laboral</span>
+          <span class="chip">puesto</span>
+          <span class="chip">disponibilidad</span>
+          <span class="chip">jornada completa / parcial</span>
+          <span class="chip glosa">exposición temporal<span class="g">temporary exhibition</span></span>
+          <span class="chip">sala</span>
+          <span class="chip glosa">comisario/a<span class="g">curator (no "policía")</span></span>
+        </div>
+      </div>
+
+      <div class="roles">
+        <div class="role-card">
+          <h4>Rol A · Entrevistador/a</h4>
+          <p>Director/a del museo. Trata a la candidata de "usted". Pregunta por experiencia, formación y disponibilidad.</p>
+        </div>
+        <div class="role-card">
+          <h4>Rol B · Daniela</h4>
+          <p>Se presenta formalmente, habla de su experiencia y explica por qué le interesa el puesto.</p>
+        </div>
+      </div>
+
+      <div class="dialogue">
+        <div class="linea"><b>A</b>Buenos días, gracias por venir. ¿Puede presentarse, por favor?</div>
+        <div class="linea"><b>B</b>Buenos días. Me llamo Daniela y soy... [profesión / campo de interés].</div>
+        <div class="linea"><b>A</b>¿Dónde trabaja o estudia actualmente?</div>
+        <div class="linea"><b>B</b>Actualmente estoy... [trabajando en / estudiando].</div>
+        <div class="linea"><b>A</b>¿Por qué está interesada en este puesto?</div>
+        <div class="linea"><b>B</b>Estoy interesada porque... [motivo relacionado con arte/museos].</div>
+      </div>
+
+      <p>Después de la primera ronda, se invierten los papeles para que Daniela practique también el rol del entrevistador, usando "usted" de forma activa y no solo receptiva.</p>
+
+      <div class="vocab-box">
+        <h4>Vocabulario para la ronda 2</h4>
+        <div class="chip-row">
+          <span class="chip">sueldo</span>
+          <span class="chip">horario</span>
+          <span class="chip glosa">contrato temporal / indefinido<span class="g">fixed-term / permanent contract</span></span>
+          <span class="chip glosa">periodo de prueba<span class="g">trial period</span></span>
+          <span class="chip glosa">incorporación<span class="g">start date</span></span>
+          <span class="chip">referencias</span>
+        </div>
+      </div>
+
+      <div class="dialogue">
+        <div class="linea"><b>A</b>¿Qué experiencia tiene usted en el sector cultural o artístico?</div>
+        <div class="linea"><b>B</b>Tengo experiencia en... / He trabajado en... / Estoy familiarizada con...</div>
+        <div class="linea"><b>A</b>¿Cuál es su disponibilidad horaria?</div>
+        <div class="linea"><b>B</b>Estoy disponible para... / Mi horario es flexible porque...</div>
+        <div class="linea"><b>A</b>¿Tiene alguna pregunta sobre el puesto o el museo?</div>
+        <div class="linea"><b>B</b>Sí, ¿cómo es el equipo? / ¿Dónde está ubicada exactamente la sala en la que trabajaría?</div>
+      </div>
+
+      <div class="ejercicio">
+        <h4>Cierre del roleplay</h4>
+        <p class="instr">Después de la entrevista, Daniela escribe tres frases usando ser y estar sobre cómo se ha sentido en la simulación (por ejemplo: nivel de nerviosismo, impresión sobre el museo, valoración de su propia actuación).</p>
+      </div>
+
+      <p><b>Ronda 3 · Llamada de seguimiento.</b> Una semana después de la entrevista, el museo llama a Daniela para darle información adicional. Se practica el teléfono formal, un registro distinto al cara a cara.</p>
+
+      <div class="roles">
+        <div class="role-card">
+          <h4>Rol A · Recursos Humanos</h4>
+          <p>Llama para informar sobre el resultado del proceso y explicar los siguientes pasos.</p>
+        </div>
+        <div class="role-card">
+          <h4>Rol B · Daniela</h4>
+          <p>Responde al teléfono de forma formal, confirma datos y hace preguntas de seguimiento.</p>
+        </div>
+      </div>
+
+      <div class="dialogue">
+        <div class="linea"><b>A</b>Buenos días, ¿hablo con Daniela?</div>
+        <div class="linea"><b>B</b>Sí, soy yo. Buenos días.</div>
+        <div class="linea"><b>A</b>La llamo del museo respecto a la entrevista de la semana pasada.</div>
+        <div class="linea"><b>B</b>Ah, muchas gracias por llamar. ¿Hay alguna novedad?</div>
+        <div class="linea"><b>A</b>Sí, está usted seleccionada para la segunda fase del proceso.</div>
+        <div class="linea"><b>B</b>¡Qué buena noticia! ¿Cuál es el siguiente paso?</div>
+        <div class="linea"><b>A</b>Necesitamos que envíe sus referencias y confirme su disponibilidad.</div>
+        <div class="linea"><b>B</b>Perfecto, estoy disponible a partir del mes que viene.</div>
+      </div>
+
+      <div class="vocab-box">
+        <h4>Vocabulario para la ronda 3</h4>
+        <div class="chip-row">
+          <span class="chip glosa">proceso de selección<span class="g">hiring process</span></span>
+          <span class="chip">segunda fase</span>
+          <span class="chip glosa">novedad<span class="g">news/update</span></span>
+          <span class="chip">confirmar</span>
+          <span class="chip">referencias</span>
+          <span class="chip">a partir de</span>
+        </div>
+      </div>
+
+      <p><b>Ronda 4 · Primer día de trabajo.</b> Se cierra el bloque de roleplay con una situación más informal: Daniela se presenta a sus nuevos compañeros el primer día. Sirve para contrastar el registro formal (usted) del resto de rondas con el registro informal (tú) entre compañeros.</p>
+
+      <div class="dialogue">
+        <div class="linea"><b>Compañero/a</b>¡Hola! Tú debes de ser Daniela, ¿verdad?</div>
+        <div class="linea"><b>Daniela</b>Sí, soy yo. Encantada, ¿y tú?</div>
+        <div class="linea"><b>Compañero/a</b>Me llamo... Soy del equipo de exposiciones. ¿Qué tal el primer día?</div>
+        <div class="linea"><b>Daniela</b>Muy bien, estoy un poco nerviosa pero contenta.</div>
+        <div class="linea"><b>Compañero/a</b>Es normal, ¡el museo es enorme al principio! ¿Te enseño la sala de descanso?</div>
+        <div class="linea"><b>Daniela</b>Sí, por favor. ¿A qué hora es la pausa para comer aquí?</div>
+      </div>
+
+      <div class="ejercicio">
+        <h4>Ejercicio 4 · Transformar registro formal → informal</h4>
+        <p class="instr">Reescribe estas frases de "usted" a "tú", como si hablaras con un compañero en vez de con el entrevistador.</p>
+        <ol>
+          <li>¿Puede presentarse, por favor? → <span class="hueco"></span></li>
+          <li>¿Dónde trabaja usted actualmente? → <span class="hueco"></span></li>
+          <li>¿Cuál es su disponibilidad horaria? → <span class="hueco"></span></li>
+          <li>¿Tiene alguna pregunta sobre el puesto? → <span class="hueco"></span></li>
+          <li>Necesitamos que envíe sus referencias. → <span class="hueco"></span></li>
+        </ol>
+        <details class="respuestas">
+          <summary>Ver respuestas</summary>
+          <div class="respuestas-body">
+            1. ¿Puedes presentarte, por favor? · 2. ¿Dónde trabajas tú actualmente? · 3. ¿Cuál es tu disponibilidad horaria? · 4. ¿Tienes alguna pregunta sobre el puesto? · 5. Necesitamos que envíes tus referencias.
+          </div>
+        </details>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. TAREA -->
+  <div class="seccion">
+    <div class="seccion-head">
+      <h2><span class="num">5</span>Tarea para casa</h2>
+      <span class="tiempo">5 min</span>
+    </div>
+    <div class="seccion-body">
+      <p>Antes de la Clase 2 (8 de julio):</p>
+      <div class="vocab-box">
+        <h4>Pendientes</h4>
+        <div class="chip-row">
+          <span class="chip">Terminar el párrafo de rutina diaria</span>
+          <span class="chip">Repasar conjugación presente (-ar/-er/-ir)</span>
+          <span class="chip">Repasar tabla ser/estar</span>
+          <span class="chip">Revisar los ejercicios 1 y 2 sin mirar las respuestas</span>
+          <span class="chip">Escribir 3 frases nuevas con ser/estar sobre su trabajo o museo favorito</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PELÍCULA -->
+  <div class="callout movie">
+    <h3><span aria-hidden="true">🎬</span> Película 1 — asignación</h3>
+    <p>Se asigna hoy la primera película en español del programa. Daniela debe verla con subtítulos en español (no en su idioma) durante las próximas dos semanas.</p>
+    <p>Mientras la ve, debe anotar entre 8 y 10 palabras o expresiones nuevas. La discusión oral sobre la película tendrá lugar en la <b>Clase 4 (15 de julio)</b>, junto con la asignación de la película 2.</p>
+  </div>
+
+  <footer>ESCOLAR · clase 1 · programa de Daniela A.</footer>
+
+</div>
+
+<script>
+document.querySelectorAll('[data-step]').forEach(cb => {
+  cb.addEventListener('change', () => {
+    cb.closest('.check-item').classList.toggle('done', cb.checked);
+    const total = document.querySelectorAll('[data-step]').length;
+    const done = document.querySelectorAll('[data-step]:checked').length;
+    document.getElementById('barra').style.width = (done/total*100) + '%';
+  });
+});
+
+// Persistencia del texto libre (producción: rutina diaria) vía window.storage,
+// con fallback silencioso si la API no está disponible en este contexto.
+(function(){
+  const KEY = 'clase1-daniela-texto-rutina';
+  const textarea = document.getElementById('texto-rutina');
+  const status = document.getElementById('save-status-rutina');
+  if (!textarea) return;
+
+  async function cargar(){
+    if (!window.storage) return;
+    try {
+      const res = await window.storage.get(KEY);
+      if (res && typeof res.value === 'string') {
+        textarea.value = res.value;
+        if (status) status.textContent = 'Texto recuperado de la sesión anterior';
+      }
+    } catch (e) {
+      // Clave inexistente u otro error: no hay nada que cargar, seguimos en blanco.
+    }
+  }
+
+  let guardando = null;
+  function guardarDiferido(){
+    if (!window.storage) return;
+    clearTimeout(guardando);
+    if (status) status.textContent = 'Guardando…';
+    guardando = setTimeout(async () => {
+      try {
+        const ok = await window.storage.set(KEY, textarea.value);
+        if (status) status.textContent = ok ? 'Guardado' : 'No se pudo guardar';
+      } catch (e) {
+        if (status) status.textContent = 'No se pudo guardar (sin conexión al guardado)';
+      }
+    }, 600);
+  }
+
+  textarea.addEventListener('input', guardarDiferido);
+  cargar();
+})();
+</script>
+
+</body>
+</html>

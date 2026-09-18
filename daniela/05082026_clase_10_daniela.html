@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clase 10 · Lo que habría hecho — Daniela</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+
+/* ╔══════════════════════════════════════════════════════════════╗
+   ║  ESCOLAR — sistema de diseño para clases de español online   ║
+   ║  Clase 10 · Bloque 3 Condicional y pronombres                 ║
+   ║  "Lo que habría hecho"                                        ║
+   ╚══════════════════════════════════════════════════════════════╝ */
+
+:root{
+  --paper:        #FBF7EE;
+  --paper-raised: #FFFFFF;
+  --paper-alt:    #F3ECDA;
+  --ink:          #23291F;
+  --ink-soft:     #565F52;
+  --ink-faint:    #8B9184;
+  --line:         rgba(35,41,31,0.12);
+  --line-strong:  rgba(35,41,31,0.22);
+
+  --b1:      #2E9E6B;  --b1-soft: #E9F6EF;  --b1-line: #BEE6D3;
+  --b2:      #2F6FED;  --b2-soft: #EAF1FE;  --b2-line: #C6D9FC;
+  --family:  #B5502E;  --family-soft: #FBEBE3; --family-line: #EFC9B4;
+  --amber:   #C1892F;  --amber-soft: #FBF1E1; --amber-line: #F0D9A8;
+
+  --f-display: 'Fraunces', Georgia, serif;
+  --f-body:    'IBM Plex Sans', system-ui, sans-serif;
+  --f-data:    'IBM Plex Mono', monospace;
+
+  --r-sm: 8px;
+  --r-md: 14px;
+  --r-lg: 20px;
+
+  --shadow-1: 0 1px 2px rgba(35,41,31,0.05), 0 1px 8px rgba(35,41,31,0.04);
+}
+
+*{ box-sizing:border-box; }
+body{
+  margin:0;
+  background: var(--paper);
+  background-image: radial-gradient(circle at 1px 1px, var(--line) 1px, transparent 0);
+  background-size: 22px 22px;
+  color: var(--ink);
+  font-family: var(--f-body);
+  line-height:1.6;
+}
+::selection{ background: var(--b1-soft); }
+
+/* ---------- HEADER ---------- */
+header{ padding:44px 24px 28px; max-width:760px; margin:0 auto; }
+.eyebrow{
+  font-family: var(--f-data); font-size:12px; letter-spacing:.14em;
+  text-transform:uppercase; color: var(--b1); margin:0 0 10px;
+  display:flex; align-items:center; gap:10px;
+}
+.eyebrow .dot{ width:6px; height:6px; border-radius:50%; background: var(--b1); }
+h1{
+  font-family: var(--f-display); font-weight:600;
+  font-size:clamp(30px,5.6vw,46px); line-height:1.08;
+  margin:0 0 14px; letter-spacing:-.01em;
+}
+h1 em{ font-style:italic; color: var(--b1); }
+.lede{ font-size:16px; color: var(--ink-soft); max-width:56ch; margin:0; }
+
+.meta-row{
+  display:flex; flex-wrap:wrap; gap:20px; margin-top:26px;
+  font-family: var(--f-data); font-size:12px; color: var(--ink-faint);
+}
+.meta-row strong{
+  display:block; color: var(--ink); font-size:14.5px; font-weight:500;
+  font-family: var(--f-display); margin-top:3px;
+}
+
+/* ---------- SECTIONS ---------- */
+main{ max-width:760px; margin:0 auto; padding:8px 24px 100px; }
+
+section.block{ margin-bottom:48px; }
+.block-head{ display:flex; align-items:baseline; gap:12px; margin-bottom:18px; }
+.time-tag{
+  font-family: var(--f-data); font-size:11px; color: var(--ink-faint);
+  background: var(--paper-alt); padding:3px 10px; border-radius:999px; margin-left:auto; flex:none;
+}
+.block-num{
+  font-family: var(--f-data); font-size:12px; color:#fff; background: var(--b1);
+  width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  flex:none;
+}
+.block-head h2{
+  font-family: var(--f-display); font-weight:500; font-style:italic; font-size:22px; margin:0;
+}
+
+.panel{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-lg);
+  box-shadow: var(--shadow-1); padding:26px 28px;
+}
+
+/* ---------- GRAMMAR TABLE ---------- */
+.conj-table{ width:100%; border-collapse:collapse; margin-top:4px; }
+.conj-table td{ padding:10px 6px; border-bottom:1px dashed var(--line); font-size:15px; }
+.conj-table tr:last-child td{ border-bottom:none; }
+.conj-pron{ font-family: var(--f-data); color: var(--ink-faint); font-size:13px; width:90px; }
+.conj-form{ font-family: var(--f-display); font-weight:600; font-size:19px; color: var(--b1); }
+.conj-ex{ color: var(--ink-soft); font-size:14px; }
+
+.note{
+  margin-top:18px; padding:14px 16px; background: var(--b1-soft); border:1px solid var(--b1-line);
+  border-radius: var(--r-md); font-size:14px; color: var(--ink-soft);
+}
+.note strong{ color: var(--ink); }
+
+/* ---------- CORRECTION BLOCK ---------- */
+.correction-panel{ background: var(--paper-alt); border:1px solid var(--line); border-radius: var(--r-lg); padding:26px 28px; }
+.correction-panel .block-num{ background: var(--ink-soft); }
+.correction-item{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:14px 16px; margin-bottom:12px;
+}
+.correction-item:last-child{ margin-bottom:0; }
+.correction-item .wrong-line{ font-size:14.5px; color: var(--family); text-decoration: line-through; text-decoration-color: var(--family-line); }
+.correction-item .right-line{ font-size:14.5px; color: var(--b2); margin-top:6px; font-weight:500; }
+.correction-item .why{ font-size:13px; color: var(--ink-faint); margin-top:6px; }
+
+.warning-box{
+  margin-top:18px; padding:14px 16px; background: var(--amber-soft); border:1px solid var(--amber-line);
+  border-radius: var(--r-md); font-size:14px; color: var(--ink-soft);
+}
+.warning-box strong{ color: #96591A; }
+
+/* ---------- RECEPTIVE-ONLY BADGE ---------- */
+.receptive-flag{
+  display:inline-flex; align-items:center; gap:6px; font-family: var(--f-data); font-size:11px;
+  text-transform:uppercase; letter-spacing:.05em; color: var(--family); background: var(--family-soft);
+  border:1px solid var(--family-line); padding:4px 10px; border-radius:999px; margin-bottom:16px;
+}
+
+/* ---------- COMPARE (condicional simple vs. compuesto) ---------- */
+.compare-wrap{ margin-top:22px; }
+.compare-title{
+  font-family: var(--f-data); font-size:11.5px; text-transform:uppercase; letter-spacing:.06em;
+  color: var(--ink-faint); margin:0 0 10px;
+}
+.compare-grid{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+@media (max-width:560px){ .compare-grid{ grid-template-columns:1fr; } }
+.compare-col{ border-radius: var(--r-md); padding:16px 18px; border:1px solid; }
+.compare-col.is-simple{ background: var(--b2-soft); border-color: var(--b2-line); }
+.compare-col.is-compound{ background: var(--b1-soft); border-color: var(--b1-line); }
+.compare-head{ display:flex; align-items:center; gap:8px; margin:0 0 10px; }
+.compare-verb{ font-family: var(--f-display); font-weight:600; font-size:17px; }
+.is-simple .compare-verb{ color: var(--b2); }
+.is-compound .compare-verb{ color: var(--b1); }
+.compare-sub{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); }
+.compare-list{ margin:0; padding:0; list-style:none; }
+.compare-list li{ font-size:13.5px; color: var(--ink-soft); padding:6px 0; border-top:1px dashed var(--line); }
+.compare-list li:first-child{ border-top:none; }
+.compare-list strong{ color: var(--ink); font-weight:600; }
+
+/* ---------- RECOGNITION CARDS ---------- */
+.recog-grid{ display:flex; flex-direction:column; gap:10px; margin-top:16px; }
+.recog-card{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:14px 16px; display:flex; align-items:flex-start; gap:12px;
+}
+.recog-mark{
+  font-family: var(--f-data); font-size:11px; color:#fff; background: var(--b1);
+  width:22px; height:22px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex:none; margin-top:1px;
+}
+.recog-text{ font-size:14.5px; color: var(--ink); }
+.recog-text .en{ display:block; font-size:12.5px; color: var(--ink-faint); margin-top:4px; font-family: var(--f-data); }
+
+/* ---------- VOCAB CARDS ---------- */
+.vocab-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(160px,1fr)); gap:12px; }
+.vocab-card{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:14px 16px; cursor:pointer; perspective:600px; min-height:78px;
+  display:flex; flex-direction:column; justify-content:center; transition: border-color .15s ease;
+}
+.vocab-card:hover{ border-color: var(--b1-line); }
+.vocab-card:focus-visible{ outline:2px solid var(--b1); outline-offset:2px; }
+.vocab-front{ font-family: var(--f-body); font-weight:600; font-size:15px; }
+.vocab-back{ display:none; font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); margin-top:6px; }
+.vocab-card.flipped .vocab-back{ display:block; }
+.vocab-card.flipped{ background: var(--b1-soft); border-color: var(--b1-line); }
+.vocab-hint{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin:10px 2px 16px; }
+
+/* ---------- EXERCISE ---------- */
+.exercise{ margin-bottom:20px; }
+.exercise:last-of-type{ margin-bottom:0; }
+.ex-sentence{ font-size:15.5px; margin-bottom:10px; }
+.ex-sentence .gap{ font-family: var(--f-data); color: var(--ink-faint); }
+.ex-options{ display:flex; flex-wrap:wrap; gap:8px; }
+.opt-btn{
+  font-family: var(--f-body); font-size:14px; background: var(--paper-raised);
+  border:1.5px solid var(--line); color: var(--ink); padding:7px 16px; border-radius:999px;
+  cursor:pointer; transition: all .15s ease;
+}
+.opt-btn:hover{ border-color: var(--ink-faint); }
+.opt-btn.picked{ background: var(--b1-soft); border-color: var(--b1); color: var(--b1); }
+.opt-btn.correct{ background: var(--b1-soft); border-color: var(--b1); color: var(--b1); }
+.opt-btn.wrong{ background: var(--family-soft); border-color: var(--family); color: var(--family); }
+.opt-btn:disabled{ cursor:default; }
+
+.check-bar{
+  display:flex; align-items:center; justify-content:space-between; gap:16px;
+  margin-top:22px; padding-top:18px; border-top:1px dashed var(--line);
+}
+.btn-primary{
+  font-family: var(--f-body); font-weight:600; font-size:14px; color:#fff; background: var(--b1);
+  border:none; padding:11px 22px; border-radius:999px; cursor:pointer; transition: transform .1s ease;
+}
+.btn-primary:hover{ transform: translateY(-1px); }
+#score-text{ font-family: var(--f-data); font-size:13px; color: var(--ink-faint); }
+.btn-ghost{
+  font-family: var(--f-body); font-weight:600; font-size:13px; color: var(--ink-soft); background:none;
+  border:1.5px solid var(--line); padding:9px 18px; border-radius:999px; cursor:pointer;
+}
+.btn-ghost:hover{ border-color: var(--ink-faint); }
+
+/* ---------- ROLEPLAY / SCENES ---------- */
+.roleplay-panel{ background: var(--family-soft); border:1px solid var(--family-line); border-radius: var(--r-lg); padding:26px 28px; }
+.roleplay-panel .block-num{ background: var(--family); }
+.scene-setup{
+  display:flex; gap:14px; align-items:flex-start; background: var(--paper-raised);
+  border:1px solid var(--family-line); border-radius: var(--r-md); padding:14px 16px; margin-bottom:20px;
+}
+.scene-icon{ font-size:22px; flex:none; }
+.scene-text{ font-size:14px; color: var(--ink-soft); }
+.scene-text strong{ color: var(--ink); }
+
+.scene-tabs{ display:flex; gap:8px; margin-bottom:16px; flex-wrap:wrap; }
+.scene-tab{
+  font-family: var(--f-body); font-size:13.5px; font-weight:600; color: var(--ink-soft);
+  background: var(--paper-raised); border:1.5px solid var(--family-line); padding:8px 16px;
+  border-radius:999px; cursor:pointer; transition: all .15s ease;
+}
+.scene-tab.active{ background: var(--family); color:#fff; border-color: var(--family); }
+.scene-tab:hover:not(.active){ border-color: var(--family); }
+
+.desc-card{
+  background: var(--paper-raised); border:1px solid var(--family-line); border-radius: var(--r-md);
+  padding:18px 20px;
+}
+.desc-card .desc-title{ font-family: var(--f-display); font-weight:600; font-size:16px; margin:0 0 8px; color: var(--ink); }
+.desc-card .desc-brief{ font-size:14px; color: var(--ink-soft); margin:0 0 14px; }
+.desc-card .desc-prompts{ margin:0; padding-left:18px; font-size:13.5px; color: var(--ink-soft); }
+.desc-card .desc-prompts li{ margin-bottom:6px; }
+.desc-card textarea{
+  width:100%; min-height:90px; font-family: var(--f-body); font-size:14.5px; color: var(--ink);
+  background:#fff; border:1px solid var(--family-line); border-radius: var(--r-sm);
+  padding:10px 12px; resize:vertical; margin-top:12px;
+}
+.desc-card textarea:focus{ outline:none; border-color: var(--family); }
+
+.roleplay-tip{
+  margin-top:22px; padding:14px 16px; background: var(--paper-raised); border:1px solid var(--family-line);
+  border-radius: var(--r-md); font-size:13.5px; color: var(--ink-soft);
+}
+.roleplay-tip strong{ color: var(--ink); }
+
+/* ---------- FINAL TASK ---------- */
+.task-panel{ background: var(--paper-alt); border:1px solid var(--line); border-radius: var(--r-lg); padding:26px 28px; }
+.task-panel .block-num{ background: var(--ink-soft); }
+textarea#final-task{
+  width:100%; min-height:140px; font-family: var(--f-body); font-size:15px; color: var(--ink);
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:14px 16px; resize:vertical; margin-top:14px;
+}
+textarea#final-task:focus{ outline:none; border-color: var(--b1); }
+.task-footer{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:12px; flex-wrap:wrap; }
+#task-count{ font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); }
+.btn-secondary{
+  font-family: var(--f-body); font-weight:600; font-size:13.5px; color: var(--ink-soft); background:none;
+  border:1.5px solid var(--line); padding:9px 18px; border-radius:999px; cursor:pointer;
+}
+.saved-flag{ font-family: var(--f-data); font-size:12px; color: var(--b1); opacity:0; transition: opacity .3s ease; }
+.saved-flag.show{ opacity:1; }
+
+/* ---------- FOOTER NAV ---------- */
+footer{
+  max-width:760px; margin:0 auto; padding:0 24px 60px; display:flex;
+  justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;
+  font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint);
+}
+footer a{ color: var(--b1); text-decoration:none; }
+footer a:hover{ text-decoration:underline; }
+
+@media (max-width:600px){
+  header{ padding:34px 18px 22px; }
+  main{ padding:8px 18px 90px; }
+  .panel, .task-panel, .roleplay-panel, .correction-panel{ padding:20px 18px; }
+}
+@media (prefers-reduced-motion: reduce){ *{ transition:none !important; } }
+</style>
+</head>
+<body>
+
+<header>
+  <p class="eyebrow"><span class="dot"></span>Clase 10 de 16 · Bloque 3 · Condicional y pronombres</p>
+  <h1>Lo que <em>habría hecho</em></h1>
+  <p class="lede">Terminamos el par condicional con el condicional compuesto: el tiempo de las hipótesis sobre el pasado — "habría ido si...", "habría elegido otra cosa". Como con el futuro compuesto, hoy es un tiempo de reconocimiento: identifícalo cuando lo oigas, sin presión por producirlo de memoria.</p>
+  <div class="meta-row">
+    <div>Duración<strong>60 min</strong></div>
+    <div>Gramática<strong>Condicional compuesto (receptivo)</strong></div>
+    <div>Nivel<strong>B1 → B2</strong></div>
+  </div>
+</header>
+
+<main>
+
+  <section class="block correction-panel">
+    <div class="block-head"><span class="block-num">1</span><h2>Corrección de la tarea: consejos para un/a estudiante de arte</h2><span class="time-tag">6 min</span></div>
+    <p class="vocab-hint" style="margin-top:0;">Repaso de errores frecuentes en la tarea de la Clase 9. Revisamos juntas antes de avanzar.</p>
+    <div class="correction-item">
+      <p class="wrong-line">✗ "Yo *tendría* que hablar con el director primero." (mezcla condicional con obligación fuerte)</p>
+      <p class="right-line">✓ Yo debería hablar con el director primero.</p>
+      <p class="why">"Tendría que" no es incorrecto, pero suena más a obligación casi ineludible; "debería" es el condicional de consejo por excelencia y suena más natural en este contexto suave.</p>
+    </div>
+    <div class="correction-item">
+      <p class="wrong-line">✗ "Yo, en tu lugar, *voy a probar* con acuarela." (mezcla presente/futuro con estructura de condicional)</p>
+      <p class="right-line">✓ Yo, en tu lugar, probaría con acuarela.</p>
+      <p class="why">"Yo, en tu lugar" pide siempre condicional simple después — es una construcción fija de hipótesis, no admite presente ni futuro.</p>
+    </div>
+    <div class="note" style="margin-top:16px;"><strong>En clase:</strong> hoy añadimos una capa más — el condicional compuesto — para hablar de lo que habría pasado en el pasado si las cosas hubieran sido diferentes. Solo para reconocerlo.</div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">2</span><h2>Condicional compuesto</h2><span class="time-tag">14 min</span></div>
+    <div class="panel">
+      <span class="receptive-flag">👁️ Solo reconocimiento — no hace falta producirlo con fluidez</span>
+      <p style="margin:0 0 16px; font-size:14.5px; color:var(--ink-soft);">El condicional compuesto se forma con <strong>habría / habrías / habría / habríamos / habríais / habrían</strong> + participio. Expresa una hipótesis sobre algo que podría haber pasado en el pasado, pero no pasó.</p>
+      <table class="conj-table">
+        <tr><td class="conj-pron">yo</td><td class="conj-form">habría ido</td><td class="conj-ex">Yo habría ido a la inauguración si hubiera podido.</td></tr>
+        <tr><td class="conj-pron">tú</td><td class="conj-form">habrías elegido</td><td class="conj-ex">¿Tú qué habrías elegido en mi lugar?</td></tr>
+        <tr><td class="conj-pron">él / ella</td><td class="conj-form">habría preferido</td><td class="conj-ex">Ella habría preferido quedarse en Bogotá, creo.</td></tr>
+        <tr><td class="conj-pron">nosotros/as</td><td class="conj-form">habríamos aceptado</td><td class="conj-ex">Nosotras habríamos aceptado esa oferta sin dudarlo.</td></tr>
+        <tr><td class="conj-pron">vosotros/as</td><td class="conj-form">habríais dicho</td><td class="conj-ex">¿Vosotros qué habríais dicho en esa reunión?</td></tr>
+        <tr><td class="conj-pron">ellos/as</td><td class="conj-form">habrían hecho</td><td class="conj-ex">Ellos habrían hecho lo mismo en tu situación.</td></tr>
+      </table>
+      <div class="note"><strong>La idea central:</strong> el condicional compuesto describe un pasado que no ocurrió — una puerta que ya se cerró. Por eso casi siempre aparece junto a un "si" con pluscuamperfecto de subjuntivo ("si hubiera sabido...") o simplemente flotando en la conversación como una reflexión sobre decisiones pasadas.</div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">3</span><h2>Condicional simple vs. compuesto</h2><span class="time-tag">8 min</span></div>
+    <div class="panel">
+      <div class="compare-wrap">
+        <p class="compare-title">Misma idea de hipótesis, distinto momento en el tiempo</p>
+        <div class="compare-grid">
+          <div class="compare-col is-simple">
+            <div class="compare-head"><span class="compare-verb">Condicional simple</span></div>
+            <p class="compare-sub">hipótesis sobre presente/futuro</p>
+            <ul class="compare-list">
+              <li><strong>Yo, en tu lugar, hablaría</strong> con el director.<em>todavía es posible hacerlo</em></li>
+              <li><strong>Debería</strong> estudiar más.<em>consejo válido ahora</em></li>
+            </ul>
+          </div>
+          <div class="compare-col is-compound">
+            <div class="compare-head"><span class="compare-verb">Condicional compuesto</span></div>
+            <p class="compare-sub">hipótesis sobre un pasado que ya no se puede cambiar</p>
+            <ul class="compare-list">
+              <li><strong>Yo, en tu lugar, habría hablado</strong> con el director.<em>ya pasó el momento de hacerlo</em></li>
+              <li><strong>Habría deberido</strong>... <em style="color:var(--family);">✗ no existe — se usa "debería haber + participio" en su lugar</em></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="warning-box"><strong>Un matiz útil:</strong> para "debería haber hecho algo" (arrepentimiento), el español prefiere "debería haber + participio" sobre "habría debido + participio" — aunque ambas existen, la primera es mucho más común en el habla cotidiana.</div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">4</span><h2>Identifícalo cuando lo oigas</h2><span class="time-tag">6 min</span></div>
+    <div class="panel">
+      <p style="margin:0 0 14px; font-size:14.5px; color:var(--ink-soft);">Reconoce estas frases en una conversación o en un texto de lectura del DELE — hipótesis sobre decisiones pasadas.</p>
+      <div class="recog-grid">
+        <div class="recog-card">
+          <span class="recog-mark">✓</span>
+          <div class="recog-text">Con más tiempo, habría preparado mejor la entrevista.<span class="en">hipótesis sobre algo que ya pasó y no se puede cambiar</span></div>
+        </div>
+        <div class="recog-card">
+          <span class="recog-mark">✓</span>
+          <div class="recog-text">Yo habría aceptado esa oferta de trabajo en Sevilla.<span class="en">decisión hipotética alternativa a lo que realmente pasó</span></div>
+        </div>
+        <div class="recog-card">
+          <span class="recog-mark">✓</span>
+          <div class="recog-text">¿Habría llegado ya cuando la llamaste? (suposición sobre el pasado)<span class="en">también sirve como "futuro de probabilidad", pero desplazado al pasado</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">5</span><h2>Vocabulario de hoy</h2><span class="time-tag">5 min</span></div>
+    <p class="vocab-hint">Toca cada tarjeta para ver un ejemplo con condicional compuesto.</p>
+    <div class="vocab-grid" id="vocab-grid"></div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">6</span><h2>Practica: reconocer el condicional compuesto</h2><span class="time-tag">8 min</span></div>
+    <div class="panel">
+      <p class="vocab-hint" style="margin-bottom:14px;">12 frases sobre decisiones profesionales pasadas. El objetivo es identificar la forma correcta, no producirla de cero.</p>
+      <div id="exercises"></div>
+      <div class="check-bar">
+        <div style="display:flex; gap:10px;">
+          <button class="btn-primary" id="check-btn">Comprobar respuestas</button>
+          <button class="btn-ghost" id="reset-btn">Reiniciar</button>
+        </div>
+        <span id="score-text"></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="block roleplay-panel">
+    <div class="block-head"><span class="block-num">7</span><h2>Hablar de una decisión profesional pasada</h2><span class="time-tag">10 min</span></div>
+    <p class="lede" style="margin-bottom:16px;">Elige uno de los tres contextos y reflexiona en voz alta sobre una decisión pasada, real o inventada, usando el condicional compuesto.</p>
+    <div class="scene-setup">
+      <span class="scene-icon">🕰️</span>
+      <p class="scene-text"><strong>Practica en clase:</strong> el profesor puede preguntarte "¿qué habrías hecho tú?" sobre cualquiera de estos temas. No pasa nada si te apoyas en el condicional simple para el resto de la respuesta.</p>
+    </div>
+    <div class="scene-tabs" id="scene-tabs"></div>
+    <div id="scene-container"></div>
+    <div class="roleplay-tip"><strong>En clase:</strong> intenta usar al menos una frase con "habría + participio" en tu reflexión, aunque el resto de la conversación sea en otros tiempos.</div>
+  </section>
+
+  <section class="block task-panel">
+    <div class="block-head"><span class="block-num">8</span><h2>Tu tarea</h2><span class="time-tag">2 min</span></div>
+    <p style="margin:0; font-size:15px; color:var(--ink-soft);">Completa 4-5 frases con la estructura "Yo habría..." pensando en una decisión profesional o de estudios que tomaste en el pasado. No hace falta que sean perfectas — es un primer contacto con la forma.</p>
+    <textarea id="final-task" placeholder="Yo habría aceptado...&#10;Con más tiempo, habría...&#10;En tu lugar, yo habría..."></textarea>
+    <div class="task-footer">
+      <span id="task-count">0 frases con "habría" detectadas</span>
+      <div style="display:flex; gap:10px; align-items:center;">
+        <span class="saved-flag" id="saved-flag">Guardado ✓</span>
+        <button class="btn-secondary" id="save-btn">Guardar tarea</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <span>Clase 10 · Bloque 3 · Condicional y pronombres</span>
+  <span>Próxima clase → Clase 11: Pronombres OD/OI — consolidación final (10 ago)</span>
+</footer>
+
+<script>
+/* ---------- VOCAB ---------- */
+const VOCAB = [
+  {front:"con más tiempo", back:"Con más tiempo, habría preparado mejor la entrevista."},
+  {front:"de haber sabido", back:"De haber sabido eso, habría tomado otra decisión."},
+  {front:"arrepentirse de (algo)", back:"Me arrepiento de no haber aceptado esa oferta."},
+  {front:"la oportunidad perdida", back:"Fue una oportunidad perdida — habría aprendido mucho allí."},
+  {front:"debería haber + participio", back:"Debería haber hablado con ella antes de decidir."},
+  {front:"en aquel momento", back:"En aquel momento, habría elegido quedarme en Bogotá."},
+  {front:"salir bien/mal", back:"Si hubiera insistido, habría salido bien, creo."},
+  {front:"replantearse (algo)", back:"Con lo que sé ahora, me habría replanteado toda la decisión."},
+];
+
+const grid = document.getElementById('vocab-grid');
+VOCAB.forEach(v=>{
+  const card = document.createElement('div');
+  card.className = 'vocab-card';
+  card.setAttribute('role', 'button');
+  card.setAttribute('tabindex', '0');
+  card.setAttribute('aria-pressed', 'false');
+  card.setAttribute('aria-label', `${v.front}. Pulsa para ver un ejemplo.`);
+  card.innerHTML = `<div class="vocab-front">${v.front}</div><div class="vocab-back">${v.back}</div>`;
+  const toggle = ()=>{
+    const flipped = card.classList.toggle('flipped');
+    card.setAttribute('aria-pressed', String(flipped));
+  };
+  card.addEventListener('click', toggle);
+  card.addEventListener('keydown', (e)=>{
+    if(e.key === 'Enter' || e.key === ' '){
+      e.preventDefault();
+      toggle();
+    }
+  });
+  grid.appendChild(card);
+});
+
+/* ---------- EXERCISES ---------- */
+const EXERCISES = [
+  { "sentence": "Con más tiempo, yo <span class=\"gap\">___</span> mejor la entrevista.", "options": ["habría preparado","prepararía","preparé"], "answer": "habría preparado" },
+  { "sentence": "¿Tú qué <span class=\"gap\">___</span> en mi lugar hace cinco años?", "options": ["habrías elegido","elegirías","elegiste"], "answer": "habrías elegido" },
+  { "sentence": "Ella <span class=\"gap\">___</span> quedarse en Bogotá, creo.", "options": ["habría preferido","preferiría","prefirió"], "answer": "habría preferido" },
+  { "sentence": "Nosotras <span class=\"gap\">___</span> esa oferta sin dudarlo.", "options": ["habríamos aceptado","aceptaríamos","aceptamos"], "answer": "habríamos aceptado" },
+  { "sentence": "¿Vosotros qué <span class=\"gap\">___</span> en esa reunión?", "options": ["habríais dicho","diríais","dijisteis"], "answer": "habríais dicho" },
+  { "sentence": "Ellos <span class=\"gap\">___</span> lo mismo en tu situación.", "options": ["habrían hecho","harían","hicieron"], "answer": "habrían hecho" },
+  { "sentence": "De haber sabido eso, yo <span class=\"gap\">___</span> otra decisión.", "options": ["habría tomado","tomaría","tomé"], "answer": "habría tomado" },
+  { "sentence": "¿<span class=\"gap\">___</span> ya cuando la llamaste? (suposición sobre el pasado)", "options": ["Habría llegado","Llegaría","Llegó"], "answer": "Habría llegado" },
+  { "sentence": "Yo <span class=\"gap\">___</span> hablar con ella antes de decidir.", "options": ["debería haber","debería","debí"], "answer": "debería haber" },
+  { "sentence": "Con lo que sé ahora, me <span class=\"gap\">___</span> toda la decisión.", "options": ["habría replanteado","replantearía","replanteé"], "answer": "habría replanteado" },
+  { "sentence": "En aquel momento, tú <span class=\"gap\">___</span> quedarte en tu puesto, ¿no?", "options": ["habrías preferido","preferirías","preferiste"], "answer": "habrías preferido" },
+  { "sentence": "Si hubiera insistido, <span class=\"gap\">___</span> bien, creo.", "options": ["habría salido","saldría","salió"], "answer": "habría salido" }
+];
+
+const exWrap = document.getElementById('exercises');
+EXERCISES.forEach((ex, i)=>{
+  const el = document.createElement('div');
+  el.className = 'exercise';
+  el.dataset.answer = ex.answer;
+  el.innerHTML = `
+    <div class="ex-sentence">${i+1}. ${ex.sentence}</div>
+    <div class="ex-options">
+      ${ex.options.map(o=>`<button class="opt-btn" data-value="${o}">${o}</button>`).join('')}
+    </div>
+  `;
+  exWrap.appendChild(el);
+
+  el.querySelectorAll('.opt-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      el.querySelectorAll('.opt-btn').forEach(b=>b.classList.remove('picked'));
+      btn.classList.add('picked');
+    });
+  });
+});
+
+document.getElementById('check-btn').addEventListener('click', ()=>{
+  let correct = 0;
+  document.querySelectorAll('.exercise').forEach(el=>{
+    const answer = el.dataset.answer;
+    const picked = el.querySelector('.opt-btn.picked');
+    el.querySelectorAll('.opt-btn').forEach(b=>{
+      b.disabled = true;
+      if(b.dataset.value === answer) b.classList.add('correct');
+      else if(b === picked) b.classList.add('wrong');
+    });
+    if(picked && picked.dataset.value === answer) correct++;
+  });
+  document.getElementById('score-text').textContent = `${correct} / ${EXERCISES.length} correctas`;
+});
+
+document.getElementById('reset-btn').addEventListener('click', ()=>{
+  document.querySelectorAll('.exercise').forEach(el=>{
+    el.querySelectorAll('.opt-btn').forEach(b=>{
+      b.disabled = false;
+      b.classList.remove('picked','correct','wrong');
+    });
+  });
+  document.getElementById('score-text').textContent = '';
+});
+
+/* ---------- ROLEPLAY SCENES ---------- */
+const SCENES = [
+  {
+    id: 'oferta-trabajo',
+    label: 'Una oferta rechazada',
+    title: 'Reflexiona sobre una oferta de trabajo que no aceptaste',
+    brief: 'Habla sobre qué habría pasado si hubieras tomado la otra decisión.',
+    prompts: [
+      '¿Qué habrías hecho si hubieras aceptado esa oferta?',
+      '¿Qué habrías aprendido allí que no aprendiste en tu puesto actual?',
+      '¿Crees que habría sido mejor o peor decisión?',
+      '¿Qué le habrías dicho a tu yo del pasado sobre esa decisión?'
+    ]
+  },
+  {
+    id: 'cambio-carrera',
+    label: 'Un cambio de rumbo',
+    title: 'Piensa en un momento en que pudiste cambiar de carrera y no lo hiciste',
+    brief: 'Reflexiona sobre qué habría sido diferente con otra elección.',
+    prompts: [
+      '¿Qué habrías estudiado en vez de lo que estudiaste?',
+      '¿Dónde habrías trabajado probablemente?',
+      '¿Qué habrías echado de menos del camino que sí tomaste?',
+      '¿Te arrepientes de no haber cambiado, o no?'
+    ]
+  },
+  {
+    id: 'proyecto-pasado',
+    label: 'Un proyecto del museo',
+    title: 'Reflexiona sobre un proyecto pasado que podría haber salido mejor',
+    brief: 'Habla de qué habrías hecho de forma diferente con lo que sabes ahora.',
+    prompts: [
+      '¿Qué habrías cambiado en la planificación del proyecto?',
+      '¿A quién habrías pedido ayuda antes?',
+      '¿Qué habría pasado si hubieras tenido más presupuesto?',
+      '¿Qué habrías hecho exactamente igual?'
+    ]
+  }
+];
+
+const tabsWrap = document.getElementById('scene-tabs');
+const sceneContainer = document.getElementById('scene-container');
+
+function renderScene(id){
+  const scene = SCENES.find(s=>s.id===id);
+  sceneContainer.innerHTML = `
+    <div class="desc-card">
+      <p class="desc-title">${scene.title}</p>
+      <p class="desc-brief">${scene.brief}</p>
+      <ul class="desc-prompts">
+        ${scene.prompts.map(p=>`<li>${p}</li>`).join('')}
+      </ul>
+      <textarea placeholder="Escribe tus notas aquí..."></textarea>
+    </div>
+  `;
+}
+
+SCENES.forEach((s, i)=>{
+  const tab = document.createElement('button');
+  tab.className = 'scene-tab' + (i===0 ? ' active' : '');
+  tab.textContent = s.label;
+  tab.addEventListener('click', ()=>{
+    tabsWrap.querySelectorAll('.scene-tab').forEach(t=>t.classList.remove('active'));
+    tab.classList.add('active');
+    renderScene(s.id);
+  });
+  tabsWrap.appendChild(tab);
+});
+renderScene(SCENES[0].id);
+
+/* ---------- FINAL TASK ---------- */
+const STORAGE_KEY = 'daniela-clase10-tarea';
+const taskArea = document.getElementById('final-task');
+const taskCount = document.getElementById('task-count');
+const savedFlag = document.getElementById('saved-flag');
+
+async function cargarTarea(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(STORAGE_KEY);
+    if (res && typeof res.value === 'string') taskArea.value = res.value;
+  }catch(e){
+    // Clave inexistente todavía: no hay tarea previa, se queda en blanco.
+  }
+  updateCount();
+}
+
+function updateCount(){
+  const matches = (taskArea.value.match(/\bhabr[ií][a-zé]*\b/gi) || []).length;
+  taskCount.textContent = `${matches} frase${matches===1?'':'s'} con "habría" detectada${matches===1?'':'s'}`;
+}
+taskArea.addEventListener('input', updateCount);
+updateCount();
+cargarTarea();
+
+document.getElementById('save-btn').addEventListener('click', async ()=>{
+  if (!window.storage){
+    savedFlag.textContent = 'Guardado no disponible aquí';
+    savedFlag.classList.add('show');
+    setTimeout(()=>{ savedFlag.classList.remove('show'); savedFlag.textContent = 'Guardado ✓'; }, 2200);
+    return;
+  }
+  try{
+    const ok = await window.storage.set(STORAGE_KEY, taskArea.value);
+    savedFlag.textContent = ok ? 'Guardado ✓' : 'No se pudo guardar';
+  }catch(e){
+    savedFlag.textContent = 'No se pudo guardar';
+  }
+  savedFlag.classList.add('show');
+  setTimeout(()=>{ savedFlag.classList.remove('show'); savedFlag.textContent = 'Guardado ✓'; }, 1800);
+});
+
+let taskAutosaveTimer = null;
+taskArea.addEventListener('input', ()=>{
+  clearTimeout(taskAutosaveTimer);
+  taskAutosaveTimer = setTimeout(()=>{
+    document.getElementById('save-btn').click();
+  }, 900);
+});
+</script>
+
+</body>
+</html>

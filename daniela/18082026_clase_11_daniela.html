@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clase 11 · El hilo que cerramos — Daniela</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+
+/* ╔══════════════════════════════════════════════════════════════╗
+   ║  ESCOLAR — sistema de diseño para clases de español online   ║
+   ║  Clase 11 · Bloque 3 Condicional y pronombres                 ║
+   ║  "El hilo que cerramos" — pronombres OD/OI consolidación      ║
+   ╚══════════════════════════════════════════════════════════════╝ */
+
+:root{
+  --paper:        #FBF7EE;
+  --paper-raised: #FFFFFF;
+  --paper-alt:    #F3ECDA;
+  --ink:          #23291F;
+  --ink-soft:     #565F52;
+  --ink-faint:    #8B9184;
+  --line:         rgba(35,41,31,0.12);
+  --line-strong:  rgba(35,41,31,0.22);
+
+  --b1:      #2F6FED;  --b1-soft: #EAF1FE;  --b1-line: #C6D9FC;
+  --b2:      #2E9E6B;  --b2-soft: #E9F6EF;  --b2-line: #BEE6D3;
+  --family:  #B5502E;  --family-soft: #FBEBE3; --family-line: #EFC9B4;
+  --amber:   #C1892F;  --amber-soft: #FBF1E1; --amber-line: #F0D9A8;
+
+  --f-display: 'Fraunces', Georgia, serif;
+  --f-body:    'IBM Plex Sans', system-ui, sans-serif;
+  --f-data:    'IBM Plex Mono', monospace;
+
+  --r-sm: 8px;
+  --r-md: 14px;
+  --r-lg: 20px;
+
+  --shadow-1: 0 1px 2px rgba(35,41,31,0.05), 0 1px 8px rgba(35,41,31,0.04);
+}
+
+*{ box-sizing:border-box; }
+body{
+  margin:0;
+  background: var(--paper);
+  background-image: radial-gradient(circle at 1px 1px, var(--line) 1px, transparent 0);
+  background-size: 22px 22px;
+  color: var(--ink);
+  font-family: var(--f-body);
+  line-height:1.6;
+}
+::selection{ background: var(--b1-soft); }
+
+/* ---------- HEADER ---------- */
+header{ padding:44px 24px 28px; max-width:760px; margin:0 auto; }
+.eyebrow{
+  font-family: var(--f-data); font-size:12px; letter-spacing:.14em;
+  text-transform:uppercase; color: var(--b1); margin:0 0 10px;
+  display:flex; align-items:center; gap:10px;
+}
+.eyebrow .dot{ width:6px; height:6px; border-radius:50%; background: var(--b1); }
+h1{
+  font-family: var(--f-display); font-weight:600;
+  font-size:clamp(30px,5.6vw,46px); line-height:1.08;
+  margin:0 0 14px; letter-spacing:-.01em;
+}
+h1 em{ font-style:italic; color: var(--b1); }
+.lede{ font-size:16px; color: var(--ink-soft); max-width:56ch; margin:0; }
+
+.meta-row{
+  display:flex; flex-wrap:wrap; gap:20px; margin-top:26px;
+  font-family: var(--f-data); font-size:12px; color: var(--ink-faint);
+}
+.meta-row strong{
+  display:block; color: var(--ink); font-size:14.5px; font-weight:500;
+  font-family: var(--f-display); margin-top:3px;
+}
+
+/* ---------- SECTIONS ---------- */
+main{ max-width:760px; margin:0 auto; padding:8px 24px 100px; }
+
+section.block{ margin-bottom:48px; }
+.block-head{ display:flex; align-items:baseline; gap:12px; margin-bottom:18px; }
+.time-tag{
+  font-family: var(--f-data); font-size:11px; color: var(--ink-faint);
+  background: var(--paper-alt); padding:3px 10px; border-radius:999px; margin-left:auto; flex:none;
+}
+.block-num{
+  font-family: var(--f-data); font-size:12px; color:#fff; background: var(--b1);
+  width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  flex:none;
+}
+.block-head h2{
+  font-family: var(--f-display); font-weight:500; font-style:italic; font-size:22px; margin:0;
+}
+
+.panel{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-lg);
+  box-shadow: var(--shadow-1); padding:26px 28px;
+}
+
+.note{
+  margin-top:18px; padding:14px 16px; background: var(--b1-soft); border:1px solid var(--b1-line);
+  border-radius: var(--r-md); font-size:14px; color: var(--ink-soft);
+}
+.note strong{ color: var(--ink); }
+
+/* ---------- CORRECTION BLOCK ---------- */
+.correction-panel{ background: var(--paper-alt); border:1px solid var(--line); border-radius: var(--r-lg); padding:26px 28px; }
+.correction-panel .block-num{ background: var(--ink-soft); }
+.correction-item{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:14px 16px; margin-bottom:12px;
+}
+.correction-item:last-child{ margin-bottom:0; }
+.correction-item .wrong-line{ font-size:14.5px; color: var(--family); text-decoration: line-through; text-decoration-color: var(--family-line); }
+.correction-item .right-line{ font-size:14.5px; color: var(--b2); margin-top:6px; font-weight:500; }
+.correction-item .why{ font-size:13px; color: var(--ink-faint); margin-top:6px; }
+
+/* ---------- THREAD RECAP (hilo desde clase 1/3/6) ---------- */
+.thread-wrap{ margin-top:4px; }
+.thread-step{
+  position:relative; padding-left:34px; margin-bottom:16px;
+}
+.thread-step:last-child{ margin-bottom:0; }
+.thread-step::before{
+  content:""; position:absolute; left:9px; top:26px; bottom:-16px; width:2px; background: var(--line-strong);
+}
+.thread-step:last-child::before{ display:none; }
+.thread-marker{
+  position:absolute; left:0; top:2px; width:20px; height:20px; border-radius:50%;
+  background: var(--b1); color:#fff; font-family: var(--f-data); font-size:10px;
+  display:flex; align-items:center; justify-content:center; z-index:1;
+}
+.thread-card{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:14px 16px;
+}
+.thread-label{ font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.05em; color: var(--b1); margin:0 0 6px; }
+.thread-ex{ font-size:14.5px; color: var(--ink); margin:0; }
+
+/* ---------- PRONOUN CHAIN TABLE ---------- */
+.chain-table{ width:100%; border-collapse:collapse; margin-top:4px; }
+.chain-table th{
+  font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.05em;
+  color: var(--ink-faint); text-align:left; padding:0 8px 10px; border-bottom:1px solid var(--line);
+}
+.chain-table td{ padding:12px 8px; border-bottom:1px dashed var(--line); font-size:14.5px; vertical-align:top; }
+.chain-table tr:last-child td{ border-bottom:none; }
+.chain-arrow{ color: var(--ink-faint); font-size:13px; padding:0 4px; }
+.chain-after{ color: var(--b2); font-family: var(--f-data); font-weight:600; font-size:14px; }
+.chain-ex{ color: var(--ink-soft); font-size:13.5px; }
+
+.warning-box{
+  margin-top:18px; padding:14px 16px; background: var(--amber-soft); border:1px solid var(--amber-line);
+  border-radius: var(--r-md); font-size:14px; color: var(--ink-soft);
+}
+.warning-box strong{ color: #96591A; }
+
+/* ---------- VOCAB CARDS ---------- */
+.vocab-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(160px,1fr)); gap:12px; }
+.vocab-card{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:14px 16px; cursor:pointer; perspective:600px; min-height:78px;
+  display:flex; flex-direction:column; justify-content:center; transition: border-color .15s ease;
+}
+.vocab-card:hover{ border-color: var(--b1-line); }
+.vocab-card:focus-visible{ outline:2px solid var(--b1); outline-offset:2px; }
+.vocab-front{ font-family: var(--f-body); font-weight:600; font-size:15px; }
+.vocab-back{ display:none; font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); margin-top:6px; }
+.vocab-card.flipped .vocab-back{ display:block; }
+.vocab-card.flipped{ background: var(--b1-soft); border-color: var(--b1-line); }
+.vocab-hint{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin:10px 2px 16px; }
+
+/* ---------- DRILLING EXERCISE ---------- */
+.exercise{ margin-bottom:20px; }
+.exercise:last-of-type{ margin-bottom:0; }
+.ex-sentence{ font-size:15.5px; margin-bottom:10px; }
+.ex-sentence .gap{ font-family: var(--f-data); color: var(--ink-faint); }
+.ex-options{ display:flex; flex-wrap:wrap; gap:8px; }
+.opt-btn{
+  font-family: var(--f-body); font-size:14px; background: var(--paper-raised);
+  border:1.5px solid var(--line); color: var(--ink); padding:7px 16px; border-radius:999px;
+  cursor:pointer; transition: all .15s ease;
+}
+.opt-btn:hover{ border-color: var(--ink-faint); }
+.opt-btn.picked{ background: var(--b1-soft); border-color: var(--b1); color: var(--b1); }
+.opt-btn.correct{ background: var(--b2-soft); border-color: var(--b2); color: var(--b2); }
+.opt-btn.wrong{ background: var(--family-soft); border-color: var(--family); color: var(--family); }
+.opt-btn:disabled{ cursor:default; }
+
+.check-bar{
+  display:flex; align-items:center; justify-content:space-between; gap:16px;
+  margin-top:22px; padding-top:18px; border-top:1px dashed var(--line);
+}
+.btn-primary{
+  font-family: var(--f-body); font-weight:600; font-size:14px; color:#fff; background: var(--b1);
+  border:none; padding:11px 22px; border-radius:999px; cursor:pointer; transition: transform .1s ease;
+}
+.btn-primary:hover{ transform: translateY(-1px); }
+#score-text{ font-family: var(--f-data); font-size:13px; color: var(--ink-faint); }
+.btn-ghost{
+  font-family: var(--f-body); font-weight:600; font-size:13px; color: var(--ink-soft); background:none;
+  border:1.5px solid var(--line); padding:9px 18px; border-radius:999px; cursor:pointer;
+}
+.btn-ghost:hover{ border-color: var(--ink-faint); }
+
+/* ---------- ROLEPLAY / SCENES ---------- */
+.roleplay-panel{ background: var(--family-soft); border:1px solid var(--family-line); border-radius: var(--r-lg); padding:26px 28px; }
+.roleplay-panel .block-num{ background: var(--family); }
+.scene-setup{
+  display:flex; gap:14px; align-items:flex-start; background: var(--paper-raised);
+  border:1px solid var(--family-line); border-radius: var(--r-md); padding:14px 16px; margin-bottom:20px;
+}
+.scene-icon{ font-size:22px; flex:none; }
+.scene-text{ font-size:14px; color: var(--ink-soft); }
+.scene-text strong{ color: var(--ink); }
+
+.scene-tabs{ display:flex; gap:8px; margin-bottom:16px; flex-wrap:wrap; }
+.scene-tab{
+  font-family: var(--f-body); font-size:13.5px; font-weight:600; color: var(--ink-soft);
+  background: var(--paper-raised); border:1.5px solid var(--family-line); padding:8px 16px;
+  border-radius:999px; cursor:pointer; transition: all .15s ease;
+}
+.scene-tab.active{ background: var(--family); color:#fff; border-color: var(--family); }
+.scene-tab:hover:not(.active){ border-color: var(--family); }
+
+.dialogue{ display:flex; flex-direction:column; gap:14px; }
+.line{ display:flex; gap:12px; align-items:flex-start; }
+.line-avatar{
+  width:32px; height:32px; border-radius:50%; background: var(--paper-alt); border:1px solid var(--line);
+  display:flex; align-items:center; justify-content:center; font-family: var(--f-data); font-size:11px;
+  color: var(--ink-soft); flex:none;
+}
+.line.you .line-avatar{ background: var(--family); color:#fff; border-color: var(--family); }
+.line-body{ flex:1; }
+.line-name{ font-family: var(--f-data); font-size:11.5px; color: var(--ink-faint); margin:0 0 4px; }
+.line-bubble{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:10px 14px; font-size:14.5px; color: var(--ink); display:inline-block;
+}
+.line-input{
+  width:100%; font-family: var(--f-body); font-size:14.5px; color: var(--ink);
+  background:#fff; border:1px solid var(--family-line); border-radius: var(--r-sm);
+  padding:10px 12px; resize:vertical;
+}
+.line-input:focus{ outline:none; border-color: var(--family); }
+.line-hint{ font-size:12.5px; color: var(--ink-faint); margin:6px 0 0; font-style:italic; }
+
+.roleplay-tip{
+  margin-top:22px; padding:14px 16px; background: var(--paper-raised); border:1px solid var(--family-line);
+  border-radius: var(--r-md); font-size:13.5px; color: var(--ink-soft);
+}
+.roleplay-tip strong{ color: var(--ink); }
+
+/* ---------- FINAL TASK ---------- */
+.task-panel{ background: var(--paper-alt); border:1px solid var(--line); border-radius: var(--r-lg); padding:26px 28px; }
+.task-panel .block-num{ background: var(--ink-soft); }
+textarea#final-task{
+  width:100%; min-height:140px; font-family: var(--f-body); font-size:15px; color: var(--ink);
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:14px 16px; resize:vertical; margin-top:14px;
+}
+textarea#final-task:focus{ outline:none; border-color: var(--b1); }
+.task-footer{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:12px; flex-wrap:wrap; }
+#task-count{ font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); }
+.btn-secondary{
+  font-family: var(--f-body); font-weight:600; font-size:13.5px; color: var(--ink-soft); background:none;
+  border:1.5px solid var(--line); padding:9px 18px; border-radius:999px; cursor:pointer;
+}
+.saved-flag{ font-family: var(--f-data); font-size:12px; color: var(--b2); opacity:0; transition: opacity .3s ease; }
+.saved-flag.show{ opacity:1; }
+
+/* ---------- FOOTER NAV ---------- */
+footer{
+  max-width:760px; margin:0 auto; padding:0 24px 60px; display:flex;
+  justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;
+  font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint);
+}
+footer a{ color: var(--b1); text-decoration:none; }
+footer a:hover{ text-decoration:underline; }
+
+@media (max-width:600px){
+  header{ padding:34px 18px 22px; }
+  main{ padding:8px 18px 90px; }
+  .panel, .task-panel, .roleplay-panel, .correction-panel{ padding:20px 18px; }
+  .chain-table{ font-size:13px; }
+}
+@media (prefers-reduced-motion: reduce){ *{ transition:none !important; } }
+</style>
+</head>
+<body>
+
+<header>
+  <p class="eyebrow"><span class="dot"></span>Clase 11 de 16 · Bloque 3 · Condicional y pronombres</p>
+  <h1>El hilo que <em>cerramos</em></h1>
+  <p class="lede">Hoy cerramos un hilo que empezó en la Clase 1: los pronombres de objeto directo (lo/la/los/las) e indirecto (le/les), y su combinación con "se" que vimos en la Clase 6. Vamos a hacer drilling intensivo hasta que la sustitución sea automática.</p>
+  <div class="meta-row">
+    <div>Duración<strong>60 min</strong></div>
+    <div>Gramática<strong>Pronombres OD/OI — consolidación final</strong></div>
+    <div>Nivel<strong>B1 → B2</strong></div>
+  </div>
+</header>
+
+<main>
+
+  <section class="block correction-panel">
+    <div class="block-head"><span class="block-num">1</span><h2>Corrección de la tarea: decisiones pasadas</h2><span class="time-tag">6 min</span></div>
+    <p class="vocab-hint" style="margin-top:0;">Repaso de errores frecuentes en la tarea de la Clase 10. Revisamos juntas antes de avanzar.</p>
+    <div class="correction-item">
+      <p class="wrong-line">✗ "Yo *habría preferido* a quedarme en Bogotá." (preposición sobrante)</p>
+      <p class="right-line">✓ Yo habría preferido quedarme en Bogotá.</p>
+      <p class="why">"Preferir" va seguido directamente de infinitivo, sin preposición — a diferencia de otros verbos como "empezar a" o "ayudar a".</p>
+    </div>
+    <div class="correction-item">
+      <p class="wrong-line">✗ "Con más tiempo, yo *habría prepara* mejor la entrevista."</p>
+      <p class="right-line">✓ Con más tiempo, yo habría preparado mejor la entrevista.</p>
+      <p class="why">Igual que con el futuro compuesto: habría + participio completo (preparado), nunca una forma abreviada del verbo.</p>
+    </div>
+    <div class="note" style="margin-top:16px;"><strong>En clase:</strong> hoy volvemos a algo que ya conoces bien — los pronombres OD/OI — pero con drilling intensivo para que la sustitución sea automática, sin pensar.</div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">2</span><h2>El hilo completo: de la Clase 1 a hoy</h2><span class="time-tag">10 min</span></div>
+    <div class="panel">
+      <p style="margin:0 0 18px; font-size:14.5px; color:var(--ink-soft);">Antes de practicar, repasemos rápidamente cómo hemos ido construyendo este tema paso a paso a lo largo del curso.</p>
+      <div class="thread-wrap">
+        <div class="thread-step">
+          <span class="thread-marker">1</span>
+          <div class="thread-card">
+            <p class="thread-label">Clase 1 · OD simple</p>
+            <p class="thread-ex">¿Ves el cuadro? → Sí, lo veo. / ¿Conoces a la comisaria? → Sí, la conozco.</p>
+          </div>
+        </div>
+        <div class="thread-step">
+          <span class="thread-marker">3</span>
+          <div class="thread-card">
+            <p class="thread-label">Clase 3 · OI con verbos de comunicación</p>
+            <p class="thread-ex">Le expliqué el proyecto a Jorge. / Les escribí a los visitantes.</p>
+          </div>
+        </div>
+        <div class="thread-step">
+          <span class="thread-marker">6</span>
+          <div class="thread-card">
+            <p class="thread-label">Clase 6 · OD + OI combinados → "se"</p>
+            <p class="thread-ex">Le expliqué el proyecto a Jorge. → Se lo expliqué.</p>
+          </div>
+        </div>
+        <div class="thread-step">
+          <span class="thread-marker">11</span>
+          <div class="thread-card">
+            <p class="thread-label">Clase 11 · Hoy: todo junto, sin pausas para pensar</p>
+            <p class="thread-ex">Drilling intensivo — la meta es que la sustitución salga sola, sin traducir mentalmente desde el inglés.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">3</span><h2>Repaso rápido: la tabla completa</h2><span class="time-tag">8 min</span></div>
+    <div class="panel">
+      <table class="chain-table">
+        <tr><th>Frase completa</th><th></th><th>Con pronombres</th><th>Nota</th></tr>
+        <tr>
+          <td class="chain-ex">Veo el cuadro.</td>
+          <td class="chain-arrow">→</td>
+          <td class="chain-after">Lo veo.</td>
+          <td class="chain-ex" style="font-size:12.5px;">OD masc. sing.</td>
+        </tr>
+        <tr>
+          <td class="chain-ex">Conozco a la comisaria.</td>
+          <td class="chain-arrow">→</td>
+          <td class="chain-after">La conozco.</td>
+          <td class="chain-ex" style="font-size:12.5px;">OD fem. sing.</td>
+        </tr>
+        <tr>
+          <td class="chain-ex">Le doy el catálogo a Jorge.</td>
+          <td class="chain-arrow">→</td>
+          <td class="chain-after">Se lo doy.</td>
+          <td class="chain-ex" style="font-size:12.5px;">le + lo = <strong>se lo</strong></td>
+        </tr>
+        <tr>
+          <td class="chain-ex">Les envío las invitaciones a los artistas.</td>
+          <td class="chain-arrow">→</td>
+          <td class="chain-after">Se las envío.</td>
+          <td class="chain-ex" style="font-size:12.5px;">les + las = <strong>se las</strong></td>
+        </tr>
+      </table>
+      <div class="note"><strong>Regla de oro (recordatorio):</strong> le/les + lo/la/los/las → siempre "se" + lo/la/los/las. Nunca "le lo" ni "le la". El orden fijo es OI (se) + OD (lo/la/los/las) + verbo.</div>
+      <div class="warning-box"><strong>El error más común en tu nivel:</strong> mezclar el género del OD con el objeto real, no con la palabra que sustituye. "La exposición" → la (femenino), aunque hables de "el museo" en la misma frase. Fíjate siempre en la palabra que sustituyes, no en el contexto general.</div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">4</span><h2>Vocabulario de hoy</h2><span class="time-tag">5 min</span></div>
+    <p class="vocab-hint">Toca cada tarjeta para ver un ejemplo con pronombres combinados.</p>
+    <div class="vocab-grid" id="vocab-grid"></div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">5</span><h2>Drilling intensivo: sustitución dirigida</h2><span class="time-tag">14 min</span></div>
+    <div class="panel">
+      <p class="vocab-hint" style="margin-bottom:14px;">16 frases para convertir en pronombres lo más rápido posible. El objetivo es velocidad y automatismo, no reflexión larga.</p>
+      <div id="exercises"></div>
+      <div class="check-bar">
+        <div style="display:flex; gap:10px;">
+          <button class="btn-primary" id="check-btn">Comprobar respuestas</button>
+          <button class="btn-ghost" id="reset-btn">Reiniciar</button>
+        </div>
+        <span id="score-text"></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="block roleplay-panel">
+    <div class="block-head"><span class="block-num">6</span><h2>Diálogo rápido: tienda de arte</h2><span class="time-tag">10 min</span></div>
+    <p class="lede" style="margin-bottom:16px;">Completa el diálogo usando pronombres OD/OI (y "se lo/se la" cuando corresponda) en vez de repetir los sustantivos.</p>
+    <div class="scene-setup">
+      <span class="scene-icon">🖼️</span>
+      <p class="scene-text"><strong>Practica en clase:</strong> estás comprando materiales en una tienda de arte y hablando con la dependienta sobre encargos y entregas. Responde sustituyendo lo que puedas por pronombres.</p>
+    </div>
+    <div class="scene-tabs" id="scene-tabs"></div>
+    <div id="scene-container"></div>
+    <div class="roleplay-tip"><strong>En clase:</strong> intenta no repetir ningún sustantivo que ya se haya mencionado — sustitúyelo siempre por el pronombre correcto.</div>
+  </section>
+
+  <section class="block task-panel">
+    <div class="block-head"><span class="block-num">7</span><h2>Tu tarea</h2><span class="time-tag">2 min</span></div>
+    <p style="margin:0; font-size:15px; color:var(--ink-soft);">Escribe 6-8 frases sobre tu trabajo en el museo, usando pronombres OD/OI en todas ellas. Incluye <strong>al menos dos frases con "se lo/se la/se los/se las"</strong> combinando OD e OI.</p>
+    <textarea id="final-task" placeholder="Le expliqué el proyecto a mi jefa — se lo expliqué ayer.&#10;El catálogo lo revisé dos veces.&#10;Las invitaciones se las envié a los artistas."></textarea>
+    <div class="task-footer">
+      <span id="task-count">0 palabras escritas</span>
+      <div style="display:flex; gap:10px; align-items:center;">
+        <span class="saved-flag" id="saved-flag">Guardado ✓</span>
+        <button class="btn-secondary" id="save-btn">Guardar tarea</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <span>Clase 11 · Bloque 3 · Condicional y pronombres</span>
+  <span>Próxima clase → Clase 12: Por vs. para — consolidación final (12 ago)</span>
+</footer>
+
+<script>
+/* ---------- MEMORIA PERSISTENTE (localStorage) ---------- */
+if (!window.storage) {
+  window.storage = {
+    get: function(key) {
+      return new Promise((resolve) => {
+        try {
+          const value = localStorage.getItem(key);
+          resolve(value !== null ? { value: value } : null);
+        } catch (e) {
+          resolve(null);
+        }
+      });
+    },
+    set: function(key, value) {
+      return new Promise((resolve) => {
+        try {
+          localStorage.setItem(key, value);
+          resolve(true);
+        } catch (e) {
+          resolve(false);
+        }
+      });
+    }
+  };
+}
+
+/* ---------- VOCAB ---------- */
+const VOCAB = [
+  {front:"el encargo", back:"El encargo, se lo entregué la semana pasada."},
+  {front:"el pedido", back:"El pedido lo recogí esta mañana en la tienda."},
+  {front:"la factura", back:"La factura se la mandé por correo al proveedor."},
+  {front:"devolver (algo)", back:"El material defectuoso se lo devolví a la tienda."},
+  {front:"reservar (algo para alguien)", back:"Le reservé el lienzo grande — se lo reservé ayer."},
+  {front:"recoger", back:"Los materiales los recogí yo misma esta mañana."},
+  {front:"prestar", back:"La cámara se la presté a un compañero del museo."},
+  {front:"confirmar (algo a alguien)", back:"La cita se la confirmé por teléfono."},
+];
+
+const grid = document.getElementById('vocab-grid');
+VOCAB.forEach(v=>{
+  const card = document.createElement('div');
+  card.className = 'vocab-card';
+  card.setAttribute('role', 'button');
+  card.setAttribute('tabindex', '0');
+  card.setAttribute('aria-pressed', 'false');
+  card.setAttribute('aria-label', `${v.front}. Pulsa para ver un ejemplo.`);
+  card.innerHTML = `<div class="vocab-front">${v.front}</div><div class="vocab-back">${v.back}</div>`;
+  const toggle = ()=>{
+    const flipped = card.classList.toggle('flipped');
+    card.setAttribute('aria-pressed', String(flipped));
+  };
+  card.addEventListener('click', toggle);
+  card.addEventListener('keydown', (e)=>{
+    if(e.key === 'Enter' || e.key === ' '){
+      e.preventDefault();
+      toggle();
+    }
+  });
+  grid.appendChild(card);
+});
+
+/* ---------- EXERCISES ---------- */
+const EXERCISES = [
+  { "sentence": "Veo el cuadro. → <span class=\"gap\">___</span> veo.", "options": ["Lo","La","Se lo"], "answer": "Lo" },
+  { "sentence": "Conozco a la comisaria. → <span class=\"gap\">___</span> conozco.", "options": ["La","Lo","Le"], "answer": "La" },
+  { "sentence": "Le doy el catálogo a Jorge. → <span class=\"gap\">___</span> doy.", "options": ["Se lo","Le lo","Se la"], "answer": "Se lo" },
+  { "sentence": "Les envío las invitaciones a los artistas. → <span class=\"gap\">___</span> envío.", "options": ["Se las","Les las","Se los"], "answer": "Se las" },
+  { "sentence": "Compré los materiales ayer. → <span class=\"gap\">___</span> compré ayer.", "options": ["Los","Las","Le"], "answer": "Los" },
+  { "sentence": "Le expliqué la exposición a Lucía. → <span class=\"gap\">___</span> expliqué.", "options": ["Se la","Le la","Se lo"], "answer": "Se la" },
+  { "sentence": "Devolví el material defectuoso a la tienda. → <span class=\"gap\">___</span> devolví.", "options": ["Se lo","Lo","Le lo"], "answer": "Se lo" },
+  { "sentence": "Reservé el lienzo grande para ella. → <span class=\"gap\">___</span> reservé.", "options": ["Se lo","Lo","Le lo"], "answer": "Se lo" },
+  { "sentence": "Presté la cámara a un compañero. → <span class=\"gap\">___</span> presté.", "options": ["Se la","La","Le la"], "answer": "Se la" },
+  { "sentence": "Confirmé la cita al director. → <span class=\"gap\">___</span> confirmé.", "options": ["Se la","La","Le la"], "answer": "Se la" },
+  { "sentence": "Recogí los pedidos esta mañana. → <span class=\"gap\">___</span> recogí esta mañana.", "options": ["Los","Las","Le"], "answer": "Los" },
+  { "sentence": "Mandé la factura al proveedor. → <span class=\"gap\">___</span> mandé.", "options": ["Se la","La","Le la"], "answer": "Se la" },
+  { "sentence": "Le enseñé las obras nuevas a mi jefa. → <span class=\"gap\">___</span> enseñé.", "options": ["Se las","Les las","Se los"], "answer": "Se las" },
+  { "sentence": "Vi la exposición temporal el mes pasado. → <span class=\"gap\">___</span> vi el mes pasado.", "options": ["La","Lo","Le"], "answer": "La" },
+  { "sentence": "Les di el informe a mis compañeros. → <span class=\"gap\">___</span> di.", "options": ["Se lo","Les lo","Se la"], "answer": "Se lo" },
+  { "sentence": "Escribí a la comisaria sobre el proyecto. → <span class=\"gap\">___</span> escribí sobre el proyecto.", "options": ["Le","La","Se la"], "answer": "Le" }
+];
+
+const exWrap = document.getElementById('exercises');
+EXERCISES.forEach((ex, i)=>{
+  const el = document.createElement('div');
+  el.className = 'exercise';
+  el.dataset.answer = ex.answer;
+  el.innerHTML = `
+    <div class="ex-sentence">${i+1}. ${ex.sentence}</div>
+    <div class="ex-options">
+      ${ex.options.map(o=>`<button class="opt-btn" data-value="${o}">${o}</button>`).join('')}
+    </div>
+  `;
+  exWrap.appendChild(el);
+
+  el.querySelectorAll('.opt-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      el.querySelectorAll('.opt-btn').forEach(b=>b.classList.remove('picked'));
+      btn.classList.add('picked');
+    });
+  });
+});
+
+document.getElementById('check-btn').addEventListener('click', ()=>{
+  let correct = 0;
+  document.querySelectorAll('.exercise').forEach(el=>{
+    const answer = el.dataset.answer;
+    const picked = el.querySelector('.opt-btn.picked');
+    el.querySelectorAll('.opt-btn').forEach(b=>{
+      b.disabled = true;
+      if(b.dataset.value === answer) b.classList.add('correct');
+      else if(b === picked) b.classList.add('wrong');
+    });
+    if(picked && picked.dataset.value === answer) correct++;
+  });
+  document.getElementById('score-text').textContent = `${correct} / ${EXERCISES.length} correctas`;
+});
+
+document.getElementById('reset-btn').addEventListener('click', ()=>{
+  document.querySelectorAll('.exercise').forEach(el=>{
+    el.querySelectorAll('.opt-btn').forEach(b=>{
+      b.disabled = false;
+      b.classList.remove('picked','correct','wrong');
+    });
+  });
+  document.getElementById('score-text').textContent = '';
+});
+
+/* ---------- ROLEPLAY SCENES ---------- */
+const SCENES = [
+  {
+    id: 'tienda-arte',
+    tab: 'En la tienda de arte',
+    icon: '🎨',
+    setup: 'Estás en una tienda de arte comprando materiales para un proyecto del museo y hablando con la dependienta.',
+    lines: [
+      {who:'friend', name:'Dependienta', text:'¿Ya recogió el pedido que hizo la semana pasada?'},
+      {who:'you', hint:'Responde diciendo si ya lo recogiste, usando un pronombre.'},
+      {who:'friend', name:'Dependienta', text:'¿Quiere que le reserve el lienzo grande también?'},
+      {who:'you', hint:'Responde diciendo si quieres que te lo reserve.'},
+      {who:'friend', name:'Dependienta', text:'Le puedo dar la factura ahora o se la mando por correo.'},
+      {who:'you', hint:'Responde diciendo cómo prefieres recibir la factura.'},
+      {who:'friend', name:'Dependienta', text:'¿Necesita que le explique cómo usar estos pigmentos?'},
+      {who:'you', hint:'Responde diciendo si necesitas la explicación.'},
+      {who:'friend', name:'Dependienta', text:'Si hay algún problema con el material, puede devolvérmelo sin problema.'},
+      {who:'you', hint:'Responde agradeciendo o confirmando que lo tendrás en cuenta.'}
+    ]
+  },
+  {
+    id: 'entrega-museo',
+    tab: 'Entrega en el museo',
+    icon: '📦',
+    setup: 'Un compañero del museo te pregunta por unos documentos y materiales que gestionaste esta semana.',
+    lines: [
+      {who:'friend', name:'Compañero', text:'¿Ya le enviaste las invitaciones a los artistas?'},
+      {who:'you', hint:'Responde diciendo si ya se las enviaste.'},
+      {who:'friend', name:'Compañero', text:'¿Y el informe final, se lo diste ya a la directora?'},
+      {who:'you', hint:'Responde diciendo si ya se lo diste.'},
+      {who:'friend', name:'Compañero', text:'¿Puedes prestarme la cámara que usaste ayer?'},
+      {who:'you', hint:'Responde diciendo si puedes prestársela.'},
+      {who:'friend', name:'Compañero', text:'¿Le confirmaste la cita al proveedor?'},
+      {who:'you', hint:'Responde diciendo si ya se la confirmaste.'},
+      {who:'friend', name:'Compañero', text:'Perfecto, entonces solo falta revisar el catálogo nuevo.'},
+      {who:'you', hint:'Responde diciendo si ya lo revisaste o cuándo lo harás.'}
+    ]
+  },
+  {
+    id: 'devolucion',
+    tab: 'Una devolución',
+    icon: '🔄',
+    setup: 'Llamas a la tienda porque uno de los materiales que compraste llegó defectuoso.',
+    lines: [
+      {who:'friend', name:'Dependienta', text:'¿Qué problema tiene el material que compró?'},
+      {who:'you', hint:'Explica el problema con el material, usando un pronombre si repites la palabra.'},
+      {who:'friend', name:'Dependienta', text:'¿Ya intentó usarlo o prefiere devolverlo directamente?'},
+      {who:'you', hint:'Responde diciendo si lo intentaste usar o prefieres devolverlo.'},
+      {who:'friend', name:'Dependienta', text:'Puedo enviarle uno nuevo o devolverle el dinero — usted decide.'},
+      {who:'you', hint:'Responde diciendo qué opción prefieres.'},
+      {who:'friend', name:'Dependienta', text:'¿Le envío la confirmación por correo?'},
+      {who:'you', hint:'Responde diciendo si quieres que te la envíen por correo.'},
+      {who:'friend', name:'Dependienta', text:'Perfecto, ya está todo gestionado por nuestra parte.'},
+      {who:'you', hint:'Responde agradeciendo la gestión.'}
+    ]
+  }
+];
+
+const sceneTabs = document.getElementById('scene-tabs');
+const sceneContainer = document.getElementById('scene-container');
+let activeScene = 0;
+
+function renderTabs(){
+  sceneTabs.innerHTML = SCENES.map((s,i)=>
+    `<button class="scene-tab${i===activeScene?' active':''}" data-idx="${i}">${s.icon} ${s.tab}</button>`
+  ).join('');
+  sceneTabs.querySelectorAll('.scene-tab').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      activeScene = parseInt(btn.dataset.idx, 10);
+      renderTabs();
+      renderScene();
+    });
+  });
+}
+
+function renderScene(){
+  const scene = SCENES[activeScene];
+  const linesHtml = scene.lines.map((l)=>{
+    if(l.who === 'friend'){
+      return `
+        <div class="line friend">
+          <div class="line-avatar">${l.name.charAt(0)}</div>
+          <div class="line-body">
+            <p class="line-name">${l.name}</p>
+            <div class="line-bubble">${l.text}</div>
+          </div>
+        </div>`;
+    } else {
+      return `
+        <div class="line you">
+          <div class="line-avatar">Tú</div>
+          <div class="line-body">
+            <p class="line-name">Tú</p>
+            <textarea class="line-input" rows="2" placeholder="Escribe tu respuesta usando un pronombre..."></textarea>
+            <p class="line-hint">${l.hint}</p>
+          </div>
+        </div>`;
+    }
+  }).join('');
+
+  sceneContainer.innerHTML = `
+    <div class="scene-setup">
+      <span class="scene-icon">${scene.icon}</span>
+      <p class="scene-text"><strong>${scene.tab}:</strong> ${scene.setup}</p>
+    </div>
+    <div class="dialogue">${linesHtml}</div>
+  `;
+}
+
+renderTabs();
+renderScene();
+
+/* ---------- FINAL TASK ---------- */
+const STORAGE_KEY = 'daniela-clase11-tarea';
+const taskArea = document.getElementById('final-task');
+const taskCount = document.getElementById('task-count');
+const savedFlag = document.getElementById('saved-flag');
+
+async function cargarTarea(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(STORAGE_KEY);
+    if (res && typeof res.value === 'string') taskArea.value = res.value;
+  }catch(e){
+    // Clave inexistente todavía: no hay tarea previa, se queda en blanco.
+  }
+  updateCount();
+}
+
+function updateCount(){
+  const words = taskArea.value.trim().split(/\s+/).filter(Boolean).length;
+  taskCount.textContent = `${words} palabra${words===1?'':'s'} escrita${words===1?'':'s'}`;
+}
+taskArea.addEventListener('input', updateCount);
+updateCount();
+cargarTarea();
+
+document.getElementById('save-btn').addEventListener('click', async ()=>{
+  if (!window.storage){
+    savedFlag.textContent = 'Guardado no disponible aquí';
+    savedFlag.classList.add('show');
+    setTimeout(()=>{ savedFlag.classList.remove('show'); savedFlag.textContent = 'Guardado ✓'; }, 2200);
+    return;
+  }
+  try{
+    const ok = await window.storage.set(STORAGE_KEY, taskArea.value);
+    savedFlag.textContent = ok ? 'Guardado ✓' : 'No se pudo guardar';
+  }catch(e){
+    savedFlag.textContent = 'No se pudo guardar';
+  }
+  savedFlag.classList.add('show');
+  setTimeout(()=>{ savedFlag.classList.remove('show'); savedFlag.textContent = 'Guardado ✓'; }, 1800);
+});
+
+let taskAutosaveTimer = null;
+taskArea.addEventListener('input', ()=>{
+  clearTimeout(taskAutosaveTimer);
+  taskAutosaveTimer = setTimeout(()=>{
+    document.getElementById('save-btn').click();
+  }, 900);
+});
+</script>
+
+</body>
+</html>

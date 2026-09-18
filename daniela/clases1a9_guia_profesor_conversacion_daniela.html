@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guía del profesor · Clase de conversación integradora — Daniela</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+
+/* ╔══════════════════════════════════════════════════════════════╗
+   ║  ESCOLAR · docente — guía de conversación integradora         ║
+   ║  hereda paleta/tipografía del programa de Daniela A.          ║
+   ╚══════════════════════════════════════════════════════════════╝ */
+
+:root{
+  --paper:        #FBF7EE;
+  --paper-raised: #FFFFFF;
+  --paper-alt:    #F3ECDA;
+  --ink:          #23291F;
+  --ink-soft:     #565F52;
+  --ink-faint:    #8B9184;
+  --line:         rgba(35,41,31,0.12);
+  --line-strong:  rgba(35,41,31,0.22);
+
+  --b1:      #2F6FED;  --b1-soft: #EAF1FE;  --b1-line: #C6D9FC;  /* presente / ser-estar / OI */
+  --b2:      #2E9E6B;  --b2-soft: #E9F6EF;  --b2-line: #BEE6D3;  /* pasado + marcadores */
+  --b3:      #DB8A2E;  --b3-soft: #FCF1E1;  --b3-line: #F3D9AF;  /* condicional / futuro */
+  --b4:      #C1473F;  --b4-soft: #FBEAE8;  --b4-line: #F0C4C0;  /* alertas docente */
+  --b5:      #7A5FC9;  --b5-soft: #F1EDFB;  --b5-line: #D9CDF3;  /* notas docente */
+
+  --f-display: 'Fraunces', Georgia, serif;
+  --f-body:    'IBM Plex Sans', system-ui, sans-serif;
+  --f-data:    'IBM Plex Mono', monospace;
+
+  --r-sm: 8px;
+  --r-md: 14px;
+  --r-lg: 20px;
+
+  --shadow-1: 0 1px 2px rgba(35,41,31,0.05), 0 1px 8px rgba(35,41,31,0.04);
+  --shadow-2: 0 4px 16px rgba(35,41,31,0.08);
+}
+
+*{ box-sizing:border-box; }
+html{ -webkit-text-size-adjust:100%; }
+body{
+  margin:0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--f-body);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+.wrap{ max-width: 860px; margin: 0 auto; padding: 28px 20px 90px; }
+
+/* ── header ── */
+.doc-header{
+  padding: 22px 24px 24px;
+  background: var(--paper-raised);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-1);
+  margin-bottom: 22px;
+  position: relative;
+  overflow: hidden;
+}
+.doc-header::before{
+  content:"";
+  position:absolute; top:0; left:0; right:0; height: 5px;
+  background: linear-gradient(90deg, var(--b1), var(--b2), var(--b3));
+}
+.doc-eyebrow{
+  font-family: var(--f-data); font-size: 11.5px; letter-spacing: .07em; text-transform: uppercase;
+  color: var(--ink-faint); margin: 6px 0 12px;
+}
+.doc-title{
+  font-family: var(--f-display); font-weight: 600; font-size: clamp(26px,4vw,34px);
+  line-height: 1.12; margin: 0 0 10px; letter-spacing: -0.01em;
+}
+.doc-sub{ color: var(--ink-soft); font-size: 15px; max-width: 62ch; margin: 0 0 16px; }
+.doc-meta{ display:flex; flex-wrap:wrap; gap: 8px 10px; }
+.pill{
+  display:inline-flex; align-items:center; gap:6px;
+  font-family: var(--f-data); font-size: 12px; padding: 5px 11px;
+  background: var(--paper-alt); border:1px solid var(--line); border-radius: 999px;
+  color: var(--ink-soft);
+}
+.pill b{ color: var(--ink); font-weight: 600; }
+
+/* ── section shell ── */
+.sec{
+  background: var(--paper-raised);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-1);
+  margin-bottom: 18px;
+  overflow: hidden;
+}
+.sec-head{
+  display:flex; align-items:center; gap: 14px;
+  padding: 18px 22px;
+  border-bottom: 1px solid var(--line);
+}
+.sec-num{
+  width: 34px; height:34px; border-radius: 50%;
+  display:flex; align-items:center; justify-content:center;
+  font-family: var(--f-data); font-size: 14px; font-weight:500;
+  flex-shrink:0;
+  background: var(--accent-soft); color: var(--accent); border: 1px solid var(--accent-line);
+}
+.sec-titles{ flex:1; min-width:0; }
+.sec-title{ font-family: var(--f-display); font-weight:600; font-size: 19px; margin:0 0 2px; }
+.sec-time{ font-family: var(--f-data); font-size: 11.5px; color: var(--ink-faint); }
+.sec-body{ padding: 20px 22px 24px; }
+.sec-body > *:first-child{ margin-top:0; }
+.sec-body > *:last-child{ margin-bottom:0; }
+
+.sec.block1{ --accent: var(--b1); --accent-soft: var(--b1-soft); --accent-line: var(--b1-line); }
+.sec.block2{ --accent: var(--b2); --accent-soft: var(--b2-soft); --accent-line: var(--b2-line); }
+.sec.block3{ --accent: var(--b3); --accent-soft: var(--b3-soft); --accent-line: var(--b3-line); }
+
+/* ── intro text blocks ── */
+.lead{ font-size: 15.5px; color: var(--ink-soft); }
+.lead b{ color: var(--ink); font-weight: 600; }
+
+/* ── objetivo box ── */
+.goal-box{
+  background: var(--paper-alt); border:1px solid var(--line); border-radius: var(--r-md);
+  padding: 14px 16px; margin: 14px 0; font-size: 14px;
+}
+.goal-box .lbl{ font-family: var(--f-data); font-size: 11px; letter-spacing:.06em; text-transform:uppercase; color: var(--ink-faint); display:block; margin-bottom:6px; }
+
+/* ── prompt list (preguntas al alumno) ── */
+.q-list{ list-style:none; padding:0; margin: 14px 0; display:flex; flex-direction:column; gap:10px; }
+.q-list li{
+  display:flex; gap:12px; align-items:flex-start;
+  padding: 12px 14px; background: var(--paper-alt); border:1px solid var(--line); border-radius: var(--r-md);
+  font-size: 14.5px;
+}
+.q-list .qmark{
+  font-family: var(--f-display); font-size: 20px; font-weight:600; color: var(--accent);
+  line-height:1; flex-shrink:0; margin-top:1px;
+}
+.q-list .req{
+  display:block; margin-top: 5px; font-family: var(--f-data); font-size: 11.5px; color: var(--ink-faint);
+}
+.q-list .req b{ color: var(--accent); font-weight:600; }
+
+/* ── grammar chips ── */
+.chips{ display:flex; flex-wrap:wrap; gap: 7px; margin: 12px 0; }
+.chip{
+  font-family: var(--f-data); font-size: 12px; padding: 5px 10px;
+  border-radius: 999px; border:1px solid var(--accent-line); background: var(--accent-soft); color: var(--accent);
+}
+
+/* ── dialogue script ── */
+.script{ margin: 14px 0; display:flex; flex-direction:column; gap: 10px; }
+.line{ display:flex; gap: 12px; align-items:flex-start; }
+.line .who{
+  font-family: var(--f-data); font-size: 11px; font-weight:500; flex-shrink:0; width: 78px;
+  padding: 4px 0; color: var(--ink-faint); text-transform: uppercase; letter-spacing:.04em;
+}
+.line.prof .who{ color: var(--b1); }
+.line.alum .who{ color: var(--b3); }
+.line .txt{
+  flex:1; padding: 10px 13px; border-radius: var(--r-md); font-size: 14.5px;
+  background: var(--paper-alt); border: 1px solid var(--line);
+}
+.line.prof .txt{ background: var(--b1-soft); border-color: var(--b1-line); }
+.line.alum .txt{ background: var(--b3-soft); border-color: var(--b3-line); }
+.line .txt i{ color: var(--ink-faint); font-size: 12.5px; display:block; margin-top:4px;}
+
+/* ── table for review grid ── */
+.grid-table{ width:100%; border-collapse: collapse; margin: 14px 0; font-size: 13.5px; }
+.grid-table th{
+  text-align:left; font-family: var(--f-data); font-size: 11px; text-transform:uppercase; letter-spacing:.05em;
+  color: var(--ink-faint); padding: 8px 10px; border-bottom: 1px solid var(--line-strong);
+}
+.grid-table td{ padding: 9px 10px; border-bottom: 1px solid var(--line); vertical-align:top; }
+.grid-table tr:last-child td{ border-bottom:none; }
+.grid-table td.tag{ font-family: var(--f-data); font-size: 12px; color: var(--accent); white-space:nowrap; }
+
+/* ── teacher note (purple) ── */
+.tnote{
+  background: var(--b5-soft); border:1px solid var(--b5-line); border-radius: var(--r-md);
+  padding: 13px 15px; margin: 14px 0; font-size: 13.5px; color: var(--ink);
+  display:flex; gap:10px;
+}
+.tnote .ico{ flex-shrink:0; font-size:16px; }
+.tnote b{ color: var(--b5); }
+
+/* ── watch-for (red) ── */
+.watch{
+  background: var(--b4-soft); border:1px solid var(--b4-line); border-radius: var(--r-md);
+  padding: 13px 15px; margin: 14px 0; font-size: 13.5px;
+}
+.watch .lbl{ font-family: var(--f-data); font-size: 11px; text-transform:uppercase; letter-spacing:.05em; color: var(--b4); display:block; margin-bottom:8px; font-weight:600; }
+.watch ul{ margin:0; padding-left: 18px; }
+.watch li{ margin-bottom: 5px; }
+.watch li:last-child{ margin-bottom:0; }
+
+/* ── checklist final ── */
+.checklist{ list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap: 8px; }
+.checklist li{
+  display:flex; align-items:flex-start; gap: 10px;
+  padding: 10px 13px; background: var(--paper-alt); border: 1px solid var(--line); border-radius: var(--r-sm);
+  font-size: 14px;
+}
+.checklist .box{
+  width:17px; height:17px; border-radius: 4px; border: 1.5px solid var(--ink-faint); flex-shrink:0; margin-top:2px;
+}
+.checklist b{ font-family: var(--f-data); font-size: 12px; color: var(--accent); margin-right:4px; }
+
+/* ── divider label ── */
+.divider{
+  display:flex; align-items:center; gap:12px; margin: 8px 0 4px; color: var(--ink-faint);
+  font-family: var(--f-data); font-size: 11px; text-transform:uppercase; letter-spacing:.06em;
+}
+.divider::before, .divider::after{ content:""; flex:1; height:1px; background: var(--line-strong); }
+
+/* ── timeline strip for cronograma ── */
+.tl-strip{
+  display:flex; align-items:center; gap: 2px; margin: 16px 0 8px; overflow-x:auto; padding-bottom: 4px;
+}
+.tl-node{ flex-shrink:0; text-align:center; min-width: 92px; }
+.tl-dot{ width:10px; height:10px; border-radius:50%; background: var(--b2); margin: 0 auto 8px; }
+.tl-node.now .tl-dot{ background: var(--ink); width:12px; height:12px; }
+.tl-label{ font-family: var(--f-data); font-size: 10.5px; color: var(--ink-faint); line-height:1.3; }
+.tl-node.now .tl-label{ color: var(--ink); font-weight:600; }
+.tl-line{ flex:1; height:1px; background: var(--line-strong); min-width: 20px; margin-top:-24px; }
+
+/* ── footer nav ── */
+.doc-footer{
+  text-align:center; padding: 18px 0 4px; color: var(--ink-faint); font-family: var(--f-data); font-size: 11.5px;
+}
+
+/* ── print ── */
+@media print{
+  body{ background:#fff; }
+  .sec{ box-shadow:none; break-inside: avoid; }
+}
+
+@media (max-width: 600px){
+  .wrap{ padding: 18px 12px 60px; }
+  .sec-head{ padding: 15px 16px; }
+  .sec-body{ padding: 16px 16px 20px; }
+  .line{ flex-direction:column; gap:4px; }
+  .line .who{ width:auto; }
+}
+
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- ═══════════ HEADER ═══════════ -->
+  <header class="doc-header">
+    <span class="doc-eyebrow">Guía del profesor · no es material para el alumno</span>
+    <h1 class="doc-title">Clase de conversación integradora<br>Repaso de las clases 1 → 9</h1>
+    <p class="doc-sub">Sesión de conversación libre (sin gramática nueva) diseñada para forzar el uso combinado de <b>todo</b> lo que Daniela ha visto hasta ahora: presente + ser/estar, irregulares + por/para, perfecto compuesto + OI, indefinido, imperfecto, marcadores temporales + OD/OI con "se", futuro simple y compuesto, y condicional simple. El contexto museo/arte se mantiene como hilo conductor de todo el programa.</p>
+    <div class="doc-meta">
+      <span class="pill">⏱️ <b>50–60 min</b></span>
+      <span class="pill">🎯 <b>Producción oral</b>, no gramática nueva</span>
+      <span class="pill">📍 Entre Clase 9 y Clase 10</span>
+      <span class="pill">B1 → B2</span>
+    </div>
+  </header>
+
+  <!-- ═══════════ MAPA DE CONTENIDO ACUMULADO ═══════════ -->
+  <section class="sec">
+    <div class="sec-head">
+      <div class="sec-num">✺</div>
+      <div class="sec-titles">
+        <h2 class="sec-title">Qué debe salir hoy, en una sola tabla</h2>
+        <span class="sec-time">Referencia rápida antes de empezar — no leer en voz alta</span>
+      </div>
+    </div>
+    <div class="sec-body">
+      <p class="lead">Esta sesión no enseña nada nuevo: es la primera vez que Daniela tiene que <b>mezclar</b> los ocho puntos gramaticales de las clases 1–9 dentro de una misma conversación fluida, sin que tú se los sirvas por bloques separados. Tu trabajo hoy es de director de escena, no de profesor de gramática — corriges poco y dejas que ella busque la forma.</p>
+      <table class="grid-table">
+        <tr><th>Clase</th><th>Contenido</th><th>Dónde debería aparecer hoy</th></tr>
+        <tr><td class="tag">C1</td><td>Presente regular + ser/estar</td><td>Calentamiento y en toda la conversación como base</td></tr>
+        <tr><td class="tag">C2</td><td>Irregulares (e→ie, o→ue, irr. yo) + por/para básico</td><td>Hablar de gustos/rutina del museo hoy; por/para al justificar</td></tr>
+        <tr><td class="tag">C3</td><td>Perfecto compuesto + OI (le/les)</td><td>Bloque "esta semana en el museo"</td></tr>
+        <tr><td class="tag">C4–C5</td><td>Indefinido + imperfecto (contraste)</td><td>Bloque narrativo: anécdota del pasado</td></tr>
+        <tr><td class="tag">C6</td><td>Marcadores temporales + OD/OI combinados con "se"</td><td>Bloque "tu trayectoria" + al contar quién le dio algo a quién</td></tr>
+        <tr><td class="tag">C7–C8</td><td>Futuro simple + futuro compuesto (reconocimiento)</td><td>Bloque "planes de septiembre / examen"</td></tr>
+        <tr><td class="tag">C9</td><td>Condicional simple (cortesía, hipótesis, consejo)</td><td>Bloque final: consejo a un personaje / a sí misma</td></tr>
+      </table>
+      <div class="tnote">
+        <span class="ico">💡</span>
+        <span><b>Formato de la sesión:</b> son 5 bloques temáticos cortos con preguntas abiertas, más un roleplay final que exige encadenar varios tiempos en una sola escena. No hay ejercicios cerrados ni fichas — todo es oral. Deja que las respuestas sean largas; si Daniela contesta en una frase, repregunta con "¿y por qué?" o "cuéntame más" antes de pasar al siguiente bloque.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ BLOQUE 1 · CALENTAMIENTO ═══════════ -->
+  <section class="sec block1">
+    <div class="sec-head">
+      <div class="sec-num">1</div>
+      <div class="sec-titles">
+        <h2 class="sec-title">Calentamiento libre</h2>
+        <span class="sec-time">5 min · presente + ser/estar (C1)</span>
+      </div>
+    </div>
+    <div class="sec-body">
+      <p class="lead">Igual que en la Clase 1: preguntas rápidas para activar el idioma. Insiste en frases completas, no en respuestas de una palabra.</p>
+      <div class="chips">
+        <span class="chip">presente regular/irregular</span>
+        <span class="chip">ser vs. estar</span>
+      </div>
+      <ul class="q-list">
+        <li><span class="qmark">¿</span><div>¿Qué tal la semana? ¿Cómo estás hoy, en serio?<span class="req">busca <b>estar</b> + estado de ánimo, no un "bien" automático</span></div></li>
+        <li><span class="qmark">¿</span><div>¿Cómo es un día normal en el museo ahora mismo, en pleno verano?<span class="req">presente regular/irregular + <b>ser</b> descriptivo</span></div></li>
+        <li><span class="qmark">¿</span><div>¿Qué quieres o qué puedes hacer hoy que normalmente no haces? (irregulares C2)<span class="req"><b>querer / poder</b> — e→ie, o→ue</span></div></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ═══════════ BLOQUE 2 · ESTA SEMANA ═══════════ -->
+  <section class="sec block1">
+    <div class="sec-head">
+      <div class="sec-num">2</div>
+      <div class="sec-titles">
+        <h2 class="sec-title">Esta semana en el museo</h2>
+        <span class="sec-time">8 min · perfecto compuesto + OI + por/para (C2, C3)</span>
+      </div>
+    </div>
+    <div class="sec-body">
+      <p class="lead">El objetivo es que aparezca el perfecto compuesto de forma natural, y que el pronombre <b>le/les</b> salga sin que se lo pidas — solo lo corriges si desaparece con un verbo de comunicación.</p>
+      <div class="chips">
+        <span class="chip">he/has/ha + participio</span>
+        <span class="chip">le / les</span>
+        <span class="chip">por (causa) / para (finalidad)</span>
+      </div>
+      <ul class="q-list">
+        <li><span class="qmark">¿</span><div>¿Qué has hecho esta semana en el museo o en tus estudios?<span class="req">fuerza <b>perfecto compuesto</b>; si dice "hice", repregunta "¿y esta semana, qué has hecho?"</span></div></li>
+        <li><span class="qmark">¿</span><div>¿Le has explicado o enseñado algo a alguien últimamente — un visitante, un compañero, un estudiante?<span class="req">fuerza <b>le/les</b> con verbo de comunicación</span></div></li>
+        <li><span class="qmark">¿</span><div>¿Por qué haces ese trabajo, y para qué te sirve a largo plazo?<span class="req">un <b>por</b> (motivo) y un <b>para</b> (finalidad) en la misma respuesta</span></div></li>
+      </ul>
+      <div class="watch">
+        <span class="lbl">⚠ vigila</span>
+        <ul>
+          <li>Participio sustituido por indefinido: "he *hablé*" en vez de "he hablado" (error típico de la C3/C4).</li>
+          <li>"le" que desaparece cuando el destinatario ya está nombrado: "He explicado el catálogo a los visitantes" sin "les".</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ BLOQUE 3 · ANÉCDOTA ═══════════ -->
+  <section class="sec block2">
+    <div class="sec-head">
+      <div class="sec-num">3</div>
+      <div class="sec-titles">
+        <h2 class="sec-title">Una anécdota del pasado</h2>
+        <span class="sec-time">12 min · indefinido + imperfecto + por/para narrativo (C4, C5)</span>
+      </div>
+    </div>
+    <div class="sec-body">
+      <p class="lead">Este es el bloque más exigente de la sesión: Daniela tiene que narrar, no describir aisladamente. Necesita el imperfecto para el telón de fondo y el indefinido para la acción que rompe la rutina — exactamente el patrón de "Café Solo" y "Café para llevar".</p>
+      <div class="chips">
+        <span class="chip">imperfecto (contexto/costumbre)</span>
+        <span class="chip">indefinido (hecho puntual)</span>
+        <span class="chip">por (causa habitual) / para (finalidad puntual)</span>
+      </div>
+      <ul class="q-list">
+        <li><span class="qmark">¿</span><div>Cuéntame cómo era tu rutina antes de trabajar en el museo — o antes de un cambio importante en tu vida.<span class="req">fuerza <b>imperfecto</b>: costumbre, descripción</span></div></li>
+        <li><span class="qmark">¿</span><div>¿Y qué pasó un día que cambió esa rutina? Cuéntamelo como una historia.<span class="req">fuerza <b>indefinido</b>: hecho puntual que interrumpe</span></div></li>
+        <li><span class="qmark">¿</span><div>Como en "Café Solo": ¿alguna vez cambiaste algo de tu vida "de un día para otro"? ¿Por qué lo hiciste, y para qué?<span class="req">combina indefinido + <b>por/para</b> narrativo</span></div></li>
+      </ul>
+      <div class="tnote">
+        <span class="ico">🎬</span>
+        <span><b>Gancho de los cortos:</b> puedes anclar la pregunta directamente en "Café para llevar" o "Café Solo" — "¿tú has tenido algún encuentro tipo Alicia y Javi?" — para reactivar vocabulario que ya trabajó en las Clases 4 y 5.</span>
+      </div>
+      <div class="watch">
+        <span class="lbl">⚠ vigila</span>
+        <ul>
+          <li>Imperfecto para datos cerrados con periodo contado: "vivía cinco años" en vez de "viví cinco años" (error de C6).</li>
+          <li>Indefinido usado para el fondo de la escena en vez de la acción puntual.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ BLOQUE 4 · TRAYECTORIA / CRONOGRAMA ═══════════ -->
+  <section class="sec block2">
+    <div class="sec-head">
+      <div class="sec-num">4</div>
+      <div class="sec-titles">
+        <h2 class="sec-title">Tu trayectoria, con precisión</h2>
+        <span class="sec-time">10 min · marcadores temporales + OD/OI con "se" (C6)</span>
+      </div>
+    </div>
+    <div class="sec-body">
+      <p class="lead">Pide que sitúe momentos concretos de su trayectoria (profesional o de estudios) usando marcadores distintos, y busca al menos una ocasión en la que tenga que combinar OD+OI con "se" al contar que le dio o mostró algo a alguien.</p>
+      <div class="chips">
+        <span class="chip">hace / desde hace</span>
+        <span class="chip">a principios de / a finales de</span>
+        <span class="chip">dentro de</span>
+        <span class="chip">se lo / se la / se los / se las</span>
+      </div>
+
+      <div class="tl-strip">
+        <div class="tl-node"><div class="tl-dot"></div><div class="tl-label">hace X años<br>estudios</div></div>
+        <div class="tl-line"></div>
+        <div class="tl-node"><div class="tl-dot"></div><div class="tl-label">a principios de…<br>primer paso</div></div>
+        <div class="tl-line"></div>
+        <div class="tl-node now"><div class="tl-dot"></div><div class="tl-label">desde hace…<br>ahora</div></div>
+        <div class="tl-line"></div>
+        <div class="tl-node"><div class="tl-dot"></div><div class="tl-label">dentro de…<br>próximo paso</div></div>
+      </div>
+
+      <ul class="q-list">
+        <li><span class="qmark">¿</span><div>Cuéntame tu trayectoria hasta hoy: usa al menos tres marcadores distintos (hace, desde hace, a principios de...).<span class="req">fuerza variedad de <b>marcadores temporales</b>, no solo "hace"</span></div></li>
+        <li><span class="qmark">¿</span><div>¿Alguna vez le explicaste o le enseñaste algo importante a alguien — un proyecto, un catálogo, unos datos? Cuéntamelo usando "se lo/se la".<span class="req">fuerza el pronombre combinado <b>se + lo/la/los/las</b></span></div></li>
+      </ul>
+      <div class="watch">
+        <span class="lbl">⚠ vigila</span>
+        <ul>
+          <li>"hace" (acción cerrada) confundido con "desde hace" (situación que continúa): "trabajo aquí hace tres años" en vez de "desde hace tres años".</li>
+          <li>"le lo" en vez de "se lo" — recuérdale la regla si se traba, pero deja que lo intente primero.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ BLOQUE 5 · PLANES Y PREDICCIONES ═══════════ -->
+  <section class="sec block3">
+    <div class="sec-head">
+      <div class="sec-num">5</div>
+      <div class="sec-titles">
+        <h2 class="sec-title">Planes, predicciones y logros futuros</h2>
+        <span class="sec-time">8 min · futuro simple + futuro compuesto en reconocimiento (C7, C8)</span>
+      </div>
+    </div>
+    <div class="sec-body">
+      <p class="lead">El futuro compuesto sigue siendo receptivo (C8): no exijas que lo produzca con fluidez, pero sí que lo reconozca si tú lo usas primero en la pregunta.</p>
+      <div class="chips">
+        <span class="chip">futuro simple</span>
+        <span class="chip">probablemente / seguro que + futuro</span>
+        <span class="chip">futuro compuesto (habré + participio) — receptivo</span>
+      </div>
+      <ul class="q-list">
+        <li><span class="qmark">¿</span><div>¿Qué planes tienes para septiembre — examen, trabajo, algo personal? Dame al menos un verbo irregular.<span class="req">fuerza <b>futuro simple</b>, incluyendo tendré/podré/haré...</span></div></li>
+        <li><span class="qmark">¿</span><div>Para finales de agosto, ¿qué ya habrás terminado? (Tú modelas la forma en la pregunta.)<span class="req">Daniela solo necesita <b>reconocer y responder</b>, no producir de cero</span></div></li>
+        <li><span class="qmark">¿</span><div>¿Qué crees que pasará con tu examen — seguro, probablemente, o es pura suposición?<span class="req">gradúa certeza: <b>seguro que</b> / <b>probablemente</b> + futuro</span></div></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ═══════════ BLOQUE 6 · CONSEJO ═══════════ -->
+  <section class="sec block3">
+    <div class="sec-head">
+      <div class="sec-num">6</div>
+      <div class="sec-titles">
+        <h2 class="sec-title">Consejo — a otro y a ti misma</h2>
+        <span class="sec-time">7 min · condicional simple (C9)</span>
+      </div>
+    </div>
+    <div class="sec-body">
+      <p class="lead">Cierra el repaso lineal con el punto más reciente. Pide variedad: que no repita siempre "yo en tu lugar" y use también "debería(s)" y "podría(s)".</p>
+      <div class="chips">
+        <span class="chip">yo, en tu lugar...</span>
+        <span class="chip">deberías / podrías</span>
+        <span class="chip">condicional de cortesía</span>
+      </div>
+      <ul class="q-list">
+        <li><span class="qmark">¿</span><div>Un estudiante de arte no sabe qué técnica elegir para su proyecto. ¿Qué le dirías?<span class="req">consejo con <b>condicional</b>, varía la fórmula</span></div></li>
+        <li><span class="qmark">¿</span><div>Si pudieras hablar con la Daniela de hace unos años, ¿qué consejo le darías sobre su carrera?<span class="req"><b>condicional</b> + conecta con el bloque narrativo (C4/C5)</span></div></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ═══════════ ROLEPLAY FINAL INTEGRADOR ═══════════ -->
+  <section class="sec">
+    <div class="sec-head">
+      <div class="sec-num">🎭</div>
+      <div class="sec-titles">
+        <h2 class="sec-title">Roleplay final integrador</h2>
+        <span class="sec-time">10–12 min · exige mezclar varios tiempos en una sola escena</span>
+      </div>
+    </div>
+    <div class="sec-body">
+      <p class="lead"><b>Situación:</b> una periodista de una revista cultural entrevista a Daniela sobre su trayectoria en el museo, con motivo de una nueva exposición. La entrevista obliga a saltar entre pasado, presente y futuro de forma natural — como ocurre en cualquier entrevista real.</p>
+
+      <div class="goal-box">
+        <span class="lbl">Reparto</span>
+        <b>Rol A — Periodista (profesor):</b> trata a Daniela de "usted" al principio, y pasa a "tú" a mitad de entrevista para contrastar registros (como en la Clase 1). Hace preguntas que fuerzan cambios de tiempo verbal deliberadamente.<br><br>
+        <b>Rol B — Daniela:</b> responde en el tiempo que la pregunta exige, sin que se lo indiques explícitamente.
+      </div>
+
+      <div class="script">
+        <div class="line prof"><span class="who">Periodista</span><div class="txt">Buenos días, gracias por recibirme. Para empezar, ¿puede contarme cómo empezó todo? ¿Cómo era su vida antes de dedicarse al mundo del museo?<i>busca imperfecto (C5)</i></div></div>
+        <div class="line alum"><span class="who">Daniela</span><div class="txt">…</div></div>
+
+        <div class="line prof"><span class="who">Periodista</span><div class="txt">¿Y qué pasó exactamente para que decidiera dar el paso?<i>busca indefinido (C4/C5)</i></div></div>
+        <div class="line alum"><span class="who">Daniela</span><div class="txt">…</div></div>
+
+        <div class="line prof"><span class="who">Periodista</span><div class="txt">Desde entonces, ¿cuánto tiempo lleva trabajando aquí? Y cuénteme, ¿qué ha hecho esta última semana con la nueva exposición?<i>desde hace (C6) + perfecto compuesto (C3)</i></div></div>
+        <div class="line alum"><span class="who">Daniela</span><div class="txt">…</div></div>
+
+        <div class="line prof"><span class="who">Periodista</span><div class="txt">¿Le ha explicado el proyecto a alguien del equipo esta semana? ¿A quién?<i>le/les obligatorio (C3)</i></div></div>
+        <div class="line alum"><span class="who">Daniela</span><div class="txt">…</div></div>
+
+        <div class="line prof"><span class="who">Periodista</span><div class="txt">Ya cambiando de tema — perdona, ¿puedo tutearte? — ¿qué planes tienes para cuando termine esta exposición?<i>cambio de registro usted→tú + futuro simple (C1/C7)</i></div></div>
+        <div class="line alum"><span class="who">Daniela</span><div class="txt">…</div></div>
+
+        <div class="line prof"><span class="who">Periodista</span><div class="txt">Para finales de año, ¿qué crees que ya habrás conseguido con este proyecto?<i>futuro compuesto, receptivo (C8)</i></div></div>
+        <div class="line alum"><span class="who">Daniela</span><div class="txt">…</div></div>
+
+        <div class="line prof"><span class="who">Periodista</span><div class="txt">Última pregunta: si una persona joven quisiera dedicarse a esto, ¿qué consejo le darías?<i>condicional (C9)</i></div></div>
+        <div class="line alum"><span class="who">Daniela</span><div class="txt">…</div></div>
+      </div>
+
+      <div class="tnote">
+        <span class="ico">🎙️</span>
+        <span><b>Cómo dirigir la escena:</b> no leas el guion literalmente — úsalo como columna vertebral e improvisa alrededor si la respuesta de Daniela abre una puerta interesante (por ejemplo, si menciona un cortometraje o una exposición concreta, tira de ese hilo). Lo importante es que las preguntas, en su orden, la obliguen a moverse por imperfecto → indefinido → desde hace → perfecto compuesto → OI → futuro → futuro compuesto → condicional, sin pausas para "pensar en la gramática".</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ FICHA DE SEGUIMIENTO DOCENTE ═══════════ -->
+  <section class="sec">
+    <div class="sec-head">
+      <div class="sec-num">✓</div>
+      <div class="sec-titles">
+        <h2 class="sec-title">Ficha de seguimiento — rellenar durante la clase</h2>
+        <span class="sec-time">Marca lo que aparece de forma espontánea vs. lo que necesita ayuda</span>
+      </div>
+    </div>
+    <div class="sec-body">
+      <ul class="checklist">
+        <li><span class="box"></span><span><b>C1</b> Presente + ser/estar sin errores de base</span></li>
+        <li><span class="box"></span><span><b>C2</b> Irregulares (quiero/puedo/hago/conozco) + por/para básico</span></li>
+        <li><span class="box"></span><span><b>C3</b> Perfecto compuesto bien formado (participio, no indefinido tras "he")</span></li>
+        <li><span class="box"></span><span><b>C3</b> le/les presente aunque el destinatario ya esté nombrado</span></li>
+        <li><span class="box"></span><span><b>C4/C5</b> Indefinido vs. imperfecto: elige correctamente según fondo/acción</span></li>
+        <li><span class="box"></span><span><b>C6</b> Al menos dos marcadores temporales distintos, bien elegidos (hace vs. desde hace)</span></li>
+        <li><span class="box"></span><span><b>C6</b> "se lo/se la" en vez de "le lo/le la"</span></li>
+        <li><span class="box"></span><span><b>C7</b> Futuro simple con al menos un irregular</span></li>
+        <li><span class="box"></span><span><b>C8</b> Reconoce el futuro compuesto cuando tú lo usas (no hace falta que lo produzca)</span></li>
+        <li><span class="box"></span><span><b>C9</b> Condicional variado: no repite siempre la misma fórmula de consejo</span></li>
+      </ul>
+
+      <div class="divider">al cerrar la sesión</div>
+      <div class="goal-box">
+        <span class="lbl">Con esta ficha decides</span>
+        Si la mayoría de casillas se marcan con soltura, Daniela está lista para el Bloque 3 avanzado (condicional compuesto, C10) sin repaso adicional. Si "indefinido vs. imperfecto" o "se lo/se la" fallan de forma repetida, vale la pena dedicar 10 minutos de la próxima clase a un repaso rápido antes de avanzar — son los dos puntos más frágiles típicamente a estas alturas del programa.
+      </div>
+    </div>
+  </section>
+
+  <footer class="doc-footer">ESCOLAR · guía docente · repaso integrador clases 1–9 · programa de Daniela A.</footer>
+
+</div>
+</body>
+</html>

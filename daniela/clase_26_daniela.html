@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daniela A. · Clase 26 · Conectores causales y consecutivos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ╔══════════════════════════════════════════════════════════════════╗
+   ║  ESCOLAR — sistema de diseño para clases de español online        ║
+   ║  Versión: paleta pergamino original + ACENTO PRINCIPAL VARIABLE    ║
+   ╚══════════════════════════════════════════════════════════════════╝ */
+
+:root{
+  --paper:        #FBF7EE;
+  --paper-raised: #FFFFFF;
+  --paper-alt:    #F3ECDA;
+  --ink:          #23291F;
+  --ink-soft:     #565F52;
+  --ink-faint:    #8B9184;
+  --line:         rgba(35,41,31,0.12);
+  --line-strong:  rgba(35,41,31,0.22);
+
+  --b2:      #2F6FED;  --b2-soft: #EAF1FE;  --b2-line: #C6D9FC;
+  --ok:      #2F7D5C;  --ok-soft:  #E7F3EC;  --ok-line:  #BFE0CE;
+  --family:  #B5502E;  --family-soft: #FBEBE3; --family-line: #EFC9B4;
+  --amber:   #C1892F;  --amber-soft: #FBF1E1; --amber-line: #F0D9A8;
+
+  --accent:      #7A4FBF;
+  --accent-soft: #F1EBFB;
+  --accent-line: #D8C6F0;
+
+  --f-display: 'Fraunces', Georgia, serif;
+  --f-body:    'IBM Plex Sans', system-ui, sans-serif;
+  --f-data:    'IBM Plex Mono', monospace;
+
+  --r-sm: 8px;
+  --r-md: 14px;
+  --r-lg: 20px;
+
+  --shadow-1: 0 1px 2px rgba(35,41,31,0.05), 0 1px 8px rgba(35,41,31,0.04);
+}
+
+[data-accent="teja"]{ --accent:#C1473F; --accent-soft:#FBEAE8; --accent-line:#F0C4C0; }
+[data-accent="azul"]{ --accent:#2F6FED; --accent-soft:#EAF1FE; --accent-line:#C6D9FC; }
+[data-accent="verde"]{ --accent:#2F7D5C; --accent-soft:#E7F3EC; --accent-line:#BFE0CE; }
+[data-accent="morado"]{ --accent:#7A4FBF; --accent-soft:#F1EBFB; --accent-line:#D8C6F0; }
+[data-accent="terracota"]{ --accent:#B5502E; --accent-soft:#FBEBE3; --accent-line:#EFC9B4; }
+[data-accent="mostaza"]{ --accent:#C1892F; --accent-soft:#FBF1E1; --accent-line:#F0D9A8; }
+[data-accent="petroleo"]{ --accent:#296A75; --accent-soft:#E6F1F2; --accent-line:#BEDDE1; }
+[data-accent="rosa"]{ --accent:#C15B7C; --accent-soft:#FBEAF0; --accent-line:#F0C6D5; }
+
+*{ box-sizing:border-box; }
+body{
+  margin:0;
+  background: var(--paper);
+  background-image: radial-gradient(circle at 1px 1px, var(--line) 1px, transparent 0);
+  background-size: 22px 22px;
+  color: var(--ink);
+  font-family: var(--f-body);
+  line-height:1.6;
+}
+::selection{ background: var(--accent-soft); }
+
+/* ---------- HEADER ---------- */
+header{ padding:44px 24px 28px; max-width:760px; margin:0 auto; }
+.header-top{ display:flex; align-items:flex-start; justify-content:space-between; gap:24px; }
+.eyebrow{
+  font-family: var(--f-data); font-size:12px; letter-spacing:.14em;
+  text-transform:uppercase; color: var(--accent); margin:0 0 10px;
+  display:flex; align-items:center; gap:10px;
+}
+.eyebrow .dot{ width:6px; height:6px; border-radius:50%; background: var(--accent); }
+h1{
+  font-family: var(--f-display); font-weight:600;
+  font-size:clamp(34px,6.4vw,54px); line-height:1.02;
+  margin:0; letter-spacing:-.015em;
+}
+h1 em{ font-style:italic; color: var(--accent); }
+.level-badge{
+  font-family: var(--f-display); font-weight:700; font-style:normal;
+  font-size:clamp(52px,11vw,96px); line-height:0.85; color: var(--accent);
+  letter-spacing:-.02em; flex:none; margin-top:-4px;
+}
+.lede{ font-size:16px; color: var(--ink-soft); max-width:56ch; margin:18px 0 0; }
+
+.meta-row{
+  display:grid; grid-template-columns:1fr 1fr; column-gap:40px; row-gap:22px;
+  margin-top:34px; max-width:520px;
+  font-family: var(--f-data); font-size:11px; letter-spacing:.06em; text-transform:uppercase;
+  color: var(--ink); font-weight:600;
+}
+.meta-row div{ line-height:1.6; }
+.meta-row strong{
+  display:block; color: var(--ink-faint); font-size:11px; font-weight:500;
+  font-family: var(--f-data); letter-spacing:.06em; text-transform:uppercase; margin-top:3px;
+}
+@media (max-width:600px){
+  .header-top{ flex-direction:column; gap:6px; }
+  .level-badge{ margin-top:0; }
+  .meta-row{ max-width:none; column-gap:24px; }
+}
+
+/* ---------- SECTIONS ---------- */
+main{ max-width:760px; margin:0 auto; padding:8px 24px 100px; }
+
+section.block{ margin-bottom:48px; }
+.block-head{ display:flex; align-items:baseline; gap:12px; margin-bottom:18px; }
+.time-tag{
+  font-family: var(--f-data); font-size:11px; color: var(--ink-faint);
+  background: var(--paper-alt); padding:3px 10px; border-radius:999px; margin-left:auto; flex:none;
+}
+.block-num{
+  font-family: var(--f-data); font-size:12px; color:#fff; background: var(--accent);
+  width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  flex:none;
+}
+.block-head h2{ font-family: var(--f-display); font-weight:500; font-style:italic; font-size:22px; margin:0; }
+
+.panel{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-lg);
+  box-shadow: var(--shadow-1); padding:26px 28px;
+}
+
+.note{
+  margin-top:18px; padding:14px 16px; background: var(--accent-soft); border:1px solid var(--accent-line);
+  border-radius: var(--r-md); font-size:14px; color: var(--ink-soft);
+}
+.note strong{ color: var(--ink); }
+.note.amber{ background: var(--amber-soft); border-color: var(--amber-line); }
+
+.correction-panel{ background: var(--paper-alt); border:1px solid var(--line); border-radius: var(--r-lg); padding:26px 28px; }
+.correction-panel .block-num{ background: var(--ink-soft); }
+.correction-item{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:14px 16px; margin-bottom:12px;
+}
+.correction-item:last-child{ margin-bottom:0; }
+.correction-item .wrong-line{ font-size:14.5px; color: var(--family); text-decoration: line-through; text-decoration-color: var(--family-line); }
+.correction-item .right-line{ font-size:14.5px; color: var(--b2); margin-top:6px; font-weight:500; }
+.correction-item .why{ font-size:13px; color: var(--ink-faint); margin-top:6px; }
+
+.irr-table-wrap{ overflow-x:auto; margin-top:4px; }
+table.irr-table{ width:100%; border-collapse:collapse; font-size:13.5px; min-width:560px; }
+table.irr-table th{
+  font-family: var(--f-data); font-size:10.5px; text-transform:uppercase; letter-spacing:.05em;
+  color: var(--ink-faint); text-align:left; padding:8px 10px; border-bottom:1.5px solid var(--line-strong);
+}
+table.irr-table td{ padding:9px 10px; border-bottom:1px dashed var(--line); color: var(--ink-soft); }
+table.irr-table tr:last-child td{ border-bottom:none; }
+table.irr-table td.verb{ font-family: var(--f-display); font-weight:600; color: var(--ink); }
+table.irr-table td.irr-form{ font-family: var(--f-data); color: var(--accent); }
+
+.tense-tabs{ display:flex; gap:8px; margin-bottom:16px; flex-wrap:wrap; }
+.tense-tab{
+  font-family: var(--f-body); font-size:13px; font-weight:600; color: var(--ink-soft);
+  background: var(--paper-alt); border:1.5px solid var(--line); padding:7px 14px;
+  border-radius:999px; cursor:pointer; transition: all .15s ease;
+}
+.tense-tab.active{ background: var(--accent); color:#fff; border-color: var(--accent); }
+.tense-tab:hover:not(.active){ border-color: var(--ink-faint); }
+
+.reading-panel{ background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-lg); padding:26px 28px; }
+.reading-text{
+  font-family: var(--f-display); font-size:16.5px; line-height:1.7; color: var(--ink);
+  background: var(--paper-alt); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:20px 22px; margin-bottom:20px;
+}
+.reading-text p{ margin:0 0 12px; }
+.reading-text p:last-child{ margin-bottom:0; }
+.reading-q{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:14px 16px; margin-bottom:12px;
+}
+.reading-q:last-child{ margin-bottom:0; }
+.reading-q p.q{ font-size:14.5px; color: var(--ink); margin:0 0 10px; font-weight:500; }
+.reading-q .opts{ display:flex; flex-wrap:wrap; gap:8px; }
+
+.vocab-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(160px,1fr)); gap:12px; }
+.vocab-card{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:14px 16px; cursor:pointer; perspective:600px; min-height:78px;
+  display:flex; flex-direction:column; justify-content:center; transition: border-color .15s ease;
+}
+.vocab-card:hover{ border-color: var(--accent-line); }
+.vocab-card:focus-visible{ outline:2px solid var(--accent); outline-offset:2px; }
+.vocab-front{ font-family: var(--f-body); font-weight:600; font-size:15px; }
+.vocab-back{ display:none; font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); margin-top:6px; }
+.vocab-card.flipped .vocab-back{ display:block; }
+.vocab-card.flipped{ background: var(--accent-soft); border-color: var(--accent-line); }
+.vocab-hint{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin:10px 2px 16px; }
+
+.exercise{ margin-bottom:20px; }
+.exercise:last-of-type{ margin-bottom:0; }
+.ex-sentence{ font-size:15.5px; margin-bottom:10px; }
+.ex-sentence .gap{ font-family: var(--f-data); color: var(--ink-faint); }
+.ex-options{ display:flex; flex-wrap:wrap; gap:8px; }
+.opt-btn{
+  font-family: var(--f-body); font-size:14px; background: var(--paper-raised);
+  border:1.5px solid var(--line); color: var(--ink); padding:7px 16px; border-radius:999px;
+  cursor:pointer; transition: all .15s ease;
+}
+.opt-btn:hover{ border-color: var(--ink-faint); }
+.opt-btn.picked{ background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+.opt-btn.correct{ background: var(--ok-soft); border-color: var(--ok); color: var(--ok); }
+.opt-btn.wrong{ background: var(--family-soft); border-color: var(--family); color: var(--family); }
+.opt-btn:disabled{ cursor:default; }
+
+.check-bar{
+  display:flex; align-items:center; justify-content:space-between; gap:16px;
+  margin-top:22px; padding-top:18px; border-top:1px dashed var(--line);
+}
+.btn-primary{
+  font-family: var(--f-body); font-weight:600; font-size:14px; color:#fff; background: var(--accent);
+  border:none; padding:11px 22px; border-radius:999px; cursor:pointer; transition: transform .1s ease;
+}
+.btn-primary:hover{ transform: translateY(-1px); }
+#score-text{ font-family: var(--f-data); font-size:13px; color: var(--ink-faint); }
+.btn-ghost{
+  font-family: var(--f-body); font-weight:600; font-size:13px; color: var(--ink-soft); background:none;
+  border:1.5px solid var(--line); padding:9px 18px; border-radius:999px; cursor:pointer;
+}
+.btn-ghost:hover{ border-color: var(--ink-faint); }
+
+.roleplay-panel{ background: var(--family-soft); border:1px solid var(--family-line); border-radius: var(--r-lg); padding:26px 28px; }
+.roleplay-panel .block-num{ background: var(--family); }
+.scene-setup{
+  display:flex; gap:14px; align-items:flex-start; background: var(--paper-raised);
+  border:1px solid var(--family-line); border-radius: var(--r-md); padding:14px 16px; margin-bottom:20px;
+}
+.scene-icon{ font-size:22px; flex:none; }
+.scene-text{ font-size:14px; color: var(--ink-soft); }
+.scene-text strong{ color: var(--ink); }
+
+.scene-tabs{ display:flex; gap:8px; margin-bottom:16px; flex-wrap:wrap; }
+.scene-tab{
+  font-family: var(--f-body); font-size:13.5px; font-weight:600; color: var(--ink-soft);
+  background: var(--paper-raised); border:1.5px solid var(--family-line); padding:8px 16px;
+  border-radius:999px; cursor:pointer; transition: all .15s ease;
+}
+.scene-tab.active{ background: var(--family); color:#fff; border-color: var(--family); }
+.scene-tab:hover:not(.active){ border-color: var(--family); }
+
+.desc-card{
+  background: var(--paper-raised); border:1px solid var(--family-line); border-radius: var(--r-md);
+  padding:18px 20px;
+}
+.desc-card .desc-title{ font-family: var(--f-display); font-weight:600; font-size:16px; margin:0 0 8px; color: var(--ink); }
+.desc-card .desc-brief{ font-size:14px; color: var(--ink-soft); margin:0 0 14px; }
+.desc-card .desc-prompts{ margin:0; padding-left:18px; font-size:13.5px; color: var(--ink-soft); }
+.desc-card .desc-prompts li{ margin-bottom:6px; }
+.desc-card textarea{
+  width:100%; min-height:90px; font-family: var(--f-body); font-size:14.5px; color: var(--ink);
+  background:#fff; border:1px solid var(--family-line); border-radius: var(--r-sm);
+  padding:10px 12px; resize:vertical; margin-top:12px;
+}
+.desc-card textarea:focus{ outline:none; border-color: var(--family); }
+
+.roleplay-tip{
+  margin-top:22px; padding:14px 16px; background: var(--paper-raised); border:1px solid var(--family-line);
+  border-radius: var(--r-md); font-size:13.5px; color: var(--ink-soft);
+}
+.roleplay-tip strong{ color: var(--ink); }
+
+.task-panel{ background: var(--paper-alt); border:1px solid var(--line); border-radius: var(--r-lg); padding:26px 28px; }
+.task-panel .block-num{ background: var(--ink-soft); }
+textarea.final-task{
+  width:100%; min-height:140px; font-family: var(--f-body); font-size:15px; color: var(--ink);
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:14px 16px; resize:vertical; margin-top:14px;
+}
+textarea.final-task:focus{ outline:none; border-color: var(--accent); }
+.task-footer{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:12px; flex-wrap:wrap; }
+.task-count{ font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); }
+.btn-secondary{
+  font-family: var(--f-body); font-weight:600; font-size:13.5px; color: var(--ink-soft); background:none;
+  border:1.5px solid var(--line); padding:9px 18px; border-radius:999px; cursor:pointer;
+}
+.saved-flag{ font-family: var(--f-data); font-size:12px; color: var(--b2); opacity:0; transition: opacity .3s ease; }
+.saved-flag.show{ opacity:1; }
+
+.fill-block{ font-size:15.5px; line-height:2.1; color: var(--ink); }
+.fill-block input[type="text"]{
+  font-family: var(--f-data); font-size:14px; color: var(--ink); background: var(--paper-alt);
+  border:none; border-bottom:2px solid var(--accent-line); padding:2px 6px; text-align:center;
+  min-width:70px; margin:0 2px;
+}
+.fill-block input[type="text"]:focus{ outline:none; border-bottom-color: var(--accent); }
+.fill-block input.correct{ border-bottom-color: var(--ok); color: var(--ok); }
+.fill-block input.wrong{ border-bottom-color: var(--family); color: var(--family); text-decoration: line-through; }
+
+.spot-item{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:14px 16px; margin-bottom:12px;
+}
+.spot-item:last-child{ margin-bottom:0; }
+.spot-sentence{ font-size:15px; line-height:1.9; }
+.spot-word{ cursor:pointer; border-radius:4px; padding:1px 3px; transition: all .15s ease; }
+.spot-word:hover{ background: var(--accent-soft); }
+.spot-word.picked{ background: var(--accent-soft); color: var(--accent); font-weight:600; }
+.spot-word.correct{ background: var(--ok-soft); color: var(--ok); font-weight:600; }
+.spot-word.wrong{ background: var(--family-soft); color: var(--family); text-decoration: line-through; }
+.spot-fix{ font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); margin-top:8px; display:none; }
+.spot-item.checked .spot-fix{ display:block; }
+
+.sort-board{ display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:14px; margin-bottom:16px; }
+.sort-bucket{
+  background: var(--paper-alt); border:1.5px dashed var(--line-strong); border-radius: var(--r-md);
+  padding:12px; min-height:120px;
+}
+.sort-bucket h4{
+  font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.05em;
+  color: var(--ink-faint); margin:0 0 10px;
+}
+.sort-bucket-items{ display:flex; flex-wrap:wrap; gap:6px; min-height:30px; }
+.sort-pool{ display:flex; flex-wrap:wrap; gap:8px; padding:12px; background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md); margin-bottom:14px; }
+.sort-chip{
+  font-family: var(--f-body); font-size:13px; font-weight:600; background: var(--paper-raised);
+  border:1.5px solid var(--line); color: var(--ink); padding:6px 12px; border-radius:999px;
+  cursor:pointer; transition: all .15s ease;
+}
+.sort-chip:hover{ border-color: var(--accent-line); }
+.sort-chip.placed{ background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+.sort-chip.correct{ background: var(--ok-soft); border-color: var(--ok); color: var(--ok); }
+.sort-chip.wrong{ background: var(--family-soft); border-color: var(--family); color: var(--family); }
+
+table.conj-table{ width:100%; border-collapse:collapse; font-size:13.5px; }
+table.conj-table th{
+  font-family: var(--f-data); font-size:10.5px; text-transform:uppercase; letter-spacing:.05em;
+  color: var(--ink-faint); text-align:left; padding:8px 10px; border-bottom:1.5px solid var(--line-strong);
+}
+table.conj-table td{ padding:6px 10px; border-bottom:1px dashed var(--line); }
+table.conj-table tr:last-child td{ border-bottom:none; }
+table.conj-table td.pronoun{ font-family: var(--f-display); font-weight:600; color: var(--ink-soft); font-size:13px; }
+table.conj-table input[type="text"]{
+  width:100%; font-family: var(--f-data); font-size:13.5px; background: var(--paper-alt);
+  border:1px solid var(--line); border-radius: var(--r-sm); padding:6px 9px; color: var(--ink);
+}
+table.conj-table input[type="text"]:focus{ outline:none; border-color: var(--accent); }
+table.conj-table input.correct{ border-color: var(--ok); background: var(--ok-soft); }
+table.conj-table input.wrong{ border-color: var(--family); background: var(--family-soft); }
+
+:root{ --mesh-color: var(--accent); }
+.mesh-surface{ position:relative; overflow:hidden; isolation:isolate; }
+.mesh-surface::before,
+.mesh-surface::after,
+.mesh-surface .mesh-blob{
+  content:""; position:absolute; border-radius:50%; filter: blur(46px);
+  z-index:-1; animation: mesh-drift 22s ease-in-out infinite alternate; pointer-events:none;
+}
+.mesh-surface::before{ width:60%; height:60%; top:-10%; left:-10%; background: var(--mesh-color); opacity:.16; }
+.mesh-surface::after{ width:50%; height:50%; bottom:-15%; right:-5%; background: var(--mesh-color); opacity:.13; animation-delay:-7s; }
+.mesh-surface .mesh-blob{ width:40%; height:40%; top:30%; right:20%; background: var(--mesh-color); opacity:.11; animation-delay:-14s; }
+@keyframes mesh-drift{
+  0%{ transform: translate(0,0) scale(1); }
+  50%{ transform: translate(6%,-4%) scale(1.08); }
+  100%{ transform: translate(-4%,5%) scale(.96); }
+}
+@media (prefers-reduced-motion: reduce){
+  .mesh-surface::before, .mesh-surface::after, .mesh-surface .mesh-blob{ animation:none; }
+}
+
+.phrase-card{ padding:32px 36px; border-radius: var(--r-lg); border:1px solid var(--line); text-align:center; }
+.phrase-eyebrow{
+  font-family: var(--f-data); font-size:11.5px; letter-spacing:.1em; text-transform:uppercase;
+  color: var(--accent); font-weight:600; margin:0 0 12px;
+}
+.phrase-main{ font-family: var(--f-display); font-weight:600; font-size:clamp(21px,3.4vw,28px); line-height:1.35; margin:0 0 10px; }
+.phrase-main em{ font-style:italic; color: var(--accent); font-weight:500; }
+.phrase-sub{ font-size:14px; color: var(--ink-soft); max-width:46ch; margin:0 auto; }
+.phrase-card.complex{ text-align:left; }
+.phrase-card.complex .phrase-main{ font-size:clamp(18px,2.6vw,23px); line-height:1.5; max-width:58ch; margin:0 0 12px; }
+.phrase-card.complex .phrase-sub{ max-width:58ch; margin:0; }
+.phrase-tags{ display:flex; gap:8px; flex-wrap:wrap; margin-top:16px; }
+.phrase-card.complex .phrase-tags{ justify-content:flex-start; }
+.phrase-card:not(.complex) .phrase-tags{ justify-content:center; }
+.phrase-tag{
+  font-family: var(--f-data); font-size:10.5px; padding:4px 10px; border-radius:999px;
+  background: var(--accent-soft); border:1px solid var(--accent-line); color: var(--accent);
+}
+
+.culture-card{ border-radius: var(--r-lg); border:1px solid var(--line); padding:4px; }
+.culture-card-inner{
+  background: color-mix(in srgb, var(--paper-raised) 88%, transparent);
+  border-radius: calc(var(--r-lg) - 4px); padding:24px 26px;
+}
+.culture-eyebrow{
+  font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.08em;
+  color: var(--accent); font-weight:600; margin:0 0 10px;
+}
+.culture-card h3{ font-family: var(--f-display); font-size:18px; font-weight:600; margin:0 0 8px; }
+.culture-card p{ font-size:14px; color: var(--ink-soft); line-height:1.6; margin:0; }
+
+
+/* ---------- FOOTER ---------- */
+footer{
+  max-width:760px; margin:0 auto; padding:0 24px 60px; display:flex;
+  justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;
+  font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint);
+}
+footer a{ color: var(--accent); text-decoration:none; }
+footer a:hover{ text-decoration:underline; }
+
+@media (max-width:600px){
+  header{ padding:34px 18px 22px; }
+  main{ padding:8px 18px 90px; }
+  .panel, .task-panel, .roleplay-panel, .correction-panel, .reading-panel{ padding:20px 18px; }
+}
+@media (prefers-reduced-motion: reduce){ *{ transition:none !important; } }
+</style>
+</head>
+<body data-accent="morado">
+
+<header>
+  <div class="header-top">
+    <div>
+      <p class="eyebrow"><span class="dot"></span>Clase 26 · Programa B2 · Daniela A.</p>
+      <h1>Puesto que <em>así que</em></h1>
+    </div>
+    <span class="level-badge">B2</span>
+  </div>
+  <p class="lede">Seguimos en la línea de la argumentación, pero cambiamos de herramienta: hoy no contrastas ideas, las encadenas. "Puesto que", "dado que" y "ya que" te permiten justificar una decisión antes de anunciarla; "por lo cual", "de modo que" y "así que" hacen lo contrario — anuncian la consecuencia después de explicar la causa. Dominar los dos sentidos de la flecha (causa→antes, consecuencia→después) es lo que te permite organizar un texto argumentativo completo, no solo frases sueltas.</p>
+  <div class="meta-row">
+    <div>Duración<strong>50 minutos</strong></div>
+    <div>Línea<strong>L7 · Conectores y argumentación avanzada</strong></div>
+    <div>Gramática<strong>Puesto que, dado que, ya que, por lo cual, de modo que, así que</strong></div>
+    <div>Producción<strong>Ensayo breve estructurado (causa-efecto)</strong></div>
+  </div>
+</header>
+
+<main>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">1</span><h2>Frase de hoy</h2><span class="time-tag">0–1 min</span></div>
+    <div class="phrase-card mesh-surface">
+      <span class="mesh-blob"></span>
+      <p class="phrase-eyebrow">Frase de hoy</p>
+      <p class="phrase-main">Puesto que <em>el mercado ha cambiado</em>, la empresa decidió reestructurar el equipo.</p>
+      <p class="phrase-sub">"Puesto que" va delante, presentando la causa como algo ya sabido o evidente, antes de anunciar la decisión. Es la otra cara de la argumentación: ayer aprendiste a matizar una idea contraria, hoy aprendes a justificar la tuya.</p>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">2</span><h2>Dos direcciones: la causa por delante, la consecuencia por detrás</h2><span class="time-tag">1–10 min</span></div>
+    <div class="panel">
+      <p style="margin:0 0 16px; font-size:14.5px; color:var(--ink-soft);">Estos seis conectores organizan un texto argumentativo en dos bloques. Los <strong style="color:var(--ink);">causales</strong> (puesto que, dado que, ya que) presentan el motivo — normalmente antes del resultado. Los <strong style="color:var(--ink);">consecutivos</strong> (por lo cual, de modo que, así que) presentan el resultado — siempre después de la causa.</p>
+      <div class="irr-table-wrap">
+        <table class="irr-table">
+          <thead><tr><th>Conector</th><th>Tipo</th><th>Posición / registro</th></tr></thead>
+          <tbody>
+            <tr><td class="verb">Puesto que</td><td class="irr-form">causal</td><td>al principio o en medio — neutro, oral y escrito</td></tr>
+            <tr><td class="verb">Dado que</td><td class="irr-form">causal</td><td>al principio o en medio — formal, sobre todo escrito</td></tr>
+            <tr><td class="verb">Ya que</td><td class="irr-form">causal</td><td>al principio o en medio — neutro, muy natural en oral</td></tr>
+            <tr><td class="verb">Por lo cual</td><td class="irr-form">consecutivo</td><td>siempre después de la causa — formal, escrito</td></tr>
+            <tr><td class="verb">De modo que</td><td class="irr-form">consecutivo</td><td>siempre después de la causa — neutro, oral y escrito</td></tr>
+            <tr><td class="verb">Así que</td><td class="irr-form">consecutivo</td><td>siempre después de la causa — neutro, muy natural en oral</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="note"><strong>Regla clave:</strong> "puesto que / dado que / ya que" pueden ir delante de la causa ("Puesto que llovía, no salimos") o detrás ("No salimos, puesto que llovía"). "Por lo cual / de modo que / así que" son distintos: solo funcionan detrás de la causa, nunca delante — porque introducen el efecto, no el motivo.</div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">3</span><h2>"Porque" vs. "puesto que / dado que / ya que": la misma causa, distinto uso</h2><span class="time-tag">10–18 min</span></div>
+    <div class="panel">
+      <p style="margin:0 0 16px; font-size:14.5px; color:var(--ink-soft);">Todos son causales, pero no son intercambiables en cualquier posición. <strong style="color:var(--ink);">Porque</strong> casi siempre va detrás del resultado y responde a un "¿por qué?" — es la opción más neutra y la única que no suele abrir frase. <strong style="color:var(--ink);">Puesto que, dado que</strong> y <strong style="color:var(--ink);">ya que</strong> presentan la causa como algo ya conocido o evidente para el oyente, y por eso son los que abren frase con más naturalidad en un texto argumentativo escrito.</p>
+      <div class="irr-table-wrap">
+        <table class="irr-table">
+          <thead><tr><th>Conector</th><th>Ejemplo</th><th>Por qué</th></tr></thead>
+          <tbody>
+            <tr><td class="verb">Porque</td><td class="irr-form">No salimos porque llovía</td><td>responde a "¿por qué?", casi nunca abre frase</td></tr>
+            <tr><td class="verb">Puesto que</td><td class="irr-form">Puesto que llovía, no salimos</td><td>causa presentada como dato conocido, abre frase con naturalidad</td></tr>
+            <tr><td class="verb">Dado que</td><td class="irr-form">Dado que los resultados eran claros, se aprobó el plan</td><td>registro más formal — informes, ensayos</td></tr>
+            <tr><td class="verb">Ya que</td><td class="irr-form">Ya que insistes, te lo explico otra vez</td><td>tono más conversacional, casi de justificación</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="note amber"><strong>Truco práctico:</strong> si tu frase empieza directamente por la causa (sin que nadie la haya preguntado), usa "puesto que / dado que / ya que". Si la causa va después del resultado, "porque" es casi siempre la opción más natural.</div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">4</span><h2>Practica la forma: completa con el verbo correcto</h2><span class="time-tag">18–25 min</span></div>
+    <div class="panel">
+      <p style="margin:0 0 16px; font-size:14.5px; color:var(--ink-soft);">Escribe el verbo entre paréntesis en la forma correcta según el conector y el contexto.</p>
+      <table class="conj-table" id="conj-tbl">
+        <thead><tr><th>Frase</th><th>Verbo</th></tr></thead>
+        <tbody></tbody>
+      </table>
+      <div class="check-bar">
+        <button class="btn-primary" id="check-conj-btn">Comprobar</button>
+        <span id="conj-score"></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">5</span><h2>Mini test — ¿causa o consecuencia?</h2><span class="time-tag">25–31 min</span></div>
+    <div class="panel">
+      <p style="margin:0 0 16px; font-size:14.5px; color:var(--ink-soft);">Elige el conector más natural para cada contexto, teniendo en cuenta el registro.</p>
+      <div id="mini-test-list"></div>
+      <div class="check-bar">
+        <button class="btn-primary" id="check-mini-btn">Comprobar</button>
+        <span id="mini-score"></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">6</span><h2>Rellenar huecos en texto</h2><span class="time-tag">31–37 min</span></div>
+    <div class="panel">
+      <p style="margin:0 0 16px; font-size:14.5px; color:var(--ink-soft);">Completa cada hueco con el conector causal o consecutivo más adecuado al contexto.</p>
+      <div class="fill-block" id="fill-block"></div>
+      <div class="check-bar">
+        <button class="btn-primary" id="check-fill-btn">Comprobar huecos</button>
+        <span id="fill-score"></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">7</span><h2>Encontrar el error</h2><span class="time-tag">37–42 min</span></div>
+    <div class="panel">
+      <p style="margin:0 0 16px; font-size:14.5px; color:var(--ink-soft);">Cada frase tiene un posible error de posición o construcción con el conector causal/consecutivo. Pulsa la palabra incorrecta (o marca que la frase es correcta si no encuentras ninguna).</p>
+      <div id="spot-list"></div>
+    </div>
+  </section>
+
+  <section class="block roleplay-panel">
+    <div class="block-head"><span class="block-num">8</span><h2>Explicar causas y consecuencias de una decisión profesional</h2><span class="time-tag">42–47 min</span></div>
+    <div class="scene-setup">
+      <span class="scene-icon">🗣️</span>
+      <p class="scene-text"><strong>Contexto:</strong> Elige uno de los dos escenarios y escribe al menos tres frases encadenando causa y consecuencia con los conectores de hoy.</p>
+    </div>
+    <div class="scene-tabs" id="scene-tabs"></div>
+    <div id="scene-content"></div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">9</span><h2>Dato cultural</h2><span class="time-tag">47–48 min</span></div>
+    <div class="culture-card mesh-surface">
+      <span class="mesh-blob"></span>
+      <div class="culture-card-inner">
+        <p class="culture-eyebrow">Dato cultural</p>
+        <h3>El "por lo tanto" del lenguaje administrativo</h3>
+        <p>En textos oficiales, sentencias e informes en español, es habitual una estructura fija: primero se enumeran los "considerandos" o motivos (introducidos con "dado que", "puesto que", "visto que"), y al final aparece la conclusión con "por lo tanto" o "por lo cual". Esa misma lógica de causa acumulada → consecuencia final es exactamente la que necesitas para organizar un ensayo argumentativo de nivel B2: varias razones, y al final, una conclusión que se deduce de ellas.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="block task-panel">
+    <div class="block-head"><span class="block-num">10</span><h2>Tarea final</h2><span class="time-tag">48–50 min</span></div>
+    <p style="margin:0 0 4px; font-size:14.5px; color:var(--ink-soft);">Escribe un ensayo breve estructurado en causa → efecto sobre una decisión profesional (real o imaginaria). Usa al menos:</p>
+    <ul style="margin:10px 0 0; padding-left:18px; font-size:14px; color:var(--ink-soft); line-height:1.7;">
+      <li>Un conector causal del grupo "puesto que / dado que / ya que"</li>
+      <li>Un conector consecutivo del grupo "por lo cual / de modo que / así que"</li>
+      <li>Al menos una frase con "porque" en su posición natural (detrás del resultado)</li>
+    </ul>
+    <textarea class="final-task" placeholder="Escribe aquí tu ensayo breve de causa-efecto..."></textarea>
+    <div class="task-footer">
+      <span class="task-count">0 palabras escritas</span>
+      <button class="btn-secondary" id="save-task-btn">Guardar tarea</button>
+      <span class="saved-flag" id="saved-flag">Guardado ✓</span>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">11</span><h2>Frase de cierre</h2><span class="time-tag">50 min</span></div>
+    <div class="phrase-card complex mesh-surface">
+      <span class="mesh-blob"></span>
+      <p class="phrase-main">Ya tienes las dos piezas centrales de la argumentación B2: contrastar con "sin embargo / a pesar de" y encadenar causa-efecto con "puesto que / así que". Juntas, te permiten construir un texto de opinión completo: reconocer, justificar y concluir.</p>
+      <p class="phrase-sub">En la próxima clase pasamos a las oraciones condicionales de tipo II y III — cómo hablar de hipótesis irreales, tanto en presente como en pasado.</p>
+      <div class="phrase-tags">
+        <span class="phrase-tag">causa</span>
+        <span class="phrase-tag">consecuencia</span>
+        <span class="phrase-tag">registro escrito/oral</span>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <span>ESCOLAR · Programa Daniela A. · Clase 26 de 32</span>
+  <span>Sistema de diseño: escolar_multiacento · acento: morado</span>
+</footer>
+
+<script>
+function normalizeText(s){
+  return s.trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/\s+/g,' ');
+}
+
+/* ---------- 4. TABLA: VERBO EN LA FORMA CORRECTA SEGÚN CONECTOR CAUSAL/CONSECUTIVO ---------- */
+const CONJ = [
+  {sentence:"Puesto que ", verb:"tener (indic. pres.)", answer:"tiene", after:" mucha experiencia en el sector, le ofrecieron el puesto de dirección."},
+  {sentence:"Dado que los resultados no ", verb:"ser (indic. pret. imperf.)", answer:"eran", after:" los esperados, la empresa decidió cambiar de estrategia."},
+  {sentence:"Ya que ", verb:"insistir (indic. pres.)", answer:"insistes", after:" tanto, acepto revisar el contrato una vez más."},
+  {sentence:"El presupuesto se agotó, de modo que el proyecto se ", verb:"tener que (indic. pret.)", answer:"tuvo que", after:" posponer."},
+  {sentence:"No llegó a tiempo la documentación, así que la reunión se ", verb:"cancelar (indic. pret.)", answer:"canceló", after:"."},
+];
+const conjTbody = document.querySelector('#conj-tbl tbody');
+CONJ.forEach((item,i)=>{
+  const tr = document.createElement('tr');
+  tr.innerHTML = `<td class="pronoun">${item.sentence}<em style="font-family:var(--f-data); color:var(--ink-faint); font-style:normal;">(${item.verb})</em>${item.after}</td>
+    <td><input type="text" data-answer="${item.answer}" placeholder="verbo"></td>`;
+  conjTbody.appendChild(tr);
+});
+document.getElementById('check-conj-btn').addEventListener('click', ()=>{
+  let correct = 0;
+  document.querySelectorAll('#conj-tbl input').forEach(input=>{
+    const ok = normalizeText(input.value) === normalizeText(input.dataset.answer);
+    input.classList.toggle('correct', ok);
+    input.classList.toggle('wrong', !ok);
+    if(ok) correct++;
+  });
+  document.getElementById('conj-score').textContent = `${correct} / ${CONJ.length} correctas`;
+});
+
+/* ---------- 5. MINI TEST (¿causa antes o consecuencia después?) ---------- */
+const MINI_TEST = [
+  {sentence:"Empieza la frase presentando el motivo, antes del resultado: \"___ el equipo no cumplió los plazos, se revisó todo el proceso.\" →", options:["Dado que","Así que"], answer:"Dado que"},
+  {sentence:"El resultado va después de la causa, nunca al principio: \"El cliente canceló el pedido, ___ tuvimos que reorganizar la producción.\" →", options:["así que","ya que"], answer:"así que"},
+  {sentence:"Registro formal, tipo informe: \"Los datos son concluyentes, ___ se recomienda aprobar el proyecto.\" →", options:["por lo cual","porque"], answer:"por lo cual"},
+  {sentence:"Tono conversacional, casi de justificación: \"___ tú lo dices, lo hacemos a tu manera.\" →", options:["Ya que","Dado que"], answer:"Ya que"},
+  {sentence:"Responde a un \"¿por qué?\" implícito, detrás del resultado: \"No fuimos a la reunión ___ nos avisaron demasiado tarde.\" →", options:["porque","puesto que"], answer:"porque"},
+];
+const miniList = document.getElementById('mini-test-list');
+MINI_TEST.forEach((item,i)=>{
+  const el = document.createElement('div');
+  el.className = 'exercise';
+  el.dataset.answer = item.answer;
+  const shuffled = [...item.options].sort(()=>Math.random()-0.5);
+  el.innerHTML = `<p class="ex-sentence">${i+1}. ${item.sentence}</p>
+    <div class="ex-options">${shuffled.map(o=>`<button class="opt-btn" data-value="${o}">${o}</button>`).join('')}</div>`;
+  el.querySelectorAll('.opt-btn').forEach(b=>{
+    b.addEventListener('click', ()=>{
+      el.querySelectorAll('.opt-btn').forEach(x=>x.classList.remove('picked'));
+      b.classList.add('picked');
+    });
+  });
+  miniList.appendChild(el);
+});
+document.getElementById('check-mini-btn').addEventListener('click', ()=>{
+  let correct = 0;
+  miniList.querySelectorAll('.exercise').forEach(el=>{
+    const answer = el.dataset.answer;
+    const picked = el.querySelector('.opt-btn.picked');
+    el.querySelectorAll('.opt-btn').forEach(b=>{
+      b.disabled = true;
+      if(b.dataset.value === answer) b.classList.add('correct');
+      else if(b === picked) b.classList.add('wrong');
+    });
+    if(picked && picked.dataset.value === answer) correct++;
+  });
+  document.getElementById('mini-score').textContent = `${correct} / ${MINI_TEST.length} correctas`;
+});
+
+/* ---------- 6. RELLENAR HUECOS EN TEXTO ---------- */
+const FILL_TEXT = [
+  {before:"", answer:"Puesto que", after:" la demanda había crecido mucho, la empresa amplió su plantilla. "},
+  {before:"Los costes de producción subieron, ", answer:"de modo que", after:" tuvieron que revisar los precios. "},
+  {before:"", answer:"Dado que", after:" el contrato no se había firmado a tiempo, el proyecto quedó en pausa. "},
+  {before:"No consiguieron el permiso necesario, ", answer:"así que", after:" el evento se trasladó a otra fecha. "},
+];
+const fillBlock = document.getElementById('fill-block');
+fillBlock.innerHTML = FILL_TEXT.map((part)=>
+  `${part.before}<input type="text" data-answer="${part.answer}" size="${Math.max(part.answer.length,6)}">${part.after}`
+).join('');
+document.getElementById('check-fill-btn').addEventListener('click', ()=>{
+  let correct = 0; let total = 0;
+  fillBlock.querySelectorAll('input').forEach(input=>{
+    total++;
+    const ok = normalizeText(input.value) === normalizeText(input.dataset.answer);
+    input.classList.toggle('correct', ok);
+    input.classList.toggle('wrong', !ok);
+    if(ok) correct++;
+  });
+  document.getElementById('fill-score').textContent = `${correct} / ${total} correctas`;
+});
+
+/* ---------- 7. ENCONTRAR EL ERROR ---------- */
+const SPOT_REAL = [
+  {sentence:"Así que llovía mucho, decidieron aplazar la reunión.", words:["Así","que","llovía","mucho",",","decidieron","aplazar","la","reunión","."], wrongIndex:0, fix:"\"Así que\" es consecutivo y va SIEMPRE detrás de la causa, nunca al principio — aquí debería ser \"Puesto que llovía mucho, decidieron aplazar la reunión\" o \"Llovía mucho, así que decidieron aplazar la reunión\""},
+  {sentence:"Dado que el proyecto era muy ambicioso, pidieron más presupuesto.", words:["Dado","que","el","proyecto","era","muy","ambicioso",",","pidieron","más","presupuesto","."], wrongIndex:-1, fix:"Esta frase es correcta — \"dado que\" puede abrir frase presentando la causa como dato conocido"},
+  {sentence:"El informe llegó tarde, puesto que se retrasó toda la entrega.", words:["El","informe","llegó","tarde",",","puesto","que","se","retrasó","toda","la","entrega","."], wrongIndex:5, fix:"El orden lógico está invertido: aquí \"toda la entrega se retrasó\" es la causa y \"el informe llegó tarde\" es la consecuencia — con \"puesto que\" en esa posición, se necesitaría \"así que\" o \"de modo que\": \"Se retrasó toda la entrega, así que el informe llegó tarde\""},
+  {sentence:"No teníamos suficientes datos, de modo que decidimos esperar una semana más.", words:["No","teníamos","suficientes","datos",",","de","modo","que","decidimos","esperar","una","semana","más","."], wrongIndex:-1, fix:"Esta frase es correcta — la causa (falta de datos) va primero y \"de modo que\" introduce la consecuencia después"},
+];
+const spotList = document.getElementById('spot-list');
+SPOT_REAL.forEach((item,i)=>{
+  const el = document.createElement('div');
+  el.className = 'spot-item';
+  el.innerHTML = `<p class="spot-sentence">${i+1}. ${item.words.map((w,wi)=>`<span class="spot-word" data-idx="${wi}">${w}</span>`).join(' ')}</p>
+    <p class="spot-fix">Corrección: ${item.fix}</p>`;
+  el.querySelectorAll('.spot-word').forEach(w=>{
+    w.addEventListener('click', ()=>{
+      if(el.classList.contains('checked')) return;
+      el.querySelectorAll('.spot-word').forEach(x=>x.classList.remove('picked'));
+      w.classList.add('picked');
+      const idx = parseInt(w.dataset.idx);
+      el.querySelectorAll('.spot-word').forEach((x,xi)=>{
+        if(xi === item.wrongIndex) x.classList.add('correct');
+        if(xi === idx && idx !== item.wrongIndex) x.classList.add('wrong');
+      });
+      el.classList.add('checked');
+    });
+  });
+  spotList.appendChild(el);
+});
+
+/* ---------- 8. EXPLICAR CAUSAS Y CONSECUENCIAS (escenas tabuladas) ---------- */
+const SCENES = [
+  {
+    id: 'cambio-carrera',
+    label: 'Cambio de carrera',
+    title: 'Explica por qué decidiste (o decidirías) cambiar de sector profesional',
+    brief: 'Cuenta las causas que llevaron a esa decisión y las consecuencias que tuvo, encadenando causa y efecto.',
+    prompts: [
+      'Empieza por la causa principal con "puesto que", "dado que" o "ya que"',
+      'Añade una segunda causa o factor que influyó en la decisión',
+      'Cierra con la consecuencia usando "por lo cual", "de modo que" o "así que"'
+    ]
+  },
+  {
+    id: 'proyecto-cancelado',
+    label: 'Proyecto cancelado',
+    title: 'Un proyecto de tu equipo se canceló o se retrasó mucho — explica por qué',
+    brief: 'Explica la cadena de causas que llevó al problema y qué consecuencias tuvo para el equipo o la empresa.',
+    prompts: [
+      'Presenta la causa inicial del problema con "dado que" o "puesto que"',
+      'Explica cómo esa causa provocó otro problema, usando "por lo cual" o "de modo que"',
+      'Termina con la consecuencia final, usando "así que" en su posición natural'
+    ]
+  }
+];
+const sceneTabs = document.getElementById('scene-tabs');
+const sceneContent = document.getElementById('scene-content');
+function renderScene(id){
+  const scene = SCENES.find(s=>s.id===id);
+  sceneContent.innerHTML = `
+    <div class="desc-card">
+      <p class="desc-title">${scene.title}</p>
+      <p class="desc-brief">${scene.brief}</p>
+      <ul class="desc-prompts">${scene.prompts.map(p=>`<li>${p}</li>`).join('')}</ul>
+      <textarea placeholder="Escribe aquí (mínimo 3 frases encadenando causa y consecuencia)..."></textarea>
+    </div>
+    <div class="roleplay-tip"><strong>Consejo:</strong> antes de terminar, revisa el orden — ¿la causa va primero? Entonces usa "puesto que / dado que / ya que". ¿Estás presentando el resultado después de explicar el motivo? Entonces usa "por lo cual / de modo que / así que", nunca al principio de la frase.</div>
+  `;
+}
+SCENES.forEach((scene,i)=>{
+  const tab = document.createElement('button');
+  tab.className = 'scene-tab' + (i===0?' active':'');
+  tab.textContent = scene.label;
+  tab.addEventListener('click', ()=>{
+    sceneTabs.querySelectorAll('.scene-tab').forEach(t=>t.classList.remove('active'));
+    tab.classList.add('active');
+    renderScene(scene.id);
+  });
+  sceneTabs.appendChild(tab);
+});
+renderScene(SCENES[0].id);
+
+/* ---------- 10. TAREA FINAL: contador + guardado ---------- */
+const ta = document.querySelector('.final-task');
+const tc = document.querySelector('.task-count');
+ta.addEventListener('input', ()=>{
+  const words = ta.value.trim().split(/\s+/).filter(Boolean).length;
+  tc.textContent = `${words} palabra${words===1?'':'s'} escrita${words===1?'':'s'}`;
+});
+const STORAGE_KEY = 'daniela-clase26-tarea';
+async function loadTask(){
+  if(!window.storage) return;
+  try{
+    const res = await window.storage.get(STORAGE_KEY);
+    if(res && typeof res.value === 'string'){
+      ta.value = res.value;
+      ta.dispatchEvent(new Event('input'));
+    }
+  }catch(e){ /* sin tarea guardada todavía */ }
+}
+document.getElementById('save-task-btn').addEventListener('click', async ()=>{
+  if(window.storage){
+    try{ await window.storage.set(STORAGE_KEY, ta.value); }catch(e){ /* fallo silencioso */ }
+  }
+  const flag = document.getElementById('saved-flag');
+  flag.classList.add('show');
+  setTimeout(()=>flag.classList.remove('show'), 2000);
+});
+loadTask();
+</script>
+
+</body>
+</html>
