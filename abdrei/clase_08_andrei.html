@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clase 8 · What already happened — Andrei</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+
+/* ╔══════════════════════════════════════════════════════════════╗
+   ║  ESCOLAR — sistema de diseño para clases de español online   ║
+   ║  Clase 8 · L2 Repaso y despegue hacia A2 · "What already happened" ║
+   ╚══════════════════════════════════════════════════════════════╝ */
+
+:root{
+  --paper:        #FBF7EE;
+  --paper-raised: #FFFFFF;
+  --paper-alt:    #F3ECDA;
+  --ink:          #23291F;
+  --ink-soft:     #565F52;
+  --ink-faint:    #8B9184;
+  --line:         rgba(35,41,31,0.12);
+  --line-strong:  rgba(35,41,31,0.22);
+
+  --b1:      #2F6FED;  --b1-soft: #EAF1FE;  --b1-line: #C6D9FC;
+  --b2:      #2E9E6B;  --b2-soft: #E9F6EF;  --b2-line: #BEE6D3;
+  --family:  #B5502E;  --family-soft: #FBEBE3; --family-line: #EFC9B4;
+
+  --f-display: 'Fraunces', Georgia, serif;
+  --f-body:    'IBM Plex Sans', system-ui, sans-serif;
+  --f-data:    'IBM Plex Mono', monospace;
+
+  --r-sm: 8px;
+  --r-md: 14px;
+  --r-lg: 20px;
+
+  --shadow-1: 0 1px 2px rgba(35,41,31,0.05), 0 1px 8px rgba(35,41,31,0.04);
+}
+
+*{ box-sizing:border-box; }
+body{
+  margin:0;
+  background: var(--paper);
+  background-image: radial-gradient(circle at 1px 1px, var(--line) 1px, transparent 0);
+  background-size: 22px 22px;
+  color: var(--ink);
+  font-family: var(--f-body);
+  line-height:1.6;
+}
+::selection{ background: var(--b2-soft); }
+
+/* ---------- HEADER ---------- */
+header{ padding:44px 24px 28px; max-width:760px; margin:0 auto; }
+.eyebrow{
+  font-family: var(--f-data); font-size:12px; letter-spacing:.14em;
+  text-transform:uppercase; color: var(--b2); margin:0 0 10px;
+  display:flex; align-items:center; gap:10px;
+}
+.eyebrow .dot{ width:6px; height:6px; border-radius:50%; background: var(--b2); }
+h1{
+  font-family: var(--f-display); font-weight:600;
+  font-size:clamp(30px,5.6vw,46px); line-height:1.08;
+  margin:0 0 14px; letter-spacing:-.01em;
+}
+h1 em{ font-style:italic; color: var(--b2); }
+.lede{ font-size:16px; color: var(--ink-soft); max-width:56ch; margin:0; }
+
+.meta-row{
+  display:flex; flex-wrap:wrap; gap:20px; margin-top:26px;
+  font-family: var(--f-data); font-size:12px; color: var(--ink-faint);
+}
+.meta-row strong{
+  display:block; color: var(--ink); font-size:14.5px; font-weight:500;
+  font-family: var(--f-display); margin-top:3px;
+}
+
+/* ---------- SECTIONS ---------- */
+main{ max-width:760px; margin:0 auto; padding:8px 24px 100px; }
+
+section.block{ margin-bottom:52px; }
+.block-head{ display:flex; align-items:baseline; gap:12px; margin-bottom:18px; }
+.time-tag{
+  font-family: var(--f-data); font-size:11px; color: var(--ink-faint);
+  background: var(--paper-alt); padding:3px 10px; border-radius:999px; margin-left:auto; flex:none;
+}
+.block-num{
+  font-family: var(--f-data); font-size:12px; color:#fff; background: var(--b2);
+  width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  flex:none;
+}
+.block-head h2{
+  font-family: var(--f-display); font-weight:500; font-style:italic; font-size:22px; margin:0;
+}
+
+.panel{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-lg);
+  box-shadow: var(--shadow-1); padding:26px 28px;
+}
+
+/* ---------- CONJUGATION TABLE ---------- */
+.conj-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:14px; margin-top:20px; }
+.conj-card{ border-radius: var(--r-md); padding:16px 18px; border:1px solid var(--line); background: var(--paper-alt); }
+.conj-head{ display:flex; align-items:center; gap:8px; margin:0 0 10px; }
+.conj-main{ font-family: var(--f-display); font-weight:600; font-size:17px; color: var(--b2); }
+.conj-reg{ font-family: var(--f-data); font-size:10.5px; color: var(--ink-faint); text-transform:uppercase; letter-spacing:.04em; }
+.conj-rows{ display:grid; gap:4px; font-family: var(--f-data); font-size:13px; color: var(--ink-soft); }
+.conj-rows span.pron{ color: var(--ink-faint); display:inline-block; width:52px; }
+.en{ display:block; font-style:italic; color: var(--ink-faint); font-size:0.92em; margin-top:3px; }
+
+.irregular-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:12px; margin-top:14px; }
+.irr-card{ background: var(--paper-raised); border:1px solid var(--b2-line); border-radius: var(--r-md); padding:12px 14px; text-align:center; }
+.irr-inf{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); text-transform:uppercase; }
+.irr-form{ font-family: var(--f-display); font-weight:600; font-size:18px; color: var(--b2); margin-top:4px; }
+
+.note{
+  margin-top:18px; padding:14px 16px; background: var(--b2-soft); border:1px solid var(--b2-line);
+  border-radius: var(--r-md); font-size:14px; color: var(--ink-soft);
+}
+.note strong{ color: var(--ink); }
+
+.pron-note{
+  margin-top:14px; padding:14px 16px; background: var(--paper-alt); border:1px solid var(--line);
+  border-radius: var(--r-md); font-size:14px; color: var(--ink-soft);
+}
+.pron-note strong{ color: var(--ink); }
+
+.compare-warning{
+  margin-top:14px; padding:14px 16px; background: var(--family-soft); border:1px solid var(--family-line);
+  border-radius: var(--r-md); font-size:13.5px; color: var(--ink-soft);
+}
+.compare-warning strong{ color: var(--family); }
+
+/* ---------- VOCAB CARDS ---------- */
+.vocab-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:12px; }
+.vocab-card{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:14px 16px; cursor:pointer; perspective:600px; min-height:78px;
+  display:flex; flex-direction:column; justify-content:center; transition: border-color .15s ease;
+}
+.vocab-card:hover{ border-color: var(--b2-line); }
+.vocab-card:focus-visible{ outline:2px solid var(--b2); outline-offset:2px; }
+.vocab-front{ font-family: var(--f-body); font-weight:600; font-size:15px; }
+.vocab-back{ display:none; font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); margin-top:6px; }
+.vocab-card.flipped .vocab-back{ display:block; }
+.vocab-card.flipped{ background: var(--b2-soft); border-color: var(--b2-line); }
+.vocab-hint{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin:10px 2px 16px; }
+
+/* ---------- EXERCISE ---------- */
+.exercise{ margin-bottom:20px; }
+.exercise:last-of-type{ margin-bottom:0; }
+.ex-sentence{ font-size:15.5px; margin-bottom:10px; }
+.ex-sentence .gap{ font-family: var(--f-data); color: var(--ink-faint); }
+.ex-options{ display:flex; flex-wrap:wrap; gap:8px; }
+.opt-btn{
+  font-family: var(--f-body); font-size:14px; background: var(--paper-raised);
+  border:1.5px solid var(--line); color: var(--ink); padding:7px 16px; border-radius:999px;
+  cursor:pointer; transition: all .15s ease;
+}
+.opt-btn:hover{ border-color: var(--ink-faint); }
+.opt-btn.picked{ background: var(--b2-soft); border-color: var(--b2); color: var(--b2); }
+.opt-btn.correct{ background: var(--b2-soft); border-color: var(--b2); color: var(--b2); }
+.opt-btn.wrong{ background: var(--family-soft); border-color: var(--family); color: var(--family); }
+.opt-btn:disabled{ cursor:default; }
+
+.check-bar{
+  display:flex; align-items:center; justify-content:space-between; gap:16px;
+  margin-top:22px; padding-top:18px; border-top:1px dashed var(--line);
+}
+.btn-primary{
+  font-family: var(--f-body); font-weight:600; font-size:14px; color:#fff; background: var(--b2);
+  border:none; padding:11px 22px; border-radius:999px; cursor:pointer; transition: transform .1s ease;
+}
+.btn-primary:hover{ transform: translateY(-1px); }
+#score-text{ font-family: var(--f-data); font-size:13px; color: var(--ink-faint); }
+.btn-ghost{
+  font-family: var(--f-body); font-weight:600; font-size:13px; color: var(--ink-soft); background:none;
+  border:1.5px solid var(--line); padding:9px 18px; border-radius:999px; cursor:pointer;
+}
+.btn-ghost:hover{ border-color: var(--ink-faint); }
+.ex-divider{
+  display:flex; align-items:center; gap:10px; margin:20px 0 16px;
+  font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.06em;
+  color: var(--ink-faint);
+}
+.ex-divider::before, .ex-divider::after{ content:""; flex:1; height:1px; background: var(--line); }
+.ex-divider.en-clase{ color: var(--b2); }
+.ex-divider.en-clase::before, .ex-divider.en-clase::after{ background: var(--b2-line); }
+
+/* ---------- CHARACTER CARDS ---------- */
+.characters{ display:grid; gap:16px; }
+.char-card{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-lg);
+  padding:20px 22px; display:flex; gap:16px; align-items:flex-start;
+}
+.char-avatar{
+  flex:none; width:44px; height:44px; border-radius:50%; background: var(--b2-soft);
+  display:flex; align-items:center; justify-content:center; font-family: var(--f-display);
+  font-weight:600; font-size:17px; color: var(--b2);
+}
+.char-body{ flex:1; }
+.char-name{ font-family: var(--f-display); font-weight:600; font-size:17px; margin:0 0 4px; }
+.char-role{ font-family: var(--f-data); font-size:11.5px; text-transform:uppercase; letter-spacing:.05em; color: var(--ink-faint); margin:0 0 10px; }
+.char-facts{ display:flex; flex-wrap:wrap; gap:6px; margin-bottom:10px; }
+.fact-tag{
+  font-family: var(--f-data); font-size:12px; background: var(--paper-alt); color: var(--ink-soft);
+  padding:4px 10px; border-radius:999px;
+}
+.char-prompt{ font-size:14px; color: var(--ink-soft); }
+.char-input{
+  width:100%; margin-top:8px; font-family: var(--f-body); font-size:14.5px; color: var(--ink);
+  background: var(--paper); border:1px solid var(--line); border-radius: var(--r-sm);
+  padding:10px 12px; resize:vertical; min-height:44px;
+}
+.char-input:focus{ outline:none; border-color: var(--b2-line); background: var(--paper-raised); }
+
+/* ---------- ROLEPLAY ---------- */
+.roleplay-panel{ background: var(--b1-soft); border:1px solid var(--b1-line); border-radius: var(--r-lg); padding:26px 28px; }
+.roleplay-panel .block-num{ background: var(--b1); }
+.scene-setup{
+  display:flex; gap:14px; align-items:flex-start; background: var(--paper-raised);
+  border:1px solid var(--b1-line); border-radius: var(--r-md); padding:14px 16px; margin-bottom:20px;
+}
+.scene-icon{ font-size:22px; flex:none; }
+.scene-text{ font-size:14px; color: var(--ink-soft); }
+.scene-text strong{ color: var(--ink); }
+
+.dialogue{ display:flex; flex-direction:column; gap:14px; }
+.scene-tabs{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:18px; }
+.scene-tab{
+  font-family: var(--f-data); font-size:12.5px; background: var(--paper-raised);
+  border:1.5px solid var(--b1-line); color: var(--ink-soft); padding:7px 14px;
+  border-radius:999px; cursor:pointer; transition: all .15s ease;
+}
+.scene-tab:hover{ border-color: var(--b1); }
+.scene-tab.active{ background: var(--b1); border-color: var(--b1); color:#fff; }
+.line{ display:flex; gap:12px; align-items:flex-start; }
+.line-avatar{
+  flex:none; width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  font-family: var(--f-display); font-weight:600; font-size:14px; color:#fff;
+}
+.line.friend .line-avatar{ background: var(--ink-faint); }
+.line.you .line-avatar{ background: var(--b1); }
+.line-body{ flex:1; }
+.line-name{ font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.05em; color: var(--ink-faint); margin:0 0 4px; }
+.line-bubble{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:12px 14px; font-size:14.5px; color: var(--ink);
+}
+.line.you .line-bubble{ background:#fff; border-color: var(--b1-line); }
+.line-input{
+  width:100%; font-family: var(--f-body); font-size:14.5px; color: var(--ink);
+  background:#fff; border:1px solid var(--b1-line); border-radius: var(--r-sm);
+  padding:10px 12px; resize:vertical; min-height:40px; margin-top:2px;
+}
+.line-input:focus{ outline:none; border-color: var(--b1); }
+.line-hint{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin-top:5px; }
+
+.roleplay-tip{
+  margin-top:22px; padding:14px 16px; background: var(--paper-raised); border:1px solid var(--b1-line);
+  border-radius: var(--r-md); font-size:13.5px; color: var(--ink-soft);
+}
+.roleplay-tip strong{ color: var(--ink); }
+
+/* ---------- FINAL TASK ---------- */
+.task-panel{ background: var(--family-soft); border:1px solid var(--family-line); border-radius: var(--r-lg); padding:26px 28px; }
+.task-panel .block-num{ background: var(--family); }
+textarea#final-task{
+  width:100%; min-height:110px; font-family: var(--f-body); font-size:15px; color: var(--ink);
+  background: var(--paper-raised); border:1px solid var(--family-line); border-radius: var(--r-md);
+  padding:14px 16px; resize:vertical; margin-top:14px;
+}
+textarea#final-task:focus{ outline:none; border-color: var(--family); }
+.task-footer{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:12px; flex-wrap:wrap; }
+#task-count{ font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); }
+.btn-secondary{
+  font-family: var(--f-body); font-weight:600; font-size:13.5px; color: var(--family); background:none;
+  border:1.5px solid var(--family-line); padding:9px 18px; border-radius:999px; cursor:pointer;
+}
+.saved-flag{ font-family: var(--f-data); font-size:12px; color: var(--b2); opacity:0; transition: opacity .3s ease; }
+.saved-flag.show{ opacity:1; }
+
+/* ---------- FOOTER NAV ---------- */
+footer{
+  max-width:760px; margin:0 auto; padding:0 24px 60px; display:flex;
+  justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;
+  font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint);
+}
+footer a{ color: var(--b2); text-decoration:none; }
+footer a:hover{ text-decoration:underline; }
+
+@media (max-width:600px){
+  header{ padding:34px 18px 22px; }
+  main{ padding:8px 18px 90px; }
+  .panel, .task-panel{ padding:20px 18px; }
+  .char-card{ flex-direction:column; }
+}
+@media (prefers-reduced-motion: reduce){ *{ transition:none !important; } }
+</style>
+</head>
+<body>
+
+<header>
+  <p class="eyebrow"><span class="dot"></span>Clase 8 de 20 · L2 Repaso y despegue hacia A2 · Pretérito indefinido</p>
+  <h1>Lo que ya <em>pasó</em></h1>
+  <p class="lede">Julio fue solo presente. Hoy abrimos agosto con la primera herramienta para contar el pasado: el pretérito indefinido. Vas a poder decir qué hiciste el fin de semana, cómo fue tu llegada a Madrid o qué pasó en ese partido — sin quedarte atascado en el presente cada vez que la conversación mira hacia atrás.</p>
+  <div class="meta-row">
+    <div>Duración<strong>50 min</strong></div>
+    <div>Construye sobre<strong>Clases 1–7</strong></div>
+    <div>Nivel<strong>A1 → A2</strong></div>
+  </div>
+</header>
+
+<main>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">1</span><h2>El pasado que ya terminó</h2><span class="time-tag">10 min</span></div>
+    <div class="panel">
+      <p style="margin:0 0 6px; font-size:14.5px; color:var(--ink-soft);">El pretérito indefinido cuenta acciones pasadas que ya están cerradas: pasaron, terminaron, y se acabó. Es el pasado de "ayer", "el fin de semana pasado", "hace dos años" — un punto concreto en el tiempo, no un proceso ni una costumbre.</p>
+
+      <div class="conj-grid">
+        <div class="conj-card">
+          <div class="conj-head"><span class="conj-main">-AR</span><span class="conj-reg">hablar</span></div>
+          <div class="conj-rows">
+            <div><span class="pron">yo</span>habl<strong>é</strong></div>
+            <div><span class="pron">tú</span>habl<strong>aste</strong></div>
+            <div><span class="pron">él/ella</span>habl<strong>ó</strong></div>
+            <div><span class="pron">nosotros</span>habl<strong>amos</strong></div>
+            <div><span class="pron">ellos</span>habl<strong>aron</strong></div>
+          </div>
+        </div>
+        <div class="conj-card">
+          <div class="conj-head"><span class="conj-main">-ER</span><span class="conj-reg">comer</span></div>
+          <div class="conj-rows">
+            <div><span class="pron">yo</span>com<strong>í</strong></div>
+            <div><span class="pron">tú</span>com<strong>iste</strong></div>
+            <div><span class="pron">él/ella</span>com<strong>ió</strong></div>
+            <div><span class="pron">nosotros</span>com<strong>imos</strong></div>
+            <div><span class="pron">ellos</span>com<strong>ieron</strong></div>
+          </div>
+        </div>
+        <div class="conj-card">
+          <div class="conj-head"><span class="conj-main">-IR</span><span class="conj-reg">vivir</span></div>
+          <div class="conj-rows">
+            <div><span class="pron">yo</span>viv<strong>í</strong></div>
+            <div><span class="pron">tú</span>viv<strong>iste</strong></div>
+            <div><span class="pron">él/ella</span>viv<strong>ió</strong></div>
+            <div><span class="pron">nosotros</span>viv<strong>imos</strong></div>
+            <div><span class="pron">ellos</span>viv<strong>ieron</strong></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="note"><strong>El truco -ER/-IR:</strong> las terminaciones son idénticas para los verbos -er y los -ir. Solo tienes que memorizar dos patrones, no tres.</div>
+
+      <p style="margin:20px 0 6px; font-size:14.5px; color:var(--ink-soft);">Y luego están los cuatro irregulares que vas a usar constantemente al contar cualquier historia — estos no siguen ningún patrón, hay que memorizarlos directamente en "yo" y "él/ella":</p>
+      <div class="irregular-grid">
+        <div class="irr-card"><div class="irr-inf">ser / ir</div><div class="irr-form">fue</div></div>
+        <div class="irr-card"><div class="irr-inf">tener</div><div class="irr-form">tuvo</div></div>
+        <div class="irr-card"><div class="irr-inf">hacer</div><div class="irr-form">hizo</div></div>
+        <div class="irr-card"><div class="irr-inf">decir</div><div class="irr-form">dijo</div></div>
+      </div>
+
+      <div class="pron-note">🔊 <strong>Pronunciación de hoy:</strong> distinguir el indefinido del presente al hablar rápido — la diferencia entre "hablo" (presente) y "habló" (pasado) está solo en dónde cae el acento. Vamos a exagerar ese acento final hasta que se sienta natural.</div>
+
+      <div class="compare-warning">
+        <strong>El error más común:</strong> "ser" e "ir" comparten exactamente la misma forma en indefinido (fue, fui, fueron...). Solo el contexto te dice cuál es cuál — "fue a Madrid" (ir) frente a "fue un buen día" (ser). No te preocupes si al principio suena raro, es así para todos.
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">2</span><h2>Repaso relámpago</h2><span class="time-tag">6 min</span></div>
+    <p class="vocab-hint">Seis piezas para contar algo que ya pasó. Toca cada tarjeta para ver un ejemplo. Dilo en voz alta antes de mirar el reverso.</p>
+    <div class="vocab-grid" id="vocab-grid"></div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">3</span><h2>Practica</h2><span class="time-tag">12 min</span></div>
+    <div class="panel">
+      <p class="vocab-hint" style="margin-bottom:14px;">30 frases con el pretérito indefinido: las primeras 10 se hacen en voz alta en clase — di la opción correcta antes de tocar el botón; el resto queda como repaso auditivo para casa.</p>
+      <div id="exercises"></div>
+      <div class="check-bar">
+        <div style="display:flex; gap:10px;">
+          <button class="btn-primary" id="check-btn">Comprobar respuestas</button>
+          <button class="btn-ghost" id="reset-btn">Reiniciar</button>
+        </div>
+        <span id="score-text"></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">4</span><h2>¿Qué hiciste?</h2><span class="time-tag">8 min</span></div>
+    <p class="lede" style="margin-bottom:16px;">Cada tarjeta te pide contar algo del pasado con una persona distinta. Las primeras 6 se trabajan en clase; el resto queda como banco de repaso para casa.</p>
+    <div class="characters" id="characters"></div>
+  </section>
+
+  <section class="block roleplay-panel">
+    <div class="block-head"><span class="block-num">5</span><h2>Roleplay: el fin de semana pasado</h2><span class="time-tag">12 min</span></div>
+    <p class="lede" style="margin-bottom:16px;">5 escenas donde te preguntan qué hiciste el fin de semana o cómo fue algo del pasado — todo en pretérito indefinido. Practicamos en voz alta la escena con Marta en clase; el resto son para escuchar y practicar por tu cuenta durante la semana.</p>
+    <div class="scene-tabs" id="scene-tabs"></div>
+    <div id="scene-container"></div>
+    <div class="roleplay-tip"><strong>En clase:</strong> practicaremos la escena "Marta te pregunta por tu fin de semana" en voz alta, cambiando de rol. El resto de escenas son para escuchar y repetir por tu cuenta durante la semana — la idea es que las digas, no que las escribas.</div>
+  </section>
+
+  <section class="block task-panel">
+    <div class="block-head"><span class="block-num">6</span><h2 style="color:var(--family)">Tu tarea</h2><span class="time-tag">3 min</span></div>
+    <p style="margin:0; font-size:15px; color:var(--ink-soft);">Escucha una conversación sobre planes pasados (un podcast, un vídeo, alguien contando su fin de semana) y repite en voz alta 3 frases que usen el pretérito indefinido — no hace falta transcribirlas, solo repetirlas hasta que te salgan naturales.</p>
+    <textarea id="final-task" placeholder="Notas rápidas de las 3 frases o de dónde las sacaste (opcional)..."></textarea>
+    <p style="margin:10px 2px 0; font-size:12.5px; color:var(--ink-faint);">Esto es solo un apoyo para ti — no hace falta que esté perfecto. Lo importante es repetirlas en voz alta, no el texto escrito.</p>
+    <div class="task-footer">
+      <span id="task-count">0 líneas escritas</span>
+      <div style="display:flex; gap:10px; align-items:center;">
+        <span class="saved-flag" id="saved-flag">Guardado ✓</span>
+        <button class="btn-secondary" id="save-btn">Guardar tarea</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <span>Clase 8 · What already happened</span>
+  <span>Próxima clase → Clase 9: What used to happen</span>
+</footer>
+
+<script>
+/* ---------- VOCAB ---------- */
+const VOCAB = [
+  {front:"fue / fui", back:"Fue un fin de semana muy tranquilo — ser/ir en indefinido, la misma forma.", en:"It was a very quiet weekend — ser/ir in the preterite, same form."},
+  {front:"tuvo / tuve", back:"Tuve una reunión importante el viernes — tener en indefinido.", en:"I had an important meeting on Friday — tener in the preterite."},
+  {front:"hizo / hice", back:"Hice deporte el sábado por la mañana — hacer en indefinido.", en:"I did some exercise on Saturday morning — hacer in the preterite."},
+  {front:"dijo / dije", back:"Le dije que sí sin pensarlo — decir en indefinido.", en:"I told him/her yes without thinking — decir in the preterite."},
+  {front:"el fin de semana pasado", back:"El fin de semana pasado fui a ver un partido con Iker.", en:"Last weekend I went to watch a match with Iker."},
+  {front:"hace dos días", back:"Hace dos días tuve una entrevista para unas prácticas.", en:"Two days ago I had an interview for an internship."},
+];
+
+const grid = document.getElementById('vocab-grid');
+VOCAB.forEach(v=>{
+  const card = document.createElement('div');
+  card.className = 'vocab-card';
+  card.setAttribute('role', 'button');
+  card.setAttribute('tabindex', '0');
+  card.setAttribute('aria-pressed', 'false');
+  card.setAttribute('aria-label', `${v.front}. Pulsa para ver un ejemplo.`);
+  card.innerHTML = `<div class="vocab-front">${v.front}</div><div class="vocab-back">${v.back}<span class="en">${v.en}</span></div>`;
+  const toggle = ()=>{
+    const flipped = card.classList.toggle('flipped');
+    card.setAttribute('aria-pressed', String(flipped));
+  };
+  card.addEventListener('click', toggle);
+  card.addEventListener('keydown', (e)=>{
+    if(e.key === 'Enter' || e.key === ' '){
+      e.preventDefault();
+      toggle();
+    }
+  });
+  grid.appendChild(card);
+});
+
+/* ---------- EXERCISES ---------- */
+const EXERCISES = [
+  {"sentence": "Ayer <span class=\"gap\">___</span> con mis compañeros de máster.", "options": ["hablé","hablo","hablaba"], "answer": "hablé", "en": "Yesterday I talked with my classmates from the master's program."},
+  {"sentence": "El sábado pasado <span class=\"gap\">___</span> con Marta en un restaurante nuevo.", "options": ["comimos","comemos","comíamos"], "answer": "comimos", "en": "Last Saturday we ate with Marta at a new restaurant."},
+  {"sentence": "Mi novia <span class=\"gap\">___</span> en Madrid hace tres años.", "options": ["vivió","vive","vivía"], "answer": "vivió", "en": "My girlfriend lived in Madrid three years ago."},
+  {"sentence": "El partido <span class=\"gap\">___</span> mucho mejor de lo que esperaba.", "options": ["fue","es","era"], "answer": "fue", "en": "The match was much better than I expected."},
+  {"sentence": "Yo <span class=\"gap\">___</span> una reunión muy larga el viernes.", "options": ["tuve","tengo","tenía"], "answer": "tuve", "en": "I had a very long meeting on Friday."},
+  {"sentence": "¿Qué <span class=\"gap\">___</span> tú anoche después de cenar?", "options": ["hiciste","haces","hacías"], "answer": "hiciste", "en": "What did you do last night after dinner?"},
+  {"sentence": "Iker me <span class=\"gap\">___</span> que el árbitro se equivocó.", "options": ["dijo","dice","decía"], "answer": "dijo", "en": "Iker told me the referee made a mistake."},
+  {"sentence": "El fin de semana pasado <span class=\"gap\">___</span> a ver a la familia de Marta.", "options": ["fui","voy","iba"], "answer": "fui", "en": "Last weekend I went to see Marta's family."},
+  {"sentence": "Nosotros <span class=\"gap\">___</span> deporte todo el domingo.", "options": ["hicimos","hacemos","hacíamos"], "answer": "hicimos", "en": "We did sports all day Sunday."},
+  {"sentence": "Ella <span class=\"gap\">___</span> muy contenta con el resultado del partido.", "options": ["estuvo","está","estaba"], "answer": "estuvo", "en": "She was very happy with the match result."},
+  {"sentence": "Yo <span class=\"gap\">___</span> con mi jefe ayer por la tarde.", "options": ["hablé","hablo","hablaba"], "answer": "hablé", "en": "I talked with my boss yesterday afternoon."},
+  {"sentence": "¿<span class=\"gap\">___</span> ustedes al partido el domingo?", "options": ["Fueron","Van","Iban"], "answer": "Fueron", "en": "Did you (plural, formal) go to the match on Sunday?"},
+  {"sentence": "Mi hermano <span class=\"gap\">___</span> dos años en Berlín antes de venir a Madrid.", "options": ["vivió","vive","vivía"], "answer": "vivió", "en": "My brother lived two years in Berlin before coming to Madrid."},
+  {"sentence": "Rubén <span class=\"gap\">___</span> una idea genial para la presentación.", "options": ["tuvo","tiene","tenía"], "answer": "tuvo", "en": "Rubén had a great idea for the presentation."},
+  {"sentence": "El profesor nos <span class=\"gap\">___</span> que la clase empieza más tarde.", "options": ["dijo","dice","decía"], "answer": "dijo", "en": "The professor told us the class starts later."},
+  {"sentence": "Yo <span class=\"gap\">___</span> la cena para todos el sábado.", "options": ["hice","hago","hacía"], "answer": "hice", "en": "I made dinner for everyone on Saturday."},
+  {"sentence": "¿Qué te <span class=\"gap\">___</span> Sole sobre el piso nuevo?", "options": ["dijo","dice","decía"], "answer": "dijo", "en": "What did Sole tell you about the new apartment?"},
+  {"sentence": "Nosotros <span class=\"gap\">___</span> al cine el viernes por la noche.", "options": ["fuimos","vamos","íbamos"], "answer": "fuimos", "en": "We went to the cinema on Friday night."},
+  {"sentence": "Diego <span class=\"gap\">___</span> muchas preguntas durante la cena.", "options": ["hizo","hace","hacía"], "answer": "hizo", "en": "Diego asked a lot of questions during dinner."},
+  {"sentence": "El máster me <span class=\"gap\">___</span> mucho trabajo este semestre.", "options": ["dio","da","daba"], "answer": "dio", "en": "The master's program gave me a lot of work this semester."},
+  {"sentence": "Yo <span class=\"gap\">___</span> con Iker sobre el fichaje nuevo.", "options": ["hablé","hablo","hablaba"], "answer": "hablé", "en": "I talked with Iker about the new signing."},
+  {"sentence": "El viaje a Canadá <span class=\"gap\">___</span> muy largo.", "options": ["fue","es","era"], "answer": "fue", "en": "The trip to Canada was very long."},
+  {"sentence": "Marta y yo <span class=\"gap\">___</span> una cena estupenda para sus padres.", "options": ["hicimos","hacemos","hacíamos"], "answer": "hicimos", "en": "Marta and I made a wonderful dinner for her parents."},
+  {"sentence": "¿Dónde <span class=\"gap\">___</span> tú la semana pasada?", "options": ["estuviste","estás","estabas"], "answer": "estuviste", "en": "Where were you last week?"},
+  {"sentence": "Rubén me <span class=\"gap\">___</span> las gracias por la ayuda con el proyecto.", "options": ["dio","da","daba"], "answer": "dio", "en": "Rubén thanked me for the help with the project."},
+  {"sentence": "Yo <span class=\"gap\">___</span> muy cansado después del entrenamiento.", "options": ["estuve","estoy","estaba"], "answer": "estuve", "en": "I was very tired after training."},
+  {"sentence": "Ellos <span class=\"gap\">___</span> tres años estudiando gestión deportiva.", "options": ["estuvieron","están","estaban"], "answer": "estuvieron", "en": "They spent three years studying sports management."},
+  {"sentence": "¿<span class=\"gap\">___</span> algo interesante en clase ayer?", "options": ["Pasó","Pasa","Pasaba"], "answer": "Pasó", "en": "Did anything interesting happen in class yesterday?"},
+  {"sentence": "Yo le <span class=\"gap\">___</span> a Marta que llegaría tarde.", "options": ["dije","digo","decía"], "answer": "dije", "en": "I told Marta I would arrive late."},
+  {"sentence": "Sole <span class=\"gap\">___</span> una fiesta sorpresa para su hija.", "options": ["organizó","organiza","organizaba"], "answer": "organizó", "en": "Sole organized a surprise party for her daughter."}
+];
+
+const exWrap = document.getElementById('exercises');
+EXERCISES.forEach((ex, i)=>{
+  if(i === 0){
+    const divider = document.createElement('div');
+    divider.className = 'ex-divider en-clase';
+    divider.textContent = 'en clase · ítems 1–10';
+    exWrap.appendChild(divider);
+  }
+  if(i === 10){
+    const divider = document.createElement('div');
+    divider.className = 'ex-divider';
+    divider.textContent = 'para casa · repaso auditivo opcional';
+    exWrap.appendChild(divider);
+  }
+  const el = document.createElement('div');
+  el.className = 'exercise';
+  el.dataset.answer = ex.answer;
+  el.innerHTML = `
+    <div class="ex-sentence">${i+1}. ${ex.sentence}</div>
+    <div class="ex-options">
+      ${ex.options.map(o=>`<button class="opt-btn" data-value="${o}">${o}</button>`).join('')}
+    </div>
+    <p class="en" style="margin-top:8px;">${ex.en}</p>
+  `;
+  exWrap.appendChild(el);
+
+  el.querySelectorAll('.opt-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      el.querySelectorAll('.opt-btn').forEach(b=>b.classList.remove('picked'));
+      btn.classList.add('picked');
+    });
+  });
+});
+
+document.getElementById('check-btn').addEventListener('click', ()=>{
+  let correct = 0;
+  document.querySelectorAll('.exercise').forEach(el=>{
+    const answer = el.dataset.answer;
+    const picked = el.querySelector('.opt-btn.picked');
+    el.querySelectorAll('.opt-btn').forEach(b=>{
+      b.disabled = true;
+      if(b.dataset.value === answer) b.classList.add('correct');
+      else if(b === picked) b.classList.add('wrong');
+    });
+    if(picked && picked.dataset.value === answer) correct++;
+  });
+  document.getElementById('score-text').textContent = `${correct} / ${EXERCISES.length} correctas`;
+});
+
+document.getElementById('reset-btn').addEventListener('click', ()=>{
+  document.querySelectorAll('.exercise').forEach(el=>{
+    el.querySelectorAll('.opt-btn').forEach(b=>{
+      b.disabled = false;
+      b.classList.remove('picked','correct','wrong');
+    });
+  });
+  document.getElementById('score-text').textContent = '';
+});
+
+/* ---------- CHARACTER CARDS ---------- */
+const CHARACTERS = [
+  {"name": "Marta", "role": "Tu novia te pregunta qué hiciste ayer mientras ella estaba en el trabajo", "roleEn": "Your girlfriend asks what you did yesterday while she was at work", "facts": ["clase 8","hacer + tener en indefinido","el clásico de la noche"], "prompt": "Cuenta qué hiciste ayer usando al menos dos verbos en pretérito indefinido:", "promptEn": "Tell what you did yesterday using at least two verbs in the preterite:"},
+  {"name": "Iker", "role": "Te pregunta si fuiste al partido del fin de semana pasado", "roleEn": "He asks if you went to the match last weekend", "facts": ["clase 8","ir/ser en indefinido","fútbol otra vez"], "prompt": "Cuenta si fuiste o no al partido y qué tal fue:", "promptEn": "Say whether you went to the match or not and how it was:"},
+  {"name": "Rubén", "role": "Quiere saber cómo te fue en la entrevista de prácticas que tuviste", "roleEn": "He wants to know how the internship interview you had went", "facts": ["clase 8","tener + decir en indefinido","contexto de máster"], "prompt": "Cuenta cómo fue la entrevista usando \"tuve\" y \"dije\":", "promptEn": "Tell how the interview went using \"I had\" and \"I said\":"},
+  {"name": "Sole", "role": "Te pregunta qué hicisteis Marta y tú el sábado por la noche", "roleEn": "She asks what you and Marta did Saturday night", "facts": ["clase 8","nosotros en indefinido","cena o plan de pareja"], "prompt": "Cuenta el plan del sábado usando la forma de \"nosotros\":", "promptEn": "Tell about Saturday's plan using the \"we\" form:"},
+  {"name": "Diego", "role": "Te pregunta si hiciste algo divertido cuando eras más joven en Canadá", "roleEn": "He asks if you did anything fun when you were younger in Canada", "facts": ["clase 8","anécdota + indefinido","informal, curioso"], "prompt": "Cuenta algo que hiciste hace tiempo usando el indefinido:", "promptEn": "Tell something you did a while ago using the preterite:"},
+  {"name": "Un compañero de máster", "role": "Comenta que ayer hubo un examen sorpresa y te pregunta cómo te fue", "roleEn": "He mentions there was a surprise exam yesterday and asks how it went for you", "facts": ["clase 8","estar + hacer en indefinido","contexto académico"], "prompt": "Cuenta cómo te fue en el examen usando el pretérito indefinido:", "promptEn": "Tell how the exam went for you using the preterite:"},
+  {"name": "Un antiguo compañero de trabajo", "role": "Te escribe preguntando cómo fue tu mudanza a Madrid", "roleEn": "He writes asking how your move to Madrid went", "facts": ["contacto de Canadá","curioso por tu vida nueva","mensaje escrito, tú respondes hablado"], "prompt": "Cuenta cómo fue tu mudanza a Madrid usando el indefinido:", "promptEn": "Tell how your move to Madrid went using the preterite:"},
+  {"name": "Tu casero", "role": "Pregunta qué pasó con el ruido de la fiesta del sábado en tu piso", "roleEn": "He asks what happened with the noise from Saturday's party at your place", "facts": ["algo formal","directo","necesita una explicación clara"], "prompt": "Explica qué pasó el sábado, en registro algo formal:", "promptEn": "Explain what happened on Saturday, in a somewhat formal register:"},
+  {"name": "Un amigo de fútbol", "role": "Te pregunta qué hizo el equipo la temporada pasada", "roleEn": "He asks what the team did last season", "facts": ["fanático del deporte","habla rápido","tema recurrente"], "prompt": "Cuenta qué hizo el equipo la temporada pasada:", "promptEn": "Tell what the team did last season:"},
+  {"name": "La madre de Marta", "role": "Te pregunta cómo fue tu primer día en el máster", "roleEn": "She asks how your first day at the master's program was", "facts": ["cariñosa","le interesa tu vida académica","conversación de sobremesa"], "prompt": "Cuenta cómo fue tu primer día de máster:", "promptEn": "Tell how your first day at the master's program was:"},
+  {"name": "Un antiguo profesor tuyo", "role": "Te encuentras con él por casualidad y te pregunta qué hiciste después de graduarte", "roleEn": "You run into him by chance and he asks what you did after graduating", "facts": ["formal","sorprendido de verte","conversación breve en la calle"], "prompt": "Cuenta brevemente qué hiciste desde que te graduaste, en registro formal:", "promptEn": "Briefly tell what you did since graduating, in a formal register:"},
+  {"name": "Tú mismo, en una entrevista", "role": "Te preguntan en una entrevista de trabajo cuál fue tu mayor logro reciente", "roleEn": "In a job interview, you're asked what your greatest recent achievement was", "facts": ["formal","profesional","hay que sonar seguro"], "prompt": "Cuenta tu mayor logro reciente usando el pretérito indefinido:", "promptEn": "Tell your greatest recent achievement using the preterite:"}
+];
+
+const charWrap = document.getElementById('characters');
+CHARACTERS.forEach((c, i)=>{
+  if(i === 0){
+    const divider = document.createElement('div');
+    divider.className = 'ex-divider en-clase';
+    divider.textContent = 'en clase · tarjetas 1–6';
+    charWrap.appendChild(divider);
+  }
+  if(i === 6){
+    const divider = document.createElement('div');
+    divider.className = 'ex-divider';
+    divider.textContent = 'para casa · banco de repaso';
+    charWrap.appendChild(divider);
+  }
+  const card = document.createElement('div');
+  card.className = 'char-card';
+  card.innerHTML = `
+    <div class="char-avatar">${c.name.charAt(0)}</div>
+    <div class="char-body">
+      <p class="char-name">${c.name}</p>
+      <p class="char-role">${c.role}<span class="en">${c.roleEn}</span></p>
+      <div class="char-facts">${c.facts.map(f=>`<span class="fact-tag">${f}</span>`).join('')}</div>
+      <p class="char-prompt">${c.prompt}<span class="en">${c.promptEn}</span></p>
+      <textarea class="char-input" rows="2" placeholder="Ayer hice... / El fin de semana pasado fui... / Tuve..."></textarea>
+    </div>
+  `;
+  charWrap.appendChild(card);
+});
+
+/* ---------- ROLEPLAY SCENES ---------- */
+const SCENES = [
+  {
+    "id": "marta",
+    "tab": "Marta te pregunta por tu fin de semana",
+    "icon": "🏡",
+    "setup": "Marta llega a casa el domingo por la noche y quiere que le cuentes todo lo que hiciste mientras ella no estaba.",
+    "setupEn": "Marta gets home Sunday night and wants you to tell her everything you did while she was out.",
+    "lines": [
+      {"who": "friend", "name": "Marta", "text": "¡Hola! ¿Qué tal el fin de semana? Cuéntame qué hiciste.", "textEn": "Hi! How was the weekend? Tell me what you did."},
+      {"who": "you", "hint": "Cuenta qué hiciste el sábado usando el pretérito indefinido.", "hintEn": "Tell what you did on Saturday using the preterite."},
+      {"who": "friend", "name": "Marta", "text": "¿Y viste a Iker? Me dijo que quería quedar contigo.", "textEn": "And did you see Iker? He told me he wanted to meet up with you."},
+      {"who": "you", "hint": "Di si lo viste o no, y qué hicisteis si quedasteis.", "hintEn": "Say whether you saw him or not, and what you did if you met up."},
+      {"who": "friend", "name": "Marta", "text": "Qué bien. ¿Y fuiste al final al partido del domingo?", "textEn": "Great. And did you end up going to Sunday's match?"},
+      {"who": "you", "hint": "Cuenta si fuiste al partido y cómo fue, usando \"fue\" o \"fui\".", "hintEn": "Tell whether you went to the match and how it was, using \"it was\" or \"I went\"."},
+      {"who": "friend", "name": "Marta", "text": "Me alegro. Yo también tuve un fin de semana intenso en el trabajo.", "textEn": "I'm glad. I also had an intense weekend at work."},
+      {"who": "you", "hint": "Reacciona y pregúntale qué tal le fue a ella en el trabajo.", "hintEn": "React and ask her how work went for her."}
+    ]
+  },
+  {
+    "id": "iker",
+    "tab": "Iker pregunta por el partido",
+    "icon": "🏆",
+    "setup": "Iker te llama para preguntarte si al final fuiste al partido del domingo y qué tal estuvo.",
+    "setupEn": "Iker calls you to ask whether you ended up going to Sunday's match and how it was.",
+    "lines": [
+      {"who": "friend", "name": "Iker", "text": "Oye, ¿fuiste al final al partido del domingo o te quedaste en casa?", "textEn": "Hey, did you end up going to Sunday's match or did you stay home?"},
+      {"who": "you", "hint": "Di si fuiste o no, usando \"fui\" o \"no fui\".", "hintEn": "Say whether you went or not, using \"I went\" or \"I didn't go\"."},
+      {"who": "friend", "name": "Iker", "text": "¿Y qué tal estuvo? Yo lo vi por la tele.", "textEn": "And how was it? I watched it on TV."},
+      {"who": "you", "hint": "Cuenta cómo estuvo el partido usando \"estuvo\" o \"fue\".", "hintEn": "Tell how the match was using \"it was\" (estuvo) or \"it was\" (fue)."},
+      {"who": "friend", "name": "Iker", "text": "¿Hizo algo especial el entrenador esta vez?", "textEn": "Did the coach do anything special this time?"},
+      {"who": "you", "hint": "Cuenta qué hizo el entrenador usando \"hizo\".", "hintEn": "Tell what the coach did using \"he did\"."},
+      {"who": "friend", "name": "Iker", "text": "Vaya, no me lo esperaba. ¿Y quién te dijo eso del cambio de táctica?", "textEn": "Wow, I wasn't expecting that. And who told you about the tactical change?"},
+      {"who": "you", "hint": "Di quién te lo dijo usando \"me dijo\".", "hintEn": "Say who told you using \"told me\"."}
+    ]
+  },
+  {
+    "id": "rubén",
+    "tab": "Rubén pregunta por la entrevista",
+    "icon": "🎒",
+    "setup": "Rubén se encuentra contigo en la cafetería del máster y quiere saber cómo te fue en la entrevista de prácticas de la semana pasada.",
+    "setupEn": "Rubén runs into you in the master's cafeteria and wants to know how last week's internship interview went for you.",
+    "lines": [
+      {"who": "friend", "name": "Rubén", "text": "¿Qué tal la entrevista de la semana pasada? ¿Al final tuviste tiempo de prepararla bien?", "textEn": "How was last week's interview? Did you end up having time to prepare well?"},
+      {"who": "you", "hint": "Cuenta si tuviste tiempo o no, usando \"tuve\".", "hintEn": "Tell whether you had time or not, using \"I had\"."},
+      {"who": "friend", "name": "Rubén", "text": "¿Y qué te preguntaron? ¿Fue muy larga?", "textEn": "And what did they ask you? Was it very long?"},
+      {"who": "you", "hint": "Cuenta cómo fue la entrevista, usando \"fue\".", "hintEn": "Tell how the interview was, using \"it was\"."},
+      {"who": "friend", "name": "Rubén", "text": "¿Y qué les dijiste sobre tu experiencia en gestión deportiva?", "textEn": "And what did you tell them about your experience in sports management?"},
+      {"who": "you", "hint": "Cuenta qué dijiste, usando \"dije\".", "hintEn": "Tell what you said, using \"I said\"."},
+      {"who": "friend", "name": "Rubén", "text": "Suena bien. ¿Ya te dijeron algo o todavía estás esperando?", "textEn": "Sounds good. Have they told you anything yet or are you still waiting?"},
+      {"who": "you", "hint": "Responde si ya te dijeron algo, usando \"me dijeron\" o \"no me dijeron\".", "hintEn": "Answer whether they've told you anything, using \"they told me\" or \"they haven't told me\"."}
+    ]
+  },
+  {
+    "id": "sole",
+    "tab": "Sole pregunta por el sábado",
+    "icon": "🍽️",
+    "setup": "Sole os invitó a cenar y ahora, unos días después, quiere que le cuentes qué hicisteis Marta y tú el resto del sábado.",
+    "setupEn": "Sole invited you to dinner and now, a few days later, wants you to tell her what you and Marta did for the rest of Saturday.",
+    "lines": [
+      {"who": "friend", "name": "Sole", "text": "¿Qué hicisteis Marta y tú después de la cena del sábado?", "textEn": "What did you and Marta do after Saturday's dinner?"},
+      {"who": "you", "hint": "Cuenta qué hicisteis después, usando la forma de \"nosotros\" en indefinido.", "hintEn": "Tell what you did afterward, using the \"we\" form in the preterite."},
+      {"who": "friend", "name": "Sole", "text": "¡Qué bonito! ¿Y fuisteis andando o cogisteis un taxi?", "textEn": "How lovely! And did you walk or take a taxi?"},
+      {"who": "you", "hint": "Di cómo fuisteis, usando \"fuimos\".", "hintEn": "Say how you went, using \"we went\"."},
+      {"who": "friend", "name": "Sole", "text": "Me alegra que lo pasarais bien. ¿Marta te dijo algo sobre la cena?", "textEn": "I'm glad you had a good time. Did Marta say anything to you about the dinner?"},
+      {"who": "you", "hint": "Cuenta qué te dijo Marta, usando \"me dijo\".", "hintEn": "Tell what Marta told you, using \"told me\"."},
+      {"who": "friend", "name": "Sole", "text": "Qué detalle. La próxima vez organizamos otra.", "textEn": "How sweet. Next time we'll organize another one."},
+      {"who": "you", "hint": "Reacciona y dale las gracias por la cena del sábado.", "hintEn": "React and thank her for Saturday's dinner."}
+    ]
+  },
+  {
+    "id": "diego",
+    "tab": "Diego pregunta por tu vida en Canadá",
+    "icon": "🍁",
+    "setup": "El hermano de Marta te pregunta, con su curiosidad habitual, si hiciste algo interesante cuando eras más joven en Canadá.",
+    "setupEn": "Marta's brother, with his usual curiosity, asks if you did anything interesting when you were younger in Canada.",
+    "lines": [
+      {"who": "friend", "name": "Diego", "text": "Oye, ¿hiciste algo guay cuando eras joven en Canadá? Cuéntame algo.", "textEn": "Hey, did you do anything cool when you were young in Canada? Tell me something."},
+      {"who": "you", "hint": "Cuenta algo que hiciste de joven, usando el pretérito indefinido.", "hintEn": "Tell something you did when you were young, using the preterite."},
+      {"who": "friend", "name": "Diego", "text": "¡No me lo esperaba! ¿Y fuiste alguna vez a un partido de hockey de verdad?", "textEn": "I wasn't expecting that! And did you ever go to a real hockey game?"},
+      {"who": "you", "hint": "Di si fuiste o no a un partido de hockey.", "hintEn": "Say whether you went to a hockey game or not."},
+      {"who": "friend", "name": "Diego", "text": "Qué envidia. ¿Y qué te dijeron tus padres cuando decidiste venir a España?", "textEn": "I'm jealous. And what did your parents tell you when you decided to come to Spain?"},
+      {"who": "you", "hint": "Cuenta qué te dijeron tus padres, usando \"me dijeron\".", "hintEn": "Tell what your parents said to you, using \"they told me\"."},
+      {"who": "friend", "name": "Diego", "text": "Jajaja, menos mal. ¿Y tuviste miedo el primer día aquí?", "textEn": "Hahaha, good thing. And were you scared on the first day here?"},
+      {"who": "you", "hint": "Responde si tuviste miedo o no, usando \"tuve\".", "hintEn": "Answer whether you were scared or not, using \"I had\"."}
+    ]
+  }
+];
+
+const sceneTabs = document.getElementById('scene-tabs');
+const sceneContainer = document.getElementById('scene-container');
+let activeScene = 0;
+
+function renderTabs(){
+  sceneTabs.innerHTML = SCENES.map((s,i)=>
+    `<button class="scene-tab${i===activeScene?' active':''}" data-idx="${i}">${s.icon} ${s.tab}</button>`
+  ).join('');
+  sceneTabs.querySelectorAll('.scene-tab').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      activeScene = parseInt(btn.dataset.idx, 10);
+      renderTabs();
+      renderScene();
+    });
+  });
+}
+
+function renderScene(){
+  const scene = SCENES[activeScene];
+  const linesHtml = scene.lines.map((l)=>{
+    if(l.who === 'friend'){
+      return `
+        <div class="line friend">
+          <div class="line-avatar">${l.name.charAt(0)}</div>
+          <div class="line-body">
+            <p class="line-name">${l.name}</p>
+            <div class="line-bubble">${l.text}<span class="en">${l.textEn}</span></div>
+          </div>
+        </div>`;
+    } else {
+      return `
+        <div class="line you">
+          <div class="line-avatar">Tú</div>
+          <div class="line-body">
+            <p class="line-name">Tú</p>
+            <textarea class="line-input" rows="2" placeholder="Di tu respuesta en voz alta (anota solo si te ayuda)..."></textarea>
+            <p class="line-hint">${l.hint}<span class="en">${l.hintEn}</span></p>
+          </div>
+        </div>`;
+    }
+  }).join('');
+
+  sceneContainer.innerHTML = `
+    <div class="scene-setup">
+      <span class="scene-icon">${scene.icon}</span>
+      <p class="scene-text"><strong>${scene.tab}:</strong> ${scene.setup}<span class="en">${scene.setupEn}</span></p>
+    </div>
+    <div class="dialogue">${linesHtml}</div>
+  `;
+}
+
+renderTabs();
+renderScene();
+
+/* ---------- FINAL TASK ---------- */
+const STORAGE_KEY = 'andrei-clase08-tarea';
+const taskArea = document.getElementById('final-task');
+const taskCount = document.getElementById('task-count');
+const savedFlag = document.getElementById('saved-flag');
+
+async function cargarTarea(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(STORAGE_KEY);
+    if (res && typeof res.value === 'string') taskArea.value = res.value;
+  }catch(e){
+    // Clave inexistente todavía: no hay tarea previa, se queda en blanco.
+  }
+  updateCount();
+}
+
+function updateCount(){
+  const lines = taskArea.value.split('\n').filter(l => l.trim().length > 0).length;
+  taskCount.textContent = `${lines} línea${lines===1?'':'s'} escrita${lines===1?'':'s'}`;
+}
+taskArea.addEventListener('input', updateCount);
+updateCount();
+cargarTarea();
+
+document.getElementById('save-btn').addEventListener('click', async ()=>{
+  if (!window.storage){
+    savedFlag.textContent = 'Guardado no disponible aquí';
+    savedFlag.classList.add('show');
+    setTimeout(()=>{ savedFlag.classList.remove('show'); savedFlag.textContent = 'Guardado ✓'; }, 2200);
+    return;
+  }
+  try{
+    const ok = await window.storage.set(STORAGE_KEY, taskArea.value);
+    savedFlag.textContent = ok ? 'Guardado ✓' : 'No se pudo guardar';
+  }catch(e){
+    savedFlag.textContent = 'No se pudo guardar';
+  }
+  savedFlag.classList.add('show');
+  setTimeout(()=>{ savedFlag.classList.remove('show'); savedFlag.textContent = 'Guardado ✓'; }, 1800);
+});
+</script>
+
+</body>
+</html>
