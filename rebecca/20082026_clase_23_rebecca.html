@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clase 23 · Por las calles de Barcelona — Rebecca</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+
+/* ╔══════════════════════════════════════════════════════════════╗
+   ║  ESCOLAR — sistema de diseño para clases de español online   ║
+   ║  Clase 23 · Barrios y direcciones · "Por las calles de Barcelona — imperativo informal" ║
+   ╚══════════════════════════════════════════════════════════════╝ */
+
+:root{
+  --paper:        #FBF7EE;
+  --paper-raised: #FFFFFF;
+  --paper-alt:    #F3ECDA;
+  --ink:          #23291F;
+  --ink-soft:     #565F52;
+  --ink-faint:    #8B9184;
+  --line:         rgba(35,41,31,0.12);
+  --line-strong:  rgba(35,41,31,0.22);
+
+  --b1:      #2F6FED;  --b1-soft: #EAF1FE;  --b1-line: #C6D9FC;
+  --b2:      #2E9E6B;  --b2-soft: #E9F6EF;  --b2-line: #BEE6D3;
+  --b3:      #DB8A2E;  --b3-soft: #FCF1E1;  --b3-line: #F3D9AF;
+  --family:  #7C5CBF;  --family-soft: #F1EBFA; --family-line: #DACBF0;
+  --map:     #C1440E;  --map-soft: #FCEAE0; --map-line: #F0C4A8;
+
+  --f-display: 'Fraunces', Georgia, serif;
+  --f-body:    'IBM Plex Sans', system-ui, sans-serif;
+  --f-data:    'IBM Plex Mono', monospace;
+
+  --r-sm: 8px;
+  --r-md: 14px;
+  --r-lg: 20px;
+
+  --shadow-1: 0 1px 2px rgba(35,41,31,0.05), 0 1px 8px rgba(35,41,31,0.04);
+}
+
+*{ box-sizing:border-box; }
+body{
+  margin:0;
+  background: var(--paper);
+  background-image: radial-gradient(circle at 1px 1px, var(--line) 1px, transparent 0);
+  background-size: 22px 22px;
+  color: var(--ink);
+  font-family: var(--f-body);
+  line-height:1.6;
+}
+::selection{ background: var(--map-soft); }
+
+/* ---------- HEADER ---------- */
+header{ padding:44px 24px 28px; max-width:760px; margin:0 auto; }
+.eyebrow{
+  font-family: var(--f-data); font-size:12px; letter-spacing:.14em;
+  text-transform:uppercase; color: var(--map); margin:0 0 10px;
+  display:flex; align-items:center; gap:10px;
+}
+.eyebrow .dot{ width:6px; height:6px; border-radius:50%; background: var(--map); }
+h1{
+  font-family: var(--f-display); font-weight:600;
+  font-size:clamp(30px,5.6vw,46px); line-height:1.08;
+  margin:0 0 14px; letter-spacing:-.01em;
+}
+h1 em{ font-style:italic; color: var(--map); }
+.lede{ font-size:16px; color: var(--ink-soft); max-width:56ch; margin:0; }
+
+.meta-row{
+  display:flex; flex-wrap:wrap; gap:20px; margin-top:26px;
+  font-family: var(--f-data); font-size:12px; color: var(--ink-faint);
+}
+.meta-row strong{
+  display:block; color: var(--ink); font-size:14.5px; font-weight:500;
+  font-family: var(--f-display); margin-top:3px;
+}
+
+/* ---------- SECTIONS ---------- */
+main{ max-width:760px; margin:0 auto; padding:8px 24px 100px; }
+
+section.block{ margin-bottom:52px; }
+.block-head{ display:flex; align-items:baseline; gap:12px; margin-bottom:18px; }
+.time-tag{
+  font-family: var(--f-data); font-size:11px; color: var(--ink-faint);
+  background: var(--paper-alt); padding:3px 10px; border-radius:999px; margin-left:auto; flex:none;
+}
+.block-num{
+  font-family: var(--f-data); font-size:12px; color:#fff; background: var(--map);
+  width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  flex:none;
+}
+.block-head h2{
+  font-family: var(--f-display); font-weight:500; font-style:italic; font-size:22px; margin:0;
+}
+
+.panel{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-lg);
+  box-shadow: var(--shadow-1); padding:26px 28px;
+}
+
+/* ---------- VOCAB ---------- */
+.vocab-hint{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin:0 0 14px; }
+.vocab-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:10px; }
+.vocab-card{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:12px 14px; box-shadow: var(--shadow-1); display:flex; align-items:center; gap:10px;
+}
+.vocab-icon{ font-size:20px; flex:none; }
+.vocab-word{ font-family: var(--f-display); font-weight:600; font-size:15.5px; color: var(--ink); }
+
+/* ---------- IMPERATIVE TABLE ---------- */
+.conj-wrap{ margin-top:22px; }
+.conj-table{ width:100%; border-collapse:collapse; }
+.conj-table th{
+  font-family: var(--f-data); font-size:10.5px; text-transform:uppercase; letter-spacing:.05em;
+  color: var(--ink-faint); text-align:left; padding:8px 10px; border-bottom:1.5px solid var(--line-strong);
+}
+.conj-table td{
+  font-family: var(--f-display); font-size:15.5px; padding:9px 10px; border-bottom:1px dashed var(--line);
+  color: var(--ink);
+}
+.conj-table td.pron{ font-family: var(--f-data); font-size:12px; color: var(--ink-faint); }
+.conj-table tr:last-child td{ border-bottom:none; }
+
+.legend-wrap{ margin-top:22px; }
+.legend-title{
+  font-family: var(--f-data); font-size:11.5px; text-transform:uppercase; letter-spacing:.06em;
+  color: var(--ink-faint); margin:0 0 10px;
+}
+.legend-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(140px,1fr)); gap:10px; }
+.legend-card{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:12px 14px; box-shadow: var(--shadow-1);
+}
+.legend-inf{ font-family: var(--f-data); font-size:10.5px; color: var(--ink-faint); text-transform:uppercase; letter-spacing:.04em; }
+.legend-form{ font-family: var(--f-display); font-weight:600; font-size:17px; color: var(--map); margin-top:2px; }
+.legend-type{ font-size:11.5px; color: var(--ink-faint); margin-top:4px; }
+
+/* ---------- MAP ---------- */
+.map-wrap{ margin-top:4px; }
+.map-svg-frame{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-lg);
+  box-shadow: var(--shadow-1); padding:16px; overflow:hidden;
+}
+.map-svg-frame svg{ width:100%; height:auto; display:block; }
+.map-legend{ display:flex; flex-wrap:wrap; gap:16px; margin-top:14px; font-size:12.5px; color: var(--ink-soft); }
+.map-legend span{ display:inline-flex; align-items:center; gap:7px; }
+.map-legend .swatch{ width:14px; height:14px; border-radius:4px; flex:none; }
+
+/* ---------- DIRECTION BUILDER ---------- */
+.route-panel{ margin-top:22px; background: var(--map-soft); border:1px solid var(--map-line); border-radius: var(--r-lg); padding:22px 24px; }
+.route-title{ font-family: var(--f-display); font-weight:600; font-style:italic; font-size:17px; margin:0 0 6px; color: var(--map); }
+.route-desc{ font-size:13.5px; color: var(--ink-soft); margin:0 0 16px; }
+.route-scenario{ background: var(--paper-raised); border:1px solid var(--map-line); border-radius: var(--r-md); padding:14px 16px; margin-bottom:14px; font-size:14px; color:var(--ink); }
+.route-scenario strong{ color: var(--map); }
+.route-steps{ display:flex; flex-direction:column; gap:10px; }
+.route-step{ display:flex; gap:10px; align-items:flex-start; }
+.route-step-num{ font-family: var(--f-data); font-size:11px; color:#fff; background: var(--map); width:22px; height:22px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex:none; margin-top:2px; }
+.route-step-input{
+  flex:1; font-family: var(--f-body); font-size:14.5px; color: var(--ink);
+  background:#fff; border:1px solid var(--map-line); border-radius: var(--r-sm);
+  padding:9px 12px;
+}
+.route-step-input:focus{ outline:none; border-color: var(--map); }
+.route-reveal-btn{
+  margin-top:16px; font-family: var(--f-body); font-weight:600; font-size:13px; color: var(--map);
+  background:none; border:1.5px solid var(--map-line); padding:8px 16px; border-radius:999px; cursor:pointer;
+}
+.route-reveal-btn:hover{ border-color: var(--map); }
+.route-answer{ margin-top:12px; padding:12px 14px; background: var(--paper-raised); border:1px solid var(--map-line); border-radius: var(--r-sm); font-size:13.5px; color: var(--ink-soft); display:none; }
+.route-answer.show{ display:block; }
+.route-answer strong{ color: var(--map); }
+
+/* ---------- PRONUNCIATION DRILL ---------- */
+.pron-wrap{ margin-top:22px; }
+.pron-row{
+  display:flex; align-items:center; gap:14px; padding:12px 0; border-bottom:1px dashed var(--line);
+}
+.pron-row:last-child{ border-bottom:none; }
+.pron-word{ font-family: var(--f-display); font-weight:600; font-size:18px; color: var(--ink); min-width:120px; }
+.pron-ipa{ font-family: var(--f-data); font-size:13px; color: var(--map); min-width:140px; }
+.pron-tip{ font-size:13px; color: var(--ink-soft); }
+
+/* ---------- EXERCISE ---------- */
+.exercise{ margin-bottom:20px; }
+.exercise:last-of-type{ margin-bottom:0; }
+.ex-sentence{ font-size:15.5px; margin-bottom:10px; }
+.ex-sentence .gap{ font-family: var(--f-data); color: var(--ink-faint); }
+.ex-options{ display:flex; flex-wrap:wrap; gap:8px; }
+.opt-btn{
+  font-family: var(--f-body); font-size:14px; background: var(--paper-raised);
+  border:1.5px solid var(--line); color: var(--ink); padding:7px 16px; border-radius:999px;
+  cursor:pointer; transition: all .15s ease;
+}
+.opt-btn:hover{ border-color: var(--ink-faint); }
+.opt-btn.picked{ background: var(--map-soft); border-color: var(--map); color: var(--map); }
+.opt-btn.correct{ background: var(--map-soft); border-color: var(--map); color: var(--map); }
+.opt-btn.wrong{ background: var(--b1-soft); border-color: var(--b1); color: var(--b1); }
+.opt-btn:disabled{ cursor:default; }
+
+.check-bar{
+  display:flex; align-items:center; justify-content:space-between; gap:16px;
+  margin-top:22px; padding-top:18px; border-top:1px dashed var(--line);
+}
+.btn-primary{
+  font-family: var(--f-body); font-weight:600; font-size:14px; color:#fff; background: var(--map);
+  border:none; padding:11px 22px; border-radius:999px; cursor:pointer; transition: transform .1s ease;
+}
+.btn-primary:hover{ transform: translateY(-1px); }
+#score-text{ font-family: var(--f-data); font-size:13px; color: var(--ink-faint); }
+.btn-ghost{
+  font-family: var(--f-body); font-weight:600; font-size:13px; color: var(--ink-soft); background:none;
+  border:1.5px solid var(--line); padding:9px 18px; border-radius:999px; cursor:pointer;
+}
+.btn-ghost:hover{ border-color: var(--ink-faint); }
+.ex-divider{
+  display:flex; align-items:center; gap:10px; margin:20px 0 16px;
+  font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.06em;
+  color: var(--ink-faint);
+}
+.ex-divider::before, .ex-divider::after{ content:""; flex:1; height:1px; background: var(--line); }
+.ex-divider.en-clase{ color: var(--map); }
+.ex-divider.en-clase::before, .ex-divider.en-clase::after{ background: var(--map-line); }
+
+/* ---------- ROLEPLAY ---------- */
+.roleplay-panel{ background: var(--b1-soft); border:1px solid var(--b1-line); border-radius: var(--r-lg); padding:26px 28px; }
+.roleplay-panel .block-num{ background: var(--b1); }
+.scene-setup{
+  display:flex; gap:14px; align-items:flex-start; background: var(--paper-raised);
+  border:1px solid var(--b1-line); border-radius: var(--r-md); padding:14px 16px; margin-bottom:20px;
+}
+.scene-icon{ font-size:22px; flex:none; }
+.scene-text{ font-size:14px; color: var(--ink-soft); }
+.scene-text strong{ color: var(--ink); }
+
+.dialogue{ display:flex; flex-direction:column; gap:14px; }
+.scene-tabs{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:18px; }
+.scene-tab{
+  font-family: var(--f-data); font-size:12.5px; background: var(--paper-raised);
+  border:1.5px solid var(--b1-line); color: var(--ink-soft); padding:7px 14px;
+  border-radius:999px; cursor:pointer; transition: all .15s ease;
+}
+.scene-tab:hover{ border-color: var(--b1); }
+.scene-tab.active{ background: var(--b1); border-color: var(--b1); color:#fff; }
+.line{ display:flex; gap:12px; align-items:flex-start; }
+.line-avatar{
+  flex:none; width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  font-family: var(--f-display); font-weight:600; font-size:14px; color:#fff;
+}
+.line.friend .line-avatar{ background: var(--ink-faint); }
+.line.you .line-avatar{ background: var(--b1); }
+.line-body{ flex:1; }
+.line-name{ font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.05em; color: var(--ink-faint); margin:0 0 4px; }
+.line-bubble{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:12px 14px; font-size:14.5px; color: var(--ink);
+}
+.line.you .line-bubble{ background:#fff; border-color: var(--b1-line); }
+.line-input{
+  width:100%; font-family: var(--f-body); font-size:14.5px; color: var(--ink);
+  background:#fff; border:1px solid var(--b1-line); border-radius: var(--r-sm);
+  padding:10px 12px; resize:vertical; min-height:40px; margin-top:2px;
+}
+.line-input:focus{ outline:none; border-color: var(--b1); }
+.line-hint{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin-top:5px; }
+
+.roleplay-tip{
+  margin-top:22px; padding:14px 16px; background: var(--paper-raised); border:1px solid var(--b1-line);
+  border-radius: var(--r-md); font-size:13.5px; color: var(--ink-soft);
+}
+.roleplay-tip strong{ color: var(--ink); }
+
+/* ---------- TAREA FINAL ---------- */
+.task-panel{ background: var(--b3-soft); border:1px solid var(--b3-line); border-radius: var(--r-lg); padding:26px 28px; }
+.task-panel .block-num{ background: var(--b3); }
+.prompt-box{
+  margin-top:14px; padding:16px 18px; background: var(--paper-raised); border:1px solid var(--b3-line);
+  border-radius: var(--r-md); font-size:14.5px; line-height:1.75; color: var(--ink);
+}
+.prompt-box strong{ color:var(--b3); }
+textarea#final-task{
+  width:100%; min-height:150px; font-family: var(--f-body); font-size:15px; color: var(--ink);
+  background: var(--paper-raised); border:1px solid var(--b3-line); border-radius: var(--r-md);
+  padding:14px 16px; resize:vertical; margin-top:14px;
+}
+textarea#final-task:focus{ outline:none; border-color: var(--b3); }
+.task-footer{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:12px; flex-wrap:wrap; }
+#task-count{ font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); }
+.btn-secondary{
+  font-family: var(--f-body); font-weight:600; font-size:13.5px; color: var(--b3); background:none;
+  border:1.5px solid var(--b3-line); padding:9px 18px; border-radius:999px; cursor:pointer;
+}
+.saved-flag{ font-family: var(--f-data); font-size:12px; color: var(--b2); opacity:0; transition: opacity .3s ease; }
+.saved-flag.show{ opacity:1; }
+.record-tip{
+  margin-top:14px; padding:14px 16px; background: var(--paper-raised); border:1px solid var(--b3-line);
+  border-radius: var(--r-md); font-size:13.5px; color: var(--ink-soft);
+}
+.record-tip strong{ color: var(--ink); }
+
+/* ---------- FOOTER NAV ---------- */
+footer{
+  max-width:760px; margin:0 auto; padding:0 24px 60px; display:flex;
+  justify-content:space-between; flex-wrap:wrap; gap:12px;
+  font-family: var(--f-data); font-size:11.5px; color: var(--ink-faint);
+}
+
+@media (max-width:640px){
+  header{ padding:36px 16px 22px; }
+  main{ padding:6px 16px 90px; }
+  .panel{ padding:20px 18px; }
+  .roleplay-panel, .task-panel, .route-panel{ padding:20px 18px; }
+  .conj-table{ font-size:13.5px; }
+}
+@media (prefers-reduced-motion: reduce){ *{ transition:none !important; } }
+</style>
+</head>
+<body>
+
+<header>
+  <p class="eyebrow"><span class="dot"></span>Clase 23 · Barrios y direcciones</p>
+  <h1>Por las calles de <em>Barcelona</em></h1>
+  <p class="lede">Hoy aprendes a dar y seguir direcciones en español usando el <strong>imperativo informal</strong>: gira, sigue, cruza, coge. Es una gramática muy práctica — te va a servir cada vez que alguien te pregunte cómo llegar a un sitio, o cuando tú necesites explicar el camino a tu propia casa.</p>
+  <div class="meta-row">
+    <div>Duración<strong>50 min</strong></div>
+    <div>Gramática<strong>Imperativo informal (tú) para direcciones</strong></div>
+    <div>Nivel<strong>A1–A2</strong></div>
+  </div>
+</header>
+
+<main>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">1</span><h2>Vocabulario del camino</h2><span class="time-tag">6 min</span></div>
+    <div class="panel">
+      <p class="vocab-hint">Palabras esenciales para orientarte y para orientar a otros por la calle.</p>
+      <div class="vocab-grid">
+        <div class="vocab-card"><span class="vocab-icon">➡️</span><span class="vocab-word">a la derecha</span></div>
+        <div class="vocab-card"><span class="vocab-icon">⬅️</span><span class="vocab-word">a la izquierda</span></div>
+        <div class="vocab-card"><span class="vocab-icon">⬆️</span><span class="vocab-word">todo recto</span></div>
+        <div class="vocab-card"><span class="vocab-icon">🔲</span><span class="vocab-word">la plaza</span></div>
+        <div class="vocab-card"><span class="vocab-icon">🛣️</span><span class="vocab-word">la calle</span></div>
+        <div class="vocab-card"><span class="vocab-icon">🚦</span><span class="vocab-word">el semáforo</span></div>
+        <div class="vocab-card"><span class="vocab-icon">🌉</span><span class="vocab-word">la esquina</span></div>
+        <div class="vocab-card"><span class="vocab-icon">🚇</span><span class="vocab-word">la parada de metro</span></div>
+        <div class="vocab-card"><span class="vocab-icon">📍</span><span class="vocab-word">está cerca / lejos</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">2</span><h2>El imperativo informal</h2><span class="time-tag">12 min</span></div>
+    <div class="panel">
+      <p class="vocab-hint">Para dar instrucciones a alguien que tratas de "tú", usamos el imperativo. Muchos verbos regulares se forman igual que la tercera persona del presente.</p>
+      <div class="conj-wrap">
+        <table class="conj-table">
+          <thead>
+            <tr><th>infinitivo</th><th>imperativo (tú)</th><th>ejemplo</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="pron">girar</td><td>gira</td><td>Gira a la derecha</td></tr>
+            <tr><td class="pron">seguir</td><td>sigue</td><td>Sigue todo recto</td></tr>
+            <tr><td class="pron">cruzar</td><td>cruza</td><td>Cruza la plaza</td></tr>
+            <tr><td class="pron">coger</td><td>coge</td><td>Coge la primera calle</td></tr>
+            <tr><td class="pron">bajar</td><td>baja</td><td>Baja por esta calle</td></tr>
+            <tr><td class="pron">subir</td><td>sube</td><td>Sube hasta la plaza</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="legend-wrap">
+        <p class="legend-title">Tres imperativos irregulares muy comunes</p>
+        <div class="legend-grid">
+          <div class="legend-card"><div class="legend-inf">ir</div><div class="legend-form">ve</div><div class="legend-type">Ve hacia el parque</div></div>
+          <div class="legend-card"><div class="legend-inf">venir</div><div class="legend-form">ven</div><div class="legend-type">Ven por aquí</div></div>
+          <div class="legend-card"><div class="legend-inf">tener</div><div class="legend-form">ten</div><div class="legend-type">Ten cuidado con el tráfico</div></div>
+        </div>
+      </div>
+      <div class="story-audio-tip" style="margin-top:22px; padding:14px 16px; background:var(--map-soft); border:1px solid var(--map-line); border-radius:var(--r-md); font-size:14px; color:var(--ink-soft);"><strong>Truco:</strong> casi todos los verbos -AR e -ER/-IR regulares forman el imperativo de "tú" igual que la forma de "él/ella" en presente: habla, come, escribe.</div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">3</span><h2>El mapa del barrio</h2><span class="time-tag">10 min</span></div>
+    <div class="map-wrap">
+      <div class="map-svg-frame">
+        <svg viewBox="0 0 700 460" xmlns="http://www.w3.org/2000/svg">
+          <rect x="0" y="0" width="700" height="460" fill="#FBF7EE"/>
+          <!-- calles horizontales -->
+          <rect x="0" y="120" width="700" height="34" fill="#FFFFFF" stroke="#8B9184" stroke-width="1.5"/>
+          <rect x="0" y="300" width="700" height="34" fill="#FFFFFF" stroke="#8B9184" stroke-width="1.5"/>
+          <!-- calles verticales -->
+          <rect x="140" y="0" width="34" height="460" fill="#FFFFFF" stroke="#8B9184" stroke-width="1.5"/>
+          <rect x="420" y="0" width="34" height="460" fill="#FFFFFF" stroke="#8B9184" stroke-width="1.5"/>
+          <!-- nombres de calle -->
+          <text x="20" y="112" font-family="IBM Plex Mono" font-size="11" fill="#565F52">C/ DE LA MERCÈ</text>
+          <text x="20" y="292" font-family="IBM Plex Mono" font-size="11" fill="#565F52">C/ DEL PI</text>
+          <text x="148" y="20" font-family="IBM Plex Mono" font-size="11" fill="#565F52" transform="rotate(90 148 20)">C/ ANCHA</text>
+          <text x="428" y="20" font-family="IBM Plex Mono" font-size="11" fill="#565F52" transform="rotate(90 428 20)">C/ FERRAN</text>
+
+          <!-- plaza -->
+          <circle cx="288" cy="137" r="26" fill="#EAF1FE" stroke="#2F6FED" stroke-width="2"/>
+          <text x="288" y="141" font-family="IBM Plex Sans" font-size="11" fill="#2F6FED" text-anchor="middle" font-weight="600">PLAZA</text>
+
+          <!-- edificios -->
+          <rect x="40" y="30" width="80" height="70" rx="6" fill="#F1EBFA" stroke="#7C5CBF" stroke-width="1.5"/>
+          <text x="80" y="70" font-family="IBM Plex Sans" font-size="18" text-anchor="middle">🏠</text>
+          <text x="80" y="115" font-family="IBM Plex Mono" font-size="10.5" fill="#565F52" text-anchor="middle">TU CASA</text>
+
+          <rect x="500" y="30" width="80" height="70" rx="6" fill="#FCF1E1" stroke="#DB8A2E" stroke-width="1.5"/>
+          <text x="540" y="70" font-family="IBM Plex Sans" font-size="18" text-anchor="middle">☕</text>
+          <text x="540" y="115" font-family="IBM Plex Mono" font-size="10.5" fill="#565F52" text-anchor="middle">CAFETERÍA</text>
+
+          <rect x="40" y="200" width="80" height="70" rx="6" fill="#E9F6EF" stroke="#2E9E6B" stroke-width="1.5"/>
+          <text x="80" y="240" font-family="IBM Plex Sans" font-size="18" text-anchor="middle">🏦</text>
+          <text x="80" y="285" font-family="IBM Plex Mono" font-size="10.5" fill="#565F52" text-anchor="middle">BANCO</text>
+
+          <rect x="500" y="200" width="80" height="70" rx="6" fill="#FCEAE0" stroke="#C1440E" stroke-width="1.5"/>
+          <text x="540" y="240" font-family="IBM Plex Sans" font-size="18" text-anchor="middle">📚</text>
+          <text x="540" y="285" font-family="IBM Plex Mono" font-size="10.5" fill="#565F52" text-anchor="middle">LIBRERÍA</text>
+
+          <rect x="200" y="360" width="80" height="70" rx="6" fill="#F1EBFA" stroke="#7C5CBF" stroke-width="1.5"/>
+          <text x="240" y="400" font-family="IBM Plex Sans" font-size="18" text-anchor="middle">🚇</text>
+          <text x="240" y="445" font-family="IBM Plex Mono" font-size="10.5" fill="#565F52" text-anchor="middle">METRO</text>
+
+          <rect x="380" y="360" width="80" height="70" rx="6" fill="#E9F6EF" stroke="#2E9E6B" stroke-width="1.5"/>
+          <text x="420" y="400" font-family="IBM Plex Sans" font-size="18" text-anchor="middle">🥐</text>
+          <text x="420" y="445" font-family="IBM Plex Mono" font-size="10.5" fill="#565F52" text-anchor="middle">PANADERÍA</text>
+
+          <!-- semaforo -->
+          <circle cx="157" cy="137" r="5" fill="#DB8A2E"/>
+          <circle cx="437" cy="317" r="5" fill="#DB8A2E"/>
+        </svg>
+      </div>
+      <div class="map-legend">
+        <span><span class="swatch" style="background:#EAF1FE; border:1.5px solid #2F6FED;"></span>plaza</span>
+        <span><span class="swatch" style="background:#F1EBFA; border:1.5px solid #7C5CBF;"></span>edificio</span>
+        <span><span class="swatch" style="background:#FCF1E1; border:1.5px solid #DB8A2E;"></span>cafetería</span>
+        <span><span class="swatch" style="background:#E9F6EF; border:1.5px solid #2E9E6B;"></span>banco / metro / panadería</span>
+        <span><span class="swatch" style="background:#FCEAE0; border:1.5px solid #C1440E;"></span>librería</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">4</span><h2>Construye el camino</h2><span class="time-tag">8 min</span></div>
+    <div class="panel">
+      <p class="vocab-hint" style="margin-bottom:18px;">Usando el mapa de arriba, completa las instrucciones para cada ruta. Escribe tu propia versión y después revela una posible respuesta.</p>
+
+      <div class="route-panel">
+        <p class="route-title">Ruta 1 · De tu casa a la cafetería</p>
+        <p class="route-desc">Un amigo está en tu casa y quiere ir a la cafetería.</p>
+        <div class="route-scenario"><strong>Contexto:</strong> tu casa está arriba a la izquierda del mapa; la cafetería está arriba a la derecha.</div>
+        <div class="route-steps">
+          <div class="route-step"><span class="route-step-num">1</span><input class="route-step-input" type="text" placeholder="Ej: Sal de casa y..."></div>
+          <div class="route-step"><span class="route-step-num">2</span><input class="route-step-input" type="text" placeholder="¿Qué haces con la calle Ancha?"></div>
+          <div class="route-step"><span class="route-step-num">3</span><input class="route-step-input" type="text" placeholder="¿Cómo llegas hasta la cafetería?"></div>
+        </div>
+        <button class="route-reveal-btn" data-target="ans1">Ver una posible respuesta</button>
+        <div class="route-answer" id="ans1"><strong>Posible respuesta:</strong> Sal de casa y baja por la calle de la Mercè. Gira a la derecha en la calle Ferran. Sigue todo recto y la cafetería está a la derecha.</div>
+      </div>
+
+      <div class="route-panel">
+        <p class="route-title">Ruta 2 · De la plaza al metro</p>
+        <p class="route-desc">Alguien está en la plaza y necesita llegar a la parada de metro.</p>
+        <div class="route-scenario"><strong>Contexto:</strong> la plaza está en el centro; el metro está abajo, un poco a la izquierda.</div>
+        <div class="route-steps">
+          <div class="route-step"><span class="route-step-num">1</span><input class="route-step-input" type="text" placeholder="Ej: Cruza la plaza y..."></div>
+          <div class="route-step"><span class="route-step-num">2</span><input class="route-step-input" type="text" placeholder="¿Qué calle bajas?"></div>
+          <div class="route-step"><span class="route-step-num">3</span><input class="route-step-input" type="text" placeholder="¿Dónde giras para llegar al metro?"></div>
+        </div>
+        <button class="route-reveal-btn" data-target="ans2">Ver una posible respuesta</button>
+        <div class="route-answer" id="ans2"><strong>Posible respuesta:</strong> Cruza la plaza y baja por la calle Ancha. Sigue todo recto hasta la calle del Pi. Gira a la izquierda y el metro está un poco más adelante.</div>
+      </div>
+
+      <div class="route-panel">
+        <p class="route-title">Ruta 3 · De la librería a la panadería</p>
+        <p class="route-desc">Necesitas explicar cómo ir de la librería a la panadería.</p>
+        <div class="route-scenario"><strong>Contexto:</strong> la librería está arriba a la derecha; la panadería está abajo, un poco más a la izquierda.</div>
+        <div class="route-steps">
+          <div class="route-step"><span class="route-step-num">1</span><input class="route-step-input" type="text" placeholder="Ej: Sal de la librería y..."></div>
+          <div class="route-step"><span class="route-step-num">2</span><input class="route-step-input" type="text" placeholder="¿Qué calle coges?"></div>
+          <div class="route-step"><span class="route-step-num">3</span><input class="route-step-input" type="text" placeholder="¿Cómo terminas en la panadería?"></div>
+        </div>
+        <button class="route-reveal-btn" data-target="ans3">Ver una posible respuesta</button>
+        <div class="route-answer" id="ans3"><strong>Posible respuesta:</strong> Sal de la librería y coge la calle Ferran hacia abajo. Cruza la calle del Pi y sigue todo recto. La panadería está a la izquierda, cerca del metro.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">5</span><h2>Pronunciación</h2><span class="time-tag">5 min</span></div>
+    <div class="panel">
+      <p class="vocab-hint">Los verbos del imperativo suenan cortos y directos — practica el golpe de voz.</p>
+      <div class="pron-wrap">
+        <div class="pron-row"><span class="pron-word">gira</span><span class="pron-ipa">/ˈxi.ɾa/</span><span class="pron-tip">la "g" antes de "i" suena como una "j" suave</span></div>
+        <div class="pron-row"><span class="pron-word">sigue</span><span class="pron-ipa">/ˈsi.ɣe/</span><span class="pron-tip">la "u" no se pronuncia, solo suaviza la "g"</span></div>
+        <div class="pron-row"><span class="pron-word">cruza</span><span class="pron-ipa">/ˈkɾu.θa/ o /ˈkɾu.sa/</span><span class="pron-tip">varía entre España (θ) y Latinoamérica (s)</span></div>
+        <div class="pron-row"><span class="pron-word">esquina</span><span class="pron-ipa">/esˈki.na/</span><span class="pron-tip">acento en la segunda sílaba: es-QUI-na</span></div>
+        <div class="pron-row"><span class="pron-word">semáforo</span><span class="pron-ipa">/seˈma.fo.ɾo/</span><span class="pron-tip">palabra esdrújula: el acento va en la tercera sílaba desde el final</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">6</span><h2>Practica</h2><span class="time-tag">8 min</span></div>
+    <div class="panel">
+      <p class="vocab-hint">20 frases de repaso con imperativo y vocabulario de direcciones. Las primeras 10 se hacen en voz alta en clase; el resto queda como repaso para casa.</p>
+      <div id="exercises"></div>
+      <div class="check-bar">
+        <div style="display:flex; gap:10px;">
+          <button class="btn-primary" id="check-btn">Comprobar respuestas</button>
+          <button class="btn-ghost" id="reset-btn">Reiniciar</button>
+        </div>
+        <span id="score-text"></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="block roleplay-panel">
+    <div class="block-head"><span class="block-num">7</span><h2>Pidiendo y dando direcciones</h2><span class="time-tag">6 min</span></div>
+    <p class="lede" style="margin-bottom:16px;">Alguien te pide direcciones o tú se las pides a alguien. 50 turnos repartidos en 5 escenas; elige una para practicar en clase y deja el resto para casa.</p>
+    <div class="scene-tabs" id="scene-tabs"></div>
+    <div id="scene-container"></div>
+    <div class="roleplay-tip"><strong>En clase:</strong> practicaremos una escena en voz alta, cambiando de rol. El resto de escenas son para practicar por tu cuenta durante la semana.</div>
+  </section>
+
+  <section class="block task-panel">
+    <div class="block-head"><span class="block-num">8</span><h2 style="color:var(--b3)">Tu tarea</h2><span class="time-tag">—</span></div>
+    <p style="margin:0; font-size:15px; color:var(--ink-soft);">Piensa en el camino real desde tu casa hasta un lugar que visitas a menudo (el trabajo, un parque, una tienda). Escribe las instrucciones en español usando el imperativo.</p>
+    <div class="prompt-box"><strong>Idea:</strong> escribe al menos 6 instrucciones usando verbos como sal, gira, sigue, cruza, coge, baja o sube — como si le explicaras el camino a un amigo que viene a visitarte por primera vez.</div>
+    <textarea id="final-task" placeholder="Escribe aquí las instrucciones desde tu casa..."></textarea>
+    <div class="task-footer">
+      <span id="task-count">0 / 6 verbos en imperativo detectados</span>
+      <div style="display:flex; gap:10px; align-items:center;">
+        <span class="saved-flag" id="saved-flag">Guardado ✓</span>
+        <button class="btn-secondary" id="save-btn">Guardar tarea</button>
+      </div>
+    </div>
+    <div class="record-tip"><strong>Para casa:</strong> si puedes, sal a caminar el trayecto real mientras dices las instrucciones en voz alta, como si le explicaras el camino a alguien que camina contigo.</div>
+  </section>
+
+</main>
+
+<footer>
+  <span>Clase 23 · Barrios y direcciones</span>
+  <span>Próxima clase → Clase 24: canciones y repaso de pasado</span>
+</footer>
+
+<script>
+/* ---------- ROUTE REVEAL ---------- */
+document.querySelectorAll('.route-reveal-btn').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    const target = document.getElementById(btn.dataset.target);
+    target.classList.toggle('show');
+    btn.textContent = target.classList.contains('show') ? 'Ocultar respuesta' : 'Ver una posible respuesta';
+  });
+});
+
+/* ---------- EXERCISES ---------- */
+const EXERCISES = [
+  {"sentence":"Para llegar a la plaza, <span class=\"gap\">___</span> todo recto por esta calle.","options":["sigue","sigues","seguir"],"answer":"sigue"},
+  {"sentence":"<span class=\"gap\">___</span> a la derecha en la próxima esquina.","options":["gira","giras","girar"],"answer":"gira"},
+  {"sentence":"Para ir al banco, <span class=\"gap\">___</span> la calle principal.","options":["cruza","cruzas","cruzar"],"answer":"cruza"},
+  {"sentence":"<span class=\"gap\">___</span> la primera calle a la izquierda.","options":["coge","coges","coger"],"answer":"coge"},
+  {"sentence":"La librería está lejos, así que <span class=\"gap\">___</span> el autobús.","options":["coge","coges","coger"],"answer":"coge"},
+  {"sentence":"Para bajar al metro, <span class=\"gap\">___</span> por estas escaleras.","options":["baja","bajas","bajar"],"answer":"baja"},
+  {"sentence":"<span class=\"gap\">___</span> hasta la plaza y ahí verás la panadería.","options":["sube","subes","subir"],"answer":"sube"},
+  {"sentence":"Si te pierdes, <span class=\"gap\">___</span> a mí, que te acompaño.","options":["ven","vienes","venir"],"answer":"ven"},
+  {"sentence":"<span class=\"gap\">___</span> hacia el parque, está muy cerca.","options":["ve","vas","ir"],"answer":"ve"},
+  {"sentence":"<span class=\"gap\">___</span> cuidado al cruzar, hay mucho tráfico.","options":["ten","tienes","tener"],"answer":"ten"},
+  {"sentence":"La cafetería está a la derecha, justo en la <span class=\"gap\">___</span>.","options":["esquina","plaza","semáforo"],"answer":"esquina"},
+  {"sentence":"Perdona, ¿dónde está la parada de <span class=\"gap\">___</span> más cercana?","options":["metro","calle","plaza"],"answer":"metro"},
+  {"sentence":"No gires todavía, sigue <span class=\"gap\">___</span> dos calles más.","options":["todo recto","a la derecha","cerca"],"answer":"todo recto"},
+  {"sentence":"El banco está muy <span class=\"gap\">___</span>, a diez minutos andando.","options":["lejos","cerca","recto"],"answer":"lejos"},
+  {"sentence":"Perdona, ¿la librería está <span class=\"gap\">___</span> o lejos de aquí?","options":["cerca","recto","gira"],"answer":"cerca"},
+  {"sentence":"<span class=\"gap\">___</span> el semáforo y gira a la izquierda.","options":["Cruza","Cruzas","Cruzar"],"answer":"Cruza"},
+  {"sentence":"Nosotros normalmente <span class=\"gap\">___</span> por la plaza para ir al trabajo.","options":["pasamos","pasa","pasar"],"answer":"pasamos"},
+  {"sentence":"<span class=\"gap\">___</span> por esta calle hasta el final.","options":["Sigue","Sigues","Seguir"],"answer":"Sigue"},
+  {"sentence":"¿Puedes <span class=\"gap\">___</span> cómo llegar a la estación?","options":["explicarme","explícame","explicar"],"answer":"explicarme"},
+  {"sentence":"<span class=\"gap\">___</span> la segunda calle, no la primera.","options":["Coge","Coges","Coger"],"answer":"Coge"}
+];
+
+const exWrap = document.getElementById('exercises');
+
+const PRACTICE_KEY = 'rebecca-clase23-practica';
+let practiceAnswers = {};
+let practiceAutosaveTimer = null;
+function guardarPractica(){
+  if (!window.storage) return;
+  clearTimeout(practiceAutosaveTimer);
+  practiceAutosaveTimer = setTimeout(()=>{
+    window.storage.set(PRACTICE_KEY, JSON.stringify(practiceAnswers)).catch(()=>{});
+  }, 500);
+}
+function restaurarPractica(){
+  const items = exWrap.querySelectorAll('.exercise');
+  items.forEach((el, idx)=>{
+    const val = practiceAnswers[idx];
+    if (val === undefined) return;
+    const btn = el.querySelector(`.opt-btn[data-value="${val}"]`);
+    if (btn) btn.classList.add('picked');
+  });
+}
+async function cargarPractica(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(PRACTICE_KEY);
+    if (res && typeof res.value === 'string') practiceAnswers = JSON.parse(res.value);
+  }catch(e){
+    // Sin progreso guardado todavia.
+  }
+  restaurarPractica();
+}
+exWrap.addEventListener('click', (e)=>{
+  const btn = e.target.closest('.opt-btn');
+  if (!btn || btn.disabled) return;
+  const el = btn.closest('.exercise');
+  if (!el) return;
+  const items = Array.from(exWrap.querySelectorAll('.exercise'));
+  const idx = items.indexOf(el);
+  if (idx === -1) return;
+  practiceAnswers[idx] = btn.dataset.value;
+  guardarPractica();
+});
+new MutationObserver(()=>{ restaurarPractica(); }).observe(exWrap, { childList:true });
+cargarPractica();
+
+EXERCISES.forEach((ex, i)=>{
+  if(i === 0){
+    const divider = document.createElement('div');
+    divider.className = 'ex-divider en-clase';
+    divider.textContent = 'en clase · ítems 1–10';
+    exWrap.appendChild(divider);
+  }
+  if(i === 10){
+    const divider = document.createElement('div');
+    divider.className = 'ex-divider';
+    divider.textContent = 'para casa · repaso opcional';
+    exWrap.appendChild(divider);
+  }
+  const el = document.createElement('div');
+  el.className = 'exercise';
+  el.dataset.answer = ex.answer.toLowerCase();
+  el.innerHTML = `
+    <div class="ex-sentence">${i+1}. ${ex.sentence}</div>
+    <div class="ex-options">
+      ${ex.options.map(opt => `<button class="opt-btn" data-value="${opt.toLowerCase()}">${opt}</button>`).join('')}
+    </div>
+  `;
+  exWrap.appendChild(el);
+});
+
+exWrap.querySelectorAll('.exercise').forEach(exercise=>{
+  const buttons = exercise.querySelectorAll('.opt-btn');
+  buttons.forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      buttons.forEach(b=>b.classList.remove('picked'));
+      btn.classList.add('picked');
+    });
+  });
+});
+
+document.getElementById('check-btn').addEventListener('click', ()=>{
+  let correct = 0;
+  let answered = 0;
+  exWrap.querySelectorAll('.exercise').forEach(exercise=>{
+    const answer = exercise.dataset.answer;
+    const buttons = exercise.querySelectorAll('.opt-btn');
+    const picked = exercise.querySelector('.opt-btn.picked');
+    if(picked) answered++;
+    buttons.forEach(btn=>{
+      btn.disabled = true;
+      if(btn.dataset.value === answer){
+        btn.classList.add('correct');
+      } else if(btn.classList.contains('picked')){
+        btn.classList.add('wrong');
+      }
+    });
+    if(picked && picked.dataset.value === answer) correct++;
+  });
+  document.getElementById('score-text').textContent = `${correct} / ${exWrap.querySelectorAll('.exercise').length} correctas (${answered} respondidas)`;
+});
+
+document.getElementById('reset-btn').addEventListener('click', ()=>{
+  exWrap.querySelectorAll('.opt-btn').forEach(btn=>{
+    btn.disabled = false;
+    btn.classList.remove('picked','correct','wrong');
+  });
+  document.getElementById('score-text').textContent = '';
+});
+
+practiceAnswers = {};
+if (window.storage) window.storage.set(PRACTICE_KEY, JSON.stringify(practiceAnswers)).catch(()=>{});
+
+/* ---------- ROLEPLAY ---------- */
+const SCENES = [
+  {
+    "id": "turista-perdido",
+    "tab": "Un turista perdido",
+    "icon": "🧭",
+    "setup": "Un turista te pregunta cómo llegar a la Sagrada Familia.",
+    "lines": [
+      {"who":"friend","name":"Turista","text":"Perdona, ¿sabes cómo llegar a la Sagrada Familia?"},
+      {"who":"you","hint":"Responde si lo sabes y empieza a explicar."},
+      {"who":"friend","name":"Turista","text":"¿Está muy lejos de aquí?"},
+      {"who":"you","hint":"Usa CERCA o LEJOS: responde sobre la distancia."},
+      {"who":"friend","name":"Turista","text":"¿Tengo que coger el metro?"},
+      {"who":"you","hint":"Responde si necesita coger el metro o no."},
+      {"who":"friend","name":"Turista","text":"¿Qué calle debo seguir primero?"},
+      {"who":"you","hint":"Usa SIGUE: indica qué calle debe seguir."},
+      {"who":"friend","name":"Turista","text":"¿Y después qué hago?"},
+      {"who":"you","hint":"Usa GIRA o CRUZA: continúa las instrucciones."},
+      {"who":"friend","name":"Turista","text":"Muchas gracias por tu ayuda."},
+      {"who":"you","hint":"Responde de forma amable."}
+    ]
+  },
+  {
+    "id": "pidiendo-al-vecino",
+    "tab": "Pidiendo direcciones a un vecino",
+    "icon": "🙋",
+    "setup": "Acabas de mudarte al barrio y le pides direcciones a un vecino.",
+    "lines": [
+      {"who":"friend","name":"Vecino","text":"Hola, ¿te puedo ayudar en algo?"},
+      {"who":"you","hint":"Pregunta cómo llegar a un lugar (el supermercado, la farmacia...)."},
+      {"who":"friend","name":"Vecino","text":"Claro, está muy cerca. Sigue todo recto por esta calle."},
+      {"who":"you","hint":"Responde confirmando que has entendido."},
+      {"who":"friend","name":"Vecino","text":"Después, gira a la izquierda en la segunda esquina."},
+      {"who":"you","hint":"Pregunta si hay algo más que debas saber."},
+      {"who":"friend","name":"Vecino","text":"Sí, cruza la plaza y lo verás justo enfrente."},
+      {"who":"you","hint":"Repite el camino con tus propias palabras."},
+      {"who":"friend","name":"Vecino","text":"Eso es, lo has entendido perfectamente."},
+      {"who":"you","hint":"Da las gracias al vecino."},
+      {"who":"friend","name":"Vecino","text":"De nada, bienvenida al barrio."},
+      {"who":"you","hint":"Responde de forma amable, mostrando que te gusta el barrio."}
+    ]
+  },
+  {
+    "id": "explicando-tu-casa",
+    "tab": "Explicando el camino a tu casa",
+    "icon": "🏡",
+    "setup": "Un amigo va a visitarte por primera vez y le explicas cómo llegar.",
+    "lines": [
+      {"who":"friend","name":"Amigo","text":"¿Cómo llego a tu casa desde el metro?"},
+      {"who":"you","hint":"Usa SAL o SIGUE: empieza a explicar el camino."},
+      {"who":"friend","name":"Amigo","text":"¿Cuántas calles tengo que caminar?"},
+      {"who":"you","hint":"Responde con un número aproximado de calles."},
+      {"who":"friend","name":"Amigo","text":"¿Hay algún punto de referencia fácil de ver?"},
+      {"who":"you","hint":"Menciona un punto de referencia (una plaza, una tienda...)."},
+      {"who":"friend","name":"Amigo","text":"¿Tu edificio está a la derecha o a la izquierda?"},
+      {"who":"you","hint":"Usa A LA DERECHA o A LA IZQUIERDA."},
+      {"who":"friend","name":"Amigo","text":"¿Hay que llamar al timbre o me esperas fuera?"},
+      {"who":"you","hint":"Responde cómo prefieres recibirlo."},
+      {"who":"friend","name":"Amigo","text":"Perfecto, ¡nos vemos en un rato!"},
+      {"who":"you","hint":"Despídete de forma amable."}
+    ]
+  },
+  {
+    "id": "en-el-taxi",
+    "tab": "Dando direcciones al taxista",
+    "icon": "🚕",
+    "setup": "Estás en un taxi y le explicas al conductor cómo llegar a tu destino.",
+    "lines": [
+      {"who":"friend","name":"Taxista","text":"Buenas, ¿adónde vamos?"},
+      {"who":"you","hint":"Di a qué lugar quieres ir."},
+      {"who":"friend","name":"Taxista","text":"¿Conoces el camino o prefieres que use el GPS?"},
+      {"who":"you","hint":"Responde si conoces el camino o prefieres el GPS."},
+      {"who":"friend","name":"Taxista","text":"Vale, dime por dónde voy."},
+      {"who":"you","hint":"Usa SIGA o GIRE (usted): da la primera instrucción."},
+      {"who":"friend","name":"Taxista","text":"¿Sigo recto en el próximo semáforo?"},
+      {"who":"you","hint":"Responde si debe seguir recto o girar."},
+      {"who":"friend","name":"Taxista","text":"¿Ya casi llegamos?"},
+      {"who":"you","hint":"Responde si está cerca o todavía lejos."},
+      {"who":"friend","name":"Taxista","text":"Perfecto, hemos llegado."},
+      {"who":"you","hint":"Da las gracias y despídete."}
+    ]
+  },
+  {
+    "id": "buscando-un-sitio",
+    "tab": "Buscando un sitio juntos",
+    "icon": "🗺️",
+    "setup": "Tú y un amigo buscáis juntos un restaurante nuevo en el barrio.",
+    "lines": [
+      {"who":"friend","name":"Amiga","text":"¿Sabes dónde está el restaurante nuevo?"},
+      {"who":"you","hint":"Responde si lo sabes o no."},
+      {"who":"friend","name":"Amiga","text":"Vamos a preguntar a alguien, ¿te parece?"},
+      {"who":"you","hint":"Responde si te parece bien preguntar."},
+      {"who":"friend","name":"Amiga","text":"¿Qué le preguntamos exactamente?"},
+      {"who":"you","hint":"Formula la pregunta que le harías a un desconocido."},
+      {"who":"friend","name":"Amiga","text":"El señor dice: sigue recto y gira en la plaza."},
+      {"who":"you","hint":"Repite la instrucción para confirmar que la entendiste."},
+      {"who":"friend","name":"Amiga","text":"¿Crees que está cerca o lejos todavía?"},
+      {"who":"you","hint":"Da tu opinión sobre la distancia."},
+      {"who":"friend","name":"Amiga","text":"¡Mira, ahí está!"},
+      {"who":"you","hint":"Reacciona con alegría al encontrarlo."}
+    ]
+  }
+];
+
+const sceneTabs = document.getElementById('scene-tabs');
+const sceneContainer = document.getElementById('scene-container');
+let activeScene = 0;
+
+function renderTabs(){
+  sceneTabs.innerHTML = SCENES.map((s,i)=>
+    `<button class="scene-tab${i===activeScene?' active':''}" data-idx="${i}">${s.icon} ${s.tab}</button>`
+  ).join('');
+  sceneTabs.querySelectorAll('.scene-tab').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      activeScene = parseInt(btn.dataset.idx, 10);
+      renderTabs();
+      renderScene();
+    });
+  });
+}
+
+function renderScene(){
+  const scene = SCENES[activeScene];
+  const linesHtml = scene.lines.map((l)=>{
+    if(l.who === 'friend'){
+      return `
+        <div class="line friend">
+          <div class="line-avatar">${l.name.charAt(0)}</div>
+          <div class="line-body">
+            <p class="line-name">${l.name}</p>
+            <div class="line-bubble">${l.text}</div>
+          </div>
+        </div>`;
+    } else {
+      return `
+        <div class="line you">
+          <div class="line-avatar">Tú</div>
+          <div class="line-body">
+            <p class="line-name">Tú</p>
+            <textarea class="line-input" rows="2" placeholder="Escribe tu respuesta..."></textarea>
+            <p class="line-hint">${l.hint}</p>
+          </div>
+        </div>`;
+    }
+  }).join('');
+
+  sceneContainer.innerHTML = `
+    <div class="scene-setup">
+      <span class="scene-icon">${scene.icon}</span>
+      <p class="scene-text"><strong>${scene.tab}:</strong> ${scene.setup}</p>
+    </div>
+    <div class="dialogue">${linesHtml}</div>
+  `;
+}
+
+renderTabs();
+renderScene();
+
+const sceneStorageKey = 'rebecca-clase23-roleplay';
+let sceneAnswers = {};
+let sceneAutosaveTimer = null;
+function guardarScene(){
+  if (!window.storage) return;
+  clearTimeout(sceneAutosaveTimer);
+  sceneAutosaveTimer = setTimeout(()=>{
+    window.storage.set(sceneStorageKey, JSON.stringify(sceneAnswers)).catch(()=>{});
+  }, 500);
+}
+function restaurarScene(){
+  sceneContainer.querySelectorAll('.line-input').forEach((ta, li)=>{
+    const val = sceneAnswers[String(li)];
+    if (val !== undefined) ta.value = val;
+  });
+}
+async function cargarScene(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(sceneStorageKey);
+    if (res && typeof res.value === 'string') sceneAnswers = JSON.parse(res.value);
+  }catch(e){
+    // Sin progreso guardado todavia.
+  }
+  restaurarScene();
+}
+sceneContainer.addEventListener('input', (e)=>{
+  const ta = e.target.closest('.line-input');
+  if (!ta) return;
+  const all = Array.from(sceneContainer.querySelectorAll('.line-input'));
+  const li = all.indexOf(ta);
+  if (li === -1) return;
+  sceneAnswers[String(li)] = ta.value;
+  guardarScene();
+});
+new MutationObserver(()=>{ restaurarScene(); }).observe(sceneContainer, { childList:true });
+cargarScene();
+
+
+/* ---------- FINAL TASK ---------- */
+const STORAGE_KEY = 'rebecca-clase23-tarea';
+const taskArea = document.getElementById('final-task');
+const taskCount = document.getElementById('task-count');
+const savedFlag = document.getElementById('saved-flag');
+const IMPERATIVE_WORDS = /\b(gira|sigue|cruza|coge|baja|sube|ve|ven|ten|entra|sal|para|dobla|continúa|toma)\w*\b/gi;
+
+async function cargarTarea(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(STORAGE_KEY);
+    if (res && typeof res.value === 'string') taskArea.value = res.value;
+  }catch(e){
+    // Clave inexistente todavía: no hay tarea previa, se queda en blanco.
+  }
+  updateCount();
+}
+
+function updateCount(){
+  const text = taskArea.value.toLowerCase();
+  const matches = text.match(IMPERATIVE_WORDS) || [];
+  const found = new Set(matches).size;
+  taskCount.textContent = `${Math.min(found,6)} / 6 verbos en imperativo detectados`;
+}
+taskArea.addEventListener('input', updateCount);
+updateCount();
+cargarTarea();
+
+document.getElementById('save-btn').addEventListener('click', async ()=>{
+  if (!window.storage){
+    savedFlag.textContent = 'Guardado no disponible aquí';
+    savedFlag.classList.add('show');
+    setTimeout(()=>{ savedFlag.classList.remove('show'); savedFlag.textContent = 'Guardado ✓'; }, 2200);
+    return;
+  }
+  try{
+    const ok = await window.storage.set(STORAGE_KEY, taskArea.value);
+    savedFlag.textContent = ok ? 'Guardado ✓' : 'No se pudo guardar';
+  }catch(e){
+    savedFlag.textContent = 'No se pudo guardar';
+  }
+  savedFlag.classList.add('show');
+  setTimeout(()=>{ savedFlag.classList.remove('show'); savedFlag.textContent = 'Guardado ✓'; }, 1800);
+});
+
+let taskAutosaveTimer = null;
+taskArea.addEventListener('input', ()=>{
+  clearTimeout(taskAutosaveTimer);
+  taskAutosaveTimer = setTimeout(()=>{
+    document.getElementById('save-btn').click();
+  }, 900);
+});
+</script>
+
+</body>
+</html>

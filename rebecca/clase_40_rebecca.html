@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clase 40 · Evaluación final y cierre — Rebecca</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+
+/* ╔══════════════════════════════════════════════════════════════╗
+   ║  ESCOLAR — sistema de diseño para clases de español online   ║
+   ║  Clase 40 · Línea de llegada · Evaluación final y cierre        ║
+   ╚══════════════════════════════════════════════════════════════╝ */
+
+:root{
+  --paper:        #FBF7EE;
+  --paper-raised: #FFFFFF;
+  --paper-alt:    #F3ECDA;
+  --ink:          #23291F;
+  --ink-soft:     #565F52;
+  --ink-faint:    #8B9184;
+  --line:         rgba(35,41,31,0.12);
+  --line-strong:  rgba(35,41,31,0.22);
+
+  --b1:      #2F6FED;  --b1-soft: #EAF1FE;  --b1-line: #C6D9FC;
+  --b2:      #2E9E6B;  --b2-soft: #E9F6EF;  --b2-line: #BEE6D3;
+  --b3:      #DB8A2E;  --b3-soft: #FCF1E1;  --b3-line: #F3D9AF;
+  --family:  #C4432E;  --family-soft: #FBEAE4; --family-line: #F0C7BA;
+  --gold:    #C79A2E;  --gold-soft: #FBF2DE; --gold-line: #EFD99C;
+
+  --f-display: 'Fraunces', Georgia, serif;
+  --f-body:    'IBM Plex Sans', system-ui, sans-serif;
+  --f-data:    'IBM Plex Mono', monospace;
+
+  --r-sm: 8px;
+  --r-md: 14px;
+  --r-lg: 20px;
+
+  --shadow-1: 0 1px 2px rgba(35,41,31,0.05), 0 1px 8px rgba(35,41,31,0.04);
+}
+
+*{ box-sizing:border-box; }
+body{
+  margin:0;
+  background: var(--paper);
+  background-image: radial-gradient(circle at 1px 1px, var(--line) 1px, transparent 0);
+  background-size: 22px 22px;
+  color: var(--ink);
+  font-family: var(--f-body);
+  line-height:1.6;
+}
+::selection{ background: var(--b1-soft); }
+
+/* ---------- HEADER ---------- */
+header{ padding:44px 24px 28px; max-width:760px; margin:0 auto; position:relative; }
+.eyebrow{
+  font-family: var(--f-data); font-size:12px; letter-spacing:.14em;
+  text-transform:uppercase; color: var(--family); margin:0 0 10px;
+  display:flex; align-items:center; gap:10px;
+}
+.eyebrow .dot{ width:6px; height:6px; border-radius:50%; background: var(--family); }
+h1{
+  font-family: var(--f-display); font-weight:600;
+  font-size:clamp(30px,5.6vw,46px); line-height:1.08;
+  margin:0 0 14px; letter-spacing:-.01em;
+}
+h1 em{ font-style:italic; color: var(--family); }
+.lede{ font-size:16px; color: var(--ink-soft); max-width:56ch; margin:0; }
+
+.meta-row{
+  display:flex; flex-wrap:wrap; gap:20px; margin-top:26px;
+  font-family: var(--f-data); font-size:12px; color: var(--ink-faint);
+}
+.meta-row strong{
+  display:block; color: var(--ink); font-size:14.5px; font-weight:500;
+  font-family: var(--f-display); margin-top:3px;
+}
+
+/* ---------- PROGRESS BAR (sticky) ---------- */
+.score-bar{
+  position:sticky; top:0; z-index:20; background: var(--paper);
+  border-bottom:1px solid var(--line); padding:12px 24px;
+  display:flex; align-items:center; gap:16px; justify-content:center;
+  backdrop-filter: blur(6px);
+}
+.score-bar-inner{ max-width:760px; width:100%; display:flex; align-items:center; gap:16px; }
+.score-chip{
+  font-family: var(--f-data); font-size:12.5px; color: var(--ink-soft);
+  background: var(--paper-raised); border:1px solid var(--line); border-radius:999px;
+  padding:6px 14px; display:flex; align-items:center; gap:8px; white-space:nowrap;
+}
+.score-chip strong{ color: var(--gold); font-family: var(--f-display); font-size:15px; }
+.score-track{
+  flex:1; height:8px; background: var(--paper-alt); border:1px solid var(--line);
+  border-radius:99px; overflow:hidden;
+}
+.score-fill{ height:100%; background: var(--b2); width:0%; transition: width .4s ease; }
+
+/* ---------- SECTIONS ---------- */
+main{ max-width:760px; margin:0 auto; padding:8px 24px 100px; }
+
+section.block{ margin-bottom:52px; }
+.block-head{ display:flex; align-items:baseline; gap:12px; margin-bottom:18px; }
+.time-tag{
+  font-family: var(--f-data); font-size:11px; color: var(--ink-faint);
+  background: var(--paper-alt); padding:3px 10px; border-radius:999px; margin-left:auto; flex:none;
+}
+.block-num{
+  font-family: var(--f-data); font-size:12px; color:#fff; background: var(--family);
+  width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  flex:none;
+}
+.block-head h2{
+  font-family: var(--f-display); font-weight:500; font-style:italic; font-size:22px; margin:0;
+}
+
+.panel{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-lg);
+  box-shadow: var(--shadow-1); padding:26px 28px;
+}
+
+/* ---------- COMPARISON: clase 1 vs hoy ---------- */
+.compare-record-grid{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+@media (max-width:560px){ .compare-record-grid{ grid-template-columns:1fr; } }
+.record-card{ border-radius: var(--r-md); padding:18px 20px; border:1px solid; }
+.record-card.is-then{ background: var(--paper-alt); border-color: var(--line-strong); }
+.record-card.is-now{ background: var(--gold-soft); border-color: var(--gold-line); }
+.record-label{ font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.06em; color: var(--ink-faint); margin:0 0 6px; }
+.record-card.is-now .record-label{ color: var(--gold); }
+.record-title{ font-family: var(--f-display); font-weight:600; font-size:17px; margin:0 0 10px; color: var(--ink); }
+.record-prompt{ font-size:13.5px; color: var(--ink-soft); margin:0 0 14px; }
+.record-textarea{
+  width:100%; min-height:110px; font-family: var(--f-body); font-size:14px; color: var(--ink);
+  background:#fff; border:1px solid var(--line); border-radius: var(--r-sm);
+  padding:12px 14px; resize:vertical;
+}
+.record-textarea:focus{ outline:none; border-color: var(--gold); }
+.record-card.is-then .record-textarea{ border-color: var(--line-strong); }
+.record-note{ margin-top:24px; padding:14px 16px; background: var(--paper-raised); border:1px solid var(--gold-line); border-radius: var(--r-md); font-size:13.5px; color: var(--ink-soft); }
+.record-note strong{ color: var(--ink); }
+
+/* ---------- ORAL PROMPTS ---------- */
+.oral-panel{ background: var(--b1-soft); border:1px solid var(--b1-line); border-radius: var(--r-lg); padding:26px 28px; }
+.oral-panel .block-num{ background: var(--b1); }
+.oral-panel .block-head h2{ color: var(--b1); }
+.oral-list{ display:flex; flex-direction:column; gap:12px; margin:0; padding:0; list-style:none; }
+.oral-item{
+  background:#fff; border:1px solid var(--b1-line); border-radius: var(--r-md);
+  padding:14px 16px; display:flex; gap:12px; align-items:flex-start;
+}
+.oral-num{
+  font-family: var(--f-data); font-size:12px; color:#fff; background: var(--b1);
+  width:22px; height:22px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  flex:none; margin-top:1px;
+}
+.oral-text{ font-size:14.5px; color: var(--ink); }
+.oral-text em{ display:block; font-style:normal; color: var(--ink-faint); font-size:12px; margin-top:3px; }
+
+/* ---------- WRITTEN FINAL TASK ---------- */
+.written-panel{ background: var(--b3-soft); border:1px solid var(--b3-line); border-radius: var(--r-lg); padding:26px 28px; }
+.written-panel .block-num{ background: var(--b3); }
+.written-panel .block-head h2{ color: var(--b3); }
+.written-prompt{ font-size:14.5px; color: var(--ink-soft); margin:0 0 16px; }
+.written-prompt strong{ color: var(--ink); }
+.written-textarea{
+  width:100%; min-height:160px; font-family: var(--f-body); font-size:15px; color: var(--ink);
+  background:#fff; border:1px solid var(--b3-line); border-radius: var(--r-md);
+  padding:14px 16px; resize:vertical;
+}
+.written-textarea:focus{ outline:none; border-color: var(--b3); }
+.written-footer{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:12px; flex-wrap:wrap; }
+#written-count{ font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); }
+
+/* ---------- DIAGNOSTIC CHECKLIST ---------- */
+.diag-grid{ display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+@media (max-width:560px){ .diag-grid{ grid-template-columns:1fr; } }
+.diag-item{
+  display:flex; align-items:center; gap:10px; background:#fff; border:1px solid var(--line);
+  border-radius: var(--r-sm); padding:10px 12px; cursor:pointer; transition: all .15s ease;
+}
+.diag-item:hover{ border-color: var(--ink-faint); }
+.diag-check{
+  width:20px; height:20px; border-radius:5px; border:1.5px solid var(--ink-faint); flex:none;
+  display:flex; align-items:center; justify-content:center; font-size:12px; color:transparent; transition: all .15s ease;
+}
+.diag-item.checked .diag-check{ background: var(--b2); border-color: var(--b2); color:#fff; }
+.diag-item.checked{ background: var(--b2-soft); border-color: var(--b2-line); }
+.diag-text{ font-size:13.5px; color: var(--ink); }
+.diag-tally{ margin-top:16px; padding-top:14px; border-top:1px dashed var(--line); font-family: var(--f-data); font-size:12.5px; color: var(--ink-soft); text-align:center; }
+.diag-tally strong{ color: var(--b2); font-family: var(--f-display); font-size:16px; }
+
+/* ---------- SEPTEMBER PLAN ---------- */
+.plan-panel{ background: var(--family-soft); border:1px solid var(--family-line); border-radius: var(--r-lg); padding:26px 28px; }
+.plan-panel .block-num{ background: var(--family); }
+.plan-panel .block-head h2{ color: var(--family); }
+.plan-row{ margin-bottom:18px; }
+.plan-row:last-child{ margin-bottom:0; }
+.plan-row label{ display:block; font-weight:600; font-size:14px; color:var(--ink); margin-bottom:8px; }
+.plan-options{ display:flex; flex-wrap:wrap; gap:8px; }
+.plan-opt{
+  font-family: var(--f-body); font-size:13.5px; background:#fff; border:1.5px solid var(--family-line);
+  color: var(--ink-soft); padding:8px 16px; border-radius:999px; cursor:pointer; transition: all .15s ease;
+}
+.plan-opt:hover{ border-color: var(--family); }
+.plan-opt.selected{ background: var(--family); border-color: var(--family); color:#fff; }
+.plan-textarea{
+  width:100%; min-height:80px; border:1.5px solid var(--family-line); border-radius: var(--r-md);
+  padding:12px 14px; font-family: var(--f-body); font-size:14px; color:var(--ink); resize:vertical;
+  background:#fff;
+}
+.plan-textarea:focus{ outline:none; border-color: var(--family); }
+.plan-save{
+  margin-top:18px; font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint);
+  display:flex; align-items:center; gap:8px;
+}
+.plan-save .saved-dot{ width:7px; height:7px; border-radius:50%; background: var(--b2); opacity:0; transition: opacity .3s ease; }
+.plan-save.show-saved .saved-dot{ opacity:1; }
+
+/* ---------- DIAGNOSTIC PANEL WRAPPER ---------- */
+.diag-panel{ background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-lg); box-shadow: var(--shadow-1); padding:26px 28px; }
+.diag-panel .block-num{ background: var(--gold); }
+.diag-panel .block-head h2{ color: var(--gold); }
+.diag-hint{ font-family: var(--f-data); font-size:11.5px; color: var(--ink-faint); margin:0 0 18px; }
+
+/* ---------- SELF-ASSESSMENT (shared hint style) ---------- */
+.eval-hint{ font-family: var(--f-data); font-size:11.5px; color: var(--ink-faint); margin:0 0 20px; }
+
+/* ---------- CLOSING ---------- */
+.closing-panel{
+  background: linear-gradient(135deg, var(--gold-soft) 0%, var(--paper-raised) 100%);
+  border:1px solid var(--gold-line); border-radius: var(--r-lg); padding:32px 28px; text-align:center;
+}
+.closing-panel .block-num{ background: var(--gold); margin:0 auto 14px; }
+.closing-panel .block-head{ flex-direction:column; align-items:center; }
+.closing-panel .block-head h2{ color: var(--gold); font-size:26px; }
+.closing-panel .time-tag{ display:none; }
+.closing-text{ font-size:15.5px; color: var(--ink-soft); max-width:50ch; margin:0 auto 22px; }
+.medal-row{ display:flex; justify-content:center; gap:14px; flex-wrap:wrap; margin-bottom:6px; }
+.medal{
+  background:#fff; border:1px solid var(--gold-line); border-radius: var(--r-md); padding:14px 18px;
+  font-family: var(--f-data); font-size:12px; color: var(--ink-soft); min-width:140px;
+}
+.medal .medal-icon{ font-size:24px; display:block; margin-bottom:6px; }
+.medal strong{ display:block; color: var(--ink); font-family: var(--f-display); font-size:14px; margin-top:2px; }
+
+/* ---------- FOOTER NAV ---------- */
+footer{
+  max-width:760px; margin:0 auto; padding:0 24px 60px; display:flex;
+  justify-content:space-between; flex-wrap:wrap; gap:12px;
+  font-family: var(--f-data); font-size:12px; color: var(--ink-faint);
+}
+
+@media (max-width:600px){
+  .panel, .oral-panel, .written-panel, .diag-panel, .plan-panel, .closing-panel{ padding:20px 18px; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <p class="eyebrow"><span class="dot"></span>Clase 40 · Línea de llegada · Evaluación final</p>
+  <h1>Evaluación final <em>y cierre</em></h1>
+  <p class="lede">Ha llegado el día. Hoy no aprendemos gramática nueva — hoy medimos lo que ya sabes. Vas a grabarte hablando otra vez, tal como en la clase 1, y vas a comparar las dos versiones de ti misma. Después, un diagnóstico completo del curso y tu plan de continuación para septiembre.</p>
+  <div class="meta-row">
+    <div>Duración<strong>50 min</strong></div>
+    <div>Gramática<strong>Evaluación oral y escrita · diagnóstico</strong></div>
+    <div>Nivel<strong>A1 → cierre</strong></div>
+  </div>
+</header>
+
+<div class="score-bar">
+  <div class="score-bar-inner">
+    <div class="score-chip">Diagnóstico <strong id="score-count">0</strong> / 24</div>
+    <div class="score-track"><div class="score-fill" id="score-fill"></div></div>
+  </div>
+</div>
+
+<main>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">1</span><h2>Cómo funciona hoy</h2><span class="time-tag">3 min</span></div>
+    <div class="panel">
+      <p style="margin:0; font-size:14.5px; color:var(--ink-soft);">Cinco bloques: primero grabas tu voz y la comparas con la clase 1; después una parte oral guiada y una redacción final; luego un diagnóstico completo de las <strong style="color:var(--gold)">24 áreas</strong> del curso, marcando lo que ya dominas; y para terminar, tu plan de continuación para septiembre. No hay preguntas de test hoy — esto es sobre ti, mirando atrás y hacia delante.</p>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">2</span><h2>Clase 1 vs. hoy — mide tu progreso real</h2><span class="time-tag">12 min</span></div>
+    <div class="panel">
+      <p style="margin:0 0 18px; font-size:14.5px; color:var(--ink-soft);">En la clase 1 escribiste y dijiste en voz alta 3 frases sobre ti misma usando "soy". Vuelve a grabarte ahora, contestando las mismas preguntas, y compara: más vocabulario, frases más largas, menos pausas, verbos que antes no tenías.</p>
+      <div class="compare-record-grid">
+        <div class="record-card is-then">
+          <p class="record-label">Clase 1 · 6 de julio</p>
+          <p class="record-title">Cómo hablabas entonces</p>
+          <p class="record-prompt">Copia aquí lo que escribiste en la clase 1, o resume de memoria cómo te presentabas.</p>
+          <textarea class="record-textarea" id="record-then" placeholder="Soy Rebecca. Soy de... Soy..."></textarea>
+        </div>
+        <div class="record-card is-now">
+          <p class="record-label">Clase 40 · hoy</p>
+          <p class="record-title">Cómo hablas ahora</p>
+          <p class="record-prompt">Grábate en voz alta 1–2 minutos y luego escribe aquí un resumen: quién eres, dónde estás, cómo es tu vida en Barcelona.</p>
+          <textarea class="record-textarea" id="record-now" placeholder="Soy Rebecca. Vivo en Barcelona con Marc, en un piso que está cerca de..."></textarea>
+        </div>
+      </div>
+      <div class="record-note"><strong>En clase:</strong> compartimos las dos grabaciones en voz alta y hablamos de las diferencias — no solo gramática, también fluidez y confianza.</div>
+    </div>
+  </section>
+
+
+  <section class="block oral-panel">
+    <div class="block-head"><span class="block-num">3</span><h2>Evaluación oral guiada</h2><span class="time-tag">15 min</span></div>
+    <p style="margin:0 0 16px; font-size:14.5px; color:var(--ink-soft);">Responde en voz alta a cada pregunta, sin escribir antes. Combina todo lo que has aprendido: identidad, lugar, género, hay/estar, comparativos, pasado, futuro y condicional de cortesía.</p>
+    <ul class="oral-list">
+      <li class="oral-item"><span class="oral-num">1</span><p class="oral-text">Preséntate: ¿quién eres, de dónde eres, a qué te dedicas?<em>ser + identidad</em></p></li>
+      <li class="oral-item"><span class="oral-num">2</span><p class="oral-text">Describe cómo estás hoy y por qué te sientes así.<em>estar + estado de ánimo</em></p></li>
+      <li class="oral-item"><span class="oral-num">3</span><p class="oral-text">Describe tu piso: qué hay, dónde está cada cosa.<em>hay / estar + género + preposiciones</em></p></li>
+      <li class="oral-item"><span class="oral-num">4</span><p class="oral-text">Compara tu barrio actual con el barrio donde vivías antes.<em>comparativos: más/menos que, tan... como</em></p></li>
+      <li class="oral-item"><span class="oral-num">5</span><p class="oral-text">Cuenta qué hiciste el fin de semana pasado.<em>pretérito indefinido</em></p></li>
+      <li class="oral-item"><span class="oral-num">6</span><p class="oral-text">Explica cómo era tu vida antes de mudarte a Barcelona.<em>pretérito imperfecto</em></p></li>
+      <li class="oral-item"><span class="oral-num">7</span><p class="oral-text">Cuenta un plan para el próximo mes.<em>futuro simple</em></p></li>
+      <li class="oral-item"><span class="oral-num">8</span><p class="oral-text">Pide algo con cortesía, como en un restaurante.<em>condicional: me gustaría, podría</em></p></li>
+    </ul>
+  </section>
+
+  <section class="block written-panel">
+    <div class="block-head"><span class="block-num">4</span><h2>Redacción final</h2><span class="time-tag">10 min</span></div>
+    <p class="written-prompt">Escribe un texto de <strong>mínimo 80 palabras</strong> contando tu historia: quién eras cuando llegaste a Barcelona, cómo es tu vida ahora, y qué planes tienes. Usa todos los tiempos verbales que puedas: presente, pasado, futuro, y al menos una comparación.</p>
+    <textarea class="written-textarea" id="final-writing" placeholder="Cuando llegué a Barcelona, no conocía a nadie excepto a Marc..."></textarea>
+    <div class="written-footer">
+      <span id="written-count">0 palabras</span>
+      <div style="display:flex; gap:10px; align-items:center;">
+        <span class="saved-flag" id="writing-saved-flag" style="font-family:var(--f-data); font-size:12px; color:var(--b2); opacity:0; transition:opacity .3s ease;">Guardado ✓</span>
+        <button class="btn-secondary" id="writing-save-btn" style="font-family:var(--f-body); font-weight:600; font-size:13.5px; color:var(--b3); background:none; border:1.5px solid var(--b3-line); padding:9px 18px; border-radius:999px; cursor:pointer;">Guardar redacción</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="block diag-panel">
+    <div class="block-head"><span class="block-num">🎯</span><h2>Diagnóstico completo del curso</h2><span class="time-tag">8 min</span></div>
+    <p class="diag-hint">Marca cada punto que sientes que dominas. Esto no es un examen — es una foto de dónde estás hoy, para decidir juntas qué hacer en septiembre.</p>
+    <div class="diag-grid" id="diag-grid"></div>
+    <div class="diag-tally">Dominas <strong id="diag-count">0</strong> / 24 puntos del curso</div>
+  </section>
+
+  <section class="block plan-panel">
+    <div class="block-head"><span class="block-num">5</span><h2>Tu plan de continuación para septiembre</h2><span class="time-tag">8 min</span></div>
+    <p class="eval-hint">Has terminado el A1. Ahora decidimos juntas cómo seguir en septiembre — no hay respuesta incorrecta, esto es solo para planificar.</p>
+
+    <div class="plan-row" data-plan="ritmo">
+      <label>¿Con qué ritmo quieres continuar en septiembre?</label>
+      <div class="plan-options">
+        <button class="plan-opt" data-val="mismo">Mismo ritmo (2–3 clases/semana)</button>
+        <button class="plan-opt" data-val="mas">Más intensivo</button>
+        <button class="plan-opt" data-val="menos">Más relajado</button>
+        <button class="plan-opt" data-val="pausa">Pausa unas semanas</button>
+      </div>
+    </div>
+
+    <div class="plan-row" data-plan="foco">
+      <label>¿En qué te gustaría enfocarte al empezar A2?</label>
+      <div class="plan-options">
+        <button class="plan-opt" data-val="conversacion">Conversación fluida</button>
+        <button class="plan-opt" data-val="gramatica">Gramática más compleja</button>
+        <button class="plan-opt" data-val="trabajo">Español para el trabajo</button>
+        <button class="plan-opt" data-val="cultura">Cultura y expresiones</button>
+      </div>
+    </div>
+
+    <div class="plan-row">
+      <label>Notas para septiembre — cualquier cosa que quieras recordar o pedir</label>
+      <textarea class="plan-textarea" id="plan-notes" placeholder="Escribe aquí tus notas..."></textarea>
+    </div>
+
+    <div class="plan-save" id="plan-save-indicator">
+      <span class="saved-dot"></span><span>Guardado automáticamente</span>
+    </div>
+  </section>
+
+  <section class="block closing-panel">
+    <div class="block-head"><span class="block-num">🎓</span><h2>¡Lo has conseguido, Rebecca!</h2><span class="time-tag"></span></div>
+    <p class="closing-text">Has completado el A1 entero: identidad, lugar, género, ciudad, mercado, rutina, comparativos, los tres tiempos verbales, y una simulación completa de tu vida en Barcelona. La grabación de hoy, comparada con la de la clase 1, lo demuestra mejor que cualquier examen. Septiembre empieza donde tú decidas.</p>
+    <div class="medal-row">
+      <div class="medal"><span class="medal-icon">🗣️</span>Grabación<strong>clase 1 vs. hoy comparada</strong></div>
+      <div class="medal"><span class="medal-icon">📝</span>Redacción final<strong>completada</strong></div>
+      <div class="medal"><span class="medal-icon">✍️</span>40 clases<strong>completadas · nivel A1</strong></div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <span>Clase 40 · Evaluación final y cierre</span>
+  <span>Nivel A1 completado · Próximo paso → A2 en septiembre</span>
+</footer>
+
+<script>
+/* ---------- RECORDING COMPARISON ---------- */
+const STORAGE_KEY_RECORD = 'rebecca-clase40-grabacion';
+const recordThen = document.getElementById('record-then');
+const recordNow = document.getElementById('record-now');
+let recordSaveTimeout = null;
+
+async function loadRecording(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(STORAGE_KEY_RECORD);
+    if(res && typeof res.value === 'string'){
+      const data = JSON.parse(res.value);
+      if(data.then) recordThen.value = data.then;
+      if(data.now) recordNow.value = data.now;
+    }
+  }catch(e){ /* no hay datos previos todavía */ }
+}
+async function saveRecording(){
+  if (!window.storage) return;
+  try{
+    await window.storage.set(STORAGE_KEY_RECORD, JSON.stringify({ then: recordThen.value, now: recordNow.value }));
+  }catch(e){ /* fallo silencioso */ }
+}
+[recordThen, recordNow].forEach(el=>{
+  el.addEventListener('input', ()=>{
+    clearTimeout(recordSaveTimeout);
+    recordSaveTimeout = setTimeout(saveRecording, 600);
+  });
+});
+loadRecording();
+
+/* ---------- WRITTEN FINAL TASK ---------- */
+const STORAGE_KEY_WRITING = 'rebecca-clase40-redaccion';
+const writingArea = document.getElementById('final-writing');
+const writingCount = document.getElementById('written-count');
+const writingSavedFlag = document.getElementById('writing-saved-flag');
+
+async function loadWriting(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(STORAGE_KEY_WRITING);
+    if(res && typeof res.value === 'string') writingArea.value = res.value;
+  }catch(e){ /* no hay redacción previa */ }
+  updateWritingCount();
+}
+function updateWritingCount(){
+  const words = writingArea.value.trim().split(/\s+/).filter(Boolean).length;
+  writingCount.textContent = `${words} palabra${words===1?'':'s'}`;
+}
+writingArea.addEventListener('input', updateWritingCount);
+loadWriting();
+
+document.getElementById('writing-save-btn').addEventListener('click', async ()=>{
+  if (!window.storage){
+    writingSavedFlag.textContent = 'Guardado no disponible aquí';
+    writingSavedFlag.style.opacity = '1';
+    setTimeout(()=>{ writingSavedFlag.style.opacity = '0'; writingSavedFlag.textContent = 'Guardado ✓'; }, 2200);
+    return;
+  }
+  try{
+    const ok = await window.storage.set(STORAGE_KEY_WRITING, writingArea.value);
+    writingSavedFlag.textContent = ok ? 'Guardado ✓' : 'No se pudo guardar';
+  }catch(e){
+    writingSavedFlag.textContent = 'No se pudo guardar';
+  }
+  writingSavedFlag.style.opacity = '1';
+  setTimeout(()=>{ writingSavedFlag.style.opacity = '0'; }, 1800);
+});
+
+let writingAutosaveTimer = null;
+writingArea.addEventListener('input', ()=>{
+  clearTimeout(writingAutosaveTimer);
+  writingAutosaveTimer = setTimeout(()=>{
+    document.getElementById('writing-save-btn').click();
+  }, 900);
+});
+
+/* ---------- DIAGNOSTIC CHECKLIST ---------- */
+const DIAGNOSTIC = [
+  "Ser para identidad (soy/eres/es)",
+  "Estar para estado de ánimo",
+  "Estar para ubicación",
+  "Género: el / la",
+  "Concordancia de adjetivos",
+  "Hay vs. estar",
+  "Preposiciones de lugar",
+  "Imperativo para direcciones",
+  "Vocabulario de ciudad",
+  "Vocabulario de mercado",
+  "Verbos de rutina diaria",
+  "Vocabulario de casa y vecinos",
+  "Comparativos (más/menos/tan... como)",
+  "Condicional de cortesía (me gustaría, podría)",
+  "Vocabulario de restaurante",
+  "Verbos irregulares en presente",
+  "Pretérito indefinido",
+  "Pretérito imperfecto",
+  "Diferencia indefinido vs. imperfecto",
+  "Futuro simple",
+  "Opinión simple (creo que, pienso que)",
+  "Narración libre combinando tiempos",
+  "Comprensión oral en diálogos",
+  "Fluidez al hablar sin preparación"
+];
+
+const STORAGE_KEY_DIAG = 'rebecca-clase40-diagnostico';
+let diagState = {};
+
+async function loadDiag(){
+  if (!window.storage) return {};
+  try{
+    const res = await window.storage.get(STORAGE_KEY_DIAG);
+    return (res && typeof res.value === 'string') ? JSON.parse(res.value) : {};
+  }catch(e){ return {}; }
+}
+async function saveDiag(){
+  if (!window.storage) return;
+  try{ await window.storage.set(STORAGE_KEY_DIAG, JSON.stringify(diagState)); }catch(e){ /* fallo silencioso */ }
+}
+
+function renderDiag(){
+  const grid = document.getElementById('diag-grid');
+  grid.innerHTML = '';
+  DIAGNOSTIC.forEach((text, idx)=>{
+    const item = document.createElement('div');
+    item.className = 'diag-item' + (diagState[idx] ? ' checked' : '');
+    item.dataset.idx = idx;
+    item.setAttribute('role','checkbox');
+    item.setAttribute('tabindex','0');
+    item.setAttribute('aria-checked', String(!!diagState[idx]));
+    item.innerHTML = `<span class="diag-check">✓</span><span class="diag-text">${text}</span>`;
+    const toggle = async ()=>{
+      const checked = !diagState[idx];
+      if(checked){ diagState[idx] = true; } else { delete diagState[idx]; }
+      item.classList.toggle('checked', checked);
+      item.setAttribute('aria-checked', String(checked));
+      updateDiagTally();
+      await saveDiag();
+    };
+    item.addEventListener('click', toggle);
+    item.addEventListener('keydown', (e)=>{
+      if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); toggle(); }
+    });
+    grid.appendChild(item);
+  });
+  updateDiagTally();
+}
+
+function updateDiagTally(){
+  const done = Object.keys(diagState).length;
+  document.getElementById('diag-count').textContent = done;
+  document.getElementById('score-count').textContent = done;
+  document.getElementById('score-fill').style.width = (done/DIAGNOSTIC.length*100) + '%';
+}
+
+(async function initDiag(){
+  diagState = await loadDiag();
+  renderDiag();
+})();
+
+/* ---------- SEPTEMBER PLAN ---------- */
+const STORAGE_KEY_PLAN = 'rebecca-clase40-plan';
+let planState = { choices: {}, notes: '' };
+let planSaveTimeout = null;
+
+async function loadPlan(){
+  if (!window.storage) return { choices: {}, notes: '' };
+  try{
+    const res = await window.storage.get(STORAGE_KEY_PLAN);
+    return (res && typeof res.value === 'string') ? JSON.parse(res.value) : { choices: {}, notes: '' };
+  }catch(e){ return { choices: {}, notes: '' }; }
+}
+async function savePlan(){
+  if (!window.storage) return;
+  try{ await window.storage.set(STORAGE_KEY_PLAN, JSON.stringify(planState)); }catch(e){ /* fallo silencioso */ }
+  const indicator = document.getElementById('plan-save-indicator');
+  indicator.classList.add('show-saved');
+  setTimeout(() => indicator.classList.remove('show-saved'), 1500);
+}
+
+document.querySelectorAll('.plan-row[data-plan]').forEach(row => {
+  const key = row.dataset.plan;
+  const opts = row.querySelectorAll('.plan-opt');
+  opts.forEach(opt => {
+    opt.addEventListener('click', async () => {
+      const val = opt.dataset.val;
+      opts.forEach(o => o.classList.toggle('selected', o === opt));
+      planState.choices[key] = val;
+      await savePlan();
+    });
+  });
+});
+
+const planNotesEl = document.getElementById('plan-notes');
+planNotesEl.addEventListener('input', () => {
+  planState.notes = planNotesEl.value;
+  clearTimeout(planSaveTimeout);
+  planSaveTimeout = setTimeout(savePlan, 600);
+});
+
+(async function initPlan(){
+  planState = await loadPlan();
+  if(!planState.choices) planState.choices = {};
+  Object.keys(planState.choices).forEach(key => {
+    const row = document.querySelector(`.plan-row[data-plan="${key}"]`);
+    if(!row) return;
+    const val = planState.choices[key];
+    row.querySelectorAll('.plan-opt').forEach(o => o.classList.toggle('selected', o.dataset.val === val));
+  });
+  if(planState.notes) planNotesEl.value = planState.notes;
+})();
+</script>
+
+</body>
+</html>

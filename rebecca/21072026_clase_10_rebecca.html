@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clase 10 · ¿Qué estoy haciendo? — Rebecca</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+
+/* ╔══════════════════════════════════════════════════════════════╗
+   ║  ESCOLAR — sistema de diseño para clases de español online   ║
+   ║  Clase 10 · L2 Línea del presente · "¿Qué estoy haciendo?"     ║
+   ╚══════════════════════════════════════════════════════════════╝ */
+
+:root{
+  --paper:        #FBF7EE;
+  --paper-raised: #FFFFFF;
+  --paper-alt:    #F3ECDA;
+  --ink:          #23291F;
+  --ink-soft:     #565F52;
+  --ink-faint:    #8B9184;
+  --line:         rgba(35,41,31,0.12);
+  --line-strong:  rgba(35,41,31,0.22);
+
+  --b1:      #2F6FED;  --b1-soft: #EAF1FE;  --b1-line: #C6D9FC;
+  --b2:      #2E9E6B;  --b2-soft: #E9F6EF;  --b2-line: #BEE6D3;
+  --b3:      #DB8A2E;  --b3-soft: #FCF1E1;  --b3-line: #F3D9AF;
+  --family:  #B5502E;  --family-soft: #FBEBE3; --family-line: #EFC9B4;
+
+  --f-display: 'Fraunces', Georgia, serif;
+  --f-body:    'IBM Plex Sans', system-ui, sans-serif;
+  --f-data:    'IBM Plex Mono', monospace;
+
+  --r-sm: 8px;
+  --r-md: 14px;
+  --r-lg: 20px;
+
+  --shadow-1: 0 1px 2px rgba(35,41,31,0.05), 0 1px 8px rgba(35,41,31,0.04);
+}
+
+*{ box-sizing:border-box; }
+body{
+  margin:0;
+  background: var(--paper);
+  background-image: radial-gradient(circle at 1px 1px, var(--line) 1px, transparent 0);
+  background-size: 22px 22px;
+  color: var(--ink);
+  font-family: var(--f-body);
+  line-height:1.6;
+}
+::selection{ background: var(--b1-soft); }
+
+/* ---------- HEADER ---------- */
+header{ padding:44px 24px 28px; max-width:760px; margin:0 auto; }
+.eyebrow{
+  font-family: var(--f-data); font-size:12px; letter-spacing:.14em;
+  text-transform:uppercase; color: var(--b1); margin:0 0 10px;
+  display:flex; align-items:center; gap:10px;
+}
+.eyebrow .dot{ width:6px; height:6px; border-radius:50%; background: var(--b1); }
+h1{
+  font-family: var(--f-display); font-weight:600;
+  font-size:clamp(30px,5.6vw,46px); line-height:1.08;
+  margin:0 0 14px; letter-spacing:-.01em;
+}
+h1 em{ font-style:italic; color: var(--b1); }
+.lede{ font-size:16px; color: var(--ink-soft); max-width:56ch; margin:0; }
+
+.meta-row{
+  display:flex; flex-wrap:wrap; gap:20px; margin-top:26px;
+  font-family: var(--f-data); font-size:12px; color: var(--ink-faint);
+}
+.meta-row strong{
+  display:block; color: var(--ink); font-size:14.5px; font-weight:500;
+  font-family: var(--f-display); margin-top:3px;
+}
+
+/* ---------- SECTIONS ---------- */
+main{ max-width:760px; margin:0 auto; padding:8px 24px 100px; }
+
+section.block{ margin-bottom:52px; }
+.block-head{ display:flex; align-items:baseline; gap:12px; margin-bottom:18px; }
+.time-tag{
+  font-family: var(--f-data); font-size:11px; color: var(--ink-faint);
+  background: var(--paper-alt); padding:3px 10px; border-radius:999px; margin-left:auto; flex:none;
+}
+.block-num{
+  font-family: var(--f-data); font-size:12px; color:#fff; background: var(--b1);
+  width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  flex:none;
+}
+.block-head h2{
+  font-family: var(--f-display); font-weight:500; font-style:italic; font-size:22px; margin:0;
+}
+
+.panel{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-lg);
+  box-shadow: var(--shadow-1); padding:26px 28px;
+}
+
+/* ---------- GRAMMAR TABLE ---------- */
+.conj-table{ width:100%; border-collapse:collapse; margin-top:4px; }
+.conj-table td{ padding:10px 6px; border-bottom:1px dashed var(--line); font-size:15px; }
+.conj-table tr:last-child td{ border-bottom:none; }
+.conj-pron{ font-family: var(--f-data); color: var(--ink-faint); font-size:13px; width:150px; }
+.conj-form{ font-family: var(--f-display); font-weight:600; font-size:19px; color: var(--b1); }
+.conj-ex{ color: var(--ink-soft); font-size:14px; }
+
+.note{
+  margin-top:18px; padding:14px 16px; background: var(--b1-soft); border:1px solid var(--b1-line);
+  border-radius: var(--r-md); font-size:14px; color: var(--ink-soft);
+}
+.note strong{ color: var(--ink); }
+
+/* ---------- GERUNDIO FORMATION COMPARE ---------- */
+.compare-wrap{ margin-top:22px; }
+.compare-title{
+  font-family: var(--f-data); font-size:11.5px; text-transform:uppercase; letter-spacing:.06em;
+  color: var(--ink-faint); margin:0 0 10px;
+}
+.compare-grid{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px; }
+@media (max-width:640px){ .compare-grid{ grid-template-columns:1fr; } }
+.compare-col{ border-radius: var(--r-md); padding:16px 18px; border:1px solid; }
+.compare-col.is-ar{ background: var(--b1-soft); border-color: var(--b1-line); }
+.compare-col.is-er{ background: var(--b2-soft); border-color: var(--b2-line); }
+.compare-col.is-ir{ background: var(--b3-soft); border-color: var(--b3-line); }
+.compare-head{ display:flex; align-items:center; gap:8px; margin:0 0 10px; }
+.compare-verb{ font-family: var(--f-display); font-weight:600; font-size:19px; }
+.is-ar .compare-verb{ color: var(--b1); }
+.is-er .compare-verb{ color: var(--b2); }
+.is-ir .compare-verb{ color: var(--b3); }
+.compare-sub{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); }
+.compare-list{ margin:0; padding:0; list-style:none; }
+.compare-list li{ font-size:13.5px; color: var(--ink-soft); padding:6px 0; border-top:1px dashed var(--line); }
+.compare-list li:first-child{ border-top:none; }
+.compare-list strong{ color: var(--ink); font-weight:600; }
+.compare-list em{ display:block; font-style:normal; color: var(--ink-faint); font-size:12.5px; margin-top:2px; }
+.compare-warning{
+  margin-top:14px; padding:14px 16px; background: var(--paper-alt); border:1px solid var(--line-strong);
+  border-radius: var(--r-md); font-size:13.5px; color: var(--ink-soft);
+}
+.compare-warning strong{ color: var(--ink); }
+.exception-tags{ display:flex; flex-wrap:wrap; gap:6px; margin-top:8px; }
+.exception-tag{
+  font-family: var(--f-data); font-size:12px; background: var(--paper-raised); color: var(--ink-soft);
+  border:1px solid var(--line); padding:3px 9px; border-radius:999px;
+}
+
+/* ---------- IRREGULAR GERUNDS STRIP ---------- */
+.irregular-strip{ margin-top:22px; }
+.irregular-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:10px; }
+.irregular-card{
+  background: var(--family-soft); border:1px solid var(--family-line); border-radius: var(--r-md);
+  padding:12px 14px;
+}
+.irregular-inf{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); }
+.irregular-ger{ font-family: var(--f-display); font-weight:600; font-size:17px; color: var(--family); margin-top:2px; }
+
+/* ---------- FLAT TIMELINE (moving in steps) ---------- */
+.timeline-wrap{ margin-top:22px; }
+.timeline{ display:flex; flex-direction:column; gap:0; }
+.tl-item{ display:flex; gap:14px; align-items:flex-start; padding:10px 0; border-top:1px dashed var(--line); }
+.tl-item:first-child{ border-top:none; }
+.tl-time{ font-family: var(--f-data); font-size:12px; color: var(--b1); width:64px; flex:none; padding-top:2px; }
+.tl-verb{ font-family: var(--f-display); font-weight:600; font-size:15.5px; color: var(--ink); min-width:160px; }
+.tl-ex{ font-size:13.5px; color: var(--ink-soft); }
+
+/* ---------- VOCAB CARDS ---------- */
+.vocab-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:12px; }
+.vocab-card{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:14px 16px; cursor:pointer; perspective:600px; min-height:78px;
+  display:flex; flex-direction:column; justify-content:center; transition: border-color .15s ease;
+}
+.vocab-card:hover{ border-color: var(--b1-line); }
+.vocab-card:focus-visible{ outline:2px solid var(--b1); outline-offset:2px; }
+.vocab-front{ font-family: var(--f-body); font-weight:600; font-size:15px; }
+.vocab-back{ display:none; font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); margin-top:6px; }
+.vocab-card.flipped .vocab-back{ display:block; }
+.vocab-card.flipped{ background: var(--b1-soft); border-color: var(--b1-line); }
+.vocab-hint{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin:10px 2px 16px; }
+
+/* ---------- EXERCISE ---------- */
+.exercise{ margin-bottom:20px; }
+.exercise:last-of-type{ margin-bottom:0; }
+.ex-sentence{ font-size:15.5px; margin-bottom:10px; }
+.ex-sentence .gap{ font-family: var(--f-data); color: var(--ink-faint); }
+.ex-options{ display:flex; flex-wrap:wrap; gap:8px; }
+.opt-btn{
+  font-family: var(--f-body); font-size:14px; background: var(--paper-raised);
+  border:1.5px solid var(--line); color: var(--ink); padding:7px 16px; border-radius:999px;
+  cursor:pointer; transition: all .15s ease;
+}
+.opt-btn:hover{ border-color: var(--ink-faint); }
+.opt-btn.picked{ background: var(--b1-soft); border-color: var(--b1); color: var(--b1); }
+.opt-btn.correct{ background: var(--b1-soft); border-color: var(--b1); color: var(--b1); }
+.opt-btn.wrong{ background: var(--family-soft); border-color: var(--family); color: var(--family); }
+.opt-btn:disabled{ cursor:default; }
+
+.check-bar{
+  display:flex; align-items:center; justify-content:space-between; gap:16px;
+  margin-top:22px; padding-top:18px; border-top:1px dashed var(--line);
+}
+.btn-primary{
+  font-family: var(--f-body); font-weight:600; font-size:14px; color:#fff; background: var(--b1);
+  border:none; padding:11px 22px; border-radius:999px; cursor:pointer; transition: transform .1s ease;
+}
+.btn-primary:hover{ transform: translateY(-1px); }
+#score-text, #classify-score{ font-family: var(--f-data); font-size:13px; color: var(--ink-faint); }
+.btn-ghost{
+  font-family: var(--f-body); font-weight:600; font-size:13px; color: var(--ink-soft); background:none;
+  border:1.5px solid var(--line); padding:9px 18px; border-radius:999px; cursor:pointer;
+}
+.btn-ghost:hover{ border-color: var(--ink-faint); }
+.ex-divider{
+  display:flex; align-items:center; gap:10px; margin:20px 0 16px;
+  font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.06em;
+  color: var(--ink-faint);
+}
+.ex-divider::before, .ex-divider::after{ content:""; flex:1; height:1px; background: var(--line); }
+.ex-divider.en-clase{ color: var(--b1); }
+.ex-divider.en-clase::before, .ex-divider.en-clase::after{ background: var(--b1-line); }
+
+/* ---------- MIMICA GAME ---------- */
+.classify-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(170px,1fr)); gap:14px; }
+.classify-card{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:18px 16px 14px; text-align:center; transition: border-color .15s ease, box-shadow .15s ease;
+}
+.classify-icon{ font-size:30px; margin-bottom:8px; }
+.classify-word{
+  font-family: var(--f-display); font-weight:600; font-size:16.5px; margin:2px 0 12px; color: var(--ink);
+  line-height:1.3;
+}
+.classify-btns{ display:flex; flex-wrap:wrap; gap:6px; justify-content:center; }
+.classify-btn{
+  font-family: var(--f-body); font-weight:600; font-size:12.5px; flex:1 1 100%; padding:8px 4px;
+  border-radius:999px; cursor:pointer; border:1.5px solid var(--line); background: var(--paper-raised);
+  color: var(--ink); transition: all .15s ease;
+}
+.classify-btn:hover{ border-color: var(--ink-faint); }
+.classify-card.answered .classify-btn{ cursor:default; }
+.classify-card.correct{ background: var(--b1-soft); border-color: var(--b1-line); }
+.classify-card.correct .classify-word{ color: var(--b1); }
+.classify-card.incorrect{ background: var(--family-soft); border-color: var(--family-line); }
+.classify-feedback{
+  font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin-top:8px; min-height:14px;
+}
+
+/* ---------- ROLEPLAY ---------- */
+.roleplay-panel{ background: var(--b1-soft); border:1px solid var(--b1-line); border-radius: var(--r-lg); padding:26px 28px; }
+.roleplay-panel .block-num{ background: var(--b1); }
+.scene-setup{
+  display:flex; gap:14px; align-items:flex-start; background: var(--paper-raised);
+  border:1px solid var(--b1-line); border-radius: var(--r-md); padding:14px 16px; margin-bottom:20px;
+}
+.scene-icon{ font-size:22px; flex:none; }
+.scene-text{ font-size:14px; color: var(--ink-soft); }
+.scene-text strong{ color: var(--ink); }
+
+.dialogue{ display:flex; flex-direction:column; gap:14px; }
+.scene-tabs{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:18px; }
+.scene-tab{
+  font-family: var(--f-data); font-size:12.5px; background: var(--paper-raised);
+  border:1.5px solid var(--b1-line); color: var(--ink-soft); padding:7px 14px;
+  border-radius:999px; cursor:pointer; transition: all .15s ease;
+}
+.scene-tab:hover{ border-color: var(--b1); }
+.scene-tab.active{ background: var(--b1); border-color: var(--b1); color:#fff; }
+.line{ display:flex; gap:12px; align-items:flex-start; }
+.line-avatar{
+  flex:none; width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  font-family: var(--f-display); font-weight:600; font-size:14px; color:#fff;
+}
+.line.friend .line-avatar{ background: var(--ink-faint); }
+.line.you .line-avatar{ background: var(--b1); }
+.line-body{ flex:1; }
+.line-name{ font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.05em; color: var(--ink-faint); margin:0 0 4px; }
+.line-bubble{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:12px 14px; font-size:14.5px; color: var(--ink);
+}
+.line.you .line-bubble{ background:#fff; border-color: var(--b1-line); }
+.line-input{
+  width:100%; font-family: var(--f-body); font-size:14.5px; color: var(--ink);
+  background:#fff; border:1px solid var(--b1-line); border-radius: var(--r-sm);
+  padding:10px 12px; resize:vertical; min-height:40px; margin-top:2px;
+}
+.line-input:focus{ outline:none; border-color: var(--b1); }
+.line-hint{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin-top:5px; }
+
+.roleplay-tip{
+  margin-top:22px; padding:14px 16px; background: var(--paper-raised); border:1px solid var(--b1-line);
+  border-radius: var(--r-md); font-size:13.5px; color: var(--ink-soft);
+}
+.roleplay-tip strong{ color: var(--ink); }
+
+/* ---------- FINAL TASK ---------- */
+.task-panel{ background: var(--family-soft); border:1px solid var(--family-line); border-radius: var(--r-lg); padding:26px 28px; }
+.task-panel .block-num{ background: var(--family); }
+textarea#final-task{
+  width:100%; min-height:140px; font-family: var(--f-body); font-size:15px; color: var(--ink);
+  background: var(--paper-raised); border:1px solid var(--family-line); border-radius: var(--r-md);
+  padding:14px 16px; resize:vertical; margin-top:14px;
+}
+textarea#final-task:focus{ outline:none; border-color: var(--family); }
+.task-footer{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:12px; flex-wrap:wrap; }
+#task-count{ font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); }
+.btn-secondary{
+  font-family: var(--f-body); font-weight:600; font-size:13.5px; color: var(--family); background:none;
+  border:1.5px solid var(--family-line); padding:9px 18px; border-radius:999px; cursor:pointer;
+}
+.saved-flag{ font-family: var(--f-data); font-size:12px; color: var(--b1); opacity:0; transition: opacity .3s ease; }
+.saved-flag.show{ opacity:1; }
+.record-tip{
+  margin-top:14px; padding:14px 16px; background: var(--paper-raised); border:1px solid var(--family-line);
+  border-radius: var(--r-md); font-size:13.5px; color: var(--ink-soft);
+}
+.record-tip strong{ color: var(--ink); }
+
+/* ---------- FOOTER NAV ---------- */
+footer{
+  max-width:760px; margin:0 auto; padding:0 24px 60px; display:flex;
+  justify-content:space-between; flex-wrap:wrap; gap:12px;
+  font-family: var(--f-data); font-size:11.5px; color: var(--ink-faint);
+}
+
+@media (max-width:640px){
+  header{ padding:36px 16px 22px; }
+  main{ padding:6px 16px 90px; }
+  .panel{ padding:20px 18px; }
+  .roleplay-panel, .task-panel{ padding:20px 18px; }
+}
+@media (prefers-reduced-motion: reduce){ *{ transition:none !important; } }
+</style>
+</head>
+<body>
+
+<header>
+  <p class="eyebrow"><span class="dot"></span>Clase 10 · L2 Línea del presente</p>
+  <h1>¿Qué estoy <em>haciendo</em>?</h1>
+  <p class="lede">Ya sabes hablar de rutinas y de lo que quieres o necesitas. Hoy aprendes a describir lo que ocurre <strong>en este mismo momento</strong>: estar + gerundio. Es la estructura perfecta para narrar una mímica, describir el tiempo o contar qué hace la gente ahora mismo en tu piso nuevo de Barcelona.</p>
+  <div class="meta-row">
+    <div>Duración<strong>50 min</strong></div>
+    <div>Gramática<strong>Estar + gerundio</strong></div>
+    <div>Nivel<strong>A1</strong></div>
+  </div>
+</header>
+
+<main>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">1</span><h2>Gramática</h2><span class="time-tag">10 min</span></div>
+    <div class="panel">
+      <table class="conj-table">
+        <tr><td class="conj-pron">yo</td><td class="conj-form">estoy</td><td class="conj-ex">estoy comiendo ahora mismo</td></tr>
+        <tr><td class="conj-pron">tú</td><td class="conj-form">estás</td><td class="conj-ex">¿tú qué estás haciendo?</td></tr>
+        <tr><td class="conj-pron">él / ella</td><td class="conj-form">está</td><td class="conj-ex">está lloviendo en Barcelona</td></tr>
+        <tr><td class="conj-pron">nosotros/as</td><td class="conj-form">estamos</td><td class="conj-ex">estamos hablando por teléfono</td></tr>
+        <tr><td class="conj-pron">vosotros/as</td><td class="conj-form">estáis</td><td class="conj-ex">¿vosotros estáis viviendo juntos?</td></tr>
+        <tr><td class="conj-pron">ellos/ellas</td><td class="conj-form">están</td><td class="conj-ex">ellos están pintando el salón</td></tr>
+      </table>
+      <div class="note"><strong>La regla:</strong> para hablar de una acción que pasa <strong>ahora mismo</strong>, usamos <strong>estar</strong> (conjugado) + <strong>gerundio</strong> del verbo principal. El gerundio no cambia según la persona: solo cambia "estar". Es como decir "I am -ing" en inglés: "estoy comiendo" = "I am eating".</div>
+
+      <div class="compare-wrap">
+        <p class="compare-title">Cómo formar el gerundio</p>
+        <div class="compare-grid">
+          <div class="compare-col is-ar">
+            <div class="compare-head">
+              <span class="compare-verb">-AR</span>
+              <span class="compare-sub">→ -ando</span>
+            </div>
+            <ul class="compare-list">
+              <li><strong>hablar</strong> → habl<strong>ando</strong>
+                <em>estoy hablando con el casero</em>
+              </li>
+              <li><strong>cocinar</strong> → cocin<strong>ando</strong></li>
+              <li><strong>trabajar</strong> → trabaj<strong>ando</strong></li>
+            </ul>
+          </div>
+          <div class="compare-col is-er">
+            <div class="compare-head">
+              <span class="compare-verb">-ER</span>
+              <span class="compare-sub">→ -iendo</span>
+            </div>
+            <ul class="compare-list">
+              <li><strong>comer</strong> → com<strong>iendo</strong>
+                <em>está comiendo en la cocina</em>
+              </li>
+              <li><strong>beber</strong> → beb<strong>iendo</strong></li>
+              <li><strong>hacer</strong> → hac<strong>iendo</strong></li>
+            </ul>
+          </div>
+          <div class="compare-col is-ir">
+            <div class="compare-head">
+              <span class="compare-verb">-IR</span>
+              <span class="compare-sub">→ -iendo</span>
+            </div>
+            <ul class="compare-list">
+              <li><strong>vivir</strong> → viv<strong>iendo</strong>
+                <em>estamos viviendo en Barcelona</em>
+              </li>
+              <li><strong>escribir</strong> → escrib<strong>iendo</strong></li>
+              <li><strong>abrir</strong> → abr<strong>iendo</strong></li>
+            </ul>
+          </div>
+        </div>
+        <div class="compare-warning">
+          <strong>Truco:</strong> el gerundio es siempre la misma palabra, no cambia con el sujeto. Lo que cambia es <strong>estar</strong>: "yo estoy comiendo", "ella está comiendo", "nosotros estamos comiendo" — el gerundio "comiendo" es idéntico en los tres casos.
+          <div class="exception-tags">
+            <span class="exception-tag">-ar → -ando</span>
+            <span class="exception-tag">-er/-ir → -iendo</span>
+            <span class="exception-tag">gerundio invariable</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="irregular-strip">
+        <p class="compare-title">Gerundios irregulares frecuentes</p>
+        <div class="irregular-grid">
+          <div class="irregular-card"><div class="irregular-inf">leer</div><div class="irregular-ger">leyendo</div></div>
+          <div class="irregular-card"><div class="irregular-inf">dormir</div><div class="irregular-ger">durmiendo</div></div>
+          <div class="irregular-card"><div class="irregular-inf">pedir</div><div class="irregular-ger">pidiendo</div></div>
+          <div class="irregular-card"><div class="irregular-inf">decir</div><div class="irregular-ger">diciendo</div></div>
+          <div class="irregular-card"><div class="irregular-inf">venir</div><div class="irregular-ger">viniendo</div></div>
+          <div class="irregular-card"><div class="irregular-inf">ir</div><div class="irregular-ger">yendo</div></div>
+        </div>
+      </div>
+
+      <div class="timeline-wrap">
+        <p class="compare-title">Ahora mismo en mi piso de Barcelona</p>
+        <div class="timeline">
+          <div class="tl-item"><span class="tl-time">7:30</span><span class="tl-verb">está lloviendo</span><span class="tl-ex">Está lloviendo, así que cojo el paraguas.</span></div>
+          <div class="tl-item"><span class="tl-time">9:00</span><span class="tl-verb">estoy trabajando</span><span class="tl-ex">Estoy trabajando desde casa esta mañana.</span></div>
+          <div class="tl-item"><span class="tl-time">14:00</span><span class="tl-verb">estamos comiendo</span><span class="tl-ex">Mi compañera y yo estamos comiendo en la cocina.</span></div>
+          <div class="tl-item"><span class="tl-time">17:00</span><span class="tl-verb">está pintando</span><span class="tl-ex">El casero está pintando el pasillo.</span></div>
+          <div class="tl-item"><span class="tl-time">22:00</span><span class="tl-verb">estoy leyendo</span><span class="tl-ex">Estoy leyendo un libro antes de dormir.</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">2</span><h2>Vocabulario</h2><span class="time-tag">6 min</span></div>
+    <p class="vocab-hint">Toca cada tarjeta para ver un ejemplo con "estar + gerundio".</p>
+    <div class="vocab-grid" id="vocab-grid"></div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">3</span><h2>Practica</h2><span class="time-tag">12 min</span></div>
+    <div class="panel">
+      <p class="vocab-hint" style="margin-bottom:14px;">50 frases: las primeras 12 se hacen en voz alta en clase; el resto queda como repaso para casa.</p>
+      <div id="exercises"></div>
+      <div class="check-bar">
+        <div style="display:flex; gap:10px;">
+          <button class="btn-primary" id="check-btn">Comprobar respuestas</button>
+          <button class="btn-ghost" id="reset-btn">Reiniciar</button>
+        </div>
+        <span id="score-text"></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">4</span><h2>Juego: mímica de acciones</h2><span class="time-tag">8 min</span></div>
+    <p class="lede" style="margin-bottom:16px;">Lee la acción, imagínala o represéntala, y elige el gerundio correcto para completar "está...". Las primeras 14 se juegan en clase; el resto queda como banco de repaso para casa.</p>
+    <div class="classify-grid" id="classify-grid"></div>
+    <div class="check-bar">
+      <button class="btn-ghost" id="classify-reset">Reiniciar juego</button>
+      <span id="classify-score"></span>
+    </div>
+  </section>
+
+  <section class="block roleplay-panel">
+    <div class="block-head"><span class="block-num">5</span><h2>Roleplay: ¿qué está pasando?</h2><span class="time-tag">13 min</span></div>
+    <p class="lede" style="margin-bottom:16px;">50 intercambios repartidos en 5 escenas sobre tu vida ahora mismo en Barcelona. Elige una escena para practicar en clase; el resto queda como banco de repaso para casa.</p>
+    <div class="scene-tabs" id="scene-tabs"></div>
+    <div id="scene-container"></div>
+    <div class="roleplay-tip"><strong>En clase:</strong> practicaremos una escena en voz alta, cambiando de rol. El resto de escenas son para practicar por tu cuenta durante la semana.</div>
+  </section>
+
+  <section class="block task-panel">
+    <div class="block-head"><span class="block-num">6</span><h2 style="color:var(--family)">Tu tarea</h2><span class="time-tag">3 min</span></div>
+    <p style="margin:0; font-size:15px; color:var(--ink-soft);">Mira a tu alrededor (o imagina una escena) y escribe al menos <strong>5 frases</strong> usando "estar + gerundio" para describir lo que está pasando ahora mismo.</p>
+    <textarea id="final-task" placeholder="Estoy escribiendo en mi ordenador.&#10;Mi vecino está escuchando música.&#10;..."></textarea>
+    <div class="task-footer">
+      <span id="task-count">0 verbos usados</span>
+      <div style="display:flex; gap:10px; align-items:center;">
+        <span class="saved-flag" id="saved-flag">Guardado ✓</span>
+        <button class="btn-secondary" id="save-btn">Guardar tarea</button>
+      </div>
+    </div>
+    <div class="record-tip"><strong>Para casa:</strong> graba un audio de 30 segundos describiendo qué está haciendo cada persona en tu casa o en la calle, usando "estar + gerundio".</div>
+  </section>
+
+</main>
+
+<footer>
+  <span>Clase 10 · Línea del presente</span>
+  <span>Próxima clase → Clase 11: mi familia — posesivos</span>
+</footer>
+
+<script>
+/* ---------- VOCAB ---------- */
+const VOCAB = [
+  {front:"ahora mismo", back:"¿Qué estás haciendo ahora mismo?"},
+  {front:"comiendo", back:"Estoy comiendo en la cocina."},
+  {front:"hablando", back:"Estamos hablando por teléfono."},
+  {front:"viviendo", back:"Estoy viviendo en Barcelona desde julio."},
+  {front:"lloviendo", back:"Está lloviendo mucho hoy."},
+  {front:"durmiendo", back:"Mi compañero está durmiendo la siesta."},
+  {front:"escribiendo", back:"Estoy escribiendo un mensaje al casero."},
+  {front:"leyendo", back:"Está leyendo el contrato con calma."},
+];
+
+const grid = document.getElementById('vocab-grid');
+VOCAB.forEach(v=>{
+  const card = document.createElement('div');
+  card.className = 'vocab-card';
+  card.setAttribute('role', 'button');
+  card.setAttribute('tabindex', '0');
+  card.setAttribute('aria-pressed', 'false');
+  card.setAttribute('aria-label', `${v.front}. Pulsa para ver un ejemplo.`);
+  card.innerHTML = `<div class="vocab-front">${v.front}</div><div class="vocab-back">${v.back}</div>`;
+  const toggle = ()=>{
+    const flipped = card.classList.toggle('flipped');
+    card.setAttribute('aria-pressed', String(flipped));
+  };
+  card.addEventListener('click', toggle);
+  card.addEventListener('keydown', (e)=>{
+    if(e.key === 'Enter' || e.key === ' '){
+      e.preventDefault();
+      toggle();
+    }
+  });
+  grid.appendChild(card);
+});
+
+/* ---------- EXERCISES ---------- */
+const EXERCISES = [
+  {"sentence":"Yo <span class=\"gap\">___</span> (estar) comiendo ahora mismo.","options":["estoy","estás","está"],"answer":"estoy"},
+  {"sentence":"¿Tú qué <span class=\"gap\">___</span> (estar) haciendo?","options":["estoy","estás","está"],"answer":"estás"},
+  {"sentence":"El casero <span class=\"gap\">___</span> (estar) pintando el pasillo.","options":["estoy","estás","está"],"answer":"está"},
+  {"sentence":"Nosotros <span class=\"gap\">___</span> (estar) hablando del contrato.","options":["estamos","estáis","están"],"answer":"estamos"},
+  {"sentence":"Vosotros <span class=\"gap\">___</span> (estar) viviendo juntos, ¿no?","options":["estamos","estáis","están"],"answer":"estáis"},
+  {"sentence":"Mis vecinos <span class=\"gap\">___</span> (estar) escuchando música.","options":["estoy","estamos","están"],"answer":"están"},
+  {"sentence":"Ahora mismo está <span class=\"gap\">___</span> (llover) en Barcelona.","options":["lloviendo","lloviendas","llover"],"answer":"lloviendo"},
+  {"sentence":"Yo estoy <span class=\"gap\">___</span> (leer) un libro nuevo.","options":["leiendo","leyendo","leendo"],"answer":"leyendo"},
+  {"sentence":"Mi compañera está <span class=\"gap\">___</span> (dormir) la siesta.","options":["dormiendo","durmiendo","dormendo"],"answer":"durmiendo"},
+  {"sentence":"Nosotros estamos <span class=\"gap\">___</span> (escribir) un mensaje.","options":["escribendo","escribiendo","escribando"],"answer":"escribiendo"},
+  {"sentence":"¿Ustedes están <span class=\"gap\">___</span> (pedir) la cena?","options":["pediendo","pidiendo","pedendo"],"answer":"pidiendo"},
+  {"sentence":"Ella <span class=\"gap\">___</span> (estar) trabajando desde casa.","options":["estoy","estás","está"],"answer":"está"},
+  {"sentence":"Yo <span class=\"gap\">___</span> (estar) cocinando la cena.","options":["estoy","estás","está"],"answer":"estoy"},
+  {"sentence":"¿Vosotros <span class=\"gap\">___</span> (estar) estudiando español?","options":["estamos","estáis","están"],"answer":"estáis"},
+  {"sentence":"Mi hermano está <span class=\"gap\">___</span> (venir) hacia aquí.","options":["veniendo","viniendo","venendo"],"answer":"viniendo"},
+  {"sentence":"Nosotras <span class=\"gap\">___</span> (estar) comiendo en el balcón.","options":["estamos","estáis","están"],"answer":"estamos"},
+  {"sentence":"Tú <span class=\"gap\">___</span> (estar) hablando muy rápido.","options":["estoy","estás","está"],"answer":"estás"},
+  {"sentence":"Yo estoy <span class=\"gap\">___</span> (decir) la verdad.","options":["diciendo","deciendo","dicendo"],"answer":"diciendo"},
+  {"sentence":"Mis padres <span class=\"gap\">___</span> (estar) visitando el piso.","options":["estoy","estamos","están"],"answer":"están"},
+  {"sentence":"¿Usted <span class=\"gap\">___</span> (estar) buscando algo?","options":["estoy","estás","está"],"answer":"está"},
+  {"sentence":"Nosotros estamos <span class=\"gap\">___</span> (ir) al mercado.","options":["yendo","iendo","yiendo"],"answer":"yendo"},
+  {"sentence":"Ella está <span class=\"gap\">___</span> (hacer) la comida.","options":["haciendo","hacendo","haziendo"],"answer":"haciendo"},
+  {"sentence":"Yo <span class=\"gap\">___</span> (estar) viviendo un momento único.","options":["estoy","estás","está"],"answer":"estoy"},
+  {"sentence":"¿Tú <span class=\"gap\">___</span> (estar) durmiendo bien en el piso nuevo?","options":["estoy","estás","está"],"answer":"estás"},
+  {"sentence":"Nosotros <span class=\"gap\">___</span> (estar) pintando la habitación.","options":["estamos","estáis","están"],"answer":"estamos"},
+  {"sentence":"Los inquilinos <span class=\"gap\">___</span> (estar) organizando la mudanza.","options":["estoy","estamos","están"],"answer":"están"},
+  {"sentence":"Yo <span class=\"gap\">___</span> (estar) bebiendo un café ahora.","options":["estoy","estás","está"],"answer":"estoy"},
+  {"sentence":"¿Vosotros <span class=\"gap\">___</span> (estar) trabajando hoy?","options":["estamos","estáis","están"],"answer":"estáis"},
+  {"sentence":"Mi amiga está <span class=\"gap\">___</span> (leer) el contrato.","options":["leiendo","leyendo","leendo"],"answer":"leyendo"},
+  {"sentence":"Yo <span class=\"gap\">___</span> (estar) esperando al casero.","options":["estoy","estás","está"],"answer":"estoy"},
+  {"sentence":"¿Ustedes <span class=\"gap\">___</span> (estar) comiendo ya?","options":["estamos","estáis","están"],"answer":"están"},
+  {"sentence":"Yo <span class=\"gap\">___</span> (estar) escuchando la radio.","options":["estoy","estás","está"],"answer":"estoy"},
+  {"sentence":"Tú <span class=\"gap\">___</span> (estar) hablando con el vecino, ¿verdad?","options":["estoy","estás","está"],"answer":"estás"},
+  {"sentence":"Nosotros <span class=\"gap\">___</span> (estar) buscando las llaves.","options":["estamos","estáis","están"],"answer":"estamos"},
+  {"sentence":"El bebé está <span class=\"gap\">___</span> (dormir) en su habitación.","options":["dormiendo","durmiendo","dormendo"],"answer":"durmiendo"},
+  {"sentence":"Yo estoy <span class=\"gap\">___</span> (pedir) ayuda con las cajas.","options":["pediendo","pidiendo","pedendo"],"answer":"pidiendo"},
+  {"sentence":"¿Tú <span class=\"gap\">___</span> (estar) viendo la tele?","options":["estoy","estás","está"],"answer":"estás"},
+  {"sentence":"Mis amigas <span class=\"gap\">___</span> (estar) ayudando con la mudanza.","options":["estoy","estamos","están"],"answer":"están"},
+  {"sentence":"Yo <span class=\"gap\">___</span> (estar) firmando el contrato ahora.","options":["estoy","estás","está"],"answer":"estoy"},
+  {"sentence":"Nosotras <span class=\"gap\">___</span> (estar) hablando del alquiler.","options":["estamos","estáis","están"],"answer":"estamos"},
+  {"sentence":"¿Vosotros <span class=\"gap\">___</span> (estar) durmiendo la siesta?","options":["estamos","estáis","están"],"answer":"estáis"},
+  {"sentence":"Yo <span class=\"gap\">___</span> (estar) organizando mis cosas.","options":["estoy","estás","está"],"answer":"estoy"},
+  {"sentence":"Ella está <span class=\"gap\">___</span> (venir) a visitarme.","options":["veniendo","viniendo","venendo"],"answer":"viniendo"},
+  {"sentence":"Nosotros <span class=\"gap\">___</span> (estar) esperando el ascensor.","options":["estamos","estáis","están"],"answer":"estamos"},
+  {"sentence":"Yo <span class=\"gap\">___</span> (estar) decorando el salón.","options":["estoy","estás","está"],"answer":"estoy"},
+  {"sentence":"¿Tú <span class=\"gap\">___</span> (estar) escribiendo la lista de la compra?","options":["estoy","estás","está"],"answer":"estás"},
+  {"sentence":"Mis vecinos <span class=\"gap\">___</span> (estar) haciendo ruido.","options":["estoy","estamos","están"],"answer":"están"},
+  {"sentence":"Yo <span class=\"gap\">___</span> (estar) viviendo un cambio grande.","options":["estoy","estás","está"],"answer":"estoy"},
+  {"sentence":"Nosotros <span class=\"gap\">___</span> (estar) hablando de los muebles nuevos.","options":["estamos","estáis","están"],"answer":"estamos"}
+];
+
+const exWrap = document.getElementById('exercises');
+EXERCISES.forEach((ex, i)=>{
+  if(i === 0){
+    const divider = document.createElement('div');
+    divider.className = 'ex-divider en-clase';
+    divider.textContent = 'en clase · ítems 1–12';
+    exWrap.appendChild(divider);
+  }
+  if(i === 12){
+    const divider = document.createElement('div');
+    divider.className = 'ex-divider';
+    divider.textContent = 'para casa · repaso opcional';
+    exWrap.appendChild(divider);
+  }
+  const el = document.createElement('div');
+  el.className = 'exercise';
+  el.dataset.answer = ex.answer.toLowerCase();
+  el.innerHTML = `
+    <div class="ex-sentence">${i+1}. ${ex.sentence}</div>
+    <div class="ex-options">
+      ${ex.options.map(o=>`<button class="opt-btn" data-value="${o.toLowerCase()}">${o}</button>`).join('')}
+    </div>
+  `;
+  exWrap.appendChild(el);
+
+  el.querySelectorAll('.opt-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      el.querySelectorAll('.opt-btn').forEach(b=>b.classList.remove('picked'));
+      btn.classList.add('picked');
+    });
+  });
+});
+
+document.getElementById('check-btn').addEventListener('click', ()=>{
+  let correct = 0;
+  document.querySelectorAll('.exercise').forEach(el=>{
+    const answer = el.dataset.answer;
+    const picked = el.querySelector('.opt-btn.picked');
+    el.querySelectorAll('.opt-btn').forEach(b=>{
+      b.disabled = true;
+      if(b.dataset.value === answer) b.classList.add('correct');
+      else if(b === picked) b.classList.add('wrong');
+    });
+    if(picked && picked.dataset.value === answer) correct++;
+  });
+  document.getElementById('score-text').textContent = `${correct} / ${EXERCISES.length} correctas`;
+});
+
+document.getElementById('reset-btn').addEventListener('click', ()=>{
+  document.querySelectorAll('.exercise').forEach(el=>{
+    el.querySelectorAll('.opt-btn').forEach(b=>{
+      b.disabled = false;
+      b.classList.remove('picked','correct','wrong');
+    });
+  });
+  document.getElementById('score-text').textContent = '';
+});
+
+/* ---------- MIMICA GAME: elige el gerundio correcto ---------- */
+const CLASSIFY = [
+  {"icon":"🍽️","word":"Está comiendo un bocadillo","options":["comiendo","comendo"],"answer":"comiendo"},
+  {"icon":"☔","word":"Está ___ mucho en la calle","options":["lloviendo","lluviendo"],"answer":"lloviendo"},
+  {"icon":"📖","word":"Estoy ___ un libro de español","options":["leendo","leyendo"],"answer":"leyendo"},
+  {"icon":"😴","word":"El bebé está ___ la siesta","options":["dormiendo","durmiendo"],"answer":"durmiendo"},
+  {"icon":"✍️","word":"Estamos ___ un mensaje al casero","options":["escribiendo","escribendo"],"answer":"escribiendo"},
+  {"icon":"🎨","word":"El casero está ___ el pasillo","options":["pintiendo","pintando"],"answer":"pintando"},
+  {"icon":"🗣️","word":"Estamos ___ del contrato","options":["hablando","hablendo"],"answer":"hablando"},
+  {"icon":"🚶","word":"Estoy ___ hacia el mercado","options":["yendo","iendo"],"answer":"yendo"},
+  {"icon":"🎧","word":"Mis vecinos están ___ música alta","options":["escuchando","escuchiendo"],"answer":"escuchando"},
+  {"icon":"🧳","word":"Estamos ___ las cajas de la mudanza","options":["organizando","organiziendo"],"answer":"organizando"},
+  {"icon":"🍳","word":"Estoy ___ la cena ahora mismo","options":["cocinando","cociniendo"],"answer":"cocinando"},
+  {"icon":"🔑","word":"El casero está ___ las llaves nuevas","options":["trayendo","traendo"],"answer":"trayendo"},
+  {"icon":"🛒","word":"Estoy ___ comida para la semana","options":["comprando","compriendo"],"answer":"comprando"},
+  {"icon":"📞","word":"Estamos ___ con la agencia inmobiliaria","options":["hablando","hablendo"],"answer":"hablando"},
+  {"icon":"🧹","word":"Estoy ___ el salón antes de la visita","options":["limpiando","limpieindo"],"answer":"limpiando"},
+  {"icon":"🛏️","word":"Estamos ___ los muebles del dormitorio","options":["montando","montiendo"],"answer":"montando"},
+  {"icon":"📦","word":"Mi amigo está ___ las cajas al camión","options":["subiendo","subendo"],"answer":"subiendo"},
+  {"icon":"✒️","word":"Estoy ___ el contrato de alquiler","options":["firmando","firmiendo"],"answer":"firmando"},
+  {"icon":"🚪","word":"Estoy ___ la puerta del portal","options":["abriendo","abrendo"],"answer":"abriendo"},
+  {"icon":"🖼️","word":"Estamos ___ cuadros en la pared","options":["colgando","colgiendo"],"answer":"colgando"},
+  {"icon":"🧺","word":"Estoy ___ la ropa en el armario","options":["guardando","guardiendo"],"answer":"guardando"},
+  {"icon":"🛋️","word":"Estamos ___ el sofá al salón","options":["llevando","lleviendo"],"answer":"llevando"},
+  {"icon":"🥤","word":"Estoy ___ un café con mi vecina","options":["tomando","tomiendo"],"answer":"tomando"},
+  {"icon":"📱","word":"Está ___ una foto del piso nuevo","options":["haciendo","hacendo"],"answer":"haciendo"},
+  {"icon":"🚿","word":"Estoy ___ la ducha nueva","options":["probando","probiendo"],"answer":"probando"},
+  {"icon":"🪑","word":"Estamos ___ las sillas en su sitio","options":["poniendo","ponendo"],"answer":"poniendo"},
+  {"icon":"💡","word":"Estoy ___ la lámpara del salón","options":["instalando","instaliendo"],"answer":"instalando"},
+  {"icon":"🗝️","word":"El casero está ___ la cerradura","options":["cambiando","cambieindo"],"answer":"cambiando"},
+  {"icon":"🎉","word":"Estamos ___ la fiesta de bienvenida","options":["preparando","prepariendo"],"answer":"preparando"},
+  {"icon":"📋","word":"Estoy ___ la lista de la compra","options":["revisando","revisiendo"],"answer":"revisando"}
+];
+
+let classifyScore = 0;
+let classifyAnswered = 0;
+
+function renderClassify(){
+  const wrap = document.getElementById('classify-grid');
+  wrap.innerHTML = '';
+  classifyScore = 0;
+  classifyAnswered = 0;
+  updateClassifyScore();
+
+  CLASSIFY.forEach((item, i)=>{
+    if(i === 14){
+      const divider = document.createElement('div');
+      divider.className = 'ex-divider';
+      divider.style.gridColumn = '1 / -1';
+      divider.textContent = 'para casa · banco de repaso';
+      wrap.appendChild(divider);
+    } else if(i === 0){
+      const divider = document.createElement('div');
+      divider.className = 'ex-divider en-clase';
+      divider.style.gridColumn = '1 / -1';
+      divider.textContent = 'en clase · mímica 1–14';
+      wrap.appendChild(divider);
+    }
+
+    const card = document.createElement('div');
+    card.className = 'classify-card';
+    card.dataset.answer = item.answer;
+    const optsShuffled = [...item.options];
+    card.innerHTML = `
+      <div class="classify-icon">${item.icon}</div>
+      <p class="classify-word">${item.word}</p>
+      <div class="classify-btns">
+        ${optsShuffled.map(o=>`<button class="classify-btn" data-g="${o}">${o}</button>`).join('')}
+      </div>
+      <p class="classify-feedback"></p>
+    `;
+    card.querySelectorAll('.classify-btn').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        if(card.classList.contains('answered')) return;
+        card.classList.add('answered');
+        classifyAnswered++;
+        const feedback = card.querySelector('.classify-feedback');
+        if(btn.dataset.g === item.answer){
+          card.classList.add('correct');
+          classifyScore++;
+          feedback.textContent = '¡Correcto!';
+        } else {
+          card.classList.add('incorrect');
+          feedback.textContent = `Era "${item.answer}"`;
+        }
+        card.querySelectorAll('.classify-btn').forEach(b=>b.disabled = true);
+        updateClassifyScore();
+      });
+    });
+    wrap.appendChild(card);
+  });
+}
+
+function updateClassifyScore(){
+  document.getElementById('classify-score').textContent =
+    classifyAnswered ? `${classifyScore} / ${classifyAnswered} correctas` : '';
+}
+
+document.getElementById('classify-reset').addEventListener('click', renderClassify);
+renderClassify();
+
+/* ---------- ROLEPLAY SCENES ---------- */
+const SCENES = [
+  {
+    "id": "llamada",
+    "tab": "Llamada con una amiga",
+    "icon": "📞",
+    "setup": "Tu amiga te llama por teléfono para ver qué estás haciendo.",
+    "lines": [
+      {"who":"friend","name":"Marta","text":"¡Hola! ¿Qué estás haciendo ahora mismo?"},
+      {"who":"you","hint":"Responde usando \"estoy + gerundio\" con una actividad."},
+      {"who":"friend","name":"Marta","text":"Yo estoy cocinando la cena. ¿Y tu compañero de piso?"},
+      {"who":"you","hint":"Responde diciendo qué está haciendo tu compañero/a."},
+      {"who":"friend","name":"Marta","text":"¿Está lloviendo también donde tú estás?"},
+      {"who":"you","hint":"Responde sobre el tiempo, usando \"está lloviendo\" o no."},
+      {"who":"friend","name":"Marta","text":"¿Estáis organizando ya las cosas del piso nuevo?"},
+      {"who":"you","hint":"Responde usando \"estamos + gerundio\"."},
+      {"who":"friend","name":"Marta","text":"Qué bien, parece que estáis muy ocupados."},
+      {"who":"you","hint":"Responde confirmando y añadiendo un detalle."},
+      {"who":"friend","name":"Marta","text":"Bueno, te dejo seguir. ¡Hablamos luego!"},
+      {"who":"you","hint":"Responde despidiéndote."}
+    ]
+  },
+  {
+    "id": "vecino",
+    "tab": "Hablando con un vecino",
+    "icon": "🏠",
+    "setup": "Te encuentras con un vecino en el rellano y charláis un momento.",
+    "lines": [
+      {"who":"friend","name":"Vecino","text":"¡Hola! ¿Qué tal la mudanza? ¿Estáis instalándoos bien?"},
+      {"who":"you","hint":"Responde usando \"estamos + gerundio\" con algo que estáis haciendo."},
+      {"who":"friend","name":"Vecino","text":"Yo estoy arreglando el jardín esta semana."},
+      {"who":"you","hint":"Responde con una reacción o pregunta."},
+      {"who":"friend","name":"Vecino","text":"¿Está haciendo mucho ruido la obra del piso de arriba?"},
+      {"who":"you","hint":"Responde usando \"está + gerundio\" sobre el ruido."},
+      {"who":"friend","name":"Vecino","text":"¿Estás buscando algún electricista de confianza?"},
+      {"who":"you","hint":"Responde usando \"estoy buscando\" o diciendo que no."},
+      {"who":"friend","name":"Vecino","text":"Te paso el número de uno que conozco."},
+      {"who":"you","hint":"Responde agradeciendo."},
+      {"who":"friend","name":"Vecino","text":"¡Nada, cualquier cosa me avisas!"},
+      {"who":"you","hint":"Responde despidiéndote."}
+    ]
+  },
+  {
+    "id": "casero-visita",
+    "tab": "El casero de visita",
+    "icon": "🔑",
+    "setup": "El casero pasa a ver cómo va todo justo cuando estáis en plena mudanza.",
+    "lines": [
+      {"who":"friend","name":"Casero","text":"Buenas, veo que estáis muy ocupados. ¿Qué estáis haciendo?"},
+      {"who":"you","hint":"Responde usando \"estamos + gerundio\" describiendo la mudanza."},
+      {"who":"friend","name":"Casero","text":"¿Está funcionando bien la calefacción?"},
+      {"who":"you","hint":"Responde usando \"está funcionando\" o describiendo el problema."},
+      {"who":"friend","name":"Casero","text":"Veo que estás colgando cuadros ya."},
+      {"who":"you","hint":"Responde confirmando o corrigiendo con \"estoy + gerundio\"."},
+      {"who":"friend","name":"Casero","text":"¿Estáis necesitando algo más del piso?"},
+      {"who":"you","hint":"Responde diciendo qué necesitáis, si algo."},
+      {"who":"friend","name":"Casero","text":"Perfecto, cualquier cosa me llamáis."},
+      {"who":"you","hint":"Responde agradeciendo."},
+      {"who":"friend","name":"Casero","text":"Me alegro de veros tan bien instalados."},
+      {"who":"you","hint":"Responde despidiéndote."}
+    ]
+  },
+  {
+    "id": "videollamada",
+    "tab": "Videollamada con la familia",
+    "icon": "💻",
+    "setup": "Haces una videollamada con tu familia para enseñarles el piso nuevo.",
+    "lines": [
+      {"who":"friend","name":"Madre","text":"¡Hola cariño! ¿Qué estás haciendo? Te veo con cajas detrás."},
+      {"who":"you","hint":"Responde usando \"estoy + gerundio\" sobre las cajas."},
+      {"who":"friend","name":"Madre","text":"¿Y tu compañera de piso qué está haciendo?"},
+      {"who":"you","hint":"Responde describiendo qué hace ella ahora mismo."},
+      {"who":"friend","name":"Madre","text":"Parece que está lloviendo mucho ahí."},
+      {"who":"you","hint":"Responde confirmando o negando sobre el tiempo."},
+      {"who":"friend","name":"Madre","text":"¿Estáis comiendo bien estos días?"},
+      {"who":"you","hint":"Responde usando \"estamos + gerundio\" sobre la comida."},
+      {"who":"friend","name":"Madre","text":"Qué ganas tengo de visitaros pronto."},
+      {"who":"you","hint":"Responde con ilusión, invitándola."},
+      {"who":"friend","name":"Madre","text":"Bueno, os dejo seguir con la mudanza. ¡Un beso!"},
+      {"who":"you","hint":"Responde despidiéndote."}
+    ]
+  },
+  {
+    "id": "companera-piso",
+    "tab": "Organizando con tu compañera",
+    "icon": "📦",
+    "setup": "Organizas tareas con tu compañera de piso mientras os instaláis.",
+    "lines": [
+      {"who":"friend","name":"Sara","text":"¿Qué estás haciendo tú ahora? Yo estoy montando la estantería."},
+      {"who":"you","hint":"Responde usando \"estoy + gerundio\" con tu tarea."},
+      {"who":"friend","name":"Sara","text":"¿Está sonando el timbre? Creo que ha llegado el técnico."},
+      {"who":"you","hint":"Responde confirmando o diciendo qué está pasando."},
+      {"who":"friend","name":"Sara","text":"¿Estás guardando la ropa ya en el armario?"},
+      {"who":"you","hint":"Responde usando \"estoy guardando\" o describiendo tu progreso."},
+      {"who":"friend","name":"Sara","text":"Yo estoy limpiando la cocina mientras tanto."},
+      {"who":"you","hint":"Responde con una reacción o agradecimiento."},
+      {"who":"friend","name":"Sara","text":"¿Estamos avanzando bien con todo esto?"},
+      {"who":"you","hint":"Responde dando tu opinión sobre el progreso."},
+      {"who":"friend","name":"Sara","text":"¡Genial, ya casi lo tenemos todo listo!"},
+      {"who":"you","hint":"Responde cerrando la conversación."}
+    ]
+  }
+];
+
+const sceneTabs = document.getElementById('scene-tabs');
+const sceneContainer = document.getElementById('scene-container');
+let activeScene = 0;
+
+function renderTabs(){
+  sceneTabs.innerHTML = SCENES.map((s,i)=>
+    `<button class="scene-tab${i===activeScene?' active':''}" data-idx="${i}">${s.icon} ${s.tab}</button>`
+  ).join('');
+  sceneTabs.querySelectorAll('.scene-tab').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      activeScene = parseInt(btn.dataset.idx, 10);
+      renderTabs();
+      renderScene();
+    });
+  });
+}
+
+function renderScene(){
+  const scene = SCENES[activeScene];
+  const linesHtml = scene.lines.map((l)=>{
+    if(l.who === 'friend'){
+      return `
+        <div class="line friend">
+          <div class="line-avatar">${l.name.charAt(0)}</div>
+          <div class="line-body">
+            <p class="line-name">${l.name}</p>
+            <div class="line-bubble">${l.text}</div>
+          </div>
+        </div>`;
+    } else {
+      return `
+        <div class="line you">
+          <div class="line-avatar">Tú</div>
+          <div class="line-body">
+            <p class="line-name">Tú</p>
+            <textarea class="line-input" rows="2" placeholder="Escribe tu respuesta usando estar + gerundio..."></textarea>
+            <p class="line-hint">${l.hint}</p>
+          </div>
+        </div>`;
+    }
+  }).join('');
+
+  sceneContainer.innerHTML = `
+    <div class="scene-setup">
+      <span class="scene-icon">${scene.icon}</span>
+      <p class="scene-text"><strong>${scene.tab}:</strong> ${scene.setup}</p>
+    </div>
+    <div class="dialogue">${linesHtml}</div>
+  `;
+}
+
+renderTabs();
+renderScene();
+
+/* ---------- FINAL TASK ---------- */
+const STORAGE_KEY = 'rebecca-clase10-tarea';
+const taskArea = document.getElementById('final-task');
+const taskCount = document.getElementById('task-count');
+const savedFlag = document.getElementById('saved-flag');
+
+async function cargarTarea(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(STORAGE_KEY);
+    if (res && typeof res.value === 'string') taskArea.value = res.value;
+  }catch(e){
+    // Clave inexistente todavía: no hay tarea previa, se queda en blanco.
+  }
+  updateCount();
+}
+
+function updateCount(){
+  const matches = (taskArea.value.match(/\b(estoy|estás|está|estamos|estáis|están)\s+\w+(ando|iendo|yendo)\b/gi) || []).length;
+  taskCount.textContent = `${matches} verbo${matches===1?'':'s'} usado${matches===1?'':'s'}`;
+}
+taskArea.addEventListener('input', updateCount);
+updateCount();
+cargarTarea();
+
+document.getElementById('save-btn').addEventListener('click', async ()=>{
+  if (!window.storage){
+    savedFlag.textContent = 'Guardado no disponible aquí';
+    savedFlag.classList.add('show');
+    setTimeout(()=>{ savedFlag.classList.remove('show'); savedFlag.textContent = 'Guardado ✓'; }, 2200);
+    return;
+  }
+  try{
+    const ok = await window.storage.set(STORAGE_KEY, taskArea.value);
+    savedFlag.textContent = ok ? 'Guardado ✓' : 'No se pudo guardar';
+  }catch(e){
+    savedFlag.textContent = 'No se pudo guardar';
+  }
+  savedFlag.classList.add('show');
+  setTimeout(()=>{ savedFlag.classList.remove('show'); savedFlag.textContent = 'Guardado ✓'; }, 1800);
+});
+</script>
+
+</body>
+</html>

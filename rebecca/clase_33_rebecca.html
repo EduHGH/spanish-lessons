@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clase 33 · Noticias y opiniones — Rebecca</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+
+/* ╔══════════════════════════════════════════════════════════════╗
+   ║  ESCOLAR — sistema de diseño para clases de español online   ║
+   ║  Clase 33 · Noticias y opiniones · "El debate sencillo"       ║
+   ╚══════════════════════════════════════════════════════════════╝ */
+
+:root{
+  --paper:        #FBF7EE;
+  --paper-raised: #FFFFFF;
+  --paper-alt:    #F3ECDA;
+  --ink:          #23291F;
+  --ink-soft:     #565F52;
+  --ink-faint:    #8B9184;
+  --line:         rgba(35,41,31,0.12);
+  --line-strong:  rgba(35,41,31,0.22);
+
+  --b1:      #2F6FED;  --b1-soft: #EAF1FE;  --b1-line: #C6D9FC;
+  --b2:      #2E9E6B;  --b2-soft: #E9F6EF;  --b2-line: #BEE6D3;
+  --b3:      #DB8A2E;  --b3-soft: #FCF1E1;  --b3-line: #F3D9AF;
+  --family:  #C4432E;  --family-soft: #FBEAE4; --family-line: #F0C7BA;
+  --link:    #B5502E;  --link-soft: #FBEBE3; --link-line: #EFC9B4;
+
+  --f-display: 'Fraunces', Georgia, serif;
+  --f-body:    'IBM Plex Sans', system-ui, sans-serif;
+  --f-data:    'IBM Plex Mono', monospace;
+
+  --r-sm: 8px;
+  --r-md: 14px;
+  --r-lg: 20px;
+
+  --shadow-1: 0 1px 2px rgba(35,41,31,0.05), 0 1px 8px rgba(35,41,31,0.04);
+}
+
+*{ box-sizing:border-box; }
+body{
+  margin:0;
+  background: var(--paper);
+  background-image:
+    radial-gradient(circle at 1px 1px, var(--line) 1px, transparent 0);
+  background-size: 22px 22px;
+  color: var(--ink);
+  font-family: var(--f-body);
+  line-height:1.6;
+}
+::selection{ background: var(--link-soft); }
+
+/* ---------- HEADER ---------- */
+header{ padding:44px 24px 28px; max-width:760px; margin:0 auto; position:relative; }
+.eyebrow{
+  font-family: var(--f-data); font-size:12px; letter-spacing:.14em;
+  text-transform:uppercase; color: var(--link); margin:0 0 10px;
+  display:flex; align-items:center; gap:10px;
+}
+.eyebrow .dot{ width:6px; height:6px; border-radius:50%; background: var(--link); }
+h1{
+  font-family: var(--f-display); font-weight:600;
+  font-size:clamp(30px,5.6vw,46px); line-height:1.08;
+  margin:0 0 14px; letter-spacing:-.01em;
+}
+h1 em{ font-style:italic; color: var(--link); }
+.lede{ font-size:16px; color: var(--ink-soft); max-width:56ch; margin:0; }
+
+.meta-row{
+  display:flex; flex-wrap:wrap; gap:20px; margin-top:26px;
+  font-family: var(--f-data); font-size:12px; color: var(--ink-faint);
+}
+.meta-row strong{
+  display:block; color: var(--ink); font-size:14.5px; font-weight:500;
+  font-family: var(--f-display); margin-top:3px;
+}
+
+/* ---------- SECTIONS ---------- */
+main{ max-width:760px; margin:0 auto; padding:8px 24px 100px; }
+
+section.block{ margin-bottom:52px; }
+.block-head{ display:flex; align-items:baseline; gap:12px; margin-bottom:18px; }
+.time-tag{
+  font-family: var(--f-data); font-size:11px; color: var(--ink-faint);
+  background: var(--paper-alt); padding:3px 10px; border-radius:999px; margin-left:auto; flex:none;
+}
+.block-num{
+  font-family: var(--f-data); font-size:12px; color:#fff; background: var(--link);
+  width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  flex:none;
+}
+.block-head h2{
+  font-family: var(--f-display); font-weight:500; font-style:italic; font-size:22px; margin:0;
+}
+
+.panel{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-lg);
+  box-shadow: var(--shadow-1); padding:26px 28px;
+}
+
+/* ---------- VOCAB ---------- */
+.vocab-hint{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin:0 0 14px; }
+.vocab-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:10px; }
+.vocab-card{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:12px 14px; box-shadow: var(--shadow-1); display:flex; align-items:center; gap:10px;
+}
+.vocab-icon{ font-size:20px; flex:none; }
+.vocab-word{ font-family: var(--f-display); font-weight:600; font-size:15.5px; color: var(--ink); }
+
+/* ---------- OPINION FRAMES TABLE ---------- */
+.frame-wrap{ margin-top:22px; }
+.frame-row{
+  display:grid; grid-template-columns:170px 1fr; gap:14px; align-items:center;
+  padding:12px 0; border-bottom:1px dashed var(--line);
+}
+.frame-row:last-child{ border-bottom:none; }
+.frame-phrase{ font-family: var(--f-display); font-weight:600; font-size:16.5px; color: var(--link); }
+.frame-example{ font-size:14px; color: var(--ink-soft); }
+.frame-example em{ font-style:normal; color: var(--ink); font-weight:500; }
+
+.note-box{
+  margin-top:20px; padding:14px 16px; background: var(--b1-soft); border:1px solid var(--b1-line);
+  border-radius: var(--r-md); font-size:13.5px; color: var(--ink-soft);
+}
+.note-box strong{ color: var(--b1); }
+
+/* ---------- PRONUNCIATION ---------- */
+.pron-row{
+  display:flex; align-items:center; gap:14px; padding:12px 0; border-bottom:1px dashed var(--line);
+}
+.pron-row:last-child{ border-bottom:none; }
+.pron-word{ font-family: var(--f-display); font-weight:600; font-size:18px; color: var(--ink); min-width:150px; }
+.pron-ipa{ font-family: var(--f-data); font-size:13px; color: var(--link); min-width:150px; }
+.pron-tip{ font-size:13px; color: var(--ink-soft); }
+
+/* ---------- NEWS CARDS / OPINION GAME ---------- */
+.news-wrap{ display:flex; flex-direction:column; gap:14px; }
+.news-card{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-lg);
+  box-shadow: var(--shadow-1); padding:20px 22px; transition: border-color .15s ease;
+}
+.news-card.active{ border-color: var(--link-line); background: var(--link-soft); }
+.news-topic-tag{
+  font-family: var(--f-data); font-size:10.5px; text-transform:uppercase; letter-spacing:.05em;
+  color: var(--link); margin:0 0 8px;
+}
+.news-headline{ font-family: var(--f-display); font-weight:600; font-size:17px; color: var(--ink); margin:0 0 6px; }
+.news-sub{ font-size:13.5px; color: var(--ink-soft); margin:0 0 14px; }
+
+.opinion-picker{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
+.opinion-chip{
+  font-family: var(--f-data); font-size:12px; color: var(--ink-soft); background: var(--paper-raised);
+  border:1px solid var(--line); padding:6px 12px; border-radius:999px; cursor:pointer; transition: all .15s ease;
+}
+.opinion-chip:hover{ border-color: var(--link); color: var(--link); }
+.opinion-chip.selected{ background: var(--link); border-color: var(--link); color:#fff; }
+
+.opinion-input-row{ display:flex; gap:10px; margin-top:4px; }
+.opinion-input{
+  flex:1; font-family: var(--f-body); font-size:14.5px; color: var(--ink);
+  background:#fff; border:1px solid var(--link-line); border-radius: var(--r-sm);
+  padding:11px 13px;
+}
+.opinion-input:focus{ outline:none; border-color: var(--link); }
+.opinion-save-btn{
+  font-family: var(--f-body); font-weight:600; font-size:13.5px; color:#fff; background: var(--link);
+  border:none; padding:0 18px; border-radius: var(--r-sm); cursor:pointer; white-space:nowrap;
+}
+.opinion-save-btn:hover{ opacity:.92; }
+.opinion-saved{
+  margin-top:10px; padding:10px 12px; background: var(--b2-soft); border:1px solid var(--b2-line);
+  border-radius: var(--r-sm); font-size:13.5px; color: var(--ink); display:none;
+}
+.opinion-saved.show{ display:block; }
+.opinion-saved strong{ color: var(--b2); font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.04em; display:block; margin-bottom:3px; }
+
+.news-progress{
+  font-family: var(--f-data); font-size:12px; color: var(--ink-faint); margin-bottom:14px;
+  display:flex; justify-content:space-between; align-items:center;
+}
+
+/* ---------- AGREE / DISAGREE ROLE-PLAY ---------- */
+.agree-panel{ background: var(--b1-soft); border:1px solid var(--b1-line); border-radius: var(--r-lg); padding:26px 28px; }
+.agree-panel .block-num{ background: var(--b1); }
+.agree-script{
+  background: var(--paper-raised); border:1px solid var(--b1-line); border-radius: var(--r-md);
+  padding:18px 20px; margin-top:14px;
+}
+.agree-line{ display:flex; gap:12px; padding:9px 0; border-bottom:1px dashed var(--line); align-items:baseline; }
+.agree-line:last-child{ border-bottom:none; }
+.agree-speaker{ font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.04em; color: var(--b1); min-width:64px; flex:none; }
+.agree-text{ font-size:14.5px; color: var(--ink); }
+.agree-text em{ color: var(--link); font-style:normal; font-weight:600; }
+
+/* ---------- SELF-ASSESSMENT ---------- */
+.selfcheck-panel{ background: var(--b2-soft); border:1px solid var(--b2-line); border-radius: var(--r-lg); padding:26px 28px; }
+.selfcheck-panel .block-num{ background: var(--b2); }
+.selfcheck-row{
+  display:flex; align-items:center; justify-content:space-between; gap:16px; padding:13px 0;
+  border-bottom:1px dashed var(--b2-line);
+}
+.selfcheck-row:last-of-type{ border-bottom:none; }
+.selfcheck-verb{ font-family: var(--f-display); font-weight:600; font-size:15.5px; color: var(--ink); }
+.selfcheck-verb small{ display:block; font-family: var(--f-data); font-size:11px; color: var(--ink-faint); font-weight:400; margin-top:2px; }
+.selfcheck-faces{ display:flex; gap:8px; flex:none; }
+.face-btn{
+  width:36px; height:36px; border-radius:50%; border:1.5px solid var(--b2-line); background:#fff;
+  font-size:16px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition: all .15s ease;
+}
+.face-btn:hover{ border-color: var(--b2); }
+.face-btn.active{ background: var(--b2); border-color: var(--b2); }
+.selfcheck-summary{
+  margin-top:18px; padding:14px 16px; background: var(--paper-raised); border:1px solid var(--b2-line);
+  border-radius: var(--r-md); font-family: var(--f-data); font-size:12.5px; color: var(--ink-soft);
+}
+.selfcheck-summary strong{ color: var(--ink); font-family: var(--f-display); font-size:14.5px; }
+
+/* ---------- TAREA FINAL ---------- */
+.task-panel{ background: var(--b3-soft); border:1px solid var(--b3-line); border-radius: var(--r-lg); padding:26px 28px; }
+.task-panel .block-num{ background: var(--b3); }
+.prompt-box{
+  margin-top:14px; padding:16px 18px; background: var(--paper-raised); border:1px solid var(--b3-line);
+  border-radius: var(--r-md); font-size:14.5px; line-height:1.75; color: var(--ink);
+}
+.prompt-box strong{ color:var(--b3); }
+textarea#final-task{
+  width:100%; min-height:150px; font-family: var(--f-body); font-size:15px; color: var(--ink);
+  background: var(--paper-raised); border:1px solid var(--b3-line); border-radius: var(--r-md);
+  padding:14px 16px; resize:vertical; margin-top:14px;
+}
+textarea#final-task:focus{ outline:none; border-color: var(--b3); }
+.task-footer{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:12px; flex-wrap:wrap; }
+#task-count{ font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); }
+.btn-secondary{
+  font-family: var(--f-body); font-weight:600; font-size:13.5px; color: var(--b3); background:none;
+  border:1.5px solid var(--b3-line); padding:9px 18px; border-radius:999px; cursor:pointer;
+}
+.saved-flag{ font-family: var(--f-data); font-size:12px; color: var(--b2); opacity:0; transition: opacity .3s ease; }
+.saved-flag.show{ opacity:1; }
+.record-tip{
+  margin-top:14px; padding:14px 16px; background: var(--paper-raised); border:1px solid var(--b3-line);
+  border-radius: var(--r-md); font-size:13.5px; color: var(--ink-soft);
+}
+.record-tip strong{ color: var(--ink); }
+
+/* ---------- FOOTER NAV ---------- */
+footer{
+  max-width:760px; margin:0 auto; padding:0 24px 60px; display:flex;
+  justify-content:space-between; flex-wrap:wrap; gap:12px;
+  font-family: var(--f-data); font-size:12px; color: var(--ink-faint);
+}
+
+@media (max-width:600px){
+  .panel, .agree-panel, .selfcheck-panel, .task-panel{ padding:20px 18px; }
+  .frame-row{ grid-template-columns:1fr; gap:4px; }
+  .opinion-input-row{ flex-direction:column; }
+  .opinion-save-btn{ padding:11px 20px; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <p class="eyebrow"><span class="dot"></span>Clase 33 · Línea de enlace · Opinión y actualidad</p>
+  <h1>Noticias y <em>opiniones</em></h1>
+  <p class="lede">Hoy aprendemos a dar tu opinión en español sencillo: "creo que", "pienso que", "para mí" y "estoy de acuerdo". Vamos a leer titulares breves sobre Barcelona y vamos a practicar decir lo que piensas, sin complicarte con gramática avanzada — solo indicativo, como siempre.</p>
+  <div class="meta-row">
+    <div>Duración<strong>50 min</strong></div>
+    <div>Gramática<strong>Creo que + indicativo</strong></div>
+    <div>Nivel<strong>A2</strong></div>
+  </div>
+</header>
+
+<main>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">1</span><h2>Vocabulario</h2><span class="time-tag">4 min</span></div>
+    <div class="panel">
+      <p class="vocab-hint">Palabras clave para hablar de noticias y opiniones.</p>
+      <div class="vocab-grid">
+        <div class="vocab-card"><span class="vocab-icon">📰</span><span class="vocab-word">la noticia</span></div>
+        <div class="vocab-card"><span class="vocab-icon">💭</span><span class="vocab-word">la opinión</span></div>
+        <div class="vocab-card"><span class="vocab-icon">👍</span><span class="vocab-word">estar de acuerdo</span></div>
+        <div class="vocab-card"><span class="vocab-icon">👎</span><span class="vocab-word">no estar de acuerdo</span></div>
+        <div class="vocab-card"><span class="vocab-icon">🤔</span><span class="vocab-word">pensar / creer</span></div>
+        <div class="vocab-card"><span class="vocab-icon">⚖️</span><span class="vocab-word">a favor / en contra</span></div>
+        <div class="vocab-card"><span class="vocab-icon">🗣️</span><span class="vocab-word">dar la razón</span></div>
+        <div class="vocab-card"><span class="vocab-icon">📌</span><span class="vocab-word">el tema</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">2</span><h2>Estructuras para opinar</h2><span class="time-tag">10 min</span></div>
+    <div class="panel">
+      <p class="vocab-hint">En A1/A2 la opinión simple siempre va con indicativo — nada de subjuntivo todavía.</p>
+      <div class="frame-wrap">
+        <div class="frame-row">
+          <span class="frame-phrase">creo que...</span>
+          <span class="frame-example"><em>Creo que</em> Barcelona es una ciudad muy bonita.</span>
+        </div>
+        <div class="frame-row">
+          <span class="frame-phrase">pienso que...</span>
+          <span class="frame-example"><em>Pienso que</em> el transporte público aquí funciona muy bien.</span>
+        </div>
+        <div class="frame-row">
+          <span class="frame-phrase">para mí...</span>
+          <span class="frame-example"><em>Para mí</em>, la mejor época del año es el otoño.</span>
+        </div>
+        <div class="frame-row">
+          <span class="frame-phrase">(no) estoy de acuerdo</span>
+          <span class="frame-example">Estoy de acuerdo contigo / No estoy de acuerdo, prefiero...</span>
+        </div>
+        <div class="frame-row">
+          <span class="frame-phrase">en mi opinión...</span>
+          <span class="frame-example"><em>En mi opinión</em>, es importante hablar idiomas.</span>
+        </div>
+      </div>
+      <div class="note-box"><strong>Regla clave:</strong> "creo que" y "pienso que" van seguidos de un verbo en indicativo normal (es, tiene, funciona...), igual que si fuera una frase afirmativa cualquiera. No cambia nada más.</div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">3</span><h2>Pronunciación</h2><span class="time-tag">4 min</span></div>
+    <div class="panel">
+      <p class="vocab-hint">Enlaces y ritmo natural al dar tu opinión en voz alta.</p>
+      <div class="pron-wrap">
+        <div class="pron-row"><span class="pron-word">creo que</span><span class="pron-ipa">/ˈkɾe.o.ke/</span><span class="pron-tip">se enlaza como una sola palabra: "kreoke"</span></div>
+        <div class="pron-row"><span class="pron-word">para mí</span><span class="pron-ipa">/ˈpaɾa.ˈmi/</span><span class="pron-tip">acento fuerte en la Í final — sin él, suena a "para mi [casa]"</span></div>
+        <div class="pron-row"><span class="pron-word">de acuerdo</span><span class="pron-ipa">/de.aˈkweɾ.ðo/</span><span class="pron-tip">la "d" entre vocales suena suave, casi como una "z" inglesa suave</span></div>
+        <div class="pron-row"><span class="pron-word">en contra</span><span class="pron-ipa">/eŋˈkon.tɾa/</span><span class="pron-tip">la "n" se asimila a la "c" siguiente, suena casi "eng-kontra"</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">4</span><h2>Noticias breves — da tu opinión</h2><span class="time-tag">18 min</span></div>
+    <div class="news-progress">
+      <span id="news-progress-text">0 / 5 opiniones escritas</span>
+      <span id="news-nav-hint">Escribe tu opinión sobre cada noticia</span>
+    </div>
+    <div class="news-wrap" id="news-wrap"></div>
+  </section>
+
+  <section class="block agree-panel">
+    <div class="block-head"><span class="block-num">5</span><h2 style="color:var(--b1)">Estar de acuerdo / en desacuerdo</h2><span class="time-tag">8 min</span></div>
+    <p class="lede" style="margin-bottom:0;">Lee este diálogo en voz alta conmigo (role-play), cambiando de papel a mitad. Fíjate en cómo se da la razón y cómo se discrepa con educación.</p>
+    <div class="agree-script">
+      <div class="agree-line"><span class="agree-speaker">Rebecca</span><span class="agree-text"><em>Creo que</em> vivir cerca de la playa es mejor que vivir en el centro.</span></div>
+      <div class="agree-line"><span class="agree-speaker">Pareja</span><span class="agree-text">Sí, <em>estoy de acuerdo</em>, además hay menos ruido.</span></div>
+      <div class="agree-line"><span class="agree-speaker">Rebecca</span><span class="agree-text"><em>Para mí</em>, lo más importante es tener el metro cerca.</span></div>
+      <div class="agree-line"><span class="agree-speaker">Pareja</span><span class="agree-text">Pues yo <em>no estoy de acuerdo</em>: <em>pienso que</em> el coche es más cómodo.</span></div>
+      <div class="agree-line"><span class="agree-speaker">Rebecca</span><span class="agree-text">Bueno, <em>en mi opinión</em> depende del barrio. ¡Cada persona es diferente!</span></div>
+    </div>
+  </section>
+
+  <section class="block selfcheck-panel">
+    <div class="block-head"><span class="block-num">6</span><h2 style="color:var(--b2)">Autoevaluación</h2><span class="time-tag">3 min</span></div>
+    <p class="lede" style="margin-bottom:6px;">Para cada estructura, marca cómo te sientes usándola: 😕 inseguro, 🙂 lo dudo a veces, 😄 lo tengo controlado.</p>
+    <div id="selfcheck-list"></div>
+    <div class="selfcheck-summary" id="selfcheck-summary"><strong>0 / 5</strong> estructuras evaluadas — marca todas para ver tu resumen.</div>
+  </section>
+
+  <section class="block task-panel">
+    <div class="block-head"><span class="block-num">7</span><h2 style="color:var(--b3)">Tu tarea</h2><span class="time-tag">—</span></div>
+    <p style="margin:0; font-size:15px; color:var(--ink-soft);">Escribe un párrafo corto dando tu opinión sobre un tema sencillo de tu vida en Barcelona (el barrio, el clima, la comida, el transporte...). Usa al menos 3 estructuras diferentes de opinión.</p>
+    <div class="prompt-box"><strong>Idea:</strong> "Creo que Barcelona tiene un clima muy agradable. Para mí, lo mejor es... Pienso que... Estoy de acuerdo con..." Intenta usar "creo que", "para mí" y "estoy/no estoy de acuerdo" al menos una vez cada uno.</div>
+    <textarea id="final-task" placeholder="Escribe aquí tu párrafo..."></textarea>
+    <div class="task-footer">
+      <span id="task-count">0 / 3 estructuras de opinión detectadas</span>
+      <div style="display:flex; gap:10px; align-items:center;">
+        <span class="saved-flag" id="saved-flag">Guardado ✓</span>
+        <button class="btn-secondary" id="save-btn">Guardar tarea</button>
+      </div>
+    </div>
+    <div class="record-tip"><strong>Para casa:</strong> lee tu párrafo en voz alta y grábate. Comprueba que "creo que" suena enlazado y que "para mí" lleva el acento en la í. Repite las frases que te cuesten más.</div>
+  </section>
+
+</main>
+
+<footer>
+  <span>Clase 33 · Noticias y opiniones en español sencillo</span>
+  <span>Próxima clase → Clase 34: día de canciones III</span>
+</footer>
+
+<script>
+/* ---------- NEWS / OPINION CARDS ---------- */
+const NEWS = [
+  {
+    id: 'n1',
+    topic: 'Ciudad',
+    headline: 'Barcelona abre más carriles bici en el centro',
+    sub: 'El ayuntamiento anuncia 15 km nuevos de carril bici para este año.',
+    chips: ['Creo que es una buena idea', 'Creo que es mal idea', 'Para mí es peligroso', 'Estoy de acuerdo con el proyecto']
+  },
+  {
+    id: 'n2',
+    topic: 'Turismo',
+    headline: 'Cada vez llegan más turistas a Barcelona en verano',
+    sub: 'Las calles del centro están muy llenas en julio y agosto.',
+    chips: ['Pienso que es positivo para la ciudad', 'Pienso que hay demasiada gente', 'Para mí no es un problema', 'No estoy de acuerdo con limitar el turismo']
+  },
+  {
+    id: 'n3',
+    topic: 'Comida',
+    headline: 'Los mercados tradicionales pierden clientes frente a los supermercados',
+    sub: 'La Boquería y otros mercados piden ayuda para atraer a más vecinos.',
+    chips: ['Creo que los mercados son mejores', 'Para mí el supermercado es más práctico', 'Estoy de acuerdo en ayudar a los mercados', 'Pienso que los dos pueden convivir']
+  },
+  {
+    id: 'n4',
+    topic: 'Transporte',
+    headline: 'El metro de Barcelona amplía su horario los fines de semana',
+    sub: 'Ahora el metro funciona toda la noche los viernes y sábados.',
+    chips: ['Creo que es una gran noticia', 'Para mí no cambia mucho', 'Estoy de acuerdo, así es más seguro volver a casa', 'Pienso que faltan más líneas']
+  },
+  {
+    id: 'n5',
+    topic: 'Clima',
+    headline: 'Este verano ha sido uno de los más calurosos en Barcelona',
+    sub: 'Las temperaturas han superado los 35 grados varios días seguidos.',
+    chips: ['Creo que el calor es difícil de soportar', 'Para mí el calor no es un problema', 'Pienso que necesitamos más zonas verdes', 'Estoy de acuerdo en cuidar más el medioambiente']
+  }
+];
+
+const STORAGE_KEY_NEWS = 'rebecca-clase33-opiniones';
+let opinions = {};
+
+const newsWrap = document.getElementById('news-wrap');
+const newsProgressText = document.getElementById('news-progress-text');
+
+async function loadOpinions(){
+  if (!window.storage) return {};
+  try{
+    const res = await window.storage.get(STORAGE_KEY_NEWS);
+    return (res && typeof res.value === 'string') ? JSON.parse(res.value) : {};
+  }catch(e){
+    return {};
+  }
+}
+async function saveOpinions(){
+  if (!window.storage) return;
+  try{ await window.storage.set(STORAGE_KEY_NEWS, JSON.stringify(opinions)); }catch(e){ /* fallo silencioso */ }
+}
+
+function renderNews(){
+  newsWrap.innerHTML = '';
+  NEWS.forEach(item => {
+    const card = document.createElement('div');
+    card.className = 'news-card' + (opinions[item.id] ? ' active' : '');
+    card.innerHTML = `
+      <p class="news-topic-tag">${item.topic}</p>
+      <p class="news-headline">${item.headline}</p>
+      <p class="news-sub">${item.sub}</p>
+      <div class="opinion-picker">
+        ${item.chips.map(c => `<button class="opinion-chip" data-text="${c}">${c}</button>`).join('')}
+      </div>
+      <div class="opinion-input-row">
+        <input class="opinion-input" type="text" placeholder="Escribe tu opinión con tus propias palabras..." value="${opinions[item.id] ? opinions[item.id].replace(/"/g,'&quot;') : ''}">
+        <button class="opinion-save-btn">Guardar</button>
+      </div>
+      <div class="opinion-saved"><strong>Tu opinión</strong><span class="opinion-saved-text"></span></div>
+    `;
+
+    const input = card.querySelector('.opinion-input');
+    const saveBtn = card.querySelector('.opinion-save-btn');
+    const savedBox = card.querySelector('.opinion-saved');
+    const savedText = card.querySelector('.opinion-saved-text');
+
+    if(opinions[item.id]){
+      savedBox.classList.add('show');
+      savedText.textContent = opinions[item.id];
+    }
+
+    card.querySelectorAll('.opinion-chip').forEach(chip => {
+      chip.addEventListener('click', () => {
+        input.value = chip.dataset.text;
+        card.querySelectorAll('.opinion-chip').forEach(c => c.classList.toggle('selected', c === chip));
+        input.focus();
+      });
+    });
+
+    const commit = async () => {
+      const val = input.value.trim();
+      if(!val) return;
+      opinions[item.id] = val;
+      card.classList.add('active');
+      savedBox.classList.add('show');
+      savedText.textContent = val;
+      await saveOpinions();
+      updateNewsProgress();
+    };
+    saveBtn.addEventListener('click', commit);
+    input.addEventListener('keydown', (e) => {
+      if(e.key === 'Enter'){ e.preventDefault(); commit(); }
+    });
+
+    newsWrap.appendChild(card);
+  });
+}
+
+function updateNewsProgress(){
+  const done = Object.keys(opinions).length;
+  newsProgressText.textContent = `${done} / 5 opiniones escritas`;
+}
+
+(async function initNews(){
+  opinions = await loadOpinions();
+  renderNews();
+  updateNewsProgress();
+})();
+
+/* ---------- SELF-ASSESSMENT ---------- */
+const SELFCHECK_ITEMS = ['creo que', 'pienso que', 'para mí', 'estoy / no estoy de acuerdo', 'en mi opinión'];
+const selfList = document.getElementById('selfcheck-list');
+const selfSummary = document.getElementById('selfcheck-summary');
+const SELFCHECK_KEY = 'rebecca-clase33-autoeval';
+let selfState = {};
+let selfStateSaveTimer = null;
+function guardarSelfState(){
+  if (!window.storage) return;
+  clearTimeout(selfStateSaveTimer);
+  selfStateSaveTimer = setTimeout(()=>{
+    window.storage.set(SELFCHECK_KEY, JSON.stringify(selfState)).catch(()=>{});
+  }, 400);
+}
+async function cargarSelfState(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(SELFCHECK_KEY);
+    if (res && typeof res.value === 'string') selfState = JSON.parse(res.value);
+  }catch(e){
+    // Sin autoevaluación guardada todavía.
+  }
+  Object.entries(selfState).forEach(([item, val])=>{
+    selfList.querySelectorAll(`.face-btn[data-item="${item}"]`).forEach(b=>{
+      b.classList.toggle('active', b.dataset.val === val);
+    });
+  });
+  updateSelfSummary();
+}
+
+SELFCHECK_ITEMS.forEach(item=>{
+  const row = document.createElement('div');
+  row.className = 'selfcheck-row';
+  row.innerHTML = `
+    <div class="selfcheck-verb">${item}<small>estructura de opinión</small></div>
+    <div class="selfcheck-faces">
+      <button class="face-btn" data-item="${item}" data-val="1">😕</button>
+      <button class="face-btn" data-item="${item}" data-val="2">🙂</button>
+      <button class="face-btn" data-item="${item}" data-val="3">😄</button>
+    </div>
+  `;
+  selfList.appendChild(row);
+});
+
+selfList.querySelectorAll('.face-btn').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    const item = btn.dataset.item;
+    const val = btn.dataset.val;
+    selfState[item] = val;
+    selfList.querySelectorAll(`.face-btn[data-item="${item}"]`).forEach(b=>{
+      b.classList.toggle('active', b === btn);
+    });
+    updateSelfSummary();
+    guardarSelfState();
+  });
+});
+
+function updateSelfSummary(){
+  const evaluated = Object.keys(selfState).length;
+  if(evaluated === 0){
+    selfSummary.innerHTML = `<strong>0 / 5</strong> estructuras evaluadas — marca todas para ver tu resumen.`;
+    return;
+  }
+  const shaky = Object.entries(selfState).filter(([,v])=>v==='1').map(([k])=>k);
+  let msg = `<strong>${evaluated} / 5</strong> estructuras evaluadas.`;
+  if(evaluated === 5){
+    msg += shaky.length
+      ? ` Revisa especialmente: ${shaky.join(', ')}.`
+      : ` ¡Genial, tienes controladas las 5 estructuras de opinión!`;
+  }
+  selfSummary.innerHTML = msg;
+}
+
+cargarSelfState();
+
+/* ---------- FINAL TASK ---------- */
+const STORAGE_KEY = 'rebecca-clase33-tarea';
+const taskArea = document.getElementById('final-task');
+const taskCount = document.getElementById('task-count');
+const savedFlag = document.getElementById('saved-flag');
+const OPINION_PHRASES = /\b(creo que|pienso que|para m[ií]|estoy de acuerdo|no estoy de acuerdo|en mi opini[oó]n)\b/gi;
+
+async function cargarTarea(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(STORAGE_KEY);
+    if (res && typeof res.value === 'string') taskArea.value = res.value;
+  }catch(e){
+    // Clave inexistente todavía: no hay tarea previa, se queda en blanco.
+  }
+  updateCount();
+}
+
+function updateCount(){
+  const text = taskArea.value.toLowerCase();
+  const matches = text.match(OPINION_PHRASES) || [];
+  const found = new Set(matches).size;
+  taskCount.textContent = `${Math.min(found,3)} / 3 estructuras de opinión detectadas`;
+}
+taskArea.addEventListener('input', updateCount);
+updateCount();
+cargarTarea();
+
+document.getElementById('save-btn').addEventListener('click', async ()=>{
+  if (!window.storage){
+    savedFlag.textContent = 'Guardado no disponible aquí';
+    savedFlag.classList.add('show');
+    setTimeout(()=>{ savedFlag.classList.remove('show'); savedFlag.textContent = 'Guardado ✓'; }, 2200);
+    return;
+  }
+  try{
+    const ok = await window.storage.set(STORAGE_KEY, taskArea.value);
+    savedFlag.textContent = ok ? 'Guardado ✓' : 'No se pudo guardar';
+  }catch(e){
+    savedFlag.textContent = 'No se pudo guardar';
+  }
+  savedFlag.classList.add('show');
+  setTimeout(()=>{ savedFlag.classList.remove('show'); savedFlag.textContent = 'Guardado ✓'; }, 1800);
+});
+
+let taskAutosaveTimer = null;
+taskArea.addEventListener('input', ()=>{
+  clearTimeout(taskAutosaveTimer);
+  taskAutosaveTimer = setTimeout(()=>{
+    document.getElementById('save-btn').click();
+  }, 900);
+});
+</script>
+
+</body>
+</html>

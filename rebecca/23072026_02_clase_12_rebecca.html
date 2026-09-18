@@ -1,0 +1,1122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clase 13 · Sonar más natural — Rebecca</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+
+/* ╔══════════════════════════════════════════════════════════════╗
+   ║  ESCOLAR — sistema de diseño para clases de español online   ║
+   ║  Clase 13 · Repaso · "Sonar más natural"                      ║
+   ╚══════════════════════════════════════════════════════════════╝ */
+
+:root{
+  --paper:        #FBF7EE;
+  --paper-raised: #FFFFFF;
+  --paper-alt:    #F3ECDA;
+  --ink:          #23291F;
+  --ink-soft:     #565F52;
+  --ink-faint:    #8B9184;
+  --line:         rgba(35,41,31,0.12);
+  --line-strong:  rgba(35,41,31,0.22);
+
+  --b1:      #2F6FED;  --b1-soft: #EAF1FE;  --b1-line: #C6D9FC;
+  --b2:      #2E9E6B;  --b2-soft: #E9F6EF;  --b2-line: #BEE6D3;
+  --b3:      #DB8A2E;  --b3-soft: #FCF1E1;  --b3-line: #F3D9AF;
+  --accent:  #7A4FBF;  --accent-soft: #F1EBFB; --accent-line: #DCCBF2;
+
+  --f-display: 'Fraunces', Georgia, serif;
+  --f-body:    'IBM Plex Sans', system-ui, sans-serif;
+  --f-data:    'IBM Plex Mono', monospace;
+
+  --r-sm: 8px;
+  --r-md: 14px;
+  --r-lg: 20px;
+
+  --shadow-1: 0 1px 2px rgba(35,41,31,0.05), 0 1px 8px rgba(35,41,31,0.04);
+}
+
+*{ box-sizing:border-box; }
+body{
+  margin:0;
+  background: var(--paper);
+  background-image: radial-gradient(circle at 1px 1px, var(--line) 1px, transparent 0);
+  background-size: 22px 22px;
+  color: var(--ink);
+  font-family: var(--f-body);
+  line-height:1.6;
+}
+::selection{ background: var(--accent-soft); }
+
+/* ---------- HEADER ---------- */
+header{ padding:44px 24px 28px; max-width:760px; margin:0 auto; }
+.eyebrow{
+  font-family: var(--f-data); font-size:12px; letter-spacing:.14em;
+  text-transform:uppercase; color: var(--accent); margin:0 0 10px;
+  display:flex; align-items:center; gap:10px;
+}
+.eyebrow .dot{ width:6px; height:6px; border-radius:50%; background: var(--accent); }
+h1{
+  font-family: var(--f-display); font-weight:600;
+  font-size:clamp(30px,5.6vw,46px); line-height:1.08;
+  margin:0 0 14px; letter-spacing:-.01em;
+}
+h1 em{ font-style:italic; color: var(--accent); }
+.lede{ font-size:16px; color: var(--ink-soft); max-width:56ch; margin:0; }
+
+.meta-row{
+  display:flex; flex-wrap:wrap; gap:20px; margin-top:26px;
+  font-family: var(--f-data); font-size:12px; color: var(--ink-faint);
+}
+.meta-row strong{
+  display:block; color: var(--ink); font-size:14.5px; font-weight:500;
+  font-family: var(--f-display); margin-top:3px;
+}
+
+/* ---------- SECTIONS ---------- */
+main{ max-width:760px; margin:0 auto; padding:8px 24px 100px; }
+
+section.block{ margin-bottom:52px; }
+.block-head{ display:flex; align-items:baseline; gap:12px; margin-bottom:18px; }
+.time-tag{
+  font-family: var(--f-data); font-size:11px; color: var(--ink-faint);
+  background: var(--paper-alt); padding:3px 10px; border-radius:999px; margin-left:auto; flex:none;
+}
+.block-num{
+  font-family: var(--f-data); font-size:12px; color:#fff; background: var(--accent);
+  width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  flex:none;
+}
+.block-head h2{
+  font-family: var(--f-display); font-weight:500; font-style:italic; font-size:22px; margin:0;
+}
+
+.panel{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-lg);
+  box-shadow: var(--shadow-1); padding:26px 28px;
+}
+
+.note{
+  margin-top:18px; padding:14px 16px; background: var(--accent-soft); border:1px solid var(--accent-line);
+  border-radius: var(--r-md); font-size:14px; color: var(--ink-soft);
+}
+.note strong{ color: var(--ink); }
+
+.compare-title{
+  font-family: var(--f-data); font-size:11.5px; text-transform:uppercase; letter-spacing:.06em;
+  color: var(--ink-faint); margin:0 0 10px;
+}
+
+/* ---------- BLOCK 1: MASCULINO / FEMENINO — quick reference ---------- */
+.gender-grid{ display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:4px; }
+@media (max-width:560px){ .gender-grid{ grid-template-columns:1fr; } }
+.gender-col{ border-radius: var(--r-md); padding:16px 18px; border:1px solid; }
+.gender-col.is-masc{ background: var(--b1-soft); border-color: var(--b1-line); }
+.gender-col.is-fem{ background: var(--b3-soft); border-color: var(--b3-line); }
+.gender-head{ display:flex; align-items:center; gap:8px; margin:0 0 10px; }
+.gender-tag{ font-family: var(--f-display); font-weight:600; font-size:19px; }
+.is-masc .gender-tag{ color: var(--b1); }
+.is-fem .gender-tag{ color: var(--b3); }
+.gender-sub{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); }
+.gender-list{ margin:0; padding:0; list-style:none; }
+.gender-list li{ font-size:13.5px; color: var(--ink-soft); padding:6px 0; border-top:1px dashed var(--line); }
+.gender-list li:first-child{ border-top:none; }
+.gender-list strong{ color: var(--ink); font-weight:600; }
+.gender-warning{
+  margin-top:14px; padding:14px 16px; background: var(--paper-alt); border:1px solid var(--line-strong);
+  border-radius: var(--r-md); font-size:13.5px; color: var(--ink-soft);
+}
+.gender-warning strong{ color: var(--ink); }
+.exception-tags{ display:flex; flex-wrap:wrap; gap:6px; margin-top:8px; }
+.exception-tag{
+  font-family: var(--f-data); font-size:12px; background: var(--paper-raised); color: var(--ink-soft);
+  border:1px solid var(--line); padding:3px 9px; border-radius:999px;
+}
+
+/* ---------- BLOCK 2: IRREGULAR VERBS ---------- */
+.verb-tabs{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:16px; }
+.verb-tab{
+  font-family: var(--f-data); font-size:12.5px; background: var(--paper-raised);
+  border:1.5px solid var(--line); color: var(--ink-soft); padding:7px 14px;
+  border-radius:999px; cursor:pointer; transition: all .15s ease;
+}
+.verb-tab:hover{ border-color: var(--accent); }
+.verb-tab.active{ background: var(--accent); border-color: var(--accent); color:#fff; }
+.conj-table{ width:100%; border-collapse:collapse; margin-top:4px; }
+.conj-table td{ padding:9px 6px; border-bottom:1px dashed var(--line); font-size:14.5px; }
+.conj-table tr:last-child td{ border-bottom:none; }
+.conj-pron{ font-family: var(--f-data); color: var(--ink-faint); font-size:12.5px; width:80px; }
+.conj-form{ font-family: var(--f-display); font-weight:600; font-size:18px; color: var(--accent); width:110px; }
+.conj-ex{ color: var(--ink-soft); font-size:13.5px; }
+.verb-meta{ display:flex; gap:14px; margin-bottom:14px; flex-wrap:wrap; }
+.verb-chip{
+  font-family: var(--f-data); font-size:11px; color: var(--ink-faint);
+  background: var(--paper-alt); padding:4px 10px; border-radius:999px;
+}
+
+/* ---------- BLOCK 3: USTED / USTEDES ---------- */
+.formal-grid{ display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:4px; }
+@media (max-width:560px){ .formal-grid{ grid-template-columns:1fr; } }
+.formal-col{ border-radius: var(--r-md); padding:16px 18px; border:1px solid var(--line); background: var(--paper-alt); }
+.formal-col.is-informal{ border-color: var(--b1-line); background: var(--b1-soft); }
+.formal-col.is-formal{ border-color: var(--accent-line); background: var(--accent-soft); }
+.formal-head{ font-family: var(--f-display); font-weight:600; font-size:18px; margin:0 0 4px; }
+.is-informal .formal-head{ color: var(--b1); }
+.is-formal .formal-head{ color: var(--accent); }
+.formal-sub{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin-bottom:10px; }
+.formal-list{ margin:0; padding:0; list-style:none; }
+.formal-list li{ font-size:13.5px; color: var(--ink-soft); padding:6px 0; border-top:1px dashed var(--line); }
+.formal-list li:first-child{ border-top:none; }
+.formal-list strong{ color: var(--ink); font-weight:600; }
+
+/* ---------- FLAT TIMELINE reused ---------- */
+.timeline-wrap{ margin-top:22px; }
+.timeline{ display:flex; flex-direction:column; gap:0; }
+.tl-item{ display:flex; gap:14px; align-items:flex-start; padding:10px 0; border-top:1px dashed var(--line); }
+.tl-item:first-child{ border-top:none; }
+.tl-time{ font-family: var(--f-data); font-size:12px; color: var(--accent); width:74px; flex:none; padding-top:2px; }
+.tl-verb{ font-family: var(--f-display); font-weight:600; font-size:15px; color: var(--ink); min-width:140px; }
+.tl-ex{ font-size:13.5px; color: var(--ink-soft); }
+
+/* ---------- BLOCK 4: FILLER WORDS (vocab cards) ---------- */
+.vocab-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:12px; }
+.vocab-card{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:14px 16px; cursor:pointer; perspective:600px; min-height:78px;
+  display:flex; flex-direction:column; justify-content:center; transition: border-color .15s ease;
+}
+.vocab-card:hover{ border-color: var(--accent-line); }
+.vocab-card:focus-visible{ outline:2px solid var(--accent); outline-offset:2px; }
+.vocab-front{ font-family: var(--f-body); font-weight:600; font-size:15px; }
+.vocab-back{ display:none; font-family: var(--f-data); font-size:12px; color: var(--ink-faint); margin-top:6px; line-height:1.5; }
+.vocab-card.flipped .vocab-back{ display:block; }
+.vocab-card.flipped{ background: var(--accent-soft); border-color: var(--accent-line); }
+.vocab-hint{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin:10px 2px 16px; }
+.vocab-group-title{
+  font-family: var(--f-data); font-size:11.5px; text-transform:uppercase; letter-spacing:.06em;
+  color: var(--ink-faint); margin:24px 0 10px;
+}
+.vocab-group-title:first-child{ margin-top:0; }
+
+/* ---------- BLOCK 5: PRONUNCIATION — minimal pairs ---------- */
+.sound-grid{ display:flex; flex-direction:column; gap:0; margin-top:4px; }
+.sound-item{
+  display:grid; grid-template-columns:90px 1fr 1fr; gap:14px; align-items:center;
+  padding:14px 0; border-top:1px dashed var(--line);
+}
+.sound-item:first-child{ border-top:none; }
+@media (max-width:560px){ .sound-item{ grid-template-columns:70px 1fr 1fr; gap:8px; } }
+.sound-tag{
+  font-family: var(--f-data); font-size:11px; color:#fff; background: var(--accent);
+  padding:5px 8px; border-radius:8px; text-align:center; letter-spacing:.02em;
+}
+.sound-word{ font-family: var(--f-display); font-weight:600; font-size:16px; color: var(--ink); }
+.sound-word .ipa{ display:block; font-family: var(--f-data); font-weight:400; font-size:11.5px; color: var(--ink-faint); margin-top:2px; }
+.sound-tip-box{
+  margin-top:18px; padding:14px 16px; background: var(--accent-soft); border:1px solid var(--accent-line);
+  border-radius: var(--r-md); font-size:13.5px; color: var(--ink-soft);
+}
+.sound-tip-box strong{ color: var(--ink); }
+.sound-tip-box + .sound-tip-box{ margin-top:10px; }
+
+/* ---------- EXERCISE (shared) ---------- */
+.exercise{ margin-bottom:20px; }
+.exercise:last-of-type{ margin-bottom:0; }
+.ex-sentence{ font-size:15.5px; margin-bottom:10px; }
+.ex-sentence .gap{ font-family: var(--f-data); color: var(--ink-faint); }
+.ex-options{ display:flex; flex-wrap:wrap; gap:8px; }
+.opt-btn{
+  font-family: var(--f-body); font-size:14px; background: var(--paper-raised);
+  border:1.5px solid var(--line); color: var(--ink); padding:7px 16px; border-radius:999px;
+  cursor:pointer; transition: all .15s ease;
+}
+.opt-btn:hover{ border-color: var(--ink-faint); }
+.opt-btn.picked{ background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+.opt-btn.correct{ background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+.opt-btn.wrong{ background: var(--b1-soft); border-color: var(--b1); color: var(--b1); }
+.opt-btn:disabled{ cursor:default; }
+
+.check-bar{
+  display:flex; align-items:center; justify-content:space-between; gap:16px;
+  margin-top:22px; padding-top:18px; border-top:1px dashed var(--line);
+}
+.btn-primary{
+  font-family: var(--f-body); font-weight:600; font-size:14px; color:#fff; background: var(--accent);
+  border:none; padding:11px 22px; border-radius:999px; cursor:pointer; transition: transform .1s ease;
+}
+.btn-primary:hover{ transform: translateY(-1px); }
+#score-text, #classify-score{ font-family: var(--f-data); font-size:13px; color: var(--ink-faint); }
+.btn-ghost{
+  font-family: var(--f-body); font-weight:600; font-size:13px; color: var(--ink-soft); background:none;
+  border:1.5px solid var(--line); padding:9px 18px; border-radius:999px; cursor:pointer;
+}
+.btn-ghost:hover{ border-color: var(--ink-faint); }
+.ex-divider{
+  display:flex; align-items:center; gap:10px; margin:20px 0 16px;
+  font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.06em;
+  color: var(--ink-faint);
+}
+.ex-divider::before, .ex-divider::after{ content:""; flex:1; height:1px; background: var(--line); }
+.ex-divider.en-clase{ color: var(--accent); }
+.ex-divider.en-clase::before, .ex-divider.en-clase::after{ background: var(--accent-line); }
+
+/* ---------- CLASSIFY GAME (usted vs tú) ---------- */
+.classify-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(190px,1fr)); gap:14px; }
+.classify-card{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:16px 16px 14px; text-align:center; transition: border-color .15s ease, box-shadow .15s ease;
+}
+.classify-word{
+  font-family: var(--f-display); font-weight:600; font-size:15.5px; margin:2px 0 12px; color: var(--ink);
+  line-height:1.35;
+}
+.classify-btns{ display:flex; flex-wrap:wrap; gap:6px; justify-content:center; }
+.classify-btn{
+  font-family: var(--f-body); font-weight:600; font-size:12.5px; flex:1 1 40%; padding:7px 4px;
+  border-radius:999px; cursor:pointer; border:1.5px solid var(--line); background: var(--paper-raised);
+  color: var(--ink); transition: all .15s ease;
+}
+.classify-btn:hover{ border-color: var(--ink-faint); }
+.classify-card.answered .classify-btn{ cursor:default; }
+.classify-card.correct{ background: var(--accent-soft); border-color: var(--accent-line); }
+.classify-card.correct .classify-word{ color: var(--accent); }
+.classify-card.incorrect{ background: var(--b1-soft); border-color: var(--b1-line); }
+.classify-feedback{
+  font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin-top:8px; min-height:14px;
+}
+
+/* ---------- ROLEPLAY ---------- */
+.roleplay-panel{ background: var(--accent-soft); border:1px solid var(--accent-line); border-radius: var(--r-lg); padding:26px 28px; }
+.roleplay-panel .block-num{ background: var(--accent); }
+.scene-setup{
+  display:flex; gap:14px; align-items:flex-start; background: var(--paper-raised);
+  border:1px solid var(--accent-line); border-radius: var(--r-md); padding:14px 16px; margin-bottom:20px;
+}
+.scene-icon{ font-size:22px; flex:none; }
+.scene-text{ font-size:14px; color: var(--ink-soft); }
+.scene-text strong{ color: var(--ink); }
+
+.dialogue{ display:flex; flex-direction:column; gap:14px; }
+.scene-tabs{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:18px; }
+.scene-tab{
+  font-family: var(--f-data); font-size:12.5px; background: var(--paper-raised);
+  border:1.5px solid var(--accent-line); color: var(--ink-soft); padding:7px 14px;
+  border-radius:999px; cursor:pointer; transition: all .15s ease;
+}
+.scene-tab:hover{ border-color: var(--accent); }
+.scene-tab.active{ background: var(--accent); border-color: var(--accent); color:#fff; }
+.line{ display:flex; gap:12px; align-items:flex-start; }
+.line-avatar{
+  flex:none; width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  font-family: var(--f-display); font-weight:600; font-size:14px; color:#fff;
+}
+.line.friend .line-avatar{ background: var(--ink-faint); }
+.line.you .line-avatar{ background: var(--accent); }
+.line-body{ flex:1; }
+.line-name{ font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.05em; color: var(--ink-faint); margin:0 0 4px; }
+.line-bubble{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:12px 14px; font-size:14.5px; color: var(--ink);
+}
+.line.you .line-bubble{ background:#fff; border-color: var(--accent-line); }
+.line-input{
+  width:100%; font-family: var(--f-body); font-size:14.5px; color: var(--ink);
+  background:#fff; border:1px solid var(--accent-line); border-radius: var(--r-sm);
+  padding:10px 12px; resize:vertical; min-height:40px; margin-top:2px;
+}
+.line-input:focus{ outline:none; border-color: var(--accent); }
+.line-hint{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin-top:5px; }
+
+.roleplay-tip{
+  margin-top:22px; padding:14px 16px; background: var(--paper-raised); border:1px solid var(--accent-line);
+  border-radius: var(--r-md); font-size:13.5px; color: var(--ink-soft);
+}
+.roleplay-tip strong{ color: var(--ink); }
+
+/* ---------- FINAL TASK ---------- */
+.task-panel{ background: var(--b1-soft); border:1px solid var(--b1-line); border-radius: var(--r-lg); padding:26px 28px; }
+.task-panel .block-num{ background: var(--b1); }
+textarea#final-task{
+  width:100%; min-height:140px; font-family: var(--f-body); font-size:15px; color: var(--ink);
+  background: var(--paper-raised); border:1px solid var(--b1-line); border-radius: var(--r-md);
+  padding:14px 16px; resize:vertical; margin-top:14px;
+}
+textarea#final-task:focus{ outline:none; border-color: var(--b1); }
+.task-footer{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:12px; flex-wrap:wrap; }
+#task-count{ font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); }
+.btn-secondary{
+  font-family: var(--f-body); font-weight:600; font-size:13.5px; color: var(--b1); background:none;
+  border:1.5px solid var(--b1-line); padding:9px 18px; border-radius:999px; cursor:pointer;
+}
+.saved-flag{ font-family: var(--f-data); font-size:12px; color: var(--accent); opacity:0; transition: opacity .3s ease; }
+.saved-flag.show{ opacity:1; }
+.record-tip{
+  margin-top:18px; padding:14px 16px; background: var(--paper-raised); border:1px dashed var(--line-strong);
+  border-radius: var(--r-md); font-size:13px; color: var(--ink-soft);
+}
+.record-tip strong{ color: var(--ink); }
+
+footer{
+  max-width:760px; margin:0 auto; padding:0 24px 60px;
+  display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;
+  font-family: var(--f-data); font-size:12px; color: var(--ink-faint);
+}
+</style>
+</head>
+<body>
+
+<header>
+  <p class="eyebrow"><span class="dot"></span>Clase 13 · Repaso conversacional</p>
+  <h1>Sonar más <em>natural</em></h1>
+  <p class="lede">Hoy no aprendemos gramática nueva: pulimos lo que ya sabes para que suene más fluido — género, los verbos irregulares que más se usan al hablar, el "usted" formal, muletillas y los sonidos que más cuesta distinguir.</p>
+  <div class="meta-row">
+    <div>Nivel<strong>A2 → B1</strong></div>
+    <div>Enfoque<strong>Conversación real</strong></div>
+    <div>Duración<strong>60 min</strong></div>
+  </div>
+</header>
+
+<main>
+
+  <!-- BLOQUE 1: MASCULINO / FEMENINO -->
+  <section class="block">
+    <div class="block-head"><span class="block-num">1</span><h2>Repaso rápido: masculino y femenino</h2><span class="time-tag">6 min</span></div>
+    <div class="panel">
+      <p style="margin:0 0 4px; font-size:14.5px; color:var(--ink-soft);">Ya conoces la regla general de <strong>-o / -a</strong>. Hoy repasamos solo las trampas que más aparecen cuando hablas rápido.</p>
+      <div class="gender-grid" style="margin-top:16px;">
+        <div class="gender-col is-masc">
+          <div class="gender-head">
+            <span class="gender-tag">el</span>
+            <span class="gender-sub">masculino, pero termina en -a</span>
+          </div>
+          <ul class="gender-list">
+            <li><strong>el</strong> problema <em style="display:block;color:var(--ink-faint);font-size:12.5px;margin-top:2px;">de origen griego</em></li>
+            <li><strong>el</strong> día</li>
+            <li><strong>el</strong> idioma</li>
+            <li><strong>el</strong> mapa, el planeta, el sistema</li>
+          </ul>
+        </div>
+        <div class="gender-col is-fem">
+          <div class="gender-head">
+            <span class="gender-tag">la</span>
+            <span class="gender-sub">femenino, pero termina en -o / -e / consonante</span>
+          </div>
+          <ul class="gender-list">
+            <li><strong>la</strong> mano</li>
+            <li><strong>la</strong> foto <em style="display:block;color:var(--ink-faint);font-size:12.5px;margin-top:2px;">de "fotografía"</em></li>
+            <li><strong>la</strong> moto <em style="display:block;color:var(--ink-faint);font-size:12.5px;margin-top:2px;">de "motocicleta"</em></li>
+            <li><strong>la</strong> ciudad, la clase, la gente</li>
+          </ul>
+        </div>
+      </div>
+      <div class="gender-warning">
+        <strong>La trampa más común en conversación:</strong> palabras en <strong>-ista</strong> y <strong>-ante</strong> no cambian de forma — cambia solo el artículo: <strong>el</strong> estudiante / <strong>la</strong> estudiante, <strong>el</strong> turista / <strong>la</strong> turista, <strong>el</strong> dentista / <strong>la</strong> dentista.
+        <div class="exception-tags">
+          <span class="exception-tag">-ma, -pa, -ta griegos → el</span>
+          <span class="exception-tag">-ción, -sión, -dad → siempre la</span>
+          <span class="exception-tag">-ista, -ante → el/la igual</span>
+        </div>
+      </div>
+      <div class="note"><strong>Para hablar rápido:</strong> si dudas, di el sustantivo con "un/una" mentalmente antes de la frase — te da medio segundo para decidir sin que se note la pausa.</div>
+    </div>
+  </section>
+
+  <!-- BLOQUE 2: VERBOS IRREGULARES MÁS COMUNES -->
+  <section class="block">
+    <div class="block-head"><span class="block-num">2</span><h2>Los irregulares que más usarás</h2><span class="time-tag">12 min</span></div>
+    <div class="panel">
+      <p style="margin:0 0 16px; font-size:14.5px; color:var(--ink-soft);">Estos ocho verbos aparecen en casi cualquier conversación. Tócalos para ver su presente completo.</p>
+      <div class="verb-tabs" id="verb-tabs"></div>
+      <div class="verb-meta" id="verb-meta"></div>
+      <table class="conj-table" id="verb-table"></table>
+      <div class="note" id="verb-note"></div>
+
+      <div class="timeline-wrap">
+        <p class="compare-title">Frases hechas con estos verbos</p>
+        <div class="timeline">
+          <div class="tl-item"><span class="tl-time">tener</span><span class="tl-verb">tengo que...</span><span class="tl-ex">Tengo que irme, se me hace tarde.</span></div>
+          <div class="tl-item"><span class="tl-time">poder</span><span class="tl-verb">¿puedes...?</span><span class="tl-ex">¿Puedes repetir eso, por favor?</span></div>
+          <div class="tl-item"><span class="tl-time">querer</span><span class="tl-verb">quiero decir</span><span class="tl-ex">Quiero decir que no lo entendí bien.</span></div>
+          <div class="tl-item"><span class="tl-time">decir</span><span class="tl-verb">¿qué dices?</span><span class="tl-ex">¿Qué dices? No te he oído.</span></div>
+          <div class="tl-item"><span class="tl-time">saber</span><span class="tl-verb">no sé...</span><span class="tl-ex">No sé, la verdad, tendría que pensarlo.</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BLOQUE 3: USTED / USTEDES -->
+  <section class="block">
+    <div class="block-head"><span class="block-num">3</span><h2>Usted y ustedes</h2><span class="time-tag">8 min</span></div>
+    <div class="panel">
+      <p style="margin:0 0 4px; font-size:14.5px; color:var(--ink-soft);">Hasta ahora has hablado con amigos y compañeros usando <strong>tú</strong>. "Usted" es la forma de respeto: con desconocidos mayores, en tiendas formales, con médicos, en entrevistas o trámites.</p>
+      <div class="formal-grid" style="margin-top:16px;">
+        <div class="formal-col is-informal">
+          <p class="formal-head">tú</p>
+          <p class="formal-sub">amigos, compañeros, gente de tu edad</p>
+          <ul class="formal-list">
+            <li><strong>¿Cómo estás?</strong></li>
+            <li><strong>¿De dónde eres?</strong></li>
+            <li><strong>¿Puedes ayudarme?</strong></li>
+            <li>Conjugación: 2ª persona singular (-as, -es)</li>
+          </ul>
+        </div>
+        <div class="formal-col is-formal">
+          <p class="formal-head">usted</p>
+          <p class="formal-sub">desconocidos, formalidad, respeto</p>
+          <ul class="formal-list">
+            <li><strong>¿Cómo está?</strong></li>
+            <li><strong>¿De dónde es?</strong></li>
+            <li><strong>¿Puede ayudarme?</strong></li>
+            <li>Conjugación: igual que él/ella (3ª persona)</li>
+          </ul>
+        </div>
+      </div>
+      <div class="note"><strong>El truco:</strong> "usted" se conjuga exactamente igual que "él" o "ella". Si ya sabes decir "él tiene", "él puede", "él quiere" — ya sabes conjugar para "usted". Solo cambias a quién miras cuando hablas.</div>
+
+      <div class="formal-grid" style="margin-top:14px;">
+        <div class="formal-col is-informal">
+          <p class="formal-head" style="font-size:16px;">vosotros</p>
+          <p class="formal-sub">grupo de amigos (España)</p>
+          <ul class="formal-list">
+            <li><strong>¿Cómo estáis?</strong></li>
+            <li><strong>¿Qué queréis hacer?</strong></li>
+          </ul>
+        </div>
+        <div class="formal-col is-formal">
+          <p class="formal-head" style="font-size:16px;">ustedes</p>
+          <p class="formal-sub">grupo formal, y siempre en Latinoamérica</p>
+          <ul class="formal-list">
+            <li><strong>¿Cómo están?</strong></li>
+            <li><strong>¿Qué quieren hacer?</strong></li>
+          </ul>
+        </div>
+      </div>
+      <div class="gender-warning" style="margin-top:14px;">
+        <strong>Dato útil para viajar:</strong> en España se usa "vosotros" con amigos y "ustedes" solo en contextos formales. En Latinoamérica, "ustedes" se usa siempre para el plural, formal o no — "vosotros" casi no se usa.
+      </div>
+    </div>
+  </section>
+
+  <!-- BLOQUE 4: MULETILLAS -->
+  <section class="block">
+    <div class="block-head"><span class="block-num">4</span><h2>Muletillas para sonar natural</h2><span class="time-tag">7 min</span></div>
+    <p class="vocab-hint">Toca cada tarjeta para ver cuándo usarla. Estas palabras no significan mucho por sí solas, pero son las que hacen que una conversación suene fluida en lugar de traducida.</p>
+
+    <p class="vocab-group-title">Para ganar tiempo mientras piensas</p>
+    <div class="vocab-grid" id="vocab-grid-1"></div>
+
+    <p class="vocab-group-title">Para reaccionar a lo que oyes</p>
+    <div class="vocab-grid" id="vocab-grid-2"></div>
+
+    <p class="vocab-group-title">Para organizar lo que dices</p>
+    <div class="vocab-grid" id="vocab-grid-3"></div>
+  </section>
+
+  <!-- BLOQUE 5: PRONUNCIACIÓN -->
+  <section class="block">
+    <div class="block-head"><span class="block-num">5</span><h2>Sonidos que cuesta distinguir</h2><span class="time-tag">10 min</span></div>
+    <div class="panel">
+      <p style="margin:0 0 4px; font-size:14.5px; color:var(--ink-soft);">Estos son los pares de sonidos que más confunden a hablantes de inglés. Practicaremos en voz alta en clase.</p>
+
+      <p class="compare-title" style="margin-top:20px;">r suave vs. rr fuerte</p>
+      <div class="sound-grid">
+        <div class="sound-item">
+          <span class="sound-tag">r suave</span>
+          <div class="sound-word">pero<span class="ipa">/ˈpe.ɾo/ — "but"</span></div>
+          <div class="sound-word">caro<span class="ipa">/ˈka.ɾo/ — "expensive"</span></div>
+        </div>
+        <div class="sound-item">
+          <span class="sound-tag">rr fuerte</span>
+          <div class="sound-word">perro<span class="ipa">/ˈpe.ro/ — "dog"</span></div>
+          <div class="sound-word">carro<span class="ipa">/ˈka.ro/ — "cart/car"</span></div>
+        </div>
+      </div>
+
+      <p class="compare-title" style="margin-top:22px;">b/v — se pronuncian igual</p>
+      <div class="sound-grid">
+        <div class="sound-item">
+          <span class="sound-tag">b = v</span>
+          <div class="sound-word">vaca<span class="ipa">/ˈba.ka/ — "cow"</span></div>
+          <div class="sound-word">baca<span class="ipa">/ˈba.ka/ — "roof rack"</span></div>
+        </div>
+      </div>
+
+      <p class="compare-title" style="margin-top:22px;">la j / g — sonido de "h" fuerte</p>
+      <div class="sound-grid">
+        <div class="sound-item">
+          <span class="sound-tag">j / ge / gi</span>
+          <div class="sound-word">jamón<span class="ipa">/xaˈmon/</span></div>
+          <div class="sound-word">gente<span class="ipa">/ˈxen.te/</span></div>
+        </div>
+      </div>
+
+      <p class="compare-title" style="margin-top:22px;">las vocales — siempre cortas y puras</p>
+      <div class="sound-grid">
+        <div class="sound-item">
+          <span class="sound-tag">sin diptongo</span>
+          <div class="sound-word">no<span class="ipa">/no/ — nunca "nou"</span></div>
+          <div class="sound-word">se<span class="ipa">/se/ — nunca "sei"</span></div>
+        </div>
+      </div>
+
+      <div class="sound-tip-box"><strong>Tip 1 — la rr:</strong> se hace vibrando la lengua contra el paladar, justo detrás de los dientes. Empieza practicando con "erre" repetido muy despacio.</div>
+      <div class="sound-tip-box"><strong>Tip 2 — las vocales:</strong> en español cada vocal tiene un solo sonido, corto y limpio. El inglés alarga y desliza las vocales ("no" → "nou") — en español hay que cortarlas en seco.</div>
+      <div class="sound-tip-box"><strong>Tip 3 — el ritmo:</strong> el español tiene ritmo silábico (cada sílaba dura casi lo mismo), no un ritmo de acentos como el inglés. Ayuda marcar cada sílaba con un golpecito de dedo al principio.</div>
+    </div>
+  </section>
+
+  <!-- BLOQUE 6: PRACTICA -->
+  <section class="block">
+    <div class="block-head"><span class="block-num">6</span><h2>Practica</h2><span class="time-tag">10 min</span></div>
+    <div class="panel">
+      <p class="vocab-hint" style="margin-bottom:14px;">41 frases: elige la opción correcta combinando todo lo de hoy. Las primeras 12 se hacen en voz alta en clase; el resto queda como repaso para casa.</p>
+      <div id="exercises"></div>
+      <div class="check-bar">
+        <div style="display:flex; gap:10px;">
+          <button class="btn-primary" id="check-btn">Comprobar respuestas</button>
+          <button class="btn-ghost" id="reset-btn">Reiniciar</button>
+        </div>
+        <span id="score-text"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- BLOQUE 7: JUEGO -->
+  <section class="block">
+    <div class="block-head"><span class="block-num">7</span><h2>Juego: ¿tú o usted?</h2><span class="time-tag">6 min</span></div>
+    <p class="lede" style="margin-bottom:16px;">Lee la situación y elige si se usa "tú" o "usted". Las primeras 12 se juegan en clase; el resto queda como banco de repaso para casa.</p>
+    <div class="classify-grid" id="classify-grid"></div>
+    <div class="check-bar">
+      <button class="btn-ghost" id="classify-reset">Reiniciar juego</button>
+      <span id="classify-score"></span>
+    </div>
+  </section>
+
+  <!-- BLOQUE 8: ROLEPLAY -->
+  <section class="block roleplay-panel">
+    <div class="block-head"><span class="block-num">8</span><h2>Roleplay: situaciones formales e informales</h2><span class="time-tag">11 min</span></div>
+    <p class="lede" style="margin-bottom:16px;">30 intercambios repartidos en 3 escenas donde alternas entre "tú" y "usted" y usas muletillas para sonar natural. Elige una escena para practicar en clase; el resto queda como banco de repaso para casa.</p>
+    <div class="scene-tabs" id="scene-tabs"></div>
+    <div id="scene-container"></div>
+    <div class="roleplay-tip"><strong>En clase:</strong> practicaremos una escena en voz alta, cambiando de rol. El resto de escenas son para practicar por tu cuenta durante la semana.</div>
+  </section>
+
+  <!-- BLOQUE 9: TAREA -->
+  <section class="block task-panel">
+    <div class="block-head"><span class="block-num">9</span><h2 style="color:var(--b1)">Tu tarea</h2><span class="time-tag">3 min</span></div>
+    <p style="margin:0; font-size:15px; color:var(--ink-soft);">Escribe un mini-diálogo de <strong>al menos 6 frases</strong>: una persona pide algo a un desconocido usando "usted", y luego describe la misma situación contándosela a un amigo usando "tú". Incluye al menos <strong>dos muletillas</strong>.</p>
+    <textarea id="final-task" placeholder="Perdone, ¿podría decirme...?&#10;Pues nada, le pregunté a un señor y..."></textarea>
+    <div class="task-footer">
+      <span id="task-count">0 palabras clave usadas</span>
+      <div style="display:flex; gap:10px; align-items:center;">
+        <span class="saved-flag" id="saved-flag">Guardado ✓</span>
+        <button class="btn-secondary" id="save-btn">Guardar tarea</button>
+      </div>
+    </div>
+    <div class="record-tip"><strong>Para casa:</strong> graba un audio de 1 minuto usando al menos 3 muletillas y practicando la rr fuerte en al menos dos palabras, como preparación para la próxima clase.</div>
+  </section>
+
+</main>
+
+<footer>
+  <span>Clase 13 · Repaso conversacional</span>
+  <span>Próxima clase → Clase 14: en el mercado — comida y compras</span>
+</footer>
+
+<script>
+/* ---------- IRREGULAR VERBS ---------- */
+const VERBS = [
+  {
+    id: "tener", inf: "tener", meaning: "to have",
+    freq: "top 1 en conversación", type: "irregular en yo + diptongo",
+    rows: [
+      ["yo","tengo","tengo prisa"],
+      ["tú","tienes","¿tienes hambre?"],
+      ["él/ella/usted","tiene","tiene razón"],
+      ["nosotros","tenemos","tenemos que hablar"],
+      ["vosotros","tenéis","¿tenéis planes?"],
+      ["ellos/ustedes","tienen","tienen suerte"]
+    ],
+    note: "Irregular solo en \"yo\" (tengo) y con diptongo e→ie en el resto, excepto nosotros/vosotros."
+  },
+  {
+    id: "poder", inf: "poder", meaning: "can / to be able to",
+    freq: "esencial para pedir cosas", type: "diptongo o→ue",
+    rows: [
+      ["yo","puedo","puedo intentarlo"],
+      ["tú","puedes","¿puedes venir?"],
+      ["él/ella/usted","puede","puede ser"],
+      ["nosotros","podemos","podemos quedar mañana"],
+      ["vosotros","podéis","¿podéis oírme?"],
+      ["ellos/ustedes","pueden","pueden llamarme"]
+    ],
+    note: "La o cambia a ue en todas las personas menos nosotros y vosotros."
+  },
+  {
+    id: "querer", inf: "querer", meaning: "to want",
+    freq: "para expresar deseos y opiniones", type: "diptongo e→ie",
+    rows: [
+      ["yo","quiero","quiero decir que..."],
+      ["tú","quieres","¿qué quieres hacer?"],
+      ["él/ella/usted","quiere","quiere ayudarte"],
+      ["nosotros","queremos","queremos salir hoy"],
+      ["vosotros","queréis","¿queréis café?"],
+      ["ellos/ustedes","quieren","quieren descansar"]
+    ],
+    note: "Mismo patrón que \"tener\": e→ie en todas menos nosotros/vosotros."
+  },
+  {
+    id: "decir", inf: "decir", meaning: "to say / to tell",
+    freq: "clave para reportar lo que otros dicen", type: "irregular en yo + diptongo",
+    rows: [
+      ["yo","digo","yo digo que sí"],
+      ["tú","dices","¿qué dices?"],
+      ["él/ella/usted","dice","dice que viene"],
+      ["nosotros","decimos","decimos la verdad"],
+      ["vosotros","decís","¿qué decís vosotros?"],
+      ["ellos/ustedes","dicen","dicen que llueve"]
+    ],
+    note: "Irregular en \"yo\" (digo) y diptongo e→i en el resto, salvo nosotros/vosotros."
+  },
+  {
+    id: "saber", inf: "saber", meaning: "to know (facts)",
+    freq: "muy común para dudar o responder", type: "irregular solo en yo",
+    rows: [
+      ["yo","sé","no sé, la verdad"],
+      ["tú","sabes","¿sabes dónde está?"],
+      ["él/ella/usted","sabe","sabe mucho de esto"],
+      ["nosotros","sabemos","sabemos la respuesta"],
+      ["vosotros","sabéis","¿sabéis la hora?"],
+      ["ellos/ustedes","saben","saben cocinar bien"]
+    ],
+    note: "Solo la forma \"yo\" es irregular (sé); el resto sigue el patrón regular de -er."
+  },
+  {
+    id: "venir", inf: "venir", meaning: "to come",
+    freq: "para hacer planes", type: "irregular en yo + diptongo",
+    rows: [
+      ["yo","vengo","vengo enseguida"],
+      ["tú","vienes","¿vienes a la fiesta?"],
+      ["él/ella/usted","viene","viene de trabajar"],
+      ["nosotros","venimos","venimos juntos"],
+      ["vosotros","venís","¿venís mañana?"],
+      ["ellos/ustedes","vienen","vienen tarde siempre"]
+    ],
+    note: "Mismo patrón que \"tener\": irregular en \"yo\" y diptongo e→ie."
+  },
+  {
+    id: "ir", inf: "ir", meaning: "to go",
+    freq: "imprescindible para planes y futuro", type: "totalmente irregular",
+    rows: [
+      ["yo","voy","voy para allá"],
+      ["tú","vas","¿vas en serio?"],
+      ["él/ella/usted","va","va a llegar tarde"],
+      ["nosotros","vamos","vamos a ver"],
+      ["vosotros","vais","¿vais al cine?"],
+      ["ellos/ustedes","van","van a comer"]
+    ],
+    note: "El verbo más irregular de todos, pero también el más usado: \"ir a + infinitivo\" es la forma más natural de hablar del futuro."
+  },
+  {
+    id: "dar", inf: "dar", meaning: "to give",
+    freq: "en expresiones fijas del día a día", type: "irregular en yo",
+    rows: [
+      ["yo","doy","te doy mi opinión"],
+      ["tú","das","¿me das un segundo?"],
+      ["él/ella/usted","da","da igual"],
+      ["nosotros","damos","damos un paseo"],
+      ["vosotros","dais","¿dais permiso?"],
+      ["ellos/ustedes","dan","dan las gracias"]
+    ],
+    note: "Irregular solo en \"yo\" (doy). Aparece muchísimo en frases hechas: \"da igual\", \"me da miedo\", \"da lo mismo\"."
+  }
+];
+
+let activeVerb = 0;
+
+function renderVerbTabs(){
+  document.getElementById('verb-tabs').innerHTML = VERBS.map((v,i)=>
+    `<button class="verb-tab${i===activeVerb?' active':''}" data-idx="${i}">${v.inf}</button>`
+  ).join('');
+  document.querySelectorAll('.verb-tab').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      activeVerb = parseInt(btn.dataset.idx, 10);
+      renderVerbTabs();
+      renderVerb();
+    });
+  });
+}
+
+function renderVerb(){
+  const v = VERBS[activeVerb];
+  document.getElementById('verb-meta').innerHTML = `
+    <span class="verb-chip">${v.meaning}</span>
+    <span class="verb-chip">${v.freq}</span>
+    <span class="verb-chip">${v.type}</span>
+  `;
+  document.getElementById('verb-table').innerHTML = v.rows.map(r=>
+    `<tr><td class="conj-pron">${r[0]}</td><td class="conj-form">${r[1]}</td><td class="conj-ex">${r[2]}</td></tr>`
+  ).join('');
+  document.getElementById('verb-note').innerHTML = `<strong>Patrón:</strong> ${v.note}`;
+}
+
+renderVerbTabs();
+renderVerb();
+
+/* ---------- FILLER WORDS VOCAB ---------- */
+const FILLERS_TIME = [
+  { f: "pues", b: "Para empezar una frase o ganar un segundo. Ej: \"Pues no sé.\"" },
+  { f: "bueno", b: "Para pausar o suavizar. Ej: \"Bueno, la verdad es que...\"" },
+  { f: "o sea", b: "Para aclarar lo que acabas de decir. Ej: \"O sea, quiero decir que...\"" },
+  { f: "esto...", b: "Equivale a \"um...\" en inglés. Ej: \"Esto... no me acuerdo.\"" },
+  { f: "a ver", b: "Para pensar antes de responder. Ej: \"A ver, déjame pensar.\"" }
+];
+const FILLERS_REACT = [
+  { f: "¡qué va!", b: "Para negar con énfasis. Ej: \"—¿Estás enfadado? —¡Qué va!\"" },
+  { f: "¡anda!", b: "Sorpresa suave. Ej: \"¡Anda, no lo sabía!\"" },
+  { f: "ya", b: "\"Entiendo\" o \"sí, claro\". Ej: \"—Es difícil. —Ya, ya lo sé.\"" },
+  { f: "vale", b: "\"Ok\", de acuerdo. Ej: \"Vale, nos vemos luego.\"" },
+  { f: "claro", b: "Confirmación fuerte. Ej: \"—¿Puedes venir? —Claro que sí.\"" }
+];
+const FILLERS_ORGANIZE = [
+  { f: "entonces", b: "Para conectar ideas o consecuencias. Ej: \"Entonces, ¿qué hacemos?\"" },
+  { f: "de hecho", b: "Para añadir un dato relevante. Ej: \"De hecho, ya lo he probado.\"" },
+  { f: "en fin", b: "Para cerrar una idea. Ej: \"En fin, ya veremos.\"" },
+  { f: "total, que", b: "Para resumir una historia. Ej: \"Total, que perdí el autobús.\"" },
+  { f: "es que", b: "Para dar una razón o excusa. Ej: \"Es que no tenía tiempo.\"" }
+];
+
+function renderFillerGrid(containerId, list){
+  const grid = document.getElementById(containerId);
+  grid.innerHTML = list.map((item, i)=>`
+    <div class="vocab-card" tabindex="0" data-id="${containerId}-${i}">
+      <div class="vocab-front">${item.f}</div>
+      <div class="vocab-back">${item.b}</div>
+    </div>`).join('');
+  grid.querySelectorAll('.vocab-card').forEach(card=>{
+    const toggle = ()=> card.classList.toggle('flipped');
+    card.addEventListener('click', toggle);
+    card.addEventListener('keydown', e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); toggle(); } });
+  });
+}
+renderFillerGrid('vocab-grid-1', FILLERS_TIME);
+renderFillerGrid('vocab-grid-2', FILLERS_REACT);
+renderFillerGrid('vocab-grid-3', FILLERS_ORGANIZE);
+
+/* ---------- EXERCISES ---------- */
+const EXERCISES_CLASS = [
+  { s: "El ___ que tenemos que resolver es complicado.", opts: ["el problema","la problema"], correct: "el problema" },
+  { s: "___ decirme dónde está la estación, por favor? (a un desconocido mayor)", opts: ["Puede","Puedes"], correct: "Puede" },
+  { s: "Perdona, ¿___ ayudarme un momento? (a tu amigo)", opts: ["puedes","puede"], correct: "puedes" },
+  { s: "No ___ la respuesta, tendría que mirarlo.", opts: ["sé","se"], correct: "sé" },
+  { s: "___, no sé qué decir ahora mismo.", opts: ["Esto...","El esto"], correct: "Esto..." },
+  { s: "___ que llueve mañana, según el pronóstico.", opts: ["Dicen","Dices"], correct: "Dicen" },
+  { s: "¿Cómo ___ usted hoy? (formal)", opts: ["está","estás"], correct: "está" },
+  { s: "¿Cómo ___ hoy? (a tu amiga)", opts: ["estás","está"], correct: "estás" },
+  { s: "___ un momento, ya vengo. (frase hecha con \"dar\")", opts: ["Dame","Doy"], correct: "Dame" },
+  { s: "___ vamos a comer algo antes de salir.", opts: ["Entonces","Total"], correct: "Entonces" },
+  { s: "El agua tiene ___ que baja de la montaña.", opts: ["el origen","la origen"], correct: "el origen" },
+  { s: "___ que sí, claro que puedo ir contigo.", opts: ["Claro","Vale"], correct: "Claro" },
+  { s: "La ___ del avión sale a las ocho.", opts: ["la salida","el salida"], correct: "la salida" },
+  { s: "___ que voy a llegar un poco tarde.", opts: ["Es que","O sea"], correct: "Es que" },
+  { s: "¿A dónde ___ ustedes este fin de semana?", opts: ["van","vais"], correct: "van" },
+  { s: "¿A dónde ___ vosotros este fin de semana?", opts: ["vais","van"], correct: "vais" },
+  { s: "___ , déjame pensarlo un segundo.", opts: ["A ver","Ya"], correct: "A ver" },
+  { s: "El ___ es la lengua que hablamos en clase.", opts: ["el idioma","la idioma"], correct: "el idioma" },
+  { s: "___ mucho de historia, deberías preguntarle.", opts: ["Sabe","Sabes"], correct: "Sabe" },
+  { s: "Necesito hacer una ___ antes de irme a casa.", opts: ["la foto","el foto"], correct: "la foto" },
+  { s: "¿Qué ___ tomar, señora? (formal, en un restaurante)", opts: ["quiere","quieres"], correct: "quiere" },
+  { s: "¿Qué ___ tomar, tía? (a tu amiga)", opts: ["quieres","quiere"], correct: "quieres" },
+  { s: "___, no me acuerdo de su nombre.", opts: ["Bueno","Claro"], correct: "Bueno" },
+  { s: "El sistema de metro de esta ciudad es muy ___.", opts: ["el moderno","moderno"], correct: "moderno" },
+  { s: "___ perdí el tren y llegué tarde a todo.", opts: ["Total, que","Es que"], correct: "Total, que" },
+  { s: "___, ya sé lo que quieres decir.", opts: ["Ya","Anda"], correct: "Ya" },
+  { s: "¿___ usted algún problema con el pedido?", opts: ["Tiene","Tienes"], correct: "Tiene" },
+  { s: "¿___ algún problema con el pedido, tío?", opts: ["Tienes","Tiene"], correct: "Tienes" },
+  { s: "___ estudiante de español desde hace un año.", opts: ["Soy el estudiante","Soy estudiante"], correct: "Soy estudiante" },
+  { s: "___, no lo sabía, ¡qué interesante!", opts: ["Anda","Vale"], correct: "Anda" },
+  { s: "El ___ que sigue esta clase es bastante intensivo.", opts: ["el planeta","el plan"], correct: "el plan" },
+  { s: "___ trabajar el sábado, no puedo salir.", opts: ["Tengo que","Tienes que"], correct: "Tengo que" },
+  { s: "___ decirme la hora, caballero? (formal)", opts: ["Podría","Podrías"], correct: "Podría" },
+  { s: "___ decirme la hora, tío? (informal)", opts: ["Podrías","Podría"], correct: "Podrías" },
+  { s: "___ voy, dame un segundo más.", opts: ["Ya","Vale"], correct: "Ya" },
+  { s: "La ___ que tomamos ayer fue muy larga.", opts: ["la decisión","el decisión"], correct: "la decisión" },
+  { s: "___ te digo, mejor lo dejamos para otro día.", opts: ["Bueno","Anda"], correct: "Bueno" },
+  { s: "¿Ustedes ___ el documento firmado?", opts: ["tienen","tenéis"], correct: "tienen" },
+  { s: "¿Vosotros ___ el documento firmado?", opts: ["tenéis","tienen"], correct: "tenéis" },
+  { s: "___, mejor lo hablamos en persona.", opts: ["De hecho","Vale"], correct: "De hecho" },
+  { s: "El ___ es un idioma bonito de aprender.", opts: ["el francés","la francés"], correct: "el francés" }
+];
+
+function renderExercises(){
+  const container = document.getElementById('exercises');
+  container.innerHTML = EXERCISES_CLASS.map((ex, i) => `
+    <div class="exercise" data-idx="${i}">
+      ${i === 12 ? '<div class="ex-divider en-clase">En clase · primeras 12</div><div class="ex-divider">Repaso para casa</div>' : ''}
+      <p class="ex-sentence">${i+1}. ${ex.s}</p>
+      <div class="ex-options">
+        ${ex.opts.map(o => `<button class="opt-btn" data-answer="${o}">${o}</button>`).join('')}
+      </div>
+    </div>`).join('');
+
+  container.querySelectorAll('.exercise').forEach((exDiv, i) => {
+    const buttons = exDiv.querySelectorAll('.opt-btn');
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        buttons.forEach(b => b.classList.remove('picked'));
+        btn.classList.add('picked');
+        exDiv.dataset.picked = btn.dataset.answer;
+      });
+    });
+  });
+}
+renderExercises();
+
+document.getElementById('check-btn').addEventListener('click', () => {
+  let correct = 0, total = EXERCISES_CLASS.length;
+  document.querySelectorAll('.exercise').forEach((exDiv, i) => {
+    const picked = exDiv.dataset.picked;
+    const answer = EXERCISES_CLASS[i].correct;
+    exDiv.querySelectorAll('.opt-btn').forEach(btn => {
+      btn.disabled = true;
+      if (btn.dataset.answer === answer) btn.classList.add('correct');
+      else if (btn.dataset.answer === picked) btn.classList.add('wrong');
+    });
+    if (picked === answer) correct++;
+  });
+  document.getElementById('score-text').textContent = `${correct} / ${total} correctas`;
+});
+
+document.getElementById('reset-btn').addEventListener('click', () => {
+  renderExercises();
+  document.getElementById('score-text').textContent = '';
+});
+
+/* ---------- CLASSIFY GAME: TÚ O USTED ---------- */
+const CLASSIFY_ITEMS = [
+  { word: "Le preguntas la hora a un policía en la calle.", answer: "usted" },
+  { word: "Hablas con tu compañero de piso sobre la cena.", answer: "tú" },
+  { word: "Entrevista de trabajo con el director de la empresa.", answer: "usted" },
+  { word: "Charlas con un amigo en un bar.", answer: "tú" },
+  { word: "Le pides algo a una señora mayor desconocida.", answer: "usted" },
+  { word: "Hablas con tu profesora de español (informal, ya la conoces).", answer: "tú" },
+  { word: "Le hablas al médico en la consulta.", answer: "usted" },
+  { word: "Escribes un mensaje a tu hermana.", answer: "tú" },
+  { word: "Preguntas el precio en una tienda de lujo al dependiente.", answer: "usted" },
+  { word: "Hablas con el camarero de tu bar de siempre, que ya te conoce.", answer: "tú" },
+  { word: "Te diriges al recepcionista de un hotel de 5 estrellas.", answer: "usted" },
+  { word: "Hablas con un niño en el parque.", answer: "tú" },
+  { word: "Rellenas una solicitud y hablas con el funcionario.", answer: "usted" },
+  { word: "Charlas con tus compañeros de clase de español.", answer: "tú" },
+  { word: "Le preguntas algo a tu suegra la primera vez que la ves.", answer: "usted" },
+  { word: "Hablas con el portero del edificio, que ya conoces bien.", answer: "tú" },
+  { word: "Presentas una queja formal por escrito a una empresa.", answer: "usted" },
+  { word: "Pides ayuda a un compañero de trabajo cercano.", answer: "tú" },
+  { word: "Hablas con el taxista que no conoces de nada.", answer: "usted" },
+  { word: "Charlas con tu vecino, con quien tienes confianza.", answer: "tú" },
+  { word: "Te diriges a un profesor universitario que no conoces.", answer: "usted" },
+  { word: "Hablas con tu pareja sobre los planes del fin de semana.", answer: "tú" },
+  { word: "Saludas a la abuela de tu amiga por primera vez.", answer: "usted" },
+  { word: "Escribes un mensaje informal a un grupo de amigos.", answer: "tú" }
+];
+
+function renderClassify(){
+  const grid = document.getElementById('classify-grid');
+  grid.innerHTML = CLASSIFY_ITEMS.map((item, i) => `
+    <div class="classify-card" data-idx="${i}">
+      <p class="classify-word">${item.word}</p>
+      <div class="classify-btns">
+        <button class="classify-btn" data-choice="tú">tú</button>
+        <button class="classify-btn" data-choice="usted">usted</button>
+      </div>
+      <p class="classify-feedback"></p>
+    </div>`).join('');
+
+  grid.querySelectorAll('.classify-card').forEach((card, i) => {
+    const feedback = card.querySelector('.classify-feedback');
+    card.querySelectorAll('.classify-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (card.classList.contains('answered')) return;
+        card.classList.add('answered');
+        const isCorrect = btn.dataset.choice === CLASSIFY_ITEMS[i].answer;
+        card.classList.add(isCorrect ? 'correct' : 'incorrect');
+        feedback.textContent = isCorrect ? '✓ Correcto' : `✗ Era: ${CLASSIFY_ITEMS[i].answer}`;
+        updateClassifyScore();
+      });
+    });
+  });
+}
+
+function updateClassifyScore(){
+  const answered = document.querySelectorAll('.classify-card.answered').length;
+  const correct = document.querySelectorAll('.classify-card.correct').length;
+  document.getElementById('classify-score').textContent = answered > 0 ? `${correct} / ${answered} correctas` : '';
+}
+
+renderClassify();
+
+document.getElementById('classify-reset').addEventListener('click', () => {
+  renderClassify();
+  document.getElementById('classify-score').textContent = '';
+});
+
+/* ---------- ROLEPLAY ---------- */
+const SCENES = [
+  {
+    id: "pidiendo-informacion",
+    tab: "Pidiendo información en la calle",
+    icon: "🧭",
+    setup: "Paras a un señor mayor desconocido en la calle para pedirle información. Usa \"usted\".",
+    lines: [
+      {"who":"friend","name":"Señor","text":"Buenas tardes, dígame."},
+      {"who":"you","hint":"Salúdale y pregúntale si puede ayudarte, usando \"usted\"."},
+      {"who":"friend","name":"Señor","text":"Claro, ¿qué necesita?"},
+      {"who":"you","hint":"Pregúntale dónde está la estación de metro más cercana."},
+      {"who":"friend","name":"Señor","text":"Siga todo recto y gire a la derecha."},
+      {"who":"you","hint":"Responde agradeciendo y confirmando que has entendido."},
+      {"who":"friend","name":"Señor","text":"¿Necesita algo más?"},
+      {"who":"you","hint":"Responde que no, y despídete formalmente."},
+      {"who":"friend","name":"Señor","text":"De nada, que tenga buen día."},
+      {"who":"you","hint":"Responde deseándole lo mismo."}
+    ]
+  },
+  {
+    id: "contando-a-amigo",
+    tab: "Contándoselo a un amigo",
+    icon: "☕",
+    setup: "Le cuentas a tu amigo lo que acaba de pasar. Usa \"tú\" y al menos dos muletillas.",
+    lines: [
+      {"who":"friend","name":"Marcos","text":"¿Qué tal? ¿Encontraste la estación?"},
+      {"who":"you","hint":"Responde usando una muletilla como \"pues\" o \"bueno\" para empezar."},
+      {"who":"friend","name":"Marcos","text":"¿Y qué pasó?"},
+      {"who":"you","hint":"Cuenta que le preguntaste a un señor, usando \"es que\" o \"total, que\"."},
+      {"who":"friend","name":"Marcos","text":"¿Te ayudó bien?"},
+      {"who":"you","hint":"Responde afirmando con \"claro\" o \"la verdad es que sí\"."},
+      {"who":"friend","name":"Marcos","text":"Qué majo, oye."},
+      {"who":"you","hint":"Responde con \"ya\" o \"sí, la verdad\"."},
+      {"who":"friend","name":"Marcos","text":"Bueno, ¿vamos a tomar algo?"},
+      {"who":"you","hint":"Responde aceptando con \"vale\" o \"claro que sí\"."}
+    ]
+  },
+  {
+    id: "entrevista",
+    tab: "Entrevista de trabajo",
+    icon: "💼",
+    setup: "Tienes una entrevista de trabajo formal. Usa \"usted\" en todo momento.",
+    lines: [
+      {"who":"friend","name":"Entrevistadora","text":"Buenos días, siéntese, por favor."},
+      {"who":"you","hint":"Saluda formalmente y da las gracias."},
+      {"who":"friend","name":"Entrevistadora","text":"¿Puede hablarme un poco de usted?"},
+      {"who":"you","hint":"Responde presentándote brevemente con \"usted\" implícito en el registro."},
+      {"who":"friend","name":"Entrevistadora","text":"¿Por qué quiere trabajar aquí?"},
+      {"who":"you","hint":"Responde explicando tu motivación."},
+      {"who":"friend","name":"Entrevistadora","text":"¿Tiene alguna pregunta para nosotros?"},
+      {"who":"you","hint":"Pregúntale algo sobre el puesto, usando \"usted\"."},
+      {"who":"friend","name":"Entrevistadora","text":"Le contactaremos la próxima semana."},
+      {"who":"you","hint":"Responde agradeciendo y despidiéndote formalmente."}
+    ]
+  }
+];
+
+const sceneTabs = document.getElementById('scene-tabs');
+const sceneContainer = document.getElementById('scene-container');
+let activeScene = 0;
+
+function renderTabs(){
+  sceneTabs.innerHTML = SCENES.map((s,i)=>
+    `<button class="scene-tab${i===activeScene?' active':''}" data-idx="${i}">${s.icon} ${s.tab}</button>`
+  ).join('');
+  sceneTabs.querySelectorAll('.scene-tab').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      activeScene = parseInt(btn.dataset.idx, 10);
+      renderTabs();
+      renderScene();
+    });
+  });
+}
+
+function renderScene(){
+  const scene = SCENES[activeScene];
+  const linesHtml = scene.lines.map((l)=>{
+    if(l.who === 'friend'){
+      return `
+        <div class="line friend">
+          <div class="line-avatar">${l.name.charAt(0)}</div>
+          <div class="line-body">
+            <p class="line-name">${l.name}</p>
+            <div class="line-bubble">${l.text}</div>
+          </div>
+        </div>`;
+    } else {
+      return `
+        <div class="line you">
+          <div class="line-avatar">Tú</div>
+          <div class="line-body">
+            <p class="line-name">Tú</p>
+            <textarea class="line-input" rows="2" placeholder="Escribe tu respuesta..."></textarea>
+            <p class="line-hint">${l.hint}</p>
+          </div>
+        </div>`;
+    }
+  }).join('');
+
+  sceneContainer.innerHTML = `
+    <div class="scene-setup">
+      <span class="scene-icon">${scene.icon}</span>
+      <p class="scene-text"><strong>${scene.tab}:</strong> ${scene.setup}</p>
+    </div>
+    <div class="dialogue">${linesHtml}</div>
+  `;
+}
+
+renderTabs();
+renderScene();
+
+/* ---------- FINAL TASK ---------- */
+const STORAGE_KEY = 'rebecca-clase13-tarea';
+const taskArea = document.getElementById('final-task');
+const taskCount = document.getElementById('task-count');
+const savedFlag = document.getElementById('saved-flag');
+
+async function cargarTarea(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(STORAGE_KEY);
+    if (res && typeof res.value === 'string') taskArea.value = res.value;
+  }catch(e){
+    // Clave inexistente todavía: no hay tarea previa, se queda en blanco.
+  }
+  updateCount();
+}
+
+function updateCount(){
+  const matches = (taskArea.value.match(/\b(usted|pues|bueno|o sea|entonces|es que|vale|claro|ya|anda|de hecho|a ver|total)\b/gi) || []).length;
+  taskCount.textContent = `${matches} palabra${matches===1?'':'s'} clave usada${matches===1?'':'s'}`;
+}
+taskArea.addEventListener('input', updateCount);
+updateCount();
+cargarTarea();
+
+document.getElementById('save-btn').addEventListener('click', async ()=>{
+  if (!window.storage){
+    savedFlag.textContent = 'Guardado no disponible aquí';
+    savedFlag.classList.add('show');
+    setTimeout(()=>{ savedFlag.classList.remove('show'); savedFlag.textContent = 'Guardado ✓'; }, 2200);
+    return;
+  }
+  try{
+    const ok = await window.storage.set(STORAGE_KEY, taskArea.value);
+    savedFlag.textContent = ok ? 'Guardado ✓' : 'No se pudo guardar';
+  }catch(e){
+    savedFlag.textContent = 'No se pudo guardar';
+  }
+  savedFlag.classList.add('show');
+  setTimeout(()=>{ savedFlag.classList.remove('show'); savedFlag.textContent = 'Guardado ✓'; }, 1800);
+});
+</script>
+
+</body>
+</html>

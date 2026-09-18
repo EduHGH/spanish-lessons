@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clase 32 · Verbos irregulares — Rebecca</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+
+/* ╔══════════════════════════════════════════════════════════════╗
+   ║  ESCOLAR — sistema de diseño para clases de español online   ║
+   ║  Clase 32 · Repaso integrado de irregulares · "El tablero"   ║
+   ╚══════════════════════════════════════════════════════════════╝ */
+
+:root{
+  --paper:        #FBF7EE;
+  --paper-raised: #FFFFFF;
+  --paper-alt:    #F3ECDA;
+  --ink:          #23291F;
+  --ink-soft:     #565F52;
+  --ink-faint:    #8B9184;
+  --line:         rgba(35,41,31,0.12);
+  --line-strong:  rgba(35,41,31,0.22);
+
+  --b1:      #2F6FED;  --b1-soft: #EAF1FE;  --b1-line: #C6D9FC;
+  --b2:      #2E9E6B;  --b2-soft: #E9F6EF;  --b2-line: #BEE6D3;
+  --b3:      #DB8A2E;  --b3-soft: #FCF1E1;  --b3-line: #F3D9AF;
+  --family:  #C4432E;  --family-soft: #FBEAE4; --family-line: #F0C7BA;
+  --link:    #B5502E;  --link-soft: #FBEBE3; --link-line: #EFC9B4;
+
+  --f-display: 'Fraunces', Georgia, serif;
+  --f-body:    'IBM Plex Sans', system-ui, sans-serif;
+  --f-data:    'IBM Plex Mono', monospace;
+
+  --r-sm: 8px;
+  --r-md: 14px;
+  --r-lg: 20px;
+
+  --shadow-1: 0 1px 2px rgba(35,41,31,0.05), 0 1px 8px rgba(35,41,31,0.04);
+}
+
+*{ box-sizing:border-box; }
+body{
+  margin:0;
+  background: var(--paper);
+  background-image:
+    radial-gradient(circle at 1px 1px, var(--line) 1px, transparent 0);
+  background-size: 22px 22px;
+  color: var(--ink);
+  font-family: var(--f-body);
+  line-height:1.6;
+}
+::selection{ background: var(--link-soft); }
+
+/* ---------- HEADER ---------- */
+header{ padding:44px 24px 28px; max-width:760px; margin:0 auto; position:relative; }
+.eyebrow{
+  font-family: var(--f-data); font-size:12px; letter-spacing:.14em;
+  text-transform:uppercase; color: var(--link); margin:0 0 10px;
+  display:flex; align-items:center; gap:10px;
+}
+.eyebrow .dot{ width:6px; height:6px; border-radius:50%; background: var(--link); }
+h1{
+  font-family: var(--f-display); font-weight:600;
+  font-size:clamp(30px,5.6vw,46px); line-height:1.08;
+  margin:0 0 14px; letter-spacing:-.01em;
+}
+h1 em{ font-style:italic; color: var(--link); }
+.lede{ font-size:16px; color: var(--ink-soft); max-width:56ch; margin:0; }
+
+.meta-row{
+  display:flex; flex-wrap:wrap; gap:20px; margin-top:26px;
+  font-family: var(--f-data); font-size:12px; color: var(--ink-faint);
+}
+.meta-row strong{
+  display:block; color: var(--ink); font-size:14.5px; font-weight:500;
+  font-family: var(--f-display); margin-top:3px;
+}
+
+/* ---------- SECTIONS ---------- */
+main{ max-width:760px; margin:0 auto; padding:8px 24px 100px; }
+
+section.block{ margin-bottom:52px; }
+.block-head{ display:flex; align-items:baseline; gap:12px; margin-bottom:18px; }
+.time-tag{
+  font-family: var(--f-data); font-size:11px; color: var(--ink-faint);
+  background: var(--paper-alt); padding:3px 10px; border-radius:999px; margin-left:auto; flex:none;
+}
+.block-num{
+  font-family: var(--f-data); font-size:12px; color:#fff; background: var(--link);
+  width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  flex:none;
+}
+.block-head h2{
+  font-family: var(--f-display); font-weight:500; font-style:italic; font-size:22px; margin:0;
+}
+
+.panel{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-lg);
+  box-shadow: var(--shadow-1); padding:26px 28px;
+}
+
+/* ---------- VOCAB ---------- */
+.vocab-hint{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin:0 0 14px; }
+.vocab-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:10px; }
+.vocab-card{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:12px 14px; box-shadow: var(--shadow-1); display:flex; align-items:center; gap:10px;
+}
+.vocab-icon{ font-size:20px; flex:none; }
+.vocab-word{ font-family: var(--f-display); font-weight:600; font-size:15.5px; color: var(--ink); }
+
+/* ---------- IRREGULAR VERB TABLE ---------- */
+.verbtable-wrap{ margin-top:22px; overflow-x:auto; }
+table.verbtable{ width:100%; border-collapse:collapse; font-size:13.5px; min-width:560px; }
+table.verbtable th{
+  font-family: var(--f-data); font-size:10.5px; text-transform:uppercase; letter-spacing:.05em;
+  color: var(--ink-faint); text-align:left; padding:8px 10px; border-bottom:2px solid var(--line);
+}
+table.verbtable td{ padding:9px 10px; border-bottom:1px dashed var(--line); }
+table.verbtable td.inf{ font-family: var(--f-display); font-weight:600; color: var(--link); }
+table.verbtable td.form{ font-family: var(--f-data); color: var(--ink); }
+table.verbtable tr:last-child td{ border-bottom:none; }
+table.verbtable tr:hover td{ background: var(--paper-alt); }
+
+.legend-wrap{ margin-top:22px; }
+.legend-title{
+  font-family: var(--f-data); font-size:11.5px; text-transform:uppercase; letter-spacing:.06em;
+  color: var(--ink-faint); margin:0 0 10px;
+}
+
+/* ---------- PRONUNCIATION ---------- */
+.pron-row{
+  display:flex; align-items:center; gap:14px; padding:12px 0; border-bottom:1px dashed var(--line);
+}
+.pron-row:last-child{ border-bottom:none; }
+.pron-word{ font-family: var(--f-display); font-weight:600; font-size:18px; color: var(--ink); min-width:120px; }
+.pron-ipa{ font-family: var(--f-data); font-size:13px; color: var(--link); min-width:150px; }
+.pron-tip{ font-size:13px; color: var(--ink-soft); }
+
+/* ---------- BOARD GAME ---------- */
+.board-wrap{ margin-top:4px; }
+.board-frame{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-lg);
+  box-shadow: var(--shadow-1); padding:22px 24px;
+}
+.board-status{
+  display:flex; flex-wrap:wrap; gap:10px 22px; align-items:center; margin-bottom:18px;
+  font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint);
+}
+.board-status strong{ font-family: var(--f-display); color: var(--ink); font-size:15px; }
+.board-track{
+  display:grid; grid-template-columns:repeat(10,1fr); gap:6px; margin-bottom:20px;
+}
+.board-cell{
+  aspect-ratio:1; border-radius:var(--r-sm); background: var(--paper-alt); border:1px solid var(--line);
+  display:flex; align-items:center; justify-content:center; font-family: var(--f-data); font-size:11px;
+  color: var(--ink-faint); position:relative; transition: all .15s ease;
+}
+.board-cell.tense-presente{ background: var(--b1-soft); border-color: var(--b1-line); }
+.board-cell.tense-pasado{ background: var(--family-soft); border-color: var(--family-line); }
+.board-cell.tense-futuro{ background: var(--b3-soft); border-color: var(--b3-line); }
+.board-cell.current{ box-shadow: 0 0 0 2.5px var(--link); font-weight:700; color: var(--link); }
+.board-cell.passed::after{
+  content:"✓"; position:absolute; top:2px; right:3px; font-size:9px; color: var(--b2);
+}
+.board-legend{ display:flex; flex-wrap:wrap; gap:14px; margin-bottom:18px; font-family: var(--f-data); font-size:11px; color: var(--ink-soft); }
+.board-legend span{ display:inline-flex; align-items:center; gap:6px; }
+.board-legend i{ width:11px; height:11px; border-radius:3px; display:inline-block; }
+.board-legend i.presente{ background: var(--b1); }
+.board-legend i.pasado{ background: var(--family); }
+.board-legend i.futuro{ background: var(--b3); }
+
+.board-card{
+  background: var(--paper-alt); border-radius: var(--r-md); padding:20px 22px; margin-bottom:16px; min-height:118px;
+  display:flex; flex-direction:column; justify-content:center;
+}
+.board-card-tense{
+  font-family: var(--f-data); font-size:10.5px; text-transform:uppercase; letter-spacing:.06em;
+  margin:0 0 8px;
+}
+.board-card-tense.presente{ color: var(--b1); }
+.board-card-tense.pasado{ color: var(--family); }
+.board-card-tense.futuro{ color: var(--b3); }
+.board-card-prompt{ font-family: var(--f-display); font-weight:600; font-size:19px; color: var(--ink); margin:0 0 6px; }
+.board-card-hint{ font-size:13px; color: var(--ink-soft); }
+
+.board-input-row{ display:flex; gap:10px; margin-bottom:12px; }
+.board-input{
+  flex:1; font-family: var(--f-body); font-size:14.5px; color: var(--ink);
+  background:#fff; border:1px solid var(--link-line); border-radius: var(--r-sm);
+  padding:11px 13px;
+}
+.board-input:focus{ outline:none; border-color: var(--link); }
+.board-check-btn{
+  font-family: var(--f-body); font-weight:600; font-size:13.5px; color:#fff; background: var(--link);
+  border:none; padding:0 20px; border-radius: var(--r-sm); cursor:pointer; white-space:nowrap;
+}
+.board-check-btn:hover{ opacity:.92; }
+.board-feedback{
+  font-family: var(--f-data); font-size:13px; padding:10px 12px; border-radius: var(--r-sm); min-height:16px;
+}
+.board-feedback.ok{ background: var(--b2-soft); color: var(--b2); border:1px solid var(--b2-line); }
+.board-feedback.no{ background: var(--b3-soft); color:#8a5a10; border:1px solid var(--b3-line); }
+.board-feedback.empty{ display:none; }
+.board-controls{ display:flex; justify-content:space-between; align-items:center; margin-top:16px; gap:12px; flex-wrap:wrap; }
+.board-dice-btn{
+  font-family: var(--f-body); font-weight:600; font-size:14px; color:#fff; background: var(--b1);
+  border:none; padding:11px 22px; border-radius:999px; cursor:pointer; transition: transform .1s ease;
+}
+.board-dice-btn:hover{ transform: translateY(-1px); }
+.board-dice-btn:disabled{ opacity:.45; cursor:default; transform:none; }
+.board-reset-link{
+  font-family: var(--f-data); font-size:12px; color: var(--ink-faint); background:none; border:none;
+  text-decoration:underline; cursor:pointer;
+}
+.board-finish{
+  margin-top:16px; padding:16px 18px; background: var(--b2-soft); border:1px solid var(--b2-line);
+  border-radius: var(--r-md); font-size:14px; color: var(--ink); display:none;
+}
+.board-finish.show{ display:block; }
+.board-finish strong{ color: var(--b2); }
+
+/* ---------- SELF-ASSESSMENT ---------- */
+.selfcheck-panel{ background: var(--b1-soft); border:1px solid var(--b1-line); border-radius: var(--r-lg); padding:26px 28px; }
+.selfcheck-panel .block-num{ background: var(--b1); }
+.selfcheck-row{
+  display:flex; align-items:center; justify-content:space-between; gap:16px; padding:13px 0;
+  border-bottom:1px dashed var(--b1-line);
+}
+.selfcheck-row:last-of-type{ border-bottom:none; }
+.selfcheck-verb{ font-family: var(--f-display); font-weight:600; font-size:16px; color: var(--ink); }
+.selfcheck-verb small{ display:block; font-family: var(--f-data); font-size:11px; color: var(--ink-faint); font-weight:400; margin-top:2px; }
+.selfcheck-faces{ display:flex; gap:8px; flex:none; }
+.face-btn{
+  width:36px; height:36px; border-radius:50%; border:1.5px solid var(--b1-line); background:#fff;
+  font-size:16px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition: all .15s ease;
+}
+.face-btn:hover{ border-color: var(--b1); }
+.face-btn.active{ background: var(--b1); border-color: var(--b1); }
+.selfcheck-summary{
+  margin-top:18px; padding:14px 16px; background: var(--paper-raised); border:1px solid var(--b1-line);
+  border-radius: var(--r-md); font-family: var(--f-data); font-size:12.5px; color: var(--ink-soft);
+}
+.selfcheck-summary strong{ color: var(--ink); font-family: var(--f-display); font-size:14.5px; }
+
+/* ---------- TAREA FINAL ---------- */
+.task-panel{ background: var(--b3-soft); border:1px solid var(--b3-line); border-radius: var(--r-lg); padding:26px 28px; }
+.task-panel .block-num{ background: var(--b3); }
+.prompt-box{
+  margin-top:14px; padding:16px 18px; background: var(--paper-raised); border:1px solid var(--b3-line);
+  border-radius: var(--r-md); font-size:14.5px; line-height:1.75; color: var(--ink);
+}
+.prompt-box strong{ color:var(--b3); }
+textarea#final-task{
+  width:100%; min-height:150px; font-family: var(--f-body); font-size:15px; color: var(--ink);
+  background: var(--paper-raised); border:1px solid var(--b3-line); border-radius: var(--r-md);
+  padding:14px 16px; resize:vertical; margin-top:14px;
+}
+textarea#final-task:focus{ outline:none; border-color: var(--b3); }
+.task-footer{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:12px; flex-wrap:wrap; }
+#task-count{ font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); }
+.btn-secondary{
+  font-family: var(--f-body); font-weight:600; font-size:13.5px; color: var(--b3); background:none;
+  border:1.5px solid var(--b3-line); padding:9px 18px; border-radius:999px; cursor:pointer;
+}
+.saved-flag{ font-family: var(--f-data); font-size:12px; color: var(--b2); opacity:0; transition: opacity .3s ease; }
+.saved-flag.show{ opacity:1; }
+.record-tip{
+  margin-top:14px; padding:14px 16px; background: var(--paper-raised); border:1px solid var(--b3-line);
+  border-radius: var(--r-md); font-size:13.5px; color: var(--ink-soft);
+}
+.record-tip strong{ color: var(--ink); }
+
+/* ---------- FOOTER NAV ---------- */
+footer{
+  max-width:760px; margin:0 auto; padding:0 24px 60px; display:flex;
+  justify-content:space-between; flex-wrap:wrap; gap:12px;
+  font-family: var(--f-data); font-size:12px; color: var(--ink-faint);
+}
+
+@media (max-width:600px){
+  .panel, .board-frame, .selfcheck-panel, .task-panel{ padding:20px 18px; }
+  .board-track{ grid-template-columns:repeat(5,1fr); }
+  .board-input-row{ flex-direction:column; }
+  .board-check-btn{ padding:11px 20px; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <p class="eyebrow"><span class="dot"></span>Clase 32 · Línea de enlace · Repaso integrado</p>
+  <h1>Verbos <em>irregulares</em></h1>
+  <p class="lede">Hoy repasamos los 10 verbos irregulares más usados en español, combinando presente, pasado (indefinido) y futuro. Vamos a jugar una partida de tablero: cada casilla te pide una forma verbal en un tiempo distinto — como pediste con cortesía en el restaurante, hoy vas a "pedir" verbos correctos para avanzar.</p>
+  <div class="meta-row">
+    <div>Duración<strong>50 min</strong></div>
+    <div>Gramática<strong>Presente · Pasado · Futuro irregular</strong></div>
+    <div>Nivel<strong>A2</strong></div>
+  </div>
+</header>
+
+<main>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">1</span><h2>Vocabulario</h2><span class="time-tag">4 min</span></div>
+    <div class="panel">
+      <p class="vocab-hint">Palabras clave para hablar de repasar y jugar en clase.</p>
+      <div class="vocab-grid">
+        <div class="vocab-card"><span class="vocab-icon">🎲</span><span class="vocab-word">tirar el dado</span></div>
+        <div class="vocab-card"><span class="vocab-icon">➡️</span><span class="vocab-word">avanzar / retroceder</span></div>
+        <div class="vocab-card"><span class="vocab-icon">🏁</span><span class="vocab-word">la casilla</span></div>
+        <div class="vocab-card"><span class="vocab-icon">✅</span><span class="vocab-word">acertar</span></div>
+        <div class="vocab-card"><span class="vocab-icon">❌</span><span class="vocab-word">fallar / equivocarse</span></div>
+        <div class="vocab-card"><span class="vocab-icon">🔁</span><span class="vocab-word">repasar</span></div>
+        <div class="vocab-card"><span class="vocab-icon">🧠</span><span class="vocab-word">recordar</span></div>
+        <div class="vocab-card"><span class="vocab-icon">🏆</span><span class="vocab-word">llegar a la meta</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">2</span><h2>Los 10 verbos irregulares</h2><span class="time-tag">10 min</span></div>
+    <div class="panel">
+      <p class="vocab-hint">Tabla de repaso rápido: presente (yo), indefinido (yo) y futuro (yo). Fíjate en las raíces irregulares del futuro — son las mismas que usaste en la clase 27.</p>
+      <div class="verbtable-wrap">
+        <table class="verbtable">
+          <thead>
+            <tr><th>infinitivo</th><th>presente (yo)</th><th>indefinido (yo)</th><th>futuro (yo)</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="inf">ser</td><td class="form">soy</td><td class="form">fui</td><td class="form">seré</td></tr>
+            <tr><td class="inf">ir</td><td class="form">voy</td><td class="form">fui</td><td class="form">iré</td></tr>
+            <tr><td class="inf">tener</td><td class="form">tengo</td><td class="form">tuve</td><td class="form">tendré</td></tr>
+            <tr><td class="inf">hacer</td><td class="form">hago</td><td class="form">hice</td><td class="form">haré</td></tr>
+            <tr><td class="inf">poder</td><td class="form">puedo</td><td class="form">pude</td><td class="form">podré</td></tr>
+            <tr><td class="inf">querer</td><td class="form">quiero</td><td class="form">quise</td><td class="form">querré</td></tr>
+            <tr><td class="inf">decir</td><td class="form">digo</td><td class="form">dije</td><td class="form">diré</td></tr>
+            <tr><td class="inf">venir</td><td class="form">vengo</td><td class="form">vine</td><td class="form">vendré</td></tr>
+            <tr><td class="inf">poner</td><td class="form">pongo</td><td class="form">puse</td><td class="form">pondré</td></tr>
+            <tr><td class="inf">salir</td><td class="form">salgo</td><td class="form">salí *</td><td class="form">saldré</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="legend-wrap">
+        <p class="legend-title">* "salir" es regular en indefinido — la única sorpresa de la tabla. El resto son irregulares en al menos dos tiempos.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">3</span><h2>Pronunciación</h2><span class="time-tag">4 min</span></div>
+    <div class="panel">
+      <p class="vocab-hint">Las formas que más se confunden entre sí — practícalas antes del tablero.</p>
+      <div class="pron-wrap">
+        <div class="pron-row"><span class="pron-word">tuve / tuvo</span><span class="pron-ipa">/ˈtuβe/ /ˈtuβo/</span><span class="pron-tip">yo vs. él/ella — solo cambia la vocal final</span></div>
+        <div class="pron-row"><span class="pron-word">dije / diré</span><span class="pron-ipa">/ˈdixe/ /diˈɾe/</span><span class="pron-tip">pasado sin acento final, futuro con acento en la É</span></div>
+        <div class="pron-row"><span class="pron-word">pondré</span><span class="pron-ipa">/ponˈdɾe/</span><span class="pron-tip">la -d- se añade a la raíz "pon-", como en "tendré" y "saldré"</span></div>
+        <div class="pron-row"><span class="pron-word">fui</span><span class="pron-ipa">/ˈfwi/</span><span class="pron-tip">una sola sílaba — sirve tanto para "ser" como para "ir"</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">4</span><h2>Juego de tablero</h2><span class="time-tag">20 min</span></div>
+    <div class="board-wrap">
+      <div class="board-frame">
+        <div class="board-status">
+          <span>Casilla actual: <strong id="pos-text">0 / 20</strong></span>
+          <span>Aciertos: <strong id="score-text">0</strong></span>
+        </div>
+        <div class="board-legend">
+          <span><i class="presente"></i>presente</span>
+          <span><i class="pasado"></i>indefinido</span>
+          <span><i class="futuro"></i>futuro</span>
+        </div>
+        <div class="board-track" id="board-track"></div>
+
+        <div class="board-card" id="board-card">
+          <p class="board-card-tense" id="card-tense">presente</p>
+          <p class="board-card-prompt" id="card-prompt">Tira el dado para empezar la partida.</p>
+          <p class="board-card-hint" id="card-hint"></p>
+        </div>
+        <div class="board-input-row">
+          <input class="board-input" id="board-input" type="text" placeholder="Escribe la forma verbal..." disabled>
+          <button class="board-check-btn" id="board-check-btn" disabled>Comprobar</button>
+        </div>
+        <div class="board-feedback empty" id="board-feedback"></div>
+
+        <div class="board-controls">
+          <button class="board-dice-btn" id="dice-btn">🎲 Tirar el dado</button>
+          <button class="board-reset-link" id="board-reset-link">Reiniciar partida</button>
+        </div>
+        <div class="board-finish" id="board-finish"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block selfcheck-panel">
+    <div class="block-head"><span class="block-num">5</span><h2>Autoevaluación</h2><span class="time-tag">4 min</span></div>
+    <p class="lede" style="margin-bottom:6px;">Para cada verbo, marca cómo te sientes usándolo en los tres tiempos: 😕 inseguro, 🙂 lo dudo a veces, 😄 lo tengo controlado.</p>
+    <div id="selfcheck-list"></div>
+    <div class="selfcheck-summary" id="selfcheck-summary"><strong>0 / 10</strong> verbos evaluados — marca todos para ver tu resumen.</div>
+  </section>
+
+  <section class="block task-panel">
+    <div class="block-head"><span class="block-num">6</span><h2 style="color:var(--b3)">Tu tarea</h2><span class="time-tag">—</span></div>
+    <p style="margin:0; font-size:15px; color:var(--ink-soft);">Escribe un párrafo corto contando algo que hiciste ayer, algo que haces normalmente y algo que harás pronto, usando al menos 4 de los 10 verbos irregulares de hoy.</p>
+    <div class="prompt-box"><strong>Idea:</strong> "Ayer tuve una reunión con... Normalmente hago... La semana que viene vendré/saldré/haré..." Usa como mínimo un verbo en presente, uno en indefinido y uno en futuro.</div>
+    <textarea id="final-task" placeholder="Escribe aquí tu párrafo..."></textarea>
+    <div class="task-footer">
+      <span id="task-count">0 / 4 verbos irregulares detectados</span>
+      <div style="display:flex; gap:10px; align-items:center;">
+        <span class="saved-flag" id="saved-flag">Guardado ✓</span>
+        <button class="btn-secondary" id="save-btn">Guardar tarea</button>
+      </div>
+    </div>
+    <div class="record-tip"><strong>Para casa:</strong> lee tu párrafo en voz alta y grábate. Después escucha la grabación y comprueba: ¿pronunciaste bien "tuve", "dije" y "pondré"? Repite las que te cuesten más.</div>
+  </section>
+
+</main>
+
+<footer>
+  <span>Clase 32 · Repaso integrado de verbos irregulares</span>
+  <span>Próxima clase → Clase 33: opiniones en español sencillo</span>
+</footer>
+
+<script>
+/* ---------- BOARD GAME ---------- */
+const TENSES = ['presente','pasado','futuro'];
+const TENSE_LABEL = {presente:'presente', pasado:'indefinido', futuro:'futuro'};
+
+const VERBS = [
+  {inf:'ser', pronoun:'yo', hint:'ser · presente · yo', forms:{presente:'soy', pasado:'fui', futuro:'seré'}},
+  {inf:'ir', pronoun:'tú', hint:'ir · tú', forms:{presente:'vas', pasado:'fuiste', futuro:'irás'}},
+  {inf:'tener', pronoun:'ella', hint:'tener · ella', forms:{presente:'tiene', pasado:'tuvo', futuro:'tendrá'}},
+  {inf:'hacer', pronoun:'yo', hint:'hacer · yo', forms:{presente:'hago', pasado:'hice', futuro:'haré'}},
+  {inf:'poder', pronoun:'nosotros', hint:'poder · nosotros', forms:{presente:'podemos', pasado:'pudimos', futuro:'podremos'}},
+  {inf:'querer', pronoun:'yo', hint:'querer · yo', forms:{presente:'quiero', pasado:'quise', futuro:'querré'}},
+  {inf:'decir', pronoun:'tú', hint:'decir · tú', forms:{presente:'dices', pasado:'dijiste', futuro:'dirás'}},
+  {inf:'venir', pronoun:'ellos', hint:'venir · ellos', forms:{presente:'vienen', pasado:'vinieron', futuro:'vendrán'}},
+  {inf:'poner', pronoun:'yo', hint:'poner · yo', forms:{presente:'pongo', pasado:'puse', futuro:'pondré'}},
+  {inf:'salir', pronoun:'usted', hint:'salir · usted', forms:{presente:'sale', pasado:'salió', futuro:'saldrá'}},
+  {inf:'ser', pronoun:'nosotros', hint:'ser · nosotros', forms:{presente:'somos', pasado:'fuimos', futuro:'seremos'}},
+  {inf:'tener', pronoun:'yo', hint:'tener · yo', forms:{presente:'tengo', pasado:'tuve', futuro:'tendré'}},
+  {inf:'hacer', pronoun:'tú', hint:'hacer · tú', forms:{presente:'haces', pasado:'hiciste', futuro:'harás'}},
+  {inf:'poder', pronoun:'yo', hint:'poder · yo', forms:{presente:'puedo', pasado:'pude', futuro:'podré'}},
+  {inf:'querer', pronoun:'ella', hint:'querer · ella', forms:{presente:'quiere', pasado:'quiso', futuro:'querrá'}},
+  {inf:'decir', pronoun:'yo', hint:'decir · yo', forms:{presente:'digo', pasado:'dije', futuro:'diré'}},
+  {inf:'venir', pronoun:'yo', hint:'venir · yo', forms:{presente:'vengo', pasado:'vine', futuro:'vendré'}},
+  {inf:'poner', pronoun:'ella', hint:'poner · ella', forms:{presente:'pone', pasado:'puso', futuro:'pondrá'}},
+  {inf:'ir', pronoun:'yo', hint:'ir · yo', forms:{presente:'voy', pasado:'fui', futuro:'iré'}},
+  {inf:'salir', pronoun:'yo', hint:'salir · yo', forms:{presente:'salgo', pasado:'salí', futuro:'saldré'}}
+];
+
+const TOTAL_CELLS = 20;
+let boardPos = 0;
+let score = 0;
+let cellTense = [];
+let currentVerb = null;
+let waitingCheck = false;
+
+for(let i=0;i<TOTAL_CELLS;i++){
+  cellTense.push(TENSES[i % TENSES.length]);
+}
+// baraja ligera de tiempos para que no sea siempre el mismo ciclo
+cellTense = cellTense.sort(()=> Math.random()-0.4);
+
+const trackEl = document.getElementById('board-track');
+const posText = document.getElementById('pos-text');
+const scoreText = document.getElementById('score-text');
+const cardTense = document.getElementById('card-tense');
+const cardPrompt = document.getElementById('card-prompt');
+const cardHint = document.getElementById('card-hint');
+const boardInput = document.getElementById('board-input');
+const boardCheckBtn = document.getElementById('board-check-btn');
+const boardFeedback = document.getElementById('board-feedback');
+const diceBtn = document.getElementById('dice-btn');
+const boardFinish = document.getElementById('board-finish');
+
+function renderTrack(){
+  trackEl.innerHTML = '';
+  for(let i=1;i<=TOTAL_CELLS;i++){
+    const cell = document.createElement('div');
+    cell.className = 'board-cell tense-' + cellTense[i-1];
+    if(i <= boardPos) cell.classList.add('passed');
+    if(i === boardPos + 1 && boardPos < TOTAL_CELLS) cell.classList.add('current');
+    cell.textContent = i;
+    trackEl.appendChild(cell);
+  }
+  posText.textContent = `${boardPos} / ${TOTAL_CELLS}`;
+  scoreText.textContent = score;
+}
+
+function pickVerb(tense){
+  const idx = Math.floor(Math.random()*VERBS.length);
+  return VERBS[idx];
+}
+
+function rollDice(){
+  if(boardPos >= TOTAL_CELLS) return;
+  diceBtn.disabled = true;
+  boardPos += 1;
+  const tense = cellTense[boardPos-1];
+  currentVerb = pickVerb(tense);
+  currentVerb._tense = tense;
+
+  cardTense.textContent = TENSE_LABEL[tense];
+  cardTense.className = 'board-card-tense ' + tense;
+  cardPrompt.textContent = `${currentVerb.inf} — forma de "${currentVerb.pronoun}"`;
+  cardHint.textContent = `Escribe el verbo "${currentVerb.inf}" en ${TENSE_LABEL[tense]}, persona "${currentVerb.pronoun}".`;
+
+  boardInput.value = '';
+  boardInput.disabled = false;
+  boardCheckBtn.disabled = false;
+  boardFeedback.className = 'board-feedback empty';
+  boardFeedback.textContent = '';
+  waitingCheck = true;
+  renderTrack();
+  boardInput.focus();
+}
+
+function checkAnswer(){
+  if(!waitingCheck || !currentVerb) return;
+  const answer = currentVerb.forms[currentVerb._tense].toLowerCase();
+  const given = boardInput.value.trim().toLowerCase();
+  const correct = given === answer;
+  if(correct) score += 1;
+
+  boardFeedback.className = 'board-feedback ' + (correct ? 'ok' : 'no');
+  boardFeedback.textContent = correct
+    ? `¡Correcto! ${currentVerb.inf} → ${answer}`
+    : `Casi — la forma correcta es "${answer}".`;
+
+  boardInput.disabled = true;
+  boardCheckBtn.disabled = true;
+  waitingCheck = false;
+  renderTrack();
+
+  if(boardPos >= TOTAL_CELLS){
+    diceBtn.disabled = true;
+    boardFinish.className = 'board-finish show';
+    boardFinish.innerHTML = `🏁 <strong>¡Meta!</strong> Terminaste el tablero con ${score} / ${TOTAL_CELLS} aciertos.`;
+  } else {
+    diceBtn.disabled = false;
+  }
+}
+
+diceBtn.addEventListener('click', rollDice);
+boardCheckBtn.addEventListener('click', checkAnswer);
+boardInput.addEventListener('keydown', (e)=>{
+  if(e.key === 'Enter' && waitingCheck){
+    e.preventDefault();
+    checkAnswer();
+  }
+});
+document.getElementById('board-reset-link').addEventListener('click', ()=>{
+  boardPos = 0; score = 0; currentVerb = null; waitingCheck = false;
+  cellTense = [];
+  for(let i=0;i<TOTAL_CELLS;i++){ cellTense.push(TENSES[i % TENSES.length]); }
+  cellTense = cellTense.sort(()=> Math.random()-0.4);
+  cardTense.textContent = 'presente';
+  cardTense.className = 'board-card-tense';
+  cardPrompt.textContent = 'Tira el dado para empezar la partida.';
+  cardHint.textContent = '';
+  boardInput.value = '';
+  boardInput.disabled = true;
+  boardCheckBtn.disabled = true;
+  boardFeedback.className = 'board-feedback empty';
+  diceBtn.disabled = false;
+  boardFinish.className = 'board-finish';
+  boardFinish.innerHTML = '';
+  renderTrack();
+});
+
+renderTrack();
+
+/* ---------- SELF-ASSESSMENT ---------- */
+const SELFCHECK_VERBS = ['ser','ir','tener','hacer','poder','querer','decir','venir','poner','salir'];
+const selfList = document.getElementById('selfcheck-list');
+const selfSummary = document.getElementById('selfcheck-summary');
+const selfState = {};
+
+SELFCHECK_VERBS.forEach(verb=>{
+  const row = document.createElement('div');
+  row.className = 'selfcheck-row';
+  row.innerHTML = `
+    <div class="selfcheck-verb">${verb}<small>presente · indefinido · futuro</small></div>
+    <div class="selfcheck-faces">
+      <button class="face-btn" data-verb="${verb}" data-val="1">😕</button>
+      <button class="face-btn" data-verb="${verb}" data-val="2">🙂</button>
+      <button class="face-btn" data-verb="${verb}" data-val="3">😄</button>
+    </div>
+  `;
+  selfList.appendChild(row);
+});
+
+selfList.querySelectorAll('.face-btn').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    const verb = btn.dataset.verb;
+    const val = btn.dataset.val;
+    selfState[verb] = val;
+    selfList.querySelectorAll(`.face-btn[data-verb="${verb}"]`).forEach(b=>{
+      b.classList.toggle('active', b === btn);
+    });
+    updateSelfSummary();
+  });
+});
+
+function updateSelfSummary(){
+  const evaluated = Object.keys(selfState).length;
+  if(evaluated === 0){
+    selfSummary.innerHTML = `<strong>0 / 10</strong> verbos evaluados — marca todos para ver tu resumen.`;
+    return;
+  }
+  const shaky = Object.entries(selfState).filter(([,v])=>v==='1').map(([k])=>k);
+  let msg = `<strong>${evaluated} / 10</strong> verbos evaluados.`;
+  if(evaluated === 10){
+    msg += shaky.length
+      ? ` Revisa especialmente: ${shaky.join(', ')}.`
+      : ` ¡Genial, tienes controlados los 10 verbos irregulares!`;
+  }
+  selfSummary.innerHTML = msg;
+}
+
+/* ---------- FINAL TASK ---------- */
+const STORAGE_KEY = 'rebecca-clase32-tarea';
+const taskArea = document.getElementById('final-task');
+const taskCount = document.getElementById('task-count');
+const savedFlag = document.getElementById('saved-flag');
+const IRREGULAR_WORDS = /\b(soy|eres|es|somos|sois|son|voy|vas|va|vamos|vais|van|fui|fuiste|fue|fuimos|fuisteis|fueron|tengo|tienes|tiene|tenemos|ten[eé]is|tienen|tuve|tuviste|tuvo|tuvimos|tuvisteis|tuvieron|tendr[eé]|tendr[aá]s|tendr[aá]|tendremos|tendr[eé]is|tendr[aá]n|hago|haces|hace|hacemos|hac[eé]is|hacen|hice|hiciste|hizo|hicimos|hicisteis|hicieron|har[eé]|har[aá]s|har[aá]|haremos|har[eé]is|har[aá]n|puedo|puedes|puede|podemos|pod[eé]is|pueden|pude|pudiste|pudo|pudimos|pudisteis|pudieron|podr[eé]|podr[aá]s|podr[aá]|podremos|podr[eé]is|podr[aá]n|quiero|quieres|quiere|queremos|quer[eé]is|quieren|quise|quisiste|quiso|quisimos|quisisteis|quisieron|querr[eé]|querr[aá]s|querr[aá]|querremos|querr[eé]is|querr[aá]n|digo|dices|dice|decimos|dec[ií]s|dicen|dije|dijiste|dijo|dijimos|dijisteis|dijeron|dir[eé]|dir[aá]s|dir[aá]|diremos|dir[eé]is|dir[aá]n|vengo|vienes|viene|venimos|ven[ií]s|vienen|vine|viniste|vino|vinimos|vinisteis|vinieron|vendr[eé]|vendr[aá]s|vendr[aá]|vendremos|vendr[eé]is|vendr[aá]n|pongo|pones|pone|ponemos|pon[eé]is|ponen|puse|pusiste|puso|pusimos|pusisteis|pusieron|pondr[eé]|pondr[aá]s|pondr[aá]|pondremos|pondr[eé]is|pondr[aá]n|salgo|sales|sale|salimos|sal[ií]s|salen|sal[ií]|saliste|sali[oó]|salimos|salisteis|salieron|saldr[eé]|saldr[aá]s|saldr[aá]|saldremos|saldr[eé]is|saldr[aá]n)\b/gi;
+
+async function cargarTarea(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(STORAGE_KEY);
+    if (res && typeof res.value === 'string') taskArea.value = res.value;
+  }catch(e){
+    // Clave inexistente todavía: no hay tarea previa, se queda en blanco.
+  }
+  updateCount();
+}
+
+function updateCount(){
+  const text = taskArea.value.toLowerCase();
+  const matches = text.match(IRREGULAR_WORDS) || [];
+  const found = new Set(matches).size;
+  taskCount.textContent = `${Math.min(found,4)} / 4 verbos irregulares detectados`;
+}
+taskArea.addEventListener('input', updateCount);
+updateCount();
+cargarTarea();
+
+document.getElementById('save-btn').addEventListener('click', async ()=>{
+  if (!window.storage){
+    savedFlag.textContent = 'Guardado no disponible aquí';
+    savedFlag.classList.add('show');
+    setTimeout(()=>{ savedFlag.classList.remove('show'); savedFlag.textContent = 'Guardado ✓'; }, 2200);
+    return;
+  }
+  try{
+    const ok = await window.storage.set(STORAGE_KEY, taskArea.value);
+    savedFlag.textContent = ok ? 'Guardado ✓' : 'No se pudo guardar';
+  }catch(e){
+    savedFlag.textContent = 'No se pudo guardar';
+  }
+  savedFlag.classList.add('show');
+  setTimeout(()=>{ savedFlag.classList.remove('show'); savedFlag.textContent = 'Guardado ✓'; }, 1800);
+});
+
+let taskAutosaveTimer = null;
+taskArea.addEventListener('input', ()=>{
+  clearTimeout(taskAutosaveTimer);
+  taskAutosaveTimer = setTimeout(()=>{
+    document.getElementById('save-btn').click();
+  }, 900);
+});
+</script>
+
+</body>
+</html>

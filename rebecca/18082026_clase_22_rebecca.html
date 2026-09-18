@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clase 22 · Noticias en español sencillo — Rebecca</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+
+/* ╔══════════════════════════════════════════════════════════════╗
+   ║  ESCOLAR — sistema de diseño para clases de español online   ║
+   ║  Clase 22 · L5 Línea del recuerdo · "Noticias en español sencillo — repaso de pasado" ║
+   ╚══════════════════════════════════════════════════════════════╝ */
+
+:root{
+  --paper:        #FBF7EE;
+  --paper-raised: #FFFFFF;
+  --paper-alt:    #F3ECDA;
+  --ink:          #23291F;
+  --ink-soft:     #565F52;
+  --ink-faint:    #8B9184;
+  --line:         rgba(35,41,31,0.12);
+  --line-strong:  rgba(35,41,31,0.22);
+
+  --b1:      #2F6FED;  --b1-soft: #EAF1FE;  --b1-line: #C6D9FC;
+  --b2:      #2E9E6B;  --b2-soft: #E9F6EF;  --b2-line: #BEE6D3;
+  --b3:      #DB8A2E;  --b3-soft: #FCF1E1;  --b3-line: #F3D9AF;
+  --family:  #7C5CBF;  --family-soft: #F1EBFA; --family-line: #DACBF0;
+  --news:    #B8443A;  --news-soft: #FBEBE9; --news-line: #F0C9C4;
+
+  --f-display: 'Fraunces', Georgia, serif;
+  --f-body:    'IBM Plex Sans', system-ui, sans-serif;
+  --f-data:    'IBM Plex Mono', monospace;
+
+  --r-sm: 8px;
+  --r-md: 14px;
+  --r-lg: 20px;
+
+  --shadow-1: 0 1px 2px rgba(35,41,31,0.05), 0 1px 8px rgba(35,41,31,0.04);
+}
+
+*{ box-sizing:border-box; }
+body{
+  margin:0;
+  background: var(--paper);
+  background-image: radial-gradient(circle at 1px 1px, var(--line) 1px, transparent 0);
+  background-size: 22px 22px;
+  color: var(--ink);
+  font-family: var(--f-body);
+  line-height:1.6;
+}
+::selection{ background: var(--news-soft); }
+
+/* ---------- HEADER ---------- */
+header{ padding:44px 24px 28px; max-width:760px; margin:0 auto; }
+.eyebrow{
+  font-family: var(--f-data); font-size:12px; letter-spacing:.14em;
+  text-transform:uppercase; color: var(--news); margin:0 0 10px;
+  display:flex; align-items:center; gap:10px;
+}
+.eyebrow .dot{ width:6px; height:6px; border-radius:50%; background: var(--news); }
+h1{
+  font-family: var(--f-display); font-weight:600;
+  font-size:clamp(30px,5.6vw,46px); line-height:1.08;
+  margin:0 0 14px; letter-spacing:-.01em;
+}
+h1 em{ font-style:italic; color: var(--news); }
+.lede{ font-size:16px; color: var(--ink-soft); max-width:56ch; margin:0; }
+
+.meta-row{
+  display:flex; flex-wrap:wrap; gap:20px; margin-top:26px;
+  font-family: var(--f-data); font-size:12px; color: var(--ink-faint);
+}
+.meta-row strong{
+  display:block; color: var(--ink); font-size:14.5px; font-weight:500;
+  font-family: var(--f-display); margin-top:3px;
+}
+
+/* ---------- SECTIONS ---------- */
+main{ max-width:760px; margin:0 auto; padding:8px 24px 100px; }
+
+section.block{ margin-bottom:52px; }
+.block-head{ display:flex; align-items:baseline; gap:12px; margin-bottom:18px; }
+.time-tag{
+  font-family: var(--f-data); font-size:11px; color: var(--ink-faint);
+  background: var(--paper-alt); padding:3px 10px; border-radius:999px; margin-left:auto; flex:none;
+}
+.block-num{
+  font-family: var(--f-data); font-size:12px; color:#fff; background: var(--news);
+  width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  flex:none;
+}
+.block-head h2{
+  font-family: var(--f-display); font-weight:500; font-style:italic; font-size:22px; margin:0;
+}
+
+.panel{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-lg);
+  box-shadow: var(--shadow-1); padding:26px 28px;
+}
+
+/* ---------- VOCAB ---------- */
+.vocab-hint{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin:0 0 14px; }
+.vocab-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(160px,1fr)); gap:10px; }
+.vocab-card{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:12px 14px; box-shadow: var(--shadow-1);
+}
+.vocab-cat{ font-family: var(--f-data); font-size:10.5px; color: var(--news); text-transform:uppercase; letter-spacing:.05em; }
+.vocab-word{ font-family: var(--f-display); font-weight:600; font-size:16.5px; color: var(--ink); margin-top:3px; }
+.vocab-def{ font-size:12px; color: var(--ink-soft); margin-top:3px; }
+
+/* ---------- NEWS HEADLINE CARDS ---------- */
+.headline-wrap{ display:flex; flex-direction:column; gap:18px; }
+.headline-card{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-lg);
+  box-shadow: var(--shadow-1); padding:22px 24px; border-left:4px solid var(--news);
+}
+.headline-tag{
+  font-family: var(--f-data); font-size:10.5px; text-transform:uppercase; letter-spacing:.08em;
+  color: var(--news); background: var(--news-soft); padding:3px 10px; border-radius:999px; display:inline-block;
+  margin-bottom:10px;
+}
+.headline-title{
+  font-family: var(--f-display); font-weight:600; font-size:20px; line-height:1.35; margin:0 0 12px; color: var(--ink);
+}
+.headline-body{ font-size:15px; line-height:1.75; color: var(--ink-soft); }
+.headline-body .sv{ font-weight:600; color: var(--news); border-bottom:2px dotted var(--news-line); cursor:help; }
+.headline-body .sv:hover, .headline-body .sv:focus{ background: var(--news-soft); }
+.headline-glossary{
+  margin-top:14px; padding-top:14px; border-top:1px dashed var(--line);
+  font-family: var(--f-data); font-size:12px; color: var(--ink-faint); line-height:1.9;
+}
+.headline-glossary strong{ color: var(--ink); font-family: var(--f-body); }
+
+/* ---------- COMPREHENSION QUESTIONS ---------- */
+.comp-wrap{ margin-top:22px; }
+.comp-q{
+  background: var(--paper-alt); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:14px 16px; margin-bottom:10px;
+}
+.comp-q:last-child{ margin-bottom:0; }
+.comp-q-text{ font-size:14.5px; color: var(--ink); margin:0 0 8px; }
+.comp-q-input{
+  width:100%; font-family: var(--f-body); font-size:14px; color: var(--ink);
+  background:#fff; border:1px solid var(--line-strong); border-radius: var(--r-sm);
+  padding:9px 12px; resize:vertical; min-height:38px;
+}
+.comp-q-input:focus{ outline:none; border-color: var(--news); }
+
+/* ---------- SUMMARY BOX ---------- */
+.summary-box{
+  margin-top:18px; padding:16px 18px; background: var(--news-soft); border:1px solid var(--news-line);
+  border-radius: var(--r-md);
+}
+.summary-box-title{ font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.06em; color: var(--news); margin:0 0 8px; }
+.summary-box textarea{
+  width:100%; min-height:70px; font-family: var(--f-body); font-size:14.5px; color: var(--ink);
+  background:#fff; border:1px solid var(--news-line); border-radius: var(--r-sm);
+  padding:10px 12px; resize:vertical;
+}
+.summary-box textarea:focus{ outline:none; border-color: var(--news); }
+
+/* ---------- PRONUNCIATION DRILL ---------- */
+.pron-wrap{ margin-top:22px; }
+.pron-row{
+  display:flex; align-items:center; gap:14px; padding:12px 0; border-bottom:1px dashed var(--line);
+}
+.pron-row:last-child{ border-bottom:none; }
+.pron-word{ font-family: var(--f-display); font-weight:600; font-size:18px; color: var(--ink); min-width:130px; }
+.pron-ipa{ font-family: var(--f-data); font-size:13px; color: var(--news); min-width:150px; }
+.pron-tip{ font-size:13px; color: var(--ink-soft); }
+
+/* ---------- EXERCISE ---------- */
+.exercise{ margin-bottom:20px; }
+.exercise:last-of-type{ margin-bottom:0; }
+.ex-sentence{ font-size:15.5px; margin-bottom:10px; }
+.ex-sentence .gap{ font-family: var(--f-data); color: var(--ink-faint); }
+.ex-options{ display:flex; flex-wrap:wrap; gap:8px; }
+.opt-btn{
+  font-family: var(--f-body); font-size:14px; background: var(--paper-raised);
+  border:1.5px solid var(--line); color: var(--ink); padding:7px 16px; border-radius:999px;
+  cursor:pointer; transition: all .15s ease;
+}
+.opt-btn:hover{ border-color: var(--ink-faint); }
+.opt-btn.picked{ background: var(--news-soft); border-color: var(--news); color: var(--news); }
+.opt-btn.correct{ background: var(--news-soft); border-color: var(--news); color: var(--news); }
+.opt-btn.wrong{ background: var(--b1-soft); border-color: var(--b1); color: var(--b1); }
+.opt-btn:disabled{ cursor:default; }
+
+.check-bar{
+  display:flex; align-items:center; justify-content:space-between; gap:16px;
+  margin-top:22px; padding-top:18px; border-top:1px dashed var(--line);
+}
+.btn-primary{
+  font-family: var(--f-body); font-weight:600; font-size:14px; color:#fff; background: var(--news);
+  border:none; padding:11px 22px; border-radius:999px; cursor:pointer; transition: transform .1s ease;
+}
+.btn-primary:hover{ transform: translateY(-1px); }
+#score-text{ font-family: var(--f-data); font-size:13px; color: var(--ink-faint); }
+.btn-ghost{
+  font-family: var(--f-body); font-weight:600; font-size:13px; color: var(--ink-soft); background:none;
+  border:1.5px solid var(--line); padding:9px 18px; border-radius:999px; cursor:pointer;
+}
+.btn-ghost:hover{ border-color: var(--ink-faint); }
+.ex-divider{
+  display:flex; align-items:center; gap:10px; margin:20px 0 16px;
+  font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.06em;
+  color: var(--ink-faint);
+}
+.ex-divider::before, .ex-divider::after{ content:""; flex:1; height:1px; background: var(--line); }
+.ex-divider.en-clase{ color: var(--news); }
+.ex-divider.en-clase::before, .ex-divider.en-clase::after{ background: var(--news-line); }
+
+/* ---------- ROLEPLAY ---------- */
+.roleplay-panel{ background: var(--b1-soft); border:1px solid var(--b1-line); border-radius: var(--r-lg); padding:26px 28px; }
+.roleplay-panel .block-num{ background: var(--b1); }
+.scene-setup{
+  display:flex; gap:14px; align-items:flex-start; background: var(--paper-raised);
+  border:1px solid var(--b1-line); border-radius: var(--r-md); padding:14px 16px; margin-bottom:20px;
+}
+.scene-icon{ font-size:22px; flex:none; }
+.scene-text{ font-size:14px; color: var(--ink-soft); }
+.scene-text strong{ color: var(--ink); }
+
+.dialogue{ display:flex; flex-direction:column; gap:14px; }
+.scene-tabs{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:18px; }
+.scene-tab{
+  font-family: var(--f-data); font-size:12.5px; background: var(--paper-raised);
+  border:1.5px solid var(--b1-line); color: var(--ink-soft); padding:7px 14px;
+  border-radius:999px; cursor:pointer; transition: all .15s ease;
+}
+.scene-tab:hover{ border-color: var(--b1); }
+.scene-tab.active{ background: var(--b1); border-color: var(--b1); color:#fff; }
+.line{ display:flex; gap:12px; align-items:flex-start; }
+.line-avatar{
+  flex:none; width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  font-family: var(--f-display); font-weight:600; font-size:14px; color:#fff;
+}
+.line.friend .line-avatar{ background: var(--ink-faint); }
+.line.you .line-avatar{ background: var(--b1); }
+.line-body{ flex:1; }
+.line-name{ font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.05em; color: var(--ink-faint); margin:0 0 4px; }
+.line-bubble{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:12px 14px; font-size:14.5px; color: var(--ink);
+}
+.line.you .line-bubble{ background:#fff; border-color: var(--b1-line); }
+.line-input{
+  width:100%; font-family: var(--f-body); font-size:14.5px; color: var(--ink);
+  background:#fff; border:1px solid var(--b1-line); border-radius: var(--r-sm);
+  padding:10px 12px; resize:vertical; min-height:40px; margin-top:2px;
+}
+.line-input:focus{ outline:none; border-color: var(--b1); }
+.line-hint{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin-top:5px; }
+
+.roleplay-tip{
+  margin-top:22px; padding:14px 16px; background: var(--paper-raised); border:1px solid var(--b1-line);
+  border-radius: var(--r-md); font-size:13.5px; color: var(--ink-soft);
+}
+.roleplay-tip strong{ color: var(--ink); }
+
+/* ---------- TAREA FINAL ---------- */
+.task-panel{ background: var(--b3-soft); border:1px solid var(--b3-line); border-radius: var(--r-lg); padding:26px 28px; }
+.task-panel .block-num{ background: var(--b3); }
+.prompt-box{
+  margin-top:14px; padding:16px 18px; background: var(--paper-raised); border:1px solid var(--b3-line);
+  border-radius: var(--r-md); font-size:14.5px; line-height:1.75; color: var(--ink);
+}
+.prompt-box strong{ color:var(--b3); }
+textarea#final-task{
+  width:100%; min-height:140px; font-family: var(--f-body); font-size:15px; color: var(--ink);
+  background: var(--paper-raised); border:1px solid var(--b3-line); border-radius: var(--r-md);
+  padding:14px 16px; resize:vertical; margin-top:14px;
+}
+textarea#final-task:focus{ outline:none; border-color: var(--b3); }
+input#headline-input{
+  width:100%; font-family: var(--f-body); font-size:15px; color: var(--ink);
+  background: var(--paper-raised); border:1px solid var(--b3-line); border-radius: var(--r-md);
+  padding:12px 16px; margin-top:14px;
+}
+input#headline-input:focus{ outline:none; border-color: var(--b3); }
+.task-footer{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:12px; flex-wrap:wrap; }
+#task-count{ font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); }
+.btn-secondary{
+  font-family: var(--f-body); font-weight:600; font-size:13.5px; color: var(--b3); background:none;
+  border:1.5px solid var(--b3-line); padding:9px 18px; border-radius:999px; cursor:pointer;
+}
+.saved-flag{ font-family: var(--f-data); font-size:12px; color: var(--b2); opacity:0; transition: opacity .3s ease; }
+.saved-flag.show{ opacity:1; }
+.record-tip{
+  margin-top:14px; padding:14px 16px; background: var(--paper-raised); border:1px solid var(--b3-line);
+  border-radius: var(--r-md); font-size:13.5px; color: var(--ink-soft);
+}
+.record-tip strong{ color: var(--ink); }
+
+/* ---------- FOOTER NAV ---------- */
+footer{
+  max-width:760px; margin:0 auto; padding:0 24px 60px; display:flex;
+  justify-content:space-between; flex-wrap:wrap; gap:12px;
+  font-family: var(--f-data); font-size:11.5px; color: var(--ink-faint);
+}
+
+@media (max-width:640px){
+  header{ padding:36px 16px 22px; }
+  main{ padding:6px 16px 90px; }
+  .panel{ padding:20px 18px; }
+  .roleplay-panel, .task-panel{ padding:20px 18px; }
+  .headline-card{ padding:18px 18px; }
+  .pron-word{ min-width:auto; }
+}
+@media (prefers-reduced-motion: reduce){ *{ transition:none !important; } }
+</style>
+</head>
+<body>
+
+<header>
+  <p class="eyebrow"><span class="dot"></span>Clase 22 · L5 Línea del recuerdo</p>
+  <h1>Noticias en <em>español sencillo</em></h1>
+  <p class="lede">Hoy cerramos el bloque del pasado con algo muy práctico: leer noticias reales, adaptadas a un nivel A1. Vas a practicar el imperfecto y el indefinido en contexto real, aprender vocabulario básico de noticias (gobierno, economía, tiempo) y resumir titulares con tus propias palabras — justo lo que necesitas para entender la prensa española del día a día.</p>
+  <div class="meta-row">
+    <div>Duración<strong>50 min</strong></div>
+    <div>Gramática<strong>Repaso de pasado en titulares A1</strong></div>
+    <div>Nivel<strong>A1–A2</strong></div>
+  </div>
+</header>
+
+<main>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">1</span><h2>Vocabulario de noticias</h2><span class="time-tag">8 min</span></div>
+    <div class="panel">
+      <p class="vocab-hint">Palabras básicas que aparecen en casi cualquier noticia en español.</p>
+      <div class="vocab-grid">
+        <div class="vocab-card"><div class="vocab-cat">gobierno</div><div class="vocab-word">el gobierno</div><div class="vocab-def">quien dirige el país</div></div>
+        <div class="vocab-card"><div class="vocab-cat">gobierno</div><div class="vocab-word">el presidente</div><div class="vocab-def">la persona que lidera el gobierno</div></div>
+        <div class="vocab-card"><div class="vocab-cat">gobierno</div><div class="vocab-word">anunciar</div><div class="vocab-def">decir algo de forma oficial</div></div>
+        <div class="vocab-card"><div class="vocab-cat">economía</div><div class="vocab-word">la economía</div><div class="vocab-def">el dinero y el trabajo de un país</div></div>
+        <div class="vocab-card"><div class="vocab-cat">economía</div><div class="vocab-word">subir / bajar</div><div class="vocab-def">aumentar o disminuir un precio o número</div></div>
+        <div class="vocab-card"><div class="vocab-cat">economía</div><div class="vocab-word">el precio</div><div class="vocab-def">cuánto cuesta algo</div></div>
+        <div class="vocab-card"><div class="vocab-cat">tiempo</div><div class="vocab-word">la ola de calor</div><div class="vocab-def">varios días de mucho calor</div></div>
+        <div class="vocab-card"><div class="vocab-cat">tiempo</div><div class="vocab-word">la tormenta</div><div class="vocab-def">lluvia fuerte con viento</div></div>
+        <div class="vocab-card"><div class="vocab-cat">tiempo</div><div class="vocab-word">afectar</div><div class="vocab-def">tener un efecto sobre algo o alguien</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">2</span><h2>Tres titulares</h2><span class="time-tag">15 min</span></div>
+    <div class="headline-wrap">
+
+      <div class="headline-card">
+        <span class="headline-tag">gobierno</span>
+        <p class="headline-title">El gobierno anunció ayer una bajada de impuestos</p>
+        <p class="headline-body">El presidente <span class="sv" tabindex="0" title="indefinido — hecho puntual y oficial">anunció</span> ayer que los impuestos <span class="sv" tabindex="0" title="futuro simple — algo que va a pasar">van a bajar</span> el próximo año. Antes de la reunión, muchas personas <span class="sv" tabindex="0" title="imperfecto — escenario, situación antes del anuncio">pensaban</span> que el gobierno no <span class="sv" tabindex="0" title="imperfecto — descripción de la situación previa">iba</span> a hacer ningún cambio. La noticia <span class="sv" tabindex="0" title="indefinido — reacción puntual">sorprendió</span> a mucha gente.</p>
+        <div class="headline-glossary"><strong>Vocabulario clave:</strong> impuestos = dinero que se paga al estado · bajada = reducción · sorprender = causar sorpresa</div>
+      </div>
+
+      <div class="headline-card">
+        <span class="headline-tag">economía</span>
+        <p class="headline-title">El precio de la fruta subió mucho este verano</p>
+        <p class="headline-body">Durante el mes de julio, el precio de la fruta <span class="sv" tabindex="0" title="indefinido — cambio puntual, hecho">subió</span> casi un 20%. Normalmente, en verano los precios <span class="sv" tabindex="0" title="imperfecto — situación habitual">bajaban</span> un poco porque <span class="sv" tabindex="0" title="imperfecto — descripción">había</span> más fruta en el mercado. Este año, sin embargo, el calor <span class="sv" tabindex="0" title="indefinido — acción puntual, causa del hecho">afectó</span> a las cosechas y los precios <span class="sv" tabindex="0" title="indefinido — resultado final">subieron</span> en lugar de bajar.</p>
+        <div class="headline-glossary"><strong>Vocabulario clave:</strong> la cosecha = lo que se recoge del campo · sin embargo = pero, en cambio · en lugar de = en vez de</div>
+      </div>
+
+      <div class="headline-card">
+        <span class="headline-tag">tiempo</span>
+        <p class="headline-title">Una ola de calor afectó a media España</p>
+        <p class="headline-body">La semana pasada, una ola de calor <span class="sv" tabindex="0" title="indefinido — hecho puntual">afectó</span> a media España. En algunas ciudades, las temperaturas <span class="sv" tabindex="0" title="indefinido — hecho puntual, resultado">llegaron</span> a 42 grados. Mientras la gente <span class="sv" tabindex="0" title="imperfecto — acción de fondo, en curso">buscaba</span> sombra y agua, el gobierno <span class="sv" tabindex="0" title="indefinido — acción puntual">recomendó</span> quedarse en casa durante las horas centrales del día. La ola de calor <span class="sv" tabindex="0" title="indefinido — hecho puntual, conclusión">terminó</span> el fin de semana, cuando por fin <span class="sv" tabindex="0" title="indefinido — acción puntual">llegó</span> una tormenta.</p>
+        <div class="headline-glossary"><strong>Vocabulario clave:</strong> la temperatura = grados de calor o frío · la sombra = lugar sin sol directo · las horas centrales = el mediodía</div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">3</span><h2>¿Qué entendiste?</h2><span class="time-tag">8 min</span></div>
+    <div class="panel">
+      <p class="vocab-hint">Responde con tus propias palabras, sin mirar el texto si puedes.</p>
+      <div class="comp-wrap">
+        <div class="comp-q"><p class="comp-q-text">1. ¿Qué anunció el gobierno sobre los impuestos?</p><textarea class="comp-q-input" rows="1"></textarea></div>
+        <div class="comp-q"><p class="comp-q-text">2. ¿Por qué subió el precio de la fruta este verano?</p><textarea class="comp-q-input" rows="1"></textarea></div>
+        <div class="comp-q"><p class="comp-q-text">3. ¿Qué temperatura llegaron a tener algunas ciudades?</p><textarea class="comp-q-input" rows="1"></textarea></div>
+        <div class="comp-q"><p class="comp-q-text">4. ¿Qué recomendó el gobierno durante la ola de calor?</p><textarea class="comp-q-input" rows="1"></textarea></div>
+        <div class="comp-q"><p class="comp-q-text">5. De los tres titulares, ¿cuál te parece más interesante y por qué?</p><textarea class="comp-q-input" rows="2"></textarea></div>
+      </div>
+      <div class="summary-box">
+        <p class="summary-box-title">Ahora resume uno de los titulares con tus propias palabras (2-3 frases)</p>
+        <textarea id="resumen-titular" placeholder="Escribe aquí tu resumen..."></textarea>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">4</span><h2>Pronunciación</h2><span class="time-tag">5 min</span></div>
+    <div class="panel">
+      <p class="vocab-hint">Palabras de noticias que pueden costar un poco más.</p>
+      <div class="pron-wrap">
+        <div class="pron-row"><span class="pron-word">gobierno</span><span class="pron-ipa">/goˈβjer.no/</span><span class="pron-tip">una sola sílaba tónica: go-BIER-no</span></div>
+        <div class="pron-row"><span class="pron-word">anunció</span><span class="pron-ipa">/anunˈsjo/</span><span class="pron-tip">acento fuerte en la última sílaba</span></div>
+        <div class="pron-row"><span class="pron-word">impuestos</span><span class="pron-ipa">/imˈpwes.tos/</span><span class="pron-tip">diptongo "ue" en una sola sílaba</span></div>
+        <div class="pron-row"><span class="pron-word">temperatura</span><span class="pron-ipa">/tem.pe.ɾaˈtu.ɾa/</span><span class="pron-tip">palabra larga; divide en sílabas al practicar</span></div>
+        <div class="pron-row"><span class="pron-word">cosecha</span><span class="pron-ipa">/koˈse.tʃa/</span><span class="pron-tip">la "ch" es un solo sonido, como en "leche"</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">5</span><h2>Practica</h2><span class="time-tag">8 min</span></div>
+    <div class="panel">
+      <p class="vocab-hint">20 frases de repaso combinando vocabulario de noticias con imperfecto e indefinido. Las primeras 10 se hacen en voz alta en clase; el resto queda como repaso para casa.</p>
+      <div id="exercises"></div>
+      <div class="check-bar">
+        <div style="display:flex; gap:10px;">
+          <button class="btn-primary" id="check-btn">Comprobar respuestas</button>
+          <button class="btn-ghost" id="reset-btn">Reiniciar</button>
+        </div>
+        <span id="score-text"></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="block roleplay-panel">
+    <div class="block-head"><span class="block-num">6</span><h2>Comentando las noticias</h2><span class="time-tag">6 min</span></div>
+    <p class="lede" style="margin-bottom:16px;">Un compañero te pregunta sobre las noticias de hoy y sobre noticias que recuerdas. 50 turnos repartidos en 5 escenas; elige una para practicar en clase y deja el resto para casa.</p>
+    <div class="scene-tabs" id="scene-tabs"></div>
+    <div id="scene-container"></div>
+    <div class="roleplay-tip"><strong>En clase:</strong> practicaremos una escena en voz alta, cambiando de rol. El resto de escenas son para practicar por tu cuenta durante la semana.</div>
+  </section>
+
+  <section class="block task-panel">
+    <div class="block-head"><span class="block-num">7</span><h2 style="color:var(--b3)">Tu tarea</h2><span class="time-tag">—</span></div>
+    <p style="margin:0; font-size:15px; color:var(--ink-soft);">Busca un titular sencillo en español — puede ser de cualquier periódico digital — y tráelo a la próxima clase. Aquí puedes anotarlo y preparar un resumen breve.</p>
+    <div class="prompt-box"><strong>Idea:</strong> busca en Google "noticias fáciles en español" o mira la sección de titulares de un periódico como El País o 20minutos. Elige un titular corto que entiendas al menos en parte.</div>
+    <input type="text" id="headline-input" placeholder="Pega o escribe aquí el titular que encontraste...">
+    <textarea id="final-task" placeholder="Escribe aquí un resumen breve del titular, con tus propias palabras (2-3 frases)..."></textarea>
+    <div class="task-footer">
+      <span id="task-count">0 / 3 verbos en pasado detectados</span>
+      <div style="display:flex; gap:10px; align-items:center;">
+        <span class="saved-flag" id="saved-flag">Guardado ✓</span>
+        <button class="btn-secondary" id="save-btn">Guardar tarea</button>
+      </div>
+    </div>
+    <div class="record-tip"><strong>Para casa:</strong> lee tu titular en voz alta y practica explicándoselo a alguien (o a ti misma) como si se lo contaras después de leer el periódico.</div>
+  </section>
+
+</main>
+
+<footer>
+  <span>Clase 22 · Línea del recuerdo</span>
+  <span>Próxima clase → Clase 23: direcciones por Barcelona</span>
+</footer>
+
+<script>
+/* ---------- EXERCISES ---------- */
+const EXERCISES = [
+  {"sentence":"Ayer, el gobierno <span class=\"gap\">___</span> una nueva ley sobre impuestos.","options":["anunciaba","anunció","anuncia"],"answer":"anunció"},
+  {"sentence":"Mientras el presidente <span class=\"gap\">___</span>, todos escuchaban en silencio.","options":["hablaba","habló","habla"],"answer":"hablaba"},
+  {"sentence":"El precio del pan <span class=\"gap\">___</span> un 5% la semana pasada.","options":["subía","subió","sube"],"answer":"subió"},
+  {"sentence":"Antes, los impuestos <span class=\"gap\">___</span> más bajos que ahora.","options":["eran","fueron","son"],"answer":"eran"},
+  {"sentence":"De repente, una tormenta <span class=\"gap\">___</span> toda la ciudad.","options":["afectaba","afectó","afecta"],"answer":"afectó"},
+  {"sentence":"Normalmente, en agosto <span class=\"gap\">___</span> mucho calor en España.","options":["hacía","hizo","hace"],"answer":"hacía"},
+  {"sentence":"La economía <span class=\"gap\">___</span> mal durante muchos meses, hasta que mejoró.","options":["estaba","estuvo","está"],"answer":"estaba"},
+  {"sentence":"Ese día, la temperatura <span class=\"gap\">___</span> a 40 grados.","options":["llegaba","llegó","llega"],"answer":"llegó"},
+  {"sentence":"Mientras leía el periódico, <span class=\"gap\">___</span> una noticia muy triste.","options":["encontraba","encontré","encuentro"],"answer":"encontré"},
+  {"sentence":"El año pasado, el gobierno <span class=\"gap\">___</span> los precios de la luz.","options":["bajaba","bajó","baja"],"answer":"bajó"},
+  {"sentence":"Cuando yo era pequeña, no me <span class=\"gap\">___</span> las noticias.","options":["interesaban","interesaron","interesan"],"answer":"interesaban"},
+  {"sentence":"La ola de calor <span class=\"gap\">___</span> el fin de semana pasado.","options":["terminaba","terminó","termina"],"answer":"terminó"},
+  {"sentence":"Antes de la tormenta, el cielo <span class=\"gap\">___</span> completamente gris.","options":["estaba","estuvo","está"],"answer":"estaba"},
+  {"sentence":"Los agricultores <span class=\"gap\">___</span> perder toda la cosecha ese año.","options":["temían","temieron","temen"],"answer":"temían"},
+  {"sentence":"El titular de ayer <span class=\"gap\">___</span> sobre una subida de precios.","options":["hablaba","habló","habla"],"answer":"hablaba"},
+  {"sentence":"De niña, mi madre siempre <span class=\"gap\">___</span> el periódico por la mañana.","options":["leía","leyó","lee"],"answer":"leía"},
+  {"sentence":"El presidente <span class=\"gap\">___</span> la reunión con los periodistas ayer a las diez.","options":["empezaba","empezó","empieza"],"answer":"empezó"},
+  {"sentence":"Mientras el país <span class=\"gap\">___</span> en crisis económica, muchos precios subieron.","options":["estaba","estuvo","está"],"answer":"estaba"},
+  {"sentence":"La noticia me <span class=\"gap\">___</span> mucho porque no la esperaba.","options":["sorprendía","sorprendió","sorprende"],"answer":"sorprendió"},
+  {"sentence":"Antes de esta tormenta, no <span class=\"gap\">___</span> llovido en semanas.","options":["había","hubo","hay"],"answer":"había"}
+];
+
+const exWrap = document.getElementById('exercises');
+
+const PRACTICE_KEY = 'rebecca-clase22-practica';
+let practiceAnswers = {};
+let practiceAutosaveTimer = null;
+function guardarPractica(){
+  if (!window.storage) return;
+  clearTimeout(practiceAutosaveTimer);
+  practiceAutosaveTimer = setTimeout(()=>{
+    window.storage.set(PRACTICE_KEY, JSON.stringify(practiceAnswers)).catch(()=>{});
+  }, 500);
+}
+function restaurarPractica(){
+  const items = exWrap.querySelectorAll('.exercise');
+  items.forEach((el, idx)=>{
+    const val = practiceAnswers[idx];
+    if (val === undefined) return;
+    const btn = el.querySelector(`.opt-btn[data-value="${val}"]`);
+    if (btn) btn.classList.add('picked');
+  });
+}
+async function cargarPractica(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(PRACTICE_KEY);
+    if (res && typeof res.value === 'string') practiceAnswers = JSON.parse(res.value);
+  }catch(e){
+    // Sin progreso guardado todavia.
+  }
+  restaurarPractica();
+}
+exWrap.addEventListener('click', (e)=>{
+  const btn = e.target.closest('.opt-btn');
+  if (!btn || btn.disabled) return;
+  const el = btn.closest('.exercise');
+  if (!el) return;
+  const items = Array.from(exWrap.querySelectorAll('.exercise'));
+  const idx = items.indexOf(el);
+  if (idx === -1) return;
+  practiceAnswers[idx] = btn.dataset.value;
+  guardarPractica();
+});
+new MutationObserver(()=>{ restaurarPractica(); }).observe(exWrap, { childList:true });
+cargarPractica();
+
+EXERCISES.forEach((ex, i)=>{
+  if(i === 0){
+    const divider = document.createElement('div');
+    divider.className = 'ex-divider en-clase';
+    divider.textContent = 'en clase · ítems 1–10';
+    exWrap.appendChild(divider);
+  }
+  if(i === 10){
+    const divider = document.createElement('div');
+    divider.className = 'ex-divider';
+    divider.textContent = 'para casa · repaso opcional';
+    exWrap.appendChild(divider);
+  }
+  const el = document.createElement('div');
+  el.className = 'exercise';
+  el.dataset.answer = ex.answer.toLowerCase();
+  el.innerHTML = `
+    <div class="ex-sentence">${i+1}. ${ex.sentence}</div>
+    <div class="ex-options">
+      ${ex.options.map(opt => `<button class="opt-btn" data-value="${opt.toLowerCase()}">${opt}</button>`).join('')}
+    </div>
+  `;
+  exWrap.appendChild(el);
+});
+
+exWrap.querySelectorAll('.exercise').forEach(exercise=>{
+  const buttons = exercise.querySelectorAll('.opt-btn');
+  buttons.forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      buttons.forEach(b=>b.classList.remove('picked'));
+      btn.classList.add('picked');
+    });
+  });
+});
+
+document.getElementById('check-btn').addEventListener('click', ()=>{
+  let correct = 0;
+  let answered = 0;
+  exWrap.querySelectorAll('.exercise').forEach(exercise=>{
+    const answer = exercise.dataset.answer;
+    const buttons = exercise.querySelectorAll('.opt-btn');
+    const picked = exercise.querySelector('.opt-btn.picked');
+    if(picked) answered++;
+    buttons.forEach(btn=>{
+      btn.disabled = true;
+      if(btn.dataset.value === answer){
+        btn.classList.add('correct');
+      } else if(btn.classList.contains('picked')){
+        btn.classList.add('wrong');
+      }
+    });
+    if(picked && picked.dataset.value === answer) correct++;
+  });
+  document.getElementById('score-text').textContent = `${correct} / ${exWrap.querySelectorAll('.exercise').length} correctas (${answered} respondidas)`;
+});
+
+document.getElementById('reset-btn').addEventListener('click', ()=>{
+  exWrap.querySelectorAll('.opt-btn').forEach(btn=>{
+    btn.disabled = false;
+    btn.classList.remove('picked','correct','wrong');
+  });
+  document.getElementById('score-text').textContent = '';
+});
+
+practiceAnswers = {};
+if (window.storage) window.storage.set(PRACTICE_KEY, JSON.stringify(practiceAnswers)).catch(()=>{});
+
+/* ---------- ROLEPLAY ---------- */
+const SCENES = [
+  {
+    "id": "titular-gobierno",
+    "tab": "Hablando del titular del gobierno",
+    "icon": "🏛️",
+    "setup": "Comentas con un compañero el titular sobre los impuestos.",
+    "lines": [
+      {"who":"friend","name":"Compañero","text":"¿De qué hablaba el titular del gobierno?"},
+      {"who":"you","hint":"Resume con tus palabras de qué hablaba."},
+      {"who":"friend","name":"Compañero","text":"¿Qué anunció el presidente exactamente?"},
+      {"who":"you","hint":"Usa ANUNCIÓ: cuenta qué anunció."},
+      {"who":"friend","name":"Compañero","text":"¿Te sorprendió la noticia?"},
+      {"who":"you","hint":"Responde si te sorprendió o no."},
+      {"who":"friend","name":"Compañero","text":"¿Crees que es una buena decisión?"},
+      {"who":"you","hint":"Da tu opinión sobre la decisión."},
+      {"who":"friend","name":"Compañero","text":"¿Sigues las noticias de política normalmente?"},
+      {"who":"you","hint":"Responde si sigues las noticias de política."},
+      {"who":"friend","name":"Compañero","text":"¿Qué opinas de los impuestos en tu país?"},
+      {"who":"you","hint":"Da tu opinión sobre los impuestos en tu país."}
+    ]
+  },
+  {
+    "id": "titular-economia",
+    "tab": "Hablando del precio de la fruta",
+    "icon": "🍊",
+    "setup": "Comentas el titular sobre la subida de precios.",
+    "lines": [
+      {"who":"friend","name":"Profesora","text":"¿Qué pasó con el precio de la fruta este verano?"},
+      {"who":"you","hint":"Usa SUBIÓ: cuenta qué pasó."},
+      {"who":"friend","name":"Profesora","text":"¿Por qué subió el precio, según la noticia?"},
+      {"who":"you","hint":"Usa AFECTÓ: cuenta por qué subió."},
+      {"who":"friend","name":"Profesora","text":"¿Has notado tú también que suben los precios?"},
+      {"who":"you","hint":"Responde si has notado subidas de precio."},
+      {"who":"friend","name":"Profesora","text":"¿Qué producto te parece que ha subido más?"},
+      {"who":"you","hint":"Nombra un producto que crees que ha subido mucho."},
+      {"who":"friend","name":"Profesora","text":"¿Cómo cambia tu forma de comprar cuando suben los precios?"},
+      {"who":"you","hint":"Cuenta cómo cambia tu forma de comprar."},
+      {"who":"friend","name":"Profesora","text":"¿Crees que los precios van a bajar pronto?"},
+      {"who":"you","hint":"Da tu opinión sobre si van a bajar los precios."}
+    ]
+  },
+  {
+    "id": "titular-tiempo",
+    "tab": "Hablando de la ola de calor",
+    "icon": "🌡️",
+    "setup": "Comentas el titular sobre el tiempo.",
+    "lines": [
+      {"who":"friend","name":"Amigo","text":"¿Qué pasó durante la ola de calor?"},
+      {"who":"you","hint":"Resume qué pasó durante la ola de calor."},
+      {"who":"friend","name":"Amigo","text":"¿A cuántos grados llegaron algunas ciudades?"},
+      {"who":"you","hint":"Usa LLEGARON: responde a cuántos grados."},
+      {"who":"friend","name":"Amigo","text":"¿Qué recomendó el gobierno a la gente?"},
+      {"who":"you","hint":"Usa RECOMENDÓ: cuenta qué recomendó."},
+      {"who":"friend","name":"Amigo","text":"¿Has vivido alguna ola de calor muy fuerte?"},
+      {"who":"you","hint":"Responde si has vivido una ola de calor fuerte."},
+      {"who":"friend","name":"Amigo","text":"¿Qué hacías tú para protegerte del calor?"},
+      {"who":"you","hint":"Usa el imperfecto: cuenta qué hacías para protegerte."},
+      {"who":"friend","name":"Amigo","text":"¿Crees que el clima está cambiando mucho?"},
+      {"who":"you","hint":"Da tu opinión sobre el cambio climático."}
+    ]
+  },
+  {
+    "id": "tu-titular",
+    "tab": "Presentando tu propio titular",
+    "icon": "📰",
+    "setup": "Presentas a la clase el titular que encontraste tú.",
+    "lines": [
+      {"who":"friend","name":"Profesora","text":"¿Qué titular encontraste para hoy?"},
+      {"who":"you","hint":"Lee o resume el titular que encontraste."},
+      {"who":"friend","name":"Profesora","text":"¿De qué tema trata: gobierno, economía o tiempo?"},
+      {"who":"you","hint":"Di de qué tema trata tu titular."},
+      {"who":"friend","name":"Profesora","text":"¿Entendiste todo el titular o hubo palabras difíciles?"},
+      {"who":"you","hint":"Cuenta si entendiste todo o hubo palabras difíciles."},
+      {"who":"friend","name":"Profesora","text":"¿Puedes resumirlo en una frase?"},
+      {"who":"you","hint":"Resume tu titular en una sola frase."},
+      {"who":"friend","name":"Profesora","text":"¿Por qué elegiste esta noticia?"},
+      {"who":"you","hint":"Explica por qué elegiste esa noticia."},
+      {"who":"friend","name":"Profesora","text":"¿Te gustaría saber más sobre este tema?"},
+      {"who":"you","hint":"Responde si te gustaría saber más."}
+    ]
+  },
+  {
+    "id": "habitos-noticias",
+    "tab": "Tus hábitos con las noticias",
+    "icon": "📱",
+    "setup": "Hablas de cómo sigues las noticias normalmente.",
+    "lines": [
+      {"who":"friend","name":"Compañera","text":"¿Cómo te enterabas de las noticias cuando eras más joven?"},
+      {"who":"you","hint":"Usa el imperfecto: cuenta cómo te enterabas antes."},
+      {"who":"friend","name":"Compañera","text":"¿Cómo te enteras de las noticias ahora?"},
+      {"who":"you","hint":"Cuenta cómo te enteras ahora."},
+      {"who":"friend","name":"Compañera","text":"¿Lees noticias en español a menudo?"},
+      {"who":"you","hint":"Responde si lees noticias en español a menudo."},
+      {"who":"friend","name":"Compañera","text":"¿Cuál fue la última noticia importante que leíste?"},
+      {"who":"you","hint":"Usa LEÍSTE: cuenta la última noticia importante que leíste."},
+      {"who":"friend","name":"Compañera","text":"¿Qué tipo de noticias te interesan más?"},
+      {"who":"you","hint":"Cuenta qué tipo de noticias te interesan más."},
+      {"who":"friend","name":"Compañera","text":"¿Te gustaría seguir practicando con noticias en clase?"},
+      {"who":"you","hint":"Responde si te gustaría seguir practicando con noticias."}
+    ]
+  }
+];
+
+const sceneTabs = document.getElementById('scene-tabs');
+const sceneContainer = document.getElementById('scene-container');
+let activeScene = 0;
+
+function renderTabs(){
+  sceneTabs.innerHTML = SCENES.map((s,i)=>
+    `<button class="scene-tab${i===activeScene?' active':''}" data-idx="${i}">${s.icon} ${s.tab}</button>`
+  ).join('');
+  sceneTabs.querySelectorAll('.scene-tab').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      activeScene = parseInt(btn.dataset.idx, 10);
+      renderTabs();
+      renderScene();
+    });
+  });
+}
+
+function renderScene(){
+  const scene = SCENES[activeScene];
+  const linesHtml = scene.lines.map((l)=>{
+    if(l.who === 'friend'){
+      return `
+        <div class="line friend">
+          <div class="line-avatar">${l.name.charAt(0)}</div>
+          <div class="line-body">
+            <p class="line-name">${l.name}</p>
+            <div class="line-bubble">${l.text}</div>
+          </div>
+        </div>`;
+    } else {
+      return `
+        <div class="line you">
+          <div class="line-avatar">Tú</div>
+          <div class="line-body">
+            <p class="line-name">Tú</p>
+            <textarea class="line-input" rows="2" placeholder="Escribe tu respuesta..."></textarea>
+            <p class="line-hint">${l.hint}</p>
+          </div>
+        </div>`;
+    }
+  }).join('');
+
+  sceneContainer.innerHTML = `
+    <div class="scene-setup">
+      <span class="scene-icon">${scene.icon}</span>
+      <p class="scene-text"><strong>${scene.tab}:</strong> ${scene.setup}</p>
+    </div>
+    <div class="dialogue">${linesHtml}</div>
+  `;
+}
+
+renderTabs();
+renderScene();
+
+const sceneStorageKey = 'rebecca-clase22-roleplay';
+let sceneAnswers = {};
+let sceneAutosaveTimer = null;
+function guardarScene(){
+  if (!window.storage) return;
+  clearTimeout(sceneAutosaveTimer);
+  sceneAutosaveTimer = setTimeout(()=>{
+    window.storage.set(sceneStorageKey, JSON.stringify(sceneAnswers)).catch(()=>{});
+  }, 500);
+}
+function restaurarScene(){
+  sceneContainer.querySelectorAll('.line-input').forEach((ta, li)=>{
+    const val = sceneAnswers[String(li)];
+    if (val !== undefined) ta.value = val;
+  });
+}
+async function cargarScene(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(sceneStorageKey);
+    if (res && typeof res.value === 'string') sceneAnswers = JSON.parse(res.value);
+  }catch(e){
+    // Sin progreso guardado todavia.
+  }
+  restaurarScene();
+}
+sceneContainer.addEventListener('input', (e)=>{
+  const ta = e.target.closest('.line-input');
+  if (!ta) return;
+  const all = Array.from(sceneContainer.querySelectorAll('.line-input'));
+  const li = all.indexOf(ta);
+  if (li === -1) return;
+  sceneAnswers[String(li)] = ta.value;
+  guardarScene();
+});
+new MutationObserver(()=>{ restaurarScene(); }).observe(sceneContainer, { childList:true });
+cargarScene();
+
+
+/* ---------- FINAL TASK ---------- */
+const STORAGE_KEY = 'rebecca-clase22-tarea';
+const HEADLINE_KEY = 'rebecca-clase22-titular';
+const taskArea = document.getElementById('final-task');
+const headlineInput = document.getElementById('headline-input');
+const taskCount = document.getElementById('task-count');
+const savedFlag = document.getElementById('saved-flag');
+const PAST_ENDINGS = /\b\w*(aba|abas|ábamos|abais|aban|ía|ías|íamos|íais|ían|era|eras|éramos|erais|eran|iba|ibas|íbamos|ibais|iban|é|aste|ó|amos|asteis|aron|í|iste|ió|imos|isteis|ieron|uve|uvo|uvimos|uvieron|ue|ui|uiste|uimos|uisteis|uieron)\b/gi;
+
+async function cargarTarea(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(STORAGE_KEY);
+    if (res && typeof res.value === 'string') taskArea.value = res.value;
+  }catch(e){
+    // Clave inexistente todavía: no hay tarea previa, se queda en blanco.
+  }
+  try{
+    const res2 = await window.storage.get(HEADLINE_KEY);
+    if (res2 && typeof res2.value === 'string') headlineInput.value = res2.value;
+  }catch(e){
+    // Clave inexistente todavía: no hay titular previo, se queda en blanco.
+  }
+  updateCount();
+}
+
+function updateCount(){
+  const text = taskArea.value.toLowerCase();
+  const matches = text.match(PAST_ENDINGS) || [];
+  const found = new Set(matches).size;
+  taskCount.textContent = `${Math.min(found,3)} / 3 verbos en pasado detectados`;
+}
+taskArea.addEventListener('input', updateCount);
+updateCount();
+cargarTarea();
+
+document.getElementById('save-btn').addEventListener('click', async ()=>{
+  if (!window.storage){
+    savedFlag.textContent = 'Guardado no disponible aquí';
+    savedFlag.classList.add('show');
+    setTimeout(()=>{ savedFlag.classList.remove('show'); savedFlag.textContent = 'Guardado ✓'; }, 2200);
+    return;
+  }
+  try{
+    const ok1 = await window.storage.set(STORAGE_KEY, taskArea.value);
+    const ok2 = await window.storage.set(HEADLINE_KEY, headlineInput.value);
+    savedFlag.textContent = (ok1 && ok2) ? 'Guardado ✓' : 'No se pudo guardar';
+  }catch(e){
+    savedFlag.textContent = 'No se pudo guardar';
+  }
+  savedFlag.classList.add('show');
+  setTimeout(()=>{ savedFlag.classList.remove('show'); savedFlag.textContent = 'Guardado ✓'; }, 1800);
+});
+
+let taskAutosaveTimer = null;
+taskArea.addEventListener('input', ()=>{
+  clearTimeout(taskAutosaveTimer);
+  taskAutosaveTimer = setTimeout(()=>{
+    document.getElementById('save-btn').click();
+  }, 900);
+});
+</script>
+
+</body>
+</html>
