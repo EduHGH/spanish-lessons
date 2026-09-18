@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clase 18 · Contar una anécdota — Davide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+
+/* ╔══════════════════════════════════════════════════════════════╗
+   ║  ESCOLAR — sistema de diseño para clases de español online   ║
+   ║  Clase 18 · L8 Línea de la memoria · "Contar una anécdota" — Davide ║
+   ╚══════════════════════════════════════════════════════════════╝ */
+
+:root{
+  --paper:        #FBF7EE;
+  --paper-raised: #FFFFFF;
+  --paper-alt:    #F3ECDA;
+  --ink:          #23291F;
+  --ink-soft:     #565F52;
+  --ink-faint:    #8B9184;
+  --line:         rgba(35,41,31,0.12);
+  --line-strong:  rgba(35,41,31,0.22);
+
+  --b1:      #2E9E6B;  --b1-soft: #E9F6EF;  --b1-line: #BEE6D3;
+  --b2:      #DB8A2E;  --b2-soft: #FCF1E1;  --b2-line: #F3D9AF;
+  --family:  #B5502E;  --family-soft: #FBEBE3; --family-line: #EFC9B4;
+
+  --f-display: 'Fraunces', Georgia, serif;
+  --f-body:    'IBM Plex Sans', system-ui, sans-serif;
+  --f-data:    'IBM Plex Mono', monospace;
+
+  --r-sm: 8px;
+  --r-md: 14px;
+  --r-lg: 20px;
+
+  --shadow-1: 0 1px 2px rgba(35,41,31,0.05), 0 1px 8px rgba(35,41,31,0.04);
+}
+
+*{ box-sizing:border-box; }
+body{
+  margin:0;
+  background: var(--paper);
+  background-image: radial-gradient(circle at 1px 1px, var(--line) 1px, transparent 0);
+  background-size: 22px 22px;
+  color: var(--ink);
+  font-family: var(--f-body);
+  line-height:1.6;
+}
+::selection{ background: var(--b1-soft); }
+
+/* ---------- HEADER ---------- */
+header{ padding:44px 24px 28px; max-width:760px; margin:0 auto; }
+.eyebrow{
+  font-family: var(--f-data); font-size:12px; letter-spacing:.14em;
+  text-transform:uppercase; color: var(--b1); margin:0 0 10px;
+  display:flex; align-items:center; gap:10px;
+}
+.eyebrow .dot{ width:6px; height:6px; border-radius:50%; background: var(--b1); }
+h1{
+  font-family: var(--f-display); font-weight:600;
+  font-size:clamp(30px,5.6vw,46px); line-height:1.08;
+  margin:0 0 14px; letter-spacing:-.01em;
+}
+h1 em{ font-style:italic; color: var(--b1); }
+.lede{ font-size:16px; color: var(--ink-soft); max-width:56ch; margin:0; }
+
+.meta-row{
+  display:flex; flex-wrap:wrap; gap:20px; margin-top:26px;
+  font-family: var(--f-data); font-size:12px; color: var(--ink-faint);
+}
+.meta-row strong{
+  display:block; color: var(--ink); font-size:14.5px; font-weight:500;
+  font-family: var(--f-display); margin-top:3px;
+}
+
+/* ---------- SECTIONS ---------- */
+main{ max-width:760px; margin:0 auto; padding:8px 24px 100px; }
+
+section.block{ margin-bottom:52px; }
+.block-head{ display:flex; align-items:baseline; gap:12px; margin-bottom:18px; }
+.time-tag{
+  font-family: var(--f-data); font-size:11px; color: var(--ink-faint);
+  background: var(--paper-alt); padding:3px 10px; border-radius:999px; margin-left:auto; flex:none;
+}
+.block-num{
+  font-family: var(--f-data); font-size:12px; color:#fff; background: var(--b1);
+  width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  flex:none;
+}
+.block-head h2{
+  font-family: var(--f-display); font-weight:500; font-style:italic; font-size:22px; margin:0;
+}
+
+.panel{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-lg);
+  box-shadow: var(--shadow-1); padding:26px 28px;
+}
+
+/* ---------- STORY ARC ---------- */
+.arc-line{ position:relative; padding-left:30px; }
+.arc-line::before{
+  content:""; position:absolute; left:9px; top:6px; bottom:6px; width:3px;
+  background: var(--b1-line); opacity:.7;
+}
+.arc-step{ position:relative; margin-bottom:14px; }
+.arc-step:last-child{ margin-bottom:0; }
+.arc-step::before{
+  content:""; position:absolute; left:-30px; top:20px; width:11px; height:11px;
+  border-radius:50%; background: var(--paper); border:3px solid var(--b1);
+}
+.arc-card{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:16px 18px;
+}
+.arc-tag{
+  font-family: var(--f-data); font-size:10.5px; text-transform:uppercase; letter-spacing:.05em;
+  color: var(--b1); margin:0 0 4px;
+}
+.arc-title{ font-family: var(--f-body); font-weight:600; font-size:15.5px; margin:0 0 6px; }
+.arc-desc{ font-size:13.5px; color: var(--ink-soft); margin:0; }
+.arc-example{
+  display:inline-block; margin-top:8px; font-family: var(--f-data); font-size:11.5px;
+  color: var(--b1); background: var(--b1-soft); border:1px solid var(--b1-line);
+  padding:4px 11px; border-radius:999px;
+}
+
+.note{
+  margin-top:18px; padding:14px 16px; background: var(--b1-soft); border:1px solid var(--b1-line);
+  border-radius: var(--r-md); font-size:14px; color: var(--ink-soft);
+}
+.note strong{ color: var(--ink); }
+
+/* ---------- SE ACCIDENTAL ---------- */
+.se-table{ width:100%; border-collapse:collapse; margin-top:4px; }
+.se-table td{ padding:10px 6px; border-bottom:1px dashed var(--line); font-size:15px; }
+.se-table tr:last-child td{ border-bottom:none; }
+.se-pron{ font-family: var(--f-data); color: var(--ink-faint); font-size:13px; width:110px; }
+.se-form{ font-family: var(--f-display); font-weight:600; font-size:18px; color: var(--b1); }
+.se-ex{ color: var(--ink-soft); font-size:14px; }
+
+.compare-warning{
+  margin-top:14px; padding:14px 16px; background: var(--family-soft); border:1px solid var(--family-line);
+  border-radius: var(--r-md); font-size:13.5px; color: var(--ink-soft);
+}
+.compare-warning strong{ color: var(--family); }
+
+/* ---------- MARKERS ---------- */
+.marker-row{ display:flex; flex-wrap:wrap; gap:10px; margin-top:16px; }
+.marker-chip{
+  font-family: var(--f-data); font-size:12.5px; color: var(--b1); background: var(--b1-soft);
+  border:1px solid var(--b1-line); padding:6px 13px; border-radius:999px;
+}
+
+/* ---------- VOCAB CARDS ---------- */
+.vocab-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:12px; }
+.vocab-card{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:14px 16px; cursor:pointer; perspective:600px; min-height:78px;
+  display:flex; flex-direction:column; justify-content:center; transition: border-color .15s ease;
+}
+.vocab-card:hover{ border-color: var(--b1-line); }
+.vocab-card:focus-visible{ outline:2px solid var(--b1); outline-offset:2px; }
+.vocab-front{ font-family: var(--f-body); font-weight:600; font-size:15px; }
+.vocab-back{ display:none; font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); margin-top:6px; }
+.vocab-card.flipped .vocab-back{ display:block; }
+.vocab-card.flipped{ background: var(--b1-soft); border-color: var(--b1-line); }
+.vocab-hint{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin:10px 2px 16px; }
+
+/* ---------- EXERCISE ---------- */
+.exercise{ margin-bottom:20px; }
+.exercise:last-of-type{ margin-bottom:0; }
+.ex-sentence{ font-size:15.5px; margin-bottom:10px; }
+.ex-sentence .gap{ font-family: var(--f-data); color: var(--ink-faint); }
+.ex-options{ display:flex; flex-wrap:wrap; gap:8px; }
+.opt-btn{
+  font-family: var(--f-body); font-size:14px; background: var(--paper-raised);
+  border:1.5px solid var(--line); color: var(--ink); padding:7px 16px; border-radius:999px;
+  cursor:pointer; transition: all .15s ease;
+}
+.opt-btn:hover{ border-color: var(--ink-faint); }
+.opt-btn.picked{ background: var(--b1-soft); border-color: var(--b1); color: var(--b1); }
+.opt-btn.correct{ background: var(--b2-soft); border-color: var(--b2); color: var(--b2); }
+.opt-btn.wrong{ background: var(--family-soft); border-color: var(--family); color: var(--family); }
+.opt-btn:disabled{ cursor:default; }
+
+.check-bar{
+  display:flex; align-items:center; justify-content:space-between; gap:16px;
+  margin-top:22px; padding-top:18px; border-top:1px dashed var(--line);
+}
+.btn-primary{
+  font-family: var(--f-body); font-weight:600; font-size:14px; color:#fff; background: var(--b1);
+  border:none; padding:11px 22px; border-radius:999px; cursor:pointer; transition: transform .1s ease;
+}
+.btn-primary:hover{ transform: translateY(-1px); }
+#score-text{ font-family: var(--f-data); font-size:13px; color: var(--ink-faint); }
+.btn-ghost{
+  font-family: var(--f-body); font-weight:600; font-size:13px; color: var(--ink-soft); background:none;
+  border:1.5px solid var(--line); padding:9px 18px; border-radius:999px; cursor:pointer;
+}
+.btn-ghost:hover{ border-color: var(--ink-faint); }
+.ex-divider{
+  display:flex; align-items:center; gap:10px; margin:20px 0 16px;
+  font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.06em;
+  color: var(--ink-faint);
+}
+.ex-divider::before, .ex-divider::after{ content:""; flex:1; height:1px; background: var(--line); }
+.ex-divider.en-clase::before, .ex-divider.en-clase::after{ background: var(--b1-line); }
+.ex-divider.en-clase{ color: var(--b1); }
+
+/* ---------- READING ---------- */
+.reading-panel{ background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-lg); box-shadow: var(--shadow-1); padding:26px 28px; }
+.reading-text{ font-family: var(--f-display); font-size:16.5px; line-height:1.75; color: var(--ink); }
+.reading-text p{ margin:0 0 14px; }
+.reading-text p:last-child{ margin-bottom:0; }
+.reading-highlight{ background: var(--b1-soft); padding:1px 4px; border-radius:4px; color: var(--ink); font-weight:500; }
+.reading-questions{ margin-top:20px; padding-top:18px; border-top:1px dashed var(--line); }
+.reading-questions p{ font-family: var(--f-data); font-size:11.5px; text-transform:uppercase; letter-spacing:.05em; color: var(--ink-faint); margin:0 0 10px; }
+.reading-questions ol{ margin:0; padding-left:20px; }
+.reading-questions li{ font-size:14.5px; color: var(--ink-soft); margin-bottom:8px; }
+.reading-questions li:last-child{ margin-bottom:0; }
+
+/* ---------- CHARACTER CARDS ---------- */
+.characters{ display:flex; flex-direction:column; gap:14px; }
+.char-card{
+  display:flex; gap:16px; background: var(--paper-raised); border:1px solid var(--line);
+  border-radius: var(--r-md); padding:18px 20px;
+}
+.char-avatar{
+  flex:none; width:44px; height:44px; border-radius:50%; background: var(--b1);
+  display:flex; align-items:center; justify-content:center; color:#fff;
+  font-family: var(--f-display); font-weight:600; font-size:17px;
+}
+.char-body{ flex:1; }
+.char-name{ font-family: var(--f-body); font-weight:600; font-size:15.5px; margin:0 0 2px; }
+.char-role{ font-family: var(--f-data); font-size:12px; color: var(--ink-faint); margin:0 0 8px; }
+.char-facts{ display:flex; flex-wrap:wrap; gap:6px; margin-bottom:10px; }
+.fact-tag{
+  font-family: var(--f-data); font-size:11.5px; color: var(--b1); background: var(--b1-soft);
+  border:1px solid var(--b1-line); padding:3px 9px; border-radius:999px;
+}
+.char-prompt{ font-size:13.5px; color: var(--ink-soft); margin:0 0 6px; }
+.char-input{
+  width:100%; font-family: var(--f-body); font-size:14px; color: var(--ink);
+  background:#fff; border:1px solid var(--line); border-radius: var(--r-sm);
+  padding:9px 11px; resize:vertical; min-height:38px;
+}
+.char-input:focus{ outline:none; border-color: var(--b1); }
+
+/* ---------- ROLEPLAY ---------- */
+.roleplay-panel{ background: var(--b2-soft); border:1px solid var(--b2-line); border-radius: var(--r-lg); padding:26px 28px; }
+.roleplay-panel .block-num{ background: var(--b2); }
+.scene-setup{
+  display:flex; gap:14px; align-items:flex-start; background: var(--paper-raised);
+  border:1px solid var(--b2-line); border-radius: var(--r-md); padding:14px 16px; margin-bottom:20px;
+}
+.scene-icon{ font-size:22px; flex:none; }
+.scene-text{ font-size:14px; color: var(--ink-soft); }
+.scene-text strong{ color: var(--ink); }
+
+.dialogue{ display:flex; flex-direction:column; gap:14px; }
+.scene-tabs{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:18px; }
+.scene-tab{
+  font-family: var(--f-data); font-size:12.5px; background: var(--paper-raised);
+  border:1.5px solid var(--b2-line); color: var(--ink-soft); padding:7px 14px;
+  border-radius:999px; cursor:pointer; transition: all .15s ease;
+}
+.scene-tab:hover{ border-color: var(--b2); }
+.scene-tab.active{ background: var(--b2); border-color: var(--b2); color:#fff; }
+.line{ display:flex; gap:12px; align-items:flex-start; }
+.line-avatar{
+  flex:none; width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  font-family: var(--f-display); font-weight:600; font-size:14px; color:#fff;
+}
+.line.friend .line-avatar{ background: var(--ink-faint); }
+.line.you .line-avatar{ background: var(--b2); }
+.line-body{ flex:1; }
+.line-name{ font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.05em; color: var(--ink-faint); margin:0 0 4px; }
+.line-bubble{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:12px 14px; font-size:14.5px; color: var(--ink);
+}
+.line.you .line-bubble{ background:#fff; border-color: var(--b2-line); }
+.line-input{
+  width:100%; font-family: var(--f-body); font-size:14.5px; color: var(--ink);
+  background:#fff; border:1px solid var(--b2-line); border-radius: var(--r-sm);
+  padding:10px 12px; resize:vertical; min-height:40px; margin-top:2px;
+}
+.line-input:focus{ outline:none; border-color: var(--b2); }
+.line-hint{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin-top:5px; }
+
+.roleplay-tip{
+  margin-top:22px; padding:14px 16px; background: var(--paper-raised); border:1px solid var(--b2-line);
+  border-radius: var(--r-md); font-size:13.5px; color: var(--ink-soft);
+}
+.roleplay-tip strong{ color: var(--ink); }
+
+/* ---------- FINAL TASK ---------- */
+.task-panel{ background: var(--family-soft); border:1px solid var(--family-line); border-radius: var(--r-lg); padding:26px 28px; }
+.task-panel .block-num{ background: var(--family); }
+textarea#final-task{
+  width:100%; min-height:150px; font-family: var(--f-body); font-size:15px; color: var(--ink);
+  background: var(--paper-raised); border:1px solid var(--family-line); border-radius: var(--r-md);
+  padding:14px 16px; resize:vertical; margin-top:14px;
+}
+textarea#final-task:focus{ outline:none; border-color: var(--family); }
+.task-footer{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:12px; flex-wrap:wrap; }
+#task-count{ font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); }
+.saved-flag{ font-family: var(--f-data); font-size:12px; color: var(--b1); opacity:0; transition: opacity .3s ease; }
+.saved-flag.show{ opacity:1; }
+
+/* ---------- FOOTER NAV ---------- */
+footer{
+  max-width:760px; margin:0 auto; padding:0 24px 60px; display:flex;
+  justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;
+  font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint);
+}
+footer a{ color: var(--b1); text-decoration:none; }
+footer a:hover{ text-decoration:underline; }
+
+@media (max-width:600px){
+  header{ padding:34px 18px 22px; }
+  main{ padding:8px 18px 90px; }
+  .panel, .task-panel, .roleplay-panel, .reading-panel{ padding:20px 18px; }
+  .char-card{ flex-direction:column; }
+}
+@media (prefers-reduced-motion: reduce){ *{ transition:none !important; } }
+</style>
+</head>
+<body>
+
+<header>
+  <p class="eyebrow"><span class="dot"></span>Clase 18 de 31 · L8 Línea de la memoria</p>
+  <h1>Contar una <em>anécdota</em></h1>
+  <p class="lede">Ya sabes decir qué pasó (tuve, hice, estuve). Hoy aprendes a contarlo como una historia con gracia: con marcadores que ordenan los hechos y con esas expresiones tan españolas para hablar de pequeños desastres — "se me olvidó", "se me quemó" — que todo pastelero usa alguna vez.</p>
+  <div class="meta-row">
+    <div>Duración<strong>50 min</strong></div>
+    <div>Gramática<strong>Marcadores narrativos + "se" accidental</strong></div>
+    <div>Nivel<strong>A2</strong></div>
+  </div>
+</header>
+
+<main>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">1</span><h2>El esqueleto de una anécdota</h2><span class="time-tag">10 min</span></div>
+    <div class="panel">
+      <p class="vocab-hint" style="margin:0 0 16px;">Toda anécdota tiene la misma forma: un inicio tranquilo, un giro inesperado y un final. Estos marcadores son las bisagras que unen las partes.</p>
+      <div class="arc-line">
+        <div class="arc-step">
+          <div class="arc-card">
+            <p class="arc-tag">inicio</p>
+            <p class="arc-title">Un día — situar la anécdota en el tiempo</p>
+            <p class="arc-desc">Empiezas a contar algo que pasó una vez, sin ser tan preciso como con "ayer" o "el mes pasado".</p>
+            <span class="arc-example">Un día, en el obrador...</span>
+          </div>
+        </div>
+        <div class="arc-step">
+          <div class="arc-card">
+            <p class="arc-tag">desarrollo</p>
+            <p class="arc-title">Mientras tanto — lo que pasaba de fondo</p>
+            <p class="arc-desc">Describes el contexto: qué estabas haciendo justo antes de que pasara el problema.</p>
+            <span class="arc-example">Mientras tanto, yo estaba horneando...</span>
+          </div>
+        </div>
+        <div class="arc-step">
+          <div class="arc-card">
+            <p class="arc-tag">giro</p>
+            <p class="arc-title">De repente — el momento del desastre</p>
+            <p class="arc-desc">El giro inesperado de la historia: aquí es donde algo sale mal, rápido y sin avisar.</p>
+            <span class="arc-example">De repente, sonó la alarma del horno.</span>
+          </div>
+        </div>
+        <div class="arc-step">
+          <div class="arc-card">
+            <p class="arc-tag">final</p>
+            <p class="arc-title">Al final — cómo se resolvió todo</p>
+            <p class="arc-desc">Cierras la historia contando qué pasó después del problema y cómo terminó.</p>
+            <span class="arc-example">Al final, pudimos salvar la tarta.</span>
+          </div>
+        </div>
+      </div>
+      <div class="note"><strong>Estos cuatro marcadores</strong> — un día, mientras tanto, de repente, al final — bastan para construir cualquier anécdota corta. No necesitas más gramática nueva: solo ordenar lo que ya sabes decir (presente, imperfecto que verás pronto, y el pretérito de la semana pasada) alrededor de este esqueleto.</div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">2</span><h2>"Se me olvidó" — los pequeños desastres</h2><span class="time-tag">9 min</span></div>
+    <div class="panel">
+      <table class="se-table">
+        <tr><td class="se-pron">olvidarse (a mí)</td><td class="se-form">se me olvidó</td><td class="se-ex">Se me olvidó apagar el horno.</td></tr>
+        <tr><td class="se-pron">quemarse (a mí)</td><td class="se-form">se me quemó</td><td class="se-ex">Se me quemó el primer bizcocho.</td></tr>
+        <tr><td class="se-pron">caerse (a mí)</td><td class="se-form">se me cayó</td><td class="se-ex">Se me cayó la bandeja al suelo.</td></tr>
+        <tr><td class="se-pron">romperse (a mí)</td><td class="se-form">se me rompió</td><td class="se-ex">Se me rompió el molde de la tarta.</td></tr>
+        <tr><td class="se-pron">acabarse (a mí)</td><td class="se-form">se me acabó</td><td class="se-ex">Se me acabó la mantequilla a media receta.</td></tr>
+      </table>
+      <div class="note"><strong>Esta estructura</strong> (se + me/te/le + verbo) sirve para hablar de algo que "te pasa" sin decir directamente que tú tuviste la culpa: no es "olvidé apagar el horno" (yo lo hice mal) sino "se me olvidó apagar el horno" (pasó, y yo estaba ahí). Es la forma más natural de contar un pequeño desastre de cocina sin sonar como si te estuvieras culpando demasiado.</div>
+      <div class="compare-warning">
+        <strong>Ojo, trampa para hablantes de italiano y francés:</strong> el italiano ("mi sono dimenticato") y el francés ("j'ai oublié") ponen a la persona como sujeto directo del verbo. En español, con "se me olvidó", el sujeto gramatical es la cosa olvidada ("se me olvidó <em>la receta</em>" = la receta es la que "se olvidó"), y tú apareces como "me" — la persona afectada. Por eso el verbo concuerda con la cosa, no contigo: "se me olvidó la receta" pero "se me olvidaron las llaves".
+      </div>
+      <div class="marker-row">
+        <span class="marker-chip">un día</span>
+        <span class="marker-chip">mientras tanto</span>
+        <span class="marker-chip">de repente</span>
+        <span class="marker-chip">al final</span>
+        <span class="marker-chip">se me olvidó</span>
+        <span class="marker-chip">se me quemó</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">3</span><h2>Vocabulario</h2><span class="time-tag">6 min</span></div>
+    <p class="vocab-hint">Toca cada tarjeta para ver un ejemplo.</p>
+    <div class="vocab-grid" id="vocab-grid"></div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">4</span><h2>Lectura recomendada</h2><span class="time-tag">6 min</span></div>
+    <div class="reading-panel">
+      <div class="reading-text">
+        <p>Un día, en el obrador donde trabajaba antes de venir a España, un compañero <span class="reading-highlight">se me olvidó</span> avisar de que había cambiado la temperatura del horno grande. Yo estaba tranquilo, montando la nata para veinte tartaletas, mientras tanto pensaba en la lista de pedidos del día.</p>
+        <p>De repente, <span class="reading-highlight">se me quemó</span> toda la primera bandeja de bases de tarta. El olor llegó antes que el sonido de la alarma, y cuando abrí el horno, ya no había nada que hacer. Se me cayó también una de las bandejas al sacarla, del susto.</p>
+        <p>Al final, tuvimos que empezar de nuevo con otra masa, y llegamos tarde con el primer pedido. Pero desde ese día, siempre reviso la temperatura del horno dos veces antes de irme a hacer otra cosa. Cada pastelero tiene una historia parecida: al final, siempre se aprende algo.</p>
+      </div>
+      <div class="reading-questions">
+        <p>Para comentar en clase</p>
+        <ol>
+          <li>¿Qué se le olvidó al compañero del narrador?</li>
+          <li>¿Qué estaba haciendo el narrador mientras tanto?</li>
+          <li>¿A ti se te ha quemado alguna vez algo importante? Cuéntalo con "un día... de repente... al final..."</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">5</span><h2>Practica</h2><span class="time-tag">10 min</span></div>
+    <div class="panel">
+      <p class="vocab-hint" style="margin-bottom:14px;">36 frases: las primeras 12 se hacen en voz alta en clase; el resto queda como repaso para casa. Se mezclan los marcadores y el "se" accidental de hoy con estructuras de otras semanas — presente, imperativo, indefinido irregular, comparativos.</p>
+      <div id="exercises"></div>
+      <div class="check-bar">
+        <div style="display:flex; gap:10px;">
+          <button class="btn-primary" id="check-btn">Comprobar respuestas</button>
+          <button class="btn-ghost" id="reset-btn">Reiniciar</button>
+        </div>
+        <span id="score-text"></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">6</span><h2>Tarjetas de personajes</h2><span class="time-tag">7 min</span></div>
+    <p class="lede" style="margin-bottom:16px;">Cuenta el pequeño desastre que le pasó a cada persona, usando "se me/te/le..." y los marcadores de hoy. Las primeras 6 se trabajan en clase; el resto queda como banco de repaso para casa.</p>
+    <div class="characters" id="characters"></div>
+  </section>
+
+  <section class="block roleplay-panel">
+    <div class="block-head"><span class="block-num">7</span><h2>Roleplay: anécdotas en el obrador</h2><span class="time-tag">10 min</span></div>
+    <p class="lede" style="margin-bottom:16px;">4 situaciones reales con conversaciones completas. Elige una escena para practicar en clase; el resto queda como banco de repaso para casa. Como siempre, los compañeros mezclan temas de otras semanas, así que no solo necesitarás la anécdota de hoy.</p>
+    <div class="scene-tabs" id="scene-tabs"></div>
+    <div id="scene-container"></div>
+    <div class="roleplay-tip"><strong>En clase:</strong> practicaremos una escena en voz alta, cambiando de rol. El resto de escenas son para practicar por tu cuenta durante la semana.</div>
+  </section>
+
+  <section class="block task-panel">
+    <div class="block-head"><span class="block-num">8</span><h2 style="color:var(--family)">Tu tarea</h2><span class="time-tag">2 min</span></div>
+    <p style="margin:0; font-size:15px; color:var(--ink-soft);">No hay tarea escrita esta semana: la lectura de hoy es tu "tarea". Si te apetece, puedes escribir aquí abajo tu propia anécdota graciosa de un error en el obrador, usando "un día... mientras tanto... de repente... al final..." y alguna expresión con "se me...".</p>
+    <textarea id="final-task" placeholder="Un día...&#10;Mientras tanto...&#10;De repente...&#10;Al final..."></textarea>
+    <div class="task-footer">
+      <span id="task-count">0 palabras escritas</span>
+      <div style="display:flex; gap:10px; align-items:center;">
+        <span class="saved-flag" id="saved-flag">Guardado ✓</span>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <span>Clase 18 de 31 · L8 Línea de la memoria</span>
+  <span>ESCOLAR · Davide · obrador de Girona</span>
+</footer>
+
+<script>
+/* ---------- VOCAB ---------- */
+const VOCAB = [
+  {"front":"un día","back":"Un día, en el obrador, pasó algo curioso."},
+  {"front":"mientras tanto","back":"Yo pesaba la harina, mientras tanto Laura montaba la nata."},
+  {"front":"de repente","back":"De repente, sonó la alarma del horno."},
+  {"front":"al final","back":"Al final, todo salió bien."},
+  {"front":"se me olvidó","back":"Se me olvidó apagar el horno a tiempo."},
+  {"front":"se me quemó","back":"Se me quemó la primera bandeja de bizcochos."},
+  {"front":"se me cayó","back":"Se me cayó la tarta cuando la sacaba del horno."},
+  {"front":"se me rompió","back":"Se me rompió el molde grande de metal."},
+  {"front":"se me acabó","back":"Se me acabó el azúcar a media receta."},
+  {"front":"el susto","back":"Menudo susto cuando vi el humo salir del horno."},
+  {"front":"el desastre","back":"Fue un pequeño desastre, pero lo resolvimos."},
+  {"front":"empezar de nuevo","back":"Tuvimos que empezar de nuevo con otra masa."}
+];
+
+const vocabGrid = document.getElementById('vocab-grid');
+VOCAB.forEach(v=>{
+  const card = document.createElement('div');
+  card.className = 'vocab-card';
+  card.tabIndex = 0;
+  card.innerHTML = `<div class="vocab-front">${v.front}</div><div class="vocab-back">${v.back}</div>`;
+  card.addEventListener('click', ()=> card.classList.toggle('flipped'));
+  card.addEventListener('keydown', (e)=>{
+    if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); card.classList.toggle('flipped'); }
+  });
+  vocabGrid.appendChild(card);
+});
+
+/* ---------- EXERCISES ---------- */
+const EXERCISES = [
+  {"sentence":"<span class=\"gap\">___</span>, en el obrador, se me olvidó apagar el horno.","options":["Un día","De repente","Al final"],"answer":"Un día"},
+  {"sentence":"Yo estaba montando la nata; <span class=\"gap\">___</span>, Laura pesaba la harina.","options":["un día","mientras tanto","al final"],"answer":"mientras tanto"},
+  {"sentence":"<span class=\"gap\">___</span> sonó la alarma del horno y me asusté.","options":["Al final","De repente","Mientras tanto"],"answer":"De repente"},
+  {"sentence":"<span class=\"gap\">___</span>, pudimos salvar la tarta a tiempo.","options":["Un día","De repente","Al final"],"answer":"Al final"},
+  {"sentence":"Ayer <span class=\"gap\">___</span> apagar el horno y se quemó todo.","options":["me olvidé","se me olvidó","olvidé"],"answer":"se me olvidó"},
+  {"sentence":"<span class=\"gap\">___</span> el primer bizcocho, olía fatal.","options":["Se me quemó","Me quemé","Quemé"],"answer":"Se me quemó"},
+  {"sentence":"Anoche <span class=\"gap\">___</span> la bandeja al sacarla del horno.","options":["se me cayó","me caí","caí"],"answer":"se me cayó"},
+  {"sentence":"Ahora mismo estoy <span class=\"gap\">___</span> la masa para el pan.","options":["amasar","amasando","amasado"],"answer":"amasando"},
+  {"sentence":"La semana pasada <span class=\"gap\">___</span> el molde grande de metal.","options":["se me rompió","me rompí","rompí"],"answer":"se me rompió"},
+  {"sentence":"Necesito medio kilo <span class=\"gap\">___</span> mantequilla para esta receta.","options":["de","por","para"],"answer":"de"},
+  {"sentence":"Hace dos días <span class=\"gap\">___</span> el azúcar a media receta.","options":["se me acabó","me acabé","acabé"],"answer":"se me acabó"},
+  {"sentence":"<span class=\"gap\">___</span> la manga pastelera y decora la tarta con cuidado.","options":["Coge","Cogió","Coger"],"answer":"Coge"},
+  {"sentence":"Un día, mientras horneaba, <span class=\"gap\">___</span> apagar el temporizador.","options":["me olvidé","se me olvidó","olvidé"],"answer":"se me olvidó"},
+  {"sentence":"Yo <span class=\"gap\">___</span> pastelero desde hace cinco años.","options":["soy","estoy","es"],"answer":"soy"},
+  {"sentence":"De repente, <span class=\"gap\">___</span> la última bandeja de croissants.","options":["se me quemó","se me quemaron","quemé"],"answer":"se me quemaron"},
+  {"sentence":"Ayer <span class=\"gap\">___</span> mucho trabajo en el obrador.","options":["tengo","tuve","tener"],"answer":"tuve"},
+  {"sentence":"Al final, <span class=\"gap\">___</span> empezar de nuevo con otra masa.","options":["tuvimos que","tenemos que","tuvo que"],"answer":"tuvimos que"},
+  {"sentence":"Esta receta es <span class=\"gap\">___</span> difícil que la de ayer.","options":["más","menos","el mejor"],"answer":"más"},
+  {"sentence":"Un día se me <span class=\"gap\">___</span> las llaves del obrador en casa.","options":["olvidó","olvidaron","olvidé"],"answer":"olvidaron"},
+  {"sentence":"Mientras tanto, Marc <span class=\"gap\">___</span> las tareas del día al equipo.","options":["reparte","repartió","repartir"],"answer":"reparte"},
+  {"sentence":"Hace dos días no <span class=\"gap\">___</span> terminar el pedido a tiempo.","options":["puedo","pude","poder"],"answer":"pude"},
+  {"sentence":"De repente, <span class=\"gap\">___</span> la bandeja de galletas al suelo.","options":["se me cayó","se me cayeron","caí"],"answer":"se me cayeron"},
+  {"sentence":"Le <span class=\"gap\">___</span> al jefe que necesitábamos más harina.","options":["digo","dije","decir"],"answer":"dije"},
+  {"sentence":"Un día en el obrador, <span class=\"gap\">___</span> el molde justo antes de usarlo.","options":["se me rompió","me rompí","rompió"],"answer":"se me rompió"},
+  {"sentence":"Bate los huevos y <span class=\"gap\">___</span> con cuidado el azúcar.","options":["añade","añadió","añadir"],"answer":"añade"},
+  {"sentence":"Al final del turno, <span class=\"gap\">___</span> se me acabó la paciencia.","options":["casi","mientras tanto","de repente"],"answer":"casi"},
+  {"sentence":"El obrador de Girona es <span class=\"gap\">___</span> pequeño que el de Nápoles.","options":["más","menos","el mejor"],"answer":"menos"},
+  {"sentence":"Un día, <span class=\"gap\">___</span> tanto trabajo que no pude ni comer.","options":["tuve","tengo","tener"],"answer":"tuve"},
+  {"sentence":"De repente, a Pau <span class=\"gap\">___</span> todos los ingredientes al mismo tiempo.","options":["se le acabaron","se le acabó","acabó"],"answer":"se le acabaron"},
+  {"sentence":"Estoy <span class=\"gap\">___</span> en el obrador desde las siete de la mañana.","options":["trabajar","trabajando","trabajo"],"answer":"trabajando"},
+  {"sentence":"Mientras tanto, a Laura <span class=\"gap\">___</span> la fecha del pedido especial.","options":["se le olvidó","se le olvidaron","olvidó"],"answer":"se le olvidó"},
+  {"sentence":"Voy <span class=\"gap\">___</span> contarte una anécdota muy graciosa.","options":["a","de","por"],"answer":"a"},
+  {"sentence":"Al final, <span class=\"gap\">___</span> Marc que todo había salido bien.","options":["le dije a","dije a","dije"],"answer":"le dije a"},
+  {"sentence":"Un día, a Jordi <span class=\"gap\">___</span> el horno pequeño en pleno servicio.","options":["se le rompió","se le rompieron","rompió"],"answer":"se le rompió"},
+  {"sentence":"Hace dos días <span class=\"gap\">___</span> mucho frío en el obrador por la mañana.","options":["hace","hizo","hacer"],"answer":"hizo"},
+  {"sentence":"Primero pesa la harina, <span class=\"gap\">___</span> añade los huevos.","options":["después","antes","ayer"],"answer":"después"}
+];
+
+const EX_KEY = 'davide-clase18-practica';
+let exState = {};
+async function cargarPractica(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(EX_KEY);
+    if (res && typeof res.value === 'string') exState = JSON.parse(res.value);
+  }catch(e){
+    // Sin progreso previo guardado todavía.
+  }
+}
+async function guardarPractica(){
+  if (!window.storage) return;
+  try{ await window.storage.set(EX_KEY, JSON.stringify(exState)); }catch(e){ /* fallo silencioso */ }
+}
+
+const exWrap = document.getElementById('exercises');
+(async function initPractica(){
+await cargarPractica();
+EXERCISES.forEach((ex, i)=>{
+  if(i === 0){
+    const divider = document.createElement('div');
+    divider.className = 'ex-divider en-clase';
+    divider.textContent = 'en clase · ítems 1–12';
+    exWrap.appendChild(divider);
+  }
+  if(i === 12){
+    const divider = document.createElement('div');
+    divider.className = 'ex-divider';
+    divider.textContent = 'para casa · repaso opcional';
+    exWrap.appendChild(divider);
+  }
+  const el = document.createElement('div');
+  el.className = 'exercise';
+  el.dataset.answer = ex.answer;
+  el.dataset.idx = i;
+  el.innerHTML = `
+    <div class="ex-sentence">${i+1}. ${ex.sentence}</div>
+    <div class="ex-options">
+      ${ex.options.map(o=>`<button class="opt-btn" data-value="${o}">${o}</button>`).join('')}
+    </div>
+  `;
+  exWrap.appendChild(el);
+
+  const savedPick = exState[i];
+  if(savedPick){
+    const savedBtn = el.querySelector(`.opt-btn[data-value="${savedPick}"]`);
+    if(savedBtn) savedBtn.classList.add('picked');
+  }
+
+  el.querySelectorAll('.opt-btn').forEach(btn=>{
+    btn.addEventListener('click', async ()=>{
+      el.querySelectorAll('.opt-btn').forEach(b=>b.classList.remove('picked'));
+      btn.classList.add('picked');
+      exState[i] = btn.dataset.value;
+      await guardarPractica();
+    });
+  });
+});
+})();
+
+document.getElementById('check-btn').addEventListener('click', ()=>{
+  let correct = 0;
+  document.querySelectorAll('.exercise').forEach(el=>{
+    const answer = el.dataset.answer;
+    const picked = el.querySelector('.opt-btn.picked');
+    el.querySelectorAll('.opt-btn').forEach(b=>{
+      b.disabled = true;
+      if(b.dataset.value === answer) b.classList.add('correct');
+      else if(b === picked) b.classList.add('wrong');
+    });
+    if(picked && picked.dataset.value === answer) correct++;
+  });
+  document.getElementById('score-text').textContent = `${correct} / ${EXERCISES.length} correctas`;
+});
+
+document.getElementById('reset-btn').addEventListener('click', async ()=>{
+  document.querySelectorAll('.exercise').forEach(el=>{
+    el.querySelectorAll('.opt-btn').forEach(b=>{
+      b.disabled = false;
+      b.classList.remove('picked','correct','wrong');
+    });
+  });
+  document.getElementById('score-text').textContent = '';
+  exState = {};
+  await guardarPractica();
+});
+
+/* ---------- CHARACTER CARDS ---------- */
+const CHARACTERS = [
+  {"name":"Tú","role":"Tu propio desastre","facts":["se me olvidó / se me quemó","un día... de repente... al final","empezar de nuevo"],"prompt":"Cuenta un pequeño desastre que te pasó:"},
+  {"name":"Marc","role":"El jefe de cocina","facts":["se le rompió el horno pequeño","un día tuvo que llamar al técnico","al final resolvió el problema"],"prompt":"Cuenta el desastre de Marc:"},
+  {"name":"Laura","role":"Tu compañera de turno","facts":["se le olvidó la fecha de un pedido","de repente se dio cuenta a tiempo","al final llamó al cliente"],"prompt":"Cuenta el desastre de Laura:"},
+  {"name":"Jordi","role":"El otro pastelero","facts":["se le cayó una bandeja entera","mientras tanto estaba distraído","al final limpió todo rápido"],"prompt":"Cuenta el desastre de Jordi:"},
+  {"name":"Núria","role":"La encargada del obrador","facts":["se le acabó el azúcar en un pedido grande","un día tuvo que salir a comprar más","al final llegó a tiempo"],"prompt":"Cuenta el desastre de Núria:"},
+  {"name":"Pau","role":"El aprendiz nuevo","facts":["se le quemaron las primeras galletas","de repente sonó la alarma","al final aprendió la lección"],"prompt":"Cuenta el desastre de Pau:"},
+  {"name":"Marta","role":"La repostera de tarde","facts":["se le rompió el molde de la tarta especial","un día tuvo que improvisar","al final quedó mejor que antes"],"prompt":"Cuenta el desastre de Marta:"},
+  {"name":"Carla","role":"La responsable de pedidos","facts":["se le olvidó confirmar un pedido","mientras tanto el cliente esperaba","al final lo solucionó con una llamada"],"prompt":"Cuenta el desastre de Carla:"},
+  {"name":"Oriol","role":"El dueño del obrador","facts":["se le cayó la caja de la báscula","un día se rió mucho del susto","al final compró una nueva"],"prompt":"Cuenta el desastre de Oriol:"},
+  {"name":"Elena","role":"Tu antigua profesora","facts":["se le quemó un pastel en su primer año","de repente se llenó todo de humo","al final se convirtió en su mejor anécdota"],"prompt":"Cuenta el desastre de Elena:"}
+];
+
+const CHAR_KEY = 'davide-clase18-personajes';
+let charState = {};
+async function cargarPersonajes(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(CHAR_KEY);
+    if (res && typeof res.value === 'string') charState = JSON.parse(res.value);
+  }catch(e){
+    // Sin personajes guardados todavía.
+  }
+}
+async function guardarPersonajes(){
+  if (!window.storage) return;
+  try{ await window.storage.set(CHAR_KEY, JSON.stringify(charState)); }catch(e){ /* fallo silencioso */ }
+}
+let charSaveTimer = null;
+function scheduleCharSave(){
+  clearTimeout(charSaveTimer);
+  charSaveTimer = setTimeout(guardarPersonajes, 500);
+}
+
+const charWrap = document.getElementById('characters');
+(async function initPersonajes(){
+await cargarPersonajes();
+CHARACTERS.forEach((c, i)=>{
+  if(i === 0){
+    const divider = document.createElement('div');
+    divider.className = 'ex-divider en-clase';
+    divider.textContent = 'en clase · personajes 1–6';
+    charWrap.appendChild(divider);
+  }
+  if(i === 6){
+    const divider = document.createElement('div');
+    divider.className = 'ex-divider';
+    divider.textContent = 'para casa · banco de repaso';
+    charWrap.appendChild(divider);
+  }
+  const card = document.createElement('div');
+  card.className = 'char-card';
+  card.innerHTML = `
+    <div class="char-avatar">${c.name.charAt(0)}</div>
+    <div class="char-body">
+      <p class="char-name">${c.name}</p>
+      <p class="char-role">${c.role}</p>
+      <div class="char-facts">${c.facts.map(f=>`<span class="fact-tag">${f}</span>`).join('')}</div>
+      <p class="char-prompt">${c.prompt}</p>
+      <textarea class="char-input" rows="2" placeholder="Un día... / De repente... / Al final..." data-idx="${i}"></textarea>
+    </div>
+  `;
+  charWrap.appendChild(card);
+  const charInputEl = card.querySelector('.char-input');
+  if(charState[i]) charInputEl.value = charState[i];
+  charInputEl.addEventListener('input', ()=>{
+    charState[i] = charInputEl.value;
+    scheduleCharSave();
+  });
+});
+})();
+
+/* ---------- ROLEPLAY SCENES ---------- */
+const SCENES = [
+  {
+    "id": "laura-anecdota",
+    "tab": "Laura te cuenta su desastre",
+    "icon": "😅",
+    "setup": "Es la hora del descanso. Laura te cuenta algo gracioso que le pasó la semana pasada.",
+    "lines": [
+      {"who":"friend","name":"Laura","text":"¿Sabes qué me pasó la semana pasada? Fue un desastre."},
+      {"who":"you","hint":"Pregúntale qué pasó, con curiosidad."},
+      {"who":"friend","name":"Laura","text":"Un día, mientras estaba pesando la harina, se me cayó todo el bote al suelo."},
+      {"who":"you","hint":"Reacciona con sorpresa o risa."},
+      {"who":"friend","name":"Laura","text":"De repente entró Marc y me vio ahí, cubierta de harina."},
+      {"who":"you","hint":"Pregunta qué dijo Marc, en pretérito."},
+      {"who":"friend","name":"Laura","text":"Al final se rió y me ayudó a limpiarlo todo."},
+      {"who":"you","hint":"Cuenta si a ti también se te ha caído algo alguna vez."},
+      {"who":"friend","name":"Laura","text":"¿A ti se te ha quemado algo importante alguna vez?"},
+      {"who":"you","hint":"Responde con \"se me quemó\" contando tu propia anécdota."},
+      {"who":"friend","name":"Laura","text":"Jajaja, qué mala suerte. Bueno, ¿pesamos la harina para hoy?"},
+      {"who":"you","hint":"Responde en presente confirmando que sí."},
+      {"who":"friend","name":"Laura","text":"Coge tú el bote esta vez, a ver si tienes más suerte."},
+      {"who":"you","hint":"Responde con humor, aceptando la tarea."}
+    ]
+  },
+  {
+    "id": "marc-pregunta-horno",
+    "tab": "Marc pregunta por el horno",
+    "icon": "🔥",
+    "setup": "Marc quiere saber qué pasó ayer con el horno grande, que se estropeó a media tarde.",
+    "lines": [
+      {"who":"friend","name":"Marc","text":"¿Qué pasó ayer con el horno grande? Me dijeron que hubo un problema."},
+      {"who":"you","hint":"Empieza a contar con \"un día\" o \"ayer\"."},
+      {"who":"friend","name":"Marc","text":"¿Se te olvidó revisar la temperatura antes de encenderlo?"},
+      {"who":"you","hint":"Responde con \"se me olvidó\" o \"no se me olvidó\"."},
+      {"who":"friend","name":"Marc","text":"¿Y qué pasó de repente?"},
+      {"who":"you","hint":"Responde con \"de repente\" contando lo que ocurrió."},
+      {"who":"friend","name":"Marc","text":"¿Se quemó mucho la bandeja que estaba dentro?"},
+      {"who":"you","hint":"Responde con \"se me quemó\"."},
+      {"who":"friend","name":"Marc","text":"¿Cómo se resolvió al final?"},
+      {"who":"you","hint":"Responde con \"al final\"."},
+      {"who":"friend","name":"Marc","text":"Vale, no pasa nada. Necesito medio kilo de harina para el siguiente pedido, ¿puedes traerla?"},
+      {"who":"you","hint":"Responde en presente confirmando que vas a traerla."},
+      {"who":"friend","name":"Marc","text":"Gracias. Y la próxima vez, revisa el horno dos veces."},
+      {"who":"you","hint":"Responde aceptando el consejo, con imperativo o presente."}
+    ]
+  },
+  {
+    "id": "familia-anecdota",
+    "tab": "Cuentas la anécdota a tu familia",
+    "icon": "📱",
+    "setup": "Llamas a tu familia en Italia y les cuentas la anécdota del horno para hacerles reír.",
+    "lines": [
+      {"who":"friend","name":"Mamá","text":"¡Hola, hijo! ¿Qué tal la semana? ¿Ha pasado algo interesante?"},
+      {"who":"you","hint":"Empieza a contar con \"un día\"."},
+      {"who":"friend","name":"Mamá","text":"¿En serio? ¿Y qué pasó mientras tanto?"},
+      {"who":"you","hint":"Responde con \"mientras tanto\"."},
+      {"who":"friend","name":"Mamá","text":"Uy, ¿y de repente qué pasó?"},
+      {"who":"you","hint":"Responde con \"de repente\"."},
+      {"who":"friend","name":"Mamá","text":"¡Qué susto! ¿Se te quemó mucho la comida?"},
+      {"who":"you","hint":"Responde con \"se me quemó\"."},
+      {"who":"friend","name":"Mamá","text":"¿Y cómo terminó todo al final?"},
+      {"who":"you","hint":"Responde con \"al final\"."},
+      {"who":"friend","name":"Mamá","text":"Jajaja, qué gracioso, siempre pasa algo por ahí."},
+      {"who":"you","hint":"Responde riendo, en presente."},
+      {"who":"friend","name":"Mamá","text":"Bueno, cuídate mucho, hijo, un beso grande."},
+      {"who":"you","hint":"Despídete con cariño."}
+    ]
+  },
+  {
+    "id": "pau-primera-anecdota",
+    "tab": "Pau cuenta su primer desastre",
+    "icon": "🎓",
+    "setup": "Pau, el aprendiz nuevo, te cuenta su primer pequeño desastre en el obrador y te pide consejo.",
+    "lines": [
+      {"who":"friend","name":"Pau","text":"Oye, ayer se me quemaron las primeras galletas que hice yo solo."},
+      {"who":"you","hint":"Reacciona con comprensión, en presente."},
+      {"who":"friend","name":"Pau","text":"Un día pensé que ya sabía usar el horno pequeño, pero mientras tanto no revisé el tiempo."},
+      {"who":"you","hint":"Cuenta si a ti también se te olvidó algo parecido al principio."},
+      {"who":"friend","name":"Pau","text":"De repente olí a quemado y ya era tarde."},
+      {"who":"you","hint":"Anímale, contando cómo se resuelve normalmente."},
+      {"who":"friend","name":"Pau","text":"Al final tuve que empezar de nuevo con otra masa."},
+      {"who":"you","hint":"Dale un consejo para la próxima vez, en imperativo si quieres."},
+      {"who":"friend","name":"Pau","text":"Vale, la próxima vez pongo un temporizador aparte."},
+      {"who":"you","hint":"Responde apoyando su idea."},
+      {"who":"friend","name":"Pau","text":"Gracias por escuchar mi desastre, jaja."},
+      {"who":"you","hint":"Responde con humor y amabilidad."}
+    ]
+  }
+];
+
+const sceneTabs = document.getElementById('scene-tabs');
+const sceneContainer = document.getElementById('scene-container');
+let activeScene = 0;
+
+function renderTabs(){
+  sceneTabs.innerHTML = SCENES.map((s,i)=>
+    `<button class="scene-tab${i===activeScene?' active':''}" data-idx="${i}">${s.icon} ${s.tab}</button>`
+  ).join('');
+  sceneTabs.querySelectorAll('.scene-tab').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      activeScene = parseInt(btn.dataset.idx, 10);
+      renderTabs();
+      renderScene();
+    });
+  });
+}
+
+function renderScene(){
+  const scene = SCENES[activeScene];
+  const linesHtml = scene.lines.map((l, li)=>{
+    if(l.who === 'friend'){
+      return `
+        <div class="line friend">
+          <div class="line-avatar">${l.name.charAt(0)}</div>
+          <div class="line-body">
+            <p class="line-name">${l.name}</p>
+            <div class="line-bubble">${l.text}</div>
+          </div>
+        </div>`;
+    } else {
+      const rpKey = `${scene.id}:${li}`;
+      return `
+        <div class="line you">
+          <div class="line-avatar">Tú</div>
+          <div class="line-body">
+            <p class="line-name">Tú</p>
+            <textarea class="line-input" rows="2" placeholder="Escribe tu respuesta..." data-rpkey="${scene.id}:${li}">${roleplayState[rpKey] ? roleplayState[rpKey] : ''}</textarea>
+            <p class="line-hint">${l.hint}</p>
+          </div>
+        </div>`;
+    }
+  }).join('');
+
+  sceneContainer.innerHTML = `
+    <div class="scene-setup">
+      <span class="scene-icon">${scene.icon}</span>
+      <p class="scene-text"><strong>${scene.tab}:</strong> ${scene.setup}</p>
+    </div>
+    <div class="dialogue">${linesHtml}</div>
+  `;
+
+  sceneContainer.querySelectorAll('.line-input').forEach(inputEl=>{
+    inputEl.addEventListener('input', ()=>{
+      roleplayState[inputEl.dataset.rpkey] = inputEl.value;
+      scheduleRoleplaySave();
+    });
+  });
+}
+
+const ROLEPLAY_KEY = 'davide-clase18-roleplay';
+let roleplayState = {};
+async function cargarRoleplay(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(ROLEPLAY_KEY);
+    if (res && typeof res.value === 'string') roleplayState = JSON.parse(res.value);
+  }catch(e){
+    // Sin intervenciones guardadas todavía.
+  }
+}
+async function guardarRoleplay(){
+  if (!window.storage) return;
+  try{ await window.storage.set(ROLEPLAY_KEY, JSON.stringify(roleplayState)); }catch(e){ /* fallo silencioso */ }
+}
+let roleplaySaveTimer = null;
+function scheduleRoleplaySave(){
+  clearTimeout(roleplaySaveTimer);
+  roleplaySaveTimer = setTimeout(guardarRoleplay, 500);
+}
+
+(async function initRoleplay(){
+await cargarRoleplay();
+renderTabs();
+renderScene();
+})();
+
+/* ---------- FINAL TASK ---------- */
+const STORAGE_KEY = 'davide-clase18-tarea';
+const taskArea = document.getElementById('final-task');
+const taskCount = document.getElementById('task-count');
+const savedFlag = document.getElementById('saved-flag');
+
+async function cargarTarea(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(STORAGE_KEY);
+    if (res && typeof res.value === 'string') taskArea.value = res.value;
+  }catch(e){
+    // Clave inexistente todavía: no hay tarea previa, se queda en blanco.
+  }
+  updateCount();
+}
+
+function updateCount(){
+  const words = taskArea.value.trim().split(/\s+/).filter(Boolean).length;
+  taskCount.textContent = `${words} palabra${words===1?'':'s'} escrita${words===1?'':'s'}`;
+}
+async function guardarTareaAuto(){
+  if (!window.storage){
+    savedFlag.textContent = 'Guardado no disponible aquí';
+    savedFlag.classList.add('show');
+    setTimeout(()=>{ savedFlag.classList.remove('show'); savedFlag.textContent = 'Guardado ✓'; }, 2200);
+    return;
+  }
+  try{
+    const ok = await window.storage.set(STORAGE_KEY, taskArea.value);
+    savedFlag.textContent = ok ? 'Guardado ✓' : 'No se pudo guardar';
+  }catch(e){
+    savedFlag.textContent = 'No se pudo guardar';
+  }
+  savedFlag.classList.add('show');
+  setTimeout(()=>{ savedFlag.classList.remove('show'); savedFlag.textContent = 'Guardado ✓'; }, 1800);
+}
+
+let taskSaveTimer = null;
+function scheduleTaskSave(){
+  clearTimeout(taskSaveTimer);
+  taskSaveTimer = setTimeout(guardarTareaAuto, 700);
+}
+
+taskArea.addEventListener('input', ()=>{
+  updateCount();
+  scheduleTaskSave();
+});
+updateCount();
+cargarTarea();
+
+</script>
+
+</body>
+</html>

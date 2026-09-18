@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clase 16 · Simulación completa — Davide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+
+/* ╔══════════════════════════════════════════════════════════════╗
+   ║  ESCOLAR — sistema de diseño para clases de español online   ║
+   ║  Clase 16 · L7 Línea de llegada · "Simulación completa" — Davide ║
+   ╚══════════════════════════════════════════════════════════════╝ */
+
+:root{
+  --paper:        #FBF7EE;
+  --paper-raised: #FFFFFF;
+  --paper-alt:    #F3ECDA;
+  --ink:          #23291F;
+  --ink-soft:     #565F52;
+  --ink-faint:    #8B9184;
+  --line:         rgba(35,41,31,0.12);
+  --line-strong:  rgba(35,41,31,0.22);
+
+  --b1:      #2F6FED;  --b1-soft: #EAF1FE;  --b1-line: #C6D9FC;
+  --b2:      #2E9E6B;  --b2-soft: #E9F6EF;  --b2-line: #BEE6D3;
+  --b3:      #DB8A2E;  --b3-soft: #FCF1E1;  --b3-line: #F3D9AF;
+  --family:  #B5502E;  --family-soft: #FBEBE3; --family-line: #EFC9B4;
+
+  --f-display: 'Fraunces', Georgia, serif;
+  --f-body:    'IBM Plex Sans', system-ui, sans-serif;
+  --f-data:    'IBM Plex Mono', monospace;
+
+  --r-sm: 8px;
+  --r-md: 14px;
+  --r-lg: 20px;
+
+  --shadow-1: 0 1px 2px rgba(35,41,31,0.05), 0 1px 8px rgba(35,41,31,0.04);
+}
+
+*{ box-sizing:border-box; }
+body{
+  margin:0;
+  background: var(--paper);
+  background-image: radial-gradient(circle at 1px 1px, var(--line) 1px, transparent 0);
+  background-size: 22px 22px;
+  color: var(--ink);
+  font-family: var(--f-body);
+  line-height:1.6;
+}
+::selection{ background: var(--b1-soft); }
+
+/* ---------- HEADER ---------- */
+header{ padding:44px 24px 28px; max-width:760px; margin:0 auto; }
+.eyebrow{
+  font-family: var(--f-data); font-size:12px; letter-spacing:.14em;
+  text-transform:uppercase; color: var(--b1); margin:0 0 10px;
+  display:flex; align-items:center; gap:10px;
+}
+.eyebrow .dot{ width:6px; height:6px; border-radius:50%; background: var(--b1); }
+h1{
+  font-family: var(--f-display); font-weight:600;
+  font-size:clamp(30px,5.6vw,46px); line-height:1.08;
+  margin:0 0 14px; letter-spacing:-.01em;
+}
+h1 em{ font-style:italic; color: var(--b1); }
+.lede{ font-size:16px; color: var(--ink-soft); max-width:56ch; margin:0; }
+
+.meta-row{
+  display:flex; flex-wrap:wrap; gap:20px; margin-top:26px;
+  font-family: var(--f-data); font-size:12px; color: var(--ink-faint);
+}
+.meta-row strong{
+  display:block; color: var(--ink); font-size:14.5px; font-weight:500;
+  font-family: var(--f-display); margin-top:3px;
+}
+
+.finish-banner{
+  margin-top:22px; padding:14px 18px; background: var(--family-soft); border:1px solid var(--family-line);
+  border-radius: var(--r-md); font-size:13.5px; color: var(--ink-soft); display:flex; gap:12px; align-items:flex-start;
+}
+.finish-banner .flag{ font-size:20px; flex:none; }
+.finish-banner strong{ color: var(--family); }
+
+/* ---------- SECTIONS ---------- */
+main{ max-width:760px; margin:0 auto; padding:8px 24px 100px; }
+
+section.block{ margin-bottom:52px; }
+.block-head{ display:flex; align-items:baseline; gap:12px; margin-bottom:18px; }
+.time-tag{
+  font-family: var(--f-data); font-size:11px; color: var(--ink-faint);
+  background: var(--paper-alt); padding:3px 10px; border-radius:999px; margin-left:auto; flex:none;
+}
+.block-num{
+  font-family: var(--f-data); font-size:12px; color:#fff; background: var(--b1);
+  width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  flex:none;
+}
+.block-head h2{
+  font-family: var(--f-display); font-weight:500; font-style:italic; font-size:22px; margin:0;
+}
+
+.panel{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-lg);
+  box-shadow: var(--shadow-1); padding:26px 28px;
+}
+
+/* ---------- TIMELINE / STAGES ---------- */
+.stage-line{ position:relative; padding-left:30px; }
+.stage-line::before{
+  content:""; position:absolute; left:9px; top:6px; bottom:6px; width:3px;
+  background: var(--b1-line); opacity:.7;
+}
+.stage{ position:relative; margin-bottom:14px; }
+.stage:last-child{ margin-bottom:0; }
+.stage::before{
+  content:""; position:absolute; left:-30px; top:20px; width:11px; height:11px;
+  border-radius:50%; background: var(--paper); border:3px solid var(--b1);
+}
+.stage-card{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:16px 18px;
+}
+.stage-tag{
+  font-family: var(--f-data); font-size:10.5px; text-transform:uppercase; letter-spacing:.05em;
+  color: var(--b1); margin:0 0 4px;
+}
+.stage-title{ font-family: var(--f-body); font-weight:600; font-size:15.5px; margin:0 0 6px; }
+.stage-desc{ font-size:13.5px; color: var(--ink-soft); margin:0; }
+.stage-tense{
+  display:inline-block; margin-top:8px; font-family: var(--f-data); font-size:11px;
+  color: var(--b2); background: var(--b2-soft); border:1px solid var(--b2-line);
+  padding:3px 10px; border-radius:999px;
+}
+
+/* ---------- MIX CONJUGATION REVIEW ---------- */
+.mix-grid{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px; margin-top:4px; }
+@media (max-width:640px){ .mix-grid{ grid-template-columns:1fr; } }
+.mix-col{ border-radius: var(--r-md); padding:16px 18px; border:1px solid; }
+.mix-col.is-pres{ background: var(--b1-soft); border-color: var(--b1-line); }
+.mix-col.is-imp{ background: var(--b2-soft); border-color: var(--b2-line); }
+.mix-col.is-pret{ background: var(--b3-soft); border-color: var(--b3-line); }
+.mix-head{ display:flex; align-items:center; gap:8px; margin:0 0 10px; }
+.mix-verb{ font-family: var(--f-display); font-weight:600; font-size:17px; }
+.is-pres .mix-verb{ color: var(--b1); }
+.is-imp .mix-verb{ color: var(--b2); }
+.is-pret .mix-verb{ color: var(--b3); }
+.mix-sub{ font-family: var(--f-data); font-size:10.5px; color: var(--ink-faint); }
+.mix-list{ margin:0; padding:0; list-style:none; }
+.mix-list li{ font-size:13px; color: var(--ink-soft); padding:6px 0; border-top:1px dashed var(--line); }
+.mix-list li:first-child{ border-top:none; }
+.mix-list strong{ color: var(--ink); font-weight:600; }
+
+.note{
+  margin-top:18px; padding:14px 16px; background: var(--b1-soft); border:1px solid var(--b1-line);
+  border-radius: var(--r-md); font-size:14px; color: var(--ink-soft);
+}
+.note strong{ color: var(--ink); }
+
+/* ---------- VOCAB CARDS ---------- */
+.vocab-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:12px; }
+.vocab-card{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:14px 16px; cursor:pointer; perspective:600px; min-height:78px;
+  display:flex; flex-direction:column; justify-content:center; transition: border-color .15s ease;
+}
+.vocab-card:hover{ border-color: var(--b1-line); }
+.vocab-card:focus-visible{ outline:2px solid var(--b1); outline-offset:2px; }
+.vocab-front{ font-family: var(--f-body); font-weight:600; font-size:15px; }
+.vocab-back{ display:none; font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); margin-top:6px; }
+.vocab-card.flipped .vocab-back{ display:block; }
+.vocab-card.flipped{ background: var(--b1-soft); border-color: var(--b1-line); }
+.vocab-hint{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin:10px 2px 16px; }
+.vocab-cat{
+  font-family: var(--f-data); font-size:10.5px; text-transform:uppercase; letter-spacing:.05em;
+  color: var(--ink-faint); margin:20px 2px 10px;
+}
+.vocab-cat:first-child{ margin-top:0; }
+
+/* ---------- EXERCISE ---------- */
+.exercise{ margin-bottom:20px; }
+.exercise:last-of-type{ margin-bottom:0; }
+.ex-sentence{ font-size:15.5px; margin-bottom:10px; }
+.ex-sentence .gap{ font-family: var(--f-data); color: var(--ink-faint); }
+.ex-options{ display:flex; flex-wrap:wrap; gap:8px; }
+.opt-btn{
+  font-family: var(--f-body); font-size:14px; background: var(--paper-raised);
+  border:1.5px solid var(--line); color: var(--ink); padding:7px 16px; border-radius:999px;
+  cursor:pointer; transition: all .15s ease;
+}
+.opt-btn:hover{ border-color: var(--ink-faint); }
+.opt-btn.picked{ background: var(--b1-soft); border-color: var(--b1); color: var(--b1); }
+.opt-btn.correct{ background: var(--b2-soft); border-color: var(--b2); color: var(--b2); }
+.opt-btn.wrong{ background: var(--family-soft); border-color: var(--family); color: var(--family); }
+.opt-btn:disabled{ cursor:default; }
+
+.check-bar{
+  display:flex; align-items:center; justify-content:space-between; gap:16px;
+  margin-top:22px; padding-top:18px; border-top:1px dashed var(--line);
+}
+.btn-primary{
+  font-family: var(--f-body); font-weight:600; font-size:14px; color:#fff; background: var(--b1);
+  border:none; padding:11px 22px; border-radius:999px; cursor:pointer; transition: transform .1s ease;
+}
+.btn-primary:hover{ transform: translateY(-1px); }
+#score-text{ font-family: var(--f-data); font-size:13px; color: var(--ink-faint); }
+.btn-ghost{
+  font-family: var(--f-body); font-weight:600; font-size:13px; color: var(--ink-soft); background:none;
+  border:1.5px solid var(--line); padding:9px 18px; border-radius:999px; cursor:pointer;
+}
+.btn-ghost:hover{ border-color: var(--ink-faint); }
+.ex-divider{
+  display:flex; align-items:center; gap:10px; margin:20px 0 16px;
+  font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.06em;
+  color: var(--ink-faint);
+}
+.ex-divider::before, .ex-divider::after{ content:""; flex:1; height:1px; background: var(--line); }
+.ex-divider.en-clase::before, .ex-divider.en-clase::after{ background: var(--b1-line); }
+.ex-divider.en-clase{ color: var(--b1); }
+
+/* ---------- ROLEPLAY (full simulation) ---------- */
+.roleplay-panel{ background: var(--b2-soft); border:1px solid var(--b2-line); border-radius: var(--r-lg); padding:26px 28px; }
+.roleplay-panel .block-num{ background: var(--b2); }
+.scene-setup{
+  display:flex; gap:14px; align-items:flex-start; background: var(--paper-raised);
+  border:1px solid var(--b2-line); border-radius: var(--r-md); padding:14px 16px; margin-bottom:20px;
+}
+.scene-icon{ font-size:22px; flex:none; }
+.scene-text{ font-size:14px; color: var(--ink-soft); }
+.scene-text strong{ color: var(--ink); }
+
+.dialogue{ display:flex; flex-direction:column; gap:14px; }
+.scene-tabs{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:18px; }
+.scene-tab{
+  font-family: var(--f-data); font-size:12.5px; background: var(--paper-raised);
+  border:1.5px solid var(--b2-line); color: var(--ink-soft); padding:7px 14px;
+  border-radius:999px; cursor:pointer; transition: all .15s ease;
+}
+.scene-tab:hover{ border-color: var(--b2); }
+.scene-tab.active{ background: var(--b2); border-color: var(--b2); color:#fff; }
+.line{ display:flex; gap:12px; align-items:flex-start; }
+.line-avatar{
+  flex:none; width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  font-family: var(--f-display); font-weight:600; font-size:14px; color:#fff;
+}
+.line.friend .line-avatar{ background: var(--ink-faint); }
+.line.you .line-avatar{ background: var(--b2); }
+.line-body{ flex:1; }
+.line-name{ font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.05em; color: var(--ink-faint); margin:0 0 4px; }
+.line-bubble{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:12px 14px; font-size:14.5px; color: var(--ink);
+}
+.line.you .line-bubble{ background:#fff; border-color: var(--b2-line); }
+.line-input{
+  width:100%; font-family: var(--f-body); font-size:14.5px; color: var(--ink);
+  background:#fff; border:1px solid var(--b2-line); border-radius: var(--r-sm);
+  padding:10px 12px; resize:vertical; min-height:40px; margin-top:2px;
+}
+.line-input:focus{ outline:none; border-color: var(--b2); }
+.line-hint{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin-top:5px; }
+.line-tense{
+  display:inline-block; margin-top:4px; font-family: var(--f-data); font-size:10px;
+  text-transform:uppercase; letter-spacing:.04em; padding:2px 8px; border-radius:999px;
+}
+.line-tense.t-pres{ background: var(--b1-soft); color: var(--b1); }
+.line-tense.t-imp{ background: var(--b2-soft); color: var(--b2); }
+.line-tense.t-pret{ background: var(--b3-soft); color: var(--b3); }
+
+.roleplay-tip{
+  margin-top:22px; padding:14px 16px; background: var(--paper-raised); border:1px solid var(--b2-line);
+  border-radius: var(--r-md); font-size:13.5px; color: var(--ink-soft);
+}
+.roleplay-tip strong{ color: var(--ink); }
+
+/* ---------- SELF-ASSESSMENT ---------- */
+.assess-panel{ background: var(--b3-soft); border:1px solid var(--b3-line); border-radius: var(--r-lg); padding:26px 28px; }
+.assess-panel .block-num{ background: var(--b3); }
+.assess-row{
+  display:flex; align-items:center; justify-content:space-between; gap:16px;
+  padding:14px 0; border-top:1px dashed var(--line);
+}
+.assess-row:first-child{ border-top:none; padding-top:4px; }
+.assess-label{ font-size:14.5px; color: var(--ink); flex:1; }
+.assess-scale{ display:flex; gap:6px; flex:none; }
+.assess-dot{
+  width:30px; height:30px; border-radius:50%; border:1.5px solid var(--b3-line);
+  background: var(--paper-raised); cursor:pointer; font-family: var(--f-data); font-size:12px;
+  color: var(--ink-faint); display:flex; align-items:center; justify-content:center;
+  transition: all .15s ease;
+}
+.assess-dot:hover{ border-color: var(--b3); }
+.assess-dot.picked{ background: var(--b3); border-color: var(--b3); color:#fff; }
+.assess-legend{
+  display:flex; justify-content:space-between; font-family: var(--f-data); font-size:10.5px;
+  color: var(--ink-faint); margin-top:4px;
+}
+
+/* ---------- FINAL TASK ---------- */
+.task-panel{ background: var(--family-soft); border:1px solid var(--family-line); border-radius: var(--r-lg); padding:26px 28px; }
+.task-panel .block-num{ background: var(--family); }
+textarea#final-task{
+  width:100%; min-height:150px; font-family: var(--f-body); font-size:15px; color: var(--ink);
+  background: var(--paper-raised); border:1px solid var(--family-line); border-radius: var(--r-md);
+  padding:14px 16px; resize:vertical; margin-top:14px;
+}
+textarea#final-task:focus{ outline:none; border-color: var(--family); }
+.task-footer{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:12px; flex-wrap:wrap; }
+#task-count{ font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); }
+.btn-secondary{
+  font-family: var(--f-body); font-weight:600; font-size:13.5px; color: var(--family); background:none;
+  border:1.5px solid var(--family-line); padding:9px 18px; border-radius:999px; cursor:pointer;
+}
+.saved-flag{ font-family: var(--f-data); font-size:12px; color: var(--b2); opacity:0; transition: opacity .3s ease; }
+.saved-flag.show{ opacity:1; }
+.task-prompts{ margin:14px 0 0; padding:0; list-style:none; display:grid; gap:8px; }
+.task-prompts li{
+  font-size:13.5px; color: var(--ink-soft); background: var(--paper-raised); border:1px solid var(--family-line);
+  border-radius: var(--r-sm); padding:10px 12px;
+}
+.task-prompts strong{ color: var(--family); }
+
+/* ---------- FOOTER NAV ---------- */
+footer{
+  max-width:760px; margin:0 auto; padding:0 24px 60px; display:flex;
+  justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;
+  font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint);
+}
+footer a{ color: var(--b1); text-decoration:none; }
+footer a:hover{ text-decoration:underline; }
+
+@media (max-width:600px){
+  header{ padding:34px 18px 22px; }
+  main{ padding:8px 18px 90px; }
+  .panel, .task-panel, .roleplay-panel, .assess-panel{ padding:20px 18px; }
+  .assess-row{ flex-direction:column; align-items:flex-start; gap:10px; }
+}
+@media (prefers-reduced-motion: reduce){ *{ transition:none !important; } }
+</style>
+</head>
+<body>
+
+<header>
+  <p class="eyebrow"><span class="dot"></span>Clase 16 de 16 · L7 Línea de llegada</p>
+  <h1>Un día completo en el <em>obrador</em></h1>
+  <p class="lede">Última clase del curso. Hoy no aprendemos gramática nueva: vivimos un día entero de trabajo en el obrador de Girona, de principio a fin, usando todo lo que ya sabes — presente, imperativo y pretérito indefinido — en un solo hilo narrativo continuo.</p>
+  <div class="meta-row">
+    <div>Duración<strong>50 min</strong></div>
+    <div>Gramática<strong>Presente + imperativo + pretérito, integrados</strong></div>
+    <div>Nivel<strong>A1 (cierre)</strong></div>
+  </div>
+  <div class="finish-banner">
+    <span class="flag">🏁</span>
+    <div><strong>Meta del curso.</strong> Empezaste el 15 de julio diciendo "Soy Davide, soy pastelero". Hoy, cinco semanas después, vas a llevar una conversación completa de un día de trabajo real — llegada, instrucciones, receta, compañeros y despedida — sin salir del español.</div>
+  </div>
+</header>
+
+<main>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">1</span><h2>El día, en cinco momentos</h2><span class="time-tag">6 min</span></div>
+    <div class="panel">
+      <p class="vocab-hint" style="margin:0 0 16px;">Así se organiza la simulación de hoy. Cada momento usa un tiempo verbal distinto — como en un día real de trabajo.</p>
+      <div class="stage-line">
+        <div class="stage">
+          <div class="stage-card">
+            <p class="stage-tag">7:00 — llegada</p>
+            <p class="stage-title">Llegas al obrador y saludas al equipo</p>
+            <p class="stage-desc">Hablas de quién eres, cómo estás y qué tal el turno de hoy.</p>
+            <span class="stage-tense">presente · ser / estar</span>
+          </div>
+        </div>
+        <div class="stage">
+          <div class="stage-card">
+            <p class="stage-tag">7:15 — instrucciones</p>
+            <p class="stage-title">El jefe de cocina reparte las tareas del día</p>
+            <p class="stage-desc">Recibes y repites órdenes rápidas: qué pesar, qué mezclar, qué hornear primero.</p>
+            <span class="stage-tense">imperativo</span>
+          </div>
+        </div>
+        <div class="stage">
+          <div class="stage-card">
+            <p class="stage-tag">8:00 — la receta</p>
+            <p class="stage-title">Preparas una receta paso a paso con un compañero</p>
+            <p class="stage-desc">Describes lo que estás haciendo ahora mismo mientras trabajas.</p>
+            <span class="stage-tense">presente · estar + gerundio</span>
+          </div>
+        </div>
+        <div class="stage">
+          <div class="stage-card">
+            <p class="stage-tag">12:30 — el descanso</p>
+            <p class="stage-title">Charlas con compañeros sobre tu formación</p>
+            <p class="stage-desc">Cuentas de dónde vienes, dónde estudiaste y qué aprendiste.</p>
+            <span class="stage-tense">pretérito indefinido</span>
+          </div>
+        </div>
+        <div class="stage">
+          <div class="stage-card">
+            <p class="stage-tag">18:00 — despedida</p>
+            <p class="stage-title">Terminas el turno y hablas de tus planes</p>
+            <p class="stage-desc">Te despides del equipo y comentas qué vas a hacer mañana o en el futuro.</p>
+            <span class="stage-tense">ir a + infinitivo / futuro</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">2</span><h2>Repaso rápido: los tres tiempos</h2><span class="time-tag">6 min</span></div>
+    <div class="panel">
+      <div class="mix-grid">
+        <div class="mix-col is-pres">
+          <div class="mix-head">
+            <span class="mix-verb">PRESENTE</span>
+            <span class="mix-sub">— hoy, siempre, ahora</span>
+          </div>
+          <ul class="mix-list">
+            <li><strong>Soy / estoy:</strong> Soy pastelero. Estoy en el obrador.</li>
+            <li><strong>-ar/-er/-ir:</strong> Trabajo, mezclo, añado, sirvo.</li>
+            <li><strong>Estar + gerundio:</strong> Estoy horneando el pan.</li>
+          </ul>
+        </div>
+        <div class="mix-col is-imp">
+          <div class="mix-head">
+            <span class="mix-verb">IMPERATIVO</span>
+            <span class="mix-sub">— órdenes e instrucciones</span>
+          </div>
+          <ul class="mix-list">
+            <li><strong>Tú:</strong> Mezcla, añade, hornea, deja reposar.</li>
+            <li><strong>Usted (jefe → ti):</strong> Pese la harina, bata los huevos.</li>
+            <li><strong>Conector:</strong> Primero mezcla, después añade, al final hornea.</li>
+          </ul>
+        </div>
+        <div class="mix-col is-pret">
+          <div class="mix-head">
+            <span class="mix-verb">PRETÉRITO</span>
+            <span class="mix-sub">— tu historia, ya terminado</span>
+          </div>
+          <ul class="mix-list">
+            <li><strong>Regular:</strong> Estudié, trabajé, aprendí, viví.</li>
+            <li><strong>Irregular:</strong> Fui a la escuela, estuve cinco años allí.</li>
+            <li><strong>Con tiempo:</strong> Hace cinco años empecé en pastelería.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="note"><strong>La clave de hoy:</strong> no eliges el tiempo verbal porque una tarjeta te lo diga — lo eliges porque la situación lo pide. Si hablas de ahora mismo → presente. Si das una orden → imperativo. Si cuentas algo que ya pasó → pretérito. Así habla un pastelero real en su turno.</div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">3</span><h2>Vocabulario acumulativo</h2><span class="time-tag">5 min</span></div>
+    <p class="vocab-hint">Repaso de las cinco semanas: toca cada tarjeta para ver un ejemplo en contexto.</p>
+    <p class="vocab-cat">Ingredientes y utensilios</p>
+    <div class="vocab-grid" id="vocab-grid-1"></div>
+    <p class="vocab-cat">Acciones y proceso</p>
+    <div class="vocab-grid" id="vocab-grid-2"></div>
+    <p class="vocab-cat">Equipo y organización</p>
+    <div class="vocab-grid" id="vocab-grid-3"></div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">4</span><h2>Practica: elige el tiempo correcto</h2><span class="time-tag">10 min</span></div>
+    <div class="panel">
+      <p class="vocab-hint" style="margin-bottom:14px;">30 frases mezclando presente, imperativo y pretérito. Las primeras 12 se hacen en voz alta en clase; el resto queda como repaso para casa.</p>
+      <div id="exercises"></div>
+      <div class="check-bar">
+        <div style="display:flex; gap:10px;">
+          <button class="btn-primary" id="check-btn">Comprobar respuestas</button>
+          <button class="btn-ghost" id="reset-btn">Reiniciar</button>
+        </div>
+        <span id="score-text"></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="block roleplay-panel">
+    <div class="block-head"><span class="block-num">5</span><h2>Simulación completa: un día en el obrador</h2><span class="time-tag">18 min</span></div>
+    <p class="lede" style="margin-bottom:16px;">Un solo hilo narrativo con los cinco momentos del día. Cada línea indica qué tiempo verbal usar. Vive la escena completa en clase, de la llegada a la despedida; puedes repetirla cambiando de rol.</p>
+    <div class="scene-tabs" id="scene-tabs"></div>
+    <div id="scene-container"></div>
+    <div class="roleplay-tip"><strong>En clase:</strong> hacemos la simulación completa en voz alta, sin pausas entre momentos — como un turno real. Si te atascas en un tiempo verbal, vuelve al bloque 2.</div>
+  </section>
+
+  <section class="block assess-panel">
+    <div class="block-head"><span class="block-num">6</span><h2 style="color:var(--b3)">Autoevaluación final</h2><span class="time-tag">4 min</span></div>
+    <p style="margin:0 0 6px; font-size:14.5px; color:var(--ink-soft);">Marca con sinceridad cómo te sientes con cada bloque del curso. Esto queda solo para ti — nos ayuda a decidir en qué enfocarnos si sigues formándote.</p>
+    <div id="assess-rows"></div>
+    <div class="assess-legend"><span>1 · inseguro</span><span>5 · con confianza</span></div>
+  </section>
+
+  <section class="block task-panel">
+    <div class="block-head"><span class="block-num">7</span><h2 style="color:var(--family)">Tu tarea final</h2><span class="time-tag">5 min</span></div>
+    <p style="margin:0; font-size:15px; color:var(--ink-soft);">Escribe tu <strong>plan de continuación</strong>: qué vas a seguir practicando por tu cuenta, y una breve autoevaluación de estas cinco semanas. Usa al menos una frase con cada tiempo verbal (presente, imperativo, pretérito).</p>
+    <ul class="task-prompts">
+      <li><strong>Presente —</strong> ¿Cómo te sientes ahora hablando español en la cocina?</li>
+      <li><strong>Pretérito —</strong> ¿Qué aprendiste en estas cinco semanas que no sabías al principio?</li>
+      <li><strong>Futuro / ir a —</strong> ¿Qué vas a seguir practicando tú solo?</li>
+    </ul>
+    <textarea id="final-task" placeholder="Ahora me siento...&#10;En estas cinco semanas aprendí...&#10;Voy a seguir practicando..."></textarea>
+    <div class="task-footer">
+      <span id="task-count">0 palabras escritas</span>
+      <div style="display:flex; gap:10px; align-items:center;">
+        <span class="saved-flag" id="saved-flag">Guardado ✓</span>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <span>Clase 16 · Línea de llegada — fin del curso</span>
+  <span>¡Enhorabuena, Davide! Curso completado 🥐</span>
+</footer>
+
+<script>
+/* ---------- VOCAB ---------- */
+const VOCAB_1 = [
+  {front:"la harina", back:"Necesito dos kilos de harina."},
+  {front:"la mantequilla", back:"Añade la mantequilla fría."},
+  {front:"la manga pastelera", back:"Pásame la manga pastelera."},
+  {front:"el molde", back:"Pon la masa en el molde."},
+  {front:"la báscula", back:"Pesa la harina en la báscula."},
+  {front:"el tamiz", back:"Tamiza el azúcar glas."},
+];
+const VOCAB_2 = [
+  {front:"mezclar", back:"Mezcla los ingredientes secos."},
+  {front:"hornear", back:"Hornea a 180 grados."},
+  {front:"dejar reposar", back:"Deja reposar la masa 20 minutos."},
+  {front:"montar la nata", back:"Está montando la nata a mano."},
+  {front:"decorar", back:"Decoré la tarta con fresas."},
+  {front:"amasar", back:"Primero amasa, después deja reposar."},
+];
+const VOCAB_3 = [
+  {front:"el jefe de cocina", back:"El jefe de cocina reparte las tareas."},
+  {front:"el turno", back:"Mi turno empieza a las siete."},
+  {front:"la formación", back:"Mi formación fue en una escuela de Nápoles."},
+  {front:"la tradición familiar", back:"Aprendí la tradición familiar de mi abuela."},
+  {front:"urgente", back:"Este pedido es urgente."},
+  {front:"algún día", back:"Algún día quiero abrir mi propio obrador."},
+];
+
+function renderVocab(id, list){
+  const grid = document.getElementById(id);
+  list.forEach(v=>{
+    const card = document.createElement('div');
+    card.className = 'vocab-card';
+    card.setAttribute('role', 'button');
+    card.setAttribute('tabindex', '0');
+    card.setAttribute('aria-pressed', 'false');
+    card.setAttribute('aria-label', `${v.front}. Pulsa para ver un ejemplo.`);
+    card.innerHTML = `<div class="vocab-front">${v.front}</div><div class="vocab-back">${v.back}</div>`;
+    const toggle = ()=>{
+      const flipped = card.classList.toggle('flipped');
+      card.setAttribute('aria-pressed', String(flipped));
+    };
+    card.addEventListener('click', toggle);
+    card.addEventListener('keydown', (e)=>{
+      if(e.key === 'Enter' || e.key === ' '){
+        e.preventDefault();
+        toggle();
+      }
+    });
+    grid.appendChild(card);
+  });
+}
+renderVocab('vocab-grid-1', VOCAB_1);
+renderVocab('vocab-grid-2', VOCAB_2);
+renderVocab('vocab-grid-3', VOCAB_3);
+
+/* ---------- EXERCISES ---------- */
+const EXERCISES = [
+  {"sentence":"(tú, mezclar) <span class=\"gap\">___</span> los ingredientes secos primero.","options":["mezclas","mezcla","mezclé"],"answer":"mezcla"},
+  {"sentence":"Ahora mismo <span class=\"gap\">___</span> horneando el pan de cada mañana.","options":["estoy","estuve","estoy a"],"answer":"estoy"},
+  {"sentence":"Yo <span class=\"gap\">___</span> en la escuela de pastelería de Nápoles hace cinco años.","options":["estudio","estudié","estudia"],"answer":"estudié"},
+  {"sentence":"(usted, pesar) <span class=\"gap\">___</span> la harina antes de empezar.","options":["pesa","pese","pesó"],"answer":"pese"},
+  {"sentence":"Ahora <span class=\"gap\">___</span> pastelero en un obrador de Girona.","options":["soy","fui","sea"],"answer":"soy"},
+  {"sentence":"(tú, añadir) <span class=\"gap\">___</span> los huevos poco a poco.","options":["añade","añades","añadí"],"answer":"añade"},
+  {"sentence":"El año pasado <span class=\"gap\">___</span> a trabajar aquí por primera vez.","options":["vengo","vine","venga"],"answer":"vine"},
+  {"sentence":"(tú, dejar) <span class=\"gap\">___</span> reposar la masa veinte minutos.","options":["deja","dejas","dejé"],"answer":"deja"},
+  {"sentence":"Mi compañera <span class=\"gap\">___</span> montando la nata en este momento.","options":["está","estuvo","esté"],"answer":"está"},
+  {"sentence":"Aprendí la tradición familiar cuando <span class=\"gap\">___</span> quince años.","options":["tengo","tuve","tenía"],"answer":"tenía"},
+  {"sentence":"(tú, hornear) <span class=\"gap\">___</span> a ciento ochenta grados.","options":["hornea","horneas","horneé"],"answer":"hornea"},
+  {"sentence":"Hoy <span class=\"gap\">___</span> muy contento con el resultado de la receta.","options":["estoy","fui","estuve"],"answer":"estoy"},
+  {"sentence":"El jefe de cocina siempre <span class=\"gap\">___</span> las tareas del día por la mañana.","options":["reparte","repartió","reparta"],"answer":"reparte"},
+  {"sentence":"Hace cinco años <span class=\"gap\">___</span> a trabajar como pastelero.","options":["empiezo","empecé","empieza"],"answer":"empecé"},
+  {"sentence":"(usted, batir) <span class=\"gap\">___</span> los huevos con energía.","options":["bata","bate","batió"],"answer":"bata"},
+  {"sentence":"En este momento <span class=\"gap\">___</span> decorando la tarta de cumpleaños.","options":["estoy","estuve","esté"],"answer":"estoy"},
+  {"sentence":"El año pasado <span class=\"gap\">___</span> en una escuela de pastelería en Francia.","options":["estoy","estuve","estaba"],"answer":"estuve"},
+  {"sentence":"(tú, cortar) <span class=\"gap\">___</span> la fruta en trozos pequeños.","options":["corta","cortas","corté"],"answer":"corta"},
+  {"sentence":"Normalmente <span class=\"gap\">___</span> a las siete de la mañana al obrador.","options":["llego","llegué","llegue"],"answer":"llego"},
+  {"sentence":"(tú, tamizar) <span class=\"gap\">___</span> el azúcar glas antes de usarlo.","options":["tamiza","tamizas","tamicé"],"answer":"tamiza"},
+  {"sentence":"El primer día <span class=\"gap\">___</span> bastante nervioso, la verdad.","options":["estoy","estuve","esté"],"answer":"estuve"},
+  {"sentence":"Primero mezcla, <span class=\"gap\">___</span> añade el azúcar, y al final hornea.","options":["antes","después","antes de"],"answer":"después"},
+  {"sentence":"(usted, decorar) <span class=\"gap\">___</span> la tarta con las fresas frescas.","options":["decore","decora","decoró"],"answer":"decore"},
+  {"sentence":"El próximo año <span class=\"gap\">___</span> aprender más sobre chocolate.","options":["voy a","fui a","vaya a"],"answer":"voy a"},
+  {"sentence":"Mis compañeros ya <span class=\"gap\">___</span> el pedido urgente de esta mañana.","options":["terminan","terminaron","terminen"],"answer":"terminaron"},
+  {"sentence":"(tú, pesar) <span class=\"gap\">___</span> quinientos gramos de harina exactamente.","options":["pesa","pesas","pesé"],"answer":"pesa"},
+  {"sentence":"Ahora mismo Laura <span class=\"gap\">___</span> preparando el hojaldre.","options":["está","estuvo","esté"],"answer":"está"},
+  {"sentence":"Cinco años atrás yo no <span class=\"gap\">___</span> nada de pastelería francesa.","options":["sé","supe","sabía"],"answer":"sabía"},
+  {"sentence":"(tú, amasar) <span class=\"gap\">___</span> despacio, sin prisa.","options":["amasa","amasas","amasé"],"answer":"amasa"},
+  {"sentence":"Algún día <span class=\"gap\">___</span> mi propia escuela de pastelería.","options":["creo","voy a crear","creé"],"answer":"voy a crear"}
+];
+
+const PRACTICE_KEY = 'davide-clase16-practica';
+let practiceState = {};
+async function cargarPractica(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(PRACTICE_KEY);
+    if (res && typeof res.value === 'string') practiceState = JSON.parse(res.value);
+  }catch(e){
+    // Sin progreso previo guardado todavía.
+  }
+}
+async function guardarPractica(){
+  if (!window.storage) return;
+  try{ await window.storage.set(PRACTICE_KEY, JSON.stringify(practiceState)); }catch(e){ /* fallo silencioso */ }
+}
+
+const exWrap = document.getElementById('exercises');
+(async function initPractica(){
+await cargarPractica();
+EXERCISES.forEach((ex, i)=>{
+  if(i === 0){
+    const divider = document.createElement('div');
+    divider.className = 'ex-divider en-clase';
+    divider.textContent = 'en clase · ítems 1–12';
+    exWrap.appendChild(divider);
+  }
+  if(i === 12){
+    const divider = document.createElement('div');
+    divider.className = 'ex-divider';
+    divider.textContent = 'para casa · repaso opcional';
+    exWrap.appendChild(divider);
+  }
+  const el = document.createElement('div');
+  el.className = 'exercise';
+  el.dataset.answer = ex.answer;
+  el.dataset.idx = i;
+  el.innerHTML = `
+    <div class="ex-sentence">${i+1}. ${ex.sentence}</div>
+    <div class="ex-options">
+      ${ex.options.map(o=>`<button class="opt-btn" data-value="${o}">${o}</button>`).join('')}
+    </div>
+  `;
+  exWrap.appendChild(el);
+
+  const savedPick = practiceState[i];
+  if(savedPick){
+    const savedBtn = el.querySelector(`.opt-btn[data-value="${savedPick}"]`);
+    if(savedBtn) savedBtn.classList.add('picked');
+  }
+
+  el.querySelectorAll('.opt-btn').forEach(btn=>{
+    btn.addEventListener('click', async ()=>{
+      el.querySelectorAll('.opt-btn').forEach(b=>b.classList.remove('picked'));
+      btn.classList.add('picked');
+      practiceState[i] = btn.dataset.value;
+      await guardarPractica();
+    });
+  });
+});
+})();
+
+document.getElementById('check-btn').addEventListener('click', ()=>{
+  let correct = 0;
+  document.querySelectorAll('.exercise').forEach(el=>{
+    const answer = el.dataset.answer;
+    const picked = el.querySelector('.opt-btn.picked');
+    el.querySelectorAll('.opt-btn').forEach(b=>{
+      b.disabled = true;
+      if(b.dataset.value === answer) b.classList.add('correct');
+      else if(b === picked) b.classList.add('wrong');
+    });
+    if(picked && picked.dataset.value === answer) correct++;
+  });
+  document.getElementById('score-text').textContent = `${correct} / ${EXERCISES.length} correctas`;
+});
+
+document.getElementById('reset-btn').addEventListener('click', async ()=>{
+  document.querySelectorAll('.exercise').forEach(el=>{
+    el.querySelectorAll('.opt-btn').forEach(b=>{
+      b.disabled = false;
+      b.classList.remove('picked','correct','wrong');
+    });
+  });
+  document.getElementById('score-text').textContent = '';
+  practiceState = {};
+  await guardarPractica();
+});
+
+/* ---------- ROLEPLAY: FULL DAY SIMULATION (single continuous scene, split into 5 tabs) ---------- */
+const SCENES = [
+  {
+    "id": "llegada",
+    "tab": "7:00 · Llegada",
+    "icon": "🥐",
+    "setup": "Llegas al obrador de Girona. Marc, el jefe de cocina, y Núria, la encargada, ya están preparando el turno.",
+    "lines": [
+      {"who":"friend","name":"Marc","text":"¡Buenos días! ¿Cómo estás hoy, preparado para el turno?"},
+      {"who":"you","hint":"Responde con \"estar\" cómo te sientes hoy.","tense":"presente"},
+      {"who":"friend","name":"Núria","text":"¿Sabes ya qué vas a hacer hoy, o prefieres que te lo explique?"},
+      {"who":"you","hint":"Responde brevemente, en presente.","tense":"presente"},
+      {"who":"friend","name":"Marc","text":"Hoy es un día importante, tenemos un pedido urgente."},
+      {"who":"you","hint":"Reacciona y pregunta algo sobre el pedido, en presente.","tense":"presente"},
+      {"who":"friend","name":"Núria","text":"Vas a trabajar con Laura hoy en la parte de hojaldre."},
+      {"who":"you","hint":"Confirma y saluda a Laura, en presente.","tense":"presente"}
+    ]
+  },
+  {
+    "id": "instrucciones",
+    "tab": "7:15 · Instrucciones",
+    "icon": "📋",
+    "setup": "Marc reparte las tareas del día en la sala de preparación, dando órdenes rápidas.",
+    "lines": [
+      {"who":"friend","name":"Marc","text":"Primero, pesa quinientos gramos de harina."},
+      {"who":"you","hint":"Repite la instrucción usando el imperativo, confirmando.","tense":"imperativo"},
+      {"who":"friend","name":"Marc","text":"Después, añade la mantequilla fría poco a poco."},
+      {"who":"you","hint":"Repite o confirma con imperativo.","tense":"imperativo"},
+      {"who":"friend","name":"Marc","text":"Mezcla bien, pero no amases demasiado."},
+      {"who":"you","hint":"Confirma la instrucción con imperativo.","tense":"imperativo"},
+      {"who":"friend","name":"Marc","text":"Al final, deja reposar la masa treinta minutos."},
+      {"who":"you","hint":"Confirma y pregunta algo con imperativo o presente.","tense":"imperativo"}
+    ]
+  },
+  {
+    "id": "receta",
+    "tab": "8:00 · La receta",
+    "icon": "🧁",
+    "setup": "Estás preparando la receta junto a Laura. Describes en voz alta lo que hacéis, paso a paso.",
+    "lines": [
+      {"who":"friend","name":"Laura","text":"¿Qué estás haciendo tú ahora mismo?"},
+      {"who":"you","hint":"Responde con \"estar + gerundio\".","tense":"presente"},
+      {"who":"friend","name":"Laura","text":"Yo estoy montando la nata, ¿me pasas el tamiz cuando termines?"},
+      {"who":"you","hint":"Responde afirmativamente, en presente.","tense":"presente"},
+      {"who":"friend","name":"Laura","text":"¿Ya está lista la masa o todavía está reposando?"},
+      {"who":"you","hint":"Responde sobre el estado de la masa, en presente.","tense":"presente"},
+      {"who":"friend","name":"Laura","text":"Perfecto, entonces yo sigo decorando mientras tanto."},
+      {"who":"you","hint":"Comenta qué estás haciendo tú, en presente.","tense":"presente"}
+    ]
+  },
+  {
+    "id": "descanso",
+    "tab": "12:30 · Descanso",
+    "icon": "☕",
+    "setup": "Es la hora del descanso. Jordi te pregunta por tu formación como pastelero.",
+    "lines": [
+      {"who":"friend","name":"Jordi","text":"Oye, ¿dónde estudiaste pastelería exactamente?"},
+      {"who":"you","hint":"Responde con pretérito indefinido (estudié).","tense":"pretérito"},
+      {"who":"friend","name":"Jordi","text":"¿Y cuánto tiempo trabajaste allí antes de venir a España?"},
+      {"who":"you","hint":"Responde con pretérito indefinido (trabajé).","tense":"pretérito"},
+      {"who":"friend","name":"Jordi","text":"¿Aprendiste la tradición familiar de alguien en concreto?"},
+      {"who":"you","hint":"Responde con pretérito indefinido (aprendí).","tense":"pretérito"},
+      {"who":"friend","name":"Jordi","text":"¡Qué interesante! ¿Y cómo llegaste a este obrador de Girona?"},
+      {"who":"you","hint":"Responde con pretérito indefinido (vine / llegué).","tense":"pretérito"}
+    ]
+  },
+  {
+    "id": "despedida",
+    "tab": "18:00 · Despedida",
+    "icon": "👋",
+    "setup": "Termina el turno. Núria y Marc se despiden de ti y preguntan por tus planes de futuro.",
+    "lines": [
+      {"who":"friend","name":"Núria","text":"¡Buen trabajo hoy! ¿Qué vas a hacer mañana, descansar?"},
+      {"who":"you","hint":"Responde con \"ir a\" + infinitivo, sobre mañana.","tense":"futuro"},
+      {"who":"friend","name":"Marc","text":"¿Y a largo plazo? ¿Tienes algún objetivo profesional?"},
+      {"who":"you","hint":"Responde con \"quiero\" o \"voy a\" sobre tus objetivos.","tense":"futuro"},
+      {"who":"friend","name":"Núria","text":"Me alegra mucho que hayas encajado tan bien con el equipo."},
+      {"who":"you","hint":"Da las gracias y comenta algo en presente.","tense":"presente"},
+      {"who":"friend","name":"Marc","text":"¡Hasta mañana, Davide! Buen trabajo el primer mes."},
+      {"who":"you","hint":"Despídete, resumiendo brevemente cómo ha ido el día.","tense":"presente"}
+    ]
+  }
+];
+
+const sceneTabs = document.getElementById('scene-tabs');
+const sceneContainer = document.getElementById('scene-container');
+let activeScene = 0;
+
+function renderTabs(){
+  sceneTabs.innerHTML = SCENES.map((s,i)=>
+    `<button class="scene-tab${i===activeScene?' active':''}" data-idx="${i}">${s.icon} ${s.tab}</button>`
+  ).join('');
+  sceneTabs.querySelectorAll('.scene-tab').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      activeScene = parseInt(btn.dataset.idx, 10);
+      renderTabs();
+      renderScene();
+    });
+  });
+}
+
+function tenseClass(t){
+  if(t === 'imperativo') return 't-imp';
+  if(t === 'pretérito') return 't-pret';
+  return 't-pres';
+}
+
+function renderScene(){
+  const scene = SCENES[activeScene];
+  const linesHtml = scene.lines.map((l, li)=>{
+    if(l.who === 'friend'){
+      return `
+        <div class="line friend">
+          <div class="line-avatar">${l.name.charAt(0)}</div>
+          <div class="line-body">
+            <p class="line-name">${l.name}</p>
+            <div class="line-bubble">${l.text}</div>
+          </div>
+        </div>`;
+    } else {
+      const rpKey = `${scene.id}:${li}`;
+      return `
+        <div class="line you">
+          <div class="line-avatar">Tú</div>
+          <div class="line-body">
+            <p class="line-name">Tú</p>
+            <textarea class="line-input" rows="2" placeholder="Escribe tu respuesta..." data-rpkey="${scene.id}:${li}">${roleplayState[rpKey] ? roleplayState[rpKey] : ''}</textarea>
+            <p class="line-hint">${l.hint}</p>
+            <span class="line-tense ${tenseClass(l.tense)}">${l.tense}</span>
+          </div>
+        </div>`;
+    }
+  }).join('');
+
+  sceneContainer.innerHTML = `
+    <div class="scene-setup">
+      <span class="scene-icon">${scene.icon}</span>
+      <p class="scene-text"><strong>${scene.tab}:</strong> ${scene.setup}</p>
+    </div>
+    <div class="dialogue">${linesHtml}</div>
+  `;
+
+  sceneContainer.querySelectorAll('.line-input').forEach(inputEl=>{
+    inputEl.addEventListener('input', ()=>{
+      roleplayState[inputEl.dataset.rpkey] = inputEl.value;
+      scheduleRoleplaySave();
+    });
+  });
+}
+
+const ROLEPLAY_KEY = 'davide-clase16-roleplay';
+let roleplayState = {};
+async function cargarRoleplay(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(ROLEPLAY_KEY);
+    if (res && typeof res.value === 'string') roleplayState = JSON.parse(res.value);
+  }catch(e){
+    // Sin intervenciones guardadas todavía.
+  }
+}
+async function guardarRoleplay(){
+  if (!window.storage) return;
+  try{ await window.storage.set(ROLEPLAY_KEY, JSON.stringify(roleplayState)); }catch(e){ /* fallo silencioso */ }
+}
+let roleplaySaveTimer = null;
+function scheduleRoleplaySave(){
+  clearTimeout(roleplaySaveTimer);
+  roleplaySaveTimer = setTimeout(guardarRoleplay, 500);
+}
+
+(async function initRoleplay(){
+await cargarRoleplay();
+renderTabs();
+renderScene();
+})();
+
+/* ---------- SELF-ASSESSMENT ---------- */
+const ASSESS_ITEMS = [
+  "Ser / estar en contexto profesional",
+  "Verbos regulares en presente (-ar/-er/-ir)",
+  "Estar + gerundio (describir lo que hago ahora)",
+  "Imperativo para dar y entender instrucciones",
+  "Pretérito indefinido para contar mi formación",
+  "Vocabulario técnico de pastelería"
+];
+const ASSESS_KEY = 'davide-clase16-autoeval';
+const assessWrap = document.getElementById('assess-rows');
+let assessState = {};
+
+async function loadAssess(){
+  if(!window.storage) return;
+  try{
+    const res = await window.storage.get(ASSESS_KEY);
+    if(res && typeof res.value === 'string') assessState = JSON.parse(res.value);
+  }catch(e){ /* sin datos previos */ }
+}
+async function saveAssess(){
+  if(!window.storage) return;
+  try{ await window.storage.set(ASSESS_KEY, JSON.stringify(assessState)); }catch(e){ /* fallo silencioso */ }
+}
+
+function renderAssess(){
+  assessWrap.innerHTML = '';
+  ASSESS_ITEMS.forEach((label, i)=>{
+    const row = document.createElement('div');
+    row.className = 'assess-row';
+    const dotsHtml = [1,2,3,4,5].map(n=>{
+      const picked = assessState[i] === n ? ' picked' : '';
+      return `<button class="assess-dot${picked}" data-i="${i}" data-n="${n}">${n}</button>`;
+    }).join('');
+    row.innerHTML = `<span class="assess-label">${label}</span><div class="assess-scale">${dotsHtml}</div>`;
+    assessWrap.appendChild(row);
+  });
+  assessWrap.querySelectorAll('.assess-dot').forEach(btn=>{
+    btn.addEventListener('click', async ()=>{
+      const i = btn.dataset.i;
+      const n = parseInt(btn.dataset.n, 10);
+      assessState[i] = n;
+      renderAssess();
+      await saveAssess();
+    });
+  });
+}
+(async function initAssess(){
+  await loadAssess();
+  renderAssess();
+})();
+
+/* ---------- FINAL TASK ---------- */
+const STORAGE_KEY = 'davide-clase16-tarea';
+const taskArea = document.getElementById('final-task');
+const taskCount = document.getElementById('task-count');
+const savedFlag = document.getElementById('saved-flag');
+
+async function cargarTarea(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(STORAGE_KEY);
+    if (res && typeof res.value === 'string') taskArea.value = res.value;
+  }catch(e){
+    // Clave inexistente todavía: no hay tarea previa, se queda en blanco.
+  }
+  updateCount();
+}
+
+function updateCount(){
+  const words = taskArea.value.trim().split(/\s+/).filter(Boolean).length;
+  taskCount.textContent = `${words} palabra${words===1?'':'s'} escrita${words===1?'':'s'}`;
+}
+async function guardarTareaAuto(){
+  if (!window.storage){
+    savedFlag.textContent = 'Guardado no disponible aquí';
+    savedFlag.classList.add('show');
+    setTimeout(()=>{ savedFlag.classList.remove('show'); savedFlag.textContent = 'Guardado ✓'; }, 2200);
+    return;
+  }
+  try{
+    const ok = await window.storage.set(STORAGE_KEY, taskArea.value);
+    savedFlag.textContent = ok ? 'Guardado ✓' : 'No se pudo guardar';
+  }catch(e){
+    savedFlag.textContent = 'No se pudo guardar';
+  }
+  savedFlag.classList.add('show');
+  setTimeout(()=>{ savedFlag.classList.remove('show'); savedFlag.textContent = 'Guardado ✓'; }, 1800);
+}
+
+let taskSaveTimer = null;
+function scheduleTaskSave(){
+  clearTimeout(taskSaveTimer);
+  taskSaveTimer = setTimeout(guardarTareaAuto, 700);
+}
+
+taskArea.addEventListener('input', ()=>{
+  updateCount();
+  scheduleTaskSave();
+});
+updateCount();
+cargarTarea();
+
+</script>
+
+</body>
+</html>

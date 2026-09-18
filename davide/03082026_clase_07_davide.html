@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clase 7 · Por y para — Davide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+
+/* ╔══════════════════════════════════════════════════════════════╗
+   ║  ESCOLAR — sistema de diseño para clases de español online   ║
+   ║  Clase 7 · L3 Línea circular · "Por y para" — Davide          ║
+   ╚══════════════════════════════════════════════════════════════╝ */
+
+:root{
+  --paper:        #FBF7EE;
+  --paper-raised: #FFFFFF;
+  --paper-alt:    #F3ECDA;
+  --ink:          #23291F;
+  --ink-soft:     #565F52;
+  --ink-faint:    #8B9184;
+  --line:         rgba(35,41,31,0.12);
+  --line-strong:  rgba(35,41,31,0.22);
+
+  --b1:      #2F6FED;  --b1-soft: #EAF1FE;  --b1-line: #C6D9FC;
+  --b2:      #2E9E6B;  --b2-soft: #E9F6EF;  --b2-line: #BEE6D3;
+  --b3:      #DB8A2E;  --b3-soft: #FCF1E1;  --b3-line: #F3D9AF;
+  --family:  #B5502E;  --family-soft: #FBEBE3; --family-line: #EFC9B4;
+
+  --f-display: 'Fraunces', Georgia, serif;
+  --f-body:    'IBM Plex Sans', system-ui, sans-serif;
+  --f-data:    'IBM Plex Mono', monospace;
+
+  --r-sm: 8px;
+  --r-md: 14px;
+  --r-lg: 20px;
+
+  --shadow-1: 0 1px 2px rgba(35,41,31,0.05), 0 1px 8px rgba(35,41,31,0.04);
+}
+
+*{ box-sizing:border-box; }
+body{
+  margin:0;
+  background: var(--paper);
+  background-image: radial-gradient(circle at 1px 1px, var(--line) 1px, transparent 0);
+  background-size: 22px 22px;
+  color: var(--ink);
+  font-family: var(--f-body);
+  line-height:1.6;
+}
+::selection{ background: var(--b3-soft); }
+
+/* ---------- HEADER ---------- */
+header{ padding:44px 24px 28px; max-width:760px; margin:0 auto; }
+.eyebrow{
+  font-family: var(--f-data); font-size:12px; letter-spacing:.14em;
+  text-transform:uppercase; color: var(--b3); margin:0 0 10px;
+  display:flex; align-items:center; gap:10px;
+}
+.eyebrow .dot{ width:6px; height:6px; border-radius:50%; background: var(--b3); }
+h1{
+  font-family: var(--f-display); font-weight:600;
+  font-size:clamp(30px,5.6vw,46px); line-height:1.08;
+  margin:0 0 14px; letter-spacing:-.01em;
+}
+h1 em{ font-style:italic; color: var(--b3); }
+.lede{ font-size:16px; color: var(--ink-soft); max-width:56ch; margin:0; }
+
+.meta-row{
+  display:flex; flex-wrap:wrap; gap:20px; margin-top:26px;
+  font-family: var(--f-data); font-size:12px; color: var(--ink-faint);
+}
+.meta-row strong{
+  display:block; color: var(--ink); font-size:14.5px; font-weight:500;
+  font-family: var(--f-display); margin-top:3px;
+}
+
+/* ---------- SECTIONS ---------- */
+main{ max-width:760px; margin:0 auto; padding:8px 24px 100px; }
+
+section.block{ margin-bottom:52px; }
+.block-head{ display:flex; align-items:baseline; gap:12px; margin-bottom:18px; }
+.time-tag{
+  font-family: var(--f-data); font-size:11px; color: var(--ink-faint);
+  background: var(--paper-alt); padding:3px 10px; border-radius:999px; margin-left:auto; flex:none;
+}
+.block-num{
+  font-family: var(--f-data); font-size:12px; color:#fff; background: var(--b3);
+  width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  flex:none;
+}
+.block-head h2{
+  font-family: var(--f-display); font-weight:500; font-style:italic; font-size:22px; margin:0;
+}
+
+.panel{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-lg);
+  box-shadow: var(--shadow-1); padding:26px 28px;
+}
+
+/* ---------- GRAMMAR TABLE ---------- */
+.conj-table{ width:100%; border-collapse:collapse; margin-top:4px; }
+.conj-table td{ padding:10px 6px; border-bottom:1px dashed var(--line); font-size:15px; }
+.conj-table tr:last-child td{ border-bottom:none; }
+.conj-pron{ font-family: var(--f-data); color: var(--ink-faint); font-size:13px; width:90px; }
+.conj-form{ font-family: var(--f-display); font-weight:600; font-size:19px; color: var(--b3); }
+.conj-ex{ color: var(--ink-soft); font-size:14px; }
+
+.note{
+  margin-top:18px; padding:14px 16px; background: var(--b3-soft); border:1px solid var(--b3-line);
+  border-radius: var(--r-md); font-size:14px; color: var(--ink-soft);
+}
+.note strong{ color: var(--ink); }
+
+/* ---------- POR vs PARA ---------- */
+.compare-wrap{ margin-top:22px; }
+.compare-title{
+  font-family: var(--f-data); font-size:11.5px; text-transform:uppercase; letter-spacing:.06em;
+  color: var(--ink-faint); margin:0 0 10px;
+}
+.compare-grid{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+@media (max-width:560px){ .compare-grid{ grid-template-columns:1fr; } }
+.compare-col{ border-radius: var(--r-md); padding:16px 18px; border:1px solid; }
+.compare-col.is-ser{ background: var(--b3-soft); border-color: var(--b3-line); }
+.compare-col.is-estar{ background: var(--b1-soft); border-color: var(--b1-line); }
+.compare-head{ display:flex; align-items:center; gap:8px; margin:0 0 10px; }
+.compare-verb{ font-family: var(--f-display); font-weight:600; font-size:19px; }
+.is-ser .compare-verb{ color: var(--b3); }
+.is-estar .compare-verb{ color: var(--b1); }
+.compare-sub{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); }
+.compare-list{ margin:0; padding:0; list-style:none; }
+.compare-list li{ font-size:13.5px; color: var(--ink-soft); padding:6px 0; border-top:1px dashed var(--line); }
+.compare-list li:first-child{ border-top:none; }
+.compare-list strong{ color: var(--ink); font-weight:600; }
+.compare-list em{ display:block; font-style:normal; color: var(--ink-faint); font-size:12.5px; margin-top:2px; }
+.compare-warning{
+  margin-top:14px; padding:14px 16px; background: var(--family-soft); border:1px solid var(--family-line);
+  border-radius: var(--r-md); font-size:13.5px; color: var(--ink-soft);
+}
+.compare-warning strong{ color: var(--family); }
+
+/* ---------- VOCAB CARDS ---------- */
+.vocab-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:12px; }
+.vocab-card{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:14px 16px; cursor:pointer; perspective:600px; min-height:78px;
+  display:flex; flex-direction:column; justify-content:center; transition: border-color .15s ease;
+}
+.vocab-card:hover{ border-color: var(--b3-line); }
+.vocab-card:focus-visible{ outline:2px solid var(--b3); outline-offset:2px; }
+.vocab-front{ font-family: var(--f-body); font-weight:600; font-size:15px; }
+.vocab-back{ display:none; font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); margin-top:6px; }
+.vocab-card.flipped .vocab-back{ display:block; }
+.vocab-card.flipped{ background: var(--b3-soft); border-color: var(--b3-line); }
+.vocab-hint{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin:10px 2px 16px; }
+
+/* ---------- EXERCISE ---------- */
+.exercise{ margin-bottom:20px; }
+.exercise:last-of-type{ margin-bottom:0; }
+.ex-sentence{ font-size:15.5px; margin-bottom:10px; }
+.ex-sentence .gap{ font-family: var(--f-data); color: var(--ink-faint); }
+.ex-options{ display:flex; flex-wrap:wrap; gap:8px; }
+.opt-btn{
+  font-family: var(--f-body); font-size:14px; background: var(--paper-raised);
+  border:1.5px solid var(--line); color: var(--ink); padding:7px 16px; border-radius:999px;
+  cursor:pointer; transition: all .15s ease;
+}
+.opt-btn:hover{ border-color: var(--ink-faint); }
+.opt-btn.picked{ background: var(--b3-soft); border-color: var(--b3); color: var(--b3); }
+.opt-btn.correct{ background: var(--b2-soft); border-color: var(--b2); color: var(--b2); }
+.opt-btn.wrong{ background: var(--family-soft); border-color: var(--family); color: var(--family); }
+.opt-btn:disabled{ cursor:default; }
+
+.check-bar{
+  display:flex; align-items:center; justify-content:space-between; gap:16px;
+  margin-top:22px; padding-top:18px; border-top:1px dashed var(--line);
+}
+.btn-primary{
+  font-family: var(--f-body); font-weight:600; font-size:14px; color:#fff; background: var(--b3);
+  border:none; padding:11px 22px; border-radius:999px; cursor:pointer; transition: transform .1s ease;
+}
+.btn-primary:hover{ transform: translateY(-1px); }
+#score-text{ font-family: var(--f-data); font-size:13px; color: var(--ink-faint); }
+.btn-ghost{
+  font-family: var(--f-body); font-weight:600; font-size:13px; color: var(--ink-soft); background:none;
+  border:1.5px solid var(--line); padding:9px 18px; border-radius:999px; cursor:pointer;
+}
+.btn-ghost:hover{ border-color: var(--ink-faint); }
+.ex-divider{
+  display:flex; align-items:center; gap:10px; margin:20px 0 16px;
+  font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.06em;
+  color: var(--ink-faint);
+}
+.ex-divider::before, .ex-divider::after{ content:""; flex:1; height:1px; background: var(--line); }
+.ex-divider.en-clase{ color: var(--b3); }
+.ex-divider.en-clase::before, .ex-divider.en-clase::after{ background: var(--b3-line); }
+
+/* ---------- CHARACTER CARDS ---------- */
+.characters{ display:grid; gap:16px; }
+.char-card{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-lg);
+  padding:20px 22px; display:flex; gap:16px; align-items:flex-start;
+}
+.char-avatar{
+  flex:none; width:44px; height:44px; border-radius:50%; background: var(--b3-soft);
+  display:flex; align-items:center; justify-content:center; font-family: var(--f-display);
+  font-weight:600; font-size:17px; color: var(--b3);
+}
+.char-body{ flex:1; }
+.char-name{ font-family: var(--f-display); font-weight:600; font-size:17px; margin:0 0 4px; }
+.char-role{ font-family: var(--f-data); font-size:11.5px; text-transform:uppercase; letter-spacing:.05em; color: var(--ink-faint); margin:0 0 10px; }
+.char-facts{ display:flex; flex-wrap:wrap; gap:6px; margin-bottom:10px; }
+.fact-tag{
+  font-family: var(--f-data); font-size:12px; background: var(--paper-alt); color: var(--ink-soft);
+  padding:4px 10px; border-radius:999px;
+}
+.char-prompt{ font-size:14px; color: var(--ink-soft); }
+.char-input{
+  width:100%; margin-top:8px; font-family: var(--f-body); font-size:14.5px; color: var(--ink);
+  background: var(--paper); border:1px solid var(--line); border-radius: var(--r-sm);
+  padding:10px 12px; resize:vertical; min-height:44px;
+}
+.char-input:focus{ outline:none; border-color: var(--b3-line); background: var(--paper-raised); }
+
+/* ---------- ROLEPLAY ---------- */
+.roleplay-panel{ background: var(--b2-soft); border:1px solid var(--b2-line); border-radius: var(--r-lg); padding:26px 28px; }
+.roleplay-panel .block-num{ background: var(--b2); }
+.scene-setup{
+  display:flex; gap:14px; align-items:flex-start; background: var(--paper-raised);
+  border:1px solid var(--b2-line); border-radius: var(--r-md); padding:14px 16px; margin-bottom:20px;
+}
+.scene-icon{ font-size:22px; flex:none; }
+.scene-text{ font-size:14px; color: var(--ink-soft); }
+.scene-text strong{ color: var(--ink); }
+
+.dialogue{ display:flex; flex-direction:column; gap:14px; }
+.scene-tabs{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:18px; }
+.scene-tab{
+  font-family: var(--f-data); font-size:12.5px; background: var(--paper-raised);
+  border:1.5px solid var(--b2-line); color: var(--ink-soft); padding:7px 14px;
+  border-radius:999px; cursor:pointer; transition: all .15s ease;
+}
+.scene-tab:hover{ border-color: var(--b2); }
+.scene-tab.active{ background: var(--b2); border-color: var(--b2); color:#fff; }
+.line{ display:flex; gap:12px; align-items:flex-start; }
+.line-avatar{
+  flex:none; width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  font-family: var(--f-display); font-weight:600; font-size:14px; color:#fff;
+}
+.line.friend .line-avatar{ background: var(--ink-faint); }
+.line.you .line-avatar{ background: var(--b2); }
+.line-body{ flex:1; }
+.line-name{ font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.05em; color: var(--ink-faint); margin:0 0 4px; }
+.line-bubble{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:12px 14px; font-size:14.5px; color: var(--ink);
+}
+.line.you .line-bubble{ background:#fff; border-color: var(--b2-line); }
+.line-input{
+  width:100%; font-family: var(--f-body); font-size:14.5px; color: var(--ink);
+  background:#fff; border:1px solid var(--b2-line); border-radius: var(--r-sm);
+  padding:10px 12px; resize:vertical; min-height:40px; margin-top:2px;
+}
+.line-input:focus{ outline:none; border-color: var(--b2); }
+.line-hint{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin-top:5px; }
+
+.roleplay-tip{
+  margin-top:22px; padding:14px 16px; background: var(--paper-raised); border:1px solid var(--b2-line);
+  border-radius: var(--r-md); font-size:13.5px; color: var(--ink-soft);
+}
+.roleplay-tip strong{ color: var(--ink); }
+
+/* ---------- FINAL TASK ---------- */
+.task-panel{ background: var(--family-soft); border:1px solid var(--family-line); border-radius: var(--r-lg); padding:26px 28px; }
+.task-panel .block-num{ background: var(--family); }
+textarea#final-task{
+  width:100%; min-height:110px; font-family: var(--f-body); font-size:15px; color: var(--ink);
+  background: var(--paper-raised); border:1px solid var(--family-line); border-radius: var(--r-md);
+  padding:14px 16px; resize:vertical; margin-top:14px;
+}
+textarea#final-task:focus{ outline:none; border-color: var(--family); }
+.task-footer{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:12px; flex-wrap:wrap; }
+#task-count{ font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); }
+.btn-secondary{
+  font-family: var(--f-body); font-weight:600; font-size:13.5px; color: var(--family); background:none;
+  border:1.5px solid var(--family-line); padding:9px 18px; border-radius:999px; cursor:pointer;
+}
+.saved-flag{ font-family: var(--f-data); font-size:12px; color: var(--b2); opacity:0; transition: opacity .3s ease; }
+.saved-flag.show{ opacity:1; }
+
+/* ---------- FOOTER NAV ---------- */
+footer{
+  max-width:760px; margin:0 auto; padding:0 24px 60px; display:flex;
+  justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;
+  font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint);
+}
+footer a{ color: var(--b3); text-decoration:none; }
+footer a:hover{ text-decoration:underline; }
+
+@media (max-width:600px){
+  header{ padding:34px 18px 22px; }
+  main{ padding:8px 18px 90px; }
+  .panel, .task-panel{ padding:20px 18px; }
+  .char-card{ flex-direction:column; }
+}
+@media (prefers-reduced-motion: reduce){ *{ transition:none !important; } }
+</style>
+</head>
+<body>
+
+<header>
+  <p class="eyebrow"><span class="dot"></span>Clase 7 de 16 · L3 Línea circular</p>
+  <h1><em>Por</em> qué y <em>para</em> qué</h1>
+  <p class="lede">En la cocina, cada acción tiene una causa y una finalidad: se hornea <strong>por</strong> el calor necesario y se decora <strong>para</strong> impresionar al cliente. Hoy aprendes a distinguir estas dos preposiciones que en italiano y en francés se confunden fácilmente, porque ambos idiomas usan una sola palabra para las dos ideas.</p>
+  <div class="meta-row">
+    <div>Duración<strong>50 min</strong></div>
+    <div>Gramática<strong>Por / para — causa y finalidad</strong></div>
+    <div>Nivel<strong>A1</strong></div>
+  </div>
+</header>
+
+<main>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">1</span><h2>Por y para</h2><span class="time-tag">8 min</span></div>
+    <div class="panel">
+      <table class="conj-table">
+        <tr><td class="conj-pron">para + inf.</td><td class="conj-form">para</td><td class="conj-ex">Para hornear el pan, necesito el horno caliente.</td></tr>
+        <tr><td class="conj-pron">para + sust.</td><td class="conj-form">para</td><td class="conj-ex">Esta manga es para la nata.</td></tr>
+        <tr><td class="conj-pron">por + causa</td><td class="conj-form">por</td><td class="conj-ex">No puedo salir por el calor del horno.</td></tr>
+        <tr><td class="conj-pron">por + tiempo</td><td class="conj-form">por</td><td class="conj-ex">Trabajo por la mañana en el obrador.</td></tr>
+        <tr><td class="conj-pron">por + medio</td><td class="conj-form">por</td><td class="conj-ex">Me avisan por teléfono si falta harina.</td></tr>
+        <tr><td class="conj-pron">por + cambio</td><td class="conj-form">por</td><td class="conj-ex">Cambio el turno de tarde por el de mañana.</td></tr>
+      </table>
+      <div class="note"><strong>La pregunta clave:</strong> si puedes responder "¿para qué sirve esto?" o "¿con qué objetivo?", usa <strong>para</strong>. Si respondes a "¿por qué motivo?" o "¿a causa de qué?", usa <strong>por</strong>.</div>
+
+      <div class="compare-wrap">
+        <p class="compare-title">Para (finalidad) vs. Por (causa) — así lo reconoces</p>
+        <div class="compare-grid">
+          <div class="compare-col is-ser">
+            <div class="compare-head">
+              <span class="compare-verb">PARA</span>
+              <span class="compare-sub">— finalidad, objetivo</span>
+            </div>
+            <ul class="compare-list">
+              <li><strong>Finalidad de una acción:</strong> Bato la nata para decorar la tarta.</li>
+              <li><strong>Destinatario:</strong> Este croissant es para el cliente de la mesa 3.</li>
+              <li><strong>Uso de un objeto:</strong> El tamiz es para la harina.</li>
+              <li><strong>Fecha límite:</strong> El pedido tiene que estar listo para las ocho.
+                <em>Mira hacia adelante, hacia el objetivo.</em>
+              </li>
+            </ul>
+          </div>
+          <div class="compare-col is-estar">
+            <div class="compare-head">
+              <span class="compare-verb">POR</span>
+              <span class="compare-sub">— causa, motivo</span>
+            </div>
+            <ul class="compare-list">
+              <li><strong>Causa o motivo:</strong> Llego tarde por el tráfico.</li>
+              <li><strong>Periodo de tiempo:</strong> Trabajo por la tarde tres días a la semana.</li>
+              <li><strong>Medio o manera:</strong> Recibo el pedido por correo electrónico.</li>
+              <li><strong>Precio o intercambio:</strong> Compro la harina por diez euros.
+                <em>Mira hacia atrás, hacia la causa.</em>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="compare-warning">
+          <strong>Ojo, trampa para hablantes de italiano y francés:</strong> "per" (it.) y "pour" (fr.) sirven para casi todo, pero en español hay dos palabras distintas. Pregúntate siempre: ¿es el objetivo final de la acción (para) o la razón que la provoca (por)? "Trabajo para ganar dinero" (objetivo) no es lo mismo que "Trabajo por la mañana" (momento) ni "No trabajo por el calor" (causa).
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">2</span><h2>Vocabulario</h2><span class="time-tag">6 min</span></div>
+    <p class="vocab-hint">Toca cada tarjeta para ver un ejemplo.</p>
+    <div class="vocab-grid" id="vocab-grid"></div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">3</span><h2>Practica</h2><span class="time-tag">12 min</span></div>
+    <div class="panel">
+      <p class="vocab-hint" style="margin-bottom:14px;">50 frases: las primeras 12 se hacen en voz alta en clase; el resto queda como repaso para casa.</p>
+      <div id="exercises"></div>
+      <div class="check-bar">
+        <div style="display:flex; gap:10px;">
+          <button class="btn-primary" id="check-btn">Comprobar respuestas</button>
+          <button class="btn-ghost" id="reset-btn">Reiniciar</button>
+        </div>
+        <span id="score-text"></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">4</span><h2>Tarjetas de situaciones</h2><span class="time-tag">8 min</span></div>
+    <p class="lede" style="margin-bottom:16px;">Completa cada situación con una frase usando <strong>por</strong> o <strong>para</strong>. Usa los datos de la tarjeta como pista. Las primeras 6 se trabajan en clase; el resto queda como banco de repaso para casa.</p>
+    <div class="characters" id="characters"></div>
+  </section>
+
+  <section class="block roleplay-panel">
+    <div class="block-head"><span class="block-num">5</span><h2>Roleplay: 5 escenas en el obrador de Girona</h2><span class="time-tag">13 min</span></div>
+    <p class="lede" style="margin-bottom:16px;">50 intercambios repartidos en 5 situaciones reales. Elige una escena para practicar en clase; el resto queda como banco de repaso para casa.</p>
+    <div class="scene-tabs" id="scene-tabs"></div>
+    <div id="scene-container"></div>
+    <div class="roleplay-tip"><strong>En clase:</strong> practicaremos una escena en voz alta, cambiando de rol. El resto de escenas son para practicar por tu cuenta durante la semana.</div>
+  </section>
+
+  <section class="block task-panel">
+    <div class="block-head"><span class="block-num">6</span><h2 style="color:var(--family)">Tu tarea</h2><span class="time-tag">3 min</span></div>
+    <p style="margin:0; font-size:15px; color:var(--ink-soft);">Completa <strong>8 frases</strong> eligiendo <strong>por</strong> o <strong>para</strong> según el contexto de la cocina. Piensa en finalidades (para decorar, para el cliente) y en causas (por el calor, por la receta).</p>
+    <textarea id="final-task" placeholder="1. Necesito la manga pastelera para...&#10;2. Llego tarde por...&#10;3. ..."></textarea>
+    <div class="task-footer">
+      <span id="task-count">0 apariciones de "por" o "para" detectadas</span>
+      <div style="display:flex; gap:10px; align-items:center;">
+        <span class="saved-flag" id="saved-flag">Guardado ✓</span>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <span>Clase 7 · Línea circular</span>
+  <span>Próxima clase → Clase 8: Pedir ingredientes y utensilios</span>
+</footer>
+
+<script>
+/* ---------- VOCAB ---------- */
+const VOCAB = [
+  {front:"para decorar", back:"Bato la nata para decorar la tarta."},
+  {front:"para hornear", back:"Precaliento el horno para hornear el pan."},
+  {front:"por el calor", back:"No puedo estar cerca por el calor del horno."},
+  {front:"por la receta", back:"Añado más azúcar por la receta tradicional."},
+  {front:"el objetivo", back:"Mi objetivo es aprender la pastelería francesa."},
+  {front:"la causa", back:"La causa del retraso es la falta de harina."},
+  {front:"el destinatario", back:"Este pastel es para el cumpleaños de un cliente."},
+  {front:"el motivo", back:"¿Cuál es el motivo del cambio de turno?"},
+  {front:"a cambio de", back:"Trabajo el sábado por otro día libre."},
+  {front:"con el fin de", back:"Uso el tamiz para tamizar la harina."},
+];
+
+const grid = document.getElementById('vocab-grid');
+VOCAB.forEach(v=>{
+  const card = document.createElement('div');
+  card.className = 'vocab-card';
+  card.setAttribute('role', 'button');
+  card.setAttribute('tabindex', '0');
+  card.setAttribute('aria-pressed', 'false');
+  card.setAttribute('aria-label', `${v.front}. Pulsa para ver un ejemplo.`);
+  card.innerHTML = `<div class="vocab-front">${v.front}</div><div class="vocab-back">${v.back}</div>`;
+  const toggle = ()=>{
+    const flipped = card.classList.toggle('flipped');
+    card.setAttribute('aria-pressed', String(flipped));
+  };
+  card.addEventListener('click', toggle);
+  card.addEventListener('keydown', (e)=>{
+    if(e.key === 'Enter' || e.key === ' '){
+      e.preventDefault();
+      toggle();
+    }
+  });
+  grid.appendChild(card);
+});
+
+/* ---------- EXERCISES ---------- */
+const EXERCISES = [
+  {"sentence":"Bato la nata <span class=\"gap\">___</span> decorar la tarta.","options":["por","para","de"],"answer":"para"},
+  {"sentence":"Necesito el horno caliente <span class=\"gap\">___</span> hornear el pan.","options":["para","por","con"],"answer":"para"},
+  {"sentence":"Este croissant es <span class=\"gap\">___</span> el cliente de la mesa 3.","options":["por","para","a"],"answer":"para"},
+  {"sentence":"El tamiz es <span class=\"gap\">___</span> la harina.","options":["por","para","en"],"answer":"para"},
+  {"sentence":"El pedido tiene que estar listo <span class=\"gap\">___</span> las ocho.","options":["por","para","de"],"answer":"para"},
+  {"sentence":"Trabajo mucho <span class=\"gap\">___</span> ahorrar dinero para mi escuela.","options":["por","para","en"],"answer":"para"},
+  {"sentence":"Llego tarde <span class=\"gap\">___</span> el tráfico de esta mañana.","options":["para","por","con"],"answer":"por"},
+  {"sentence":"Trabajo <span class=\"gap\">___</span> la tarde tres días a la semana.","options":["para","por","en"],"answer":"por"},
+  {"sentence":"Recibo el pedido <span class=\"gap\">___</span> correo electrónico.","options":["para","por","con"],"answer":"por"},
+  {"sentence":"Compro la harina <span class=\"gap\">___</span> diez euros el kilo.","options":["para","por","de"],"answer":"por"},
+  {"sentence":"No puedo salir <span class=\"gap\">___</span> el calor del horno.","options":["para","por","con"],"answer":"por"},
+  {"sentence":"Cambio mi turno de tarde <span class=\"gap\">___</span> el de mañana.","options":["para","por","a"],"answer":"por"},
+  {"sentence":"Uso la manga pastelera <span class=\"gap\">___</span> decorar los cupcakes.","options":["por","para","en"],"answer":"para"},
+  {"sentence":"El jefe de cocina pregunta <span class=\"gap\">___</span> teléfono si falta azúcar.","options":["para","por","con"],"answer":"por"},
+  {"sentence":"Añado más levadura <span class=\"gap\">___</span> la receta tradicional.","options":["para","por","en"],"answer":"por"},
+  {"sentence":"Esta báscula es <span class=\"gap\">___</span> pesar la harina con precisión.","options":["por","para","de"],"answer":"para"},
+  {"sentence":"Estudio pastelería <span class=\"gap\">___</span> trabajar en un obrador famoso.","options":["por","para","con"],"answer":"para"},
+  {"sentence":"El cliente se queja <span class=\"gap\">___</span> el retraso del pedido.","options":["para","por","de"],"answer":"por"},
+  {"sentence":"¿Cuál es el motivo <span class=\"gap\">___</span> el que cambias de turno?","options":["para","por","con"],"answer":"por"},
+  {"sentence":"Este delantal es <span class=\"gap\">___</span> el aprendiz nuevo.","options":["por","para","en"],"answer":"para"},
+  {"sentence":"Vengo <span class=\"gap\">___</span> la mañana temprano, antes de abrir.","options":["para","por","de"],"answer":"por"},
+  {"sentence":"Necesito diez huevos <span class=\"gap\">___</span> hacer esta tarta.","options":["por","para","con"],"answer":"para"},
+  {"sentence":"El obrador cierra antes <span class=\"gap\">___</span> las vacaciones del jefe.","options":["para","por","de"],"answer":"por"},
+  {"sentence":"Esta receta es perfecta <span class=\"gap\">___</span> principiantes.","options":["por","para","con"],"answer":"para"},
+  {"sentence":"Cambio la harina normal <span class=\"gap\">___</span> harina sin gluten.","options":["para","por","de"],"answer":"por"},
+  {"sentence":"El pastelero trabaja rápido <span class=\"gap\">___</span> terminar antes del cierre.","options":["por","para","con"],"answer":"para"},
+  {"sentence":"Vamos a Girona <span class=\"gap\">___</span> aprender nuevas técnicas.","options":["por","para","en"],"answer":"para"},
+  {"sentence":"El aprendiz pregunta mucho <span class=\"gap\">___</span> curiosidad.","options":["para","por","con"],"answer":"por"},
+  {"sentence":"Compramos moldes nuevos <span class=\"gap\">___</span> las tartas de boda.","options":["por","para","en"],"answer":"para"},
+  {"sentence":"El horno está encendido <span class=\"gap\">___</span> la mañana entera.","options":["para","por","de"],"answer":"por"},
+  {"sentence":"Necesito más tiempo <span class=\"gap\">___</span> terminar la decoración.","options":["por","para","con"],"answer":"para"},
+  {"sentence":"El cliente paga cien euros <span class=\"gap\">___</span> la tarta de cumpleaños.","options":["para","por","en"],"answer":"por"},
+  {"sentence":"Este cuchillo es <span class=\"gap\">___</span> cortar la masa de hojaldre.","options":["por","para","de"],"answer":"para"},
+  {"sentence":"No vengo mañana <span class=\"gap\">___</span> una cita médica.","options":["para","por","con"],"answer":"por"},
+  {"sentence":"Guardamos la nata en la nevera <span class=\"gap\">___</span> el calor de la cocina.","options":["para","por","de"],"answer":"por"},
+  {"sentence":"El equipo trabaja unido <span class=\"gap\">___</span> conseguir el mejor resultado.","options":["por","para","con"],"answer":"para"},
+  {"sentence":"Esta bandeja es <span class=\"gap\">___</span> los cruasanes recién horneados.","options":["por","para","en"],"answer":"para"},
+  {"sentence":"El pastelero se disculpa <span class=\"gap\">___</span> el error en el pedido.","options":["para","por","de"],"answer":"por"},
+  {"sentence":"Compramos ingredientes nuevos <span class=\"gap\">___</span> internet.","options":["para","por","con"],"answer":"por"},
+  {"sentence":"Estudiamos técnicas francesas <span class=\"gap\">___</span> mejorar nuestras recetas.","options":["por","para","con"],"answer":"para"},
+  {"sentence":"El jefe reparte tareas <span class=\"gap\">___</span> orden de llegada.","options":["para","por","de"],"answer":"por"},
+  {"sentence":"Esta caja es <span class=\"gap\">___</span> transportar los pasteles con cuidado.","options":["por","para","en"],"answer":"para"},
+  {"sentence":"El aprendiz trabaja gratis <span class=\"gap\">___</span> aprender el oficio.","options":["para","por","con"],"answer":"para"},
+  {"sentence":"Cerramos antes <span class=\"gap\">___</span> la fiesta del pueblo.","options":["para","por","de"],"answer":"por"},
+  {"sentence":"Vengo a este obrador <span class=\"gap\">___</span> la calidad de sus dulces.","options":["para","por","con"],"answer":"por"},
+  {"sentence":"Esta espátula sirve <span class=\"gap\">___</span> extender el chocolate.","options":["por","para","de"],"answer":"para"},
+  {"sentence":"El horno se apaga <span class=\"gap\">___</span> un corte de luz.","options":["para","por","de"],"answer":"por"},
+  {"sentence":"Compro flores <span class=\"gap\">___</span> decorar el escaparate.","options":["por","para","en"],"answer":"para"},
+  {"sentence":"Trabajamos el domingo <span class=\"gap\">___</span> la boda de mañana.","options":["para","por","de"],"answer":"por"},
+  {"sentence":"Esta receta gana premios <span class=\"gap\">___</span> su sabor único.","options":["para","por","con"],"answer":"por"}
+];
+
+const PRACTICE_KEY = 'davide-clase07-practica';
+let practiceState = {};
+async function cargarPractica(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(PRACTICE_KEY);
+    if (res && typeof res.value === 'string') practiceState = JSON.parse(res.value);
+  }catch(e){
+    // Sin progreso previo guardado todavía.
+  }
+}
+async function guardarPractica(){
+  if (!window.storage) return;
+  try{ await window.storage.set(PRACTICE_KEY, JSON.stringify(practiceState)); }catch(e){ /* fallo silencioso */ }
+}
+
+const exWrap = document.getElementById('exercises');
+(async function initPractica(){
+await cargarPractica();
+EXERCISES.forEach((ex, i)=>{
+  if(i === 0){
+    const divider = document.createElement('div');
+    divider.className = 'ex-divider en-clase';
+    divider.textContent = 'en clase · ítems 1–12';
+    exWrap.appendChild(divider);
+  }
+  if(i === 12){
+    const divider = document.createElement('div');
+    divider.className = 'ex-divider';
+    divider.textContent = 'para casa · repaso opcional';
+    exWrap.appendChild(divider);
+  }
+  const el = document.createElement('div');
+  el.className = 'exercise';
+  el.dataset.answer = ex.answer;
+  el.dataset.idx = i;
+  el.innerHTML = `
+    <div class="ex-sentence">${i+1}. ${ex.sentence}</div>
+    <div class="ex-options">
+      ${ex.options.map(o=>`<button class="opt-btn" data-value="${o}">${o}</button>`).join('')}
+    </div>
+  `;
+  exWrap.appendChild(el);
+
+  const savedPick = practiceState[i];
+  if(savedPick){
+    const savedBtn = el.querySelector(`.opt-btn[data-value="${savedPick}"]`);
+    if(savedBtn) savedBtn.classList.add('picked');
+  }
+
+  el.querySelectorAll('.opt-btn').forEach(btn=>{
+    btn.addEventListener('click', async ()=>{
+      el.querySelectorAll('.opt-btn').forEach(b=>b.classList.remove('picked'));
+      btn.classList.add('picked');
+      practiceState[i] = btn.dataset.value;
+      await guardarPractica();
+    });
+  });
+});
+})();
+
+document.getElementById('check-btn').addEventListener('click', ()=>{
+  let correct = 0;
+  document.querySelectorAll('.exercise').forEach(el=>{
+    const answer = el.dataset.answer;
+    const picked = el.querySelector('.opt-btn.picked');
+    el.querySelectorAll('.opt-btn').forEach(b=>{
+      b.disabled = true;
+      if(b.dataset.value === answer) b.classList.add('correct');
+      else if(b === picked) b.classList.add('wrong');
+    });
+    if(picked && picked.dataset.value === answer) correct++;
+  });
+  document.getElementById('score-text').textContent = `${correct} / ${EXERCISES.length} correctas`;
+});
+
+document.getElementById('reset-btn').addEventListener('click', async ()=>{
+  document.querySelectorAll('.exercise').forEach(el=>{
+    el.querySelectorAll('.opt-btn').forEach(b=>{
+      b.disabled = false;
+      b.classList.remove('picked','correct','wrong');
+    });
+  });
+  document.getElementById('score-text').textContent = '';
+  practiceState = {};
+  await guardarPractica();
+});
+
+/* ---------- CHARACTER CARDS (situaciones) ---------- */
+const CHARACTERS = [
+  {"name":"Tú","role":"Explica por qué llegas tarde","facts":["el tráfico","el metro","una cita"],"prompt":"Escribe una frase con \"por\":"},
+  {"name":"Marc","role":"El jefe pregunta el objetivo de una tarea","facts":["decorar la tarta","impresionar al cliente","el cumpleaños"],"prompt":"Escribe una frase con \"para\":"},
+  {"name":"Laura","role":"Explica el uso de un utensilio","facts":["la manga pastelera","la nata","decorar"],"prompt":"Escribe una frase con \"para\":"},
+  {"name":"Jordi","role":"Explica una causa del retraso","facts":["el horno estropeado","el calor","la avería"],"prompt":"Escribe una frase con \"por\":"},
+  {"name":"Núria","role":"Explica el precio de un ingrediente","facts":["la harina","diez euros","el kilo"],"prompt":"Escribe una frase con \"por\":"},
+  {"name":"Pau","role":"Explica para quién es un pedido","facts":["el cliente de la mesa 3","el cumpleaños","mañana"],"prompt":"Escribe una frase con \"para\":"},
+  {"name":"Marta","role":"Explica el horario de trabajo","facts":["por la mañana","tres días","turno de tarde"],"prompt":"Escribe una frase con \"por\":"},
+  {"name":"Álex","role":"Explica el objetivo de estudiar pastelería","facts":["trabajar en Francia","aprender técnicas","su futuro"],"prompt":"Escribe una frase con \"para\":"},
+  {"name":"Carla","role":"Explica cómo recibe los pedidos","facts":["por teléfono","por correo","por la app"],"prompt":"Escribe una frase con \"por\":"},
+  {"name":"Oriol","role":"Explica la finalidad de comprar un horno nuevo","facts":["hornear más rápido","ahorrar energía","mejorar la calidad"],"prompt":"Escribe una frase con \"para\":"},
+  {"name":"Elena","role":"Explica por qué cambia de escuela","facts":["una beca","un traslado","una oportunidad"],"prompt":"Escribe una frase con \"por\":"},
+  {"name":"Adrià","role":"Explica para qué compra un pastel","facts":["una celebración","su aniversario","un regalo"],"prompt":"Escribe una frase con \"para\":"}
+];
+
+const CHAR_KEY = 'davide-clase07-personajes';
+let charState = {};
+async function cargarPersonajes(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(CHAR_KEY);
+    if (res && typeof res.value === 'string') charState = JSON.parse(res.value);
+  }catch(e){
+    // Sin personajes guardados todavía.
+  }
+}
+async function guardarPersonajes(){
+  if (!window.storage) return;
+  try{ await window.storage.set(CHAR_KEY, JSON.stringify(charState)); }catch(e){ /* fallo silencioso */ }
+}
+let charSaveTimer = null;
+function scheduleCharSave(){
+  clearTimeout(charSaveTimer);
+  charSaveTimer = setTimeout(guardarPersonajes, 500);
+}
+
+const charWrap = document.getElementById('characters');
+(async function initPersonajes(){
+await cargarPersonajes();
+CHARACTERS.forEach((c, i)=>{
+  if(i === 0){
+    const divider = document.createElement('div');
+    divider.className = 'ex-divider en-clase';
+    divider.textContent = 'en clase · situaciones 1–6';
+    charWrap.appendChild(divider);
+  }
+  if(i === 6){
+    const divider = document.createElement('div');
+    divider.className = 'ex-divider';
+    divider.textContent = 'para casa · banco de repaso';
+    charWrap.appendChild(divider);
+  }
+  const card = document.createElement('div');
+  card.className = 'char-card';
+  card.innerHTML = `
+    <div class="char-avatar">${c.name.charAt(0)}</div>
+    <div class="char-body">
+      <p class="char-name">${c.name}</p>
+      <p class="char-role">${c.role}</p>
+      <div class="char-facts">${c.facts.map(f=>`<span class="fact-tag">${f}</span>`).join('')}</div>
+      <p class="char-prompt">${c.prompt}</p>
+      <textarea class="char-input" rows="2" placeholder="Por / Para ..." data-idx="${i}"></textarea>
+    </div>
+  `;
+  charWrap.appendChild(card);
+  const charInputEl = card.querySelector('.char-input');
+  if(charState[i]) charInputEl.value = charState[i];
+  charInputEl.addEventListener('input', ()=>{
+    charState[i] = charInputEl.value;
+    scheduleCharSave();
+  });
+});
+})();
+
+/* ---------- ROLEPLAY SCENES ---------- */
+const SCENES = [
+  {
+    "id": "retraso",
+    "tab": "Explicando un retraso",
+    "icon": "⏰",
+    "setup": "Llegas tarde al obrador y Marc, el jefe de cocina, te pregunta qué ha pasado.",
+    "lines": [
+      {"who":"friend","name":"Marc","text":"¡Davide! Llegas veinte minutos tarde, ¿qué ha pasado?"},
+      {"who":"you","hint":"Explica el motivo con \"por\" (el tráfico, el metro...)."},
+      {"who":"friend","name":"Marc","text":"Vaya, ¿y no puedes salir antes de casa para evitar eso?"},
+      {"who":"you","hint":"Responde con \"para\" sobre lo que intentas hacer mañana."},
+      {"who":"friend","name":"Marc","text":"Bueno, hoy necesito que termines la tarta de bodas cuanto antes."},
+      {"who":"you","hint":"Pregunta para qué hora tiene que estar lista, usando \"para\"."},
+      {"who":"friend","name":"Marc","text":"Tiene que estar lista para las seis de la tarde."},
+      {"who":"you","hint":"Confirma que trabajarás rápido, usando \"para\" (el objetivo)."},
+      {"who":"friend","name":"Marc","text":"¿Necesitas algo especial para terminarla a tiempo?"},
+      {"who":"you","hint":"Pide un utensilio explicando para qué lo necesitas."},
+      {"who":"friend","name":"Marc","text":"Toma la manga pastelera nueva, es más precisa."},
+      {"who":"you","hint":"Da las gracias y explica para qué la vas a usar."},
+      {"who":"friend","name":"Marc","text":"Por cierto, ¿por qué elegiste trabajar en pastelería?"},
+      {"who":"you","hint":"Responde con \"por\" o \"para\" sobre tu motivación."},
+      {"who":"friend","name":"Marc","text":"Me parece una razón muy bonita."},
+      {"who":"you","hint":"Da las gracias y añade una frase con \"por\" o \"para\"."},
+      {"who":"friend","name":"Marc","text":"Bueno, ¡manos a la obra! No podemos perder más tiempo por la conversación."},
+      {"who":"you","hint":"Responde aceptando, usando \"por\" o \"para\"."},
+      {"who":"friend","name":"Marc","text":"Perfecto, confío en ti."},
+      {"who":"you","hint":"Despídete con una frase usando \"por\" o \"para\"."}
+    ]
+  },
+  {
+    "id": "utensilios",
+    "tab": "Explicando para qué sirve cada utensilio",
+    "icon": "🥄",
+    "setup": "Un aprendiz nuevo, Pau, no conoce los utensilios del obrador y te pregunta.",
+    "lines": [
+      {"who":"friend","name":"Pau","text":"Davide, ¿para qué sirve esta espátula tan grande?"},
+      {"who":"you","hint":"Explica su uso con \"para\"."},
+      {"who":"friend","name":"Pau","text":"¿Y este tamiz tan fino?"},
+      {"who":"you","hint":"Explica su finalidad con \"para\"."},
+      {"who":"friend","name":"Pau","text":"¿Por qué tenemos dos básculas diferentes?"},
+      {"who":"you","hint":"Responde con \"por\" explicando el motivo."},
+      {"who":"friend","name":"Pau","text":"Entiendo. ¿Y la manga pastelera con esta boquilla especial?"},
+      {"who":"you","hint":"Explica para qué sirve con \"para\"."},
+      {"who":"friend","name":"Pau","text":"¿Compráis los moldes por internet normalmente?"},
+      {"who":"you","hint":"Responde con \"por\" sobre cómo compráis material."},
+      {"who":"friend","name":"Pau","text":"¿Y por qué este horno es tan grande?"},
+      {"who":"you","hint":"Responde con \"por\" explicando la razón."},
+      {"who":"friend","name":"Pau","text":"Tiene sentido. ¿Este cuchillo es para el hojaldre?"},
+      {"who":"you","hint":"Confirma o corrige usando \"para\"."},
+      {"who":"friend","name":"Pau","text":"Gracias por explicarme todo esto, Davide."},
+      {"who":"you","hint":"Responde amablemente usando \"por\" o \"para\"."},
+      {"who":"friend","name":"Pau","text":"¿Por qué elegiste este obrador para trabajar?"},
+      {"who":"you","hint":"Responde con \"por\" y \"para\" en la misma frase si puedes."},
+      {"who":"friend","name":"Pau","text":"Ojalá algún día trabaje aquí también."},
+      {"who":"you","hint":"Anímalo con una frase usando \"para\"."}
+    ]
+  },
+  {
+    "id": "pedido-especial",
+    "tab": "Un pedido especial",
+    "icon": "🎂",
+    "setup": "Núria, la encargada, te explica un pedido especial que ha llegado esta mañana.",
+    "lines": [
+      {"who":"friend","name":"Núria","text":"Davide, tenemos un pedido especial para una boda el sábado."},
+      {"who":"you","hint":"Pregunta para cuándo tiene que estar lista la tarta, con \"para\"."},
+      {"who":"friend","name":"Núria","text":"Tiene que estar lista para el viernes por la tarde."},
+      {"who":"you","hint":"Confirma que trabajarás rápido, usando \"para\" o \"por\"."},
+      {"who":"friend","name":"Núria","text":"El cliente paga trescientos euros por esta tarta."},
+      {"who":"you","hint":"Reacciona con \"por\" sobre el precio."},
+      {"who":"friend","name":"Núria","text":"¿Para cuántas personas crees que necesitamos hacerla?"},
+      {"who":"you","hint":"Responde con \"para\" indicando un número de personas."},
+      {"who":"friend","name":"Núria","text":"Perfecto. ¿Qué ingredientes necesitas para esta receta?"},
+      {"who":"you","hint":"Menciona un ingrediente y para qué lo necesitas."},
+      {"who":"friend","name":"Núria","text":"¿Por qué prefieres esa harina en concreto?"},
+      {"who":"you","hint":"Responde con \"por\" dando una razón."},
+      {"who":"friend","name":"Núria","text":"De acuerdo, confío en tu criterio."},
+      {"who":"you","hint":"Da las gracias con una frase usando \"por\"."},
+      {"who":"friend","name":"Núria","text":"¿Necesitas ayuda de algún compañero para terminarla a tiempo?"},
+      {"who":"you","hint":"Responde con \"para\" sobre si necesitas ayuda."},
+      {"who":"friend","name":"Núria","text":"Perfecto, se lo diré a Jordi."},
+      {"who":"you","hint":"Da las gracias y añade una frase con \"por\" o \"para\"."},
+      {"who":"friend","name":"Núria","text":"Mucha suerte con el pedido, Davide."},
+      {"who":"you","hint":"Despídete con una frase usando \"por\" o \"para\"."}
+    ]
+  },
+  {
+    "id": "cliente-agradecido",
+    "tab": "Un cliente agradecido",
+    "icon": "🧁",
+    "setup": "Adrià, el cliente habitual, viene a recoger su pedido y charla contigo.",
+    "lines": [
+      {"who":"friend","name":"Adrià","text":"¡Hola, Davide! Vengo por mi pedido de cumpleaños."},
+      {"who":"you","hint":"Confirma con \"por\" o \"para\" y entrégale el pedido."},
+      {"who":"friend","name":"Adrià","text":"¿Para cuántas personas es esta tarta, más o menos?"},
+      {"who":"you","hint":"Responde con \"para\" indicando un número de personas."},
+      {"who":"friend","name":"Adrià","text":"Perfecto, es justo para mi familia. ¿Cuánto es, por cierto?"},
+      {"who":"you","hint":"Di el precio usando \"por\"."},
+      {"who":"friend","name":"Adrià","text":"Aquí tienes, y algo más por las molestias."},
+      {"who":"you","hint":"Da las gracias con una frase usando \"por\"."},
+      {"who":"friend","name":"Adrià","text":"¿Por qué esta tarta tiene ese color tan especial?"},
+      {"who":"you","hint":"Explica la razón con \"por\" (un ingrediente, una técnica)."},
+      {"who":"friend","name":"Adrià","text":"Qué interesante. ¿Y para qué sirve esa decoración de arriba?"},
+      {"who":"you","hint":"Explica su finalidad con \"para\"."},
+      {"who":"friend","name":"Adrià","text":"Siempre vengo a este obrador por la calidad de vuestros dulces."},
+      {"who":"you","hint":"Da las gracias con una frase usando \"por\"."},
+      {"who":"friend","name":"Adrià","text":"¿Vais a abrir otro obrador para el año que viene?"},
+      {"who":"you","hint":"Responde con \"para\" sobre planes futuros."},
+      {"who":"friend","name":"Adrià","text":"Ojalá, así podría venir más cerca de casa."},
+      {"who":"you","hint":"Reacciona con una frase usando \"por\" o \"para\"."},
+      {"who":"friend","name":"Adrià","text":"Bueno, gracias por todo, ¡hasta la próxima!"},
+      {"who":"you","hint":"Despídete con una frase usando \"por\" o \"para\"."}
+    ]
+  },
+  {
+    "id": "escuela",
+    "tab": "Videollamada con la escuela de pastelería",
+    "icon": "🎓",
+    "setup": "Elena, tu antigua profesora, te llama para saber cómo va tu trabajo en Girona.",
+    "lines": [
+      {"who":"friend","name":"Elena","text":"¡Davide! ¿Por qué elegiste un obrador en Girona precisamente?"},
+      {"who":"you","hint":"Responde con \"por\" explicando el motivo."},
+      {"who":"friend","name":"Elena","text":"¿Y para qué tipo de repostería te estás especializando allí?"},
+      {"who":"you","hint":"Responde con \"para\" o menciona tu especialidad."},
+      {"who":"friend","name":"Elena","text":"Me alegra saberlo. ¿Necesitas algún consejo para mejorar?"},
+      {"who":"you","hint":"Responde con \"para\" sobre algo que quieres mejorar."},
+      {"who":"friend","name":"Elena","text":"¿Por qué motivo cambiaste de receta la semana pasada?"},
+      {"who":"you","hint":"Explica la razón usando \"por\"."},
+      {"who":"friend","name":"Elena","text":"Entiendo, a veces hay que adaptarse por los ingredientes disponibles."},
+      {"who":"you","hint":"Confirma o añade algo usando \"por\"."},
+      {"who":"friend","name":"Elena","text":"¿Para qué fecha tienes el próximo pedido grande?"},
+      {"who":"you","hint":"Responde con \"para\" dando una fecha."},
+      {"who":"friend","name":"Elena","text":"Mucho trabajo, ¿no? ¿Por qué no descansas un poco este fin de semana?"},
+      {"who":"you","hint":"Responde con \"por\" o \"para\" explicando tu situación."},
+      {"who":"friend","name":"Elena","text":"Cuídate, Davide, estoy muy orgullosa de ti."},
+      {"who":"you","hint":"Da las gracias con una frase usando \"por\"."},
+      {"who":"friend","name":"Elena","text":"¿Vendrás a visitar la escuela para las fiestas?"},
+      {"who":"you","hint":"Responde con \"para\" sobre tus planes."},
+      {"who":"friend","name":"Elena","text":"Estupendo, ¡hablamos pronto!"},
+      {"who":"you","hint":"Despídete con una frase usando \"por\" o \"para\"."}
+    ]
+  }
+];
+
+const sceneTabs = document.getElementById('scene-tabs');
+const sceneContainer = document.getElementById('scene-container');
+let activeScene = 0;
+
+function renderTabs(){
+  sceneTabs.innerHTML = SCENES.map((s,i)=>
+    `<button class="scene-tab${i===activeScene?' active':''}" data-idx="${i}">${s.icon} ${s.tab}</button>`
+  ).join('');
+  sceneTabs.querySelectorAll('.scene-tab').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      activeScene = parseInt(btn.dataset.idx, 10);
+      renderTabs();
+      renderScene();
+    });
+  });
+}
+
+function renderScene(){
+  const scene = SCENES[activeScene];
+  const linesHtml = scene.lines.map((l, li)=>{
+    if(l.who === 'friend'){
+      return `
+        <div class="line friend">
+          <div class="line-avatar">${l.name.charAt(0)}</div>
+          <div class="line-body">
+            <p class="line-name">${l.name}</p>
+            <div class="line-bubble">${l.text}</div>
+          </div>
+        </div>`;
+    } else {
+      const rpKey = `${scene.id}:${li}`;
+      return `
+        <div class="line you">
+          <div class="line-avatar">Tú</div>
+          <div class="line-body">
+            <p class="line-name">Tú</p>
+            <textarea class="line-input" rows="2" placeholder="Escribe tu respuesta con 'por' o 'para'..." data-rpkey="${scene.id}:${li}">${roleplayState[rpKey] ? roleplayState[rpKey] : ''}</textarea>
+            <p class="line-hint">${l.hint}</p>
+          </div>
+        </div>`;
+    }
+  }).join('');
+
+  sceneContainer.innerHTML = `
+    <div class="scene-setup">
+      <span class="scene-icon">${scene.icon}</span>
+      <p class="scene-text"><strong>${scene.tab}:</strong> ${scene.setup}</p>
+    </div>
+    <div class="dialogue">${linesHtml}</div>
+  `;
+
+  sceneContainer.querySelectorAll('.line-input').forEach(inputEl=>{
+    inputEl.addEventListener('input', ()=>{
+      roleplayState[inputEl.dataset.rpkey] = inputEl.value;
+      scheduleRoleplaySave();
+    });
+  });
+}
+
+const ROLEPLAY_KEY = 'davide-clase07-roleplay';
+let roleplayState = {};
+async function cargarRoleplay(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(ROLEPLAY_KEY);
+    if (res && typeof res.value === 'string') roleplayState = JSON.parse(res.value);
+  }catch(e){
+    // Sin intervenciones guardadas todavía.
+  }
+}
+async function guardarRoleplay(){
+  if (!window.storage) return;
+  try{ await window.storage.set(ROLEPLAY_KEY, JSON.stringify(roleplayState)); }catch(e){ /* fallo silencioso */ }
+}
+let roleplaySaveTimer = null;
+function scheduleRoleplaySave(){
+  clearTimeout(roleplaySaveTimer);
+  roleplaySaveTimer = setTimeout(guardarRoleplay, 500);
+}
+
+(async function initRoleplay(){
+await cargarRoleplay();
+renderTabs();
+renderScene();
+})();
+
+/* ---------- FINAL TASK ---------- */
+const STORAGE_KEY = 'davide-clase07-tarea';
+const taskArea = document.getElementById('final-task');
+const taskCount = document.getElementById('task-count');
+const savedFlag = document.getElementById('saved-flag');
+
+async function cargarTarea(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(STORAGE_KEY);
+    if (res && typeof res.value === 'string') taskArea.value = res.value;
+  }catch(e){
+    // Clave inexistente todavía: no hay tarea previa, se queda en blanco.
+  }
+  updateCount();
+}
+
+function updateCount(){
+  const matches = (taskArea.value.match(/\b(por|para)\b/gi) || []).length;
+  taskCount.textContent = `${matches} aparicion${matches===1?'':'es'} de "por" o "para" detectada${matches===1?'':'s'}`;
+}
+async function guardarTareaAuto(){
+  if (!window.storage){
+    savedFlag.textContent = 'Guardado no disponible aquí';
+    savedFlag.classList.add('show');
+    setTimeout(()=>{ savedFlag.classList.remove('show'); savedFlag.textContent = 'Guardado ✓'; }, 2200);
+    return;
+  }
+  try{
+    const ok = await window.storage.set(STORAGE_KEY, taskArea.value);
+    savedFlag.textContent = ok ? 'Guardado ✓' : 'No se pudo guardar';
+  }catch(e){
+    savedFlag.textContent = 'No se pudo guardar';
+  }
+  savedFlag.classList.add('show');
+  setTimeout(()=>{ savedFlag.classList.remove('show'); savedFlag.textContent = 'Guardado ✓'; }, 1800);
+}
+
+let taskSaveTimer = null;
+function scheduleTaskSave(){
+  clearTimeout(taskSaveTimer);
+  taskSaveTimer = setTimeout(guardarTareaAuto, 700);
+}
+
+taskArea.addEventListener('input', ()=>{
+  updateCount();
+  scheduleTaskSave();
+});
+updateCount();
+cargarTarea();
+
+</script>
+
+</body>
+</html>

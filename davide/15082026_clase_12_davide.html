@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clase 12 · Más que, menos que — Davide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+
+/* ╔══════════════════════════════════════════════════════════════╗
+   ║  ESCOLAR — sistema de diseño para clases de español online   ║
+   ║  Clase 12 · L6 Línea del oficio · "Más que, menos que" — Davide ║
+   ╚══════════════════════════════════════════════════════════════╝ */
+
+:root{
+  --paper:        #FBF7EE;
+  --paper-raised: #FFFFFF;
+  --paper-alt:    #F3ECDA;
+  --ink:          #23291F;
+  --ink-soft:     #565F52;
+  --ink-faint:    #8B9184;
+  --line:         rgba(35,41,31,0.12);
+  --line-strong:  rgba(35,41,31,0.22);
+
+  --b1:      #DB8A2E;  --b1-soft: #FCF1E1;  --b1-line: #F3D9AF;
+  --b2:      #2E9E6B;  --b2-soft: #E9F6EF;  --b2-line: #BEE6D3;
+  --family:  #B5502E;  --family-soft: #FBEBE3; --family-line: #EFC9B4;
+
+  --f-display: 'Fraunces', Georgia, serif;
+  --f-body:    'IBM Plex Sans', system-ui, sans-serif;
+  --f-data:    'IBM Plex Mono', monospace;
+
+  --r-sm: 8px;
+  --r-md: 14px;
+  --r-lg: 20px;
+
+  --shadow-1: 0 1px 2px rgba(35,41,31,0.05), 0 1px 8px rgba(35,41,31,0.04);
+}
+
+*{ box-sizing:border-box; }
+body{
+  margin:0;
+  background: var(--paper);
+  background-image: radial-gradient(circle at 1px 1px, var(--line) 1px, transparent 0);
+  background-size: 22px 22px;
+  color: var(--ink);
+  font-family: var(--f-body);
+  line-height:1.6;
+}
+::selection{ background: var(--b1-soft); }
+
+/* ---------- HEADER ---------- */
+header{ padding:44px 24px 28px; max-width:760px; margin:0 auto; }
+.eyebrow{
+  font-family: var(--f-data); font-size:12px; letter-spacing:.14em;
+  text-transform:uppercase; color: var(--b1); margin:0 0 10px;
+  display:flex; align-items:center; gap:10px;
+}
+.eyebrow .dot{ width:6px; height:6px; border-radius:50%; background: var(--b1); }
+h1{
+  font-family: var(--f-display); font-weight:600;
+  font-size:clamp(30px,5.6vw,46px); line-height:1.08;
+  margin:0 0 14px; letter-spacing:-.01em;
+}
+h1 em{ font-style:italic; color: var(--b1); }
+.lede{ font-size:16px; color: var(--ink-soft); max-width:56ch; margin:0; }
+
+.meta-row{
+  display:flex; flex-wrap:wrap; gap:20px; margin-top:26px;
+  font-family: var(--f-data); font-size:12px; color: var(--ink-faint);
+}
+.meta-row strong{
+  display:block; color: var(--ink); font-size:14.5px; font-weight:500;
+  font-family: var(--f-display); margin-top:3px;
+}
+
+/* ---------- SECTIONS ---------- */
+main{ max-width:760px; margin:0 auto; padding:8px 24px 100px; }
+
+section.block{ margin-bottom:52px; }
+.block-head{ display:flex; align-items:baseline; gap:12px; margin-bottom:18px; }
+.time-tag{
+  font-family: var(--f-data); font-size:11px; color: var(--ink-faint);
+  background: var(--paper-alt); padding:3px 10px; border-radius:999px; margin-left:auto; flex:none;
+}
+.block-num{
+  font-family: var(--f-data); font-size:12px; color:#fff; background: var(--b1);
+  width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  flex:none;
+}
+.block-head h2{
+  font-family: var(--f-display); font-weight:500; font-style:italic; font-size:22px; margin:0;
+}
+
+.panel{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-lg);
+  box-shadow: var(--shadow-1); padding:26px 28px;
+}
+
+/* ---------- GRAMMAR TABLE ---------- */
+.conj-table{ width:100%; border-collapse:collapse; margin-top:4px; }
+.conj-table td{ padding:10px 6px; border-bottom:1px dashed var(--line); font-size:15px; }
+.conj-table tr:last-child td{ border-bottom:none; }
+.conj-pron{ font-family: var(--f-data); color: var(--ink-faint); font-size:13px; width:110px; }
+.conj-form{ font-family: var(--f-display); font-weight:600; font-size:19px; color: var(--b1); }
+.conj-ex{ color: var(--ink-soft); font-size:14px; }
+
+.note{
+  margin-top:18px; padding:14px 16px; background: var(--b1-soft); border:1px solid var(--b1-line);
+  border-radius: var(--r-md); font-size:14px; color: var(--ink-soft);
+}
+.note strong{ color: var(--ink); }
+
+/* ---------- COMPARE ---------- */
+.compare-wrap{ margin-top:22px; }
+.compare-title{
+  font-family: var(--f-data); font-size:11.5px; text-transform:uppercase; letter-spacing:.06em;
+  color: var(--ink-faint); margin:0 0 10px;
+}
+.compare-grid{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px; }
+@media (max-width:680px){ .compare-grid{ grid-template-columns:1fr; } }
+.compare-col{ border-radius: var(--r-md); padding:16px 18px; border:1px solid; }
+.compare-col.is-ser{ background: var(--b1-soft); border-color: var(--b1-line); }
+.compare-col.is-estar{ background: var(--b2-soft); border-color: var(--b2-line); }
+.compare-col.is-family{ background: var(--family-soft); border-color: var(--family-line); }
+.compare-head{ display:flex; align-items:center; gap:8px; margin:0 0 10px; }
+.compare-verb{ font-family: var(--f-display); font-weight:600; font-size:19px; }
+.is-ser .compare-verb{ color: var(--b1); }
+.is-estar .compare-verb{ color: var(--b2); }
+.is-family .compare-verb{ color: var(--family); }
+.compare-sub{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); }
+.compare-list{ margin:0; padding:0; list-style:none; }
+.compare-list li{ font-size:13.5px; color: var(--ink-soft); padding:6px 0; border-top:1px dashed var(--line); }
+.compare-list li:first-child{ border-top:none; }
+.compare-list strong{ color: var(--ink); font-weight:600; }
+.compare-list em{ display:block; font-style:normal; color: var(--ink-faint); font-size:12.5px; margin-top:2px; }
+.compare-warning{
+  margin-top:14px; padding:14px 16px; background: var(--family-soft); border:1px solid var(--family-line);
+  border-radius: var(--r-md); font-size:13.5px; color: var(--ink-soft);
+}
+.compare-warning strong{ color: var(--family); }
+
+/* ---------- VOCAB CARDS ---------- */
+.vocab-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:12px; }
+.vocab-card{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:14px 16px; cursor:pointer; perspective:600px; min-height:78px;
+  display:flex; flex-direction:column; justify-content:center; transition: border-color .15s ease;
+}
+.vocab-card:hover{ border-color: var(--b1-line); }
+.vocab-card:focus-visible{ outline:2px solid var(--b1); outline-offset:2px; }
+.vocab-front{ font-family: var(--f-body); font-weight:600; font-size:15px; }
+.vocab-back{ display:none; font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); margin-top:6px; }
+.vocab-card.flipped .vocab-back{ display:block; }
+.vocab-card.flipped{ background: var(--b1-soft); border-color: var(--b1-line); }
+.vocab-hint{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin:10px 2px 16px; }
+
+/* ---------- EXERCISE ---------- */
+.exercise{ margin-bottom:20px; }
+.exercise:last-of-type{ margin-bottom:0; }
+.ex-sentence{ font-size:15.5px; margin-bottom:10px; }
+.ex-sentence .gap{ font-family: var(--f-data); color: var(--ink-faint); }
+.ex-options{ display:flex; flex-wrap:wrap; gap:8px; }
+.opt-btn{
+  font-family: var(--f-body); font-size:14px; background: var(--paper-raised);
+  border:1.5px solid var(--line); color: var(--ink); padding:7px 16px; border-radius:999px;
+  cursor:pointer; transition: all .15s ease;
+}
+.opt-btn:hover{ border-color: var(--ink-faint); }
+.opt-btn.picked{ background: var(--b1-soft); border-color: var(--b1); color: var(--b1); }
+.opt-btn.correct{ background: var(--b2-soft); border-color: var(--b2); color: var(--b2); }
+.opt-btn.wrong{ background: var(--family-soft); border-color: var(--family); color: var(--family); }
+.opt-btn:disabled{ cursor:default; }
+
+.check-bar{
+  display:flex; align-items:center; justify-content:space-between; gap:16px;
+  margin-top:22px; padding-top:18px; border-top:1px dashed var(--line);
+}
+.btn-primary{
+  font-family: var(--f-body); font-weight:600; font-size:14px; color:#fff; background: var(--b1);
+  border:none; padding:11px 22px; border-radius:999px; cursor:pointer; transition: transform .1s ease;
+}
+.btn-primary:hover{ transform: translateY(-1px); }
+#score-text{ font-family: var(--f-data); font-size:13px; color: var(--ink-faint); }
+.btn-ghost{
+  font-family: var(--f-body); font-weight:600; font-size:13px; color: var(--ink-soft); background:none;
+  border:1.5px solid var(--line); padding:9px 18px; border-radius:999px; cursor:pointer;
+}
+.btn-ghost:hover{ border-color: var(--ink-faint); }
+.ex-divider{
+  display:flex; align-items:center; gap:10px; margin:20px 0 16px;
+  font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.06em;
+  color: var(--ink-faint);
+}
+.ex-divider::before, .ex-divider::after{ content:""; flex:1; height:1px; background: var(--line); }
+.ex-divider.en-clase{ color: var(--b1); }
+.ex-divider.en-clase::before, .ex-divider.en-clase::after{ background: var(--b1-line); }
+
+/* ---------- CHARACTER CARDS ---------- */
+.characters{ display:grid; gap:16px; }
+.char-card{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-lg);
+  padding:20px 22px; display:flex; gap:16px; align-items:flex-start;
+}
+.char-avatar{
+  flex:none; width:44px; height:44px; border-radius:50%; background: var(--b1-soft);
+  display:flex; align-items:center; justify-content:center; font-family: var(--f-display);
+  font-weight:600; font-size:17px; color: var(--b1);
+}
+.char-body{ flex:1; }
+.char-name{ font-family: var(--f-display); font-weight:600; font-size:17px; margin:0 0 4px; }
+.char-role{ font-family: var(--f-data); font-size:11.5px; text-transform:uppercase; letter-spacing:.05em; color: var(--ink-faint); margin:0 0 10px; }
+.char-facts{ display:flex; flex-wrap:wrap; gap:6px; margin-bottom:10px; }
+.fact-tag{
+  font-family: var(--f-data); font-size:12px; background: var(--paper-alt); color: var(--ink-soft);
+  padding:4px 10px; border-radius:999px;
+}
+.char-prompt{ font-size:14px; color: var(--ink-soft); }
+.char-input{
+  width:100%; margin-top:8px; font-family: var(--f-body); font-size:14.5px; color: var(--ink);
+  background: var(--paper); border:1px solid var(--line); border-radius: var(--r-sm);
+  padding:10px 12px; resize:vertical; min-height:44px;
+}
+.char-input:focus{ outline:none; border-color: var(--b1-line); background: var(--paper-raised); }
+
+/* ---------- ROLEPLAY ---------- */
+.roleplay-panel{ background: var(--b2-soft); border:1px solid var(--b2-line); border-radius: var(--r-lg); padding:26px 28px; }
+.roleplay-panel .block-num{ background: var(--b2); }
+.scene-setup{
+  display:flex; gap:14px; align-items:flex-start; background: var(--paper-raised);
+  border:1px solid var(--b2-line); border-radius: var(--r-md); padding:14px 16px; margin-bottom:20px;
+}
+.scene-icon{ font-size:22px; flex:none; }
+.scene-text{ font-size:14px; color: var(--ink-soft); }
+.scene-text strong{ color: var(--ink); }
+
+.dialogue{ display:flex; flex-direction:column; gap:14px; }
+.scene-tabs{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:18px; }
+.scene-tab{
+  font-family: var(--f-data); font-size:12.5px; background: var(--paper-raised);
+  border:1.5px solid var(--b2-line); color: var(--ink-soft); padding:7px 14px;
+  border-radius:999px; cursor:pointer; transition: all .15s ease;
+}
+.scene-tab:hover{ border-color: var(--b2); }
+.scene-tab.active{ background: var(--b2); border-color: var(--b2); color:#fff; }
+.line{ display:flex; gap:12px; align-items:flex-start; }
+.line-avatar{
+  flex:none; width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  font-family: var(--f-display); font-weight:600; font-size:14px; color:#fff;
+}
+.line.friend .line-avatar{ background: var(--ink-faint); }
+.line.you .line-avatar{ background: var(--b2); }
+.line-body{ flex:1; }
+.line-name{ font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.05em; color: var(--ink-faint); margin:0 0 4px; }
+.line-bubble{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:12px 14px; font-size:14.5px; color: var(--ink);
+}
+.line.you .line-bubble{ background:#fff; border-color: var(--b2-line); }
+.line-input{
+  width:100%; font-family: var(--f-body); font-size:14.5px; color: var(--ink);
+  background:#fff; border:1px solid var(--b2-line); border-radius: var(--r-sm);
+  padding:10px 12px; resize:vertical; min-height:40px; margin-top:2px;
+}
+.line-input:focus{ outline:none; border-color: var(--b2); }
+.line-hint{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin-top:5px; }
+
+.roleplay-tip{
+  margin-top:22px; padding:14px 16px; background: var(--paper-raised); border:1px solid var(--b2-line);
+  border-radius: var(--r-md); font-size:13.5px; color: var(--ink-soft);
+}
+.roleplay-tip strong{ color: var(--ink); }
+
+/* ---------- FINAL TASK ---------- */
+.task-panel{ background: var(--family-soft); border:1px solid var(--family-line); border-radius: var(--r-lg); padding:26px 28px; }
+.task-panel .block-num{ background: var(--family); }
+textarea#final-task{
+  width:100%; min-height:110px; font-family: var(--f-body); font-size:15px; color: var(--ink);
+  background: var(--paper-raised); border:1px solid var(--family-line); border-radius: var(--r-md);
+  padding:14px 16px; resize:vertical; margin-top:14px;
+}
+textarea#final-task:focus{ outline:none; border-color: var(--family); }
+.task-footer{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:12px; flex-wrap:wrap; }
+#task-count{ font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); }
+.btn-secondary{
+  font-family: var(--f-body); font-weight:600; font-size:13.5px; color: var(--family); background:none;
+  border:1.5px solid var(--family-line); padding:9px 18px; border-radius:999px; cursor:pointer;
+}
+.saved-flag{ font-family: var(--f-data); font-size:12px; color: var(--b2); opacity:0; transition: opacity .3s ease; }
+.saved-flag.show{ opacity:1; }
+
+/* ---------- FOOTER NAV ---------- */
+footer{
+  max-width:760px; margin:0 auto; padding:0 24px 60px; display:flex;
+  justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;
+  font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint);
+}
+footer a{ color: var(--b1); text-decoration:none; }
+footer a:hover{ text-decoration:underline; }
+
+@media (max-width:600px){
+  header{ padding:34px 18px 22px; }
+  main{ padding:8px 18px 90px; }
+  .panel, .task-panel{ padding:20px 18px; }
+  .char-card{ flex-direction:column; }
+}
+@media (prefers-reduced-motion: reduce){ *{ transition:none !important; } }
+</style>
+</head>
+<body>
+
+<header>
+  <p class="eyebrow"><span class="dot"></span>Clase 12 de 16 · L6 Línea del oficio</p>
+  <h1>Más que, <em>menos que</em></h1>
+  <p class="lede">Llevas semanas en el obrador de Girona y ya conoces bien las tres grandes tradiciones pasteleras: la italiana, la francesa y la española. Hoy aprendes a compararlas — qué técnica es más precisa, qué mantequilla es mejor, cuál es la elaboración más difícil — con los comparativos y superlativos del español.</p>
+  <div class="meta-row">
+    <div>Duración<strong>50 min</strong></div>
+    <div>Gramática<strong>Comparativos y superlativos</strong></div>
+    <div>Nivel<strong>A1</strong></div>
+  </div>
+</header>
+
+<main>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">1</span><h2>Comparativos y superlativos</h2><span class="time-tag">10 min</span></div>
+    <div class="panel">
+      <table class="conj-table">
+        <tr><td class="conj-pron">superioridad</td><td class="conj-form">más ... que</td><td class="conj-ex">El hojaldre francés es más fino que el italiano.</td></tr>
+        <tr><td class="conj-pron">inferioridad</td><td class="conj-form">menos ... que</td><td class="conj-ex">La pastelería española usa menos mantequilla que la francesa.</td></tr>
+        <tr><td class="conj-pron">igualdad</td><td class="conj-form">tan ... como</td><td class="conj-ex">El turrón es tan tradicional como el panettone.</td></tr>
+        <tr><td class="conj-pron">superlativo</td><td class="conj-form">el/la más...</td><td class="conj-ex">Este es el obrador más antiguo de Girona.</td></tr>
+        <tr><td class="conj-pron">irregular</td><td class="conj-form">mejor / peor</td><td class="conj-ex">Para mí, esta receta es mejor que la otra.</td></tr>
+      </table>
+      <div class="note"><strong>Estructura básica:</strong> más/menos + adjetivo + que, o tan + adjetivo + como. Para el superlativo, añadimos el/la/los/las delante de más o menos: "el más caro", "la más tradicional".</div>
+
+      <div class="compare-wrap">
+        <p class="compare-title">Tres formas, tres significados — así las distingues</p>
+        <div class="compare-grid">
+          <div class="compare-col is-ser">
+            <div class="compare-head">
+              <span class="compare-verb">MÁS / MENOS QUE</span>
+              <span class="compare-sub">— diferencia</span>
+            </div>
+            <ul class="compare-list">
+              <li><strong>Superioridad:</strong> La técnica francesa es más precisa que la italiana.
+                <em>Comparas dos cosas y una gana.</em>
+              </li>
+              <li><strong>Inferioridad:</strong> El turrón es menos dulce que el panettone.</li>
+              <li><strong>Con verbos:</strong> Trabajo más que ayer.</li>
+            </ul>
+          </div>
+          <div class="compare-col is-estar">
+            <div class="compare-head">
+              <span class="compare-verb">TAN ... COMO</span>
+              <span class="compare-sub">— igualdad</span>
+            </div>
+            <ul class="compare-list">
+              <li><strong>Adjetivo:</strong> El croissant es tan popular como la ensaimada.
+                <em>Las dos cosas están al mismo nivel.</em>
+              </li>
+              <li><strong>Ojo:</strong> "tan" cambia de forma con sustantivos: tanto/tanta/tantos/tantas azúcar/harina.</li>
+            </ul>
+          </div>
+          <div class="compare-col is-family">
+            <div class="compare-head">
+              <span class="compare-verb">EL/LA MÁS...</span>
+              <span class="compare-sub">— superlativo</span>
+            </div>
+            <ul class="compare-list">
+              <li><strong>De un grupo:</strong> Esta es la receta más difícil del obrador.
+                <em>Compara con todo el grupo, no solo con una cosa.</em>
+              </li>
+              <li><strong>Irregulares:</strong> mejor (no "más bueno"), peor (no "más malo").</li>
+            </ul>
+          </div>
+        </div>
+        <div class="compare-warning">
+          <strong>Ojo, trampa para hablantes de italiano y francés:</strong> en italiano "più...di" y en francés "plus...que" cambian según lo que comparas, pero en español siempre usamos "que" en el comparativo (nunca "de" excepto con números: "más de diez años"). Y cuidado con "bueno/malo": no decimos "más bueno", decimos <strong>mejor</strong>; no decimos "más malo", decimos <strong>peor</strong>.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">2</span><h2>Vocabulario</h2><span class="time-tag">6 min</span></div>
+    <p class="vocab-hint">Toca cada tarjeta para ver un ejemplo.</p>
+    <div class="vocab-grid" id="vocab-grid"></div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">3</span><h2>Practica</h2><span class="time-tag">12 min</span></div>
+    <div class="panel">
+      <p class="vocab-hint" style="margin-bottom:14px;">50 frases: las primeras 12 se hacen en voz alta en clase; el resto queda como repaso para casa.</p>
+      <div id="exercises"></div>
+      <div class="check-bar">
+        <div style="display:flex; gap:10px;">
+          <button class="btn-primary" id="check-btn">Comprobar respuestas</button>
+          <button class="btn-ghost" id="reset-btn">Reiniciar</button>
+        </div>
+        <span id="score-text"></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">4</span><h2>Tarjetas de comparación</h2><span class="time-tag">8 min</span></div>
+    <p class="lede" style="margin-bottom:16px;">Compara los dos elementos de cada tarjeta usando comparativos o superlativos. Las primeras 6 se trabajan en clase; el resto queda como banco de repaso para casa.</p>
+    <div class="characters" id="characters"></div>
+  </section>
+
+  <section class="block roleplay-panel">
+    <div class="block-head"><span class="block-num">5</span><h2>Roleplay: 5 escenas en el obrador de Girona</h2><span class="time-tag">11 min</span></div>
+    <p class="lede" style="margin-bottom:16px;">50 intercambios repartidos en 5 situaciones reales. Elige una escena para practicar en clase; el resto queda como banco de repaso para casa.</p>
+    <div class="scene-tabs" id="scene-tabs"></div>
+    <div id="scene-container"></div>
+    <div class="roleplay-tip"><strong>En clase:</strong> practicaremos una escena en voz alta, cambiando de rol. El resto de escenas son para practicar por tu cuenta durante la semana.</div>
+  </section>
+
+  <section class="block task-panel">
+    <div class="block-head"><span class="block-num">6</span><h2 style="color:var(--family)">Tu tarea</h2><span class="time-tag">3 min</span></div>
+    <p style="margin:0; font-size:15px; color:var(--ink-soft);">Escribe <strong>5 frases comparando las tres tradiciones de pastelería</strong> (italiana, francesa y española). Usa "más...que", "menos...que", "tan...como" o el superlativo "el/la más...".</p>
+    <textarea id="final-task" placeholder="La pastelería francesa es más...&#10;El turrón es tan...&#10;Para mí, la mejor es..."></textarea>
+    <div class="task-footer">
+      <span id="task-count">0 frases comparativas detectadas</span>
+      <div style="display:flex; gap:10px; align-items:center;">
+        <span class="saved-flag" id="saved-flag">Guardado ✓</span>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <span>Clase 12 · Línea del oficio</span>
+  <span>Próxima clase → Clase 13: Understanding the chef's instructions</span>
+</footer>
+
+<script>
+/* ---------- VOCAB ---------- */
+const VOCAB = [
+  {front:"la técnica", back:"La técnica francesa es muy precisa."},
+  {front:"la calidad", back:"La calidad de esta harina es mejor."},
+  {front:"la tradición", back:"El turrón es una tradición muy antigua."},
+  {front:"el ingrediente", back:"La mantequilla es el ingrediente más caro."},
+  {front:"la elaboración", back:"Esta elaboración es más larga que la otra."},
+  {front:"mejor / peor", back:"Para mí, esta receta es mejor."},
+  {front:"el más / la más", back:"Es la pastelería más famosa de Girona."},
+  {front:"tan ... como", back:"Es tan dulce como el panettone."},
+  {front:"la mantequilla", back:"Usamos más mantequilla que en España."},
+  {front:"famoso / famosa", back:"El croissant es muy famoso en Francia."},
+];
+
+const grid = document.getElementById('vocab-grid');
+VOCAB.forEach(v=>{
+  const card = document.createElement('div');
+  card.className = 'vocab-card';
+  card.setAttribute('role', 'button');
+  card.setAttribute('tabindex', '0');
+  card.setAttribute('aria-pressed', 'false');
+  card.setAttribute('aria-label', `${v.front}. Pulsa para ver un ejemplo.`);
+  card.innerHTML = `<div class="vocab-front">${v.front}</div><div class="vocab-back">${v.back}</div>`;
+  const toggle = ()=>{
+    const flipped = card.classList.toggle('flipped');
+    card.setAttribute('aria-pressed', String(flipped));
+  };
+  card.addEventListener('click', toggle);
+  card.addEventListener('keydown', (e)=>{
+    if(e.key === 'Enter' || e.key === ' '){
+      e.preventDefault();
+      toggle();
+    }
+  });
+  grid.appendChild(card);
+});
+
+/* ---------- EXERCISES ---------- */
+const EXERCISES = [
+  {"sentence":"El hojaldre francés es <span class=\"gap\">___</span> fino que el italiano.","options":["más","tan","el más"],"answer":"más"},
+  {"sentence":"La pastelería española usa <span class=\"gap\">___</span> azúcar que la francesa.","options":["más","menos","tan"],"answer":"menos"},
+  {"sentence":"El turrón es <span class=\"gap\">___</span> tradicional como el panettone.","options":["más","menos","tan"],"answer":"tan"},
+  {"sentence":"Esta es la receta <span class=\"gap\">___</span> difícil del obrador.","options":["más","tan","el más"],"answer":"más"},
+  {"sentence":"Para mí, esta tarta es <span class=\"gap\">___</span> que la otra.","options":["más bueno","mejor","el más"],"answer":"mejor"},
+  {"sentence":"El croissant francés tiene <span class=\"gap\">___</span> capas que el italiano.","options":["más","tan","el más"],"answer":"más"},
+  {"sentence":"La ensaimada es <span class=\"gap\">___</span> famosa como el croissant.","options":["más","tan","menos que"],"answer":"tan"},
+  {"sentence":"Este obrador es <span class=\"gap\">___</span> antiguo de Girona.","options":["más","el más","tan"],"answer":"el más"},
+  {"sentence":"La técnica italiana es <span class=\"gap\">___</span> precisa que la francesa, según Marc.","options":["menos","tan","el más"],"answer":"menos"},
+  {"sentence":"Esta receta es <span class=\"gap\">___</span> que la de ayer, más rápida.","options":["mejor","más bueno","el mejor"],"answer":"mejor"},
+  {"sentence":"El panettone italiano tiene <span class=\"gap\">___</span> mantequilla que el brioche francés.","options":["menos","tan","el más"],"answer":"menos"},
+  {"sentence":"Esta es la elaboración <span class=\"gap\">___</span> larga de todas.","options":["más","el más","la más"],"answer":"la más"},
+  {"sentence":"El azúcar francés es <span class=\"gap\">___</span> fino que el español.","options":["más","tan","menos que"],"answer":"más"},
+  {"sentence":"La mantequilla francesa es <span class=\"gap\">___</span> cara que la italiana.","options":["más","el más","tan"],"answer":"más"},
+  {"sentence":"El turrón de Girona es <span class=\"gap\">___</span> conocido de la región.","options":["más","el más","tan"],"answer":"el más"},
+  {"sentence":"Esta harina es <span class=\"gap\">___</span> buena como la anterior.","options":["más","tan","menos"],"answer":"tan"},
+  {"sentence":"Para Laura, el croissant francés es <span class=\"gap\">___</span> que el italiano.","options":["más bueno","mejor","el más"],"answer":"mejor"},
+  {"sentence":"La técnica española usa <span class=\"gap\">___</span> pasos que la francesa.","options":["menos","tan","el más"],"answer":"menos"},
+  {"sentence":"Este es el obrador <span class=\"gap\">___</span> moderno de la ciudad.","options":["más","el más","tan"],"answer":"el más"},
+  {"sentence":"El pan francés es <span class=\"gap\">___</span> crujiente que el italiano.","options":["más","tan","el más"],"answer":"más"},
+  {"sentence":"Esta receta italiana es <span class=\"gap\">___</span> compleja que la española.","options":["menos","tan","el más"],"answer":"menos"},
+  {"sentence":"Marc dice que esta es la mejor receta, <span class=\"gap\">___</span> que las demás.","options":["mejor","el mejor","más buena"],"answer":"mejor"},
+  {"sentence":"La calidad de este chocolate es <span class=\"gap\">___</span> alta que la del otro.","options":["más","el más","tan"],"answer":"más"},
+  {"sentence":"El brioche es <span class=\"gap\">___</span> dulce como el panettone.","options":["más","tan","menos"],"answer":"tan"},
+  {"sentence":"Este horno es <span class=\"gap\">___</span> rápido de todo el obrador.","options":["más","el más","tan"],"answer":"el más"},
+  {"sentence":"La pastelería francesa tiene <span class=\"gap\">___</span> variedad que la italiana, en mi opinión.","options":["más","el más","tan"],"answer":"más"},
+  {"sentence":"Esta masa está <span class=\"gap\">___</span> que la de ayer, no tan buena.","options":["mejor","peor","el peor"],"answer":"peor"},
+  {"sentence":"El azúcar moreno es <span class=\"gap\">___</span> dulce que el blanco.","options":["menos","tan","el más"],"answer":"menos"},
+  {"sentence":"Este es el ingrediente <span class=\"gap\">___</span> caro de la receta.","options":["más","el más","tan"],"answer":"el más"},
+  {"sentence":"La vainilla francesa es <span class=\"gap\">___</span> buena como la de Madagascar.","options":["más","tan","menos"],"answer":"tan"},
+  {"sentence":"Jordi dice que su técnica es <span class=\"gap\">___</span> que la mía.","options":["más bueno","mejor","el mejor"],"answer":"mejor"},
+  {"sentence":"Este obrador usa <span class=\"gap\">___</span> ingredientes naturales que el otro.","options":["más","el más","tan"],"answer":"más"},
+  {"sentence":"La receta de la abuela es <span class=\"gap\">___</span> antigua de la familia.","options":["más","la más","tan"],"answer":"la más"},
+  {"sentence":"El café italiano es <span class=\"gap\">___</span> fuerte que el francés.","options":["más","tan","menos"],"answer":"más"},
+  {"sentence":"Esta tarta tiene <span class=\"gap\">___</span> capas que la anterior, solo dos.","options":["menos","tan","el más"],"answer":"menos"},
+  {"sentence":"Para el jefe de cocina, este es el postre <span class=\"gap\">___</span> elegante.","options":["más","el más","tan"],"answer":"el más"},
+  {"sentence":"Este chocolate es <span class=\"gap\">___</span> amargo como el otro.","options":["más","tan","menos"],"answer":"tan"},
+  {"sentence":"La nata montada de hoy está <span class=\"gap\">___</span> que la de ayer.","options":["mejor","más buena","el mejor"],"answer":"mejor"},
+  {"sentence":"El horno nuevo es <span class=\"gap\">___</span> eficiente que el viejo.","options":["más","el más","tan"],"answer":"más"},
+  {"sentence":"Esta es la pastelería <span class=\"gap\">___</span> visitada de Girona.","options":["más","la más","tan"],"answer":"la más"},
+  {"sentence":"El azúcar glas es <span class=\"gap\">___</span> fino que el azúcar normal.","options":["más","tan","el más"],"answer":"más"},
+  {"sentence":"Esta receta francesa tiene <span class=\"gap\">___</span> pasos que la italiana.","options":["menos","tan","el más"],"answer":"menos"},
+  {"sentence":"Para mí, el hojaldre de hoy está <span class=\"gap\">___</span>, no tan crujiente.","options":["mejor","peor","el peor"],"answer":"peor"},
+  {"sentence":"Este es el postre <span class=\"gap\">___</span> difícil de hacer.","options":["más","el más","tan"],"answer":"el más"},
+  {"sentence":"La receta española es <span class=\"gap\">___</span> sencilla como la italiana.","options":["más","tan","menos"],"answer":"tan"},
+  {"sentence":"El equipo francés trabaja <span class=\"gap\">___</span> rápido que nosotros.","options":["más","el más","tan"],"answer":"más"},
+  {"sentence":"Esta harina integral es <span class=\"gap\">___</span> ligera que la blanca.","options":["menos","tan","el más"],"answer":"menos"},
+  {"sentence":"Marc cree que esta técnica es la <span class=\"gap\">___</span> de todas.","options":["más","mejor","el mejor"],"answer":"mejor"},
+  {"sentence":"Esta es la elaboración <span class=\"gap\">___</span> tradicional del obrador.","options":["más","la más","tan"],"answer":"la más"},
+  {"sentence":"El chocolate belga es <span class=\"gap\">___</span> caro que el español.","options":["más","tan","el más"],"answer":"más"}
+];
+
+const PRACTICE_KEY = 'davide-clase12-practica';
+let practiceState = {};
+async function cargarPractica(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(PRACTICE_KEY);
+    if (res && typeof res.value === 'string') practiceState = JSON.parse(res.value);
+  }catch(e){
+    // Sin progreso previo guardado todavía.
+  }
+}
+async function guardarPractica(){
+  if (!window.storage) return;
+  try{ await window.storage.set(PRACTICE_KEY, JSON.stringify(practiceState)); }catch(e){ /* fallo silencioso */ }
+}
+
+const exWrap = document.getElementById('exercises');
+(async function initPractica(){
+await cargarPractica();
+EXERCISES.forEach((ex, i)=>{
+  if(i === 0){
+    const divider = document.createElement('div');
+    divider.className = 'ex-divider en-clase';
+    divider.textContent = 'en clase · ítems 1–12';
+    exWrap.appendChild(divider);
+  }
+  if(i === 12){
+    const divider = document.createElement('div');
+    divider.className = 'ex-divider';
+    divider.textContent = 'para casa · repaso opcional';
+    exWrap.appendChild(divider);
+  }
+  const el = document.createElement('div');
+  el.className = 'exercise';
+  el.dataset.answer = ex.answer;
+  el.dataset.idx = i;
+  el.innerHTML = `
+    <div class="ex-sentence">${i+1}. ${ex.sentence}</div>
+    <div class="ex-options">
+      ${ex.options.map(o=>`<button class="opt-btn" data-value="${o}">${o}</button>`).join('')}
+    </div>
+  `;
+  exWrap.appendChild(el);
+
+  const savedPick = practiceState[i];
+  if(savedPick){
+    const savedBtn = el.querySelector(`.opt-btn[data-value="${savedPick}"]`);
+    if(savedBtn) savedBtn.classList.add('picked');
+  }
+
+  el.querySelectorAll('.opt-btn').forEach(btn=>{
+    btn.addEventListener('click', async ()=>{
+      el.querySelectorAll('.opt-btn').forEach(b=>b.classList.remove('picked'));
+      btn.classList.add('picked');
+      practiceState[i] = btn.dataset.value;
+      await guardarPractica();
+    });
+  });
+});
+})();
+
+document.getElementById('check-btn').addEventListener('click', ()=>{
+  let correct = 0;
+  document.querySelectorAll('.exercise').forEach(el=>{
+    const answer = el.dataset.answer;
+    const picked = el.querySelector('.opt-btn.picked');
+    el.querySelectorAll('.opt-btn').forEach(b=>{
+      b.disabled = true;
+      if(b.dataset.value === answer) b.classList.add('correct');
+      else if(b === picked) b.classList.add('wrong');
+    });
+    if(picked && picked.dataset.value === answer) correct++;
+  });
+  document.getElementById('score-text').textContent = `${correct} / ${EXERCISES.length} correctas`;
+});
+
+document.getElementById('reset-btn').addEventListener('click', async ()=>{
+  document.querySelectorAll('.exercise').forEach(el=>{
+    el.querySelectorAll('.opt-btn').forEach(b=>{
+      b.disabled = false;
+      b.classList.remove('picked','correct','wrong');
+    });
+  });
+  document.getElementById('score-text').textContent = '';
+  practiceState = {};
+  await guardarPractica();
+});
+
+/* ---------- CHARACTER / COMPARISON CARDS ---------- */
+const CHARACTERS = [
+  {"name":"Italia vs. Francia","role":"El hojaldre","facts":["Italia: sfogliatella","Francia: croissant","¿cuál es más fino?"],"prompt":"Compara las dos técnicas:"},
+  {"name":"España vs. Francia","role":"El azúcar usado","facts":["España: menos dulce","Francia: más dulce","el turrón vs. el macaron"],"prompt":"Compara la cantidad de azúcar:"},
+  {"name":"Italia vs. España","role":"El tiempo de elaboración","facts":["panettone: 3 días","turrón: 1 día","¿cuál es más largo?"],"prompt":"Compara los tiempos:"},
+  {"name":"Tú vs. Jordi","role":"La velocidad trabajando","facts":["tú: rápido con la manga","Jordi: muy rápido siempre","¿quién es más rápido?"],"prompt":"Compárate con Jordi:"},
+  {"name":"Este obrador vs. el otro","role":"El tamaño","facts":["este: pequeño","el otro: grande","el más conocido de Girona"],"prompt":"Compara los dos obradores:"},
+  {"name":"La receta de hoy vs. ayer","role":"La dificultad","facts":["hoy: más pasos","ayer: más sencilla","¿cuál es mejor?"],"prompt":"Compara las dos recetas:"},
+  {"name":"Francia vs. Bélgica","role":"El chocolate","facts":["Francia: muy fino","Bélgica: muy cremoso","los dos son famosos"],"prompt":"Compara los dos chocolates:"},
+  {"name":"Tú vs. tu profesora Elena","role":"La experiencia","facts":["Elena: 20 años","tú: 5 años","¿quién tiene más experiencia?"],"prompt":"Compárate con Elena:"},
+  {"name":"El horno nuevo vs. el viejo","role":"La eficiencia","facts":["nuevo: rápido","viejo: lento","el mejor para hornear"],"prompt":"Compara los dos hornos:"},
+  {"name":"Marc vs. Núria","role":"La organización","facts":["Marc: exigente","Núria: muy organizada","los dos son buenos jefes"],"prompt":"Compáralos como jefes:"},
+  {"name":"La harina integral vs. la blanca","role":"El peso","facts":["integral: más pesada","blanca: más ligera","depende de la receta"],"prompt":"Compara las dos harinas:"},
+  {"name":"Girona vs. tu ciudad natal","role":"La tradición pastelera","facts":["Girona: mucha tradición","tu ciudad: otra tradición","¿cuál prefieres?"],"prompt":"Compara las dos tradiciones:"}
+];
+
+const CHAR_KEY = 'davide-clase12-personajes';
+let charState = {};
+async function cargarPersonajes(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(CHAR_KEY);
+    if (res && typeof res.value === 'string') charState = JSON.parse(res.value);
+  }catch(e){
+    // Sin personajes guardados todavía.
+  }
+}
+async function guardarPersonajes(){
+  if (!window.storage) return;
+  try{ await window.storage.set(CHAR_KEY, JSON.stringify(charState)); }catch(e){ /* fallo silencioso */ }
+}
+let charSaveTimer = null;
+function scheduleCharSave(){
+  clearTimeout(charSaveTimer);
+  charSaveTimer = setTimeout(guardarPersonajes, 500);
+}
+
+const charWrap = document.getElementById('characters');
+(async function initPersonajes(){
+await cargarPersonajes();
+CHARACTERS.forEach((c, i)=>{
+  if(i === 0){
+    const divider = document.createElement('div');
+    divider.className = 'ex-divider en-clase';
+    divider.textContent = 'en clase · comparaciones 1–6';
+    charWrap.appendChild(divider);
+  }
+  if(i === 6){
+    const divider = document.createElement('div');
+    divider.className = 'ex-divider';
+    divider.textContent = 'para casa · banco de repaso';
+    charWrap.appendChild(divider);
+  }
+  const card = document.createElement('div');
+  card.className = 'char-card';
+  card.innerHTML = `
+    <div class="char-avatar">${c.name.charAt(0)}</div>
+    <div class="char-body">
+      <p class="char-name">${c.name}</p>
+      <p class="char-role">${c.role}</p>
+      <div class="char-facts">${c.facts.map(f=>`<span class="fact-tag">${f}</span>`).join('')}</div>
+      <p class="char-prompt">${c.prompt}</p>
+      <textarea class="char-input" rows="2" placeholder="Es más ... que / tan ... como / el más ..." data-idx="${i}"></textarea>
+    </div>
+  `;
+  charWrap.appendChild(card);
+  const charInputEl = card.querySelector('.char-input');
+  if(charState[i]) charInputEl.value = charState[i];
+  charInputEl.addEventListener('input', ()=>{
+    charState[i] = charInputEl.value;
+    scheduleCharSave();
+  });
+});
+})();
+
+/* ---------- ROLEPLAY SCENES ---------- */
+const SCENES = [
+  {
+    "id": "descanso",
+    "tab": "Conversación en el descanso",
+    "icon": "☕",
+    "setup": "Es la hora del descanso y hablas con Laura sobre las diferencias entre las pastelerías europeas.",
+    "lines": [
+      {"who":"friend","name":"Laura","text":"¿Qué te parece más difícil, la pastelería francesa o la italiana?"},
+      {"who":"you","hint":"Compara usando \"más...que\"."},
+      {"who":"friend","name":"Laura","text":"Yo creo que el hojaldre francés es más complicado."},
+      {"who":"you","hint":"Da tu opinión con un comparativo."},
+      {"who":"friend","name":"Laura","text":"¿Y la pastelería española? ¿Es tan dulce como la italiana?"},
+      {"who":"you","hint":"Responde con \"tan...como\" o \"más/menos que\"."},
+      {"who":"friend","name":"Laura","text":"El turrón me parece menos dulce que el panettone."},
+      {"who":"you","hint":"Da tu opinión comparando los dos postres."},
+      {"who":"friend","name":"Laura","text":"¿Cuál es, para ti, el mejor postre de los tres países?"},
+      {"who":"you","hint":"Usa \"el mejor\" o \"el más\" para responder."},
+      {"who":"friend","name":"Laura","text":"Yo también prefiero algo así. ¿Y el peor, o el más difícil de hacer?"},
+      {"who":"you","hint":"Responde con un superlativo."},
+      {"who":"friend","name":"Laura","text":"Estoy de acuerdo, esa técnica es realmente complicada."},
+      {"who":"you","hint":"Añade una comparación más sobre técnica o ingredientes."},
+      {"who":"friend","name":"Laura","text":"¿Trabajas más rápido ahora que al principio?"},
+      {"who":"you","hint":"Compárate a ti mismo con \"más...que\"."},
+      {"who":"friend","name":"Laura","text":"Se nota, cada semana estás mejor."},
+      {"who":"you","hint":"Da las gracias y añade un comparativo."},
+      {"who":"friend","name":"Laura","text":"Bueno, volvamos al obrador, el descanso se acaba."},
+      {"who":"you","hint":"Despídete con una frase comparativa final."}
+    ]
+  },
+  {
+    "id": "cliente-curioso",
+    "tab": "Un cliente pregunta por las tradiciones",
+    "icon": "🧁",
+    "setup": "Un cliente curioso en el mostrador te pregunta por las diferencias entre las pastelerías europeas.",
+    "lines": [
+      {"who":"friend","name":"Adrià","text":"¿Es verdad que la pastelería francesa usa más mantequilla que la italiana?"},
+      {"who":"you","hint":"Responde con un comparativo sobre la mantequilla."},
+      {"who":"friend","name":"Adrià","text":"¿Y cuál es más dulce, el turrón español o el panettone italiano?"},
+      {"who":"you","hint":"Compara los dos postres."},
+      {"who":"friend","name":"Adrià","text":"Me sorprende. ¿Cuál te parece más tradicional?"},
+      {"who":"you","hint":"Usa \"más...que\" o \"el más\"."},
+      {"who":"friend","name":"Adrià","text":"¿Es la técnica francesa tan difícil como dicen?"},
+      {"who":"you","hint":"Responde con \"tan...como\"."},
+      {"who":"friend","name":"Adrià","text":"¿Y cuál de las tres tradiciones te gusta más a ti?"},
+      {"who":"you","hint":"Da tu opinión con un superlativo."},
+      {"who":"friend","name":"Adrià","text":"¿Este croissant es mejor que el de la otra pastelería del barrio?"},
+      {"who":"you","hint":"Responde con \"mejor\" o \"peor\"."},
+      {"who":"friend","name":"Adrià","text":"Qué interesante, nunca lo había pensado así."},
+      {"who":"you","hint":"Añade otra comparación sobre ingredientes o precio."},
+      {"who":"friend","name":"Adrià","text":"¿Y el precio? ¿Es más caro el francés que el español?"},
+      {"who":"you","hint":"Compara el precio."},
+      {"who":"friend","name":"Adrià","text":"Gracias por la explicación, aprendo algo nuevo cada vez que vengo."},
+      {"who":"you","hint":"Da las gracias y añade una última comparación."},
+      {"who":"friend","name":"Adrià","text":"Me llevo dos croissants, ¡hasta la próxima!"},
+      {"who":"you","hint":"Despídete con cortesía."}
+    ]
+  },
+  {
+    "id": "jefe-cocina",
+    "tab": "Marc evalúa tu técnica",
+    "icon": "👨‍🍳",
+    "setup": "Marc, el jefe de cocina, compara tu forma de trabajar con la del resto del equipo.",
+    "lines": [
+      {"who":"friend","name":"Marc","text":"Tu técnica con el hojaldre es cada vez mejor."},
+      {"who":"you","hint":"Da las gracias y añade un comparativo sobre tu progreso."},
+      {"who":"friend","name":"Marc","text":"¿Crees que trabajas más rápido que al principio?"},
+      {"who":"you","hint":"Compárate a ti mismo con \"más...que\"."},
+      {"who":"friend","name":"Marc","text":"Jordi también ha mejorado mucho, es tan rápido como tú ahora."},
+      {"who":"you","hint":"Responde con \"tan...como\" o comenta sobre Jordi."},
+      {"who":"friend","name":"Marc","text":"¿Qué técnica te parece más difícil, la francesa o la italiana?"},
+      {"who":"you","hint":"Compara las dos técnicas."},
+      {"who":"friend","name":"Marc","text":"Para mí, la francesa es la más exigente de todas."},
+      {"who":"you","hint":"Responde de acuerdo o en desacuerdo con un superlativo."},
+      {"who":"friend","name":"Marc","text":"¿Y tu formación en Italia, fue más dura que aquí?"},
+      {"who":"you","hint":"Compara tu formación en los dos lugares."},
+      {"who":"friend","name":"Marc","text":"Interesante, cada escuela tiene su estilo."},
+      {"who":"you","hint":"Añade otra comparación sobre estilos de trabajo."},
+      {"who":"friend","name":"Marc","text":"Este mes has sido el mejor pastelero del turno."},
+      {"who":"you","hint":"Da las gracias con humildad y un comparativo."},
+      {"who":"friend","name":"Marc","text":"Sigue así, y pronto serás el más rápido del equipo."},
+      {"who":"you","hint":"Responde con una frase motivada usando un superlativo."},
+      {"who":"friend","name":"Marc","text":"Bueno, vamos, el horno ya está listo."},
+      {"who":"you","hint":"Responde afirmativamente y continúa."}
+    ]
+  },
+  {
+    "id": "companera-italiana",
+    "tab": "Videollamada con una compañera de Italia",
+    "icon": "📱",
+    "setup": "Hablas por videollamada con Giulia, una compañera de tu antigua escuela en Italia.",
+    "lines": [
+      {"who":"friend","name":"Giulia","text":"¿Cómo es trabajar en un obrador español? ¿Muy diferente de Italia?"},
+      {"who":"you","hint":"Compara los dos países con \"más/menos...que\"."},
+      {"who":"friend","name":"Giulia","text":"¿Usáis más o menos mantequilla que en Italia?"},
+      {"who":"you","hint":"Responde sobre la mantequilla."},
+      {"who":"friend","name":"Giulia","text":"¿Y el horario? ¿Es más duro que aquí?"},
+      {"who":"you","hint":"Compara los horarios."},
+      {"who":"friend","name":"Giulia","text":"¿Qué te parece más difícil, el turrón o el panettone?"},
+      {"who":"you","hint":"Compara los dos postres tradicionales."},
+      {"who":"friend","name":"Giulia","text":"Aquí seguimos haciendo el panettone tradicional, es el más famoso de la zona."},
+      {"who":"you","hint":"Comenta con un superlativo sobre tu obrador."},
+      {"who":"friend","name":"Giulia","text":"¿Tu jefe es tan exigente como nuestra antigua profesora?"},
+      {"who":"you","hint":"Responde con \"tan...como\"."},
+      {"who":"friend","name":"Giulia","text":"Me alegra que estés aprendiendo tanto."},
+      {"who":"you","hint":"Añade una comparación sobre tu progreso."},
+      {"who":"friend","name":"Giulia","text":"¿Crees que eres mejor pastelero ahora que hace un año?"},
+      {"who":"you","hint":"Responde con \"mejor\" sobre ti mismo."},
+      {"who":"friend","name":"Giulia","text":"Se nota en cómo hablas de esto, estás muy motivado."},
+      {"who":"you","hint":"Da las gracias con una frase comparativa."},
+      {"who":"friend","name":"Giulia","text":"Hablamos pronto, ¡cuídate!"},
+      {"who":"you","hint":"Despídete con cortesía."}
+    ]
+  },
+  {
+    "id": "feria",
+    "tab": "En una feria de pastelería",
+    "icon": "🎪",
+    "setup": "Estás en una feria de pastelería en Girona, hablando con Oriol, el dueño del obrador, sobre otros expositores.",
+    "lines": [
+      {"who":"friend","name":"Oriol","text":"¿Qué te parece el stand de la pastelería francesa de allí?"},
+      {"who":"you","hint":"Compara ese stand con otro."},
+      {"who":"friend","name":"Oriol","text":"Yo creo que sus macarons son más coloridos que los nuestros."},
+      {"who":"you","hint":"Da tu opinión con un comparativo."},
+      {"who":"friend","name":"Oriol","text":"¿Y cuál te parece el mejor postre de toda la feria?"},
+      {"who":"you","hint":"Responde con un superlativo."},
+      {"who":"friend","name":"Oriol","text":"Ese stand italiano tiene una presentación tan cuidada como la nuestra."},
+      {"who":"you","hint":"Responde de acuerdo o en desacuerdo."},
+      {"who":"friend","name":"Oriol","text":"¿Crees que nuestros precios son más altos que los de la competencia?"},
+      {"who":"you","hint":"Compara los precios."},
+      {"who":"friend","name":"Oriol","text":"Tienes razón, deberíamos ajustar algo."},
+      {"who":"you","hint":"Añade una comparación más sobre calidad o precio."},
+      {"who":"friend","name":"Oriol","text":"¿Qué técnica te parece la más innovadora de la feria?"},
+      {"who":"you","hint":"Responde con un superlativo."},
+      {"who":"friend","name":"Oriol","text":"Me gusta tu forma de analizar todo esto."},
+      {"who":"you","hint":"Da las gracias y añade una frase comparativa."},
+      {"who":"friend","name":"Oriol","text":"Vamos a ver el resto de los stands."},
+      {"who":"you","hint":"Responde afirmativamente y continúa."},
+      {"who":"friend","name":"Oriol","text":"Este ha sido, sin duda, el mejor año de la feria."},
+      {"who":"you","hint":"Responde de acuerdo con un superlativo final."}
+    ]
+  }
+];
+
+const sceneTabs = document.getElementById('scene-tabs');
+const sceneContainer = document.getElementById('scene-container');
+let activeScene = 0;
+
+function renderTabs(){
+  sceneTabs.innerHTML = SCENES.map((s,i)=>
+    `<button class="scene-tab${i===activeScene?' active':''}" data-idx="${i}">${s.icon} ${s.tab}</button>`
+  ).join('');
+  sceneTabs.querySelectorAll('.scene-tab').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      activeScene = parseInt(btn.dataset.idx, 10);
+      renderTabs();
+      renderScene();
+    });
+  });
+}
+
+function renderScene(){
+  const scene = SCENES[activeScene];
+  const linesHtml = scene.lines.map((l, li)=>{
+    if(l.who === 'friend'){
+      return `
+        <div class="line friend">
+          <div class="line-avatar">${l.name.charAt(0)}</div>
+          <div class="line-body">
+            <p class="line-name">${l.name}</p>
+            <div class="line-bubble">${l.text}</div>
+          </div>
+        </div>`;
+    } else {
+      const rpKey = `${scene.id}:${li}`;
+      return `
+        <div class="line you">
+          <div class="line-avatar">Tú</div>
+          <div class="line-body">
+            <p class="line-name">Tú</p>
+            <textarea class="line-input" rows="2" placeholder="Escribe tu respuesta con un comparativo..." data-rpkey="${scene.id}:${li}">${roleplayState[rpKey] ? roleplayState[rpKey] : ''}</textarea>
+            <p class="line-hint">${l.hint}</p>
+          </div>
+        </div>`;
+    }
+  }).join('');
+
+  sceneContainer.innerHTML = `
+    <div class="scene-setup">
+      <span class="scene-icon">${scene.icon}</span>
+      <p class="scene-text"><strong>${scene.tab}:</strong> ${scene.setup}</p>
+    </div>
+    <div class="dialogue">${linesHtml}</div>
+  `;
+
+  sceneContainer.querySelectorAll('.line-input').forEach(inputEl=>{
+    inputEl.addEventListener('input', ()=>{
+      roleplayState[inputEl.dataset.rpkey] = inputEl.value;
+      scheduleRoleplaySave();
+    });
+  });
+}
+
+const ROLEPLAY_KEY = 'davide-clase12-roleplay';
+let roleplayState = {};
+async function cargarRoleplay(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(ROLEPLAY_KEY);
+    if (res && typeof res.value === 'string') roleplayState = JSON.parse(res.value);
+  }catch(e){
+    // Sin intervenciones guardadas todavía.
+  }
+}
+async function guardarRoleplay(){
+  if (!window.storage) return;
+  try{ await window.storage.set(ROLEPLAY_KEY, JSON.stringify(roleplayState)); }catch(e){ /* fallo silencioso */ }
+}
+let roleplaySaveTimer = null;
+function scheduleRoleplaySave(){
+  clearTimeout(roleplaySaveTimer);
+  roleplaySaveTimer = setTimeout(guardarRoleplay, 500);
+}
+
+(async function initRoleplay(){
+await cargarRoleplay();
+renderTabs();
+renderScene();
+})();
+
+/* ---------- FINAL TASK ---------- */
+const STORAGE_KEY = 'davide-clase12-tarea';
+const taskArea = document.getElementById('final-task');
+const taskCount = document.getElementById('task-count');
+const savedFlag = document.getElementById('saved-flag');
+
+async function cargarTarea(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(STORAGE_KEY);
+    if (res && typeof res.value === 'string') taskArea.value = res.value;
+  }catch(e){
+    // Clave inexistente todavía: no hay tarea previa, se queda en blanco.
+  }
+  updateCount();
+}
+
+function updateCount(){
+  const matches = (taskArea.value.match(/\b(más|menos|tan|mejor|peor)\b/gi) || []).length;
+  taskCount.textContent = `${matches} frase${matches===1?'':'s'} comparativa${matches===1?'':'s'} detectada${matches===1?'':'s'}`;
+}
+async function guardarTareaAuto(){
+  if (!window.storage){
+    savedFlag.textContent = 'Guardado no disponible aquí';
+    savedFlag.classList.add('show');
+    setTimeout(()=>{ savedFlag.classList.remove('show'); savedFlag.textContent = 'Guardado ✓'; }, 2200);
+    return;
+  }
+  try{
+    const ok = await window.storage.set(STORAGE_KEY, taskArea.value);
+    savedFlag.textContent = ok ? 'Guardado ✓' : 'No se pudo guardar';
+  }catch(e){
+    savedFlag.textContent = 'No se pudo guardar';
+  }
+  savedFlag.classList.add('show');
+  setTimeout(()=>{ savedFlag.classList.remove('show'); savedFlag.textContent = 'Guardado ✓'; }, 1800);
+}
+
+let taskSaveTimer = null;
+function scheduleTaskSave(){
+  clearTimeout(taskSaveTimer);
+  taskSaveTimer = setTimeout(guardarTareaAuto, 700);
+}
+
+taskArea.addEventListener('input', ()=>{
+  updateCount();
+  scheduleTaskSave();
+});
+updateCount();
+cargarTarea();
+
+</script>
+
+</body>
+</html>

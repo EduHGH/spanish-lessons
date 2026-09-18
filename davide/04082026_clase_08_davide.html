@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clase 8 · Pedir ingredientes y utensilios — Davide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+
+/* ╔══════════════════════════════════════════════════════════════╗
+   ║  ESCOLAR — sistema de diseño para clases de español online   ║
+   ║  Clase 8 · L3 Línea circular · "Pedir ingredientes" — Davide  ║
+   ╚══════════════════════════════════════════════════════════════╝ */
+
+:root{
+  --paper:        #FBF7EE;
+  --paper-raised: #FFFFFF;
+  --paper-alt:    #F3ECDA;
+  --ink:          #23291F;
+  --ink-soft:     #565F52;
+  --ink-faint:    #8B9184;
+  --line:         rgba(35,41,31,0.12);
+  --line-strong:  rgba(35,41,31,0.22);
+
+  --b1:      #DB8A2E;  --b1-soft: #FCF1E1;  --b1-line: #F3D9AF;
+  --b2:      #2E9E6B;  --b2-soft: #E9F6EF;  --b2-line: #BEE6D3;
+  --family:  #B5502E;  --family-soft: #FBEBE3; --family-line: #EFC9B4;
+
+  --f-display: 'Fraunces', Georgia, serif;
+  --f-body:    'IBM Plex Sans', system-ui, sans-serif;
+  --f-data:    'IBM Plex Mono', monospace;
+
+  --r-sm: 8px;
+  --r-md: 14px;
+  --r-lg: 20px;
+
+  --shadow-1: 0 1px 2px rgba(35,41,31,0.05), 0 1px 8px rgba(35,41,31,0.04);
+}
+
+*{ box-sizing:border-box; }
+body{
+  margin:0;
+  background: var(--paper);
+  background-image: radial-gradient(circle at 1px 1px, var(--line) 1px, transparent 0);
+  background-size: 22px 22px;
+  color: var(--ink);
+  font-family: var(--f-body);
+  line-height:1.6;
+}
+::selection{ background: var(--b1-soft); }
+
+/* ---------- HEADER ---------- */
+header{ padding:44px 24px 28px; max-width:760px; margin:0 auto; }
+.eyebrow{
+  font-family: var(--f-data); font-size:12px; letter-spacing:.14em;
+  text-transform:uppercase; color: var(--b1); margin:0 0 10px;
+  display:flex; align-items:center; gap:10px;
+}
+.eyebrow .dot{ width:6px; height:6px; border-radius:50%; background: var(--b1); }
+h1{
+  font-family: var(--f-display); font-weight:600;
+  font-size:clamp(30px,5.6vw,46px); line-height:1.08;
+  margin:0 0 14px; letter-spacing:-.01em;
+}
+h1 em{ font-style:italic; color: var(--b1); }
+.lede{ font-size:16px; color: var(--ink-soft); max-width:56ch; margin:0; }
+
+.meta-row{
+  display:flex; flex-wrap:wrap; gap:20px; margin-top:26px;
+  font-family: var(--f-data); font-size:12px; color: var(--ink-faint);
+}
+.meta-row strong{
+  display:block; color: var(--ink); font-size:14.5px; font-weight:500;
+  font-family: var(--f-display); margin-top:3px;
+}
+
+/* ---------- SECTIONS ---------- */
+main{ max-width:760px; margin:0 auto; padding:8px 24px 100px; }
+
+section.block{ margin-bottom:52px; }
+.block-head{ display:flex; align-items:baseline; gap:12px; margin-bottom:18px; }
+.time-tag{
+  font-family: var(--f-data); font-size:11px; color: var(--ink-faint);
+  background: var(--paper-alt); padding:3px 10px; border-radius:999px; margin-left:auto; flex:none;
+}
+.block-num{
+  font-family: var(--f-data); font-size:12px; color:#fff; background: var(--b1);
+  width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  flex:none;
+}
+.block-head h2{
+  font-family: var(--f-display); font-weight:500; font-style:italic; font-size:22px; margin:0;
+}
+
+.panel{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-lg);
+  box-shadow: var(--shadow-1); padding:26px 28px;
+}
+
+/* ---------- GRAMMAR TABLE ---------- */
+.conj-table{ width:100%; border-collapse:collapse; margin-top:4px; }
+.conj-table td{ padding:10px 6px; border-bottom:1px dashed var(--line); font-size:15px; }
+.conj-table tr:last-child td{ border-bottom:none; }
+.conj-pron{ font-family: var(--f-data); color: var(--ink-faint); font-size:13px; width:90px; }
+.conj-form{ font-family: var(--f-display); font-weight:600; font-size:19px; color: var(--b1); }
+.conj-ex{ color: var(--ink-soft); font-size:14px; }
+
+.note{
+  margin-top:18px; padding:14px 16px; background: var(--b1-soft); border:1px solid var(--b1-line);
+  border-radius: var(--r-md); font-size:14px; color: var(--ink-soft);
+}
+.note strong{ color: var(--ink); }
+
+/* ---------- NECESITAR vs QUERER ---------- */
+.compare-wrap{ margin-top:22px; }
+.compare-title{
+  font-family: var(--f-data); font-size:11.5px; text-transform:uppercase; letter-spacing:.06em;
+  color: var(--ink-faint); margin:0 0 10px;
+}
+.compare-grid{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+@media (max-width:560px){ .compare-grid{ grid-template-columns:1fr; } }
+.compare-col{ border-radius: var(--r-md); padding:16px 18px; border:1px solid; }
+.compare-col.is-ser{ background: var(--b1-soft); border-color: var(--b1-line); }
+.compare-col.is-estar{ background: var(--b2-soft); border-color: var(--b2-line); }
+.compare-head{ display:flex; align-items:center; gap:8px; margin:0 0 10px; }
+.compare-verb{ font-family: var(--f-display); font-weight:600; font-size:19px; }
+.is-ser .compare-verb{ color: var(--b1); }
+.is-estar .compare-verb{ color: var(--b2); }
+.compare-sub{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); }
+.compare-list{ margin:0; padding:0; list-style:none; }
+.compare-list li{ font-size:13.5px; color: var(--ink-soft); padding:6px 0; border-top:1px dashed var(--line); }
+.compare-list li:first-child{ border-top:none; }
+.compare-list strong{ color: var(--ink); font-weight:600; }
+.compare-list em{ display:block; font-style:normal; color: var(--ink-faint); font-size:12.5px; margin-top:2px; }
+.compare-warning{
+  margin-top:14px; padding:14px 16px; background: var(--family-soft); border:1px solid var(--family-line);
+  border-radius: var(--r-md); font-size:13.5px; color: var(--ink-soft);
+}
+.compare-warning strong{ color: var(--family); }
+
+/* ---------- VOCAB CARDS ---------- */
+.vocab-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:12px; }
+.vocab-card{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:14px 16px; cursor:pointer; perspective:600px; min-height:78px;
+  display:flex; flex-direction:column; justify-content:center; transition: border-color .15s ease;
+}
+.vocab-card:hover{ border-color: var(--b1-line); }
+.vocab-card:focus-visible{ outline:2px solid var(--b1); outline-offset:2px; }
+.vocab-front{ font-family: var(--f-body); font-weight:600; font-size:15px; }
+.vocab-back{ display:none; font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); margin-top:6px; }
+.vocab-card.flipped .vocab-back{ display:block; }
+.vocab-card.flipped{ background: var(--b1-soft); border-color: var(--b1-line); }
+.vocab-hint{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin:10px 2px 16px; }
+
+/* ---------- EXERCISE ---------- */
+.exercise{ margin-bottom:20px; }
+.exercise:last-of-type{ margin-bottom:0; }
+.ex-sentence{ font-size:15.5px; margin-bottom:10px; }
+.ex-sentence .gap{ font-family: var(--f-data); color: var(--ink-faint); }
+.ex-options{ display:flex; flex-wrap:wrap; gap:8px; }
+.opt-btn{
+  font-family: var(--f-body); font-size:14px; background: var(--paper-raised);
+  border:1.5px solid var(--line); color: var(--ink); padding:7px 16px; border-radius:999px;
+  cursor:pointer; transition: all .15s ease;
+}
+.opt-btn:hover{ border-color: var(--ink-faint); }
+.opt-btn.picked{ background: var(--b1-soft); border-color: var(--b1); color: var(--b1); }
+.opt-btn.correct{ background: var(--b2-soft); border-color: var(--b2); color: var(--b2); }
+.opt-btn.wrong{ background: var(--family-soft); border-color: var(--family); color: var(--family); }
+.opt-btn:disabled{ cursor:default; }
+
+.check-bar{
+  display:flex; align-items:center; justify-content:space-between; gap:16px;
+  margin-top:22px; padding-top:18px; border-top:1px dashed var(--line);
+}
+.btn-primary{
+  font-family: var(--f-body); font-weight:600; font-size:14px; color:#fff; background: var(--b1);
+  border:none; padding:11px 22px; border-radius:999px; cursor:pointer; transition: transform .1s ease;
+}
+.btn-primary:hover{ transform: translateY(-1px); }
+#score-text{ font-family: var(--f-data); font-size:13px; color: var(--ink-faint); }
+.btn-ghost{
+  font-family: var(--f-body); font-weight:600; font-size:13px; color: var(--ink-soft); background:none;
+  border:1.5px solid var(--line); padding:9px 18px; border-radius:999px; cursor:pointer;
+}
+.btn-ghost:hover{ border-color: var(--ink-faint); }
+.ex-divider{
+  display:flex; align-items:center; gap:10px; margin:20px 0 16px;
+  font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.06em;
+  color: var(--ink-faint);
+}
+.ex-divider::before, .ex-divider::after{ content:""; flex:1; height:1px; background: var(--line); }
+.ex-divider.en-clase{ color: var(--b1); }
+.ex-divider.en-clase::before, .ex-divider.en-clase::after{ background: var(--b1-line); }
+
+/* ---------- CHARACTER CARDS ---------- */
+.characters{ display:grid; gap:16px; }
+.char-card{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-lg);
+  padding:20px 22px; display:flex; gap:16px; align-items:flex-start;
+}
+.char-avatar{
+  flex:none; width:44px; height:44px; border-radius:50%; background: var(--b1-soft);
+  display:flex; align-items:center; justify-content:center; font-family: var(--f-display);
+  font-weight:600; font-size:17px; color: var(--b1);
+}
+.char-body{ flex:1; }
+.char-name{ font-family: var(--f-display); font-weight:600; font-size:17px; margin:0 0 4px; }
+.char-role{ font-family: var(--f-data); font-size:11.5px; text-transform:uppercase; letter-spacing:.05em; color: var(--ink-faint); margin:0 0 10px; }
+.char-facts{ display:flex; flex-wrap:wrap; gap:6px; margin-bottom:10px; }
+.fact-tag{
+  font-family: var(--f-data); font-size:12px; background: var(--paper-alt); color: var(--ink-soft);
+  padding:4px 10px; border-radius:999px;
+}
+.char-prompt{ font-size:14px; color: var(--ink-soft); }
+.char-input{
+  width:100%; margin-top:8px; font-family: var(--f-body); font-size:14.5px; color: var(--ink);
+  background: var(--paper); border:1px solid var(--line); border-radius: var(--r-sm);
+  padding:10px 12px; resize:vertical; min-height:44px;
+}
+.char-input:focus{ outline:none; border-color: var(--b1-line); background: var(--paper-raised); }
+
+/* ---------- ROLEPLAY ---------- */
+.roleplay-panel{ background: var(--b2-soft); border:1px solid var(--b2-line); border-radius: var(--r-lg); padding:26px 28px; }
+.roleplay-panel .block-num{ background: var(--b2); }
+.scene-setup{
+  display:flex; gap:14px; align-items:flex-start; background: var(--paper-raised);
+  border:1px solid var(--b2-line); border-radius: var(--r-md); padding:14px 16px; margin-bottom:20px;
+}
+.scene-icon{ font-size:22px; flex:none; }
+.scene-text{ font-size:14px; color: var(--ink-soft); }
+.scene-text strong{ color: var(--ink); }
+
+.dialogue{ display:flex; flex-direction:column; gap:14px; }
+.scene-tabs{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:18px; }
+.scene-tab{
+  font-family: var(--f-data); font-size:12.5px; background: var(--paper-raised);
+  border:1.5px solid var(--b2-line); color: var(--ink-soft); padding:7px 14px;
+  border-radius:999px; cursor:pointer; transition: all .15s ease;
+}
+.scene-tab:hover{ border-color: var(--b2); }
+.scene-tab.active{ background: var(--b2); border-color: var(--b2); color:#fff; }
+.line{ display:flex; gap:12px; align-items:flex-start; }
+.line-avatar{
+  flex:none; width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  font-family: var(--f-display); font-weight:600; font-size:14px; color:#fff;
+}
+.line.friend .line-avatar{ background: var(--ink-faint); }
+.line.you .line-avatar{ background: var(--b2); }
+.line-body{ flex:1; }
+.line-name{ font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.05em; color: var(--ink-faint); margin:0 0 4px; }
+.line-bubble{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:12px 14px; font-size:14.5px; color: var(--ink);
+}
+.line.you .line-bubble{ background:#fff; border-color: var(--b2-line); }
+.line-input{
+  width:100%; font-family: var(--f-body); font-size:14.5px; color: var(--ink);
+  background:#fff; border:1px solid var(--b2-line); border-radius: var(--r-sm);
+  padding:10px 12px; resize:vertical; min-height:40px; margin-top:2px;
+}
+.line-input:focus{ outline:none; border-color: var(--b2); }
+.line-hint{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin-top:5px; }
+
+.roleplay-tip{
+  margin-top:22px; padding:14px 16px; background: var(--paper-raised); border:1px solid var(--b2-line);
+  border-radius: var(--r-md); font-size:13.5px; color: var(--ink-soft);
+}
+.roleplay-tip strong{ color: var(--ink); }
+
+/* ---------- FINAL TASK ---------- */
+.task-panel{ background: var(--family-soft); border:1px solid var(--family-line); border-radius: var(--r-lg); padding:26px 28px; }
+.task-panel .block-num{ background: var(--family); }
+textarea#final-task{
+  width:100%; min-height:110px; font-family: var(--f-body); font-size:15px; color: var(--ink);
+  background: var(--paper-raised); border:1px solid var(--family-line); border-radius: var(--r-md);
+  padding:14px 16px; resize:vertical; margin-top:14px;
+}
+textarea#final-task:focus{ outline:none; border-color: var(--family); }
+.task-footer{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:12px; flex-wrap:wrap; }
+#task-count{ font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); }
+.btn-secondary{
+  font-family: var(--f-body); font-weight:600; font-size:13.5px; color: var(--family); background:none;
+  border:1.5px solid var(--family-line); padding:9px 18px; border-radius:999px; cursor:pointer;
+}
+.saved-flag{ font-family: var(--f-data); font-size:12px; color: var(--b2); opacity:0; transition: opacity .3s ease; }
+.saved-flag.show{ opacity:1; }
+
+/* ---------- FOOTER NAV ---------- */
+footer{
+  max-width:760px; margin:0 auto; padding:0 24px 60px; display:flex;
+  justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;
+  font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint);
+}
+footer a{ color: var(--b1); text-decoration:none; }
+footer a:hover{ text-decoration:underline; }
+
+@media (max-width:600px){
+  header{ padding:34px 18px 22px; }
+  main{ padding:8px 18px 90px; }
+  .panel, .task-panel{ padding:20px 18px; }
+  .char-card{ flex-direction:column; }
+}
+@media (prefers-reduced-motion: reduce){ *{ transition:none !important; } }
+</style>
+</head>
+<body>
+
+<header>
+  <p class="eyebrow"><span class="dot"></span>Clase 8 de 16 · L3 Línea circular</p>
+  <h1>Pido lo que <em>necesito</em></h1>
+  <p class="lede">En pleno servicio no hay tiempo que perder: necesitas pedir ingredientes y utensilios a tus compañeros con rapidez y claridad. Hoy trabajamos <strong>necesitar</strong> y <strong>querer</strong> + sustantivo, junto con los artículos y las cantidades para pedir exactamente lo que hace falta.</p>
+  <div class="meta-row">
+    <div>Duración<strong>50 min</strong></div>
+    <div>Gramática<strong>Necesitar / querer + artículos y cantidades</strong></div>
+    <div>Nivel<strong>A1</strong></div>
+  </div>
+</header>
+
+<main>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">1</span><h2>Necesitar y querer</h2><span class="time-tag">8 min</span></div>
+    <div class="panel">
+      <table class="conj-table">
+        <tr><td class="conj-pron">yo</td><td class="conj-form">necesito</td><td class="conj-ex">Necesito la espátula.</td></tr>
+        <tr><td class="conj-pron">tú</td><td class="conj-form">necesitas</td><td class="conj-ex">¿Necesitas el molde grande?</td></tr>
+        <tr><td class="conj-pron">él / ella</td><td class="conj-form">necesita</td><td class="conj-ex">Marc necesita más harina.</td></tr>
+        <tr><td class="conj-pron">nosotros/as</td><td class="conj-form">necesitamos</td><td class="conj-ex">Necesitamos la manga pastelera.</td></tr>
+        <tr><td class="conj-pron">vosotros/as</td><td class="conj-form">necesitáis</td><td class="conj-ex">¿Necesitáis el tamiz?</td></tr>
+        <tr><td class="conj-pron">ellos/as</td><td class="conj-form">necesitan</td><td class="conj-ex">Necesitan la báscula del otro turno.</td></tr>
+      </table>
+      <div class="note"><strong>"Querer"</strong> se conjuga igual que "necesitar" pero con cambio vocálico: quiero, quieres, quiere, queremos, queréis, quieren. Ambos van seguidos directamente de un sustantivo, sin preposición: <em>necesito la espátula</em>, no "necesito de la espátula".</div>
+
+      <div class="compare-wrap">
+        <p class="compare-title">Necesitar vs. querer — ¿qué diferencia hay?</p>
+        <div class="compare-grid">
+          <div class="compare-col is-ser">
+            <div class="compare-head">
+              <span class="compare-verb">NECESITAR</span>
+              <span class="compare-sub">— hace falta, es obligatorio</span>
+            </div>
+            <ul class="compare-list">
+              <li><strong>Necesito el molde.</strong>
+                <em>Sin él, no puedo terminar la tarea.</em>
+              </li>
+              <li><strong>Necesitamos más azúcar.</strong>
+                <em>La receta lo exige.</em>
+              </li>
+            </ul>
+          </div>
+          <div class="compare-col is-estar">
+            <div class="compare-head">
+              <span class="compare-verb">QUERER</span>
+              <span class="compare-sub">— deseo, preferencia</span>
+            </div>
+            <ul class="compare-list">
+              <li><strong>Quiero la espátula pequeña.</strong>
+                <em>Prefiero esa, aunque hay otra opción.</em>
+              </li>
+              <li><strong>¿Quieres un café?</strong>
+                <em>Es una oferta u opción, no una obligación.</em>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="compare-warning">
+          <strong>Ojo con los artículos y las cantidades:</strong> "necesito harina" (en general, sin especificar) es distinto de "necesito la harina" (esa concreta, la que está ahí) y de "necesito un kilo de harina" (una cantidad exacta). El artículo indefinido (un/una) se usa con cantidades, y el definido (el/la) cuando ya sabemos de qué objeto hablamos.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">2</span><h2>Vocabulario</h2><span class="time-tag">6 min</span></div>
+    <p class="vocab-hint">Toca cada tarjeta para ver un ejemplo.</p>
+    <div class="vocab-grid" id="vocab-grid"></div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">3</span><h2>Practica</h2><span class="time-tag">12 min</span></div>
+    <div class="panel">
+      <p class="vocab-hint" style="margin-bottom:14px;">50 frases: las primeras 12 se hacen en voz alta en clase; el resto queda como repaso para casa.</p>
+      <div id="exercises"></div>
+      <div class="check-bar">
+        <div style="display:flex; gap:10px;">
+          <button class="btn-primary" id="check-btn">Comprobar respuestas</button>
+          <button class="btn-ghost" id="reset-btn">Reiniciar</button>
+        </div>
+        <span id="score-text"></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">4</span><h2>Tarjetas de personajes</h2><span class="time-tag">8 min</span></div>
+    <p class="lede" style="margin-bottom:16px;">Escribe qué necesita o qué quiere cada persona usando <strong>necesitar</strong> o <strong>querer</strong>. Usa los datos de la tarjeta como pista. Las primeras 6 se trabajan en clase; el resto queda como banco de repaso para casa.</p>
+    <div class="characters" id="characters"></div>
+  </section>
+
+  <section class="block roleplay-panel">
+    <div class="block-head"><span class="block-num">5</span><h2>Roleplay: 5 escenas en el obrador de Girona</h2><span class="time-tag">13 min</span></div>
+    <p class="lede" style="margin-bottom:16px;">50 intercambios repartidos en 5 situaciones reales. Elige una escena para practicar en clase; el resto queda como banco de repaso para casa.</p>
+    <div class="scene-tabs" id="scene-tabs"></div>
+    <div id="scene-container"></div>
+    <div class="roleplay-tip"><strong>En clase:</strong> practicaremos una escena en voz alta, cambiando de rol. El resto de escenas son para practicar por tu cuenta durante la semana.</div>
+  </section>
+
+  <section class="block task-panel">
+    <div class="block-head"><span class="block-num">6</span><h2 style="color:var(--family)">Tu tarea</h2><span class="time-tag">3 min</span></div>
+    <p style="margin:0; font-size:15px; color:var(--ink-soft);">Lee el diálogo corto entre dos pasteleros del obrador pidiéndose ingredientes y utensilios durante el servicio. Después, escribe <strong>3 frases propias</strong> usando "necesito" o "quiero" + un ingrediente o utensilio de la lista de vocabulario.</p>
+    <div class="panel" style="margin-top:16px; background:var(--paper-raised);">
+      <p style="margin:0 0 10px; font-family:var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.05em; color:var(--ink-faint);">Lectura recomendada</p>
+      <p style="margin:0 0 8px;"><strong>Laura:</strong> Oye, ¿tienes la espátula grande? La necesito para la tarta de chocolate.</p>
+      <p style="margin:0 0 8px;"><strong>Davide:</strong> Sí, aquí está. ¿Necesitas también el molde redondo?</p>
+      <p style="margin:0 0 8px;"><strong>Laura:</strong> No, ese no. Quiero el molde cuadrado, es para la receta de hoy.</p>
+      <p style="margin:0 0 8px;"><strong>Davide:</strong> Vale, está en el armario. ¿Cuánta mantequilla necesitas?</p>
+      <p style="margin:0;"><strong>Laura:</strong> Necesito medio kilo, más o menos. Gracias, Davide.</p>
+    </div>
+    <textarea id="final-task" placeholder="Necesito...&#10;Quiero...&#10;Necesitamos..."></textarea>
+    <div class="task-footer">
+      <span id="task-count">0 frases con "necesito" o "quiero" detectadas</span>
+      <div style="display:flex; gap:10px; align-items:center;">
+        <span class="saved-flag" id="saved-flag">Guardado ✓</span>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <span>Clase 8 · Línea circular</span>
+  <span>Próxima clase → Clase 9: Cantidades y medidas</span>
+</footer>
+
+<script>
+/* ---------- VOCAB ---------- */
+const VOCAB = [
+  {front:"el molde", back:"Necesito el molde redondo."},
+  {front:"la espátula", back:"¿Quién tiene la espátula?"},
+  {front:"la manga pastelera", back:"Necesito la manga pastelera para decorar."},
+  {front:"el tamiz", back:"Quiero el tamiz para la harina."},
+  {front:"la báscula", back:"Necesitamos la báscula, ¿está libre?"},
+  {front:"el horno", back:"El horno está ocupado ahora mismo."},
+  {front:"la harina", back:"Necesito un kilo de harina."},
+  {front:"la mantequilla", back:"¿Quieres mantequilla o aceite?"},
+  {front:"el azúcar", back:"Necesitamos más azúcar para el bizcocho."},
+  {front:"la nata", back:"Quiero la nata montada para la tarta."},
+];
+
+const grid = document.getElementById('vocab-grid');
+VOCAB.forEach(v=>{
+  const card = document.createElement('div');
+  card.className = 'vocab-card';
+  card.setAttribute('role', 'button');
+  card.setAttribute('tabindex', '0');
+  card.setAttribute('aria-pressed', 'false');
+  card.setAttribute('aria-label', `${v.front}. Pulsa para ver un ejemplo.`);
+  card.innerHTML = `<div class="vocab-front">${v.front}</div><div class="vocab-back">${v.back}</div>`;
+  const toggle = ()=>{
+    const flipped = card.classList.toggle('flipped');
+    card.setAttribute('aria-pressed', String(flipped));
+  };
+  card.addEventListener('click', toggle);
+  card.addEventListener('keydown', (e)=>{
+    if(e.key === 'Enter' || e.key === ' '){
+      e.preventDefault();
+      toggle();
+    }
+  });
+  grid.appendChild(card);
+});
+
+/* ---------- EXERCISES ---------- */
+const EXERCISES = [
+  {"sentence":"Yo <span class=\"gap\">___</span> la espátula grande.","options":["necesito","necesitas","necesita"],"answer":"necesito"},
+  {"sentence":"Yo <span class=\"gap\">___</span> un kilo de harina.","options":["necesita","necesito","necesitamos"],"answer":"necesito"},
+  {"sentence":"Yo <span class=\"gap\">___</span> el molde cuadrado, no el redondo.","options":["quieres","quiero","quiere"],"answer":"quiero"},
+  {"sentence":"Yo no <span class=\"gap\">___</span> mantequilla, ya tengo.","options":["necesito","necesitas","necesitáis"],"answer":"necesito"},
+  {"sentence":"¿Tú <span class=\"gap\">___</span> el tamiz ahora?","options":["necesita","necesitas","necesito"],"answer":"necesitas"},
+  {"sentence":"¿Qué <span class=\"gap\">___</span> tú para la receta?","options":["quiero","quiere","quieres"],"answer":"quieres"},
+  {"sentence":"¿Tú <span class=\"gap\">___</span> la báscula o el tamiz primero?","options":["quieres","quiero","queremos"],"answer":"quieres"},
+  {"sentence":"Tú <span class=\"gap\">___</span> más azúcar para esta tarta.","options":["necesita","necesitas","necesito"],"answer":"necesitas"},
+  {"sentence":"Marc <span class=\"gap\">___</span> la manga pastelera urgentemente.","options":["necesito","necesitas","necesita"],"answer":"necesita"},
+  {"sentence":"Laura <span class=\"gap\">___</span> el molde grande para el pastel.","options":["quiere","quiero","quieren"],"answer":"quiere"},
+  {"sentence":"Jordi <span class=\"gap\">___</span> más mantequilla del almacén.","options":["necesitas","necesita","necesitamos"],"answer":"necesita"},
+  {"sentence":"¿Ella <span class=\"gap\">___</span> nata montada o líquida?","options":["quiere","quieres","queremos"],"answer":"quiere"},
+  {"sentence":"Nosotros <span class=\"gap\">___</span> el horno grande para hoy.","options":["necesito","necesitamos","necesitáis"],"answer":"necesitamos"},
+  {"sentence":"Nosotros <span class=\"gap\">___</span> terminar antes del mediodía.","options":["queremos","quiero","quieren"],"answer":"queremos"},
+  {"sentence":"Nosotras <span class=\"gap\">___</span> medio kilo de azúcar.","options":["necesitamos","necesitáis","necesitan"],"answer":"necesitamos"},
+  {"sentence":"¿Vosotros <span class=\"gap\">___</span> el tamiz ahora o después?","options":["necesitáis","necesitamos","necesitan"],"answer":"necesitáis"},
+  {"sentence":"¿Vosotros <span class=\"gap\">___</span> café o té?","options":["queréis","quieren","queremos"],"answer":"queréis"},
+  {"sentence":"Vosotras <span class=\"gap\">___</span> más harina, ¿verdad?","options":["necesitan","necesitáis","necesitamos"],"answer":"necesitáis"},
+  {"sentence":"Mis compañeros <span class=\"gap\">___</span> la báscula para pesar.","options":["necesita","necesitan","necesitamos"],"answer":"necesitan"},
+  {"sentence":"Ellos <span class=\"gap\">___</span> el molde pequeño, no el grande.","options":["quiere","quieren","queremos"],"answer":"quieren"},
+  {"sentence":"Marc y Laura <span class=\"gap\">___</span> la espátula del otro turno.","options":["necesita","necesitan","necesito"],"answer":"necesitan"},
+  {"sentence":"¿Ellas <span class=\"gap\">___</span> empezar ya con la receta?","options":["quiere","queremos","quieren"],"answer":"quieren"},
+  {"sentence":"Yo <span class=\"gap\">___</span> un poco más de tiempo.","options":["necesito","necesita","necesitas"],"answer":"necesito"},
+  {"sentence":"¿Cuánta harina <span class=\"gap\">___</span> tú para el pan?","options":["necesitas","necesito","necesita"],"answer":"necesitas"},
+  {"sentence":"El jefe de cocina <span class=\"gap\">___</span> la báscula digital.","options":["necesito","necesita","necesitan"],"answer":"necesita"},
+  {"sentence":"¿Quieres la mantequilla fría o a temperatura ambiente? Yo la <span class=\"gap\">___</span> fría.","options":["quiero","quiere","queremos"],"answer":"quiero"},
+  {"sentence":"Necesito <span class=\"gap\">___</span> molde redondo para la tarta.","options":["el","la","un"],"answer":"un"},
+  {"sentence":"¿Dónde está <span class=\"gap\">___</span> espátula que usé ayer?","options":["el","la","un"],"answer":"la"},
+  {"sentence":"Necesito <span class=\"gap\">___</span> kilo de azúcar para esta receta.","options":["un","una","el"],"answer":"un"},
+  {"sentence":"Quiero <span class=\"gap\">___</span> tamiz nuevo, el viejo está roto.","options":["una","un","el"],"answer":"un"},
+  {"sentence":"¿Puedes pasarme <span class=\"gap\">___</span> báscula, por favor?","options":["el","un","la"],"answer":"la"},
+  {"sentence":"Necesitamos <span class=\"gap\">___</span> poco más de nata para la tarta.","options":["un","una","el"],"answer":"un"},
+  {"sentence":"Quiero <span class=\"gap\">___</span> manga pastelera con boquilla fina.","options":["el","un","una"],"answer":"una"},
+  {"sentence":"¿Necesitas <span class=\"gap\">___</span> harina que está en el estante de arriba?","options":["la","una","el"],"answer":"la"},
+  {"sentence":"Marc necesita <span class=\"gap\">___</span> molde grande que usamos ayer.","options":["un","el","una"],"answer":"el"},
+  {"sentence":"Yo <span class=\"gap\">___</span> pedirte un favor: ¿tienes el tamiz?","options":["necesito","quiero","necesita"],"answer":"quiero"},
+  {"sentence":"¿Necesitas ayuda con la báscula? Yo <span class=\"gap\">___</span> ayudarte.","options":["necesito","quiero","quieres"],"answer":"quiero"},
+  {"sentence":"Para esta receta <span class=\"gap\">___</span> exactamente medio kilo de mantequilla.","options":["quiero","necesito","necesitas"],"answer":"necesito"},
+  {"sentence":"¿Vosotros <span class=\"gap\">___</span> el horno pequeño o el grande?","options":["necesitáis","necesito","necesita"],"answer":"necesitáis"},
+  {"sentence":"Laura y yo <span class=\"gap\">___</span> terminar el pedido antes de las cinco.","options":["queremos","quiere","quiero"],"answer":"queremos"},
+  {"sentence":"El aprendiz nuevo <span class=\"gap\">___</span> ayuda con la manga pastelera.","options":["necesita","necesito","necesitas"],"answer":"necesita"},
+  {"sentence":"¿Tú <span class=\"gap\">___</span> probar esta receta nueva?","options":["quiero","quieres","quiere"],"answer":"quieres"},
+  {"sentence":"Nosotros no <span class=\"gap\">___</span> más azúcar, ya tenemos suficiente.","options":["necesitamos","necesitáis","necesito"],"answer":"necesitamos"},
+  {"sentence":"¿Ella <span class=\"gap\">___</span> la báscula o la usa Marc primero?","options":["necesitas","necesita","necesito"],"answer":"necesita"},
+  {"sentence":"Yo <span class=\"gap\">___</span> el tamiz que está en el cajón de abajo.","options":["quiero","quiere","quieres"],"answer":"quiero"},
+  {"sentence":"¿Cuánta mantequilla <span class=\"gap\">___</span> para el hojaldre?","options":["necesitas","necesito","necesitáis"],"answer":"necesitas"},
+  {"sentence":"Ellos <span class=\"gap\">___</span> el horno grande para hoy.","options":["necesita","necesitan","necesito"],"answer":"necesitan"},
+  {"sentence":"¿Vosotras <span class=\"gap\">___</span> más nata o ya tenéis suficiente?","options":["queréis","quiere","quieren"],"answer":"queréis"},
+  {"sentence":"Yo <span class=\"gap\">___</span> un poco de ayuda con el molde.","options":["necesito","necesita","necesitas"],"answer":"necesito"}
+];
+
+const PRACTICE_KEY = 'davide-clase08-practica';
+let practiceState = {};
+async function cargarPractica(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(PRACTICE_KEY);
+    if (res && typeof res.value === 'string') practiceState = JSON.parse(res.value);
+  }catch(e){
+    // Sin progreso previo guardado todavía.
+  }
+}
+async function guardarPractica(){
+  if (!window.storage) return;
+  try{ await window.storage.set(PRACTICE_KEY, JSON.stringify(practiceState)); }catch(e){ /* fallo silencioso */ }
+}
+
+const exWrap = document.getElementById('exercises');
+(async function initPractica(){
+await cargarPractica();
+EXERCISES.forEach((ex, i)=>{
+  if(i === 0){
+    const divider = document.createElement('div');
+    divider.className = 'ex-divider en-clase';
+    divider.textContent = 'en clase · ítems 1–12';
+    exWrap.appendChild(divider);
+  }
+  if(i === 12){
+    const divider = document.createElement('div');
+    divider.className = 'ex-divider';
+    divider.textContent = 'para casa · repaso opcional';
+    exWrap.appendChild(divider);
+  }
+  const el = document.createElement('div');
+  el.className = 'exercise';
+  el.dataset.answer = ex.answer;
+  el.dataset.idx = i;
+  el.innerHTML = `
+    <div class="ex-sentence">${i+1}. ${ex.sentence}</div>
+    <div class="ex-options">
+      ${ex.options.map(o=>`<button class="opt-btn" data-value="${o}">${o}</button>`).join('')}
+    </div>
+  `;
+  exWrap.appendChild(el);
+
+  const savedPick = practiceState[i];
+  if(savedPick){
+    const savedBtn = el.querySelector(`.opt-btn[data-value="${savedPick}"]`);
+    if(savedBtn) savedBtn.classList.add('picked');
+  }
+
+  el.querySelectorAll('.opt-btn').forEach(btn=>{
+    btn.addEventListener('click', async ()=>{
+      el.querySelectorAll('.opt-btn').forEach(b=>b.classList.remove('picked'));
+      btn.classList.add('picked');
+      practiceState[i] = btn.dataset.value;
+      await guardarPractica();
+    });
+  });
+});
+})();
+
+document.getElementById('check-btn').addEventListener('click', ()=>{
+  let correct = 0;
+  document.querySelectorAll('.exercise').forEach(el=>{
+    const answer = el.dataset.answer;
+    const picked = el.querySelector('.opt-btn.picked');
+    el.querySelectorAll('.opt-btn').forEach(b=>{
+      b.disabled = true;
+      if(b.dataset.value === answer) b.classList.add('correct');
+      else if(b === picked) b.classList.add('wrong');
+    });
+    if(picked && picked.dataset.value === answer) correct++;
+  });
+  document.getElementById('score-text').textContent = `${correct} / ${EXERCISES.length} correctas`;
+});
+
+document.getElementById('reset-btn').addEventListener('click', async ()=>{
+  document.querySelectorAll('.exercise').forEach(el=>{
+    el.querySelectorAll('.opt-btn').forEach(b=>{
+      b.disabled = false;
+      b.classList.remove('picked','correct','wrong');
+    });
+  });
+  document.getElementById('score-text').textContent = '';
+  practiceState = {};
+  await guardarPractica();
+});
+
+/* ---------- CHARACTER CARDS ---------- */
+const CHARACTERS = [
+  {"name":"Tú","role":"Estás en pleno servicio","facts":["falta la espátula","falta harina","prisa"],"prompt":"Escribe qué necesitas con \"necesitar\":"},
+  {"name":"Marc","role":"El jefe de cocina","facts":["quiere el molde grande","tarta especial","urgente"],"prompt":"Escribe qué quiere Marc:"},
+  {"name":"Laura","role":"Tu compañera de turno","facts":["necesita azúcar","medio kilo","para el bizcocho"],"prompt":"Escribe qué necesita Laura:"},
+  {"name":"Jordi","role":"El otro pastelero","facts":["quiere la manga pastelera","boquilla fina","decorar tarta"],"prompt":"Escribe qué quiere Jordi:"},
+  {"name":"Núria","role":"La encargada del obrador","facts":["necesita la báscula","pesar ingredientes","pedido nuevo"],"prompt":"Escribe qué necesita Núria:"},
+  {"name":"Pau","role":"El aprendiz nuevo","facts":["necesita ayuda","no encuentra el tamiz","nervioso"],"prompt":"Escribe qué necesita Pau:"},
+  {"name":"Marta","role":"La repostera del turno de tarde","facts":["quiere nata montada","para la tarta de fresa","tres tazas"],"prompt":"Escribe qué quiere Marta:"},
+  {"name":"Álex","role":"El panadero del obrador vecino","facts":["necesita un kilo de harina","préstamo urgente","se le acabó"],"prompt":"Escribe qué necesita Álex:"},
+  {"name":"Carla","role":"La responsable de pedidos","facts":["necesita la lista de ingredientes","antes de las diez","para el proveedor"],"prompt":"Escribe qué necesita Carla:"},
+  {"name":"Oriol","role":"El dueño del obrador","facts":["quiere el horno grande libre","pedido especial","cliente importante"],"prompt":"Escribe qué quiere Oriol:"},
+  {"name":"Elena","role":"Tu antigua profesora","facts":["quiere saber tu progreso","pregunta por el obrador","videollamada"],"prompt":"Escribe qué quiere saber Elena:"},
+  {"name":"Adrià","role":"Un cliente habitual","facts":["quiere croissants recién hechos","cada mañana","impaciente"],"prompt":"Escribe qué quiere Adrià:"}
+];
+
+const CHAR_KEY = 'davide-clase08-personajes';
+let charState = {};
+async function cargarPersonajes(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(CHAR_KEY);
+    if (res && typeof res.value === 'string') charState = JSON.parse(res.value);
+  }catch(e){
+    // Sin personajes guardados todavía.
+  }
+}
+async function guardarPersonajes(){
+  if (!window.storage) return;
+  try{ await window.storage.set(CHAR_KEY, JSON.stringify(charState)); }catch(e){ /* fallo silencioso */ }
+}
+let charSaveTimer = null;
+function scheduleCharSave(){
+  clearTimeout(charSaveTimer);
+  charSaveTimer = setTimeout(guardarPersonajes, 500);
+}
+
+const charWrap = document.getElementById('characters');
+(async function initPersonajes(){
+await cargarPersonajes();
+CHARACTERS.forEach((c, i)=>{
+  if(i === 0){
+    const divider = document.createElement('div');
+    divider.className = 'ex-divider en-clase';
+    divider.textContent = 'en clase · personajes 1–6';
+    charWrap.appendChild(divider);
+  }
+  if(i === 6){
+    const divider = document.createElement('div');
+    divider.className = 'ex-divider';
+    divider.textContent = 'para casa · banco de repaso';
+    charWrap.appendChild(divider);
+  }
+  const card = document.createElement('div');
+  card.className = 'char-card';
+  card.innerHTML = `
+    <div class="char-avatar">${c.name.charAt(0)}</div>
+    <div class="char-body">
+      <p class="char-name">${c.name}</p>
+      <p class="char-role">${c.role}</p>
+      <div class="char-facts">${c.facts.map(f=>`<span class="fact-tag">${f}</span>`).join('')}</div>
+      <p class="char-prompt">${c.prompt}</p>
+      <textarea class="char-input" rows="2" placeholder="Necesito / Quiero ..." data-idx="${i}"></textarea>
+    </div>
+  `;
+  charWrap.appendChild(card);
+  const charInputEl = card.querySelector('.char-input');
+  if(charState[i]) charInputEl.value = charState[i];
+  charInputEl.addEventListener('input', ()=>{
+    charState[i] = charInputEl.value;
+    scheduleCharSave();
+  });
+});
+})();
+
+/* ---------- ROLEPLAY SCENES ---------- */
+const SCENES = [
+  {
+    "id": "servicio-manana",
+    "tab": "Pleno servicio de mañana",
+    "icon": "🥐",
+    "setup": "Es media mañana y el obrador está lleno de pedidos. Marc te pide ayuda con urgencia.",
+    "lines": [
+      {"who":"friend","name":"Marc","text":"¡Davide! ¿Tienes la espátula grande? La necesito ya."},
+      {"who":"you","hint":"Responde si la tienes o no, usando \"necesitar\" si aplica."},
+      {"who":"friend","name":"Marc","text":"¿Y el molde redondo, dónde está?"},
+      {"who":"you","hint":"Dile dónde está o qué necesitas para encontrarlo."},
+      {"who":"friend","name":"Marc","text":"Necesito también un kilo de harina, rápido."},
+      {"who":"you","hint":"Confirma con \"necesitar\" o \"querer\" qué vas a traer."},
+      {"who":"friend","name":"Marc","text":"¿Tú necesitas algo para tu receta de hoy?"},
+      {"who":"you","hint":"Responde con \"necesito\" o \"quiero\" + un objeto."},
+      {"who":"friend","name":"Marc","text":"Vale, yo te traigo eso en un momento."},
+      {"who":"you","hint":"Dale las gracias."},
+      {"who":"friend","name":"Marc","text":"¿Quieres café mientras esperas?"},
+      {"who":"you","hint":"Responde con \"quiero\" o \"no quiero\"."},
+      {"who":"friend","name":"Marc","text":"Perfecto. ¿Necesitas algo más del almacén?"},
+      {"who":"you","hint":"Responde con \"necesito\" + otro objeto."},
+      {"who":"friend","name":"Marc","text":"Voy a buscarlo todo ahora mismo."},
+      {"who":"you","hint":"Agradece de nuevo."},
+      {"who":"friend","name":"Marc","text":"¿Necesitas la báscula también?"},
+      {"who":"you","hint":"Responde con \"necesito\" o \"no necesito\"."},
+      {"who":"friend","name":"Marc","text":"Entendido, ahora te lo traigo todo junto."},
+      {"who":"you","hint":"Cierra la conversación con una frase de agradecimiento."}
+    ]
+  },
+  {
+    "id": "companera-turno",
+    "tab": "Pidiendo ayuda a Laura",
+    "icon": "👩‍🍳",
+    "setup": "Laura está preparando una tarta de chocolate y necesita varias cosas.",
+    "lines": [
+      {"who":"friend","name":"Laura","text":"Oye, ¿tienes la manga pastelera? La necesito para decorar."},
+      {"who":"you","hint":"Responde si la tienes, usando \"necesitar\" o \"querer\"."},
+      {"who":"friend","name":"Laura","text":"¿Y tú, necesitas algo para tu tarea de hoy?"},
+      {"who":"you","hint":"Responde con \"necesito\" + un objeto."},
+      {"who":"friend","name":"Laura","text":"Yo también necesito medio kilo de azúcar."},
+      {"who":"you","hint":"Ofrece ayuda o pregunta dónde está el azúcar."},
+      {"who":"friend","name":"Laura","text":"¿Quieres el molde cuadrado o el redondo para tu receta?"},
+      {"who":"you","hint":"Responde con \"quiero\" + un molde."},
+      {"who":"friend","name":"Laura","text":"Perfecto, entonces yo uso el otro."},
+      {"who":"you","hint":"Confirma con una frase corta."},
+      {"who":"friend","name":"Laura","text":"¿Necesitas ayuda con algo más?"},
+      {"who":"you","hint":"Responde con \"necesito\" o \"no necesito\" + explicación."},
+      {"who":"friend","name":"Laura","text":"Vale, avísame si necesitas la báscula."},
+      {"who":"you","hint":"Da las gracias y confirma que avisarás."},
+      {"who":"friend","name":"Laura","text":"¿Quieres que te ayude con el horno después?"},
+      {"who":"you","hint":"Responde con \"quiero\" o \"no quiero\"."},
+      {"who":"friend","name":"Laura","text":"Perfecto, hablamos en un rato entonces."},
+      {"who":"you","hint":"Despídete con una frase corta."}
+    ]
+  },
+  {
+    "id": "almacen",
+    "tab": "En el almacén con Núria",
+    "icon": "📦",
+    "setup": "Núria, la encargada, revisa contigo qué falta en el almacén para el pedido de la semana.",
+    "lines": [
+      {"who":"friend","name":"Núria","text":"Davide, ¿qué necesitas del almacén para hoy?"},
+      {"who":"you","hint":"Responde con \"necesito\" + uno o dos objetos."},
+      {"who":"friend","name":"Núria","text":"¿Cuánta harina necesitas exactamente?"},
+      {"who":"you","hint":"Responde con una cantidad, por ejemplo \"un kilo de\"."},
+      {"who":"friend","name":"Núria","text":"¿Y mantequilla? ¿Necesitas también?"},
+      {"who":"you","hint":"Responde con \"necesito\" o \"no necesito\" + cantidad."},
+      {"who":"friend","name":"Núria","text":"Yo necesito la báscula digital, ¿la has visto?"},
+      {"who":"you","hint":"Responde si la has visto o dónde está."},
+      {"who":"friend","name":"Núria","text":"¿Quieres que pida más nata para esta semana?"},
+      {"who":"you","hint":"Responde con \"quiero\" o \"no quiero\"."},
+      {"who":"friend","name":"Núria","text":"Perfecto, lo apunto en la lista del proveedor."},
+      {"who":"you","hint":"Agradece a Núria."},
+      {"who":"friend","name":"Núria","text":"¿Necesitas algo más antes de que cierre el pedido?"},
+      {"who":"you","hint":"Responde con \"necesito\" + un último objeto o \"nada más\"."},
+      {"who":"friend","name":"Núria","text":"Entendido, mando el pedido ahora."},
+      {"who":"you","hint":"Cierra con una frase de agradecimiento."}
+    ]
+  },
+  {
+    "id": "obrador-vecino",
+    "tab": "Pidiendo prestado a Álex",
+    "icon": "🍞",
+    "setup": "Al panadero del obrador vecino se le ha acabado la harina y viene a pedir ayuda.",
+    "lines": [
+      {"who":"friend","name":"Álex","text":"¡Hola Davide! Necesito un favor urgente."},
+      {"who":"you","hint":"Pregúntale qué necesita."},
+      {"who":"friend","name":"Álex","text":"Necesito un kilo de harina, se me ha acabado."},
+      {"who":"you","hint":"Responde si tienes harina o dónde está."},
+      {"who":"friend","name":"Álex","text":"¿Y tenéis mantequilla de sobra también?"},
+      {"who":"you","hint":"Responde con \"necesitamos\" o confirma si hay de sobra."},
+      {"who":"friend","name":"Álex","text":"No quiero molestar mucho, solo lo justo."},
+      {"who":"you","hint":"Tranquilízalo con una frase amable."},
+      {"who":"friend","name":"Álex","text":"¿Necesitas algo del obrador vecino a cambio?"},
+      {"who":"you","hint":"Responde con \"necesito\" + algo, o \"no necesito nada\"."},
+      {"who":"friend","name":"Álex","text":"Perfecto, entonces trato hecho."},
+      {"who":"you","hint":"Confirma el trato con una frase corta."},
+      {"who":"friend","name":"Álex","text":"¿Quieres que te devuelva la harina mañana?"},
+      {"who":"you","hint":"Responde con \"quiero\" o \"no es necesario\"."},
+      {"who":"friend","name":"Álex","text":"Muchas gracias, Davide, eres un gran compañero."},
+      {"who":"you","hint":"Responde con una frase de despedida."}
+    ]
+  },
+  {
+    "id": "cliente-croissants",
+    "tab": "Adrià pide en el mostrador",
+    "icon": "🧁",
+    "setup": "Adrià, el cliente habitual, llega al mostrador con ganas de sus croissants de siempre.",
+    "lines": [
+      {"who":"friend","name":"Adrià","text":"¡Buenos días! Quiero dos croissants recién hechos, por favor."},
+      {"who":"you","hint":"Responde confirmando el pedido."},
+      {"who":"friend","name":"Adrià","text":"¿Necesitáis que espere unos minutos?"},
+      {"who":"you","hint":"Responde con \"necesitamos\" o \"no es necesario\"."},
+      {"who":"friend","name":"Adrià","text":"También quiero un café, si es posible."},
+      {"who":"you","hint":"Confirma el pedido del café."},
+      {"who":"friend","name":"Adrià","text":"¿Necesitáis algo más de mí, como el número de mesa?"},
+      {"who":"you","hint":"Responde con \"necesitamos\" o \"no necesitamos nada más\"."},
+      {"who":"friend","name":"Adrià","text":"Perfecto. ¿Cuánto tiempo necesito esperar?"},
+      {"who":"you","hint":"Dale un tiempo aproximado."},
+      {"who":"friend","name":"Adrià","text":"No hay prisa, quiero disfrutar del desayuno con calma."},
+      {"who":"you","hint":"Responde con una frase amable."},
+      {"who":"friend","name":"Adrià","text":"Gracias, aquí espero tranquilo."},
+      {"who":"you","hint":"Despídete brevemente."}
+    ]
+  }
+];
+
+const sceneTabs = document.getElementById('scene-tabs');
+const sceneContainer = document.getElementById('scene-container');
+let activeScene = 0;
+
+function renderTabs(){
+  sceneTabs.innerHTML = SCENES.map((s,i)=>
+    `<button class="scene-tab${i===activeScene?' active':''}" data-idx="${i}">${s.icon} ${s.tab}</button>`
+  ).join('');
+  sceneTabs.querySelectorAll('.scene-tab').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      activeScene = parseInt(btn.dataset.idx, 10);
+      renderTabs();
+      renderScene();
+    });
+  });
+}
+
+function renderScene(){
+  const scene = SCENES[activeScene];
+  const linesHtml = scene.lines.map((l, li)=>{
+    if(l.who === 'friend'){
+      return `
+        <div class="line friend">
+          <div class="line-avatar">${l.name.charAt(0)}</div>
+          <div class="line-body">
+            <p class="line-name">${l.name}</p>
+            <div class="line-bubble">${l.text}</div>
+          </div>
+        </div>`;
+    } else {
+      const rpKey = `${scene.id}:${li}`;
+      return `
+        <div class="line you">
+          <div class="line-avatar">Tú</div>
+          <div class="line-body">
+            <p class="line-name">Tú</p>
+            <textarea class="line-input" rows="2" placeholder="Escribe tu respuesta con 'necesitar' o 'querer'..." data-rpkey="${scene.id}:${li}">${roleplayState[rpKey] ? roleplayState[rpKey] : ''}</textarea>
+            <p class="line-hint">${l.hint}</p>
+          </div>
+        </div>`;
+    }
+  }).join('');
+
+  sceneContainer.innerHTML = `
+    <div class="scene-setup">
+      <span class="scene-icon">${scene.icon}</span>
+      <p class="scene-text"><strong>${scene.tab}:</strong> ${scene.setup}</p>
+    </div>
+    <div class="dialogue">${linesHtml}</div>
+  `;
+
+  sceneContainer.querySelectorAll('.line-input').forEach(inputEl=>{
+    inputEl.addEventListener('input', ()=>{
+      roleplayState[inputEl.dataset.rpkey] = inputEl.value;
+      scheduleRoleplaySave();
+    });
+  });
+}
+
+const ROLEPLAY_KEY = 'davide-clase08-roleplay';
+let roleplayState = {};
+async function cargarRoleplay(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(ROLEPLAY_KEY);
+    if (res && typeof res.value === 'string') roleplayState = JSON.parse(res.value);
+  }catch(e){
+    // Sin intervenciones guardadas todavía.
+  }
+}
+async function guardarRoleplay(){
+  if (!window.storage) return;
+  try{ await window.storage.set(ROLEPLAY_KEY, JSON.stringify(roleplayState)); }catch(e){ /* fallo silencioso */ }
+}
+let roleplaySaveTimer = null;
+function scheduleRoleplaySave(){
+  clearTimeout(roleplaySaveTimer);
+  roleplaySaveTimer = setTimeout(guardarRoleplay, 500);
+}
+
+(async function initRoleplay(){
+await cargarRoleplay();
+renderTabs();
+renderScene();
+})();
+
+/* ---------- FINAL TASK ---------- */
+const STORAGE_KEY = 'davide-clase08-tarea';
+const taskArea = document.getElementById('final-task');
+const taskCount = document.getElementById('task-count');
+const savedFlag = document.getElementById('saved-flag');
+
+async function cargarTarea(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(STORAGE_KEY);
+    if (res && typeof res.value === 'string') taskArea.value = res.value;
+  }catch(e){
+    // Clave inexistente todavía: no hay tarea previa, se queda en blanco.
+  }
+  updateCount();
+}
+
+function updateCount(){
+  const matches = (taskArea.value.match(/\b(necesito|necesitamos|quiero|queremos)\b/gi) || []).length;
+  taskCount.textContent = `${matches} frase${matches===1?'':'s'} con "necesito" o "quiero" detectada${matches===1?'':'s'}`;
+}
+async function guardarTareaAuto(){
+  if (!window.storage){
+    savedFlag.textContent = 'Guardado no disponible aquí';
+    savedFlag.classList.add('show');
+    setTimeout(()=>{ savedFlag.classList.remove('show'); savedFlag.textContent = 'Guardado ✓'; }, 2200);
+    return;
+  }
+  try{
+    const ok = await window.storage.set(STORAGE_KEY, taskArea.value);
+    savedFlag.textContent = ok ? 'Guardado ✓' : 'No se pudo guardar';
+  }catch(e){
+    savedFlag.textContent = 'No se pudo guardar';
+  }
+  savedFlag.classList.add('show');
+  setTimeout(()=>{ savedFlag.classList.remove('show'); savedFlag.textContent = 'Guardado ✓'; }, 1800);
+}
+
+let taskSaveTimer = null;
+function scheduleTaskSave(){
+  clearTimeout(taskSaveTimer);
+  taskSaveTimer = setTimeout(guardarTareaAuto, 700);
+}
+
+taskArea.addEventListener('input', ()=>{
+  updateCount();
+  scheduleTaskSave();
+});
+updateCount();
+cargarTarea();
+
+</script>
+
+</body>
+</html>

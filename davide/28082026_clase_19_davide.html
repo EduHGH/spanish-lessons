@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clase 19 · Un pedido especial — Davide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+
+/* ╔══════════════════════════════════════════════════════════════╗
+   ║  ESCOLAR — sistema de diseño para clases de español online   ║
+   ║  Clase 19 · L8 Línea de la memoria · "Un pedido especial" — Davide ║
+   ╚══════════════════════════════════════════════════════════════╝ */
+
+:root{
+  --paper:        #FBF7EE;
+  --paper-raised: #FFFFFF;
+  --paper-alt:    #F3ECDA;
+  --ink:          #23291F;
+  --ink-soft:     #565F52;
+  --ink-faint:    #8B9184;
+  --line:         rgba(35,41,31,0.12);
+  --line-strong:  rgba(35,41,31,0.22);
+
+  --b1:      #2E9E6B;  --b1-soft: #E9F6EF;  --b1-line: #BEE6D3;
+  --b2:      #DB8A2E;  --b2-soft: #FCF1E1;  --b2-line: #F3D9AF;
+  --family:  #B5502E;  --family-soft: #FBEBE3; --family-line: #EFC9B4;
+
+  --f-display: 'Fraunces', Georgia, serif;
+  --f-body:    'IBM Plex Sans', system-ui, sans-serif;
+  --f-data:    'IBM Plex Mono', monospace;
+
+  --r-sm: 8px;
+  --r-md: 14px;
+  --r-lg: 20px;
+
+  --shadow-1: 0 1px 2px rgba(35,41,31,0.05), 0 1px 8px rgba(35,41,31,0.04);
+}
+
+*{ box-sizing:border-box; }
+body{
+  margin:0;
+  background: var(--paper);
+  background-image: radial-gradient(circle at 1px 1px, var(--line) 1px, transparent 0);
+  background-size: 22px 22px;
+  color: var(--ink);
+  font-family: var(--f-body);
+  line-height:1.6;
+}
+::selection{ background: var(--b1-soft); }
+
+/* ---------- HEADER ---------- */
+header{ padding:44px 24px 28px; max-width:760px; margin:0 auto; }
+.eyebrow{
+  font-family: var(--f-data); font-size:12px; letter-spacing:.14em;
+  text-transform:uppercase; color: var(--b1); margin:0 0 10px;
+  display:flex; align-items:center; gap:10px;
+}
+.eyebrow .dot{ width:6px; height:6px; border-radius:50%; background: var(--b1); }
+h1{
+  font-family: var(--f-display); font-weight:600;
+  font-size:clamp(30px,5.6vw,46px); line-height:1.08;
+  margin:0 0 14px; letter-spacing:-.01em;
+}
+h1 em{ font-style:italic; color: var(--b1); }
+.lede{ font-size:16px; color: var(--ink-soft); max-width:56ch; margin:0; }
+
+.meta-row{
+  display:flex; flex-wrap:wrap; gap:20px; margin-top:26px;
+  font-family: var(--f-data); font-size:12px; color: var(--ink-faint);
+}
+.meta-row strong{
+  display:block; color: var(--ink); font-size:14.5px; font-weight:500;
+  font-family: var(--f-display); margin-top:3px;
+}
+
+/* ---------- SECTIONS ---------- */
+main{ max-width:760px; margin:0 auto; padding:8px 24px 100px; }
+
+section.block{ margin-bottom:52px; }
+.block-head{ display:flex; align-items:baseline; gap:12px; margin-bottom:18px; }
+.time-tag{
+  font-family: var(--f-data); font-size:11px; color: var(--ink-faint);
+  background: var(--paper-alt); padding:3px 10px; border-radius:999px; margin-left:auto; flex:none;
+}
+.block-num{
+  font-family: var(--f-data); font-size:12px; color:#fff; background: var(--b1);
+  width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  flex:none;
+}
+.block-head h2{
+  font-family: var(--f-display); font-weight:500; font-style:italic; font-size:22px; margin:0;
+}
+
+.panel{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-lg);
+  box-shadow: var(--shadow-1); padding:26px 28px;
+}
+
+/* ---------- STORY ARC ---------- */
+.arc-line{ position:relative; padding-left:30px; }
+.arc-line::before{
+  content:""; position:absolute; left:9px; top:6px; bottom:6px; width:3px;
+  background: var(--b1-line); opacity:.7;
+}
+.arc-step{ position:relative; margin-bottom:14px; }
+.arc-step:last-child{ margin-bottom:0; }
+.arc-step::before{
+  content:""; position:absolute; left:-30px; top:20px; width:11px; height:11px;
+  border-radius:50%; background: var(--paper); border:3px solid var(--b1);
+}
+.arc-card{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:16px 18px;
+}
+.arc-tag{
+  font-family: var(--f-data); font-size:10.5px; text-transform:uppercase; letter-spacing:.05em;
+  color: var(--b1); margin:0 0 4px;
+}
+.arc-title{ font-family: var(--f-body); font-weight:600; font-size:15.5px; margin:0 0 6px; }
+.arc-desc{ font-size:13.5px; color: var(--ink-soft); margin:0; }
+.arc-example{
+  display:inline-block; margin-top:8px; font-family: var(--f-data); font-size:11.5px;
+  color: var(--b1); background: var(--b1-soft); border:1px solid var(--b1-line);
+  padding:4px 11px; border-radius:999px;
+}
+
+.note{
+  margin-top:18px; padding:14px 16px; background: var(--b1-soft); border:1px solid var(--b1-line);
+  border-radius: var(--r-md); font-size:14px; color: var(--ink-soft);
+}
+.note strong{ color: var(--ink); }
+
+/* ---------- IRREGULAR VERB TABLE ---------- */
+.irr-table{ width:100%; border-collapse:collapse; margin-top:4px; }
+.irr-table td{ padding:10px 6px; border-bottom:1px dashed var(--line); font-size:15px; }
+.irr-table tr:last-child td{ border-bottom:none; }
+.irr-inf{ font-family: var(--f-data); color: var(--ink-faint); font-size:13px; width:90px; }
+.irr-form{ font-family: var(--f-display); font-weight:600; font-size:18px; color: var(--b1); width:110px; }
+.irr-ex{ color: var(--ink-soft); font-size:14px; }
+
+.compare-warning{
+  margin-top:14px; padding:14px 16px; background: var(--family-soft); border:1px solid var(--family-line);
+  border-radius: var(--r-md); font-size:13.5px; color: var(--ink-soft);
+}
+.compare-warning strong{ color: var(--family); }
+
+/* ---------- MARKERS ---------- */
+.marker-row{ display:flex; flex-wrap:wrap; gap:10px; margin-top:16px; }
+.marker-chip{
+  font-family: var(--f-data); font-size:12.5px; color: var(--b1); background: var(--b1-soft);
+  border:1px solid var(--b1-line); padding:6px 13px; border-radius:999px;
+}
+
+/* ---------- VOCAB CARDS ---------- */
+.vocab-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:12px; }
+.vocab-card{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:14px 16px; cursor:pointer; perspective:600px; min-height:78px;
+  display:flex; flex-direction:column; justify-content:center; transition: border-color .15s ease;
+}
+.vocab-card:hover{ border-color: var(--b1-line); }
+.vocab-card:focus-visible{ outline:2px solid var(--b1); outline-offset:2px; }
+.vocab-front{ font-family: var(--f-body); font-weight:600; font-size:15px; }
+.vocab-back{ display:none; font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); margin-top:6px; }
+.vocab-card.flipped .vocab-back{ display:block; }
+.vocab-card.flipped{ background: var(--b1-soft); border-color: var(--b1-line); }
+.vocab-hint{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin:10px 2px 16px; }
+
+/* ---------- EXERCISE ---------- */
+.exercise{ margin-bottom:20px; }
+.exercise:last-of-type{ margin-bottom:0; }
+.ex-sentence{ font-size:15.5px; margin-bottom:10px; }
+.ex-sentence .gap{ font-family: var(--f-data); color: var(--ink-faint); }
+.ex-options{ display:flex; flex-wrap:wrap; gap:8px; }
+.opt-btn{
+  font-family: var(--f-body); font-size:14px; background: var(--paper-raised);
+  border:1.5px solid var(--line); color: var(--ink); padding:7px 16px; border-radius:999px;
+  cursor:pointer; transition: all .15s ease;
+}
+.opt-btn:hover{ border-color: var(--ink-faint); }
+.opt-btn.picked{ background: var(--b1-soft); border-color: var(--b1); color: var(--b1); }
+.opt-btn.correct{ background: var(--b2-soft); border-color: var(--b2); color: var(--b2); }
+.opt-btn.wrong{ background: var(--family-soft); border-color: var(--family); color: var(--family); }
+.opt-btn:disabled{ cursor:default; }
+
+.check-bar{
+  display:flex; align-items:center; justify-content:space-between; gap:16px;
+  margin-top:22px; padding-top:18px; border-top:1px dashed var(--line);
+}
+.btn-primary{
+  font-family: var(--f-body); font-weight:600; font-size:14px; color:#fff; background: var(--b1);
+  border:none; padding:11px 22px; border-radius:999px; cursor:pointer; transition: transform .1s ease;
+}
+.btn-primary:hover{ transform: translateY(-1px); }
+#score-text{ font-family: var(--f-data); font-size:13px; color: var(--ink-faint); }
+.btn-ghost{
+  font-family: var(--f-body); font-weight:600; font-size:13px; color: var(--ink-soft); background:none;
+  border:1.5px solid var(--line); padding:9px 18px; border-radius:999px; cursor:pointer;
+}
+.btn-ghost:hover{ border-color: var(--ink-faint); }
+.ex-divider{
+  display:flex; align-items:center; gap:10px; margin:20px 0 16px;
+  font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.06em;
+  color: var(--ink-faint);
+}
+.ex-divider::before, .ex-divider::after{ content:""; flex:1; height:1px; background: var(--line); }
+.ex-divider.en-clase::before, .ex-divider.en-clase::after{ background: var(--b1-line); }
+.ex-divider.en-clase{ color: var(--b1); }
+
+/* ---------- READING ---------- */
+.reading-panel{ background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-lg); box-shadow: var(--shadow-1); padding:26px 28px; }
+.reading-text{ font-family: var(--f-display); font-size:16.5px; line-height:1.75; color: var(--ink); }
+.reading-text p{ margin:0 0 14px; }
+.reading-text p:last-child{ margin-bottom:0; }
+.reading-highlight{ background: var(--b1-soft); padding:1px 4px; border-radius:4px; color: var(--ink); font-weight:500; }
+.reading-questions{ margin-top:20px; padding-top:18px; border-top:1px dashed var(--line); }
+.reading-questions p{ font-family: var(--f-data); font-size:11.5px; text-transform:uppercase; letter-spacing:.05em; color: var(--ink-faint); margin:0 0 10px; }
+.reading-questions ol{ margin:0; padding-left:20px; }
+.reading-questions li{ font-size:14.5px; color: var(--ink-soft); margin-bottom:8px; }
+.reading-questions li:last-child{ margin-bottom:0; }
+
+/* ---------- CHARACTER CARDS ---------- */
+.characters{ display:flex; flex-direction:column; gap:14px; }
+.char-card{
+  display:flex; gap:16px; background: var(--paper-raised); border:1px solid var(--line);
+  border-radius: var(--r-md); padding:18px 20px;
+}
+.char-avatar{
+  flex:none; width:44px; height:44px; border-radius:50%; background: var(--b1);
+  display:flex; align-items:center; justify-content:center; color:#fff;
+  font-family: var(--f-display); font-weight:600; font-size:17px;
+}
+.char-body{ flex:1; }
+.char-name{ font-family: var(--f-body); font-weight:600; font-size:15.5px; margin:0 0 2px; }
+.char-role{ font-family: var(--f-data); font-size:12px; color: var(--ink-faint); margin:0 0 8px; }
+.char-facts{ display:flex; flex-wrap:wrap; gap:6px; margin-bottom:10px; }
+.fact-tag{
+  font-family: var(--f-data); font-size:11.5px; color: var(--b1); background: var(--b1-soft);
+  border:1px solid var(--b1-line); padding:3px 9px; border-radius:999px;
+}
+.char-prompt{ font-size:13.5px; color: var(--ink-soft); margin:0 0 6px; }
+.char-input{
+  width:100%; font-family: var(--f-body); font-size:14px; color: var(--ink);
+  background:#fff; border:1px solid var(--line); border-radius: var(--r-sm);
+  padding:9px 11px; resize:vertical; min-height:38px;
+}
+.char-input:focus{ outline:none; border-color: var(--b1); }
+
+/* ---------- ROLEPLAY ---------- */
+.roleplay-panel{ background: var(--b2-soft); border:1px solid var(--b2-line); border-radius: var(--r-lg); padding:26px 28px; }
+.roleplay-panel .block-num{ background: var(--b2); }
+.scene-setup{
+  display:flex; gap:14px; align-items:flex-start; background: var(--paper-raised);
+  border:1px solid var(--b2-line); border-radius: var(--r-md); padding:14px 16px; margin-bottom:20px;
+}
+.scene-icon{ font-size:22px; flex:none; }
+.scene-text{ font-size:14px; color: var(--ink-soft); }
+.scene-text strong{ color: var(--ink); }
+
+.dialogue{ display:flex; flex-direction:column; gap:14px; }
+.scene-tabs{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:18px; }
+.scene-tab{
+  font-family: var(--f-data); font-size:12.5px; background: var(--paper-raised);
+  border:1.5px solid var(--b2-line); color: var(--ink-soft); padding:7px 14px;
+  border-radius:999px; cursor:pointer; transition: all .15s ease;
+}
+.scene-tab:hover{ border-color: var(--b2); }
+.scene-tab.active{ background: var(--b2); border-color: var(--b2); color:#fff; }
+.line{ display:flex; gap:12px; align-items:flex-start; }
+.line-avatar{
+  flex:none; width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  font-family: var(--f-display); font-weight:600; font-size:14px; color:#fff;
+}
+.line.friend .line-avatar{ background: var(--ink-faint); }
+.line.you .line-avatar{ background: var(--b2); }
+.line-body{ flex:1; }
+.line-name{ font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.05em; color: var(--ink-faint); margin:0 0 4px; }
+.line-bubble{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:12px 14px; font-size:14.5px; color: var(--ink);
+}
+.line.you .line-bubble{ background:#fff; border-color: var(--b2-line); }
+.line-input{
+  width:100%; font-family: var(--f-body); font-size:14.5px; color: var(--ink);
+  background:#fff; border:1px solid var(--b2-line); border-radius: var(--r-sm);
+  padding:10px 12px; resize:vertical; min-height:40px; margin-top:2px;
+}
+.line-input:focus{ outline:none; border-color: var(--b2); }
+.line-hint{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin-top:5px; }
+
+.roleplay-tip{
+  margin-top:22px; padding:14px 16px; background: var(--paper-raised); border:1px solid var(--b2-line);
+  border-radius: var(--r-md); font-size:13.5px; color: var(--ink-soft);
+}
+.roleplay-tip strong{ color: var(--ink); }
+
+/* ---------- FINAL TASK ---------- */
+.task-panel{ background: var(--family-soft); border:1px solid var(--family-line); border-radius: var(--r-lg); padding:26px 28px; }
+.task-panel .block-num{ background: var(--family); }
+textarea#final-task{
+  width:100%; min-height:150px; font-family: var(--f-body); font-size:15px; color: var(--ink);
+  background: var(--paper-raised); border:1px solid var(--family-line); border-radius: var(--r-md);
+  padding:14px 16px; resize:vertical; margin-top:14px;
+}
+textarea#final-task:focus{ outline:none; border-color: var(--family); }
+.task-footer{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:12px; flex-wrap:wrap; }
+#task-count{ font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); }
+.saved-flag{ font-family: var(--f-data); font-size:12px; color: var(--b1); opacity:0; transition: opacity .3s ease; }
+.saved-flag.show{ opacity:1; }
+
+/* ---------- FOOTER NAV ---------- */
+footer{
+  max-width:760px; margin:0 auto; padding:0 24px 60px; display:flex;
+  justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;
+  font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint);
+}
+footer a{ color: var(--b1); text-decoration:none; }
+footer a:hover{ text-decoration:underline; }
+
+@media (max-width:600px){
+  header{ padding:34px 18px 22px; }
+  main{ padding:8px 18px 90px; }
+  .panel, .task-panel, .roleplay-panel, .reading-panel{ padding:20px 18px; }
+  .char-card{ flex-direction:column; }
+}
+@media (prefers-reduced-motion: reduce){ *{ transition:none !important; } }
+</style>
+</head>
+<body>
+
+<header>
+  <p class="eyebrow"><span class="dot"></span>Clase 19 de 31 · L8 Línea de la memoria</p>
+  <h1>Un pedido <em>especial</em></h1>
+  <p class="lede">Última clase de la línea de la memoria: hoy no aprendes gramática nueva, la usas toda junta. Vas a contar la historia completa de un pedido especial y complicado — una tarta de boda, un encargo de última hora — combinando el pretérito regular e irregular que ya dominas.</p>
+  <div class="meta-row">
+    <div>Duración<strong>50 min</strong></div>
+    <div>Gramática<strong>Indefinido regular + irregular integrado</strong></div>
+    <div>Nivel<strong>A2</strong></div>
+  </div>
+</header>
+
+<main>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">1</span><h2>El encargo: vocabulario de un pedido especial</h2><span class="time-tag">8 min</span></div>
+    <div class="panel">
+      <p class="vocab-hint" style="margin:0 0 16px;">Antes de narrar, necesitas el vocabulario del "encargo": qué pide el cliente y cómo se organiza en el obrador.</p>
+      <div class="arc-line">
+        <div class="arc-step">
+          <div class="arc-card">
+            <p class="arc-tag">el encargo</p>
+            <p class="arc-title">El pedido especial — quién lo pidió y qué quería</p>
+            <p class="arc-desc">Un cliente llamó o vino al obrador para pedir algo fuera de lo habitual.</p>
+            <span class="arc-example">Un cliente pidió una tarta de boda para 80 personas.</span>
+          </div>
+        </div>
+        <div class="arc-step">
+          <div class="arc-card">
+            <p class="arc-tag">la preparación</p>
+            <p class="arc-title">Cómo lo organizasteis en el obrador</p>
+            <p class="arc-desc">Qué decidisteis hacer, quién ayudó, qué planificasteis para cumplir el plazo.</p>
+            <span class="arc-example">Decidimos empezar dos días antes de la entrega.</span>
+          </div>
+        </div>
+        <div class="arc-step">
+          <div class="arc-card">
+            <p class="arc-tag">la dificultad</p>
+            <p class="arc-title">Lo que se complicó por el camino</p>
+            <p class="arc-desc">Todo pedido especial tiene un momento de tensión: algo salió mal o costó más de lo previsto.</p>
+            <span class="arc-example">Tuvimos un problema con el diseño de la última capa.</span>
+          </div>
+        </div>
+        <div class="arc-step">
+          <div class="arc-card">
+            <p class="arc-tag">la entrega</p>
+            <p class="arc-title">Cómo terminó y qué dijo el cliente</p>
+            <p class="arc-desc">El desenlace: entregasteis el pedido y el cliente reaccionó de una forma u otra.</p>
+            <span class="arc-example">Al cliente le encantó y nos dio las gracias.</span>
+          </div>
+        </div>
+      </div>
+      <div class="note"><strong>Hoy no hay gramática nueva.</strong> Esta clase es un repaso integrado: vas a usar el pretérito regular (trabajé, preparamos) y el irregular (tuve, hice, pude, dije, estuve) juntos, dentro de una sola historia con principio, desarrollo y final — igual que hiciste con tu anécdota de la clase pasada, pero ahora sobre algo profesional y más largo.</div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">2</span><h2>Repaso: el indefinido irregular en contexto</h2><span class="time-tag">9 min</span></div>
+    <div class="panel">
+      <table class="irr-table">
+        <tr><td class="irr-inf">tener</td><td class="irr-form">tuve</td><td class="irr-ex">Tuve que rehacer la última capa de la tarta.</td></tr>
+        <tr><td class="irr-inf">hacer</td><td class="irr-form">hice</td><td class="irr-ex">Hice el diseño de la tarta en dos horas.</td></tr>
+        <tr><td class="irr-inf">poder</td><td class="irr-form">pude</td><td class="irr-ex">No pude terminar el encargo antes de las seis.</td></tr>
+        <tr><td class="irr-inf">decir</td><td class="irr-form">dije</td><td class="irr-ex">Le dije al cliente que necesitábamos un día más.</td></tr>
+        <tr><td class="irr-inf">estar</td><td class="irr-form">estuve</td><td class="irr-ex">Estuve toda la noche decorando la tarta de boda.</td></tr>
+        <tr><td class="irr-inf">venir</td><td class="irr-form">vino</td><td class="irr-ex">El cliente vino a recoger el pedido a las nueve.</td></tr>
+      </table>
+      <div class="note"><strong>La clave de hoy</strong> no es memorizar más formas irregulares — ya las conoces de la clase 17 — sino encadenarlas con conectores (primero, después, mientras tanto, al final) para que la historia fluya sin pausas. Un pedido especial casi siempre tiene esta estructura: alguien pidió algo → tuvisteis que organizaros → algo se complicó → al final lo entregasteis.</div>
+      <div class="compare-warning">
+        <strong>Ojo con el orden de la historia:</strong> en italiano y francés a veces se empieza describiendo el resultado antes que el proceso ("la tarta era preciosa, y antes de eso..."). En español, para un relato natural de este tipo, es más común seguir el orden cronológico: primero el pedido, después la preparación, luego la dificultad, y al final el resultado — como en la línea de tiempo de arriba.
+      </div>
+      <div class="marker-row">
+        <span class="marker-chip">un cliente pidió</span>
+        <span class="marker-chip">decidimos</span>
+        <span class="marker-chip">tuvimos que</span>
+        <span class="marker-chip">al final</span>
+        <span class="marker-chip">le encantó</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">3</span><h2>Vocabulario</h2><span class="time-tag">6 min</span></div>
+    <p class="vocab-hint">Toca cada tarjeta para ver un ejemplo.</p>
+    <div class="vocab-grid" id="vocab-grid"></div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">4</span><h2>Lectura recomendada</h2><span class="time-tag">6 min</span></div>
+    <div class="reading-panel">
+      <div class="reading-text">
+        <p>La semana pasada, un cliente <span class="reading-highlight">pidió</span> una tarta de boda para ochenta personas, con solo cuatro días de plazo. En el obrador <span class="reading-highlight">decidimos</span> empezar la base dos días antes de la entrega, mientras el resto del equipo seguía con los pedidos normales del día.</p>
+        <p><span class="reading-highlight">Tuvimos</span> un problema con el diseño de la última capa: el fondant no se sostenía bien con el calor de agosto. Marc <span class="reading-highlight">estuvo</span> probando distintas técnicas toda la tarde, y yo <span class="reading-highlight">hice</span> una base extra por si acaso. Al final, <span class="reading-highlight">pudimos</span> resolverlo enfriando la tarta antes de montar la última capa.</p>
+        <p>El día de la entrega, el cliente <span class="reading-highlight">vino</span> a las nueve de la mañana. Cuando vio la tarta, <span class="reading-highlight">dijo</span> que era mejor de lo que había imaginado. Al final, todo el esfuerzo mereció la pena: fue uno de los pedidos más complicados del año, pero también uno de los más bonitos.</p>
+      </div>
+      <div class="reading-questions">
+        <p>Para comentar en clase</p>
+        <ol>
+          <li>¿Qué pidió el cliente y con cuánto tiempo de plazo?</li>
+          <li>¿Qué problema tuvieron con el diseño de la tarta?</li>
+          <li>¿Has vivido tú (o te gustaría contar) un pedido especial y complicado? Cuéntalo siguiendo el mismo orden: pedido → preparación → dificultad → entrega.</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">5</span><h2>Practica</h2><span class="time-tag">10 min</span></div>
+    <div class="panel">
+      <p class="vocab-hint" style="margin-bottom:14px;">36 frases: las primeras 12 se hacen en voz alta en clase; el resto queda como repaso para casa. Se mezcla el indefinido irregular de hoy con estructuras de semanas anteriores — presente, gerundio, imperativo, comparativos y "se" accidental.</p>
+      <div id="exercises"></div>
+      <div class="check-bar">
+        <div style="display:flex; gap:10px;">
+          <button class="btn-primary" id="check-btn">Comprobar respuestas</button>
+          <button class="btn-ghost" id="reset-btn">Reiniciar</button>
+        </div>
+        <span id="score-text"></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">6</span><h2>Tarjetas de personajes</h2><span class="time-tag">7 min</span></div>
+    <p class="lede" style="margin-bottom:16px;">Cuenta el pedido especial que vivió cada persona, usando el indefinido y el vocabulario de hoy. Las primeras 6 se trabajan en clase; el resto queda como banco de repaso para casa.</p>
+    <div class="characters" id="characters"></div>
+  </section>
+
+  <section class="block roleplay-panel">
+    <div class="block-head"><span class="block-num">7</span><h2>Roleplay: el pedido complicado</h2><span class="time-tag">10 min</span></div>
+    <p class="lede" style="margin-bottom:16px;">4 situaciones reales con conversaciones completas. Elige una escena para practicar en clase; el resto queda como banco de repaso para casa. Los compañeros mezclan temas de otras semanas, así que no solo necesitarás el vocabulario de hoy.</p>
+    <div class="scene-tabs" id="scene-tabs"></div>
+    <div id="scene-container"></div>
+    <div class="roleplay-tip"><strong>En clase:</strong> practicaremos una escena en voz alta, cambiando de rol. El resto de escenas son para practicar por tu cuenta durante la semana.</div>
+  </section>
+
+  <section class="block task-panel">
+    <div class="block-head"><span class="block-num">8</span><h2 style="color:var(--family)">Tu tarea</h2><span class="time-tag">10 min</span></div>
+    <p style="margin:0; font-size:15px; color:var(--ink-soft);">Escribe un párrafo narrando la historia de un pedido especial que preparaste (real o inventado). Sigue el orden: quién lo pidió → cómo os organizasteis → qué se complicó → cómo terminó. Usa al menos 4 verbos en indefinido, dos de ellos irregulares.</p>
+    <textarea id="final-task" placeholder="Un cliente pidió...&#10;Decidimos...&#10;Tuvimos un problema con...&#10;Al final..."></textarea>
+    <div class="task-footer">
+      <span id="task-count">0 palabras escritas</span>
+      <div style="display:flex; gap:10px; align-items:center;">
+        <span class="saved-flag" id="saved-flag">Guardado ✓</span>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <span>Clase 19 de 31 · L8 Línea de la memoria</span>
+  <span>ESCOLAR · Davide · obrador de Girona</span>
+</footer>
+
+<script>
+/* ---------- VOCAB ---------- */
+const VOCAB = [
+  {"front":"el pedido especial","back":"Este mes tuvimos tres pedidos especiales muy distintos."},
+  {"front":"el encargo","back":"El encargo era una tarta de tres pisos para una boda."},
+  {"front":"la tarta de boda","back":"La tarta de boda tenía que llegar intacta a las seis."},
+  {"front":"el plazo de entrega","back":"El plazo de entrega era de solo cuatro días."},
+  {"front":"pedir (pidió)","back":"El cliente pidió una tarta sin gluten para veinte personas."},
+  {"front":"decidir (decidimos)","back":"Decidimos empezar la base con dos días de antelación."},
+  {"front":"tener un problema","back":"Tuvimos un problema con el diseño de la última capa."},
+  {"front":"resolver (resolvimos)","back":"Al final resolvimos el problema enfriando la tarta antes de montarla."},
+  {"front":"entregar (entregamos)","back":"Entregamos el pedido a las nueve de la mañana, como habíamos prometido."},
+  {"front":"quedar encantado/a","back":"El cliente quedó encantado con el resultado final."},
+  {"front":"mereció la pena","back":"Fue un encargo difícil, pero mereció la pena."},
+  {"front":"de última hora","back":"Fue un pedido de última hora, con muy poco tiempo de aviso."}
+];
+
+const vocabGrid = document.getElementById('vocab-grid');
+VOCAB.forEach(v=>{
+  const card = document.createElement('div');
+  card.className = 'vocab-card';
+  card.tabIndex = 0;
+  card.innerHTML = `<div class="vocab-front">${v.front}</div><div class="vocab-back">${v.back}</div>`;
+  card.addEventListener('click', ()=> card.classList.toggle('flipped'));
+  card.addEventListener('keydown', (e)=>{
+    if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); card.classList.toggle('flipped'); }
+  });
+  vocabGrid.appendChild(card);
+});
+
+/* ---------- EXERCISES ---------- */
+const EXERCISES = [
+  {"sentence":"La semana pasada, un cliente <span class=\"gap\">___</span> una tarta de boda para ochenta personas.","options":["pidió","pide","pedir"],"answer":"pidió"},
+  {"sentence":"En el obrador <span class=\"gap\">___</span> empezar la base dos días antes.","options":["decidimos","decidir","decide"],"answer":"decidimos"},
+  {"sentence":"<span class=\"gap\">___</span> un problema con el diseño de la última capa.","options":["Tuvimos","Tenemos","Tener"],"answer":"Tuvimos"},
+  {"sentence":"Marc <span class=\"gap\">___</span> toda la tarde probando técnicas nuevas.","options":["estuvo","está","estar"],"answer":"estuvo"},
+  {"sentence":"Yo <span class=\"gap\">___</span> una base extra por si acaso.","options":["hice","hago","hacer"],"answer":"hice"},
+  {"sentence":"Al final, <span class=\"gap\">___</span> resolver el problema enfriando la tarta.","options":["pudimos","podemos","poder"],"answer":"pudimos"},
+  {"sentence":"El cliente <span class=\"gap\">___</span> a recoger el pedido a las nueve.","options":["vino","viene","venir"],"answer":"vino"},
+  {"sentence":"Le <span class=\"gap\">___</span> que la tarta era mejor de lo que esperaba.","options":["dijo","dice","decir"],"answer":"dijo"},
+  {"sentence":"El plazo de entrega <span class=\"gap\">___</span> de solo cuatro días.","options":["fue","es","ser"],"answer":"fue"},
+  {"sentence":"Ahora mismo estoy <span class=\"gap\">___</span> el diseño del próximo pedido.","options":["preparar","preparando","preparado"],"answer":"preparando"},
+  {"sentence":"El cliente <span class=\"gap\">___</span> encantado con el resultado final.","options":["quedó","queda","quedar"],"answer":"quedó"},
+  {"sentence":"<span class=\"gap\">___</span> el fondant en frío antes de montar la última capa.","options":["Guarda","Guardó","Guardar"],"answer":"Guarda"},
+  {"sentence":"Fue un encargo difícil, pero <span class=\"gap\">___</span> la pena.","options":["mereció","merece","merecer"],"answer":"mereció"},
+  {"sentence":"Un día, a Laura <span class=\"gap\">___</span> la fecha de un pedido especial.","options":["se le olvidó","se le olvidaron","olvidó"],"answer":"se le olvidó"},
+  {"sentence":"Este mes <span class=\"gap\">___</span> tres pedidos especiales muy distintos.","options":["tuvimos","tenemos","tener"],"answer":"tuvimos"},
+  {"sentence":"De repente, <span class=\"gap\">___</span> la última bandeja de croissants.","options":["se me quemó","se me quemaron","quemé"],"answer":"se me quemaron"},
+  {"sentence":"El obrador de Girona es <span class=\"gap\">___</span> tradicional que el de Nápoles.","options":["más","menos","el mejor"],"answer":"más"},
+  {"sentence":"Primero prepara la base, <span class=\"gap\">___</span> monta el relleno.","options":["después","antes","ayer"],"answer":"después"},
+  {"sentence":"El cliente <span class=\"gap\">___</span> una tarta sin gluten para veinte personas.","options":["pidió","pide","pedir"],"answer":"pidió"},
+  {"sentence":"Necesitamos medio kilo <span class=\"gap\">___</span> chocolate para el próximo encargo.","options":["de","por","para"],"answer":"de"},
+  {"sentence":"Fue un pedido <span class=\"gap\">___</span> última hora, con muy poco aviso.","options":["de","por","con"],"answer":"de"},
+  {"sentence":"Al final, <span class=\"gap\">___</span> el pedido a las nueve de la mañana, como prometimos.","options":["entregamos","entregar","entrega"],"answer":"entregamos"},
+  {"sentence":"Hace dos días <span class=\"gap\">___</span> mucho trabajo con los pedidos de boda.","options":["tuve","tengo","tener"],"answer":"tuve"},
+  {"sentence":"<span class=\"gap\">___</span> el molde grande para la tarta de tres pisos.","options":["Coge","Cogió","Coger"],"answer":"Coge"},
+  {"sentence":"El fondant no <span class=\"gap\">___</span> bien con el calor de agosto.","options":["se sostenía","se sostuvo","sostener"],"answer":"se sostenía"},
+  {"sentence":"Ayer no <span class=\"gap\">___</span> terminar el encargo a tiempo.","options":["pude","puedo","poder"],"answer":"pude"},
+  {"sentence":"Un día en el obrador, a Jordi <span class=\"gap\">___</span> el horno pequeño.","options":["se le rompió","se le rompieron","rompió"],"answer":"se le rompió"},
+  {"sentence":"Esta receta lleva <span class=\"gap\">___</span> más azúcar que la anterior.","options":["un poco de","una pizca de","medio kilo de"],"answer":"un poco de"},
+  {"sentence":"Le <span class=\"gap\">___</span> al cliente que necesitábamos un día más.","options":["dije","digo","decir"],"answer":"dije"},
+  {"sentence":"Mientras tanto, Laura <span class=\"gap\">___</span> las tareas del día al equipo.","options":["reparte","repartió","repartir"],"answer":"reparte"},
+  {"sentence":"El cliente vino <span class=\"gap\">___</span> recoger el pedido a las nueve.","options":["a","de","por"],"answer":"a"},
+  {"sentence":"Al final del turno, <span class=\"gap\">___</span> se me acabó la paciencia.","options":["casi","mientras tanto","de repente"],"answer":"casi"},
+  {"sentence":"Un día, <span class=\"gap\">___</span> tanto trabajo que no pude ni comer.","options":["tuve","tengo","tener"],"answer":"tuve"},
+  {"sentence":"De repente, a Pau <span class=\"gap\">___</span> todos los ingredientes al mismo tiempo.","options":["se le acabaron","se le acabó","acabó"],"answer":"se le acabaron"},
+  {"sentence":"Estoy <span class=\"gap\">___</span> en el obrador desde las siete de la mañana.","options":["trabajar","trabajando","trabajo"],"answer":"trabajando"},
+  {"sentence":"Este pedido fue <span class=\"gap\">___</span> complicado que el del mes pasado.","options":["más","menos","el mejor"],"answer":"más"}
+];
+
+const EX_KEY = 'davide-clase19-practica';
+let exState = {};
+async function cargarPractica(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(EX_KEY);
+    if (res && typeof res.value === 'string') exState = JSON.parse(res.value);
+  }catch(e){
+    // Sin progreso previo guardado todavía.
+  }
+}
+async function guardarPractica(){
+  if (!window.storage) return;
+  try{ await window.storage.set(EX_KEY, JSON.stringify(exState)); }catch(e){ /* fallo silencioso */ }
+}
+
+const exWrap = document.getElementById('exercises');
+(async function initPractica(){
+await cargarPractica();
+EXERCISES.forEach((ex, i)=>{
+  if(i === 0){
+    const divider = document.createElement('div');
+    divider.className = 'ex-divider en-clase';
+    divider.textContent = 'en clase · ítems 1–12';
+    exWrap.appendChild(divider);
+  }
+  if(i === 12){
+    const divider = document.createElement('div');
+    divider.className = 'ex-divider';
+    divider.textContent = 'para casa · repaso opcional';
+    exWrap.appendChild(divider);
+  }
+  const el = document.createElement('div');
+  el.className = 'exercise';
+  el.dataset.answer = ex.answer;
+  el.dataset.idx = i;
+  el.innerHTML = `
+    <div class="ex-sentence">${i+1}. ${ex.sentence}</div>
+    <div class="ex-options">
+      ${ex.options.map(o=>`<button class="opt-btn" data-value="${o}">${o}</button>`).join('')}
+    </div>
+  `;
+  exWrap.appendChild(el);
+
+  const savedPick = exState[i];
+  if(savedPick){
+    const savedBtn = el.querySelector(`.opt-btn[data-value="${savedPick}"]`);
+    if(savedBtn) savedBtn.classList.add('picked');
+  }
+
+  el.querySelectorAll('.opt-btn').forEach(btn=>{
+    btn.addEventListener('click', async ()=>{
+      el.querySelectorAll('.opt-btn').forEach(b=>b.classList.remove('picked'));
+      btn.classList.add('picked');
+      exState[i] = btn.dataset.value;
+      await guardarPractica();
+    });
+  });
+});
+})();
+
+document.getElementById('check-btn').addEventListener('click', ()=>{
+  let correct = 0;
+  document.querySelectorAll('.exercise').forEach(el=>{
+    const answer = el.dataset.answer;
+    el.querySelectorAll('.opt-btn').forEach(btn=>{
+      btn.disabled = true;
+      if(btn.dataset.value === answer) btn.classList.add('correct');
+      else if(btn.classList.contains('picked')) btn.classList.add('wrong');
+    });
+    const pickedBtn = el.querySelector('.opt-btn.picked');
+    if(pickedBtn && pickedBtn.dataset.value === answer) correct++;
+  });
+  document.getElementById('score-text').textContent = `${correct} / ${EXERCISES.length} correctas`;
+});
+
+document.getElementById('reset-btn').addEventListener('click', async ()=>{
+  document.querySelectorAll('.exercise').forEach(el=>{
+    el.querySelectorAll('.opt-btn').forEach(b=>{
+      b.disabled = false;
+      b.classList.remove('picked','correct','wrong');
+    });
+  });
+  document.getElementById('score-text').textContent = '';
+  exState = {};
+  await guardarPractica();
+});
+
+/* ---------- CHARACTER CARDS ---------- */
+const CHARACTERS = [
+  {"name":"Tú","role":"Tu propio pedido especial","facts":["un cliente pidió...","tuvimos un problema con...","al final..."],"prompt":"Cuenta un pedido especial que preparaste:"},
+  {"name":"Marc","role":"El jefe de cocina","facts":["recibió un encargo de última hora","tuvo que reorganizar todo el turno","al final entregó el pedido a tiempo"],"prompt":"Cuenta el pedido especial de Marc:"},
+  {"name":"Laura","role":"Tu compañera de turno","facts":["hizo una tarta sin gluten por primera vez","tuvo dudas con las cantidades","al final quedó perfecta"],"prompt":"Cuenta el pedido especial de Laura:"},
+  {"name":"Jordi","role":"El otro pastelero","facts":["preparó cien bombones para una empresa","estuvo tres días trabajando en el diseño","al final el cliente pidió el doble para el año siguiente"],"prompt":"Cuenta el pedido especial de Jordi:"},
+  {"name":"Núria","role":"La encargada del obrador","facts":["gestionó un pedido para una boda de cien invitados","tuvo que llamar a un proveedor de urgencia","al final todo salió a tiempo"],"prompt":"Cuenta el pedido especial de Núria:"},
+  {"name":"Pau","role":"El aprendiz nuevo","facts":["ayudó por primera vez con un pedido grande","tuvo miedo de estropear el diseño","al final Marc le felicitó por su trabajo"],"prompt":"Cuenta el pedido especial de Pau:"},
+  {"name":"Marta","role":"La repostera de tarde","facts":["preparó una tarta temática para un cumpleaños infantil","tuvo que rehacer una figura de fondant","al final los niños quedaron encantados"],"prompt":"Cuenta el pedido especial de Marta:"},
+  {"name":"Carla","role":"La responsable de pedidos","facts":["recibió un encargo con un plazo imposible","negoció un día extra con el cliente","al final lo consiguieron a tiempo"],"prompt":"Cuenta el pedido especial de Carla:"},
+  {"name":"Oriol","role":"El dueño del obrador","facts":["aceptó el pedido más grande del año","tuvo que contratar ayuda extra","al final fue un éxito para el negocio"],"prompt":"Cuenta el pedido especial de Oriol:"},
+  {"name":"Elena","role":"Tu antigua profesora","facts":["preparó su primera tarta de boda hace años","tuvo un desastre con el transporte","al final se convirtió en su especialidad"],"prompt":"Cuenta el pedido especial de Elena:"}
+];
+
+const CHAR_KEY = 'davide-clase19-personajes';
+let charState = {};
+async function cargarPersonajes(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(CHAR_KEY);
+    if (res && typeof res.value === 'string') charState = JSON.parse(res.value);
+  }catch(e){
+    // Sin personajes guardados todavía.
+  }
+}
+async function guardarPersonajes(){
+  if (!window.storage) return;
+  try{ await window.storage.set(CHAR_KEY, JSON.stringify(charState)); }catch(e){ /* fallo silencioso */ }
+}
+let charSaveTimer = null;
+function scheduleCharSave(){
+  clearTimeout(charSaveTimer);
+  charSaveTimer = setTimeout(guardarPersonajes, 500);
+}
+
+const charWrap = document.getElementById('characters');
+(async function initPersonajes(){
+await cargarPersonajes();
+CHARACTERS.forEach((c, i)=>{
+  if(i === 0){
+    const divider = document.createElement('div');
+    divider.className = 'ex-divider en-clase';
+    divider.textContent = 'en clase · personajes 1–6';
+    charWrap.appendChild(divider);
+  }
+  if(i === 6){
+    const divider = document.createElement('div');
+    divider.className = 'ex-divider';
+    divider.textContent = 'para casa · banco de repaso';
+    charWrap.appendChild(divider);
+  }
+  const card = document.createElement('div');
+  card.className = 'char-card';
+  card.innerHTML = `
+    <div class="char-avatar">${c.name.charAt(0)}</div>
+    <div class="char-body">
+      <p class="char-name">${c.name}</p>
+      <p class="char-role">${c.role}</p>
+      <div class="char-facts">${c.facts.map(f=>`<span class="fact-tag">${f}</span>`).join('')}</div>
+      <p class="char-prompt">${c.prompt}</p>
+      <textarea class="char-input" rows="2" placeholder="Un cliente pidió... / Tuvimos un problema con... / Al final..." data-idx="${i}"></textarea>
+    </div>
+  `;
+  charWrap.appendChild(card);
+  const charInputEl = card.querySelector('.char-input');
+  if(charState[i]) charInputEl.value = charState[i];
+  charInputEl.addEventListener('input', ()=>{
+    charState[i] = charInputEl.value;
+    scheduleCharSave();
+  });
+});
+})();
+
+/* ---------- ROLEPLAY SCENES ---------- */
+const SCENES = [
+  {
+    "id": "cliente-pide-tarta",
+    "tab": "Un cliente pide una tarta de boda",
+    "icon": "💍",
+    "setup": "Un cliente llega al obrador para encargar una tarta de boda con muy poco plazo.",
+    "lines": [
+      {"who":"friend","name":"Cliente","text":"Buenos días, necesito una tarta de boda para el sábado. Somos ochenta personas."},
+      {"who":"you","hint":"Pregunta por el plazo, con sorpresa, y confirma si es posible."},
+      {"who":"friend","name":"Cliente","text":"Sé que es poco tiempo, pero es muy importante para nosotros."},
+      {"who":"you","hint":"Responde diciendo que vais a intentarlo, en presente o futuro."},
+      {"who":"friend","name":"Cliente","text":"¿Qué necesitáis saber para empezar?"},
+      {"who":"you","hint":"Pregúntale por el diseño o los sabores que prefiere."},
+      {"who":"friend","name":"Cliente","text":"Algo elegante, de tres pisos, con flores naturales."},
+      {"who":"you","hint":"Confirma el pedido y dile cuándo puede recogerla."},
+      {"who":"friend","name":"Cliente","text":"Perfecto. ¿Cuánto cuesta aproximadamente?"},
+      {"who":"you","hint":"Responde con un precio aproximado o dile que lo confirmaréis."},
+      {"who":"friend","name":"Cliente","text":"De acuerdo, muchas gracias por vuestra ayuda."},
+      {"who":"you","hint":"Despídete confirmando que todo saldrá bien."}
+    ]
+  },
+  {
+    "id": "marc-organiza-equipo",
+    "tab": "Marc organiza el equipo",
+    "icon": "📋",
+    "setup": "Marc reúne al equipo para repartir las tareas del pedido especial que acaba de entrar.",
+    "lines": [
+      {"who":"friend","name":"Marc","text":"Chicos, tenemos un pedido especial urgente. Necesito que os organicéis."},
+      {"who":"you","hint":"Pregúntale qué pasó y de qué se trata el pedido."},
+      {"who":"friend","name":"Marc","text":"Un cliente pidió una tarta de tres pisos para el sábado."},
+      {"who":"you","hint":"Pregunta qué tarea te toca a ti."},
+      {"who":"friend","name":"Marc","text":"Tú te encargas de la base. ¿Puedes empezar hoy mismo?"},
+      {"who":"you","hint":"Responde confirmando, en presente o con \"voy a\"."},
+      {"who":"friend","name":"Marc","text":"Perfecto. Si tienes algún problema, dímelo enseguida."},
+      {"who":"you","hint":"Responde que sí, con confianza."},
+      {"who":"friend","name":"Marc","text":"¿Alguna vez has hecho una tarta de tres pisos?"},
+      {"who":"you","hint":"Responde con indefinido, contando tu experiencia."},
+      {"who":"friend","name":"Marc","text":"Genial, entonces confío en ti para esta parte."},
+      {"who":"you","hint":"Responde con seguridad y agradecimiento."}
+    ]
+  },
+  {
+    "id": "problema-fondant",
+    "tab": "El problema con el fondant",
+    "icon": "⚠️",
+    "setup": "A media tarde, el fondant no se sostiene bien y hay que resolverlo rápido antes de la entrega.",
+    "lines": [
+      {"who":"friend","name":"Laura","text":"Oye, el fondant no se sostiene con este calor, se está cayendo."},
+      {"who":"you","hint":"Reacciona con preocupación y pregunta qué pasó exactamente."},
+      {"who":"friend","name":"Laura","text":"No lo sé, creo que el obrador está demasiado caliente hoy."},
+      {"who":"you","hint":"Propón una solución, con imperativo o \"podemos\"."},
+      {"who":"friend","name":"Laura","text":"Buena idea, vamos a meterlo en frío un rato."},
+      {"who":"you","hint":"Pregunta cuánto tiempo creen que necesitan."},
+      {"who":"friend","name":"Laura","text":"Media hora debería bastar. Al final vamos a conseguirlo."},
+      {"who":"you","hint":"Anímala, diciendo que seguro que sale bien."},
+      {"who":"friend","name":"Laura","text":"¿Puedes avisar a Marc de que vamos a tardar un poco más?"},
+      {"who":"you","hint":"Responde confirmando que sí, en presente."},
+      {"who":"friend","name":"Laura","text":"Gracias. Menos mal que lo detectamos a tiempo."},
+      {"who":"you","hint":"Responde de acuerdo, valorando el trabajo en equipo."}
+    ]
+  },
+  {
+    "id": "entrega-cliente",
+    "tab": "La entrega al cliente",
+    "icon": "🎂",
+    "setup": "El día de la entrega, el cliente viene a recoger la tarta de boda terminada.",
+    "lines": [
+      {"who":"friend","name":"Cliente","text":"Buenos días, vengo a recoger la tarta para la boda del sábado."},
+      {"who":"you","hint":"Salúdale y dile que vas a traerla."},
+      {"who":"friend","name":"Cliente","text":"¡Vaya, es preciosa! Es mejor de lo que imaginaba."},
+      {"who":"you","hint":"Agradece el comentario y cuenta brevemente cómo la hicisteis."},
+      {"who":"friend","name":"Cliente","text":"¿Tuvisteis algún problema para prepararla?"},
+      {"who":"you","hint":"Responde con sinceridad, contando la dificultad con el fondant."},
+      {"who":"friend","name":"Cliente","text":"Pues no se nota nada, ha quedado perfecta."},
+      {"who":"you","hint":"Agradece de nuevo y explica cómo hay que transportarla."},
+      {"who":"friend","name":"Cliente","text":"Entendido, la llevaremos con mucho cuidado."},
+      {"who":"you","hint":"Deséale que disfrute de la boda."},
+      {"who":"friend","name":"Cliente","text":"Muchísimas gracias por todo el trabajo. Volveremos seguro."},
+      {"who":"you","hint":"Despídete con calidez, agradeciendo su confianza."}
+    ]
+  }
+];
+
+const sceneTabs = document.getElementById('scene-tabs');
+const sceneContainer = document.getElementById('scene-container');
+let activeScene = 0;
+
+function renderTabs(){
+  sceneTabs.innerHTML = SCENES.map((s,i)=>
+    `<button class="scene-tab${i===activeScene?' active':''}" data-idx="${i}">${s.icon} ${s.tab}</button>`
+  ).join('');
+  sceneTabs.querySelectorAll('.scene-tab').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      activeScene = parseInt(btn.dataset.idx, 10);
+      renderTabs();
+      renderScene();
+    });
+  });
+}
+
+function renderScene(){
+  const scene = SCENES[activeScene];
+  const linesHtml = scene.lines.map((l, li)=>{
+    if(l.who === 'friend'){
+      return `
+        <div class="line friend">
+          <div class="line-avatar">${l.name.charAt(0)}</div>
+          <div class="line-body">
+            <p class="line-name">${l.name}</p>
+            <div class="line-bubble">${l.text}</div>
+          </div>
+        </div>`;
+    } else {
+      const rpKey = `${scene.id}:${li}`;
+      return `
+        <div class="line you">
+          <div class="line-avatar">Tú</div>
+          <div class="line-body">
+            <p class="line-name">Tú</p>
+            <textarea class="line-input" rows="2" placeholder="Escribe tu respuesta..." data-rpkey="${scene.id}:${li}">${roleplayState[rpKey] ? roleplayState[rpKey] : ''}</textarea>
+            <p class="line-hint">${l.hint}</p>
+          </div>
+        </div>`;
+    }
+  }).join('');
+
+  sceneContainer.innerHTML = `
+    <div class="scene-setup">
+      <span class="scene-icon">${scene.icon}</span>
+      <p class="scene-text"><strong>${scene.tab}:</strong> ${scene.setup}</p>
+    </div>
+    <div class="dialogue">${linesHtml}</div>
+  `;
+
+  sceneContainer.querySelectorAll('.line-input').forEach(inputEl=>{
+    inputEl.addEventListener('input', ()=>{
+      roleplayState[inputEl.dataset.rpkey] = inputEl.value;
+      scheduleRoleplaySave();
+    });
+  });
+}
+
+const ROLEPLAY_KEY = 'davide-clase19-roleplay';
+let roleplayState = {};
+async function cargarRoleplay(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(ROLEPLAY_KEY);
+    if (res && typeof res.value === 'string') roleplayState = JSON.parse(res.value);
+  }catch(e){
+    // Sin intervenciones guardadas todavía.
+  }
+}
+async function guardarRoleplay(){
+  if (!window.storage) return;
+  try{ await window.storage.set(ROLEPLAY_KEY, JSON.stringify(roleplayState)); }catch(e){ /* fallo silencioso */ }
+}
+let roleplaySaveTimer = null;
+function scheduleRoleplaySave(){
+  clearTimeout(roleplaySaveTimer);
+  roleplaySaveTimer = setTimeout(guardarRoleplay, 500);
+}
+
+(async function initRoleplay(){
+await cargarRoleplay();
+renderTabs();
+renderScene();
+})();
+
+/* ---------- FINAL TASK ---------- */
+const STORAGE_KEY = 'davide-clase19-tarea';
+const taskArea = document.getElementById('final-task');
+const taskCount = document.getElementById('task-count');
+const savedFlag = document.getElementById('saved-flag');
+
+async function cargarTarea(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(STORAGE_KEY);
+    if (res && typeof res.value === 'string') taskArea.value = res.value;
+  }catch(e){
+    // Clave inexistente todavía: no hay tarea previa, se queda en blanco.
+  }
+  updateCount();
+}
+
+function updateCount(){
+  const words = taskArea.value.trim().split(/\s+/).filter(Boolean).length;
+  taskCount.textContent = `${words} palabra${words===1?'':'s'} escrita${words===1?'':'s'}`;
+}
+async function guardarTareaAuto(){
+  if (!window.storage){
+    savedFlag.textContent = 'Guardado no disponible aquí';
+    savedFlag.classList.add('show');
+    setTimeout(()=>{ savedFlag.classList.remove('show'); savedFlag.textContent = 'Guardado ✓'; }, 2200);
+    return;
+  }
+  try{
+    const ok = await window.storage.set(STORAGE_KEY, taskArea.value);
+    savedFlag.textContent = ok ? 'Guardado ✓' : 'No se pudo guardar';
+  }catch(e){
+    savedFlag.textContent = 'No se pudo guardar';
+  }
+  savedFlag.classList.add('show');
+  setTimeout(()=>{ savedFlag.classList.remove('show'); savedFlag.textContent = 'Guardado ✓'; }, 1800);
+}
+
+let taskSaveTimer = null;
+function scheduleTaskSave(){
+  clearTimeout(taskSaveTimer);
+  taskSaveTimer = setTimeout(guardarTareaAuto, 700);
+}
+
+taskArea.addEventListener('input', ()=>{
+  updateCount();
+  scheduleTaskSave();
+});
+updateCount();
+cargarTarea();
+
+</script>
+
+</body>
+</html>

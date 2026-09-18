@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clase 20 · Cómo era antes — Davide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+
+/* ╔══════════════════════════════════════════════════════════════╗
+   ║  ESCOLAR — sistema de diseño para clases de español online   ║
+   ║  Clase 20 · L9 Línea del recuerdo · "Cómo era antes" — Davide ║
+   ╚══════════════════════════════════════════════════════════════╝ */
+
+:root{
+  --paper:        #FBF7EE;
+  --paper-raised: #FFFFFF;
+  --paper-alt:    #F3ECDA;
+  --ink:          #23291F;
+  --ink-soft:     #565F52;
+  --ink-faint:    #8B9184;
+  --line:         rgba(35,41,31,0.12);
+  --line-strong:  rgba(35,41,31,0.22);
+
+  --b1:      #DB8A2E;  --b1-soft: #FCF1E1;  --b1-line: #F3D9AF;
+  --b2:      #2F6FED;  --b2-soft: #EAF1FE;  --b2-line: #C6D9FC;
+  --family:  #B5502E;  --family-soft: #FBEBE3; --family-line: #EFC9B4;
+
+  /* paleta de contraste para ciclar ejercicios */
+  --ex1:     #DB8A2E;  --ex1-soft: #FCF1E1;  --ex1-line: #F3D9AF;
+  --ex2:     #2F6FED;  --ex2-soft: #EAF1FE;  --ex2-line: #C6D9FC;
+  --ex3:     #1F8A5C;  --ex3-soft: #E1F5EB;  --ex3-line: #B9E3CE;
+  --ex4:     #8E3B9E;  --ex4-soft: #F3E5F8;  --ex4-line: #E1C2ED;
+  --ex5:     #B5502E;  --ex5-soft: #FBEBE3;  --ex5-line: #EFC9B4;
+  --ex6:     #B08A00;  --ex6-soft: #FBF3D6;  --ex6-line: #EFDE9E;
+
+  --f-display: 'Fraunces', Georgia, serif;
+  --f-body:    'IBM Plex Sans', system-ui, sans-serif;
+  --f-data:    'IBM Plex Mono', monospace;
+
+  --r-sm: 8px;
+  --r-md: 14px;
+  --r-lg: 20px;
+
+  --shadow-1: 0 1px 2px rgba(35,41,31,0.05), 0 1px 8px rgba(35,41,31,0.04);
+}
+
+*{ box-sizing:border-box; }
+body{
+  margin:0;
+  background-color: var(--paper);
+  background-image:
+    radial-gradient(at 10% 6%,  rgba(219,138,46,0.26) 0px, transparent 44%),
+    radial-gradient(at 88% 4%,  rgba(47,111,237,0.20) 0px, transparent 42%),
+    radial-gradient(at 92% 60%, rgba(181,80,47,0.18) 0px, transparent 46%),
+    radial-gradient(at 6% 55%,  rgba(31,138,92,0.16) 0px, transparent 42%),
+    radial-gradient(at 50% 98%, rgba(142,59,158,0.14) 0px, transparent 50%),
+    radial-gradient(at 50% 30%, rgba(251,247,238,0.92) 0px, transparent 60%),
+    radial-gradient(circle at 1px 1px, var(--line) 1px, transparent 0);
+  background-size: auto, auto, auto, auto, auto, auto, 22px 22px;
+  background-attachment: fixed;
+  color: var(--ink);
+  font-family: var(--f-body);
+  line-height:1.6;
+}
+::selection{ background: var(--b1-soft); }
+
+/* ---------- HEADER ---------- */
+header{ padding:44px 24px 28px; max-width:760px; margin:0 auto; }
+.eyebrow{
+  font-family: var(--f-data); font-size:12px; letter-spacing:.14em;
+  text-transform:uppercase; color: var(--b1); margin:0 0 10px;
+  display:flex; align-items:center; gap:10px;
+}
+.eyebrow .dot{ width:6px; height:6px; border-radius:50%; background: var(--b1); }
+h1{
+  font-family: var(--f-display); font-weight:600;
+  font-size:clamp(30px,5.6vw,46px); line-height:1.08;
+  margin:0 0 14px; letter-spacing:-.01em;
+}
+h1 em{ font-style:italic; color: var(--b1); }
+.lede{ font-size:16px; color: var(--ink-soft); max-width:56ch; margin:0; }
+
+.meta-row{
+  display:flex; flex-wrap:wrap; gap:20px; margin-top:26px;
+  font-family: var(--f-data); font-size:12px; color: var(--ink-faint);
+}
+.meta-row strong{
+  display:block; color: var(--ink); font-size:14.5px; font-weight:500;
+  font-family: var(--f-display); margin-top:3px;
+}
+
+/* ---------- SECTIONS ---------- */
+main{ max-width:760px; margin:0 auto; padding:8px 24px 100px; }
+
+section.block{ margin-bottom:52px; }
+.block-head{ display:flex; align-items:baseline; gap:12px; margin-bottom:18px; }
+.time-tag{
+  font-family: var(--f-data); font-size:11px; color: var(--ink-faint);
+  background: var(--paper-alt); padding:3px 10px; border-radius:999px; margin-left:auto; flex:none;
+}
+.block-num{
+  font-family: var(--f-data); font-size:12px; color:#fff; background: var(--b1);
+  width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  flex:none;
+}
+.block-head h2{
+  font-family: var(--f-display); font-weight:500; font-style:italic; font-size:22px; margin:0;
+}
+
+.panel{
+  background: rgba(255,255,255,0.86); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+  border:1px solid var(--line); border-radius: var(--r-lg);
+  box-shadow: var(--shadow-1); padding:26px 28px;
+}
+
+/* ---------- CONJUGATION TABLE ---------- */
+.conj-grid{ display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+.conj-col{ background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md); padding:16px 18px; }
+.conj-verb{ font-family: var(--f-display); font-weight:600; font-style:italic; font-size:17px; color: var(--b1); margin:0 0 10px; }
+.conj-row{ display:flex; justify-content:space-between; font-size:14.5px; padding:5px 0; border-bottom:1px dashed var(--line); }
+.conj-row:last-child{ border-bottom:none; }
+.conj-pron{ color: var(--ink-faint); font-family: var(--f-data); font-size:12.5px; }
+.conj-form{ font-weight:600; color: var(--ink); }
+
+.note{
+  margin-top:18px; padding:14px 16px; background: var(--b1-soft); border:1px solid var(--b1-line);
+  border-radius: var(--r-md); font-size:14px; color: var(--ink-soft);
+}
+.note strong{ color: var(--ink); }
+
+.compare-warning{
+  margin-top:14px; padding:14px 16px; background: var(--family-soft); border:1px solid var(--family-line);
+  border-radius: var(--r-md); font-size:13.5px; color: var(--ink-soft);
+}
+.compare-warning strong{ color: var(--family); }
+
+/* ---------- MARKERS ---------- */
+.marker-row{ display:flex; flex-wrap:wrap; gap:10px; margin-top:16px; }
+.marker-chip{
+  font-family: var(--f-data); font-size:12.5px; color: var(--b1); background: var(--b1-soft);
+  border:1px solid var(--b1-line); padding:6px 13px; border-radius:999px;
+}
+
+/* ---------- VOCAB CARDS ---------- */
+.vocab-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:12px; }
+.vocab-card{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:14px 16px; cursor:pointer; perspective:600px; min-height:78px;
+  display:flex; flex-direction:column; justify-content:center; transition: border-color .15s ease;
+}
+.vocab-card:hover{ border-color: var(--b1-line); }
+.vocab-card:focus-visible{ outline:2px solid var(--b1); outline-offset:2px; }
+.vocab-front{ font-family: var(--f-body); font-weight:600; font-size:15px; }
+.vocab-back{ display:none; font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); margin-top:6px; }
+.vocab-card.flipped .vocab-back{ display:block; }
+.vocab-card.flipped{ background: var(--b1-soft); border-color: var(--b1-line); }
+.vocab-hint{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin:10px 2px 16px; }
+
+/* ---------- EXERCISE ---------- */
+.exercise{ margin-bottom:20px; }
+.exercise:last-of-type{ margin-bottom:0; }
+.ex-sentence{ font-size:15.5px; margin-bottom:10px; }
+.ex-sentence .gap{ font-family: var(--f-data); color: var(--ink-faint); }
+.ex-options{ display:flex; flex-wrap:wrap; gap:8px; }
+.opt-btn{
+  font-family: var(--f-body); font-size:14px; background: var(--paper-raised);
+  border:1.5px solid var(--line); color: var(--ink); padding:7px 16px; border-radius:999px;
+  cursor:pointer; transition: all .15s ease;
+}
+.opt-btn:hover{ border-color: var(--ex-accent, var(--ink-faint)); }
+.opt-btn.picked{ background: var(--ex-accent-soft, var(--b1-soft)); border-color: var(--ex-accent, var(--b1)); color: var(--ex-accent, var(--b1)); }
+.opt-btn.correct{ background: var(--b2-soft); border-color: var(--b2); color: var(--b2); }
+.opt-btn.wrong{ background: var(--family-soft); border-color: var(--family); color: var(--family); }
+.opt-btn:disabled{ cursor:default; }
+
+.exercise.ex-c1{ --ex-accent: var(--ex1); --ex-accent-soft: var(--ex1-soft); }
+.exercise.ex-c2{ --ex-accent: var(--ex2); --ex-accent-soft: var(--ex2-soft); }
+.exercise.ex-c3{ --ex-accent: var(--ex3); --ex-accent-soft: var(--ex3-soft); }
+.exercise.ex-c4{ --ex-accent: var(--ex4); --ex-accent-soft: var(--ex4-soft); }
+.exercise.ex-c5{ --ex-accent: var(--ex5); --ex-accent-soft: var(--ex5-soft); }
+.exercise.ex-c6{ --ex-accent: var(--ex6); --ex-accent-soft: var(--ex6-soft); }
+.exercise .ex-sentence{ border-left:3px solid var(--ex-accent, transparent); padding-left:10px; }
+
+.check-bar{
+  display:flex; align-items:center; justify-content:space-between; gap:16px;
+  margin-top:22px; padding-top:18px; border-top:1px dashed var(--line);
+}
+.btn-primary{
+  font-family: var(--f-body); font-weight:600; font-size:14px; color:#fff; background: var(--b1);
+  border:none; padding:11px 22px; border-radius:999px; cursor:pointer; transition: transform .1s ease;
+}
+.btn-primary:hover{ transform: translateY(-1px); }
+#score-text{ font-family: var(--f-data); font-size:13px; color: var(--ink-faint); }
+.btn-ghost{
+  font-family: var(--f-body); font-weight:600; font-size:13px; color: var(--ink-soft); background:none;
+  border:1.5px solid var(--line); padding:9px 18px; border-radius:999px; cursor:pointer;
+}
+.btn-ghost:hover{ border-color: var(--ink-faint); }
+.ex-divider{
+  display:flex; align-items:center; gap:10px; margin:20px 0 16px;
+  font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.06em;
+  color: var(--ink-faint);
+}
+.ex-divider::before, .ex-divider::after{ content:""; flex:1; height:1px; background: var(--line); }
+.ex-divider.en-clase::before, .ex-divider.en-clase::after{ background: var(--b1-line); }
+.ex-divider.en-clase{ color: var(--b1); }
+
+/* ---------- READING ---------- */
+.reading-panel{ background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-lg); box-shadow: var(--shadow-1); padding:26px 28px; }
+.reading-text{ font-family: var(--f-display); font-size:16.5px; line-height:1.75; color: var(--ink); }
+.reading-text p{ margin:0 0 14px; }
+.reading-text p:last-child{ margin-bottom:0; }
+.reading-highlight{ background: var(--b1-soft); padding:1px 4px; border-radius:4px; color: var(--ink); font-weight:500; }
+.reading-questions{ margin-top:20px; padding-top:18px; border-top:1px dashed var(--line); }
+.reading-questions p{ font-family: var(--f-data); font-size:11.5px; text-transform:uppercase; letter-spacing:.05em; color: var(--ink-faint); margin:0 0 10px; }
+.reading-questions ol{ margin:0; padding-left:20px; }
+.reading-questions li{ font-size:14.5px; color: var(--ink-soft); margin-bottom:8px; }
+.reading-questions li:last-child{ margin-bottom:0; }
+
+/* ---------- CHARACTER CARDS ---------- */
+.characters{ display:flex; flex-direction:column; gap:14px; }
+.char-card{
+  display:flex; gap:16px; background: var(--paper-raised); border:1px solid var(--line);
+  border-radius: var(--r-md); padding:18px 20px;
+}
+.char-avatar{
+  flex:none; width:44px; height:44px; border-radius:50%; background: var(--b1);
+  display:flex; align-items:center; justify-content:center; color:#fff;
+  font-family: var(--f-display); font-weight:600; font-size:17px;
+}
+.char-body{ flex:1; }
+.char-name{ font-family: var(--f-body); font-weight:600; font-size:15.5px; margin:0 0 2px; }
+.char-role{ font-family: var(--f-data); font-size:12px; color: var(--ink-faint); margin:0 0 8px; }
+.char-facts{ display:flex; flex-wrap:wrap; gap:6px; margin-bottom:10px; }
+.fact-tag{
+  font-family: var(--f-data); font-size:11.5px; color: var(--b1); background: var(--b1-soft);
+  border:1px solid var(--b1-line); padding:3px 9px; border-radius:999px;
+}
+.char-prompt{ font-size:13.5px; color: var(--ink-soft); margin:0 0 6px; }
+.char-input{
+  width:100%; font-family: var(--f-body); font-size:14px; color: var(--ink);
+  background:#fff; border:1px solid var(--line); border-radius: var(--r-sm);
+  padding:9px 11px; resize:vertical; min-height:38px;
+}
+.char-input:focus{ outline:none; border-color: var(--b1); }
+
+/* ---------- ROLEPLAY ---------- */
+.roleplay-panel{ background: var(--b2-soft); border:1px solid var(--b2-line); border-radius: var(--r-lg); padding:26px 28px; }
+.roleplay-panel .block-num{ background: var(--b2); }
+.scene-setup{
+  display:flex; gap:14px; align-items:flex-start; background: var(--paper-raised);
+  border:1px solid var(--b2-line); border-radius: var(--r-md); padding:14px 16px; margin-bottom:20px;
+}
+.scene-icon{ font-size:22px; flex:none; }
+.scene-text{ font-size:14px; color: var(--ink-soft); }
+.scene-text strong{ color: var(--ink); }
+
+.dialogue{ display:flex; flex-direction:column; gap:14px; }
+.scene-tabs{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:18px; }
+.scene-tab{
+  font-family: var(--f-data); font-size:12.5px; background: var(--paper-raised);
+  border:1.5px solid var(--b2-line); color: var(--ink-soft); padding:7px 14px;
+  border-radius:999px; cursor:pointer; transition: all .15s ease;
+}
+.scene-tab:hover{ border-color: var(--b2); }
+.scene-tab.active{ background: var(--b2); border-color: var(--b2); color:#fff; }
+.line{ display:flex; gap:12px; align-items:flex-start; }
+.line-avatar{
+  flex:none; width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  font-family: var(--f-display); font-weight:600; font-size:14px; color:#fff;
+}
+.line.friend .line-avatar{ background: var(--ink-faint); }
+.line.you .line-avatar{ background: var(--b2); }
+.line-body{ flex:1; }
+.line-name{ font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.05em; color: var(--ink-faint); margin:0 0 4px; }
+.line-bubble{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:12px 14px; font-size:14.5px; color: var(--ink);
+}
+.line.you .line-bubble{ background:#fff; border-color: var(--b2-line); }
+.line-input{
+  width:100%; font-family: var(--f-body); font-size:14.5px; color: var(--ink);
+  background:#fff; border:1px solid var(--b2-line); border-radius: var(--r-sm);
+  padding:10px 12px; resize:vertical; min-height:40px; margin-top:2px;
+}
+.line-input:focus{ outline:none; border-color: var(--b2); }
+.line-hint{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin-top:5px; }
+
+.roleplay-tip{
+  margin-top:22px; padding:14px 16px; background: var(--paper-raised); border:1px solid var(--b2-line);
+  border-radius: var(--r-md); font-size:13.5px; color: var(--ink-soft);
+}
+.roleplay-tip strong{ color: var(--ink); }
+
+/* ---------- FINAL TASK ---------- */
+.task-panel{ background: var(--family-soft); border:1px solid var(--family-line); border-radius: var(--r-lg); padding:26px 28px; }
+.task-panel .block-num{ background: var(--family); }
+textarea#final-task{
+  width:100%; min-height:150px; font-family: var(--f-body); font-size:15px; color: var(--ink);
+  background: var(--paper-raised); border:1px solid var(--family-line); border-radius: var(--r-md);
+  padding:14px 16px; resize:vertical; margin-top:14px;
+}
+textarea#final-task:focus{ outline:none; border-color: var(--family); }
+.task-footer{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:12px; flex-wrap:wrap; }
+#task-count{ font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); }
+.saved-flag{ font-family: var(--f-data); font-size:12px; color: var(--b1); opacity:0; transition: opacity .3s ease; }
+.saved-flag.show{ opacity:1; }
+
+/* ---------- FOOTER NAV ---------- */
+footer{
+  max-width:760px; margin:0 auto; padding:0 24px 60px; display:flex;
+  justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;
+  font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint);
+}
+footer a{ color: var(--b1); text-decoration:none; }
+footer a:hover{ text-decoration:underline; }
+
+@media (max-width:600px){
+  header{ padding:34px 18px 22px; }
+  main{ padding:8px 18px 90px; }
+  .panel, .task-panel, .roleplay-panel, .reading-panel{ padding:20px 18px; }
+  .char-card{ flex-direction:column; }
+  .conj-grid{ grid-template-columns:1fr; }
+}
+@media (prefers-reduced-motion: reduce){ *{ transition:none !important; } }
+</style>
+</head>
+<body>
+
+<header>
+  <p class="eyebrow"><span class="dot"></span>Clase 20 de 31 · L9 Línea del recuerdo</p>
+  <h1>Cómo era <em>antes</em></h1>
+  <p class="lede">Empieza una nueva línea: dejamos el "qué pasó" (indefinido) para aprender el "cómo era" (imperfecto). Hoy vas a describir tu rutina de aprendiz antes de venir a España — lo que hacías siempre, cada día, cuando eras más joven — con un tiempo verbal nuevo y muy útil.</p>
+  <div class="meta-row">
+    <div>Duración<strong>50 min</strong></div>
+    <div>Gramática<strong>Pretérito imperfecto regular</strong></div>
+    <div>Nivel<strong>A2</strong></div>
+  </div>
+</header>
+
+<main>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">1</span><h2>Un tiempo verbal nuevo: el imperfecto</h2><span class="time-tag">10 min</span></div>
+    <div class="panel">
+      <p class="vocab-hint" style="margin:0 0 16px;">El imperfecto no cuenta "qué pasó una vez" (eso es el indefinido: tuve, hice, estuve). El imperfecto describe cómo eran las cosas, o qué hacías habitualmente, sin decir cuándo empezó ni cuándo terminó.</p>
+      <div class="conj-grid">
+        <div class="conj-col">
+          <p class="conj-verb">trabajar <span style="font-size:12px; color:var(--ink-faint); font-style:normal;">-AR</span></p>
+          <div class="conj-row"><span class="conj-pron">yo</span><span class="conj-form">trabajaba</span></div>
+          <div class="conj-row"><span class="conj-pron">tú</span><span class="conj-form">trabajabas</span></div>
+          <div class="conj-row"><span class="conj-pron">él/ella</span><span class="conj-form">trabajaba</span></div>
+          <div class="conj-row"><span class="conj-pron">nosotros</span><span class="conj-form">trabajábamos</span></div>
+          <div class="conj-row"><span class="conj-pron">vosotros</span><span class="conj-form">trabajabais</span></div>
+          <div class="conj-row"><span class="conj-pron">ellos</span><span class="conj-form">trabajaban</span></div>
+        </div>
+        <div class="conj-col">
+          <p class="conj-verb">vivir <span style="font-size:12px; color:var(--ink-faint); font-style:normal;">-ER/-IR</span></p>
+          <div class="conj-row"><span class="conj-pron">yo</span><span class="conj-form">vivía</span></div>
+          <div class="conj-row"><span class="conj-pron">tú</span><span class="conj-form">vivías</span></div>
+          <div class="conj-row"><span class="conj-pron">él/ella</span><span class="conj-form">vivía</span></div>
+          <div class="conj-row"><span class="conj-pron">nosotros</span><span class="conj-form">vivíamos</span></div>
+          <div class="conj-row"><span class="conj-pron">vosotros</span><span class="conj-form">vivíais</span></div>
+          <div class="conj-row"><span class="conj-pron">ellos</span><span class="conj-form">vivían</span></div>
+        </div>
+      </div>
+      <div class="note"><strong>Regla simple:</strong> verbos -AR terminan siempre en -aba (trabajaba, mezclaba, pesaba); verbos -ER e -IR terminan siempre en -ía (vivía, hacía, comía). Es uno de los tiempos más regulares del español — casi no hay excepciones, así que hoy puedes concentrarte solo en el significado, no en memorizar formas raras.</div>
+      <div class="compare-warning">
+        <strong>Ojo, trampa para hablantes de italiano y francés:</strong> el italiano ("lavoravo") y el francés ("je travaillais") también tienen un imperfecto muy parecido en uso — así que la idea te resultará familiar. La trampa está en la forma "nosotros": en español lleva tilde (trabajábamos, vivíamos) y muchos estudiantes la olvidan al escribir.
+      </div>
+      <div class="marker-row">
+        <span class="marker-chip">antes</span>
+        <span class="marker-chip">cuando era pequeño/a</span>
+        <span class="marker-chip">siempre</span>
+        <span class="marker-chip">todos los días</span>
+        <span class="marker-chip">de niño/a</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">2</span><h2>Tu rutina de aprendiz — antes de venir a España</h2><span class="time-tag">8 min</span></div>
+    <div class="panel">
+      <p class="vocab-hint" style="margin:0 0 16px;">El imperfecto es perfecto para hablar de rutinas y hábitos del pasado: lo que hacías cada día, sin pensar en un momento concreto.</p>
+      <div class="conj-grid" style="grid-template-columns:1fr;">
+        <div class="conj-col">
+          <div class="conj-row"><span class="conj-pron">rutina diaria</span><span class="conj-form">Todos los días empezaba a las siete de la mañana.</span></div>
+          <div class="conj-row"><span class="conj-pron">frecuencia</span><span class="conj-form">Siempre pesaba la harina antes que nada.</span></div>
+          <div class="conj-row"><span class="conj-pron">edad</span><span class="conj-form">Cuando era pequeño, ayudaba a mi abuela en la cocina.</span></div>
+          <div class="conj-row"><span class="conj-pron">estado habitual</span><span class="conj-form">De aprendiz, siempre estaba nervioso el primer día de cada obrador.</span></div>
+        </div>
+      </div>
+      <div class="note"><strong>Piensa en una foto fija</strong>, no en una película: el imperfecto describe cómo eran las cosas de forma general, como si sacaras una foto de tu rutina de aprendiz. La próxima clase aprenderás a usarlo también para describir personas y lugares del pasado.</div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">3</span><h2>Vocabulario</h2><span class="time-tag">6 min</span></div>
+    <p class="vocab-hint">Toca cada tarjeta para ver un ejemplo.</p>
+    <div class="vocab-grid" id="vocab-grid"></div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">4</span><h2>Lectura recomendada</h2><span class="time-tag">6 min</span></div>
+    <div class="reading-panel">
+      <div class="reading-text">
+        <p>Cuando <span class="reading-highlight">era</span> pequeño, mi abuela <span class="reading-highlight">tenía</span> una pastelería pequeña en el centro del pueblo. Todos los días, después del colegio, yo <span class="reading-highlight">iba</span> a ayudarla un rato. Ella siempre me <span class="reading-highlight">dejaba</span> pesar la harina y el azúcar, aunque yo era demasiado pequeño para hacer mucho más.</p>
+        <p>De aprendiz, mi rutina <span class="reading-highlight">era</span> siempre la misma: <span class="reading-highlight">empezaba</span> a las siete de la mañana, <span class="reading-highlight">limpiaba</span> el obrador antes de que llegaran los demás, y <span class="reading-highlight">preparaba</span> las masas más sencillas mientras el jefe de cocina llegaba. Al principio, todo me <span class="reading-highlight">parecía</span> muy difícil, pero con el tiempo empecé a disfrutarlo de verdad.</p>
+        <p>Antes de venir a España, no <span class="reading-highlight">sabía</span> casi nada de repostería española. Solo <span class="reading-highlight">conocía</span> la pastelería italiana y francesa, que era la que <span class="reading-highlight">trabajábamos</span> en mi antiguo obrador. Ahora, cada receta nueva me recuerda un poco a esos primeros años.</p>
+      </div>
+      <div class="reading-questions">
+        <p>Para comentar en clase</p>
+        <ol>
+          <li>¿Qué hacía el narrador todos los días después del colegio?</li>
+          <li>¿Cómo era su rutina de aprendiz al principio?</li>
+          <li>¿Cómo era tu rutina antes de dedicarte a la pastelería? Cuéntalo con el imperfecto.</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">5</span><h2>Practica</h2><span class="time-tag">10 min</span></div>
+    <div class="panel">
+      <p class="vocab-hint" style="margin-bottom:14px;">36 frases: las primeras 12 se hacen en voz alta en clase; el resto queda como repaso para casa. Se mezcla el imperfecto de hoy con estructuras de semanas anteriores — presente, indefinido, gerundio y "se" accidental.</p>
+      <div id="exercises"></div>
+      <div class="check-bar">
+        <div style="display:flex; gap:10px;">
+          <button class="btn-primary" id="check-btn">Comprobar respuestas</button>
+          <button class="btn-ghost" id="reset-btn">Reiniciar</button>
+        </div>
+        <span id="score-text"></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">6</span><h2>Tarjetas de personajes</h2><span class="time-tag">7 min</span></div>
+    <p class="lede" style="margin-bottom:16px;">Cuenta cómo era la rutina o la vida de cada persona antes, usando el imperfecto. Las primeras 6 se trabajan en clase; el resto queda como banco de repaso para casa.</p>
+    <div class="characters" id="characters"></div>
+  </section>
+
+  <section class="block roleplay-panel">
+    <div class="block-head"><span class="block-num">7</span><h2>Roleplay: cómo era antes</h2><span class="time-tag">10 min</span></div>
+    <p class="lede" style="margin-bottom:16px;">4 situaciones reales con conversaciones completas. Elige una escena para practicar en clase; el resto queda como banco de repaso para casa. Los compañeros mezclan temas de otras semanas, así que no solo necesitarás el imperfecto de hoy.</p>
+    <div class="scene-tabs" id="scene-tabs"></div>
+    <div id="scene-container"></div>
+    <div class="roleplay-tip"><strong>En clase:</strong> practicaremos una escena en voz alta, cambiando de rol. El resto de escenas son para practicar por tu cuenta durante la semana.</div>
+  </section>
+
+  <section class="block task-panel">
+    <div class="block-head"><span class="block-num">8</span><h2 style="color:var(--family)">Tu tarea</h2><span class="time-tag">8 min</span></div>
+    <p style="margin:0; font-size:15px; color:var(--ink-soft);">Escribe 5 frases sobre tu rutina de aprendiz antes de venir a España, usando el pretérito imperfecto. Piensa en: a qué hora empezabas, qué hacías siempre, cómo te sentías al principio.</p>
+    <textarea id="final-task" placeholder="Todos los días...&#10;Siempre...&#10;Cuando era aprendiz...&#10;Antes de venir a España..."></textarea>
+    <div class="task-footer">
+      <span id="task-count">0 palabras escritas</span>
+      <div style="display:flex; gap:10px; align-items:center;">
+        <span class="saved-flag" id="saved-flag">Guardado ✓</span>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <span>Clase 20 de 31 · L9 Línea del recuerdo</span>
+  <span>ESCOLAR · Davide · obrador de Girona</span>
+</footer>
+
+<script>
+/* ---------- VOCAB ---------- */
+const VOCAB = [
+  {"front":"antes","back":"Antes trabajaba en un obrador mucho más pequeño."},
+  {"front":"cuando era pequeño/a","back":"Cuando era pequeño, ayudaba a mi abuela en la pastelería."},
+  {"front":"siempre","back":"Siempre pesaba la harina antes que nada."},
+  {"front":"todos los días","back":"Todos los días empezaba a las siete de la mañana."},
+  {"front":"de niño/a","back":"De niño, me encantaba ver cómo horneaban el pan."},
+  {"front":"la rutina","back":"Mi rutina de aprendiz era siempre la misma."},
+  {"front":"soler + infinitivo","back":"Solía llegar antes que los demás para preparar todo."},
+  {"front":"de aprendiz","back":"De aprendiz, tenía mucho que aprender cada día."},
+  {"front":"al principio","back":"Al principio todo me parecía muy difícil."},
+  {"front":"con el tiempo","back":"Con el tiempo empecé a disfrutarlo de verdad."},
+  {"front":"la infancia","back":"En mi infancia, la pastelería era parte de la familia."},
+  {"front":"recordar","back":"Recuerdo perfectamente cómo era mi primer obrador."}
+];
+
+const vocabGrid = document.getElementById('vocab-grid');
+VOCAB.forEach(v=>{
+  const card = document.createElement('div');
+  card.className = 'vocab-card';
+  card.tabIndex = 0;
+  card.innerHTML = `<div class="vocab-front">${v.front}</div><div class="vocab-back">${v.back}</div>`;
+  card.addEventListener('click', ()=> card.classList.toggle('flipped'));
+  card.addEventListener('keydown', (e)=>{
+    if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); card.classList.toggle('flipped'); }
+  });
+  vocabGrid.appendChild(card);
+});
+
+/* ---------- EXERCISES ---------- */
+const EXERCISES = [
+  {"sentence":"Cuando <span class=\"gap\">___</span> pequeño, ayudaba a mi abuela en la pastelería.","options":["era","fui","soy"],"answer":"era"},
+  {"sentence":"Todos los días <span class=\"gap\">___</span> a las siete de la mañana.","options":["empezaba","empecé","empiezo"],"answer":"empezaba"},
+  {"sentence":"Siempre <span class=\"gap\">___</span> la harina antes que nada.","options":["pesaba","pesé","peso"],"answer":"pesaba"},
+  {"sentence":"De aprendiz, <span class=\"gap\">___</span> mucho que aprender cada día.","options":["tenía","tuve","tengo"],"answer":"tenía"},
+  {"sentence":"Antes de venir a España, no <span class=\"gap\">___</span> casi nada de repostería española.","options":["sabía","supe","sé"],"answer":"sabía"},
+  {"sentence":"Al principio, todo me <span class=\"gap\">___</span> muy difícil.","options":["parecía","pareció","parece"],"answer":"parecía"},
+  {"sentence":"Nosotros <span class=\"gap\">___</span> siempre la pastelería italiana en mi antiguo obrador.","options":["trabajábamos","trabajamos","trabajaba"],"answer":"trabajábamos"},
+  {"sentence":"De niño, me <span class=\"gap\">___</span> ver cómo horneaban el pan.","options":["encantaba","encantó","encanta"],"answer":"encantaba"},
+  {"sentence":"Ayer <span class=\"gap\">___</span> a trabajar a las siete, como cada día.","options":["fui","era","iba"],"answer":"fui"},
+  {"sentence":"Con el tiempo, <span class=\"gap\">___</span> a disfrutarlo de verdad.","options":["empecé","empezaba","empiezo"],"answer":"empecé"},
+  {"sentence":"Mi abuela <span class=\"gap\">___</span> una pastelería pequeña en el pueblo.","options":["tenía","tuvo","tiene"],"answer":"tenía"},
+  {"sentence":"Yo <span class=\"gap\">___</span> a ayudarla cada tarde después del colegio.","options":["iba","fui","voy"],"answer":"iba"},
+  {"sentence":"Un día, <span class=\"gap\">___</span> apagar el horno y se quemó todo.","options":["se me olvidó","se me olvida","olvidé"],"answer":"se me olvidó"},
+  {"sentence":"Ahora mismo estoy <span class=\"gap\">___</span> la masa para el pan.","options":["amasando","amasar","amasado"],"answer":"amasando"},
+  {"sentence":"De pequeño, <span class=\"gap\">___</span> siempre pesar los ingredientes con mi abuela.","options":["solía","suelo","soler"],"answer":"solía"},
+  {"sentence":"Este obrador es <span class=\"gap\">___</span> grande que el anterior.","options":["más","menos","el mejor"],"answer":"más"},
+  {"sentence":"La semana pasada <span class=\"gap\">___</span> un pedido muy especial.","options":["tuvimos","teníamos","tenemos"],"answer":"tuvimos"},
+  {"sentence":"Cuando era aprendiz, <span class=\"gap\">___</span> siempre nervioso el primer día.","options":["estaba","estuve","estoy"],"answer":"estaba"},
+  {"sentence":"Necesitamos medio kilo <span class=\"gap\">___</span> mantequilla para esta receta.","options":["de","por","para"],"answer":"de"},
+  {"sentence":"Antes, mi rutina de aprendiz <span class=\"gap\">___</span> siempre la misma.","options":["era","fue","es"],"answer":"era"},
+  {"sentence":"<span class=\"gap\">___</span> las manos antes de tocar los ingredientes.","options":["Lava","Lavó","Lavar"],"answer":"Lava"},
+  {"sentence":"De niño, mi hermano y yo <span class=\"gap\">___</span> pasteles imaginarios con arena.","options":["hacíamos","hicimos","hacemos"],"answer":"hacíamos"},
+  {"sentence":"El año pasado <span class=\"gap\">___</span> a trabajar a Girona.","options":["vine","venía","vengo"],"answer":"vine"},
+  {"sentence":"Todos los veranos <span class=\"gap\">___</span> a casa de mis abuelos en Italia.","options":["íbamos","fuimos","vamos"],"answer":"íbamos"},
+  {"sentence":"Un día, a Marc <span class=\"gap\">___</span> el horno pequeño en pleno servicio.","options":["se le rompió","se le rompieron","rompió"],"answer":"se le rompió"},
+  {"sentence":"De pequeño, no me <span class=\"gap\">___</span> nada la repostería, prefería cocinar salado.","options":["gustaba","gustó","gusta"],"answer":"gustaba"},
+  {"sentence":"Mi profesora <span class=\"gap\">___</span> mucha paciencia con los aprendices nuevos.","options":["tenía","tuvo","tiene"],"answer":"tenía"},
+  {"sentence":"Le <span class=\"gap\">___</span> al cliente que la tarta estaría lista el sábado.","options":["dije","decía","digo"],"answer":"dije"},
+  {"sentence":"Cada mañana, mi abuela <span class=\"gap\">___</span> el pan antes de abrir la tienda.","options":["horneaba","horneó","hornea"],"answer":"horneaba"},
+  {"sentence":"Esta tarta lleva <span class=\"gap\">___</span> menos azúcar que la de ayer.","options":["un poco de","una pizca de","medio kilo de"],"answer":"un poco de"},
+  {"sentence":"De adolescente, <span class=\"gap\">___</span> los fines de semana en la pastelería familiar.","options":["pasaba","pasé","paso"],"answer":"pasaba"},
+  {"sentence":"El obrador antiguo <span class=\"gap\">___</span> mucho más pequeño que este.","options":["era","fue","es"],"answer":"era"},
+  {"sentence":"Al final, <span class=\"gap\">___</span> resolver el problema con el fondant.","options":["pudimos","podíamos","podemos"],"answer":"pudimos"},
+  {"sentence":"De niña, Laura <span class=\"gap\">___</span> con su madre en la cocina cada domingo.","options":["cocinaba","cocinó","cocina"],"answer":"cocinaba"},
+  {"sentence":"Primero pesa la harina, <span class=\"gap\">___</span> añade los huevos.","options":["después","antes","ayer"],"answer":"después"},
+  {"sentence":"Cuando vivía en Nápoles, <span class=\"gap\">___</span> el metro todos los días para ir al obrador.","options":["cogía","cogí","cojo"],"answer":"cogía"}
+];
+
+const EX_KEY = 'davide-clase20-practica';
+let exState = {};
+async function cargarPractica(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(EX_KEY);
+    if (res && typeof res.value === 'string') exState = JSON.parse(res.value);
+  }catch(e){
+    // Sin progreso previo guardado todavía.
+  }
+}
+async function guardarPractica(){
+  if (!window.storage) return;
+  try{ await window.storage.set(EX_KEY, JSON.stringify(exState)); }catch(e){ /* fallo silencioso */ }
+}
+
+function shuffle(arr){
+  const a = arr.slice();
+  for(let i = a.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+const exWrap = document.getElementById('exercises');
+(async function initPractica(){
+await cargarPractica();
+EXERCISES.forEach((ex, i)=>{
+  if(i === 0){
+    const divider = document.createElement('div');
+    divider.className = 'ex-divider en-clase';
+    divider.textContent = 'en clase · ítems 1–12';
+    exWrap.appendChild(divider);
+  }
+  if(i === 12){
+    const divider = document.createElement('div');
+    divider.className = 'ex-divider';
+    divider.textContent = 'para casa · repaso opcional';
+    exWrap.appendChild(divider);
+  }
+  const el = document.createElement('div');
+  el.className = `exercise ex-c${(i % 6) + 1}`;
+  el.dataset.answer = ex.answer;
+  el.dataset.idx = i;
+  const shuffledOptions = shuffle(ex.options);
+  el.innerHTML = `
+    <div class="ex-sentence">${i+1}. ${ex.sentence}</div>
+    <div class="ex-options">
+      ${shuffledOptions.map(o=>`<button class="opt-btn" data-value="${o}">${o}</button>`).join('')}
+    </div>
+  `;
+  exWrap.appendChild(el);
+
+  const savedPick = exState[i];
+  if(savedPick){
+    const savedBtn = el.querySelector(`.opt-btn[data-value="${savedPick}"]`);
+    if(savedBtn) savedBtn.classList.add('picked');
+  }
+
+  el.querySelectorAll('.opt-btn').forEach(btn=>{
+    btn.addEventListener('click', async ()=>{
+      el.querySelectorAll('.opt-btn').forEach(b=>b.classList.remove('picked'));
+      btn.classList.add('picked');
+      exState[i] = btn.dataset.value;
+      await guardarPractica();
+    });
+  });
+});
+})();
+
+document.getElementById('check-btn').addEventListener('click', ()=>{
+  let correct = 0;
+  document.querySelectorAll('.exercise').forEach(el=>{
+    const answer = el.dataset.answer;
+    el.querySelectorAll('.opt-btn').forEach(btn=>{
+      btn.disabled = true;
+      if(btn.dataset.value === answer) btn.classList.add('correct');
+      else if(btn.classList.contains('picked')) btn.classList.add('wrong');
+    });
+    const pickedBtn = el.querySelector('.opt-btn.picked');
+    if(pickedBtn && pickedBtn.dataset.value === answer) correct++;
+  });
+  document.getElementById('score-text').textContent = `${correct} / ${EXERCISES.length} correctas`;
+});
+
+document.getElementById('reset-btn').addEventListener('click', async ()=>{
+  document.querySelectorAll('.exercise').forEach(el=>{
+    el.querySelectorAll('.opt-btn').forEach(b=>{
+      b.disabled = false;
+      b.classList.remove('picked','correct','wrong');
+    });
+  });
+  document.getElementById('score-text').textContent = '';
+  exState = {};
+  await guardarPractica();
+});
+
+/* ---------- CHARACTER CARDS ---------- */
+const CHARACTERS = [
+  {"name":"Tú","role":"Tu propia rutina de aprendiz","facts":["todos los días...","siempre...","cuando era pequeño/a..."],"prompt":"Cuenta cómo era tu rutina antes:"},
+  {"name":"Marc","role":"El jefe de cocina","facts":["de joven trabajaba en un obrador muy pequeño","empezaba siempre a las cinco de la mañana","no sabía casi nada de repostería moderna"],"prompt":"Cuenta cómo era la vida de Marc antes:"},
+  {"name":"Laura","role":"Tu compañera de turno","facts":["de niña cocinaba con su madre cada domingo","siempre quería ser pastelera","soñaba con tener su propio obrador"],"prompt":"Cuenta cómo era la infancia de Laura:"},
+  {"name":"Jordi","role":"El otro pastelero","facts":["antes trabajaba en un restaurante grande","odiaba madrugar al principio","con el tiempo se acostumbró al horario"],"prompt":"Cuenta cómo era la vida de Jordi antes:"},
+  {"name":"Núria","role":"La encargada del obrador","facts":["de joven estudiaba en una escuela de hostelería","trabajaba los fines de semana para pagarse los estudios","siempre era la primera en llegar"],"prompt":"Cuenta cómo era Núria de joven:"},
+  {"name":"Pau","role":"El aprendiz nuevo","facts":["antes de empezar aquí, no sabía usar el horno grande","estaba muy nervioso los primeros días","todos los días preguntaba muchas cosas"],"prompt":"Cuenta cómo era Pau al principio:"},
+  {"name":"Marta","role":"La repostera de tarde","facts":["de pequeña ayudaba en la panadería de su tío","siempre olía a pan cuando llegaba a casa","soñaba con inventar sus propias recetas"],"prompt":"Cuenta cómo era la infancia de Marta:"},
+  {"name":"Carla","role":"La responsable de pedidos","facts":["antes trabajaba en una oficina, no en un obrador","no tenía experiencia en pastelería","aprendió todo desde cero, poco a poco"],"prompt":"Cuenta cómo era la vida de Carla antes:"},
+  {"name":"Oriol","role":"El dueño del obrador","facts":["de joven trabajaba solo, sin ningún empleado","empezaba el negocio con muy poco dinero","siempre soñaba con abrir un segundo obrador"],"prompt":"Cuenta cómo era Oriol al principio:"},
+  {"name":"Elena","role":"Tu antigua profesora","facts":["de joven vivía en Francia, aprendiendo pastelería francesa","enseñaba en una escuela pequeña","siempre decía que la paciencia era la clave del oficio"],"prompt":"Cuenta cómo era Elena de joven:"}
+];
+
+const CHAR_KEY = 'davide-clase20-personajes';
+let charState = {};
+async function cargarPersonajes(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(CHAR_KEY);
+    if (res && typeof res.value === 'string') charState = JSON.parse(res.value);
+  }catch(e){
+    // Sin personajes guardados todavía.
+  }
+}
+async function guardarPersonajes(){
+  if (!window.storage) return;
+  try{ await window.storage.set(CHAR_KEY, JSON.stringify(charState)); }catch(e){ /* fallo silencioso */ }
+}
+let charSaveTimer = null;
+function scheduleCharSave(){
+  clearTimeout(charSaveTimer);
+  charSaveTimer = setTimeout(guardarPersonajes, 500);
+}
+
+const charWrap = document.getElementById('characters');
+(async function initPersonajes(){
+await cargarPersonajes();
+CHARACTERS.forEach((c, i)=>{
+  if(i === 0){
+    const divider = document.createElement('div');
+    divider.className = 'ex-divider en-clase';
+    divider.textContent = 'en clase · personajes 1–6';
+    charWrap.appendChild(divider);
+  }
+  if(i === 6){
+    const divider = document.createElement('div');
+    divider.className = 'ex-divider';
+    divider.textContent = 'para casa · banco de repaso';
+    charWrap.appendChild(divider);
+  }
+  const card = document.createElement('div');
+  card.className = 'char-card';
+  card.innerHTML = `
+    <div class="char-avatar">${c.name.charAt(0)}</div>
+    <div class="char-body">
+      <p class="char-name">${c.name}</p>
+      <p class="char-role">${c.role}</p>
+      <div class="char-facts">${c.facts.map(f=>`<span class="fact-tag">${f}</span>`).join('')}</div>
+      <p class="char-prompt">${c.prompt}</p>
+      <textarea class="char-input" rows="2" placeholder="Antes... / Siempre... / Cuando era pequeño/a..." data-idx="${i}"></textarea>
+    </div>
+  `;
+  charWrap.appendChild(card);
+  const charInputEl = card.querySelector('.char-input');
+  if(charState[i]) charInputEl.value = charState[i];
+  charInputEl.addEventListener('input', ()=>{
+    charState[i] = charInputEl.value;
+    scheduleCharSave();
+  });
+});
+})();
+
+/* ---------- ROLEPLAY SCENES ---------- */
+const SCENES = [
+  {
+    "id": "laura-pregunta-infancia",
+    "tab": "Laura pregunta por tu infancia",
+    "icon": "🧁",
+    "setup": "Durante el descanso, Laura te pregunta cómo era tu vida antes de dedicarte a la pastelería.",
+    "lines": [
+      {"who":"friend","name":"Laura","text":"Oye, ¿cómo era tu vida antes de ser pastelero? ¿Siempre quisiste hacer esto?"},
+      {"who":"you","hint":"Responde con el imperfecto, contando cómo era tu infancia."},
+      {"who":"friend","name":"Laura","text":"Qué bonito. ¿Y quién te enseñó a cocinar al principio?"},
+      {"who":"you","hint":"Cuenta quién te enseñaba de pequeño."},
+      {"who":"friend","name":"Laura","text":"¿Y qué hacías todos los días con esa persona?"},
+      {"who":"you","hint":"Responde con \"todos los días\" y el imperfecto."},
+      {"who":"friend","name":"Laura","text":"¡Qué recuerdos tan bonitos! Yo también cocinaba mucho de niña."},
+      {"who":"you","hint":"Pregúntale cómo era su infancia a ella."},
+      {"who":"friend","name":"Laura","text":"Mi madre horneaba pan cada domingo y yo siempre ayudaba."},
+      {"who":"you","hint":"Reacciona con interés y haz otra pregunta sobre su infancia."},
+      {"who":"friend","name":"Laura","text":"Bueno, volvamos al trabajo, que se nos acaba el descanso."},
+      {"who":"you","hint":"Responde de acuerdo, con presente."}
+    ]
+  },
+  {
+    "id": "marc-cuenta-como-era",
+    "tab": "Marc cuenta cómo empezó",
+    "icon": "👨‍🍳",
+    "setup": "Marc te cuenta cómo era su vida cuando empezó en el oficio, hace muchos años.",
+    "lines": [
+      {"who":"friend","name":"Marc","text":"¿Sabes? Cuando empecé en esto, era muy diferente a ahora."},
+      {"who":"you","hint":"Pregúntale cómo era antes, con curiosidad."},
+      {"who":"friend","name":"Marc","text":"Trabajábamos en un obrador muy pequeño, sin apenas máquinas."},
+      {"who":"you","hint":"Reacciona con sorpresa y pregunta cómo lo hacían todo."},
+      {"who":"friend","name":"Marc","text":"Todo se hacía a mano. Empezábamos a las cinco de la mañana."},
+      {"who":"you","hint":"Pregunta si le gustaba ese horario."},
+      {"who":"friend","name":"Marc","text":"Al principio no, pero con el tiempo me acostumbré."},
+      {"who":"you","hint":"Cuenta si a ti también te costó acostumbrarte a algo al principio."},
+      {"who":"friend","name":"Marc","text":"¿Y tú, cómo era tu rutina de aprendiz al principio?"},
+      {"who":"you","hint":"Responde describiendo tu rutina con el imperfecto."},
+      {"who":"friend","name":"Marc","text":"Se nota que has aprendido rápido. Bueno, a trabajar."},
+      {"who":"you","hint":"Responde con energía, aceptando volver al trabajo."}
+    ]
+  },
+  {
+    "id": "pau-pregunta-consejos",
+    "tab": "Pau te pregunta cómo eras de aprendiz",
+    "icon": "🎓",
+    "setup": "Pau, el aprendiz nuevo, quiere saber cómo eras tú cuando empezaste, para sentirse mejor.",
+    "lines": [
+      {"who":"friend","name":"Pau","text":"Oye, ¿tú también estabas nervioso cuando empezaste aquí?"},
+      {"who":"you","hint":"Responde con sinceridad, usando el imperfecto."},
+      {"who":"friend","name":"Pau","text":"Menos mal, pensaba que era el único. ¿Qué hacías siempre al principio?"},
+      {"who":"you","hint":"Cuenta tu rutina de los primeros días con \"siempre\" o \"todos los días\"."},
+      {"who":"friend","name":"Pau","text":"¿Y se te olvidaban muchas cosas al principio?"},
+      {"who":"you","hint":"Responde contando si se te olvidaba algo, mezclando imperfecto e indefinido."},
+      {"who":"friend","name":"Pau","text":"Jaja, qué gracioso. ¿Cuándo empezaste a sentirte más seguro?"},
+      {"who":"you","hint":"Responde con \"con el tiempo\" y el indefinido o presente."},
+      {"who":"friend","name":"Pau","text":"Eso me anima mucho, gracias por contármelo."},
+      {"who":"you","hint":"Anímale, dándole un consejo para estos primeros días."},
+      {"who":"friend","name":"Pau","text":"Lo tendré en cuenta. ¿Seguimos con la receta de hoy?"},
+      {"who":"you","hint":"Responde que sí, en presente, y proponle empezar."}
+    ]
+  },
+  {
+    "id": "familia-videollamada",
+    "tab": "Videollamada con tu familia",
+    "icon": "📹",
+    "setup": "Haces una videollamada con tu familia en Italia y hablan de cómo era tu vida antes de venir a España.",
+    "lines": [
+      {"who":"friend","name":"Mamá","text":"Hijo, ¿te acuerdas de cuando eras pequeño y ayudabas a la abuela?"},
+      {"who":"you","hint":"Responde recordando con cariño, con el imperfecto."},
+      {"who":"friend","name":"Mamá","text":"Sí, siempre querías estar en la cocina con ella."},
+      {"who":"you","hint":"Cuenta qué te gustaba hacer entonces."},
+      {"who":"friend","name":"Mamá","text":"¿Y cómo era tu rutina antes de venir a España?"},
+      {"who":"you","hint":"Describe tu antigua rutina con el imperfecto."},
+      {"who":"friend","name":"Mamá","text":"Qué diferente a ahora. ¿Echas de menos algo de esa época?"},
+      {"who":"you","hint":"Responde contando qué echas de menos, si algo."},
+      {"who":"friend","name":"Mamá","text":"Bueno, cuéntanos, ¿qué tal la nueva rutina en Girona?"},
+      {"who":"you","hint":"Responde en presente, comparando con antes."},
+      {"who":"friend","name":"Mamá","text":"Nos alegra mucho verte tan feliz con esto."},
+      {"who":"you","hint":"Responde con cariño, agradeciendo su apoyo."}
+    ]
+  }
+];
+
+const sceneTabs = document.getElementById('scene-tabs');
+const sceneContainer = document.getElementById('scene-container');
+let activeScene = 0;
+
+function renderTabs(){
+  sceneTabs.innerHTML = SCENES.map((s,i)=>
+    `<button class="scene-tab${i===activeScene?' active':''}" data-idx="${i}">${s.icon} ${s.tab}</button>`
+  ).join('');
+  sceneTabs.querySelectorAll('.scene-tab').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      activeScene = parseInt(btn.dataset.idx, 10);
+      renderTabs();
+      renderScene();
+    });
+  });
+}
+
+function renderScene(){
+  const scene = SCENES[activeScene];
+  const linesHtml = scene.lines.map((l, li)=>{
+    if(l.who === 'friend'){
+      return `
+        <div class="line friend">
+          <div class="line-avatar">${l.name.charAt(0)}</div>
+          <div class="line-body">
+            <p class="line-name">${l.name}</p>
+            <div class="line-bubble">${l.text}</div>
+          </div>
+        </div>`;
+    } else {
+      const rpKey = `${scene.id}:${li}`;
+      return `
+        <div class="line you">
+          <div class="line-avatar">Tú</div>
+          <div class="line-body">
+            <p class="line-name">Tú</p>
+            <textarea class="line-input" rows="2" placeholder="Escribe tu respuesta..." data-rpkey="${scene.id}:${li}">${roleplayState[rpKey] ? roleplayState[rpKey] : ''}</textarea>
+            <p class="line-hint">${l.hint}</p>
+          </div>
+        </div>`;
+    }
+  }).join('');
+
+  sceneContainer.innerHTML = `
+    <div class="scene-setup">
+      <span class="scene-icon">${scene.icon}</span>
+      <p class="scene-text"><strong>${scene.tab}:</strong> ${scene.setup}</p>
+    </div>
+    <div class="dialogue">${linesHtml}</div>
+  `;
+
+  sceneContainer.querySelectorAll('.line-input').forEach(inputEl=>{
+    inputEl.addEventListener('input', ()=>{
+      roleplayState[inputEl.dataset.rpkey] = inputEl.value;
+      scheduleRoleplaySave();
+    });
+  });
+}
+
+const ROLEPLAY_KEY = 'davide-clase20-roleplay';
+let roleplayState = {};
+async function cargarRoleplay(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(ROLEPLAY_KEY);
+    if (res && typeof res.value === 'string') roleplayState = JSON.parse(res.value);
+  }catch(e){
+    // Sin intervenciones guardadas todavía.
+  }
+}
+async function guardarRoleplay(){
+  if (!window.storage) return;
+  try{ await window.storage.set(ROLEPLAY_KEY, JSON.stringify(roleplayState)); }catch(e){ /* fallo silencioso */ }
+}
+let roleplaySaveTimer = null;
+function scheduleRoleplaySave(){
+  clearTimeout(roleplaySaveTimer);
+  roleplaySaveTimer = setTimeout(guardarRoleplay, 500);
+}
+
+(async function initRoleplay(){
+await cargarRoleplay();
+renderTabs();
+renderScene();
+})();
+
+/* ---------- FINAL TASK ---------- */
+const STORAGE_KEY = 'davide-clase20-tarea';
+const taskArea = document.getElementById('final-task');
+const taskCount = document.getElementById('task-count');
+const savedFlag = document.getElementById('saved-flag');
+
+async function cargarTarea(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(STORAGE_KEY);
+    if (res && typeof res.value === 'string') taskArea.value = res.value;
+  }catch(e){
+    // Clave inexistente todavía: no hay tarea previa, se queda en blanco.
+  }
+  updateCount();
+}
+
+function updateCount(){
+  const words = taskArea.value.trim().split(/\s+/).filter(Boolean).length;
+  taskCount.textContent = `${words} palabra${words===1?'':'s'} escrita${words===1?'':'s'}`;
+}
+async function guardarTareaAuto(){
+  if (!window.storage){
+    savedFlag.textContent = 'Guardado no disponible aquí';
+    savedFlag.classList.add('show');
+    setTimeout(()=>{ savedFlag.classList.remove('show'); savedFlag.textContent = 'Guardado ✓'; }, 2200);
+    return;
+  }
+  try{
+    const ok = await window.storage.set(STORAGE_KEY, taskArea.value);
+    savedFlag.textContent = ok ? 'Guardado ✓' : 'No se pudo guardar';
+  }catch(e){
+    savedFlag.textContent = 'No se pudo guardar';
+  }
+  savedFlag.classList.add('show');
+  setTimeout(()=>{ savedFlag.classList.remove('show'); savedFlag.textContent = 'Guardado ✓'; }, 1800);
+}
+
+let taskSaveTimer = null;
+function scheduleTaskSave(){
+  clearTimeout(taskSaveTimer);
+  taskSaveTimer = setTimeout(guardarTareaAuto, 700);
+}
+
+taskArea.addEventListener('input', ()=>{
+  updateCount();
+  scheduleTaskSave();
+});
+updateCount();
+cargarTarea();
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clase 11 · Explicando un proceso — Davide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+
+/* ╔══════════════════════════════════════════════════════════════╗
+   ║  ESCOLAR — sistema de diseño para clases de español online   ║
+   ║  Clase 11 · L5 Línea del proceso · "Explicando un proceso" — Davide ║
+   ╚══════════════════════════════════════════════════════════════╝ */
+
+:root{
+  --paper:        #FBF7EE;
+  --paper-raised: #FFFFFF;
+  --paper-alt:    #F3ECDA;
+  --ink:          #23291F;
+  --ink-soft:     #565F52;
+  --ink-faint:    #8B9184;
+  --line:         rgba(35,41,31,0.12);
+  --line-strong:  rgba(35,41,31,0.22);
+
+  --b1:      #2F6FED;  --b1-soft: #EAF1FE;  --b1-line: #C6D9FC;
+  --b2:      #2E9E6B;  --b2-soft: #E9F6EF;  --b2-line: #BEE6D3;
+  --family:  #B5502E;  --family-soft: #FBEBE3; --family-line: #EFC9B4;
+
+  --f-display: 'Fraunces', Georgia, serif;
+  --f-body:    'IBM Plex Sans', system-ui, sans-serif;
+  --f-data:    'IBM Plex Mono', monospace;
+
+  --r-sm: 8px;
+  --r-md: 14px;
+  --r-lg: 20px;
+
+  --shadow-1: 0 1px 2px rgba(35,41,31,0.05), 0 1px 8px rgba(35,41,31,0.04);
+}
+
+*{ box-sizing:border-box; }
+body{
+  margin:0;
+  background: var(--paper);
+  background-image: radial-gradient(circle at 1px 1px, var(--line) 1px, transparent 0);
+  background-size: 22px 22px;
+  color: var(--ink);
+  font-family: var(--f-body);
+  line-height:1.6;
+}
+::selection{ background: var(--b1-soft); }
+
+/* ---------- HEADER ---------- */
+header{ padding:44px 24px 28px; max-width:760px; margin:0 auto; }
+.eyebrow{
+  font-family: var(--f-data); font-size:12px; letter-spacing:.14em;
+  text-transform:uppercase; color: var(--b1); margin:0 0 10px;
+  display:flex; align-items:center; gap:10px;
+}
+.eyebrow .dot{ width:6px; height:6px; border-radius:50%; background: var(--b1); }
+h1{
+  font-family: var(--f-display); font-weight:600;
+  font-size:clamp(30px,5.6vw,46px); line-height:1.08;
+  margin:0 0 14px; letter-spacing:-.01em;
+}
+h1 em{ font-style:italic; color: var(--b1); }
+.lede{ font-size:16px; color: var(--ink-soft); max-width:56ch; margin:0; }
+
+.meta-row{
+  display:flex; flex-wrap:wrap; gap:20px; margin-top:26px;
+  font-family: var(--f-data); font-size:12px; color: var(--ink-faint);
+}
+.meta-row strong{
+  display:block; color: var(--ink); font-size:14.5px; font-weight:500;
+  font-family: var(--f-display); margin-top:3px;
+}
+
+/* ---------- SECTIONS ---------- */
+main{ max-width:760px; margin:0 auto; padding:8px 24px 100px; }
+
+section.block{ margin-bottom:52px; }
+.block-head{ display:flex; align-items:baseline; gap:12px; margin-bottom:18px; }
+.time-tag{
+  font-family: var(--f-data); font-size:11px; color: var(--ink-faint);
+  background: var(--paper-alt); padding:3px 10px; border-radius:999px; margin-left:auto; flex:none;
+}
+.block-num{
+  font-family: var(--f-data); font-size:12px; color:#fff; background: var(--b1);
+  width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  flex:none;
+}
+.block-head h2{
+  font-family: var(--f-display); font-weight:500; font-style:italic; font-size:22px; margin:0;
+}
+
+.panel{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-lg);
+  box-shadow: var(--shadow-1); padding:26px 28px;
+}
+
+/* ---------- CONNECTOR SEQUENCE ---------- */
+.seq-wrap{ display:flex; flex-direction:column; gap:0; }
+.seq-item{ display:flex; gap:16px; align-items:flex-start; position:relative; padding-bottom:20px; }
+.seq-item:last-child{ padding-bottom:0; }
+.seq-item::before{
+  content:""; position:absolute; left:19px; top:38px; bottom:0; width:2px; background: var(--b1-line);
+}
+.seq-item:last-child::before{ display:none; }
+.seq-marker{
+  flex:none; width:40px; height:40px; border-radius:50%; background: var(--b1-soft); border:1.5px solid var(--b1-line);
+  display:flex; align-items:center; justify-content:center; font-family: var(--f-display); font-weight:600;
+  font-size:18px; color: var(--b1); z-index:1;
+}
+.seq-body{ flex:1; padding-top:4px; }
+.seq-word{ font-family: var(--f-display); font-weight:600; font-size:19px; color: var(--ink); margin:0 0 4px; }
+.seq-ex{ font-size:14.5px; color: var(--ink-soft); margin:0; }
+
+.note{
+  margin-top:18px; padding:14px 16px; background: var(--b1-soft); border:1px solid var(--b1-line);
+  border-radius: var(--r-md); font-size:14px; color: var(--ink-soft);
+}
+.note strong{ color: var(--ink); }
+
+.compare-warning{
+  margin-top:14px; padding:14px 16px; background: var(--family-soft); border:1px solid var(--family-line);
+  border-radius: var(--r-md); font-size:13.5px; color: var(--ink-soft);
+}
+.compare-warning strong{ color: var(--family); }
+
+/* ---------- VOCAB CARDS ---------- */
+.vocab-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:12px; }
+.vocab-card{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:14px 16px; cursor:pointer; perspective:600px; min-height:78px;
+  display:flex; flex-direction:column; justify-content:center; transition: border-color .15s ease;
+}
+.vocab-card:hover{ border-color: var(--b1-line); }
+.vocab-card:focus-visible{ outline:2px solid var(--b1); outline-offset:2px; }
+.vocab-front{ font-family: var(--f-body); font-weight:600; font-size:15px; }
+.vocab-back{ display:none; font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); margin-top:6px; }
+.vocab-card.flipped .vocab-back{ display:block; }
+.vocab-card.flipped{ background: var(--b1-soft); border-color: var(--b1-line); }
+.vocab-hint{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin:10px 2px 16px; }
+
+/* ---------- EXERCISE ---------- */
+.exercise{ margin-bottom:20px; }
+.exercise:last-of-type{ margin-bottom:0; }
+.ex-sentence{ font-size:15.5px; margin-bottom:10px; }
+.ex-sentence .gap{ font-family: var(--f-data); color: var(--ink-faint); }
+.ex-options{ display:flex; flex-wrap:wrap; gap:8px; }
+.opt-btn{
+  font-family: var(--f-body); font-size:14px; background: var(--paper-raised);
+  border:1.5px solid var(--line); color: var(--ink); padding:7px 16px; border-radius:999px;
+  cursor:pointer; transition: all .15s ease;
+}
+.opt-btn:hover{ border-color: var(--ink-faint); }
+.opt-btn.picked{ background: var(--b1-soft); border-color: var(--b1); color: var(--b1); }
+.opt-btn.correct{ background: var(--b2-soft); border-color: var(--b2); color: var(--b2); }
+.opt-btn.wrong{ background: var(--family-soft); border-color: var(--family); color: var(--family); }
+.opt-btn:disabled{ cursor:default; }
+
+.check-bar{
+  display:flex; align-items:center; justify-content:space-between; gap:16px;
+  margin-top:22px; padding-top:18px; border-top:1px dashed var(--line);
+}
+.btn-primary{
+  font-family: var(--f-body); font-weight:600; font-size:14px; color:#fff; background: var(--b1);
+  border:none; padding:11px 22px; border-radius:999px; cursor:pointer; transition: transform .1s ease;
+}
+.btn-primary:hover{ transform: translateY(-1px); }
+#score-text{ font-family: var(--f-data); font-size:13px; color: var(--ink-faint); }
+.btn-ghost{
+  font-family: var(--f-body); font-weight:600; font-size:13px; color: var(--ink-soft); background:none;
+  border:1.5px solid var(--line); padding:9px 18px; border-radius:999px; cursor:pointer;
+}
+.btn-ghost:hover{ border-color: var(--ink-faint); }
+.ex-divider{
+  display:flex; align-items:center; gap:10px; margin:20px 0 16px;
+  font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.06em;
+  color: var(--ink-faint);
+}
+.ex-divider::before, .ex-divider::after{ content:""; flex:1; height:1px; background: var(--line); }
+.ex-divider.en-clase{ color: var(--b1); }
+.ex-divider.en-clase::before, .ex-divider.en-clase::after{ background: var(--b1-line); }
+
+/* ---------- CHARACTER CARDS (used here as "proceso" cards) ---------- */
+.characters{ display:grid; gap:16px; }
+.char-card{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-lg);
+  padding:20px 22px; display:flex; gap:16px; align-items:flex-start;
+}
+.char-avatar{
+  flex:none; width:44px; height:44px; border-radius:50%; background: var(--b1-soft);
+  display:flex; align-items:center; justify-content:center; font-family: var(--f-display);
+  font-weight:600; font-size:17px; color: var(--b1);
+}
+.char-body{ flex:1; }
+.char-name{ font-family: var(--f-display); font-weight:600; font-size:17px; margin:0 0 4px; }
+.char-role{ font-family: var(--f-data); font-size:11.5px; text-transform:uppercase; letter-spacing:.05em; color: var(--ink-faint); margin:0 0 10px; }
+.char-facts{ display:flex; flex-wrap:wrap; gap:6px; margin-bottom:10px; }
+.fact-tag{
+  font-family: var(--f-data); font-size:12px; background: var(--paper-alt); color: var(--ink-soft);
+  padding:4px 10px; border-radius:999px;
+}
+.char-prompt{ font-size:14px; color: var(--ink-soft); }
+.char-input{
+  width:100%; margin-top:8px; font-family: var(--f-body); font-size:14.5px; color: var(--ink);
+  background: var(--paper); border:1px solid var(--line); border-radius: var(--r-sm);
+  padding:10px 12px; resize:vertical; min-height:44px;
+}
+.char-input:focus{ outline:none; border-color: var(--b1-line); background: var(--paper-raised); }
+
+/* ---------- ROLEPLAY ---------- */
+.roleplay-panel{ background: var(--b2-soft); border:1px solid var(--b2-line); border-radius: var(--r-lg); padding:26px 28px; }
+.roleplay-panel .block-num{ background: var(--b2); }
+.scene-setup{
+  display:flex; gap:14px; align-items:flex-start; background: var(--paper-raised);
+  border:1px solid var(--b2-line); border-radius: var(--r-md); padding:14px 16px; margin-bottom:20px;
+}
+.scene-icon{ font-size:22px; flex:none; }
+.scene-text{ font-size:14px; color: var(--ink-soft); }
+.scene-text strong{ color: var(--ink); }
+
+.dialogue{ display:flex; flex-direction:column; gap:14px; }
+.scene-tabs{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:18px; }
+.scene-tab{
+  font-family: var(--f-data); font-size:12.5px; background: var(--paper-raised);
+  border:1.5px solid var(--b2-line); color: var(--ink-soft); padding:7px 14px;
+  border-radius:999px; cursor:pointer; transition: all .15s ease;
+}
+.scene-tab:hover{ border-color: var(--b2); }
+.scene-tab.active{ background: var(--b2); border-color: var(--b2); color:#fff; }
+.line{ display:flex; gap:12px; align-items:flex-start; }
+.line-avatar{
+  flex:none; width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  font-family: var(--f-display); font-weight:600; font-size:14px; color:#fff;
+}
+.line.friend .line-avatar{ background: var(--ink-faint); }
+.line.you .line-avatar{ background: var(--b2); }
+.line-body{ flex:1; }
+.line-name{ font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.05em; color: var(--ink-faint); margin:0 0 4px; }
+.line-bubble{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:12px 14px; font-size:14.5px; color: var(--ink);
+}
+.line.you .line-bubble{ background:#fff; border-color: var(--b2-line); }
+.line-input{
+  width:100%; font-family: var(--f-body); font-size:14.5px; color: var(--ink);
+  background:#fff; border:1px solid var(--b2-line); border-radius: var(--r-sm);
+  padding:10px 12px; resize:vertical; min-height:40px; margin-top:2px;
+}
+.line-input:focus{ outline:none; border-color: var(--b2); }
+.line-hint{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin-top:5px; }
+
+.roleplay-tip{
+  margin-top:22px; padding:14px 16px; background: var(--paper-raised); border:1px solid var(--b2-line);
+  border-radius: var(--r-md); font-size:13.5px; color: var(--ink-soft);
+}
+.roleplay-tip strong{ color: var(--ink); }
+
+/* ---------- FINAL TASK ---------- */
+.task-panel{ background: var(--family-soft); border:1px solid var(--family-line); border-radius: var(--r-lg); padding:26px 28px; }
+.task-panel .block-num{ background: var(--family); }
+textarea#final-task{
+  width:100%; min-height:110px; font-family: var(--f-body); font-size:15px; color: var(--ink);
+  background: var(--paper-raised); border:1px solid var(--family-line); border-radius: var(--r-md);
+  padding:14px 16px; resize:vertical; margin-top:14px;
+}
+textarea#final-task:focus{ outline:none; border-color: var(--family); }
+.task-footer{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:12px; flex-wrap:wrap; }
+#task-count{ font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); }
+.btn-secondary{
+  font-family: var(--f-body); font-weight:600; font-size:13.5px; color: var(--family); background:none;
+  border:1.5px solid var(--family-line); padding:9px 18px; border-radius:999px; cursor:pointer;
+}
+.saved-flag{ font-family: var(--f-data); font-size:12px; color: var(--b2); opacity:0; transition: opacity .3s ease; }
+.saved-flag.show{ opacity:1; }
+
+/* ---------- READING PANEL ---------- */
+.reading-panel{ background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-lg); padding:26px 28px; }
+.reading-title{ font-family: var(--f-display); font-weight:600; font-style:italic; font-size:19px; margin:0 0 14px; color: var(--family); }
+.reading-text{ font-size:15px; color: var(--ink-soft); line-height:1.75; }
+.reading-text p{ margin:0 0 14px; }
+.reading-text p:last-child{ margin-bottom:0; }
+.reading-text strong{ color: var(--ink); font-family: var(--f-display); font-style:italic; font-weight:600; }
+
+/* ---------- FOOTER NAV ---------- */
+footer{
+  max-width:760px; margin:0 auto; padding:0 24px 60px; display:flex;
+  justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;
+  font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint);
+}
+footer a{ color: var(--b1); text-decoration:none; }
+footer a:hover{ text-decoration:underline; }
+
+@media (max-width:600px){
+  header{ padding:34px 18px 22px; }
+  main{ padding:8px 18px 90px; }
+  .panel, .task-panel, .reading-panel{ padding:20px 18px; }
+  .char-card{ flex-direction:column; }
+}
+@media (prefers-reduced-motion: reduce){ *{ transition:none !important; } }
+</style>
+</head>
+<body>
+
+<header>
+  <p class="eyebrow"><span class="dot"></span>Clase 11 de 16 · L5 Línea del proceso</p>
+  <h1>Explicando un <em>proceso</em></h1>
+  <p class="lede">Ya sabes dar órdenes con el imperativo. Hoy aprendes a encadenarlas para contar un proceso completo, paso a paso, como cuando explicas una receta de principio a fin: <strong>primero</strong>, <strong>después</strong>, <strong>luego</strong>, <strong>mientras tanto</strong> y <strong>al final</strong>.</p>
+  <div class="meta-row">
+    <div>Duración<strong>50 min</strong></div>
+    <div>Gramática<strong>Conectores temporales</strong></div>
+    <div>Nivel<strong>A1</strong></div>
+  </div>
+</header>
+
+<main>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">1</span><h2>Los conectores del proceso</h2><span class="time-tag">10 min</span></div>
+    <div class="panel">
+      <div class="seq-wrap">
+        <div class="seq-item">
+          <div class="seq-marker">1º</div>
+          <div class="seq-body">
+            <p class="seq-word">Primero</p>
+            <p class="seq-ex">Primero, pesamos todos los ingredientes.</p>
+          </div>
+        </div>
+        <div class="seq-item">
+          <div class="seq-marker">2º</div>
+          <div class="seq-body">
+            <p class="seq-word">Después</p>
+            <p class="seq-ex">Después, mezclamos la harina con el azúcar.</p>
+          </div>
+        </div>
+        <div class="seq-item">
+          <div class="seq-marker">3º</div>
+          <div class="seq-body">
+            <p class="seq-word">Luego</p>
+            <p class="seq-ex">Luego, añadimos la mantequilla poco a poco.</p>
+          </div>
+        </div>
+        <div class="seq-item">
+          <div class="seq-marker">↻</div>
+          <div class="seq-body">
+            <p class="seq-word">Mientras tanto</p>
+            <p class="seq-ex">Mientras tanto, precalentamos el horno a 180 grados.</p>
+          </div>
+        </div>
+        <div class="seq-item">
+          <div class="seq-marker">✓</div>
+          <div class="seq-body">
+            <p class="seq-word">Al final</p>
+            <p class="seq-ex">Al final, dejamos reposar la masa media hora.</p>
+          </div>
+        </div>
+      </div>
+      <div class="note"><strong>Después y luego</strong> son casi intercambiables en español hablado — los dos indican "a continuación". No hay una diferencia grande entre ellos, así que puedes usar el que prefieras para variar el discurso.</div>
+      <div class="compare-warning">
+        <strong>Ojo, trampa para hablantes de italiano y francés:</strong> "prima" / "d'abord" y "dopo" / "après" se traducen bien, pero recuerda que en español no repetimos el sujeto en cada frase del proceso: no decimos "yo primero peso, yo después mezclo" — decimos simplemente "primero peso, después mezclo". El conector ya organiza la frase, el sujeto se sobreentiende.
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">2</span><h2>Vocabulario</h2><span class="time-tag">6 min</span></div>
+    <p class="vocab-hint">Toca cada tarjeta para ver un ejemplo.</p>
+    <div class="vocab-grid" id="vocab-grid"></div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">3</span><h2>Practica</h2><span class="time-tag">12 min</span></div>
+    <div class="panel">
+      <p class="vocab-hint" style="margin-bottom:14px;">50 frases: las primeras 12 se hacen en voz alta en clase; el resto queda como repaso para casa.</p>
+      <div id="exercises"></div>
+      <div class="check-bar">
+        <div style="display:flex; gap:10px;">
+          <button class="btn-primary" id="check-btn">Comprobar respuestas</button>
+          <button class="btn-ghost" id="reset-btn">Reiniciar</button>
+        </div>
+        <span id="score-text"></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">4</span><h2>Narra el proceso</h2><span class="time-tag">7 min</span></div>
+    <p class="lede" style="margin-bottom:16px;">Completa cada paso del proceso con un conector temporal y una frase propia. Las primeras 6 se trabajan en clase; el resto queda como banco de repaso para casa.</p>
+    <div class="characters" id="characters"></div>
+  </section>
+
+  <section class="block roleplay-panel">
+    <div class="block-head"><span class="block-num">5</span><h2>Roleplay: 5 escenas en el obrador de Girona</h2><span class="time-tag">12 min</span></div>
+    <p class="lede" style="margin-bottom:16px;">50 intercambios repartidos en 5 situaciones reales. Elige una escena para practicar en clase; el resto queda como banco de repaso para casa.</p>
+    <div class="scene-tabs" id="scene-tabs"></div>
+    <div id="scene-container"></div>
+    <div class="roleplay-tip"><strong>En clase:</strong> practicaremos una escena en voz alta, cambiando de rol. El resto de escenas son para practicar por tu cuenta durante la semana.</div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">6</span><h2>Lectura recomendada</h2><span class="time-tag">3 min</span></div>
+    <div class="reading-panel">
+      <p class="reading-title">La elaboración de la crema catalana</p>
+      <div class="reading-text">
+        <p><strong>Primero</strong>, calentamos la leche con la piel de un limón y una rama de canela, sin que llegue a hervir. <strong>Mientras tanto</strong>, batimos las yemas de huevo con el azúcar hasta conseguir una mezcla clara y suave.</p>
+        <p><strong>Después</strong>, añadimos la leche caliente poco a poco sobre las yemas, removiendo sin parar para que no se cuajen. <strong>Luego</strong>, volvemos a poner la mezcla al fuego suave hasta que espesa un poco, como una crema fina.</p>
+        <p><strong>Al final</strong>, repartimos la crema en cuencos individuales y la dejamos enfriar en la nevera varias horas. Justo antes de servir, espolvoreamos azúcar por encima y la quemamos con un soplete para conseguir esa capa crujiente tan característica.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="block task-panel">
+    <div class="block-head"><span class="block-num">7</span><h2 style="color:var(--family)">Tu tarea</h2><span class="time-tag">3 min</span></div>
+    <p style="margin:0; font-size:15px; color:var(--ink-soft);">Elige un postre clásico español (crema catalana, tarta de Santiago, torrijas...) y escribe el proceso de elaboración usando al menos <strong>4 conectores temporales</strong> distintos: primero, después, luego, mientras tanto, al final.</p>
+    <textarea id="final-task" placeholder="Primero...&#10;Después...&#10;Mientras tanto...&#10;Al final..."></textarea>
+    <div class="task-footer">
+      <span id="task-count">0 conectores detectados</span>
+      <div style="display:flex; gap:10px; align-items:center;">
+        <span class="saved-flag" id="saved-flag">Guardado ✓</span>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <span>Clase 11 · Línea del proceso</span>
+  <span>Próxima clase → Clase 12: Comparando tradiciones de pastelería</span>
+</footer>
+
+<script>
+/* ---------- VOCAB ---------- */
+const VOCAB = [
+  {front:"primero", back:"Primero, precalentamos el horno."},
+  {front:"después", back:"Después, mezclamos los ingredientes secos."},
+  {front:"luego", back:"Luego, incorporamos los huevos."},
+  {front:"mientras tanto", back:"Mientras tanto, prepara el molde."},
+  {front:"al final", back:"Al final, hornea durante 30 minutos."},
+  {front:"a continuación", back:"A continuación, deja enfriar el bizcocho."},
+  {front:"antes de", back:"Antes de hornear, engrasa el molde."},
+  {front:"para terminar", back:"Para terminar, decora con azúcar glas."},
+  {front:"el paso", back:"Este es el primer paso de la receta."},
+  {front:"reposar", back:"Deja reposar la masa una hora."},
+];
+
+const grid = document.getElementById('vocab-grid');
+VOCAB.forEach(v=>{
+  const card = document.createElement('div');
+  card.className = 'vocab-card';
+  card.setAttribute('role', 'button');
+  card.setAttribute('tabindex', '0');
+  card.setAttribute('aria-pressed', 'false');
+  card.setAttribute('aria-label', `${v.front}. Pulsa para ver un ejemplo.`);
+  card.innerHTML = `<div class="vocab-front">${v.front}</div><div class="vocab-back">${v.back}</div>`;
+  const toggle = ()=>{
+    const flipped = card.classList.toggle('flipped');
+    card.setAttribute('aria-pressed', String(flipped));
+  };
+  card.addEventListener('click', toggle);
+  card.addEventListener('keydown', (e)=>{
+    if(e.key === 'Enter' || e.key === ' '){
+      e.preventDefault();
+      toggle();
+    }
+  });
+  grid.appendChild(card);
+});
+
+/* ---------- EXERCISES ---------- */
+const EXERCISES = [
+  {"sentence":"<span class=\"gap\">___</span>, pesamos la harina y el azúcar.","options":["Al final","Primero","Mientras"],"answer":"Primero"},
+  {"sentence":"Primero calentamos el horno; <span class=\"gap\">___</span> preparamos la masa.","options":["después","primero","antes"],"answer":"después"},
+  {"sentence":"<span class=\"gap\">___</span> añadimos los huevos uno a uno.","options":["Mientras tanto","Luego","Antes"],"answer":"Luego"},
+  {"sentence":"<span class=\"gap\">___</span>, precalienta el horno a 180 grados.","options":["Al final","Mientras tanto","Luego"],"answer":"Mientras tanto"},
+  {"sentence":"<span class=\"gap\">___</span>, dejamos reposar el bizcocho antes de desmoldar.","options":["Primero","Al final","Mientras"],"answer":"Al final"},
+  {"sentence":"Primero mezcla los ingredientes secos; <span class=\"gap\">___</span> incorpora los líquidos.","options":["después","al final","antes"],"answer":"después"},
+  {"sentence":"<span class=\"gap\">___</span> hornear, engrasa bien el molde.","options":["Antes de","Después de","Luego de"],"answer":"Antes de"},
+  {"sentence":"<span class=\"gap\">___</span> terminar, decora la tarta con fruta fresca.","options":["Para","Antes","Mientras"],"answer":"Para"},
+  {"sentence":"El primer <span class=\"gap\">___</span> de la receta es pesar los ingredientes.","options":["proceso","paso","final"],"answer":"paso"},
+  {"sentence":"Deja <span class=\"gap\">___</span> la masa media hora en la nevera.","options":["reposar","hornear","mezclar"],"answer":"reposar"},
+  {"sentence":"<span class=\"gap\">___</span> montamos la nata, batimos las claras a punto de nieve.","options":["Mientras tanto","Al final","Primero"],"answer":"Mientras tanto"},
+  {"sentence":"<span class=\"gap\">___</span>, sacamos el pastel del horno y lo dejamos enfriar.","options":["Primero","Al final","Antes"],"answer":"Al final"},
+  {"sentence":"<span class=\"gap\">___</span>, cortamos la fruta en trozos pequeños.","options":["Al final","Primero","Después de"],"answer":"Primero"},
+  {"sentence":"Primero batimos la mantequilla; <span class=\"gap\">___</span> añadimos el azúcar poco a poco.","options":["luego","antes","al final"],"answer":"luego"},
+  {"sentence":"<span class=\"gap\">___</span> comprobar si está hecho, pinchamos con un palillo.","options":["Para","Antes de","Mientras"],"answer":"Para"},
+  {"sentence":"El horno tarda diez minutos en calentarse; <span class=\"gap\">___</span> preparamos la masa.","options":["mientras tanto","al final","antes"],"answer":"mientras tanto"},
+  {"sentence":"<span class=\"gap\">___</span>, tamizamos la harina para que no queden grumos.","options":["Primero","Al final","Luego de"],"answer":"Primero"},
+  {"sentence":"Después de hornear, <span class=\"gap\">___</span> dejamos enfriar el bizcocho sobre una rejilla.","options":["mientras tanto","primero","al final"],"answer":"al final"},
+  {"sentence":"<span class=\"gap\">___</span> encender el horno, comprueba que está limpio.","options":["Antes de","Después de","Al final de"],"answer":"Antes de"},
+  {"sentence":"<span class=\"gap\">___</span>, espolvoreamos azúcar glas por encima.","options":["Primero","Para terminar","Mientras"],"answer":"Para terminar"},
+  {"sentence":"Cada <span class=\"gap\">___</span> de esta receta es importante para el resultado final.","options":["paso","final","principio"],"answer":"paso"},
+  {"sentence":"<span class=\"gap\">___</span> vamos a explicar el proceso completo del croissant.","options":["A continuación","Antes","Al final"],"answer":"A continuación"},
+  {"sentence":"Primero amasamos; <span class=\"gap\">___</span> dejamos reposar la masa dos horas.","options":["después","antes de","al final de"],"answer":"después"},
+  {"sentence":"<span class=\"gap\">___</span> incorporar la mantequilla, la masa debe estar fría.","options":["Antes de","Después de","Para"],"answer":"Antes de"},
+  {"sentence":"<span class=\"gap\">___</span>, formamos los croissants con mucho cuidado.","options":["Luego","Al final de","Antes de"],"answer":"Luego"},
+  {"sentence":"El pastel se hornea 40 minutos; <span class=\"gap\">___</span> preparamos la decoración.","options":["mientras tanto","al final","primero"],"answer":"mientras tanto"},
+  {"sentence":"<span class=\"gap\">___</span>, montamos la tarta con las capas de bizcocho y crema.","options":["Al final","Primero","Antes"],"answer":"Primero"},
+  {"sentence":"Después de montar la tarta, <span class=\"gap\">___</span> la decoramos con fruta.","options":["luego","antes","mientras"],"answer":"luego"},
+  {"sentence":"<span class=\"gap\">___</span> servir el postre, lo dejamos enfriar en la nevera.","options":["Para","Antes de","Al final de"],"answer":"Para"},
+  {"sentence":"<span class=\"gap\">___</span> este proceso, necesitamos paciencia y precisión.","options":["Para","Durante","Antes"],"answer":"Durante"},
+  {"sentence":"<span class=\"gap\">___</span>, revisamos que todos los ingredientes estén listos.","options":["Primero","Al final","Luego de"],"answer":"Primero"},
+  {"sentence":"Batimos las claras a punto de nieve; <span class=\"gap\">___</span> las mezclamos con cuidado.","options":["luego","antes","al final de"],"answer":"luego"},
+  {"sentence":"<span class=\"gap\">___</span> hornear el bizcocho, no abras la puerta del horno.","options":["Mientras","Después de","Antes de"],"answer":"Mientras"},
+  {"sentence":"<span class=\"gap\">___</span>, colocamos la tarta en el frigorífico toda la noche.","options":["Primero","Para terminar","Mientras tanto"],"answer":"Para terminar"},
+  {"sentence":"El primer <span class=\"gap\">___</span> siempre es leer bien la receta completa.","options":["paso","final","proceso"],"answer":"paso"},
+  {"sentence":"<span class=\"gap\">___</span> vamos a ver cómo se hace una masa madre.","options":["A continuación","Al final","Antes"],"answer":"A continuación"},
+  {"sentence":"Dejamos <span class=\"gap\">___</span> la masa madre varios días antes de usarla.","options":["reposar","hornear","mezclar"],"answer":"reposar"},
+  {"sentence":"<span class=\"gap\">___</span> cortar la tarta, deja que se enfríe completamente.","options":["Antes de","Después de","Para"],"answer":"Antes de"},
+  {"sentence":"Primero se hornea la base; <span class=\"gap\">___</span> se añade el relleno.","options":["después","antes de","al final de"],"answer":"después"},
+  {"sentence":"<span class=\"gap\">___</span>, limpiamos bien la mesa de trabajo.","options":["Al final","Primero","Luego"],"answer":"Al final"},
+  {"sentence":"<span class=\"gap\">___</span> se hornea la masa, preparamos la crema pastelera.","options":["Mientras","Después","Antes"],"answer":"Mientras"},
+  {"sentence":"<span class=\"gap\">___</span> el bizcocho está en el horno, batimos la nata.","options":["Mientras","Al final","Antes"],"answer":"Mientras"},
+  {"sentence":"<span class=\"gap\">___</span>, comprobamos la textura de la masa con los dedos.","options":["Primero","A continuación","Para terminar"],"answer":"A continuación"},
+  {"sentence":"El proceso tiene varios <span class=\"gap\">___</span> que hay que seguir en orden.","options":["pasos","finales","principios"],"answer":"pasos"},
+  {"sentence":"<span class=\"gap\">___</span> montar la tarta, prepara todos los ingredientes.","options":["Antes de","Después de","Para terminar"],"answer":"Antes de"},
+  {"sentence":"Primero se bate la mantequilla; <span class=\"gap\">___</span>, se añade el azúcar.","options":["luego","antes","al final de"],"answer":"luego"},
+  {"sentence":"<span class=\"gap\">___</span>, el jefe de cocina revisa que todo esté perfecto.","options":["Al final","Primero","Mientras tanto"],"answer":"Al final"},
+  {"sentence":"<span class=\"gap\">___</span> preparar el relleno, escurrimos bien la fruta.","options":["Para","Antes de","Al final de"],"answer":"Para"},
+  {"sentence":"<span class=\"gap\">___</span>, servimos el postre recién hecho.","options":["Para terminar","Primero","Antes"],"answer":"Para terminar"}
+];
+
+const PRACTICE_KEY = 'davide-clase11-practica';
+let practiceState = {};
+async function cargarPractica(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(PRACTICE_KEY);
+    if (res && typeof res.value === 'string') practiceState = JSON.parse(res.value);
+  }catch(e){
+    // Sin progreso previo guardado todavía.
+  }
+}
+async function guardarPractica(){
+  if (!window.storage) return;
+  try{ await window.storage.set(PRACTICE_KEY, JSON.stringify(practiceState)); }catch(e){ /* fallo silencioso */ }
+}
+
+const exWrap = document.getElementById('exercises');
+(async function initPractica(){
+await cargarPractica();
+EXERCISES.forEach((ex, i)=>{
+  if(i === 0){
+    const divider = document.createElement('div');
+    divider.className = 'ex-divider en-clase';
+    divider.textContent = 'en clase · ítems 1–12';
+    exWrap.appendChild(divider);
+  }
+  if(i === 12){
+    const divider = document.createElement('div');
+    divider.className = 'ex-divider';
+    divider.textContent = 'para casa · repaso opcional';
+    exWrap.appendChild(divider);
+  }
+  const el = document.createElement('div');
+  el.className = 'exercise';
+  el.dataset.answer = ex.answer;
+  el.dataset.idx = i;
+  el.innerHTML = `
+    <div class="ex-sentence">${i+1}. ${ex.sentence}</div>
+    <div class="ex-options">
+      ${ex.options.map(o=>`<button class="opt-btn" data-value="${o}">${o}</button>`).join('')}
+    </div>
+  `;
+  exWrap.appendChild(el);
+
+  const savedPick = practiceState[i];
+  if(savedPick){
+    const savedBtn = el.querySelector(`.opt-btn[data-value="${savedPick}"]`);
+    if(savedBtn) savedBtn.classList.add('picked');
+  }
+
+  el.querySelectorAll('.opt-btn').forEach(btn=>{
+    btn.addEventListener('click', async ()=>{
+      el.querySelectorAll('.opt-btn').forEach(b=>b.classList.remove('picked'));
+      btn.classList.add('picked');
+      practiceState[i] = btn.dataset.value;
+      await guardarPractica();
+    });
+  });
+});
+})();
+
+document.getElementById('check-btn').addEventListener('click', ()=>{
+  let correct = 0;
+  document.querySelectorAll('.exercise').forEach(el=>{
+    const answer = el.dataset.answer;
+    const picked = el.querySelector('.opt-btn.picked');
+    el.querySelectorAll('.opt-btn').forEach(b=>{
+      b.disabled = true;
+      if(b.dataset.value === answer) b.classList.add('correct');
+      else if(b === picked) b.classList.add('wrong');
+    });
+    if(picked && picked.dataset.value === answer) correct++;
+  });
+  document.getElementById('score-text').textContent = `${correct} / ${EXERCISES.length} correctas`;
+});
+
+document.getElementById('reset-btn').addEventListener('click', async ()=>{
+  document.querySelectorAll('.exercise').forEach(el=>{
+    el.querySelectorAll('.opt-btn').forEach(b=>{
+      b.disabled = false;
+      b.classList.remove('picked','correct','wrong');
+    });
+  });
+  document.getElementById('score-text').textContent = '';
+  practiceState = {};
+  await guardarPractica();
+});
+
+/* ---------- PROCESS CARDS ---------- */
+const CHARACTERS = [
+  {"name":"El bizcocho","role":"Proceso base de pastelería","facts":["mezclar","hornear","enfriar"],"prompt":"Describe el proceso con conectores temporales:"},
+  {"name":"El croissant","role":"Hojaldre y fermentación","facts":["amasar","reposar","formar"],"prompt":"Describe el proceso con conectores temporales:"},
+  {"name":"La crema pastelera","role":"Relleno clásico","facts":["batir yemas","calentar leche","espesar"],"prompt":"Describe el proceso con conectores temporales:"},
+  {"name":"La tarta de fruta","role":"Montaje final","facts":["hornear base","preparar crema","decorar"],"prompt":"Describe el proceso con conectores temporales:"},
+  {"name":"El pan casero","role":"Fermentación larga","facts":["amasar","fermentar","hornear"],"prompt":"Describe el proceso con conectores temporales:"},
+  {"name":"Las galletas","role":"Elaboración rápida","facts":["mezclar","formar bolitas","hornear 10 min"],"prompt":"Describe el proceso con conectores temporales:"},
+  {"name":"El merengue","role":"Claras a punto de nieve","facts":["batir claras","añadir azúcar","hornear a baja temperatura"],"prompt":"Describe el proceso con conectores temporales:"},
+  {"name":"La mousse de chocolate","role":"Postre sin horno","facts":["derretir chocolate","montar nata","refrigerar"],"prompt":"Describe el proceso con conectores temporales:"},
+  {"name":"El flan","role":"Postre con caramelo","facts":["hacer caramelo","batir huevos","cocer al baño maría"],"prompt":"Describe el proceso con conectores temporales:"},
+  {"name":"Las torrijas","role":"Postre tradicional español","facts":["remojar el pan","freír","añadir azúcar y canela"],"prompt":"Describe el proceso con conectores temporales:"}
+];
+
+const CHAR_KEY = 'davide-clase11-personajes';
+let charState = {};
+async function cargarPersonajes(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(CHAR_KEY);
+    if (res && typeof res.value === 'string') charState = JSON.parse(res.value);
+  }catch(e){
+    // Sin personajes guardados todavía.
+  }
+}
+async function guardarPersonajes(){
+  if (!window.storage) return;
+  try{ await window.storage.set(CHAR_KEY, JSON.stringify(charState)); }catch(e){ /* fallo silencioso */ }
+}
+let charSaveTimer = null;
+function scheduleCharSave(){
+  clearTimeout(charSaveTimer);
+  charSaveTimer = setTimeout(guardarPersonajes, 500);
+}
+
+const charWrap = document.getElementById('characters');
+(async function initPersonajes(){
+await cargarPersonajes();
+CHARACTERS.forEach((c, i)=>{
+  if(i === 0){
+    const divider = document.createElement('div');
+    divider.className = 'ex-divider en-clase';
+    divider.textContent = 'en clase · procesos 1–6';
+    charWrap.appendChild(divider);
+  }
+  if(i === 6){
+    const divider = document.createElement('div');
+    divider.className = 'ex-divider';
+    divider.textContent = 'para casa · banco de repaso';
+    charWrap.appendChild(divider);
+  }
+  const card = document.createElement('div');
+  card.className = 'char-card';
+  card.innerHTML = `
+    <div class="char-avatar">${c.name.charAt(0)}</div>
+    <div class="char-body">
+      <p class="char-name">${c.name}</p>
+      <p class="char-role">${c.role}</p>
+      <div class="char-facts">${c.facts.map(f=>`<span class="fact-tag">${f}</span>`).join('')}</div>
+      <p class="char-prompt">${c.prompt}</p>
+      <textarea class="char-input" rows="3" placeholder="Primero... Después... Al final..." data-idx="${i}"></textarea>
+    </div>
+  `;
+  charWrap.appendChild(card);
+  const charInputEl = card.querySelector('.char-input');
+  if(charState[i]) charInputEl.value = charState[i];
+  charInputEl.addEventListener('input', ()=>{
+    charState[i] = charInputEl.value;
+    scheduleCharSave();
+  });
+});
+})();
+
+/* ---------- ROLEPLAY SCENES ---------- */
+const SCENES = [
+  {
+    "id": "aprendiz",
+    "tab": "Explicando la receta al aprendiz",
+    "icon": "🧁",
+    "setup": "Pau, el aprendiz nuevo, no sabe cómo hacer un bizcocho y te pide que se lo expliques paso a paso.",
+    "lines": [
+      {"who":"friend","name":"Pau","text":"Davide, ¿me explicas cómo se hace el bizcocho de hoy?"},
+      {"who":"you","hint":"Empieza con \"primero\" y di el primer paso."},
+      {"who":"friend","name":"Pau","text":"Vale, ¿y después qué hago?"},
+      {"who":"you","hint":"Usa \"después\" para el segundo paso."},
+      {"who":"friend","name":"Pau","text":"¿Cuándo añado los huevos?"},
+      {"who":"you","hint":"Responde usando \"luego\"."},
+      {"who":"friend","name":"Pau","text":"¿Y mientras se hornea, qué hago yo?"},
+      {"who":"you","hint":"Usa \"mientras tanto\" para dar otra tarea."},
+      {"who":"friend","name":"Pau","text":"¿Cuánto tiempo tiene que reposar antes de desmoldar?"},
+      {"who":"you","hint":"Responde con un tiempo y \"antes de\"."},
+      {"who":"friend","name":"Pau","text":"Perfecto. ¿Y al final qué hacemos?"},
+      {"who":"you","hint":"Usa \"al final\" para el último paso."},
+      {"who":"friend","name":"Pau","text":"¿Se puede decorar con algo especial?"},
+      {"who":"you","hint":"Responde usando \"para terminar\"."},
+      {"who":"friend","name":"Pau","text":"Gracias, Davide, ahora lo entiendo mucho mejor."},
+      {"who":"you","hint":"Responde animándolo y resume el proceso brevemente."},
+      {"who":"friend","name":"Pau","text":"¿Puedo intentarlo yo solo la próxima vez?"},
+      {"who":"you","hint":"Anímale y añade un consejo con un conector temporal."},
+      {"who":"friend","name":"Pau","text":"¡Genial! Voy a apuntar todos los pasos."},
+      {"who":"you","hint":"Despídete deseándole suerte."}
+    ]
+  },
+  {
+    "id": "jefe",
+    "tab": "El jefe de cocina revisa el proceso",
+    "icon": "👨‍🍳",
+    "setup": "Marc quiere asegurarse de que sigues bien el orden correcto de la receta del día.",
+    "lines": [
+      {"who":"friend","name":"Marc","text":"Davide, ¿en qué paso del proceso estás ahora?"},
+      {"who":"you","hint":"Responde con un conector y el paso actual."},
+      {"who":"friend","name":"Marc","text":"¿Ya has pesado todos los ingredientes?"},
+      {"who":"you","hint":"Responde usando \"primero\"."},
+      {"who":"friend","name":"Marc","text":"Bien. ¿Qué haces después de mezclar?"},
+      {"who":"you","hint":"Usa \"después\" para el siguiente paso."},
+      {"who":"friend","name":"Marc","text":"¿Y el horno ya está caliente?"},
+      {"who":"you","hint":"Responde usando \"mientras tanto\"."},
+      {"who":"friend","name":"Marc","text":"Perfecto. ¿Cuánto tiempo va a hornear?"},
+      {"who":"you","hint":"Da un tiempo aproximado."},
+      {"who":"friend","name":"Marc","text":"¿Y al final qué hacemos con el producto?"},
+      {"who":"you","hint":"Usa \"al final\" para explicar el último paso."},
+      {"who":"friend","name":"Marc","text":"Muy bien organizado, Davide."},
+      {"who":"you","hint":"Da las gracias y comenta el proceso."},
+      {"who":"friend","name":"Marc","text":"¿Necesitas ayuda con algún paso?"},
+      {"who":"you","hint":"Responde con un conector temporal específico."},
+      {"who":"friend","name":"Marc","text":"Avísame antes de sacarlo del horno."},
+      {"who":"you","hint":"Confirma usando \"antes de\"."},
+      {"who":"friend","name":"Marc","text":"Genial, sigue así."},
+      {"who":"you","hint":"Responde agradeciendo el consejo."}
+    ]
+  },
+  {
+    "id": "companera",
+    "tab": "Ayudando a Laura con su receta",
+    "icon": "🍰",
+    "setup": "Laura está preparando una tarta complicada y te pide consejo sobre el orden de los pasos.",
+    "lines": [
+      {"who":"friend","name":"Laura","text":"Davide, ¿por dónde empiezo esta tarta?"},
+      {"who":"you","hint":"Responde usando \"primero\"."},
+      {"who":"friend","name":"Laura","text":"Vale, ¿y después de montar la nata?"},
+      {"who":"you","hint":"Usa \"después\" para continuar el proceso."},
+      {"who":"friend","name":"Laura","text":"¿Puedo preparar la base mientras se enfría la crema?"},
+      {"who":"you","hint":"Responde usando \"mientras tanto\"."},
+      {"who":"friend","name":"Laura","text":"¿Cuándo añado la fruta encima?"},
+      {"who":"you","hint":"Usa \"luego\" o \"al final\"."},
+      {"who":"friend","name":"Laura","text":"¿Antes de servir hay que refrigerarla?"},
+      {"who":"you","hint":"Responde usando \"antes de\"."},
+      {"who":"friend","name":"Laura","text":"Gracias, esto me ayuda mucho."},
+      {"who":"you","hint":"Responde amablemente."},
+      {"who":"friend","name":"Laura","text":"¿Y para decorar, qué me recomiendas?"},
+      {"who":"you","hint":"Usa \"para terminar\" y da una idea."},
+      {"who":"friend","name":"Laura","text":"Perfecto, voy a seguir tus pasos."},
+      {"who":"you","hint":"Anímala con una frase final."},
+      {"who":"friend","name":"Laura","text":"¿Puedes revisarla al final?"},
+      {"who":"you","hint":"Confirma que la revisarás al final."},
+      {"who":"friend","name":"Laura","text":"Genial, ¡gracias por la ayuda!"},
+      {"who":"you","hint":"Despídete deseándole suerte."}
+    ]
+  },
+  {
+    "id": "cliente",
+    "tab": "Un cliente pregunta por la receta",
+    "icon": "🧑‍🤝‍🧑",
+    "setup": "Un cliente curioso te pregunta cómo se hace el pastel que ha comprado.",
+    "lines": [
+      {"who":"friend","name":"Adrià","text":"Este pastel está buenísimo, ¿cómo se hace?"},
+      {"who":"you","hint":"Empieza a explicar con \"primero\"."},
+      {"who":"friend","name":"Adrià","text":"¿Y qué se hace después de mezclar los ingredientes?"},
+      {"who":"you","hint":"Continúa con \"después\"."},
+      {"who":"friend","name":"Adrià","text":"¿Se hornea mucho tiempo?"},
+      {"who":"you","hint":"Responde con un tiempo aproximado."},
+      {"who":"friend","name":"Adrià","text":"¿Y mientras se hornea qué se prepara?"},
+      {"who":"you","hint":"Usa \"mientras tanto\"."},
+      {"who":"friend","name":"Adrià","text":"¿Qué se hace al final, antes de servirlo?"},
+      {"who":"you","hint":"Usa \"al final\" o \"antes de\"."},
+      {"who":"friend","name":"Adrià","text":"Qué interesante todo el proceso."},
+      {"who":"you","hint":"Responde con orgullo sobre tu trabajo."},
+      {"who":"friend","name":"Adrià","text":"¿Es difícil hacerlo en casa?"},
+      {"who":"you","hint":"Da tu opinión con un conector temporal."},
+      {"who":"friend","name":"Adrià","text":"Me gustaría intentarlo algún día."},
+      {"who":"you","hint":"Anímale a probarlo."},
+      {"who":"friend","name":"Adrià","text":"¿Tenéis la receta escrita en algún sitio?"},
+      {"who":"you","hint":"Responde ofreciéndole ayuda."},
+      {"who":"friend","name":"Adrià","text":"¡Muchas gracias por la explicación!"},
+      {"who":"you","hint":"Despídete amablemente."}
+    ]
+  },
+  {
+    "id": "video",
+    "tab": "Grabando un vídeo para el obrador",
+    "icon": "🎥",
+    "setup": "Núria te pide que grabes un vídeo explicando el proceso de una receta para las redes sociales del obrador.",
+    "lines": [
+      {"who":"friend","name":"Núria","text":"Davide, ¿puedes grabar un vídeo explicando el proceso de la receta?"},
+      {"who":"you","hint":"Acepta y empieza a explicar con \"primero\"."},
+      {"who":"friend","name":"Núria","text":"Muy bien, ¿qué viene después?"},
+      {"who":"you","hint":"Continúa con \"después\" o \"luego\"."},
+      {"who":"friend","name":"Núria","text":"¿Puedes mencionar cuánto tiempo se hornea?"},
+      {"who":"you","hint":"Da el tiempo con un conector adecuado."},
+      {"who":"friend","name":"Núria","text":"¿Y qué se puede hacer mientras se hornea?"},
+      {"who":"you","hint":"Usa \"mientras tanto\"."},
+      {"who":"friend","name":"Núria","text":"Perfecto, ¿cómo terminas la explicación?"},
+      {"who":"you","hint":"Usa \"al final\" o \"para terminar\"."},
+      {"who":"friend","name":"Núria","text":"Genial, el vídeo va a quedar muy claro."},
+      {"who":"you","hint":"Responde con satisfacción sobre el resultado."},
+      {"who":"friend","name":"Núria","text":"¿Quieres añadir algún consejo extra?"},
+      {"who":"you","hint":"Da un consejo usando un conector temporal."},
+      {"who":"friend","name":"Núria","text":"¿Podemos grabar otro vídeo la próxima semana?"},
+      {"who":"you","hint":"Responde aceptando con entusiasmo."},
+      {"who":"friend","name":"Núria","text":"Perfecto, muchas gracias por tu ayuda."},
+      {"who":"you","hint":"Responde amablemente."},
+      {"who":"friend","name":"Núria","text":"¡Nos vemos en el siguiente vídeo!"},
+      {"who":"you","hint":"Despídete con entusiasmo."}
+    ]
+  }
+];
+
+const sceneTabs = document.getElementById('scene-tabs');
+const sceneContainer = document.getElementById('scene-container');
+let activeScene = 0;
+
+function renderTabs(){
+  sceneTabs.innerHTML = SCENES.map((s,i)=>
+    `<button class="scene-tab${i===activeScene?' active':''}" data-idx="${i}">${s.icon} ${s.tab}</button>`
+  ).join('');
+  sceneTabs.querySelectorAll('.scene-tab').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      activeScene = parseInt(btn.dataset.idx, 10);
+      renderTabs();
+      renderScene();
+    });
+  });
+}
+
+function renderScene(){
+  const scene = SCENES[activeScene];
+  const linesHtml = scene.lines.map((l, li)=>{
+    if(l.who === 'friend'){
+      return `
+        <div class="line friend">
+          <div class="line-avatar">${l.name.charAt(0)}</div>
+          <div class="line-body">
+            <p class="line-name">${l.name}</p>
+            <div class="line-bubble">${l.text}</div>
+          </div>
+        </div>`;
+    } else {
+      const rpKey = `${scene.id}:${li}`;
+      return `
+        <div class="line you">
+          <div class="line-avatar">Tú</div>
+          <div class="line-body">
+            <p class="line-name">Tú</p>
+            <textarea class="line-input" rows="2" placeholder="Escribe tu respuesta con un conector temporal..." data-rpkey="${scene.id}:${li}">${roleplayState[rpKey] ? roleplayState[rpKey] : ''}</textarea>
+            <p class="line-hint">${l.hint}</p>
+          </div>
+        </div>`;
+    }
+  }).join('');
+
+  sceneContainer.innerHTML = `
+    <div class="scene-setup">
+      <span class="scene-icon">${scene.icon}</span>
+      <p class="scene-text"><strong>${scene.tab}:</strong> ${scene.setup}</p>
+    </div>
+    <div class="dialogue">${linesHtml}</div>
+  `;
+
+  sceneContainer.querySelectorAll('.line-input').forEach(inputEl=>{
+    inputEl.addEventListener('input', ()=>{
+      roleplayState[inputEl.dataset.rpkey] = inputEl.value;
+      scheduleRoleplaySave();
+    });
+  });
+}
+
+const ROLEPLAY_KEY = 'davide-clase11-roleplay';
+let roleplayState = {};
+async function cargarRoleplay(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(ROLEPLAY_KEY);
+    if (res && typeof res.value === 'string') roleplayState = JSON.parse(res.value);
+  }catch(e){
+    // Sin intervenciones guardadas todavía.
+  }
+}
+async function guardarRoleplay(){
+  if (!window.storage) return;
+  try{ await window.storage.set(ROLEPLAY_KEY, JSON.stringify(roleplayState)); }catch(e){ /* fallo silencioso */ }
+}
+let roleplaySaveTimer = null;
+function scheduleRoleplaySave(){
+  clearTimeout(roleplaySaveTimer);
+  roleplaySaveTimer = setTimeout(guardarRoleplay, 500);
+}
+
+(async function initRoleplay(){
+await cargarRoleplay();
+renderTabs();
+renderScene();
+})();
+
+/* ---------- FINAL TASK ---------- */
+const STORAGE_KEY = 'davide-clase11-tarea';
+const taskArea = document.getElementById('final-task');
+const taskCount = document.getElementById('task-count');
+const savedFlag = document.getElementById('saved-flag');
+
+async function cargarTarea(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(STORAGE_KEY);
+    if (res && typeof res.value === 'string') taskArea.value = res.value;
+  }catch(e){
+    // Clave inexistente todavía: no hay tarea previa, se queda en blanco.
+  }
+  updateCount();
+}
+
+function updateCount(){
+  const matches = (taskArea.value.match(/\b(primero|despu[eé]s|luego|mientras tanto|al final|para terminar|antes de|a continuaci[oó]n)\b/gi) || []).length;
+  taskCount.textContent = `${matches} conector${matches===1?'':'es'} detectado${matches===1?'':'s'}`;
+}
+async function guardarTareaAuto(){
+  if (!window.storage){
+    savedFlag.textContent = 'Guardado no disponible aquí';
+    savedFlag.classList.add('show');
+    setTimeout(()=>{ savedFlag.classList.remove('show'); savedFlag.textContent = 'Guardado ✓'; }, 2200);
+    return;
+  }
+  try{
+    const ok = await window.storage.set(STORAGE_KEY, taskArea.value);
+    savedFlag.textContent = ok ? 'Guardado ✓' : 'No se pudo guardar';
+  }catch(e){
+    savedFlag.textContent = 'No se pudo guardar';
+  }
+  savedFlag.classList.add('show');
+  setTimeout(()=>{ savedFlag.classList.remove('show'); savedFlag.textContent = 'Guardado ✓'; }, 1800);
+}
+
+let taskSaveTimer = null;
+function scheduleTaskSave(){
+  clearTimeout(taskSaveTimer);
+  taskSaveTimer = setTimeout(guardarTareaAuto, 700);
+}
+
+taskArea.addEventListener('input', ()=>{
+  updateCount();
+  scheduleTaskSave();
+});
+updateCount();
+cargarTarea();
+
+</script>
+
+</body>
+</html>
