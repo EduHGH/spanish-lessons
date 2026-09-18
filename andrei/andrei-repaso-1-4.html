@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Andrei · Repaso escrito — Clases 1 a 4</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+
+/* ╔══════════════════════════════════════════════════════════════╗
+   ║  ESCOLAR — repaso escrito autoevaluable                        ║
+   ║  Andrei · Clases 1–4 · "hablar sin frenos"                    ║
+   ╚══════════════════════════════════════════════════════════════╝ */
+
+:root{
+  --paper:        #FBF7EE;
+  --paper-raised: #FFFFFF;
+  --paper-alt:    #F3ECDA;
+  --ink:          #23291F;
+  --ink-soft:     #565F52;
+  --ink-faint:    #8B9184;
+  --line:         rgba(35,41,31,0.12);
+  --line-strong:  rgba(35,41,31,0.22);
+
+  --b1:      #2F6FED;  --b1-soft: #EAF1FE;  --b1-line: #C6D9FC;
+  --b2:      #2E9E6B;  --b2-soft: #E9F6EF;  --b2-line: #BEE6D3;
+  --b3:      #DB8A2E;  --b3-soft: #FCF1E1;  --b3-line: #F3D9AF;
+  --b4:      #B5502E;  --b4-soft: #FBEBE3;  --b4-line: #EFC9B4;
+  --family:  #B5502E;
+
+  --wrong:   #C24444; --wrong-soft:#FBEAEA; --wrong-line:#F0C6C6;
+
+  --f-display: 'Fraunces', Georgia, serif;
+  --f-body:    'IBM Plex Sans', system-ui, sans-serif;
+  --f-data:    'IBM Plex Mono', monospace;
+
+  --r-sm: 8px; --r-md: 14px; --r-lg: 20px;
+  --line-w: 3px;
+  --shadow-1: 0 1px 2px rgba(35,41,31,0.05), 0 1px 8px rgba(35,41,31,0.04);
+}
+
+*{ box-sizing:border-box; }
+body{
+  margin:0;
+  background: var(--paper);
+  background-image: radial-gradient(circle at 1px 1px, var(--line) 1px, transparent 0);
+  background-size: 22px 22px;
+  color: var(--ink);
+  font-family: var(--f-body);
+  line-height:1.55;
+}
+::selection{ background: var(--b1-soft); }
+
+/* ---------- HEADER ---------- */
+header{ padding:48px 24px 30px; max-width:900px; margin:0 auto; }
+.eyebrow{ font-family: var(--f-data); font-size:12px; letter-spacing:.14em; text-transform:uppercase; color: var(--family); margin:0 0 10px; }
+h1{ font-family: var(--f-display); font-weight:600; font-size:clamp(30px,5vw,46px); line-height:1.05; margin:0 0 16px; letter-spacing:-.01em; }
+h1 em{ font-style:italic; color: var(--family); }
+.ticket-card{ background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-lg); box-shadow: var(--shadow-1); padding:22px 26px; position:relative; overflow:hidden; }
+.ticket-card::before{ content:""; position:absolute; inset:0 0 auto 0; height:6px; background: linear-gradient(90deg, var(--b1) 0 25%, var(--b2) 25% 50%, var(--b3) 50% 75%, var(--b4) 75% 100%); }
+.ticket-meta{ display:flex; flex-wrap:wrap; gap:22px; font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); }
+.ticket-meta strong{ display:block; color: var(--ink); font-size:15px; font-weight:500; font-family: var(--f-display); margin-top:3px; }
+.note{ font-family: var(--f-data); font-size:12px; color: var(--family); margin:14px 2px 0; letter-spacing:.02em; line-height:1.6; }
+
+/* ---------- PROGRESS ---------- */
+.progress-wrap{ max-width:900px; margin:0 auto; padding:20px 24px 0; }
+.progress-label{ display:flex; justify-content:space-between; font-family: var(--f-data); font-size:12px; color: var(--ink-faint); margin-bottom:8px; }
+.progress-track{ height:8px; background: var(--paper-alt); border:1px solid var(--line); border-radius:99px; overflow:hidden; }
+.progress-fill{ height:100%; background: var(--b2); width:0%; transition: width .4s ease; }
+
+/* ---------- NAV ---------- */
+.jumpnav{ max-width:900px; margin:0 auto; padding:20px 24px 0; display:flex; flex-wrap:wrap; gap:8px; }
+.jumpnav a{ font-family: var(--f-data); font-size:12px; letter-spacing:.02em; background: var(--paper-raised); border:1px solid var(--line); color: var(--ink-soft); padding:7px 14px; border-radius:999px; text-decoration:none; transition: all .15s ease; }
+.jumpnav a:hover{ border-color: var(--ink-faint); color: var(--ink); }
+
+main{ max-width:900px; margin:0 auto; padding:34px 24px 90px; }
+
+/* ---------- SECTION BLOCKS ---------- */
+.section{ margin-bottom:44px; scroll-margin-top:20px; }
+.section-header{ display:flex; align-items:baseline; gap:14px; margin-bottom:18px; padding-left:2px; }
+.section-tag{ font-family: var(--f-data); font-size:13px; font-weight:500; color:#fff; padding:4px 11px; border-radius:999px; letter-spacing:.04em; flex:none; }
+.section[data-color="b1"] .section-tag{ background: var(--b1); }
+.section[data-color="b2"] .section-tag{ background: var(--b2); }
+.section[data-color="b3"] .section-tag{ background: var(--b3); }
+.section[data-color="b4"] .section-tag{ background: var(--b4); }
+.section-titles h2{ font-family: var(--f-display); font-weight:500; font-style:italic; font-size:22px; margin:0; line-height:1; }
+.section-titles p{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin:5px 0 0; text-transform:uppercase; letter-spacing:.06em; }
+
+.block{ background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md); box-shadow: var(--shadow-1); padding:22px 24px; margin-bottom:16px; }
+.block-intro{ font-size:13.5px; color: var(--ink-soft); margin:0 0 18px; padding-bottom:14px; border-bottom:1px dashed var(--line); }
+.block-label{ font-family: var(--f-data); font-size:10.5px; text-transform:uppercase; letter-spacing:.06em; color: var(--family); margin:0 0 10px; }
+
+/* ---------- TRANSLATE ITEMS ---------- */
+.tr-item{ margin-bottom:16px; padding-bottom:16px; border-bottom:1px solid var(--line); }
+.tr-item:last-child{ margin-bottom:0; padding-bottom:0; border-bottom:none; }
+.tr-en{ font-size:14.5px; color: var(--ink); margin-bottom:8px; }
+.tr-en .num{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin-right:8px; }
+.tr-input-row{ display:flex; gap:8px; align-items:stretch; }
+.tr-input{ flex:1; font-family: var(--f-body); font-size:14.5px; color: var(--ink); background: var(--paper-alt); border:1.5px solid var(--line); border-radius: var(--r-sm); padding:10px 13px; transition: border-color .15s ease, background .15s ease; }
+.tr-input:focus{ outline:none; border-color: var(--b1-line); background: var(--paper-raised); }
+.tr-input.correct{ background: var(--b2-soft); border-color: var(--b2-line); color: var(--b2); }
+.tr-input.incorrect{ background: var(--wrong-soft); border-color: var(--wrong-line); color: var(--wrong); }
+.tr-check{ font-family: var(--f-body); font-weight:600; font-size:12.5px; color: var(--ink); background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-sm); padding:0 16px; cursor:pointer; flex:none; transition: border-color .15s ease; white-space:nowrap; }
+.tr-check:hover{ border-color: var(--ink-faint); }
+.tr-feedback{ font-family: var(--f-data); font-size:12px; margin-top:8px; padding:8px 12px; border-radius:7px; display:none; }
+.tr-feedback.show{ display:block; }
+.tr-feedback.ok{ background: var(--b2-soft); color: var(--b2); }
+.tr-feedback.bad{ background: var(--wrong-soft); color: var(--wrong); }
+.tr-feedback .alt{ display:block; margin-top:4px; color: var(--ink-soft); }
+.tr-reveal{ background:none; border:none; font-family: var(--f-data); font-size:11.5px; color: var(--ink-faint); text-decoration:underline; cursor:pointer; padding:0; margin-top:6px; }
+.tr-reveal:hover{ color: var(--family); }
+
+/* ---------- MCQ ITEMS ---------- */
+.mcq-item{ margin-bottom:18px; padding-bottom:18px; border-bottom:1px solid var(--line); }
+.mcq-item:last-child{ margin-bottom:0; padding-bottom:0; border-bottom:none; }
+.mcq-sentence{ font-size:14.5px; color: var(--ink); margin-bottom:12px; line-height:1.6; }
+.mcq-sentence .num{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin-right:8px; }
+.mcq-sentence .blank{ display:inline-block; min-width:80px; border-bottom:2px dotted var(--ink-faint); text-align:center; font-family: var(--f-data); font-size:13px; color: var(--family); padding:0 4px; }
+.mcq-options{ display:flex; flex-wrap:wrap; gap:8px; }
+.mcq-opt{ font-family: var(--f-data); font-size:13px; background: var(--paper-alt); border:1.5px solid var(--line); color: var(--ink-soft); padding:8px 15px; border-radius:999px; cursor:pointer; transition: all .15s ease; }
+.mcq-opt:hover{ border-color: var(--ink-faint); }
+.mcq-opt.selected{ border-color: var(--b1-line); background: var(--b1-soft); color: var(--b1); }
+.mcq-opt.selected.correct{ border-color: var(--b2-line); background: var(--b2-soft); color: var(--b2); }
+.mcq-opt.selected.incorrect{ border-color: var(--wrong-line); background: var(--wrong-soft); color: var(--wrong); }
+.mcq-opt.reveal-correct{ border-color: var(--b2-line); background: var(--b2-soft); color: var(--b2); }
+
+/* ---------- ANEXO: GRAMMAR TABLES ---------- */
+.gram-block{ margin-bottom:22px; }
+.gram-block:last-child{ margin-bottom:0; }
+.gram-title{ font-family: var(--f-body); font-weight:700; font-size:14.5px; margin:0 0 10px; color: var(--ink); }
+.gram-table{ width:100%; border-collapse:collapse; font-size:13.5px; }
+.gram-table th{ font-family: var(--f-data); font-size:10.5px; text-transform:uppercase; letter-spacing:.05em; color: var(--family); text-align:left; padding:6px 10px; border-bottom:1.5px solid var(--line-strong); }
+.gram-table td{ padding:7px 10px; border-bottom:1px solid var(--line); color: var(--ink-soft); }
+.gram-table tr:last-child td{ border-bottom:none; }
+.gram-table td.hl{ color: var(--ink); font-weight:600; font-family: var(--f-data); font-size:13px; }
+.gram-note{ font-size:13px; color: var(--ink-soft); margin:10px 0 0; padding:10px 13px; background: var(--paper-alt); border-radius: var(--r-sm); border-left:3px solid var(--family); }
+.gram-examples{ list-style:none; margin:10px 0 0; padding:0; display:grid; gap:6px; }
+.gram-examples li{ font-size:13px; color: var(--ink-soft); padding:8px 12px; background: var(--paper-alt); border-radius: var(--r-sm); }
+.gram-examples li strong{ color: var(--ink); font-family: var(--f-data); font-weight:600; }
+
+/* ---------- ANEXO: VOCAB BANK ---------- */
+.vocab-cat{ margin-bottom:20px; }
+.vocab-cat:last-child{ margin-bottom:0; }
+.vocab-cat-title{ font-family: var(--f-body); font-weight:700; font-size:13.5px; color: var(--ink); margin:0 0 10px; display:flex; align-items:center; gap:8px; }
+.vocab-cat-title::before{ content:""; width:8px; height:8px; border-radius:50%; background: var(--dot, var(--b1)); flex:none; }
+.vocab-grid{ display:grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap:6px 16px; }
+.vocab-pair{ font-size:13px; padding:6px 0; border-bottom:1px dotted var(--line); display:flex; justify-content:space-between; gap:10px; }
+.vocab-es{ color: var(--ink); font-weight:600; }
+.vocab-en{ color: var(--ink-faint); font-family: var(--f-data); font-size:12px; text-align:right; }
+
+/* ---------- SCORE BAR ---------- */
+.score-bar{ position:fixed; bottom:0; left:0; right:0; background: var(--ink); color: var(--paper); padding:14px 24px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; font-family: var(--f-data); font-size:13px; z-index:40; box-shadow: 0 -2px 12px rgba(0,0,0,0.15); }
+.score-bar strong{ color:#fff; font-family: var(--f-display); font-size:16px; font-weight:500; }
+.score-actions{ display:flex; gap:10px; }
+.reset-btn{ background:none; border:1px solid rgba(255,255,255,0.25); color: var(--paper); padding:7px 14px; border-radius:999px; cursor:pointer; font-family: var(--f-data); font-size:12px; }
+.reset-btn:hover{ border-color: rgba(255,255,255,0.5); }
+
+footer{ max-width:900px; margin:0 auto; padding:10px 24px 100px; font-family: var(--f-data); font-size:11.5px; color: var(--ink-faint); }
+
+@media (max-width:640px){
+  header{ padding:36px 16px 24px; }
+  .ticket-card{ padding:18px 16px; }
+  main{ padding:26px 12px 100px; }
+  .block{ padding:18px 16px; }
+  .tr-input-row{ flex-direction:column; }
+  .tr-check{ padding:10px 16px; }
+  .vocab-grid{ grid-template-columns:1fr; }
+  .vocab-en{ text-align:left; }
+  .score-bar{ flex-direction:column; align-items:flex-start; padding:12px 16px; }
+}
+@media (prefers-reduced-motion: reduce){ *{ transition:none !important; } }
+</style>
+</head>
+<body>
+
+<header>
+  <p class="eyebrow">Repaso escrito · Autoevaluable · Clases 1–4</p>
+  <h1>Repasar <em>sin prisa</em></h1>
+  <div class="ticket-card">
+    <div class="ticket-meta">
+      <div>Alumno<strong>Andrei</strong></div>
+      <div>Cubre<strong>Clases 1 → 4</strong></div>
+      <div>Formato<strong>Traducción + opción múltiple</strong></div>
+      <div>Se corrige<strong>Solo/a, al instante</strong></div>
+    </div>
+    <p class="note">✍️ Esta es la única tarea con escritura del programa: sirve para fijar por escrito lo que ya trabajamos hablando en clase. Cada respuesta se comprueba sola — no hace falta enviármela. El anexo del final tiene toda la gramática y el vocabulario de las 4 clases para consultar mientras haces los ejercicios. Versión ampliada: 25 traducciones y 25 huecos por clase.</p>
+  </div>
+</header>
+
+<div class="progress-wrap">
+  <div class="progress-label">
+    <span>Progreso del repaso</span>
+    <span id="progress-text">0 / 0 respondidas</span>
+  </div>
+  <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
+</div>
+
+<nav class="jumpnav">
+  <a href="#c1">Clase 1</a>
+  <a href="#c2">Clase 2</a>
+  <a href="#c3">Clase 3</a>
+  <a href="#c4">Clase 4</a>
+  <a href="#anexo">Anexo: gramática y vocabulario</a>
+</nav>
+
+<main id="main">
+
+  <!-- ================= CLASE 1 ================= -->
+  <section class="section" data-color="b1" id="c1">
+    <div class="section-header">
+      <span class="section-tag">Clase 1</span>
+      <div class="section-titles">
+        <h2>Breaking the ice</h2>
+        <p>Presente regular + ser/estar/tener · presentarse, nacionalidad, profesión, fútbol básico</p>
+      </div>
+    </div>
+
+    <div class="block">
+      <p class="block-label">Parte A · Traducción (25 frases)</p>
+      <p class="block-intro">Traduce estas frases al español. Escribe tu respuesta y pulsa «Comprobar». No hace falta poner tildes para que la corrección funcione, pero intenta escribirlas — te lo diré igual si aciertas.</p>
+      <div id="mcq-tr-c1"></div>
+    </div>
+
+    <div class="block">
+      <p class="block-label">Parte B · Rellena el hueco (25 frases)</p>
+      <p class="block-intro">Elige la opción correcta para completar el hueco.</p>
+      <div id="mcq-c1"></div>
+    </div>
+  </section>
+
+  <!-- ================= CLASE 2 ================= -->
+  <section class="section" data-color="b2" id="c2">
+    <div class="section-header">
+      <span class="section-tag">Clase 2</span>
+      <div class="section-titles">
+        <h2>Tú o usted</h2>
+        <p>Formas de tratamiento · registro formal e informal</p>
+      </div>
+    </div>
+
+    <div class="block">
+      <p class="block-label">Parte A · Traducción (25 frases)</p>
+      <p class="block-intro">Traduce estas frases al español. Presta atención a si el contexto pide tú o usted.</p>
+      <div id="mcq-tr-c2"></div>
+    </div>
+
+    <div class="block">
+      <p class="block-label">Parte B · Rellena el hueco (25 frases)</p>
+      <p class="block-intro">Elige la opción correcta para completar el hueco.</p>
+      <div id="mcq-c2"></div>
+    </div>
+  </section>
+
+  <!-- ================= CLASE 3 ================= -->
+  <section class="section" data-color="b3" id="c3">
+    <div class="section-header">
+      <span class="section-tag">Clase 3</span>
+      <div class="section-titles">
+        <h2>Verbs that carry the conversation</h2>
+        <p>Irregulares en presente · ir, querer, poder, tener, decir · rutina</p>
+      </div>
+    </div>
+
+    <div class="block">
+      <p class="block-label">Parte A · Traducción (25 frases)</p>
+      <p class="block-intro">Traduce estas frases al español.</p>
+      <div id="mcq-tr-c3"></div>
+    </div>
+
+    <div class="block">
+      <p class="block-label">Parte B · Rellena el hueco (25 frases)</p>
+      <p class="block-intro">Elige la opción correcta para completar el hueco.</p>
+      <div id="mcq-c3"></div>
+    </div>
+  </section>
+
+  <!-- ================= CLASE 4 ================= -->
+  <section class="section" data-color="b4" id="c4">
+    <div class="section-header">
+      <span class="section-tag">Clase 4</span>
+      <div class="section-titles">
+        <h2>Talking football like a local</h2>
+        <p>Presente + opinión · creo que, me parece que, a mí me da que · fútbol</p>
+      </div>
+    </div>
+
+    <div class="block">
+      <p class="block-label">Parte A · Traducción (25 frases)</p>
+      <p class="block-intro">Traduce estas frases al español.</p>
+      <div id="mcq-tr-c4"></div>
+    </div>
+
+    <div class="block">
+      <p class="block-label">Parte B · Rellena el hueco (25 frases)</p>
+      <p class="block-intro">Elige la opción correcta para completar el hueco.</p>
+      <div id="mcq-c4"></div>
+    </div>
+  </section>
+
+  <!-- ================= ANEXO ================= -->
+  <section class="section" data-color="b4" id="anexo">
+    <div class="section-header">
+      <span class="section-tag">Anexo</span>
+      <div class="section-titles">
+        <h2>Gramática y vocabulario</h2>
+        <p>Toda la teoría de las clases 1 a 4, ampliada, para consultar mientras repasas</p>
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="gram-block">
+        <p class="gram-title">1 · Presente de indicativo — verbos regulares</p>
+        <table class="gram-table">
+          <tr><th></th><th>hablar (-ar)</th><th>comer (-er)</th><th>vivir (-ir)</th></tr>
+          <tr><td>yo</td><td class="hl">hablo</td><td class="hl">como</td><td class="hl">vivo</td></tr>
+          <tr><td>tú</td><td class="hl">hablas</td><td class="hl">comes</td><td class="hl">vives</td></tr>
+          <tr><td>él/ella/usted</td><td class="hl">habla</td><td class="hl">come</td><td class="hl">vive</td></tr>
+          <tr><td>nosotros/as</td><td class="hl">hablamos</td><td class="hl">comemos</td><td class="hl">vivimos</td></tr>
+          <tr><td>vosotros/as</td><td class="hl">habláis</td><td class="hl">coméis</td><td class="hl">vivís</td></tr>
+          <tr><td>ellos/ellas/ustedes</td><td class="hl">hablan</td><td class="hl">comen</td><td class="hl">viven</td></tr>
+        </table>
+        <p class="gram-note">Regla de formación: quita la terminación del infinitivo (-ar, -er, -ir) y añade la terminación de persona. Los verbos -er e -ir comparten casi todas las terminaciones, solo cambian en "vosotros" (-éis / -ís) y "nosotros" (-emos / -imos).</p>
+        <ul class="gram-examples">
+          <li><strong>Trabajo</strong> en gestión deportiva y <strong>vivo</strong> cerca del centro.</li>
+          <li>¿Tú <strong>comes</strong> carne, o eres vegetariano?</li>
+          <li>Nosotros <strong>hablamos</strong> inglés y un poco de español.</li>
+        </ul>
+      </div>
+
+      <div class="gram-block">
+        <p class="gram-title">2 · Ser, estar y tener (irregulares esenciales)</p>
+        <table class="gram-table">
+          <tr><th></th><th>ser</th><th>estar</th><th>tener</th></tr>
+          <tr><td>yo</td><td class="hl">soy</td><td class="hl">estoy</td><td class="hl">tengo</td></tr>
+          <tr><td>tú</td><td class="hl">eres</td><td class="hl">estás</td><td class="hl">tienes</td></tr>
+          <tr><td>él/ella/usted</td><td class="hl">es</td><td class="hl">está</td><td class="hl">tiene</td></tr>
+          <tr><td>nosotros/as</td><td class="hl">somos</td><td class="hl">estamos</td><td class="hl">tenemos</td></tr>
+          <tr><td>vosotros/as</td><td class="hl">sois</td><td class="hl">estáis</td><td class="hl">tenéis</td></tr>
+          <tr><td>ellos/ellas/ustedes</td><td class="hl">son</td><td class="hl">están</td><td class="hl">tienen</td></tr>
+        </table>
+        <p class="gram-note"><strong>Ser</strong> = identidad, origen, profesión, características permanentes (soy canadiense, soy estudiante, el partido es a las ocho). <strong>Estar</strong> = estado temporal o ubicación (estoy en Madrid, estoy cansado, la comida está fría). <strong>Tener</strong> = posesión, edad, sensaciones físicas (tengo 28 años, tengo hambre, tengo prisa).</p>
+        <ul class="gram-examples">
+          <li><strong>Soy</strong> de Alemania pero <strong>estoy</strong> viviendo en Madrid.</li>
+          <li>Ella <strong>tiene</strong> mucha hambre porque no ha comido.</li>
+          <li>¿Cómo <strong>estás</strong> hoy? — <strong>Estoy</strong> bien, gracias.</li>
+        </ul>
+      </div>
+
+      <div class="gram-block">
+        <p class="gram-title">3 · Tú vs. usted</p>
+        <table class="gram-table">
+          <tr><th>Tú (informal)</th><th>Usted (formal)</th></tr>
+          <tr><td class="hl">¿Cómo estás?</td><td class="hl">¿Cómo está usted?</td></tr>
+          <tr><td class="hl">¿De dónde eres?</td><td class="hl">¿De dónde es usted?</td></tr>
+          <tr><td class="hl">¿Qué quieres?</td><td class="hl">¿Qué quiere usted?</td></tr>
+          <tr><td class="hl">¿Puedes ayudarme?</td><td class="hl">¿Puede ayudarme?</td></tr>
+          <tr><td class="hl">¿Tienes un momento?</td><td class="hl">¿Tiene usted un momento?</td></tr>
+        </table>
+        <p class="gram-note">El verbo con <strong>usted</strong> se conjuga igual que con <strong>él/ella</strong> (3ª persona singular), aunque hables directamente con la persona. Se usa con desconocidos mayores, en contextos de negocios, en tiendas formales, o para mostrar respeto general. Con amigos, familia, y gente de tu edad en contextos informales, se usa <strong>tú</strong>.</p>
+        <ul class="gram-examples">
+          <li>A un camarero joven en un bar informal: <strong>"¿Qué me recomiendas?"</strong> (tú)</li>
+          <li>A la abuela de tu novia: <strong>"¿Cómo está usted, señora?"</strong> (usted)</li>
+          <li>En una reunión de negocios: <strong>"¿Puede enviarme el documento, por favor?"</strong> (usted)</li>
+        </ul>
+      </div>
+
+      <div class="gram-block">
+        <p class="gram-title">4 · Verbos irregulares en presente (los 5 clave)</p>
+        <table class="gram-table">
+          <tr><th></th><th>ir</th><th>querer</th><th>poder</th><th>decir</th></tr>
+          <tr><td>yo</td><td class="hl">voy</td><td class="hl">quiero</td><td class="hl">puedo</td><td class="hl">digo</td></tr>
+          <tr><td>tú</td><td class="hl">vas</td><td class="hl">quieres</td><td class="hl">puedes</td><td class="hl">dices</td></tr>
+          <tr><td>él/ella/usted</td><td class="hl">va</td><td class="hl">quiere</td><td class="hl">puede</td><td class="hl">dice</td></tr>
+          <tr><td>nosotros/as</td><td class="hl">vamos</td><td class="hl">queremos</td><td class="hl">podemos</td><td class="hl">decimos</td></tr>
+          <tr><td>vosotros/as</td><td class="hl">vais</td><td class="hl">queréis</td><td class="hl">podéis</td><td class="hl">decís</td></tr>
+          <tr><td>ellos/ellas/ustedes</td><td class="hl">van</td><td class="hl">quieren</td><td class="hl">pueden</td><td class="hl">dicen</td></tr>
+        </table>
+        <p class="gram-note">Recuerda también <strong>tener</strong> (tabla arriba) — es el quinto verbo irregular clave de esta clase. Fíjate en el patrón: <strong>querer</strong> y <strong>poder</strong> cambian la vocal de la raíz (e→ie, o→ue) en todas las personas menos nosotros/vosotros; <strong>decir</strong> cambia e→i y además añade una "g" en "yo digo".</p>
+        <ul class="gram-examples">
+          <li><strong>Voy</strong> a clase todos los días, pero hoy no <strong>puedo</strong> ir.</li>
+          <li>¿Qué <strong>quieres</strong> hacer este fin de semana?</li>
+          <li>Ella siempre <strong>dice</strong> la verdad, aunque sea difícil.</li>
+        </ul>
+      </div>
+
+      <div class="gram-block">
+        <p class="gram-title">5 · Creer que + presente — dar tu opinión</p>
+        <table class="gram-table">
+          <tr><th>Persona</th><th>Forma</th><th>Ejemplo</th></tr>
+          <tr><td>yo</td><td class="hl">creo que...</td><td>Creo que el Madrid gana el domingo.</td></tr>
+          <tr><td>tú</td><td class="hl">¿crees que...?</td><td>¿Crees que el Madrid gana el domingo?</td></tr>
+          <tr><td>él/ella/usted</td><td class="hl">cree que...</td><td>Marta cree que el Madrid gana el domingo.</td></tr>
+          <tr><td>nosotros/as</td><td class="hl">creemos que...</td><td>Creemos que va a ser un partidazo.</td></tr>
+          <tr><td>vosotros/as</td><td class="hl">creéis que...</td><td>¿Creéis que hay remontada?</td></tr>
+          <tr><td>ellos/ellas/ustedes</td><td class="hl">creen que...</td><td>Ellos creen que el árbitro se ha equivocado.</td></tr>
+        </table>
+        <p class="gram-note">"Creer" se conjuga como un verbo -er regular (creo, crees, cree, creemos, creéis, creen), y a diferencia del inglés ("I think that..." igual para todos), en español cada persona tiene su propia forma: no es "creo" para todo el mundo. Detrás de "creo que" va una frase normal en <strong>presente de indicativo</strong>, sin subjuntivo — es la estructura de opinión más fácil y más usada del español, perfecta para cualquier bar.</p>
+        <ul class="gram-examples">
+          <li><strong>Creo que</strong> el nuevo fichaje va a ser muy bueno.</li>
+          <li><strong>¿Crees que</strong> ganamos la liga este año?</li>
+          <li>Javi <strong>cree que</strong> el entrenador debería cambiar la táctica.</li>
+        </ul>
+      </div>
+
+      <div class="gram-block">
+        <p class="gram-title">6 · Más expresiones de opinión</p>
+        <table class="gram-table">
+          <tr><th>Expresión</th><th>Uso</th></tr>
+          <tr><td class="hl">creo que...</td><td>opinión neutra, la más común y versátil</td></tr>
+          <tr><td class="hl">me parece que...</td><td>opinión algo más suave, reflexiva o razonada</td></tr>
+          <tr><td class="hl">a mí me da que...</td><td>opinión/intuición coloquial, muy hablada, casi un presentimiento</td></tr>
+          <tr><td class="hl">para mí...</td><td>opinión personal, marcando que es tu punto de vista frente al de otros</td></tr>
+        </table>
+        <p class="gram-note">Las tres primeras van seguidas de un verbo en indicativo (no subjuntivo, porque expresan certeza u opinión afirmativa): <em>creo que el equipo va a ganar</em>, <em>me parece que el árbitro se ha equivocado</em>, <em>a mí me da que pierden</em>. "A mí me da que" es muy coloquial — perfecto para hablar de fútbol con amigos, pero evítalo en contextos formales. <strong>"Para mí"</strong> funciona distinto: no lleva un verbo de opinión detrás, va seguido directamente de una frase normal, y se usa mucho para contrastar tu opinión con la de otra persona: <em>para mí, el mejor jugador es el portero</em> (aunque otros piensen distinto).</p>
+        <ul class="gram-examples">
+          <li><strong>Creo que</strong> el nuevo fichaje va a ser muy bueno.</li>
+          <li><strong>Me parece que</strong> el entrenador debería cambiar la táctica.</li>
+          <li><strong>A mí me da que</strong> este año no ganan la liga.</li>
+          <li><strong>Para mí</strong>, este equipo juega mejor que el año pasado.</li>
+        </ul>
+      </div>
+
+      <div class="gram-block">
+        <p class="gram-title">7 · Pronunciación — resumen de las 4 clases</p>
+        <table class="gram-table">
+          <tr><th>Clase</th><th>Foco</th><th>Ejemplo</th></tr>
+          <tr><td>1</td><td class="hl">Vocales puras</td><td>soy, eres, es, somos, sois, son — sin diptongar</td></tr>
+          <tr><td>2</td><td class="hl">Entonación tú/usted</td><td>¿De dónde eres?↗ (informal) vs. ¿De dónde es usted?→ (formal)</td></tr>
+          <tr><td>3</td><td class="hl">r simple vs. rr</td><td>pero / perro, quiero / carro, coro / corro</td></tr>
+          <tr><td>4</td><td class="hl">Enlace entre palabras</td><td>el_equipo, el_árbitro, un_árbitro, el_arquero</td></tr>
+        </table>
+        <p class="gram-note">Cuatro rasgos de pronunciación que en inglés o alemán no marcan diferencia de significado, pero que en español suenan a "acento marcado" si se pasan por alto: vocales que no se alargan, entonación que refleja el registro, la distinción r/rr, y el enlace fluido entre palabra terminada en consonante y palabra empezada en vocal.</p>
+      </div>
+    </div>
+
+    <div class="block">
+      <p class="block-intro" style="margin-bottom:22px;">Banco de vocabulario ampliado — clases 1 a 4</p>
+
+      <div class="vocab-cat" style="--dot:var(--b1)">
+        <p class="vocab-cat-title">Presentarse y nacionalidad</p>
+        <div class="vocab-grid">
+          <div class="vocab-pair"><span class="vocab-es">presentarse</span><span class="vocab-en">to introduce oneself</span></div>
+          <div class="vocab-pair"><span class="vocab-es">nacionalidad</span><span class="vocab-en">nationality</span></div>
+          <div class="vocab-pair"><span class="vocab-es">canadiense</span><span class="vocab-en">Canadian</span></div>
+          <div class="vocab-pair"><span class="vocab-es">alemán / alemana</span><span class="vocab-en">German</span></div>
+          <div class="vocab-pair"><span class="vocab-es">profesión</span><span class="vocab-en">profession</span></div>
+          <div class="vocab-pair"><span class="vocab-es">dedicarse a</span><span class="vocab-en">to work in / do for a living</span></div>
+          <div class="vocab-pair"><span class="vocab-es">encantado/a</span><span class="vocab-en">nice to meet you</span></div>
+          <div class="vocab-pair"><span class="vocab-es">el máster</span><span class="vocab-en">master's degree</span></div>
+          <div class="vocab-pair"><span class="vocab-es">la carrera</span><span class="vocab-en">degree / career</span></div>
+          <div class="vocab-pair"><span class="vocab-es">el origen</span><span class="vocab-en">background / origin</span></div>
+          <div class="vocab-pair"><span class="vocab-es">crecer</span><span class="vocab-en">to grow up</span></div>
+          <div class="vocab-pair"><span class="vocab-es">mudarse</span><span class="vocab-en">to move (house/city)</span></div>
+        </div>
+      </div>
+
+      <div class="vocab-cat" style="--dot:var(--b1)">
+        <p class="vocab-cat-title">Fútbol básico</p>
+        <div class="vocab-grid">
+          <div class="vocab-pair"><span class="vocab-es">el equipo</span><span class="vocab-en">the team</span></div>
+          <div class="vocab-pair"><span class="vocab-es">el partido</span><span class="vocab-en">the match</span></div>
+          <div class="vocab-pair"><span class="vocab-es">ganar / perder</span><span class="vocab-en">to win / to lose</span></div>
+          <div class="vocab-pair"><span class="vocab-es">jugar</span><span class="vocab-en">to play</span></div>
+          <div class="vocab-pair"><span class="vocab-es">el gol</span><span class="vocab-en">the goal</span></div>
+          <div class="vocab-pair"><span class="vocab-es">marcar un gol</span><span class="vocab-en">to score a goal</span></div>
+          <div class="vocab-pair"><span class="vocab-es">el estadio</span><span class="vocab-en">the stadium</span></div>
+          <div class="vocab-pair"><span class="vocab-es">el aficionado</span><span class="vocab-en">the fan</span></div>
+        </div>
+      </div>
+
+      <div class="vocab-cat" style="--dot:var(--b2)">
+        <p class="vocab-cat-title">Saludos y cortesía</p>
+        <div class="vocab-grid">
+          <div class="vocab-pair"><span class="vocab-es">¿Qué tal?</span><span class="vocab-en">How's it going? (informal)</span></div>
+          <div class="vocab-pair"><span class="vocab-es">¿Cómo está usted?</span><span class="vocab-en">How are you? (formal)</span></div>
+          <div class="vocab-pair"><span class="vocab-es">mucho gusto</span><span class="vocab-en">pleased to meet you</span></div>
+          <div class="vocab-pair"><span class="vocab-es">por favor / gracias</span><span class="vocab-en">please / thank you</span></div>
+          <div class="vocab-pair"><span class="vocab-es">disculpe</span><span class="vocab-en">excuse me (formal)</span></div>
+          <div class="vocab-pair"><span class="vocab-es">oye / oiga</span><span class="vocab-en">hey (informal / formal)</span></div>
+          <div class="vocab-pair"><span class="vocab-es">un placer</span><span class="vocab-en">a pleasure</span></div>
+          <div class="vocab-pair"><span class="vocab-es">con permiso</span><span class="vocab-en">excuse me (passing by)</span></div>
+          <div class="vocab-pair"><span class="vocab-es">de nada</span><span class="vocab-en">you're welcome</span></div>
+          <div class="vocab-pair"><span class="vocab-es">lo siento</span><span class="vocab-en">I'm sorry</span></div>
+          <div class="vocab-pair"><span class="vocab-es">tratar de tú / de usted</span><span class="vocab-en">to address informally / formally</span></div>
+          <div class="vocab-pair"><span class="vocab-es">tutear (a alguien)</span><span class="vocab-en">to use "tú" with someone</span></div>
+          <div class="vocab-pair"><span class="vocab-es">el socio / la socia</span><span class="vocab-en">business partner</span></div>
+          <div class="vocab-pair"><span class="vocab-es">por favor / porfa</span><span class="vocab-en">please (formal / informal)</span></div>
+        </div>
+      </div>
+
+      <div class="vocab-cat" style="--dot:var(--b3)">
+        <p class="vocab-cat-title">Rutina y máster de gestión deportiva</p>
+        <div class="vocab-grid">
+          <div class="vocab-pair"><span class="vocab-es">la rutina</span><span class="vocab-en">routine</span></div>
+          <div class="vocab-pair"><span class="vocab-es">tener clase</span><span class="vocab-en">to have class</span></div>
+          <div class="vocab-pair"><span class="vocab-es">la gestión deportiva</span><span class="vocab-en">sports management</span></div>
+          <div class="vocab-pair"><span class="vocab-es">temprano / tarde</span><span class="vocab-en">early / late</span></div>
+          <div class="vocab-pair"><span class="vocab-es">soler + infinitivo</span><span class="vocab-en">to usually do something</span></div>
+          <div class="vocab-pair"><span class="vocab-es">entrenar</span><span class="vocab-en">to train</span></div>
+          <div class="vocab-pair"><span class="vocab-es">el compañero / la compañera</span><span class="vocab-en">classmate</span></div>
+          <div class="vocab-pair"><span class="vocab-es">levantarse</span><span class="vocab-en">to get up</span></div>
+          <div class="vocab-pair"><span class="vocab-es">el horario</span><span class="vocab-en">schedule</span></div>
+          <div class="vocab-pair"><span class="vocab-es">la semana que viene</span><span class="vocab-en">next week</span></div>
+          <div class="vocab-pair"><span class="vocab-es">todos los días</span><span class="vocab-en">every day</span></div>
+          <div class="vocab-pair"><span class="vocab-es">a veces</span><span class="vocab-en">sometimes</span></div>
+          <div class="vocab-pair"><span class="vocab-es">madrugar</span><span class="vocab-en">to get up early</span></div>
+          <div class="vocab-pair"><span class="vocab-es">quedar (con alguien)</span><span class="vocab-en">to meet up (with someone)</span></div>
+          <div class="vocab-pair"><span class="vocab-es">apuntarse (a algo)</span><span class="vocab-en">to sign up (for something)</span></div>
+          <div class="vocab-pair"><span class="vocab-es">entregar (un trabajo)</span><span class="vocab-en">to hand in (an assignment)</span></div>
+        </div>
+      </div>
+
+      <div class="vocab-cat" style="--dot:var(--b1)">
+        <p class="vocab-cat-title">Personajes de tu vida en Madrid</p>
+        <div class="vocab-grid">
+          <div class="vocab-pair"><span class="vocab-es">Marta</span><span class="vocab-en">tu novia, madrileña, profesora de yoga</span></div>
+          <div class="vocab-pair"><span class="vocab-es">Javi</span><span class="vocab-en">mejor amigo de Marta, entrenador de fútbol</span></div>
+          <div class="vocab-pair"><span class="vocab-es">Sole e Iker</span><span class="vocab-en">los padres de Marta</span></div>
+          <div class="vocab-pair"><span class="vocab-es">Diego</span><span class="vocab-en">el hermano pequeño de Marta</span></div>
+          <div class="vocab-pair"><span class="vocab-es">Rubén</span><span class="vocab-en">compañero del máster, argentino, exjugador</span></div>
+          <div class="vocab-pair"><span class="vocab-es">Elena</span><span class="vocab-en">la profesora del máster, muy exigente</span></div>
+          <div class="vocab-pair"><span class="vocab-es">Marc</span><span class="vocab-en">posible socio de negocios, catalán</span></div>
+          <div class="vocab-pair"><span class="vocab-es">Hugo</span><span class="vocab-en">compañero de tu equipo de fútbol amateur</span></div>
+        </div>
+      </div>
+
+      <div class="vocab-cat" style="--dot:var(--b4)">
+        <p class="vocab-cat-title">Fútbol avanzado y opinión</p>
+        <div class="vocab-grid">
+          <div class="vocab-pair"><span class="vocab-es">la afición</span><span class="vocab-en">the fans / fanbase</span></div>
+          <div class="vocab-pair"><span class="vocab-es">el entrenador</span><span class="vocab-en">the coach</span></div>
+          <div class="vocab-pair"><span class="vocab-es">el fichaje</span><span class="vocab-en">the signing (new player)</span></div>
+          <div class="vocab-pair"><span class="vocab-es">el resultado</span><span class="vocab-en">the result / score</span></div>
+          <div class="vocab-pair"><span class="vocab-es">el árbitro</span><span class="vocab-en">the referee</span></div>
+          <div class="vocab-pair"><span class="vocab-es">empatar</span><span class="vocab-en">to draw / tie</span></div>
+          <div class="vocab-pair"><span class="vocab-es">creo que...</span><span class="vocab-en">I think that...</span></div>
+          <div class="vocab-pair"><span class="vocab-es">me parece que...</span><span class="vocab-en">it seems to me that...</span></div>
+          <div class="vocab-pair"><span class="vocab-es">a mí me da que...</span><span class="vocab-en">I have a feeling that...</span></div>
+          <div class="vocab-pair"><span class="vocab-es">para mí...</span><span class="vocab-en">for me... / in my opinion...</span></div>
+          <div class="vocab-pair"><span class="vocab-es">equivocarse</span><span class="vocab-en">to be wrong / make a mistake</span></div>
+          <div class="vocab-pair"><span class="vocab-es">la táctica</span><span class="vocab-en">tactics</span></div>
+          <div class="vocab-pair"><span class="vocab-es">el rival</span><span class="vocab-en">the opponent</span></div>
+          <div class="vocab-pair"><span class="vocab-es">la temporada</span><span class="vocab-en">the season</span></div>
+          <div class="vocab-pair"><span class="vocab-es">fichar (a alguien)</span><span class="vocab-en">to sign (a player)</span></div>
+          <div class="vocab-pair"><span class="vocab-es">el once inicial</span><span class="vocab-en">the starting lineup</span></div>
+          <div class="vocab-pair"><span class="vocab-es">jugar de titular</span><span class="vocab-en">to play as a starter</span></div>
+          <div class="vocab-pair"><span class="vocab-es">la jornada</span><span class="vocab-en">the matchday / round</span></div>
+          <div class="vocab-pair"><span class="vocab-es">pitar (el árbitro)</span><span class="vocab-en">to referee / to blow the whistle</span></div>
+          <div class="vocab-pair"><span class="vocab-es">tener razón</span><span class="vocab-en">to be right</span></div>
+          <div class="vocab-pair"><span class="vocab-es">el marcador</span><span class="vocab-en">the scoreline</span></div>
+        </div>
+      </div>
+
+      <div class="vocab-cat" style="--dot:var(--b2)">
+        <p class="vocab-cat-title">Reuniones, invitaciones y vida cotidiana</p>
+        <div class="vocab-grid">
+          <div class="vocab-pair"><span class="vocab-es">¿podría...?</span><span class="vocab-en">could you... ? (very formal)</span></div>
+          <div class="vocab-pair"><span class="vocab-es">el pasaporte</span><span class="vocab-en">passport</span></div>
+          <div class="vocab-pair"><span class="vocab-es">ser residente (en España)</span><span class="vocab-en">to be a resident (of Spain)</span></div>
+          <div class="vocab-pair"><span class="vocab-es">estar listo/a</span><span class="vocab-en">to be ready</span></div>
+          <div class="vocab-pair"><span class="vocab-es">la barbacoa / la parrillada</span><span class="vocab-en">the barbecue / cookout</span></div>
+          <div class="vocab-pair"><span class="vocab-es">¿te apuntas?</span><span class="vocab-en">are you in? / want to join?</span></div>
+          <div class="vocab-pair"><span class="vocab-es">¿te vienes?</span><span class="vocab-en">want to come along?</span></div>
+          <div class="vocab-pair"><span class="vocab-es">el módulo</span><span class="vocab-en">the course module</span></div>
+          <div class="vocab-pair"><span class="vocab-es">bienvenido/a</span><span class="vocab-en">welcome</span></div>
+          <div class="vocab-pair"><span class="vocab-es">la tutoría</span><span class="vocab-en">office hours / tutorial session</span></div>
+          <div class="vocab-pair"><span class="vocab-es">tener el día libre</span><span class="vocab-en">to have the day off</span></div>
+          <div class="vocab-pair"><span class="vocab-es">relajarse</span><span class="vocab-en">to relax</span></div>
+          <div class="vocab-pair"><span class="vocab-es">llevar (tiempo) en algo</span><span class="vocab-en">to have been in / doing something for (time)</span></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<div class="score-bar">
+  <span>Repaso Andrei · Clases 1–4 &nbsp;—&nbsp; <strong id="score-live">0 / 0</strong> respondidas</span>
+  <div class="score-actions">
+    <button class="reset-btn" id="reset-btn">Reiniciar repaso</button>
+  </div>
+</div>
+
+<footer>Tu progreso se guarda en este navegador. Cada respuesta se corrige al momento — no hace falta enviar nada.</footer>
+
+<script>
+/* ============================================================
+   DATOS: traducciones EN→ES y ejercicios de opción múltiple
+
+   Cada traducción usa "display" para la frase bien escrita
+   (con tildes y mayúscula) que se muestra al revelar la
+   respuesta, y "accept" para todas las variantes válidas que
+   se comparan ya normalizadas (sin tildes, en minúscula).
+   El "display" NO hace falta incluirlo en "accept": se añade
+   automáticamente al comparar.
+   ============================================================ */
+
+const TRANSLATIONS = {
+  c1: [
+    { en: "Hi, my name is Andrei.", display: "Hola, me llamo Andrei.", accept: ["hola, mi nombre es andrei"] },
+    { en: "I am Canadian and German.", display: "Soy canadiense y alemán.", accept: [] },
+    { en: "What do you do for a living?", display: "¿A qué te dedicas?", accept: [] },
+    { en: "I am doing a master's degree in sports management.", display: "Hago un máster en gestión deportiva.", accept: ["estoy haciendo un master en gestion deportiva"] },
+    { en: "Where are you from?", display: "¿De dónde eres?", accept: [] },
+    { en: "I am in Madrid because of my girlfriend.", display: "Estoy en Madrid por mi novia.", accept: ["estoy en madrid por causa de mi novia"] },
+    { en: "I have a class every morning.", display: "Tengo clase todas las mañanas.", accept: [] },
+    { en: "She is a Spanish teacher.", display: "Ella es profesora de español.", accept: [] },
+    { en: "We are in Spain this summer.", display: "Estamos en España este verano.", accept: [] },
+    { en: "How old are you?", display: "¿Cuántos años tienes?", accept: [] },
+    { en: "I live near the city center.", display: "Vivo cerca del centro.", accept: [] },
+    { en: "My girlfriend is Spanish.", display: "Mi novia es española.", accept: [] },
+    { en: "I speak a little Spanish.", display: "Hablo un poco de español.", accept: [] },
+    { en: "The team plays on Saturday.", display: "El equipo juega el sábado.", accept: [] },
+    { en: "I like football a lot.", display: "Me gusta mucho el fútbol.", accept: [] },
+    { en: "Nice to meet you.", display: "Encantado de conocerte.", accept: ["mucho gusto", "encantado", "encantada"] },
+    { en: "I am not from here.", display: "No soy de aquí.", accept: [] },
+    { en: "We have two classes this week.", display: "Tenemos dos clases esta semana.", accept: [] },
+    { en: "Marta is a yoga teacher.", display: "Marta es profesora de yoga.", accept: [] },
+    { en: "Javi is Marta's best friend, and he's a football coach.", display: "Javi es el mejor amigo de Marta y es entrenador de fútbol.", accept: [] },
+    { en: "I am not shy, I am quite talkative.", display: "No soy tímido, soy bastante hablador.", accept: [] },
+    { en: "Rubén is Argentinian and a former football player.", display: "Rubén es argentino y exjugador de fútbol.", accept: [] },
+    { en: "Elena is the master's program teacher, and she's very demanding.", display: "Elena es la profesora del máster y es muy exigente.", accept: ["elena es la profesora del master, es muy exigente"] },
+    { en: "Marta's parents are from Madrid.", display: "Los padres de Marta son de Madrid.", accept: [] },
+    { en: "You are very talkative. (informal)", display: "Eres muy hablador.", accept: ["eres muy habladora"] },
+  ],
+  c2: [
+    { en: "How are you? (talking to a friend)", display: "¿Cómo estás?", accept: ["que tal"] },
+    { en: "How are you? (talking to your girlfriend's grandmother)", display: "¿Cómo está usted?", accept: [] },
+    { en: "Nice to meet you, sir.", display: "Mucho gusto, señor.", accept: ["encantado, señor", "encantada, señor"] },
+    { en: "Can you help me? (to a shop assistant, formal)", display: "¿Puede ayudarme?", accept: ["me puede ayudar"] },
+    { en: "What do you want to drink? (asking a friend)", display: "¿Qué quieres beber?", accept: ["que quieres tomar"] },
+    { en: "Excuse me, do you have the time? (to a stranger, formal)", display: "Disculpe, ¿tiene hora?", accept: [] },
+    { en: "Where do you live? (asking a close friend)", display: "¿Dónde vives?", accept: [] },
+    { en: "Where do you live? (asking your boss)", display: "¿Dónde vive usted?", accept: [] },
+    { en: "Do you want a coffee? (to a colleague you know well)", display: "¿Quieres un café?", accept: [] },
+    { en: "Would you like a coffee? (to a client, formal)", display: "¿Quiere usted un café?", accept: ["¿quiere un café?"] },
+    { en: "What is your name? (formal, to an older person)", display: "¿Cómo se llama usted?", accept: [] },
+    { en: "What is your name? (informal, to a classmate)", display: "¿Cómo te llamas?", accept: [] },
+    { en: "Excuse me, sir, is this seat free?", display: "Disculpe, señor, ¿está libre este asiento?", accept: [] },
+    { en: "Can I ask you something? (to a friend)", display: "¿Te puedo preguntar algo?", accept: ["puedo preguntarte algo"] },
+    { en: "Can I ask you something? (formal, to your professor)", display: "¿Le puedo preguntar algo?", accept: ["puedo preguntarle algo"] },
+    { en: "See you later! (informal)", display: "¡Hasta luego!", accept: [] },
+    { en: "Good afternoon, how may I help you? (formal, shop)", display: "Buenas tardes, ¿en qué puedo ayudarle?", accept: [] },
+    { en: "Are you okay? (checking on a friend)", display: "¿Estás bien?", accept: [] },
+    { en: "I have a meeting with a business partner tomorrow.", display: "Tengo una reunión con un socio mañana.", accept: ["tengo una reunion con una socia manana"] },
+    { en: "You can call me by tú, don't use usted with me.", display: "Puedes tutearme, no uses usted conmigo.", accept: [] },
+    { en: "Could you pass me the salt, please? (formal)", display: "¿Me puede pasar la sal, por favor?", accept: ["me puedes pasar la sal por favor"] },
+    { en: "Grab me a beer, please! (informal, to a close friend)", display: "¡Pásame una cerveza, porfa!", accept: ["pasame una cerveza porfa"] },
+    { en: "When in doubt, start with usted.", display: "Cuando dudes, empieza con usted.", accept: [] },
+    { en: "If they use tú with you first, you can use tú too.", display: "Si te tutean primero, puedes tutear tú también.", accept: [] },
+    { en: "In business meetings, it's better to start with usted.", display: "En las reuniones de negocios, es mejor empezar con usted.", accept: [] },
+  ],
+  c3: [
+    { en: "I go to class every morning.", display: "Voy a clase todas las mañanas.", accept: ["voy a clase cada mañana"] },
+    { en: "I want to train more this year.", display: "Quiero entrenar más este año.", accept: [] },
+    { en: "I can speak Spanish a little.", display: "Puedo hablar español un poco.", accept: ["puedo hablar un poco de español"] },
+    { en: "What do you usually do on Fridays?", display: "¿Qué sueles hacer los viernes?", accept: [] },
+    { en: "He says that the class starts at nine.", display: "Dice que la clase empieza a las nueve.", accept: ["el dice que la clase empieza a las nueve"] },
+    { en: "My classmates and I have class together.", display: "Mis compañeros y yo tenemos clase juntos.", accept: ["mis compañeros y yo tenemos clase juntas"] },
+    { en: "I can't come tomorrow.", display: "No puedo venir mañana.", accept: [] },
+    { en: "We go to the gym every day.", display: "Vamos al gimnasio todos los días.", accept: [] },
+    { en: "Do you want to study together?", display: "¿Quieres estudiar juntos?", accept: [] },
+    { en: "I usually wake up early.", display: "Suelo despertarme temprano.", accept: [] },
+    { en: "She says she can't today.", display: "Dice que no puede hoy.", accept: [] },
+    { en: "They want to go to the match on Sunday.", display: "Quieren ir al partido el domingo.", accept: [] },
+    { en: "Can we talk for a moment?", display: "¿Podemos hablar un momento?", accept: [] },
+    { en: "I always say the same thing.", display: "Siempre digo lo mismo.", accept: [] },
+    { en: "Where are you going now?", display: "¿Adónde vas ahora?", accept: ["a donde vas ahora"] },
+    { en: "My routine is quite simple.", display: "Mi rutina es bastante simple.", accept: [] },
+    { en: "We can't train today, it's raining.", display: "No podemos entrenar hoy, está lloviendo.", accept: [] },
+    { en: "What time does your class usually start?", display: "¿A qué hora suele empezar tu clase?", accept: [] },
+    { en: "I don't have to get up early on Tuesdays.", display: "No tengo que madrugar los martes.", accept: [] },
+    { en: "I want to meet up with Rubén to study together.", display: "Quiero quedar con Rubén para estudiar juntos.", accept: [] },
+    { en: "Are you signing up for the sports management talk?", display: "¿Te apuntas a la charla de gestión deportiva?", accept: [] },
+    { en: "I have to hand in an assignment on Friday.", display: "Tengo que entregar un trabajo el viernes.", accept: [] },
+    { en: "My routine is pretty calm during the week.", display: "Mi rutina es bastante tranquila entre semana.", accept: [] },
+    { en: "Can we meet up this week?", display: "¿Podemos quedar esta semana?", accept: [] },
+    { en: "We say the same thing every week.", display: "Decimos lo mismo todas las semanas.", accept: [] },
+  ],
+  c4: [
+    { en: "I think the team is going to win.", display: "Creo que el equipo va a ganar.", accept: [] },
+    { en: "It seems to me that the coach is wrong.", display: "Me parece que el entrenador se equivoca.", accept: ["me parece que el entrenador esta equivocado"] },
+    { en: "I have a feeling they're going to lose.", display: "A mí me da que van a perder.", accept: [] },
+    { en: "The fans are very happy with the new signing.", display: "La afición está muy contenta con el nuevo fichaje.", accept: [] },
+    { en: "What is the result of the match?", display: "¿Cuál es el resultado del partido?", accept: [] },
+    { en: "I think the referee is wrong.", display: "Creo que el árbitro se equivoca.", accept: [] },
+    { en: "It seems to me that this team plays very well.", display: "Me parece que este equipo juega muy bien.", accept: [] },
+    { en: "I have a feeling it's going to be a draw.", display: "A mí me da que va a ser un empate.", accept: [] },
+    { en: "The new coach knows a lot about tactics.", display: "El nuevo entrenador sabe mucho de táctica.", accept: [] },
+    { en: "I think the rival is very strong this year.", display: "Creo que el rival es muy fuerte este año.", accept: [] },
+    { en: "The fans always support the team.", display: "La afición siempre apoya al equipo.", accept: [] },
+    { en: "It seems to me that they need a new signing.", display: "Me parece que necesitan un fichaje nuevo.", accept: [] },
+    { en: "I have a feeling the referee doesn't like this team.", display: "A mí me da que al árbitro no le gusta este equipo.", accept: [] },
+    { en: "What do you think about the result?", display: "¿Qué crees sobre el resultado?", accept: ["que piensas sobre el resultado"] },
+    { en: "I think we're going to draw again.", display: "Creo que vamos a empatar otra vez.", accept: [] },
+    { en: "The coach is wrong about the tactics.", display: "El entrenador se equivoca con la táctica.", accept: [] },
+    { en: "It seems to me that the referee is very fair.", display: "Me parece que el árbitro es muy justo.", accept: [] },
+    { en: "I have a feeling this signing is going to be great.", display: "A mí me da que este fichaje va a ser genial.", accept: [] },
+    { en: "For me, the best player on the team is the goalkeeper.", display: "Para mí, el mejor jugador del equipo es el portero.", accept: [] },
+    { en: "For me, this season is going really well.", display: "Para mí, esta temporada va muy bien.", accept: [] },
+    { en: "Do you think Madrid wins on Sunday?", display: "¿Crees que el Madrid gana el domingo?", accept: [] },
+    { en: "Marta thinks Atleti loses today.", display: "Marta cree que el Atleti pierde hoy.", accept: [] },
+    { en: "For me, the referee is right today.", display: "Para mí, el árbitro tiene razón hoy.", accept: [] },
+    { en: "I think the fanbase deserves a better result.", display: "Creo que la afición merece un resultado mejor.", accept: [] },
+    { en: "Do you think the coach is going to change the tactics?", display: "¿Crees que el entrenador va a cambiar la táctica?", accept: [] },
+  ],
+};
+
+// Ejercicios de opción múltiple (rellenar el hueco)
+const MCQ = {
+  c1: [
+    { before: "Yo", after: "de Alemania y de Canadá.", options: ["soy", "estoy", "tengo"], correct: 0 },
+    { before: "¿", after: "usted 28 años?", options: ["Es", "Tiene", "Está"], correct: 1 },
+    { before: "Ella", after: "profesora de español.", options: ["tiene", "está", "es"], correct: 2 },
+    { before: "Nosotros", after: "en Madrid este verano.", options: ["estamos", "somos", "tenemos"], correct: 0 },
+    { before: "¿A qué te", after: "?", options: ["dedicas", "dedico", "dedica"], correct: 0 },
+    { before: "Mi novia", after: "española.", options: ["está", "es", "tiene"], correct: 1 },
+    { before: "Yo", after: "mucha hambre ahora.", options: ["soy", "estoy", "tengo"], correct: 2 },
+    { before: "¿De dónde", after: "tú?", options: ["eres", "estás", "tienes"], correct: 0 },
+    { before: "El partido", after: "el sábado.", options: ["es", "está", "tiene"], correct: 0 },
+    { before: "Nosotros", after: "dos clases esta semana.", options: ["somos", "estamos", "tenemos"], correct: 2 },
+    { before: "¿Cómo", after: "usted hoy?", options: ["es", "está", "tiene"], correct: 1 },
+    { before: "Yo no", after: "de aquí.", options: ["soy", "estoy", "tengo"], correct: 0 },
+    { before: "Ellos", after: "en el estadio ahora mismo.", options: ["son", "están", "tienen"], correct: 1 },
+    { before: "Tú", after: "un máster en gestión deportiva.", options: ["eres", "estás", "haces"], correct: 2 },
+    { before: "¿", after: "usted casado?", options: ["Es", "Está", "Tiene"], correct: 1 },
+    { before: "Javi", after: "entrenador de fútbol y muy gracioso.", options: ["está", "es", "tiene"], correct: 1 },
+    { before: "Rubén", after: "argentino y exjugador de fútbol.", options: ["es", "está", "tiene"], correct: 0 },
+    { before: "Nosotros", after: "compañeros del máster en gestión deportiva.", options: ["estamos", "somos", "tenemos"], correct: 1 },
+    { before: "Elena", after: "muy exigente con los estudiantes.", options: ["tiene", "está", "es"], correct: 2 },
+    { before: "Vosotros", after: "compañeros del máster, ¿no?", options: ["sois", "estáis", "tenéis"], correct: 0 },
+    { before: "Marta", after: "profesora de yoga.", options: ["está", "tiene", "es"], correct: 2 },
+    { before: "¿Tú", after: "hablador o más bien tímido?", options: ["eres", "estás", "tienes"], correct: 0 },
+    { before: "Yo", after: "un máster en gestión deportiva.", options: ["soy", "hago", "tengo"], correct: 1 },
+    { before: "Javi y Rubén", after: "los mejores amigos de Marta.", options: ["son", "están", "tienen"], correct: 0 },
+    { before: "¿Cuántos años", after: "usted?", options: ["es", "tiene", "está"], correct: 1 },
+  ],
+  c2: [
+    { before: "¿Cómo", after: "usted, señora?", options: ["estás", "está", "estáis"], correct: 1 },
+    { before: "Oye, ¿", after: "un momento?", options: ["tiene", "tienes", "tenéis"], correct: 1 },
+    { before: "Disculpe, ¿", after: "usted de aquí?", options: ["eres", "es", "son"], correct: 1 },
+    { before: "¿Qué", after: "tomar, tío?", options: ["quiere", "quieres", "queréis"], correct: 1 },
+    { before: "Con los amigos de mi novia uso", after: ", no usted.", options: ["tú", "usted", "ustedes"], correct: 0 },
+    { before: "¿Cómo se", after: "usted, por favor?", options: ["llama", "llamas", "llaman"], correct: 0 },
+    { before: "¿Dónde", after: "usted, señor director?", options: ["vives", "vive", "viven"], correct: 1 },
+    { before: "¿Te", after: "preguntar algo, tío?", options: ["puedo", "puede", "puedes"], correct: 0 },
+    { before: "Buenas tardes, ¿en qué puedo", after: "?", options: ["ayudarte", "ayudarle", "ayudarlo"], correct: 1 },
+    { before: "¿", after: "libre este asiento? (a un desconocido mayor)", options: ["Está", "Estás", "Estáis"], correct: 0 },
+    { before: "¿Quieres un café,", after: "?", options: ["tío", "señor", "usted"], correct: 0 },
+    { before: "Con mi jefe siempre uso", after: ".", options: ["tú", "usted", "vosotros"], correct: 1 },
+    { before: "¿Cómo te", after: "? (a un compañero de clase)", options: ["llama", "llamas", "llaman"], correct: 1 },
+    { before: "Perdona, ¿", after: "un segundo? (a un amigo)", options: ["tienes", "tiene", "tenéis"], correct: 0 },
+    { before: "¿Le puedo preguntar algo, ", after: "?", options: ["tío", "señor", "colega"], correct: 1 },
+    { before: "Tengo una reunión con un", after: " mañana por la mañana.", options: ["socio", "compañero", "vecino"], correct: 0 },
+    { before: "Puedes", after: "me, no hace falta usted.", options: ["tutear", "tratar", "hablar"], correct: 0 },
+    { before: "¡Pásame una cerveza,", after: "!", options: ["por favor", "porfa", "gracias"], correct: 1 },
+    { before: "Cuando dudes, empieza con", after: ".", options: ["tú", "usted", "vosotros"], correct: 1 },
+    { before: "¿", after: "hora, por favor? (a un desconocido)", options: ["Tienes", "Tiene", "Tenéis"], correct: 1 },
+    { before: "Con los compañeros del máster uso", after: " sin problema.", options: ["tú", "usted", "ustedes"], correct: 0 },
+    { before: "¿Dónde", after: ", tío? (a un amigo)", options: ["vive", "vives", "viven"], correct: 1 },
+    { before: "Buenas tardes, ¿", after: " usted un café?", options: ["quiere", "quieres", "queréis"], correct: 0 },
+    { before: "Disculpe, ¿", after: " libre este asiento?", options: ["estás", "está", "estáis"], correct: 1 },
+    { before: "Con mi jefe siempre", after: " usted.", options: ["uso", "usas", "usamos"], correct: 0 },
+  ],
+  c3: [
+    { before: "Todos los días", after: "a clase a las nueve.", options: ["voy", "va", "van"], correct: 0 },
+    { before: "¿", after: "hablar español mejor?", options: ["Quiere", "Quieres", "Queréis"], correct: 1 },
+    { before: "No", after: "venir mañana. Tengo clase.", options: ["puedo", "puede", "pueden"], correct: 0 },
+    { before: "Ella siempre", after: "la verdad.", options: ["dice", "dices", "digo"], correct: 0 },
+    { before: "¿Qué", after: "hacer este fin de semana?", options: ["quiere", "quieres", "quiero"], correct: 1 },
+    { before: "Nosotros", after: "al gimnasio todos los días.", options: ["vamos", "queremos", "podemos"], correct: 0 },
+    { before: "Ellos", after: "ir al partido el domingo.", options: ["quieren", "quiere", "quiero"], correct: 0 },
+    { before: "¿", after: "hablar un momento?", options: ["Podemos", "Podéis", "Puede"], correct: 0 },
+    { before: "Yo", after: "despertarme temprano los lunes.", options: ["suelo", "suele", "solemos"], correct: 0 },
+    { before: "Ella", after: "que no puede hoy.", options: ["dice", "dices", "decimos"], correct: 0 },
+    { before: "¿Adónde", after: "ahora, tío?", options: ["voy", "vas", "va"], correct: 1 },
+    { before: "Nosotros no", after: "entrenar hoy. Está lloviendo.", options: ["podemos", "puedo", "puede"], correct: 0 },
+    { before: "¿A qué hora", after: "empezar tu clase?", options: ["suelo", "suele", "sueles"], correct: 1 },
+    { before: "Mis compañeros", after: "clase conmigo.", options: ["tiene", "tienen", "tengo"], correct: 1 },
+    { before: "Yo siempre", after: "lo mismo en clase.", options: ["digo", "dice", "dices"], correct: 0 },
+    { before: "No", after: "que madrugar mucho los martes.", options: ["tengo", "tiene", "tienen"], correct: 0 },
+    { before: "Quiero", after: "con Rubén para estudiar juntos.", options: ["quedar", "quedo", "quedamos"], correct: 0 },
+    { before: "¿Te", after: "a la charla de gestión deportiva?", options: ["apunto", "apuntas", "apunta"], correct: 1 },
+    { before: "Tengo que", after: "un trabajo el viernes.", options: ["entregar", "entrego", "entregas"], correct: 0 },
+    { before: "Vosotros", after: "que estudiar más para el examen.", options: ["tenéis", "tienen", "tienes"], correct: 0 },
+    { before: "¿", after: "ir al gimnasio conmigo esta tarde?", options: ["Quieres", "Quiere", "Queréis"], correct: 0 },
+    { before: "Ellos siempre", after: "lo mismo cuando llegan tarde.", options: ["dicen", "dice", "dices"], correct: 0 },
+    { before: "Yo no", after: "hablar español tan rápido todavía.", options: ["puedo", "puede", "podemos"], correct: 0 },
+    { before: "¿A qué hora", after: "vosotros a clase normalmente?", options: ["vais", "van", "va"], correct: 0 },
+    { before: "Rubén", after: "que la clase es muy útil.", options: ["dice", "dices", "decimos"], correct: 0 },
+  ],
+  c4: [
+    { before: "___ el equipo juega muy bien este año.", after: "", options: ["Creo que", "A mí me da", "A mí"], correct: 0, freeBlank: true },
+    { before: "El nuevo", after: "cuesta mucho dinero.", options: ["resultado", "fichaje", "entrenador"], correct: 1 },
+    { before: "Me parece que el", after: "se equivoca otra vez.", options: ["afición", "árbitro", "resultado"], correct: 1 },
+    { before: "A mí me", after: "que van a empatar.", options: ["da", "parece", "creo"], correct: 0 },
+    { before: "La", after: "del equipo está muy triste hoy.", options: ["afición", "entrenador", "fichaje"], correct: 0 },
+    { before: "Creo", after: "el rival es muy fuerte este año.", options: ["que", "de que", "en que"], correct: 0 },
+    { before: "Me", after: "que necesitan un fichaje nuevo.", options: ["da", "parece", "creo"], correct: 1 },
+    { before: "El entrenador se", after: "con la táctica otra vez.", options: ["equivoca", "equivocas", "equivocan"], correct: 0 },
+    { before: "¿Qué", after: "sobre el resultado del partido?", options: ["crees", "cree", "creo"], correct: 0 },
+    { before: "A mí me da que este", after: "va a ser muy bueno.", options: ["fichaje", "afición", "resultado"], correct: 0 },
+    { before: "La afición siempre", after: "al equipo.", options: ["apoya", "apoyo", "apoyas"], correct: 0 },
+    { before: "___ vamos a empatar otra vez.", after: "", options: ["Creo que", "A mí me da", "Me parece"], correct: 0, freeBlank: true },
+    { before: "Me parece que el árbitro es muy", after: ".", options: ["justo", "resultado", "fichaje"], correct: 0 },
+    { before: "¿Cuál es el", after: "del partido de hoy?", options: ["resultado", "fichaje", "entrenador"], correct: 0 },
+    { before: "A mí me da que al árbitro no le", after: "este equipo.", options: ["gusta", "gustan", "gustas"], correct: 0 },
+    { before: "___, el mejor jugador del equipo es el portero.", after: "", options: ["Para mí", "A mí me da", "Digo que"], correct: 0, freeBlank: true },
+    { before: "¿", after: "que el Madrid gana el domingo?", options: ["Crees", "Cree", "Creo"], correct: 0 },
+    { before: "Para mí, esta", after: "va muy bien.", options: ["temporada", "afición", "fichaje"], correct: 0 },
+    { before: "Marta", after: "que el Atleti pierde hoy.", options: ["cree", "crees", "creo"], correct: 0 },
+    { before: "El", after: "se equivoca con la táctica otra vez.", options: ["árbitro", "entrenador", "resultado"], correct: 1 },
+    { before: "¿Qué te", after: "el nuevo fichaje del equipo?", options: ["parece", "parecen", "parezco"], correct: 0 },
+    { before: "A mí me da que este partido", after: " un empate.", options: ["va a ser", "vas a ser", "voy a ser"], correct: 0 },
+    { before: "Nosotros", after: "que el equipo va a ganar.", options: ["creemos", "cree", "creéis"], correct: 0 },
+    { before: "¿Cuál", after: "el resultado del partido de hoy?", options: ["es", "eres", "soy"], correct: 0 },
+    { before: "Para mí, el", after: "de hoy es muy bueno.", options: ["árbitro", "fichaje", "afición"], correct: 0 },
+  ],
+};
+
+/* ============================================================
+   ESTADO Y PERSISTENCIA
+   ============================================================ */
+const STORAGE_KEY = 'andrei-repaso-c1c4-estado-v2';
+let state = { tr: {}, mcq: {} };
+
+async function loadState(){
+  if (!window.storage) return { tr:{}, mcq:{} };
+  try{
+    const res = await window.storage.get(STORAGE_KEY);
+    return (res && typeof res.value === 'string') ? JSON.parse(res.value) : { tr:{}, mcq:{} };
+  }catch(e){ return { tr:{}, mcq:{} }; }
+}
+async function saveState(){
+  if (!window.storage) return;
+  try{ await window.storage.set(STORAGE_KEY, JSON.stringify(state)); }catch(e){ /* fallo silencioso */ }
+}
+
+function normalize(str){
+  return str.toLowerCase()
+    .normalize('NFD').replace(/[\u0300-\u036f]/g, '') // quita acentos para comparar de forma flexible
+    .replace(/[¿?¡!.,]/g, '')
+    .trim()
+    .replace(/\s+/g, ' ');
+}
+
+// Construye la lista completa de variantes aceptadas a partir de display + accept
+function acceptedVariants(item){
+  const all = [item.display, ...item.accept];
+  return all.map(normalize);
+}
+
+function totalItems(){
+  let n = 0;
+  Object.values(TRANSLATIONS).forEach(arr => n += arr.length);
+  Object.values(MCQ).forEach(arr => n += arr.length);
+  return n;
+}
+
+function answeredCount(){
+  return Object.keys(state.tr).length + Object.keys(state.mcq).length;
+}
+
+function updateProgress(){
+  const total = totalItems();
+  const done = answeredCount();
+  document.getElementById('progress-fill').style.width = (done/total*100) + '%';
+  document.getElementById('progress-text').textContent = `${done} / ${total} respondidas`;
+  document.getElementById('score-live').textContent = `${done} / ${total}`;
+}
+
+/* ============================================================
+   RENDER: TRADUCCIONES
+   ============================================================ */
+function renderTranslations(classKey, containerId){
+  const container = document.getElementById(containerId);
+  const items = TRANSLATIONS[classKey];
+  container.innerHTML = '';
+
+  items.forEach((item, i) => {
+    const key = `${classKey}-${i}`;
+    const wrap = document.createElement('div');
+    wrap.className = 'tr-item';
+    wrap.innerHTML = `
+      <p class="tr-en"><span class="num">${i+1}.</span>${item.en}</p>
+      <div class="tr-input-row">
+        <input type="text" class="tr-input" id="input-${key}" placeholder="Escribe la traducción en español...">
+        <button class="tr-check" data-key="${key}" type="button">Comprobar</button>
+      </div>
+      <div class="tr-feedback" id="feedback-${key}"></div>
+      <button class="tr-reveal" data-key="${key}" type="button">Ver una respuesta válida</button>
+    `;
+    container.appendChild(wrap);
+
+    const input = wrap.querySelector(`#input-${key}`);
+    const feedback = wrap.querySelector(`#feedback-${key}`);
+
+    if (state.tr[key] !== undefined) {
+      input.classList.add(state.tr[key] ? 'correct' : 'incorrect');
+    }
+
+    const variants = acceptedVariants(item);
+
+    const check = async () => {
+      const val = normalize(input.value);
+      if (!val) return;
+      const isCorrect = variants.includes(val);
+      input.classList.remove('correct', 'incorrect');
+      input.classList.add(isCorrect ? 'correct' : 'incorrect');
+      feedback.classList.remove('ok', 'bad');
+      feedback.classList.add('show', isCorrect ? 'ok' : 'bad');
+      if (isCorrect) {
+        feedback.innerHTML = '✓ Correcto.';
+      } else {
+        feedback.innerHTML = `✗ No coincide exactamente.<span class="alt">Prueba de nuevo, o pulsa «Ver una respuesta válida» para comparar.</span>`;
+      }
+      state.tr[key] = isCorrect;
+      updateProgress();
+      await saveState();
+    };
+
+    wrap.querySelector(`[data-key="${key}"].tr-check`).addEventListener('click', check);
+    input.addEventListener('keydown', (e) => { if (e.key === 'Enter'){ e.preventDefault(); check(); } });
+
+    wrap.querySelector(`[data-key="${key}"].tr-reveal`).addEventListener('click', () => {
+      feedback.classList.remove('ok');
+      feedback.classList.add('show', 'bad');
+      feedback.innerHTML = `<span class="alt">Respuesta válida: "${item.display}"</span>`;
+    });
+  });
+}
+
+/* ============================================================
+   RENDER: OPCIÓN MÚLTIPLE
+   ============================================================ */
+function renderMCQ(classKey, containerId){
+  const container = document.getElementById(containerId);
+  const items = MCQ[classKey];
+  container.innerHTML = '';
+
+  items.forEach((item, i) => {
+    const key = `${classKey}-${i}`;
+    const wrap = document.createElement('div');
+    wrap.className = 'mcq-item';
+    const sentenceHTML = item.freeBlank
+      ? `${item.before}`
+      : `${item.before} <span class="blank">＿＿＿＿</span> ${item.after}`;
+    wrap.innerHTML = `
+      <p class="mcq-sentence"><span class="num">${i+1}.</span>${sentenceHTML}</p>
+      <div class="mcq-options" id="opts-${key}"></div>
+    `;
+    container.appendChild(wrap);
+
+    const optsEl = wrap.querySelector(`#opts-${key}`);
+    item.options.forEach((opt, oi) => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'mcq-opt';
+      btn.textContent = opt;
+      btn.dataset.idx = oi;
+
+      if (state.mcq[key] !== undefined) {
+        if (oi === item.correct) btn.classList.add('reveal-correct');
+        if (state.mcq[key].selected === oi) {
+          btn.classList.add('selected', state.mcq[key].correct ? 'correct' : 'incorrect');
+        }
+      }
+
+      btn.addEventListener('click', async () => {
+        const isCorrect = oi === item.correct;
+        optsEl.querySelectorAll('.mcq-opt').forEach(b => {
+          b.classList.remove('selected', 'correct', 'incorrect');
+        });
+        btn.classList.add('selected', isCorrect ? 'correct' : 'incorrect');
+        if (!isCorrect) {
+          optsEl.querySelector(`[data-idx="${item.correct}"]`).classList.add('reveal-correct');
+        }
+        state.mcq[key] = { selected: oi, correct: isCorrect };
+        updateProgress();
+        await saveState();
+      });
+
+      optsEl.appendChild(btn);
+    });
+  });
+}
+
+/* ============================================================
+   INIT
+   ============================================================ */
+let pendingReset = false;
+document.getElementById('reset-btn').addEventListener('click', async () => {
+  const btn = document.getElementById('reset-btn');
+  if(!pendingReset){
+    pendingReset = true;
+    btn.textContent = '¿Seguro? Pulsa de nuevo';
+    setTimeout(()=>{ pendingReset = false; btn.textContent = 'Reiniciar repaso'; }, 4000);
+    return;
+  }
+  pendingReset = false;
+  btn.textContent = 'Reiniciar repaso';
+  state = { tr:{}, mcq:{} };
+  await saveState();
+  renderAll();
+});
+
+function renderAll(){
+  renderTranslations('c1', 'mcq-tr-c1');
+  renderTranslations('c2', 'mcq-tr-c2');
+  renderTranslations('c3', 'mcq-tr-c3');
+  renderTranslations('c4', 'mcq-tr-c4');
+  renderMCQ('c1', 'mcq-c1');
+  renderMCQ('c2', 'mcq-c2');
+  renderMCQ('c3', 'mcq-c3');
+  renderMCQ('c4', 'mcq-c4');
+  updateProgress();
+}
+
+(async function init(){
+  state = await loadState();
+  if (!state.tr) state.tr = {};
+  if (!state.mcq) state.mcq = {};
+  renderAll();
+})();
+</script>
+
+</body>
+</html>
