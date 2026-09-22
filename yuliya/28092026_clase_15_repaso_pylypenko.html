@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clase de repaso · Subjuntivo y condicionales (clases 1–14)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+
+/* ╔══════════════════════════════════════════════════════════════╗
+   ║  ESCOLAR — sistema pergamino + acento variable                ║
+   ║  Clase de repaso · Subjuntivo y condicionales (clases 1–14)   ║
+   ╚══════════════════════════════════════════════════════════════╝ */
+
+:root{
+  /* base de papel fija */
+  --paper:        #FBF7EE;
+  --paper-raised: #FFFFFF;
+  --paper-alt:    #F3ECDA;
+  --ink:          #23291F;
+  --ink-soft:     #565F52;
+  --ink-faint:    #8B9184;
+  --line:         rgba(35,41,31,0.12);
+  --line-strong:  rgba(35,41,31,0.22);
+
+  /* colores fijos de sistema */
+  --b2:      #2F6FED;  --b2-soft: #EAF1FE;  --b2-line: #C6D9FC;
+  --ok:      #2F7D5C;  --ok-soft: #E6F3EC;  --ok-line: #B9DCC9;
+  --family:  #B5502E;  --family-soft: #FBEBE3; --family-line: #EFC9B4;
+  --amber:   #C1892F;  --amber-soft: #FBF1DC; --amber-line: #EBD3A2;
+
+  /* acento variable (por defecto: teja) */
+  --accent:      #C1473F;
+  --accent-soft: #FBE9E7;
+  --accent-line: #F0C4C0;
+
+  --f-display: 'Fraunces', Georgia, serif;
+  --f-body:    'IBM Plex Sans', system-ui, sans-serif;
+  --f-data:    'IBM Plex Mono', ui-monospace, monospace;
+
+  --r-sm: 8px;
+  --r-md: 14px;
+  --r-lg: 20px;
+
+  --shadow-1: 0 1px 2px rgba(35,41,31,0.05), 0 1px 8px rgba(35,41,31,0.04);
+}
+
+*{ box-sizing:border-box; }
+html{ scroll-behavior:smooth; }
+body{
+  margin:0;
+  background: var(--paper);
+  background-image: radial-gradient(circle at 1px 1px, var(--line) 1px, transparent 0);
+  background-size: 22px 22px;
+  color: var(--ink);
+  font-family: var(--f-body);
+  line-height:1.6;
+}
+::selection{ background: var(--accent-soft); }
+
+/* ---------- HEADER ---------- */
+header{ padding:44px 24px 20px; max-width:760px; margin:0 auto; }
+.eyebrow{
+  font-family: var(--f-data); font-size:12px; letter-spacing:.14em;
+  text-transform:uppercase; color: var(--accent); margin:0 0 10px;
+  display:flex; align-items:center; gap:10px;
+}
+.eyebrow .dot{ width:6px; height:6px; border-radius:50%; background: var(--accent); }
+h1{
+  font-family: var(--f-display); font-weight:600;
+  font-size:clamp(28px,5.2vw,44px); line-height:1.08;
+  margin:0 0 14px; letter-spacing:-.01em;
+}
+h1 em{ font-style:italic; color: var(--accent); }
+.lede{ font-size:16px; color: var(--ink-soft); max-width:60ch; margin:0; }
+
+.level-badge{
+  display:inline-block; font-family: var(--f-data); font-size:11px; letter-spacing:.06em;
+  background: var(--accent-soft); color: var(--accent); border:1px solid var(--accent-line);
+  padding:3px 10px; border-radius:999px; margin-bottom:14px;
+}
+.meta-row{
+  display:flex; flex-wrap:wrap; gap:24px; margin-top:26px;
+  font-family: var(--f-data); font-size:12px; color: var(--ink-faint);
+}
+.meta-row strong{
+  display:block; color: var(--ink); font-size:14.5px; font-weight:500;
+  font-family: var(--f-display); margin-top:3px;
+}
+
+/* ---------- PLAN DE LA CLASE (línea de tiempo) ---------- */
+.plan{
+  max-width:760px; margin:8px auto 0; padding:0 24px;
+}
+.plan-card{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-lg);
+  box-shadow: var(--shadow-1); padding:20px 22px;
+}
+.plan-title{
+  font-family: var(--f-data); font-size:11px; letter-spacing:.12em; text-transform:uppercase;
+  color: var(--ink-faint); margin:0 0 12px;
+}
+.plan-bar{ display:flex; height:10px; border-radius:999px; overflow:hidden; background: var(--paper-alt); }
+.plan-bar span{ display:block; height:100%; }
+.plan-legend{ display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:8px 18px; margin-top:14px; font-size:13px; color: var(--ink-soft); }
+.plan-legend a{ color: inherit; text-decoration:none; display:flex; align-items:center; gap:8px; }
+.plan-legend a:hover{ color: var(--ink); }
+.plan-legend i{ width:10px; height:10px; border-radius:3px; flex:none; }
+.plan-legend b{ font-family: var(--f-data); font-weight:500; margin-left:auto; color: var(--ink-faint); font-size:12px; }
+
+/* ---------- SECTIONS ---------- */
+main{ max-width:760px; margin:0 auto; padding:8px 24px 100px; }
+section.block{ margin-top:52px; scroll-margin-top:16px; }
+.block-head{ display:flex; align-items:baseline; gap:12px; margin-bottom:18px; }
+.block-num{
+  font-family: var(--f-data); font-size:12px; color:#fff; background: var(--accent);
+  width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex:none;
+}
+.block-head h2{ font-family: var(--f-display); font-weight:500; font-style:italic; font-size:22px; margin:0; }
+.time-tag{
+  font-family: var(--f-data); font-size:11px; color: var(--ink-faint);
+  background: var(--paper-alt); padding:3px 10px; border-radius:999px; margin-left:auto; flex:none;
+}
+
+.panel{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-lg);
+  box-shadow: var(--shadow-1); padding:26px 28px;
+}
+.panel p{ font-size:15px; color: var(--ink-soft); margin:0 0 14px; }
+.panel p:last-child{ margin-bottom:0; }
+.panel p strong{ color: var(--ink); font-weight:600; }
+
+.note{
+  margin-top:16px; padding:14px 16px; background: var(--accent-soft); border:1px solid var(--accent-line);
+  border-radius: var(--r-md); font-size:14px; color: var(--ink-soft);
+}
+.note strong{ color: var(--ink); }
+.note.amber{ background: var(--amber-soft); border-color: var(--amber-line); }
+.note.amber strong{ color:#8A5F12; }
+
+.guide-q{ margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:8px; }
+.guide-q li{ font-size:14.5px; color: var(--ink-soft); padding-left:18px; position:relative; }
+.guide-q li::before{ content:"›"; position:absolute; left:0; color: var(--accent); font-weight:700; }
+
+/* ---------- MAPA DEL CURSO (tarjetas por bloque) ---------- */
+.map-grid{ display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:6px; }
+@media (max-width:600px){ .map-grid{ grid-template-columns:1fr; } }
+.map-card{
+  border:1px solid var(--line); border-radius: var(--r-md); padding:16px 18px; background: var(--paper);
+}
+.map-card[data-k="desea"]{ border-color: var(--accent-line); background: var(--accent-soft); }
+.map-card[data-k="conj"]{ border-color: var(--b2-line); background: var(--b2-soft); }
+.map-card[data-k="cond"]{ border-color: var(--amber-line); background: var(--amber-soft); }
+.map-card[data-k="si"]{ border-color: var(--ok-line); background: var(--ok-soft); }
+.map-card[data-k="imp"]{ grid-column:1/-1; border-color: var(--family-line); background: var(--family-soft); }
+@media (max-width:600px){ .map-card[data-k="imp"]{ grid-column:auto; } }
+.map-tag{ font-family: var(--f-data); font-size:10px; text-transform:uppercase; letter-spacing:.07em; color: var(--ink-faint); margin:0 0 4px; }
+.map-title{ font-family: var(--f-display); font-weight:600; font-size:17px; margin:0 0 8px; }
+.map-forms{ display:flex; flex-direction:column; gap:6px; margin:0; padding:0; list-style:none; }
+.map-forms li{ font-size:13.5px; color: var(--ink-soft); line-height:1.45; }
+.map-forms li b{ color: var(--ink); font-weight:600; font-family: var(--f-display); }
+
+/* ---------- EL ÁRBOL DE DECISIÓN ---------- */
+.tree{ display:flex; flex-direction:column; gap:10px; margin-top:6px; }
+.tree-q{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:14px 16px; display:grid; grid-template-columns:32px 1fr; gap:12px; align-items:start;
+}
+.tree-n{ font-family: var(--f-data); font-size:13px; color:#fff; background: var(--ink); width:28px; height:28px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:600; }
+.tree-body p{ margin:0 0 6px; font-size:14.5px; color: var(--ink); font-weight:500; }
+.tree-body .branches{ display:flex; flex-wrap:wrap; gap:8px; }
+.branch{ font-size:13px; padding:5px 11px; border-radius:999px; border:1px solid var(--line); color: var(--ink-soft); background: var(--paper); }
+.branch b{ color: var(--ink); font-weight:600; }
+.branch.s{ border-color: var(--accent-line); background: var(--accent-soft); }
+.branch.i{ border-color: var(--ok-line); background: var(--ok-soft); }
+
+/* ---------- TABLAS ---------- */
+.conj-wrap{ overflow-x:auto; max-width:100%; margin-top:4px; -webkit-overflow-scrolling:touch; }
+.panel, .correction-panel, .roleplay-panel, .task-panel, .eval-panel{ min-width:0; }
+main, .plan{ min-width:0; }
+table.conj{ width:100%; border-collapse:collapse; font-size:14px; min-width:520px; }
+table.conj th{ font-family: var(--f-data); font-size:10.5px; text-transform:uppercase; letter-spacing:.06em; color: var(--ink-faint); text-align:left; padding:8px 8px; border-bottom:1.5px solid var(--line-strong); font-weight:500; }
+table.conj td{ padding:11px 8px; border-bottom:1px dashed var(--line); vertical-align:top; }
+table.conj tr:last-child td{ border-bottom:none; }
+table.conj td.trig{ font-family: var(--f-display); font-weight:600; font-size:16px; color: var(--accent); white-space:nowrap; }
+table.conj td.ex{ color: var(--ink-soft); font-size:13.5px; }
+table.conj td.mode{ font-family: var(--f-data); font-size:11.5px; color: var(--ink-faint); }
+
+/* ---------- VOCAB (flip cards) ---------- */
+.vocab-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:12px; margin-top:4px; }
+.tap-card{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:14px 16px; cursor:pointer; min-height:82px;
+  display:flex; flex-direction:column; justify-content:center; box-shadow: var(--shadow-1);
+  transition: border-color .15s ease, transform .15s ease;
+}
+.tap-card:hover{ border-color: var(--accent-line); transform: translateY(-2px); }
+.tap-card:focus-visible{ outline:2px solid var(--accent); outline-offset:2px; }
+.tap-front{ font-weight:600; font-size:15px; }
+.tap-src{ font-family: var(--f-data); font-size:10px; color: var(--ink-faint); margin-top:3px; }
+.tap-back{ display:none; font-size:12.5px; color: var(--ink-soft); margin-top:8px; line-height:1.45; }
+.tap-card.flipped{ background: var(--accent-soft); border-color: var(--accent-line); }
+.tap-card.flipped .tap-back{ display:block; }
+.vocab-hint{ font-family: var(--f-data); font-size:11.5px; color: var(--ink-faint); margin:0 0 12px; }
+
+/* ---------- EJERCICIOS ---------- */
+.exercises{ display:flex; flex-direction:column; gap:14px; }
+.exercise{ background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md); padding:14px 16px; }
+.ex-tag{ font-family: var(--f-data); font-size:10px; text-transform:uppercase; letter-spacing:.06em; color: var(--ink-faint); margin:0 0 4px; }
+.ex-sentence{ font-size:15.5px; margin-bottom:10px; }
+.gap{ display:inline-block; min-width:64px; border-bottom:2px solid var(--accent); text-align:center; color: var(--accent); font-weight:600; }
+.ex-options{ display:flex; flex-wrap:wrap; gap:8px; }
+.opt-btn{
+  font-family: var(--f-body); font-size:14px; font-weight:500; color: var(--ink);
+  background: var(--paper); border:1.5px solid var(--line-strong); border-radius:999px;
+  padding:7px 16px; cursor:pointer; transition: all .12s ease;
+}
+.opt-btn:hover:not(:disabled){ border-color: var(--accent); }
+.opt-btn.picked{ background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+.opt-btn.correct{ background: var(--ok-soft); border-color: var(--ok); color: var(--ok); }
+.opt-btn.wrong{ background: var(--family-soft); border-color: var(--family); color: var(--family); text-decoration: line-through; }
+.opt-btn:disabled{ cursor:default; }
+.why{ display:none; margin-top:10px; font-size:13px; color: var(--ink-soft); padding:9px 12px; background: var(--paper-alt); border-radius: var(--r-sm); }
+.exercise.checked .why{ display:block; }
+
+.check-bar{ display:flex; align-items:center; gap:12px; margin-top:18px; flex-wrap:wrap; }
+.btn-primary{
+  font-family: var(--f-body); font-weight:600; font-size:14px; color:#fff; background: var(--accent);
+  border:none; padding:10px 22px; border-radius:999px; cursor:pointer;
+}
+.btn-primary:hover{ filter:brightness(.94); }
+.btn-ghost{
+  font-family: var(--f-body); font-weight:600; font-size:14px; color: var(--ink-soft); background:none;
+  border:1.5px solid var(--line-strong); padding:9px 20px; border-radius:999px; cursor:pointer;
+}
+.btn-ghost:hover{ border-color: var(--ink-soft); }
+#score-text{ font-family: var(--f-data); font-size:13px; color: var(--ink-soft); }
+
+/* ---------- CORRECCIÓN DE ERRORES (paneles neutros) ---------- */
+.correction-panel{ background: var(--paper-alt); border:1px solid var(--line-strong); border-radius: var(--r-lg); padding:24px 26px; }
+.corr-list{ display:flex; flex-direction:column; gap:12px; }
+.corr-item{ background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md); padding:14px 16px; }
+.wrong-line{ font-size:15px; color: var(--family); text-decoration: line-through; text-decoration-thickness:1.5px; margin:0 0 8px; }
+.corr-item textarea{
+  width:100%; font-family: var(--f-body); font-size:14.5px; color: var(--ink);
+  background: var(--paper); border:1px solid var(--line); border-radius: var(--r-sm);
+  padding:9px 11px; resize:vertical;
+}
+.corr-item textarea:focus{ outline:none; border-color: var(--b2); }
+.reveal-btn{
+  margin-top:8px; font-family: var(--f-data); font-size:11.5px; color: var(--b2); background:none;
+  border:none; cursor:pointer; padding:0; text-decoration:underline;
+}
+.right-line{ display:none; margin-top:10px; font-size:14.5px; color: var(--b2); font-weight:500; }
+.right-line small{ display:block; font-size:12.5px; font-weight:400; color: var(--ink-soft); margin-top:3px; }
+.corr-item.open .right-line{ display:block; }
+.corr-item.open .reveal-btn{ display:none; }
+
+/* ---------- DECISIÓN RÁPIDA (real vs. irreal / indicativo vs. subjuntivo) ---------- */
+.rapid{ display:flex; flex-direction:column; gap:10px; }
+.rapid-item{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:12px 16px; display:grid; grid-template-columns:1fr auto; gap:12px; align-items:center; min-width:0;
+}
+.rapid-item p{ margin:0; font-size:15px; color: var(--ink); min-width:0; }
+.rapid-btns{ display:flex; gap:6px; flex-wrap:wrap; justify-content:flex-end; min-width:0; }
+.vf-btn{
+  font-family: var(--f-data); font-size:12px; font-weight:500; color: var(--ink-soft); background: var(--paper);
+  border:1.5px solid var(--line-strong); border-radius:999px; padding:6px 13px; cursor:pointer; white-space:nowrap;
+}
+.vf-btn:hover:not(:disabled){ border-color: var(--accent); color: var(--accent); }
+.vf-btn.correct{ background: var(--ok-soft); border-color: var(--ok); color: var(--ok); }
+.vf-btn.wrong{ background: var(--family-soft); border-color: var(--family); color: var(--family); }
+.vf-btn:disabled{ cursor:default; }
+.rapid-fb{ grid-column:1/-1; font-size:12.5px; color: var(--ink-soft); margin-top:-4px; display:none; }
+.rapid-item.done .rapid-fb{ display:block; }
+@media (max-width:560px){ .rapid-item{ grid-template-columns:1fr; } .rapid-btns{ justify-content:flex-start; } }
+
+/* ---------- ROLEPLAY / SIMULACRO (--family fijo) ---------- */
+.roleplay-panel{ background: var(--family-soft); border:1px solid var(--family-line); border-radius: var(--r-lg); padding:24px 26px; }
+.scene-tabs{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:16px; }
+.scene-tab{
+  font-family: var(--f-data); font-size:12px; color: var(--family); background: var(--paper-raised);
+  border:1.5px solid var(--family-line); border-radius:999px; padding:7px 14px; cursor:pointer;
+}
+.scene-tab:hover{ border-color: var(--family); }
+.scene-tab.active{ background: var(--family); color:#fff; border-color: var(--family); }
+.desc-card{ background: var(--paper-raised); border:1px solid var(--family-line); border-radius: var(--r-md); padding:18px 20px; }
+.desc-trigger{ font-family: var(--f-display); font-weight:600; font-size:22px; margin:0 0 2px; }
+.desc-sub{ font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.06em; color: var(--family); margin:0 0 10px; }
+.desc-task{ font-size:14.5px; color: var(--ink-soft); margin:0 0 12px; }
+.desc-tools{ display:flex; flex-wrap:wrap; gap:6px; margin:0 0 12px; }
+.tool-chip{ font-family: var(--f-data); font-size:11px; padding:3px 9px; border-radius:999px; background: var(--family-soft); color: var(--family); border:1px solid var(--family-line); }
+.desc-card textarea{
+  width:100%; font-family: var(--f-body); font-size:14.5px; color: var(--ink);
+  background: var(--paper); border:1px solid var(--line); border-radius: var(--r-sm);
+  padding:10px 12px; resize:vertical;
+}
+.desc-card textarea:focus{ outline:none; border-color: var(--family); }
+
+/* ---------- TAREA FINAL ---------- */
+.task-panel{ background: var(--accent-soft); border:1px solid var(--accent-line); border-radius: var(--r-lg); padding:26px 28px; }
+.task-panel textarea{
+  width:100%; min-height:150px; font-family: var(--f-body); font-size:15px; color: var(--ink);
+  background: var(--paper-raised); border:1px solid var(--accent-line); border-radius: var(--r-md);
+  padding:12px 14px; resize:vertical; line-height:1.55;
+}
+.task-panel textarea:focus{ outline:none; border-color: var(--accent); }
+.task-footer{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:14px; flex-wrap:wrap; }
+#task-count{ font-family: var(--f-data); font-size:12.5px; color: var(--ink-soft); }
+.btn-secondary{
+  font-family: var(--f-body); font-weight:600; font-size:13.5px; color: var(--accent); background:none;
+  border:1.5px solid var(--accent-line); padding:9px 18px; border-radius:999px; cursor:pointer;
+}
+.btn-secondary:hover{ border-color: var(--accent); }
+.saved-flag{ font-family: var(--f-data); font-size:12px; color: var(--ok); opacity:0; transition: opacity .3s ease; }
+.saved-flag.show{ opacity:1; }
+
+/* ---------- AUTOEVALUACIÓN ---------- */
+.eval-panel{ background: var(--ok-soft); border:1px solid var(--ok-line); border-radius: var(--r-lg); padding:24px 26px; }
+.eval-list{ display:flex; flex-direction:column; gap:8px; }
+.eval-item{
+  display:grid; grid-template-columns:26px 1fr; gap:12px; align-items:center;
+  background: var(--paper-raised); border:1.5px solid var(--ok-line); border-radius: var(--r-md);
+  padding:11px 14px; cursor:pointer; font-size:14.5px; color: var(--ink); text-align:left; font-family: var(--f-body); width:100%;
+}
+.eval-item:hover{ border-color: var(--ok); }
+.eval-box{ width:22px; height:22px; border-radius:6px; border:1.5px solid var(--ok-line); display:flex; align-items:center; justify-content:center; font-size:14px; color:#fff; background: var(--paper); }
+.eval-item.on{ border-color: var(--ok); background: #F2FAF6; }
+.eval-item.on .eval-box{ background: var(--ok); border-color: var(--ok); }
+.eval-item small{ display:block; font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin-top:1px; }
+#eval-count{ font-family: var(--f-data); font-size:12.5px; color: var(--ok); margin-top:14px; display:block; }
+
+/* ---------- CIERRE ---------- */
+.closing{
+  text-align:center; padding:34px 24px 10px; margin-top:52px; border-top:1px solid var(--line-strong);
+}
+.closing .rot{ font-family: var(--f-data); font-size:11px; letter-spacing:.14em; text-transform:uppercase; color: var(--ink-faint); margin:0 0 10px; }
+.closing .txt{ font-family: var(--f-display); font-size:clamp(20px,3.6vw,28px); font-weight:500; line-height:1.25; margin:0 0 8px; }
+.closing .txt em{ font-style:italic; color: var(--accent); }
+.closing .sup{ font-size:14px; color: var(--ink-soft); margin:0; }
+
+/* ---------- FOOTER ---------- */
+footer{
+  max-width:760px; margin:0 auto; padding:0 24px 60px; display:flex;
+  justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;
+  font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint);
+}
+
+@media (max-width:600px){
+  header{ padding:34px 18px 18px; }
+  .plan, main{ padding-left:18px; padding-right:18px; }
+  .panel, .task-panel, .roleplay-panel, .correction-panel, .eval-panel{ padding:20px 18px; }
+}
+@media (prefers-reduced-motion: reduce){ *{ transition:none !important; animation:none !important; scroll-behavior:auto !important; } }
+</style>
+</head>
+<body data-accent="teja">
+
+<header>
+  <p class="eyebrow"><span class="dot"></span>Clase 15 · Repaso general</p>
+  <span class="level-badge">A2 → B1</span>
+  <h1>Todo lo que has aprendido, <em>en una sola clase</em></h1>
+  <p class="lede">Antes de seguir con temas nuevos, hoy recorremos las catorce clases: subjuntivo (deseo, recomendación, emoción, tiempo, concesión, finalidad), condicional simple, condicionales reales e hipotéticas, y el imperfecto de subjuntivo con verbos variados.</p>
+  <div class="meta-row">
+    <div>Duración<strong>50 min</strong></div>
+    <div>Enfoque<strong>Repaso de las clases 1–14</strong></div>
+    <div>Nivel<strong>A2 consolidado</strong></div>
+  </div>
+</header>
+
+<div class="plan">
+  <div class="plan-card">
+    <p class="plan-title">Plan de la clase · 50 minutos</p>
+    <div class="plan-bar" aria-hidden="true">
+      <span style="width:8%;  background:var(--ink-faint)"></span>
+      <span style="width:16%; background:var(--accent)"></span>
+      <span style="width:10%; background:var(--amber)"></span>
+      <span style="width:16%; background:var(--ok)"></span>
+      <span style="width:12%; background:var(--b2)"></span>
+      <span style="width:22%; background:var(--family)"></span>
+      <span style="width:16%; background:var(--ink)"></span>
+    </div>
+    <div class="plan-legend">
+      <a href="#s1"><i style="background:var(--ink-faint)"></i>1 · Calentamiento<b>4 min</b></a>
+      <a href="#s2"><i style="background:var(--accent)"></i>2 · Mapa del curso<b>8 min</b></a>
+      <a href="#s3"><i style="background:var(--amber)"></i>3 · Vocabulario<b>5 min</b></a>
+      <a href="#s4"><i style="background:var(--ok)"></i>4 · Decisión rápida<b>8 min</b></a>
+      <a href="#s5"><i style="background:var(--b2)"></i>5 · Práctica mixta<b>6 min</b></a>
+      <a href="#s6"><i style="background:var(--family)"></i>6 · Errores + simulacro<b>11 min</b></a>
+      <a href="#s7"><i style="background:var(--ink)"></i>7 · Cierre y tarea<b>8 min</b></a>
+    </div>
+  </div>
+</div>
+
+<main>
+
+  <!-- ================= 1 · CALENTAMIENTO ================= -->
+  <section class="block" id="s1">
+    <div class="block-head"><span class="block-num">1</span><h2>Calentamiento: ¿qué recuerdas?</h2><span class="time-tag">4 min</span></div>
+    <div class="panel">
+      <p>Antes de mirar nada, hablemos. En estas semanas has pasado de <strong>"espero que encuentres trabajo"</strong> a preparar una entrevista completa y a planear rutas en bici por Tenerife. Cuéntame con tus palabras qué ha cambiado.</p>
+      <ul class="guide-q">
+        <li>¿Qué estructura te parece que usas ya de forma natural, sin pensar?</li>
+        <li>¿Cuál sigue costándote más cuando hablas deprisa?</li>
+        <li>Si tuvieras que explicarle a alguien qué es el subjuntivo en una frase, ¿qué dirías?</li>
+      </ul>
+      <div class="note"><strong>Objetivo de hoy:</strong> no aprender nada nuevo, sino <strong>conectar</strong> lo que ya sabes. Todo el subjuntivo y los condicionales siguen unas pocas reglas — hoy las ves juntas.</div>
+    </div>
+  </section>
+
+  <!-- ================= 2 · MAPA DEL CURSO ================= -->
+  <section class="block" id="s2">
+    <div class="block-head"><span class="block-num">2</span><h2>El mapa del curso</h2><span class="time-tag">8 min</span></div>
+    <div class="panel">
+      <p>Las catorce clases se pueden resumir en <strong>cinco bloques</strong>. Junto a cada estructura verás en qué clase la trabajamos, por si quieres volver a mirarla.</p>
+      <div class="map-grid">
+        <div class="map-card" data-k="desea">
+          <p class="map-tag">Bloque A · Clases 1, 2, 3, 5, 12</p>
+          <p class="map-title">Subjuntivo con disparador</p>
+          <ul class="map-forms">
+            <li><b>Deseo</b> — espero que, quiero que, ojalá</li>
+            <li><b>Recomendación</b> — te recomiendo que, es importante que</li>
+            <li><b>Emoción</b> — me alegra que, me sorprende que, es una pena que</li>
+          </ul>
+        </div>
+        <div class="map-card" data-k="conj">
+          <p class="map-tag">Bloque B · Clases 4, 9, 10, 12</p>
+          <p class="map-title">Subjuntivo con conjunción</p>
+          <ul class="map-forms">
+            <li><b>Tiempo futuro</b> — cuando, en cuanto, hasta que</li>
+            <li><b>Concesión</b> — aunque + subj. (hipótesis)</li>
+            <li><b>Finalidad</b> — para que, antes de que</li>
+          </ul>
+        </div>
+        <div class="map-card" data-k="cond">
+          <p class="map-tag">Bloque C · Clases 6, 10</p>
+          <p class="map-title">Condicional simple</p>
+          <ul class="map-forms">
+            <li><b>Cortesía</b> — ¿podría…? me gustaría…</li>
+            <li><b>Consejo</b> — yo que tú, hablaría…</li>
+            <li><b>Irregulares</b> — tendría, haría, podría, diría, sabría</li>
+          </ul>
+        </div>
+        <div class="map-card" data-k="si">
+          <p class="map-tag">Bloque D · Clases 7, 8, 13</p>
+          <p class="map-title">Frases con "si"</p>
+          <ul class="map-forms">
+            <li><b>Real</b> — si + presente + futuro</li>
+            <li><b>Irreal</b> — si + imperfecto de subj. + condicional</li>
+          </ul>
+        </div>
+        <div class="map-card" data-k="imp">
+          <p class="map-tag">Bloque E · Clases 8, 13, 14</p>
+          <p class="map-title">Imperfecto de subjuntivo, con muchos verbos</p>
+          <ul class="map-forms">
+            <li><b>Formación</b> — 3ª persona plural del pretérito, quitas <b>-ron</b> y añades <b>-ra</b> (tuvieron → tuviera, pidieron → pidiera, vinieron → viniera)</li>
+            <li><b>Usos</b> — si + imp. subj. + condicional · ojalá + imp. subj. · quisiera + infinitivo · como si + imp. subj.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="note amber" style="margin-top:22px"><strong>El árbol de decisión.</strong> Casi todos tus errores se resuelven con tres preguntas, en este orden:</div>
+      <div class="tree">
+        <div class="tree-q">
+          <div class="tree-n">1</div>
+          <div class="tree-body">
+            <p>¿Cambia el sujeto entre las dos partes de la frase?</p>
+            <div class="branches">
+              <span class="branch i"><b>No</b> → infinitivo: <em>quiero trabajar</em></span>
+              <span class="branch s"><b>Sí</b> → que + subjuntivo: <em>quiero que trabajes</em></span>
+            </div>
+          </div>
+        </div>
+        <div class="tree-q">
+          <div class="tree-n">2</div>
+          <div class="tree-body">
+            <p>Con cuando / en cuanto / aunque: ¿la acción ya pasó o pasa siempre, o todavía está por venir?</p>
+            <div class="branches">
+              <span class="branch i"><b>Ya lo sé / es hábito</b> → indicativo: <em>aunque llueve</em></span>
+              <span class="branch s"><b>Futuro o hipótesis</b> → subjuntivo: <em>cuando llegue</em></span>
+            </div>
+          </div>
+        </div>
+        <div class="tree-q">
+          <div class="tree-n">3</div>
+          <div class="tree-body">
+            <p>Con "si": ¿la condición es realista o imaginaria?</p>
+            <div class="branches">
+              <span class="branch i"><b>Realista</b> → si + presente + futuro: <em>si consigo el puesto, empezaré</em></span>
+              <span class="branch s"><b>Imaginaria</b> → si + imperfecto subj. + condicional: <em>si tuviera más experiencia, pediría más</em></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="conj-wrap" style="margin-top:22px">
+        <table class="conj">
+          <thead><tr><th>Disparador</th><th>Modo</th><th>Ejemplo</th></tr></thead>
+          <tbody>
+            <tr><td class="trig">espero que</td><td class="mode">subjuntivo</td><td class="ex">Espero que encuentres trabajo pronto.</td></tr>
+            <tr><td class="trig">te recomiendo que</td><td class="mode">subjuntivo</td><td class="ex">Te recomiendo que uses la guagua.</td></tr>
+            <tr><td class="trig">me sorprende que</td><td class="mode">subjuntivo</td><td class="ex">Me sorprende que las casas sean tan coloridas.</td></tr>
+            <tr><td class="trig">cuando (futuro)</td><td class="mode">subjuntivo</td><td class="ex">Cuando encuentre trabajo, celebraré.</td></tr>
+            <tr><td class="trig">cuando (hábito / pasado)</td><td class="mode">indicativo</td><td class="ex">Cuando llego a casa, hablo con mi marido.</td></tr>
+            <tr><td class="trig">aunque (hecho)</td><td class="mode">indicativo</td><td class="ex">Aunque hace calima, salgo.</td></tr>
+            <tr><td class="trig">aunque (hipótesis)</td><td class="mode">subjuntivo</td><td class="ex">Aunque haga calima mañana, iré.</td></tr>
+            <tr><td class="trig">para que / antes de que</td><td class="mode">subjuntivo</td><td class="ex">Le explico esto para que sepa mi experiencia.</td></tr>
+            <tr><td class="trig">creo que / en mi opinión</td><td class="mode">indicativo</td><td class="ex">En mi opinión, el arte abstracto es difícil.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 3 · VOCABULARIO ================= -->
+  <section class="block" id="s3">
+    <div class="block-head"><span class="block-num">3</span><h2>Vocabulario acumulado</h2><span class="time-tag">5 min</span></div>
+    <div class="panel">
+      <p class="vocab-hint">Toca cada tarjeta. Antes de girarla, intenta decir una frase con esa palabra. Debajo de cada una verás de qué clase viene.</p>
+      <div class="vocab-grid" id="vocab-grid"></div>
+    </div>
+  </section>
+
+  <!-- ================= 4 · DECISIÓN RÁPIDA ================= -->
+  <section class="block" id="s4">
+    <div class="block-head"><span class="block-num">4</span><h2>Decisión rápida: ¿indicativo o subjuntivo?</h2><span class="time-tag">8 min</span></div>
+    <div class="panel">
+      <p>Ocho frases, una decisión cada una. No las completes: solo elige <strong>qué modo o qué estructura</strong> necesita el verbo. Es exactamente lo que haces en tu cabeza antes de hablar.</p>
+      <div class="rapid" id="rapid"></div>
+      <div class="check-bar">
+        <button class="btn-ghost" id="rapid-reset">Reiniciar</button>
+        <span id="rapid-score"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 5 · PRÁCTICA MIXTA ================= -->
+  <section class="block" id="s5">
+    <div class="block-head"><span class="block-num">5</span><h2>Práctica mixta</h2><span class="time-tag">6 min</span></div>
+    <div class="panel">
+      <p>Diez frases que mezclan <strong>todo el curso</strong>. Piensa primero a qué bloque pertenece cada una (A, B, C, D o E) antes de elegir.</p>
+      <div class="exercises" id="exercises"></div>
+      <div class="check-bar">
+        <button class="btn-primary" id="check-btn">Comprobar respuestas</button>
+        <button class="btn-ghost" id="reset-btn">Reiniciar</button>
+        <span id="score-text"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 6 · ERRORES + SIMULACRO ================= -->
+  <section class="block" id="s6">
+    <div class="block-head"><span class="block-num">6</span><h2>Tus errores más frecuentes, corregidos</h2><span class="time-tag">5 min</span></div>
+    <div class="correction-panel">
+      <p style="margin:0 0 16px;font-size:14.5px;color:var(--ink-soft)">Son frases parecidas a las que han aparecido en las tareas de las clases 12, 13 y 14. Escribe cómo las corregirías y después pulsa para ver la solución.</p>
+      <div class="corr-list" id="corr-list"></div>
+    </div>
+  </section>
+
+  <section class="block" id="s6b" style="margin-top:36px">
+    <div class="block-head"><span class="block-num" style="background:var(--family)">6b</span><h2>Simulacro: todo junto</h2><span class="time-tag">6 min</span></div>
+    <div class="roleplay-panel">
+      <p style="margin:0 0 16px;font-size:14.5px;color:var(--ink-soft)">Cuatro situaciones distintas. En clase respondes <strong>en voz alta</strong>, sin escribir primero. Elige la pestaña que quieras y usa las estructuras del cuadro. Las demás son para practicar en casa.</p>
+      <div class="scene-tabs" id="scene-tabs"></div>
+      <div id="scene-container"></div>
+    </div>
+  </section>
+
+  <!-- ================= 7 · CIERRE Y TAREA ================= -->
+  <section class="block" id="s7">
+    <div class="block-head"><span class="block-num">7</span><h2>Autoevaluación</h2><span class="time-tag">3 min</span></div>
+    <div class="eval-panel">
+      <p style="margin:0 0 16px;font-size:14.5px;color:var(--ink-soft)">Marca lo que ya puedes hacer <strong>sin mirar apuntes</strong>. Sé sincera: lo que quede sin marcar será lo primero que repasemos en la próxima clase.</p>
+      <div class="eval-list" id="eval-list"></div>
+      <span id="eval-count"></span>
+    </div>
+  </section>
+
+  <section class="block" id="s8" style="margin-top:36px">
+    <div class="block-head"><span class="block-num">8</span><h2>Tu tarea</h2><span class="time-tag">5 min</span></div>
+    <div class="task-panel">
+      <p style="margin:0 0 14px;font-size:15px;color:var(--ink-soft)">Escribe <strong>un párrafo de 8 frases</strong> sobre cómo imaginas tu vida en Tenerife dentro de un año. Debe incluir <strong>al menos una estructura de cada bloque</strong>: un deseo (espero que), una recomendación o emoción, un <em>cuando</em> de futuro, un <em>aunque</em>, una frase con <em>si</em> real y otra con <em>si</em> irreal, un condicional de cortesía y un <em>para que</em> o <em>antes de que</em>.</p>
+      <textarea id="final-task" placeholder="Escribe aquí tu párrafo..."></textarea>
+      <div class="task-footer">
+        <span id="task-count">0 estructuras detectadas</span>
+        <div style="display:flex;gap:10px;align-items:center">
+          <span class="saved-flag" id="saved-flag">Guardado ✓</span>
+          <button class="btn-secondary" id="save-btn">Guardar tarea</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="s9" style="margin-top:36px">
+    <div class="block-head"><span class="block-num" style="background:var(--ink-faint)">9</span><h2>Para la próxima clase</h2><span class="time-tag">—</span></div>
+    <div class="panel">
+      <p><strong>Lectura</strong> · Tus propias frases de las tareas de las clases 1–14. Léelas en voz alta y marca cuáles cambiarías ahora.</p>
+      <p><strong>Audio</strong> · Vuelve a escuchar una de tus grabaciones de las clases 8, 10 u 11 y anota <strong>un acierto</strong> y <strong>un error</strong> que ahora detectes tú sola.</p>
+    </div>
+  </section>
+
+  <div class="closing">
+    <p class="rot">Frase de cierre</p>
+    <p class="txt">Lo que hace catorce clases era <em>"espero que encuentres trabajo"</em>, hoy es una forma de pensar.</p>
+    <p class="sup">Cuando sigas practicando, el subjuntivo dejará de sonar a regla y empezará a sonar a español.</p>
+  </div>
+
+</main>
+
+<footer>
+  <span>Pylypenko · Repaso general</span>
+  <span>Clase 15 · Subjuntivo y condicionales</span>
+</footer>
+
+<script>
+/* ---------- utilidades ---------- */
+function shuffle(arr){
+  const a = arr.slice();
+  for(let i = a.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+function norm(s){ return (s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,''); }
+
+/* ---------- VOCABULARIO (12 tarjetas, una selección de todo el curso) ---------- */
+const VOCAB = [
+  {front:"espero que",       src:"Clase 1",  back:"I hope that (+ subjuntivo). — Espero que encuentres trabajo pronto."},
+  {front:"te recomiendo que",src:"Clase 2",  back:"I recommend that you (+ subj.). — Te recomiendo que uses el bono de guagua."},
+  {front:"me sorprende que", src:"Clase 3",  back:"It surprises me that (+ subj.). — Me sorprende que las casas sean tan coloridas."},
+  {front:"en cuanto",        src:"Clase 4",  back:"As soon as (+ subj. en futuro). — En cuanto tenga tiempo, visitaré una cueva guanche."},
+  {front:"en mi opinión",    src:"Clase 5",  back:"In my opinion (+ indicativo). — En mi opinión, el arte abstracto es difícil de entender."},
+  {front:"yo que tú",        src:"Clase 6",  back:"If I were you (+ condicional). — Yo que tú, hablaría con tu jefe."},
+  {front:"si me contratan",  src:"Clase 7",  back:"If they hire me (+ futuro). — Si me contratan, empezaré en septiembre."},
+  {front:"si tuviera",       src:"Clase 8",  back:"If I had (+ condicional). — Si tuviera más experiencia, conseguiría el trabajo."},
+  {front:"aunque",           src:"Clase 9",  back:"Although / even if. Indic. = hecho; subj. = hipótesis. — Aunque haga calima, saldré."},
+  {front:"para que",         src:"Clase 10", back:"So that (+ subjuntivo). — Le explico esto para que entienda mi experiencia."},
+  {front:"el desnivel",      src:"Clase 14", back:"Elevation gain. — Si supiera el desnivel exacto, calcularía mejor el tiempo."},
+  {front:"el avituallamiento",src:"Clase 14",back:"Refuelling point. — Si el avituallamiento estuviera cerrado, llevaría más comida."}
+];
+const vgrid = document.getElementById('vocab-grid');
+VOCAB.forEach(v=>{
+  const card = document.createElement('div');
+  card.className = 'tap-card';
+  card.setAttribute('role','button');
+  card.setAttribute('tabindex','0');
+  card.setAttribute('aria-pressed','false');
+  card.innerHTML = `<div class="tap-front">${v.front}</div><div class="tap-src">${v.src}</div><div class="tap-back">${v.back}</div>`;
+  const toggle = ()=>{
+    const f = card.classList.toggle('flipped');
+    card.setAttribute('aria-pressed', String(f));
+  };
+  card.addEventListener('click', toggle);
+  card.addEventListener('keydown', e=>{
+    if(e.key==='Enter' || e.key===' '){ e.preventDefault(); toggle(); }
+  });
+  vgrid.appendChild(card);
+});
+
+/* ---------- DECISIÓN RÁPIDA (8 ítems, botones etiquetados) ---------- */
+const RAPID = [
+  {s:"Espero que tú ___ venir el sábado.", opts:["Subjuntivo","Indicativo","Infinitivo"], a:"Subjuntivo",
+   why:"Cambia el sujeto (yo espero, tú vienes) y hay un deseo → subjuntivo."},
+  {s:"Quiero ___ más español todos los días.", opts:["Subjuntivo","Indicativo","Infinitivo"], a:"Infinitivo",
+   why:"El sujeto no cambia (yo quiero, yo practico) → infinitivo, sin «que»."},
+  {s:"Cuando ___ a casa esta noche, te llamaré.", opts:["Subjuntivo","Indicativo","Infinitivo"], a:"Subjuntivo",
+   why:"Todavía no ha pasado (futuro) → cuando + subjuntivo: llegue."},
+  {s:"Cuando ___ a casa, siempre saludo a mi marido.", opts:["Subjuntivo","Indicativo","Infinitivo"], a:"Indicativo",
+   why:"Es un hábito, pasa siempre → indicativo: llego."},
+  {s:"Aunque ___ calima ahora mismo, voy a salir.", opts:["Subjuntivo","Indicativo","Infinitivo"], a:"Indicativo",
+   why:"Ya sabes que hay calima (dato conocido) → aunque + indicativo."},
+  {s:"Aunque ___ mal tiempo mañana, saldré igual.", opts:["Subjuntivo","Indicativo","Infinitivo"], a:"Subjuntivo",
+   why:"No sabes si lo habrá, y no importa → aunque + subjuntivo: haga."},
+  {s:"Si consigo el puesto, ___ en septiembre.", opts:["Futuro","Condicional","Imperfecto de subj."], a:"Futuro",
+   why:"Es una condición realista → si + presente + futuro: empezaré."},
+  {s:"Si tuviera más experiencia, ___ un puesto mejor.", opts:["Futuro","Condicional","Imperfecto de subj."], a:"Condicional",
+   why:"Condición imaginaria (si + imp. subj.) → la otra parte va en condicional: pediría."}
+];
+const rapidEl = document.getElementById('rapid');
+function buildRapid(){
+  rapidEl.innerHTML = '';
+  RAPID.forEach((r,i)=>{
+    const item = document.createElement('div');
+    item.className = 'rapid-item';
+    item.innerHTML = `
+      <p>${i+1}. ${r.s.replace('___','<span class="gap">___</span>')}</p>
+      <div class="rapid-btns"></div>
+      <div class="rapid-fb"></div>`;
+    const btns = item.querySelector('.rapid-btns');
+    shuffle(r.opts).forEach(o=>{
+      const b = document.createElement('button');
+      b.className = 'vf-btn';
+      b.textContent = o;
+      b.addEventListener('click', ()=>{
+        btns.querySelectorAll('.vf-btn').forEach(x=>{
+          x.disabled = true;
+          if(x.textContent === r.a) x.classList.add('correct');
+        });
+        if(o !== r.a) b.classList.add('wrong');
+        item.classList.add('done');
+        item.querySelector('.rapid-fb').textContent = (o === r.a ? '✓ ' : '✗ ') + r.why;
+        updateRapidScore();
+      });
+      btns.appendChild(b);
+    });
+    rapidEl.appendChild(item);
+  });
+  document.getElementById('rapid-score').textContent = '';
+}
+function updateRapidScore(){
+  const done = rapidEl.querySelectorAll('.rapid-item.done').length;
+  const ok = rapidEl.querySelectorAll('.vf-btn.correct:disabled').length;
+  // aciertos reales: los ítems en los que no hay ningún .wrong
+  let good = 0;
+  rapidEl.querySelectorAll('.rapid-item.done').forEach(it=>{
+    if(!it.querySelector('.vf-btn.wrong')) good++;
+  });
+  document.getElementById('rapid-score').textContent = done === RAPID.length
+    ? `${good} / ${RAPID.length} correctas`
+    : `${done} / ${RAPID.length} respondidas`;
+}
+document.getElementById('rapid-reset').addEventListener('click', buildRapid);
+buildRapid();
+
+/* ---------- PRÁCTICA MIXTA (10 huecos, opciones aleatorizadas) ---------- */
+const EXERCISES = [
+  {block:"A · deseo", sentence:"Ojalá <span class=\"gap\">___</span> trabajo antes de septiembre.",
+   options:["encuentre","encuentro","encontraré"], answer:"encuentre",
+   why:"Ojalá + presente de subjuntivo."},
+  {block:"A · recomendación", sentence:"Te aconsejo que <span class=\"gap\">___</span> con antelación.",
+   options:["salgas","sales","saldrás"], answer:"salgas",
+   why:"Aconsejar que + subjuntivo; cambia el sujeto (yo aconsejo, tú sales)."},
+  {block:"A · emoción", sentence:"Es una pena que <span class=\"gap\">___</span> tan pronto los domingos.",
+   options:["cierren","cierran","cerrarán"], answer:"cierren",
+   why:"Es una pena que + subjuntivo (reacción emocional)."},
+  {block:"B · tiempo", sentence:"En cuanto <span class=\"gap\">___</span> el curso, buscaré trabajo.",
+   options:["termine","termino","terminaré"], answer:"termine",
+   why:"En cuanto + subjuntivo cuando habla de futuro."},
+  {block:"B · finalidad", sentence:"Le explico mi experiencia para que <span class=\"gap\">___</span> que soy la persona adecuada.",
+   options:["sepa","sabe","sabría"], answer:"sepa",
+   why:"Para que + subjuntivo (cambia el sujeto)."},
+  {block:"C · cortesía", sentence:"<span class=\"gap\">___</span> hacerle una pregunta sobre el horario?",
+   options:["¿Podría","¿Puedo","¿Pude"], answer:"¿Podría",
+   why:"El condicional suaviza la petición y suena más cortés."},
+  {block:"D · si real", sentence:"Si me <span class=\"gap\">___</span> para la entrevista, iré el lunes.",
+   options:["llaman","llamaran","llamarían"], answer:"llaman",
+   why:"Condición real y probable → si + presente + futuro."},
+  {block:"D · si irreal", sentence:"Si <span class=\"gap\">___</span> más inglés, tendría más opciones.",
+   options:["supiera","sé","sabría"], answer:"supiera",
+   why:"Condición imaginaria → si + imperfecto de subjuntivo (saber → supieron → supiera)."},
+  {block:"E · imperf. subj.", sentence:"Si el guía nos <span class=\"gap\">___</span> bajar el ritmo, le haría caso.",
+   options:["pidiera","pediría","pide"], answer:"pidiera",
+   why:"Pedir → pidieron → pidiera. Fíjate en el cambio e→i."},
+  {block:"E · ojalá irreal", sentence:"Ojalá <span class=\"gap\">___</span> menos esta semana en el norte.",
+   options:["lloviera","llueva","lloverá"], answer:"lloviera",
+   why:"Ojalá + imperfecto de subjuntivo = deseo poco realista (llovieron → lloviera)."}
+];
+const exWrap = document.getElementById('exercises');
+EXERCISES.forEach((ex,i)=>{
+  const el = document.createElement('div');
+  el.className = 'exercise';
+  el.dataset.answer = ex.answer;
+  el.innerHTML = `
+    <p class="ex-tag">Bloque ${ex.block}</p>
+    <div class="ex-sentence">${i+1}. ${ex.sentence}</div>
+    <div class="ex-options">
+      ${shuffle(ex.options).map(o=>`<button class="opt-btn" data-value="${o}">${o}</button>`).join('')}
+    </div>
+    <div class="why">${ex.why}</div>`;
+  exWrap.appendChild(el);
+  el.querySelectorAll('.opt-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      el.querySelectorAll('.opt-btn').forEach(b=>b.classList.remove('picked'));
+      btn.classList.add('picked');
+    });
+  });
+});
+document.getElementById('check-btn').addEventListener('click', ()=>{
+  let correct = 0;
+  document.querySelectorAll('.exercise').forEach(el=>{
+    const answer = el.dataset.answer;
+    const picked = el.querySelector('.opt-btn.picked');
+    el.querySelectorAll('.opt-btn').forEach(b=>{
+      b.disabled = true;
+      if(b.dataset.value === answer) b.classList.add('correct');
+      else if(b === picked) b.classList.add('wrong');
+    });
+    el.classList.add('checked');
+    if(picked && picked.dataset.value === answer) correct++;
+  });
+  document.getElementById('score-text').textContent = `${correct} / ${EXERCISES.length} correctas`;
+});
+document.getElementById('reset-btn').addEventListener('click', ()=>{
+  document.querySelectorAll('.exercise').forEach(el=>{
+    el.classList.remove('checked');
+    el.querySelectorAll('.opt-btn').forEach(b=>{
+      b.disabled = false;
+      b.classList.remove('picked','correct','wrong');
+    });
+  });
+  document.getElementById('score-text').textContent = '';
+});
+
+/* ---------- CORRECCIÓN DE ERRORES (frases de las clases 12–14) ---------- */
+const ERRORS = [
+  {wrong:"Espero que tú puedes venir a mi casa el sábado.",
+   right:"Espero que tú puedas venir a mi casa el sábado.",
+   why:"«Esperar que» = deseo, y hay cambio de sujeto → subjuntivo (puedas)."},
+  {wrong:"Cuando yo llego a España, voy a buscar trabajo.",
+   right:"Cuando llegue a España, voy a buscar trabajo.",
+   why:"Habla de futuro, todavía no ha pasado → cuando + subjuntivo (llegue)."},
+  {wrong:"Aunque hace mal tiempo mañana, voy a salir igual.",
+   right:"Aunque haga mal tiempo mañana, voy a salir igual.",
+   why:"Mañana es incierto y no importa → aunque + subjuntivo (haga)."},
+  {wrong:"Si tengo el trabajo, estaría muy contenta.",
+   right:"Si tengo el trabajo, estaré muy contenta.  /  Si tuviera el trabajo, estaría muy contenta.",
+   why:"No se mezclan: real = presente + futuro; irreal = imperfecto subj. + condicional."},
+  {wrong:"Si tenía más experiencia, pediría un sueldo mejor.",
+   right:"Si tuviera más experiencia, pediría un sueldo mejor.",
+   why:"La hipótesis pide imperfecto de subjuntivo (tuviera), no imperfecto de indicativo (tenía)."},
+  {wrong:"Pedaleaba como si no tiene cansancio.",
+   right:"Pedaleaba como si no tuviera cansancio.",
+   why:"«Como si» siempre va con imperfecto de subjuntivo."},
+  {wrong:"Quisiera que me explicas el desnivel de la ruta.",
+   right:"Quisiera que me explicaras el desnivel de la ruta.",
+   why:"Quisiera (imperfecto de subj.) arrastra a explicaras, no a explicas."}
+];
+const corrList = document.getElementById('corr-list');
+ERRORS.forEach((e,i)=>{
+  const item = document.createElement('div');
+  item.className = 'corr-item';
+  item.innerHTML = `
+    <p class="wrong-line">${i+1}. ${e.wrong}</p>
+    <textarea rows="1" placeholder="Escribe tu versión corregida..."></textarea>
+    <button class="reveal-btn">Ver solución</button>
+    <div class="right-line">${e.right}<small>${e.why}</small></div>`;
+  item.querySelector('.reveal-btn').addEventListener('click', ()=> item.classList.add('open'));
+  corrList.appendChild(item);
+});
+
+/* ---------- SIMULACRO (4 escenas con "herramientas") ---------- */
+const SCENES = [
+  { tab:"🎬 Entrevista", word:"La actriz del momento", sub:"combina bloques A–E",
+    task:"Eres una actriz famosa que acaba de estrenar película. Responde: qué esperas del estreno, qué te sorprendió del rodaje, qué harías si un papel te asustara, y qué te gustaría hacer cuando termine esta gira de promoción.",
+    tools:["espero que…","me sorprendió que…","si un papel me asustara, …","cuando termine la gira, …","me gustaría…"] },
+  { tab:"🚲 Ruta en bici", word:"Mañana, el Teide", sub:"bloques B, D y E",
+    task:"Cuenta tu plan para subir al Teide: qué harás si hace buen tiempo, qué harías si lloviera, y qué te gustaría que pasara.",
+    tools:["si hace buen tiempo, …","si lloviera, …","cuando llegue, …","aunque haga viento, …","ojalá…"] },
+  { tab:"🧭 Consejos", word:"Una amiga llega a Tenerife", sub:"bloques A y C",
+    task:"Una amiga acaba de mudarse a Tenerife. Dale consejos sobre la guagua, la calima y la burocracia, y cuéntale qué te sorprendió a ti al llegar.",
+    tools:["te recomiendo que…","es importante que…","yo que tú, …","me sorprendió que…","antes de que…"] },
+  { tab:"🌍 Mi futuro", word:"Dentro de un año", sub:"todos los bloques",
+    task:"Imagina tu vida en un año: lo que esperas, lo que harás cuando consigas trabajo y lo que harías si pudieras cambiar una cosa.",
+    tools:["espero que…","cuando encuentre trabajo, …","si pudiera, …","aunque cueste, …","me gustaría…"] }
+];
+let activeScene = 0;
+const sceneTabs = document.getElementById('scene-tabs');
+const sceneContainer = document.getElementById('scene-container');
+function renderTabs(){
+  sceneTabs.innerHTML = SCENES.map((s,i)=>
+    `<button class="scene-tab${i===activeScene?' active':''}" data-idx="${i}">${s.tab}</button>`).join('');
+  sceneTabs.querySelectorAll('.scene-tab').forEach(b=>{
+    b.addEventListener('click', ()=>{ activeScene = +b.dataset.idx; renderTabs(); renderScene(); });
+  });
+}
+function renderScene(){
+  const s = SCENES[activeScene];
+  sceneContainer.innerHTML = `
+    <div class="desc-card">
+      <p class="desc-trigger">${s.word}</p>
+      <p class="desc-sub">${s.sub}</p>
+      <p class="desc-task">${s.task}</p>
+      <div class="desc-tools">${s.tools.map(t=>`<span class="tool-chip">${t}</span>`).join('')}</div>
+      <textarea rows="3" placeholder="Escribe (o prepara mentalmente) tu respuesta..."></textarea>
+    </div>`;
+}
+renderTabs(); renderScene();
+
+/* ---------- AUTOEVALUACIÓN (persistente) ---------- */
+const EVAL_ITEMS = [
+  {t:"Distingo infinitivo y «que» + subjuntivo según si cambia el sujeto", s:"Bloque A · clases 1–3"},
+  {t:"Uso subjuntivo con «cuando / en cuanto» cuando hablo de futuro", s:"Bloque B · clase 4"},
+  {t:"Sé cuándo «aunque» lleva indicativo y cuándo subjuntivo", s:"Bloque B · clase 9"},
+  {t:"Uso «para que» y «antes de que» con subjuntivo", s:"Bloque B · clase 10"},
+  {t:"Doy consejos y pido cosas con condicional (podría, me gustaría)", s:"Bloque C · clases 6 y 10"},
+  {t:"No mezclo tiempos en frases con «si» (real vs. irreal)", s:"Bloque D · clases 7, 8 y 13"},
+  {t:"Formo el imperfecto de subjuntivo con verbos distintos de «pudiera»", s:"Bloque E · clases 8 y 14"},
+  {t:"Puedo responder una pregunta de entrevista sin preparar la frase", s:"Bloques C y D · clases 10 y 13"}
+];
+const EVAL_KEY = 'pylypenko-clase15-repaso-eval';
+const evalList = document.getElementById('eval-list');
+const evalCount = document.getElementById('eval-count');
+let evalState = new Array(EVAL_ITEMS.length).fill(false);
+function paintEval(){
+  evalList.innerHTML = '';
+  EVAL_ITEMS.forEach((it,i)=>{
+    const b = document.createElement('button');
+    b.className = 'eval-item' + (evalState[i] ? ' on' : '');
+    b.innerHTML = `<span class="eval-box">${evalState[i] ? '✓' : ''}</span><span>${it.t}<small>${it.s}</small></span>`;
+    b.addEventListener('click', async ()=>{
+      evalState[i] = !evalState[i];
+      paintEval();
+      if(window.storage){
+        try{ await window.storage.set(EVAL_KEY, JSON.stringify(evalState)); }catch(e){}
+      }
+    });
+    evalList.appendChild(b);
+  });
+  const n = evalState.filter(Boolean).length;
+  evalCount.textContent = `${n} de ${EVAL_ITEMS.length} dominadas` +
+    (n === EVAL_ITEMS.length ? ' — ¡todo el curso consolidado!' : n >= 5 ? ' — muy buen nivel' : ' — repasaremos las que faltan');
+}
+(async function loadEval(){
+  if(window.storage){
+    try{
+      const res = await window.storage.get(EVAL_KEY);
+      if(res && typeof res.value === 'string'){
+        const arr = JSON.parse(res.value);
+        if(Array.isArray(arr) && arr.length === EVAL_ITEMS.length) evalState = arr.map(Boolean);
+      }
+    }catch(e){ /* sin datos previos */ }
+  }
+  paintEval();
+})();
+
+/* ---------- TAREA FINAL ---------- */
+const STORAGE_KEY = 'pylypenko-clase15-repaso-tarea';
+const taskArea = document.getElementById('final-task');
+const taskCount = document.getElementById('task-count');
+const savedFlag = document.getElementById('saved-flag');
+
+const PATTERNS = [
+  /\b(espero que|quiero que|ojalá|ojala)\b/i,
+  /\b(te recomiendo que|te aconsejo que|es importante que|me alegra que|me sorprende que|es una pena que)\b/i,
+  /\b(cuando|en cuanto|hasta que)\s+\w+/i,
+  /\baunque\b/i,
+  /\bsi\s+(me\s+)?(consigo|encuentro|contratan|llaman|tengo|apruebo|aceptan|hace|llego)\b/i,
+  /\bsi\s+(tuviera|pudiera|fuera|supiera|hiciera|viviera|tuviese)\b/i,
+  /\b(me gustaría|podría|sería|querría)\b/i,
+  /\b(para que|antes de que)\b/i
+];
+function updateCount(){
+  const txt = taskArea.value;
+  const n = PATTERNS.filter(p => p.test(txt)).length;
+  taskCount.textContent = `${n} / 8 bloques detectados`;
+}
+taskArea.addEventListener('input', updateCount);
+(async function loadTask(){
+  if(window.storage){
+    try{
+      const res = await window.storage.get(STORAGE_KEY);
+      if(res && typeof res.value === 'string') taskArea.value = res.value;
+    }catch(e){ /* sin tarea previa */ }
+  }
+  updateCount();
+})();
+document.getElementById('save-btn').addEventListener('click', async ()=>{
+  if(!window.storage){
+    savedFlag.textContent = 'No se puede guardar aquí';
+    savedFlag.classList.add('show');
+    setTimeout(()=>{ savedFlag.classList.remove('show'); savedFlag.textContent = 'Guardado ✓'; }, 2200);
+    return;
+  }
+  try{
+    const ok = await window.storage.set(STORAGE_KEY, taskArea.value);
+    savedFlag.textContent = ok ? 'Guardado ✓' : 'No se pudo guardar';
+  }catch(e){
+    savedFlag.textContent = 'No se pudo guardar';
+  }
+  savedFlag.classList.add('show');
+  setTimeout(()=>{ savedFlag.classList.remove('show'); savedFlag.textContent = 'Guardado ✓'; }, 1800);
+});
+</script>
+
+</body>
+</html>
