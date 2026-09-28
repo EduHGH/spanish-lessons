@@ -1,0 +1,1621 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clase 39 · Repaso general — consolidación gramatical — Rebecca</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+
+/* ╔══════════════════════════════════════════════════════════════╗
+   ║  ESCOLAR — sistema de diseño para clases de español online   ║
+   ║  Clase 39 · Repaso general · concurso de consolidación         ║
+   ╚══════════════════════════════════════════════════════════════╝ */
+
+:root{
+  --paper:        #FBF7EE;
+  --paper-raised: #FFFFFF;
+  --paper-alt:    #F3ECDA;
+  --ink:          #23291F;
+  --ink-soft:     #565F52;
+  --ink-faint:    #8B9184;
+  --line:         rgba(35,41,31,0.12);
+  --line-strong:  rgba(35,41,31,0.22);
+
+  --b1:      #2F6FED;  --b1-soft: #EAF1FE;  --b1-line: #C6D9FC;
+  --b2:      #2E9E6B;  --b2-soft: #E9F6EF;  --b2-line: #BEE6D3;
+  --b3:      #DB8A2E;  --b3-soft: #FCF1E1;  --b3-line: #F3D9AF;
+  --family:  #C4432E;  --family-soft: #FBEAE4; --family-line: #F0C7BA;
+  --gold:    #C79A2E;  --gold-soft: #FBF2DE; --gold-line: #EFD99C;
+
+  --f-display: 'Fraunces', Georgia, serif;
+  --f-body:    'IBM Plex Sans', system-ui, sans-serif;
+  --f-data:    'IBM Plex Mono', monospace;
+
+  --r-sm: 8px;
+  --r-md: 14px;
+  --r-lg: 20px;
+
+  --shadow-1: 0 1px 2px rgba(35,41,31,0.05), 0 1px 8px rgba(35,41,31,0.04);
+}
+
+*{ box-sizing:border-box; }
+body{
+  margin:0;
+  background: var(--paper);
+  background-image: radial-gradient(circle at 1px 1px, var(--line) 1px, transparent 0);
+  background-size: 22px 22px;
+  color: var(--ink);
+  font-family: var(--f-body);
+  line-height:1.6;
+}
+::selection{ background: var(--b1-soft); }
+
+/* ---------- LANGUAGE TOGGLE ---------- */
+.lang-toggle-wrap{
+  position:fixed; top:16px; right:16px; z-index:50;
+}
+.lang-toggle{
+  font-family: var(--f-data); font-size:11.5px; letter-spacing:.03em;
+  background: var(--paper-raised); border:1px solid var(--line-strong); border-radius:999px;
+  padding:6px 6px; display:flex; align-items:center; gap:2px; box-shadow: var(--shadow-1); cursor:pointer;
+}
+.lang-toggle span{
+  padding:5px 11px; border-radius:999px; color: var(--ink-faint); transition: all .15s ease;
+}
+.lang-toggle span.active{ background: var(--ink); color:#fff; }
+.en-note{
+  display:block; font-family: var(--f-body); font-style:italic; font-size:0.82em;
+  color: var(--ink-faint); margin-top:3px; opacity:0; max-height:0; overflow:hidden;
+  transition: opacity .2s ease;
+}
+html[data-lang="bilingual"] .en-note{ opacity:1; max-height:none; }
+@media (max-width:600px){
+  .lang-toggle-wrap{ top:10px; right:10px; }
+  .lang-toggle span{ padding:5px 9px; font-size:11px; }
+}
+
+/* ---------- HEADER ---------- */
+header{ padding:44px 24px 28px; max-width:760px; margin:0 auto; position:relative; }
+.eyebrow{
+  font-family: var(--f-data); font-size:12px; letter-spacing:.14em;
+  text-transform:uppercase; color: var(--family); margin:0 0 10px;
+  display:flex; align-items:center; gap:10px;
+}
+.eyebrow .dot{ width:6px; height:6px; border-radius:50%; background: var(--family); }
+h1{
+  font-family: var(--f-display); font-weight:600;
+  font-size:clamp(30px,5.6vw,46px); line-height:1.08;
+  margin:0 0 14px; letter-spacing:-.01em;
+}
+h1 em{ font-style:italic; color: var(--family); }
+.lede{ font-size:16px; color: var(--ink-soft); max-width:56ch; margin:0; }
+
+.meta-row{
+  display:flex; flex-wrap:wrap; gap:20px; margin-top:26px;
+  font-family: var(--f-data); font-size:12px; color: var(--ink-faint);
+}
+.meta-row strong{
+  display:block; color: var(--ink); font-size:14.5px; font-weight:500;
+  font-family: var(--f-display); margin-top:3px;
+}
+
+/* ---------- SCORE BAR (sticky) ---------- */
+.score-bar{
+  position:sticky; top:0; z-index:20; background: var(--paper);
+  border-bottom:1px solid var(--line); padding:12px 24px;
+  display:flex; align-items:center; gap:16px; justify-content:center;
+  backdrop-filter: blur(6px);
+}
+.score-bar-inner{ max-width:760px; width:100%; display:flex; align-items:center; gap:16px; }
+.score-chip{
+  font-family: var(--f-data); font-size:12.5px; color: var(--ink-soft);
+  background: var(--paper-raised); border:1px solid var(--line); border-radius:999px;
+  padding:6px 14px; display:flex; align-items:center; gap:8px; white-space:nowrap;
+}
+.score-chip strong{ color: var(--gold); font-family: var(--f-display); font-size:15px; }
+.score-track{
+  flex:1; height:8px; background: var(--paper-alt); border:1px solid var(--line);
+  border-radius:99px; overflow:hidden;
+}
+.score-fill{ height:100%; background: var(--b2); width:0%; transition: width .4s ease; }
+
+/* ---------- SECTIONS ---------- */
+main{ max-width:760px; margin:0 auto; padding:8px 24px 100px; }
+
+section.block{ margin-bottom:52px; }
+.block-head{ display:flex; align-items:baseline; gap:12px; margin-bottom:18px; }
+.time-tag{
+  font-family: var(--f-data); font-size:11px; color: var(--ink-faint);
+  background: var(--paper-alt); padding:3px 10px; border-radius:999px; margin-left:auto; flex:none;
+}
+.block-num{
+  font-family: var(--f-data); font-size:12px; color:#fff; background: var(--family);
+  width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  flex:none;
+}
+.block-head h2{
+  font-family: var(--f-display); font-weight:500; font-style:italic; font-size:22px; margin:0;
+}
+
+.panel{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-lg);
+  box-shadow: var(--shadow-1); padding:26px 28px;
+}
+
+/* ---------- QUIZ ROUND CARDS ---------- */
+.round-panel{ border-radius: var(--r-lg); padding:26px 28px; }
+.round-panel.ser-estar{ background: var(--b1-soft); border:1px solid var(--b1-line); }
+.round-panel.genero{ background: var(--b3-soft); border:1px solid var(--b3-line); }
+.round-panel.tiempos{ background: var(--b2-soft); border:1px solid var(--b2-line); }
+.round-panel.vocab{ background: var(--family-soft); border:1px solid var(--family-line); }
+.round-panel.ser-estar .block-num{ background: var(--b1); }
+.round-panel.genero .block-num{ background: var(--b3); }
+.round-panel.tiempos .block-num{ background: var(--b2); }
+.round-panel.vocab .block-num{ background: var(--family); }
+.round-panel.ser-estar .block-head h2{ color: var(--b1); }
+.round-panel.genero .block-head h2{ color: var(--b3); }
+.round-panel.tiempos .block-head h2{ color: var(--b2); }
+.round-panel.vocab .block-head h2{ color: var(--family); }
+
+.round-sub{ font-family: var(--f-data); font-size:11.5px; color: var(--ink-faint); margin:-10px 0 18px; text-transform:uppercase; letter-spacing:.05em; }
+
+.q-card{
+  background:#fff; border-radius: var(--r-md); padding:18px 20px; margin-bottom:12px;
+}
+.round-panel.ser-estar .q-card{ border:1px solid var(--b1-line); }
+.round-panel.genero .q-card{ border:1px solid var(--b3-line); }
+.round-panel.tiempos .q-card{ border:1px solid var(--b2-line); }
+.round-panel.vocab .q-card{ border:1px solid var(--family-line); }
+.q-card:last-child{ margin-bottom:0; }
+.q-text{ font-size:15px; color:var(--ink); margin:0 0 12px; }
+.q-text .blank{ font-family: var(--f-data); font-weight:600; color: var(--ink-faint); }
+.q-options{ display:flex; flex-wrap:wrap; gap:8px; }
+.q-opt{
+  font-family: var(--f-data); font-size:13px; background: var(--paper-raised);
+  border:1.5px solid var(--line); border-radius:999px; padding:7px 15px;
+  cursor:pointer; transition: all .15s ease; color: var(--ink-soft);
+}
+.q-opt:hover{ border-color: var(--ink-faint); }
+.q-opt.correct{ background: var(--b2); border-color: var(--b2); color:#fff; }
+.q-opt.incorrect{ background: var(--family); border-color: var(--family); color:#fff; }
+.q-opt.disabled{ pointer-events:none; opacity:.55; }
+.q-feedback{
+  font-family: var(--f-data); font-size:12px; color: var(--ink-faint); margin-top:10px;
+  padding-top:10px; border-top:1px dashed var(--line); display:none;
+}
+.q-feedback.visible{ display:block; }
+.q-feedback strong{ color: var(--ink); }
+
+/* ---------- WORD RACE (28 palabras) ---------- */
+.race-panel{ background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-lg); box-shadow: var(--shadow-1); padding:26px 28px; }
+.race-panel .block-num{ background: var(--gold); }
+.race-panel .block-head h2{ color: var(--gold); }
+.race-hint{ font-family: var(--f-data); font-size:11.5px; color: var(--ink-faint); margin:0 0 18px; }
+.race-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:10px; }
+@media (max-width:520px){ .race-grid{ grid-template-columns:1fr; } }
+.race-category{
+  background: var(--paper-alt); border:1px solid var(--line); border-radius: var(--r-md); padding:14px 16px;
+}
+.race-category h4{ font-family: var(--f-display); font-weight:600; font-size:14.5px; margin:0 0 8px; color: var(--ink); }
+.race-words{ display:flex; flex-wrap:wrap; gap:6px; }
+.race-word{
+  font-family: var(--f-data); font-size:11.5px; background:#fff; border:1px solid var(--line);
+  border-radius:999px; padding:4px 10px; cursor:pointer; transition: all .15s ease; color: var(--ink-soft);
+}
+.race-word:hover{ border-color: var(--gold); }
+.race-word.known{ background: var(--gold-soft); border-color: var(--gold); color: var(--gold); font-weight:600; }
+.race-tally{
+  margin-top:16px; padding-top:14px; border-top:1px dashed var(--line);
+  font-family: var(--f-data); font-size:12.5px; color: var(--ink-soft); text-align:center;
+}
+.race-tally strong{ color: var(--gold); font-family: var(--f-display); font-size:16px; }
+
+/* ---------- SELF-ASSESSMENT ---------- */
+.eval-panel{ background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-lg); box-shadow: var(--shadow-1); padding:26px 28px; }
+.eval-panel .block-num{ background: var(--ink); }
+.eval-hint{ font-family: var(--f-data); font-size:11.5px; color: var(--ink-faint); margin:0 0 20px; }
+.eval-row{ margin-bottom:20px; }
+.eval-row:last-child{ margin-bottom:0; }
+.eval-row label{ display:block; font-weight:600; font-size:14px; color:var(--ink); margin-bottom:8px; }
+.eval-scale{ display:flex; gap:6px; }
+.eval-dot{
+  flex:1; height:38px; border-radius:8px; border:1.5px solid var(--line); cursor:pointer;
+  display:flex; align-items:center; justify-content:center; font-family: var(--f-data); font-size:13px;
+  color: var(--ink-faint); background:#fff; transition: all .15s ease;
+}
+.eval-dot:hover{ border-color: var(--ink-faint); }
+.eval-dot.selected{ background: var(--b2); border-color: var(--b2); color:#fff; }
+.eval-scale-labels{ display:flex; justify-content:space-between; font-family: var(--f-data); font-size:10px; color: var(--ink-faint); margin-top:4px; text-transform:uppercase; letter-spacing:.04em; }
+.eval-textarea{
+  width:100%; min-height:90px; border:1.5px solid var(--line); border-radius: var(--r-md);
+  padding:12px 14px; font-family: var(--f-body); font-size:14px; color:var(--ink); resize:vertical;
+  background:#fff;
+}
+.eval-textarea:focus{ outline:none; border-color: var(--b1); }
+.eval-save{
+  margin-top:18px; font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint);
+  display:flex; align-items:center; gap:8px;
+}
+.eval-save .saved-dot{ width:7px; height:7px; border-radius:50%; background: var(--b2); opacity:0; transition: opacity .3s ease; }
+.eval-save.show-saved .saved-dot{ opacity:1; }
+
+/* ---------- CLOSING ---------- */
+.closing-panel{
+  background: linear-gradient(135deg, var(--gold-soft) 0%, var(--paper-raised) 100%);
+  border:1px solid var(--gold-line); border-radius: var(--r-lg); padding:32px 28px; text-align:center;
+}
+.closing-panel .block-num{ background: var(--gold); margin:0 auto 14px; }
+.closing-panel .block-head{ flex-direction:column; align-items:center; }
+.closing-panel .block-head h2{ color: var(--gold); font-size:26px; }
+.closing-panel .time-tag{ display:none; }
+.closing-text{ font-size:15.5px; color: var(--ink-soft); max-width:50ch; margin:0 auto 22px; }
+.medal-row{ display:flex; justify-content:center; gap:14px; flex-wrap:wrap; margin-bottom:6px; }
+.medal{
+  background:#fff; border:1px solid var(--gold-line); border-radius: var(--r-md); padding:14px 18px;
+  font-family: var(--f-data); font-size:12px; color: var(--ink-soft); min-width:140px;
+}
+.medal .medal-icon{ font-size:24px; display:block; margin-bottom:6px; }
+.medal strong{ display:block; color: var(--ink); font-family: var(--f-display); font-size:14px; margin-top:2px; }
+
+/* ---------- FOOTER NAV ---------- */
+footer{
+  max-width:760px; margin:0 auto; padding:0 24px 60px; display:flex;
+  justify-content:space-between; flex-wrap:wrap; gap:12px;
+  font-family: var(--f-data); font-size:12px; color: var(--ink-faint);
+}
+
+@media (max-width:600px){
+  .panel, .round-panel, .race-panel, .eval-panel, .closing-panel{ padding:20px 18px; }
+}
+
+/* ---------- RONDA EXTRA — 5 ejercicios interactivos ---------- */
+.round-panel.extra{ background: var(--gold-soft); border:1px solid var(--gold-line); }
+.round-panel.extra .block-num{ background: var(--gold); }
+.round-panel.extra .block-head h2{ color: var(--gold); }
+.round-panel.extra .q-card{ border:1px solid var(--gold-line); }
+
+.ex-card{
+  background:#fff; border:1px solid var(--gold-line); border-radius: var(--r-md);
+  padding:18px 20px; margin-bottom:14px;
+}
+.ex-card:last-child{ margin-bottom:0; }
+.ex-label{
+  font-family: var(--f-data); font-size:10.5px; text-transform:uppercase; letter-spacing:.05em;
+  color: var(--gold); margin:0 0 8px; font-weight:600;
+}
+.ex-text{ font-size:15px; color:var(--ink); margin:0 0 12px; }
+
+/* Tipo 1: input de texto libre */
+.ex-input-row{ display:flex; flex-wrap:wrap; gap:8px; align-items:center; }
+.ex-input{
+  font-family: var(--f-data); font-size:14px; border:1.5px solid var(--line); border-radius:8px;
+  padding:8px 12px; width:160px; color:var(--ink); background:var(--paper);
+}
+.ex-input:focus{ outline:none; border-color: var(--gold); }
+.ex-input.correct{ border-color: var(--b2); background: var(--b2-soft); }
+.ex-input.incorrect{ border-color: var(--family); background: var(--family-soft); }
+.ex-check-btn{
+  font-family: var(--f-data); font-size:12.5px; background: var(--ink); color:#fff;
+  border:none; border-radius:999px; padding:8px 16px; cursor:pointer; transition: opacity .15s ease;
+}
+.ex-check-btn:hover{ opacity:.85; }
+.ex-check-btn:disabled{ opacity:.4; cursor:default; }
+
+/* Tipo 2: emparejar por clic (dos columnas) */
+.ex-match{ display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+@media (max-width:520px){ .ex-match{ grid-template-columns:1fr; } }
+.ex-match-col{ display:flex; flex-direction:column; gap:8px; }
+.ex-match-item{
+  font-family: var(--f-data); font-size:13px; background: var(--paper);
+  border:1.5px solid var(--line); border-radius:8px; padding:9px 13px; cursor:pointer;
+  transition: all .15s ease; color: var(--ink-soft);
+}
+.ex-match-item:hover{ border-color: var(--gold); }
+.ex-match-item.selected{ border-color: var(--gold); background: var(--gold-soft); color: var(--ink); }
+.ex-match-item.matched-correct{ border-color: var(--b2); background: var(--b2-soft); color: var(--b2); pointer-events:none; }
+.ex-match-item.matched-wrong{ border-color: var(--family); background: var(--family-soft); pointer-events:none; }
+
+/* Tipo 3: ordenar palabras (clic en orden) */
+.ex-order-bank{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:14px; }
+.ex-order-chip{
+  font-family: var(--f-data); font-size:13px; background: var(--paper);
+  border:1.5px solid var(--line); border-radius:999px; padding:7px 14px; cursor:pointer;
+  transition: all .15s ease; color: var(--ink-soft);
+}
+.ex-order-chip:hover{ border-color: var(--gold); }
+.ex-order-chip.used{ opacity:.35; pointer-events:none; }
+.ex-order-slot-row{
+  min-height:42px; border:1.5px dashed var(--line-strong); border-radius:8px; padding:8px 12px;
+  display:flex; flex-wrap:wrap; gap:8px; align-items:center; background: var(--paper);
+}
+.ex-order-slot-row .filled{
+  font-family: var(--f-data); font-size:13px; background: var(--gold-soft); border:1px solid var(--gold-line);
+  border-radius:999px; padding:6px 13px; color: var(--ink);
+}
+.ex-order-actions{ margin-top:10px; display:flex; gap:8px; }
+.ex-reset-btn{
+  font-family: var(--f-data); font-size:12px; background:none; color: var(--ink-faint);
+  border:1px solid var(--line); border-radius:999px; padding:6px 14px; cursor:pointer;
+}
+.ex-reset-btn:hover{ border-color: var(--ink-faint); }
+
+/* Tipo 4: verdadero / falso */
+.ex-vf-row{ display:flex; gap:10px; }
+.ex-vf-btn{
+  font-family: var(--f-data); font-size:13px; border:1.5px solid var(--line); border-radius:999px;
+  padding:8px 18px; cursor:pointer; background:#fff; color: var(--ink-soft); transition: all .15s ease;
+}
+.ex-vf-btn:hover{ border-color: var(--ink-faint); }
+.ex-vf-btn.correct{ background: var(--b2); border-color: var(--b2); color:#fff; }
+.ex-vf-btn.incorrect{ background: var(--family); border-color: var(--family); color:#fff; }
+.ex-vf-btn.disabled{ pointer-events:none; opacity:.55; }
+
+.ex-feedback{
+  font-family: var(--f-data); font-size:12px; color: var(--ink-faint); margin-top:12px;
+  padding-top:10px; border-top:1px dashed var(--line); display:none;
+}
+.ex-feedback.visible{ display:block; }
+.ex-feedback strong{ color: var(--ink); }
+
+/* ---------- ROLEPLAY DIÁLOGO ---------- */
+.role-panel{ background: var(--b1-soft); border:1px solid var(--b1-line); }
+.role-panel .block-num{ background: var(--b1); }
+.role-panel .block-head h2{ color: var(--b1); }
+.role-intro{ font-size:14.5px; color: var(--ink-soft); margin:0 0 18px; }
+.role-chat{ display:flex; flex-direction:column; gap:12px; }
+.role-line{ display:flex; gap:10px; align-items:flex-start; }
+.role-line.rebecca{ flex-direction:row-reverse; }
+.role-avatar{
+  flex:none; width:34px; height:34px; border-radius:50%; display:flex; align-items:center;
+  justify-content:center; font-family: var(--f-display); font-weight:600; font-size:13px; color:#fff;
+}
+.role-line.vecino .role-avatar{ background: var(--b1); }
+.role-line.rebecca .role-avatar{ background: var(--gold); }
+.role-bubble{
+  background:#fff; border:1px solid var(--b1-line); border-radius: var(--r-md); padding:12px 16px;
+  max-width:78%; font-size:14.5px; color:var(--ink);
+}
+.role-line.rebecca .role-bubble{ border-color: var(--gold-line); }
+.role-bubble .en-note{ display:block; margin-top:4px; }
+.role-bubble.fill .q-options{ margin-top:8px; }
+.role-bubble .q-options{ display:flex; flex-wrap:wrap; gap:8px; }
+.role-bubble .q-opt{
+  font-family: var(--f-data); font-size:12.5px; background: var(--paper);
+  border:1.5px solid var(--line); border-radius:999px; padding:6px 13px;
+  cursor:pointer; transition: all .15s ease; color: var(--ink-soft);
+}
+.role-bubble .q-opt:hover{ border-color: var(--ink-faint); }
+.role-bubble .q-opt.correct{ background: var(--b2); border-color: var(--b2); color:#fff; }
+.role-bubble .q-opt.incorrect{ background: var(--family); border-color: var(--family); color:#fff; }
+.role-bubble .q-opt.disabled{ pointer-events:none; opacity:.55; }
+.role-feedback{
+  font-family: var(--f-data); font-size:11.5px; color: var(--ink-faint); margin-top:8px;
+  padding-top:8px; border-top:1px dashed var(--line); display:none;
+}
+.role-feedback.visible{ display:block; }
+.role-feedback strong{ color: var(--ink); }
+.role-progress{
+  margin-top:18px; padding-top:14px; border-top:1px dashed var(--line);
+  font-family: var(--f-data); font-size:12.5px; color: var(--ink-soft); text-align:center;
+}
+.role-progress strong{ color: var(--b1); font-family: var(--f-display); font-size:16px; }
+</style>
+</head>
+<body>
+
+<div class="lang-toggle-wrap">
+  <div class="lang-toggle" id="lang-toggle" role="button" tabindex="0" aria-label="Cambiar idioma de las notas">
+    <span data-mode="es">ES</span><span data-mode="bilingual">ES+EN</span>
+  </div>
+</div>
+
+<header>
+  <p class="eyebrow"><span class="dot"></span>Clase 39 · Línea de llegada · Repaso general</p>
+  <h1>Repaso general — <em>consolidación gramatical</em></h1>
+  <p class="lede">Última clase antes de la evaluación final. Hoy jugamos: cuatro rondas de concurso repasando ser/estar, género de los sustantivos, y los tres tiempos verbales que ya dominas. Al final, una carrera rápida de vocabulario y tu autoevaluación por escrito.<span class="en-note">Last class before the final assessment. Today we play: four quiz rounds reviewing ser/estar, noun gender, and the three verb tenses you already master. At the end, a quick vocabulary race and your written self-assessment.</span></p>
+  <div class="meta-row">
+    <div>Duración<strong>50 min</strong></div>
+    <div>Gramática<strong>Ser/estar · género · presente, pasado, futuro</strong></div>
+    <div>Nivel<strong>A1–A2</strong></div>
+  </div>
+</header>
+
+<div class="score-bar">
+  <div class="score-bar-inner">
+    <div class="score-chip">Puntos <strong id="score-count">0</strong> / 20</div>
+    <div class="score-track"><div class="score-fill" id="score-fill"></div></div>
+  </div>
+</div>
+
+<main>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">1</span><h2>Cómo funciona hoy<span class="en-note">How today works</span></h2><span class="time-tag">3 min</span></div>
+    <div class="panel">
+      <p style="margin:0; font-size:14.5px; color:var(--ink-soft);">Cuatro rondas, <strong style="color:var(--b1)">20 preguntas en total</strong>: ser/estar, género de sustantivos, los tres tiempos verbales, y una ronda de vocabulario. Cada respuesta correcta suma un punto en la barra de arriba. No hay presión — si fallas, la app te explica por qué, y sigues jugando. Después, una ronda extra de 15 retos mezclados y un roleplay de tres escenas. Al final: carrera de las 28 palabras y tu autoevaluación.</p>
+    </div>
+  </section>
+
+  <section class="block round-panel ser-estar">
+    <div class="block-head"><span class="block-num">2</span><h2>Ronda 1 — ser o estar<span class="en-note">Round 1 — ser or estar</span></h2><span class="time-tag">10 min</span></div>
+    <p class="round-sub">5 preguntas · elige el verbo correcto<span class="en-note">5 questions · choose the correct verb</span></p>
+
+    <div class="q-card" data-qid="1">
+      <p class="q-text">Rebecca <span class="blank">___</span> muy contenta hoy porque ha terminado casi todo el curso.<span class="en-note">Rebecca ___ very happy today because she has finished almost the whole course.</span></p>
+      <div class="q-options">
+        <button class="q-opt" data-correct="false">es</button>
+        <button class="q-opt" data-correct="true">está</button>
+      </div>
+      <div class="q-feedback"><strong>Está</strong> — describe un estado de ánimo temporal, no una característica permanente. Por eso usamos <em>estar</em>.</div>
+    </div>
+
+    <div class="q-card" data-qid="2">
+      <p class="q-text">Ana <span class="blank">___</span> de Barcelona, pero ahora vive en el barrio de Rebecca.<span class="en-note">Ana ___ from Barcelona, but now she lives in Rebecca's neighbourhood.</span></p>
+      <div class="q-options">
+        <button class="q-opt" data-correct="true">es</button>
+        <button class="q-opt" data-correct="false">está</button>
+      </div>
+      <div class="q-feedback"><strong>Es</strong> — el origen de una persona es una característica permanente, siempre con <em>ser</em>.</div>
+    </div>
+
+    <div class="q-card" data-qid="3">
+      <p class="q-text">El mercado <span class="blank">___</span> cerca de la plaza, a cinco minutos andando.<span class="en-note">The market ___ near the square, a five-minute walk away.</span></p>
+      <div class="q-options">
+        <button class="q-opt" data-correct="false">es</button>
+        <button class="q-opt" data-correct="true">está</button>
+      </div>
+      <div class="q-feedback"><strong>Está</strong> — la ubicación de un lugar siempre se expresa con <em>estar</em>, aunque sea un lugar fijo.</div>
+    </div>
+
+    <div class="q-card" data-qid="4">
+      <p class="q-text">El profesor de Rebecca <span class="blank">___</span> paciente y muy claro explicando.<span class="en-note">Rebecca's teacher ___ patient and very clear when explaining.</span></p>
+      <div class="q-options">
+        <button class="q-opt" data-correct="true">es</button>
+        <button class="q-opt" data-correct="false">está</button>
+      </div>
+      <div class="q-feedback"><strong>Es</strong> — describe una cualidad de personalidad, algo permanente, con <em>ser</em>.</div>
+    </div>
+
+    <div class="q-card" data-qid="5">
+      <p class="q-text">Hoy la sopa <span class="blank">___</span> un poco fría, mejor la caliento.<span class="en-note">Today the soup ___ a bit cold, I'd better heat it up.</span></p>
+      <div class="q-options">
+        <button class="q-opt" data-correct="false">es</button>
+        <button class="q-opt" data-correct="true">está</button>
+      </div>
+      <div class="q-feedback"><strong>Está</strong> — habla del estado de la sopa en este momento, no de una característica del plato en general.</div>
+    </div>
+  </section>
+
+  <section class="block round-panel genero">
+    <div class="block-head"><span class="block-num">3</span><h2>Ronda 2 — género de los sustantivos<span class="en-note">Round 2 — noun gender</span></h2><span class="time-tag">8 min</span></div>
+    <p class="round-sub">5 preguntas · elige el artículo correcto<span class="en-note">5 questions · choose the correct article</span></p>
+
+    <div class="q-card" data-qid="6">
+      <p class="q-text"><span class="blank">___</span> mapa que usaste para llegar al piso de Ana.<span class="en-note">The map you used to get to Ana's flat.</span></p>
+      <div class="q-options">
+        <button class="q-opt" data-correct="true">el</button>
+        <button class="q-opt" data-correct="false">la</button>
+      </div>
+      <div class="q-feedback"><strong>El mapa</strong> — termina en -a pero es masculino, una de las excepciones clásicas (como el día, el problema, el idioma).</div>
+    </div>
+
+    <div class="q-card" data-qid="7">
+      <p class="q-text"><span class="blank">___</span> estación de metro está a dos calles de aquí.<span class="en-note">The metro station is two streets from here.</span></p>
+      <div class="q-options">
+        <button class="q-opt" data-correct="true">la</button>
+        <button class="q-opt" data-correct="false">el</button>
+      </div>
+      <div class="q-feedback"><strong>La estación</strong> — sustantivos terminados en -ión son casi siempre femeninos (la estación, la canción, la dirección).</div>
+    </div>
+
+    <div class="q-card" data-qid="8">
+      <p class="q-text"><span class="blank">___</span> ciudad de Barcelona tiene un mercado precioso.<span class="en-note">The city of Barcelona has a lovely market.</span></p>
+      <div class="q-options">
+        <button class="q-opt" data-correct="true">la</button>
+        <button class="q-opt" data-correct="false">el</button>
+      </div>
+      <div class="q-feedback"><strong>La ciudad</strong> — femenino regular, termina en -dad como la mayoría de estas palabras (la verdad, la libertad).</div>
+    </div>
+
+    <div class="q-card" data-qid="9">
+      <p class="q-text"><span class="blank">___</span> problema de hoy fue encontrar la dirección correcta.<span class="en-note">Today's problem was finding the right address.</span></p>
+      <div class="q-options">
+        <button class="q-opt" data-correct="true">el</button>
+        <button class="q-opt" data-correct="false">la</button>
+      </div>
+      <div class="q-feedback"><strong>El problema</strong> — otra excepción: palabras griegas terminadas en -ma suelen ser masculinas (el problema, el tema, el sistema).</div>
+    </div>
+
+    <div class="q-card" data-qid="10">
+      <p class="q-text"><span class="blank">___</span> noche que llegaste a Barcelona hacía mucho calor.<span class="en-note">The night you arrived in Barcelona it was very hot.</span></p>
+      <div class="q-options">
+        <button class="q-opt" data-correct="true">la</button>
+        <button class="q-opt" data-correct="false">el</button>
+      </div>
+      <div class="q-feedback"><strong>La noche</strong> — femenino regular terminado en -e; hay que aprenderlo de memoria porque -e no da pista fiable.</div>
+    </div>
+  </section>
+
+  <section class="block round-panel tiempos">
+    <div class="block-head"><span class="block-num">4</span><h2>Ronda 3 — los tres tiempos<span class="en-note">Round 3 — the three tenses</span></h2><span class="time-tag">12 min</span></div>
+    <p class="round-sub">5 preguntas · presente, indefinido, imperfecto y futuro<span class="en-note">5 questions · present, indefinido, imperfecto and future</span></p>
+
+    <div class="q-card" data-qid="11">
+      <p class="q-text">Todos los días, Rebecca <span class="blank">___</span> (coger) el metro para ir al trabajo.<span class="en-note">Every day, Rebecca ___ (take) the metro to go to work.</span></p>
+      <div class="q-options">
+        <button class="q-opt" data-correct="true">coge</button>
+        <button class="q-opt" data-correct="false">cogió</button>
+        <button class="q-opt" data-correct="false">cogerá</button>
+      </div>
+      <div class="q-feedback"><strong>Coge</strong> — acción habitual y repetida, presente de indicativo.</div>
+    </div>
+
+    <div class="q-card" data-qid="12">
+      <p class="q-text">El día de su llegada, Rebecca <span class="blank">___</span> (estar) muy nerviosa.<span class="en-note">On the day she arrived, Rebecca ___ (be) very nervous.</span></p>
+      <div class="q-options">
+        <button class="q-opt" data-correct="false">está</button>
+        <button class="q-opt" data-correct="true">estaba</button>
+        <button class="q-opt" data-correct="false">estará</button>
+      </div>
+      <div class="q-feedback"><strong>Estaba</strong> — describe un estado de ánimo de fondo en el pasado, imperfecto.</div>
+    </div>
+
+    <div class="q-card" data-qid="13">
+      <p class="q-text">Ayer Rebecca <span class="blank">___</span> (conocer) a un vecino nuevo en el portal.<span class="en-note">Yesterday Rebecca ___ (meet) a new neighbour in the entrance hall.</span></p>
+      <div class="q-options">
+        <button class="q-opt" data-correct="false">conoce</button>
+        <button class="q-opt" data-correct="true">conoció</button>
+        <button class="q-opt" data-correct="false">conocía</button>
+      </div>
+      <div class="q-feedback"><strong>Conoció</strong> — acción puntual y terminada en el pasado, indefinido.</div>
+    </div>
+
+    <div class="q-card" data-qid="14">
+      <p class="q-text">El próximo verano, Rebecca <span class="blank">___</span> (viajar) a visitar a su familia.<span class="en-note">Next summer, Rebecca ___ (travel) to visit her family.</span></p>
+      <div class="q-options">
+        <button class="q-opt" data-correct="false">viaja</button>
+        <button class="q-opt" data-correct="false">viajó</button>
+        <button class="q-opt" data-correct="true">viajará</button>
+      </div>
+      <div class="q-feedback"><strong>Viajará</strong> — planes o predicciones futuras, futuro simple.</div>
+    </div>
+
+    <div class="q-card" data-qid="15">
+      <p class="q-text">Cuando Rebecca era pequeña, <span class="blank">___</span> (vivir) en un pueblo pequeño.<span class="en-note">When Rebecca was little, she ___ (live) in a small town.</span></p>
+      <div class="q-options">
+        <button class="q-opt" data-correct="false">vive</button>
+        <button class="q-opt" data-correct="true">vivía</button>
+        <button class="q-opt" data-correct="false">vivió</button>
+      </div>
+      <div class="q-feedback"><strong>Vivía</strong> — describe una situación duradera y de fondo en la infancia, imperfecto.</div>
+    </div>
+  </section>
+
+  <section class="block round-panel vocab">
+    <div class="block-head"><span class="block-num">5</span><h2>Ronda 4 — vocabulario mixto<span class="en-note">Round 4 — mixed vocabulary</span></h2><span class="time-tag">7 min</span></div>
+    <p class="round-sub">5 preguntas · repaso de palabras clave del curso<span class="en-note">5 questions · review of key words from the course</span></p>
+
+    <div class="q-card" data-qid="16">
+      <p class="q-text">"Cada uno paga lo suyo" en un restaurante se dice ir a...<span class="en-note">"Each person pays their share" at a restaurant is called going...</span></p>
+      <div class="q-options">
+        <button class="q-opt" data-correct="true">medias</button>
+        <button class="q-opt" data-correct="false">solas</button>
+        <button class="q-opt" data-correct="false">juntas</button>
+      </div>
+      <div class="q-feedback"><strong>Medias</strong> — "pagar a medias" o "ir a medias" significa dividir el gasto entre todos.</div>
+    </div>
+
+    <div class="q-card" data-qid="17">
+      <p class="q-text">Para preguntar el camino a alguien por la calle, empiezas con: "Perdona, ¿___ decirme dónde está...?"<span class="en-note">To ask someone for directions on the street, you start with: "Excuse me, could you tell me where... is?"</span></p>
+      <div class="q-options">
+        <button class="q-opt" data-correct="true">podrías</button>
+        <button class="q-opt" data-correct="false">puedes tú</button>
+        <button class="q-opt" data-correct="false">quiero</button>
+      </div>
+      <div class="q-feedback"><strong>Podrías</strong> — forma cortés y natural para pedir ayuda a un desconocido.</div>
+    </div>
+
+    <div class="q-card" data-qid="18">
+      <p class="q-text">"Sigue todo recto y luego gira a la izquierda" es una instrucción para...<span class="en-note">"Go straight ahead and then turn left" is an instruction for...</span></p>
+      <div class="q-options">
+        <button class="q-opt" data-correct="true">dar direcciones</button>
+        <button class="q-opt" data-correct="false">hacer la compra</button>
+        <button class="q-opt" data-correct="false">pedir en un bar</button>
+      </div>
+      <div class="q-feedback"><strong>Dar direcciones</strong> — vocabulario del bloque de orientación en la ciudad.</div>
+    </div>
+
+    <div class="q-card" data-qid="19">
+      <p class="q-text">Si algo cuesta poco dinero, decimos que es...<span class="en-note">If something costs little money, we say it is...</span></p>
+      <div class="q-options">
+        <button class="q-opt" data-correct="true">barato</button>
+        <button class="q-opt" data-correct="false">caro</button>
+        <button class="q-opt" data-correct="false">gratis siempre</button>
+      </div>
+      <div class="q-feedback"><strong>Barato</strong> — opuesto de "caro"; "gratis" es distinto, significa que no cuesta nada.</div>
+    </div>
+
+    <div class="q-card" data-qid="20">
+      <p class="q-text">Cuando alguien te da las gracias, la respuesta más natural es...<span class="en-note">When someone thanks you, the most natural reply is...</span></p>
+      <div class="q-options">
+        <button class="q-opt" data-correct="true">de nada</button>
+        <button class="q-opt" data-correct="false">lo siento</button>
+        <button class="q-opt" data-correct="false">buen provecho</button>
+      </div>
+      <div class="q-feedback"><strong>De nada</strong> — respuesta estándar y cortés a "gracias".</div>
+    </div>
+  </section>
+
+  <section class="block round-panel extra">
+    <div class="block-head"><span class="block-num">6</span><h2>Ronda extra — 15 retos mezclados<span class="en-note">Bonus round — 15 mixed challenges</span></h2><span class="time-tag">30 min</span></div>
+    <p class="round-sub">15 ejercicios de tipos distintos, en tres tandas · repaso final antes de la carrera<span class="en-note">15 different exercise types, in three sets · final review before the race</span></p>
+
+    <p class="round-sub" style="margin-top:22px;">Tanda 1 de 3<span class="en-note">Set 1 of 3</span></p>
+
+    <!-- Ejercicio 1: input de texto libre -->
+    <div class="ex-card" data-extype="input" data-exid="e1" data-answer="está">
+      <p class="ex-label">1 · Escribe la palabra<span class="en-note">Write the word</span></p>
+      <p class="ex-text">El piso de Rebecca <span class="blank">___</span> en el tercer piso, justo encima de la panadería.<span class="en-note">Rebecca's flat is on the third floor, right above the bakery.</span></p>
+      <div class="ex-input-row">
+        <input type="text" class="ex-input" data-exinput placeholder="ser o estar...">
+        <button class="ex-check-btn" data-excheck>Comprobar</button>
+      </div>
+      <div class="ex-feedback" data-exfeedback><strong>Está</strong> — la ubicación de un lugar siempre se expresa con <em>estar</em>.</div>
+    </div>
+
+    <!-- Ejercicio 2: emparejar por clic -->
+    <div class="ex-card" data-extype="match" data-exid="e2">
+      <p class="ex-label">2 · Empareja cada pregunta con su respuesta<span class="en-note">Match each question with its answer</span></p>
+      <p class="ex-text">Toca una pregunta y luego su respuesta correcta.<span class="en-note">Tap a question and then its correct answer.</span></p>
+      <div class="ex-match">
+        <div class="ex-match-col" data-excol="left">
+          <div class="ex-match-item" data-exval="q1">¿Dónde está la panadería?</div>
+          <div class="ex-match-item" data-exval="q2">¿Cuánto cuesta el pan?</div>
+          <div class="ex-match-item" data-exval="q3">¿A qué hora abre el mercado?</div>
+        </div>
+        <div class="ex-match-col" data-excol="right">
+          <div class="ex-match-item" data-exval="q2">Un euro con veinte.</div>
+          <div class="ex-match-item" data-exval="q3">A las ocho de la mañana.</div>
+          <div class="ex-match-item" data-exval="q1">Al lado de la farmacia.</div>
+        </div>
+      </div>
+      <div class="ex-feedback" data-exfeedback><strong>¡Bien hecho!</strong> Practicar preguntas y respuestas cortas te ayuda a sonar más natural en la calle.</div>
+    </div>
+
+    <!-- Ejercicio 3: ordenar la frase -->
+    <div class="ex-card" data-extype="order" data-exid="e3" data-correct-order="Perdona,|¿podrías|decirme|dónde|está|el metro?">
+      <p class="ex-label">3 · Ordena la frase<span class="en-note">Put the sentence in order</span></p>
+      <p class="ex-text">Toca las palabras en el orden correcto para formar una pregunta educada.<span class="en-note">Tap the words in the right order to form a polite question.</span></p>
+      <div class="ex-order-slot-row" data-exslots></div>
+      <div class="ex-order-bank" data-exbank>
+        <span class="ex-order-chip" data-word="dónde">dónde</span>
+        <span class="ex-order-chip" data-word="Perdona,">Perdona,</span>
+        <span class="ex-order-chip" data-word="está">está</span>
+        <span class="ex-order-chip" data-word="el metro?">el metro?</span>
+        <span class="ex-order-chip" data-word="¿podrías">¿podrías</span>
+        <span class="ex-order-chip" data-word="decirme">decirme</span>
+      </div>
+      <div class="ex-order-actions"><button class="ex-reset-btn" data-exreset>Reiniciar</button></div>
+      <div class="ex-feedback" data-exfeedback><strong>Perdona, ¿podrías decirme dónde está el metro?</strong> — así se pide ayuda de forma cortés a un desconocido.</div>
+    </div>
+
+    <!-- Ejercicio 4: verdadero o falso -->
+    <div class="ex-card" data-extype="vf" data-exid="e4" data-answer="falso">
+      <p class="ex-label">4 · Verdadero o falso<span class="en-note">True or false</span></p>
+      <p class="ex-text">"El problema" se escribe con <em>la</em> porque termina en -a, como la mayoría de palabras femeninas.<span class="en-note">"El problema" is written with "la" because it ends in -a, like most feminine words.</span></p>
+      <div class="ex-vf-row">
+        <button class="ex-vf-btn" data-exval="verdadero">Verdadero</button>
+        <button class="ex-vf-btn" data-exval="falso">Falso</button>
+      </div>
+      <div class="ex-feedback" data-exfeedback><strong>Falso</strong> — "problema" termina en -ma (origen griego) y es masculino: <em>el</em> problema, no <em>la</em>.</div>
+    </div>
+
+    <!-- Ejercicio 5: input de texto libre (transformación) -->
+    <div class="ex-card" data-extype="input" data-exid="e5" data-answer="vivía">
+      <p class="ex-label">5 · Transforma la frase<span class="en-note">Transform the sentence</span></p>
+      <p class="ex-text">Presente: "Rebecca vive en Barcelona." → Imperfecto: "De pequeña, Rebecca <span class="blank">___</span> en un pueblo."<span class="en-note">Present: "Rebecca lives in Barcelona." → Imperfect: "As a child, Rebecca ___ in a small town."</span></p>
+      <div class="ex-input-row">
+        <input type="text" class="ex-input" data-exinput placeholder="escribe el verbo...">
+        <button class="ex-check-btn" data-excheck>Comprobar</button>
+      </div>
+      <div class="ex-feedback" data-exfeedback><strong>Vivía</strong> — imperfecto de "vivir", para situaciones duraderas en el pasado.</div>
+    </div>
+
+    <p class="round-sub" style="margin-top:22px;">Tanda 2 de 3<span class="en-note">Set 2 of 3</span></p>
+
+    <!-- Ejercicio 6: input de texto libre -->
+    <div class="ex-card" data-extype="input" data-exid="e6" data-answer="es">
+      <p class="ex-label">6 · Escribe la palabra<span class="en-note">Write the word</span></p>
+      <p class="ex-text">Marc, el vecino de Rebecca, <span class="blank">___</span> arquitecto y trabaja desde casa la mayoría de los días.<span class="en-note">Marc, Rebecca's neighbour, ___ an architect and works from home most days.</span></p>
+      <div class="ex-input-row">
+        <input type="text" class="ex-input" data-exinput placeholder="ser o estar...">
+        <button class="ex-check-btn" data-excheck>Comprobar</button>
+      </div>
+      <div class="ex-feedback" data-exfeedback><strong>Es</strong> — la profesión es una característica que se expresa con <em>ser</em>.</div>
+    </div>
+
+    <!-- Ejercicio 7: emparejar por clic -->
+    <div class="ex-card" data-extype="match" data-exid="e7">
+      <p class="ex-label">7 · Empareja cada palabra con su artículo<span class="en-note">Match each word with its article</span></p>
+      <p class="ex-text">Toca una palabra y luego el artículo correcto.<span class="en-note">Tap a word and then the correct article.</span></p>
+      <div class="ex-match">
+        <div class="ex-match-col" data-excol="left">
+          <div class="ex-match-item" data-exval="w1">idioma</div>
+          <div class="ex-match-item" data-exval="w2">canción</div>
+          <div class="ex-match-item" data-exval="w3">libertad</div>
+        </div>
+        <div class="ex-match-col" data-excol="right">
+          <div class="ex-match-item" data-exval="w2">la</div>
+          <div class="ex-match-item" data-exval="w3">la</div>
+          <div class="ex-match-item" data-exval="w1">el</div>
+        </div>
+      </div>
+      <div class="ex-feedback" data-exfeedback><strong>El idioma, la canción, la libertad</strong> — recuerda las excepciones en -ma y las terminaciones -ión y -dad, siempre femeninas.</div>
+    </div>
+
+    <!-- Ejercicio 8: ordenar la frase -->
+    <div class="ex-card" data-extype="order" data-exid="e8" data-correct-order="Cuando|era|pequeña,|vivía|en|un pueblo.">
+      <p class="ex-label">8 · Ordena la frase<span class="en-note">Put the sentence in order</span></p>
+      <p class="ex-text">Toca las palabras en el orden correcto para formar una frase en imperfecto.<span class="en-note">Tap the words in the right order to form a sentence in the imperfect.</span></p>
+      <div class="ex-order-slot-row" data-exslots></div>
+      <div class="ex-order-bank" data-exbank>
+        <span class="ex-order-chip" data-word="vivía">vivía</span>
+        <span class="ex-order-chip" data-word="Cuando">Cuando</span>
+        <span class="ex-order-chip" data-word="un pueblo.">un pueblo.</span>
+        <span class="ex-order-chip" data-word="pequeña,">pequeña,</span>
+        <span class="ex-order-chip" data-word="era">era</span>
+        <span class="ex-order-chip" data-word="en">en</span>
+      </div>
+      <div class="ex-order-actions"><button class="ex-reset-btn" data-exreset>Reiniciar</button></div>
+      <div class="ex-feedback" data-exfeedback><strong>Cuando era pequeña, vivía en un pueblo.</strong> — dos imperfectos juntos describen una situación de fondo en el pasado.</div>
+    </div>
+
+    <!-- Ejercicio 9: verdadero o falso -->
+    <div class="ex-card" data-extype="vf" data-exid="e9" data-answer="verdadero">
+      <p class="ex-label">9 · Verdadero o falso<span class="en-note">True or false</span></p>
+      <p class="ex-text">Para pedir algo con cortesía a un desconocido, es más natural decir "¿podrías...?" que "¿puedes tú...?".<span class="en-note">To politely ask a stranger for something, it's more natural to say "¿podrías...?" than "¿puedes tú...?".</span></p>
+      <div class="ex-vf-row">
+        <button class="ex-vf-btn" data-exval="verdadero">Verdadero</button>
+        <button class="ex-vf-btn" data-exval="falso">Falso</button>
+      </div>
+      <div class="ex-feedback" data-exfeedback><strong>Verdadero</strong> — "podrías" es más formal y cortés; añadir "tú" en "puedes tú" suena forzado e innecesario.</div>
+    </div>
+
+    <!-- Ejercicio 10: input de texto libre (transformación) -->
+    <div class="ex-card" data-extype="input" data-exid="e10" data-answer="conoció">
+      <p class="ex-label">10 · Transforma la frase<span class="en-note">Transform the sentence</span></p>
+      <p class="ex-text">Presente: "Rebecca conoce a Marc." → Indefinido: "Ayer, Rebecca <span class="blank">___</span> a Marc en el portal."<span class="en-note">Present: "Rebecca meets Marc." → Indefinido: "Yesterday, Rebecca ___ Marc in the entrance hall."</span></p>
+      <div class="ex-input-row">
+        <input type="text" class="ex-input" data-exinput placeholder="escribe el verbo...">
+        <button class="ex-check-btn" data-excheck>Comprobar</button>
+      </div>
+      <div class="ex-feedback" data-exfeedback><strong>Conoció</strong> — indefinido de "conocer", para una acción puntual y terminada en el pasado.</div>
+    </div>
+
+    <p class="round-sub" style="margin-top:22px;">Tanda 3 de 3<span class="en-note">Set 3 of 3</span></p>
+
+    <!-- Ejercicio 11: input de texto libre -->
+    <div class="ex-card" data-extype="input" data-exid="e11" data-answer="es">
+      <p class="ex-label">11 · Escribe la palabra<span class="en-note">Write the word</span></p>
+      <p class="ex-text">La panadería del barrio de Rebecca <span class="blank">___</span> muy conocida por su pan de pueblo.<span class="en-note">The bakery in Rebecca's neighbourhood ___ well known for its country-style bread.</span></p>
+      <div class="ex-input-row">
+        <input type="text" class="ex-input" data-exinput placeholder="ser o estar...">
+        <button class="ex-check-btn" data-excheck>Comprobar</button>
+      </div>
+      <div class="ex-feedback" data-exfeedback><strong>Es</strong> — una característica o fama del lugar se expresa con <em>ser</em>, no con <em>estar</em>.</div>
+    </div>
+
+    <!-- Ejercicio 12: emparejar por clic -->
+    <div class="ex-card" data-extype="match" data-exid="e12">
+      <p class="ex-label">12 · Empareja cada situación con el verbo correcto<span class="en-note">Match each situation with the correct verb</span></p>
+      <p class="ex-text">Toca una situación y luego el tiempo verbal que le corresponde.<span class="en-note">Tap a situation and then the matching verb tense.</span></p>
+      <div class="ex-match">
+        <div class="ex-match-col" data-excol="left">
+          <div class="ex-match-item" data-exval="s1">acción habitual, todos los días</div>
+          <div class="ex-match-item" data-exval="s2">acción puntual ya terminada</div>
+          <div class="ex-match-item" data-exval="s3">plan o predicción futura</div>
+        </div>
+        <div class="ex-match-col" data-excol="right">
+          <div class="ex-match-item" data-exval="s2">indefinido</div>
+          <div class="ex-match-item" data-exval="s3">futuro simple</div>
+          <div class="ex-match-item" data-exval="s1">presente</div>
+        </div>
+      </div>
+      <div class="ex-feedback" data-exfeedback><strong>¡Exacto!</strong> Identificar el tipo de acción es la clave para elegir el tiempo verbal correcto.</div>
+    </div>
+
+    <!-- Ejercicio 13: ordenar la frase -->
+    <div class="ex-card" data-extype="order" data-exid="e13" data-correct-order="El próximo|verano,|Rebecca|viajará|a|visitar a su familia.">
+      <p class="ex-label">13 · Ordena la frase<span class="en-note">Put the sentence in order</span></p>
+      <p class="ex-text">Toca las palabras en el orden correcto para formar una frase en futuro.<span class="en-note">Tap the words in the right order to form a sentence in the future.</span></p>
+      <div class="ex-order-slot-row" data-exslots></div>
+      <div class="ex-order-bank" data-exbank>
+        <span class="ex-order-chip" data-word="viajará">viajará</span>
+        <span class="ex-order-chip" data-word="El próximo">El próximo</span>
+        <span class="ex-order-chip" data-word="visitar a su familia.">visitar a su familia.</span>
+        <span class="ex-order-chip" data-word="Rebecca">Rebecca</span>
+        <span class="ex-order-chip" data-word="verano,">verano,</span>
+        <span class="ex-order-chip" data-word="a">a</span>
+      </div>
+      <div class="ex-order-actions"><button class="ex-reset-btn" data-exreset>Reiniciar</button></div>
+      <div class="ex-feedback" data-exfeedback><strong>El próximo verano, Rebecca viajará a visitar a su familia.</strong> — futuro simple para planes ya decididos.</div>
+    </div>
+
+    <!-- Ejercicio 14: verdadero o falso -->
+    <div class="ex-card" data-extype="vf" data-exid="e14" data-answer="verdadero">
+      <p class="ex-label">14 · Verdadero o falso<span class="en-note">True or false</span></p>
+      <p class="ex-text">"La noche" es femenino, aunque termina en -e, y hay que aprenderlo de memoria porque esa terminación no da una pista fiable.<span class="en-note">"La noche" is feminine, even though it ends in -e, and you have to memorise it because that ending isn't a reliable clue.</span></p>
+      <div class="ex-vf-row">
+        <button class="ex-vf-btn" data-exval="verdadero">Verdadero</button>
+        <button class="ex-vf-btn" data-exval="falso">Falso</button>
+      </div>
+      <div class="ex-feedback" data-exfeedback><strong>Verdadero</strong> — las palabras terminadas en -e pueden ser masculinas o femeninas, así que el género se aprende con cada palabra.</div>
+    </div>
+
+    <!-- Ejercicio 15: input de texto libre (transformación) -->
+    <div class="ex-card" data-extype="input" data-exid="e15" data-answer="estaba">
+      <p class="ex-label">15 · Transforma la frase<span class="en-note">Transform the sentence</span></p>
+      <p class="ex-text">Presente: "Rebecca está nerviosa." → Imperfecto: "El primer día en Barcelona, Rebecca <span class="blank">___</span> muy nerviosa."<span class="en-note">Present: "Rebecca is nervous." → Imperfect: "On her first day in Barcelona, Rebecca ___ very nervous."</span></p>
+      <div class="ex-input-row">
+        <input type="text" class="ex-input" data-exinput placeholder="escribe el verbo...">
+        <button class="ex-check-btn" data-excheck>Comprobar</button>
+      </div>
+      <div class="ex-feedback" data-exfeedback><strong>Estaba</strong> — imperfecto de "estar", para un estado de ánimo de fondo en el pasado.</div>
+    </div>
+
+    <div class="race-tally">Retos completados: <strong id="extra-count">0</strong> / 15</div>
+  </section>
+
+  <section class="block round-panel role-panel">
+    <div class="block-head"><span class="block-num">7</span><h2>Roleplay — tres escenas de conversación<span class="en-note">Roleplay — three conversation scenes</span></h2><span class="time-tag">24 min</span></div>
+    <p class="role-intro">Tres escenas distintas de la vida diaria de Rebecca en Barcelona. Completa sus líneas eligiendo la opción correcta para que cada conversación tenga sentido.<span class="en-note">Three different scenes from Rebecca's daily life in Barcelona. Complete her lines by choosing the correct option so each conversation makes sense.</span></p>
+
+    <p class="round-sub" style="margin-top:4px;">Escena 1 — hablando con un vecino nuevo<span class="en-note">Scene 1 — talking to a new neighbour</span></p>
+
+    <div class="role-chat">
+      <div class="role-line vecino">
+        <div class="role-avatar">V</div>
+        <div class="role-bubble">¡Hola! Soy Marc, acabo de mudarme al segundo piso.<span class="en-note">Hi! I'm Marc, I just moved into the second floor.</span></div>
+      </div>
+
+      <div class="role-line rebecca">
+        <div class="role-avatar">R</div>
+        <div class="role-bubble fill" data-role-qid="r1" data-role-answer="Encantada">
+          <span>___, Marc. Yo soy Rebecca, vivo en el tercero.<span class="en-note">___, Marc. I'm Rebecca, I live on the third floor.</span></span>
+          <div class="q-options">
+            <button class="q-opt" data-correct="true">Encantada</button>
+            <button class="q-opt" data-correct="false">De nada</button>
+            <button class="q-opt" data-correct="false">Lo siento</button>
+          </div>
+          <div class="role-feedback"><strong>Encantada</strong> — respuesta habitual al conocer a alguien por primera vez.</div>
+        </div>
+      </div>
+
+      <div class="role-line vecino">
+        <div class="role-avatar">V</div>
+        <div class="role-bubble">¿Sabes si hay algún mercado cerca de aquí?<span class="en-note">Do you know if there's a market nearby?</span></div>
+      </div>
+
+      <div class="role-line rebecca">
+        <div class="role-avatar">R</div>
+        <div class="role-bubble fill" data-role-qid="r2" data-role-answer="Sí, está">
+          <span>___ a cinco minutos andando, al lado de la farmacia.<span class="en-note">___ five minutes on foot, next to the pharmacy.</span></span>
+          <div class="q-options">
+            <button class="q-opt" data-correct="false">Sí, es</button>
+            <button class="q-opt" data-correct="true">Sí, está</button>
+            <button class="q-opt" data-correct="false">No, es</button>
+          </div>
+          <div class="role-feedback"><strong>Sí, está</strong> — la ubicación de un lugar se expresa siempre con <em>estar</em>.</div>
+        </div>
+      </div>
+
+      <div class="role-line vecino">
+        <div class="role-avatar">V</div>
+        <div class="role-bubble">Genial, gracias. Por cierto, ¿tú también trabajas por aquí?<span class="en-note">Great, thanks. By the way, do you also work around here?</span></div>
+      </div>
+
+      <div class="role-line rebecca">
+        <div class="role-avatar">R</div>
+        <div class="role-bubble fill" data-role-qid="r3" data-role-answer="trabajo">
+          <span>Sí, ___ (trabajar) en una oficina cerca de la plaza.<span class="en-note">Yes, I ___ (work) in an office near the square.</span></span>
+          <div class="q-options">
+            <button class="q-opt" data-correct="true">trabajo</button>
+            <button class="q-opt" data-correct="false">trabajé</button>
+            <button class="q-opt" data-correct="false">trabajaré</button>
+          </div>
+          <div class="role-feedback"><strong>Trabajo</strong> — acción habitual, presente de indicativo.</div>
+        </div>
+      </div>
+
+      <div class="role-line vecino">
+        <div class="role-avatar">V</div>
+        <div class="role-bubble">¡Qué bien! Bueno, me voy a organizar las cajas. ¡Hasta luego!<span class="en-note">Great! Well, I'm going to organise the boxes. See you later!</span></div>
+      </div>
+
+      <div class="role-line rebecca">
+        <div class="role-avatar">R</div>
+        <div class="role-bubble fill" data-role-qid="r4" data-role-answer="Hasta luego">
+          <span>___, Marc. ¡Bienvenido al barrio!<span class="en-note">___, Marc. Welcome to the neighbourhood!</span></span>
+          <div class="q-options">
+            <button class="q-opt" data-correct="true">Hasta luego</button>
+            <button class="q-opt" data-correct="false">Buen provecho</button>
+            <button class="q-opt" data-correct="false">De nada</button>
+          </div>
+          <div class="role-feedback"><strong>Hasta luego</strong> — despedida natural cuando ambos seguiréis viéndoos por el edificio.</div>
+        </div>
+      </div>
+    </div>
+
+    <p class="round-sub" style="margin-top:26px;">Escena 2 — en el mercado del barrio<span class="en-note">Scene 2 — at the neighbourhood market</span></p>
+
+    <div class="role-chat">
+      <div class="role-line vecino">
+        <div class="role-avatar">M</div>
+        <div class="role-bubble">¡Buenos días! ¿Qué le pongo hoy?<span class="en-note">Good morning! What can I get you today?</span></div>
+      </div>
+
+      <div class="role-line rebecca">
+        <div class="role-avatar">R</div>
+        <div class="role-bubble fill" data-role-qid="r5" data-role-answer="Querría">
+          <span>___ medio kilo de tomates y unas manzanas, por favor.<span class="en-note">___ half a kilo of tomatoes and some apples, please.</span></span>
+          <div class="q-options">
+            <button class="q-opt" data-correct="true">Querría</button>
+            <button class="q-opt" data-correct="false">Quiero yo</button>
+            <button class="q-opt" data-correct="false">Querrá</button>
+          </div>
+          <div class="role-feedback"><strong>Querría</strong> — forma cortés para pedir algo en una tienda, más suave que "quiero".</div>
+        </div>
+      </div>
+
+      <div class="role-line vecino">
+        <div class="role-avatar">M</div>
+        <div class="role-bubble">Marchando. Los tomates hoy <span class="blank">___</span> (estar) buenísimos, recién llegados.<span class="en-note">Right away. The tomatoes today ___ (are) delicious, just arrived.</span></div>
+      </div>
+
+      <div class="role-line rebecca">
+        <div class="role-avatar">R</div>
+        <div class="role-bubble fill" data-role-qid="r6" data-role-answer="Perfecto, ¿cuánto es">
+          <span>___?<span class="en-note">___?</span></span>
+          <div class="q-options">
+            <button class="q-opt" data-correct="true">Perfecto, ¿cuánto es</button>
+            <button class="q-opt" data-correct="false">Perfecto, ¿cuánto está</button>
+            <button class="q-opt" data-correct="false">Perfecto, ¿cuánto será</button>
+          </div>
+          <div class="role-feedback"><strong>¿Cuánto es?</strong> — pregunta fija con <em>ser</em> para pedir el precio total.</div>
+        </div>
+      </div>
+
+      <div class="role-line vecino">
+        <div class="role-avatar">M</div>
+        <div class="role-bubble">Son tres euros con cincuenta. ¿Algo más?<span class="en-note">That's three euros fifty. Anything else?</span></div>
+      </div>
+
+      <div class="role-line rebecca">
+        <div class="role-avatar">R</div>
+        <div class="role-bubble fill" data-role-qid="r7" data-role-answer="Nada más, gracias">
+          <span>___. ¡Hasta la próxima!<span class="en-note">___. See you next time!</span></span>
+          <div class="q-options">
+            <button class="q-opt" data-correct="true">Nada más, gracias</button>
+            <button class="q-opt" data-correct="false">De nada, gracias</button>
+            <button class="q-opt" data-correct="false">Lo siento, gracias</button>
+          </div>
+          <div class="role-feedback"><strong>Nada más, gracias</strong> — forma habitual de cerrar la compra cuando no necesitas nada más.</div>
+        </div>
+      </div>
+
+      <div class="role-line vecino">
+        <div class="role-avatar">M</div>
+        <div class="role-bubble">¡Hasta la próxima! Que tengas buen día.<span class="en-note">See you next time! Have a good day.</span></div>
+      </div>
+
+      <div class="role-line rebecca">
+        <div class="role-avatar">R</div>
+        <div class="role-bubble fill" data-role-qid="r8" data-role-answer="Igualmente">
+          <span>___, gracias.<span class="en-note">___, thank you.</span></span>
+          <div class="q-options">
+            <button class="q-opt" data-correct="true">Igualmente</button>
+            <button class="q-opt" data-correct="false">De nada</button>
+            <button class="q-opt" data-correct="false">Buen provecho</button>
+          </div>
+          <div class="role-feedback"><strong>Igualmente</strong> — respuesta natural para devolver un buen deseo a la otra persona.</div>
+        </div>
+      </div>
+    </div>
+
+    <p class="round-sub" style="margin-top:26px;">Escena 3 — pidiendo direcciones en la calle<span class="en-note">Scene 3 — asking for directions in the street</span></p>
+
+    <div class="role-chat">
+      <div class="role-line vecino">
+        <div class="role-avatar">D</div>
+        <div class="role-bubble">¿Puedo ayudarte? Pareces un poco perdida.<span class="en-note">Can I help you? You seem a bit lost.</span></div>
+      </div>
+
+      <div class="role-line rebecca">
+        <div class="role-avatar">R</div>
+        <div class="role-bubble fill" data-role-qid="r9" data-role-answer="Perdona, ¿podrías decirme">
+          <span>___ dónde está la estación de metro más cercana?<span class="en-note">___ where the nearest metro station is?</span></span>
+          <div class="q-options">
+            <button class="q-opt" data-correct="true">Perdona, ¿podrías decirme</button>
+            <button class="q-opt" data-correct="false">Oye, dime</button>
+            <button class="q-opt" data-correct="false">Perdona, ¿puedes tú decir</button>
+          </div>
+          <div class="role-feedback"><strong>Perdona, ¿podrías decirme...?</strong> — la forma más cortés y natural para pedir ayuda a un desconocido.</div>
+        </div>
+      </div>
+
+      <div class="role-line vecino">
+        <div class="role-avatar">D</div>
+        <div class="role-bubble">Claro, sigue todo recto y luego gira a la izquierda en el semáforo.<span class="en-note">Sure, go straight ahead and then turn left at the traffic light.</span></div>
+      </div>
+
+      <div class="role-line rebecca">
+        <div class="role-avatar">R</div>
+        <div class="role-bubble fill" data-role-qid="r10" data-role-answer="está">
+          <span>Entonces la estación <span class="blank">___</span> justo después del semáforo, ¿no?<span class="en-note">So the station ___ right after the traffic light, isn't it?</span></span>
+          <div class="q-options">
+            <button class="q-opt" data-correct="true">está</button>
+            <button class="q-opt" data-correct="false">es</button>
+            <button class="q-opt" data-correct="false">será</button>
+          </div>
+          <div class="role-feedback"><strong>Está</strong> — la ubicación siempre se expresa con <em>estar</em>, incluso en preguntas de confirmación.</div>
+        </div>
+      </div>
+
+      <div class="role-line vecino">
+        <div class="role-avatar">D</div>
+        <div class="role-bubble">Exacto. Está a unos cinco minutos andando desde aquí.<span class="en-note">Exactly. It's about a five-minute walk from here.</span></div>
+      </div>
+
+      <div class="role-line rebecca">
+        <div class="role-avatar">R</div>
+        <div class="role-bubble fill" data-role-qid="r11" data-role-answer="Muchas gracias por tu ayuda">
+          <span>___.<span class="en-note">___.</span></span>
+          <div class="q-options">
+            <button class="q-opt" data-correct="true">Muchas gracias por tu ayuda</button>
+            <button class="q-opt" data-correct="false">Lo siento por tu ayuda</button>
+            <button class="q-opt" data-correct="false">De nada por tu ayuda</button>
+          </div>
+          <div class="role-feedback"><strong>Muchas gracias por tu ayuda</strong> — forma clara de agradecer cuando alguien te explica algo.</div>
+        </div>
+      </div>
+
+      <div class="role-line vecino">
+        <div class="role-avatar">D</div>
+        <div class="role-bubble">De nada, ¡que tengas un buen día!<span class="en-note">You're welcome, have a good day!</span></div>
+      </div>
+
+      <div class="role-line rebecca">
+        <div class="role-avatar">R</div>
+        <div class="role-bubble fill" data-role-qid="r12" data-role-answer="Igualmente, adiós">
+          <span>___.<span class="en-note">___.</span></span>
+          <div class="q-options">
+            <button class="q-opt" data-correct="true">Igualmente, adiós</button>
+            <button class="q-opt" data-correct="false">De nada, adiós</button>
+            <button class="q-opt" data-correct="false">Buen provecho, adiós</button>
+          </div>
+          <div class="role-feedback"><strong>Igualmente, adiós</strong> — despedida cordial que devuelve el buen deseo y cierra la conversación.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="role-progress">Líneas completadas: <strong id="role-count">0</strong> / 12</div>
+  </section>
+
+  <section class="block race-panel">
+    <div class="block-head"><span class="block-num">🏁</span><h2>Carrera de las 28 palabras<span class="en-note">The 28-word race</span></h2><span class="time-tag">6 min</span></div>
+    <p class="race-hint">Un repaso rápido por categorías de palabras que has usado todo el curso. Toca las que reconozcas al instante, sin pensar dos veces.<span class="en-note">A quick review of word categories you've used throughout the course. Tap the ones you recognise instantly, without thinking twice.</span></p>
+    <div class="race-grid">
+      <div class="race-category">
+        <h4>Ciudad y direcciones<span class="en-note">City and directions</span></h4>
+        <div class="race-words">
+          <span class="race-word">calle</span><span class="race-word">plaza</span><span class="race-word">esquina</span>
+          <span class="race-word">semáforo</span><span class="race-word">metro</span><span class="race-word">recto</span>
+          <span class="race-word">izquierda</span><span class="race-word">derecha</span>
+        </div>
+      </div>
+      <div class="race-category">
+        <h4>Mercado y comida<span class="en-note">Market and food</span></h4>
+        <div class="race-words">
+          <span class="race-word">mercado</span><span class="race-word">verdura</span><span class="race-word">fruta</span>
+          <span class="race-word">carnicería</span><span class="race-word">panadería</span><span class="race-word">precio</span>
+          <span class="race-word">barato</span><span class="race-word">caro</span>
+        </div>
+      </div>
+      <div class="race-category">
+        <h4>Rutina diaria<span class="en-note">Daily routine</span></h4>
+        <div class="race-words">
+          <span class="race-word">levantarse</span><span class="race-word">desayunar</span><span class="race-word">trabajar</span>
+          <span class="race-word">comer</span><span class="race-word">descansar</span><span class="race-word">acostarse</span>
+        </div>
+      </div>
+      <div class="race-category">
+        <h4>Casa y vecinos<span class="en-note">Home and neighbours</span></h4>
+        <div class="race-words">
+          <span class="race-word">piso</span><span class="race-word">vecina</span><span class="race-word">portal</span>
+          <span class="race-word">llave</span><span class="race-word">alquiler</span><span class="race-word">habitación</span>
+        </div>
+      </div>
+    </div>
+    <div class="race-tally">Palabras reconocidas: <strong id="race-count">0</strong> / 28</div>
+  </section>
+
+  <section class="block eval-panel">
+    <div class="block-head"><span class="block-num">8</span><h2>Autoevaluación final<span class="en-note">Final self-assessment</span></h2><span class="time-tag">4 min</span></div>
+    <p class="eval-hint">Antes de la clase 40, escribe con sinceridad cómo te sientes con cada bloque. No hay respuestas malas — esto sirve para preparar la última clase juntos.<span class="en-note">Before class 40, honestly write how you feel about each block. There are no wrong answers — this helps prepare the last class together.</span></p>
+
+    <div class="eval-row" data-eval="ser-estar">
+      <label>Ser / estar<span class="en-note">Ser / estar</span></label>
+      <div class="eval-scale">
+        <div class="eval-dot" data-val="1">1</div>
+        <div class="eval-dot" data-val="2">2</div>
+        <div class="eval-dot" data-val="3">3</div>
+        <div class="eval-dot" data-val="4">4</div>
+        <div class="eval-dot" data-val="5">5</div>
+      </div>
+      <div class="eval-scale-labels"><span>Me cuesta<span class="en-note">I struggle</span></span><span>Lo domino<span class="en-note">I've got it</span></span></div>
+    </div>
+
+    <div class="eval-row" data-eval="genero">
+      <label>Género de los sustantivos<span class="en-note">Noun gender</span></label>
+      <div class="eval-scale">
+        <div class="eval-dot" data-val="1">1</div>
+        <div class="eval-dot" data-val="2">2</div>
+        <div class="eval-dot" data-val="3">3</div>
+        <div class="eval-dot" data-val="4">4</div>
+        <div class="eval-dot" data-val="5">5</div>
+      </div>
+      <div class="eval-scale-labels"><span>Me cuesta<span class="en-note">I struggle</span></span><span>Lo domino<span class="en-note">I've got it</span></span></div>
+    </div>
+
+    <div class="eval-row" data-eval="tiempos">
+      <label>Presente, pasado y futuro<span class="en-note">Present, past and future</span></label>
+      <div class="eval-scale">
+        <div class="eval-dot" data-val="1">1</div>
+        <div class="eval-dot" data-val="2">2</div>
+        <div class="eval-dot" data-val="3">3</div>
+        <div class="eval-dot" data-val="4">4</div>
+        <div class="eval-dot" data-val="5">5</div>
+      </div>
+      <div class="eval-scale-labels"><span>Me cuesta<span class="en-note">I struggle</span></span><span>Lo domino<span class="en-note">I've got it</span></span></div>
+    </div>
+
+    <div class="eval-row">
+      <label>¿Qué te gustaría repasar en la clase 40, antes de la evaluación final?<span class="en-note">What would you like to review in class 40, before the final assessment?</span></label>
+      <textarea class="eval-textarea" id="eval-notes" placeholder="Escribe aquí tus notas..."></textarea>
+    </div>
+
+    <div class="eval-save" id="eval-save-indicator">
+      <span class="saved-dot"></span><span>Guardado automáticamente</span>
+    </div>
+  </section>
+
+  <section class="block closing-panel">
+    <div class="block-head"><span class="block-num">🎯</span><h2>¡Ya casi lo tienes, Rebecca!<span class="en-note">You've almost got it, Rebecca!</span></h2><span class="time-tag"></span></div>
+    <p class="closing-text">Has repasado ser/estar, género, y los tres tiempos verbales que necesitas para hablar con soltura de tu día a día en Barcelona. Solo queda una clase: la evaluación final, donde compararás cómo hablabas en la clase 1 con cómo hablas ahora.<span class="en-note">You've reviewed ser/estar, gender, and the three verb tenses you need to speak fluently about your daily life in Barcelona. Only one class remains: the final assessment, where you'll compare how you spoke in class 1 with how you speak now.</span></p>
+    <div class="medal-row">
+      <div class="medal"><span class="medal-icon">🧩</span>4 rondas<strong>de repaso completadas</strong></div>
+      <div class="medal"><span class="medal-icon">📚</span>28 palabras<strong>repasadas por categoría</strong></div>
+      <div class="medal"><span class="medal-icon">✍️</span>39 clases<strong>completadas</strong></div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <span>Clase 39 · Repaso general — consolidación gramatical</span>
+  <span>Próxima clase → Clase 40: evaluación final y cierre</span>
+</footer>
+
+<script>
+/* ---------- SCORE TRACKING ---------- */
+const STORAGE_KEY_SCORE = 'rebecca-clase39-puntos';
+let scoreState = {};
+
+async function loadScore(){
+  if (!window.storage) return {};
+  try{
+    const res = await window.storage.get(STORAGE_KEY_SCORE);
+    return (res && typeof res.value === 'string') ? JSON.parse(res.value) : {};
+  }catch(e){ return {}; }
+}
+async function saveScore(){
+  if (!window.storage) return;
+  try{ await window.storage.set(STORAGE_KEY_SCORE, JSON.stringify(scoreState)); }catch(e){ /* fallo silencioso */ }
+}
+
+function updateScoreBar(){
+  const total = 20;
+  const done = Object.keys(scoreState).filter(k => scoreState[k] === true).length;
+  document.getElementById('score-count').textContent = done;
+  document.getElementById('score-fill').style.width = (done/total*100) + '%';
+}
+
+document.querySelectorAll('.q-card').forEach(card => {
+  const qid = card.dataset.qid;
+  const opts = card.querySelectorAll('.q-opt');
+  const feedback = card.querySelector('.q-feedback');
+
+  opts.forEach(opt => {
+    opt.addEventListener('click', async () => {
+      if(card.classList.contains('answered')) return;
+      card.classList.add('answered');
+      const isCorrect = opt.dataset.correct === 'true';
+      opts.forEach(o => {
+        o.classList.add('disabled');
+        if(o.dataset.correct === 'true'){ o.classList.add('correct'); }
+        else if(o === opt){ o.classList.add('incorrect'); }
+      });
+      feedback.classList.add('visible');
+      scoreState[qid] = isCorrect;
+      updateScoreBar();
+      await saveScore();
+    });
+  });
+});
+
+(async function initScore(){
+  scoreState = await loadScore();
+  document.querySelectorAll('.q-card').forEach(card => {
+    const qid = card.dataset.qid;
+    if(scoreState[qid] !== undefined){
+      card.classList.add('answered');
+      const opts = card.querySelectorAll('.q-opt');
+      opts.forEach(o => {
+        o.classList.add('disabled');
+        if(o.dataset.correct === 'true'){ o.classList.add('correct'); }
+      });
+      card.querySelector('.q-feedback').classList.add('visible');
+    }
+  });
+  updateScoreBar();
+})();
+
+/* ---------- WORD RACE ---------- */
+const STORAGE_KEY_RACE = 'rebecca-clase39-carrera';
+let raceState = {};
+
+async function loadRace(){
+  if (!window.storage) return {};
+  try{
+    const res = await window.storage.get(STORAGE_KEY_RACE);
+    return (res && typeof res.value === 'string') ? JSON.parse(res.value) : {};
+  }catch(e){ return {}; }
+}
+async function saveRace(){
+  if (!window.storage) return;
+  try{ await window.storage.set(STORAGE_KEY_RACE, JSON.stringify(raceState)); }catch(e){ /* fallo silencioso */ }
+}
+
+function updateRaceTally(){
+  const total = document.querySelectorAll('.race-word').length;
+  const known = document.querySelectorAll('.race-word.known').length;
+  document.getElementById('race-count').textContent = known;
+}
+
+document.querySelectorAll('.race-word').forEach((el, idx) => {
+  el.dataset.idx = idx;
+  el.addEventListener('click', async () => {
+    const isKnown = el.classList.toggle('known');
+    if(isKnown){ raceState[idx] = true; } else { delete raceState[idx]; }
+    updateRaceTally();
+    await saveRace();
+  });
+});
+
+(async function initRace(){
+  raceState = await loadRace();
+  Object.keys(raceState).forEach(idx => {
+    const el = document.querySelector(`.race-word[data-idx="${idx}"]`);
+    if(el) el.classList.add('known');
+  });
+  updateRaceTally();
+})();
+
+/* ---------- SELF-ASSESSMENT ---------- */
+const STORAGE_KEY_EVAL = 'rebecca-clase39-autoeval';
+let evalState = { scales: {}, notes: '' };
+let saveTimeout = null;
+
+async function loadEval(){
+  if (!window.storage) return { scales: {}, notes: '' };
+  try{
+    const res = await window.storage.get(STORAGE_KEY_EVAL);
+    return (res && typeof res.value === 'string') ? JSON.parse(res.value) : { scales: {}, notes: '' };
+  }catch(e){ return { scales: {}, notes: '' }; }
+}
+async function saveEval(){
+  if (!window.storage) return;
+  try{ await window.storage.set(STORAGE_KEY_EVAL, JSON.stringify(evalState)); }catch(e){ /* fallo silencioso */ }
+  const indicator = document.getElementById('eval-save-indicator');
+  indicator.classList.add('show-saved');
+  setTimeout(() => indicator.classList.remove('show-saved'), 1500);
+}
+
+document.querySelectorAll('.eval-row[data-eval]').forEach(row => {
+  const key = row.dataset.eval;
+  const dots = row.querySelectorAll('.eval-dot');
+  dots.forEach(dot => {
+    dot.addEventListener('click', async () => {
+      const val = dot.dataset.val;
+      dots.forEach(d => d.classList.toggle('selected', d.dataset.val === val));
+      evalState.scales[key] = val;
+      await saveEval();
+    });
+  });
+});
+
+const notesEl = document.getElementById('eval-notes');
+notesEl.addEventListener('input', () => {
+  evalState.notes = notesEl.value;
+  clearTimeout(saveTimeout);
+  saveTimeout = setTimeout(saveEval, 600);
+});
+
+(async function initEval(){
+  evalState = await loadEval();
+  if(!evalState.scales) evalState.scales = {};
+  Object.keys(evalState.scales).forEach(key => {
+    const row = document.querySelector(`.eval-row[data-eval="${key}"]`);
+    if(!row) return;
+    const val = evalState.scales[key];
+    row.querySelectorAll('.eval-dot').forEach(d => d.classList.toggle('selected', d.dataset.val === val));
+  });
+  if(evalState.notes) notesEl.value = evalState.notes;
+})();
+
+
+/* ---------- RONDA EXTRA — 5 ejercicios ---------- */
+const STORAGE_KEY_EXTRA = 'rebecca-clase39-extra';
+let extraState = {};
+
+function normalize(str){
+  return str.trim().toLowerCase()
+    .replace(/á/g,'a').replace(/é/g,'e').replace(/í/g,'i').replace(/ó/g,'o').replace(/ú/g,'u');
+}
+
+async function loadExtra(){
+  if (!window.storage) return {};
+  try{
+    const res = await window.storage.get(STORAGE_KEY_EXTRA);
+    return (res && typeof res.value === 'string') ? JSON.parse(res.value) : {};
+  }catch(e){ return {}; }
+}
+async function saveExtra(){
+  if (!window.storage) return;
+  try{ await window.storage.set(STORAGE_KEY_EXTRA, JSON.stringify(extraState)); }catch(e){ /* fallo silencioso */ }
+}
+function updateExtraTally(){
+  const total = document.querySelectorAll('.ex-card').length;
+  const done = Object.keys(extraState).filter(k => extraState[k] === true).length;
+  const el = document.getElementById('extra-count');
+  if(el) el.textContent = done;
+}
+function markExtraDone(exid){
+  extraState[exid] = true;
+  updateExtraTally();
+  saveExtra();
+}
+
+/* Tipo input */
+document.querySelectorAll('.ex-card[data-extype="input"]').forEach(card => {
+  const exid = card.dataset.exid;
+  const answer = card.dataset.answer;
+  const input = card.querySelector('[data-exinput]');
+  const btn = card.querySelector('[data-excheck]');
+  const feedback = card.querySelector('[data-exfeedback]');
+  const check = () => {
+    if(btn.disabled) return;
+    const ok = normalize(input.value) === normalize(answer);
+    input.classList.add(ok ? 'correct' : 'incorrect');
+    input.disabled = true; btn.disabled = true;
+    feedback.classList.add('visible');
+    markExtraDone(exid);
+  };
+  btn.addEventListener('click', check);
+  input.addEventListener('keydown', e => { if(e.key === 'Enter') check(); });
+});
+
+/* Tipo emparejar */
+document.querySelectorAll('.ex-card[data-extype="match"]').forEach(card => {
+  const exid = card.dataset.exid;
+  const feedback = card.querySelector('[data-exfeedback]');
+  let leftSel = null;
+  let matchedCount = 0;
+  const items = card.querySelectorAll('.ex-match-item');
+  const total = card.querySelectorAll('[data-excol="left"] .ex-match-item').length;
+
+  items.forEach(item => {
+    item.addEventListener('click', () => {
+      if(item.classList.contains('matched-correct')) return;
+      const col = item.closest('.ex-match-col').dataset.excol;
+      if(col === 'left'){
+        items.forEach(i => { if(i.closest('.ex-match-col').dataset.excol === 'left') i.classList.remove('selected'); });
+        item.classList.add('selected');
+        leftSel = item;
+      } else if(leftSel){
+        const isMatch = leftSel.dataset.exval === item.dataset.exval;
+        if(isMatch){
+          leftSel.classList.remove('selected'); leftSel.classList.add('matched-correct');
+          item.classList.add('matched-correct');
+          matchedCount++;
+          if(matchedCount === total){
+            feedback.classList.add('visible');
+            markExtraDone(exid);
+          }
+        } else {
+          item.classList.add('matched-wrong');
+          setTimeout(() => item.classList.remove('matched-wrong'), 500);
+        }
+        leftSel = null;
+      }
+    });
+  });
+});
+
+/* Tipo ordenar */
+document.querySelectorAll('.ex-card[data-extype="order"]').forEach(card => {
+  const exid = card.dataset.exid;
+  const correctOrder = card.dataset.correctOrder.split('|');
+  const slotRow = card.querySelector('[data-exslots]');
+  const bank = card.querySelector('[data-exbank]');
+  const feedback = card.querySelector('[data-exfeedback]');
+  const resetBtn = card.querySelector('[data-exreset]');
+  let placed = [];
+
+  function renderSlots(){
+    slotRow.innerHTML = placed.map(w => `<span class="filled">${w}</span>`).join('');
+  }
+  function checkComplete(){
+    if(placed.length === correctOrder.length){
+      const ok = placed.every((w, i) => w === correctOrder[i]);
+      if(ok){
+        feedback.classList.add('visible');
+        markExtraDone(exid);
+        bank.querySelectorAll('.ex-order-chip').forEach(c => c.classList.add('used'));
+      } else {
+        setTimeout(() => {
+          placed = [];
+          bank.querySelectorAll('.ex-order-chip').forEach(c => c.classList.remove('used'));
+          renderSlots();
+        }, 700);
+      }
+    }
+  }
+  bank.querySelectorAll('.ex-order-chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      if(chip.classList.contains('used')) return;
+      placed.push(chip.dataset.word);
+      chip.classList.add('used');
+      renderSlots();
+      checkComplete();
+    });
+  });
+  resetBtn.addEventListener('click', () => {
+    placed = [];
+    bank.querySelectorAll('.ex-order-chip').forEach(c => c.classList.remove('used'));
+    renderSlots();
+  });
+});
+
+/* Tipo verdadero/falso */
+document.querySelectorAll('.ex-card[data-extype="vf"]').forEach(card => {
+  const exid = card.dataset.exid;
+  const answer = card.dataset.answer;
+  const buttons = card.querySelectorAll('.ex-vf-btn');
+  const feedback = card.querySelector('[data-exfeedback]');
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      if(card.classList.contains('answered')) return;
+      card.classList.add('answered');
+      const isCorrect = btn.dataset.exval === answer;
+      buttons.forEach(b => {
+        b.classList.add('disabled');
+        if(b.dataset.exval === answer){ b.classList.add('correct'); }
+        else if(b === btn){ b.classList.add('incorrect'); }
+      });
+      feedback.classList.add('visible');
+      markExtraDone(exid);
+    });
+  });
+});
+
+(async function initExtra(){
+  extraState = await loadExtra();
+  updateExtraTally();
+})();
+
+/* ---------- ROLEPLAY DIÁLOGO ---------- */
+const STORAGE_KEY_ROLE = 'rebecca-clase39-roleplay';
+let roleState = {};
+
+async function loadRole(){
+  if (!window.storage) return {};
+  try{
+    const res = await window.storage.get(STORAGE_KEY_ROLE);
+    return (res && typeof res.value === 'string') ? JSON.parse(res.value) : {};
+  }catch(e){ return {}; }
+}
+async function saveRole(){
+  if (!window.storage) return;
+  try{ await window.storage.set(STORAGE_KEY_ROLE, JSON.stringify(roleState)); }catch(e){ /* fallo silencioso */ }
+}
+function updateRoleTally(){
+  const total = document.querySelectorAll('.role-bubble.fill').length;
+  const done = Object.keys(roleState).filter(k => roleState[k] === true).length;
+  const el = document.getElementById('role-count');
+  if(el) el.textContent = done;
+}
+
+document.querySelectorAll('.role-bubble.fill').forEach(bubble => {
+  const qid = bubble.dataset.roleQid;
+  const opts = bubble.querySelectorAll('.q-opt');
+  const feedback = bubble.querySelector('.role-feedback');
+
+  opts.forEach(opt => {
+    opt.addEventListener('click', async () => {
+      if(bubble.classList.contains('answered')) return;
+      bubble.classList.add('answered');
+      const isCorrect = opt.dataset.correct === 'true';
+      opts.forEach(o => {
+        o.classList.add('disabled');
+        if(o.dataset.correct === 'true'){ o.classList.add('correct'); }
+        else if(o === opt){ o.classList.add('incorrect'); }
+      });
+      feedback.classList.add('visible');
+      roleState[qid] = isCorrect;
+      updateRoleTally();
+      await saveRole();
+    });
+  });
+});
+
+(async function initRoleplay(){
+  roleState = await loadRole();
+  document.querySelectorAll('.role-bubble.fill').forEach(bubble => {
+    const qid = bubble.dataset.roleQid;
+    if(roleState[qid] !== undefined){
+      bubble.classList.add('answered');
+      const opts = bubble.querySelectorAll('.q-opt');
+      opts.forEach(o => {
+        o.classList.add('disabled');
+        if(o.dataset.correct === 'true'){ o.classList.add('correct'); }
+      });
+      bubble.querySelector('.role-feedback').classList.add('visible');
+    }
+  });
+  updateRoleTally();
+})();
+
+/* ---------- LANGUAGE TOGGLE ---------- */
+const LANG_KEY = 'escolar-idioma-modo';
+const langToggle = document.getElementById('lang-toggle');
+const langSpans = langToggle.querySelectorAll('span');
+
+function setLangMode(mode){
+  document.documentElement.setAttribute('data-lang', mode);
+  langSpans.forEach(s => s.classList.toggle('active', s.dataset.mode === mode));
+  try{ localStorage.setItem(LANG_KEY, mode); }catch(e){ /* almacenamiento no disponible */ }
+}
+
+langToggle.addEventListener('click', () => {
+  const current = document.documentElement.getAttribute('data-lang') || 'es';
+  setLangMode(current === 'es' ? 'bilingual' : 'es');
+});
+langToggle.addEventListener('keydown', (e) => {
+  if(e.key === 'Enter' || e.key === ' '){
+    e.preventDefault();
+    langToggle.click();
+  }
+});
+
+(function initLang(){
+  let saved = 'es';
+  try{ saved = localStorage.getItem(LANG_KEY) || 'es'; }catch(e){ /* almacenamiento no disponible */ }
+  setLangMode(saved);
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1363 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clase 38 · Rimas y canciones — celebración final — Rebecca</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+
+/* ╔══════════════════════════════════════════════════════════════╗
+   ║  ESCOLAR — sistema de diseño para clases de español online   ║
+   ║  Clase 38 · Rimas y canciones · celebración final              ║
+   ╚══════════════════════════════════════════════════════════════╝ */
+
+:root{
+  --paper:        #FBF7EE;
+  --paper-raised: #FFFFFF;
+  --paper-alt:    #F3ECDA;
+  --ink:          #23291F;
+  --ink-soft:     #565F52;
+  --ink-faint:    #8B9184;
+  --line:         rgba(35,41,31,0.12);
+  --line-strong:  rgba(35,41,31,0.22);
+
+  --b1:      #2F6FED;  --b1-soft: #EAF1FE;  --b1-line: #C6D9FC;
+  --b2:      #2E9E6B;  --b2-soft: #E9F6EF;  --b2-line: #BEE6D3;
+  --b3:      #DB8A2E;  --b3-soft: #FCF1E1;  --b3-line: #F3D9AF;
+  --family:  #C4432E;  --family-soft: #FBEAE4; --family-line: #F0C7BA;
+  --gold:    #C79A2E;  --gold-soft: #FBF2DE; --gold-line: #EFD99C;
+
+  --f-display: 'Fraunces', Georgia, serif;
+  --f-body:    'IBM Plex Sans', system-ui, sans-serif;
+  --f-data:    'IBM Plex Mono', monospace;
+
+  --r-sm: 8px;
+  --r-md: 14px;
+  --r-lg: 20px;
+
+  --shadow-1: 0 1px 2px rgba(35,41,31,0.05), 0 1px 8px rgba(35,41,31,0.04);
+}
+
+*{ box-sizing:border-box; }
+body{
+  margin:0;
+  background: var(--paper);
+  background-image: radial-gradient(circle at 1px 1px, var(--line) 1px, transparent 0);
+  background-size: 22px 22px;
+  color: var(--ink);
+  font-family: var(--f-body);
+  line-height:1.6;
+}
+::selection{ background: var(--gold-soft); }
+
+/* ---------- LANGUAGE TOGGLE ---------- */
+.lang-toggle-wrap{
+  position:fixed; top:16px; right:16px; z-index:50;
+}
+.lang-toggle{
+  font-family: var(--f-data); font-size:11.5px; letter-spacing:.03em;
+  background: var(--paper-raised); border:1px solid var(--line-strong); border-radius:999px;
+  padding:6px 6px; display:flex; align-items:center; gap:2px; box-shadow: var(--shadow-1); cursor:pointer;
+}
+.lang-toggle span{
+  padding:5px 11px; border-radius:999px; color: var(--ink-faint); transition: all .15s ease;
+}
+.lang-toggle span.active{ background: var(--ink); color:#fff; }
+.en-note{
+  display:block; font-family: var(--f-body); font-style:italic; font-size:0.82em;
+  color: var(--ink-faint); margin-top:3px; opacity:0; max-height:0; overflow:hidden;
+  transition: opacity .2s ease;
+}
+html[data-lang="bilingual"] .en-note{ opacity:1; max-height:none; }
+@media (max-width:600px){
+  .lang-toggle-wrap{ top:10px; right:10px; }
+  .lang-toggle span{ padding:5px 9px; font-size:11px; }
+}
+
+/* ---------- HEADER ---------- */
+header{ padding:44px 24px 28px; max-width:760px; margin:0 auto; position:relative; }
+.eyebrow{
+  font-family: var(--f-data); font-size:12px; letter-spacing:.14em;
+  text-transform:uppercase; color: var(--gold); margin:0 0 10px;
+  display:flex; align-items:center; gap:10px;
+}
+.eyebrow .dot{ width:6px; height:6px; border-radius:50%; background: var(--gold); }
+h1{
+  font-family: var(--f-display); font-weight:600;
+  font-size:clamp(30px,5.6vw,46px); line-height:1.08;
+  margin:0 0 14px; letter-spacing:-.01em;
+}
+h1 em{ font-style:italic; color: var(--gold); }
+.lede{ font-size:16px; color: var(--ink-soft); max-width:56ch; margin:0; }
+
+.meta-row{
+  display:flex; flex-wrap:wrap; gap:20px; margin-top:26px;
+  font-family: var(--f-data); font-size:12px; color: var(--ink-faint);
+}
+.meta-row strong{
+  display:block; color: var(--ink); font-size:14.5px; font-weight:500;
+  font-family: var(--f-display); margin-top:3px;
+}
+
+/* ---------- SCORE BAR (sticky) ---------- */
+.score-bar{
+  position:sticky; top:0; z-index:20; background: var(--paper);
+  border-bottom:1px solid var(--line); padding:12px 24px;
+  display:flex; align-items:center; gap:16px; justify-content:center;
+  backdrop-filter: blur(6px);
+}
+.score-bar-inner{ max-width:760px; width:100%; display:flex; align-items:center; gap:16px; }
+.score-chip{
+  font-family: var(--f-data); font-size:12.5px; color: var(--ink-soft);
+  background: var(--paper-raised); border:1px solid var(--line); border-radius:999px;
+  padding:6px 14px; display:flex; align-items:center; gap:8px; white-space:nowrap;
+}
+.score-chip strong{ color: var(--gold); font-family: var(--f-display); font-size:15px; }
+.score-track{
+  flex:1; height:8px; background: var(--paper-alt); border:1px solid var(--line);
+  border-radius:99px; overflow:hidden;
+}
+.score-fill{ height:100%; background: var(--b2); width:0%; transition: width .4s ease; }
+
+/* ---------- SECTIONS ---------- */
+main{ max-width:760px; margin:0 auto; padding:8px 24px 100px; }
+
+section.block{ margin-bottom:52px; }
+.block-head{ display:flex; align-items:baseline; gap:12px; margin-bottom:18px; }
+.time-tag{
+  font-family: var(--f-data); font-size:11px; color: var(--ink-faint);
+  background: var(--paper-alt); padding:3px 10px; border-radius:999px; margin-left:auto; flex:none;
+}
+.block-num{
+  font-family: var(--f-data); font-size:12px; color:#fff; background: var(--gold);
+  width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  flex:none;
+}
+.block-head h2{
+  font-family: var(--f-display); font-weight:500; font-style:italic; font-size:22px; margin:0;
+}
+
+.panel{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-lg);
+  box-shadow: var(--shadow-1); padding:26px 28px;
+}
+
+/* ---------- KARAOKE CARDS ---------- */
+.karaoke-panel{ border-radius: var(--r-lg); padding:26px 28px; }
+.karaoke-panel.rojo{ background: var(--b1-soft); border:1px solid var(--b1-line); }
+.karaoke-panel.verde{ background: var(--b2-soft); border:1px solid var(--b2-line); }
+.karaoke-panel.naranja{ background: var(--b3-soft); border:1px solid var(--b3-line); }
+.karaoke-panel.rojo .block-num{ background: var(--b1); }
+.karaoke-panel.verde .block-num{ background: var(--b2); }
+.karaoke-panel.naranja .block-num{ background: var(--b3); }
+.karaoke-panel.rojo .block-head h2{ color: var(--b1); }
+.karaoke-panel.verde .block-head h2{ color: var(--b2); }
+.karaoke-panel.naranja .block-head h2{ color: var(--b3); }
+
+.karaoke-meta{
+  font-family: var(--f-data); font-size:11.5px; color: var(--ink-faint); margin:-10px 0 18px;
+  text-transform:uppercase; letter-spacing:.05em; display:flex; gap:14px; flex-wrap:wrap;
+}
+
+.lyrics-card{
+  background:#fff; border-radius: var(--r-md); padding:20px 22px; margin-bottom:14px;
+}
+.karaoke-panel.rojo .lyrics-card{ border:1px solid var(--b1-line); }
+.karaoke-panel.verde .lyrics-card{ border:1px solid var(--b2-line); }
+.karaoke-panel.naranja .lyrics-card{ border:1px solid var(--b3-line); }
+
+.lyrics-verse{ margin-bottom:16px; }
+.lyrics-verse:last-child{ margin-bottom:0; }
+.lyrics-verse-label{
+  font-family: var(--f-data); font-size:10px; text-transform:uppercase; letter-spacing:.06em;
+  color: var(--ink-faint); margin:0 0 6px;
+}
+.lyrics-line{
+  font-family: var(--f-display); font-size:16px; line-height:1.7; color: var(--ink); margin:0;
+}
+.lyrics-line .kword{
+  cursor:pointer; border-radius:5px; padding:0 3px; transition: all .15s ease;
+  border-bottom:2px dotted var(--ink-faint);
+}
+.lyrics-line .kword:hover{ background: var(--gold-soft); }
+.lyrics-line .kword.tagged{
+  background: var(--gold-soft); border-bottom-color: var(--gold); color: var(--gold); font-weight:600;
+}
+.lyrics-line .kword.tagged-pres{ background: var(--b1-soft); border-bottom-color: var(--b1); color: var(--b1); }
+.lyrics-line .kword.tagged-pas{ background: var(--b3-soft); border-bottom-color: var(--b3); color: var(--b3); }
+.lyrics-line .kword.tagged-fut{ background: var(--family-soft); border-bottom-color: var(--family); color: var(--family); }
+
+.karaoke-legend{ display:flex; gap:10px; flex-wrap:wrap; margin-top:14px; }
+.klegend-chip{
+  font-family: var(--f-data); font-size:11.5px; color: var(--ink-soft); display:flex; align-items:center; gap:6px;
+  cursor:pointer; border:1px solid var(--line); padding:5px 11px; border-radius:999px; background:#fff;
+  transition: all .15s ease;
+}
+.klegend-chip.active-pres{ border-color: var(--b1); color: var(--b1); background: var(--b1-soft); }
+.klegend-chip.active-pas{ border-color: var(--b3); color: var(--b3); background: var(--b3-soft); }
+.klegend-chip.active-fut{ border-color: var(--family); color: var(--family); background: var(--family-soft); }
+.klegend-dot{ width:8px; height:8px; border-radius:50%; }
+.klegend-dot.pres{ background: var(--b1); }
+.klegend-dot.pas{ background: var(--b3); }
+.klegend-dot.fut{ background: var(--family); }
+
+.karaoke-progress{
+  font-family: var(--f-data); font-size:12px; color: var(--ink-faint); margin-top:14px;
+  display:flex; justify-content:space-between; align-items:center;
+}
+
+.karaoke-vote{
+  margin-top:16px; padding-top:14px; border-top:1px dashed var(--line-strong);
+  display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;
+}
+.karaoke-vote-btn{
+  font-family: var(--f-body); font-weight:600; font-size:13.5px; color: var(--ink-soft);
+  background:#fff; border:1.5px solid var(--line-strong); padding:9px 18px; border-radius:999px;
+  cursor:pointer; transition: all .15s ease; display:flex; align-items:center; gap:8px;
+}
+.karaoke-vote-btn:hover{ border-color: var(--ink-faint); }
+.karaoke-vote-btn.selected{ background: var(--gold); border-color: var(--gold); color:#fff; }
+
+/* ---------- VOCAB RECAP ---------- */
+.vocab-recap-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:14px; }
+@media (max-width:600px){ .vocab-recap-grid{ grid-template-columns:1fr 1fr; } }
+.vocab-recap-chip{
+  font-family: var(--f-data); font-size:12px; padding:8px 10px; border-radius:8px; text-align:center;
+  cursor:pointer; transition: all .15s ease; border:1px solid;
+}
+.vocab-recap-chip.rojo{ background: var(--b1-soft); border-color: var(--b1-line); color: var(--b1); }
+.vocab-recap-chip.verde{ background: var(--b2-soft); border-color: var(--b2-line); color: var(--b2); }
+.vocab-recap-chip.naranja{ background: var(--b3-soft); border-color: var(--b3-line); color: var(--b3); }
+.vocab-recap-chip.known{ opacity:.4; text-decoration:line-through; }
+
+/* ---------- RHYME BLOCK ---------- */
+.rhyme-panel{ background: var(--family-soft); border:1px solid var(--family-line); border-radius: var(--r-lg); padding:26px 28px; }
+.rhyme-panel .block-num{ background: var(--family); }
+.rhyme-panel .block-head h2{ color: var(--family); }
+.rhyme-card{
+  background:#fff; border:1px solid var(--family-line); border-radius: var(--r-md); padding:20px 22px;
+}
+.rhyme-text{
+  font-family: var(--f-display); font-style:italic; font-size:17px; line-height:1.85; color: var(--ink); margin:0;
+}
+.rhyme-hint{ font-family: var(--f-data); font-size:11.5px; color: var(--ink-faint); margin:0 0 14px; }
+
+/* ---------- QUIZ ROUND (final trivia) ---------- */
+.q-card{
+  background:#fff; border-radius: var(--r-md); padding:18px 20px; margin-bottom:12px;
+  border:1px solid var(--gold-line);
+}
+.q-card:last-child{ margin-bottom:0; }
+.q-text{ font-size:15px; color:var(--ink); margin:0 0 12px; }
+.q-options{ display:flex; flex-wrap:wrap; gap:8px; }
+.q-opt{
+  font-family: var(--f-data); font-size:13px; background: var(--paper-raised);
+  border:1.5px solid var(--line); border-radius:999px; padding:7px 15px;
+  cursor:pointer; transition: all .15s ease; color: var(--ink-soft);
+}
+.q-opt:hover{ border-color: var(--ink-faint); }
+.q-opt.correct{ background: var(--b2); border-color: var(--b2); color:#fff; }
+.q-opt.incorrect{ background: var(--family); border-color: var(--family); color:#fff; }
+.q-opt.disabled{ pointer-events:none; opacity:.55; }
+.q-feedback{
+  font-family: var(--f-data); font-size:12px; color: var(--ink-faint); margin-top:10px;
+  padding-top:10px; border-top:1px dashed var(--line); display:none;
+}
+.q-feedback.visible{ display:block; }
+.q-feedback strong{ color: var(--ink); }
+
+/* ---------- FAVORITE SONG TASK ---------- */
+.task-panel{ background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-lg); box-shadow: var(--shadow-1); padding:26px 28px; }
+.task-panel .block-num{ background: var(--ink); }
+.task-choice-row{ display:flex; gap:10px; flex-wrap:wrap; margin-top:6px; }
+.task-choice{
+  font-family: var(--f-body); font-weight:600; font-size:13.5px; color: var(--ink-soft);
+  background:#fff; border:1.5px solid var(--line-strong); padding:10px 18px; border-radius:999px;
+  cursor:pointer; transition: all .15s ease;
+}
+.task-choice:hover{ border-color: var(--ink-faint); }
+.task-choice.selected{ background: var(--ink); border-color: var(--ink); color:#fff; }
+.task-textarea{
+  width:100%; min-height:90px; margin-top:16px; font-family: var(--f-body); font-size:14px; color: var(--ink);
+  background: var(--paper-alt); border:1px solid var(--line-strong); border-radius: var(--r-md);
+  padding:12px 14px; resize:vertical;
+}
+.task-textarea:focus{ outline:none; border-color: var(--gold); }
+.task-save{
+  margin-top:14px; font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint);
+  display:flex; align-items:center; gap:8px;
+}
+.task-save .saved-dot{ width:7px; height:7px; border-radius:50%; background: var(--b2); opacity:0; transition: opacity .3s ease; }
+.task-save.show-saved .saved-dot{ opacity:1; }
+
+/* ---------- CLOSING ---------- */
+.closing-panel{
+  background: linear-gradient(135deg, var(--gold-soft) 0%, var(--paper-raised) 100%);
+  border:1px solid var(--gold-line); border-radius: var(--r-lg); padding:32px 28px; text-align:center;
+}
+.closing-panel .block-num{ background: var(--gold); margin:0 auto 14px; }
+.closing-panel .block-head{ flex-direction:column; align-items:center; }
+.closing-panel .block-head h2{ color: var(--gold); font-size:26px; }
+.closing-panel .time-tag{ display:none; }
+.closing-text{ font-size:15.5px; color: var(--ink-soft); max-width:50ch; margin:0 auto 22px; }
+.medal-row{ display:flex; justify-content:center; gap:14px; flex-wrap:wrap; margin-bottom:6px; }
+.medal{
+  background:#fff; border:1px solid var(--gold-line); border-radius: var(--r-md); padding:14px 18px;
+  font-family: var(--f-data); font-size:12px; color: var(--ink-soft); min-width:140px;
+}
+.medal .medal-icon{ font-size:24px; display:block; margin-bottom:6px; }
+.medal strong{ display:block; color: var(--ink); font-family: var(--f-display); font-size:14px; margin-top:2px; }
+
+/* ---------- EJERCICIOS INTERACTIVOS ---------- */
+.ex-panel{ background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-lg); box-shadow: var(--shadow-1); padding:26px 28px; }
+.ex-item{ margin-bottom:22px; padding-bottom:22px; border-bottom:1px dashed var(--line-strong); }
+.ex-item:last-child{ margin-bottom:0; padding-bottom:0; border-bottom:none; }
+.ex-num{
+  font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.05em;
+  color: var(--ink-faint); margin:0 0 8px;
+}
+.ex-prompt{ font-size:14.5px; color: var(--ink); margin:0 0 12px; }
+.ex-prompt em{ font-style:normal; color: var(--gold); font-weight:600; }
+
+/* Ejercicio 1: elegir opción (radio chips) */
+.ex-choice-row{ display:flex; gap:10px; flex-wrap:wrap; }
+.ex-choice{
+  font-family: var(--f-data); font-size:13px; padding:8px 14px; border-radius:999px;
+  border:1px solid var(--line-strong); background:#fff; color: var(--ink-soft); cursor:pointer;
+  transition: all .15s ease;
+}
+.ex-choice:hover{ border-color: var(--ink-faint); }
+.ex-choice.selected{ border-color: var(--gold); color: var(--gold); background: var(--gold-soft); }
+.ex-choice.correct{ border-color: var(--b2); color: var(--b2); background: var(--b2-soft); }
+.ex-choice.incorrect{ border-color:#C4432E; color:#C4432E; background: var(--family-soft); }
+
+/* Ejercicio 2: rellenar huecos (texto libre) */
+.ex-fill-input{
+  font-family: var(--f-body); font-size:14px; color: var(--ink); width:100%;
+  background: var(--paper-alt); border:1px solid var(--line-strong); border-radius:8px;
+  padding:9px 12px; margin-top:2px;
+}
+.ex-fill-input:focus{ outline:none; border-color: var(--gold); }
+
+/* Ejercicio 3: clasificar frases (click to sort) */
+.ex-sort-pool{ display:flex; flex-direction:column; gap:8px; margin-bottom:14px; }
+.ex-sort-card{
+  font-family: var(--f-body); font-size:13.5px; color: var(--ink); background:#fff;
+  border:1px solid var(--line-strong); border-radius:8px; padding:10px 12px; cursor:pointer;
+  transition: all .15s ease;
+}
+.ex-sort-card:hover{ box-shadow: var(--shadow-1); }
+.ex-sort-card.placed{ opacity:.45; cursor:default; }
+.ex-sort-targets{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; }
+.ex-sort-target{
+  min-height:70px; border-radius: var(--r-md); padding:10px 12px; border:1.5px dashed var(--line-strong);
+}
+.ex-sort-target.pres{ background: var(--b1-soft); border-color: var(--b1-line); }
+.ex-sort-target.pas{ background: var(--b3-soft); border-color: var(--b3-line); }
+.ex-sort-target.fut{ background: var(--family-soft); border-color: var(--family-line); }
+.ex-sort-target h5{ font-family: var(--f-data); font-size:10.5px; text-transform:uppercase; margin:0 0 8px; color: var(--ink-faint); }
+.ex-sort-target .ex-sort-card{ font-size:13px; margin-bottom:6px; cursor:default; }
+@media (max-width:600px){ .ex-sort-targets{ grid-template-columns:1fr; } }
+
+/* Ejercicio 4: opción múltiple con feedback */
+.ex-mc-options{ display:flex; flex-direction:column; gap:8px; }
+.ex-mc-option{
+  font-family: var(--f-body); font-size:14px; color: var(--ink); background:#fff;
+  border:1px solid var(--line-strong); border-radius: var(--r-md); padding:11px 14px; cursor:pointer;
+  transition: all .15s ease;
+}
+.ex-mc-option:hover{ border-color: var(--ink-faint); }
+.ex-mc-option.correct{ border-color: var(--b2); background: var(--b2-soft); color: var(--b2); font-weight:600; }
+.ex-mc-option.incorrect{ border-color:#C4432E; background: var(--family-soft); color:#C4432E; }
+.ex-mc-feedback{ font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); margin-top:10px; min-height:16px; }
+
+/* Ejercicio 5: mini-redacción guiada con contador */
+.ex-writing textarea{
+  width:100%; min-height:110px; font-family: var(--f-body); font-size:14px; color: var(--ink);
+  background: var(--paper-alt); border:1px solid var(--line-strong); border-radius: var(--r-md);
+  padding:12px 14px; resize:vertical;
+}
+.ex-writing textarea:focus{ outline:none; border-color: var(--gold); }
+.ex-writing-meta{
+  display:flex; justify-content:space-between; margin-top:8px;
+  font-family: var(--f-data); font-size:11.5px; color: var(--ink-faint);
+}
+.ex-checklist-mini{ display:flex; gap:8px; flex-wrap:wrap; margin-top:10px; }
+.ex-tag-mini{
+  font-family: var(--f-data); font-size:11px; padding:4px 10px; border-radius:999px;
+  border:1px solid var(--line-strong); color: var(--ink-faint); background:#fff;
+}
+
+.ex-progress-bar{
+  font-family: var(--f-data); font-size:12px; color: var(--ink-faint); margin-top:18px;
+  display:flex; justify-content:space-between; align-items:center;
+}
+.ex-tanda-label{
+  font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.06em;
+  color: var(--gold); margin:0 0 18px; padding-bottom:8px; border-bottom:1px solid var(--gold-line);
+}
+.ex-item.ex-tanda-first{ margin-top:0; }
+
+/* ---------- FOOTER NAV ---------- */
+footer{
+  max-width:760px; margin:0 auto; padding:0 24px 60px; display:flex;
+  justify-content:space-between; flex-wrap:wrap; gap:12px;
+  font-family: var(--f-data); font-size:12px; color: var(--ink-faint);
+}
+
+@media (max-width:600px){
+  .panel, .karaoke-panel, .rhyme-panel, .task-panel, .closing-panel{ padding:20px 18px; }
+  .vocab-recap-grid{ grid-template-columns:1fr 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="lang-toggle-wrap">
+  <div class="lang-toggle" id="lang-toggle" role="button" tabindex="0" aria-label="Cambiar idioma de las notas">
+    <span data-mode="es">ES</span><span data-mode="bilingual">ES+EN</span>
+  </div>
+</div>
+
+<header>
+  <p class="eyebrow"><span class="dot"></span>Clase 38 · Línea de llegada · Celebración final</p>
+  <h1>Rimas y canciones — <em>celebración final</em></h1>
+  <p class="lede">Hoy no hay gramática nueva: es el gran concurso de karaoke. Repasamos las tres canciones que ya trabajamos en el curso — presente, pasado y futuro — cantando, identificando verbos y recordando todo lo aprendido. Al final, eliges tu canción favorita para cantarla entera.<span class="en-note">There's no new grammar today: it's the big karaoke contest. We review the three songs we already worked on in the course — present, past and future — by singing, spotting verbs and recalling everything you've learned. At the end, you pick your favourite song to sing in full.</span></p>
+  <div class="meta-row">
+    <div>Duración<strong>50 min</strong></div>
+    <div>Gramática<strong>Repaso lúdico de presente, pasado y futuro</strong></div>
+    <div>Nivel<strong>A1–A2</strong></div>
+  </div>
+</header>
+
+<div class="score-bar">
+  <div class="score-bar-inner">
+    <div class="score-chip">Puntos <strong id="score-count">0</strong> / 12</div>
+    <div class="score-track"><div class="score-fill" id="score-fill"></div></div>
+  </div>
+</div>
+
+<main>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">1</span><h2>Cómo funciona hoy<span class="en-note">How today works</span></h2><span class="time-tag">3 min</span></div>
+    <div class="panel">
+      <p style="margin:0; font-size:14.5px; color:var(--ink-soft);">Vamos a cantar las <strong style="color:var(--gold)">tres canciones</strong> que ya conoces del curso: la de presente (clase 14), la de pasado (clase 24) y la de futuro (clase 34). En cada una, toca los verbos y clasifícalos por color. Después, dos rimas de repaso y un mini-concurso de trivia musical. Al final, votas tu canción favorita para el karaoke.<span class="en-note">We'll sing the <strong style="color:var(--gold)">three songs</strong> you already know from the course: the present one (class 14), the past one (class 24) and the future one (class 34). In each one, tap the verbs and classify them by colour. Then, two review rhymes and a mini music trivia contest. At the end, you vote for your favourite song for karaoke.</span></p>
+    </div>
+  </section>
+
+  <section class="block karaoke-panel rojo">
+    <div class="block-head"><span class="block-num">2</span><h2>Canción 1 — "Mi Rutina" (presente)<span class="en-note">Song 1 — "Mi Rutina" (present)</span></h2><span class="time-tag">10 min</span></div>
+    <p class="karaoke-meta"><span>🎵 Clase 14 · repaso</span><span>Presente de indicativo</span></p>
+    <div class="lyrics-card">
+      <div class="lyrics-verse">
+        <p class="lyrics-verse-label">Estrofa 1</p>
+        <p class="lyrics-line">
+          Yo <span class="kword" data-verb="me levanto">me levanto</span> con el sol de la mañana,<br>
+          <span class="kword" data-verb="desayuno">Desayuno</span> pan con fruta en mi ventana,<br>
+          <span class="kword" data-verb="salgo">Salgo</span> a la calle, todo Barcelona <span class="kword" data-verb="suena">suena</span>,<br>
+          <span class="kword" data-verb="camino">Camino</span> despacio, la ciudad es tan buena.
+        </p>
+      </div>
+      <div class="lyrics-verse">
+        <p class="lyrics-verse-label">Estribillo</p>
+        <p class="lyrics-line">
+          Cada día <span class="kword" data-verb="trabajo">trabajo</span>, cada día <span class="kword" data-verb="aprendo">aprendo</span>,<br>
+          Cada día un poco más <span class="kword" data-verb="comprendo">comprendo</span>,<br>
+          <span class="kword" data-verb="vivo">Vivo</span> mi rutina, la <span class="kword" data-verb="quiero">quiero</span> así,<br>
+          Simple y bonita, aquí soy feliz.
+        </p>
+      </div>
+      <div class="lyrics-verse">
+        <p class="lyrics-verse-label">Estrofa 2</p>
+        <p class="lyrics-line">
+          Por la tarde <span class="kword" data-verb="como">como</span> con mi gente querida,<br>
+          <span class="kword" data-verb="hablamos">Hablamos</span> despacio de toda la vida,<br>
+          Y por la noche <span class="kword" data-verb="descanso">descanso</span> tranquila,<br>
+          Mañana me espera otra vez la pila.
+        </p>
+      </div>
+    </div>
+    <div class="karaoke-legend">
+      <div class="klegend-chip active-pres" data-tag="pres"><span class="klegend-dot pres"></span>Presente</div>
+    </div>
+    <div class="karaoke-progress">
+      <span id="k1-progress-text">0 / 13 verbos tocados</span>
+      <span>Toca cada verbo subrayado</span>
+    </div>
+  </section>
+
+  <section class="block karaoke-panel naranja">
+    <div class="block-head"><span class="block-num">3</span><h2>Canción 2 — "Aquel Verano" (pasado)<span class="en-note">Song 2 — "Aquel Verano" (past)</span></h2><span class="time-tag">10 min</span></div>
+    <p class="karaoke-meta"><span>🎵 Clase 24 · repaso</span><span>Pretérito indefinido e imperfecto</span></p>
+    <div class="lyrics-card">
+      <div class="lyrics-verse">
+        <p class="lyrics-verse-label">Estrofa 1</p>
+        <p class="lyrics-line">
+          Aquel verano <span class="kword" data-verb="llegué">llegué</span> sin saber nada,<br>
+          La ciudad <span class="kword" data-verb="era">era</span> grande, yo <span class="kword" data-verb="estaba">estaba</span> asustada,<br>
+          Pero un día <span class="kword" data-verb="conocí">conocí</span> a alguien especial,<br>
+          Y todo <span class="kword" data-verb="cambió">cambió</span>, fue algo genial.
+        </p>
+      </div>
+      <div class="lyrics-verse">
+        <p class="lyrics-verse-label">Estribillo</p>
+        <p class="lyrics-line">
+          Aquel verano <span class="kword" data-verb="aprendí">aprendí</span> a caminar sola,<br>
+          <span class="kword" data-verb="descubrí">Descubrí</span> el mar y cada nueva ola,<br>
+          Mientras la ciudad <span class="kword" data-verb="dormía">dormía</span> bajo el calor,<br>
+          Yo <span class="kword" data-verb="soñaba">soñaba</span> despierta con un nuevo amor.
+        </p>
+      </div>
+      <div class="lyrics-verse">
+        <p class="lyrics-verse-label">Estrofa 2</p>
+        <p class="lyrics-line">
+          Todos los días <span class="kword" data-verb="salía">salía</span> a pasear,<br>
+          Un día <span class="kword" data-verb="decidí">decidí</span> quedarme sin dudar,<br>
+          Esa fue la historia que <span class="kword" data-verb="viví">viví</span>,<br>
+          Y hoy con orgullo la <span class="kword" data-verb="cuento">cuento</span> así.
+        </p>
+      </div>
+    </div>
+    <div class="karaoke-legend">
+      <div class="klegend-chip active-pas" data-tag="pas"><span class="klegend-dot pas"></span>Pasado</div>
+    </div>
+    <div class="karaoke-progress">
+      <span id="k2-progress-text">0 / 13 verbos tocados</span>
+      <span>Toca cada verbo subrayado</span>
+    </div>
+  </section>
+
+  <section class="block karaoke-panel verde">
+    <div class="block-head"><span class="block-num">4</span><h2>Canción 3 — "Lo Que Vendrá" (futuro)<span class="en-note">Song 3 — "Lo Que Vendrá" (future)</span></h2><span class="time-tag">10 min</span></div>
+    <p class="karaoke-meta"><span>🎵 Clase 34 · repaso</span><span>Futuro simple</span></p>
+    <div class="lyrics-card">
+      <div class="lyrics-verse">
+        <p class="lyrics-verse-label">Estrofa 1</p>
+        <p class="lyrics-line">
+          Algún día <span class="kword" data-verb="hablaré">hablaré</span> sin pensar la frase,<br>
+          <span class="kword" data-verb="viajaré">Viajaré</span> a lugares que nadie sabe,<br>
+          <span class="kword" data-verb="tendré">Tendré</span> más palabras dentro de mí,<br>
+          Y todo lo nuevo lo <span class="kword" data-verb="viviré">viviré</span> así.
+        </p>
+      </div>
+      <div class="lyrics-verse">
+        <p class="lyrics-verse-label">Estribillo</p>
+        <p class="lyrics-line">
+          Mañana <span class="kword" data-verb="seré">seré</span> más fuerte que ayer,<br>
+          <span class="kword" data-verb="podré">Podré</span> contar historias sin temer,<br>
+          El año que viene <span class="kword" data-verb="volveré">volveré</span> a soñar,<br>
+          Con todo el español que <span class="kword" data-verb="usaré">usaré</span> al hablar.
+        </p>
+      </div>
+      <div class="lyrics-verse">
+        <p class="lyrics-verse-label">Estrofa 2</p>
+        <p class="lyrics-line">
+          En septiembre <span class="kword" data-verb="seguiré">seguiré</span> aprendiendo más,<br>
+          <span class="kword" data-verb="haré">Haré</span> nuevas frases, nunca pararé,<br>
+          Y algún día <span class="kword" data-verb="miraré">miraré</span> atrás,<br>
+          Feliz de haber llegado tan lejos ya.
+        </p>
+      </div>
+    </div>
+    <div class="karaoke-legend">
+      <div class="klegend-chip active-fut" data-tag="fut"><span class="klegend-dot fut"></span>Futuro</div>
+    </div>
+    <div class="karaoke-progress">
+      <span id="k3-progress-text">0 / 11 verbos tocados</span>
+      <span>Toca cada verbo subrayado</span>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">5</span><h2>Repaso de vocabulario de las canciones<span class="en-note">Vocabulary review from the songs</span></h2><span class="time-tag">4 min</span></div>
+    <div class="panel">
+      <p style="margin:0 0 4px; font-size:14.5px; color:var(--ink-soft);">Toca las palabras que recuerdas de las tres canciones, sin volver a mirar la letra.<span class="en-note">Tap the words you remember from the three songs, without looking at the lyrics again.</span></p>
+      <div class="vocab-recap-grid" id="vocab-recap-grid">
+        <div class="vocab-recap-chip rojo" data-idx="0">rutina</div>
+        <div class="vocab-recap-chip rojo" data-idx="1">ventana</div>
+        <div class="vocab-recap-chip rojo" data-idx="2">tranquila</div>
+        <div class="vocab-recap-chip naranja" data-idx="3">verano</div>
+        <div class="vocab-recap-chip naranja" data-idx="4">orgullo</div>
+        <div class="vocab-recap-chip naranja" data-idx="5">ola</div>
+        <div class="vocab-recap-chip verde" data-idx="6">mañana</div>
+        <div class="vocab-recap-chip verde" data-idx="7">soñar</div>
+        <div class="vocab-recap-chip verde" data-idx="8">lejos</div>
+      </div>
+      <div class="karaoke-progress" style="margin-top:14px;">
+        <span id="vocab-progress-text">0 / 9 palabras reconocidas</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="block rhyme-panel">
+    <div class="block-head"><span class="block-num">6</span><h2>Rimas de repaso<span class="en-note">Review rhymes</span></h2><span class="time-tag">6 min</span></div>
+    <p class="rhyme-hint">Lee en voz alta estas dos rimas cortas — repaso de las clases 19 y 29 — cuidando la pronunciación y el ritmo.<span class="en-note">Read these two short rhymes out loud — a review from classes 19 and 29 — paying attention to pronunciation and rhythm.</span></p>
+    <div class="rhyme-card" style="margin-bottom:12px;">
+      <p class="rhyme-text">
+        "Treinta días tiene septiembre,<br>
+        abril, junio y noviembre;<br>
+        de veintiocho hay uno solo,<br>
+        y los demás de treinta y uno."
+      </p>
+    </div>
+    <div class="rhyme-card">
+      <p class="rhyme-text">
+        "Quien mucho abarca, poco aprieta;<br>
+        quien no arriesga, no gana ni acierta;<br>
+        pero quien practica cada día,<br>
+        habla español con alegría."
+      </p>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">7</span><h2>Trivia musical — mini-concurso<span class="en-note">Music trivia — mini-contest</span></h2><span class="time-tag">7 min</span></div>
+
+    <div class="q-card" data-qid="1">
+      <p class="q-text">En "Mi Rutina", ¿qué tiempo verbal se usa en toda la canción?<span class="en-note">In "Mi Rutina", what verb tense is used throughout the song?</span></p>
+      <div class="q-options">
+        <button class="q-opt" data-correct="true">presente</button>
+        <button class="q-opt" data-correct="false">pasado</button>
+        <button class="q-opt" data-correct="false">futuro</button>
+      </div>
+      <div class="q-feedback"><strong>Presente</strong> — la canción describe acciones habituales del día a día, como "me levanto" o "trabajo".</div>
+    </div>
+
+    <div class="q-card" data-qid="2">
+      <p class="q-text">En "Aquel Verano", "estaba asustada" describe...<span class="en-note">In "Aquel Verano", "estaba asustada" describes...</span></p>
+      <div class="q-options">
+        <button class="q-opt" data-correct="false">una acción puntual</button>
+        <button class="q-opt" data-correct="true">un estado de fondo</button>
+        <button class="q-opt" data-correct="false">un plan futuro</button>
+      </div>
+      <div class="q-feedback"><strong>Un estado de fondo</strong> — el imperfecto "estaba" describe cómo se sentía, no un hecho puntual.</div>
+    </div>
+
+    <div class="q-card" data-qid="3">
+      <p class="q-text">"Conocí a alguien especial" usa el pretérito indefinido porque...<span class="en-note">"Conocí a alguien especial" uses the pretérito indefinido because...</span></p>
+      <div class="q-options">
+        <button class="q-opt" data-correct="true">es un hecho puntual y terminado</button>
+        <button class="q-opt" data-correct="false">describe una rutina</button>
+        <button class="q-opt" data-correct="false">es un plan futuro</button>
+      </div>
+      <div class="q-feedback"><strong>Es un hecho puntual y terminado</strong> — "conocí" marca un momento concreto de la historia.</div>
+    </div>
+
+    <div class="q-card" data-qid="4">
+      <p class="q-text">En "Lo Que Vendrá", ¿cuál de estos verbos es futuro irregular?<span class="en-note">In "Lo Que Vendrá", which of these verbs is an irregular future?</span></p>
+      <div class="q-options">
+        <button class="q-opt" data-correct="false">hablaré</button>
+        <button class="q-opt" data-correct="true">tendré</button>
+        <button class="q-opt" data-correct="false">usaré</button>
+      </div>
+      <div class="q-feedback"><strong>Tendré</strong> — viene de "tener", uno de los futuros irregulares que ya conoces (junto a haré, podré, saldré...).</div>
+    </div>
+
+    <div class="q-card" data-qid="5">
+      <p class="q-text">¿Cuál de las tres canciones cuenta una historia con principio y final, mezclando indefinido e imperfecto?<span class="en-note">Which of the three songs tells a story with a beginning and an end, mixing indefinido and imperfecto?</span></p>
+      <div class="q-options">
+        <button class="q-opt" data-correct="false">Mi Rutina</button>
+        <button class="q-opt" data-correct="true">Aquel Verano</button>
+        <button class="q-opt" data-correct="false">Lo Que Vendrá</button>
+      </div>
+      <div class="q-feedback"><strong>Aquel Verano</strong> — combina el fondo (imperfecto: era, estaba, dormía) con las acciones (indefinido: llegué, conocí, cambió).</div>
+    </div>
+
+    <div class="q-card" data-qid="6">
+      <p class="q-text">"El año que viene volveré a soñar" es un ejemplo de...<span class="en-note">"El año que viene volveré a soñar" is an example of...</span></p>
+      <div class="q-options">
+        <button class="q-opt" data-correct="false">presente habitual</button>
+        <button class="q-opt" data-correct="false">pasado narrativo</button>
+        <button class="q-opt" data-correct="true">futuro simple</button>
+      </div>
+      <div class="q-feedback"><strong>Futuro simple</strong> — "volveré" describe algo que pasará más adelante, un plan o predicción.</div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">8</span><h2>Veinte ejercicios de repaso final<span class="en-note">Twenty final review exercises</span></h2><span class="time-tag">48 min</span></div>
+    <div class="ex-panel">
+
+      <p class="ex-tanda-label">Tanda 1 de 4<span class="en-note">Set 1 of 4</span></p>
+
+      <!-- EJERCICIO 1: elegir el tiempo verbal correcto -->
+      <div class="ex-item">
+        <p class="ex-num">Ejercicio 1 · Identifica el tiempo</p>
+        <p class="ex-prompt">"Cada día <em>trabajo</em> y cada día <em>aprendo</em>" — ¿en qué tiempo está esta línea de "Mi Rutina"?<span class="en-note">"Cada día trabajo y cada día aprendo" — what tense is this line from "Mi Rutina" in?</span></p>
+        <div class="ex-choice-row" data-ex="ex1" data-correct="presente">
+          <div class="ex-choice" data-val="presente">presente</div>
+          <div class="ex-choice" data-val="pasado">pasado</div>
+          <div class="ex-choice" data-val="futuro">futuro</div>
+        </div>
+      </div>
+
+      <!-- EJERCICIO 2: rellenar el hueco -->
+      <div class="ex-item">
+        <p class="ex-num">Ejercicio 2 · Completa la letra</p>
+        <p class="ex-prompt">Escribe el verbo en futuro simple: "Mañana ________ (ser) más fuerte que ayer."<span class="en-note">Write the verb in the simple future: "Tomorrow I ________ (be) stronger than yesterday."</span></p>
+        <input type="text" class="ex-fill-input" data-ex="ex2" data-correct="seré" placeholder="Escribe tu respuesta aquí...">
+        <p class="ex-mc-feedback" id="ex2-feedback"></p>
+      </div>
+
+      <!-- EJERCICIO 3: clasificar frases por canción/tiempo -->
+      <div class="ex-item">
+        <p class="ex-num">Ejercicio 3 · Clasifica: ¿presente, pasado o futuro?</p>
+        <p class="ex-prompt">Toca cada frase y colócala en la columna de la canción a la que pertenece.<span class="en-note">Tap each sentence and place it in the column of the song it belongs to.</span></p>
+        <div class="ex-sort-pool" id="ex3-pool">
+          <div class="ex-sort-card" data-tag="pres">Vivo mi rutina, la quiero así.</div>
+          <div class="ex-sort-card" data-tag="pas">Aquel verano llegué sin saber nada.</div>
+          <div class="ex-sort-card" data-tag="fut">Viajaré a lugares que nadie sabe.</div>
+          <div class="ex-sort-card" data-tag="pas">La ciudad era grande, yo estaba asustada.</div>
+          <div class="ex-sort-card" data-tag="pres">Salgo a la calle, todo Barcelona suena.</div>
+          <div class="ex-sort-card" data-tag="fut">El año que viene volveré a soñar.</div>
+        </div>
+        <div class="ex-sort-targets">
+          <div class="ex-sort-target pres" id="ex3-pres"><h5>Mi Rutina</h5></div>
+          <div class="ex-sort-target pas" id="ex3-pas"><h5>Aquel Verano</h5></div>
+          <div class="ex-sort-target fut" id="ex3-fut"><h5>Lo Que Vendrá</h5></div>
+        </div>
+      </div>
+
+      <!-- EJERCICIO 4: opción múltiple con feedback -->
+      <div class="ex-item">
+        <p class="ex-num">Ejercicio 4 · Opción múltiple</p>
+        <p class="ex-prompt">En "Descubrí el mar y cada nueva ola", ¿por qué se usa el pretérito indefinido "descubrí"?<span class="en-note">In "Descubrí el mar y cada nueva ola", why is the pretérito indefinido "descubrí" used?</span></p>
+        <div class="ex-mc-options" id="ex4-options" data-correct="b">
+          <div class="ex-mc-option" data-val="a">Porque describe una rutina de todos los días.</div>
+          <div class="ex-mc-option" data-val="b">Porque es un hecho puntual y ya terminado.</div>
+          <div class="ex-mc-option" data-val="c">Porque habla de un plan para el futuro.</div>
+        </div>
+        <p class="ex-mc-feedback" id="ex4-feedback"></p>
+      </div>
+
+      <!-- EJERCICIO 5: mini-redacción guiada -->
+      <div class="ex-item ex-writing">
+        <p class="ex-num">Ejercicio 5 · Mini-redacción</p>
+        <p class="ex-prompt">Escribe 2–3 frases al estilo de una canción, contando algo sobre ti. Usa al menos un verbo en presente y uno en futuro.<span class="en-note">Write 2–3 sentences in the style of a song, telling something about yourself. Use at least one verb in the present and one in the future.</span></p>
+        <textarea id="ex5-text" placeholder="Cada día aprendo... y algún día hablaré..."></textarea>
+        <div class="ex-writing-meta">
+          <span id="ex5-count">0 palabras</span>
+          <span>Se guarda automáticamente</span>
+        </div>
+        <div class="ex-checklist-mini">
+          <span class="ex-tag-mini">✓ un verbo en presente</span>
+          <span class="ex-tag-mini">✓ un verbo en futuro</span>
+        </div>
+      </div>
+
+      <p class="ex-tanda-label">Tanda 2 de 4<span class="en-note">Set 2 of 4</span></p>
+
+      <!-- EJERCICIO 6: elegir el tiempo verbal correcto -->
+      <div class="ex-item">
+        <p class="ex-num">Ejercicio 6 · Identifica el tiempo</p>
+        <p class="ex-prompt">"Aquel verano llegué sin saber nada" — ¿en qué tiempo está esta línea de "Aquel Verano"?<span class="en-note">"Aquel verano llegué sin saber nada" — what tense is this line from "Aquel Verano" in?</span></p>
+        <div class="ex-choice-row" data-ex="ex6" data-correct="pasado">
+          <div class="ex-choice" data-val="presente">presente</div>
+          <div class="ex-choice" data-val="pasado">pasado</div>
+          <div class="ex-choice" data-val="futuro">futuro</div>
+        </div>
+      </div>
+
+      <!-- EJERCICIO 7: rellenar el hueco -->
+      <div class="ex-item">
+        <p class="ex-num">Ejercicio 7 · Completa la letra</p>
+        <p class="ex-prompt">Escribe el verbo en presente: "Cada día trabajo, cada día ________ (aprender)."<span class="en-note">Write the verb in the present: "Cada día trabajo, cada día ________ (aprender)."</span></p>
+        <input type="text" class="ex-fill-input" data-ex="ex7" data-correct="aprendo" placeholder="Escribe tu respuesta aquí...">
+        <p class="ex-mc-feedback" id="ex7-feedback"></p>
+      </div>
+
+      <!-- EJERCICIO 8: clasificar frases por canción/tiempo -->
+      <div class="ex-item">
+        <p class="ex-num">Ejercicio 8 · Clasifica: ¿presente, pasado o futuro?</p>
+        <p class="ex-prompt">Toca cada frase y colócala en la columna de la canción a la que pertenece.<span class="en-note">Tap each sentence and place it in the column of the song it belongs to.</span></p>
+        <div class="ex-sort-pool" id="ex8-pool">
+          <div class="ex-sort-card" data-tag="pres">Camino despacio, la ciudad es tan buena.</div>
+          <div class="ex-sort-card" data-tag="pas">La ciudad era grande, yo estaba asustada.</div>
+          <div class="ex-sort-card" data-tag="fut">Tendré más palabras dentro de mí.</div>
+          <div class="ex-sort-card" data-tag="pas">Todos los días salía a pasear.</div>
+          <div class="ex-sort-card" data-tag="pres">Por la tarde como con mi gente querida.</div>
+          <div class="ex-sort-card" data-tag="fut">El año que viene volveré a soñar.</div>
+        </div>
+        <div class="ex-sort-targets">
+          <div class="ex-sort-target pres" id="ex8-pres"><h5>Mi Rutina</h5></div>
+          <div class="ex-sort-target pas" id="ex8-pas"><h5>Aquel Verano</h5></div>
+          <div class="ex-sort-target fut" id="ex8-fut"><h5>Lo Que Vendrá</h5></div>
+        </div>
+      </div>
+
+      <!-- EJERCICIO 9: opción múltiple con feedback -->
+      <div class="ex-item">
+        <p class="ex-num">Ejercicio 9 · Opción múltiple</p>
+        <p class="ex-prompt">En "La ciudad era grande, yo estaba asustada", ¿por qué se usa el imperfecto "era" y "estaba"?<span class="en-note">In "La ciudad era grande, yo estaba asustada", why is the imperfect "era" and "estaba" used?</span></p>
+        <div class="ex-mc-options" id="ex9-options" data-correct="a">
+          <div class="ex-mc-option" data-val="a">Porque describe una situación de fondo, sin marcar cuándo empezó ni terminó.</div>
+          <div class="ex-mc-option" data-val="b">Porque es una acción puntual que ya terminó.</div>
+          <div class="ex-mc-option" data-val="c">Porque habla de un plan para el futuro.</div>
+        </div>
+        <p class="ex-mc-feedback" id="ex9-feedback"></p>
+      </div>
+
+      <!-- EJERCICIO 10: mini-redacción guiada -->
+      <div class="ex-item ex-writing">
+        <p class="ex-num">Ejercicio 10 · Mini-redacción</p>
+        <p class="ex-prompt">Escribe 2–3 frases al estilo de "Aquel Verano", contando algo que viviste en el pasado. Usa al menos un verbo en indefinido y uno en imperfecto.<span class="en-note">Write 2–3 sentences in the style of "Aquel Verano", telling something you experienced in the past. Use at least one verb in the indefinido and one in the imperfecto.</span></p>
+        <textarea id="ex10-text" placeholder="Aquel día conocí... la ciudad era..."></textarea>
+        <div class="ex-writing-meta">
+          <span id="ex10-count">0 palabras</span>
+          <span>Se guarda automáticamente</span>
+        </div>
+        <div class="ex-checklist-mini">
+          <span class="ex-tag-mini">✓ un verbo en indefinido</span>
+          <span class="ex-tag-mini">✓ un verbo en imperfecto</span>
+        </div>
+      </div>
+
+      <p class="ex-tanda-label">Tanda 3 de 4<span class="en-note">Set 3 of 4</span></p>
+
+      <!-- EJERCICIO 11: elegir el tiempo verbal correcto -->
+      <div class="ex-item">
+        <p class="ex-num">Ejercicio 11 · Identifica el tiempo</p>
+        <p class="ex-prompt">"Algún día hablaré sin pensar la frase" — ¿en qué tiempo está esta línea de "Lo Que Vendrá"?<span class="en-note">"Algún día hablaré sin pensar la frase" — what tense is this line from "Lo Que Vendrá" in?</span></p>
+        <div class="ex-choice-row" data-ex="ex11" data-correct="futuro">
+          <div class="ex-choice" data-val="presente">presente</div>
+          <div class="ex-choice" data-val="pasado">pasado</div>
+          <div class="ex-choice" data-val="futuro">futuro</div>
+        </div>
+      </div>
+
+      <!-- EJERCICIO 12: rellenar el hueco -->
+      <div class="ex-item">
+        <p class="ex-num">Ejercicio 12 · Completa la letra</p>
+        <p class="ex-prompt">Escribe el verbo en pretérito indefinido: "Pero un día ________ (conocer) a alguien especial."<span class="en-note">Write the verb in the pretérito indefinido: "Pero un día ________ (conocer) a alguien especial."</span></p>
+        <input type="text" class="ex-fill-input" data-ex="ex12" data-correct="conocí" placeholder="Escribe tu respuesta aquí...">
+        <p class="ex-mc-feedback" id="ex12-feedback"></p>
+      </div>
+
+      <!-- EJERCICIO 13: clasificar frases por canción/tiempo -->
+      <div class="ex-item">
+        <p class="ex-num">Ejercicio 13 · Clasifica: ¿presente, pasado o futuro?</p>
+        <p class="ex-prompt">Toca cada frase y colócala en la columna de la canción a la que pertenece.<span class="en-note">Tap each sentence and place it in the column of the song it belongs to.</span></p>
+        <div class="ex-sort-pool" id="ex13-pool">
+          <div class="ex-sort-card" data-tag="pres">Simple y bonita, aquí soy feliz.</div>
+          <div class="ex-sort-card" data-tag="pas">Esa fue la historia que viví.</div>
+          <div class="ex-sort-card" data-tag="fut">Podré contar historias sin temer.</div>
+          <div class="ex-sort-card" data-tag="pres">Hablamos despacio de toda la vida.</div>
+          <div class="ex-sort-card" data-tag="fut">En septiembre seguiré aprendiendo más.</div>
+          <div class="ex-sort-card" data-tag="pas">Mientras la ciudad dormía bajo el calor.</div>
+        </div>
+        <div class="ex-sort-targets">
+          <div class="ex-sort-target pres" id="ex13-pres"><h5>Mi Rutina</h5></div>
+          <div class="ex-sort-target pas" id="ex13-pas"><h5>Aquel Verano</h5></div>
+          <div class="ex-sort-target fut" id="ex13-fut"><h5>Lo Que Vendrá</h5></div>
+        </div>
+      </div>
+
+      <!-- EJERCICIO 14: opción múltiple con feedback -->
+      <div class="ex-item">
+        <p class="ex-num">Ejercicio 14 · Opción múltiple</p>
+        <p class="ex-prompt">En "Mañana seré más fuerte que ayer", ¿por qué se usa el futuro simple "seré"?<span class="en-note">In "Mañana seré más fuerte que ayer", why is the simple future "seré" used?</span></p>
+        <div class="ex-mc-options" id="ex14-options" data-correct="c">
+          <div class="ex-mc-option" data-val="a">Porque describe una rutina de todos los días.</div>
+          <div class="ex-mc-option" data-val="b">Porque es un hecho puntual y ya terminado.</div>
+          <div class="ex-mc-option" data-val="c">Porque habla de una predicción sobre algo que aún no ha pasado.</div>
+        </div>
+        <p class="ex-mc-feedback" id="ex14-feedback"></p>
+      </div>
+
+      <!-- EJERCICIO 15: mini-redacción guiada -->
+      <div class="ex-item ex-writing">
+        <p class="ex-num">Ejercicio 15 · Mini-redacción</p>
+        <p class="ex-prompt">Escribe 2–3 frases al estilo de "Lo Que Vendrá", contando un plan o una predicción para tu futuro. Usa al menos dos verbos en futuro simple.<span class="en-note">Write 2–3 sentences in the style of "Lo Que Vendrá", telling a plan or prediction for your future. Use at least two verbs in the simple future.</span></p>
+        <textarea id="ex15-text" placeholder="Algún día viajaré... y hablaré..."></textarea>
+        <div class="ex-writing-meta">
+          <span id="ex15-count">0 palabras</span>
+          <span>Se guarda automáticamente</span>
+        </div>
+        <div class="ex-checklist-mini">
+          <span class="ex-tag-mini">✓ dos verbos en futuro</span>
+        </div>
+      </div>
+
+      <p class="ex-tanda-label">Tanda 4 de 4<span class="en-note">Set 4 of 4</span></p>
+
+      <!-- EJERCICIO 16: elegir el tiempo verbal correcto -->
+      <div class="ex-item">
+        <p class="ex-num">Ejercicio 16 · Identifica el tiempo</p>
+        <p class="ex-prompt">"Un día decidí quedarme sin dudar" — ¿en qué tiempo está esta línea de "Aquel Verano"?<span class="en-note">"Un día decidí quedarme sin dudar" — what tense is this line from "Aquel Verano" in?</span></p>
+        <div class="ex-choice-row" data-ex="ex16" data-correct="pasado">
+          <div class="ex-choice" data-val="presente">presente</div>
+          <div class="ex-choice" data-val="pasado">pasado</div>
+          <div class="ex-choice" data-val="futuro">futuro</div>
+        </div>
+      </div>
+
+      <!-- EJERCICIO 17: rellenar el hueco -->
+      <div class="ex-item">
+        <p class="ex-num">Ejercicio 17 · Completa la letra</p>
+        <p class="ex-prompt">Escribe el verbo en presente: "________ (vivir) mi rutina, la quiero así."<span class="en-note">Write the verb in the present: "________ (vivir) mi rutina, la quiero así."</span></p>
+        <input type="text" class="ex-fill-input" data-ex="ex17" data-correct="vivo" placeholder="Escribe tu respuesta aquí...">
+        <p class="ex-mc-feedback" id="ex17-feedback"></p>
+      </div>
+
+      <!-- EJERCICIO 18: clasificar frases por canción/tiempo -->
+      <div class="ex-item">
+        <p class="ex-num">Ejercicio 18 · Clasifica: ¿presente, pasado o futuro?</p>
+        <p class="ex-prompt">Toca cada frase y colócala en la columna de la canción a la que pertenece.<span class="en-note">Tap each sentence and place it in the column of the song it belongs to.</span></p>
+        <div class="ex-sort-pool" id="ex18-pool">
+          <div class="ex-sort-card" data-tag="pres">Cada día un poco más comprendo.</div>
+          <div class="ex-sort-card" data-tag="pas">Yo soñaba despierta con un nuevo amor.</div>
+          <div class="ex-sort-card" data-tag="fut">Y algún día miraré atrás.</div>
+          <div class="ex-sort-card" data-tag="pres">Yo me levanto con el sol de la mañana.</div>
+          <div class="ex-sort-card" data-tag="fut">Haré nuevas frases, nunca pararé.</div>
+          <div class="ex-sort-card" data-tag="pas">Y todo cambió, fue algo genial.</div>
+        </div>
+        <div class="ex-sort-targets">
+          <div class="ex-sort-target pres" id="ex18-pres"><h5>Mi Rutina</h5></div>
+          <div class="ex-sort-target pas" id="ex18-pas"><h5>Aquel Verano</h5></div>
+          <div class="ex-sort-target fut" id="ex18-fut"><h5>Lo Que Vendrá</h5></div>
+        </div>
+      </div>
+
+      <!-- EJERCICIO 19: opción múltiple con feedback -->
+      <div class="ex-item">
+        <p class="ex-num">Ejercicio 19 · Opción múltiple</p>
+        <p class="ex-prompt">En "Todos los días salía a pasear", ¿por qué se usa el imperfecto "salía" y no el indefinido "salí"?<span class="en-note">In "Todos los días salía a pasear", why is the imperfect "salía" used instead of the indefinido "salí"?</span></p>
+        <div class="ex-mc-options" id="ex19-options" data-correct="b">
+          <div class="ex-mc-option" data-val="a">Porque es una acción puntual que pasó una sola vez.</div>
+          <div class="ex-mc-option" data-val="b">Porque describe una acción repetida y habitual en el pasado.</div>
+          <div class="ex-mc-option" data-val="c">Porque habla de algo que va a pasar pronto.</div>
+        </div>
+        <p class="ex-mc-feedback" id="ex19-feedback"></p>
+      </div>
+
+      <!-- EJERCICIO 20: mini-redacción guiada -->
+      <div class="ex-item ex-writing">
+        <p class="ex-num">Ejercicio 20 · Mini-redacción</p>
+        <p class="ex-prompt">Escribe 2–3 frases mezclando los tres tiempos de las canciones: qué hacías antes, qué haces ahora y qué harás después.<span class="en-note">Write 2–3 sentences mixing the three song tenses: what you used to do, what you do now, and what you will do next.</span></p>
+        <textarea id="ex20-text" placeholder="Antes vivía... ahora vivo... y algún día viviré..."></textarea>
+        <div class="ex-writing-meta">
+          <span id="ex20-count">0 palabras</span>
+          <span>Se guarda automáticamente</span>
+        </div>
+        <div class="ex-checklist-mini">
+          <span class="ex-tag-mini">✓ presente, pasado y futuro</span>
+        </div>
+      </div>
+
+      <div class="ex-progress-bar">
+        <span id="ex-progress-text">0 / 20 ejercicios completados</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="block task-panel">
+    <div class="block-head"><span class="block-num">9</span><h2>Tu tarea: elige tu canción favorita<span class="en-note">Your task: choose your favourite song</span></h2><span class="time-tag">—</span></div>
+    <p style="margin:0 0 4px; font-size:15px; color:var(--ink-soft);">De las tres canciones del curso, elige la que más te guste para cantarla entera en la próxima sesión de karaoke.<span class="en-note">Of the three songs from the course, choose the one you like best to sing in full at the next karaoke session.</span></p>
+    <div class="task-choice-row" id="task-choice-row">
+      <div class="task-choice" data-val="rutina">Mi Rutina (presente)</div>
+      <div class="task-choice" data-val="verano">Aquel Verano (pasado)</div>
+      <div class="task-choice" data-val="vendra">Lo Que Vendrá (futuro)</div>
+    </div>
+    <textarea class="task-textarea" id="task-notes" placeholder="¿Por qué te gusta esta canción? ¿Qué verbos o frases recuerdas mejor?"></textarea>
+    <div class="task-save" id="task-save-indicator">
+      <span class="saved-dot"></span><span>Guardado automáticamente</span>
+    </div>
+  </section>
+
+  <section class="block closing-panel">
+    <div class="block-head"><span class="block-num">🎤</span><h2>¡A cantar, Rebecca!<span class="en-note">Time to sing, Rebecca!</span></h2><span class="time-tag"></span></div>
+    <p class="closing-text">Has repasado presente, pasado y futuro a través de tres canciones que ya eran tuyas. Solo quedan dos clases: el repaso general y la evaluación final, donde medirás todo lo que has avanzado desde el primer día.<span class="en-note">You've reviewed present, past and future through three songs that were already yours. Only two classes remain: the general review and the final assessment, where you'll measure everything you've progressed since day one.</span></p>
+    <div class="medal-row">
+      <div class="medal"><span class="medal-icon">🎶</span>3 canciones<strong>repasadas y cantadas</strong></div>
+      <div class="medal"><span class="medal-icon">📜</span>2 rimas<strong>recitadas en voz alta</strong></div>
+      <div class="medal"><span class="medal-icon">✍️</span>38 clases<strong>completadas</strong></div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <span>Clase 38 · Rimas y canciones — celebración final</span>
+  <span>Próxima clase → Clase 39: repaso general</span>
+</footer>
+
+<script>
+/* ---------- KARAOKE WORD TAGGING (3 canciones) ---------- */
+function setupKaraoke(containerSelector, storageKey, progressElId, tagClass, totalWords){
+  const container = document.querySelector(containerSelector);
+  if(!container) return;
+  const words = container.querySelectorAll('.kword');
+  let tagged = {};
+
+  async function load(){
+    if (!window.storage) return {};
+    try{
+      const res = await window.storage.get(storageKey);
+      return (res && typeof res.value === 'string') ? JSON.parse(res.value) : {};
+    }catch(e){ return {}; }
+  }
+  async function save(){
+    if (!window.storage) return;
+    try{ await window.storage.set(storageKey, JSON.stringify(tagged)); }catch(e){ /* fallo silencioso */ }
+  }
+  function updateProgress(){
+    const done = Object.keys(tagged).length;
+    document.getElementById(progressElId).textContent = `${done} / ${totalWords} verbos tocados`;
+  }
+
+  words.forEach((el, idx) => {
+    el.dataset.idx = idx;
+    el.addEventListener('click', async () => {
+      const isTagged = el.classList.toggle('tagged');
+      el.classList.toggle(tagClass, isTagged);
+      if(isTagged){ tagged[idx] = true; } else { delete tagged[idx]; }
+      updateProgress();
+      await save();
+    });
+  });
+
+  (async function init(){
+    tagged = await load();
+    Object.keys(tagged).forEach(idx => {
+      const el = container.querySelector(`.kword[data-idx="${idx}"]`);
+      if(el){ el.classList.add('tagged', tagClass); }
+    });
+    updateProgress();
+  })();
+}
+
+setupKaraoke('.karaoke-panel.rojo', 'rebecca-clase38-karaoke1', 'k1-progress-text', 'tagged-pres', 13);
+setupKaraoke('.karaoke-panel.naranja', 'rebecca-clase38-karaoke2', 'k2-progress-text', 'tagged-pas', 13);
+setupKaraoke('.karaoke-panel.verde', 'rebecca-clase38-karaoke3', 'k3-progress-text', 'tagged-fut', 11);
+
+/* ---------- VOCAB RECAP ---------- */
+const STORAGE_KEY_VOCAB = 'rebecca-clase38-vocab';
+let vocabState = {};
+const vocabChips = document.querySelectorAll('.vocab-recap-chip');
+
+async function loadVocab(){
+  if (!window.storage) return {};
+  try{
+    const res = await window.storage.get(STORAGE_KEY_VOCAB);
+    return (res && typeof res.value === 'string') ? JSON.parse(res.value) : {};
+  }catch(e){ return {}; }
+}
+async function saveVocab(){
+  if (!window.storage) return;
+  try{ await window.storage.set(STORAGE_KEY_VOCAB, JSON.stringify(vocabState)); }catch(e){ /* fallo silencioso */ }
+}
+function updateVocabProgress(){
+  const done = Object.keys(vocabState).length;
+  document.getElementById('vocab-progress-text').textContent = `${done} / 9 palabras reconocidas`;
+}
+vocabChips.forEach(chip => {
+  chip.addEventListener('click', async () => {
+    const idx = chip.dataset.idx;
+    const isKnown = chip.classList.toggle('known');
+    if(isKnown){ vocabState[idx] = true; } else { delete vocabState[idx]; }
+    updateVocabProgress();
+    await saveVocab();
+  });
+});
+(async function initVocab(){
+  vocabState = await loadVocab();
+  Object.keys(vocabState).forEach(idx => {
+    const el = document.querySelector(`.vocab-recap-chip[data-idx="${idx}"]`);
+    if(el) el.classList.add('known');
+  });
+  updateVocabProgress();
+})();
+
+/* ---------- TRIVIA QUIZ ---------- */
+const STORAGE_KEY_SCORE = 'rebecca-clase38-trivia';
+let scoreState = {};
+
+async function loadScore(){
+  if (!window.storage) return {};
+  try{
+    const res = await window.storage.get(STORAGE_KEY_SCORE);
+    return (res && typeof res.value === 'string') ? JSON.parse(res.value) : {};
+  }catch(e){ return {}; }
+}
+async function saveScore(){
+  if (!window.storage) return;
+  try{ await window.storage.set(STORAGE_KEY_SCORE, JSON.stringify(scoreState)); }catch(e){ /* fallo silencioso */ }
+}
+function updateScoreBar(){
+  const total = 12;
+  const quizDone = Object.keys(scoreState).filter(k => scoreState[k] === true).length * 2;
+  document.getElementById('score-count').textContent = quizDone;
+  document.getElementById('score-fill').style.width = (quizDone/total*100) + '%';
+}
+
+document.querySelectorAll('.q-card').forEach(card => {
+  const qid = card.dataset.qid;
+  const opts = card.querySelectorAll('.q-opt');
+  const feedback = card.querySelector('.q-feedback');
+
+  opts.forEach(opt => {
+    opt.addEventListener('click', async () => {
+      if(card.classList.contains('answered')) return;
+      card.classList.add('answered');
+      const isCorrect = opt.dataset.correct === 'true';
+      opts.forEach(o => {
+        o.classList.add('disabled');
+        if(o.dataset.correct === 'true'){ o.classList.add('correct'); }
+        else if(o === opt){ o.classList.add('incorrect'); }
+      });
+      feedback.classList.add('visible');
+      scoreState[qid] = isCorrect;
+      updateScoreBar();
+      await saveScore();
+    });
+  });
+});
+
+(async function initScore(){
+  scoreState = await loadScore();
+  document.querySelectorAll('.q-card').forEach(card => {
+    const qid = card.dataset.qid;
+    if(scoreState[qid] !== undefined){
+      card.classList.add('answered');
+      const opts = card.querySelectorAll('.q-opt');
+      opts.forEach(o => {
+        o.classList.add('disabled');
+        if(o.dataset.correct === 'true'){ o.classList.add('correct'); }
+      });
+      card.querySelector('.q-feedback').classList.add('visible');
+    }
+  });
+  updateScoreBar();
+})();
+
+/* ---------- FAVORITE SONG TASK ---------- */
+const STORAGE_KEY_TASK = 'rebecca-clase38-tarea';
+let taskState = { choice: null, notes: '' };
+let taskSaveTimeout = null;
+
+async function loadTask(){
+  if (!window.storage) return { choice: null, notes: '' };
+  try{
+    const res = await window.storage.get(STORAGE_KEY_TASK);
+    return (res && typeof res.value === 'string') ? JSON.parse(res.value) : { choice: null, notes: '' };
+  }catch(e){ return { choice: null, notes: '' }; }
+}
+async function saveTask(){
+  if (!window.storage) return;
+  try{ await window.storage.set(STORAGE_KEY_TASK, JSON.stringify(taskState)); }catch(e){ /* fallo silencioso */ }
+  const indicator = document.getElementById('task-save-indicator');
+  indicator.classList.add('show-saved');
+  setTimeout(() => indicator.classList.remove('show-saved'), 1500);
+}
+
+document.querySelectorAll('.task-choice').forEach(choice => {
+  choice.addEventListener('click', async () => {
+    document.querySelectorAll('.task-choice').forEach(c => c.classList.toggle('selected', c === choice));
+    taskState.choice = choice.dataset.val;
+    await saveTask();
+  });
+});
+
+const taskNotesEl = document.getElementById('task-notes');
+taskNotesEl.addEventListener('input', () => {
+  taskState.notes = taskNotesEl.value;
+  clearTimeout(taskSaveTimeout);
+  taskSaveTimeout = setTimeout(saveTask, 600);
+});
+
+(async function initTask(){
+  taskState = await loadTask();
+  if(taskState.choice){
+    document.querySelectorAll('.task-choice').forEach(c => c.classList.toggle('selected', c.dataset.val === taskState.choice));
+  }
+  if(taskState.notes) taskNotesEl.value = taskState.notes;
+})();
+
+/* ---------- EJERCICIOS INTERACTIVOS (bloque 8, 20 ejercicios) ---------- */
+const STORAGE_KEY_EX = 'rebecca-clase38-ejercicios';
+const EX_TOTAL = 20;
+let exState = {};
+let exSaveTimer = null;
+
+async function loadExState(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(STORAGE_KEY_EX);
+    if (res && typeof res.value === 'string') exState = { ...exState, ...JSON.parse(res.value) };
+  }catch(e){ /* sin progreso guardado todavía */ }
+}
+function saveExStateDebounced(){
+  clearTimeout(exSaveTimer);
+  exSaveTimer = setTimeout(saveExState, 400);
+}
+async function saveExState(){
+  if (!window.storage) return;
+  try{ await window.storage.set(STORAGE_KEY_EX, JSON.stringify(exState)); }catch(e){ /* fallo silencioso */ }
+}
+function updateExProgress(){
+  const done = Object.values(exState).filter(Boolean).length;
+  document.getElementById('ex-progress-text').textContent = `${done} / ${EX_TOTAL} ejercicios completados`;
+}
+function markExDone(key){
+  exState[key] = true;
+  updateExProgress();
+  saveExStateDebounced();
+}
+
+/* Tipo "elegir opción" (chips): data-ex="exN" en .ex-choice-row */
+document.querySelectorAll('.ex-choice-row[data-ex]').forEach(row => {
+  const key = row.dataset.ex;
+  const correct = row.dataset.correct;
+  row.querySelectorAll('.ex-choice').forEach(chip => {
+    chip.addEventListener('click', () => {
+      row.querySelectorAll('.ex-choice').forEach(c => c.classList.remove('selected','correct','incorrect'));
+      if (chip.dataset.val === correct){
+        chip.classList.add('correct');
+        markExDone(key);
+      } else {
+        chip.classList.add('incorrect');
+      }
+    });
+  });
+});
+
+/* Tipo "rellenar hueco" (texto libre): data-ex="exN" en .ex-fill-input, feedback en #exN-feedback */
+document.querySelectorAll('.ex-fill-input[data-ex]').forEach(input => {
+  const key = input.dataset.ex;
+  const feedback = document.getElementById(`${key}-feedback`);
+  const correct = input.dataset.correct.toLowerCase();
+  input.addEventListener('input', () => {
+    const val = input.value.trim().toLowerCase();
+    if (val.length === 0){
+      if(feedback) feedback.textContent = '';
+      input.style.borderColor = '';
+      return;
+    }
+    if (val === correct){
+      if(feedback) feedback.textContent = `✓ ¡Correcto! "${input.dataset.correct}" es la forma que buscamos.`;
+      input.style.borderColor = 'var(--b2)';
+      markExDone(key);
+    } else {
+      if(feedback) feedback.textContent = 'Sigue intentando — repasa la letra de la canción.';
+      input.style.borderColor = '#C4432E';
+    }
+  });
+});
+
+/* Tipo "clasificar frases" (click to sort): pool con id="exN-pool", columnas exN-pres/pas/fut */
+document.querySelectorAll('[id$="-pool"].ex-sort-pool').forEach(pool => {
+  const key = pool.id.replace('-pool', '');
+  const targets = {
+    pres: document.getElementById(`${key}-pres`),
+    pas: document.getElementById(`${key}-pas`),
+    fut: document.getElementById(`${key}-fut`)
+  };
+  let placedCount = 0;
+  const totalCards = pool.querySelectorAll('.ex-sort-card').length;
+  pool.querySelectorAll('.ex-sort-card').forEach(card => {
+    card.addEventListener('click', () => {
+      if (card.classList.contains('placed')) return;
+      const tag = card.dataset.tag;
+      const target = targets[tag];
+      card.classList.add('placed');
+      const clone = card.cloneNode(true);
+      clone.classList.remove('placed');
+      clone.style.cursor = 'default';
+      target.appendChild(clone);
+      placedCount++;
+      if (placedCount === totalCards){
+        markExDone(key);
+      }
+    });
+  });
+});
+
+/* Tipo "opción múltiple con feedback": id="exN-options", feedback en #exN-feedback */
+document.querySelectorAll('[id$="-options"].ex-mc-options').forEach(optionsEl => {
+  const key = optionsEl.id.replace('-options', '');
+  const correct = optionsEl.dataset.correct;
+  const feedback = document.getElementById(`${key}-feedback`);
+  optionsEl.querySelectorAll('.ex-mc-option').forEach(opt => {
+    opt.addEventListener('click', () => {
+      optionsEl.querySelectorAll('.ex-mc-option').forEach(o => o.classList.remove('correct','incorrect'));
+      if (opt.dataset.val === correct){
+        opt.classList.add('correct');
+        if(feedback) feedback.textContent = '✓ Exacto — bien razonado.';
+        markExDone(key);
+      } else {
+        opt.classList.add('incorrect');
+        if(feedback) feedback.textContent = 'Casi — vuelve a leer la línea de la canción y piensa en el tipo de acción.';
+      }
+    });
+  });
+});
+
+/* Tipo "mini-redacción" con contador de palabras: textarea id="exN-text", contador #exN-count */
+document.querySelectorAll('.ex-writing textarea[id$="-text"]').forEach(textarea => {
+  const key = textarea.id.replace('-text', '');
+  const count = document.getElementById(`${key}-count`);
+  const storageKey = `rebecca-clase38-${key}-texto`;
+  async function loadDraft(){
+    if (!window.storage) return;
+    try{
+      const res = await window.storage.get(storageKey);
+      if (res && typeof res.value === 'string') textarea.value = res.value;
+    }catch(e){ /* sin borrador guardado */ }
+    updateCount();
+  }
+  function updateCount(){
+    const words = textarea.value.trim().split(/\s+/).filter(Boolean);
+    if(count) count.textContent = `${words.length} palabra${words.length === 1 ? '' : 's'}`;
+    if (words.length >= 8) markExDone(key);
+  }
+  let saveTimer = null;
+  textarea.addEventListener('input', () => {
+    updateCount();
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(() => {
+      if (window.storage) window.storage.set(storageKey, textarea.value).catch(()=>{});
+    }, 500);
+  });
+  loadDraft();
+});
+
+(async function initExercises(){
+  await loadExState();
+  updateExProgress();
+})();
+
+
+/* ---------- LANGUAGE TOGGLE ---------- */
+const LANG_KEY = 'escolar-idioma-modo';
+const langToggle = document.getElementById('lang-toggle');
+const langSpans = langToggle.querySelectorAll('span');
+
+function setLangMode(mode){
+  document.documentElement.setAttribute('data-lang', mode);
+  langSpans.forEach(s => s.classList.toggle('active', s.dataset.mode === mode));
+  try{ localStorage.setItem(LANG_KEY, mode); }catch(e){ /* almacenamiento no disponible */ }
+}
+
+langToggle.addEventListener('click', () => {
+  const current = document.documentElement.getAttribute('data-lang') || 'es';
+  setLangMode(current === 'es' ? 'bilingual' : 'es');
+});
+langToggle.addEventListener('keydown', (e) => {
+  if(e.key === 'Enter' || e.key === ' '){
+    e.preventDefault();
+    langToggle.click();
+  }
+});
+
+(function initLang(){
+  let saved = 'es';
+  try{ saved = localStorage.getItem(LANG_KEY) || 'es'; }catch(e){ /* almacenamiento no disponible */ }
+  setLangMode(saved);
+})();
+</script>
+
+</body>
+</html>
