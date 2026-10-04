@@ -1,0 +1,2918 @@
+<!DOCTYPE html><html lang="es" data-accent="terracota" data-lang="bilingual"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#FBF8F1" id="meta-theme-color">
+<title>Noah · Clase 17 · ¿Dónde está…? (hay, estar y direcciones)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500;1,9..144,600&amp;family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&amp;family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,500;0,7..72,600;0,7..72,700;1,7..72,400;1,7..72,500&amp;family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&amp;display=swap" rel="stylesheet">
+
+<style>
+/* ==========================================================================
+   Sistema de diseño de clases · tokens semánticos, modo oscuro, paletas dinámicas,
+   accesibilidad (WCAG 2.1 AA), objetivos táctiles de 44 px, tipografía de lectura
+   y patrones didácticos interactivos.
+   ========================================================================== */
+
+:root {
+  /* 1. Lienzo y Superficies Editoriales Cálidas */
+  --esc-paper:         #FBF8F1;
+  --esc-surface:       #FFFFFF;
+  --esc-surface-subtle:#F3ECDA;
+  --esc-surface-alt:   #EAE1CE;
+  --esc-surface-inset: #E4D9C3;
+  --esc-backdrop-blur: rgba(251, 248, 241, 0.92);
+
+  /* 2. Jerarquía de Tinta Neutra */
+  --esc-ink:           #21261E;
+  --esc-ink-soft:      #4E564A;
+  --esc-ink-muted:     #586152;
+  --esc-ink-faint:     #A5ACA0;
+  --esc-ink-inverse:   #FFFFFF;
+
+  /* 3. Estructura y Separadores */
+  --esc-line:          rgba(33, 38, 30, 0.10);
+  --esc-line-strong:   rgba(33, 38, 30, 0.22);
+  --esc-line-dashed:   rgba(33, 38, 30, 0.18);
+
+  /* 4. Feedback Semántico Inmutable (Universal) */
+  --esc-ok:            #217A50;
+  --esc-ok-soft:       #E7F5EE;
+  --esc-ok-border:     #B5DFCA;
+
+  --esc-err:           #B93826;
+  --esc-err-soft:      #FCEBE8;
+  --esc-err-border:    #F5C2BC;
+
+  --esc-warn:          #8A5A0A;
+  --esc-warn-soft:     #FEF5E6;
+  --esc-warn-border:   #F5DEB4;
+
+  --esc-info:          #1F5BBF;
+  --esc-info-soft:     #EBF2FD;
+  --esc-info-border:   #BFD5FA;
+
+  /* 5. Acento Modular (Sobrescrito por [data-accent]) */
+  --esc-accent:        #AD4A28; /* Terracota predeterminado */
+  --esc-accent-soft:   #FCEEE8;
+  --esc-accent-border: #F3C9BA;
+  --esc-accent-hover:  #943B1D;
+
+  /* 6. Roles Pedagógicos Especiales */
+  --esc-ped-present:   #2563EB;
+  --esc-ped-present-bg:#EFF6FF;
+  --esc-ped-past:      #8E2A7E; /* ciruela: ya no coincide con --esc-err */
+  --esc-ped-past-bg:   #F9EBF6;
+  --esc-ped-imperfect: #168052;
+  --esc-ped-imperfect-bg:#E9F7F0;
+  --esc-ped-future:    #7C3AED;
+  --esc-ped-future-bg: #F5F3FF;
+  --esc-ped-tech:      #6D28D9;
+  --esc-ped-tech-bg:   #F3EDFC;
+  --esc-ped-tech-border:#D8C7F5;
+
+  /* 7. Avisos Semánticos (importados de MAPA v2) — tinta / marcador / fondo vidriado */
+  --esc-aviso-ok-tinta:    #1B4513;   /* verde bosque, consolidación normativa */
+  --esc-aviso-ok-borde:    #488C38;
+  --esc-aviso-ok-fondo:    rgba(216, 240, 186, 0.65);
+  --esc-aviso-ok-contorno: rgba(72, 140, 56, 0.30);
+
+  --esc-aviso-ojo-tinta:    #642300;  /* tinta quemada, falsos amigos / interferencias */
+  --esc-aviso-ojo-borde:    #D86226;
+  --esc-aviso-ojo-fondo:    rgba(253, 228, 212, 0.65);
+  --esc-aviso-ojo-contorno: rgba(216, 98, 38, 0.30);
+
+  --esc-aviso-dato-tinta:    #0E5A6F; /* cian costero, notas culturales y de registro */
+  --esc-aviso-dato-borde:    #169CB9;
+  --esc-aviso-dato-fondo:    rgba(222, 246, 252, 0.65);
+  --esc-aviso-dato-contorno: rgba(22, 156, 185, 0.30);
+
+  /* 8. Tipografía */
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-body:    'IBM Plex Sans', system-ui, -apple-system, sans-serif;
+  --font-read:    'Literata', Charter, 'Iowan Old Style', Georgia, serif;   /* cuerpo de lectura (estilo ebook) */
+  --font-mono:    'IBM Plex Sans', system-ui, -apple-system, sans-serif;     /* etiquetas: ahora sans con espaciado */
+  --font-code:    'IBM Plex Mono', ui-monospace, monospace;                  /* solo huecos ___ */
+
+  /* 9. Geometría y Elevaciones */
+  --r-xs: 4px;
+  --r-sm: 8px;
+  --r-md: 14px;
+  --r-lg: 20px;
+  --r-pill: 9999px;
+  --r-btn: 11px; /* squircle sutil para botones */
+
+  --shadow-sm: 0 1px 3px rgba(33,38,30,0.05), 0 1px 2px rgba(33,38,30,0.03);
+  --shadow-card: 0 4px 18px rgba(33,38,30,0.06), 0 1px 3px rgba(33,38,30,0.03);
+  --shadow-hover: 0 6px 24px rgba(33,38,30,0.09), 0 2px 6px rgba(33,38,30,0.04);
+  --spring: cubic-bezier(.34, 1.56, .64, 1);
+
+  /* Superficies que deben mantener contraste propio en ambos temas */
+  --esc-timer-bg: #21261E;
+  --esc-sort-col-bg: rgba(255, 255, 255, 0.55);
+}
+
+/* PALETAS DE ACENTO DINÁMICO */
+[data-accent="terracota"]{ --esc-accent: #AD4A28; --esc-accent-soft: #FCEEE8; --esc-accent-border: #F3C9BA; --esc-accent-hover: #943B1D; }
+[data-accent="cobalto"]  { --esc-accent: #2563EB; --esc-accent-soft: #EFF6FF; --esc-accent-border: #BFDBFE; --esc-accent-hover: #1D4ED8; }
+[data-accent="romero"]   { --esc-accent: #217A50; --esc-accent-soft: #E7F5EE; --esc-accent-border: #B5DFCA; --esc-accent-hover: #175C3B; }
+[data-accent="petroleo"] { --esc-accent: #1E6B77; --esc-accent-soft: #E8F4F6; --esc-accent-border: #BCE0E5; --esc-accent-hover: #144E57; }
+[data-accent="amatista"] { --esc-accent: #7C3AED; --esc-accent-soft: #F5F3FF; --esc-accent-border: #DDD6FE; --esc-accent-hover: #5B21B6; }
+[data-accent="ambar"]    { --esc-accent: #8F5C0C; --esc-accent-soft: #FEF5E6; --esc-accent-border: #F5DEB4; --esc-accent-hover: #8D5C10; }
+[data-accent="frambuesa"]{ --esc-accent: #C7334F; --esc-accent-soft: #FDEEF1; --esc-accent-border: #F7C1CC; --esc-accent-hover: #9C1F37; }
+[data-accent="rio"]      { --esc-accent: #2F65B9; --esc-accent-soft: #D8E6FC; --esc-accent-border: #7FA8E8; --esc-accent-hover: #234A88; }
+
+/* MODO OSCURO COHERENTE (Carbón y Pergamino Nocturno) */
+html[data-theme="oscuro"] {
+  --esc-paper:         #000000;
+  --esc-surface:       #1C1C1E;
+  --esc-surface-subtle:#2C2C2E;
+  --esc-surface-alt:   #3A3A3C;
+  --esc-surface-inset: #121214;
+  --esc-backdrop-blur: rgba(0, 0, 0, 0.72);
+
+  --esc-ink:           #F2F2F7;
+  --esc-ink-soft:      #C7C7CC;
+  --esc-ink-muted:     #A9A9B1;
+  --esc-ink-faint:     #636366;
+  --esc-line:          rgba(255, 255, 255, 0.10);
+  --esc-line-strong:   rgba(255, 255, 255, 0.22);
+  --esc-line-dashed:   rgba(255, 255, 255, 0.16);
+
+  --esc-ok:            #4FBF86;
+  --esc-ok-soft:       #142F22;
+  --esc-ok-border:     #225E3E;
+
+  --esc-err:           #F56565;
+  --esc-err-soft:      #361616;
+  --esc-err-border:    #742A2A;
+
+  --esc-warn:          #D69E2E;
+  --esc-warn-soft:     #342812;
+  --esc-warn-border:   #744210;
+
+  --esc-info:          #4299E1;
+  --esc-info-soft:     #12273D;
+  --esc-info-border:   #2B6CB0;
+
+  --esc-accent-soft:   rgba(255, 255, 255, 0.08);
+  --esc-accent-border: rgba(255, 255, 255, 0.20);
+  --esc-accent-hover:  #FF7E54;
+  --shadow-card:       0 4px 18px rgba(0,0,0,0.35);
+
+  /* Sección 13 y 9: fondos hundidos y tintas claras */
+  --esc-timer-bg:      #0C0E0B;
+  --esc-sort-col-bg:   rgba(0, 0, 0, 0.28);
+  --esc-ped-imperfect: #5FD79B;
+  --esc-ped-past:      #F2A6E6;
+  --esc-ped-past-bg:   #3A1634;
+
+  /* Avisos en nocturno: fondos vidriados oscuros y tintas claras */
+  --esc-aviso-ok-tinta:    #9BE39A;
+  --esc-aviso-ok-borde:    #4FB05A;
+  --esc-aviso-ok-fondo:    rgba(72, 140, 56, 0.18);
+  --esc-aviso-ok-contorno: rgba(79, 176, 90, 0.35);
+
+  --esc-aviso-ojo-tinta:    #FFB791;
+  --esc-aviso-ojo-borde:    #E8773A;
+  --esc-aviso-ojo-fondo:    rgba(216, 98, 38, 0.18);
+  --esc-aviso-ojo-contorno: rgba(232, 119, 58, 0.35);
+
+  --esc-aviso-dato-tinta:    #7DD8EE;
+  --esc-aviso-dato-borde:    #22B3D1;
+  --esc-aviso-dato-fondo:    rgba(22, 156, 185, 0.18);
+  --esc-aviso-dato-contorno: rgba(34, 179, 209, 0.35);
+}
+
+/* Squircle real (corner-shape) donde el navegador lo soporte */
+@supports (corner-shape: squircle) {
+  .esc-btn-toggle, .esc-btn-primary, .esc-btn-ghost, .esc-opt-btn, .esc-roleplay-tab-btn,
+  .esc-menu-btn, .esc-scale-btn, .esc-dock-top, .esc-lang-pill, .esc-dock, .esc-accent-char-btn { corner-shape: squircle; }
+}
+
+/* RESET GENERAL */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background-color: var(--esc-paper);
+  background-image: radial-gradient(circle at 1px 1px, var(--esc-line) 1.2px, transparent 0);
+  background-size: 24px 24px;
+  color: var(--esc-ink);
+  font-family: var(--font-body);
+  font-size: 15.5px;
+  line-height: 1.62;
+  -webkit-font-smoothing: antialiased;
+  padding-bottom: 120px;
+}
+::selection { background: var(--esc-accent-soft); color: var(--esc-accent); }
+
+/* SISTEMA BILINGÜE MULTI-IDIOMA (.gloss-text) */
+.gloss-text {
+  display: block;
+  font-family: var(--font-body);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 0.85em;
+  color: var(--esc-ink-muted);
+  margin-top: 3px;
+  line-height: 1.45;
+  transition: all .2s ease;
+}
+.gloss-text.inline { display: inline; margin-left: 6px; }
+html[data-lang="es-only"] .gloss-text { display: none !important; }
+.esc-block-head h2 .gloss-text { font-family: var(--font-body); font-size: 12.5px; letter-spacing: 0; margin-top: 2px; }
+.esc-contrast-col h4 .gloss-text, table.esc-table .gloss-text { font-size: 12px; font-weight: 400; }
+
+/* Dock flotante: glosas + volver arriba */
+.esc-dock { position: fixed; right: 22px; bottom: 22px; z-index: 120; display: flex; align-items: center; gap: 12px;
+  background: var(--esc-surface); border: 1px solid var(--esc-line-strong); border-radius: 17px;
+  box-shadow: 0 14px 34px -4px rgba(33,38,30,.18); padding: 6px;
+  -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); }
+.esc-lang-pill { display: inline-flex; align-items: center; gap: 10px; background: var(--esc-surface); border: 1px solid var(--esc-line); border-radius: var(--r-btn); padding: 3px 8px 3px 12px; }
+.esc-dock-label { font-family: var(--font-mono); font-size: 12.5px; font-weight: 600; color: var(--esc-ink); }
+.esc-switch { position: relative; display: inline-block; width: 38px; height: 22px; }
+.esc-switch input { position: absolute; opacity: 0; width: 0; height: 0; }
+.esc-switch span { position: absolute; inset: 0; border-radius: 9999px; background: var(--esc-line-strong); cursor: pointer; transition: background .25s ease; }
+.esc-switch span::after { content: ""; position: absolute; top: 3px; left: 3px; width: 16px; height: 16px; border-radius: 50%; background: #fff; transition: transform .25s ease; }
+.esc-switch input:checked + span { background: var(--esc-accent); }
+.esc-switch input:checked + span::after { transform: translateX(16px); }
+.esc-switch input:focus-visible + span { outline: 3px solid var(--esc-accent); outline-offset: 2px; }
+.esc-dock-top { width: 28px; height: 28px; border-radius: var(--r-btn); border: 1px solid var(--esc-line); background: var(--esc-surface-subtle); color: var(--esc-ink-soft); cursor: pointer; font-size: 12px; }
+
+/* ╔══════════════════════════════════════════════════════════════════╗
+   ║  BARRA SUPERIOR GLOBAL PERSISTENTE (HUD STICKY)                 ║
+   ╚══════════════════════════════════════════════════════════════════╝ */
+.esc-sticky-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--esc-backdrop-blur);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--esc-line-strong);
+  padding: 10px 24px;
+}
+.esc-header-inner {
+  max-width: 860px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: nowrap;
+}
+.esc-hud-controls { flex: none; }
+.esc-hud-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.esc-hud-badge {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #fff;
+  background: var(--esc-accent);
+  padding: 4px 10px;
+  border-radius: var(--r-pill);
+}
+.esc-hud-timer {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--esc-ink-soft);
+  background: var(--esc-surface);
+  border: 1px solid var(--esc-line);
+  padding: 4px 12px;
+  border-radius: var(--r-pill);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.esc-timer-pulse {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--esc-ok);
+  animation: escDotPulse 2s 3 ease-in-out; /* finito: 6 s máx. */
+}
+@keyframes escDotPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.35; transform: scale(0.85); }
+}
+
+.esc-hud-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Selector de Paleta / Acento */
+.esc-accent-picker {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: var(--esc-surface);
+  padding: 3px 7px;
+  border-radius: var(--r-pill);
+  border: 1px solid var(--esc-line);
+}
+.esc-color-dot {
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  border: 1.5px solid transparent;
+  cursor: pointer;
+  transition: transform .15s ease;
+}
+.esc-color-dot:hover { transform: scale(1.2); }
+.esc-color-dot.active { border-color: var(--esc-ink); }
+
+/* Botones de Control Pill */
+.esc-btn-toggle {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--esc-ink-soft);
+  background: var(--esc-surface);
+  border: 1px solid var(--esc-line);
+  padding: 5px 12px;
+  border-radius: var(--r-btn);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all .15s ease;
+}
+.esc-btn-toggle:hover { border-color: var(--esc-ink-muted); color: var(--esc-ink); }
+.esc-btn-toggle.active {
+  background: var(--esc-accent);
+  border-color: var(--esc-accent);
+  color: #fff;
+}
+
+/* Separación entre las pildoras y el Itinerario de la clase */
+.m-ruta-card { margin-top: 34px; }
+
+/* Menú hamburguesa de secciones */
+.esc-menu { position: relative; flex: none; }
+.esc-menu-btn {
+  width: 34px; height: 30px;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: var(--esc-surface);
+  border: 1px solid var(--esc-line);
+  border-radius: var(--r-btn);
+  cursor: pointer;
+  transition: border-color .15s ease, background .15s ease;
+}
+.esc-menu-btn:hover { border-color: var(--esc-ink-muted); }
+.esc-menu-btn[aria-expanded="true"] { background: var(--esc-accent); border-color: var(--esc-accent); }
+.esc-menu-btn:focus-visible { outline: 3px solid var(--esc-accent); outline-offset: 2px; }
+.esc-burger { display: flex; flex-direction: column; gap: 3.5px; }
+.esc-burger i { display: block; width: 14px; height: 1.8px; border-radius: 2px; background: var(--esc-ink); transition: background .15s ease; }
+.esc-menu-btn[aria-expanded="true"] .esc-burger i { background: #fff; }
+.esc-menu-panel {
+  position: absolute;
+  top: calc(100% + 12px);
+  left: 0;
+  width: min(360px, calc(100vw - 32px));
+  max-height: 70vh;
+  overflow-y: auto;
+  background: var(--esc-surface);
+  border: 1px solid var(--esc-line-strong);
+  border-radius: var(--r-md);
+  box-shadow: var(--shadow-hover);
+  padding: 8px;
+  z-index: 130;
+}
+.esc-menu-panel[hidden] { display: none; }
+.esc-menu-link {
+  display: flex; align-items: center; gap: 12px;
+  padding: 8px 10px;
+  border-radius: var(--r-sm);
+  color: var(--esc-ink);
+  text-decoration: none;
+  font-size: 14px;
+  line-height: 1.3;
+}
+.esc-menu-link:hover, .esc-menu-link:focus-visible { background: var(--esc-surface-subtle); outline: none; }
+.esc-menu-link .n {
+  flex: none;
+  width: 26px; height: 26px;
+  border-radius: 50%;
+  background: var(--esc-accent-soft);
+  color: var(--esc-accent);
+  font-family: var(--font-mono);
+  font-size: 12px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+}
+
+/* Barra de progreso global fija */
+.esc-meter-bar {
+  flex: 1 1 auto;
+  min-width: 60px;
+  margin: 0;
+  height: 4px;
+  background: var(--esc-surface-inset);
+  border-radius: var(--r-pill);
+  overflow: hidden;
+}
+.esc-meter-fill {
+  height: 100%;
+  width: 0%;
+  background: var(--esc-accent);
+  transition: width .2s linear;
+}
+
+/* ╔══════════════════════════════════════════════════════════════════╗
+   ║  CONTENEDOR EDITORIAL CENTRAL                                    ║
+   ╚══════════════════════════════════════════════════════════════════╝ */
+.esc-container {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 36px 24px 0;
+}
+
+/* ---------- FOLIO SUPERIOR Y HERO ---------- */
+.esc-folio {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  color: var(--esc-ink-muted);
+  border-bottom: 1px solid var(--esc-line);
+  padding-bottom: 10px;
+  margin-bottom: 28px;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+.esc-folio strong { color: var(--esc-accent); font-weight: 600; }
+
+.esc-hero {
+  margin-bottom: 38px;
+}
+.esc-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--esc-accent);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 10px;
+}
+.esc-eyebrow .dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--esc-accent);
+}
+.esc-hero-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+}
+h1.esc-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(32px, 5.8vw, 48px);
+  line-height: 1.08;
+  letter-spacing: -.02em;
+  margin: 0 0 14px;
+}
+h1.esc-title em {
+  font-style: italic;
+  color: var(--esc-accent);
+}
+.esc-level-badge {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(48px, 8.5vw, 76px);
+  line-height: 0.85;
+  color: var(--esc-accent);
+  letter-spacing: -.03em;
+  flex: none;
+  user-select: none;
+}
+.esc-lede {
+  font-size: 16px;
+  color: var(--esc-ink-soft);
+  max-width: 66ch;
+  margin: 0;
+  line-height: 1.65;
+}
+
+.esc-meta-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+  margin-top: 24px;
+  padding: 14px 18px;
+  background: var(--esc-surface);
+  border: 1px solid var(--esc-line);
+  border-radius: var(--r-md);
+  box-shadow: var(--shadow-sm);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--esc-ink-muted);
+  text-transform: uppercase;
+}
+.esc-meta-grid strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 14px;
+  color: var(--esc-ink);
+  text-transform: none;
+  font-weight: 600;
+  margin-top: 2px;
+}
+
+/* HISTORIAL DE COMPETENCIAS ACUMULADAS (.esc-chips-strip) */
+.esc-chips-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 14px;
+}
+.esc-chip-pill {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--esc-ink-soft);
+  background: var(--esc-surface-subtle);
+  border: 1px solid var(--esc-line);
+  padding: 3px 10px;
+  border-radius: var(--r-pill);
+}
+
+/* ╔══════════════════════════════════════════════════════════════════╗
+   ║  BLOQUES Y SECCIONES DIDÁCTICAS                                 ║
+   ╚══════════════════════════════════════════════════════════════════╝ */
+section.esc-block {
+  margin-bottom: 48px;
+  scroll-margin-top: 80px;
+}
+
+.esc-block-head {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.esc-block-num {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: var(--esc-accent);
+  color: #fff;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+}
+.esc-block-head h2 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-style: italic;
+  font-size: 23px;
+  letter-spacing: -.01em;
+  margin: 0;
+  color: var(--esc-ink);
+}
+.esc-time-tag {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--esc-ink-muted);
+  background: var(--esc-surface-subtle);
+  border: 1px solid var(--esc-line);
+  padding: 3px 10px;
+  border-radius: var(--r-pill);
+  flex: none;
+}
+
+.esc-panel {
+  background: var(--esc-surface);
+  border: 1px solid var(--esc-line);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-sm);
+  padding: 24px 26px;
+}
+.esc-panel-intro {
+  font-size: 14.8px;
+  color: var(--esc-ink-soft);
+  margin: 0 0 16px;
+}
+
+/* ---------- 1. FRASE ANCLA HERO (MESH SUAVE) ---------- */
+.esc-phrase-card {
+  padding: 30px 32px;
+  background: var(--esc-surface);
+  border: 1px solid var(--esc-line);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-sm);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  margin-bottom: 40px;
+}
+.esc-phrase-card::before {
+  content: "";
+  position: absolute;
+  inset: -15%;
+  background: radial-gradient(ellipse 65% 55% at 50% 40%, var(--esc-accent-soft) 0%, transparent 75%);
+  z-index: -1;
+}
+.esc-phrase-kicker {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  color: var(--esc-accent);
+  font-weight: 600;
+  margin: 0 0 10px;
+}
+.esc-phrase-main {
+  font-family: var(--font-display);
+  font-size: clamp(21px, 3.4vw, 28px);
+  font-weight: 600;
+  line-height: 1.35;
+  margin: 0 0 10px;
+}
+.esc-phrase-main em {
+  font-style: italic;
+  color: var(--esc-accent);
+}
+.esc-phrase-sub {
+  font-size: 14px;
+  color: var(--esc-ink-soft);
+  max-width: 58ch;
+  margin: 0 auto;
+}
+
+/* ---------- 2. AVISOS SEMÁNTICOS CON MARCADOR LATERAL PULIDO (.m-aviso) ----------
+   Importado de MAPA v2. Tríada: --ok (consolidación normativa), --ojo (falsos amigos
+   e interferencias), --dato (nota cultural / registro formal).
+   Fondo vidriado translúcido + contorno sutil + barra lateral con brillo. */
+.m-aviso {
+  position: relative;
+  display: block;
+  margin: 14px 0;
+  padding: 0.95rem 1.25rem 0.95rem 1.65rem;
+  border-radius: 1.125rem;
+  border: 1px solid var(--esc-line);
+  background: var(--esc-surface);
+  color: var(--esc-ink-soft);
+  font-size: 14.2px;
+  line-height: 1.55;
+  box-shadow: 0 2px 10px rgba(33, 38, 30, 0.03), 0 1px 2px rgba(33, 38, 30, 0.04);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+.m-aviso::before {
+  content: "";
+  position: absolute;
+  left: 0.65rem;
+  top: 0.85rem;
+  bottom: 0.85rem;
+  width: 4.5px;
+  border-radius: var(--r-pill);
+  background: var(--esc-line-strong);
+}
+.m-aviso strong {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-right: 0.45rem;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--esc-ink);
+}
+.m-aviso em { color: var(--esc-ink); }
+
+.m-aviso--ok {
+  background: var(--esc-aviso-ok-fondo);
+  border-color: var(--esc-aviso-ok-contorno);
+}
+.m-aviso--ok::before {
+  background: var(--esc-aviso-ok-borde);
+  box-shadow: 0 0 8px var(--esc-aviso-ok-contorno);
+}
+.m-aviso--ok strong { color: var(--esc-aviso-ok-tinta); }
+
+.m-aviso--ojo {
+  background: var(--esc-aviso-ojo-fondo);
+  border-color: var(--esc-aviso-ojo-contorno);
+}
+.m-aviso--ojo::before {
+  background: var(--esc-aviso-ojo-borde);
+  box-shadow: 0 0 8px var(--esc-aviso-ojo-contorno);
+}
+.m-aviso--ojo strong { color: var(--esc-aviso-ojo-tinta); }
+
+.m-aviso--dato {
+  background: var(--esc-aviso-dato-fondo);
+  border-color: var(--esc-aviso-dato-contorno);
+}
+.m-aviso--dato::before {
+  background: var(--esc-aviso-dato-borde);
+  box-shadow: 0 0 8px var(--esc-aviso-dato-contorno);
+}
+.m-aviso--dato strong { color: var(--esc-aviso-dato-tinta); }
+
+/* ---------- Sección 1 · A tener en cuenta (composición de avisos) ---------- */
+.m-notas { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.m-notas .m-aviso { margin: 0; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.m-notas .m-aviso strong { display: flex; margin: 0; font-size: 1rem; }
+.m-nota-ancha { grid-column: 1 / -1; }
+.m-nota-texto { margin: 0; font-size: 14.2px; color: var(--esc-ink-soft); }
+.m-notas .gloss-text { margin: 0; }
+
+.m-formula { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 8px; }
+.m-formula-haber { display: inline-flex; flex-wrap: wrap; gap: 5px; }
+.m-formula-haber span {
+  font-family: var(--font-display); font-size: 15px; font-weight: 700; line-height: 1;
+  padding: 5px 10px; border-radius: var(--r-pill);
+  background: var(--esc-surface); color: var(--esc-aviso-ok-tinta);
+  border: 1px solid var(--esc-aviso-ok-borde);
+}
+.m-formula-mas { font-family: var(--font-display); font-size: 17px; font-weight: 700; color: var(--esc-aviso-ok-tinta); }
+.m-formula-part {
+  font-family: var(--font-display); font-size: 15px; font-style: italic; line-height: 1;
+  padding: 5px 12px; border-radius: var(--r-pill);
+  border: 1.5px dashed var(--esc-aviso-ok-borde); color: var(--esc-aviso-ok-tinta);
+}
+.m-par { display: flex; flex-wrap: wrap; gap: 8px; }
+.m-par span {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 6px 14px; border-radius: var(--r-pill);
+  font-family: var(--font-display); font-size: 17px;
+  background: var(--esc-surface); border: 1px solid var(--esc-line);
+}
+.m-par b { font-family: var(--font-body); font-size: 14px; }
+.m-par-ok b { color: var(--esc-ok); }
+.m-par-no { color: var(--esc-ink-muted); }
+.m-par-no b { color: var(--esc-err); }
+.m-par-no { text-decoration: line-through; text-decoration-color: var(--esc-err); }
+
+.m-marcas { display: flex; flex-wrap: wrap; gap: 6px; }
+.m-marcas span {
+  font-size: 13.5px; font-weight: 600; padding: 5px 12px; border-radius: var(--r-pill);
+  background: var(--esc-surface); color: var(--esc-aviso-ok-tinta);
+  border: 1px solid var(--esc-aviso-ok-borde);
+}
+
+.m-contraste { display: flex; flex-direction: column; gap: 6px; }
+.m-contraste-fila {
+  display: flex; align-items: baseline; gap: 10px;
+  padding: 9px 14px; border-radius: var(--r-md);
+  background: var(--esc-surface); border: 1px solid var(--esc-line); font-size: 14.5px;
+}
+.m-contraste-no b { color: var(--esc-err); }
+.m-contraste-no span { color: var(--esc-ink-muted); }
+.m-contraste-ok b { color: var(--esc-ok); }
+.m-contraste-ok span { font-family: var(--font-display); font-size: 16.5px; color: var(--esc-ink); }
+
+.m-cita {
+  margin: 0; padding: 10px 16px; border-radius: var(--r-md);
+  background: var(--esc-surface); border: 1px solid var(--esc-line);
+  border-left: 4px solid var(--esc-aviso-dato-borde);
+  font-family: var(--font-display); font-size: 18px; color: var(--esc-ink);
+}
+@media (max-width: 640px) {
+  .m-notas { grid-template-columns: 1fr; }
+}
+
+/* ---------- Cajas didácticas heredadas (note / warning / danger) ---------- */
+.esc-callout {
+  margin: 16px 0;
+  padding: 13px 16px 13px 18px;
+  border-radius: var(--r-md);
+  font-size: 13.8px;
+  line-height: 1.55;
+  border: 1px solid;
+  position: relative;
+}
+.esc-callout::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 12px; bottom: 12px;
+  width: 4px;
+  border-radius: var(--r-pill);
+}
+.esc-callout.note {
+  background: var(--esc-accent-soft);
+  border-color: var(--esc-accent-border);
+  color: var(--esc-ink-soft);
+}
+.esc-callout.note::before { background: var(--esc-accent); }
+.esc-callout.note strong { color: var(--esc-accent); }
+
+.esc-callout.warning {
+  background: var(--esc-warn-soft);
+  border-color: var(--esc-warn-border);
+  color: var(--esc-ink-soft);
+}
+.esc-callout.warning::before { background: var(--esc-warn); }
+.esc-callout.warning strong { color: var(--esc-warn); }
+
+.esc-callout.danger {
+  background: var(--esc-err-soft);
+  border-color: var(--esc-err-border);
+  color: var(--esc-ink-soft);
+}
+.esc-callout.danger::before { background: var(--esc-err); }
+.esc-callout.danger strong { color: var(--esc-err); }
+
+/* ---------- 3. TABLAS EDITORIALES Y CONJUGACIÓN ---------- */
+.esc-table-wrap {
+  overflow-x: auto;
+  margin: 12px 0;
+  border: 1px solid var(--esc-line);
+  border-radius: var(--r-md);
+  background: var(--esc-surface);
+}
+table.esc-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  min-width: 500px;
+}
+table.esc-table th {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--esc-ink-muted);
+  background: var(--esc-surface-subtle);
+  padding: 10px 12px;
+  border-bottom: 1.5px solid var(--esc-line-strong);
+  text-align: left;
+}
+table.esc-table td {
+  padding: 11px 12px;
+  border-bottom: 1px dashed var(--esc-line);
+  color: var(--esc-ink-soft);
+}
+table.esc-table tr:last-child td { border-bottom: none; }
+table.esc-table .col-highlight {
+  font-family: var(--font-display);
+  font-size: 16.5px;
+  font-weight: 600;
+  color: var(--esc-accent);
+}
+
+/* Grids de Contraste Bicolor */
+.esc-contrast-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-top: 16px;
+}
+@media (max-width: 600px) { .esc-contrast-grid { grid-template-columns: 1fr; } }
+.esc-contrast-col {
+  border-radius: var(--r-md);
+  padding: 16px 18px;
+  border: 1px solid var(--esc-line);
+  background: var(--esc-surface-subtle);
+}
+.esc-contrast-col.primary {
+  border-color: var(--esc-accent-border);
+  background: var(--esc-accent-soft);
+}
+.esc-contrast-col h4 {
+  font-family: var(--font-display);
+  font-size: 17px;
+  margin: 0 0 6px;
+  color: var(--esc-ink);
+}
+.esc-contrast-col.primary h4 { color: var(--esc-accent); }
+.esc-contrast-col ul {
+  margin: 8px 0 0;
+  padding-left: 20px;
+  font-size: 13.5px;
+  color: var(--esc-ink-soft);
+}
+.esc-contrast-col li { margin-bottom: 6px; }
+
+/* ---------- 4. FONÉTICA & AUDIO CON SPEECHSYNTHESIS ---------- */
+.esc-pron-card {
+  display: grid;
+  grid-template-columns: 130px 140px 1fr auto;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 12px;
+  border-bottom: 1px dashed var(--esc-line);
+  transition: background .15s ease;
+}
+.esc-pron-card:last-child { border-bottom: none; }
+.esc-pron-card:hover { background: var(--esc-surface-subtle); }
+.esc-pron-word {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 17px;
+}
+.esc-pron-ipa {
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  color: var(--esc-accent);
+}
+.esc-pron-tip {
+  font-size: 13px;
+  color: var(--esc-ink-soft);
+}
+@media (max-width: 640px) {
+  .esc-pron-card { grid-template-columns: 1fr auto; gap: 6px; }
+  .esc-pron-ipa, .esc-pron-tip { grid-column: 1 / 2; }
+}
+
+/* ---------- 5. TARJETAS DE VOCABULARIO FLIP INTERACTIVAS ---------- */
+.esc-vocab-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  gap: 12px;
+  margin: 14px 0;
+}
+.esc-tap-card {
+  position: relative;
+  min-height: 104px;
+  perspective: 900px;
+  cursor: pointer;
+  user-select: none;
+  border-radius: var(--r-md);
+}
+.esc-tap-inner {
+  position: absolute; inset: 0;
+  transform-style: preserve-3d;
+  transition: transform .7s var(--ios-spring, cubic-bezier(.32, 1.45, .5, 1));
+}
+.esc-tap-card.flipped .esc-tap-inner { transform: rotateY(180deg); }
+.esc-tap-front, .esc-tap-back {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 14px 16px;
+  border: 1px solid var(--esc-line);
+  border-radius: var(--r-md);
+  box-shadow: var(--shadow-sm);
+  -webkit-backface-visibility: hidden; backface-visibility: hidden;
+}
+.esc-tap-front {
+  background: var(--esc-surface);
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--esc-ink);
+}
+.esc-tap-back {
+  transform: rotateY(180deg);
+  background: var(--esc-accent-soft);
+  border-color: var(--esc-accent-border);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--esc-ink-soft);
+  line-height: 1.4;
+}
+
+/* ---------- 6. TEST DE OPCIÓN MÚLTIPLE CON SCORE ---------- */
+.esc-quiz-item {
+  padding: 14px 0;
+  border-bottom: 1px dashed var(--esc-line);
+}
+.esc-quiz-item:last-of-type { border-bottom: none; }
+.esc-quiz-sentence {
+  font-size: 15px;
+  color: var(--esc-ink);
+  margin-bottom: 8px;
+}
+.esc-quiz-sentence .gap {
+  font-family: var(--font-code);
+  color: var(--esc-accent);
+  font-weight: 600;
+  background: var(--esc-accent-soft);
+  padding: 2px 6px;
+  border-radius: var(--r-xs);
+}
+.esc-opt-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.esc-opt-btn {
+  font-family: var(--font-body);
+  font-size: 13.5px;
+  background: var(--esc-surface);
+  border: 1.5px solid var(--esc-line-strong);
+  color: var(--esc-ink);
+  padding: 6px 16px;
+  border-radius: var(--r-btn);
+  cursor: pointer;
+  transition: all .14s ease;
+}
+.esc-opt-btn:hover:not(:disabled) { border-color: var(--esc-ink-muted); }
+.esc-opt-btn.picked {
+  background: var(--esc-accent-soft);
+  border-color: var(--esc-accent);
+  color: var(--esc-accent);
+  font-weight: 600;
+}
+.esc-opt-btn.correct {
+  background: var(--esc-ok-soft) !important;
+  border-color: var(--esc-ok) !important;
+  color: var(--esc-ok) !important;
+  font-weight: 600;
+}
+.esc-opt-btn.wrong {
+  background: var(--esc-err-soft) !important;
+  border-color: var(--esc-err) !important;
+  color: var(--esc-err) !important;
+  text-decoration: line-through;
+}
+
+/* ---------- 7. RELLENAR HUECOS CON BARRA DE TILDES VIRTUALES ---------- */
+.esc-cloze-card {
+  background: var(--esc-surface-subtle);
+  border: 1px solid var(--esc-line);
+  border-radius: var(--r-md);
+  padding: 18px 20px;
+  margin-bottom: 12px;
+}
+.esc-cloze-input {
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--esc-ink);
+  background: var(--esc-surface);
+  border: 1.5px solid var(--esc-line-strong);
+  border-radius: var(--r-sm);
+  padding: 5px 10px;
+  width: 140px;
+  text-align: center;
+}
+.esc-cloze-input:focus {
+  outline: none;
+  border-color: var(--esc-accent);
+  box-shadow: 0 0 0 3px var(--esc-accent-soft);
+}
+.esc-cloze-input.correct {
+  background: var(--esc-ok-soft);
+  border-color: var(--esc-ok);
+  color: var(--esc-ok);
+}
+.esc-cloze-input.wrong {
+  background: var(--esc-err-soft);
+  border-color: var(--esc-err);
+  color: var(--esc-err);
+}
+.esc-accents-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+.esc-accent-char-btn {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 14px;
+  width: 30px; height: 30px;
+  border-radius: var(--r-btn);
+  background: var(--esc-surface);
+  color: var(--esc-ink);
+  border: 1px solid var(--esc-line-strong);
+  cursor: pointer;
+}
+.esc-accent-char-btn:hover { background: var(--esc-surface-subtle); border-color: var(--esc-ink); }
+
+/* ---------- 8. CLÍNICA DE ERRORES & DETECTIVE (SPOT THE MISTAKE) ---------- */
+.esc-spot-sentence {
+  font-family: var(--font-display);
+  font-size: 17px;
+  line-height: 2;
+  background: var(--esc-surface-subtle);
+  border: 1px solid var(--esc-line);
+  border-radius: var(--r-md);
+  padding: 16px 20px;
+  margin-bottom: 10px;
+}
+.esc-spot-token {
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+  border-bottom: 2px dashed var(--esc-ink-muted);
+  padding: 2px 4px;
+  cursor: pointer;
+  border-radius: var(--r-xs);
+  transition: all .12s ease;
+}
+.esc-spot-token:hover:not(:disabled) {
+  background: var(--esc-surface-alt);
+  border-bottom-color: var(--esc-accent);
+}
+.esc-spot-token.is-error {
+  background: var(--esc-err-soft);
+  border-bottom: 2px solid var(--esc-err);
+  color: var(--esc-err);
+  text-decoration: line-through;
+}
+.esc-spot-token.is-false {
+  background: var(--esc-warn-soft);
+  border-bottom: 2px solid var(--esc-warn);
+  color: var(--esc-ink-muted);
+  opacity: 1;
+  animation: escSpotNo .28s ease;
+}
+@keyframes escSpotNo { 25% { transform: translateX(-3px); } 75% { transform: translateX(3px); } }
+@media (prefers-reduced-motion: reduce) { .esc-spot-token.is-false { animation: none; } }
+.esc-spot-feedback {
+  display: none; align-items: center; flex-wrap: wrap; gap: 6px 12px;
+  font-size: 13.5px; color: var(--esc-ink-soft);
+  background: var(--esc-warn-soft); border: 1px solid var(--esc-warn-border);
+  border-radius: var(--r-md); padding: 8px 14px; margin-top: 8px;
+}
+.esc-spot-feedback.show { display: flex; }
+.esc-spot-solution {
+  display: none;
+  background: var(--esc-surface);
+  border: 1px solid var(--esc-ok-border);
+  padding: 10px 14px;
+  border-radius: var(--r-md);
+  font-size: 13.5px;
+  margin-top: 8px;
+}
+.esc-spot-solution.show { display: block; }
+
+/* ---------- 9. EMPAREJAR PREGUNTAS Y RESPUESTAS (MATCHING) ---------- */
+.esc-match-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 12px 0;
+}
+@media (max-width: 580px) { .esc-match-grid { grid-template-columns: 1fr; } }
+.esc-match-col {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.esc-match-card {
+  padding: 11px 14px;
+  background: var(--esc-surface);
+  border: 1.5px solid var(--esc-line-strong);
+  border-radius: var(--r-md);
+  font-size: 14px;
+  color: var(--esc-ink);
+  cursor: pointer;
+  text-align: left;
+  transition: all .15s ease;
+}
+.esc-match-card:hover:not(.locked) {
+  border-color: var(--esc-accent);
+  background: var(--esc-surface-subtle);
+}
+.esc-match-card.selected {
+  background: var(--esc-accent-soft);
+  border-color: var(--esc-accent);
+  color: var(--esc-accent);
+  font-weight: 600;
+}
+.esc-match-card.locked {
+  background: var(--esc-ok-soft);
+  border-color: var(--esc-ok);
+  color: var(--esc-ok);
+  cursor: default;
+}
+.esc-match-card.mismatch {
+  background: var(--esc-err-soft);
+  border-color: var(--esc-err);
+  animation: escShake .35s ease;
+}
+@keyframes escShake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+
+/* ---------- 10. CLASIFICACIÓN / SORTING POOL ---------- */
+.esc-sort-pool {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 12px;
+  background: var(--esc-surface-subtle);
+  border-radius: var(--r-md);
+  margin-bottom: 14px;
+  min-height: 48px;
+}
+.esc-sort-chip {
+  font-family: var(--font-display);
+  font-size: 14.5px;
+  padding: 6px 14px;
+  border-radius: var(--r-pill);
+  background: var(--esc-surface);
+  border: 1px solid var(--esc-line-strong);
+  cursor: pointer;
+  user-select: none;
+  transition: all .15s ease;
+}
+.esc-sort-chip:hover { border-color: var(--esc-accent); transform: translateY(-1px); }
+.esc-sort-targets {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+@media (max-width: 580px) { .esc-sort-targets { grid-template-columns: 1fr; } }
+.esc-sort-col {
+  border: 2px dashed var(--esc-line-strong);
+  border-radius: var(--r-md);
+  padding: 14px;
+  background: var(--esc-sort-col-bg);
+  min-height: 110px;
+}
+.esc-sort-title {
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+/* ---------- 11. ORDENAR PALABRAS / SINTAXIS (SCRAMBLE) ---------- */
+.esc-order-box {
+  background: var(--esc-surface-subtle);
+  border: 1px solid var(--esc-line);
+  border-radius: var(--r-md);
+  padding: 16px;
+  margin-bottom: 12px;
+}
+.esc-order-bank {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+.esc-order-slot {
+  min-height: 44px;
+  background: var(--esc-surface);
+  border: 1.5px dashed var(--esc-line-strong);
+  border-radius: var(--r-sm);
+  padding: 6px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+}
+.esc-word-chip {
+  font-family: var(--font-body);
+  font-size: 13.5px;
+  font-weight: 600;
+  background: var(--esc-surface);
+  border: 1px solid var(--esc-line);
+  padding: 4px 12px;
+  border-radius: var(--r-pill);
+  cursor: pointer;
+  user-select: none;
+}
+.esc-word-chip.used { opacity: .3; pointer-events: none; }
+
+/* ---------- 12. SPRINT CON CONTRARRELOJ (TIMER RAPID-FIRE) ---------- */
+.esc-sprint-box {
+  background: var(--esc-surface);
+  border: 1.5px solid var(--esc-accent-border);
+  border-radius: var(--r-lg);
+  padding: 22px;
+  text-align: center;
+}
+.esc-sprint-timer-track {
+  width: 100%;
+  height: 5px;
+  background: var(--esc-surface-inset);
+  border-radius: var(--r-pill);
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+.esc-sprint-fill {
+  height: 100%;
+  width: 100%;
+  background: var(--esc-accent);
+  transition: width 1s linear;
+}
+.esc-sprint-phrase {
+  font-family: var(--font-display);
+  font-size: 20px;
+  padding: 20px 14px;
+  background: var(--esc-surface-subtle);
+  border-radius: var(--r-md);
+  margin-bottom: 16px;
+  min-height: 75px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.esc-sprint-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+/* ---------- 13. ROLEPLAY CONVERSACIONAL EN PESTAÑAS ---------- */
+.esc-roleplay-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+.esc-roleplay-tab-btn {
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  text-transform: uppercase;
+  background: var(--esc-surface);
+  border: 1.5px solid var(--esc-line-strong);
+  color: var(--esc-ink-soft);
+  padding: 6px 14px;
+  border-radius: var(--r-btn);
+  cursor: pointer;
+  transition: all .15s ease;
+}
+.esc-roleplay-tab-btn.active {
+  background: var(--esc-accent);
+  border-color: var(--esc-accent);
+  color: #fff;
+}
+.esc-chat-thread {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.esc-chat-line {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+.esc-chat-avatar {
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 13px;
+  flex: none;
+}
+.esc-chat-line.interlocutor .esc-chat-avatar { background: var(--esc-surface-subtle); color: var(--esc-ink); border: 1px solid var(--esc-line); }
+.esc-chat-line.student .esc-chat-avatar { background: var(--esc-accent); color: #fff; }
+.esc-chat-content { flex: 1; }
+.esc-chat-speaker {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  text-transform: uppercase;
+  color: var(--esc-ink-muted);
+  margin-bottom: 3px;
+}
+.esc-chat-bubble {
+  background: var(--esc-surface-subtle);
+  border: 1px solid var(--esc-line);
+  border-radius: var(--r-md);
+  padding: 10px 14px;
+  font-size: 14.5px;
+}
+.esc-chat-line.student .esc-chat-bubble {
+  background: var(--esc-accent-soft);
+  border-color: var(--esc-accent-border);
+}
+.esc-chat-textarea {
+  width: 100%;
+  background: var(--esc-surface);
+  border: 1.5px solid var(--esc-line-strong);
+  border-radius: var(--r-sm);
+  padding: 8px 12px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--esc-ink);
+  resize: vertical;
+  min-height: 48px;
+}
+.esc-chat-textarea:focus { outline: none; border-color: var(--esc-accent); }
+
+/* ---------- 14. CRONÓMETRO DE MONÓLOGO ORAL (1 A 2 MINUTOS) ---------- */
+.esc-timer-display-box {
+  background: var(--esc-timer-bg);
+  border: 1px solid var(--esc-line-strong);
+  color: #fff;
+  border-radius: var(--r-lg);
+  padding: 24px 20px;
+  text-align: center;
+  margin: 14px 0;
+}
+.esc-timer-digits {
+  font-family: var(--font-mono);
+  font-size: 44px;
+  font-weight: 700;
+}
+.esc-timer-digits.warning { color: #FFA07A; }
+.esc-timer-caption {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: rgba(255,255,255,0.7);
+  text-transform: uppercase;
+  margin: 4px 0 12px;
+}
+
+/* ---------- 15. LECTURA ADAPTADA CON GLOSARIO Y TRANSCRIPCIÓN ---------- */
+.esc-reading-card {
+  background: var(--esc-surface);
+  border: 1px solid var(--esc-line);
+  border-radius: var(--r-lg);
+  padding: 24px 26px;
+  box-shadow: var(--shadow-sm);
+}
+.esc-reading-card mark {
+  background: var(--esc-accent-soft);
+  color: var(--esc-accent);
+  padding: 2px 5px;
+  border-radius: var(--r-xs);
+  font-weight: 600;
+}
+.esc-glossary-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 18px;
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px dashed var(--esc-line);
+  font-size: 12.5px;
+  color: var(--esc-ink-soft);
+}
+.esc-glossary-row b { font-family: var(--font-mono); color: var(--esc-ink); }
+
+/* ---------- 16. AUTOEVALUACIÓN (CHECKLIST / ESCALA 1-10) ---------- */
+.esc-scale-row {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin: 12px 0 16px;
+}
+.esc-scale-btn {
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  width: 36px; height: 36px;
+  border-radius: var(--r-btn);
+  border: 1.5px solid var(--esc-line-strong);
+  background: var(--esc-surface);
+  color: var(--esc-ink);
+  cursor: pointer;
+  transition: all .15s ease;
+  font-weight: 600;
+}
+.esc-scale-btn:hover { border-color: var(--esc-accent); }
+.esc-scale-btn.active {
+  background: var(--esc-accent);
+  border-color: var(--esc-accent);
+  color: #fff;
+}
+
+.esc-checklist {
+  list-style: none;
+  padding: 0; margin: 0;
+  display: grid; gap: 8px;
+}
+.esc-check-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  background: var(--esc-surface-subtle);
+  border: 1px solid var(--esc-line);
+  border-radius: var(--r-md);
+  cursor: pointer;
+  user-select: none;
+  font-size: 14px;
+}
+.esc-check-box {
+  width: 18px; height: 18px;
+  border-radius: var(--r-xs);
+  border: 1.5px solid var(--esc-line-strong);
+  background: var(--esc-surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  color: transparent;
+  flex: none;
+}
+.esc-check-item.checked {
+  background: var(--esc-accent-soft);
+  border-color: var(--esc-accent-border);
+}
+.esc-check-item.checked .esc-check-box {
+  background: var(--esc-accent);
+  border-color: var(--esc-accent);
+  color: #fff;
+}
+
+/* ---------- 17. TAREA FINAL CON DETECTOR REGEX Y PERSISTENCIA ---------- */
+.esc-task-panel {
+  background: var(--esc-accent-soft);
+  border: 1px solid var(--esc-accent-border);
+  border-radius: var(--r-lg);
+  padding: 24px 26px;
+}
+textarea.esc-final-textarea {
+  width: 100%;
+  min-height: 130px;
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: var(--esc-ink);
+  background: var(--esc-surface);
+  border: 1.5px solid var(--esc-line-strong);
+  border-radius: var(--r-md);
+  padding: 12px 16px;
+  resize: vertical;
+  margin-top: 10px;
+}
+textarea.esc-final-textarea:focus {
+  outline: none;
+  border-color: var(--esc-accent);
+}
+.esc-task-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+.esc-regex-counter {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--esc-ink-muted);
+}
+.esc-save-flag {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--esc-ok);
+  opacity: 0;
+  transition: opacity .25s ease;
+}
+.esc-save-flag.show { opacity: 1; }
+
+/* BOTONES GLOBALES DEL SISTEMA */
+.esc-btn-primary {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 13.5px;
+  color: #fff;
+  background: var(--esc-accent);
+  border: none;
+  padding: 9px 20px;
+  border-radius: var(--r-btn);
+  cursor: pointer;
+  transition: transform .15s var(--spring), filter .15s ease;
+}
+.esc-btn-primary:hover { filter: brightness(1.08); transform: translateY(-1px); }
+.esc-btn-ghost {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--esc-ink-soft);
+  background: transparent;
+  border: 1.5px solid var(--esc-line-strong);
+  padding: 8px 16px;
+  border-radius: var(--r-btn);
+  cursor: pointer;
+  transition: all .15s ease;
+}
+.esc-btn-ghost:hover { border-color: var(--esc-ink-muted); color: var(--esc-ink); }
+.esc-score-text {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--esc-accent);
+}
+
+/* FOOTER EDITORIAL */
+footer.esc-footer {
+  margin-top: 50px;
+  padding-top: 20px;
+  border-top: 1px solid var(--esc-line);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  color: var(--esc-ink-muted);
+}
+
+/* ==========================================================================
+   INTERACCIÓN ESTILO iOS — pulsación con escala, rebote elástico al soltar,
+   sin "levitación" en hover, interruptor con pulgar elástico y popover con resorte.
+   ========================================================================== */
+:root {
+  --ios-press: cubic-bezier(.2, .8, .2, 1);
+  --ios-spring: cubic-bezier(.32, 1.45, .5, 1);
+  --ios-press-scale: .955;
+}
+.esc-btn-toggle, .esc-btn-primary, .esc-btn-ghost, .esc-opt-btn, .esc-roleplay-tab-btn,
+.esc-menu-btn, .esc-scale-btn, .esc-dock-top, .esc-accent-char-btn, .esc-menu-link,
+.esc-tap-card, .esc-match-card, .esc-sort-chip, .esc-word-chip, .esc-check-item,
+.esc-spot-token, .m-parada, .esc-color-dot {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  transition: transform .45s var(--ios-spring), opacity .2s ease, background-color .25s ease,
+              border-color .25s ease, color .25s ease, filter .25s ease, box-shadow .25s ease;
+}
+/* Hover: sólo en dispositivos con puntero, sin desplazamiento (iOS no levita) */
+.esc-btn-primary:hover, .esc-tap-card:hover, .esc-sort-chip:hover,
+.esc-color-dot:hover, .esc-match-card:hover:not(.locked) { transform: none; }
+@media (hover: hover) {
+  .esc-btn-primary:hover { filter: brightness(1.06); }
+}
+/* Pulsado: se encoge al instante y rebota al soltar */
+.esc-btn-toggle:active, .esc-btn-primary:active, .esc-btn-ghost:active, .esc-opt-btn:active:not(:disabled),
+.esc-roleplay-tab-btn:active, .esc-menu-btn:active, .esc-scale-btn:active, .esc-dock-top:active,
+.esc-accent-char-btn:active, .esc-menu-link:active, .esc-tap-card:active, .esc-match-card:active:not(.locked),
+.esc-sort-chip:active, .esc-word-chip:active, .esc-check-item:active, .esc-spot-token:active:not(:disabled),
+.m-parada:active, .esc-color-dot:active {
+  transform: scale(var(--ios-press-scale));
+  transition-duration: .12s, .12s, .12s, .12s, .12s, .12s, .12s;
+  transition-timing-function: var(--ios-press);
+}
+.esc-btn-primary:active { filter: brightness(.92); }
+.esc-btn-ghost:active, .esc-btn-toggle:not(.active):active, .esc-menu-btn:not([aria-expanded="true"]):active,
+.esc-dock-top:active, .esc-accent-char-btn:active { background-color: var(--esc-surface-alt); }
+.esc-menu-link:active { background: var(--esc-surface-alt); }
+/* Foco por teclado: anillo suave estilo iOS */
+.esc-btn-toggle:focus-visible, .esc-btn-primary:focus-visible, .esc-btn-ghost:focus-visible,
+.esc-opt-btn:focus-visible, .esc-roleplay-tab-btn:focus-visible, .esc-scale-btn:focus-visible,
+.esc-dock-top:focus-visible, .esc-accent-char-btn:focus-visible, .esc-tap-card:focus-visible,
+.esc-match-card:focus-visible, .esc-word-chip:focus-visible, .esc-spot-token:focus-visible {
+  outline: 3px solid var(--esc-accent);
+  outline-offset: 2px;
+}
+.esc-btn-primary:disabled, .esc-btn-ghost:disabled { opacity: .4; cursor: default; }
+
+/* Interruptor tipo iOS: pulgar elástico que se ensancha al pulsar */
+.esc-switch { width: 48px; height: 29px; }
+.esc-switch span { background: var(--esc-line-strong); transition: background-color .3s ease; }
+.esc-switch span::after {
+  top: 2px; left: 2px; width: 25px; height: 25px;
+  box-shadow: 0 2px 5px rgba(0,0,0,.28), 0 0 0 .5px rgba(0,0,0,.06);
+  transition: transform .45s var(--ios-spring), width .25s var(--ios-press);
+}
+.esc-switch input:checked + span::after { transform: translateX(19px); }
+.esc-switch:active span::after { width: 31px; }
+.esc-switch:active input:checked + span::after { transform: translateX(13px); }
+
+/* Popover del menú: aparece con escala + resorte desde la esquina del botón */
+.esc-menu-panel { transform-origin: top left; animation: escPop .34s var(--ios-spring); }
+@keyframes escPop {
+  from { opacity: 0; transform: scale(.9) translateY(-6px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .esc-btn-toggle, .esc-btn-primary, .esc-btn-ghost, .esc-opt-btn, .esc-roleplay-tab-btn,
+  .esc-menu-btn, .esc-scale-btn, .esc-dock-top, .esc-accent-char-btn, .esc-menu-link,
+  .esc-tap-card, .esc-match-card, .esc-sort-chip, .esc-word-chip, .esc-check-item,
+  .esc-spot-token, .m-parada, .esc-color-dot, .esc-switch span::after { transition: none; }
+  .esc-menu-panel { animation: none; }
+}
+
+/* ==========================================================================
+   iOS · SEGUNDA TANDA — chat, control segmentado, listas agrupadas, deslizador,
+   hoja inferior, título en barra, materiales, zonas seguras y objetivos táctiles
+   ========================================================================== */
+
+/* ---------- Materiales translúcidos (vibrancy) ---------- */
+.esc-sticky-header {
+  background: color-mix(in srgb, var(--esc-paper) 76%, transparent);
+  -webkit-backdrop-filter: blur(22px) saturate(180%);
+  backdrop-filter: blur(22px) saturate(180%);
+  padding: calc(10px + env(safe-area-inset-top)) max(24px, env(safe-area-inset-right)) 10px max(24px, env(safe-area-inset-left));
+}
+.esc-dock {
+  background: color-mix(in srgb, var(--esc-surface) 78%, transparent);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  backdrop-filter: blur(24px) saturate(180%);
+  right: max(22px, env(safe-area-inset-right));
+  bottom: max(22px, calc(env(safe-area-inset-bottom) + 12px));
+}
+body { padding-bottom: calc(120px + env(safe-area-inset-bottom)); }
+.esc-container { padding-left: max(24px, env(safe-area-inset-left)); padding-right: max(24px, env(safe-area-inset-right)); }
+section.esc-block { scroll-margin-top: calc(84px + env(safe-area-inset-top)); }
+
+/* ---------- Barra superior: título que aparece al hacer scroll ---------- */
+.esc-hud-center { position: relative; flex: 1 1 auto; min-width: 36px; height: 30px; }
+.esc-hud-center .esc-meter-bar {
+  position: absolute; left: 0; right: 0; top: 50%;
+  flex: none; min-width: 0; margin: 0;
+  transform: translateY(-50%);
+  transition: top .55s var(--ios-spring), transform .55s var(--ios-spring);
+}
+.esc-sticky-header.has-title .esc-hud-center .esc-meter-bar { top: 100%; transform: translateY(-100%); }
+.esc-hud-title {
+  position: absolute; left: 0; right: 0; top: 0;
+  text-align: center;
+  font-family: var(--font-display); font-weight: 600; font-size: 14px; line-height: 22px;
+  color: var(--esc-ink);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  opacity: 0; transform: translateY(6px);
+  transition: opacity .3s ease, transform .55s var(--ios-spring);
+  pointer-events: none;
+}
+.esc-sticky-header.has-title .esc-hud-title { opacity: 1; transform: none; }
+
+/* ---------- Menú: popover (escritorio) y hoja inferior (móvil) ---------- */
+.esc-menu-panel {
+  position: fixed; z-index: 140;
+  background: color-mix(in srgb, var(--esc-surface) 84%, transparent);
+  -webkit-backdrop-filter: blur(26px) saturate(180%);
+  backdrop-filter: blur(26px) saturate(180%);
+  box-shadow: var(--shadow-hover), inset 0 .5px 0 rgba(255,255,255,.45);
+  animation: escPop .34s var(--ios-spring);
+}
+.esc-menu-panel.is-closing { animation: escPopOut .16s ease forwards; }
+@keyframes escPopOut { to { opacity: 0; transform: scale(.94) translateY(-4px); } }
+.esc-menu-backdrop { position: fixed; inset: 0; z-index: 135; background: transparent; }
+.esc-menu-backdrop[hidden] { display: none; }
+.esc-sheet-grab { display: none; }
+body.esc-sheet-open { overflow: hidden; }
+@media (max-width: 640px) {
+  .esc-menu-backdrop { background: rgba(0,0,0,.38); animation: escFade .3s ease; }
+  .esc-menu-panel {
+    left: 0 !important; right: 0; top: auto !important; bottom: 0;
+    width: auto; max-height: min(78vh, 640px);
+    border-radius: 24px 24px 0 0;
+    border-bottom: 0;
+    padding: 0 10px calc(14px + env(safe-area-inset-bottom));
+    transform-origin: bottom center;
+    animation: escSheetIn .5s var(--ios-spring);
+  }
+  .esc-menu-panel.is-closing { animation: escSheetOut .3s var(--ios-press) forwards; }
+  .esc-sheet-grab {
+    display: block; position: sticky; top: 0; z-index: 1;
+    height: 28px; margin: 0 -10px;
+    background: color-mix(in srgb, var(--esc-surface) 92%, transparent);
+    touch-action: none; cursor: grab;
+  }
+  .esc-sheet-grab::before {
+    content: ""; position: absolute; left: 50%; top: 10px;
+    width: 38px; height: 5px; border-radius: 3px;
+    background: var(--esc-line-strong); transform: translateX(-50%);
+  }
+  .esc-menu-link { padding: 12px; font-size: 15px; }
+}
+@keyframes escFade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes escSheetIn { from { transform: translateY(100%); } to { transform: translateY(0); } }
+@keyframes escSheetOut { to { transform: translateY(100%); } }
+
+/* ---------- Pestañas: control segmentado con selector deslizante ---------- */
+.esc-roleplay-tabs {
+  position: relative; display: grid;
+  grid-template-columns: repeat(var(--seg-n, 2), 1fr);
+  gap: 0; padding: 3px;
+  background: var(--esc-surface-alt);
+  border-radius: 13px;
+  margin-bottom: 16px;
+}
+.esc-seg-thumb {
+  position: absolute; top: 3px; bottom: 3px; left: 3px;
+  width: calc((100% - 6px) / var(--seg-n, 2));
+  background: var(--esc-surface);
+  border-radius: 10px;
+  box-shadow: 0 3px 8px rgba(0,0,0,.12), 0 0 0 .5px rgba(0,0,0,.05);
+  transform: translateX(calc(var(--seg-i, 0) * 100%));
+  transition: transform .5s var(--ios-spring);
+}
+.esc-roleplay-tab-btn, .esc-roleplay-tab-btn.active {
+  position: relative; z-index: 1;
+  background: transparent; border: 0;
+  text-transform: none; letter-spacing: 0;
+  font-family: var(--font-body); font-size: 13.5px; font-weight: 600;
+  color: var(--esc-ink-soft);
+  padding: 8px 10px;
+  border-radius: 10px;
+}
+.esc-roleplay-tab-btn.active { color: var(--esc-ink); }
+
+/* ---------- Chat estilo iMessage ---------- */
+.esc-chat-thread { gap: 10px; padding: 4px 2px 2px; }
+.esc-chat-avatar { display: none; }
+.esc-chat-line { gap: 0; align-items: flex-end; }
+.esc-chat-line.student { flex-direction: row-reverse; }
+.esc-chat-content { flex: 0 1 auto; max-width: min(84%, 540px); display: flex; flex-direction: column; align-items: flex-start; }
+.esc-chat-line.student .esc-chat-content { flex: 1 1 auto; align-items: flex-end; }
+.esc-chat-speaker {
+  font-family: var(--font-body); font-size: 12px; text-transform: none; letter-spacing: 0;
+  color: var(--esc-ink-muted); margin: 0 12px 3px;
+}
+.esc-chat-line.interlocutor .esc-chat-bubble,
+.esc-chat-line.student .esc-chat-bubble {
+  --bb: var(--esc-surface-alt);
+  position: relative; isolation: isolate;
+  background: var(--bb);
+  border: 0; border-radius: 20px;
+  padding: 9px 15px;
+  font-size: 15px; line-height: 1.4;
+  color: var(--esc-ink);
+  min-height: 38px;
+}
+.esc-chat-line.student .esc-chat-bubble { --bb: color-mix(in srgb, var(--esc-accent) 15%, var(--esc-surface)); width: 100%; }
+/* colita */
+.esc-chat-line.interlocutor .esc-chat-bubble::before, .esc-chat-line.interlocutor .esc-chat-bubble::after,
+.esc-chat-line.student .esc-chat-bubble::before, .esc-chat-line.student .esc-chat-bubble::after {
+  content: ""; position: absolute; bottom: 0; height: 18px; z-index: -1;
+}
+.esc-chat-line.interlocutor .esc-chat-bubble::before { left: -7px; width: 20px; background: var(--bb); border-bottom-right-radius: 16px 14px; }
+.esc-chat-line.interlocutor .esc-chat-bubble::after  { left: -26px; width: 26px; background: var(--esc-surface); border-bottom-right-radius: 10px; }
+.esc-chat-line.student .esc-chat-bubble::before { right: -7px; width: 20px; background: var(--bb); border-bottom-left-radius: 16px 14px; }
+.esc-chat-line.student .esc-chat-bubble::after  { right: -26px; width: 26px; background: var(--esc-surface); border-bottom-left-radius: 10px; }
+.esc-chat-line .gloss-text { margin: 4px 12px 0; transition: opacity .3s ease; }
+.esc-chat-line.pending .gloss-text { opacity: 0; }
+/* campo de escritura dentro de la burbuja */
+.esc-chat-compose { padding: 6px 14px; }
+.esc-chat-compose:focus-within { box-shadow: 0 0 0 3px color-mix(in srgb, var(--esc-accent) 30%, transparent); }
+.esc-chat-compose .esc-chat-textarea {
+  display: block; width: 100%; min-height: 44px;
+  background: transparent; border: 0; border-radius: 0;
+  padding: 4px 2px; font-size: 15px; line-height: 1.4;
+  resize: none;
+}
+.esc-chat-compose .esc-chat-textarea:focus { outline: none; border: 0; }
+.esc-chat-compose .esc-chat-textarea::placeholder { color: var(--esc-ink-muted); }
+.esc-chat-line.student .esc-accents-bar { justify-content: flex-end; margin-top: 8px; }
+.esc-chat-line.student + .esc-accents-bar { }
+/* «escribiendo…» */
+.esc-chat-bubble.typing { padding: 13px 16px; }
+.esc-typing { display: inline-flex; gap: 4px; align-items: center; height: 10px; }
+.esc-typing i { width: 7px; height: 7px; border-radius: 50%; background: var(--esc-ink-muted); animation: escTyping 1.2s 5 ease-in-out; }
+.esc-typing i:nth-child(2) { animation-delay: .15s; }
+.esc-typing i:nth-child(3) { animation-delay: .3s; }
+@keyframes escTyping { 0%, 60%, 100% { transform: translateY(0); opacity: .35; } 30% { transform: translateY(-4px); opacity: 1; } }
+
+/* ---------- Listas agrupadas (estilo Ajustes) ---------- */
+#quiz-items-container, .esc-match-col, .esc-checklist {
+  background: var(--esc-surface-subtle);
+  border-radius: 16px;
+  overflow: hidden;
+}
+.esc-quiz-item { position: relative; padding: 14px 16px; border-bottom: 0; }
+.esc-quiz-item + .esc-quiz-item::before,
+.esc-match-card + .esc-match-card::before,
+.esc-check-item + .esc-check-item::before {
+  content: ""; position: absolute; top: 0; left: 16px; right: 0; height: 1px; background: var(--esc-line);
+}
+.esc-match-col { gap: 0; align-self: start; }
+.esc-match-card {
+  position: relative; width: 100%;
+  background: transparent; border: 0; border-radius: 0;
+  padding: 13px 16px;
+}
+.esc-match-card:hover:not(.locked) { background: transparent; }
+@media (hover: hover) { .esc-match-card:hover:not(.locked):not(.selected) { background: var(--esc-surface-alt); } }
+.esc-match-card.selected { background: var(--esc-accent-soft); border: 0; }
+.esc-match-card.locked { background: var(--esc-ok-soft); border: 0; }
+.esc-match-card.mismatch { background: var(--esc-err-soft); border: 0; }
+.esc-match-card:active:not(.locked), .esc-check-item:active { transform: none; background-color: var(--esc-surface-alt); }
+.esc-checklist { gap: 0; }
+.esc-check-item {
+  position: relative; background: transparent; border: 0; border-radius: 0;
+  padding: 13px 16px; gap: 12px;
+}
+.esc-check-item + .esc-check-item::before { left: 52px; }
+.esc-check-item.checked { background: transparent; border: 0; }
+.esc-check-box {
+  width: 24px; height: 24px; border-radius: 50%;
+  background: transparent; font-size: 13px;
+  transition: background-color .25s ease, border-color .25s ease, color .25s ease;
+}
+.esc-check-item.checked .esc-check-box { animation: escCheckPop .45s var(--ios-spring); }
+@keyframes escCheckPop { 0% { transform: scale(.7); } 100% { transform: scale(1); } }
+
+/* ---------- Deslizador 1–10 (UISlider) ---------- */
+.esc-slider-row { margin: 8px 0 22px; }
+.esc-slider-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 2px; }
+.esc-slider-val { font-family: var(--font-display); font-weight: 600; font-size: 34px; line-height: 1; color: var(--esc-accent); min-width: 1.4ch; }
+.esc-slider-hint { font-size: 13px; color: var(--esc-ink-muted); }
+.esc-range {
+  -webkit-appearance: none; appearance: none;
+  display: block; width: 100%; height: 44px; margin: 0;
+  background: transparent; cursor: pointer; --pct: 44.4%;
+}
+.esc-range:focus { outline: none; }
+.esc-range::-webkit-slider-runnable-track {
+  height: 6px; border-radius: 999px;
+  background: linear-gradient(to right, var(--esc-accent) var(--pct), var(--esc-surface-alt) var(--pct));
+}
+.esc-range.untouched::-webkit-slider-runnable-track { background: var(--esc-surface-alt); }
+.esc-range::-webkit-slider-thumb {
+  -webkit-appearance: none; width: 30px; height: 30px; margin-top: -12px;
+  border-radius: 50%; border: 0; background: #fff;
+  box-shadow: 0 2px 6px rgba(0,0,0,.3), 0 0 0 .5px rgba(0,0,0,.08);
+  transition: transform .3s var(--ios-spring);
+}
+.esc-range:active::-webkit-slider-thumb { transform: scale(1.12); }
+.esc-range:focus-visible::-webkit-slider-thumb { box-shadow: 0 2px 6px rgba(0,0,0,.3), 0 0 0 4px var(--esc-accent); }
+.esc-range::-moz-range-track { height: 6px; border-radius: 999px; background: var(--esc-surface-alt); }
+.esc-range::-moz-range-progress { height: 6px; border-radius: 999px; background: var(--esc-accent); }
+.esc-range.untouched::-moz-range-progress { background: transparent; }
+.esc-range::-moz-range-thumb {
+  width: 30px; height: 30px; border: 0; border-radius: 50%; background: #fff;
+  box-shadow: 0 2px 6px rgba(0,0,0,.3), 0 0 0 .5px rgba(0,0,0,.08);
+}
+.esc-slider-ends { display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 12px; color: var(--esc-ink-muted); margin-top: -2px; }
+
+/* ---------- Squircle también en los nuevos controles ---------- */
+@supports (corner-shape: squircle) {
+  .esc-roleplay-tabs, .esc-seg-thumb, .esc-menu-panel, #quiz-items-container, .esc-match-col, .esc-checklist { corner-shape: squircle; }
+}
+
+/* ---------- Pantallas estrechas ---------- */
+@media (max-width: 600px) {
+  .esc-header-inner { gap: 8px; }
+  #dark-label { display: none; }
+  .esc-hud-controls { gap: 8px; }
+}
+@media (max-width: 400px) {
+  .esc-lang-pill { gap: 6px; padding-left: 9px; }
+  .esc-lang-pill .esc-dock-label { font-size: 12px; }
+}
+
+/* ---------- Objetivos táctiles de 44 px (HIG) ---------- */
+@media (pointer: coarse) {
+  .esc-hud-center { height: 44px; }
+  .esc-menu-btn { width: 44px; height: 44px; }
+  .esc-btn-toggle, .esc-lang-pill { min-height: 44px; }
+  .esc-btn-toggle { padding-inline: 14px; }
+  .esc-btn-primary, .esc-btn-ghost, .esc-opt-btn, .esc-roleplay-tab-btn { min-height: 44px; }
+  .esc-dock-top { width: 44px; height: 44px; font-size: 14px; }
+  .esc-accent-char-btn { width: 44px; height: 44px; font-size: 16px; }
+  .esc-menu-link { padding: 12px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .esc-seg-thumb, .esc-tap-inner, .esc-hud-title, .esc-hud-center .esc-meter-bar, .esc-range::-webkit-slider-thumb { transition: none; }
+  .esc-menu-backdrop, .esc-menu-panel, .esc-typing i, .esc-check-item.checked .esc-check-box { animation: none; }
+}
+
+.esc-hud-title .t-short { display: none; }
+@media (max-width: 520px) {
+  .esc-hud-title .t-full { display: none; }
+  .esc-hud-title .t-short { display: inline; }
+  .esc-roleplay-tab-btn, .esc-roleplay-tab-btn.active { font-size: 12.5px; padding: 8px 4px; }
+}
+
+/* ==========================================================================
+   CAPA DE ACCESIBILIDAD (WCAG 2.1 AA)
+   ========================================================================== */
+.sr-only { position:absolute !important; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+.esc-skip { position:fixed; top:8px; left:8px; z-index:10000; padding:10px 16px; background:var(--esc-ink); color:var(--esc-paper); border-radius:var(--r-sm); font:600 14px var(--font-body); text-decoration:none; transform:translateY(-200%); }
+.esc-skip:focus { transform:none; outline:3px solid var(--esc-accent); outline-offset:2px; }
+main:focus { outline:none; }
+
+/* Foco visible y sólido en todos los controles */
+.esc-sort-chip:focus-visible, .esc-check-item:focus-visible, .esc-word-chip:focus-visible,
+.esc-match-card:focus-visible, .esc-opt-btn:focus-visible, .esc-tap-card:focus-visible,
+.esc-cloze-input:focus-visible, textarea.esc-final-textarea:focus-visible, .esc-chat-textarea:focus-visible,
+.esc-roleplay-tab-btn:focus-visible, .esc-dock-top:focus-visible, .esc-btn-primary:focus-visible,
+.esc-btn-ghost:focus-visible, .esc-btn-toggle:focus-visible, .esc-spot-token:focus-visible {
+  outline: 3px solid var(--esc-accent); outline-offset: 2px;
+}
+.esc-menu-link:focus-visible { outline: 3px solid var(--esc-accent); outline-offset: -3px; }
+.esc-chat-compose:focus-within { outline: 3px solid var(--esc-accent); outline-offset: 2px; }
+.esc-range:focus-visible { outline: 3px solid var(--esc-accent); outline-offset: 4px; }
+
+
+/* Clasificar: arrastrar y comprobar */
+.esc-sort-chip { cursor: grab; touch-action: none; position: relative; }
+.esc-sort-chip.is-dragging { opacity: .35; }
+.esc-sort-chip[aria-pressed="true"] { border-color: var(--esc-accent); box-shadow: 0 0 0 3px var(--esc-accent-soft); }
+.esc-sort-chip.ok { border-color: var(--esc-ok); background: var(--esc-ok-soft); color: var(--esc-ok); }
+.esc-sort-chip.err { border-color: var(--esc-err); background: var(--esc-err-soft); color: var(--esc-err); }
+.esc-sort-chip.ok::after { content: " ✓"; font-weight: 700; }
+.esc-sort-chip.err::after { content: " ✗"; font-weight: 700; }
+.esc-sort-ghost { position: fixed; z-index: 10001; pointer-events: none; margin: 0; box-shadow: var(--shadow-hover); transform: rotate(-2deg) scale(1.04); opacity: .95; }
+.esc-sort-col.drop-over, .esc-sort-pool.drop-over { border-color: var(--esc-accent); background: var(--esc-accent-soft); }
+.esc-sort-col { display: flex; flex-direction: column; gap: 10px; }
+.esc-sort-col .target-bucket { flex: 1; min-height: 44px; }
+.esc-sort-place { align-self: flex-start; }
+.esc-sort-place:disabled { opacity: .5; cursor: not-allowed; }
+
+/* Placeholders legibles */
+.esc-cloze-input::placeholder, textarea.esc-final-textarea::placeholder, .esc-chat-textarea::placeholder { color: var(--esc-ink-muted); opacity: 1; }
+
+/* Resultado nunca solo por color: marcas de texto */
+.esc-cloze-mark { font-family: var(--font-mono); font-size: 12px; font-weight: 600; margin-left: 6px; }
+.esc-cloze-mark.ok { color: var(--esc-ok); }
+.esc-cloze-mark.ko { color: var(--esc-err); }
+.esc-opt-btn.correct::after { content: " ✓"; }
+.esc-opt-btn.wrong::after { content: " ✗"; }
+
+/* Movimiento reducido (global) */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; scroll-behavior: auto !important; }
+}
+
+/* Alto contraste del sistema / preferencia de más contraste */
+@media (forced-colors: active) {
+  .esc-btn-toggle, .esc-btn-primary, .esc-btn-ghost, .esc-opt-btn, .esc-sort-chip, .esc-word-chip, .esc-match-card,
+  .esc-spot-token, .esc-tap-card, .esc-check-item, .esc-roleplay-tab-btn, .esc-menu-btn, .esc-dock-top { border: 1px solid ButtonText; }
+  :focus-visible { outline: 3px solid Highlight !important; outline-offset: 2px; }
+  .esc-opt-btn.picked, .esc-match-card.selected, .esc-roleplay-tab-btn.active, .esc-check-item.checked { outline: 2px solid Highlight; }
+}
+@media (prefers-contrast: more) {
+  :root { --esc-ink-muted: var(--esc-ink-soft); --esc-line: rgba(33,38,30,.35); --esc-line-strong: rgba(33,38,30,.6); }
+  html[data-theme="oscuro"] { --esc-ink-muted: var(--esc-ink-soft); --esc-line: rgba(255,255,255,.35); --esc-line-strong: rgba(255,255,255,.6); }
+}
+
+/* ==========================================================================
+   MEJORAS INSPIRADAS EN EL LIBRO (v5): objetivos táctiles, texto mínimo,
+   ejemplo resuelto, pie «Relacionado» y modo oscuro
+   ========================================================================= */
+.esc-ejemplo {
+  display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 12px;
+  margin: 0 0 14px; padding: 10px 14px;
+  border: 1.5px dashed var(--esc-accent-border); border-radius: var(--r-md);
+  background: var(--esc-accent-soft); font-size: 15px; color: var(--esc-ink);
+}
+.esc-ejemplo-tag { font-family: var(--font-mono); font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; color: var(--esc-ink-soft); }
+.esc-ejemplo-sol { font-family: var(--font-display); font-style: italic; color: var(--esc-info); border-bottom: 2px solid var(--esc-info); padding: 0 3px; }
+.esc-ejemplo-op { font-size: 13px; color: var(--esc-ink-soft); }
+
+/* Objetivos táctiles ≥ 44 px (también en viewports estrechos) */
+@media (pointer: coarse), (max-width: 700px) {
+  .esc-menu-btn { width: 44px; height: 44px; }
+  .btn-speak, .esc-btn-primary, .esc-btn-ghost, .esc-opt-btn, .esc-roleplay-tab-btn, .esc-btn-toggle, .esc-lang-pill { min-height: 44px; }
+  .esc-sort-chip, .esc-word-chip, .esc-scale-btn, .esc-check-item, .esc-match-card, .esc-chip-pill, .esc-spot-token { min-height: 44px; display: inline-flex; align-items: center; }
+  .esc-check-item, .esc-match-card { display: flex; }
+  .esc-dock-top, .esc-accent-char-btn { width: 44px; height: 44px; }
+  .esc-switch { position: relative; }
+  .esc-switch::before { content: ""; position: absolute; inset: -8px -4px; }
+}
+
+/* Modo oscuro: tintas de acento aclaradas para llegar a 4.5:1 */
+html[data-theme="oscuro"] {
+  --esc-accent-ink: color-mix(in srgb, var(--esc-accent) 45%, #ffffff);
+}
+html[data-theme="oscuro"] .esc-reading-card mark { background: rgba(255,255,255,.14); color: var(--esc-accent-ink); }
+html[data-theme="oscuro"] .esc-quiz-sentence .gap { color: var(--esc-accent-ink); background: rgba(255,255,255,.12); }
+html[data-theme="oscuro"] table.esc-table .col-highlight,
+html[data-theme="oscuro"] .esc-contrast-col.primary h4 { color: var(--esc-accent-ink); }
+html[data-theme="oscuro"] .m-formula-haber span,
+html[data-theme="oscuro"] .m-formula-part,
+html[data-theme="oscuro"] .m-formula-mas { color: var(--esc-aviso-ok-tinta); }
+html[data-theme="oscuro"] .esc-ejemplo-sol { color: #8CC4FF; border-color: #8CC4FF; }
+
+
+/* ==========================================================================
+   TIPOGRAFÍA DE EBOOK (v5): Literata para lectura; Plex Sans para interfaz y glosas
+   ========================================================================= */
+.esc-panel-intro, .m-aviso, .m-nota-texto, .esc-callout, .esc-contrast-col li,
+.esc-reading-card p, .esc-quiz-sentence, .esc-chat-bubble, table.esc-table td,
+.esc-ejemplo, .esc-cloze-card > p, .esc-phrase-card p {
+  font-family: var(--font-read);
+  font-optical-sizing: auto;
+  line-height: 1.6;
+  text-align: left;
+  hyphens: manual;
+  text-wrap: pretty;
+}
+.esc-panel-intro, .m-nota-texto, .esc-reading-card p { max-width: 68ch; }
+/* Rótulos, títulos de aviso y glosas se quedan en sans */
+.m-aviso strong, .esc-callout strong, .esc-contrast-col h4, .esc-ejemplo-tag,
+.gloss-text, .esc-ejemplo-op, table.esc-table .col-highlight { font-family: var(--font-body); }
+.esc-reading-card p { line-height: 1.7; }
+.esc-reading-card mark, .esc-quiz-sentence .gap { font-family: inherit; }
+.esc-quiz-sentence .gap { font-family: var(--font-code); }
+.esc-time-tag, .esc-score-text, .m-duracion, .esc-timer-pulse + * { font-variant-numeric: tabular-nums; }
+.esc-ejemplo-sol { font-family: var(--font-read); }
+
+/* Checklist: sin destello de fondo al marcar/desmarcar (solo cambia la casilla) */
+.esc-check-item, .esc-check-item:active, .esc-check-item.checked {
+  background: transparent !important; background-color: transparent !important;
+  transition: none; -webkit-tap-highlight-color: transparent;
+}
+
+@media (pointer: coarse), (max-width: 700px) { .esc-cloze-input { min-height: 44px; } .esc-opt-btn, .esc-btn-toggle { min-width: 44px; } }
+
+</style>
+</head>
+<body>
+<a class="esc-skip" href="#contenido">Saltar al contenido</a>
+<div id="a11y-status" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></div>
+
+
+<!-- =========================================================================
+     HUD STICKY PERSISTENTE (Control global de reloj, tema, bilingüismo e idioma)
+     ========================================================================= -->
+<header class="esc-sticky-header">
+  <div class="esc-header-inner">
+    <div class="esc-menu" id="esc-menu">
+      <button type="button" class="esc-menu-btn" id="esc-menu-btn" aria-label="Menú de secciones" aria-expanded="false" aria-controls="esc-menu-panel"><span class="esc-burger" aria-hidden="true"><i></i><i></i><i></i></span></button>
+      <nav class="esc-menu-panel" id="esc-menu-panel" aria-label="Secciones de la clase" hidden></nav>
+    </div>
+    <div class="esc-hud-center">
+      <span class="esc-hud-title" aria-hidden="true"><span class="t-full">Noah · Clase 17</span><span class="t-short">Clase 17</span></span>
+      <div class="esc-meter-bar" role="progressbar" aria-label="Progreso de lectura" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+      <div class="esc-meter-fill" id="reading-meter-fill" style="width: 0%;"></div>
+    </div>
+    </div>
+
+    <div class="esc-hud-controls">
+      
+
+      <!-- Selector de Modo Oscuro -->
+      <button type="button" class="esc-btn-toggle" id="btn-toggle-dark" aria-label="Modo oscuro">
+        <span id="dark-icon">☾</span>
+        <span id="dark-label">Oscuro</span>
+      </button>
+
+      <!-- Selector Bilingüe ES / ES + GLOSA -->
+      <div class="esc-lang-pill">
+        <span class="esc-dock-label">Español + inglés</span>
+        <label class="esc-switch"><input type="checkbox" id="top-switch-gloss" checked aria-label="Español + inglés"><span></span></label>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="esc-container"><div class="esc-folio"><span><strong>Noah · Clase 17</strong></span><span>Road to Sevilla · Nivel A2</span></div>
+<header class="esc-hero"><p class="esc-eyebrow"><span class="dot"></span> Clase 17 · L6 Filling the gaps</p><div class="esc-hero-top"><div><h1 class="esc-title">¿Dónde <em>está</em>…?: hay, estar y direcciones</h1><p class="esc-lede">Hoy vas a guiar a un turista perdido desde el Alcázar hasta la Plaza de España y a preguntar a un sevillano cómo llegar a un restaurante.<span class="gloss-text">[EN: Today you will guide a lost tourist from the Alcázar to Plaza de España and ask a local how to get to a restaurant.]</span></p></div><div class="esc-level-badge">A2</div></div>
+<div class="esc-meta-grid"><div>Duración<strong>≈ 50 minutos</strong></div><div>Foco gramatical<strong>Hay vs estar y direcciones</strong></div><div>Ámbito<strong>Orientarse y orientar a otros en Sevilla</strong></div><div>Programa<strong>Clase 17 de 26</strong></div></div>
+<div class="esc-chips-strip"><span class="esc-chip-pill">01 Hay vs está</span><span class="esc-chip-pill">02 ¿Dónde está…?</span><span class="esc-chip-pill">03 Cerca de, enfrente de</span><span class="esc-chip-pill">04 Sigue, gira, cruza</span><span class="esc-chip-pill">05 Todo recto</span><span class="esc-chip-pill">06 Mis indicaciones</span></div>
+<div class="m-ruta-card" id="stepper-clase">
+      <div class="m-ruta-header" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+        <span class="m-ruta-label" style="font-family:var(--font-mono); font-size:12px; text-transform:uppercase; letter-spacing:.08em; color:var(--esc-accent); font-weight:600;">🗺️ Itinerario de la clase</span>
+        <span class="m-ruta-summary" id="stepper-summary-text" style="font-family:var(--font-mono); font-size:12px; color:var(--esc-ink-muted);">Etapa 1 de 6 · 0%</span>
+      </div>
+      <div class="m-ruta" style="display:grid; grid-template-columns:repeat(6, 1fr); position:relative; gap:8px;">
+        <div class="m-prog" id="m-stepper-prog" style="position:absolute; top:15px; left:20px; height:2px; background:var(--esc-accent); z-index:0; width:0%; transition:width .3s ease;"></div>
+        <button type="button" class="m-parada active" data-target="#bloque-01" data-step="1" style="background:none; border:none; cursor:pointer; text-align:center; position:relative; z-index:1; padding:0; display:flex; flex-direction:column; align-items:center;">
+          <span class="m-nodo" style="width:30px; height:30px; border-radius:50%; background:var(--esc-accent); border:2px solid var(--esc-accent); color:#fff; font-family:var(--font-mono); font-size:12px; font-weight:700; display:flex; align-items:center; justify-content:center;">1</span>
+          <span class="m-etapa" style="margin-top:6px; font-family:var(--font-body); font-size:12.5px; font-weight:600; color:var(--esc-ink);">Normas</span>
+          <span class="m-duracion" style="font-family:var(--font-mono); font-size:12px; color:var(--esc-ink-muted);">3 min</span>
+        </button>
+        <button type="button" class="m-parada" data-target="#bloque-02" data-step="2" style="background:none; border:none; cursor:pointer; text-align:center; position:relative; z-index:1; padding:0; display:flex; flex-direction:column; align-items:center;">
+          <span class="m-nodo" style="width:30px; height:30px; border-radius:50%; background:var(--esc-surface); border:2px solid var(--esc-line-strong); color:var(--esc-ink-muted); font-family:var(--font-mono); font-size:12px; font-weight:700; display:flex; align-items:center; justify-content:center;">2</span>
+          <span class="m-etapa" style="margin-top:6px; font-family:var(--font-body); font-size:12.5px; font-weight:600; color:var(--esc-ink);">Gramática</span>
+          <span class="m-duracion" style="font-family:var(--font-mono); font-size:12px; color:var(--esc-ink-muted);">4 min</span>
+        </button>
+        <button type="button" class="m-parada" data-target="#bloque-03" data-step="3" style="background:none; border:none; cursor:pointer; text-align:center; position:relative; z-index:1; padding:0; display:flex; flex-direction:column; align-items:center;">
+          <span class="m-nodo" style="width:30px; height:30px; border-radius:50%; background:var(--esc-surface); border:2px solid var(--esc-line-strong); color:var(--esc-ink-muted); font-family:var(--font-mono); font-size:12px; font-weight:700; display:flex; align-items:center; justify-content:center;">3</span>
+          <span class="m-etapa" style="margin-top:6px; font-family:var(--font-body); font-size:12.5px; font-weight:600; color:var(--esc-ink);">Fonética</span>
+          <span class="m-duracion" style="font-family:var(--font-mono); font-size:12px; color:var(--esc-ink-muted);">2 min</span>
+        </button>
+        <button type="button" class="m-parada" data-target="#bloque-05" data-step="4" style="background:none; border:none; cursor:pointer; text-align:center; position:relative; z-index:1; padding:0; display:flex; flex-direction:column; align-items:center;">
+          <span class="m-nodo" style="width:30px; height:30px; border-radius:50%; background:var(--esc-surface); border:2px solid var(--esc-line-strong); color:var(--esc-ink-muted); font-family:var(--font-mono); font-size:12px; font-weight:700; display:flex; align-items:center; justify-content:center;">4</span>
+          <span class="m-etapa" style="margin-top:6px; font-family:var(--font-body); font-size:12.5px; font-weight:600; color:var(--esc-ink);">Práctica</span>
+          <span class="m-duracion" style="font-family:var(--font-mono); font-size:12px; color:var(--esc-ink-muted);">27 min</span>
+        </button>
+        <button type="button" class="m-parada" data-target="#bloque-12" data-step="5" style="background:none; border:none; cursor:pointer; text-align:center; position:relative; z-index:1; padding:0; display:flex; flex-direction:column; align-items:center;">
+          <span class="m-nodo" style="width:30px; height:30px; border-radius:50%; background:var(--esc-surface); border:2px solid var(--esc-line-strong); color:var(--esc-ink-muted); font-family:var(--font-mono); font-size:12px; font-weight:700; display:flex; align-items:center; justify-content:center;">5</span>
+          <span class="m-etapa" style="margin-top:6px; font-family:var(--font-body); font-size:12.5px; font-weight:600; color:var(--esc-ink);">Roleplay</span>
+          <span class="m-duracion" style="font-family:var(--font-mono); font-size:12px; color:var(--esc-ink-muted);">10 min</span>
+        </button>
+        <button type="button" class="m-parada" data-target="#bloque-16" data-step="6" style="background:none; border:none; cursor:pointer; text-align:center; position:relative; z-index:1; padding:0; display:flex; flex-direction:column; align-items:center;">
+          <span class="m-nodo" style="width:30px; height:30px; border-radius:50%; background:var(--esc-surface); border:2px solid var(--esc-line-strong); color:var(--esc-ink-muted); font-family:var(--font-mono); font-size:12px; font-weight:700; display:flex; align-items:center; justify-content:center;">6</span>
+          <span class="m-etapa" style="margin-top:6px; font-family:var(--font-body); font-size:12.5px; font-weight:600; color:var(--esc-ink);">Tarea final</span>
+          <span class="m-duracion" style="font-family:var(--font-mono); font-size:12px; color:var(--esc-ink-muted);">4 min</span>
+        </button>
+      </div>
+    </div>
+  </header>
+<div class="esc-phrase-card"><p class="esc-phrase-kicker">Frase ancla de la clase</p><p class="esc-phrase-main">«Perdona, ¿<em>hay</em> un bar por aquí?» — «Sí, <em>sigue</em> todo recto y <em>gira</em> a la izquierda: <em>está</em> al lado del puente.»</p><p class="esc-phrase-sub">«Hay» presenta algo nuevo; «está» sitúa algo que ya conoces.<span class="gloss-text">[EN: Hay introduces something new; está locates something you already know.]</span></p></div>
+
+<main id="contenido" tabindex="-1">
+<section class="esc-block" id="bloque-01"><div class="esc-block-head"><span class="esc-block-num">01</span><h2>A tener en cuenta<span class="gloss-text">[EN: Keep in mind]</span></h2><span class="esc-time-tag">3 min</span></div><div class="esc-panel"><div class="m-notas">
+<div class="m-aviso m-aviso--ok m-nota-ancha" role="note"><strong>Fórmula</strong><div class="m-formula" role="group" aria-label="hay con algo nuevo"><span class="m-formula-haber"><span>hay</span><span>un / una / dos…</span><span>sin artículo</span></span><span class="m-formula-mas" aria-hidden="true">→</span><span class="m-formula-part">algo nuevo</span></div><div class="m-formula" role="group" aria-label="está con algo conocido"><span class="m-formula-haber"><span>el / la / los / las</span><span>mi / su</span><span>nombre propio</span></span><span class="m-formula-mas" aria-hidden="true">→</span><span class="m-formula-part">está / están</span></div><p class="m-nota-texto">Con «hay» presentas algo (¿Hay un banco?). Con «está / están» sitúas algo concreto (¿Dónde está el banco?).</p><div class="m-par"><span class="m-par-ok"><b>✓</b> hay un bar en la plaza</span><span class="m-par-no"><b>✗</b> está un bar en la plaza</span></div><span class="gloss-text">[EN: Hay introduces something new; está places something specific.]</span></div>
+<div class="m-aviso m-aviso--ok" role="note"><strong>Preposiciones de lugar</strong><div class="m-marcas"><span>cerca de</span><span>al lado de</span><span>enfrente de</span><span>entre</span></div><p class="m-nota-texto">Y para girar: «a la derecha», «a la izquierda», «todo recto». Con «el»: de + el = <em>del</em>, a + el = <em>al</em>.</p><span class="gloss-text">[EN: And for turning: a la derecha, a la izquierda, todo recto. With el: de + el = del, a + el = al.]</span></div>
+<div class="m-aviso m-aviso--ojo" role="note"><strong>¡Ojo! Interferencia del inglés</strong><div class="m-contraste"><div class="m-contraste-fila m-contraste-no"><b>✗</b><span>«el banco es cerca»</span></div><div class="m-contraste-fila m-contraste-ok"><b>✓</b><span><em>el banco está cerca</em></span></div></div><p class="m-nota-texto">La ubicación siempre lleva «estar» (o «hay»), nunca «ser». Y «there is» se dice «hay», no «allí es».</p><span class="gloss-text">[EN: Location always takes estar (or hay), never ser. And there is is hay.]</span></div>
+<div class="m-aviso m-aviso--dato m-nota-ancha" role="note"><strong>Dato cultural</strong><p class="m-nota-texto">En Sevilla las calles son estrechas y muchas no aparecen en un mapa. Por eso la gente da referencias: un bar, una iglesia, una farmacia, la Giralda.</p><blockquote class="m-cita">«Sigue todo recto hasta la iglesia y gira a la derecha.»</blockquote><span class="gloss-text">[EN: Sevilla's streets are narrow and many don't even show up on a map, so people give landmarks: a bar, a church, a pharmacy, the Giralda.]</span></div>
+</div></div></section>
+<section class="esc-block" id="bloque-02"><div class="esc-block-head"><span class="esc-block-num">02</span><h2>Gramática<span class="gloss-text">[EN: Grammar]</span></h2><span class="esc-time-tag">4 min</span></div><div class="esc-panel"><div class="esc-table-wrap"><table class="esc-table"><thead><tr><th>Estructura</th><th>Forma</th><th>Ejemplo (Sevilla)</th></tr></thead><tbody>
+<tr><td><strong>Hay</strong></td><td class="col-highlight">hay + un / una / varios / sin artículo</td><td>En la plaza hay una fuente.<span class="gloss-text">[EN: There is a fountain in the square.]</span></td></tr>
+<tr><td><strong>Estar</strong></td><td class="col-highlight">el / la + nombre + está / están</td><td>La Giralda está en el centro.<span class="gloss-text">[EN: The Giralda is in the centre.]</span></td></tr>
+<tr><td><strong>Lugar</strong></td><td class="col-highlight">cerca de · lejos de · al lado de · enfrente de · entre</td><td>La farmacia está entre el banco y el bar.<span class="gloss-text">[EN: The pharmacy is between the bank and the bar.]</span></td></tr>
+<tr><td><strong>Dirección</strong></td><td class="col-highlight">todo recto · a la derecha · a la izquierda · hasta llegar a</td><td>Giras a la izquierda hasta llegar al puente.<span class="gloss-text">[EN: You turn left until you reach the bridge.]</span></td></tr>
+<tr><td><strong>Imperativo (tú)</strong></td><td class="col-highlight">sigue · gira · cruza (de seguir, girar, cruzar)</td><td>Cruza la plaza y sigue todo recto.<span class="gloss-text">[EN: Cross the square and keep straight on.]</span></td></tr>
+</tbody></table></div>
+<svg viewBox="0 0 680 300" role="img" aria-label="Mapa esquemático de Sevilla: Alcázar, Catedral, Plaza de España, farmacia, bar, puente y Triana" style="width:100%; height:auto; margin:16px 0 4px; border-radius:14px; display:block;"><rect width="680" height="300" fill="var(--esc-surface-subtle)"/><rect x="505" y="0" width="50" height="300" fill="var(--esc-info-soft)" stroke="var(--esc-info-border)"/><text x="530" y="285" text-anchor="middle" font-size="11" fill="var(--esc-info)" font-family="IBM Plex Mono, monospace">río</text><path d="M16 150 H664" stroke="var(--esc-surface)" stroke-width="16" fill="none" stroke-linecap="round"/><path d="M16 150 H664" stroke="#E8C14A" stroke-width="2" stroke-dasharray="7 6" fill="none"/><path d="M180 16 V284" stroke="var(--esc-surface)" stroke-width="16" fill="none" stroke-linecap="round"/><path d="M180 16 V284" stroke="#E8C14A" stroke-width="2" stroke-dasharray="7 6" fill="none"/><path d="M360 16 V284" stroke="var(--esc-surface)" stroke-width="16" fill="none" stroke-linecap="round"/><path d="M360 16 V284" stroke="#E8C14A" stroke-width="2" stroke-dasharray="7 6" fill="none"/><rect x="498" y="141" width="64" height="18" rx="4" fill="var(--esc-surface)" stroke="var(--esc-line-strong)"/><rect x="36" y="40" width="124" height="80" rx="10" fill="var(--esc-ok-soft)" stroke="var(--esc-line-strong)"/><text x="98.0" y="84.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="var(--esc-ink)" font-family="IBM Plex Sans, sans-serif">Plaza de España</text><rect x="36" y="180" width="124" height="80" rx="10" fill="var(--esc-warn-soft)" stroke="var(--esc-line-strong)"/><text x="98.0" y="224.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="var(--esc-ink)" font-family="IBM Plex Sans, sans-serif">Farmacia</text><rect x="200" y="40" width="140" height="80" rx="10" fill="var(--esc-accent-soft)" stroke="var(--esc-line-strong)"/><text x="270.0" y="84.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="var(--esc-ink)" font-family="IBM Plex Sans, sans-serif">Alcázar</text><rect x="200" y="180" width="140" height="80" rx="10" fill="var(--esc-accent-soft)" stroke="var(--esc-line-strong)"/><text x="270.0" y="224.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="var(--esc-ink)" font-family="IBM Plex Sans, sans-serif">Catedral</text><rect x="380" y="40" width="106" height="80" rx="10" fill="var(--esc-info-soft)" stroke="var(--esc-line-strong)"/><text x="433.0" y="84.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="var(--esc-ink)" font-family="IBM Plex Sans, sans-serif">Bar</text><rect x="380" y="180" width="106" height="80" rx="10" fill="var(--esc-surface)" stroke="var(--esc-line-strong)"/><text x="433.0" y="224.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="var(--esc-ink)" font-family="IBM Plex Sans, sans-serif">Banco</text><rect x="575" y="40" width="92" height="220" rx="10" fill="var(--esc-ok-soft)" stroke="var(--esc-line-strong)"/><text x="621.0" y="154.0" text-anchor="middle" font-size="12.5" font-weight="600" fill="var(--esc-ink)" font-family="IBM Plex Sans, sans-serif">Triana</text><text x="530" y="136" text-anchor="middle" font-size="11" fill="var(--esc-ink-muted)" font-family="IBM Plex Mono, monospace">puente</text></svg><p style="font-size:13px; color:var(--esc-ink-muted); margin:0 0 14px;">Mapa esquemático. «El Alcázar está enfrente de la Catedral. La Plaza de España está a la izquierda del Alcázar. El bar está cerca del puente.»<span class="gloss-text">[EN: Schematic map. The Alcázar is opposite the Cathedral. Plaza de España is to the left of the Alcázar. The bar is near the bridge.]</span></p>
+<div class="esc-contrast-grid"><div class="esc-contrast-col primary"><h4>Hay: algo nuevo<span class="gloss-text">[EN: Hay: something new]</span></h4><ul><li><strong>Invariable:</strong> <em>hay un banco, hay dos bancos</em></li><li><strong>Pregunta:</strong> <em>¿Hay una farmacia por aquí?</em></li></ul></div>
+<div class="esc-contrast-col"><h4>Estar: algo conocido<span class="gloss-text">[EN: Estar: something known]</span></h4><ul><li><strong>Concuerda:</strong> <em>el banco está · los baños están</em></li><li><strong>Pregunta:</strong> <em>¿Dónde está el banco?</em></li></ul></div></div></div></section>
+<section class="esc-block" id="bloque-03"><div class="esc-block-head"><span class="esc-block-num">03</span><h2>Pronunciación activa<span class="gloss-text">[EN: Active pronunciation]</span></h2><span class="esc-time-tag">2 min</span></div><div class="esc-panel"><div class="esc-pron-card"><span class="esc-pron-word">a la izquierda</span><span class="esc-pron-ipa">/a la iθˈkjeɾ.ða/</span><span class="esc-pron-tip">La «z» suena como «th» en «think» y la «d» es muy suave.<span class="gloss-text">[EN: The z sounds like th in think and the d is very soft.]</span></span><button type="button" class="esc-btn-ghost btn-speak" data-word="a la izquierda">🔊 Escuchar</button></div><div class="esc-pron-card"><span class="esc-pron-word">todo recto</span><span class="esc-pron-ipa">/ˈto.ðo ˈrek.to/</span><span class="esc-pron-tip">La «r» inicial de «recto» es fuerte: rrecto.<span class="gloss-text">[EN: The initial r of recto is strong: rrecto.]</span></span><button type="button" class="esc-btn-ghost btn-speak" data-word="todo recto">🔊 Escuchar</button></div><div class="esc-pron-card"><span class="esc-pron-word">¿dónde está el banco?</span><span class="esc-pron-ipa">/ˈdon.de esˈta el ˈβaŋ.ko/</span><span class="esc-pron-tip">«dónde» y «está» llevan tilde: la voz sube al final.<span class="gloss-text">[EN: dónde and está carry an accent: your voice rises at the end.]</span></span><button type="button" class="esc-btn-ghost btn-speak" data-word="¿dónde está el banco?">🔊 Escuchar</button></div></div></section>
+<section class="esc-block"><div class="esc-block-head"><span class="esc-block-num">04</span><h2>Léxico contextualizado<span class="gloss-text">[EN: Contextualised vocabulary]</span></h2><span class="esc-time-tag">3 min</span></div><p style="font-size:14px; color:var(--esc-ink-muted); margin:0 0 10px;">Pulsa cada ficha para ver su uso:<span class="gloss-text">[EN: Tap each card to see it in use.]</span></p><div class="esc-vocab-grid" id="vocab-grid-container"></div></section>
+<section class="esc-block" id="bloque-05"><div class="esc-block-head"><span class="esc-block-num">05</span><h2>Práctica guiada: hay, estar y direcciones<span class="gloss-text">[EN: Guided practice: hay, estar and directions]</span></h2><span class="esc-time-tag">5 min</span></div><div class="esc-panel"><div id="quiz-items-container"></div><div style="display:flex; justify-content:space-between; align-items:center; margin-top:20px; padding-top:16px; border-top:1px dashed var(--esc-line); flex-wrap:wrap; gap:10px;"><div style="display:flex; gap:8px;"><button type="button" class="esc-btn-primary" id="btn-check-quiz">Comprobar respuestas</button><button type="button" class="esc-btn-ghost" id="btn-reset-quiz">Reiniciar</button></div><span class="esc-score-text" id="quiz-score-badge" role="status"></span></div></div></section>
+<section class="esc-block"><div class="esc-block-head"><span class="esc-block-num">06</span><h2>Escritura con tildes<span class="gloss-text">[EN: Writing with accents]</span></h2><span class="esc-time-tag">7 min</span></div><div class="esc-panel"><p class="esc-panel-intro">Completa con hay, la forma de estar, una preposición o el imperativo:<span class="gloss-text">[EN: Complete with hay, a form of estar, a preposition or the imperative.]</span></p><div class="esc-cloze-card" data-answer="hay"><p style="margin:0 0 8px; font-size:15px;">1. En la plaza <input type="text" class="esc-cloze-input" aria-label="Hueco 1: hay / estar" placeholder="hay / estar..." autocomplete="off"> una fuente.<span class="gloss-text">[EN: There is a fountain in the square.]</span></p></div><div class="esc-cloze-card" data-answer="está"><p style="margin:0; font-size:15px;">2. El Alcázar <input type="text" class="esc-cloze-input" aria-label="Hueco 2: estar" placeholder="estar..." autocomplete="off"> cerca de la Catedral.</p></div><div class="esc-cloze-card" data-answer="todo"><p style="margin:0; font-size:15px;">3. Sigue <input type="text" class="esc-cloze-input" aria-label="Hueco 3: todo / toda" placeholder="todo / toda..." autocomplete="off"> recto hasta el semáforo.<span class="gloss-text">[EN: Keep straight on to the traffic light.]</span></p></div><div class="esc-cloze-card" data-answer="Gira"><p style="margin:0; font-size:15px;">4. (girar · tú) <input type="text" class="esc-cloze-input" aria-label="Hueco 4: girar" placeholder="girar..." autocomplete="off"> a la izquierda en la esquina.<span class="gloss-text">[EN: Turn left at the corner.]</span></p></div><div class="esc-cloze-card" data-answer="Cruza"><p style="margin:0; font-size:15px;">5. (cruzar · tú) <input type="text" class="esc-cloze-input" aria-label="Hueco 5: cruzar" placeholder="cruzar..." autocomplete="off"> el puente y estás en Triana.</p></div><div class="esc-cloze-card" data-answer="están"><p style="margin:0; font-size:15px;">6. Los baños <input type="text" class="esc-cloze-input" aria-label="Hueco 6: estar" placeholder="estar..." autocomplete="off"> al fondo.<span class="gloss-text">[EN: The toilets are at the back.]</span></p></div><div class="esc-cloze-card" data-answer="hay"><p style="margin:0; font-size:15px;">7. Perdone, ¿<input type="text" class="esc-cloze-input" aria-label="Hueco 7: hay / estar" placeholder="hay / estar..." autocomplete="off"> un cajero automático por aquí?</p></div><div class="esc-cloze-card" data-answer="enfrente"><p style="margin:0; font-size:15px;">8. El bar está <input type="text" class="esc-cloze-input" aria-label="Hueco 8: enfrente / cerca" placeholder="enfrente / cerca..." autocomplete="off"> de la iglesia.<span class="gloss-text">[EN: The bar is opposite the church.]</span></p></div><div class="esc-cloze-card" data-answer="entre"><p style="margin:0; font-size:15px;">9. La farmacia está <input type="text" class="esc-cloze-input" aria-label="Hueco 9: entre / cerca" placeholder="entre / cerca..." autocomplete="off"> el banco y el supermercado.<span class="gloss-text">[EN: The pharmacy is between the bank and the supermarket.]</span></p></div><div class="esc-cloze-card" data-answer="Sigue"><p style="margin:0; font-size:15px;">10. (seguir · tú) <input type="text" class="esc-cloze-input" aria-label="Hueco 10: seguir" placeholder="seguir..." autocomplete="off"> por esta calle hasta la plaza.</p></div><div style="display:flex; justify-content:flex-end; margin-top:14px;"><button type="button" class="esc-btn-primary" id="btn-check-cloze">Validar escritura</button></div></div></section>
+<section class="esc-block"><div class="esc-block-head"><span class="esc-block-num">07</span><h2>Detective de errores<span class="gloss-text">[EN: Error detective]</span></h2><span class="esc-time-tag">4 min</span></div><div class="esc-panel"><p class="esc-panel-intro">En cada oración hay una sola palabra (o expresión) equivocada. Púlsala:<span class="gloss-text">[EN: Each sentence has one wrong word or phrase. Tap it.]</span></p><div class="esc-spot-card" style="margin-top:12px;"><div class="esc-spot-sentence"><button type="button" class="esc-spot-token">En</button> <button type="button" class="esc-spot-token">mi</button> <button type="button" class="esc-spot-token">calle</button> <button type="button" class="esc-spot-token" data-err="true">está</button> <button type="button" class="esc-spot-token">un</button> <button type="button" class="esc-spot-token">supermercado.</button></div><div class="esc-spot-solution"><strong>¡Encontrado!</strong> Algo nuevo que presentas: «hay». Forma correcta: <strong>hay un supermercado</strong>.</div></div><div class="esc-spot-card" style="margin-top:12px;"><div class="esc-spot-sentence"><button type="button" class="esc-spot-token">El</button> <button type="button" class="esc-spot-token">banco</button> <button type="button" class="esc-spot-token" data-err="true">hay</button> <button type="button" class="esc-spot-token">enfrente</button> <button type="button" class="esc-spot-token">de</button> <button type="button" class="esc-spot-token">la</button> <button type="button" class="esc-spot-token">farmacia.</button></div><div class="esc-spot-solution"><strong>¡Encontrado!</strong> El banco es algo concreto: «estar». Forma correcta: <strong>está</strong>.</div></div><div class="esc-spot-card" style="margin-top:12px;"><div class="esc-spot-sentence"><button type="button" class="esc-spot-token">La</button> <button type="button" class="esc-spot-token">Giralda</button> <button type="button" class="esc-spot-token">está</button> <button type="button" class="esc-spot-token" data-err="true">en lado</button> <button type="button" class="esc-spot-token">de</button> <button type="button" class="esc-spot-token">la</button> <button type="button" class="esc-spot-token">Catedral.</button></div><div class="esc-spot-solution"><strong>¡Encontrado!</strong> La expresión es «al lado de». Forma correcta: <strong>al lado de</strong>.</div></div><div class="esc-spot-card" style="margin-top:12px;"><div class="esc-spot-sentence"><button type="button" class="esc-spot-token">¿</button> <button type="button" class="esc-spot-token" data-err="true">Es</button> <button type="button" class="esc-spot-token">lejos</button> <button type="button" class="esc-spot-token">la</button> <button type="button" class="esc-spot-token">Plaza</button> <button type="button" class="esc-spot-token">de</button> <button type="button" class="esc-spot-token">España?</button></div><div class="esc-spot-solution"><strong>¡Encontrado!</strong> La ubicación lleva «estar». Forma correcta: <strong>¿Está lejos…?</strong></div></div><div class="esc-spot-card" style="margin-top:12px;"><div class="esc-spot-sentence"><button type="button" class="esc-spot-token">¿Dónde</button> <button type="button" class="esc-spot-token" data-err="true">hay</button> <button type="button" class="esc-spot-token">el</button> <button type="button" class="esc-spot-token">Alcázar?</button></div><div class="esc-spot-solution"><strong>¡Encontrado!</strong> El Alcázar es algo concreto y conocido: se usa «estar». Forma correcta: <strong>¿Dónde está el Alcázar?</strong>.</div></div><div class="esc-spot-card" style="margin-top:12px;"><div class="esc-spot-sentence"><button type="button" class="esc-spot-token">En</button> <button type="button" class="esc-spot-token">el</button> <button type="button" class="esc-spot-token">parque</button> <button type="button" class="esc-spot-token" data-err="true">está</button> <button type="button" class="esc-spot-token">una</button> <button type="button" class="esc-spot-token">fuente</button> <button type="button" class="esc-spot-token">muy</button> <button type="button" class="esc-spot-token">bonita.</button></div><div class="esc-spot-solution"><strong>¡Encontrado!</strong> Algo nuevo que presentas: «hay». Forma correcta: <strong>hay una fuente</strong>.</div></div><div class="esc-spot-card" style="margin-top:12px;"><div class="esc-spot-sentence"><button type="button" class="esc-spot-token">Gira</button> <button type="button" class="esc-spot-token" data-err="true">en</button> <button type="button" class="esc-spot-token">la</button> <button type="button" class="esc-spot-token">izquierda</button> <button type="button" class="esc-spot-token">y</button> <button type="button" class="esc-spot-token">sigue</button> <button type="button" class="esc-spot-token">recto.</button></div><div class="esc-spot-solution"><strong>¡Encontrado!</strong> Se dice «a la izquierda». Forma correcta: <strong>a la izquierda</strong>.</div></div><div class="esc-spot-card" style="margin-top:12px;"><div class="esc-spot-sentence"><button type="button" class="esc-spot-token">La</button> <button type="button" class="esc-spot-token">farmacia</button> <button type="button" class="esc-spot-token">está</button> <button type="button" class="esc-spot-token" data-err="true">en frente</button> <button type="button" class="esc-spot-token">del</button> <button type="button" class="esc-spot-token">banco.</button></div><div class="esc-spot-solution"><strong>¡Encontrado!</strong> Lo recomendado es escribirlo junto: «enfrente». Forma correcta: <strong>enfrente</strong>.</div></div><div class="esc-spot-card" style="margin-top:12px;"><div class="esc-spot-sentence"><button type="button" class="esc-spot-token">Cruza</button> <button type="button" class="esc-spot-token">la</button> <button type="button" class="esc-spot-token">plaza</button> <button type="button" class="esc-spot-token">y</button> <button type="button" class="esc-spot-token" data-err="true">giras</button> <button type="button" class="esc-spot-token">a</button> <button type="button" class="esc-spot-token">la</button> <button type="button" class="esc-spot-token">derecha.</button></div><div class="esc-spot-solution"><strong>¡Encontrado!</strong> Para dar una orden a «tú» se usa el imperativo. Forma correcta: <strong>gira</strong>.</div></div><div class="esc-spot-card" style="margin-top:12px;"><div class="esc-spot-sentence"><button type="button" class="esc-spot-token">La</button> <button type="button" class="esc-spot-token">parada</button> <button type="button" class="esc-spot-token">está</button> <button type="button" class="esc-spot-token" data-err="true">cerca a</button> <button type="button" class="esc-spot-token">la</button> <button type="button" class="esc-spot-token">plaza.</button></div><div class="esc-spot-solution"><strong>¡Encontrado!</strong> Se dice «cerca de». Forma correcta: <strong>cerca de la plaza</strong>.</div></div></div></section>
+<section class="esc-block"><div class="esc-block-head"><span class="esc-block-num">08</span><h2>Emparejamiento de preguntas y respuestas<span class="gloss-text">[EN: Matching]</span></h2><span class="esc-time-tag">4 min</span></div><div class="esc-panel"><p class="esc-panel-intro">Preguntas de un turista y respuestas de un sevillano:<span class="gloss-text">[EN: A tourist's questions and a local's answers.]</span></p><div class="esc-match-grid" style="margin-bottom:18px;"><div class="esc-match-col match-left"><button type="button" class="esc-match-card" data-pair="1">¿Dónde está el baño?</button><button type="button" class="esc-match-card" data-pair="2">¿Hay una farmacia por aquí?</button><button type="button" class="esc-match-card" data-pair="3">¿Cómo llego a la Plaza de España?</button><button type="button" class="esc-match-card" data-pair="4">¿Está lejos el puente?</button><button type="button" class="esc-match-card" data-pair="5">¿Dónde está el Alcázar?</button></div><div class="esc-match-col match-right"><button type="button" class="esc-match-card" data-pair="1">Está al fondo, a la derecha.</button><button type="button" class="esc-match-card" data-pair="2">Sí, hay una en la esquina.</button><button type="button" class="esc-match-card" data-pair="5">Enfrente de la Catedral.</button><button type="button" class="esc-match-card" data-pair="3">Sigue todo recto y cruza el parque.</button><button type="button" class="esc-match-card" data-pair="4">No, está muy cerca, a cinco minutos.</button></div></div><div class="esc-match-grid" style="margin-bottom:18px;"><div class="esc-match-col match-left"><button type="button" class="esc-match-card" data-pair="6">¿Hay un banco cerca?</button><button type="button" class="esc-match-card" data-pair="7">¿Dónde hay un supermercado?</button><button type="button" class="esc-match-card" data-pair="8">¿Hay un cajero por aquí?</button><button type="button" class="esc-match-card" data-pair="9">¿Dónde está el hotel?</button><button type="button" class="esc-match-card" data-pair="10">¿Cómo llego al río?</button></div><div class="esc-match-col match-right"><button type="button" class="esc-match-card" data-pair="6">Sí, gira a la izquierda y está al final de la calle.</button><button type="button" class="esc-match-card" data-pair="8">Sí, hay uno al lado del banco.</button><button type="button" class="esc-match-card" data-pair="7">Hay uno detrás del mercado.</button><button type="button" class="esc-match-card" data-pair="9">Está entre la plaza y el río.</button><button type="button" class="esc-match-card" data-pair="10">Baja por esta calle hasta el puente.</button></div></div></div></section>
+<section class="esc-block"><div class="esc-block-head"><span class="esc-block-num">09</span><h2>Reconstrucción de oraciones<span class="gloss-text">[EN: Sentence rebuilding]</span></h2><span class="esc-time-tag">4 min</span></div><div class="esc-order-box" style="margin-bottom:14px;" data-solution="El bar está al lado de la iglesia"><p style="margin:0 0 10px; font-size:14px; color:var(--esc-ink-soft);">1. Toca las fichas en orden:<span class="gloss-text">[EN: Tap the tiles in order.]</span></p><div class="esc-order-bank"><span class="esc-word-chip" role="button" tabindex="0">al</span><span class="esc-word-chip" role="button" tabindex="0">está</span><span class="esc-word-chip" role="button" tabindex="0">de</span><span class="esc-word-chip" role="button" tabindex="0">iglesia</span><span class="esc-word-chip" role="button" tabindex="0">El</span><span class="esc-word-chip" role="button" tabindex="0">lado</span><span class="esc-word-chip" role="button" tabindex="0">bar</span><span class="esc-word-chip" role="button" tabindex="0">la</span></div><div class="esc-order-slot" style="margin-top:10px;"></div><div style="display:flex; justify-content:space-between; align-items:center; margin-top:12px;"><span class="order-feedback-text" role="status" aria-live="polite" style="font-family:var(--font-mono); font-size:12px;"></span><div style="display:flex; gap:8px;"><button type="button" class="esc-btn-primary btn-check-order">Comprobar orden</button><button type="button" class="esc-btn-ghost btn-reset-order">Reiniciar</button></div></div></div><div class="esc-order-box" style="margin-bottom:14px;" data-solution="Sigue todo recto hasta el semáforo"><p style="margin:0 0 10px; font-size:14px; color:var(--esc-ink-soft);">2. Toca las fichas en orden:<span class="gloss-text">[EN: Tap the tiles in order.]</span></p><div class="esc-order-bank"><span class="esc-word-chip" role="button" tabindex="0">recto</span><span class="esc-word-chip" role="button" tabindex="0">Sigue</span><span class="esc-word-chip" role="button" tabindex="0">hasta</span><span class="esc-word-chip" role="button" tabindex="0">todo</span><span class="esc-word-chip" role="button" tabindex="0">el</span><span class="esc-word-chip" role="button" tabindex="0">semáforo</span></div><div class="esc-order-slot" style="margin-top:10px;"></div><div style="display:flex; justify-content:space-between; align-items:center; margin-top:12px;"><span class="order-feedback-text" role="status" aria-live="polite" style="font-family:var(--font-mono); font-size:12px;"></span><div style="display:flex; gap:8px;"><button type="button" class="esc-btn-primary btn-check-order">Comprobar orden</button><button type="button" class="esc-btn-ghost btn-reset-order">Reiniciar</button></div></div></div><div class="esc-order-box" style="margin-bottom:14px;" data-solution="Gira a la derecha en la esquina"><p style="margin:0 0 10px; font-size:14px; color:var(--esc-ink-soft);">3. Toca las fichas en orden:<span class="gloss-text">[EN: Tap the tiles in order.]</span></p><div class="esc-order-bank"><span class="esc-word-chip" role="button" tabindex="0">derecha</span><span class="esc-word-chip" role="button" tabindex="0">en</span><span class="esc-word-chip" role="button" tabindex="0">a</span><span class="esc-word-chip" role="button" tabindex="0">la</span><span class="esc-word-chip" role="button" tabindex="0">Gira</span><span class="esc-word-chip" role="button" tabindex="0">esquina</span><span class="esc-word-chip" role="button" tabindex="0">la</span></div><div class="esc-order-slot" style="margin-top:10px;"></div><div style="display:flex; justify-content:space-between; align-items:center; margin-top:12px;"><span class="order-feedback-text" role="status" aria-live="polite" style="font-family:var(--font-mono); font-size:12px;"></span><div style="display:flex; gap:8px;"><button type="button" class="esc-btn-primary btn-check-order">Comprobar orden</button><button type="button" class="esc-btn-ghost btn-reset-order">Reiniciar</button></div></div></div><div class="esc-order-box" style="margin-bottom:14px;" data-solution="Hay una farmacia enfrente del banco"><p style="margin:0 0 10px; font-size:14px; color:var(--esc-ink-soft);">4. Toca las fichas en orden:<span class="gloss-text">[EN: Tap the tiles in order.]</span></p><div class="esc-order-bank"><span class="esc-word-chip" role="button" tabindex="0">Hay</span><span class="esc-word-chip" role="button" tabindex="0">banco</span><span class="esc-word-chip" role="button" tabindex="0">farmacia</span><span class="esc-word-chip" role="button" tabindex="0">una</span><span class="esc-word-chip" role="button" tabindex="0">enfrente</span><span class="esc-word-chip" role="button" tabindex="0">del</span></div><div class="esc-order-slot" style="margin-top:10px;"></div><div style="display:flex; justify-content:space-between; align-items:center; margin-top:12px;"><span class="order-feedback-text" role="status" aria-live="polite" style="font-family:var(--font-mono); font-size:12px;"></span><div style="display:flex; gap:8px;"><button type="button" class="esc-btn-primary btn-check-order">Comprobar orden</button><button type="button" class="esc-btn-ghost btn-reset-order">Reiniciar</button></div></div></div><div class="esc-order-box" style="margin-bottom:14px;" data-solution="El hotel está entre la plaza y el río"><p style="margin:0 0 10px; font-size:14px; color:var(--esc-ink-soft);">5. Toca las fichas en orden:</p><div class="esc-order-bank"><span class="esc-word-chip" role="button" tabindex="0">hotel</span><span class="esc-word-chip" role="button" tabindex="0">entre</span><span class="esc-word-chip" role="button" tabindex="0">El</span><span class="esc-word-chip" role="button" tabindex="0">el</span><span class="esc-word-chip" role="button" tabindex="0">río</span><span class="esc-word-chip" role="button" tabindex="0">plaza</span><span class="esc-word-chip" role="button" tabindex="0">y</span><span class="esc-word-chip" role="button" tabindex="0">está</span><span class="esc-word-chip" role="button" tabindex="0">la</span></div><div class="esc-order-slot" style="margin-top:10px;"></div><div style="display:flex; justify-content:space-between; align-items:center; margin-top:12px;"><span class="order-feedback-text" role="status" aria-live="polite" style="font-family:var(--font-mono); font-size:12px;"></span><div style="display:flex; gap:8px;"><button type="button" class="esc-btn-primary btn-check-order">Comprobar orden</button><button type="button" class="esc-btn-ghost btn-reset-order">Reiniciar</button></div></div></div><div class="esc-order-box" style="margin-bottom:14px;" data-solution="En mi barrio hay un parque grande|Hay un parque grande en mi barrio"><p style="margin:0 0 10px; font-size:14px; color:var(--esc-ink-soft);">6. Toca las fichas en orden:</p><div class="esc-order-bank"><span class="esc-word-chip" role="button" tabindex="0">En</span><span class="esc-word-chip" role="button" tabindex="0">grande</span><span class="esc-word-chip" role="button" tabindex="0">un</span><span class="esc-word-chip" role="button" tabindex="0">barrio</span><span class="esc-word-chip" role="button" tabindex="0">parque</span><span class="esc-word-chip" role="button" tabindex="0">hay</span><span class="esc-word-chip" role="button" tabindex="0">mi</span></div><div class="esc-order-slot" style="margin-top:10px;"></div><div style="display:flex; justify-content:space-between; align-items:center; margin-top:12px;"><span class="order-feedback-text" role="status" aria-live="polite" style="font-family:var(--font-mono); font-size:12px;"></span><div style="display:flex; gap:8px;"><button type="button" class="esc-btn-primary btn-check-order">Comprobar orden</button><button type="button" class="esc-btn-ghost btn-reset-order">Reiniciar</button></div></div></div><div class="esc-order-box" style="margin-bottom:14px;" data-solution="Cruza la calle y gira a la izquierda"><p style="margin:0 0 10px; font-size:14px; color:var(--esc-ink-soft);">7. Toca las fichas en orden:</p><div class="esc-order-bank"><span class="esc-word-chip" role="button" tabindex="0">y</span><span class="esc-word-chip" role="button" tabindex="0">calle</span><span class="esc-word-chip" role="button" tabindex="0">a</span><span class="esc-word-chip" role="button" tabindex="0">izquierda</span><span class="esc-word-chip" role="button" tabindex="0">Cruza</span><span class="esc-word-chip" role="button" tabindex="0">gira</span><span class="esc-word-chip" role="button" tabindex="0">la</span><span class="esc-word-chip" role="button" tabindex="0">la</span></div><div class="esc-order-slot" style="margin-top:10px;"></div><div style="display:flex; justify-content:space-between; align-items:center; margin-top:12px;"><span class="order-feedback-text" role="status" aria-live="polite" style="font-family:var(--font-mono); font-size:12px;"></span><div style="display:flex; gap:8px;"><button type="button" class="esc-btn-primary btn-check-order">Comprobar orden</button><button type="button" class="esc-btn-ghost btn-reset-order">Reiniciar</button></div></div></div><div class="esc-order-box" style="margin-bottom:14px;" data-solution="La estación está cerca de aquí"><p style="margin:0 0 10px; font-size:14px; color:var(--esc-ink-soft);">8. Toca las fichas en orden:</p><div class="esc-order-bank"><span class="esc-word-chip" role="button" tabindex="0">está</span><span class="esc-word-chip" role="button" tabindex="0">La</span><span class="esc-word-chip" role="button" tabindex="0">cerca</span><span class="esc-word-chip" role="button" tabindex="0">estación</span><span class="esc-word-chip" role="button" tabindex="0">de</span><span class="esc-word-chip" role="button" tabindex="0">aquí</span></div><div class="esc-order-slot" style="margin-top:10px;"></div><div style="display:flex; justify-content:space-between; align-items:center; margin-top:12px;"><span class="order-feedback-text" role="status" aria-live="polite" style="font-family:var(--font-mono); font-size:12px;"></span><div style="display:flex; gap:8px;"><button type="button" class="esc-btn-primary btn-check-order">Comprobar orden</button><button type="button" class="esc-btn-ghost btn-reset-order">Reiniciar</button></div></div></div><div class="esc-order-box" style="margin-bottom:14px;" data-solution="Sigue todo recto hasta la plaza"><p style="margin:0 0 10px; font-size:14px; color:var(--esc-ink-soft);">9. Toca las fichas en orden:</p><div class="esc-order-bank"><span class="esc-word-chip" role="button" tabindex="0">hasta</span><span class="esc-word-chip" role="button" tabindex="0">la</span><span class="esc-word-chip" role="button" tabindex="0">todo</span><span class="esc-word-chip" role="button" tabindex="0">recto</span><span class="esc-word-chip" role="button" tabindex="0">Sigue</span><span class="esc-word-chip" role="button" tabindex="0">plaza</span></div><div class="esc-order-slot" style="margin-top:10px;"></div><div style="display:flex; justify-content:space-between; align-items:center; margin-top:12px;"><span class="order-feedback-text" role="status" aria-live="polite" style="font-family:var(--font-mono); font-size:12px;"></span><div style="display:flex; gap:8px;"><button type="button" class="esc-btn-primary btn-check-order">Comprobar orden</button><button type="button" class="esc-btn-ghost btn-reset-order">Reiniciar</button></div></div></div><div class="esc-order-box" style="margin-bottom:14px;" data-solution="No hay ningún banco por aquí"><p style="margin:0 0 10px; font-size:14px; color:var(--esc-ink-soft);">10. Toca las fichas en orden:</p><div class="esc-order-bank"><span class="esc-word-chip" role="button" tabindex="0">No</span><span class="esc-word-chip" role="button" tabindex="0">aquí</span><span class="esc-word-chip" role="button" tabindex="0">ningún</span><span class="esc-word-chip" role="button" tabindex="0">hay</span><span class="esc-word-chip" role="button" tabindex="0">banco</span><span class="esc-word-chip" role="button" tabindex="0">por</span></div><div class="esc-order-slot" style="margin-top:10px;"></div><div style="display:flex; justify-content:space-between; align-items:center; margin-top:12px;"><span class="order-feedback-text" role="status" aria-live="polite" style="font-family:var(--font-mono); font-size:12px;"></span><div style="display:flex; gap:8px;"><button type="button" class="esc-btn-primary btn-check-order">Comprobar orden</button><button type="button" class="esc-btn-ghost btn-reset-order">Reiniciar</button></div></div></div></section>
+<section class="esc-block" id="bloque-12"><div class="esc-block-head"><span class="esc-block-num">10</span><h2>Simulación conversacional<span class="gloss-text">[EN: Conversation simulation]</span></h2><span class="esc-time-tag">10 min</span></div><div class="esc-panel"><div class="esc-roleplay-tabs" id="roleplay-tab-buttons" role="tablist"><span class="esc-seg-thumb" aria-hidden="true"></span><button type="button" class="esc-roleplay-tab-btn active" data-tab="0">🗺️ Turista perdido</button><button type="button" class="esc-roleplay-tab-btn" data-tab="1">📍 Pregunto a un sevillano</button></div><div id="roleplay-tabpanel" role="tabpanel" aria-labelledby="roleplay-tab-0"><div id="roleplay-context"></div><div class="esc-chat-thread" id="roleplay-chat-thread"></div></div></div></section>
+<section class="esc-block"><div class="esc-block-head"><span class="esc-block-num">11</span><h2>Autoevaluación<span class="gloss-text">[EN: Self-assessment]</span></h2><span class="esc-time-tag">1 min</span></div><div class="esc-panel"><p style="margin:0 0 4px; font-weight:600; font-size:14.5px;">1. ¿Qué seguridad has sentido hoy? (1–10)<span class="gloss-text">[EN: How confident did you feel today? (1–10)]</span></p><div class="esc-slider-row" id="scale-slider-row"></div><p style="margin:16px 0 8px; font-weight:600; font-size:14.5px;">2. Objetivos:<span class="gloss-text">[EN: Goals]</span></p><ul class="esc-checklist" id="checklist-master" role="group" aria-label="Checklist de objetivos alcanzados"><li class="esc-check-item" data-id="chk-1"><span class="esc-check-box" aria-hidden="true">✓</span><span>Distingo «hay» (algo nuevo) de «está / están» (algo conocido).<span class="gloss-text">[EN: I tell hay (something new) from está / están (something known).]</span></span></li><li class="esc-check-item" data-id="chk-2"><span class="esc-check-box" aria-hidden="true">✓</span><span>Sitúo lugares con cerca de, al lado de, enfrente de y entre.<span class="gloss-text">[EN: I place things with cerca de, al lado de, enfrente de and entre.]</span></span></li><li class="esc-check-item" data-id="chk-3"><span class="esc-check-box" aria-hidden="true">✓</span><span>Doy indicaciones con sigue, gira y cruza, y las entiendo cuando me las dan.<span class="gloss-text">[EN: I give directions with sigue, gira and cruza, and I understand them when given to me.]</span></span></li></ul></div></section>
+<section class="esc-block" id="bloque-16"><div class="esc-block-head"><span class="esc-block-num">12</span><h2>Producción oral y entrega<span class="gloss-text">[EN: Speaking task and submission]</span></h2><span class="esc-time-tag">3 min</span></div><div class="esc-task-panel"><p style="margin:0; font-size:15px; color:var(--esc-ink-soft);">Escribe 8 líneas de indicaciones desde tu hotel hasta un lugar que te guste de Sevilla, con al menos cuatro preposiciones de lugar. Después léelas en voz alta y envía tu audio.<span class="gloss-text">[EN: Write 8 lines of directions from your hotel to a place you like in Sevilla, with at least four place prepositions. Then read them aloud and send your audio.]</span></p><textarea class="esc-final-textarea" id="master-task-input" placeholder="Sal del hotel y sigue todo recto. Cruza la plaza. Gira a la izquierda: el bar está enfrente de la iglesia..."></textarea><div class="esc-task-footer"><span class="esc-regex-counter" id="regex-counter-label">0 estructuras diana detectadas</span><div style="display:flex; align-items:center; gap:10px;"><span class="esc-save-flag" id="task-saved-flag">Guardado ✓</span><button type="button" class="esc-btn-primary" id="btn-manual-save-task">Guardar tarea</button></div></div></div></section>
+  <!-- PIE EDITORIAL -->
+  </main>
+<footer class="esc-footer">
+    <span>Noah · Clase 17</span>
+    <span>Road to Sevilla · L6 Filling the gaps</span>
+  </footer>
+
+</div>
+
+<aside class="esc-dock" id="dock-flotante">
+  <button type="button" class="esc-dock-top" id="dock-btn-top" title="Volver al inicio" aria-label="Volver al inicio">▲</button>
+</aside>
+
+<!-- =========================================================================
+     LÓGICA JAVASCRIPT UNIFICADA Y MOTOR DE PERSISTENCIA
+     ========================================================================= -->
+<script>
+(function() {
+  'use strict';
+
+  const STORAGE_KEY_PREFIX = 'escolar_noah_c17';
+
+  // --- 1. CAPA DE PERSISTENCIA ROBUSTA (window.storage + localStorage) ---
+  const StorageAdapter = {
+    async get(key) {
+      if (window.storage && typeof window.storage.get === 'function') {
+        try {
+          const res = await window.storage.get(key);
+          if (res && res.value !== undefined) return res.value;
+        } catch(e) {}
+      }
+      try { return localStorage.getItem(key); } catch(e) { return null; }
+    },
+    async set(key, value) {
+      const valStr = typeof value === 'string' ? value : JSON.stringify(value);
+      if (window.storage && typeof window.storage.set === 'function') {
+        try { await window.storage.set(key, valStr); } catch(e) {}
+      }
+      try { localStorage.setItem(key, valStr); } catch(e) {}
+    }
+  };
+
+  // --- 2. RELOJ DE SESIÓN Y SCROLL METER ---
+  const meterFill = document.getElementById('reading-meter-fill');
+  const hudHeader = document.querySelector('.esc-sticky-header');
+  const heroTitle = document.querySelector('h1.esc-title');
+  function onScrollHud() {
+    const total = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = total > 0 ? (window.scrollY / total) * 100 : 0;
+    const pct = Math.min(100, Math.max(0, progress));
+    meterFill.style.width = `${pct}%`;
+    meterFill.parentElement.setAttribute('aria-valuenow', Math.round(pct));
+    if (heroTitle) hudHeader.classList.toggle('has-title', heroTitle.getBoundingClientRect().bottom < hudHeader.offsetHeight);
+  }
+  window.addEventListener('scroll', onScrollHud, { passive: true });
+  onScrollHud();
+
+  // --- 3. SELECTOR DE PALETA DINÁMICA ---
+  document.querySelectorAll('.esc-color-dot').forEach(dot => {
+    dot.addEventListener('click', () => {
+      document.querySelectorAll('.esc-color-dot').forEach(d => d.classList.remove('active'));
+      dot.classList.add('active');
+      const accent = dot.dataset.color;
+      document.documentElement.setAttribute('data-accent', accent);
+      StorageAdapter.set(`${STORAGE_KEY_PREFIX}_accent`, accent);
+    });
+  });
+
+  // --- A11Y: utilidades (anuncios para lector de pantalla y teclado en controles no nativos) ---
+  const a11yStatus = document.getElementById('a11y-status');
+  let a11yTimer = null;
+  function anuncia(msg) {
+    if (!a11yStatus) return;
+    a11yStatus.textContent = '';
+    clearTimeout(a11yTimer);
+    a11yTimer = setTimeout(() => { a11yStatus.textContent = msg; }, 60);
+  }
+  function teclado(el, role) {
+    if (role) el.setAttribute('role', role);
+    if (!el.hasAttribute('tabindex')) el.tabIndex = 0;
+    if (el.dataset.kb) return;
+    el.dataset.kb = '1';
+    el.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); el.click(); } });
+  }
+  const reduceMotion = () => !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+
+  // --- 4. SELECTOR DE MODO OSCURO ---
+  const btnDark = document.getElementById('btn-toggle-dark');
+  const darkIcon = document.getElementById('dark-icon');
+  const darkLabel = document.getElementById('dark-label');
+  let themeExplicit = false;
+  const metaTheme = document.getElementById('meta-theme-color');
+  const systemDark = window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)') : null;
+  function applyTheme(isDark) {
+    if (metaTheme) metaTheme.setAttribute('content', isDark ? '#000000' : '#FBF8F1');
+    if (isDark) {
+      document.documentElement.setAttribute('data-theme', 'oscuro');
+      darkIcon.textContent = '☀';
+      darkLabel.textContent = 'Claro';
+      btnDark.classList.add('active'); btnDark.setAttribute('aria-pressed', 'true');
+    } else {
+      document.documentElement.removeAttribute('data-theme');
+      darkIcon.textContent = '☾';
+      darkLabel.textContent = 'Oscuro';
+      btnDark.classList.remove('active'); btnDark.setAttribute('aria-pressed', 'false');
+    }
+  }
+  if (systemDark) {
+    applyTheme(systemDark.matches);
+    const onSystemTheme = e => { if (!themeExplicit) applyTheme(e.matches); };
+    if (systemDark.addEventListener) systemDark.addEventListener('change', onSystemTheme);
+  }
+  btnDark.addEventListener('click', () => {
+    themeExplicit = true;
+    const isDark = document.documentElement.getAttribute('data-theme') === 'oscuro';
+    applyTheme(!isDark);
+    StorageAdapter.set(`${STORAGE_KEY_PREFIX}_theme`, !isDark ? 'oscuro' : 'claro');
+  });
+
+  // --- 5. SELECTOR DE BILINGÜISMO ---
+  const topSw = document.getElementById('top-switch-gloss');
+  function applyGloss(isOn) {
+    document.documentElement.setAttribute('data-lang', isOn ? 'bilingual' : 'es-only');
+    topSw.checked = isOn;
+  }
+  topSw.addEventListener('change', e => {
+    applyGloss(e.target.checked);
+    StorageAdapter.set(`${STORAGE_KEY_PREFIX}_gloss`, e.target.checked ? 'bilingual' : 'es-only');
+  });
+  document.getElementById('dock-btn-top').addEventListener('click', () => window.scrollTo({ top: 0, behavior: reduceMotion() ? 'auto' : 'smooth' }));
+
+  // --- 6. SÍNTESIS DE VOZ NATIVA ---
+  document.querySelectorAll('.btn-speak').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const word = btn.dataset.word;
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utter = new SpeechSynthesisUtterance(word);
+        utter.lang = 'es-ES';
+        utter.rate = 0.88;
+        window.speechSynthesis.speak(utter);
+      }
+    });
+  });
+
+  // --- 7. VOCABULARIO FLIP CARDS ---
+  const VOCAB_DATA = [{"front": "la esquina", "back": "The corner. — Gira a la izquierda en la esquina."}, {"front": "el semáforo", "back": "The traffic light. — En el semáforo, cruza la calle."}, {"front": "todo recto", "back": "Straight ahead. — Sigue todo recto hasta la plaza."}, {"front": "hasta llegar a…", "back": "Until you reach… — Sigue hasta llegar al puente."}, {"front": "enfrente de", "back": "Opposite. — El Alcázar está enfrente de la Catedral."}, {"front": "cruza", "back": "Cross. — Cruza el puente y estás en Triana."}];
+  const vocabGrid = document.getElementById('vocab-grid-container');
+  VOCAB_DATA.forEach(v => {
+    const card = document.createElement('div');
+    card.className = 'esc-tap-card';
+    card.tabIndex = 0;
+    card.setAttribute('role', 'button');
+    card.innerHTML = `
+      <div class="esc-tap-inner">
+        <div class="esc-tap-front">${v.front}</div>
+        <div class="esc-tap-back">${v.back}</div>
+      </div>
+    `;
+    card.setAttribute('aria-pressed', 'false');
+    const toggle = () => { card.classList.toggle('flipped'); card.setAttribute('aria-pressed', card.classList.contains('flipped') ? 'true' : 'false'); };
+    card.addEventListener('click', toggle);
+    card.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); } });
+    vocabGrid.appendChild(card);
+  });
+
+  // --- 8. PRÁCTICA TEST MULTIOPCIÓN ---
+  const QUIZ_DATA = [{"sentence": "En Sevilla <span class=\"gap\">___</span> muchos bares.", "options": ["está", "hay", "son"], "answer": "hay", "gloss": "There are many bars in Sevilla."}, {"sentence": "La Giralda <span class=\"gap\">___</span> en el centro.", "options": ["está", "hay", "es"], "answer": "está", "gloss": "The Giralda is in the centre."}, {"sentence": "Perdone, ¿<span class=\"gap\">___</span> un banco por aquí cerca?", "options": ["está", "es", "hay"], "answer": "hay", "gloss": "Excuse me, is there a bank near here?"}, {"sentence": "El Alcázar <span class=\"gap\">___</span> al lado de la Catedral.", "options": ["hay", "está", "son"], "answer": "está", "gloss": "The Alcázar is next to the Cathedral."}, {"sentence": "Los baños <span class=\"gap\">___</span> al fondo, a la derecha.", "options": ["son", "hay", "están"], "answer": "están", "gloss": "The toilets are at the back, on the right."}, {"sentence": "La farmacia está <span class=\"gap\">___</span> el banco y el bar.", "options": ["entre", "enfrente", "cerca"], "answer": "entre", "gloss": "The pharmacy is between the bank and the bar."}, {"sentence": "Para llegar, <span class=\"gap\">___</span> todo recto hasta el semáforo.", "options": ["siguiendo", "sigue", "seguir"], "answer": "sigue", "gloss": "To get there, keep straight on to the traffic light."}, {"sentence": "En la esquina, <span class=\"gap\">___</span> a la izquierda.", "options": ["girado", "giro", "gira"], "answer": "gira", "gloss": "At the corner, turn left."}, {"sentence": "Mi hotel <span class=\"gap\">___</span> en la calle Betis, cerca del puente.", "options": ["está", "es", "hay"], "answer": "está", "gloss": "My hotel is on Calle Betis, near the bridge."}, {"sentence": "<span class=\"gap\">___</span> el puente y estás en Triana.", "options": ["Cruzar", "Cruzado", "Cruza"], "answer": "Cruza", "gloss": "Cross the bridge and you are in Triana."}];
+  const quizWrap = document.getElementById('quiz-items-container');
+  // Orden aleatorio en cada carga; la opción correcta ocupa una posición distinta en cada frase
+  const shuffle = arr => { const a = arr.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+  const nOpts = Math.max(...QUIZ_DATA.map(q => q.options.length));
+  const quizPos = shuffle(Array.from({ length: nOpts }, (_, i) => i));
+  QUIZ_DATA.forEach((q, idx) => {
+    const opts = shuffle(q.options.filter(o => o !== q.answer));
+    opts.splice(quizPos[idx % nOpts], 0, q.answer);
+    const item = document.createElement('div');
+    item.className = 'esc-quiz-item';
+    item.dataset.ans = q.answer;
+    item.innerHTML = `
+      <div class="esc-quiz-sentence">${idx + 1}. ${q.sentence}<span class="gloss-text">[EN: ${q.gloss}]</span></div>
+      <div class="esc-opt-wrap">
+        ${opts.map(opt => `<button type="button" class="esc-opt-btn" aria-pressed="false" data-val="${opt}">${opt}</button>`).join('')}
+      </div>
+    `;
+    quizWrap.appendChild(item);
+    item.querySelectorAll('.esc-opt-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        item.querySelectorAll('.esc-opt-btn').forEach(b => { b.classList.remove('picked'); b.setAttribute('aria-pressed', 'false'); });
+        btn.classList.add('picked'); btn.setAttribute('aria-pressed', 'true');
+      });
+    });
+  });
+
+  document.getElementById('btn-check-quiz').addEventListener('click', () => {
+    let score = 0;
+    document.querySelectorAll('.esc-quiz-item').forEach(item => {
+      const correct = item.dataset.ans;
+      const picked = item.querySelector('.esc-opt-btn.picked');
+      item.querySelectorAll('.esc-opt-btn').forEach(b => {
+        b.disabled = true;
+        if (b.dataset.val === correct) { b.classList.add('correct'); b.insertAdjacentHTML('beforeend', '<span class="sr-only"> (respuesta correcta)</span>'); }
+        else if (b === picked) { b.classList.add('wrong'); b.insertAdjacentHTML('beforeend', '<span class="sr-only"> (incorrecta)</span>'); }
+      });
+      if (picked && picked.dataset.val === correct) score++;
+    });
+    document.getElementById('quiz-score-badge').textContent = `${score} / ${QUIZ_DATA.length} aciertos`;
+    anuncia(`${score} de ${QUIZ_DATA.length} aciertos.`);
+  });
+
+  document.getElementById('btn-reset-quiz').addEventListener('click', () => {
+    document.querySelectorAll('.esc-quiz-item').forEach(item => {
+      item.querySelectorAll('.esc-opt-btn').forEach(b => {
+        b.disabled = false;
+        b.classList.remove('picked', 'correct', 'wrong'); b.setAttribute('aria-pressed', 'false');
+        b.querySelectorAll('.sr-only').forEach(x => x.remove());
+      });
+    });
+    document.getElementById('quiz-score-badge').textContent = '';
+  });
+
+  // --- 9. BARRA DE TILDES RÁPIDAS (una por cada campo de escritura) ---
+  function makeAccentBar(field) {
+    const bar = document.createElement('div');
+    bar.className = 'esc-accents-bar';
+    const label = document.createElement('span');
+    label.style.cssText = 'font-family:var(--font-mono); font-size:12px; text-transform:uppercase; color:var(--esc-ink-muted);';
+    label.textContent = 'Tildes rápidas:';
+    bar.appendChild(label);
+    ['á', 'é', 'í', 'ó', 'ú', 'ñ'].forEach(ch => {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'esc-accent-char-btn';
+      b.textContent = ch;
+      b.setAttribute('aria-label', 'Insertar ' + ch);
+      b.addEventListener('mousedown', e => e.preventDefault()); // no quitar el foco al campo
+      b.addEventListener('click', () => {
+        const start = field.selectionStart ?? field.value.length;
+        const end = field.selectionEnd ?? start;
+        field.value = field.value.slice(0, start) + ch + field.value.slice(end);
+        field.focus();
+        field.setSelectionRange(start + 1, start + 1);
+        field.dispatchEvent(new Event('input', { bubbles: true }));
+      });
+      bar.appendChild(b);
+    });
+    return bar;
+  }
+  document.querySelectorAll('.esc-cloze-card').forEach(card => {
+    const inp = card.querySelector('.esc-cloze-input');
+    if (inp) card.appendChild(makeAccentBar(inp));
+  });
+  {
+    const finalTa = document.getElementById('master-task-input');
+    if (finalTa) finalTa.insertAdjacentElement('afterend', makeAccentBar(finalTa));
+  }
+  document.getElementById('btn-check-cloze').addEventListener('click', () => {
+    const res = [];
+    document.querySelectorAll('.esc-cloze-card').forEach((card, i) => {
+      const target = card.dataset.answer.toLowerCase();
+      const input = card.querySelector('.esc-cloze-input');
+      const val = input.value.trim().toLowerCase();
+      const ok = val === target;
+      input.classList.remove('correct', 'wrong');
+      input.classList.add(ok ? 'correct' : 'wrong');
+      input.setAttribute('aria-invalid', ok ? 'false' : 'true');
+      let mark = card.querySelector('.esc-cloze-mark');
+      if (!mark) { mark = document.createElement('span'); mark.className = 'esc-cloze-mark'; input.insertAdjacentElement('afterend', mark); }
+      mark.className = 'esc-cloze-mark ' + (ok ? 'ok' : 'ko');
+      mark.textContent = ok ? '✓ Correcto' : '✗ Revisa';
+      res.push('Hueco ' + (i + 1) + ': ' + (ok ? 'correcto' : 'incorrecto'));
+    });
+    anuncia(res.join('. '));
+  });
+
+  // --- 10. DETECTIVE DE ERRORES ---
+  document.querySelectorAll('.esc-spot-card').forEach(card => {
+    const toks = Array.from(card.querySelectorAll('.esc-spot-token'));
+    const sol = card.querySelector('.esc-spot-solution');
+    const solLabel = sol.querySelector('strong');
+    const fb = document.createElement('div');
+    fb.className = 'esc-spot-feedback';
+    fb.setAttribute('role', 'status');
+    fb.setAttribute('aria-live', 'polite');
+    card.insertBefore(fb, sol);
+    let fails = 0, done = false;
+
+    const finish = (found) => {
+      done = true;
+      anuncia(found ? '¡Correcto! Has encontrado el error.' : 'Respuesta mostrada.');
+      toks.forEach(t => { t.disabled = true; if (!found && t.dataset.err === 'true') t.classList.add('is-error'); });
+      fb.classList.remove('show');
+      if (!found) solLabel.textContent = 'Respuesta:';
+      sol.classList.add('show');
+    };
+
+    toks.forEach(tok => tok.addEventListener('click', () => {
+      if (done) return;
+      if (tok.dataset.err === 'true') {
+        tok.classList.add('is-error');
+        finish(true);
+        return;
+      }
+      tok.classList.add('is-false');
+      tok.disabled = true;
+      fails++;
+      fb.innerHTML = '<span>Esa palabra está bien. Prueba con otra.<span class="gloss-text">[EN: That word is fine. Try another one.]</span></span>';
+      fb.classList.add('show');
+      if (fails >= 2 && !fb.querySelector('button')) {
+        const give = document.createElement('button');
+        give.type = 'button';
+        give.className = 'esc-btn-ghost';
+        give.textContent = 'Ver la respuesta';
+        give.addEventListener('click', () => finish(false));
+        fb.appendChild(give);
+      }
+    }));
+  });
+
+  // --- 11. MATCHING DE COLUMNAS (por tablero) ---
+  document.querySelectorAll('.esc-match-grid').forEach(grid => {
+    let sel = null;
+    const left = grid.querySelectorAll('.match-left .esc-match-card');
+    const right = grid.querySelectorAll('.match-right .esc-match-card');
+    left.forEach(b => b.setAttribute('aria-pressed', 'false'));
+    left.forEach(btn => btn.addEventListener('click', () => {
+      if (btn.classList.contains('locked')) return;
+      left.forEach(b => { b.classList.remove('selected'); b.setAttribute('aria-pressed', 'false'); });
+      btn.classList.add('selected'); btn.setAttribute('aria-pressed', 'true'); sel = btn;
+    }));
+    right.forEach(btn => btn.addEventListener('click', () => {
+      if (btn.classList.contains('locked')) return;
+      if (!sel) { anuncia('Primero elige una frase de la columna izquierda.'); return; }
+      if (sel.dataset.pair === btn.dataset.pair) {
+        sel.classList.remove('selected'); sel.classList.add('locked'); btn.classList.add('locked');
+        sel.setAttribute('aria-pressed', 'false'); sel.setAttribute('aria-disabled', 'true'); btn.setAttribute('aria-disabled', 'true');
+        sel = null;
+        anuncia('Pareja correcta.');
+      } else {
+        btn.classList.add('mismatch'); setTimeout(() => btn.classList.remove('mismatch'), 350);
+        anuncia('No coincide. Prueba con otra.');
+      }
+    }));
+  });
+
+  // --- 13. SINTAXIS / SCRAMBLE ---
+  document.querySelectorAll('.esc-order-box').forEach(orderBox => {
+    const orderBank = orderBox.querySelector('.esc-order-bank');
+    const orderSlot = orderBox.querySelector('.esc-order-slot');
+    const orderFb = orderBox.querySelector('.order-feedback-text');
+    const solutions = orderBox.dataset.solution.split('|').map(x => x.trim().toLowerCase());
+    orderBank.querySelectorAll('.esc-word-chip').forEach(chip => {
+      teclado(chip, 'button');
+      chip.addEventListener('click', () => {
+        if (chip.classList.contains('used')) return;
+        chip.classList.add('used'); chip.setAttribute('aria-disabled', 'true'); chip.tabIndex = -1;
+        const clone = document.createElement('span');
+        clone.className = 'esc-word-chip';
+        clone.textContent = chip.textContent;
+        teclado(clone, 'button');
+        clone.setAttribute('aria-label', 'Quitar «' + chip.textContent + '»');
+        clone.addEventListener('click', () => { clone.remove(); chip.classList.remove('used'); chip.removeAttribute('aria-disabled'); chip.tabIndex = 0; chip.focus(); });
+        anuncia('«' + chip.textContent + '» añadida al orden.');
+        orderSlot.appendChild(clone);
+      });
+    });
+    orderBox.querySelector('.btn-check-order').addEventListener('click', () => {
+      const built = Array.from(orderSlot.children).map(c => c.textContent).join(' ').trim().toLowerCase();
+      const isOk = solutions.includes(built);
+      orderSlot.style.borderColor = isOk ? 'var(--esc-ok)' : 'var(--esc-err)';
+      orderFb.textContent = isOk ? '✓ ¡Correcto!' : '✗ Orden incorrecto, prueba de nuevo.';
+      orderFb.style.color = isOk ? 'var(--esc-ok)' : 'var(--esc-err)';
+    });
+    orderBox.querySelector('.btn-reset-order').addEventListener('click', () => {
+      orderSlot.innerHTML = '';
+      orderBank.querySelectorAll('.esc-word-chip').forEach(c => { c.classList.remove('used'); c.removeAttribute('aria-disabled'); c.tabIndex = 0; });
+      orderSlot.style.borderColor = '';
+      orderFb.textContent = '';
+    });
+  });
+
+  // --- 15. ROLEPLAY CONVERSACIONAL EN PESTAÑAS ---
+  const ROLEPLAY_DATA = [{"tab": "Turista perdido", "context": "Estás delante del Alcázar. Un turista inglés está perdido y quiere llegar a la Plaza de España. Tú conoces bien Sevilla: guíalo con las direcciones de hoy y comprueba que te entiende.", "context_gloss": "You are in front of the Alcázar. An English tourist is lost and wants to get to Plaza de España. You know Sevilla well: guide him with today's directions and check he understands.", "ideas": ["todo recto", "a la derecha", "a la izquierda", "cruza", "hasta llegar a…", "enfrente de"], "lines": [{"speaker": "Turista", "role": "interlocutor", "avatar": "U", "text": "Perdona, ¿hablas español? ¿Dónde está la Plaza de España?", "gloss": "Excuse me, do you speak Spanish? Where is Plaza de España?"}, {"speaker": "Tú", "role": "student", "avatar": "T", "isInput": true, "placeholder": "Dile que está cerca y usa una preposición de lugar.", "gloss": ""}, {"speaker": "Turista", "role": "interlocutor", "avatar": "U", "text": "¿Está lejos? ¿Voy andando?", "gloss": "Is it far? Shall I walk?"}, {"speaker": "Tú", "role": "student", "avatar": "T", "isInput": true, "placeholder": "Responde: sí, está a diez minutos andando.", "gloss": ""}, {"speaker": "Turista", "role": "interlocutor", "avatar": "U", "text": "¿Cómo llego desde aquí?", "gloss": "How do I get there from here?"}, {"speaker": "Tú", "role": "student", "avatar": "T", "isInput": true, "placeholder": "Usa sigue todo recto y cruza…", "gloss": ""}, {"speaker": "Turista", "role": "interlocutor", "avatar": "U", "text": "¿Y después del parque?", "gloss": "And after the park?"}, {"speaker": "Tú", "role": "student", "avatar": "T", "isInput": true, "placeholder": "Usa gira a la derecha o a la izquierda.", "gloss": ""}, {"speaker": "Turista", "role": "interlocutor", "avatar": "U", "text": "¿Hay algún bar por el camino? Tengo sed.", "gloss": "Is there a bar on the way? I'm thirsty."}, {"speaker": "Tú", "role": "student", "avatar": "T", "isInput": true, "placeholder": "Usa hay un bar y di dónde está.", "gloss": ""}, {"speaker": "Turista", "role": "interlocutor", "avatar": "U", "text": "No he entendido bien. ¿Puedes repetir más despacio?", "gloss": "I didn't quite understand. Can you repeat more slowly?"}, {"speaker": "Tú", "role": "student", "avatar": "T", "isInput": true, "placeholder": "Repite las indicaciones con primero, después y al final.", "gloss": ""}, {"speaker": "Turista", "role": "interlocutor", "avatar": "U", "text": "¡Muchas gracias! Eres un guía fantástico.", "gloss": "Thank you so much! You're a fantastic guide."}, {"speaker": "Tú", "role": "student", "avatar": "T", "isInput": true, "placeholder": "Despídete con amabilidad.", "gloss": ""}]}, {"tab": "Pregunto a un sevillano", "context": "Es la hora de comer y buscas un restaurante cerca de la Catedral. Una vecina sevillana te ayuda. Pregunta cómo llegar y comprueba que has entendido repitiendo las indicaciones.", "context_gloss": "It's lunchtime and you are looking for a restaurant near the Cathedral. A local woman helps you. Ask how to get there and check you understood by repeating the directions.", "ideas": ["¿hay…?", "¿dónde está…?", "sigue", "gira", "cruza", "al lado de"], "lines": [{"speaker": "Vecina", "role": "interlocutor", "avatar": "V", "text": "Buenas tardes, ¿te puedo ayudar en algo?", "gloss": "Good afternoon, can I help you with anything?"}, {"speaker": "Tú", "role": "student", "avatar": "T", "isInput": true, "placeholder": "Saluda y pregunta si hay un restaurante por aquí cerca.", "gloss": ""}, {"speaker": "Vecina", "role": "interlocutor", "avatar": "V", "text": "Sí, hay uno muy bueno: La Taberna. Está en la calle Mateos Gago, enfrente de la Giralda.", "gloss": "Yes, there's a very good one: La Taberna. It's on Calle Mateos Gago, opposite the Giralda."}, {"speaker": "Tú", "role": "student", "avatar": "T", "isInput": true, "placeholder": "Pregunta cómo llegar.", "gloss": ""}, {"speaker": "Vecina", "role": "interlocutor", "avatar": "V", "text": "Sigue todo recto, gira a la izquierda en la esquina y cruza la plaza.", "gloss": "Keep straight on, turn left at the corner and cross the square."}, {"speaker": "Tú", "role": "student", "avatar": "T", "isInput": true, "placeholder": "Comprueba: repite las indicaciones con tus palabras.", "gloss": ""}, {"speaker": "Vecina", "role": "interlocutor", "avatar": "V", "text": "Exacto. Y la taberna está al lado de una farmacia.", "gloss": "Exactly. And the tavern is next to a pharmacy."}, {"speaker": "Tú", "role": "student", "avatar": "T", "isInput": true, "placeholder": "Pregunta si está lejos.", "gloss": ""}, {"speaker": "Vecina", "role": "interlocutor", "avatar": "V", "text": "No, está a cinco minutos andando.", "gloss": "No, it's five minutes' walk."}, {"speaker": "Tú", "role": "student", "avatar": "T", "isInput": true, "placeholder": "Da las gracias y despídete.", "gloss": ""}]}];
+  const roleplayThread = document.getElementById('roleplay-chat-thread');
+  function renderRoleplay(tabIdx) {
+    const cur = ROLEPLAY_DATA[tabIdx];
+    const ctxBox = document.getElementById('roleplay-context');
+    ctxBox.innerHTML = `
+      <div class="m-aviso m-aviso--dato" role="note">
+        <strong>📍 Contexto de la situación:</strong>${cur.context}<span class="gloss-text">[EN: ${cur.context_gloss}]</span>
+        <div style="margin-top:12px; font-family:var(--font-mono); font-size:12px; text-transform:uppercase; letter-spacing:.06em; color:var(--esc-ink-muted);">Ideas para inspirarte · usa hay / está + lugar, y sigue / gira / cruza</div>
+        <div class="esc-chips-strip" style="margin-top:6px;">${cur.ideas.map(i => `<span class="esc-chip-pill">${i}</span>`).join('')}</div>
+      </div>`;
+    roleplayThread.innerHTML = cur.lines.map(l => `
+      <div class="esc-chat-line ${l.role}">
+        <div class="esc-chat-content">
+          <div class="esc-chat-speaker">${l.speaker}</div>
+          ${l.isInput ? `<div class="esc-chat-bubble esc-chat-compose"><textarea class="esc-chat-textarea" rows="2" aria-label="Escribe tu respuesta" placeholder="${l.placeholder}"></textarea></div>` : `<div class="esc-chat-bubble">${l.text}</div>`}
+          ${l.gloss ? `<span class="gloss-text">[EN: ${l.gloss}]</span>` : ''}
+        </div>
+      </div>
+    `).join('');
+    roleplayThread.querySelectorAll('.esc-chat-compose').forEach(bub => {
+      bub.insertAdjacentElement('afterend', makeAccentBar(bub.querySelector('textarea')));
+    });
+    setupTyping();
+  }
+
+  // Indicador «escribiendo…» al estilo iMessage: cada pregunta aparece al entrar en pantalla
+  let typingIO = null;
+  function setupTyping() {
+    if (typingIO) { typingIO.disconnect(); typingIO = null; }
+    if (!('IntersectionObserver' in window) || reduceMotion()) return;
+    typingIO = new IntersectionObserver(entries => {
+      entries.forEach(en => {
+        if (!en.isIntersecting) return;
+        typingIO.unobserve(en.target);
+        const bub = en.target;
+        setTimeout(() => {
+          bub.innerHTML = bub.dataset.html;
+          bub.classList.remove('typing');
+          bub.style.minHeight = '';
+          const line = bub.closest('.esc-chat-line');
+          if (line) line.classList.remove('pending');
+        }, 600 + Math.random() * 350);
+      });
+    }, { threshold: 0.6 });
+    roleplayThread.querySelectorAll('.esc-chat-line.interlocutor .esc-chat-bubble').forEach(bub => {
+      bub.dataset.html = bub.innerHTML;
+      bub.style.minHeight = bub.offsetHeight + 'px';
+      bub.classList.add('typing');
+      bub.innerHTML = '<span class="esc-typing" role="img" aria-label="escribiendo"><i></i><i></i><i></i></span>';
+      const line = bub.closest('.esc-chat-line');
+      if (line) line.classList.add('pending');
+      typingIO.observe(bub);
+    });
+  }
+  renderRoleplay(0);
+  const segTabs = document.getElementById('roleplay-tab-buttons');
+  segTabs.style.setProperty('--seg-n', ROLEPLAY_DATA.length);
+  segTabs.style.setProperty('--seg-i', 0);
+  const tabBtns = Array.from(document.querySelectorAll('.esc-roleplay-tab-btn'));
+  const tabPanel = document.getElementById('roleplay-tabpanel');
+  function selectTab(i, focus) {
+    tabBtns.forEach((btn, j) => {
+      const on = i === j;
+      btn.classList.toggle('active', on);
+      btn.setAttribute('aria-selected', on ? 'true' : 'false');
+      btn.tabIndex = on ? 0 : -1;
+    });
+    if (tabPanel) tabPanel.setAttribute('aria-labelledby', 'roleplay-tab-' + i);
+    segTabs.style.setProperty('--seg-i', i);
+    renderRoleplay(i);
+    if (focus) tabBtns[i].focus();
+  }
+  tabBtns.forEach((b, i) => {
+    b.id = 'roleplay-tab-' + i;
+    b.setAttribute('role', 'tab');
+    b.setAttribute('aria-controls', 'roleplay-tabpanel');
+    b.setAttribute('aria-selected', i === 0 ? 'true' : 'false');
+    b.tabIndex = i === 0 ? 0 : -1;
+    b.addEventListener('click', () => selectTab(i, false));
+    b.addEventListener('keydown', e => {
+      const n = tabBtns.length;
+      let t = null;
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') t = (i + 1) % n;
+      else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') t = (i - 1 + n) % n;
+      else if (e.key === 'Home') t = 0;
+      else if (e.key === 'End') t = n - 1;
+      if (t !== null) { e.preventDefault(); selectTab(t, true); }
+    });
+  });
+
+  // --- 14b. ITINERARIO DE LA CLASE (navegación + progreso) ---
+  (function buildStepper() {
+    const stops = Array.from(document.querySelectorAll('.m-ruta .m-parada'));
+    const prog = document.getElementById('m-stepper-prog');
+    const summary = document.getElementById('stepper-summary-text');
+    if (!stops.length || !prog || !summary) return;
+    const targets = stops.map(b => document.querySelector(b.dataset.target));
+    const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let current = -1;
+    function paint(idx) {
+      if (idx === current) return;
+      current = idx;
+      stops.forEach((b, i) => {
+        const nodo = b.querySelector('.m-nodo');
+        const on = i <= idx;
+        b.classList.toggle('active', i === idx);
+        nodo.style.background = on ? 'var(--esc-accent)' : 'var(--esc-surface)';
+        nodo.style.borderColor = on ? 'var(--esc-accent)' : 'var(--esc-line-strong)';
+        nodo.style.color = on ? '#fff' : 'var(--esc-ink-muted)';
+        nodo.textContent = i < idx ? '✓' : String(i + 1);
+        if (i === idx) b.setAttribute('aria-current', 'step'); else b.removeAttribute('aria-current');
+      });
+      prog.style.left = (100 / stops.length / 2) + '%';
+      prog.style.width = (idx * 100 / stops.length) + '%';
+      summary.textContent = `Etapa ${idx + 1} de ${stops.length} · ${Math.round(idx / (stops.length - 1) * 100)}%`;
+    }
+    function onScrollStepper() {
+      const line = window.innerHeight * 0.35;
+      let idx = 0;
+      targets.forEach((t, i) => { if (t && t.getBoundingClientRect().top <= line) idx = i; });
+      paint(idx);
+    }
+    stops.forEach((b, i) => b.addEventListener('click', () => {
+      const t = targets[i];
+      if (t) t.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+    }));
+    window.addEventListener('scroll', onScrollStepper, { passive: true });
+    onScrollStepper();
+  })();
+
+  // --- 17. ESCALA 1-10 Y CHECKLIST ---
+  const scaleRow = document.getElementById('scale-slider-row');
+  scaleRow.innerHTML = `
+    <div class="esc-slider-head"><span class="esc-slider-val" id="scale-val">–</span><span class="esc-slider-hint" id="scale-hint">Desliza para valorar</span></div>
+    <input type="range" class="esc-range untouched" id="scale-range" min="1" max="10" step="1" value="5" aria-label="Seguridad hoy, de 1 a 10">
+    <div class="esc-slider-ends"><span>1 · poca seguridad</span><span>10 · mucha seguridad</span></div>`;
+  const scaleRange = document.getElementById('scale-range');
+  const scaleVal = document.getElementById('scale-val');
+  const scaleHint = document.getElementById('scale-hint');
+  function setScale(v, save) {
+    scaleRange.value = v;
+    scaleRange.classList.remove('untouched');
+    scaleRange.style.setProperty('--pct', ((v - 1) / 9 * 100) + '%');
+    scaleVal.textContent = v;
+    scaleHint.textContent = v <= 3 ? 'Todavía me cuesta' : v <= 7 ? 'Voy mejorando' : '¡Muy seguro/a!';
+    if (save) StorageAdapter.set(`${STORAGE_KEY_PREFIX}_confidence_rating`, v);
+  }
+  scaleRange.style.setProperty('--pct', '44.4%');
+  scaleRange.addEventListener('input', () => setScale(Number(scaleRange.value), true));
+  scaleRange.addEventListener('change', () => setScale(Number(scaleRange.value), true));
+  scaleRange.addEventListener('pointerup', () => setScale(Number(scaleRange.value), true));
+
+  document.querySelectorAll('.esc-check-item').forEach(item => {
+    teclado(item, 'checkbox');
+    item.setAttribute('aria-checked', item.classList.contains('checked') ? 'true' : 'false');
+    item.addEventListener('click', () => {
+      item.classList.toggle('checked');
+      item.setAttribute('aria-checked', item.classList.contains('checked') ? 'true' : 'false');
+    });
+  });
+
+  // --- 18. TAREA FINAL CON DETECTOR REGEX Y AUTOSAVE ---
+  const taskArea = document.getElementById('master-task-input');
+  const regexCount = document.getElementById('regex-counter-label');
+  const saveFlag = document.getElementById('task-saved-flag');
+
+  function updateRegexTracker() {
+    const text = taskArea.value;
+    const preps = (text.match(/\b(cerca d[eel]+|lejos d[eel]+|al lado d[eel]+|enfrente d[eel]+|delante d[eel]+|detrás d[eel]+|entre|a la derecha|a la izquierda|todo recto)\b/gi) || []).length;
+    const imps = (text.match(/\b(sigue|gira|cruza|sal|toma|baja|sube)\b/gi) || []).length;
+    const hayest = (text.match(/\b(hay|está|están)\b/gi) || []).length;
+    const matches = preps + imps + hayest;
+    regexCount.textContent = `${matches} estructura${matches === 1 ? '' : 's'} diana detectada${matches === 1 ? '' : 's'}`;
+  }
+
+  async function saveTask() {
+    await StorageAdapter.set(`${STORAGE_KEY_PREFIX}_final_task`, taskArea.value);
+    saveFlag.classList.add('show');
+    setTimeout(() => saveFlag.classList.remove('show'), 2000);
+  }
+
+  let saveTimer = null;
+  taskArea.addEventListener('input', () => {
+    updateRegexTracker();
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(saveTask, 700);
+  });
+  document.getElementById('btn-manual-save-task').addEventListener('click', saveTask);
+
+  // --- 18b. MENÚ HAMBURGUESA DE SECCIONES (popover en escritorio · hoja inferior en móvil) ---
+  (function buildSectionMenu() {
+    const btn = document.getElementById('esc-menu-btn');
+    const panel = document.getElementById('esc-menu-panel');
+    const wrap = document.getElementById('esc-menu');
+    // El panel vive en <body>: el header tiene backdrop-filter y atraparía al panel fijo
+    document.body.appendChild(panel);
+    const backdrop = document.createElement('div');
+    backdrop.className = 'esc-menu-backdrop';
+    backdrop.hidden = true;
+    document.body.appendChild(backdrop);
+    const grab = document.createElement('div');
+    grab.className = 'esc-sheet-grab';
+    grab.setAttribute('aria-hidden', 'true');
+    panel.appendChild(grab);
+
+    document.querySelectorAll('section.esc-block').forEach((sec, i) => {
+      const h2 = sec.querySelector('.esc-block-head h2');
+      if (!h2) return;
+      if (!sec.id) sec.id = 'seccion-' + String(i + 1).padStart(2, '0');
+      const num = sec.querySelector('.esc-block-num');
+      const title = (h2.firstChild ? h2.firstChild.textContent : h2.textContent).trim();
+      const a = document.createElement('a');
+      a.className = 'esc-menu-link';
+      a.href = '#' + sec.id;
+      const n = document.createElement('span');
+      n.className = 'n';
+      n.textContent = num ? num.textContent.trim() : String(i + 1);
+      const t = document.createElement('span');
+      t.textContent = title;
+      a.append(n, t);
+      panel.appendChild(a);
+    });
+
+    const isSheet = () => window.matchMedia('(max-width: 640px)').matches;
+    let closeTimer = null;
+    function place() {
+      if (isSheet()) { panel.style.top = ''; panel.style.left = ''; return; }
+      const r = btn.getBoundingClientRect();
+      panel.style.top = (r.bottom + 12) + 'px';
+      panel.style.left = Math.max(8, Math.min(r.left, window.innerWidth - 368)) + 'px';
+    }
+    function openMenu() {
+      clearTimeout(closeTimer);
+      panel.classList.remove('is-closing');
+      panel.style.transform = '';
+      place();
+      panel.hidden = false;
+      backdrop.hidden = false;
+      btn.setAttribute('aria-expanded', 'true');
+      document.body.classList.toggle('esc-sheet-open', isSheet());
+      const firstLink = panel.querySelector('.esc-menu-link');
+      if (firstLink) setTimeout(() => firstLink.focus(), 30);
+    }
+    function closeMenu(instant) {
+      if (panel.hidden) return;
+      btn.setAttribute('aria-expanded', 'false');
+      document.body.classList.remove('esc-sheet-open');
+      const finish = () => { panel.hidden = true; backdrop.hidden = true; panel.classList.remove('is-closing'); panel.style.transform = ''; };
+      if (instant) { finish(); return; }
+      panel.classList.add('is-closing');
+      closeTimer = setTimeout(finish, isSheet() ? 300 : 170);
+    }
+    btn.addEventListener('click', () => (panel.hidden ? openMenu() : closeMenu()));
+    panel.addEventListener('click', e => { if (e.target.closest('.esc-menu-link')) closeMenu(); });
+    backdrop.addEventListener('click', () => closeMenu());
+    document.addEventListener('click', e => { if (!wrap.contains(e.target) && !panel.contains(e.target)) closeMenu(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape' && !panel.hidden) { closeMenu(); btn.focus(); } });
+    window.addEventListener('resize', () => closeMenu(true));
+
+    // Arrastrar el asa hacia abajo para cerrar la hoja
+    let startY = null, dy = 0;
+    grab.addEventListener('pointerdown', e => {
+      startY = e.clientY; dy = 0;
+      panel.style.animation = 'none';
+      panel.style.transition = 'none';
+      grab.setPointerCapture(e.pointerId);
+    });
+    grab.addEventListener('pointermove', e => {
+      if (startY === null) return;
+      dy = Math.max(0, e.clientY - startY);
+      panel.style.transform = `translateY(${dy}px)`;
+    });
+    const endDrag = () => {
+      if (startY === null) return;
+      startY = null;
+      panel.style.animation = '';
+      if (dy > 90) { panel.style.transition = ''; closeMenu(); }
+      else { panel.style.transition = 'transform .5s var(--ios-spring)'; panel.style.transform = ''; setTimeout(() => { panel.style.transition = ''; }, 520); }
+    };
+    grab.addEventListener('pointerup', endDrag);
+    grab.addEventListener('pointercancel', endDrag);
+  })();
+
+  // --- 19. CARGA DE PREFERENCIAS AL INICIAR ---
+  async function initSavedState() {
+    const savedAccent = await StorageAdapter.get(`${STORAGE_KEY_PREFIX}_accent`);
+    if (savedAccent) {
+      document.documentElement.setAttribute('data-accent', savedAccent);
+      const dot = document.querySelector(`.esc-color-dot[data-color="${savedAccent}"]`);
+      if (dot) {
+        document.querySelectorAll('.esc-color-dot').forEach(d => d.classList.remove('active'));
+        dot.classList.add('active');
+      }
+    }
+    const savedGloss = await StorageAdapter.get(`${STORAGE_KEY_PREFIX}_gloss`);
+    if (savedGloss) applyGloss(savedGloss === 'bilingual');
+    const savedTheme = await StorageAdapter.get(`${STORAGE_KEY_PREFIX}_theme`);
+    if (savedTheme) { themeExplicit = true; applyTheme(savedTheme === 'oscuro'); }
+
+    const savedRating = await StorageAdapter.get(`${STORAGE_KEY_PREFIX}_confidence_rating`);
+    if (savedRating && Number(savedRating) >= 1 && Number(savedRating) <= 10) setScale(Number(savedRating), false);
+
+    const savedTask = await StorageAdapter.get(`${STORAGE_KEY_PREFIX}_final_task`);
+    if (savedTask) {
+      taskArea.value = savedTask;
+      updateRegexTracker();
+    }
+  }
+  initSavedState();
+
+})();
+</script>
+
+</body></html>
