@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clase 34 · Los ocho de siempre — Rebecca</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+
+/* ╔══════════════════════════════════════════════════════════════╗
+   ║  ESCOLAR — paleta pergamino + acento variable                ║
+   ║  Clase 34 · Presente irregular · "Los ocho de siempre"       ║
+   ╚══════════════════════════════════════════════════════════════╝ */
+
+:root{
+  --paper:#FBF7EE; --paper-raised:#FFFFFF; --paper-alt:#F3ECDA;
+  --ink:#23291F; --ink-soft:#565F52; --ink-faint:#8B9184;
+  --line:rgba(35,41,31,.12); --line-strong:rgba(35,41,31,.22);
+  --b2:#2F6FED; --b2-soft:rgba(47,111,237,.10); --b2-line:rgba(47,111,237,.35);
+  --ok:#2F7D5C; --ok-soft:rgba(47,125,92,.10); --ok-line:rgba(47,125,92,.38);
+  --family:#B5502E; --family-soft:rgba(181,80,46,.09); --family-line:rgba(181,80,46,.38);
+  --amber:#C1892F; --amber-soft:rgba(193,137,47,.13); --amber-line:rgba(193,137,47,.42);
+  --accent:#C1473F; --accent-soft:rgba(193,71,63,.09); --accent-line:rgba(193,71,63,.35);
+  --f-display:'Fraunces',Georgia,serif;
+  --f-body:'IBM Plex Sans',system-ui,sans-serif;
+  --f-data:'IBM Plex Mono',monospace;
+  --r-sm:8px; --r-md:14px; --r-lg:20px;
+  --shadow-1:0 1px 2px rgba(35,41,31,.05),0 1px 8px rgba(35,41,31,.04);
+}
+[data-accent="teja"]{--accent:#C1473F;--accent-soft:rgba(193,71,63,.09);--accent-line:rgba(193,71,63,.35)}
+[data-accent="azul"]{--accent:#2F6FED;--accent-soft:rgba(47,111,237,.09);--accent-line:rgba(47,111,237,.35)}
+[data-accent="verde"]{--accent:#2F7D5C;--accent-soft:rgba(47,125,92,.09);--accent-line:rgba(47,125,92,.35)}
+[data-accent="morado"]{--accent:#7A4FBF;--accent-soft:rgba(122,79,191,.09);--accent-line:rgba(122,79,191,.35)}
+
+*{ box-sizing:border-box; }
+body{
+  margin:0; background:var(--paper);
+  background-image:radial-gradient(circle at 1px 1px,var(--line) 1px,transparent 0);
+  background-size:22px 22px; color:var(--ink); font-family:var(--f-body); line-height:1.6;
+}
+::selection{ background:var(--accent-soft); }
+
+header{ padding:44px 24px 28px; max-width:760px; margin:0 auto; }
+.eyebrow{
+  font-family:var(--f-data); font-size:12px; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--accent); margin:0 0 10px; display:flex; align-items:center; gap:10px;
+}
+.eyebrow .dot{ width:6px; height:6px; border-radius:50%; background:var(--accent); }
+h1{
+  font-family:var(--f-display); font-weight:600; font-size:clamp(30px,5.6vw,46px);
+  line-height:1.08; margin:0 0 14px; letter-spacing:-.01em;
+}
+h1 em{ font-style:italic; color:var(--accent); }
+.lede{ font-size:16px; color:var(--ink-soft); max-width:58ch; margin:0; }
+.meta-row{
+  display:flex; flex-wrap:wrap; gap:20px; margin-top:26px;
+  font-family:var(--f-data); font-size:12px; color:var(--ink-faint);
+}
+.meta-row strong{ display:block; color:var(--ink); font-size:14.5px; font-weight:500; font-family:var(--f-display); margin-top:3px; }
+
+main{ max-width:760px; margin:0 auto; padding:8px 24px 100px; }
+section.block{ margin-bottom:52px; }
+.block-head{ display:flex; align-items:baseline; gap:12px; margin-bottom:18px; }
+.block-num{
+  font-family:var(--f-data); font-size:12px; color:#fff; background:var(--accent);
+  width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex:none;
+}
+.block-head h2{ font-family:var(--f-display); font-weight:500; font-style:italic; font-size:22px; margin:0; }
+.time-tag{
+  font-family:var(--f-data); font-size:11px; color:var(--ink-faint); background:var(--paper-alt);
+  padding:3px 10px; border-radius:999px; margin-left:auto; flex:none;
+}
+.panel{
+  background:var(--paper-raised); border:1px solid var(--line); border-radius:var(--r-lg);
+  box-shadow:var(--shadow-1); padding:26px 28px;
+}
+.hint{ font-family:var(--f-data); font-size:11.5px; color:var(--ink-faint); margin:0 0 14px; }
+.note{
+  margin-top:18px; padding:14px 16px; background:var(--accent-soft); border:1px solid var(--accent-line);
+  border-radius:var(--r-md); font-size:14px; color:var(--ink-soft);
+}
+.note strong{ color:var(--ink); }
+
+/* ---------- MAPA ---------- */
+.map-tools{ display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:10px; margin-bottom:12px; }
+.mapwrap{ overflow-x:auto; }
+table.conj{ width:100%; border-collapse:collapse; min-width:440px; }
+table.conj th{
+  font-family:var(--f-data); font-size:11px; font-weight:400; color:var(--ink-faint);
+  text-align:left; padding:6px 10px; border-bottom:1.5px solid var(--line-strong);
+}
+table.conj td{ padding:10px; border-bottom:1px dashed var(--line); font-family:var(--f-display); font-size:17px; }
+table.conj td.inf{ font-family:var(--f-data); font-size:12.5px; color:var(--ink-faint); }
+table.conj td.inf small{ display:block; color:var(--ink-faint); opacity:.8; }
+table.conj b{ color:var(--accent); font-weight:600; }
+.mapwrap.memo td.cell{ cursor:pointer; }
+.mapwrap.memo td.cell:not(.shown) .cell-in{ filter:blur(7px); user-select:none; }
+.mapwrap.memo td.cell.shown{ background:var(--accent-soft); }
+
+/* ---------- PATRONES ---------- */
+.pat-grid{ display:grid; grid-template-columns:1fr; gap:14px; }
+.pat{ border:1px solid var(--line); border-radius:var(--r-md); padding:16px 18px; background:var(--paper-raised); }
+.pat-tag{ font-family:var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.05em; color:var(--accent); margin:0 0 6px; }
+.pat h3{ font-family:var(--f-display); font-size:19px; font-weight:600; margin:0 0 6px; }
+.pat p{ margin:0; font-size:14px; color:var(--ink-soft); }
+.pat .chips{ display:flex; flex-wrap:wrap; gap:6px; margin-top:10px; }
+.chip{
+  font-family:var(--f-data); font-size:12px; padding:3px 10px; border-radius:999px;
+  border:1px solid var(--line-strong); color:var(--ink-soft);
+}
+.chip.k{ border-color:var(--accent-line); background:var(--accent-soft); color:var(--accent); font-weight:500; }
+
+/* ---------- FRASES ANCLA ---------- */
+.anchor-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(210px,1fr)); gap:12px; }
+.anchor{
+  text-align:left; cursor:pointer; background:var(--paper-raised); border:1px solid var(--line);
+  border-radius:var(--r-md); padding:14px 16px; min-height:96px; font:inherit; color:var(--ink);
+  transition:border-color .15s;
+}
+.anchor:hover{ border-color:var(--accent-line); }
+.anchor .a-verb{ font-family:var(--f-data); font-size:11px; color:var(--ink-faint); text-transform:uppercase; letter-spacing:.05em; }
+.anchor .a-front{ font-family:var(--f-display); font-weight:600; font-size:17px; margin-top:4px; }
+.anchor .a-back{ display:none; margin-top:8px; font-size:13.5px; color:var(--ink-soft); }
+.anchor.flipped{ background:var(--accent-soft); border-color:var(--accent-line); }
+.anchor.flipped .a-back{ display:block; }
+.say{ font-family:var(--f-data); font-size:11px; color:var(--accent); display:block; margin-top:6px; }
+
+/* ---------- EJERCICIO ESCRITO ---------- */
+.ex-divider{
+  display:flex; align-items:center; gap:10px; margin:20px 0 16px;
+  font-family:var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.06em; color:var(--ink-faint);
+}
+.ex-divider::before,.ex-divider::after{ content:""; flex:1; height:1px; background:var(--line); }
+.ex-divider.en-clase{ color:var(--accent); }
+.ex-divider.en-clase::before,.ex-divider.en-clase::after{ background:var(--accent-line); }
+.ex{ margin-bottom:18px; }
+.ex-top{ display:flex; gap:6px; flex-wrap:wrap; margin-bottom:6px; }
+.ex-sentence{ font-size:16px; line-height:2; }
+.blank-in{
+  font:inherit; font-family:var(--f-display); width:9.5ch; text-align:center; color:var(--ink);
+  background:var(--accent-soft); border:0; border-bottom:2px solid var(--accent); border-radius:6px 6px 0 0;
+  padding:0 6px; outline:none; margin:0 3px;
+}
+.blank-in:focus{ box-shadow:0 0 0 3px var(--accent-soft); }
+.blank-in.is-ok{ border-bottom-color:var(--ok); background:var(--ok-soft); color:var(--ok); }
+.blank-in.is-bad{ border-bottom-color:var(--family); background:var(--family-soft); color:var(--family); text-decoration:line-through; }
+.fix{ font-family:var(--f-display); font-weight:600; color:var(--b2); margin-left:4px; }
+.fix.almost::after{ content:" (mira la tilde)"; font-family:var(--f-data); font-weight:400; font-size:11px; color:var(--amber); }
+.accbar{ display:flex; gap:6px; align-items:center; flex-wrap:wrap; margin-bottom:14px; }
+.accbar span{ font-family:var(--f-data); font-size:11px; color:var(--ink-faint); margin-right:4px; }
+.acc{
+  width:36px; height:36px; border-radius:10px; border:1px solid var(--line-strong); background:var(--paper);
+  font-family:var(--f-display); font-size:1.1rem; cursor:pointer; color:var(--ink);
+}
+.acc:hover{ border-color:var(--accent); background:var(--accent-soft); }
+.check-bar{
+  display:flex; align-items:center; justify-content:space-between; gap:16px;
+  margin-top:22px; padding-top:18px; border-top:1px dashed var(--line); flex-wrap:wrap;
+}
+.btn-primary{
+  font-family:var(--f-body); font-weight:600; font-size:14px; color:#fff; background:var(--accent);
+  border:none; padding:11px 22px; border-radius:999px; cursor:pointer; transition:transform .1s ease;
+}
+.btn-primary:hover{ transform:translateY(-1px); }
+.btn-ghost{
+  font-family:var(--f-body); font-weight:600; font-size:13px; color:var(--ink-soft); background:none;
+  border:1.5px solid var(--line); padding:9px 18px; border-radius:999px; cursor:pointer;
+}
+.btn-ghost:hover{ border-color:var(--accent); }
+.btn-ghost[aria-pressed="true"]{ background:var(--accent-soft); border-color:var(--accent-line); color:var(--accent); }
+#score-text,#flash-score{ font-family:var(--f-data); font-size:13px; color:var(--ink-faint); }
+
+/* ---------- RELÁMPAGO ORAL ---------- */
+.flash-card{
+  border:1px solid var(--line); border-radius:var(--r-lg); padding:28px 22px; text-align:center;
+  background:var(--paper-alt); min-height:170px; display:flex; flex-direction:column; justify-content:center; gap:10px;
+}
+.flash-count{ font-family:var(--f-data); font-size:12px; color:var(--ink-faint); }
+.flash-prompt{ font-family:var(--f-display); font-size:clamp(26px,6vw,38px); font-weight:600; }
+.flash-prompt em{ color:var(--accent); font-style:italic; }
+.flash-ans{ font-family:var(--f-display); font-size:28px; font-weight:600; color:var(--ok); min-height:38px; }
+.flash-actions{ display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:16px; }
+.btn-ok{ background:var(--ok-soft); border:1.5px solid var(--ok-line); color:var(--ok); font-weight:600; border-radius:999px; padding:10px 20px; cursor:pointer; font-family:var(--f-body); font-size:14px; }
+.btn-doubt{ background:var(--family-soft); border:1.5px solid var(--family-line); color:var(--family); font-weight:600; border-radius:999px; padding:10px 20px; cursor:pointer; font-family:var(--f-body); font-size:14px; }
+.flash-result{ margin-top:16px; padding:14px 16px; background:var(--paper-raised); border:1px solid var(--line); border-radius:var(--r-md); font-size:14px; display:none; }
+.flash-result.show{ display:block; }
+.flash-result .tags{ display:flex; flex-wrap:wrap; gap:6px; margin-top:8px; }
+
+/* ---------- ROLEPLAY ---------- */
+.roleplay-panel{ background:var(--family-soft); border:1px solid var(--family-line); border-radius:var(--r-lg); padding:26px 28px; }
+.roleplay-panel .block-num{ background:var(--family); }
+.scene-tabs{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:18px; }
+.scene-tab{
+  font-family:var(--f-data); font-size:12.5px; background:var(--paper-raised); border:1.5px solid var(--family-line);
+  color:var(--ink-soft); padding:7px 14px; border-radius:999px; cursor:pointer;
+}
+.scene-tab.active{ background:var(--family); border-color:var(--family); color:#fff; }
+.scene-setup{
+  display:flex; gap:14px; align-items:flex-start; background:var(--paper-raised);
+  border:1px solid var(--family-line); border-radius:var(--r-md); padding:14px 16px; margin-bottom:20px; font-size:14px; color:var(--ink-soft);
+}
+.scene-setup strong{ color:var(--ink); }
+.dialogue{ display:flex; flex-direction:column; gap:14px; }
+.line{ display:flex; gap:12px; align-items:flex-start; }
+.line-avatar{
+  flex:none; width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  font-family:var(--f-display); font-weight:600; font-size:14px; color:#fff;
+}
+.line.friend .line-avatar{ background:var(--ink-faint); }
+.line.you .line-avatar{ background:var(--family); }
+.line-body{ flex:1; }
+.line-name{ font-family:var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.05em; color:var(--ink-faint); margin:0 0 4px; }
+.line-bubble{ background:var(--paper-raised); border:1px solid var(--line); border-radius:var(--r-md); padding:12px 14px; font-size:14.5px; }
+.line-input{
+  width:100%; font-family:var(--f-body); font-size:14.5px; color:var(--ink); background:#fff;
+  border:1px solid var(--family-line); border-radius:var(--r-sm); padding:10px 12px; resize:vertical; min-height:40px;
+}
+.line-input:focus{ outline:none; border-color:var(--family); }
+.line-hint{ font-family:var(--f-data); font-size:11px; color:var(--amber); margin-top:5px; }
+.roleplay-tip{
+  margin-top:22px; padding:14px 16px; background:var(--paper-raised); border:1px solid var(--family-line);
+  border-radius:var(--r-md); font-size:13.5px; color:var(--ink-soft);
+}
+
+/* ---------- CIERRE ORAL ---------- */
+.close-panel{ background:var(--b2-soft); border:1px solid var(--b2-line); border-radius:var(--r-lg); padding:26px 28px; }
+.close-panel .block-num{ background:var(--b2); }
+.verb-chips{ display:flex; flex-wrap:wrap; gap:10px; margin:16px 0; }
+.vchip{
+  font-family:var(--f-display); font-weight:600; font-size:16px; padding:9px 18px; border-radius:999px;
+  border:1.5px solid var(--b2-line); background:var(--paper-raised); cursor:pointer; color:var(--ink);
+}
+.vchip.done{ background:var(--ok-soft); border-color:var(--ok); color:var(--ok); }
+.close-progress{ font-family:var(--f-data); font-size:12.5px; color:var(--ink-soft); }
+.close-progress strong{ color:var(--ink); font-family:var(--f-display); font-size:15px; }
+
+/* ---------- TAREA ---------- */
+.task-panel{ background:var(--amber-soft); border:1px solid var(--amber-line); border-radius:var(--r-lg); padding:26px 28px; }
+.task-panel .block-num{ background:var(--amber); }
+.prompt-box{
+  margin-top:14px; padding:16px 18px; background:var(--paper-raised); border:1px solid var(--amber-line);
+  border-radius:var(--r-md); font-size:14.5px; line-height:1.75;
+}
+.prompt-box strong{ color:var(--amber); }
+textarea#final-task{
+  width:100%; min-height:170px; font-family:var(--f-body); font-size:15px; color:var(--ink);
+  background:var(--paper-raised); border:1px solid var(--amber-line); border-radius:var(--r-md);
+  padding:14px 16px; resize:vertical; margin-top:14px;
+}
+textarea#final-task:focus{ outline:none; border-color:var(--amber); }
+.task-footer{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:12px; flex-wrap:wrap; }
+#task-count{ font-family:var(--f-data); font-size:12.5px; color:var(--ink-faint); }
+.btn-secondary{
+  font-family:var(--f-body); font-weight:600; font-size:13.5px; color:var(--amber); background:none;
+  border:1.5px solid var(--amber-line); padding:9px 18px; border-radius:999px; cursor:pointer;
+}
+.saved-flag{ font-family:var(--f-data); font-size:12px; color:var(--ok); opacity:0; transition:opacity .3s; }
+.saved-flag.show{ opacity:1; }
+.record-tip{
+  margin-top:14px; padding:14px 16px; background:var(--paper-raised); border:1px solid var(--amber-line);
+  border-radius:var(--r-md); font-size:13.5px; color:var(--ink-soft);
+}
+.record-tip strong{ color:var(--ink); }
+
+footer{
+  max-width:760px; margin:0 auto; padding:0 24px 60px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px;
+  font-family:var(--f-data); font-size:12px; color:var(--ink-faint);
+}
+
+/* ---------- EN (sutil) ---------- */
+.en{ display:none; font-family:var(--f-body); font-style:normal; font-weight:400; font-size:.82em; line-height:1.45; opacity:.6; color:var(--ink-soft); margin-top:3px; }
+body.show-en .en{ display:block; }
+.lang-toggle{
+  position:fixed; top:16px; right:16px; z-index:50; display:flex; align-items:center; gap:8px;
+  background:var(--paper-raised); border:1px solid var(--line-strong); border-radius:999px; padding:6px 8px 6px 14px;
+  box-shadow:var(--shadow-1); font-family:var(--f-data); font-size:11px; color:var(--ink-faint);
+}
+.lang-sw{ width:38px; height:22px; border-radius:999px; background:var(--paper-alt); border:1px solid var(--line-strong); position:relative; cursor:pointer; padding:0; }
+.lang-sw::after{ content:""; position:absolute; top:2px; left:2px; width:16px; height:16px; border-radius:50%; background:var(--ink-faint); transition:transform .18s, background .18s; }
+.lang-sw.on{ background:var(--accent-soft); border-color:var(--accent-line); }
+.lang-sw.on::after{ transform:translateX(16px); background:var(--accent); }
+
+@media (max-width:600px){
+  .panel,.roleplay-panel,.close-panel,.task-panel{ padding:20px 18px; }
+  header{ padding:36px 16px 22px; } main{ padding:6px 16px 90px; }
+}
+@media (prefers-reduced-motion:reduce){ *{ transition:none !important; } }
+</style>
+</head>
+<body data-accent="teja">
+
+<div class="lang-toggle"><span id="lang-label">ES</span><button class="lang-sw" id="lang-sw" type="button" aria-pressed="false" aria-label="Mostrar inglés sutil"></button></div>
+
+<header>
+  <p class="eyebrow"><span class="dot"></span>Clase 34 · Presente irregular</p>
+  <h1>Los ocho <em>de siempre</em></h1>
+  <p class="lede">Hoy no aprendemos nada nuevo: afinamos los ocho verbos irregulares que más vas a usar, en presente y con tres personas — <strong>yo, tú y él/ella</strong>. El objetivo no es reconocerlos, sino <strong>decirlos sin pensar</strong>.<span class="en">Today we don't learn anything new: we sharpen the eight irregular verbs you'll use most, in the present tense and with three persons — I, you and he/she. The goal isn't to recognise them, but to say them without thinking.</span></p>
+  <div class="meta-row">
+    <div>Duración<strong>50 min</strong></div>
+    <div>Gramática<strong>Presente irregular · yo, tú, él/ella</strong></div>
+    <div>Nivel<strong>A2 inicial</strong></div>
+  </div>
+</header>
+
+<main>
+
+  <!-- 1. MAPA -->
+  <section class="block">
+    <div class="block-head"><span class="block-num">1</span><h2>El mapa de los ocho</h2><span class="time-tag">6 min</span></div>
+    <div class="panel">
+      <div class="map-tools">
+        <p class="hint" style="margin:0;">Mira las formas. Con el modo memoria las tapas y las destapas al tocarlas.<span class="en">Look at the forms. In memory mode you cover them and uncover them by tapping.</span></p>
+        <button class="btn-ghost" id="memoBtn" aria-pressed="false" type="button">Modo memoria</button>
+      </div>
+      <div class="mapwrap" id="mapWrap">
+        <table class="conj">
+          <thead><tr><th>Verbo</th><th>yo</th><th>tú</th><th>él / ella</th></tr></thead>
+          <tbody id="mapBody"></tbody>
+        </table>
+      </div>
+      <div class="note"><strong>Fíjate:</strong> lo irregular está en color. En estos ocho verbos, <strong>tú y él/ella casi nunca se parecen a "yo"</strong>, por eso conviene decirlos en voz alta los tres juntos: <em>tengo – tienes – tiene</em>.<span class="en">Notice: the irregular part is coloured. In these eight verbs, tú and él/ella rarely look like "yo", so it helps to say all three aloud together.</span></div>
+    </div>
+  </section>
+
+  <!-- 2. PATRONES -->
+  <section class="block">
+    <div class="block-head"><span class="block-num">2</span><h2>Tres patrones, no ocho verbos</h2><span class="time-tag">6 min</span></div>
+    <div class="pat-grid">
+      <div class="pat">
+        <p class="pat-tag">Patrón A</p>
+        <h3>Los de -go: tengo, hago, digo</h3>
+        <p>Solo <strong>yo</strong> es raro (-go). Tú y él/ella siguen una regla sencilla: <em>tener</em> y <em>decir</em> cambian la vocal; <em>hacer</em> no cambia.<span class="en">Only "yo" is odd (-go). Tú and él/ella follow a simple rule: tener and decir change the vowel; hacer doesn't.</span></p>
+        <div class="chips"><span class="chip k">tengo · tienes · tiene</span><span class="chip k">hago · haces · hace</span><span class="chip k">digo · dices · dice</span></div>
+      </div>
+      <div class="pat">
+        <p class="pat-tag">Patrón B</p>
+        <h3>Los que cambian la vocal: quiero, puedo</h3>
+        <p>La vocal de la raíz cambia en yo, tú y él/ella: <strong>e → ie</strong> (querer) y <strong>o → ue</strong> (poder).<span class="en">The stem vowel changes in yo, tú and él/ella: e → ie (querer) and o → ue (poder).</span></p>
+        <div class="chips"><span class="chip k">quiero · quieres · quiere</span><span class="chip k">puedo · puedes · puede</span></div>
+      </div>
+      <div class="pat">
+        <p class="pat-tag">Patrón C</p>
+        <h3>Los tres sueltos: soy, voy, estoy</h3>
+        <p>No siguen ninguna regla: hay que aprenderlos de memoria. Truco: <strong>soy, voy, estoy</strong> terminan los tres en <em>-oy</em>.<span class="en">They follow no rule: learn them by heart. Trick: soy, voy, estoy all end in -oy.</span></p>
+        <div class="chips"><span class="chip k">soy · eres · es</span><span class="chip k">voy · vas · va</span><span class="chip k">estoy · estás · está</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. FRASES ANCLA -->
+  <section class="block">
+    <div class="block-head"><span class="block-num">3</span><h2>Frases ancla</h2><span class="time-tag">6 min</span></div>
+    <div class="panel">
+      <p class="hint">Un verbo aprendido dentro de una frase se recuerda mejor. Toca la tarjeta, lee el ejemplo y <strong>dilo en voz alta dos veces</strong>.<span class="en">A verb learned inside a phrase is remembered better. Tap the card, read the example and say it aloud twice.</span></p>
+      <div class="anchor-grid" id="anchor-grid"></div>
+    </div>
+  </section>
+
+  <!-- 4. ESCRIBE LA FORMA -->
+  <section class="block">
+    <div class="block-head"><span class="block-num">4</span><h2>Escribe la forma</h2><span class="time-tag">12 min</span></div>
+    <div class="panel">
+      <p class="hint">Aquí no hay opciones: escribes tú la forma. Las tildes cuentan; usa los botones si tu teclado no las tiene.<span class="en">No options here: you write the form. Accents count; use the buttons if your keyboard doesn't have them.</span></p>
+      <div class="accbar" role="group" aria-label="Insertar letra"><span>letras</span>
+        <button type="button" class="acc" data-ch="á">á</button><button type="button" class="acc" data-ch="é">é</button><button type="button" class="acc" data-ch="í">í</button><button type="button" class="acc" data-ch="ó">ó</button><button type="button" class="acc" data-ch="ú">ú</button><button type="button" class="acc" data-ch="ñ">ñ</button>
+      </div>
+      <div id="exercises"></div>
+      <div class="check-bar">
+        <div style="display:flex; gap:10px;">
+          <button class="btn-primary" id="check-btn" type="button">Comprobar respuestas</button>
+          <button class="btn-ghost" id="reset-btn" type="button">Reiniciar</button>
+        </div>
+        <span id="score-text"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. RELÁMPAGO ORAL -->
+  <section class="block">
+    <div class="block-head"><span class="block-num">5</span><h2>Relámpago oral</h2><span class="time-tag">7 min</span></div>
+    <div class="panel">
+      <p class="hint">Mira el verbo y la persona. <strong>Dilo en voz alta</strong>, después pulsa "Ver forma" y marca cómo te salió. Al final verás qué verbos repetir.<span class="en">Look at the verb and person. Say it aloud, then tap "Ver forma" and mark how it went. At the end you'll see which verbs to repeat.</span></p>
+      <div id="flash-live">
+        <div class="flash-card">
+          <div class="flash-count" id="flash-count">1 / 12</div>
+          <div class="flash-prompt" id="flash-prompt"></div>
+          <div class="flash-ans" id="flash-ans"></div>
+        </div>
+        <div class="flash-actions">
+          <button class="btn-ghost" id="flash-show" type="button">Ver forma</button>
+          <button class="btn-ok" id="flash-ok" type="button" hidden>Me salió ✓</button>
+          <button class="btn-doubt" id="flash-doubt" type="button" hidden>Dudé ✗</button>
+        </div>
+      </div>
+      <div class="flash-result" id="flash-result"></div>
+      <div class="check-bar">
+        <button class="btn-ghost" id="flash-restart" type="button">Otra ronda</button>
+        <span id="flash-score"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. ROLEPLAY -->
+  <section class="block roleplay-panel">
+    <div class="block-head"><span class="block-num">6</span><h2>Roleplay: situaciones reales</h2><span class="time-tag">8 min</span></div>
+    <p style="margin:0 0 16px; font-size:15px; color:var(--ink-soft);">Dos escenas cortas. Responde con una frase completa usando el verbo de la pista. Elige una para hacerla en voz alta en clase; la otra queda para casa.<span class="en">Two short scenes. Reply with a full sentence using the verb in the hint. Pick one to do aloud in class; the other is for home.</span></p>
+    <div class="scene-tabs" id="scene-tabs"></div>
+    <div id="scene-container"></div>
+    <div class="roleplay-tip"><strong>En clase:</strong> primero lo decimos en voz alta, después lo escribes. No hace falta que sea perfecto: lo importante es que salga rápido.<span class="en">In class: first we say it aloud, then you write it. It doesn't need to be perfect: what matters is that it comes out fast.</span></div>
+  </section>
+
+  <!-- 7. CIERRE ORAL -->
+  <section class="block close-panel">
+    <div class="block-head"><span class="block-num">7</span><h2 style="color:var(--b2)">Mi día en ocho verbos</h2><span class="time-tag">5 min</span></div>
+    <p style="margin:0; font-size:15px; color:var(--ink-soft);">Cuenta <strong>en voz alta</strong> cómo es tu día de hoy. Cada vez que uses uno de los ocho verbos en una frase, tócalo. Meta: los ocho, sin mirar la tabla.<span class="en">Tell aloud what your day today is like. Each time you use one of the eight verbs in a sentence, tap it. Goal: all eight, without looking at the table.</span></p>
+    <div class="verb-chips" id="verb-chips"></div>
+    <div class="close-progress" id="close-progress"><strong>0 / 8</strong> verbos usados</div>
+  </section>
+
+  <!-- 8. TAREA -->
+  <section class="block task-panel">
+    <div class="block-head"><span class="block-num">8</span><h2 style="color:var(--amber)">Tu tarea</h2><span class="time-tag">—</span></div>
+    <p style="margin:0; font-size:15px; color:var(--ink-soft);">Escribe <strong>8 frases sobre ti</strong>, una por verbo, en presente. Después léelas en voz alta tres veces.<span class="en">Write 8 sentences about yourself, one per verb, in the present tense. Then read them aloud three times.</span></p>
+    <div class="prompt-box"><strong>Idea:</strong> "Soy…", "Voy a…", "Estoy en…", "Tengo que…", "Hago…", "Puedo…", "Quiero…", "Digo que…". Pueden ser reales o inventadas, pero que sean <em>tuyas</em>.<span class="en">Ideas: they can be real or made up, but make them yours.</span></div>
+    <textarea id="final-task" placeholder="1. Soy...&#10;2. Voy a...&#10;..."></textarea>
+    <div class="task-footer">
+      <span id="task-count">0 / 8 verbos distintos detectados</span>
+      <div style="display:flex; gap:10px; align-items:center;">
+        <span class="saved-flag" id="saved-flag">Guardado ✓</span>
+        <button class="btn-secondary" id="save-btn" type="button">Guardar tarea</button>
+      </div>
+    </div>
+    <div class="record-tip"><strong>Para casa:</strong> grábate leyendo las 8 frases y escúchalo una vez. Marca las que te hayan costado y repítelas mañana antes de la próxima clase (5 minutos bastan).<span class="en">For home: record yourself reading the 8 sentences and listen once. Mark the ones that were hard and repeat them tomorrow before the next class (5 minutes is enough).</span></div>
+  </section>
+
+</main>
+
+<footer>
+  <span>Clase 34 · Presente irregular</span>
+  <span>Próxima clase → Clase 35: indefinido I — fui, hice, tuve, estuve</span>
+</footer>
+
+<script>
+/* ---------- utilidades ---------- */
+function shuffle(a){ const b=a.slice(); for(let i=b.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [b[i],b[j]]=[b[j],b[i]]; } return b; }
+function esc(s){ return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+function norm(s){ return String(s).trim().toLowerCase().replace(/\s+/g,' '); }
+function strip(s){ return norm(s).normalize('NFD').replace(/[\u0300-\u036f]/g,''); }
+const store = {
+  async get(k){ if(!window.storage) return null; try{ const r=await window.storage.get(k); return (r&&typeof r.value==='string')?r.value:null; }catch(e){ return null; } },
+  async set(k,v){ if(!window.storage) return false; try{ await window.storage.set(k,v); return true; }catch(e){ return false; } }
+};
+
+/* ---------- datos ---------- */
+const VERBS = [
+  {inf:'ser', en:'to be (quality)', f:['<b>soy</b>','<b>eres</b>','<b>es</b>'], p:['soy','eres','es']},
+  {inf:'ir', en:'to go', f:['<b>voy</b>','<b>vas</b>','<b>va</b>'], p:['voy','vas','va']},
+  {inf:'estar', en:'to be (place/state)', f:['est<b>oy</b>','est<b>ás</b>','est<b>á</b>'], p:['estoy','estás','está']},
+  {inf:'tener', en:'to have', f:['ten<b>g</b>o','t<b>ie</b>nes','t<b>ie</b>ne'], p:['tengo','tienes','tiene']},
+  {inf:'hacer', en:'to do / make', f:['ha<b>g</b>o','haces','hace'], p:['hago','haces','hace']},
+  {inf:'poder', en:'can / to be able', f:['p<b>ue</b>do','p<b>ue</b>des','p<b>ue</b>de'], p:['puedo','puedes','puede']},
+  {inf:'querer', en:'to want', f:['qu<b>ie</b>ro','qu<b>ie</b>res','qu<b>ie</b>re'], p:['quiero','quieres','quiere']},
+  {inf:'decir', en:'to say / tell', f:['di<b>g</b>o','d<b>i</b>ces','d<b>i</b>ce'], p:['digo','dices','dice']}
+];
+const PERSONS = ['yo','tú','él/ella'];
+
+/* ---------- 1. mapa ---------- */
+(function(){
+  const body=document.getElementById('mapBody'), wrap=document.getElementById('mapWrap'), memo=document.getElementById('memoBtn');
+  body.innerHTML = VERBS.map(v=>`<tr><td class="inf">${v.inf}<small>${v.en}</small></td>${v.f.map(c=>`<td class="cell" tabindex="0"><span class="cell-in">${c}</span></td>`).join('')}</tr>`).join('');
+  function toggle(td){ if(wrap.classList.contains('memo')) td.classList.toggle('shown'); }
+  body.addEventListener('click',e=>{ const td=e.target.closest('td.cell'); if(td) toggle(td); });
+  body.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){ const td=e.target.closest('td.cell'); if(td){ e.preventDefault(); toggle(td); } } });
+  memo.addEventListener('click',()=>{
+    const on=!wrap.classList.contains('memo');
+    wrap.classList.toggle('memo',on); memo.setAttribute('aria-pressed',on?'true':'false');
+    memo.textContent = on?'Ver todo':'Modo memoria';
+    body.querySelectorAll('td.cell').forEach(td=>td.classList.remove('shown'));
+  });
+})();
+
+/* ---------- 3. frases ancla ---------- */
+const ANCHORS = [
+  {v:'ser', front:'soy / eres de…', back:'Soy una persona muy tranquila.<br>¿Eres de aquí?', en:'I am a very calm person. / Are you from here?'},
+  {v:'ir', front:'voy a + infinitivo', back:'Esta tarde voy a descansar.<br>¿Adónde vas?', en:"This afternoon I'm going to rest. / Where are you going?"},
+  {v:'estar', front:'estoy en… / estoy + -ando', back:'Estoy en casa y estoy estudiando.<br>¿Cómo estás?', en:"I'm at home and I'm studying. / How are you?"},
+  {v:'tener', front:'tengo que + infinitivo', back:'Tengo que llamar a mi familia.<br>¿Tienes tiempo?', en:'I have to call my family. / Do you have time?'},
+  {v:'hacer', front:'hago + ejercicio / la compra', back:'Los lunes hago ejercicio.<br>¿Qué haces hoy?', en:'On Mondays I exercise. / What are you doing today?'},
+  {v:'poder', front:'¿puedes + infinitivo?', back:'¿Puedes repetirlo, por favor?<br>Hoy no puedo salir.', en:"Can you repeat it, please? / I can't go out today."},
+  {v:'querer', front:'quiero + nombre / infinitivo', back:'Quiero un café y quiero descansar.<br>¿Qué quieres?', en:'I want a coffee and I want to rest. / What do you want?'},
+  {v:'decir', front:'digo que… / ¿qué dices?', back:'Digo que sí, ¿y tú qué dices?<br>Mi amiga dice que no.', en:'I say yes, and what do you say? / My friend says no.'}
+];
+(function(){
+  const g=document.getElementById('anchor-grid');
+  g.innerHTML = ANCHORS.map(a=>`<button type="button" class="anchor" aria-pressed="false"><span class="a-verb">${a.v}</span><div class="a-front">${a.front}</div><div class="a-back">${a.back}<span class="en">${a.en}</span><span class="say">🗣 dilo dos veces</span></div></button>`).join('');
+  g.querySelectorAll('.anchor').forEach(b=>b.addEventListener('click',()=>{ const on=b.classList.toggle('flipped'); b.setAttribute('aria-pressed',on?'true':'false'); }));
+})();
+
+/* ---------- 4. escribe la forma ---------- */
+/* Orden: 1-8 yo de los ocho verbos; 9-12 tú; 13-24 resto (tú / él-ella) */
+const EX = [
+  {s:'Hoy yo ___ de buen humor.', v:'ser', pr:'yo', ans:'soy'},
+  {s:'Esta tarde yo ___ al supermercado.', v:'ir', pr:'yo', ans:'voy'},
+  {s:'Ahora mismo yo ___ en casa.', v:'estar', pr:'yo', ans:'estoy'},
+  {s:'Yo ___ una reunión a las tres.', v:'tener', pr:'yo', ans:'tengo'},
+  {s:'Los domingos yo ___ la compra.', v:'hacer', pr:'yo', ans:'hago'},
+  {s:'Hoy yo no ___ salir.', v:'poder', pr:'yo', ans:'puedo'},
+  {s:'Yo ___ un café, por favor.', v:'querer', pr:'yo', ans:'quiero'},
+  {s:'Yo siempre ___ la verdad.', v:'decir', pr:'yo', ans:'digo'},
+  {s:'¿Tú ___ de aquí?', v:'ser', pr:'tú', ans:'eres'},
+  {s:'¿Adónde ___ tú el sábado?', v:'ir', pr:'tú', ans:'vas'},
+  {s:'¿Tú ___ hambre?', v:'tener', pr:'tú', ans:'tienes'},
+  {s:'¿Qué ___ tú para cenar?', v:'querer', pr:'tú', ans:'quieres'},
+  {s:'¿Dónde ___ tú ahora?', v:'estar', pr:'tú', ans:'estás'},
+  {s:'¿Qué ___ tú esta noche?', v:'hacer', pr:'tú', ans:'haces'},
+  {s:'¿___ tú ayudarme un momento?', v:'poder', pr:'tú', ans:'puedes'},
+  {s:'¿Qué ___ tú de esta idea?', v:'decir', pr:'tú', ans:'dices'},
+  {s:'Mi amiga ___ muy simpática.', v:'ser', pr:'ella', ans:'es'},
+  {s:'Mi hermano ___ al gimnasio los martes.', v:'ir', pr:'él', ans:'va'},
+  {s:'Mi madre ___ en el trabajo ahora.', v:'estar', pr:'ella', ans:'está'},
+  {s:'Ella ___ dos hermanos.', v:'tener', pr:'ella', ans:'tiene'},
+  {s:'Mi pareja ___ la cena hoy.', v:'hacer', pr:'él/ella', ans:'hace'},
+  {s:'Hoy ella no ___ venir.', v:'poder', pr:'ella', ans:'puede'},
+  {s:'Mi amigo ___ viajar a Italia.', v:'querer', pr:'él', ans:'quiere'},
+  {s:'Mi profesor ___ que sí.', v:'decir', pr:'él', ans:'dice'}
+];
+const exWrap=document.getElementById('exercises');
+let lastInput=null;
+(function(){
+  EX.forEach((q,i)=>{
+    if(i===0){ const d=document.createElement('div'); d.className='ex-divider en-clase'; d.textContent='en clase · ítems 1–12'; exWrap.appendChild(d); }
+    if(i===12){ const d=document.createElement('div'); d.className='ex-divider'; d.textContent='para casa · repaso opcional'; exWrap.appendChild(d); }
+    const parts=q.s.split('___');
+    const el=document.createElement('div'); el.className='ex'; el.dataset.i=i;
+    el.innerHTML=`<div class="ex-top"><span class="chip k">${q.v}</span><span class="chip">${q.pr}</span></div>
+      <div class="ex-sentence">${i+1}. ${esc(parts[0])}<input class="blank-in" type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" aria-label="Respuesta ${i+1}">${esc(parts[1]||'')}<span class="res"></span></div>`;
+    exWrap.appendChild(el);
+  });
+  exWrap.addEventListener('focusin',e=>{ if(e.target.classList&&e.target.classList.contains('blank-in')) lastInput=e.target; });
+  document.querySelectorAll('.acc').forEach(b=>{
+    b.addEventListener('mousedown',e=>e.preventDefault());
+    b.addEventListener('click',()=>{
+      const inp=lastInput; if(!inp||inp.disabled) return;
+      const s=inp.selectionStart??inp.value.length, e2=inp.selectionEnd??s;
+      inp.value=inp.value.slice(0,s)+b.dataset.ch+inp.value.slice(e2);
+      inp.setSelectionRange(s+1,s+1); inp.focus();
+    });
+  });
+  exWrap.addEventListener('keydown',e=>{
+    if(e.key==='Enter'&&e.target.classList.contains('blank-in')){
+      e.preventDefault();
+      const all=[...exWrap.querySelectorAll('.blank-in')]; const n=all[all.indexOf(e.target)+1]; if(n) n.focus();
+    }
+  });
+})();
+document.getElementById('check-btn').addEventListener('click',()=>{
+  let ok=0, done=0;
+  exWrap.querySelectorAll('.ex').forEach(el=>{
+    const q=EX[+el.dataset.i], inp=el.querySelector('.blank-in'), res=el.querySelector('.res');
+    if(inp.disabled) { if(inp.classList.contains('is-ok')) ok++; return; }
+    const val=norm(inp.value); if(!val){ return; }
+    done++; inp.disabled=true;
+    if(val===q.ans){ inp.classList.add('is-ok'); ok++; }
+    else{
+      inp.classList.add('is-bad');
+      const almost = strip(val)===strip(q.ans);
+      res.innerHTML=`<span class="fix${almost?' almost':''}">${esc(q.ans)}</span>`;
+    }
+  });
+  const total=exWrap.querySelectorAll('.ex').length;
+  const answered=exWrap.querySelectorAll('.blank-in:disabled').length;
+  document.getElementById('score-text').textContent=`${ok} / ${answered} correctas (${answered} de ${total} respondidas)`;
+});
+document.getElementById('reset-btn').addEventListener('click',()=>{
+  exWrap.querySelectorAll('.ex').forEach(el=>{
+    const inp=el.querySelector('.blank-in'); inp.disabled=false; inp.value=''; inp.className='blank-in'; el.querySelector('.res').innerHTML='';
+  });
+  document.getElementById('score-text').textContent='';
+});
+
+/* ---------- 5. relámpago oral ---------- */
+const FL_N=12;
+let flDeck=[], flIdx=0, flOk=0, flMiss=[];
+function buildDeck(){
+  const all=[];
+  VERBS.forEach(v=>PERSONS.forEach((p,i)=>all.push({inf:v.inf,pr:p,form:v.p[i]})));
+  return shuffle(all).slice(0,FL_N);
+}
+const fl={ count:document.getElementById('flash-count'), prompt:document.getElementById('flash-prompt'), ans:document.getElementById('flash-ans'),
+  show:document.getElementById('flash-show'), ok:document.getElementById('flash-ok'), doubt:document.getElementById('flash-doubt'),
+  live:document.getElementById('flash-live'), result:document.getElementById('flash-result'), score:document.getElementById('flash-score') };
+function flStart(){
+  flDeck=buildDeck(); flIdx=0; flOk=0; flMiss=[];
+  fl.live.style.display='block'; fl.result.classList.remove('show'); fl.result.innerHTML=''; fl.score.textContent='';
+  flShowCard();
+}
+function flShowCard(){
+  const c=flDeck[flIdx];
+  fl.count.textContent=`${flIdx+1} / ${FL_N}`;
+  fl.prompt.innerHTML=`${c.inf} · <em>${c.pr}</em>`;
+  fl.ans.textContent=''; fl.show.hidden=false; fl.ok.hidden=true; fl.doubt.hidden=true;
+}
+function flRate(good){
+  const c=flDeck[flIdx];
+  if(good) flOk++; else flMiss.push(c);
+  flIdx++;
+  fl.score.textContent=`${flOk} / ${flIdx} te salieron`;
+  if(flIdx>=FL_N) flEnd(); else flShowCard();
+}
+function flEnd(){
+  fl.live.style.display='none';
+  const uniq=[...new Set(flMiss.map(m=>m.inf))];
+  fl.result.classList.add('show');
+  fl.result.innerHTML = `<strong>${flOk} / ${FL_N}</strong> te salieron sin dudar.` +
+    (flMiss.length ? `<div style="margin-top:6px;">Para repetir hoy:</div><div class="tags">${flMiss.map(m=>`<span class="chip k">${esc(m.inf)} · ${esc(m.pr)} → ${esc(m.form)}</span>`).join('')}</div>` : `<div style="margin-top:6px;">¡Ronda limpia! Pasa a la siguiente cuando quieras.</div>`);
+}
+fl.show.addEventListener('click',()=>{ const c=flDeck[flIdx]; fl.ans.textContent=c.form; fl.show.hidden=true; fl.ok.hidden=false; fl.doubt.hidden=false; });
+fl.ok.addEventListener('click',()=>flRate(true));
+fl.doubt.addEventListener('click',()=>flRate(false));
+document.getElementById('flash-restart').addEventListener('click',flStart);
+flStart();
+
+/* ---------- 6. roleplay ---------- */
+const SCENES = [
+  { tab:'🎬 Planes con una amiga', setup:'Tu amiga Ana te escribe para hacer planes. Contesta con frases completas.',
+    lines:[
+      {w:'f',n:'Ana',t:'¿Qué haces esta tarde?',en:'What are you doing this afternoon?'},
+      {w:'y',h:'Usa HACER o IR: «Esta tarde voy a… / hago…»'},
+      {w:'f',n:'Ana',t:'¿Puedes venir al cine conmigo?',en:'Can you come to the cinema with me?'},
+      {w:'y',h:'Usa PODER o TENER QUE: «Sí, puedo… / No puedo, tengo que…»'},
+      {w:'f',n:'Ana',t:'¿Dónde estás ahora?',en:'Where are you now?'},
+      {w:'y',h:'Usa ESTAR: «Estoy en…»'},
+      {w:'f',n:'Ana',t:'¿Qué quieres cenar después?',en:'What do you want to have for dinner afterwards?'},
+      {w:'y',h:'Usa QUERER: «Quiero…»'},
+      {w:'f',n:'Ana',t:'Mi hermano dice que viene también.',en:'My brother says he is coming too.'},
+      {w:'y',h:'Reacciona con SER o DECIR: «Es… / Digo que…»'},
+      {w:'f',n:'Ana',t:'¡Genial! Entonces, ¿vas a casa antes?',en:'Great! So, are you going home first?'},
+      {w:'y',h:'Usa IR: «Sí, voy… / No, no voy…»'}
+    ]},
+  { tab:'🏠 Un día en casa', setup:'Estás en casa con tu pareja, Marc, y organizáis la tarde.',
+    lines:[
+      {w:'f',n:'Marc',t:'¿Cómo estás hoy?',en:'How are you today?'},
+      {w:'y',h:'Usa ESTAR: «Estoy… (bien, cansada, contenta…)»'},
+      {w:'f',n:'Marc',t:'¿Tienes mucho trabajo?',en:'Do you have a lot of work?'},
+      {w:'y',h:'Usa TENER: «Tengo…»'},
+      {w:'f',n:'Marc',t:'Yo hago la pasta. ¿Tú qué haces?',en:"I'm making the pasta. What are you making?"},
+      {w:'y',h:'Usa HACER: «Yo hago…»'},
+      {w:'f',n:'Marc',t:'¿Quieres vino o agua?',en:'Do you want wine or water?'},
+      {w:'y',h:'Usa QUERER: «Quiero…»'},
+      {w:'f',n:'Marc',t:'¿Puedes poner la mesa?',en:'Can you set the table?'},
+      {w:'y',h:'Usa PODER: «Sí, puedo… / No puedo…»'},
+      {w:'f',n:'Marc',t:'¿Qué dices? ¿Cenamos en el balcón?',en:'What do you say? Shall we eat on the balcony?'},
+      {w:'y',h:'Usa DECIR: «Digo que sí / Digo que no, porque…»'}
+    ]}
+];
+const sceneTabs=document.getElementById('scene-tabs'), sceneBox=document.getElementById('scene-container');
+let activeScene=0;
+const RP_KEY='rebecca-clase34-roleplay';
+let rpAnswers={}; let rpTimer=null;
+function renderTabs(){
+  sceneTabs.innerHTML=SCENES.map((s,i)=>`<button type="button" class="scene-tab${i===activeScene?' active':''}" data-i="${i}">${s.tab}</button>`).join('');
+  sceneTabs.querySelectorAll('.scene-tab').forEach(b=>b.addEventListener('click',()=>{ activeScene=+b.dataset.i; renderTabs(); renderScene(); }));
+}
+function renderScene(){
+  const s=SCENES[activeScene]; let yi=0;
+  const html=s.lines.map(l=>{
+    if(l.w==='f') return `<div class="line friend"><div class="line-avatar">${l.n[0]}</div><div class="line-body"><p class="line-name">${l.n}</p><div class="line-bubble">${l.t}<span class="en">${l.en}</span></div></div></div>`;
+    const key=activeScene+'-'+(yi++);
+    return `<div class="line you"><div class="line-avatar">Tú</div><div class="line-body"><p class="line-name">Tú</p><textarea class="line-input" rows="2" data-k="${key}" placeholder="Escribe tu respuesta...">${esc(rpAnswers[key]||'')}</textarea><p class="line-hint">${l.h}</p></div></div>`;
+  }).join('');
+  sceneBox.innerHTML=`<div class="scene-setup"><span>${s.tab.split(' ')[0]}</span><div><strong>${s.tab.replace(/^\S+\s/,'')}:</strong> ${s.setup}</div></div><div class="dialogue">${html}</div>`;
+}
+sceneBox.addEventListener('input',e=>{
+  const ta=e.target.closest('.line-input'); if(!ta) return;
+  rpAnswers[ta.dataset.k]=ta.value;
+  clearTimeout(rpTimer); rpTimer=setTimeout(()=>store.set(RP_KEY,JSON.stringify(rpAnswers)),600);
+});
+(async function(){
+  const saved=await store.get(RP_KEY);
+  if(saved){ try{ rpAnswers=JSON.parse(saved)||{}; }catch(e){} }
+  renderTabs(); renderScene();
+})();
+
+/* ---------- 7. cierre oral ---------- */
+const CHIP_KEY='rebecca-clase34-cierre';
+let chipState={};
+const chipBox=document.getElementById('verb-chips'), chipProg=document.getElementById('close-progress');
+function renderChips(){
+  chipBox.innerHTML=VERBS.map(v=>`<button type="button" class="vchip${chipState[v.inf]?' done':''}" data-v="${v.inf}">${v.inf}</button>`).join('');
+  const n=Object.values(chipState).filter(Boolean).length;
+  chipProg.innerHTML=n===8?`<strong>8 / 8</strong> verbos usados — ¡los ocho, sin tabla! 🎉`:`<strong>${n} / 8</strong> verbos usados`;
+}
+chipBox.addEventListener('click',e=>{
+  const b=e.target.closest('.vchip'); if(!b) return;
+  chipState[b.dataset.v]=!chipState[b.dataset.v]; renderChips();
+  store.set(CHIP_KEY,JSON.stringify(chipState));
+});
+(async function(){
+  const saved=await store.get(CHIP_KEY);
+  if(saved){ try{ chipState=JSON.parse(saved)||{}; }catch(e){} }
+  renderChips();
+})();
+
+/* ---------- 8. tarea ---------- */
+const TASK_KEY='rebecca-clase34-tarea';
+const taskArea=document.getElementById('final-task'), taskCount=document.getElementById('task-count'), savedFlag=document.getElementById('saved-flag');
+const FORM_RE = {
+  ser:/\b(soy|eres|es)\b/i, ir:/\b(voy|vas|va)\b/i, estar:/\b(estoy|estás|está)\b/i, tener:/\b(tengo|tienes|tiene)\b/i,
+  hacer:/\b(hago|haces|hace)\b/i, poder:/\b(puedo|puedes|puede)\b/i, querer:/\b(quiero|quieres|quiere)\b/i, decir:/\b(digo|dices|dice)\b/i
+};
+function updateCount(){
+  const t=taskArea.value;
+  const n=Object.values(FORM_RE).filter(re=>re.test(t)).length;
+  taskCount.textContent=`${n} / 8 verbos distintos detectados`;
+}
+async function saveTask(){
+  const ok=await store.set(TASK_KEY,taskArea.value);
+  savedFlag.textContent = (window.storage ? (ok?'Guardado ✓':'No se pudo guardar') : 'Guardado no disponible aquí');
+  savedFlag.classList.add('show'); setTimeout(()=>savedFlag.classList.remove('show'),1800);
+}
+let taskTimer=null;
+taskArea.addEventListener('input',()=>{ updateCount(); clearTimeout(taskTimer); taskTimer=setTimeout(saveTask,900); });
+document.getElementById('save-btn').addEventListener('click',saveTask);
+(async function(){ const s=await store.get(TASK_KEY); if(s) taskArea.value=s; updateCount(); })();
+
+/* ---------- toggle ES/EN ---------- */
+(function(){
+  const sw=document.getElementById('lang-sw'), lab=document.getElementById('lang-label'), KEY='rebecca-clase34-en';
+  function set(on){ document.body.classList.toggle('show-en',on); sw.classList.toggle('on',on); sw.setAttribute('aria-pressed',on?'true':'false'); lab.textContent=on?'ES · EN':'ES'; }
+  sw.addEventListener('click',()=>{ const on=!document.body.classList.contains('show-en'); set(on); store.set(KEY,on?'1':'0'); });
+  store.get(KEY).then(v=>set(v==='1'));
+})();
+</script>
+
+</body>
+</html>
