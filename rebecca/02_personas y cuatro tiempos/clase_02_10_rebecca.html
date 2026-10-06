@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clase 42 · Antes y mañana — Rebecca</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ESCOLAR — pergamino + acento variable · Clase 42 · Nosotros */
+:root{
+  --paper:#FBF7EE;--paper-raised:#FFF;--paper-alt:#F3ECDA;--ink:#23291F;--ink-soft:#565F52;--ink-faint:#8B9184;
+  --line:rgba(35,41,31,.12);--line-strong:rgba(35,41,31,.22);
+  --b2:#2F6FED;--b2-soft:rgba(47,111,237,.10);--b2-line:rgba(47,111,237,.35);
+  --ok:#2F7D5C;--ok-soft:rgba(47,125,92,.10);--ok-line:rgba(47,125,92,.38);
+  --family:#B5502E;--family-soft:rgba(181,80,46,.09);--family-line:rgba(181,80,46,.38);
+  --amber:#C1892F;--amber-soft:rgba(193,137,47,.13);--amber-line:rgba(193,137,47,.42);
+  --accent:#C1473F;--accent-soft:rgba(193,71,63,.09);--accent-line:rgba(193,71,63,.35);
+  --f-display:'Fraunces',Georgia,serif;--f-body:'IBM Plex Sans',system-ui,sans-serif;--f-data:'IBM Plex Mono',monospace;
+  --r-sm:8px;--r-md:14px;--r-lg:20px;--shadow-1:0 1px 2px rgba(35,41,31,.05),0 1px 8px rgba(35,41,31,.04);
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);background-image:radial-gradient(circle at 1px 1px,var(--line) 1px,transparent 0);background-size:22px 22px;color:var(--ink);font-family:var(--f-body);line-height:1.6}
+header{padding:44px 24px 28px;max-width:760px;margin:0 auto}
+.eyebrow{font-family:var(--f-data);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin:0 0 10px;display:flex;align-items:center;gap:10px}
+.eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--accent)}
+h1{font-family:var(--f-display);font-weight:600;font-size:clamp(30px,5.6vw,46px);line-height:1.08;margin:0 0 14px;letter-spacing:-.01em}
+h1 em{font-style:italic;color:var(--accent)}
+.lede{font-size:16px;color:var(--ink-soft);max-width:58ch;margin:0}
+.meta-row{display:flex;flex-wrap:wrap;gap:20px;margin-top:26px;font-family:var(--f-data);font-size:12px;color:var(--ink-faint)}
+.meta-row strong{display:block;color:var(--ink);font-size:14.5px;font-weight:500;font-family:var(--f-display);margin-top:3px}
+main{max-width:760px;margin:0 auto;padding:8px 24px 100px}
+section.block{margin-bottom:52px}
+.block-head{display:flex;align-items:baseline;gap:12px;margin-bottom:18px}
+.block-num{font-family:var(--f-data);font-size:12px;color:#fff;background:var(--accent);width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex:none}
+.block-head h2{font-family:var(--f-display);font-weight:500;font-style:italic;font-size:22px;margin:0}
+.time-tag{font-family:var(--f-data);font-size:11px;color:var(--ink-faint);background:var(--paper-alt);padding:3px 10px;border-radius:999px;margin-left:auto;flex:none}
+.panel{background:var(--paper-raised);border:1px solid var(--line);border-radius:var(--r-lg);box-shadow:var(--shadow-1);padding:26px 28px}
+.hint{font-family:var(--f-data);font-size:11.5px;color:var(--ink-faint);margin:0 0 14px}
+.note{margin-top:18px;padding:14px 16px;background:var(--accent-soft);border:1px solid var(--accent-line);border-radius:var(--r-md);font-size:14px;color:var(--ink-soft)}
+.note strong{color:var(--ink)}
+.chip{font-family:var(--f-data);font-size:12px;padding:3px 10px;border-radius:999px;border:1px solid var(--line-strong);color:var(--ink-soft)}
+.chip.k{border-color:var(--accent-line);background:var(--accent-soft);color:var(--accent);font-weight:500}
+.map-tools{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px;margin-bottom:12px}
+.mapwrap{overflow-x:auto}
+table.conj{width:100%;border-collapse:collapse;min-width:440px}
+table.conj th{font-family:var(--f-data);font-size:11px;font-weight:400;color:var(--ink-faint);text-align:left;padding:6px 10px;border-bottom:1.5px solid var(--line-strong)}
+table.conj td{padding:10px;border-bottom:1px dashed var(--line);font-family:var(--f-display);font-size:17px}
+table.conj td.inf{font-family:var(--f-data);font-size:12.5px;color:var(--ink-faint)}
+table.conj td.inf small{display:block;opacity:.8}
+table.conj b{color:var(--accent);font-weight:600}
+.mapwrap.memo td.cell{cursor:pointer}
+.mapwrap.memo td.cell:not(.shown) .cell-in{filter:blur(7px);user-select:none}
+.mapwrap.memo td.cell.shown{background:var(--accent-soft)}
+.pat-grid{display:grid;gap:14px}
+.pat{border:1px solid var(--line);border-radius:var(--r-md);padding:16px 18px;background:var(--paper-raised)}
+.pat-tag{font-family:var(--f-data);font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--accent);margin:0 0 6px}
+.pat h3{font-family:var(--f-display);font-size:19px;font-weight:600;margin:0 0 6px}
+.pat p{margin:0;font-size:14px;color:var(--ink-soft)}
+.pat .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.anchor-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px}
+.anchor{text-align:left;cursor:pointer;background:var(--paper-raised);border:1px solid var(--line);border-radius:var(--r-md);padding:14px 16px;min-height:96px;font:inherit;color:var(--ink)}
+.anchor:hover{border-color:var(--accent-line)}
+.a-verb{font-family:var(--f-data);font-size:11px;color:var(--ink-faint);text-transform:uppercase;letter-spacing:.05em}
+.a-front{font-family:var(--f-display);font-weight:600;font-size:17px;margin-top:4px}
+.a-back{display:none;margin-top:8px;font-size:13.5px;color:var(--ink-soft)}
+.anchor.flipped{background:var(--accent-soft);border-color:var(--accent-line)}
+.anchor.flipped .a-back{display:block}
+.say{font-family:var(--f-data);font-size:11px;color:var(--accent);display:block;margin-top:6px}
+.ex{margin-bottom:18px}
+.ex-top{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:6px}
+.ex-sentence{font-size:16px;line-height:2}
+.blank-in{font:inherit;font-family:var(--f-display);width:10.5ch;text-align:center;color:var(--ink);background:var(--accent-soft);border:0;border-bottom:2px solid var(--accent);border-radius:6px 6px 0 0;padding:0 6px;outline:none;margin:0 3px}
+.blank-in:focus{box-shadow:0 0 0 3px var(--accent-soft)}
+.blank-in.is-ok{border-bottom-color:var(--ok);background:var(--ok-soft);color:var(--ok)}
+.blank-in.is-bad{border-bottom-color:var(--family);background:var(--family-soft);color:var(--family);text-decoration:line-through}
+.fix{font-family:var(--f-display);font-weight:600;color:var(--b2);margin-left:4px}
+.fix.almost::after{content:" (mira la tilde)";font-family:var(--f-data);font-weight:400;font-size:11px;color:var(--amber)}
+.accbar{display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-bottom:14px}
+.accbar span{font-family:var(--f-data);font-size:11px;color:var(--ink-faint);margin-right:4px}
+.acc{width:36px;height:36px;border-radius:10px;border:1px solid var(--line-strong);background:var(--paper);font-family:var(--f-display);font-size:1.1rem;cursor:pointer;color:var(--ink)}
+.acc:hover{border-color:var(--accent);background:var(--accent-soft)}
+.check-bar{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:22px;padding-top:18px;border-top:1px dashed var(--line);flex-wrap:wrap}
+.btn-primary{font-family:var(--f-body);font-weight:600;font-size:14px;color:#fff;background:var(--accent);border:none;padding:11px 22px;border-radius:999px;cursor:pointer}
+.btn-ghost{font-family:var(--f-body);font-weight:600;font-size:13px;color:var(--ink-soft);background:none;border:1.5px solid var(--line);padding:9px 18px;border-radius:999px;cursor:pointer}
+.btn-ghost:hover{border-color:var(--accent)}
+.btn-ghost[aria-pressed="true"]{background:var(--accent-soft);border-color:var(--accent-line);color:var(--accent)}
+#score-text,#flash-score{font-family:var(--f-data);font-size:13px;color:var(--ink-faint)}
+.flash-card{border:1px solid var(--line);border-radius:var(--r-lg);padding:28px 22px;text-align:center;background:var(--paper-alt);min-height:170px;display:flex;flex-direction:column;justify-content:center;gap:10px}
+.flash-count{font-family:var(--f-data);font-size:12px;color:var(--ink-faint)}
+.flash-prompt{font-family:var(--f-display);font-size:clamp(26px,6vw,38px);font-weight:600}
+.flash-prompt em{color:var(--accent)}
+.flash-ans{font-family:var(--f-display);font-size:28px;font-weight:600;color:var(--ok);min-height:38px}
+.flash-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:16px}
+.btn-ok,.btn-doubt{font-weight:600;border-radius:999px;padding:10px 20px;cursor:pointer;font-family:var(--f-body);font-size:14px}
+.btn-ok{background:var(--ok-soft);border:1.5px solid var(--ok-line);color:var(--ok)}
+.btn-doubt{background:var(--family-soft);border:1.5px solid var(--family-line);color:var(--family)}
+.flash-result{margin-top:16px;padding:14px 16px;background:var(--paper-raised);border:1px solid var(--line);border-radius:var(--r-md);font-size:14px;display:none}
+.flash-result.show{display:block}
+.flash-result .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.roleplay-panel{background:var(--family-soft);border:1px solid var(--family-line);border-radius:var(--r-lg);padding:26px 28px}
+.roleplay-panel .block-num{background:var(--family)}
+.scene-tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+.scene-tab{font-family:var(--f-data);font-size:12.5px;background:var(--paper-raised);border:1.5px solid var(--family-line);color:var(--ink-soft);padding:7px 14px;border-radius:999px;cursor:pointer}
+.scene-tab.active{background:var(--family);border-color:var(--family);color:#fff}
+.scene-setup{background:var(--paper-raised);border:1px solid var(--family-line);border-radius:var(--r-md);padding:14px 16px;margin-bottom:20px;font-size:14px;color:var(--ink-soft)}
+.scene-setup strong{color:var(--ink)}
+.dialogue{display:flex;flex-direction:column;gap:14px}
+.line{display:flex;gap:12px;align-items:flex-start}
+.line-avatar{flex:none;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--f-display);font-weight:600;font-size:14px;color:#fff}
+.line.friend .line-avatar{background:var(--ink-faint)}
+.line.you .line-avatar{background:var(--family)}
+.line-body{flex:1}
+.line-name{font-family:var(--f-data);font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-faint);margin:0 0 4px}
+.line-bubble{background:var(--paper-raised);border:1px solid var(--line);border-radius:var(--r-md);padding:12px 14px;font-size:14.5px}
+.line-input{width:100%;font-family:var(--f-body);font-size:14.5px;color:var(--ink);background:#fff;border:1px solid var(--family-line);border-radius:var(--r-sm);padding:10px 12px;resize:vertical;min-height:40px}
+.line-input:focus{outline:none;border-color:var(--family)}
+.line-hint{font-family:var(--f-data);font-size:11px;color:var(--amber);margin-top:5px}
+.roleplay-tip{margin-top:22px;padding:14px 16px;background:var(--paper-raised);border:1px solid var(--family-line);border-radius:var(--r-md);font-size:13.5px;color:var(--ink-soft)}
+.close-panel{background:var(--b2-soft);border:1px solid var(--b2-line);border-radius:var(--r-lg);padding:26px 28px}
+.close-panel .block-num{background:var(--b2)}
+.verb-chips{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0}
+.vchip{font-family:var(--f-display);font-weight:600;font-size:16px;padding:9px 18px;border-radius:999px;border:1.5px solid var(--b2-line);background:var(--paper-raised);cursor:pointer;color:var(--ink)}
+.vchip.done{background:var(--ok-soft);border-color:var(--ok);color:var(--ok)}
+.close-progress{font-family:var(--f-data);font-size:12.5px;color:var(--ink-soft)}
+.close-progress strong{color:var(--ink);font-family:var(--f-display);font-size:15px}
+.task-panel{background:var(--amber-soft);border:1px solid var(--amber-line);border-radius:var(--r-lg);padding:26px 28px}
+.task-panel .block-num{background:var(--amber)}
+.prompt-box,.record-tip{margin-top:14px;padding:14px 16px;background:var(--paper-raised);border:1px solid var(--amber-line);border-radius:var(--r-md);font-size:14.5px;line-height:1.75}
+.prompt-box strong{color:var(--amber)}
+.record-tip{font-size:13.5px;color:var(--ink-soft)}
+.record-tip strong{color:var(--ink)}
+textarea#final-task{width:100%;min-height:150px;font-family:var(--f-body);font-size:15px;color:var(--ink);background:var(--paper-raised);border:1px solid var(--amber-line);border-radius:var(--r-md);padding:14px 16px;resize:vertical;margin-top:14px}
+textarea#final-task:focus{outline:none;border-color:var(--amber)}
+.task-footer{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:12px;flex-wrap:wrap}
+#task-count{font-family:var(--f-data);font-size:12.5px;color:var(--ink-faint)}
+.btn-secondary{font-family:var(--f-body);font-weight:600;font-size:13.5px;color:var(--amber);background:none;border:1.5px solid var(--amber-line);padding:9px 18px;border-radius:999px;cursor:pointer}
+.saved-flag{font-family:var(--f-data);font-size:12px;color:var(--ok);opacity:0;transition:opacity .3s}
+.saved-flag.show{opacity:1}
+footer{max-width:760px;margin:0 auto;padding:0 24px 60px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-family:var(--f-data);font-size:12px;color:var(--ink-faint)}
+.en{display:none;font-family:var(--f-body);font-style:normal;font-weight:400;font-size:.82em;line-height:1.45;opacity:.6;color:var(--ink-soft);margin-top:3px}
+body.show-en .en{display:block}
+.lang-toggle{position:fixed;top:16px;right:16px;z-index:50;display:flex;align-items:center;gap:8px;background:var(--paper-raised);border:1px solid var(--line-strong);border-radius:999px;padding:6px 8px 6px 14px;box-shadow:var(--shadow-1);font-family:var(--f-data);font-size:11px;color:var(--ink-faint)}
+.lang-sw{width:38px;height:22px;border-radius:999px;background:var(--paper-alt);border:1px solid var(--line-strong);position:relative;cursor:pointer;padding:0}
+.lang-sw::after{content:"";position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;background:var(--ink-faint);transition:transform .18s,background .18s}
+.lang-sw.on{background:var(--accent-soft);border-color:var(--accent-line)}
+.lang-sw.on::after{transform:translateX(16px);background:var(--accent)}
+@media (max-width:600px){.panel,.roleplay-panel,.close-panel,.task-panel{padding:20px 18px}header{padding:36px 16px 22px}main{padding:6px 16px 90px}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+.ex-divider{display:flex;align-items:center;gap:10px;margin:20px 0 16px;font-family:var(--f-data);font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-faint)}
+.ex-divider::before,.ex-divider::after{content:"";flex:1;height:1px;background:var(--line)}
+.ex-divider.en-clase{color:var(--accent)}
+.ex-divider.en-clase::before,.ex-divider.en-clase::after{background:var(--accent-line)}
+table.conj{min-width:520px}
+
+/* ===== ESCOLAR_WORKPILOT skin ===== */
+:root{--paper:#F3F6FC;--paper-raised:#FFFFFF;--paper-alt:#E8EEF9;--ink:#1B1F2A;--ink-soft:#4A5163;--ink-faint:#5A6176;--line:rgba(27,31,42,.12);--line-strong:rgba(27,31,42,.24);
+--b2:#0B66D6;--b2-soft:rgba(11,102,214,.10);--b2-line:rgba(11,102,214,.35);--ok:#0F7A3A;--ok-soft:rgba(30,158,79,.13);--ok-line:rgba(30,158,79,.42);--family:#B3261E;--family-soft:rgba(217,48,37,.09);--family-line:rgba(217,48,37,.38);--amber:#8A5A00;--amber-soft:rgba(193,137,47,.14);--amber-line:rgba(193,137,47,.45);
+--accent:#0B66D6;--accent-soft:rgba(11,102,214,.10);--accent-line:rgba(11,102,214,.36);--pur:#8E2DA8;
+--f-display:'Plus Jakarta Sans',system-ui,sans-serif;--f-body:'Inter',system-ui,sans-serif;--f-data:'Inter',system-ui,sans-serif;--r-sm:12px;--r-md:20px;--r-lg:28px;--shadow-1:0 1px 2px rgba(20,40,90,.06),0 10px 28px rgba(20,40,90,.07)}
+[data-accent="teja"]{--accent:#C1473F;--accent-soft:rgba(193,71,63,.10);--accent-line:rgba(193,71,63,.36)}
+[data-accent="azul"]{--accent:#0B66D6;--accent-soft:rgba(11,102,214,.10);--accent-line:rgba(11,102,214,.36)}
+[data-accent="verde"]{--accent:#0F7A3A;--accent-soft:rgba(15,122,58,.10);--accent-line:rgba(15,122,58,.36)}
+[data-accent="morado"]{--accent:#8E2DA8;--accent-soft:rgba(142,45,168,.10);--accent-line:rgba(142,45,168,.36)}
+body{background:linear-gradient(180deg,#E6EFFD 0,#F3F6FC 420px) fixed;background-size:auto}
+h1,h2,h3,.flash-prompt{letter-spacing:-.025em}
+h1 em{font-style:normal;background:linear-gradient(90deg,var(--accent) 10%,var(--pur));-webkit-background-clip:text;background-clip:text;color:transparent}
+.block-head h2{font-style:normal;font-weight:600}
+.eyebrow,.hint,.meta-row,.time-tag,.a-verb,.pat-tag,.say,.flash-count,.scene-tab,table.conj th{font-weight:600;letter-spacing:.07em}
+.time-tag{background:#fff;border:1px solid var(--line)}
+.panel,.pat,.anchor,.flash-card,.flash-result,.scene-setup,.roleplay-panel,.close-panel,.task-panel,.prompt-box{border-color:rgba(20,40,90,.08);box-shadow:var(--shadow-1)}
+.panel,.roleplay-panel,.close-panel,.task-panel{border-radius:var(--r-lg)}
+.note{border-radius:var(--r-md)}
+.btn-primary{box-shadow:0 6px 16px color-mix(in srgb,var(--accent) 30%,transparent)}
+.btn-ghost{background:#fff;border:1px solid var(--line-strong)}
+.flash-card{background:#fff}
+.scene-tab{background:#fff}
+table.conj td{font-family:var(--f-body)}
+.blank-in{font-family:var(--f-body);border-radius:10px 10px 0 0}
+</style>
+</head>
+<body data-accent="azul">
+
+<div class="lang-toggle"><span id="lang-label">ES</span><button class="lang-sw" id="lang-sw" type="button" aria-pressed="false" aria-label="Mostrar inglés sutil"></button></div>
+
+<header>
+  <p class="eyebrow"><span class="dot"></span>Clase 42 · Nosotros</p>
+  <h1>Antes <em>íbamos</em>, mañana <em>iremos</em></h1>
+  <p class="lede">Ya dices «nosotros» en presente e indefinido. Hoy lo llevamos a los otros dos tiempos: <strong>imperfecto</strong> («antes éramos, íbamos, teníamos…») y <strong>futuro</strong> («mañana seremos, iremos, tendremos…»). Mismos ocho verbos, misma persona. Si una forma de futuro no te sale, tu salida sigue siendo <strong>vamos a + infinitivo</strong>.<span class="en">You already say "nosotros" in the present and preterite. Today we take it to the other two tenses: imperfect and future. Same eight verbs, same person. If a future form doesn't come out, your exit is still "vamos a + infinitive".</span></p>
+  <div class="meta-row"><div>Duración<strong>50 min</strong></div><div>Gramática<strong>Nosotros · imperfecto y futuro</strong></div><div>Nivel<strong>A2</strong></div></div>
+</header>
+
+<main>
+
+  <!-- 1. CALENTAMIENTO -->
+  <section class="block">
+    <div class="block-head"><span class="block-num">1</span><h2>Calentamiento oral</h2><span class="time-tag">4 min</span></div>
+    <div class="panel">
+      <p class="hint">Repaso de la clase 41 (nosotros, hoy y ayer). Ana pregunta en «vosotros»; tú contestas en voz alta, en «nosotros», y tocas la pregunta cuando te salga.<span class="en">Review of class 41. Ana asks in "vosotros"; you answer aloud in "nosotros" and tap the question when it comes out.</span></p>
+      <div class="verb-chips" id="warm-chips"></div>
+      <div class="close-progress" id="warm-progress"></div>
+    </div>
+  </section>
+
+  <!-- 2. MAPA -->
+  <section class="block">
+    <div class="block-head"><span class="block-num">2</span><h2>El mapa de «nosotros»: antes y mañana</h2><span class="time-tag">5 min</span></div>
+    <div class="panel">
+      <div class="map-tools">
+        <p class="hint" style="margin:0">Compara «yo» con «nosotros». En color, lo que cambia. Con el modo memoria tapas las formas y las destapas al tocarlas.<span class="en">Compare "yo" with "nosotros". The changing part is coloured. Memory mode covers the forms.</span></p>
+        <button class="btn-ghost" id="memoBtn" aria-pressed="false" type="button">Modo memoria</button>
+      </div>
+      <div class="mapwrap" id="mapWrap">
+        <table class="conj"><thead><tr><th>Verbo</th><th>antes · yo</th><th>antes · nosotros</th><th>mañana · yo</th><th>mañana · nosotros</th></tr></thead><tbody id="mapBody"></tbody></table>
+      </div>
+      <div class="note"><strong>Fíjate:</strong> en imperfecto <strong>todas las formas de «nosotros» llevan tilde</strong> (<em>éramos, íbamos, estábamos, teníamos</em>), justo en la vocal antes de <em>-bamos / -amos</em>. En futuro, al revés: <strong>ninguna lleva tilde</strong> (<em>iremos, tendremos</em>), aunque «yo» sí (<em>iré, tendré</em>).<span class="en">In the imperfect every "nosotros" form has an accent mark, right on the vowel before the ending. In the future it's the opposite: none has one, although "yo" does.</span></div>
+    </div>
+  </section>
+
+  <!-- 3. PATRONES -->
+  <section class="block">
+    <div class="block-head"><span class="block-num">3</span><h2>Tres patrones y una salida</h2><span class="time-tag">4 min</span></div>
+    <div class="pat-grid">
+      <div class="pat">
+        <p class="pat-tag">Imperfecto · A</p><h3>Los dos sueltos: éramos, íbamos</h3>
+        <p>En imperfecto solo <em>ser</em> e <em>ir</em> son irregulares. Los otros seis son regulares.<span class="en">In the imperfect only ser and ir are irregular. The other six are regular.</span></p>
+        <div class="chips"><span class="chip k">éramos</span><span class="chip k">íbamos</span></div>
+      </div>
+      <div class="pat">
+        <p class="pat-tag">Imperfecto · B</p><h3>Raíz del infinitivo + -ábamos / -íamos</h3>
+        <p><em>Estar</em> hace <strong>-ábamos</strong>; <em>tener, hacer, poder, querer, decir</em> hacen <strong>-íamos</strong>. La raíz no cambia: <em>podíamos</em>, no «pudíamos».<span class="en">Estar takes -ábamos; the other five take -íamos. The stem doesn't change.</span></p>
+        <div class="chips"><span class="chip k">estábamos</span><span class="chip k">teníamos</span><span class="chip k">hacíamos</span><span class="chip k">podíamos</span><span class="chip k">queríamos</span><span class="chip k">decíamos</span></div>
+      </div>
+      <div class="pat">
+        <p class="pat-tag">Futuro</p><h3>La raíz del futuro + -emos</h3>
+        <p>La misma raíz que ya conoces de «yo» (clase 38), con <strong>-emos</strong>. Tres son regulares (<em>ser, ir, estar</em>: infinitivo entero); <em>tener, poder, querer</em> pierden una vocal (<em>tendr-, podr-, querr-</em>); <em>hacer</em> y <em>decir</em> se acortan (<em>har-, dir-</em>).<span class="en">Same stems as "yo" (class 38) plus -emos.</span></p>
+        <div class="chips"><span class="chip k">seremos</span><span class="chip k">iremos</span><span class="chip k">estaremos</span><span class="chip k">tendremos</span><span class="chip k">podremos</span><span class="chip k">querremos</span><span class="chip k">haremos</span><span class="chip k">diremos</span></div>
+      </div>
+      <div class="pat">
+        <p class="pat-tag">Tu salida</p><h3>vamos a + infinitivo</h3>
+        <p>Si en la conversación no te sale la forma de futuro, di <em>vamos a hacer, vamos a tener que, vamos a poder</em>. Siempre funciona, y suena natural.<span class="en">If the future form doesn't come out, use "vamos a + infinitive". It always works.</span></p>
+        <div class="chips"><span class="chip">Antes íbamos… pero mañana vamos a ir…</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. FRASES ANCLA -->
+  <section class="block">
+    <div class="block-head"><span class="block-num">4</span><h2>Frases ancla</h2><span class="time-tag">4 min</span></div>
+    <div class="panel">
+      <p class="hint">Cada tarjeta une «antes» y «mañana». Toca la tarjeta, lee el ejemplo y <strong>dilo en voz alta dos veces</strong>.<span class="en">Each card links "before" and "tomorrow". Tap the card, read the example and say it aloud twice.</span></p>
+      <div class="anchor-grid" id="anchor-grid"></div>
+    </div>
+  </section>
+
+  <!-- 5. ESCRIBE LA FORMA -->
+  <section class="block">
+    <div class="block-head"><span class="block-num">5</span><h2>Escribe la forma</h2><span class="time-tag">9 min</span></div>
+    <div class="panel">
+      <p class="hint">Aquí no hay opciones: escribes tú la forma. Mira la pista de tiempo: <em>antes</em> pide imperfecto; <em>mañana, el lunes, pronto</em> piden futuro. Los doce primeros, en clase; el resto, para casa.<span class="en">No options: you write the form. Time cues decide the tense. First twelve in class, the rest at home.</span></p>
+      <div class="accbar" role="group" aria-label="Insertar letra"><span>letras</span><button type="button" class="acc" data-ch="á">á</button><button type="button" class="acc" data-ch="é">é</button><button type="button" class="acc" data-ch="í">í</button><button type="button" class="acc" data-ch="ó">ó</button><button type="button" class="acc" data-ch="ú">ú</button><button type="button" class="acc" data-ch="ñ">ñ</button></div>
+      <div id="exercises"></div>
+      <div class="check-bar">
+        <div style="display:flex;gap:10px"><button class="btn-primary" id="check-btn" type="button">Comprobar respuestas</button><button class="btn-ghost" id="reset-btn" type="button">Reiniciar</button></div>
+        <span id="score-text"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. RELÁMPAGO -->
+  <section class="block">
+    <div class="block-head"><span class="block-num">6</span><h2>Relámpago oral</h2><span class="time-tag">6 min</span></div>
+    <div class="panel">
+      <p class="hint">Verbo, tiempo y persona. Casi todas son «nosotros». <strong>Dilo en voz alta</strong>, pulsa «Ver forma» y marca cómo te salió.<span class="en">Verb, tense and person. Mostly "nosotros". Say it aloud, tap "Ver forma" and mark how it went.</span></p>
+      <div id="flash-live">
+        <div class="flash-card"><div class="flash-count" id="flash-count"></div><div class="flash-prompt" id="flash-prompt"></div><div class="flash-ans" id="flash-ans"></div></div>
+        <div class="flash-actions"><button class="btn-ghost" id="flash-show" type="button">Ver forma</button><button class="btn-ok" id="flash-ok" type="button" hidden>Me salió ✓</button><button class="btn-doubt" id="flash-doubt" type="button" hidden>Dudé ✗</button></div>
+      </div>
+      <div class="flash-result" id="flash-result"></div>
+      <div class="check-bar"><button class="btn-ghost" id="flash-restart" type="button">Otra ronda</button><span id="flash-score"></span></div>
+    </div>
+  </section>
+
+  <!-- 7. ROLEPLAY -->
+  <section class="block roleplay-panel">
+    <div class="block-head"><span class="block-num">7</span><h2>Roleplay: antes y mañana</h2><span class="time-tag">8 min</span></div>
+    <p style="margin:0 0 16px;font-size:15px;color:var(--ink-soft)">Dos escenas con Ana. Ella os pregunta a Marc y a ti en «vosotros» (<em>erais, ibais, haréis</em>); <strong>tú contestas en «nosotros»</strong> (<em>éramos, íbamos, haremos</em>). Una la hacemos en voz alta en clase; la otra queda para casa.<span class="en">Two scenes with Ana. She asks in "vosotros"; you answer in "nosotros". One aloud in class; the other for home.</span></p>
+    <div class="scene-tabs" id="scene-tabs"></div>
+    <div id="scene-container"></div>
+    <div class="roleplay-tip"><strong>En clase:</strong> primero lo decimos en voz alta, después lo escribes. En la escena del futuro, si una forma no te sale, di «vamos a…» y luego intenta la otra.<span class="en">Aloud first, then written. In the future scene, if a form doesn't come out, say "vamos a…" first, then try the other.</span></div>
+  </section>
+
+  <!-- 8. CIERRE ORAL -->
+  <section class="block close-panel">
+    <div class="block-head"><span class="block-num">8</span><h2 style="color:var(--b2)">Marc y yo, sin guion</h2><span class="time-tag">5 min</span></div>
+    <p style="margin:0;font-size:15px;color:var(--ink-soft)">Cuenta <strong>en voz alta, sin guion</strong>, cómo erais Marc y tú antes y qué haréis mañana. Toca cada tiempo y cada verbo cuando lo uses. Meta: los dos tiempos y, si puedes, los ocho verbos.<span class="en">Tell aloud, without a script, what you and Marc were like before and what you'll do tomorrow. Tap each tense and verb as you use it.</span></p>
+    <div class="verb-chips" id="tense-chips"></div>
+    <div class="verb-chips" id="verb-chips"></div>
+    <div class="close-progress" id="close-progress"></div>
+  </section>
+
+  <!-- 9. TAREA -->
+  <section class="block task-panel">
+    <div class="block-head"><span class="block-num">9</span><h2 style="color:var(--amber)">Tu tarea</h2><span class="time-tag">5 min</span></div>
+    <p style="margin:0;font-size:15px;color:var(--ink-soft)">Escribe <strong>5 frases con «nosotros»</strong> sobre ti y Marc (o una amiga, o tu familia): <strong>tres de antes</strong> y <strong>dos de mañana</strong>. Después léelas en voz alta tres veces.<span class="en">Write 5 sentences with "nosotros": three about before and two about tomorrow. Then read them aloud three times.</span></p>
+    <div class="prompt-box"><strong>Idea:</strong> «Antes íbamos a…», «Antes teníamos…», «Antes éramos…» · «Mañana haremos…», «El sábado estaremos en…». Pueden ser reales o inventadas, pero que sean <em>tuyas</em>.</div>
+    <textarea id="final-task" placeholder="1. Antes íbamos...&#10;2. Antes teníamos...&#10;3. Antes éramos...&#10;4. Mañana haremos...&#10;5. El sábado estaremos..."></textarea>
+    <div class="task-footer">
+      <span id="task-count"></span>
+      <div style="display:flex;gap:10px;align-items:center"><span class="saved-flag" id="saved-flag">Guardado ✓</span><button class="btn-secondary" id="save-btn" type="button">Guardar tarea</button></div>
+    </div>
+    <div class="record-tip"><strong>Para casa:</strong> grábate leyendo las 5 frases y escúchalo una vez. Mañana, 5 minutos con las que te costaron, antes de la próxima clase.<span class="en">Record yourself, listen once, repeat the hard ones tomorrow before the next class.</span></div>
+  </section>
+
+</main>
+
+<footer>
+  <span>Clase 42 · Nosotros: antes y mañana</span>
+  <span>Próxima clase → Clase 43: punto de control — nosotros en los cuatro tiempos</span>
+</footer>
+
+<script>
+function shuffle(a){const b=a.slice();for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]]}return b}
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
+function norm(s){return String(s).trim().toLowerCase().replace(/\s+/g,' ')}
+function strip(s){return norm(s).normalize('NFD').replace(/[\u0300-\u036f]/g,'')}
+const store={
+  async get(k){if(!window.storage)return null;try{const r=await window.storage.get(k);return(r&&typeof r.value==='string')?r.value:null}catch(e){return null}},
+  async set(k,v){if(!window.storage)return false;try{await window.storage.set(k,v);return true}catch(e){return false}}
+};
+
+/* ---------- datos: ocho verbos · antes / mañana · yo, tú, él/ella, nosotros ---------- */
+const ALL8=['ser','ir','estar','tener','hacer','poder','querer','decir'];
+const PERS=['yo','tú','él/ella','nosotros'];
+const F={
+  ser:{antes:['era','eras','era','éramos'],'mañana':['seré','serás','será','seremos']},
+  ir:{antes:['iba','ibas','iba','íbamos'],'mañana':['iré','irás','irá','iremos']},
+  estar:{antes:['estaba','estabas','estaba','estábamos'],'mañana':['estaré','estarás','estará','estaremos']},
+  tener:{antes:['tenía','tenías','tenía','teníamos'],'mañana':['tendré','tendrás','tendrá','tendremos']},
+  hacer:{antes:['hacía','hacías','hacía','hacíamos'],'mañana':['haré','harás','hará','haremos']},
+  poder:{antes:['podía','podías','podía','podíamos'],'mañana':['podré','podrás','podrá','podremos']},
+  querer:{antes:['quería','querías','quería','queríamos'],'mañana':['querré','querrás','querrá','querremos']},
+  decir:{antes:['decía','decías','decía','decíamos'],'mañana':['diré','dirás','dirá','diremos']}
+};
+const TK=['antes','mañana'];
+const MAP=[
+  {inf:'ser',en:'to be (quality)',c:['<b>era</b>','<b>éramos</b>','ser<b>é</b>','ser<b>emos</b>']},
+  {inf:'ir',en:'to go',c:['<b>iba</b>','<b>íbamos</b>','ir<b>é</b>','ir<b>emos</b>']},
+  {inf:'estar',en:'to be (place/state)',c:['est<b>aba</b>','est<b>ábamos</b>','estar<b>é</b>','estar<b>emos</b>']},
+  {inf:'tener',en:'to have',c:['ten<b>ía</b>','ten<b>íamos</b>','tendr<b>é</b>','tendr<b>emos</b>']},
+  {inf:'hacer',en:'to do / make',c:['hac<b>ía</b>','hac<b>íamos</b>','har<b>é</b>','har<b>emos</b>']},
+  {inf:'poder',en:'can / to be able',c:['pod<b>ía</b>','pod<b>íamos</b>','podr<b>é</b>','podr<b>emos</b>']},
+  {inf:'querer',en:'to want',c:['quer<b>ía</b>','quer<b>íamos</b>','querr<b>é</b>','querr<b>emos</b>']},
+  {inf:'decir',en:'to say / tell',c:['dec<b>ía</b>','dec<b>íamos</b>','dir<b>é</b>','dir<b>emos</b>']}
+];
+
+/* ---------- 1. calentamiento (clase 41) ---------- */
+const WARM=['¿Qué hacéis hoy, Marc y tú?','¿Adónde fuisteis ayer?','¿Qué tenéis que hacer esta semana?','¿Qué hicisteis el sábado?'];
+(function(){
+  const box=document.getElementById('warm-chips'),prog=document.getElementById('warm-progress');let st={};
+  function r(){box.innerHTML=WARM.map((q,i)=>`<button type="button" class="vchip${st[i]?' done':''}" data-i="${i}">${q}</button>`).join('');const n=Object.values(st).filter(Boolean).length;prog.innerHTML=`<strong>${n} / ${WARM.length}</strong> respondidas en voz alta`}
+  box.addEventListener('click',e=>{const b=e.target.closest('.vchip');if(!b)return;st[b.dataset.i]=!st[b.dataset.i];r()});r();
+})();
+
+/* ---------- 2. mapa ---------- */
+(function(){
+  const body=document.getElementById('mapBody'),wrap=document.getElementById('mapWrap'),memo=document.getElementById('memoBtn');
+  body.innerHTML=MAP.map(v=>`<tr><td class="inf">${v.inf}<small>${v.en}</small></td>${v.c.map(c=>`<td class="cell" tabindex="0"><span class="cell-in">${c}</span></td>`).join('')}</tr>`).join('');
+  function tg(td){if(wrap.classList.contains('memo'))td.classList.toggle('shown')}
+  body.addEventListener('click',e=>{const td=e.target.closest('td.cell');if(td)tg(td)});
+  body.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){const td=e.target.closest('td.cell');if(td){e.preventDefault();tg(td)}}});
+  memo.addEventListener('click',()=>{const on=!wrap.classList.contains('memo');wrap.classList.toggle('memo',on);memo.setAttribute('aria-pressed',on?'true':'false');memo.textContent=on?'Ver todo':'Modo memoria';body.querySelectorAll('td.cell').forEach(td=>td.classList.remove('shown'))});
+})();
+
+/* ---------- 4. frases ancla ---------- */
+const ANCHORS=[
+  {v:'ser',front:'éramos… / seremos…',back:'Antes éramos más jóvenes.<br>Mañana seremos cuatro en la mesa.',en:'Before we were younger. / Tomorrow there will be four of us at the table.'},
+  {v:'ir',front:'íbamos a… / iremos a…',back:'Antes íbamos a la playa cada domingo.<br>Mañana iremos a la montaña.',en:'We used to go to the beach every Sunday. / Tomorrow we will go to the mountains.'},
+  {v:'estar',front:'estábamos en… / estaremos en…',back:'Antes estábamos en otro piso.<br>El viernes estaremos en Madrid.',en:'We used to be in another flat. / On Friday we will be in Madrid.'},
+  {v:'tener',front:'teníamos… / tendremos que…',back:'Antes teníamos más tiempo libre.<br>Mañana tendremos que madrugar.',en:'We used to have more free time. / Tomorrow we will have to get up early.'},
+  {v:'hacer',front:'hacíamos… / haremos…',back:'Antes hacíamos deporte juntos.<br>El sábado haremos una paella.',en:'We used to exercise together. / On Saturday we will make a paella.'},
+  {v:'poder',front:'podíamos… / podremos…',back:'Antes no podíamos viajar.<br>Pronto podremos ir a Italia.',en:"We couldn't travel before. / Soon we will be able to go to Italy."},
+  {v:'querer',front:'queríamos… / querremos…',back:'Antes queríamos vivir en la costa.<br>Mañana querremos descansar.',en:'We used to want to live on the coast. / Tomorrow we will want to rest.'},
+  {v:'decir',front:'decíamos… / diremos…',back:'Antes siempre decíamos que sí.<br>Mañana le diremos la verdad a Ana.',en:'We always used to say yes. / Tomorrow we will tell Ana the truth.'}
+];
+(function(){
+  const g=document.getElementById('anchor-grid');
+  g.innerHTML=ANCHORS.map(a=>`<button type="button" class="anchor" aria-pressed="false"><span class="a-verb">${a.v}</span><div class="a-front">${a.front}</div><div class="a-back">${a.back}<span class="en">${a.en}</span><span class="say">🗣 dilo dos veces</span></div></button>`).join('');
+  g.querySelectorAll('.anchor').forEach(b=>b.addEventListener('click',()=>{const on=b.classList.toggle('flipped');b.setAttribute('aria-pressed',on?'true':'false')}));
+})();
+
+/* ---------- 5. escribe la forma ---------- */
+const EX=[
+  {s:'Antes Marc y yo ___ muy jóvenes.',v:'ser',pr:'nosotros',ans:'éramos'},
+  {s:'De niños nosotros ___ al pueblo cada verano.',v:'ir',pr:'nosotros',ans:'íbamos'},
+  {s:'Antes nosotros ___ en otro barrio.',v:'estar',pr:'nosotros',ans:'estábamos'},
+  {s:'Antes nosotros ___ más tiempo libre.',v:'tener',pr:'nosotros',ans:'teníamos'},
+  {s:'Antes, los domingos, nosotros ___ paella.',v:'hacer',pr:'nosotros',ans:'hacíamos'},
+  {s:'Antes nosotros no ___ viajar mucho.',v:'poder',pr:'nosotros',ans:'podíamos'},
+  {s:'Antes nosotros ___ vivir en la costa.',v:'querer',pr:'nosotros',ans:'queríamos'},
+  {s:'Mañana Marc y yo ___ en casa todo el día.',v:'estar',pr:'nosotros',ans:'estaremos'},
+  {s:'El lunes nosotros ___ al médico.',v:'ir',pr:'nosotros',ans:'iremos'},
+  {s:'Mañana nosotros ___ que madrugar.',v:'tener',pr:'nosotros',ans:'tendremos'},
+  {s:'El sábado que viene nosotros ___ una paella.',v:'hacer',pr:'nosotros',ans:'haremos'},
+  {s:'Pronto nosotros ___ viajar a Italia.',v:'poder',pr:'nosotros',ans:'podremos'},
+  {s:'Mañana nosotros ___ cenar fuera.',v:'querer',pr:'nosotros',ans:'querremos'},
+  {s:'Mañana Marc y yo le ___ la verdad a Ana.',v:'decir',pr:'nosotros',ans:'diremos'},
+  {s:'Antes nosotros siempre ___ que sí.',v:'decir',pr:'nosotros',ans:'decíamos'},
+  {s:'Seguro que mañana nosotros ___ cansados.',v:'ser',pr:'nosotros',ans:'seremos'},
+  {s:'Antes yo ___ más tiempo, pero ahora no.',v:'tener',pr:'yo',ans:'tenía'},
+  {s:'¿Qué ___ tú mañana con Marc?',v:'hacer',pr:'tú',ans:'harás'}
+];
+const exWrap=document.getElementById('exercises');let lastInput=null;
+(function(){
+  EX.forEach((q,i)=>{
+    if(i===0){const d=document.createElement('div');d.className='ex-divider en-clase';d.textContent='en clase · ítems 1–12';exWrap.appendChild(d)}
+    if(i===12){const d=document.createElement('div');d.className='ex-divider';d.textContent='para casa · repaso opcional';exWrap.appendChild(d)}
+    const parts=q.s.split('___');const el=document.createElement('div');el.className='ex';el.dataset.i=i;
+    el.innerHTML=`<div class="ex-top"><span class="chip k">${q.v}</span><span class="chip">${q.pr}</span></div><div class="ex-sentence">${i+1}. ${esc(parts[0])}<input class="blank-in" type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" aria-label="Respuesta ${i+1}">${esc(parts[1]||'')}<span class="res"></span></div>`;
+    exWrap.appendChild(el);
+  });
+  exWrap.addEventListener('focusin',e=>{if(e.target.classList&&e.target.classList.contains('blank-in'))lastInput=e.target});
+  document.querySelectorAll('.acc').forEach(b=>{
+    b.addEventListener('mousedown',e=>e.preventDefault());
+    b.addEventListener('click',()=>{const inp=lastInput;if(!inp||inp.disabled)return;const s=inp.selectionStart??inp.value.length,e2=inp.selectionEnd??s;inp.value=inp.value.slice(0,s)+b.dataset.ch+inp.value.slice(e2);inp.setSelectionRange(s+1,s+1);inp.focus()});
+  });
+  exWrap.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.classList.contains('blank-in')){e.preventDefault();const all=[...exWrap.querySelectorAll('.blank-in')];const n=all[all.indexOf(e.target)+1];if(n)n.focus()}});
+})();
+document.getElementById('check-btn').addEventListener('click',()=>{
+  let ok=0;
+  exWrap.querySelectorAll('.ex').forEach(el=>{
+    const q=EX[+el.dataset.i],inp=el.querySelector('.blank-in'),res=el.querySelector('.res');
+    if(inp.disabled){if(inp.classList.contains('is-ok'))ok++;return}
+    const val=norm(inp.value);if(!val)return;inp.disabled=true;
+    if(val===q.ans){inp.classList.add('is-ok');ok++}
+    else{inp.classList.add('is-bad');const almost=strip(val)===strip(q.ans);res.innerHTML=`<span class="fix${almost?' almost':''}">${esc(q.ans)}</span>`}
+  });
+  const answered=exWrap.querySelectorAll('.blank-in:disabled').length;
+  document.getElementById('score-text').textContent=`${ok} / ${answered} correctas (${answered} de ${EX.length} respondidas)`;
+});
+document.getElementById('reset-btn').addEventListener('click',()=>{
+  exWrap.querySelectorAll('.ex').forEach(el=>{const inp=el.querySelector('.blank-in');inp.disabled=false;inp.value='';inp.className='blank-in';el.querySelector('.res').innerHTML=''});
+  document.getElementById('score-text').textContent='';
+});
+
+/* ---------- 6. relámpago oral ---------- */
+const FL_N=12;let flDeck=[],flIdx=0,flOk=0,flMiss=[];
+const fl={count:document.getElementById('flash-count'),prompt:document.getElementById('flash-prompt'),ans:document.getElementById('flash-ans'),show:document.getElementById('flash-show'),ok:document.getElementById('flash-ok'),doubt:document.getElementById('flash-doubt'),live:document.getElementById('flash-live'),result:document.getElementById('flash-result'),score:document.getElementById('flash-score')};
+function flStart(){
+  const nos=[],otros=[];
+  ALL8.forEach(v=>TK.forEach(t=>PERS.forEach((p,i)=>{const c={inf:v,t,pr:p,form:F[v][t][i]};(i===3?nos:otros).push(c)})));
+  flDeck=shuffle(shuffle(nos).slice(0,8).concat(shuffle(otros).slice(0,FL_N-8)));
+  flIdx=0;flOk=0;flMiss=[];
+  fl.live.style.display='block';fl.result.classList.remove('show');fl.result.innerHTML='';fl.score.textContent='';flCard();
+}
+function flCard(){const c=flDeck[flIdx];fl.count.textContent=`${flIdx+1} / ${FL_N}`;fl.prompt.innerHTML=`${c.inf} · ${c.t} <em>${c.pr}</em>`;fl.ans.textContent='';fl.show.hidden=false;fl.ok.hidden=true;fl.doubt.hidden=true}
+function flRate(good){
+  const c=flDeck[flIdx];if(good)flOk++;else flMiss.push(c);flIdx++;fl.score.textContent=`${flOk} / ${flIdx} te salieron`;
+  if(flIdx>=FL_N){
+    fl.live.style.display='none';fl.result.classList.add('show');
+    fl.result.innerHTML=`<strong>${flOk} / ${FL_N}</strong> te salieron sin dudar.`+(flMiss.length?`<div style="margin-top:6px">Para repetir hoy:</div><div class="tags">${flMiss.map(m=>`<span class="chip k">${esc(m.inf)} · ${esc(m.t)} ${esc(m.pr)} → ${esc(m.form)}</span>`).join('')}</div>`:`<div style="margin-top:6px">¡Ronda limpia! Pasa a la siguiente cuando quieras.</div>`);
+  }else flCard();
+}
+fl.show.addEventListener('click',()=>{fl.ans.textContent=flDeck[flIdx].form;fl.show.hidden=true;fl.ok.hidden=false;fl.doubt.hidden=false});
+fl.ok.addEventListener('click',()=>flRate(true));fl.doubt.addEventListener('click',()=>flRate(false));
+document.getElementById('flash-restart').addEventListener('click',flStart);flStart();
+
+/* ---------- 7. roleplay ---------- */
+const SCENES=[
+  {tab:'🎬 Antes, Marc y yo',setup:'Ana quiere saber cómo era vuestra vida antes. Te pregunta en «vosotros»; tú contestas en «nosotros», en imperfecto.',lines:[
+    {w:'f',n:'Ana',t:'¿Cómo erais antes, Marc y tú?',en:'What were you and Marc like before?'},
+    {w:'y',h:'Usa SER: «Éramos… (más jóvenes, más tranquilos…)»'},
+    {w:'f',n:'Ana',t:'¿Qué hacíais los fines de semana?',en:'What did you do at weekends?'},
+    {w:'y',h:'Usa HACER: «Hacíamos…»'},
+    {w:'f',n:'Ana',t:'¿Adónde ibais de vacaciones?',en:'Where did you go on holiday?'},
+    {w:'y',h:'Usa IR: «Íbamos a…»'},
+    {w:'f',n:'Ana',t:'¿Teníais mucho tiempo libre?',en:'Did you have a lot of free time?'},
+    {w:'y',h:'Usa TENER: «Sí, teníamos… / No, no teníamos…»'},
+    {w:'f',n:'Ana',t:'¿Dónde estabais en esa época?',en:'Where were you at that time?'},
+    {w:'y',h:'Usa ESTAR: «Estábamos en…»'},
+    {w:'f',n:'Ana',t:'¿Qué queríais hacer entonces? ¿Podíais viajar?',en:'What did you want to do then? Could you travel?'},
+    {w:'y',h:'Usa QUERER o PODER: «Queríamos… / No podíamos…»'},
+    {w:'f',n:'Ana',t:'¿Y qué decíais de vivir en Barcelona?',en:'And what did you say about living in Barcelona?'},
+    {w:'y',h:'Usa DECIR: «Decíamos que…»'}]},
+  {tab:'🏠 Mañana, Marc y yo',setup:'Ana pregunta qué haréis mañana. Contesta en «nosotros», en futuro. Si no te sale, empieza con «vamos a…».',lines:[
+    {w:'f',n:'Ana',t:'¿Qué haréis mañana?',en:'What will you do tomorrow?'},
+    {w:'y',h:'Usa HACER: «Haremos…» (salida: «Vamos a hacer…»)'},
+    {w:'f',n:'Ana',t:'¿Dónde estaréis por la tarde?',en:'Where will you be in the afternoon?'},
+    {w:'y',h:'Usa ESTAR: «Estaremos en…»'},
+    {w:'f',n:'Ana',t:'¿Iréis a la playa?',en:'Will you go to the beach?'},
+    {w:'y',h:'Usa IR: «Sí, iremos… / No, no iremos…»'},
+    {w:'f',n:'Ana',t:'¿Tendréis que trabajar?',en:'Will you have to work?'},
+    {w:'y',h:'Usa TENER: «Sí, tendremos que… / No, no tendremos que…»'},
+    {w:'f',n:'Ana',t:'¿Podréis venir a cenar el viernes?',en:'Will you be able to come to dinner on Friday?'},
+    {w:'y',h:'Usa PODER: «Sí, podremos… / No podremos porque…»'},
+    {w:'f',n:'Ana',t:'¿Qué querréis cenar?',en:'What will you want for dinner?'},
+    {w:'y',h:'Usa QUERER: «Querremos…»'},
+    {w:'f',n:'Ana',t:'¿Y qué le diréis a Marta del plan?',en:'And what will you tell Marta about the plan?'},
+    {w:'y',h:'Usa DECIR: «Le diremos que…»'}]}
+];
+const sceneTabs=document.getElementById('scene-tabs'),sceneBox=document.getElementById('scene-container');
+let activeScene=0,rpAnswers={},rpTimer=null;const RP_KEY='rebecca-clase42-roleplay';
+function renderTabs(){
+  sceneTabs.innerHTML=SCENES.map((s,i)=>`<button type="button" class="scene-tab${i===activeScene?' active':''}" data-i="${i}">${s.tab}</button>`).join('');
+  sceneTabs.querySelectorAll('.scene-tab').forEach(b=>b.addEventListener('click',()=>{activeScene=+b.dataset.i;renderTabs();renderScene()}));
+}
+function renderScene(){
+  const s=SCENES[activeScene];let yi=0;
+  const html=s.lines.map(l=>{
+    if(l.w==='f')return`<div class="line friend"><div class="line-avatar">${l.n[0]}</div><div class="line-body"><p class="line-name">${l.n}</p><div class="line-bubble">${l.t}<span class="en">${l.en}</span></div></div></div>`;
+    const key=activeScene+'-'+(yi++);
+    return`<div class="line you"><div class="line-avatar">Tú</div><div class="line-body"><p class="line-name">Tú · nosotros</p><textarea class="line-input" rows="2" data-k="${key}" placeholder="Escribe tu respuesta...">${esc(rpAnswers[key]||'')}</textarea><p class="line-hint">${l.h}</p></div></div>`;
+  }).join('');
+  sceneBox.innerHTML=`<div class="scene-setup"><span>${s.tab.split(' ')[0]}</span> <strong>${s.tab.replace(/^\S+\s/,'')}:</strong> ${s.setup}</div><div class="dialogue">${html}</div>`;
+}
+sceneBox.addEventListener('input',e=>{const ta=e.target.closest('.line-input');if(!ta)return;rpAnswers[ta.dataset.k]=ta.value;clearTimeout(rpTimer);rpTimer=setTimeout(()=>store.set(RP_KEY,JSON.stringify(rpAnswers)),600)});
+(async function(){const s=await store.get(RP_KEY);if(s){try{rpAnswers=JSON.parse(s)||{}}catch(e){}}renderTabs();renderScene()})();
+
+/* ---------- 8. cierre oral ---------- */
+const CHIP_KEY='rebecca-clase42-cierre';let chipState={};
+const tenseBox=document.getElementById('tense-chips'),chipBox=document.getElementById('verb-chips'),chipProg=document.getElementById('close-progress');
+function renderChips(){
+  tenseBox.innerHTML=TK.map(t=>`<button type="button" class="vchip${chipState['t:'+t]?' done':''}" data-k="t:${t}">${t}</button>`).join('');
+  chipBox.innerHTML=ALL8.map(v=>`<button type="button" class="vchip${chipState['v:'+v]?' done':''}" data-k="v:${v}">${v}</button>`).join('');
+  const nt=TK.filter(t=>chipState['t:'+t]).length,nv=ALL8.filter(v=>chipState['v:'+v]).length;
+  chipProg.innerHTML=(nt===2&&nv===8)?`<strong>2 / 2 tiempos · 8 / 8 verbos</strong> — ¡antes y mañana, sin tabla! 🎉`:`<strong>${nt} / 2</strong> tiempos · <strong>${nv} / 8</strong> verbos`;
+}
+function onChip(e){const b=e.target.closest('.vchip');if(!b)return;chipState[b.dataset.k]=!chipState[b.dataset.k];renderChips();store.set(CHIP_KEY,JSON.stringify(chipState))}
+tenseBox.addEventListener('click',onChip);chipBox.addEventListener('click',onChip);
+(async function(){const s=await store.get(CHIP_KEY);if(s){try{chipState=JSON.parse(s)||{}}catch(e){}}renderChips()})();
+
+/* ---------- 9. tarea ---------- */
+const TASK_KEY='rebecca-clase42-tarea';
+const taskArea=document.getElementById('final-task'),taskCount=document.getElementById('task-count'),savedFlag=document.getElementById('saved-flag');
+const NOS_ANTES=ALL8.map(v=>F[v].antes[3]),NOS_MAN=ALL8.map(v=>F[v]['mañana'][3]);
+const ANTES_RE=new RegExp('(?:^|[^a-záéíóúñ])('+NOS_ANTES.join('|')+')(?![a-záéíóúñ])','i'),MAN_RE=new RegExp('(?:^|[^a-záéíóúñ])('+NOS_MAN.join('|')+')(?![a-záéíóúñ])','i');
+const VERB_RE=ALL8.map(v=>new RegExp('(?:^|[^a-záéíóúñ])('+[F[v].antes[3],F[v]['mañana'][3]].join('|')+')(?![a-záéíóúñ])','i'));
+function updateCount(){
+  const tx=taskArea.value,L=tx.split('\n').filter(l=>l.trim().length>3);
+  const a=L.filter(l=>ANTES_RE.test(l)).length,b=L.filter(l=>MAN_RE.test(l)).length,nv=VERB_RE.filter(re=>re.test(tx)).length;
+  taskCount.textContent=`${Math.min(L.length,5)} / 5 frases · ${Math.min(a,3)} / 3 de antes · ${Math.min(b,2)} / 2 de mañana · ${nv} verbos distintos`;
+}
+async function saveTask(){
+  const ok=await store.set(TASK_KEY,taskArea.value);
+  savedFlag.textContent=window.storage?(ok?'Guardado ✓':'No se pudo guardar'):'Guardado no disponible aquí';
+  savedFlag.classList.add('show');setTimeout(()=>savedFlag.classList.remove('show'),1800);
+}
+let taskTimer=null;
+taskArea.addEventListener('input',()=>{updateCount();clearTimeout(taskTimer);taskTimer=setTimeout(saveTask,900)});
+document.getElementById('save-btn').addEventListener('click',saveTask);
+(async function(){const s=await store.get(TASK_KEY);if(s)taskArea.value=s;updateCount()})();
+
+/* ---------- toggle ES/EN ---------- */
+(function(){
+  const sw=document.getElementById('lang-sw'),lab=document.getElementById('lang-label'),KEY='rebecca-clase42-en';
+  function set(on){document.body.classList.toggle('show-en',on);sw.classList.toggle('on',on);sw.setAttribute('aria-pressed',on?'true':'false');lab.textContent=on?'ES · EN':'ES'}
+  sw.addEventListener('click',()=>{const on=!document.body.classList.contains('show-en');set(on);store.set(KEY,on?'1':'0')});
+  store.get(KEY).then(v=>set(v==='1'));
+})();
+</script>
+
+</body>
+</html>
