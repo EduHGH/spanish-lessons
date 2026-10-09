@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="color-scheme" content="light dark">
+<script>(function(){var d=false,q=!!(window.matchMedia&&matchMedia('(prefers-color-scheme:dark)').matches);try{var v=localStorage.getItem('daniela-clase3-theme');d=v?v==='dark':q}catch(_){d=q}document.documentElement.setAttribute('data-theme',d?'dark':'light');try{if(localStorage.getItem('daniela-clase3-it')==='1')document.documentElement.setAttribute('data-it','1')}catch(_){}})();</script>
+<title>Clase 3 · Contar vidas en pasado · Daniela</title>
+<style>
+:root{--paper:#FBF7EE;--raised:#fff;--alt:#F3ECDA;--ink:#161616;--soft:#262626;--faint:#2B2B2B;--ctl:#626262;--line:rgba(22,22,22,.34);--brand:#96372F;--yo:#3057A3;--tu:#056D36;--ok:#056D36;--ko:#96372F;--verb:#833CD5;--btn:#161616;--on-btn:#fff;--t-tu:#DEF3E3;--t-red:#FFE7DE;--t-hl:#F6EEC4;--t-info:#DFEFFB;--info-line:#4594C8;--r-sm:8px;--r-md:14px;--r-lg:20px;--fd:Georgia,"Times New Roman",Times,serif;--fb:"Helvetica Neue",Helvetica,Arial,sans-serif;--fm:Consolas,Menlo,"DejaVu Sans Mono",monospace;--fs-mid:clamp(1.05rem,2.4vw,1.125rem)}
+html[data-theme=dark]{color-scheme:dark;--paper:#232019;--raised:#1C1A17;--alt:#2A2620;--ink:#EDE7DA;--soft:#D9D2C3;--faint:#CFC7B7;--ctl:#8F8878;--line:rgba(237,231,218,.3);--btn:#EDE7DA;--on-btn:#161616;--yo:#8FB4F5;--tu:#63CF8E;--ok:#63CF8E;--ko:#F39A90;--verb:#C7A2FF;--t-tu:#153020;--t-red:#3B201C;--t-hl:#3A3416;--t-info:#12293B;--info-line:#5DA8DB}
+*{box-sizing:border-box}h1,h2,h3,p{margin:0}button{font:inherit;color:inherit}[hidden]{display:none!important}
+html{scroll-padding-top:16px}
+body{margin:0;background:var(--alt);color:var(--ink);font:400 16px/1.6 var(--fb);-webkit-font-smoothing:antialiased;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html[data-theme=dark] body{background:#100F0D}
+:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+.mono{font:500 .76rem var(--fm);letter-spacing:.12em;text-transform:uppercase;color:var(--soft)}
+.wrap{max-width:820px;margin:0 auto;background:var(--raised);box-shadow:0 0 0 1px var(--line);padding:0 26px 90px;min-height:100vh}
+.vh{position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
+.skip{position:absolute;left:12px;top:-60px;z-index:50;padding:12px 18px;background:var(--ink);color:var(--paper);border-radius:var(--r-sm);font-weight:600;text-decoration:none}.skip:focus{top:8px}
+.bar{position:fixed;top:calc(8px + env(safe-area-inset-top,0px));right:max(12px,env(safe-area-inset-right,0px));z-index:20}
+.btn{min-height:44px;cursor:pointer;border:1px solid var(--ink);background:var(--raised);border-radius:var(--r-sm);padding:10px 20px;font-weight:600;font-size:.9rem;line-height:1.2}
+.btn.pri{background:var(--btn);border-color:var(--btn);color:var(--on-btn)}.btn.sm{padding:6px 14px;font-size:.85rem}
+.btn[aria-pressed=true]{background:var(--t-info);box-shadow:inset 0 0 0 2px var(--ink)}.btn[aria-pressed=true]::before{content:"\2713\00a0"}
+.hero{border-top:10px solid var(--brand);margin:0 -26px;padding:0 26px 8px}
+.eyebrow{display:inline-block;padding:6px 14px;background:var(--brand);color:#fff;border-radius:0 0 8px 8px}
+h1{font:600 clamp(2.3rem,7vw,4rem)/1.04 var(--fd);margin:18px 0}h1 em{font-style:normal;color:var(--brand)}
+html[data-theme=dark] h1 em,html[data-theme=dark] h2{color:#F0877B}
+.lede{color:var(--soft);max-width:58ch}
+.spec{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));border-top:1px solid var(--ink);border-bottom:1px solid var(--line);margin-top:24px}.spec div{padding:12px 14px 12px 0}.spec b{display:block;font-weight:600;font-size:.95rem;margin-top:3px}
+.phrase{position:relative;margin-top:26px;padding:34px 24px 22px;border:2px solid var(--ink);border-radius:var(--r-sm);background:var(--t-hl)}
+.phrase::before{content:"Recuerda";position:absolute;top:-1px;left:-1px;padding:3px 12px;background:var(--ink);color:var(--raised);font:600 .72rem var(--fm);letter-spacing:.12em;text-transform:uppercase;border-radius:6px 0 8px 0}
+.phrase p{font:400 clamp(1.4rem,4.4vw,2rem)/1.25 var(--fd)}.phrase b{font-style:italic;font-weight:600}.phrase small{display:block;margin-top:12px}
+.plan{list-style:none;margin:24px 0 0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:0 28px}.plan li{display:flex;gap:10px;padding:8px 0;border-bottom:1px solid var(--line);font-size:.92rem}.plan i{font:normal .78rem var(--fm);color:var(--brand);min-width:1.6em;padding-top:3px}.plan a{color:var(--ink);font-weight:500}
+.cta{display:flex;flex-wrap:wrap;align-items:center;gap:14px;margin-top:22px}.cta small{color:var(--faint);font-size:.85rem}
+.block{margin-top:56px;scroll-margin-top:16px}
+.bh{display:flex;align-items:center;gap:14px;flex-wrap:wrap;border-bottom:3px solid var(--brand);padding-bottom:10px}
+.bh .n{display:grid;place-items:center;min-width:2.5rem;height:2.5rem;padding:0 6px;background:var(--brand);color:#fff;border-radius:6px;font:600 1rem var(--fm)}
+.bh .tag{margin-left:auto}
+h2{font:600 clamp(1.4rem,3.6vw,1.9rem)/1.15 var(--fd);color:var(--brand)}h3{font:600 1.2rem var(--fd)}
+.intro{margin:16px 0 0;padding:12px 16px;background:var(--t-info);border-left:4px solid var(--info-line);font-weight:500}
+.note{margin-top:14px;padding:10px 14px;border:1.5px solid var(--ink);border-left:6px solid var(--brand);background:var(--alt);font-size:.93rem}
+.note::before{content:"Fíjate";display:block;margin-bottom:2px;font:600 .72rem var(--fm);letter-spacing:.12em;text-transform:uppercase;color:var(--brand)}
+html[data-theme=dark] .note::before{color:#F0877B}
+.panel,.run{margin-top:14px;padding:18px 20px;background:var(--raised);border:1.5px solid var(--ink);border-radius:var(--r-sm)}
+.panel ul{margin:8px 0 0;padding-left:20px}.panel li{margin-top:6px}
+.top{display:flex;justify-content:space-between;margin-bottom:8px}
+.scr{overflow-x:auto;margin-top:14px}table{width:100%;border-collapse:collapse;border:1.5px solid var(--ink)}
+th{text-align:left;padding:8px 10px;background:var(--alt);border:1px solid var(--ctl);border-bottom:2px solid var(--ink);font:500 .76rem var(--fm);letter-spacing:.12em;text-transform:uppercase}
+td{padding:10px;border:1px solid var(--ctl);font:400 1.1rem var(--fd)}td:first-child{font-weight:600}
+tbody tr:nth-child(even) td{background:rgba(22,22,22,.035)}html[data-theme=dark] tbody tr:nth-child(even) td{background:rgba(237,231,218,.04)}
+th.inf{font:400 .8rem var(--fm);color:var(--soft);text-transform:none;letter-spacing:.04em;background:var(--alt)}
+.end{font-weight:700;text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:3px}
+thead th.cy,td.cy .end{color:var(--yo);font-weight:700}thead th.ct,td.ct .end{color:var(--tu);font-weight:700}
+.py{color:var(--yo);font-weight:700}.pt{color:var(--tu);font-weight:700}
+mark{background:none;color:var(--verb);font-weight:700;border-bottom:3px solid var(--verb)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 10px}
+.chip{font:500 .76rem var(--fm);letter-spacing:.08em;text-transform:uppercase;padding:3px 10px;border:1px solid var(--info-line);border-radius:var(--r-sm);background:var(--raised)}.chip.v{font-weight:700}
+.prompt{font:400 clamp(1.3rem,3.6vw,1.65rem)/1.6 var(--fd);margin:14px 0 12px}
+.opts{display:grid;gap:10px}
+.opt{display:flex;align-items:center;gap:12px;width:100%;text-align:left;cursor:pointer;padding:13px 16px;min-height:44px;border:1.5px solid var(--ink);border-radius:var(--r-sm);background:var(--raised);font:500 var(--fs-mid)/1.3 var(--fd)}
+.opt i{display:grid;place-items:center;flex:none;width:1.9em;height:1.9em;border:1.5px solid var(--ink);border-radius:50%;font:600 .78rem var(--fb);font-style:normal}
+.opt:hover:not(:disabled){background:var(--t-info)}
+.opt.ok{border:2px solid var(--ok);background:var(--t-tu)}.opt.ok::after{content:"✓";margin-left:auto;font-weight:700;color:var(--ok)}
+.opt.bad{border:2px dashed var(--ko);background:var(--t-red)}.opt.bad::after{content:"✗";margin-left:auto;font-weight:700;color:var(--ko)}
+.qi{margin-top:18px}.qi .prompt{font-size:var(--fs-mid);margin:0 0 10px}
+.gap{font:600 inherit/1.25 var(--fd);font-size:inherit;width:11ch;max-width:100%;text-align:center;padding:2px 8px;color:var(--ink);background:transparent;border:0;border-bottom:2px solid var(--ink);border-radius:0}
+.gap:focus-visible{outline:none;border-bottom-color:var(--info-line);background:var(--t-info)}
+.gap.ok{border:2px solid var(--ok);background:var(--t-tu);color:var(--ok)}.gap.bad{border:2px dashed var(--ko);background:var(--t-red);color:var(--ko);text-decoration:line-through}
+.accs{display:flex;gap:6px;margin-top:14px;flex-wrap:wrap}.acc{width:44px;height:44px;border:1.5px solid var(--ink);border-radius:var(--r-sm);background:var(--raised);font:1.1rem var(--fd);cursor:pointer}
+.acts{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+.fb{margin-top:16px;padding:14px 16px;border-radius:var(--r-md)}
+.fb.good{border:2px solid var(--ok);background:var(--t-tu)}.fb.good b{color:var(--ok);font-family:var(--fd)}.fb.good b::before{content:"✓ "}
+.fb.bad{border:2px dashed var(--ko);background:var(--t-red)}.fb.bad .mono::before{content:"✗ ";color:var(--ko);font-weight:700}
+.fb s{color:var(--ko);font:1.1rem var(--fd)}.right{color:var(--ok);font:600 1.3rem var(--fd)}.right::before{content:"✓ "}.fb p{margin-top:6px;color:var(--soft)}
+.hw{width:100%;min-height:190px;margin-top:12px;padding:13px 16px 0;font:inherit;line-height:25.6px;color:var(--ink);border:1.5px solid var(--ink);border-radius:var(--r-sm);resize:vertical;background-color:var(--raised);background-image:linear-gradient(to bottom,transparent 24.6px,rgba(22,22,22,.22) 24.6px);background-size:100% 25.6px;background-attachment:local}
+html[data-theme=dark] .hw{background-image:linear-gradient(to bottom,transparent 24.6px,rgba(237,231,218,.2) 24.6px)}
+.hwf{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:10px}.hwf .btn{margin-left:auto}
+.foot{margin-top:56px;padding-top:18px;border-top:1px solid var(--ink)}
+html{scroll-behavior:smooth}
+/* ===== Capa animada: progreso, sonido, marcador siguiente, cascadas ===== */
+.pbar{position:fixed;top:0;left:0;right:0;height:4px;z-index:40;pointer-events:none}
+.pbar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--brand),var(--tu));transition:width .45s ease}
+.bar{flex-wrap:wrap}
+.pchip{display:inline-flex;align-items:center;min-height:34px;padding:4px 12px;border:1px solid var(--line);border-radius:var(--r-sm);background:var(--raised);font-weight:700;color:var(--soft)}
+.plan li.done a::after{content:" ✓";color:var(--tu);font-weight:700}
+.plan li.done i{color:var(--tu)}
+.block.dn .bh .n{background:var(--tu)}
+.block.dn>.bh::after{content:"✓ completado";font:700 .72rem var(--fm);letter-spacing:.12em;text-transform:uppercase;color:var(--tu)}
+tbody tr:hover td{background:var(--t-hl)}
+.hint{margin-top:10px;padding:9px 12px;border:1.5px dashed var(--ko);border-radius:var(--r-sm);background:var(--t-red);font-size:.92rem;font-weight:500}
+.hint b{font-weight:700}
+.pf{color:var(--tu);font-weight:700}.idf{color:var(--ko);font-weight:700}
+.cfx{position:fixed;width:9px;height:9px;border-radius:2px;z-index:99;pointer-events:none}
+html.anim .block{opacity:0;transform:translateY(16px)}
+html.anim .block.vis{opacity:1;transform:none;transition:opacity .55s ease,transform .55s ease}
+@media(prefers-reduced-motion:reduce){html.anim .block{opacity:1;transform:none}html{scroll-behavior:auto}}
+@media(prefers-reduced-motion:no-preference){
+@keyframes shk{20%{transform:translateX(-6px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}
+@keyframes pop{50%{transform:scale(1.08)}}
+.shk{animation:shk .32s}
+.opt.ok,.wd.ok,.gap.ok{animation:pop .28s}
+}
+/* ===== v2: barra por ejercicio, marcador siguiente, metas, cascadas ===== */
+.x-n{display:inline-block}
+.x-trk{height:5px;border-radius:99px;background:var(--alt);overflow:hidden;margin:10px 0 4px}
+.x-trk i{display:block;height:100%;width:100%;background:var(--tu);border-radius:inherit;transform:scaleX(0);transform-origin:left center}
+.qi{position:relative}
+.qi.x-next::before{content:"";position:absolute;left:-12px;top:8px;bottom:8px;width:3px;border-radius:3px;background:var(--tu)}
+.x-goals{margin-top:14px;display:grid;gap:8px}
+.x-goals>.mono{margin:0 0 2px}
+.x-goal{position:relative;overflow:hidden;border:1px solid var(--line);border-radius:var(--r-sm);padding:8px 12px;font-size:.92rem;color:var(--soft);background:var(--raised)}
+.x-goal .x-gf{position:absolute;top:0;bottom:0;left:0;width:0;background:var(--t-tu);transition:width .4s ease;opacity:.85}
+.x-goal>span,.x-goal>b{position:relative;z-index:1}
+.x-goal .x-gn{float:right;position:relative;z-index:1}
+.x-goal.met{border-color:var(--tu)}
+.x-goal.met .x-gn{color:var(--tu);font-weight:700}
+.x-goal.met .x-gn::after{content:" ✓"}
+#sndB{min-width:44px;text-align:center}
+@media(prefers-reduced-motion:no-preference){
+html.anim .x-trk i{transition:transform .5s cubic-bezier(.32,1.45,.5,1)}
+html.anim .xb{animation:xbump .32s ease}
+@keyframes xbump{40%{transform:scale(1.22)}100%{transform:scale(1)}}
+html.anim .qi.x-next::before{transform-origin:top center;animation:xgrow .5s cubic-bezier(.2,.8,.3,1) both}
+@keyframes xgrow{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+html.anim .fxg>*{opacity:0}
+html.anim .fxg.in>*{animation:xup .5s cubic-bezier(.2,.8,.3,1) both;animation-delay:calc(var(--i,0)*60ms)}
+@keyframes xup{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+}
+/* ===== v2.1: ampliación del recuadro Recuerda ===== */
+.xgx{margin-top:16px;display:grid;gap:14px}
+.xgx>.mono{margin:0;font-weight:700}
+.xflow{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.xfq{grid-column:1/-1;border:1.5px solid var(--ink);border-radius:var(--r-md);background:var(--raised);padding:12px 16px;text-align:center}
+.xfq .mono{display:block;margin-bottom:2px;color:var(--ctl);font-weight:500}
+.xfq b{font:600 1.08rem var(--fd)}
+.xfar{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;margin:-8px 0;font-size:1rem;color:var(--ink);text-align:center}
+.xfcard{border:2px solid var(--yo);border-radius:var(--r-md);background:var(--t-info);padding:12px 16px}
+.xfcard.no{border-color:var(--verb);background:var(--t-hl)}
+.xfcard .mono{display:block;margin-bottom:2px}
+.xfcard .vb{display:block;font:600 1.15rem var(--fd)}
+.xfex{margin:6px 0 0;font-size:.95rem}
+.xboot{border:1.5px solid var(--ink);border-radius:var(--r-md);background:var(--raised);padding:12px 16px;display:grid;gap:10px}
+.xboot>.mono{color:var(--ctl);font-weight:500}
+.xboot svg{width:100%;max-width:400px;height:auto;margin:0 auto;display:block}
+.xbootb{fill:var(--t-tu);fill-opacity:.55;stroke:var(--tu);stroke-width:2.5;stroke-linejoin:round}
+.blb{font:600 10px var(--fm);letter-spacing:.12em;fill:var(--ctl)}
+.bvb{font:600 17px var(--fd);fill:var(--tu)}
+.bvb.o,.blb.o{fill:var(--ink)}
+.chg{text-decoration:underline;text-decoration-thickness:2px}
+.xbcap{margin:0;font-size:.9rem;color:var(--soft)}
+.xmap{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.xmg{border:2px solid var(--info-line);border-radius:var(--r-md);background:var(--t-info);padding:10px 14px}
+.xmg.u{border-color:var(--brand);background:var(--t-hl)}
+.xmg.g{border-color:var(--tu);background:var(--t-tu)}
+.xmg>.mono{display:block;margin-bottom:6px}
+.xcs{display:flex;flex-wrap:wrap;gap:6px}
+.xad{font:600 .8rem var(--fb);padding:3px 10px;border:1.5px solid var(--ink);border-radius:99px;background:var(--raised)}
+.xmg .it{margin-top:6px}
+.xdnote{margin:0;font-size:.9rem;color:var(--soft)}
+@media(max-width:620px){.xflow,.xmap{grid-template-columns:1fr}.xdrow{grid-template-columns:64px 1fr}.xdtag{grid-column:2;justify-self:end}}
+.xfcard.g{border-color:var(--tu);background:var(--t-tu)}
+.xfcard.v{border-color:var(--verb);background:var(--t-hl)}
+.xmg.i{border-color:var(--ko);background:var(--t-red)}
+.xmg.v{border-color:var(--verb);background:var(--t-hl)}
+.bvb.r{fill:var(--ko)}
+.bvb.v{fill:var(--verb)}
+.xday{border:1.5px solid var(--ink);border-radius:var(--r-md);background:var(--raised);padding:12px 16px;display:grid;gap:10px}
+.xday>.mono{color:var(--ctl);font-weight:500}
+.xdrow{display:grid;grid-template-columns:86px 1fr minmax(110px,auto);gap:10px;align-items:center}
+.xdlb{font-weight:600;font-size:.9rem}
+.xdtrk{position:relative;height:13px;border-radius:99px;background:var(--alt)}
+.xdtrk i{position:absolute;left:0;top:0;bottom:0;border-radius:99px;background:var(--ko);opacity:.3}
+.xdtrk.xop i{background:var(--tu);opacity:.32}
+.xdnow{position:absolute;top:50%;left:0;width:11px;height:11px;border-radius:50%;background:var(--ok);transform:translate(-50%,-50%)}
+.xdtag{font:600 .68rem var(--fm);letter-spacing:.09em;text-transform:uppercase;white-space:nowrap}
+.xdtag.pf{color:var(--tu)}.xdtag.idf{color:var(--ko)}
+@media(prefers-reduced-motion:no-preference){@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(5,109,54,.45)}100%{box-shadow:0 0 0 12px rgba(5,109,54,0)}}html.anim .xdnow{animation:pulse 1.8s infinite}}
+@media(prefers-reduced-motion:reduce){html.anim .fxg>*{opacity:1}}
+@media(max-width:620px){.plan{grid-template-columns:1fr}}
+@media(max-width:520px){.wrap{padding:0 16px 90px}.hero{margin:0 -16px;padding:0 16px 8px}}
+@media(prefers-reduced-motion:no-preference){@keyframes aIn{from{opacity:0;transform:translateY(4px)}}.fb{animation:aIn .2s ease-out}.opt,.btn,.gap{transition:background-color .15s,border-color .15s}}
+.bar{display:flex;gap:8px}
+:root{--it:#5C5C5C}html[data-theme=dark]{--it:#B8B1A2}
+.it{display:none;font:italic 400 .88rem/1.45 var(--fb);color:var(--it);margin-top:4px}
+html[data-it="1"] .it{display:block}html[data-it="1"] .it.i{display:inline}
+.it.i{margin:0;font:inherit;font-style:italic;text-transform:none;letter-spacing:0}
+.bh .it{flex-basis:100%;margin:-4px 0 0;font-size:.95rem}
+.intro .it{font-weight:400;margin-top:6px}.phrase .it{margin-top:10px;font-size:.95rem}
+.qi .it{margin:-4px 0 10px}.panel li .it{margin-top:1px}.fb .it{color:var(--it)}
+th.inf .it{font-size:.72rem;margin-top:2px;letter-spacing:0}
+.swap{display:flex;align-items:center;gap:10px;margin-top:6px;font:600 var(--fs-mid)/1.25 var(--fd)}.swap .gap{width:min(100%,16ch);font-weight:500}
+.spot{font:400 clamp(1.25rem,3.4vw,1.6rem)/1.9 var(--fd)}.wd{font:inherit;color:inherit;background:none;border:0;padding:2px 5px;text-decoration:underline dotted;text-underline-offset:5px;border-radius:6px;cursor:pointer}.wd:hover:not(:disabled){background:var(--t-info)}
+.wd.ok{background:var(--t-tu);color:var(--ok);text-decoration:none;outline:2px solid var(--ok)}.wd.ok::after{content:" \2713";font-weight:700}.wd.rev{background:var(--t-red);color:var(--ko);text-decoration:line-through}.wd.wp{background:var(--t-red);outline:1.5px dashed var(--ko)}
+.mp{display:grid;grid-template-columns:1fr 1fr;gap:14px}.mp .col{display:grid;gap:10px;align-content:start}@media(max-width:620px){.mp{grid-template-columns:1fr}}
+.opt.sel{background:var(--t-info);box-shadow:inset 0 0 0 2px var(--ink)}
+</style></head>
+<body><a class="skip" href="#main">Saltar al contenido</a><div class="vh" id="sr" aria-live="polite"></div>
+<div class="pbar" aria-hidden="true"><i id="pfill"></i></div>
+<div class="bar"><span class="mono pchip" id="pc" role="status" title="Bloques completados">0/8</span><span class="mono pchip" id="stk" hidden>🔥 0</span><button class="btn sm" id="itB" type="button" aria-pressed="false" title="Mostrar la traducción al italiano">Italiano</button><button class="btn sm" id="thB" type="button" aria-pressed="false">Oscuro</button><button class="btn sm" id="rsB" type="button" aria-label="Reiniciar progreso" title="Reiniciar progreso">↺</button></div>
+<main class="wrap" id="main" tabindex="-1">
+<header class="hero"><span class="mono eyebrow">Clase de español · Daniela</span>
+<h1>Contar vidas en <em>pasado</em></h1><span class="mono">Clase 3 · 2 de noviembre</span>
+<p class="lede">Tercera clase del camino a B2: los tres pasados que necesitas para contar una vida — la de Antonello da Messina y la de Caravaggio en Sicilia — con narraciones, errores a cazar y tu primera biografía escrita.<span class="it" lang="it">Terza lezione verso il B2: i tre passati che servono per raccontare una vita — quella di Antonello da Messina e del Caravaggio in Sicilia — con narrazioni, errori da cacciare e la tua prima biografia scritta.</span></p>
+<div class="spec"><div><span class="mono">Duración</span><b>90 min</b></div><div><span class="mono">Foco B2</span><b>indefinido e imperfecto</b></div><div><span class="mono">Repaso A1</span><b>reflexivos y horarios</b></div><div><span class="mono">Tarea DELE</span><b>narración escrita</b></div></div>
+<div class="phrase"><p>El <b>indefinido</b> cuenta lo que pasó; el <b>imperfecto</b> pinta cómo era.</p><span class="it" lang="it">L'indefinido racconta cosa è successo; l'imperfetto dipinge com'era.</span><small class="mono">nació · vivía · había aprendido</small>
+<div class="xgx">
+<p class="mono">Los tres pasados · esquema, gráfico y mapa<span class="it" lang="it">I tre passati: schema, grafico e mappa</span></p>
+<div class="xflow" role="img" aria-label="Esquema de decisión: avanzar la historia pide indefinido, pintar el fondo pide imperfecto, mirar atrás pide pluscuamperfecto.">
+<div class="xfq"><span class="mono">Esquema · ¿qué trabajo hace la información?</span><b>¿avanza la historia, pinta el fondo o mira aún más atrás?</b><span class="it" lang="it">Fa avanzare la storia, dipinge lo sfondo o guarda ancora più indietro?</span></div>
+<div class="xfar" style="grid-template-columns:1fr 1fr 1fr" aria-hidden="true"><span>↓</span><span>↓</span><span>↓</span></div>
+<div class="xfcard"><span class="mono">Avanza → indefinido</span><b class="vb">nació · viajó · murió</b><p class="xfex"><b>En 1455</b> Antonello <b>viajó</b> a Nápoles.<span class="it" lang="it">Hechos puntuales que hacen avanzar la historia.</span></p></div>
+<div class="xfcard no"><span class="mono">Pinta el fondo → imperfecto</span><b class="vb">era · vivía · pintaba</b><p class="xfex">Messina <b>era</b> un puerto; los artistas <b>ganaban</b> poco.<span class="it" lang="it">Descrizioni, costumbres y escenas de fondo.</span></p></div>
+<div class="xfcard v"><span class="mono">Mira atrás → pluscuamperfecto</span><b class="vb">había aprendido</b><p class="xfex">Cuando llegó, <b>ya había aprendido</b> el óleo.<span class="it" lang="it">Una acción anterior a otra acción pasada.</span></p></div>
+</div>
+<div class="xboot" role="img" aria-label="Gráfico de la línea de vida de Antonello: la línea continua ámbar es el fondo imperfecto, los puntos rojos son los hechos en indefinido y el tramo morado marca lo que ya había pasado antes.">
+<span class="mono">Gráfico · la línea de vida de Antonello</span>
+<svg viewBox="0 0 320 176" aria-hidden="true">
+<line x1="16" y1="100" x2="304" y2="100" stroke="#E8B23A" stroke-width="7" stroke-linecap="round" opacity=".55"/>
+<circle cx="72" cy="100" r="8" fill="var(--ko)"/><circle cx="160" cy="100" r="8" fill="var(--ko)"/><circle cx="248" cy="100" r="8" fill="var(--ko)"/>
+<text class="blb" x="72" y="84" text-anchor="middle">nació</text><text class="blb" x="160" y="84" text-anchor="middle">viajó</text><text class="blb" x="248" y="84" text-anchor="middle">murió</text>
+<path d="M22 130 H58" stroke="var(--verb)" stroke-width="3"/><path d="M22 124 V130" stroke="var(--verb)" stroke-width="3"/><path d="M58 124 V130" stroke="var(--verb)" stroke-width="3"/>
+<text class="blb" x="40" y="148" text-anchor="middle" style="fill:var(--verb)">antes: había aprendido</text>
+<text class="blb" x="16" y="168">línea ámbar: era · vivía · trabajaba (el fondo)</text>
+</svg>
+<p class="xbcap">La línea continua es el fondo de la vida (imperfecto); los puntos rojos son los hechos (indefinido); el tramo morado, lo que ya había pasado antes del primer hecho.<span class="it" lang="it">La linea continua è lo sfondo della vita (imperfetto); i punti rossi sono i fatti (indefinido); il tratto viola è ciò che era già accaduto (pluscuamperfecto).</span></p>
+</div>
+<div class="xmap">
+<div class="xmg i"><span class="mono">Indefinido · el hecho</span><div class="xcs"><b class="xad">en 1475</b><b class="xad">aquel año</b><b class="xad">un día</b><b class="xad">de repente</b><b class="xad">hace dos años</b><b class="xad">aquella mañana</b></div><span class="it" lang="it">Momentos fechados y cerrados.</span></div>
+<div class="xmg u"><span class="mono">Imperfecto · el fondo</span><div class="xcs"><b class="xad">mientras</b><b class="xad">siempre</b><b class="xad">cada día</b><b class="xad">en aquella época</b><b class="xad">cuando era niño</b><b class="xad">poco a poco</b></div><span class="it" lang="it">Mientras, siempre, cada día: duración y costumbre.</span></div>
+<div class="xmg g"><span class="mono">Pluscuamperfecto · antes del pasado</span><div class="xcs"><b class="xad">ya había + participio</b><b class="xad">antes de 1475</b><b class="xad">nunca había visto</b><b class="xad">cuando llegó</b></div><p class="xdnote">Siempre dentro del pasado: una acción anterior a otra.<span class="it" lang="it">Sempre dentro del passato: un'azione anteriore a un'altra.</span></p></div>
+</div>
+</div></div>
+<ol class="plan"><li><i>01</i><a href="#b1">Calentamiento: reflexivos y horarios</a></li><li><i>02</i><a href="#b2">Mapa de los tres pasados</a></li><li><i>03</i><a href="#b3">Elige el pasado</a></li><li><i>04</i><a href="#b4">La vida de Antonello</a></li><li><i>05</i><a href="#b5">Encuentra el error</a></li><li><i>06</i><a href="#b6">Cambia el tiempo</a></li><li><i>07</i><a href="#b7">Emparejar columnas</a></li><li><i>08</i><a href="#b8">Tu narración escrita</a></li></ol>
+<div class="cta"><a class="btn pri" href="#b1" style="text-decoration:none;display:inline-flex;align-items:center">Empezar clase</a><small>Haz los bloques en orden.</small></div></header>
+
+<section class="block" id="b1"><div class="bh"><span class="n">01</span><h2>Calentamiento: reflexivos y horarios</h2><span class="mono tag">Repaso A1 · 10 min</span><span class="it" lang="it">Riscaldamento: riflessivi e orari</span></div>
+<p class="intro">Completa con reflexivos y horarios. Recuerda: el pronombre (<b>me, te, se</b>) acompaña al verbo: <b>me levanto</b>, <b>te acuestas</b>.<span class="it" lang="it">Completa con i verbi riflessivi e gli orari. Ricorda: il pronome accompagna il verbo: me levanto, te acuestas.</span></p>
+<div class="run" id="x0"></div></section>
+
+<section class="block" id="b2"><div class="bh"><span class="n">02</span><h2>Mapa de los tres pasados</h2><span class="mono tag">Gramática B2 · 30 min</span><span class="it" lang="it">La mappa dei tre passati</span></div>
+<p class="intro">Cada pasado tiene un trabajo distinto: <b>avanzar</b> la historia, <b>pintar el fondo</b> o <b>mirar atrás</b>. Fíjate en las terminaciones subrayadas.<span class="it" lang="it">Ogni passato ha un compito diverso: far avanzare la storia, dipingere lo sfondo o guardare indietro. Guarda le desinenze sottolineate.</span></p>
+<div class="scr"><table><thead><tr><th>Verbo</th><th>Indefinido</th><th>Imperfecto</th><th>Pluscuamperfecto</th><th>Trabajo</th></tr></thead><tbody>
+<tr><th scope="row" class="inf">nacer<span class="it" lang="it">nascere</span></th><td>naci<span class="end">ó</span></td><td>nac<span class="end">ía</span></td><td>había nac<span class="end">ido</span></td><td>el hecho fechado</td></tr>
+<tr><th scope="row" class="inf">viajar<span class="it" lang="it">viaggiare</span></th><td>viaj<span class="end">ó</span></td><td>viaj<span class="end">aba</span></td><td>había viaj<span class="end">ado</span></td><td>avanzar la historia</td></tr>
+<tr><th scope="row" class="inf">ver<span class="it" lang="it">vedere</span></th><td>vio</td><td>ve<span class="end">ía</span></td><td>había vis<span class="end">to</span></td><td>mirar atrás</td></tr>
+<tr><th scope="row" class="inf">morir<span class="it" lang="it">morire</span></th><td>muri<span class="end">ó</span></td><td>mor<span class="end">ía</span></td><td>había muer<span class="end">to</span></td><td>el hecho fechado</td></tr>
+<tr><th scope="row" class="inf">trabajar<span class="it" lang="it">lavorare</span></th><td>trabaj<span class="end">ó</span></td><td>trabaj<span class="end">aba</span></td><td>había trabaj<span class="end">ado</span></td><td>el fondo, la costumbre</td></tr>
+</tbody></table></div>
+<div class="note">Los tres trabajan juntos: «Cuando <b>llegó</b>, la ciudad <b>ya tenía</b> la fama que <b>había ganado</b> siglos antes». Hecho, fondo y mirada hacia atrás, en una sola frase.<span class="it" lang="it">I tre lavorano insieme: fatto, sfondo e sguardo indietro in una sola frase.</span></div></section>
+
+<section class="block" id="b3"><div class="bh"><span class="n">03</span><h2>Elige el pasado</h2><span class="mono tag">Práctica · 15 min</span><span class="it" lang="it">Scegli il passato</span></div>
+<p class="intro">Elige la forma correcta. Pulsa 1, 2 o 3 en el teclado.<span class="it" lang="it">Scegli la forma corretta. Premi 1, 2 o 3 sulla tastiera.</span></p>
+<div class="run" id="x1"></div></section>
+
+<section class="block" id="b4"><div class="bh"><span class="n">04</span><h2>La vida de Antonello</h2><span class="mono tag">Tema · 25 min</span><span class="it" lang="it">La vita di Antonello</span></div>
+<p class="intro">Completa la biografía con el pasado adecuado. Las tildes cuentan.<span class="it" lang="it">Completa la biografia con il passato adatto. Gli accenti contano.</span></p>
+<div class="run" id="x2"></div></section>
+
+<section class="block" id="b5"><div class="bh"><span class="n">05</span><h2>Encuentra el error</h2><span class="mono tag">Revisión · 8 min</span><span class="it" lang="it">Trova l'errore</span></div>
+<p class="intro">En cada frase hay una forma verbal incorrecta. Pulsa la palabra que está mal.<span class="it" lang="it">In ogni frase c'è una forma verbale sbagliata. Premi la parola sbagliata.</span></p>
+<div class="run" id="x3"></div></section>
+
+<section class="block" id="b6"><div class="bh"><span class="n">06</span><h2>Cambia el tiempo</h2><span class="mono tag">Práctica · 8 min</span><span class="it" lang="it">Cambia il tempo</span></div>
+<p class="intro">Escribe el verbo en el tiempo indicado. Solo cambia el verbo.<span class="it" lang="it">Scrivi il verbo al tempo indicato. Cambia solo il verbo.</span></p>
+<div class="run" id="x4"></div></section>
+
+<section class="block" id="b7"><div class="bh"><span class="n">07</span><h2>Emparejar columnas</h2><span class="mono tag">Repaso · 7 min</span><span class="it" lang="it">Abbina le colonne</span></div>
+<p class="intro">Une cada persona y verbo con su forma del pasado. Toca uno de cada columna.<span class="it" lang="it">Abbina ogni persona e verbo alla sua forma del passato. Tocca uno per colonna.</span></p>
+<div class="run" id="x5"></div></section>
+
+<section class="block" id="b8"><div class="bh"><span class="n">08</span><h2>Tu narración escrita</h2><span class="mono tag">Tarea tipo DELE · 25 min</span><span class="it" lang="it">La tua narrazione scritta</span></div>
+<p class="intro">Escribe una narración de 100-150 palabras: un momento en la vida de un artista que admires (o en la tuya).<span class="it" lang="it">Scrivi una narrazione di 100-150 parole: un momento della vita di un’artista che ammiri (o della tua).</span></p>
+<div class="panel"><h3>Incluye</h3><ul><li>Quién era: descripción con imperfecto (<b>era, vivía, trabajaba</b>).<span class="it" lang="it">Chi era: descrizione con imperfetto.</span></li><li>Un hecho que cambió su vida: indefinido (<b>nació, viajó, descubrió</b>).<span class="it" lang="it">Un fatto che cambiò la sua vita: indefinido.</span></li><li>Algo que ya había hecho antes: pluscuamperfecto (<b>había aprendido, había visto</b>).<span class="it" lang="it">Qualcosa che aveva già fatto prima: pluscuamperfecto.</span></li><li>Cómo terminó: un último hecho en indefinido.<span class="it" lang="it">Come finì: un ultimo fatto al indefinido.</span></li></ul></div><div class="run"><div class="top"><span class="mono">Ejercicio 7 · Narración de 100-150 palabras</span></div><textarea class="hw" id="hw" aria-label="Narración de la vida de un artista" style="min-height:190px;margin-top:0"></textarea><div class="hwf"><span class="mono" id="wc">0 palabras</span><button class="btn sm" type="button" id="cp">Texto al portapapeles</button></div></div><div class="note">Usa al menos tres marcadores del mapa del recuadro Recuerda (<b>en 1475</b>, <b>mientras</b>, <b>ya había</b>…) y no cambies de pasado sin razón.<span class="it" lang="it">Usa almeno tre avverbi della mappa del riquadro Recuerda e non cambiare passato senza motivo.</span></div></section>
+
+<footer class="foot"><span class="mono">Clase 3 · Daniela · Próxima clase: 9 de noviembre</span></footer>
+</main>
+<script>(function(){
+var sr=document.getElementById('sr');
+function esc(s){return s.replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function N(s){return s.trim().toLowerCase().replace(/\s+/g,' ')}
+function pl(s){return s.replace(/\*\*(.+?)\*\*/g,'<mark>$1</mark>').replace(/(^|[^\p{L}])([Yy]o)(?![\p{L}])/gu,'$1<span class="py">$2</span>').replace(/(^|[^\p{L}])([Tt]ú)(?![\p{L}])/gu,'$1<span class="pt">$2</span>')}
+function sh(a){return a.map(function(v){return[Math.random(),v]}).sort(function(x,y){return x[0]-y[0]}).map(function(p){return p[1]})}
+function ch(a){return'<div class="chips">'+a.map(function(v,k){return'<span class="chip'+(k?'':' v')+'">'+v[0]+'<span class="it i" lang="it"> · '+v[1]+'</span></span>'}).join('')+'</div>'}
+var G=function(a){return'<input class="gap" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Hueco" data-a="'+a+'">'};
+var ACC='<div class="accs">'+'áéíóúñ'.split('').map(function(v){return'<button class="acc" type="button" aria-label="Insertar '+v+'">'+v+'</button>'}).join('')+'</div><div class="acts"><button class="btn pri" type="button" data-k="chk">Comprobar</button></div>';
+var X=[{"t":"Reflexivos y horarios","c":[["levantarse","alzarsi"],["despertarse","svegliarsi"],["ducharse","fare la doccia"],["acostarse","andare a letto"],["quedarse","restare"],["abrirse","aprire"]],"s":[["Todos los días me ","levanto"," a las siete y media."],["Mi hermana se ","despierta"," antes que yo."],["Normalmente me ","ducho"," y desayuno café."],["Los lunes me ","acuesto"," tarde por la tesis."],["Hoy me ","quedo"," en casa hasta las cinco."],["El museo se ","abre"," a las nueve."],["¿A qué hora te ","acuestas"," los domingos?"],["Nosotros nos ","levantamos"," muy temprano."],["El bar de la esquina se ","cierra"," a las ocho."],["Yo nunca me ","despierto"," con el despertador."]],"i":["Ogni giorno mi alzo alle sette e mezza.","Mia sorella si sveglia prima di me.","Normalmente mi faccio la doccia e faccio colazione con il caffè.","Il lunedì vado a letto tardi per la tesi.","Oggi resto a casa fino alle cinque.","Il museo apre alle nove.","A che ora ti corichi la domenica?","Noi ci alziamo molto presto.","Il bar all'angolo chiude alle otto.","Io non mi sveglio mai con la sveglia."]},{"t":"Elige el pasado","q":[{"q":"Caravaggio ___ en Sicilia en 1608.","o":["llegó","llegaba","había llegado"],"x":"Momento puntual y cerrado: indefinido «llegó».","i":"Il Caravaggio arrivò in Sicilia nel 1608.","xi":"Momento puntuale e chiuso: indefinido «llegó»."},{"q":"En aquella época Messina ___ una ciudad rica.","o":["era","fue","había sido"],"x":"Fondo o descripción: imperfecto «era».","i":"A quell'epoca Messina era una città ricca.","xi":"Sfondo o descrizione: imperfetto «era»."},{"q":"En 1455 Antonello ___ a Nápoles para conocer el arte nuevo.","o":["viajó","viajaba","había viajado"],"x":"Con fecha exacta, el hecho es puntual: indefinido «viajó».","i":"Nel 1455 Antonello viaggiò a Napoli per conoscere la nuova arte.","xi":"Con una data esatta il fatto è puntuale: indefinido «viajó»."},{"q":"Mientras ___ el cuadro, Caravaggio pensaba en Roma.","o":["pintaba","pintó","había pintado"],"x":"Acción en desarrollo con «mientras»: imperfecto «pintaba».","i":"Mentre dipingeva il quadro, il Caravaggio pensava a Roma.","xi":"Azione in svolgimento con «mientras»: imperfetto «pintaba»."},{"q":"Cuando llegó a Sicilia, Antonello ya ___ el oficio.","o":["había aprendido","aprendía","aprendió"],"x":"Anterior a otra acción del pasado: pluscuamperfecto «había aprendido».","i":"Quando arrivò in Sicilia, Antonello aveva già imparato il mestiere.","xi":"Anteriore a un'altra azione passata: pluscuamperfecto «había aprendido»."},{"q":"La peste de 1576 ___ muy dura para Palermo.","o":["fue","era","había sido"],"x":"Evento único y fechable: indefinido «fue».","i":"La peste del 1576 fu durissima per Palermo.","xi":"Evento unico e databile: indefinido «fue»."},{"q":"Los artistas del Renacimiento ___ poco dinero, a menudo.","o":["ganaban","ganaron","habían ganado"],"x":"Costumbre o situación general: imperfecto «ganaban».","i":"Gli artisti del Rinascimento guadagnavano poco, spesso.","xi":"Abitudine o situazione generale: imperfetto «ganaban»."},{"q":"El día de su muerte, Caravaggio ___ hacia Roma.","o":["viajaba","viajó","había viajado"],"x":"Acción en desarrollo ese día: imperfecto «viajaba».","i":"Il giorno della sua morte, il Caravaggio viaggiava verso Roma.","xi":"Azione in svolgimento quel giorno: imperfetto «viajaba»."},{"q":"Antes del nacimiento de Antonello, su ciudad ___ fama portuaria.","o":["había tenido","tenía","tuvo"],"x":"Anterior a otra acción del pasado: pluscuamperfecto «había tenido».","i":"Prima della nascita di Antonello, la sua città aveva già fama di porto.","xi":"Anteriore a un'altra azione: pluscuamperfecto «había tenido»."},{"q":"De repente, el barco ___ del puerto.","o":["salió","salía","había salido"],"x":"«De repente» marca una acción puntual: indefinido «salió».","i":"All’improvviso, la nave uscì dal porto.","xi":"«De repente» marca un'azione puntuale: indefinido «salió»."}]},{"t":"La vida de Antonello","c":[["nacer","nascere"],["morir","morire"],["vivir","vivere"],["aprender","imparare"],["marchar","partire"],["pintar","dipingere"]],"s":[["Antonello ","nació"," en Messina hacia 1430."],["Su ciudad ","era"," un puerto lleno de artistas."],["De joven ","aprendió"," el oficio de la pintura."],["Mientras otros usaban temple, él ","experimentaba"," con el óleo."],["Hacia 1455 ","viajó"," a Nápoles para conocer el arte nuevo."],["Antes de morir, ya ","había pintado"," el «San Jerónimo» en su estudio."],["Los mecenas le ","pedían"," retratos cada año."],["En 1479 ","murió"," en Messina, todavía joven."],["Su retrato del hombre desconocido ","influyó"," en toda Europa."],["Hoy sus tablas ","cuestan"," lo que un palacio."]],"i":["Antonello nacque a Messina intorno al 1430.","La sua città era un porto pieno di artisti.","Da giovane imparò il mestiere della pittura.","Mentre gli altri usavano la tempera, lui sperimentava con l’olio.","Intorno al 1455 viaggiò a Napoli per conoscere la nuova arte.","Prima di morire aveva già dipinto il «San Gerolamo» nel suo studio.","I mecenati gli chiedevano ritratti ogni anno.","Nel 1479 morì a Messina, ancora giovane.","Il suo ritratto dell’uomo sconosciuto influenzò tutta Europa.","Oggi le sue tavole valgono quanto un palazzo."]},{"k":"sp","t":"Encuentra el error","s":[{"q":"En 1608 Caravaggio viajaba a Sicilia para huir de la justicia.","w":3,"a":"viajó","x":"Con fecha exacta, el hecho es puntual: indefinido «viajó».","i":"Nel 1608 il Caravaggio andò in Sicilia per fuggire dalla giustizia.","xi":"Con una data esatta il fatto è puntuale: indefinido «viajó»."},{"q":"Cuando era niño, Antonello vivió siempre en Messina.","w":4,"a":"vivía","x":"Duración con «siempre» en el fondo de la historia: imperfecto «vivía».","i":"Da bambino, Antonello viveva sempre a Messina.","xi":"Durata con «siempre» nello sfondo: imperfetto «vivía»."},{"q":"Mientras el maestro pintaba, Antonello copió cada gesto.","w":5,"a":"copiaba","x":"Acción en desarrollo junto a «mientras»: imperfecto «copiaba».","i":"Mentre il maestro dipingeva, Antonello copiava ogni gesto.","xi":"Azione in svolgimento con «mientras»: imperfetto «copiaba»."},{"q":"Antes de pintar el San Jerónimo, Antonello veía ya el arte flamenco.","w":7,"a":"había visto","x":"Anterior a un momento del pasado: pluscuamperfecto «había visto».","i":"Prima di dipingere il San Gerolamo, Antonello aveva già visto l’arte fiamminga.","xi":"Anteriore a un momento del passato: pluscuamperfecto «había visto»."},{"q":"La peste llegó en 1576 y mataba miles de personas.","w":6,"a":"mató","x":"Consecuencia puntual del hecho fechado: indefinido «mató».","i":"La peste arrivò nel 1576 e uccise migliaia di persone.","xi":"Conseguenza puntuale del fatto datato: indefinido «mató»."},{"q":"El cuadro se terminó en 1609: Caravaggio lo pintaba en pocos meses.","w":8,"a":"pintó","x":"Hecho único dentro del plazo: indefinido «pintó».","i":"Il quadro fu terminato nel 1609: il Caravaggio lo dipinse in pochi mesi.","xi":"Fatto unico entro il termine: indefinido «pintó»."},{"q":"Cuando los médicos llegaron, Antonello ya murió.","w":6,"a":"había muerto","x":"Anterior al momento de llegada: pluscuamperfecto «había muerto».","i":"Quando i medici arrivarono, Antonello era già morto.","xi":"Anteriore al momento dell’arrivo: pluscuamperfecto «había muerto»."},{"q":"Aquel año Caravaggio pintaba dos cuadros en pocas semanas.","w":3,"a":"pintó","x":"«Aquel año» marca un período cerrado: indefinido «pintó».","i":"Quell’anno il Caravaggio dipinse due quadri in poche settimane.","xi":"«Aquel año» indica un periodo chiuso: indefinido «pintó»."},{"q":"Los sicilianos admiraban al pintor y le ofrecieron protección cada semana.","w":7,"a":"ofrecían","x":"Repetición habitual con «cada semana»: imperfecto «ofrecían».","i":"I siciliani ammiravano il pittore e gli offrivano protezione ogni settimana.","xi":"Ripetizione abituale con «cada semana»: imperfetto «ofrecían»."},{"q":"Los expertos dicen que Antonello conoció el óleo cuando era un niño.","w":5,"a":"conocía","x":"Saber que empieza y dura desde niño: imperfecto «conocía». «Conoció» es solo el momento inicial.","i":"Gli esperti dicono che Antonello conosceva l’olio fin da bambino.","xi":"Sapere che inizia e dura: imperfetto «conocía»; «conoció» è solo il momento iniziale."}]},{"k":"sw","t":"Cambia el tiempo","s":[{"q":"La ciudad **era** un puerto activo.","p":"Indefinido","a":"fue","i":"La città fu un porto attivo."},{"q":"Antonello **aprendió** el oficio en Messina.","p":"Pluscuamperfecto","a":"había aprendido","i":"Antonello aveva imparato il mestiere a Messina."},{"q":"Mientras otros pintaban temple, Antonello **experimentaba** con el óleo.","p":"Indefinido","a":"experimentó","i":"Mentre gli altri dipingevano a tempera, Antonello sperimentò con l’olio."},{"q":"Caravaggio **vivía** con miedo en Sicilia.","p":"Indefinido","a":"vivió","i":"Il Caravaggio visse con paura in Sicilia."},{"q":"El duque le **pidió** un retrato.","p":"Imperfecto","a":"pedía","i":"Il duca gli chiedeva un ritratto."},{"q":"Antes de morir, Antonello **pintó** su mejor obra.","p":"Pluscuamperfecto","a":"había pintado","i":"Prima di morire, Antonello aveva dipinto la sua opera migliore."},{"q":"La peste **fue** terrible en 1576.","p":"Imperfecto","a":"era","i":"La peste era terribile nel 1576."},{"q":"El joven artista **copió** cada gesto del maestro.","p":"Imperfecto","a":"copiaba","i":"Il giovane artista copiava ogni gesto del maestro."},{"q":"Cuando llegó, la ciudad ya **tenía** fama.","p":"Pluscuamperfecto","a":"había tenido","i":"Quando arrivò, la città aveva già fama."},{"q":"Los mecenas le **ofrecían** oro por un cuadro.","p":"Indefinido","a":"ofrecieron","i":"I mecenati gli offrirono oro per un quadro."}]},{"k":"mp","t":"Emparejar columnas","p":[["Antonello · **nacer**","nascere","nació"],["Messina · **ser** el fondo","essere","era"],["Caravaggio · **viajar** (1608)","viaggiare","viajó"],["el maestro · **pintar** (mientras)","dipingere","pintaba"],["Antonello · **aprender** (antes)","imparare","había aprendido"],["la peste · **llegar** (1576)","arrivare","llegó"],["los retratos · **vender** (costumbre)","vendere","se vendían"],["Caravaggio · **morir** (1610)","morire","murió"],["la ciudad · **tener** (antes de su llegada)","avere","había tenido"],["el taller · **trabajar** (siempre)","lavorare","trabajaba"]]}];
+function draw(i){var d=X[i],c=document.getElementById('x'+i),h='<div class="top"><span class="mono">Ejercicio '+(i+1)+' · '+d.t+'</span>'+(d.k=='mp'?'<span class="mono" data-n>0 / '+d.p.length+'</span>':'')+'</div>';
+if(d.k=='sp'){h+=d.s.map(function(x,j){return'<div class="qi" data-j="'+j+'"><div class="spot">'+x.q.split(' ').map(function(w,k){return'<button class="wd" type="button" data-w="'+k+'">'+pl(w)+'</button>'}).join(' ')+'</div><p class="it" lang="it">'+esc(x.i)+'</p></div>'}).join('')}
+else if(d.k=='sw'){h+=d.s.map(function(x,j){return'<div class="qi"><p class="prompt">'+(j+1)+'. '+pl(x.q)+'</p><p class="it" lang="it">'+esc(x.i)+'</p><label class="swap"><span class="swp '+(x.p=='Tú'?'pt':x.p=='Yo'?'py':'')+'">'+x.p+'</span>'+G(x.a)+'</label></div>'}).join('')+ACC}
+else if(d.k=='mp'){h+='<div class="mp"><div class="col">'+d.p.map(function(p,n){return'<button class="opt" type="button" data-s="l" data-p="'+n+'"><span>'+pl(p[0])+'<span class="it i" lang="it"> · '+p[1]+'</span></span></button>'}).join('')+'</div><div class="col">'+sh(d.p.map(function(p,n){return[n,p[2]]})).map(function(p){return'<button class="opt" type="button" data-s="r" data-p="'+p[0]+'"><span>'+p[1]+'</span></button>'}).join('')+'</div></div>'}
+else if(d.q){h+=d.q.map(function(q,j){return'<div class="qi" data-j="'+j+'"><p class="prompt">'+(j+1)+'. '+pl(q.q)+'</p><p class="it" lang="it">'+esc(q.i)+'</p><div class="opts">'+sh(q.o).map(function(v,k){return'<button class="opt" type="button" data-v="'+esc(v)+'"><i>'+(k+1)+'</i><span>'+v+'</span></button>'}).join('')+'</div></div>'}).join('')}
+else{h+=ch(d.c)+d.s.map(function(x,j){return'<div class="qi"><p class="prompt">'+(j+1)+'. '+x.map(function(t,n){return n%2?G(N(t)):pl(t)}).join('')+'</p><p class="it" lang="it">'+esc(d.i[j])+'</p></div>'}).join('')+ACC}
+c.innerHTML=h}
+function fb(p,h){var f=document.createElement('div');f.className='fb bad';f.tabIndex=-1;f.innerHTML='<div class="mono">No es esa.</div>'+h+'<div class="acts"><button class="btn sm" type="button" data-k="re">Reintentar</button></div>';p.appendChild(f);f.focus()}
+X.forEach(function(_,i){draw(i)});
+document.addEventListener('mousedown',function(e){if(e.target.closest('.acc'))e.preventDefault()});
+document.addEventListener('focusin',function(e){if(e.target.classList.contains('gap')){var r=e.target.closest('.run');if(r)r.g=e.target}});
+document.addEventListener('click',function(e){var t=e.target.closest('button');if(!t)return;var c=t.closest('.run');if(!c||c.id=='')return;var i=+c.id.slice(1),d=X[i],k=t.dataset.k,it=t.closest('.qi');
+if(k=='re'){draw(i);var f=c.querySelector('.gap,.opt,.wd');if(f)f.focus();return}
+if(d.k=='mp'){if(c.busy||t.classList.contains('ok'))return;var s=c.sel;if(!s){c.sel=t;t.classList.add('sel');return}
+s.classList.remove('sel');if(s===t){c.sel=null;return}if(s.dataset.s==t.dataset.s){c.sel=t;t.classList.add('sel');return}c.sel=null;
+if(s.dataset.p===t.dataset.p){[s,t].forEach(function(b){b.classList.add('ok')});t.querySelector('span').insertAdjacentHTML('beforeend','<span class="vh"> (respuesta correcta)</span>');var m=c.querySelectorAll('.opt.ok').length/2;c.querySelector('[data-n]').textContent=m+' / '+d.p.length;if(m==d.p.length)sr.textContent='Ejercicio '+(i+1)+': completo.'}
+else{c.busy=1;[s,t].forEach(function(b){b.classList.add('bad')});setTimeout(function(){[s,t].forEach(function(b){b.classList.remove('bad')});c.busy=0},700)}return}
+if(t.classList.contains('wd')){var qs=d.s[+it.dataset.j],ws=it.querySelectorAll('.wd'),okw=+t.dataset.w===qs.w;ws.forEach(function(b){b.disabled=true});
+if(okw){t.classList.add('ok');t.textContent=qs.a}else{t.classList.add('wp');ws[qs.w].classList.add('rev')}
+sr.textContent='Frase '+(+it.dataset.j+1)+': '+(okw?'correcta. ':'incorrecta. ')+qs.a;
+if(!okw)fb(it,'<div class="right">'+qs.a+'</div><p>'+qs.x+'</p><p class="it" lang="it">'+esc(qs.xi)+'</p>');return}
+if(t.classList.contains('acc')){var g=c.g;if(g&&!g.readOnly){g.setRangeText(t.textContent,g.selectionStart,g.selectionEnd,'end');g.focus()}return}
+if(t.classList.contains('opt')){var q=d.q[+it.dataset.j],ok=t.dataset.v===q.o[0];it.querySelectorAll('.opt').forEach(function(b){b.disabled=true});t.classList.add(ok?'ok':'bad');
+sr.textContent='Pregunta '+(+it.dataset.j+1)+': '+(ok?'correcta.':'incorrecta. '+q.o[0]);
+if(ok)t.querySelector('span').insertAdjacentHTML('beforeend','<span class="vh"> (respuesta correcta)</span>');else{it.querySelectorAll('.opt').forEach(function(b){if(b.dataset.v===q.o[0])b.classList.add('ok')});fb(it,'<div class="right">'+q.o[0]+'</div><p>'+q.x+'</p><p class="it" lang="it">'+esc(q.xi)+'</p>')}return}
+if(k=='chk'){var bad=[];c.querySelectorAll('.gap').forEach(function(g){var ok=N(g.value)===g.dataset.a;g.readOnly=true;g.classList.add(ok?'ok':'bad');if(!ok)bad.push([g.value.trim()||'—',g.dataset.a])});
+c.querySelectorAll('.accs,.acts').forEach(function(b){b.remove()});sr.textContent=bad.length?bad.length+' huecos incorrectos.':'Todo correcto.';
+if(bad.length)fb(c,bad.map(function(p){return'<p><s>'+esc(p[0])+'</s> <span class="right" style="font-size:1.1rem">'+p[1]+'</span></p>'}).join(''));
+else{var f=document.createElement('div');f.className='fb good';f.innerHTML='<b>Correcto.</b> Todos los huecos están bien.';c.appendChild(f)}}});
+document.addEventListener('keydown',function(e){var c=e.target.closest&&e.target.closest('.run');if(!c||!c.id)return;
+if(e.key==='Enter'&&e.target.classList.contains('gap')&&!e.target.readOnly){e.preventDefault();var gs=[].slice.call(c.querySelectorAll('.gap')),n=gs.indexOf(e.target);if(n<gs.length-1)gs[n+1].focus();else{var b=c.querySelector('[data-k=chk]');if(b)b.click()}}
+else if(/^[1-3]$/.test(e.key)&&!e.target.matches('input,textarea')){var qi=e.target.closest('.qi')||c.querySelector('.qi:not(:has(.opt:disabled))'),o=qi?qi.querySelectorAll('.opt')[e.key-1]:null;if(o&&!o.disabled)o.click()}});
+var hw=document.getElementById('hw'),wc=document.getElementById('wc');
+hw.addEventListener('input',function(){var n=hw.value.trim().split(/\s+/).filter(Boolean).length;wc.textContent=n+' palabra'+(n==1?'':'s')});
+document.getElementById('cp').addEventListener('click',function(){var b=this;try{navigator.clipboard.writeText(hw.value).then(function(){b.textContent='Copiado';setTimeout(function(){b.textContent='Texto al portapapeles'},1600)},function(){})}catch(_){}});
+var r=document.documentElement,tb=document.getElementById('thB');function sync(){var d=r.getAttribute('data-theme')==='dark';tb.setAttribute('aria-pressed',d);tb.textContent=d?'Claro':'Oscuro'}
+tb.addEventListener('click',function(){var d=r.getAttribute('data-theme')==='dark'?'light':'dark';r.setAttribute('data-theme',d);try{localStorage.setItem('daniela-clase3-theme',d)}catch(_){}sync()});sync();
+var ib=document.getElementById('itB');function isync(){ib.setAttribute('aria-pressed',r.getAttribute('data-it')==='1')}
+ib.addEventListener('click',function(){var on=r.getAttribute('data-it')==='1';if(on)r.removeAttribute('data-it');else r.setAttribute('data-it','1');try{localStorage.setItem('daniela-clase3-it',on?'0':'1')}catch(_){}isync()});isync();
+})();</script>
+<script>
+(function(){
+var d=document;
+if(!d.getElementById('x0'))return;
+d.documentElement.classList.add('anim');
+var RM=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)');
+var MOK=!RM||!RM.matches;
+var KEY='daniela-clase3-done';
+function load(){try{var v=JSON.parse(localStorage.getItem(KEY)||'[]');return v&&v.length==8?v:[0,0,0,0,0,0,0,0]}catch(_){return[0,0,0,0,0,0,0,0]}}
+function save(a){try{localStorage.setItem(KEY,JSON.stringify(a))}catch(_){}}
+var done=load();
+var prevN=0;for(var q0=0;q0<8;q0++)if(done[q0])prevN++;
+var RUNP={0:0,1:2,2:3,3:4,4:5,5:6};
+var blocks=[].slice.call(d.querySelectorAll('.block'));
+var plan=[].slice.call(d.querySelectorAll('.plan li'));
+var pfill=d.getElementById('pfill'),pc=d.getElementById('pc'),stk=d.getElementById('stk'),sr=d.getElementById('sr');
+var streak=0;
+/* ===== Sonido: sintetizador Web Audio, sin archivos ===== */
+var AC=null,SNDON=false;
+try{SNDON=localStorage.getItem('daniela-clase3-snd')==='1'}catch(_){}
+function actx(){if(!AC){try{AC=new (window.AudioContext||window.webkitAudioContext)()}catch(_){return null}}if(AC.state==='suspended')AC.resume();return AC}
+function tone(f,t0,dur,type,vol,slide){var a=actx();if(!a||!SNDON)return;var t=a.currentTime+t0,o=a.createOscillator(),g=a.createGain();o.type=type||'sine';o.frequency.setValueAtTime(f,t);if(slide)o.frequency.exponentialRampToValueAtTime(slide,t+dur);g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(vol||.1,t+.015);g.gain.exponentialRampToValueAtTime(.0001,t+dur);o.connect(g);g.connect(a.destination);o.start(t);o.stop(t+dur+.06)}
+function fire(n){
+if(n==='pop'){tone(620,0,.1,'sine',.09);tone(930,.05,.12,'sine',.08)}
+else if(n==='nope'){tone(320,0,.12,'triangle',.08);tone(230,.1,.16,'triangle',.07)}
+else if(n==='buzz'){tone(150,0,.2,'sawtooth',.055)}
+else if(n==='tick'){tone(1150,0,.04,'square',.04)}
+else if(n==='fan'){[523,659,784,1047].forEach(function(f,i){tone(f,i*.09,.22,'sine',.08)})}
+else if(n==='big'){[392,523,659,784,1047,1319].forEach(function(f,i){tone(f,i*.11,.3,'sine',.09)});tone(1568,.7,.5,'sine',.07)}
+}
+d.addEventListener('pointerdown',function(){actx()},true);
+d.addEventListener('keydown',function(){actx()},true);
+var itB=d.getElementById('itB');
+if(itB){var sndB=d.createElement('button');sndB.type='button';sndB.className='btn sm';sndB.id='sndB';sndB.title='Efectos de sonido · Sound';sndB.setAttribute('aria-pressed',SNDON?'true':'false');sndB.textContent='♪';
+itB.parentNode.insertBefore(sndB,itB);
+sndB.addEventListener('click',function(){SNDON=!SNDON;try{localStorage.setItem('daniela-clase3-snd',SNDON?'1':'0')}catch(_){}sndB.setAttribute('aria-pressed',SNDON?'true':'false');if(SNDON){actx();fire('pop')}})}
+var lastKey=0;
+d.addEventListener('input',function(e){var t=e.target;if(!t||!t.classList)return;if((t.classList.contains('gap')&&!t.readOnly)||t.id==='hw'){var n=Date.now();if(n-lastKey>45){lastKey=n;tone(1400+Math.random()*500,0,.02,'square',.02)}}},true);
+/* ===== Progreso global ===== */
+function refresh(){
+var n=0;for(var k=0;k<8;k++)if(done[k])n++;
+if(pfill)pfill.style.width=(n/8*100)+'%';
+if(pc)pc.textContent=n+'/8';
+if(n===8&&prevN<8){fire('big');confetti(pc)}
+prevN=n;
+blocks.forEach(function(s,i){s.classList.toggle('dn',!!done[i])});
+plan.forEach(function(li,i){li.classList.toggle('done',!!done[i])});
+}
+function mark(p){if(done[p])return;done[p]=1;save(done);refresh()}
+function fly(p){
+var dx=((Math.random()-.5)*280).toFixed(0),dy=(-80-Math.random()*170).toFixed(0),ro=((Math.random()-.5)*540).toFixed(0);
+var a=p.animate([{transform:'translate(0,0) rotate(0deg)',opacity:1},{transform:'translate('+dx+'px,'+dy+'px) rotate('+ro+'deg)',opacity:0}],{duration:800+Math.random()*600,easing:'cubic-bezier(.15,.6,.4,1)'});
+a.onfinish=function(){p.remove()};
+}
+function confetti(el){
+if(!el||(RM&&RM.matches)||!el.animate)return;
+var r=el.getBoundingClientRect(),cols=['#96372F','#3057A3','#056D36','#E8B23A','#833CD5'];
+for(var k=0;k<26;k++){
+var p=d.createElement('i');p.className='cfx';p.setAttribute('aria-hidden','true');
+p.style.left=(r.left+r.width*(.15+.7*Math.random()))+'px';
+p.style.top=(r.top+Math.min(r.height/2,260))+'px';
+p.style.background=cols[k%cols.length];
+d.body.appendChild(p);
+fly(p);
+}
+}
+function complete(c){
+if(!c||!c.id||c.dataset.dnc)return;c.dataset.dnc='1';
+var p=RUNP[+c.id.slice(1)];if(p!=null)mark(p);
+fire('fan');confetti(c);
+}
+function good(){streak++;var f=500+Math.min(streak,10)*55;tone(f,0,.09,'sine',.08);tone(f*1.5,.05,.11,'sine',.07);showStk()}
+function miss(){streak=0;showStk()}
+function showStk(){if(stk){stk.hidden=streak<2;stk.textContent='🔥 '+streak}}
+/* ===== Contadores y barra por ejercicio ===== */
+function kind(c){return c.querySelector('.mp')?'mp':c.querySelector('.wd')?'sp':c.querySelector('.gap')?'fill':'q'}
+function cntFor(c){return kind(c)=='mp'?c.querySelector('.top [data-n]'):c.querySelector('.top [data-n2]')}
+function trkFor(c){return c.querySelector('.x-trk i')}
+function totalFor(c){var kd=kind(c);return kd=='fill'?c.querySelectorAll('.gap').length:kd=='mp'?c.querySelectorAll('.opt[data-s="l"]').length:c.querySelectorAll('.qi').length}
+function bump(el){if(!el||!MOK)return;el.classList.remove('xb');void el.offsetWidth;el.classList.add('xb')}
+function setCount(c,n,t){
+var s=cntFor(c);if(s&&s.textContent!=n+' / '+t){s.textContent=n+' / '+t;bump(s)}
+var b=trkFor(c);if(b)b.style.transform='scaleX('+(t?n/t:0)+')';
+}
+function curDone(c,kd){
+if(kd=='fill'){var n=0;[].forEach.call(c.querySelectorAll('.gap'),function(g){if(g.classList.contains('ok'))n++});return n}
+if(kd=='mp')return c.querySelectorAll('.opt.ok').length/2;
+var q=0;[].forEach.call(c.querySelectorAll('.qi'),function(x){if(x.querySelector('.opt.ok,.wd.ok,.wd.rev,.opt:disabled,.wd:disabled'))q++});return q;
+}
+function tag(c){
+var kd=kind(c),t=totalFor(c);
+if(!t)return;
+if(kd!='mp'&&!c.querySelector('.top [data-n2]')){
+var s=d.createElement('span');s.className='mono x-n';s.setAttribute('data-n2','1');s.textContent='0 / '+t;
+var top=c.querySelector('.top');if(top)top.appendChild(s);
+}
+var m=c.querySelector('.top [data-n]');if(m)m.classList.add('x-n');
+if(!c.querySelector('.x-trk')){
+var trk=d.createElement('div');trk.className='x-trk';trk.setAttribute('aria-hidden','true');trk.innerHTML='<i></i>';
+var tp=c.querySelector('.top');if(tp)tp.parentNode.insertBefore(trk,tp.nextSibling);
+setCount(c,curDone(c,kd),t);
+}
+}
+/* ===== Marcador "siguiente" ===== */
+function syncNext(){
+[].forEach.call(d.querySelectorAll('.qi.x-next'),function(q){q.classList.remove('x-next')});
+[].forEach.call(d.querySelectorAll('.run[id]'),function(c){
+var kd=kind(c),q=null;
+if(kd=='fill'){var gs=c.querySelectorAll('.gap');for(var i=0;i<gs.length;i++){if(!gs[i].classList.contains('ok')&&!gs[i].classList.contains('bad')){q=gs[i].closest('.qi');break}}}
+else if(kd!='mp'){var qis=c.querySelectorAll('.qi');for(var j=0;j<qis.length;j++){if(!qis[j].querySelector('.opt:disabled,.wd:disabled,.opt.ok,.wd.ok,.wd.rev')){q=qis[j];break}}}
+if(q)q.classList.add('x-next');
+});
+}
+/* ===== Cascadas de entrada ===== */
+var FSEL='.plan,.spec,.steps,.axis,.chips,.opts,.spot,.accs,.mp .col,.xflow,.xboot,.xday,.xmap';
+var fio=null;
+if(MOK&&'IntersectionObserver'in window){try{fio=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){en.target.classList.add('in');fio.unobserve(en.target)}})},{threshold:.12})}catch(_){fio=null}}
+function fxg(root){
+[].forEach.call((root||d).querySelectorAll(FSEL),function(n){
+if(n.classList.contains('fxg'))return;
+n.classList.add('fxg');
+[].forEach.call(n.children,function(ch,k){ch.style.setProperty('--i',Math.min(k,9))});
+if(fio)fio.observe(n);else n.classList.add('in');
+});
+}
+function retag(){[].forEach.call(d.querySelectorAll('.run[id]'),function(c){tag(c)});fxg(d);syncNext()}
+/* ===== Ejercicios ===== */
+function recount(c){
+var kd=kind(c);if(kd!='q'&&kd!='sp')return;
+var qis=[].slice.call(c.querySelectorAll('.qi')),n=0;
+qis.forEach(function(q){if(q.querySelector('.opt.ok,.wd.ok,.wd.rev'))n++});
+setCount(c,n,qis.length);
+if(n===qis.length)complete(c);
+}
+function cleanHints(it){[].forEach.call(it.querySelectorAll('.hint'),function(h){h.remove()})}
+function hint(it,html,msg){
+var h=d.createElement('p');h.className='hint';h.innerHTML=html;it.appendChild(h);
+if(sr)sr.textContent=msg;miss();
+}
+function undoQ(it,t){
+[].forEach.call(it.querySelectorAll('.opt'),function(b){b.disabled=false;b.classList.remove('ok','bad')});
+var f=it.querySelector('.fb');if(f)f.remove();
+t.classList.add('shk');setTimeout(function(){t.classList.remove('shk')},360);
+fire('nope');
+hint(it,"💡 ¿Es un momento puntual y fechable (indefinido) o el fondo de la historia (imperfecto)?<span class=\"it\" lang=\"it\">È un momento puntuale e databile (indefinido) o lo sfondo della storia (imperfetto)?</span>",'Inténtalo otra vez.');
+}
+function undoW(it,t){
+[].forEach.call(it.querySelectorAll('.wd'),function(b){b.disabled=false;b.classList.remove('ok','wp','rev')});
+var f=it.querySelector('.fb');if(f)f.remove();
+t.classList.add('shk');setTimeout(function(){t.classList.remove('shk')},360);
+fire('nope');
+hint(it,'💡 Esa palabra está bien. Busca la forma verbal incorrecta.<span class="it" lang="it">Quella parola è corretta. Cerca la forma verbale sbagliata.</span>','Esa palabra está bien. Inténtalo otra vez.');
+}
+d.addEventListener('click',function(e){
+var t=e.target.closest?e.target.closest('button[data-k="re"]'):null;if(!t)return;
+var fb=t.closest('.fb');if(!fb)return;
+var qi=fb.closest('.qi');if(!qi)return;
+e.stopPropagation();
+fire('tick');
+var rc=qi.closest('.run');if(rc)delete rc.dataset.dnc;
+[].forEach.call(qi.querySelectorAll('.fb,.hint'),function(n){qi.removeChild(n)});
+[].forEach.call(qi.querySelectorAll('button'),function(b){b.disabled=false;b.classList.remove('ok','bad','wp','rev','shk')});
+delete qi.dataset.at;
+var f=qi.querySelector('button');if(f)f.focus();
+if(sr)sr.textContent='Reintenta la frase.';
+syncNext();
+},true);
+d.addEventListener('click',function(e){
+try{
+var t=e.target.closest?e.target.closest('button'):null;if(!t)return;
+if(t.classList.contains('btn')||t.classList.contains('acc'))fire('tick');
+var c=t.closest('.run');if(!c||!c.id)return;
+var kk=t.getAttribute('data-k'),it=t.closest('.qi');
+if(kk==='re'){retag();delete c.dataset.dnc;return}
+if(kk==='chk'){
+var gaps=[].slice.call(c.querySelectorAll('.gap')),okn=0,SC=[523,587,659,784,880];
+gaps.forEach(function(g,i){
+if(g.classList.contains('ok')){okn++;tone(SC[i%SC.length],i*.08,.16,'sine',.07)}
+else if(g.classList.contains('bad')){g.classList.add('shk');tone(150,i*.08,.13,'sawtooth',.05)}
+});
+setCount(c,okn,gaps.length);
+if(gaps.length&&okn===gaps.length){
+var fg=c.querySelector('.fb.good');
+if(fg&&!fg.querySelector('[data-k="re"]')){
+var rb=d.createElement('button');rb.type='button';rb.className='btn sm';rb.setAttribute('data-k','re');
+rb.textContent='Repetir ejercicio';fg.appendChild(rb);
+}
+good();complete(c);
+}else if(gaps.length){miss()}
+return;
+}
+var kd=kind(c);
+if(kd==='mp'){
+if(t.classList.contains('ok')){
+good();
+var tt=c.querySelectorAll('.opt[data-s="l"]').length,mm=c.querySelectorAll('.opt.ok').length/2;
+setCount(c,mm,tt);bump(cntFor(c));
+if(mm===tt)complete(c);
+}else if(t.classList.contains('bad')){fire('nope');miss()}
+return;
+}
+if(!it)return;
+if(t.classList.contains('opt')){
+if(t.classList.contains('ok')){cleanHints(it);good();recount(c);return}
+if(t.classList.contains('bad')){
+if(!it.dataset.at){it.dataset.at='1';undoQ(it,t);return}
+fire('buzz');t.classList.add('shk');cleanHints(it);miss();recount(c);
+}
+return;
+}
+if(t.classList.contains('wd')){
+if(t.classList.contains('ok')){cleanHints(it);good();recount(c);return}
+if(t.classList.contains('wp')){
+if(!it.dataset.at){it.dataset.at='1';undoW(it,t);return}
+fire('buzz');t.classList.add('shk');cleanHints(it);miss();recount(c);
+}
+}
+}catch(_){}
+finally{syncNext()}
+});
+/* ===== Tarea final: objetivos del guion ===== */
+var hw=d.getElementById('hw');
+var goalsBox=null,goalEls=[],goalMet=[0,0,0,0],allMet=false;
+var RE_IND=/\b(?:nací|nació|nacieron|viví|vivió|vivieron|murió|murieron|viajó|viajaron|viajé|pintó|pintaron|pinté|aprendió|aprendí|llegó|llegué|llegaron|fue|fui|fuimos|hizo|hice|dijo|tuvo|estuvo|hubo|copió|ofreció|escribió|escribí|contó|empezó|terminó|descubrió|cambió|encontró|influyó|pidió|salió)\b/gi;
+var RE_IMP=/\b(?:era|eran|vivía|vivían|trabajaba|tenía|tenían|estaba|estaban|pintaba|aprendía|hacía|iba|veía|copiaba|ofrecía|ganaba|admiraba|pensaba|quería|podía|llevaba|crecía|usaban)\b/gi;
+var RE_PLU=/\bhab(?:ía|ías|íamos|ían)\s+\w+(?:ado|ido|to|so|cho)\b/gi;
+function setGoal(i,n,t){
+var el=goalEls[i];if(!el)return;
+var f=el.querySelector('.x-gf'),num=el.querySelector('.x-gn');
+if(f)f.style.width=Math.min(n/t,1)*100+'%';
+if(num)num.textContent=Math.min(n,t)+' / '+t;
+if(!goalMet[i]&&n>=t){goalMet[i]=1;el.classList.add('met');bump(el);fire('pop')}
+}
+function checkGoals(){
+if(!hw)return;
+var v=hw.value;
+var a=(v.match(RE_IND)||[]).length;
+var w=(v.match(RE_IMP)||[]).length;
+var g=(v.match(RE_PLU)||[]).length;
+var nw=v.trim().split(/\s+/).filter(Boolean).length;
+setGoal(0,a,3);setGoal(1,w,2);setGoal(2,g,1);setGoal(3,nw,100);
+if(!allMet&&goalMet.every(Boolean)){
+allMet=true;fire('big');confetti(goalsBox);mark(7);
+if(sr)sr.textContent='¡Objetivos de la narración cumplidos!';
+}
+}
+if(hw){
+var hwf=hw.parentNode.querySelector('.hwf');
+if(hwf){
+goalsBox=d.createElement('div');goalsBox.className='x-goals';
+goalsBox.innerHTML="<p class=\"mono\">Objetivos de la narración · se marcan mientras escribes</p><div class=\"x-goal\"><i class=\"x-gf\" aria-hidden=\"true\"></i><span>3 formas de <b>indefinido</b>: <b>nació, viajó, murió, llegó, hizo…</b></span><span class=\"mono x-gn\">0 / 3</span></div><div class=\"x-goal\"><i class=\"x-gf\" aria-hidden=\"true\"></i><span>2 formas de <b>imperfecto</b>: <b>era, vivía, tenía, pintaba…</b></span><span class=\"mono x-gn\">0 / 2</span></div><div class=\"x-goal\"><i class=\"x-gf\" aria-hidden=\"true\"></i><span>1 <b>pluscuamperfecto</b>: <b>había aprendido, había visto…</b></span><span class=\"mono x-gn\">0 / 1</span></div><div class=\"x-goal\"><i class=\"x-gf\" aria-hidden=\"true\"></i><span>100 palabras o más</span><span class=\"mono x-gn\">0 / 100</span></div>";
+hwf.parentNode.insertBefore(goalsBox,hwf.nextSibling);
+goalEls=[].slice.call(goalsBox.querySelectorAll('.x-goal'));
+}
+hw.addEventListener('input',checkGoals);
+}
+/* ===== Reinicio ===== */
+var rs=d.getElementById('rsB');
+if(rs)rs.addEventListener('click',function(){
+done=[0,0,0,0,0,0,0,0];save(done);streak=0;prevN=0;showStk();refresh();
+[].forEach.call(d.querySelectorAll('.run[id]'),function(c){delete c.dataset.dnc});
+goalMet=[0,0,0,0];allMet=false;
+if(goalsBox){
+[].forEach.call(goalEls,function(el){el.classList.remove('met')});
+[].forEach.call(goalsBox.querySelectorAll('.x-gf'),function(f){f.style.width='0'});
+var GT=[3,2,1,100];
+[].forEach.call(goalsBox.querySelectorAll('.x-gn'),function(n,i){n.textContent='0 / '+GT[i]});
+}
+if(sr)sr.textContent='Progreso reiniciado.';
+});
+/* ===== Aparición de bloques ===== */
+try{
+var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){en.target.classList.add('vis');io.unobserve(en.target)}})},{threshold:0});
+blocks.forEach(function(s){io.observe(s)});
+}catch(_){blocks.forEach(function(s){s.classList.add('vis')})}
+try{
+var b2=d.getElementById('b2');
+if(b2){
+var io2=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){mark(1);io2.disconnect()}})},{threshold:.2});
+io2.observe(b2);
+}
+}catch(_){}
+retag();refresh();showStk();
+})();
+</script></body></html>
