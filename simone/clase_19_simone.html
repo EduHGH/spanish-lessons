@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clase 19 · Mental health at work — deeper dive — Simone</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+
+/* ╔══════════════════════════════════════════════════════════════╗
+   ║  ESCOLAR — sistema de diseño para clases de español online   ║
+   ║  Clase 19 · L7 Psicología corporativa avanzada · Burnout      ║
+   ╚══════════════════════════════════════════════════════════════╝ */
+
+:root{
+  --paper:        #FBF7EE;
+  --paper-raised: #FFFFFF;
+  --paper-alt:    #F3ECDA;
+  --ink:          #23291F;
+  --ink-soft:     #565F52;
+  --ink-faint:    #8B9184;
+  --line:         rgba(35,41,31,0.12);
+  --line-strong:  rgba(35,41,31,0.22);
+
+  --b1:      #2F6FED;  --b1-soft: #EAF1FE;  --b1-line: #C6D9FC;
+  --b2:      #2E9E6B;  --b2-soft: #E9F6EF;  --b2-line: #BEE6D3;
+  --b3:      #DB8A2E;  --b3-soft: #FCF1E1;  --b3-line: #F3D9AF;
+  --family:  #B5502E;  --family-soft: #FBEBE3; --family-line: #EFC9B4;
+
+  --f-display: 'Fraunces', Georgia, serif;
+  --f-body:    'IBM Plex Sans', system-ui, sans-serif;
+  --f-data:    'IBM Plex Mono', monospace;
+
+  --r-sm: 8px;
+  --r-md: 14px;
+  --r-lg: 20px;
+
+  --shadow-1: 0 1px 2px rgba(35,41,31,0.05), 0 1px 8px rgba(35,41,31,0.04);
+}
+
+*{ box-sizing:border-box; }
+body{
+  margin:0;
+  background: var(--paper);
+  background-image: radial-gradient(circle at 1px 1px, var(--line) 1px, transparent 0);
+  background-size: 22px 22px;
+  color: var(--ink);
+  font-family: var(--f-body);
+  line-height:1.6;
+}
+::selection{ background: var(--b3-soft); }
+
+/* ---------- HEADER ---------- */
+header{ padding:44px 24px 28px; max-width:760px; margin:0 auto; }
+.eyebrow{
+  font-family: var(--f-data); font-size:12px; letter-spacing:.14em;
+  text-transform:uppercase; color: var(--b3); margin:0 0 10px;
+  display:flex; align-items:center; gap:10px;
+}
+.eyebrow .dot{ width:6px; height:6px; border-radius:50%; background: var(--b3); }
+h1{
+  font-family: var(--f-display); font-weight:600;
+  font-size:clamp(30px,5.6vw,46px); line-height:1.08;
+  margin:0 0 14px; letter-spacing:-.01em;
+}
+h1 em{ font-style:italic; color: var(--b3); }
+.lede{ font-size:16px; color: var(--ink-soft); max-width:56ch; margin:0; }
+
+.meta-row{
+  display:flex; flex-wrap:wrap; gap:20px; margin-top:26px;
+  font-family: var(--f-data); font-size:12px; color: var(--ink-faint);
+}
+.meta-row strong{
+  display:block; color: var(--ink); font-size:14.5px; font-weight:500;
+  font-family: var(--f-display); margin-top:3px;
+}
+
+/* ---------- SECTIONS ---------- */
+main{ max-width:760px; margin:0 auto; padding:8px 24px 100px; }
+
+section.block{ margin-bottom:52px; }
+.block-head{ display:flex; align-items:baseline; gap:12px; margin-bottom:18px; }
+.time-tag{
+  font-family: var(--f-data); font-size:11px; color: var(--ink-faint);
+  background: var(--paper-alt); padding:3px 10px; border-radius:999px; margin-left:auto; flex:none;
+}
+.block-num{
+  font-family: var(--f-data); font-size:12px; color:#fff; background: var(--b3);
+  width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  flex:none;
+}
+.block-head h2{
+  font-family: var(--f-display); font-weight:500; font-style:italic; font-size:22px; margin:0;
+}
+
+.panel{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-lg);
+  box-shadow: var(--shadow-1); padding:26px 28px;
+}
+
+/* ---------- GRAMMAR TABLE (estilo indirecto) ---------- */
+.conj-table{ width:100%; border-collapse:collapse; margin-top:4px; }
+.conj-table td{ padding:10px 6px; border-bottom:1px dashed var(--line); font-size:15px; }
+.conj-table tr:last-child td{ border-bottom:none; }
+.conj-pron{ font-family: var(--f-data); color: var(--ink-faint); font-size:13px; width:130px; }
+.conj-form{ font-family: var(--f-display); font-weight:600; font-size:19px; color: var(--b3); }
+.conj-ex{ color: var(--ink-soft); font-size:14px; }
+
+.note{
+  margin-top:18px; padding:14px 16px; background: var(--b3-soft); border:1px solid var(--b3-line);
+  border-radius: var(--r-md); font-size:14px; color: var(--ink-soft);
+}
+.note strong{ color: var(--ink); }
+
+/* ---------- COMPARE (estilo directo vs indirecto) ---------- */
+.compare-wrap{ margin-top:22px; }
+.compare-title{
+  font-family: var(--f-data); font-size:11.5px; text-transform:uppercase; letter-spacing:.06em;
+  color: var(--ink-faint); margin:0 0 10px;
+}
+.compare-grid{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+@media (max-width:560px){ .compare-grid{ grid-template-columns:1fr; } }
+.compare-col{ border-radius: var(--r-md); padding:16px 18px; border:1px solid; }
+.compare-col.is-ser{ background: var(--b1-soft); border-color: var(--b1-line); }
+.compare-col.is-estar{ background: var(--b2-soft); border-color: var(--b2-line); }
+.compare-head{ display:flex; align-items:center; gap:8px; margin:0 0 10px; }
+.compare-verb{ font-family: var(--f-display); font-weight:600; font-size:17px; }
+.is-ser .compare-verb{ color: var(--b1); }
+.is-estar .compare-verb{ color: var(--b2); }
+.compare-sub{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); }
+.compare-list{ margin:0; padding:0; list-style:none; }
+.compare-list li{ font-size:13.5px; color: var(--ink-soft); padding:6px 0; border-top:1px dashed var(--line); }
+.compare-list li:first-child{ border-top:none; }
+.compare-list strong{ color: var(--ink); font-weight:600; }
+.compare-list em{ display:block; font-style:normal; color: var(--ink-faint); font-size:12.5px; margin-top:2px; }
+.compare-warning{
+  margin-top:14px; padding:14px 16px; background: var(--family-soft); border:1px solid var(--family-line);
+  border-radius: var(--r-md); font-size:13.5px; color: var(--ink-soft);
+}
+.compare-warning strong{ color: var(--family); }
+
+/* ---------- VOCAB CARDS ---------- */
+.vocab-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:12px; }
+.vocab-card{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:14px 16px; cursor:pointer; perspective:600px; min-height:78px;
+  display:flex; flex-direction:column; justify-content:center; transition: border-color .15s ease;
+}
+.vocab-card:hover{ border-color: var(--b3-line); }
+.vocab-card:focus-visible{ outline:2px solid var(--b3); outline-offset:2px; }
+.vocab-front{ font-family: var(--f-body); font-weight:600; font-size:15px; }
+.vocab-back{ display:none; font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); margin-top:6px; }
+.vocab-card.flipped .vocab-back{ display:block; }
+.vocab-card.flipped{ background: var(--b3-soft); border-color: var(--b3-line); }
+.vocab-hint{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin:10px 2px 16px; }
+
+/* ---------- READING ARTICLE ---------- */
+.article-panel{ background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-lg); box-shadow: var(--shadow-1); padding:0; overflow:hidden; }
+.article-masthead{
+  background: var(--paper-alt); padding:14px 22px; border-bottom:1px solid var(--line);
+  display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;
+}
+.article-source{ font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.06em; color: var(--ink-faint); }
+.article-level{ font-family: var(--f-data); font-size:11px; background: var(--b3); color:#fff; padding:3px 10px; border-radius:999px; }
+.article-body{ padding:24px 26px; }
+.article-body h3{ font-family: var(--f-display); font-weight:600; font-size:22px; margin:0 0 14px; line-height:1.2; }
+.article-body p{ font-size:15px; color: var(--ink-soft); margin:0 0 14px; }
+.article-body p:last-child{ margin-bottom:0; }
+.article-body strong{ color: var(--ink); }
+
+.comprehension{ margin-top:22px; padding-top:20px; border-top:1px dashed var(--line); }
+.comp-q{ margin-bottom:16px; }
+.comp-q:last-child{ margin-bottom:0; }
+.comp-q p{ font-size:14.5px; color: var(--ink); margin:0 0 8px; font-weight:600; }
+.comp-input{
+  width:100%; font-family: var(--f-body); font-size:14.5px; color: var(--ink);
+  background: var(--paper); border:1px solid var(--line); border-radius: var(--r-sm);
+  padding:10px 12px; resize:vertical; min-height:44px;
+}
+.comp-input:focus{ outline:none; border-color: var(--b3-line); background: var(--paper-raised); }
+
+/* ---------- EXERCISE ---------- */
+.exercise{ margin-bottom:20px; }
+.exercise:last-of-type{ margin-bottom:0; }
+.ex-sentence{ font-size:15.5px; margin-bottom:10px; }
+.ex-sentence .gap{ font-family: var(--f-data); color: var(--ink-faint); }
+.ex-options{ display:flex; flex-wrap:wrap; gap:8px; }
+.opt-btn{
+  font-family: var(--f-body); font-size:14px; background: var(--paper-raised);
+  border:1.5px solid var(--line); color: var(--ink); padding:7px 16px; border-radius:999px;
+  cursor:pointer; transition: all .15s ease;
+}
+.opt-btn:hover{ border-color: var(--ink-faint); }
+.opt-btn.picked{ background: var(--b3-soft); border-color: var(--b3); color: var(--b3); }
+.opt-btn.correct{ background: var(--b2-soft); border-color: var(--b2); color: var(--b2); }
+.opt-btn.wrong{ background: var(--family-soft); border-color: var(--family); color: var(--family); }
+.opt-btn:disabled{ cursor:default; }
+
+.check-bar{
+  display:flex; align-items:center; justify-content:space-between; gap:16px;
+  margin-top:22px; padding-top:18px; border-top:1px dashed var(--line);
+}
+.btn-primary{
+  font-family: var(--f-body); font-weight:600; font-size:14px; color:#fff; background: var(--b3);
+  border:none; padding:11px 22px; border-radius:999px; cursor:pointer; transition: transform .1s ease;
+}
+.btn-primary:hover{ transform: translateY(-1px); }
+#score-text{ font-family: var(--f-data); font-size:13px; color: var(--ink-faint); }
+.btn-ghost{
+  font-family: var(--f-body); font-weight:600; font-size:13px; color: var(--ink-soft); background:none;
+  border:1.5px solid var(--line); padding:9px 18px; border-radius:999px; cursor:pointer;
+}
+.btn-ghost:hover{ border-color: var(--ink-faint); }
+.ex-divider{
+  display:flex; align-items:center; gap:10px; margin:20px 0 16px;
+  font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.06em;
+  color: var(--ink-faint);
+}
+.ex-divider::before, .ex-divider::after{ content:""; flex:1; height:1px; background: var(--line); }
+.ex-divider.en-clase{ color: var(--b3); }
+.ex-divider.en-clase::before, .ex-divider.en-clase::after{ background: var(--b3-line); }
+
+/* ---------- CHARACTER CARDS (voces que resumir en estilo indirecto) ---------- */
+.characters{ display:grid; gap:16px; }
+.char-card{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-lg);
+  padding:20px 22px; display:flex; gap:16px; align-items:flex-start;
+}
+.char-avatar{
+  flex:none; width:44px; height:44px; border-radius:50%; background: var(--b3-soft);
+  display:flex; align-items:center; justify-content:center; font-family: var(--f-display);
+  font-weight:600; font-size:17px; color: var(--b3);
+}
+.char-body{ flex:1; }
+.char-name{ font-family: var(--f-display); font-weight:600; font-size:17px; margin:0 0 4px; }
+.char-role{ font-family: var(--f-data); font-size:11.5px; text-transform:uppercase; letter-spacing:.05em; color: var(--ink-faint); margin:0 0 10px; }
+.char-facts{ display:flex; flex-wrap:wrap; gap:6px; margin-bottom:10px; }
+.fact-tag{
+  font-family: var(--f-data); font-size:12px; background: var(--paper-alt); color: var(--ink-soft);
+  padding:4px 10px; border-radius:999px;
+}
+.char-prompt{ font-size:14px; color: var(--ink-soft); }
+.char-input{
+  width:100%; margin-top:8px; font-family: var(--f-body); font-size:14.5px; color: var(--ink);
+  background: var(--paper); border:1px solid var(--line); border-radius: var(--r-sm);
+  padding:10px 12px; resize:vertical; min-height:44px;
+}
+.char-input:focus{ outline:none; border-color: var(--b3-line); background: var(--paper-raised); }
+
+/* ---------- ROLEPLAY ---------- */
+.roleplay-panel{ background: var(--b2-soft); border:1px solid var(--b2-line); border-radius: var(--r-lg); padding:26px 28px; }
+.roleplay-panel .block-num{ background: var(--b2); }
+.scene-setup{
+  display:flex; gap:14px; align-items:flex-start; background: var(--paper-raised);
+  border:1px solid var(--b2-line); border-radius: var(--r-md); padding:14px 16px; margin-bottom:20px;
+}
+.scene-icon{ font-size:22px; flex:none; }
+.scene-text{ font-size:14px; color: var(--ink-soft); }
+.scene-text strong{ color: var(--ink); }
+
+.dialogue{ display:flex; flex-direction:column; gap:14px; }
+.scene-tabs{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:18px; }
+.scene-tab{
+  font-family: var(--f-data); font-size:12.5px; background: var(--paper-raised);
+  border:1.5px solid var(--b2-line); color: var(--ink-soft); padding:7px 14px;
+  border-radius:999px; cursor:pointer; transition: all .15s ease;
+}
+.scene-tab:hover{ border-color: var(--b2); }
+.scene-tab.active{ background: var(--b2); border-color: var(--b2); color:#fff; }
+.line{ display:flex; gap:12px; align-items:flex-start; }
+.line-avatar{
+  flex:none; width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  font-family: var(--f-display); font-weight:600; font-size:14px; color:#fff;
+}
+.line.friend .line-avatar{ background: var(--ink-faint); }
+.line.you .line-avatar{ background: var(--b2); }
+.line-body{ flex:1; }
+.line-name{ font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.05em; color: var(--ink-faint); margin:0 0 4px; }
+.line-bubble{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:12px 14px; font-size:14.5px; color: var(--ink);
+}
+.line.you .line-bubble{ background:#fff; border-color: var(--b2-line); }
+.line-input{
+  width:100%; font-family: var(--f-body); font-size:14.5px; color: var(--ink);
+  background:#fff; border:1px solid var(--b2-line); border-radius: var(--r-sm);
+  padding:10px 12px; resize:vertical; min-height:40px; margin-top:2px;
+}
+.line-input:focus{ outline:none; border-color: var(--b2); }
+.line-hint{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin-top:5px; }
+
+.roleplay-tip{
+  margin-top:22px; padding:14px 16px; background: var(--paper-raised); border:1px solid var(--b2-line);
+  border-radius: var(--r-md); font-size:13.5px; color: var(--ink-soft);
+}
+.roleplay-tip strong{ color: var(--ink); }
+
+/* ---------- FINAL TASK (resumen) ---------- */
+.task-panel{ background: var(--family-soft); border:1px solid var(--family-line); border-radius: var(--r-lg); padding:26px 28px; }
+.task-panel .block-num{ background: var(--family); }
+.email-frame{
+  margin-top:16px; background: var(--paper-raised); border:1px solid var(--family-line); border-radius: var(--r-md);
+  overflow:hidden;
+}
+.email-field{
+  display:flex; align-items:center; gap:10px; padding:10px 16px; border-bottom:1px dashed var(--line);
+  font-size:13.5px;
+}
+.email-field:last-of-type{ border-bottom:1px solid var(--line); }
+.email-label{ font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.05em; color: var(--ink-faint); width:52px; flex:none; }
+.email-value{ color: var(--ink-soft); }
+textarea#final-task{
+  width:100%; min-height:150px; font-family: var(--f-body); font-size:15px; color: var(--ink);
+  background: var(--paper-raised); border:none; border-radius:0;
+  padding:16px; resize:vertical; display:block;
+}
+textarea#final-task:focus{ outline:none; }
+.task-hint{ margin:12px 0 0; font-size:13px; color: var(--ink-soft); }
+.task-hint strong{ color: var(--family); }
+.task-footer{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:12px; flex-wrap:wrap; }
+#task-count{ font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); }
+.btn-secondary{
+  font-family: var(--f-body); font-weight:600; font-size:13.5px; color: var(--family); background:none;
+  border:1.5px solid var(--family-line); padding:9px 18px; border-radius:999px; cursor:pointer;
+}
+.saved-flag{ font-family: var(--f-data); font-size:12px; color: var(--b2); opacity:0; transition: opacity .3s ease; }
+.saved-flag.show{ opacity:1; }
+
+/* ---------- FOOTER NAV ---------- */
+footer{
+  max-width:760px; margin:0 auto; padding:0 24px 60px; display:flex;
+  justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;
+  font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint);
+}
+footer a{ color: var(--b3); text-decoration:none; }
+footer a:hover{ text-decoration:underline; }
+
+@media (max-width:600px){
+  header{ padding:34px 18px 22px; }
+  main{ padding:8px 18px 90px; }
+  .panel, .task-panel{ padding:20px 18px; }
+  .article-body{ padding:20px 18px; }
+  .char-card{ flex-direction:column; }
+}
+@media (prefers-reduced-motion: reduce){ *{ transition:none !important; } }
+</style>
+</head>
+<body>
+
+<header>
+  <p class="eyebrow"><span class="dot"></span>Clase 19 de 29 · L7 Psicología corporativa avanzada</p>
+  <h1>Dice que <em>está agotado</em></h1>
+  <p class="lede">Seguimos en el terreno de la psicología corporativa, ahora con un tema central de tu campo: el burnout. Hoy aprendemos el estilo indirecto en presente — cómo contar en tus propias palabras lo que otra persona dice, explica o comenta — y lo aplicamos a un artículo real sobre salud mental laboral que vas a leer y resumir.</p>
+  <div class="meta-row">
+    <div>Duración<strong>25 min</strong></div>
+    <div>Gramática<strong>Estilo indirecto en presente</strong></div>
+    <div>Nivel<strong>B1</strong></div>
+  </div>
+</header>
+
+<main>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">1</span><h2>Estilo indirecto en presente</h2><span class="time-tag">7 min</span></div>
+    <div class="panel">
+      <table class="conj-table">
+        <tr><td class="conj-pron">decir que</td><td class="conj-form">dice</td><td class="conj-ex">Dice que está muy cansado últimamente.</td></tr>
+        <tr><td class="conj-pron">explicar que</td><td class="conj-form">explica</td><td class="conj-ex">Explica que el burnout afecta a mucha gente joven.</td></tr>
+        <tr><td class="conj-pron">comentar que</td><td class="conj-form">comenta</td><td class="conj-ex">Comenta que la empresa no ofrece suficiente apoyo.</td></tr>
+        <tr><td class="conj-pron">contar que</td><td class="conj-form">cuenta</td><td class="conj-ex">Cuenta que dejó su trabajo por estrés.</td></tr>
+        <tr><td class="conj-pron">añadir que</td><td class="conj-form">añade</td><td class="conj-ex">Añade que ahora se siente mucho mejor.</td></tr>
+        <tr><td class="conj-pron">preguntar si</td><td class="conj-form">pregunta</td><td class="conj-ex">Pregunta si hay algún programa de prevención.</td></tr>
+      </table>
+      <div class="note"><strong>La regla clave de hoy:</strong> cuando el verbo introductorio (decir, explicar, comentar, contar, añadir) está en <strong>presente</strong>, el verbo de la frase citada normalmente <strong>no cambia de tiempo</strong> — solo cambian los pronombres y posesivos si hace falta. "Estoy agotado" → Dice que <strong>está</strong> agotado. Es mucho más sencillo que el estilo indirecto en pasado (que verás más adelante), donde sí hay cambios de tiempo verbal.</div>
+
+      <div class="compare-wrap">
+        <p class="compare-title">De la cita directa al resumen</p>
+        <div class="compare-grid">
+          <div class="compare-col is-ser">
+            <div class="compare-head">
+              <span class="compare-verb">CITA DIRECTA</span>
+              <span class="compare-sub">— las palabras exactas de la persona</span>
+            </div>
+            <ul class="compare-list">
+              <li><strong>"Estoy muy estresado en el trabajo."</strong>
+                <em>Primera persona, entre comillas, tal cual lo dijo.</em>
+              </li>
+              <li><strong>"¿Tenéis algún plan de prevención?"</strong>
+                <em>Pregunta directa, con signos de interrogación.</em>
+              </li>
+            </ul>
+          </div>
+          <div class="compare-col is-estar">
+            <div class="compare-head">
+              <span class="compare-verb">ESTILO INDIRECTO</span>
+              <span class="compare-sub">— verbo + que/si + tercera persona</span>
+            </div>
+            <ul class="compare-list">
+              <li><strong>Dice que está muy estresado en el trabajo.</strong>
+                <em>Yo → él/ella; el tiempo verbal (presente) no cambia.</em>
+              </li>
+              <li><strong>Pregunta si tenemos algún plan de prevención.</strong>
+                <em>Con preguntas sin palabra interrogativa, se usa "si" en vez de "que".</em>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="compare-warning">
+          <strong>Ojo con las preguntas:</strong> si la pregunta original tiene una palabra interrogativa (qué, cómo, cuándo, dónde, por qué), esa palabra se mantiene: "¿Cómo lo gestionas?" → Pregunta cómo lo gestiono. Si no hay palabra interrogativa (es una pregunta de sí/no), se usa <strong>si</strong>: "¿Trabajas mucho?" → Pregunta si trabajo mucho. En italiano el mecanismo es parecido ("dice che...", "chiede se..."), así que la lógica te resultará familiar, aunque en español los cambios de pronombre y posesivo hay que hacerlos con cuidado: mi → su, mis → sus, nosotros → ellos.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">2</span><h2>Vocabulario</h2><span class="time-tag">4 min</span></div>
+    <p class="vocab-hint">Toca cada tarjeta para ver un ejemplo.</p>
+    <div class="vocab-grid" id="vocab-grid"></div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">3</span><h2>Artículo: el burnout en el trabajo actual</h2><span class="time-tag">6 min</span></div>
+    <div class="article-panel">
+      <div class="article-masthead">
+        <span class="article-source">Recurso de lectura · adaptado para clase</span>
+        <span class="article-level">Nivel B1</span>
+      </div>
+      <div class="article-body">
+        <h3>Cuando el trabajo agota más de lo normal</h3>
+        <p>Cada vez más empresas hablan abiertamente de <strong>salud mental laboral</strong>. El burnout, o síndrome de agotamiento profesional, ya no se considera un problema individual, sino una señal de que algo falla en la organización del trabajo. Los especialistas explican que los síntomas más comunes son el cansancio constante, la falta de motivación y la sensación de no rendir lo suficiente, aunque se trabajen muchas horas.</p>
+        <p>Una psicóloga especializada en bienestar laboral comenta que el burnout no aparece de un día para otro: se construye poco a poco, con cargas de trabajo excesivas, plazos poco realistas y falta de reconocimiento. Añade que las personas más comprometidas con su trabajo son, paradójicamente, las que corren más riesgo, porque tienden a exigirse demasiado y a pedir ayuda demasiado tarde.</p>
+        <p>Los expertos en <strong>prevención</strong> recomiendan varias medidas: fomentar pausas reales durante la jornada, establecer límites claros entre el trabajo y la vida personal, y crear espacios donde se pueda hablar de estrés sin miedo a parecer débil. También insisten en el papel de la <strong>intervención psicosocial</strong> temprana: cuanto antes se detecta el problema, más fácil es recuperarse sin llegar a una baja laboral larga.</p>
+        <p>El mensaje final del artículo es claro: cuidar la salud mental en el trabajo no es un lujo, sino una condición necesaria para que los equipos funcionen bien a largo plazo.</p>
+      </div>
+      <div class="article-body comprehension">
+        <div class="comp-q">
+          <p>1. Según el artículo, ¿qué dice la psicóloga sobre cómo aparece el burnout? Resume su idea con "comenta que" o "explica que".</p>
+          <textarea class="comp-input" rows="2" placeholder="La psicóloga comenta que..."></textarea>
+        </div>
+        <div class="comp-q">
+          <p>2. ¿Qué añade sobre las personas más comprometidas con su trabajo? Usa "añade que".</p>
+          <textarea class="comp-input" rows="2" placeholder="Añade que..."></textarea>
+        </div>
+        <div class="comp-q">
+          <p>3. ¿Qué recomiendan los expertos en prevención? Resume dos medidas, usando "dicen que" o "recomiendan que".</p>
+          <textarea class="comp-input" rows="2" placeholder="Los expertos dicen que..."></textarea>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">4</span><h2>Practica</h2><span class="time-tag">5 min</span></div>
+    <div class="panel">
+      <p class="vocab-hint" style="margin-bottom:14px;">40 frases: las primeras 12 se hacen en voz alta en clase; el resto queda como repaso para casa.</p>
+      <div id="exercises"></div>
+      <div class="check-bar">
+        <div style="display:flex; gap:10px;">
+          <button class="btn-primary" id="check-btn">Comprobar respuestas</button>
+          <button class="btn-ghost" id="reset-btn">Reiniciar</button>
+        </div>
+        <span id="score-text"></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">5</span><h2>Voces del equipo: resume lo que dicen</h2><span class="time-tag">4 min</span></div>
+    <p class="lede" style="margin-bottom:16px;">Doce compañeros hablan de cómo se sienten en el trabajo. Para cada uno, resume su cita en estilo indirecto usando decir que / explicar que / comentar que / contar que / añadir que. Los primeros 6 se trabajan en clase; el resto queda como banco de repaso para casa.</p>
+    <div class="characters" id="characters"></div>
+  </section>
+
+  <section class="block roleplay-panel">
+    <div class="block-head"><span class="block-num">6</span><h2>Roleplay: contar lo que dice otra persona</h2><span class="time-tag">3 min</span></div>
+    <p class="lede" style="margin-bottom:16px;">40 intercambios repartidos en 4 situaciones reales. Un compañero te cuenta algo y tú se lo transmites a una tercera persona en estilo indirecto. Elige una escena para practicar en clase; el resto queda como banco de repaso para casa.</p>
+    <div class="scene-tabs" id="scene-tabs"></div>
+    <div id="scene-container"></div>
+    <div class="roleplay-tip"><strong>En clase:</strong> practicaremos una escena en voz alta, cambiando de rol. El resto de escenas son para practicar por tu cuenta durante la semana.</div>
+  </section>
+
+  <section class="block task-panel">
+    <div class="block-head"><span class="block-num">7</span><h2 style="color:var(--family)">Tu tarea</h2><span class="time-tag">3 min</span></div>
+    <p style="margin:0; font-size:15px; color:var(--ink-soft);">Escribe un <strong>resumen breve</strong> del artículo de hoy sobre burnout, como si se lo contaras a un compañero que no lo ha leído. Usa al menos <strong>4 estructuras distintas</strong> de estilo indirecto: dice que, explica que, comenta que, añade que, cuenta que...</p>
+    <div class="email-frame">
+      <div class="email-field"><span class="email-label">Para</span><span class="email-value">un compañero que no leyó el artículo</span></div>
+      <div class="email-field"><span class="email-label">Tema</span><span class="email-value">Resumen: el burnout en el trabajo actual</span></div>
+      <textarea id="final-task" placeholder="He leído un artículo sobre el burnout y quiero contarte lo más importante...&#10;&#10;El artículo dice que...&#10;La psicóloga explica que...&#10;Comenta que...&#10;Añade que...&#10;&#10;Al final, recomienda que..."></textarea>
+    </div>
+    <p class="task-hint"><strong>Objetivo:</strong> al menos 4 estructuras de estilo indirecto distintas, resumiendo con tus propias palabras (no copiando frases literales del artículo).</p>
+    <div class="task-footer">
+      <span id="task-count">0 estructuras de estilo indirecto detectadas</span>
+      <div style="display:flex; gap:10px; align-items:center;">
+        <span class="saved-flag" id="saved-flag">Guardado ✓</span>
+        <button class="btn-secondary" id="save-btn">Guardar tarea</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <span>Clase 19 · Psicología corporativa avanzada</span>
+  <span>Próxima clase → Clase 20: Presenting a case study</span>
+</footer>
+
+<script>
+/* ---------- VOCAB ---------- */
+const VOCAB = [
+  {front:"el burnout", back:"El burnout afecta cada vez a más profesionales jóvenes."},
+  {front:"la salud mental laboral", back:"La empresa dice que invierte más en salud mental laboral que antes."},
+  {front:"la prevención", back:"Los expertos comentan que la prevención es más eficaz que la cura."},
+  {front:"la intervención psicosocial", back:"Explica que la intervención psicosocial temprana evita muchas bajas."},
+  {front:"el agotamiento", back:"Cuenta que el agotamiento le duró varios meses antes de pedir ayuda."},
+  {front:"la baja laboral", back:"Añade que una baja laboral larga se puede evitar si se actúa a tiempo."},
+];
+
+const grid = document.getElementById('vocab-grid');
+VOCAB.forEach(v=>{
+  const card = document.createElement('div');
+  card.className = 'vocab-card';
+  card.setAttribute('role', 'button');
+  card.setAttribute('tabindex', '0');
+  card.setAttribute('aria-pressed', 'false');
+  card.setAttribute('aria-label', `${v.front}. Pulsa para ver un ejemplo.`);
+  card.innerHTML = `<div class="vocab-front">${v.front}</div><div class="vocab-back">${v.back}</div>`;
+  const toggle = ()=>{
+    const flipped = card.classList.toggle('flipped');
+    card.setAttribute('aria-pressed', String(flipped));
+  };
+  card.addEventListener('click', toggle);
+  card.addEventListener('keydown', (e)=>{
+    if(e.key === 'Enter' || e.key === ' '){
+      e.preventDefault();
+      toggle();
+    }
+  });
+  grid.appendChild(card);
+});
+
+/* ---------- EXERCISES ---------- */
+const EXERCISES = [
+  {"sentence":"Ana dice que <span class=\"gap\">___</span> muy cansada últimamente.","options":["está","estoy","estás"],"answer":"está"},
+  {"sentence":"El médico explica que el estrés <span class=\"gap\">___</span> el sistema inmunológico.","options":["debilita","debilito","debilitas"],"answer":"debilita"},
+  {"sentence":"Mi compañero comenta que <span class=\"gap\">___</span> pensando en cambiar de trabajo.","options":["está","estoy","estás"],"answer":"está"},
+  {"sentence":"Marta cuenta que <span class=\"gap\">___</span> una baja de dos meses por estrés.","options":["tuvo","tuve","tuviste"],"answer":"tuvo"},
+  {"sentence":"El artículo añade que las empresas <span class=\"gap\">___</span> más recursos a la prevención.","options":["deben destinar","debo destinar","debes destinar"],"answer":"deben destinar"},
+  {"sentence":"Pregunta si <span class=\"gap\">___</span> algún programa de bienestar en la empresa.","options":["hay","hayo","hayamos"],"answer":"hay"},
+  {"sentence":"Dice que ya no <span class=\"gap\">___</span> disfrutar de su trabajo como antes.","options":["puede","puedo","puedes"],"answer":"puede"},
+  {"sentence":"La psicóloga explica que el burnout <span class=\"gap\">___</span> poco a poco, no de golpe.","options":["se construye","me construyo","te construyes"],"answer":"se construye"},
+  {"sentence":"Mi jefe comenta que el equipo <span class=\"gap\">___</span> demasiadas horas extra.","options":["hace","hago","haces"],"answer":"hace"},
+  {"sentence":"Carlos pregunta cómo <span class=\"gap\">___</span> el estrés en mi trabajo.","options":["gestiono","gestiona","gestionas"],"answer":"gestiono"},
+  {"sentence":"El informe dice que los síntomas más comunes <span class=\"gap\">___</span> el cansancio y la desmotivación.","options":["son","soy","eres"],"answer":"son"},
+  {"sentence":"Laura añade que <span class=\"gap\">___</span> mejor desde que pide ayuda profesional.","options":["se siente","me siento","te sientes"],"answer":"se siente"},
+  {"sentence":"El experto explica que <span class=\"gap\">___</span> importante hablar del tema sin tabúes.","options":["es","soy","eres"],"answer":"es"},
+  {"sentence":"Dice que sus compañeros no <span class=\"gap\">___</span> lo que le está pasando.","options":["saben","sé","sabes"],"answer":"saben"},
+  {"sentence":"Pregunta si nosotros <span class=\"gap\">___</span> algún día de descanso extra.","options":["tenemos","tengo","tienen"],"answer":"tenemos"},
+  {"sentence":"La empresa comenta que <span class=\"gap\">___</span> a lanzar un programa de bienestar.","options":["va","voy","vas"],"answer":"va"},
+  {"sentence":"Sofía cuenta que <span class=\"gap\">___</span> muchos días sin dormir bien.","options":["lleva","llevo","llevas"],"answer":"lleva"},
+  {"sentence":"El artículo dice que las pausas reales <span class=\"gap\">___</span> el rendimiento a largo plazo.","options":["mejoran","mejoro","mejoras"],"answer":"mejoran"},
+  {"sentence":"Explica que <span class=\"gap\">___</span> mucho miedo a pedir ayuda al principio.","options":["tenía","tenías","tenían"],"answer":"tenía"},
+  {"sentence":"Mi compañero pregunta si yo también <span class=\"gap\">___</span> ansiedad antes de las reuniones.","options":["siento","sientes","siente"],"answer":"siento"},
+  {"sentence":"Dice que su médico le <span class=\"gap\">___</span> reducir la carga de trabajo.","options":["recomienda","recomiendo","recomiendas"],"answer":"recomienda"},
+  {"sentence":"El estudio explica que el trabajo remoto <span class=\"gap\">___</span> los límites entre vida y trabajo.","options":["difumina","difumino","difuminas"],"answer":"difumina"},
+  {"sentence":"Comenta que <span class=\"gap\">___</span> falta de reconocimiento en su puesto actual.","options":["nota","noto","notas"],"answer":"nota"},
+  {"sentence":"Pregunta qué <span class=\"gap\">___</span> hacer si el estrés no mejora.","options":["debería","debo","debes"],"answer":"debería"},
+  {"sentence":"El artículo añade que la intervención temprana <span class=\"gap\">___</span> muchas bajas largas.","options":["evita","evito","evitas"],"answer":"evita"},
+  {"sentence":"Dice que a veces <span class=\"gap\">___</span> hablar con alguien de confianza le ayuda mucho.","options":["poder","puede","puedo"],"answer":"poder"},
+  {"sentence":"Mi compañera comenta que <span class=\"gap\">___</span> mejor la situación desde que fija límites claros.","options":["gestiona","gestiono","gestionas"],"answer":"gestiona"},
+  {"sentence":"El experto explica que muchas personas no <span class=\"gap\">___</span> los primeros síntomas.","options":["reconocen","reconozco","reconoces"],"answer":"reconocen"},
+  {"sentence":"Pregunta si en tu empresa <span class=\"gap\">___</span> apoyo psicológico.","options":["ofrecen","ofrezco","ofreces"],"answer":"ofrecen"},
+  {"sentence":"Dice que su equipo <span class=\"gap\">___</span> por fin hablar abiertamente del estrés.","options":["puede","puedo","puedes"],"answer":"puede"},
+  {"sentence":"La psicóloga añade que el descanso real <span class=\"gap\">___</span> tan importante como el trabajo.","options":["es","soy","eres"],"answer":"es"},
+  {"sentence":"Comenta que sus jefes <span class=\"gap\">___</span> más flexibilidad este año.","options":["ofrecen","ofrezco","ofreces"],"answer":"ofrecen"},
+  {"sentence":"Explica que ella misma <span class=\"gap\">___</span> por un episodio de burnout hace dos años.","options":["pasó","pasé","pasaste"],"answer":"pasó"},
+  {"sentence":"Pregunta si nosotros <span class=\"gap\">___</span> algún compañero con síntomas parecidos.","options":["conocemos","conozco","conocen"],"answer":"conocemos"},
+  {"sentence":"El artículo dice que hablar del tema <span class=\"gap\">___</span> el estigma poco a poco.","options":["reduce","reduzco","reduces"],"answer":"reduce"},
+  {"sentence":"Dice que ahora <span class=\"gap\">___</span> sus límites mucho mejor que antes.","options":["conoce","conozco","conoces"],"answer":"conoce"},
+  {"sentence":"Mi compañero cuenta que <span class=\"gap\">___</span> terapia desde hace seis meses.","options":["hace","hago","haces"],"answer":"hace"},
+  {"sentence":"El experto explica que el liderazgo empático <span class=\"gap\">___</span> mucho en la prevención.","options":["ayuda","ayudo","ayudas"],"answer":"ayuda"},
+  {"sentence":"Pregunta cómo <span class=\"gap\">___</span> yo el equilibrio entre trabajo y vida personal.","options":["mantengo","mantiene","mantienes"],"answer":"mantengo"},
+  {"sentence":"Dice que al final <span class=\"gap\">___</span> pedir el cambio de departamento.","options":["decidió","decidí","decidiste"],"answer":"decidió"}
+];
+
+const exWrap = document.getElementById('exercises');
+EXERCISES.forEach((ex, i)=>{
+  if(i === 0){
+    const divider = document.createElement('div');
+    divider.className = 'ex-divider en-clase';
+    divider.textContent = 'en clase · ítems 1–12';
+    exWrap.appendChild(divider);
+  }
+  if(i === 12){
+    const divider = document.createElement('div');
+    divider.className = 'ex-divider';
+    divider.textContent = 'para casa · repaso opcional';
+    exWrap.appendChild(divider);
+  }
+  const el = document.createElement('div');
+  el.className = 'exercise';
+  el.dataset.answer = ex.answer;
+  el.innerHTML = `
+    <div class="ex-sentence">${i+1}. ${ex.sentence}</div>
+    <div class="ex-options">
+      ${ex.options.map(o=>`<button class="opt-btn" data-value="${o}">${o}</button>`).join('')}
+    </div>
+  `;
+  exWrap.appendChild(el);
+
+  el.querySelectorAll('.opt-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      el.querySelectorAll('.opt-btn').forEach(b=>b.classList.remove('picked'));
+      btn.classList.add('picked');
+    });
+  });
+});
+
+document.getElementById('check-btn').addEventListener('click', ()=>{
+  let correct = 0;
+  document.querySelectorAll('.exercise').forEach(el=>{
+    const answer = el.dataset.answer;
+    const picked = el.querySelector('.opt-btn.picked');
+    el.querySelectorAll('.opt-btn').forEach(b=>{
+      b.disabled = true;
+      if(b.dataset.value === answer) b.classList.add('correct');
+      else if(b === picked) b.classList.add('wrong');
+    });
+    if(picked && picked.dataset.value === answer) correct++;
+  });
+  document.getElementById('score-text').textContent = `${correct} / ${EXERCISES.length} correctas`;
+});
+
+document.getElementById('reset-btn').addEventListener('click', ()=>{
+  document.querySelectorAll('.exercise').forEach(el=>{
+    el.querySelectorAll('.opt-btn').forEach(b=>{
+      b.disabled = false;
+      b.classList.remove('picked','correct','wrong');
+    });
+  });
+  document.getElementById('score-text').textContent = '';
+});
+
+/* ---------- CHARACTER CARDS (voces del equipo) ---------- */
+const CHARACTERS = [
+  {"name":"Voz 1","role":"\"Estoy agotado, no duermo bien desde hace semanas.\"","facts":["trabaja 10 horas al día","no se lo ha contado a su jefe"],"prompt":"Resume con \"dice que\":"},
+  {"name":"Voz 2","role":"\"Mi médico me recomienda reducir horas, pero no sé cómo hacerlo.\"","facts":["miedo a parecer poco comprometido","carga de trabajo muy alta"],"prompt":"Resume con \"explica que\":"},
+  {"name":"Voz 3","role":"\"Desde que pido ayuda psicológica me siento mucho mejor.\"","facts":["terapia desde hace tres meses","ha cambiado su rutina"],"prompt":"Resume con \"cuenta que\":"},
+  {"name":"Voz 4","role":"\"En mi empresa nadie habla de salud mental abiertamente.\"","facts":["cultura muy jerárquica","tabú alrededor del tema"],"prompt":"Resume con \"comenta que\":"},
+  {"name":"Voz 5","role":"\"Tuve una baja de dos meses el año pasado por estrés.\"","facts":["volvió con un plan de reincorporación","ahora fija límites más claros"],"prompt":"Resume con \"cuenta que\":"},
+  {"name":"Voz 6","role":"\"¿Vosotros también sentís que nunca desconectáis del trabajo?\"","facts":["revisa el correo por la noche","fin de semana incluido"],"prompt":"Resume con \"pregunta si\":"},
+  {"name":"Voz 7","role":"\"Ahora la empresa ofrece sesiones de apoyo psicológico gratuitas.\"","facts":["programa nuevo este año","poca gente lo usa todavía"],"prompt":"Resume con \"comenta que\":"},
+  {"name":"Voz 8","role":"\"Antes no reconocía los síntomas, pensaba que era solo cansancio normal.\"","facts":["lo entendió tarde","ahora lo detecta antes"],"prompt":"Resume con \"explica que\":"},
+  {"name":"Voz 9","role":"\"Mi jefa siempre pregunta cómo estamos, no solo qué hemos hecho.\"","facts":["liderazgo cercano","el equipo se siente más seguro"],"prompt":"Resume con \"dice que\":"},
+  {"name":"Voz 10","role":"\"Añado que hacer ejercicio me ayuda mucho a gestionar el estrés.\"","facts":["corre tres veces por semana","lo considera imprescindible"],"prompt":"Resume con \"añade que\":"},
+  {"name":"Voz 11","role":"\"¿Cómo consigues desconectar tú los fines de semana?\"","facts":["le cuesta apagar el móvil del trabajo","quiere consejos prácticos"],"prompt":"Resume con \"pregunta cómo\":"},
+  {"name":"Voz 12","role":"\"Al final decidí cambiar de puesto para reducir la presión.\"","facts":["decisión difícil pero necesaria","ahora está más tranquilo"],"prompt":"Resume con \"cuenta que\" o \"explica que\":"}
+];
+
+const charWrap = document.getElementById('characters');
+CHARACTERS.forEach((c, i)=>{
+  if(i === 0){
+    const divider = document.createElement('div');
+    divider.className = 'ex-divider en-clase';
+    divider.textContent = 'en clase · voces 1–6';
+    charWrap.appendChild(divider);
+  }
+  if(i === 6){
+    const divider = document.createElement('div');
+    divider.className = 'ex-divider';
+    divider.textContent = 'para casa · banco de repaso';
+    charWrap.appendChild(divider);
+  }
+  const card = document.createElement('div');
+  card.className = 'char-card';
+  card.innerHTML = `
+    <div class="char-avatar">${c.name.slice(-1)}</div>
+    <div class="char-body">
+      <p class="char-name">${c.name}</p>
+      <p class="char-role">${c.role}</p>
+      <div class="char-facts">${c.facts.map(f=>`<span class="fact-tag">${f}</span>`).join('')}</div>
+      <p class="char-prompt">${c.prompt}</p>
+      <textarea class="char-input" rows="2" placeholder="Dice que / Explica que / Comenta que / Cuenta que / Añade que / Pregunta si..."></textarea>
+    </div>
+  `;
+  charWrap.appendChild(card);
+});
+
+/* ---------- ROLEPLAY SCENES ---------- */
+const SCENES = [
+  {
+    "id": "companero_agotado",
+    "tab": "Transmitir lo que dice un compañero agotado",
+    "icon": "😮‍💨",
+    "setup": "Tu compañero Marc te ha contado en privado que está muy agotado. Ahora se lo cuentas a vuestra jefa, Elena, con cuidado.",
+    "lines": [
+      {"who":"friend","name":"Elena","text":"¿Sabes algo de por qué Marc ha estado tan distante últimamente?"},
+      {"who":"you","hint":"Responde con \"dice que\" resumiendo cómo se siente Marc (cansado, agotado...)."},
+      {"who":"friend","name":"Elena","text":"¿Ha comentado si es por la carga de trabajo?"},
+      {"who":"you","hint":"Responde con \"comenta que\" sobre la carga de trabajo de Marc."},
+      {"who":"friend","name":"Elena","text":"¿Ha dicho si quiere hablar conmigo directamente?"},
+      {"who":"you","hint":"Responde con \"explica que\" o \"dice que\" sobre si quiere hablar con ella."},
+      {"who":"friend","name":"Elena","text":"¿Te ha contado desde cuándo se siente así?"},
+      {"who":"you","hint":"Responde con \"cuenta que\" sobre desde cuándo se siente agotado."},
+      {"who":"friend","name":"Elena","text":"Gracias por decírmelo, voy a hablar con él con cuidado."},
+      {"who":"you","hint":"Responde con una última frase en estilo indirecto, añadiendo algo que Marc pidió o sugirió."}
+    ]
+  },
+  {
+    "id": "entrevista_psicologa",
+    "tab": "Resumir una entrevista con una psicóloga",
+    "icon": "🎙️",
+    "setup": "Has visto una entrevista a una psicóloga laboral y ahora se la resumes a un compañero que no la ha visto.",
+    "lines": [
+      {"who":"friend","name":"Iker","text":"¿De qué hablaba exactamente la psicóloga en la entrevista?"},
+      {"who":"you","hint":"Responde con \"explica que\" sobre el tema general (el burnout, cómo se construye)."},
+      {"who":"friend","name":"Iker","text":"¿Dio algún consejo concreto para prevenirlo?"},
+      {"who":"you","hint":"Responde con \"recomienda que\" o \"dice que\" sobre un consejo concreto."},
+      {"who":"friend","name":"Iker","text":"¿Comentó algo sobre las empresas y su responsabilidad?"},
+      {"who":"you","hint":"Responde con \"comenta que\" sobre el papel de las empresas."},
+      {"who":"friend","name":"Iker","text":"¿Y qué dijo sobre pedir ayuda a tiempo?"},
+      {"who":"you","hint":"Responde con \"añade que\" sobre la importancia de pedir ayuda pronto."},
+      {"who":"friend","name":"Iker","text":"Me interesa mucho, voy a buscar la entrevista completa."},
+      {"who":"you","hint":"Responde con una última frase resumiendo la idea principal de la psicóloga."}
+    ]
+  },
+  {
+    "id": "reunion_equipo",
+    "tab": "Contar en una reunión lo que dijo el equipo",
+    "icon": "🗣️",
+    "setup": "Has hablado en privado con varios compañeros sobre el ambiente de trabajo y ahora lo resumes en una reunión de equipo.",
+    "lines": [
+      {"who":"friend","name":"Jefe","text":"¿Qué te ha comentado el equipo sobre la carga de trabajo?"},
+      {"who":"you","hint":"Responde con \"dicen que\" o \"comentan que\" sobre la carga de trabajo del equipo."},
+      {"who":"friend","name":"Jefe","text":"¿Alguien ha mencionado problemas de comunicación?"},
+      {"who":"you","hint":"Responde con \"explican que\" sobre algún problema de comunicación."},
+      {"who":"friend","name":"Jefe","text":"¿Han preguntado algo en concreto sobre los horarios?"},
+      {"who":"you","hint":"Responde con \"preguntan si\" sobre horarios o flexibilidad."},
+      {"who":"friend","name":"Jefe","text":"¿Y sobre el apoyo psicológico que ofrecemos?"},
+      {"who":"you","hint":"Responde con \"comentan que\" o \"añaden que\" sobre el apoyo psicológico."},
+      {"who":"friend","name":"Jefe","text":"Gracias por transmitírmelo con tanto detalle."},
+      {"who":"you","hint":"Responde con una última frase resumiendo lo más importante que dijo el equipo."}
+    ]
+  },
+  {
+    "id": "llamada_amiga",
+    "tab": "Contarle a una amiga lo que le pasa a tu hermano",
+    "icon": "📞",
+    "setup": "Tu hermano te ha contado por mensaje que está pasando por un momento difícil en el trabajo. Se lo cuentas a una amiga por teléfono.",
+    "lines": [
+      {"who":"friend","name":"Amiga","text":"¿Qué tal está tu hermano? Hace tiempo que no sé nada de él."},
+      {"who":"you","hint":"Responde con \"cuenta que\" o \"dice que\" resumiendo cómo está."},
+      {"who":"friend","name":"Amiga","text":"¿Ha dicho por qué está así, si sabes algo?"},
+      {"who":"you","hint":"Responde con \"explica que\" sobre la causa (exceso de trabajo, un proyecto difícil...)."},
+      {"who":"friend","name":"Amiga","text":"¿Ha pensado en pedir ayuda o hablar con alguien?"},
+      {"who":"you","hint":"Responde con \"comenta que\" sobre si está considerando pedir ayuda."},
+      {"who":"friend","name":"Amiga","text":"¿Te ha preguntado algo a ti sobre el tema?"},
+      {"who":"you","hint":"Responde con \"pregunta si\" sobre algo que te haya preguntado tu hermano."},
+      {"who":"friend","name":"Amiga","text":"Espero que se recupere pronto, dale un abrazo de mi parte."},
+      {"who":"you","hint":"Responde con una última frase en estilo indirecto sobre los planes de tu hermano."}
+    ]
+  }
+];
+
+const sceneTabs = document.getElementById('scene-tabs');
+const sceneContainer = document.getElementById('scene-container');
+let activeScene = 0;
+
+function renderTabs(){
+  sceneTabs.innerHTML = SCENES.map((s,i)=>
+    `<button class="scene-tab${i===activeScene?' active':''}" data-idx="${i}">${s.icon} ${s.tab}</button>`
+  ).join('');
+  sceneTabs.querySelectorAll('.scene-tab').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      activeScene = parseInt(btn.dataset.idx, 10);
+      renderTabs();
+      renderScene();
+    });
+  });
+}
+
+function renderScene(){
+  const scene = SCENES[activeScene];
+  const linesHtml = scene.lines.map((l)=>{
+    if(l.who === 'friend'){
+      return `
+        <div class="line friend">
+          <div class="line-avatar">${l.name.charAt(0)}</div>
+          <div class="line-body">
+            <p class="line-name">${l.name}</p>
+            <div class="line-bubble">${l.text}</div>
+          </div>
+        </div>`;
+    } else {
+      return `
+        <div class="line you">
+          <div class="line-avatar">Tú</div>
+          <div class="line-body">
+            <p class="line-name">Tú</p>
+            <textarea class="line-input" rows="2" placeholder="Escribe tu respuesta en estilo indirecto..."></textarea>
+            <p class="line-hint">${l.hint}</p>
+          </div>
+        </div>`;
+    }
+  }).join('');
+
+  sceneContainer.innerHTML = `
+    <div class="scene-setup">
+      <span class="scene-icon">${scene.icon}</span>
+      <p class="scene-text"><strong>${scene.tab}:</strong> ${scene.setup}</p>
+    </div>
+    <div class="dialogue">${linesHtml}</div>
+  `;
+}
+
+renderTabs();
+renderScene();
+
+/* ---------- FINAL TASK ---------- */
+const STORAGE_KEY = 'simone-clase19-tarea';
+const taskArea = document.getElementById('final-task');
+const taskCount = document.getElementById('task-count');
+const savedFlag = document.getElementById('saved-flag');
+
+async function cargarTarea(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(STORAGE_KEY);
+    if (res && typeof res.value === 'string') taskArea.value = res.value;
+  }catch(e){
+    // Clave inexistente todavía: no hay resumen previo, se queda en blanco.
+  }
+  updateCount();
+}
+
+function updateCount(){
+  const matches = (taskArea.value.match(/\bdice que\b|\bdicen que\b|\bexplica que\b|\bexplican que\b|\bcomenta que\b|\bcomentan que\b|\bcuenta que\b|\bcuentan que\b|\baña?de que\b|\bañaden que\b|\bpregunta si\b|\bpreguntan si\b|\brecomienda que\b/gi) || []).length;
+  taskCount.textContent = `${matches} estructura${matches===1?'':'s'} de estilo indirecto detectada${matches===1?'':'s'}`;
+}
+taskArea.addEventListener('input', updateCount);
+updateCount();
+cargarTarea();
+
+document.getElementById('save-btn').addEventListener('click', async ()=>{
+  if (!window.storage){
+    savedFlag.textContent = 'Guardado no disponible aquí';
+    savedFlag.classList.add('show');
+    setTimeout(()=>{ savedFlag.classList.remove('show'); savedFlag.textContent = 'Guardado ✓'; }, 2200);
+    return;
+  }
+  try{
+    const ok = await window.storage.set(STORAGE_KEY, taskArea.value);
+    savedFlag.textContent = ok ? 'Guardado ✓' : 'No se pudo guardar';
+  }catch(e){
+    savedFlag.textContent = 'No se pudo guardar';
+  }
+  savedFlag.classList.add('show');
+  setTimeout(()=>{ savedFlag.classList.remove('show'); savedFlag.textContent = 'Guardado ✓'; }, 1800);
+});
+</script>
+
+</body>
+</html>
