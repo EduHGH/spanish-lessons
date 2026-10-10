@@ -1,0 +1,1373 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Elise · Clase 17 — Mirando atrás, mirando adelante</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+
+:root{
+  --paper:        #FBF7EE;
+  --paper-raised: #FFFFFF;
+  --paper-alt:    #F3ECDA;
+  --ink:          #23291F;
+  --ink-soft:     #565F52;
+  --ink-faint:    #8B9184;
+  --line:         rgba(35,41,31,0.12);
+  --line-strong:  rgba(35,41,31,0.22);
+
+  --b2:      #2F6FED;  --b2-soft: #EAF1FE;  --b2-line: #C6D9FC;
+  --ok:      #2F7D5C;  --ok-soft:  #E7F3EC;  --ok-line:  #BFE0CE;
+  --family:  #B5502E;  --family-soft: #FBEBE3; --family-line: #EFC9B4;
+  --amber:   #C1892F;  --amber-soft: #FBF1E1; --amber-line: #F0D9A8;
+
+  /* Acento: teja — clásico/por defecto del sistema, para la clase final de cierre del curso */
+  --accent:      #C1473F;
+  --accent-soft: #FBEBE9;
+  --accent-line: #F0C4C0;
+
+  --f-display: 'Fraunces', Georgia, serif;
+  --f-body:    'IBM Plex Sans', system-ui, sans-serif;
+  --f-data:    'IBM Plex Mono', monospace;
+
+  --r-sm: 8px;
+  --r-md: 14px;
+  --r-lg: 20px;
+
+  --shadow-1: 0 1px 2px rgba(35,41,31,0.05), 0 1px 8px rgba(35,41,31,0.04);
+}
+
+*{ box-sizing:border-box; }
+body{
+  margin:0;
+  background: var(--paper);
+  background-image: radial-gradient(circle at 1px 1px, var(--line) 1px, transparent 0);
+  background-size: 22px 22px;
+  color: var(--ink);
+  font-family: var(--f-body);
+  line-height:1.6;
+}
+::selection{ background: var(--accent-soft); }
+code{ font-family: var(--f-data); background: var(--paper-alt); padding:1px 5px; border-radius:5px; font-size:.92em; }
+
+/* ---------- ES/EN TOGGLE ---------- */
+.i18n-toggle{
+  position:fixed; top:18px; right:18px; z-index:50;
+  font-family: var(--f-data); font-size:11.5px; letter-spacing:.04em;
+  background: var(--paper-raised); border:1px solid var(--line-strong); color: var(--ink-soft);
+  padding:8px 14px; border-radius:999px; cursor:pointer; box-shadow: var(--shadow-1);
+  display:flex; align-items:center; gap:8px;
+}
+.i18n-toggle .dot{ width:7px; height:7px; border-radius:50%; background: var(--accent); }
+.i18n-toggle.off .dot{ background: var(--ink-faint); }
+body.i18n-hidden .en{ display:none; }
+.en{ display:block; font-size:0.82em; opacity:0.6; margin-top:2px; font-style:normal; }
+.en.inline{ display:inline; margin-top:0; margin-left:6px; }
+
+/* ---------- HEADER ---------- */
+header{ padding:44px 24px 28px; max-width:760px; margin:0 auto; }
+.header-top{ display:flex; align-items:flex-start; justify-content:space-between; gap:24px; }
+.eyebrow{
+  font-family: var(--f-data); font-size:12px; letter-spacing:.14em;
+  text-transform:uppercase; color: var(--accent); margin:0 0 10px;
+  display:flex; align-items:center; gap:10px;
+}
+.eyebrow .dot{ width:6px; height:6px; border-radius:50%; background: var(--accent); }
+h1{
+  font-family: var(--f-display); font-weight:600;
+  font-size:clamp(32px,5.8vw,50px); line-height:1.05;
+  margin:0; letter-spacing:-.015em;
+}
+h1 em{ font-style:italic; color: var(--accent); }
+.level-badge{
+  font-family: var(--f-display); font-weight:700; font-style:normal;
+  font-size:clamp(44px,9vw,80px); line-height:0.85; color: var(--accent);
+  letter-spacing:-.02em; flex:none; margin-top:-2px;
+}
+.lede{ font-size:15.5px; color: var(--ink-soft); max-width:58ch; margin:16px 0 0; }
+.lede .en{ margin-top:6px; }
+
+.meta-row{
+  display:grid; grid-template-columns:repeat(4,auto); column-gap:32px; row-gap:16px;
+  margin-top:30px; font-family: var(--f-data); font-size:11px; letter-spacing:.06em; text-transform:uppercase;
+  color: var(--ink); font-weight:600;
+}
+.meta-row strong{
+  display:block; color: var(--ink-faint); font-size:11px; font-weight:500;
+  font-family: var(--f-data); letter-spacing:.06em; text-transform:uppercase; margin-top:3px;
+}
+@media (max-width:600px){
+  .header-top{ flex-direction:column; gap:6px; }
+  .meta-row{ grid-template-columns:1fr 1fr; column-gap:24px; }
+}
+
+/* ---------- SECTIONS ---------- */
+main{ max-width:760px; margin:0 auto; padding:8px 24px 100px; }
+section.block{ margin-bottom:48px; }
+.block-head{ display:flex; align-items:baseline; gap:12px; margin-bottom:18px; }
+.time-tag{
+  font-family: var(--f-data); font-size:11px; color: var(--ink-faint);
+  background: var(--paper-alt); padding:3px 10px; border-radius:999px; margin-left:auto; flex:none;
+}
+.block-num{
+  font-family: var(--f-data); font-size:12px; color:#fff; background: var(--accent);
+  width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  flex:none;
+}
+.block-head h2{ font-family: var(--f-display); font-weight:500; font-style:italic; font-size:21px; margin:0; }
+
+.panel{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-lg);
+  box-shadow: var(--shadow-1); padding:24px 26px;
+}
+.intro-text{ margin:0 0 16px; font-size:14.5px; color: var(--ink-soft); }
+
+.note{
+  margin-top:18px; padding:14px 16px; background: var(--accent-soft); border:1px solid var(--accent-line);
+  border-radius: var(--r-md); font-size:14px; color: var(--ink-soft);
+}
+.note strong{ color: var(--ink); }
+.note.amber{ background: var(--amber-soft); border-color: var(--amber-line); }
+
+/* ---------- FRASE DESTACADA (mesh) ---------- */
+:root{ --mesh-color: var(--accent); }
+.mesh-surface{ position:relative; overflow:hidden; isolation:isolate; }
+.mesh-surface::before, .mesh-surface::after, .mesh-surface .mesh-blob{
+  content:""; position:absolute; border-radius:50%; filter: blur(46px);
+  z-index:-1; animation: mesh-drift 22s ease-in-out infinite alternate; pointer-events:none;
+}
+.mesh-surface::before{ width:60%; height:60%; top:-10%; left:-10%; background: var(--mesh-color); opacity:.16; }
+.mesh-surface::after{ width:50%; height:50%; bottom:-15%; right:-5%; background: var(--mesh-color); opacity:.13; animation-delay:-7s; }
+.mesh-surface .mesh-blob{ width:40%; height:40%; top:30%; right:20%; background: var(--mesh-color); opacity:.11; animation-delay:-14s; }
+@keyframes mesh-drift{
+  0%{ transform: translate(0,0) scale(1); }
+  50%{ transform: translate(6%,-4%) scale(1.08); }
+  100%{ transform: translate(-4%,5%) scale(.96); }
+}
+@media (prefers-reduced-motion: reduce){ .mesh-surface::before,.mesh-surface::after,.mesh-surface .mesh-blob{ animation:none; } }
+
+.phrase-card{ padding:30px 34px; border-radius: var(--r-lg); border:1px solid var(--line); text-align:center; }
+.phrase-eyebrow{ font-family: var(--f-data); font-size:11px; letter-spacing:.1em; text-transform:uppercase; color: var(--ink-faint); margin:0 0 12px; }
+.phrase-main{ font-family: var(--f-display); font-size:clamp(20px,3.6vw,28px); font-style:italic; margin:0 0 10px; color: var(--ink); }
+.phrase-sub{ font-size:13.5px; color: var(--ink-soft); margin:0; max-width:46ch; margin-left:auto; margin-right:auto; }
+
+/* ---------- ROLE: PRETÉRITO vs IMPERFECTO CONTRAST TABLE ---------- */
+.contrast-wrap{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+.contrast-col{ border-radius: var(--r-md); padding:18px 20px; border:1px solid; }
+.contrast-col.pret{ background: var(--accent-soft); border-color: var(--accent-line); }
+.contrast-col.imp{ background: var(--paper-alt); border-color: var(--line); }
+.contrast-col h3{ font-family: var(--f-display); font-size:16px; margin:0 0 4px; }
+.contrast-col.pret h3{ color: var(--accent); }
+.contrast-col.imp h3{ color: var(--ink-soft); }
+.contrast-col .en{ margin-bottom:12px; }
+.contrast-col ul{ margin:0; padding-left:18px; font-size:13.5px; color: var(--ink-soft); }
+.contrast-col li{ margin-bottom:8px; }
+.contrast-col li strong{ color: var(--ink); font-family: var(--f-data); font-size:12.5px; }
+@media (max-width:600px){ .contrast-wrap{ grid-template-columns:1fr; } }
+
+/* ---------- CONNECTOR CHIPS ---------- */
+.connector-grid{ display:flex; flex-wrap:wrap; gap:10px; margin-top:4px; }
+.connector-chip{
+  background: var(--paper-raised); border:1.5px solid var(--accent-line); border-radius: var(--r-md);
+  padding:10px 16px; font-family: var(--f-display); font-size:15px; color: var(--ink);
+  display:flex; flex-direction:column; min-width:110px;
+}
+.connector-chip .en{ font-family: var(--f-body); }
+
+/* ---------- STORY READING ---------- */
+.reading-panel{ background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-lg); padding:24px 26px; }
+.reading-text{
+  font-family: var(--f-display); font-size:16px; line-height:1.85; color: var(--ink);
+  background: var(--paper-alt); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:20px 22px; margin-bottom:8px;
+}
+.reading-text p{ margin:0 0 4px; }
+.reading-text p:last-child{ margin-bottom:0; }
+.reading-text .en{ font-family: var(--f-body); margin:2px 0 14px; }
+.tag-pret{ color: var(--accent); font-weight:600; }
+.tag-imp{ color: var(--ink-soft); font-weight:600; text-decoration: underline dotted var(--ink-faint); text-underline-offset:3px; }
+.legend{ display:flex; gap:18px; font-family: var(--f-data); font-size:11.5px; color: var(--ink-faint); margin:12px 2px 0; }
+.legend span{ display:flex; align-items:center; gap:6px; }
+.legend .sw{ width:10px; height:10px; border-radius:3px; }
+.legend .sw.pret{ background: var(--accent); }
+.legend .sw.imp{ background: var(--ink-faint); }
+
+/* ---------- FILL GAPS (elige el conector/reacción) ---------- */
+.fill-block{
+  font-family: var(--f-display); font-size:15.5px; line-height:2.15; color: var(--ink);
+  background: var(--paper-alt); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:20px 22px;
+}
+.fill-block .en{ font-family: var(--f-body); font-size:0.7em; margin:0 0 10px; }
+.gap-select{
+  font-family: var(--f-data); font-size:13.5px; background: var(--paper-raised);
+  border:none; border-bottom:2px solid var(--accent-line); color: var(--ink);
+  padding:3px 6px; margin:0 2px; border-radius:4px 4px 0 0; cursor:pointer;
+}
+.gap-select:focus{ outline:none; border-bottom-color: var(--accent); }
+.gap-select.correct{ border-bottom-color: var(--ok); color: var(--ok); }
+.gap-select.wrong{ border-bottom-color: var(--family); color: var(--family); }
+
+.check-bar{
+  display:flex; align-items:center; justify-content:space-between; gap:16px;
+  margin-top:22px; padding-top:18px; border-top:1px dashed var(--line); flex-wrap:wrap;
+}
+.btn-primary{
+  font-family: var(--f-body); font-weight:600; font-size:14px; color:#fff; background: var(--accent);
+  border:none; padding:11px 22px; border-radius:999px; cursor:pointer; transition: transform .1s ease;
+}
+.btn-primary:hover{ transform: translateY(-1px); }
+#fill-score{ font-family: var(--f-data); font-size:13px; color: var(--ink-faint); }
+.btn-ghost{
+  font-family: var(--f-body); font-weight:600; font-size:13px; color: var(--ink-soft); background:none;
+  border:1.5px solid var(--line); padding:9px 18px; border-radius:999px; cursor:pointer;
+}
+.btn-ghost:hover{ border-color: var(--ink-faint); }
+
+/* ---------- ORDENAR LA HISTORIA (secuencia) ---------- */
+.order-item{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:16px 18px; margin-bottom:14px;
+}
+.order-bank{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
+.order-slot{
+  min-height:44px; border:1.5px dashed var(--line-strong); border-radius: var(--r-sm);
+  padding:8px; display:flex; flex-wrap:wrap; gap:6px; align-items:center; background: var(--paper-alt);
+}
+.order-chip{
+  font-family: var(--f-body); font-size:13.5px; font-weight:600; background: var(--paper-raised);
+  border:1.5px solid var(--line); color: var(--ink); padding:6px 12px; border-radius:999px;
+  cursor:pointer; transition: all .15s ease; user-select:none;
+}
+.order-chip:hover{ border-color: var(--accent-line); }
+.order-chip.used{ background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+.order-item .order-feedback{ font-size:12.5px; color: var(--ink-faint); margin-top:8px; font-family: var(--f-data); }
+.order-item.correct .order-slot{ border-color: var(--ok); border-style:solid; background: var(--ok-soft); }
+.order-item.wrong .order-slot{ border-color: var(--family); border-style:solid; background: var(--family-soft); }
+
+/* ---------- ROLEPLAY / STORY BUILD (usa --family) ---------- */
+.roleplay-panel{ background: var(--family-soft); border:1px solid var(--family-line); border-radius: var(--r-lg); padding:24px 26px; }
+.roleplay-panel .block-num{ background: var(--family); }
+.scene-setup{
+  display:flex; gap:14px; align-items:flex-start; background: var(--paper-raised);
+  border:1px solid var(--family-line); border-radius: var(--r-md); padding:14px 16px; margin-bottom:20px;
+}
+.scene-icon{ font-size:22px; flex:none; }
+.scene-text{ font-size:14px; color: var(--ink-soft); }
+.scene-text strong{ color: var(--ink); }
+.scene-text .en{ margin-top:4px; }
+
+.desc-card{
+  background: var(--paper-raised); border:1px solid var(--family-line); border-radius: var(--r-md);
+  padding:18px 20px;
+}
+.desc-card .desc-title{ font-family: var(--f-display); font-weight:600; font-size:16px; margin:0 0 8px; color: var(--ink); }
+.desc-card .desc-brief{ font-size:14px; color: var(--ink-soft); margin:0 0 4px; }
+.desc-card .desc-brief.en{ margin-bottom:14px; }
+.desc-card .desc-prompts{ margin:0; padding-left:18px; font-size:13.5px; color: var(--ink-soft); }
+.desc-card .desc-prompts li{ margin-bottom:10px; }
+.desc-card .desc-prompts li .en{ margin-top:1px; }
+.desc-card textarea{
+  width:100%; min-height:110px; font-family: var(--f-body); font-size:14.5px; color: var(--ink);
+  background:#fff; border:1px solid var(--family-line); border-radius: var(--r-sm);
+  padding:10px 12px; resize:vertical; margin-top:12px;
+}
+.desc-card textarea:focus{ outline:none; border-color: var(--family); }
+.roleplay-tip{
+  margin-top:22px; padding:14px 16px; background: var(--paper-raised); border:1px solid var(--family-line);
+  border-radius: var(--r-md); font-size:13.5px; color: var(--ink-soft);
+}
+.roleplay-tip strong{ color: var(--ink); }
+
+/* ---------- TAREA FINAL ---------- */
+.task-panel{ background: var(--paper-alt); border:1px solid var(--line); border-radius: var(--r-lg); padding:24px 26px; }
+.task-panel .block-num{ background: var(--ink-soft); }
+textarea.final-task{
+  width:100%; min-height:150px; font-family: var(--f-body); font-size:15px; color: var(--ink);
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:14px 16px; resize:vertical; margin-top:14px;
+}
+textarea.final-task:focus{ outline:none; border-color: var(--accent); }
+.task-footer{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:12px; flex-wrap:wrap; }
+.task-count{ font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); }
+.btn-secondary{
+  font-family: var(--f-body); font-weight:600; font-size:13.5px; color: var(--ink-soft); background:none;
+  border:1.5px solid var(--line); padding:9px 18px; border-radius:999px; cursor:pointer;
+}
+.saved-flag{ font-family: var(--f-data); font-size:12px; color: var(--b2); opacity:0; transition: opacity .3s ease; }
+.saved-flag.show{ opacity:1; }
+
+footer{
+  max-width:760px; margin:40px auto 0; padding:0 24px 60px;
+  font-family: var(--f-data); font-size:11.5px; color: var(--ink-faint);
+  display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px;
+}
+
+@media (max-width:600px){
+  header{ padding:36px 16px 22px; }
+  main{ padding:8px 16px 80px; }
+  .panel, .reading-panel, .roleplay-panel, .task-panel{ padding:18px 18px; }
+  .i18n-toggle{ top:12px; right:12px; padding:7px 12px; font-size:11px; }
+}
+@media (prefers-reduced-motion: reduce){ *{ transition:none !important; } }
+
+/* ---------- EJERCICIOS EXTRA (7-9) ---------- */
+.q-card{background:var(--paper-alt);border:1px solid var(--line);border-radius:var(--r-md);padding:16px 18px;margin-bottom:14px}
+.q-prompt{font-family:var(--f-display);font-size:16px;margin:0 0 12px}
+.q-opts{display:flex;flex-wrap:wrap;gap:8px}
+.q-opt{font-family:var(--f-body);font-size:14px;font-weight:600;text-align:left;background:var(--paper-raised);border:1.5px solid var(--line);color:var(--ink);padding:8px 14px;border-radius:var(--r-sm);cursor:pointer}
+.q-opt:hover:not(:disabled){border-color:var(--accent)}
+.q-opt.ok{background:var(--ok-soft);border-color:var(--ok);color:var(--ok)}
+.q-opt.bad{background:var(--family-soft);border-color:var(--family);color:var(--family);opacity:.7}
+.q-opt .en{font-weight:400}
+.q-fb{font-size:13px;color:var(--ink-soft);margin-top:10px}
+.q-score{font-family:var(--f-data);font-size:13px;color:var(--ink-faint)}
+</style>
+<style id="elise-anim-css">
+/* ==========================================================================
+   Elise · capa de animación v1
+   Se añade al final del <head>. No toca el HTML original salvo con atributos
+   data-ea / clases ea-* que pone el script. Todo el movimiento solo existe
+   si <html> tiene .ea-motion (el script lo quita con prefers-reduced-motion).
+   ========================================================================== */
+:root{
+  --ea-accent: var(--esc-accent, var(--accent, #296A75));
+  --ea-accent-soft: var(--esc-accent-soft, var(--accent-soft, #E7F1F2));
+  --ea-ok: var(--esc-ok, var(--ok, #2F7D5C));
+  --ea-err: var(--esc-err, var(--family, #B5502E));
+  --ea-hl: color-mix(in srgb, var(--ea-accent) 24%, transparent);
+  --ea-spring: cubic-bezier(.32,1.45,.5,1);
+  --ea-ease: cubic-bezier(.22,.8,.3,1);
+}
+
+/* ---------- Keyframes ---------- */
+@keyframes eaPop{0%{transform:scale(.6);opacity:0}60%{transform:scale(1.12);opacity:1}100%{transform:scale(1);opacity:1}}
+@keyframes eaBump{0%{transform:scale(1)}40%{transform:scale(1.08)}100%{transform:scale(1)}}
+@keyframes eaPick{0%{transform:scale(1)}35%{transform:scale(.95)}70%{transform:scale(1.03)}100%{transform:scale(1)}}
+@keyframes eaShake{0%,100%{transform:translateX(0)}20%{transform:translateX(-5px)}40%{transform:translateX(5px)}60%{transform:translateX(-3px)}80%{transform:translateX(3px)}}
+@keyframes eaRing{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--ea-ok) 55%,transparent)}100%{box-shadow:0 0 0 12px transparent}}
+@keyframes eaRingErr{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--ea-err) 45%,transparent)}100%{box-shadow:0 0 0 10px transparent}}
+@keyframes eaFadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@keyframes eaUnfold{from{opacity:0;transform:translateY(-8px) scaleY(.9)}to{opacity:1;transform:none}}
+@keyframes eaBubbleL{from{opacity:0;transform:translateX(-14px) scale(.94)}to{opacity:1;transform:none}}
+@keyframes eaBubbleR{from{opacity:0;transform:translateX(14px) scale(.94)}to{opacity:1;transform:none}}
+@keyframes eaHop{0%,100%{transform:translateY(0)}40%{transform:translateY(-7px)}}
+@keyframes eaEq{0%,100%{transform:scaleY(.2)}50%{transform:scaleY(1)}}
+@keyframes eaStress{0%,100%{background-size:0% 45%}30%,80%{background-size:100% 45%}}
+@keyframes eaUrgent{from{opacity:1}to{opacity:.45}}
+@keyframes eaTick{0%{transform:scale(1)}30%{transform:scale(1.06)}100%{transform:scale(1)}}
+@keyframes eaWiggle{0%,100%{transform:rotate(0)}25%{transform:rotate(-2deg)}75%{transform:rotate(2deg)}}
+
+/* ---------- Revelado al hacer scroll (solo lo que enseña) ---------- */
+html.ea-motion [data-ea]{
+  transition: opacity .45s var(--ea-ease), transform .6s var(--ea-spring);
+  transition-delay: calc(var(--i,0) * 75ms);
+}
+html.ea-motion [data-ea]:not(.ea-in){ opacity:0; transform: var(--ea-from, translateY(12px)); }
+
+/* ---------- Grupos con animación propia ---------- */
+.ea-reset, .ea-reset *, .ea-reset *::after{ transition:none !important; animation:none !important; }
+
+/* Fórmula: las piezas se ensamblan una a una */
+html.ea-motion .m-formula > *{
+  transition: opacity .3s ease, transform .5s var(--ea-spring);
+  transition-delay: calc(var(--k,0) * 190ms);
+}
+html.ea-motion .m-formula:not(.ea-in) > *{ opacity:0; transform: scale(.55); }
+html.ea-motion .m-formula:not(.ea-in) > .m-formula-mas{ transform: scale(.4) rotate(-120deg); }
+
+/* ✗ → ✓ : primero se tacha, luego aparece lo correcto */
+html.ea-motion .m-par-no, html.ea-motion .m-contraste-no span{ text-decoration:none; position:relative; }
+html.ea-motion .m-par-no::after, html.ea-motion .m-contraste-no span::after{
+  content:""; position:absolute; left:6px; right:6px; top:52%; height:2px; border-radius:2px;
+  background: var(--ea-err); transform: scaleX(0); transform-origin:left;
+  transition: transform .5s var(--ea-ease) .45s;
+}
+html.ea-motion .ea-in .m-par-no::after, html.ea-motion .ea-in .m-contraste-no span::after{ transform: scaleX(1); }
+html.ea-motion .m-par-ok, html.ea-motion .m-contraste-ok{
+  transition: opacity .4s ease 1.05s, transform .55s var(--ea-spring) 1.05s;
+}
+html.ea-motion .m-par:not(.ea-in) .m-par-ok,
+html.ea-motion .m-contraste:not(.ea-in) .m-contraste-ok{ opacity:0; transform: translateX(-12px); }
+html.ea-motion .m-par.ea-in .m-par-ok b, html.ea-motion .m-contraste.ea-in .m-contraste-ok b{
+  display:inline-block; animation: eaPop .5s var(--ea-spring) 1.25s both;
+}
+html.ea-motion .m-contraste.ea-in .m-contraste-ok span em{ transition-delay: 1.6s; }
+
+/* Subrayado marcador en lo importante */
+html.ea-motion .ea-hl em, html.ea-motion .ea-hl .esc-ejemplo-sol{
+  background-image: linear-gradient(var(--ea-hl), var(--ea-hl));
+  background-repeat:no-repeat; background-position:0 92%; background-size:0% 46%;
+  border-radius:2px; transition: background-size .7s var(--ea-ease) .35s;
+}
+html.ea-motion .ea-hl.ea-in em, html.ea-motion .ea-hl.ea-in .esc-ejemplo-sol{ background-size:100% 46%; }
+
+/* Marcadores / fichas que se pueden oír */
+.ea-tap{ cursor:pointer; -webkit-tap-highlight-color:transparent; }
+html.ea-motion .ea-tap{ transition: transform .25s var(--ea-spring), box-shadow .2s ease; }
+html.ea-motion .ea-tap:hover{ transform: translateY(-2px); }
+html.ea-motion .ea-tap.ea-speaking{ animation: eaBump .5s var(--ea-spring) 2; box-shadow: 0 0 0 3px var(--ea-accent-soft); }
+.ea-tap:focus-visible, .ea-listen:focus-visible, .ea-replay:focus-visible{ outline:2px solid var(--ea-accent); outline-offset:2px; }
+
+/* Cita con voz */
+html.ea-motion .m-cita{ transition: clip-path .9s var(--ea-ease) .2s; }
+html.ea-motion .m-cita:not(.ea-in){ clip-path: inset(0 100% 0 0); }
+html.ea-motion .m-cita.ea-in{ clip-path: inset(-6px -6px -6px -6px); }
+.ea-listen, .ea-replay{
+  display:inline-flex; align-items:center; justify-content:center; flex:none;
+  min-width:30px; height:30px; padding:0 8px; margin-left:8px; border-radius:999px;
+  border:1px solid var(--esc-line-strong, var(--line-strong, rgba(0,0,0,.2)));
+  background: var(--esc-surface, var(--paper-raised, #fff)); color: var(--ea-accent);
+  font-size:14px; line-height:1; cursor:pointer; vertical-align:middle;
+}
+.m-formula, .m-par, .m-contraste{ position:relative; }
+.m-formula, .m-par{ padding-right:36px; }
+.m-contraste{ padding-right:0; }
+.ea-replay{ position:absolute; right:0; top:0; margin:0; min-width:26px; height:26px; padding:0 6px; font-size:13px; opacity:.75; }
+.m-contraste > .ea-replay{ top:-30px; }
+.ea-replay:hover, .ea-listen:hover{ background: var(--ea-accent-soft); opacity:1; }
+html.ea-motion .ea-replay:active svg, html.ea-motion .ea-replay:active{ transform: rotate(-200deg); transition: transform .4s var(--ea-ease); }
+
+/* Tabla: filas que entran y foco de lectura */
+.esc-table tbody tr{ cursor:pointer; }
+html.ea-motion .esc-table tbody tr{ transition: opacity .25s ease; }
+.esc-table tbody tr.ea-focus td{ background: var(--ea-accent-soft); }
+.esc-table.ea-has-focus tbody tr:not(.ea-focus){ opacity:.5; }
+html.ea-motion .esc-table .col-highlight{
+  background-image: linear-gradient(var(--ea-hl), var(--ea-hl)); background-repeat:no-repeat;
+  background-position:0 100%; background-size:0% 2px; transition: background-size .8s var(--ea-ease) .5s;
+}
+html.ea-motion .esc-table.ea-in .col-highlight{ background-size:100% 2px; }
+
+/* Pronunciación: ecualizador + acento tónico que late */
+.ea-eq{ display:inline-flex; align-items:flex-end; gap:3px; height:14px; width:0; opacity:0; margin-left:0; overflow:hidden; vertical-align:middle; transition: width .25s ease, opacity .25s ease, margin .25s ease; }
+.ea-eq i{ display:block; width:3px; height:100%; border-radius:2px; background: var(--ea-accent); transform: scaleY(.2); transform-origin:bottom; }
+.ea-speaking .ea-eq, .ea-speaking.ea-eq{ width:27px; opacity:1; margin-left:8px; }
+html.ea-motion .ea-speaking .ea-eq i{ animation: eaEq .7s ease-in-out infinite; }
+html.ea-motion .ea-speaking .ea-eq i:nth-child(2){ animation-delay:.12s }
+html.ea-motion .ea-speaking .ea-eq i:nth-child(3){ animation-delay:.24s }
+html.ea-motion .ea-speaking .ea-eq i:nth-child(4){ animation-delay:.36s }
+html.ea-motion .ea-speaking .ea-eq i:nth-child(5){ animation-delay:.48s }
+html.ea-motion .esc-pron-card{ transition: box-shadow .3s ease; }
+.esc-pron-card.ea-speaking{ box-shadow: 0 0 0 3px var(--ea-accent-soft); }
+html.ea-motion .esc-pron-card.ea-speaking .esc-pron-tip b{
+  background-image: linear-gradient(var(--ea-hl), var(--ea-hl)); background-repeat:no-repeat; background-position:0 92%;
+  animation: eaStress 1.3s ease-in-out 2;
+}
+
+/* Itinerario de la clase */
+html.ea-motion .m-parada.active .m-nodo{ animation: eaBump .5s var(--ea-spring); }
+
+/* ---------- Frase destacada (formato antiguo, clases 16-17) ---------- */
+html.ea-motion .ea-w{ display:inline-block; opacity:0; transform: translateY(.45em); animation: eaFadeUp .5s var(--ea-ease) both; animation-delay: calc(var(--w,0) * 70ms + .15s); }
+
+/* ---------- EJERCICIOS ---------- */
+/* Test: elegir, comprobar, acertar, fallar */
+html.ea-motion .esc-opt-btn.picked, html.ea-motion .q-opt:active, html.ea-motion .order-chip:active, html.ea-motion .esc-word-chip:active{ animation: eaPick .32s var(--ea-spring); }
+html.ea-motion .esc-opt-btn.correct, html.ea-motion .q-opt.ok{ animation: eaBump .55s var(--ea-spring) var(--ea-d,0ms), eaRing .85s ease-out var(--ea-d,0ms); }
+html.ea-motion .esc-opt-btn.wrong, html.ea-motion .q-opt.bad{ animation: eaShake .4s ease var(--ea-d,0ms), eaRingErr .7s ease-out var(--ea-d,0ms); }
+html.ea-motion .q-fb.ea-flash, html.ea-motion .esc-spot-feedback.show{ animation: eaFadeUp .35s var(--ea-ease); }
+
+/* Puntuación */
+html.ea-motion .ea-pop{ animation: eaPop .45s var(--ea-spring); }
+html.ea-motion .ea-tick{ animation: eaTick .4s ease-out; }
+html.ea-motion .ea-fadeup{ animation: eaFadeUp .35s var(--ea-ease); }
+
+/* Huecos y desplegables */
+html.ea-motion .esc-cloze-input.correct, html.ea-motion .gap-select.correct{ animation: eaRing .85s ease-out; }
+html.ea-motion .esc-cloze-input.wrong, html.ea-motion .gap-select.wrong{ animation: eaShake .4s ease, eaRingErr .7s ease-out; }
+html.ea-motion .esc-cloze-mark.ok{ display:inline-block; animation: eaPop .45s var(--ea-spring); }
+html.ea-motion .esc-cloze-mark.ko{ display:inline-block; animation: eaShake .4s ease; }
+
+/* Detective de errores */
+html.ea-motion .esc-spot-token.is-error{ animation: eaBump .55s var(--ea-spring), eaRing .9s ease-out; }
+html.ea-motion .esc-spot-solution.show{ transform-origin: top; animation: eaUnfold .5s var(--ea-spring); }
+
+/* Emparejar */
+html.ea-motion .esc-match-card.selected{ animation: eaPick .3s var(--ea-spring); }
+html.ea-motion .esc-match-card.locked{ animation: eaBump .55s var(--ea-spring), eaRing .9s ease-out; }
+html.ea-motion .esc-match-card.mismatch{ animation: eaShake .35s ease, eaRingErr .6s ease-out; }
+
+/* Clasificar */
+html.ea-motion .esc-sort-col, html.ea-motion #sorting-pool-wrap{ transition: transform .25s var(--ea-spring), box-shadow .25s ease; }
+html.ea-motion .esc-sort-col.drop-over, html.ea-motion #sorting-pool-wrap.drop-over{ transform: scale(1.015); box-shadow: 0 0 0 3px var(--ea-accent-soft); }
+html.ea-motion .esc-sort-chip[aria-pressed="true"]{ animation: eaWiggle .5s ease 2; }
+html.ea-motion .esc-sort-chip.ok{ animation: eaBump .5s var(--ea-spring) var(--ea-d,0ms), eaRing .8s ease-out var(--ea-d,0ms); }
+html.ea-motion .esc-sort-chip.err{ animation: eaShake .4s ease var(--ea-d,0ms); }
+
+/* Ordenar la frase */
+html.ea-motion .ea-slot-ok > *{ animation: eaHop .55s var(--ea-spring) both; animation-delay: calc(var(--k,0) * 70ms); }
+html.ea-motion .ea-slot-ok{ animation: eaRing .9s ease-out; }
+html.ea-motion .ea-slot-bad{ animation: eaShake .4s ease, eaRingErr .7s ease-out; }
+
+/* Sprint */
+html.ea-motion .ea-phrase-in{ animation: eaPhraseIn .38s var(--ea-spring); }
+@keyframes eaPhraseIn{from{opacity:0;transform:translateY(10px) scale(.97)}to{opacity:1;transform:none}}
+html.ea-motion .esc-sprint-fill.ea-urgent{ animation: eaUrgent .4s ease-in-out 8 alternate; }
+.ea-streak{ display:inline-flex; align-items:center; gap:6px; margin:0 0 12px; padding:4px 12px; border-radius:999px; font-family: var(--esc-mono, var(--f-data, monospace)); font-size:12.5px; font-weight:600; background: var(--ea-accent-soft); color: var(--ea-accent); }
+.ea-streak[hidden]{ display:none; }
+
+/* Simulación conversacional */
+html.ea-motion .esc-chat-line.ea-new{ animation: eaBubbleL .55s var(--ea-spring) both; animation-delay: calc(var(--k,0) * 140ms); }
+html.ea-motion .esc-chat-line.student.ea-new{ animation-name: eaBubbleR; }
+
+/* Autoevaluación */
+html.ea-motion .esc-check-item.checked .esc-check-box{ animation: eaPop .45s var(--ea-spring); }
+html.ea-motion .esc-save-flag.show, html.ea-motion .saved-flag.show{ animation: eaPop .4s var(--ea-spring); }
+
+/* ---------- Confeti (una sola ráfaga, breve) ---------- */
+.ea-confetti{ position:fixed; inset:0; pointer-events:none; z-index:9999; overflow:hidden; }
+.ea-confetti i{ position:absolute; width:8px; height:11px; border-radius:2px; will-change:transform,opacity; }
+
+@media print{
+  [data-ea]{ opacity:1 !important; transform:none !important; }
+  .ea-listen, .ea-replay, .ea-confetti, .ea-eq, .ea-streak{ display:none !important; }
+}
+</style>
+</head>
+<body data-accent="teja-clase17">
+
+<button class="i18n-toggle" id="i18n-toggle"><span class="dot"></span><span id="i18n-label">EN on</span></button>
+
+<header>
+  <div class="header-top">
+    <div>
+      <p class="eyebrow"><span class="dot"></span>Clase 17 · Última clase · Repaso y siguientes pasos</p>
+      <h1>Mira lo <em>lejos</em> que has llegado</h1>
+    </div>
+    <span class="level-badge">A1</span>
+  </div>
+  <p class="lede">Esta es la última clase del programa. Vamos a repasar todo lo que ya sabes hacer, comparar cómo sonabas en la clase 1 con cómo suenas ahora, y construir juntas un plan para que sigas practicando con la familia colombiana después de hoy.
+    <span class="en">This is the last class of the programme. We'll review everything you can now do, compare how you sounded in class 1 with how you sound now, and build a plan together so you keep practising with the Colombian family after today.</span>
+  </p>
+  <div class="meta-row">
+    <div>Fecha<strong>18 nov 2026</strong></div>
+    <div>Enfoque<strong>Repaso general</strong></div>
+    <div>Tema<strong>Progreso y plan futuro</strong></div>
+    <div>Clase<strong>17 / 17</strong></div>
+  </div>
+</header>
+
+<main>
+
+  <!-- 1. Frase destacada -->
+  <section class="block">
+    <div class="block-head"><span class="block-num">1</span><h2>Frase de hoy</h2><span class="time-tag">apertura</span></div>
+    <div class="phrase-card mesh-surface">
+      <span class="mesh-blob"></span>
+      <p class="phrase-eyebrow">Frase de hoy · Today's phrase</p>
+      <p class="phrase-main">"Antes no sabía ni presentarme, y ahora puedo contar toda mi historia."</p>
+      <p class="phrase-sub en">"Before I couldn't even introduce myself, and now I can tell my whole story." — that's the real distance you've travelled since class 1.</p>
+    </div>
+  </section>
+
+  <!-- 2. Repaso: los tiempos que ya dominas -->
+  <section class="block">
+    <div class="block-head"><span class="block-num">2</span><h2>Todo lo que ya sabes usar</h2><span class="time-tag">repaso general</span></div>
+    <div class="contrast-wrap">
+      <div class="contrast-col pret">
+        <h3>Presente y planes</h3>
+        <p class="en">Everyday life, routines, and what's coming next</p>
+        <ul>
+          <li><strong>trabajo, cuido, ayudo</strong> — present tense verbs</li>
+          <li><strong>estoy aprendiendo</strong> — present continuous</li>
+          <li><strong>voy a viajar</strong> — ir a + infinitive</li>
+          <li><strong>debería, podría</strong> — soft advice</li>
+        </ul>
+      </div>
+      <div class="contrast-col imp">
+        <h3>Pasado y matices</h3>
+        <p class="en">Telling stories and expressing opinions or feelings</p>
+        <ul>
+          <li><strong>llegué, conocí</strong> — pretérito (events)</li>
+          <li><strong>vivía, era</strong> — imperfecto (background)</li>
+          <li><strong>creo que, me parece</strong> — opinions</li>
+          <li><strong>más...que, tan...como</strong> — comparisons</li>
+        </ul>
+      </div>
+    </div>
+    <div class="note"><strong>La idea clave:</strong> hace 17 semanas no tenías ninguna de estas herramientas — hoy las tienes todas, aunque a veces necesites un segundo para elegir la correcta, y eso es completamente normal.
+      <span class="en">The key idea: 17 weeks ago you had none of these tools — today you have all of them, even if you sometimes need a second to pick the right one, and that's completely normal.</span>
+    </div>
+  </section>
+
+  <!-- 3. Vocabulario repaso por temas -->
+  <section class="block">
+    <div class="block-head"><span class="block-num">3</span><h2>Vocabulario por temas</h2><span class="time-tag">repaso</span></div>
+    <p class="intro-text">Un recordatorio rápido de las palabras que más has usado en cada bloque temático del curso.
+      <span class="en">A quick reminder of the words you've used most in each topic block of the course.</span>
+    </p>
+    <div class="connector-grid">
+      <div class="connector-chip">familia<span class="en">family</span></div>
+      <div class="connector-chip">rutina<span class="en">routine</span></div>
+      <div class="connector-chip">viajes<span class="en">travel</span></div>
+      <div class="connector-chip">emociones<span class="en">emotions</span></div>
+      <div class="connector-chip">opiniones<span class="en">opinions</span></div>
+      <div class="connector-chip">conectores<span class="en">connectors</span></div>
+    </div>
+  </section>
+
+  <!-- 4. Comparación: clase 1 vs. ahora -->
+  <section class="block reading-panel">
+    <div class="block-head"><span class="block-num">4</span><h2>Clase 1 vs. ahora</h2><span class="time-tag">comparación</span></div>
+    <p class="intro-text">Antes de grabarte hoy, mira este contraste entre lo que sabías decir en la clase 1 y lo que puedes decir ahora. Está marcado: <span class="tag-pret">verde = lo nuevo que dominas</span>, <span class="tag-imp">subrayado = lo que ya sabías entonces</span>.
+      <span class="en">Before recording yourself today, look at this contrast between what you could say in class 1 and what you can say now. Marked: green = the new things you now master, underlined = what you already knew back then.</span>
+    </p>
+    <div class="reading-text">
+      <p><strong>Clase 1:</strong> <span class="tag-imp">Hola, me llamo</span> Elise. <span class="tag-imp">Soy de</span> Inglaterra. <span class="tag-imp">Vivo en</span> el internado.</p>
+      <p class="en">Class 1: Hi, my name is Elise. I'm from England. I live at the boarding school.</p>
+      <p><strong>Ahora:</strong> <span class="tag-imp">Me llamo</span> Elise y <span class="tag-imp">soy de</span> Inglaterra, pero <span class="tag-pret">llevo un tiempo</span> aprendiendo español porque mi novio <span class="tag-pret">es</span> colombiano.</p>
+      <p class="en">Now: My name is Elise and I'm from England, but I've been learning Spanish for a while because my boyfriend is Colombian.</p>
+      <p><span class="tag-pret">El año pasado fui</span> a Colombia por primera vez y <span class="tag-pret">conocí</span> a toda su familia — <span class="tag-imp">estaba</span> muy nerviosa, pero al final <span class="tag-pret">me sentí</span> parte de la familia.</p>
+      <p class="en">Last year I went to Colombia for the first time and met his whole family — I was very nervous, but in the end I felt part of the family.</p>
+      <p><span class="tag-pret">Creo que</span> lo más difícil <span class="tag-pret">es</span> el acento tan rápido, pero cuando no entiendo algo, ahora <span class="tag-pret">puedo pedir</span> que repitan más despacio, <span class="tag-pret">o sea</span> que ya no me quedo callada.</p>
+      <p class="en">I think the hardest thing is the fast accent, but when I don't understand something, now I can ask them to repeat more slowly, so I no longer stay silent.</p>
+    </div>
+    <div class="legend">
+      <span><span class="sw pret"></span>lo nuevo — de las clases 2 a 16</span>
+      <span><span class="sw imp"></span>lo básico — ya lo sabías en la clase 1</span>
+    </div>
+  </section>
+
+  <!-- 5. Rellenar huecos: repaso general de todo el curso -->
+  <section class="block">
+    <div class="block-head"><span class="block-num">5</span><h2>Repaso final</h2><span class="time-tag">ejercicio</span></div>
+    <div class="panel">
+      <p class="intro-text">Completa este texto de repaso eligiendo la forma correcta en cada hueco — mezcla varios de los temas que hemos visto.
+        <span class="en">Complete this review text by choosing the correct form in each gap — it mixes several topics we've covered.</span>
+      </p>
+      <div class="fill-block" id="fill-block"></div>
+      <div class="check-bar">
+        <button class="btn-primary" id="check-fill-btn">Comprobar</button>
+        <span id="fill-score"></span>
+        <button class="btn-ghost" id="reset-fill-btn">Reiniciar</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. Ordenar la frase -->
+  <section class="block">
+    <div class="block-head"><span class="block-num">6</span><h2>Ordena la frase</h2><span class="time-tag">secuencia</span></div>
+    <p class="intro-text">Pulsa las palabras en el orden correcto — un último repaso mezclando estructuras de todo el curso.
+      <span class="en">Click the words in the right order — one last review mixing structures from the whole course.</span>
+    </p>
+    <div id="order-list"></div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">7</span><h2>¿Pretérito, imperfecto o futuro?</h2><span class="time-tag">tiempos</span></div>
+    <div class="panel">
+      <p class="intro-text">Elige la forma correcta para cada frase.<span class="en">Choose the correct form for each sentence.</span></p>
+      <div id="q7"></div>
+      <div class="check-bar"><span class="q-score" id="q7-score"></span><button class="btn-ghost" data-reset="q7">Reiniciar</button></div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">8</span><h2>¿Cómo lo dices?</h2><span class="time-tag">funciones</span></div>
+    <div class="panel">
+      <p class="intro-text">Elige la frase que mejor expresa cada idea.<span class="en">Choose the sentence that best expresses each idea.</span></p>
+      <div id="q8"></div>
+      <div class="check-bar"><span class="q-score" id="q8-score"></span><button class="btn-ghost" data-reset="q8">Reiniciar</button></div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">9</span><h2>¿De qué tema es?</h2><span class="time-tag">vocabulario</span></div>
+    <div class="panel">
+      <p class="intro-text">Clasifica cada palabra en su tema del curso.<span class="en">Sort each word into its course topic.</span></p>
+      <div id="q9"></div>
+      <div class="check-bar"><span class="q-score" id="q9-score"></span><button class="btn-ghost" data-reset="q9">Reiniciar</button></div>
+    </div>
+  </section>
+
+  <!-- 10. Grabación y plan de práctica continua -->
+  <section class="block roleplay-panel">
+    <div class="block-head"><span class="block-num">10</span><h2>Tu grabación y tu plan</h2><span class="time-tag">cierre del curso</span></div>
+    <div class="scene-setup">
+      <span class="scene-icon">🎙️</span>
+      <div class="scene-text">
+        <strong>Este es el momento de celebrar tu progreso.</strong> Vamos a grabarte hablando 1-2 minutos sobre ti misma y tu relación con la familia colombiana, y a compararlo con cómo sonabas en la grabación de la clase 1.
+        <span class="en">This is the moment to celebrate your progress. We'll record you talking for 1-2 minutes about yourself and your relationship with the Colombian family, and compare it with how you sounded in the class 1 recording.</span>
+      </div>
+    </div>
+    <div class="desc-card">
+      <p class="desc-title">Construyamos tu plan de práctica</p>
+      <p class="desc-brief">Después de la grabación, vamos a decidir juntas cómo sigues practicando el español con la familia después de esta clase.</p>
+      <p class="desc-brief en">After the recording, we'll decide together how you'll keep practising Spanish with the family after this class.</p>
+      <ol class="desc-prompts">
+        <li>¿Qué tema te sigue costando más — el pasado, las opiniones, o entender el acento rápido?
+          <div class="en">Which topic still feels hardest — the past tenses, giving opinions, or understanding the fast accent?</div>
+        </li>
+        <li>¿Con qué frecuencia hablas español con la familia ahora, fuera de las clases?
+          <div class="en">How often do you speak Spanish with the family now, outside of classes?</div>
+        </li>
+        <li>¿Qué te gustaría seguir practicando por tu cuenta — series, podcasts, o conversación con ellos?
+          <div class="en">What would you like to keep practising on your own — shows, podcasts, or conversation with them?</div>
+        </li>
+        <li>¿Cuál es tu próxima meta real con el español — la próxima visita, una llamada, algo más?
+          <div class="en">What's your next real goal with Spanish — the next visit, a phone call, something else?</div>
+        </li>
+      </ol>
+      <textarea placeholder="Anota aquí tus respuestas mientras hablamos, para construir tu plan personalizado... / Note down your answers here as we talk, to build your personalised plan..."></textarea>
+    </div>
+    <div class="roleplay-tip"><strong>Consejo:</strong> el aprendizaje de un idioma no termina con la última clase — solo cambia de forma. Lo importante es que sigas usándolo con gente real.
+      <span class="en">Tip: learning a language doesn't end with the last class — it just changes shape. What matters is that you keep using it with real people.</span>
+    </div>
+  </section>
+
+  <!-- 8. Tarea final -->
+  <section class="block task-panel">
+    <div class="block-head"><span class="block-num">11</span><h2>Tarea final</h2><span class="time-tag">para siempre</span></div>
+    <p class="intro-text">Escribe un párrafo corto (en español) sobre lo que has aprendido en este curso y en qué te gustaría enfocarte a continuación.
+      <span class="en">Write a short paragraph (in Spanish) about what you've learned in this course and what you'd like to focus on next.</span>
+    </p>
+    <textarea class="final-task" placeholder="He aprendido... Todavía quiero mejorar... Mi próxima meta es..."></textarea>
+    <div class="task-footer">
+      <span class="task-count">0 palabras escritas</span>
+      <div style="display:flex; gap:10px; align-items:center;">
+        <span class="saved-flag" id="task-saved">Guardado ✓</span>
+        <button class="btn-secondary" id="save-task-btn">Guardar</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <span>Clase 17 de 17 · Última clase — Repaso y siguientes pasos · Elise · A1</span>
+  <span>ESCOLAR · acento teja</span>
+</footer>
+
+<script>
+/* ---------- ES/EN TOGGLE ---------- */
+const i18nBtn = document.getElementById('i18n-toggle');
+const i18nLabel = document.getElementById('i18n-label');
+i18nBtn.addEventListener('click', ()=>{
+  document.body.classList.toggle('i18n-hidden');
+  const hidden = document.body.classList.contains('i18n-hidden');
+  i18nBtn.classList.toggle('off', hidden);
+  i18nLabel.textContent = hidden ? 'EN off' : 'EN on';
+});
+
+/* ---------- RELLENAR HUECOS: repaso general mezclando el curso ---------- */
+const FILL_STORY = [
+  {before:'El año pasado ', word:'fui', options:['fui','iba'], correct:'fui', after:' a Colombia por primera vez.'},
+  {before:'Cuando llegué, ', word:'estaba', options:['estaba','estuve'], correct:'estaba', after:' muy nerviosa.'},
+  {before:'', word:'Creo que', options:['Creo que','Voy a'], correct:'Creo que', after:' lo más difícil es el acento tan rápido.'},
+  {before:'La vida en Colombia es ', word:'más tranquila que', options:['más tranquila que','tan tranquila'], correct:'más tranquila que', after:' en el Reino Unido.'},
+  {before:'', word:'Deberías', options:['Deberías','Debía'], correct:'Deberías', after:' practicar un poco cada semana, aunque sea poco.'},
+  {before:'Ahora, cuando no entiendo algo, ', word:'puedo pedir', options:['puedo pedir','pedía'], correct:'puedo pedir', after:' que repitan más despacio.'},
+  {before:'Estoy aprendiendo español ', word:'porque', options:['porque','pero'], correct:'porque', after:' mi novio es colombiano.'},
+  {before:'Ayer ', word:'hablé', options:['hablé','hablaba'], correct:'hablé', after:' con la familia de mi novio por videollamada.'},
+  {before:'Cuando era niña, ', word:'me gustaba', options:['me gustaba','me gustó'], correct:'me gustaba', after:' jugar en el jardín.'},
+  {before:'', word:'Me parece que', options:['Me parece que','Más que'], correct:'Me parece que', after:' el sancocho está muy rico.'},
+  {before:'Mañana ', word:'voy a', options:['voy a','fui a'], correct:'voy a', after:' llamar a la familia de mi novio.'},
+  {before:'Ahora ', word:'estoy practicando', options:['estoy practicando','practiqué'], correct:'estoy practicando', after:' con vídeos y con mi novio.'},
+];
+function buildFillBlock(){
+  const wrap = document.getElementById('fill-block');
+  wrap.innerHTML = '<p class="en">Choose the correct verb form for each gap.</p>';
+  FILL_STORY.forEach((g,i)=>{
+    const p = document.createElement('p');
+    p.style.margin = '0 0 4px';
+    p.appendChild(document.createTextNode(g.before));
+    const sel = document.createElement('select');
+    sel.className = 'gap-select';
+    sel.dataset.idx = i;
+    const opts = [...g.options].sort(()=>Math.random()-0.5);
+    const blank = document.createElement('option');
+    blank.textContent = '—'; blank.value = ''; sel.appendChild(blank);
+    opts.forEach(o=>{
+      const opt = document.createElement('option');
+      opt.value = o; opt.textContent = o;
+      sel.appendChild(opt);
+    });
+    p.appendChild(sel);
+    p.appendChild(document.createTextNode(g.after));
+    wrap.appendChild(p);
+  });
+}
+buildFillBlock();
+document.getElementById('check-fill-btn').addEventListener('click', ()=>{
+  let correct = 0;
+  document.querySelectorAll('.gap-select').forEach(sel=>{
+    const idx = Number(sel.dataset.idx);
+    sel.classList.remove('correct','wrong');
+    if(sel.value === FILL_STORY[idx].correct){
+      sel.classList.add('correct'); correct++;
+    } else if(sel.value){
+      sel.classList.add('wrong');
+    }
+  });
+  document.getElementById('fill-score').textContent = `${correct} / ${FILL_STORY.length} correctas`;
+});
+document.getElementById('reset-fill-btn').addEventListener('click', ()=>{
+  buildFillBlock();
+  document.getElementById('fill-score').textContent = '';
+});
+
+/* ---------- ORDENAR LA HISTORIA ---------- */
+const ORDER_EXERCISES = [
+  {words:["He","aprendido","mucho","este","año","."], answer:["He","aprendido","mucho","este","año","."]},
+  {words:["Voy","a","seguir","practicando","cada","semana","."], answer:["Voy","a","seguir","practicando","cada","semana","."]},
+  {words:["Me","siento","muy","orgullosa","de","mí","misma","."], answer:["Me","siento","muy","orgullosa","de","mí","misma","."]},
+  {words:["Creo","que","mi","español","es","mejor","."], answer:["Creo","que","mi","español","es","mejor","."]},
+  {words:["Cuando","era","niña",",","vivía","en","Inglaterra","."], answer:["Cuando","era","niña",",","vivía","en","Inglaterra","."]},
+  {words:["Deberías","practicar","un","poco","cada","día","."], answer:["Deberías","practicar","un","poco","cada","día","."]},
+];
+const orderList = document.getElementById('order-list');
+function buildOrderList(){
+  orderList.innerHTML = '';
+  ORDER_EXERCISES.forEach(ex=>{
+    const el = document.createElement('div');
+    el.className = 'order-item';
+    const shuffled = [...ex.words].sort(()=>Math.random()-0.5);
+    el.innerHTML = `
+      <div class="order-bank">${shuffled.map((w,idx)=>`<span class="order-chip" data-word="${w}" data-idx="${idx}">${w}</span>`).join('')}</div>
+      <div class="order-slot"></div>
+      <div class="order-feedback"></div>`;
+    const slot = el.querySelector('.order-slot');
+    const feedback = el.querySelector('.order-feedback');
+    el.querySelectorAll('.order-chip').forEach(chip=>{
+      chip.addEventListener('click', ()=>{
+        if(chip.classList.contains('used')) return;
+        chip.classList.add('used');
+        const placed = document.createElement('span');
+        placed.className = 'order-chip used';
+        placed.textContent = chip.dataset.word;
+        placed.addEventListener('click', ()=>{
+          placed.remove();
+          chip.classList.remove('used');
+          el.classList.remove('correct','wrong');
+          feedback.textContent = '';
+        });
+        slot.appendChild(placed);
+        const current = [...slot.children].map(c=>c.textContent);
+        if(current.length === ex.answer.length){
+          const ok = current.every((w,idx)=>w===ex.answer[idx]);
+          el.classList.toggle('correct', ok);
+          el.classList.toggle('wrong', !ok);
+          feedback.textContent = ok ? 'Correcto.' : `Prueba otra vez — respuesta: ${ex.answer.join(' ')}`;
+        }
+      });
+    });
+    orderList.appendChild(el);
+  });
+}
+buildOrderList();
+
+/* ---------- CONTADOR DE PALABRAS + GUARDAR TAREA ---------- */
+const ta = document.querySelector('.final-task');
+const tc = document.querySelector('.task-count');
+ta.addEventListener('input', ()=>{
+  const words = ta.value.trim().split(/\s+/).filter(Boolean).length;
+  tc.textContent = `${words} palabra${words===1?'':'s'} escrita${words===1?'':'s'}`;
+});
+
+const STORAGE_KEY = 'elise-clase17-tarea';
+async function loadTask(){
+  if(!window.storage) return;
+  try{
+    const res = await window.storage.get(STORAGE_KEY);
+    if(res && typeof res.value === 'string'){
+      ta.value = res.value;
+      ta.dispatchEvent(new Event('input'));
+    }
+  }catch(e){ /* no saved task yet */ }
+}
+document.getElementById('save-task-btn').addEventListener('click', async ()=>{
+  if(window.storage){
+    try{ await window.storage.set(STORAGE_KEY, ta.value); }catch(e){ /* silent */ }
+  }
+  const flag = document.getElementById('task-saved');
+  flag.classList.add('show');
+  setTimeout(()=>flag.classList.remove('show'), 2000);
+});
+loadTask();
+/* ---------- PERSISTENCIA + PREFERENCIA EN ---------- */
+const store={async get(k){try{if(window.storage){const r=await window.storage.get(k);return r&&r.value}}catch(e){}return null},
+  async set(k,v){try{window.storage&&await window.storage.set(k,v)}catch(e){}}};
+i18nBtn.addEventListener('click',()=>store.set('elise17-en',document.body.classList.contains('i18n-hidden')?'off':'on'));
+store.get('elise17-en').then(v=>{ if(v==='off'&&!document.body.classList.contains('i18n-hidden')) i18nBtn.click(); });
+
+/* ---------- MOTOR DE OPCIONES (ejercicios 7-9) ---------- */
+function makeChoice(id,items){
+  const root=document.getElementById(id),sc=document.getElementById(id+'-score');
+  const n=items.length; let first=0,done=0; root.innerHTML='';
+  items.forEach(it=>{
+    const card=document.createElement('div'); card.className='q-card';
+    card.innerHTML=`<p class="q-prompt">${it.p}<span class="en">${it.e}</span></p><div class="q-opts"></div><div class="q-fb"></div>`;
+    const box=card.querySelector('.q-opts'),fb=card.querySelector('.q-fb');
+    it.o.map((o,i)=>({o,i})).sort(()=>Math.random()-.5).forEach(({o,i})=>{
+      const b=document.createElement('button'); b.className='q-opt'; b.innerHTML=`${o[0]}<span class="en">${o[1]}</span>`;
+      b.onclick=()=>{
+        if(card.dataset.done) return;
+        if(i===it.c){ b.classList.add('ok'); card.dataset.done=1; done++; if(!card.dataset.miss) first++;
+          fb.innerHTML=`${it.w[0]}<span class="en">${it.w[1]}</span>`; }
+        else{ b.classList.add('bad'); b.disabled=true; card.dataset.miss=1;
+          fb.innerHTML='Casi — prueba otra vez.<span class="en">Almost — try again.</span>'; }
+        sc.textContent=`${first} / ${n} a la primera`;
+        if(done===n) store.get('elise17-'+id).then(v=>{ if(v===null||first>+v) store.set('elise17-'+id,String(first)); });
+      };
+      box.appendChild(b);
+    });
+    root.appendChild(card);
+  });
+  sc.textContent='';
+  store.get('elise17-'+id).then(v=>{ if(v!==null&&!first) sc.textContent=`Mejor resultado: ${v} / ${n}`; });
+}
+const QZ={
+  q7:[{p:'Cuando era niña, ___ en Inglaterra.',e:'When I was a girl, I ___ in England.',c:0,o:[['vivía', 'I used to live'], ['viví', 'I lived (once)'], ['voy a vivir', "I'm going to live"]],w:['Descripción del pasado: imperfecto.', 'Background in the past: imperfect.']},
+    {p:'El año pasado ___ a Colombia por primera vez.',e:'Last year I ___ to Colombia for the first time.',c:0,o:[['fui', 'I went'], ['iba', 'I used to go'], ['voy', 'I go']],w:['Un evento concreto: pretérito.', 'A specific event: preterite.']},
+    {p:'Mañana ___ a llamar a la familia.',e:'Tomorrow I ___ call the family.',c:0,o:[['voy', "I'm going to"], ['fui', 'I went'], ['iba', 'I used to go']],w:['Plan futuro: ir a + infinitivo.', 'Future plan: ir a + infinitive.']},
+    {p:'Ahora ___ aprendiendo español con mi novio.',e:'Now I ___ learning Spanish with my boyfriend.',c:0,o:[['estoy', 'I am'], ['estuve', 'I was (once)'], ['estaba', 'I was (background)']],w:['Acción en curso: estar + gerundio.', 'Ongoing action: estar + gerund.']},
+    {p:'Ayer ___ con mi novio por teléfono.',e:'Yesterday I ___ with my boyfriend on the phone.',c:0,o:[['hablé', 'I spoke'], ['hablaba', 'I used to speak'], ['voy a hablar', "I'm going to speak"]],w:['Un evento concreto y terminado: pretérito.', 'A specific, finished event: preterite.']},
+    {p:'Cuando llegué a la casa, la familia ___ en la cocina.',e:'When I arrived at the house, the family ___ in the kitchen.',c:0,o:[['estaba', 'was (background)'], ['estuvo', 'was (once, finished)'], ['va a estar', 'is going to be']],w:['Escena de fondo: imperfecto.', 'Background scene: imperfect.']},
+    {p:'El próximo año ___ a visitar a la familia otra vez.',e:'Next year I ___ visit the family again.',c:0,o:[['voy', "I'm going to"], ['fui', 'I went'], ['iba', 'I used to go']],w:['Plan futuro: ir a + infinitivo.', 'Future plan: ir a + infinitive.']},
+    {p:'De niña, ___ con mis amigos todos los días.',e:'As a girl, I ___ with my friends every day.',c:0,o:[['jugaba', 'I used to play'], ['jugué', 'I played (once)'], ['voy a jugar', "I'm going to play"]],w:['Costumbre en el pasado: imperfecto.', 'Habit in the past: imperfect.']}],
+  q8:[{p:'Quieres dar tu opinión sobre el acento.',e:'You want to give your opinion on the accent.',c:0,o:[['Creo que el acento es muy rápido.', 'I think the accent is very fast.'], ['Debería el acento rápido.', 'I should the fast accent.'], ['Vivía el acento rápido.', 'I lived the fast accent.']],w:['"Creo que..." introduce una opinión.', '"Creo que..." introduces an opinion.']},
+    {p:'Quieres decir que tu español mejoró desde la clase 1.',e:'You want to say your Spanish improved since class 1.',c:0,o:[['Mi español es mejor que en la clase 1.', 'My Spanish is better than in class 1.'], ['Mi español es más bueno que en la clase 1.', '(incorrect comparative)'], ['Mi español es tan mejor que la clase 1.', '(incorrect structure)']],w:['"Mejor que" es el comparativo de "bueno".', '"Mejor que" is the comparative of "bueno".']},
+    {p:'Quieres dar un consejo suave a una amiga.',e:'You want to give a friend gentle advice.',c:0,o:[['Deberías practicar cada día.', 'You should practise every day.'], ['Practicaste cada día ayer.', 'You practised every day yesterday.'], ['Estabas practicar cada día.', '(incorrect)']],w:['"Deberías" suaviza el consejo.', '"Deberías" softens the advice.']},
+    {p:'Quieres hablar de tu plan para el verano.',e:'You want to talk about your summer plan.',c:0,o:[['Voy a viajar a Colombia.', "I'm going to travel to Colombia."], ['Viajaba a Colombia mañana.', '(wrong tense)'], ['Viajé a Colombia mañana.', '(wrong tense)']],w:['"Voy a + infinitivo" expresa planes.', '"Voy a + infinitive" expresses plans.']},
+    {p:'Quieres decir que hoy te sientes contenta.',e:'You want to say you feel happy today.',c:0,o:[['Estoy muy contenta hoy.', "I'm very happy today."], ['Soy contenta hoy.', '(ser/estar mix-up)'], ['Estar contenta muy hoy.', '(incorrect)']],w:['Las emociones van con "estar".', 'Emotions go with "estar".']},
+    {p:'Quieres pedir que hablen más despacio.',e:'You want to ask them to speak more slowly.',c:0,o:[['Perdona, ¿puedes repetir más despacio?', 'Sorry, can you repeat more slowly?'], ['Perdona, ¿puedo repetir más despacio?', '(wrong person)'], ['Perdona, repetí más despacio.', '(wrong meaning)']],w:['Pides que ELLOS repitan: "¿puedes repetir?".', 'You ask THEM to repeat: "¿puedes repetir?".']},
+    {p:'Quieres dar tu opinión sobre la comida colombiana.',e:'You want to give your opinion on Colombian food.',c:0,o:[['Me parece que la comida es muy rica.', 'I think the food is very tasty.'], ['Me parezco que la comida es muy rica.', '(incorrect verb)'], ['Parece me la comida muy rica.', '(incorrect order)']],w:['"Me parece que..." introduce una opinión.', '"Me parece que..." introduces an opinion.']},
+    {p:'Quieres decir que tu casa y la de tu novio son igual de grandes.',e:'You want to say your house and your boyfriend\'s are equally big.',c:0,o:[['Mi casa es tan grande como la de mi novio.', 'My house is as big as my boyfriend\'s.'], ['Mi casa es tan más grande que la de mi novio.', '(incorrect structure)'], ['Mi casa es tan grande que la de mi novio.', '(incorrect structure)']],w:['"Tan... como" compara cosas iguales.', '"Tan... como" compares equal things.']}],
+  q9:[{p:'el abuelo',e:'the grandfather',c:0,o:[['familia', 'family'], ['viajes', 'travel'], ['emociones', 'emotions']],w:['Es de la familia.', "It's a family word."]},
+    {p:'el aeropuerto',e:'the airport',c:1,o:[['familia', 'family'], ['viajes', 'travel'], ['emociones', 'emotions']],w:['Es de viajes.', "It's a travel word."]},
+    {p:'nerviosa',e:'nervous',c:2,o:[['familia', 'family'], ['viajes', 'travel'], ['emociones', 'emotions']],w:['Es una emoción.', "It's an emotion."]},
+    {p:'la maleta',e:'the suitcase',c:1,o:[['familia', 'family'], ['viajes', 'travel'], ['emociones', 'emotions']],w:['Es de viajes.', "It's a travel word."]},
+    {p:'la prima',e:'the cousin (f.)',c:0,o:[['familia', 'family'], ['viajes', 'travel'], ['emociones', 'emotions']],w:['Es de la familia.', "It's a family word."]},
+    {p:'orgullosa',e:'proud',c:2,o:[['familia', 'family'], ['viajes', 'travel'], ['emociones', 'emotions']],w:['Es una emoción.', "It's an emotion."]},
+    {p:'la abuela',e:'the grandmother',c:0,o:[['familia', 'family'], ['viajes', 'travel'], ['emociones', 'emotions']],w:['Es de la familia.', "It's a family word."]},
+    {p:'el pasaporte',e:'the passport',c:1,o:[['familia', 'family'], ['viajes', 'travel'], ['emociones', 'emotions']],w:['Es de viajes.', "It's a travel word."]},
+    {p:'contenta',e:'happy',c:2,o:[['familia', 'family'], ['viajes', 'travel'], ['emociones', 'emotions']],w:['Es una emoción.', "It's an emotion."]},
+    {p:'el tío',e:'the uncle',c:0,o:[['familia', 'family'], ['viajes', 'travel'], ['emociones', 'emotions']],w:['Es de la familia.', "It's a family word."]},
+    {p:'el hotel',e:'the hotel',c:1,o:[['familia', 'family'], ['viajes', 'travel'], ['emociones', 'emotions']],w:['Es de viajes.', "It's a travel word."]},
+    {p:'triste',e:'sad',c:2,o:[['familia', 'family'], ['viajes', 'travel'], ['emociones', 'emotions']],w:['Es una emoción.', "It's an emotion."]}]
+};
+Object.keys(QZ).forEach(id=>makeChoice(id,QZ[id]));
+document.querySelectorAll('[data-reset]').forEach(b=>b.addEventListener('click',()=>makeChoice(b.dataset.reset,QZ[b.dataset.reset])));
+</script>
+
+<script id="elise-anim-js">
+/* Elise · capa de animación v1 — complementa el script de cada clase; no lo sustituye. */
+(function () {
+  'use strict';
+  if (window.__eaLoaded) return;
+  window.__eaLoaded = true;
+
+  var doc = document, root = doc.documentElement;
+  var mq = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : { matches: false };
+  var RM = function () { return !!mq.matches; };
+  if (!RM()) root.classList.add('ea-motion');
+  if (mq.addEventListener) mq.addEventListener('change', function () { root.classList.toggle('ea-motion', !RM()); });
+
+  var $ = function (s, r) { return (r || doc).querySelector(s); };
+  var $$ = function (s, r) { return Array.prototype.slice.call((r || doc).querySelectorAll(s)); };
+
+  /* ---------- utilidades ---------- */
+  function retrig(el, cls, ms) {
+    if (!el || RM()) return;
+    el.classList.remove(cls); void el.offsetWidth; el.classList.add(cls);
+    setTimeout(function () { el.classList.remove(cls); }, ms || 600);
+  }
+
+  var io = 'IntersectionObserver' in window ? new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (!e.isIntersecting) return;
+      if (e.intersectionRatio < 0.2 && e.intersectionRect.height < window.innerHeight * 0.25) return;
+      io.unobserve(e.target);
+      e.target.classList.add('ea-in');
+      if (e.target.hasAttribute('data-ea')) settle(e.target);
+    });
+  }, { threshold: [0, 0.05, 0.2, 0.4], rootMargin: '0px 0px -5% 0px' }) : null;
+
+  function settle(el) {
+    var done = false;
+    var clear = function () { if (done) return; done = true; el.removeAttribute('data-ea'); el.style.removeProperty('--i'); el.style.removeProperty('--ea-from'); };
+    el.addEventListener('transitionend', function (ev) { if (ev.target === el && ev.propertyName === 'transform') clear(); });
+    setTimeout(clear, 1800);
+  }
+
+  /* Elemento que entra con movimiento (se oculta solo si hay JS + movimiento) */
+  function tag(el, i, from) {
+    if (!el || el.__eaTag || RM() || !io) return;
+    el.__eaTag = 1;
+    el.setAttribute('data-ea', '');
+    el.style.setProperty('--i', Math.min(i || 0, 8));
+    if (from) el.style.setProperty('--ea-from', from);
+    io.observe(el);
+  }
+  /* Grupo cuya animación depende de .ea-in en el contenedor */
+  function group(el) {
+    if (!el || el.__eaGrp) return;
+    el.__eaGrp = 1;
+    if (RM() || !io) { el.classList.add('ea-in'); return; }
+    io.observe(el);
+  }
+  function replay(el) {
+    if (RM()) return;
+    el.classList.add('ea-reset'); el.classList.remove('ea-in'); void el.offsetWidth;
+    el.classList.remove('ea-reset');
+    requestAnimationFrame(function () { requestAnimationFrame(function () { el.classList.add('ea-in'); }); });
+  }
+  function addReplay(host, target) {
+    if (RM() || host.querySelector(':scope > .ea-replay')) return;
+    var b = doc.createElement('button');
+    b.type = 'button'; b.className = 'ea-replay'; b.textContent = '↺';
+    b.setAttribute('aria-label', 'Ver la animación otra vez'); b.title = 'Repetir';
+    b.addEventListener('click', function () { replay(target || host); });
+    host.appendChild(b);
+  }
+
+  /* ---------- voz ---------- */
+  var voices = [];
+  function loadVoices() { try { voices = window.speechSynthesis.getVoices(); } catch (e) {} }
+  if ('speechSynthesis' in window) { loadVoices(); window.speechSynthesis.onvoiceschanged = loadVoices; }
+  function watchSpeaking(el) {
+    if (RM()) return;
+    el.classList.add('ea-speaking');
+    var t0 = Date.now(), had = false;
+    var iv = setInterval(function () {
+      var sp = 'speechSynthesis' in window && window.speechSynthesis.speaking;
+      if (sp) had = true;
+      var over = Date.now() - t0;
+      if ((!sp && (had || over > 700)) || over > 8000) { clearInterval(iv); el.classList.remove('ea-speaking'); }
+    }, 120);
+  }
+  function speak(text, el) {
+    if (!text) return;
+    if (!('speechSynthesis' in window)) { retrig(el, 'ea-speaking', 1200); return; }
+    try {
+      window.speechSynthesis.cancel();
+      var u = new SpeechSynthesisUtterance(text);
+      u.lang = 'es-ES'; u.rate = 0.9;
+      var v = voices.filter(function (x) { return /^es[-_]ES/i.test(x.lang); })[0] || voices.filter(function (x) { return /^es/i.test(x.lang); })[0];
+      if (v) u.voice = v;
+      window.speechSynthesis.speak(u);
+      watchSpeaking(el);
+    } catch (e) {}
+  }
+  function press(el, fn) {
+    el.addEventListener('click', fn);
+    el.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); fn(); } });
+  }
+
+  /* ---------- confeti ---------- */
+  var bursting = false;
+  function burst(el, n) {
+    if (RM() || bursting || !el || !el.animate) return;
+    bursting = true;
+    var r = el.getBoundingClientRect();
+    var ox = r.left + r.width / 2, oy = Math.min(Math.max(r.top + r.height / 2, 40), window.innerHeight - 40);
+    var layer = doc.createElement('div'); layer.className = 'ea-confetti'; layer.setAttribute('aria-hidden', 'true');
+    var cols = ['var(--ea-accent)', 'var(--ea-ok)', '#C1892F', 'var(--ea-err)', 'var(--ea-accent-soft)'];
+    for (var i = 0; i < (n || 26); i++) {
+      var p = doc.createElement('i');
+      p.style.left = ox + 'px'; p.style.top = oy + 'px'; p.style.background = cols[i % cols.length];
+      layer.appendChild(p);
+      var ang = (-90 + (Math.random() - 0.5) * 150) * Math.PI / 180, dist = 90 + Math.random() * 150;
+      p.animate([
+        { transform: 'translate(0,0) rotate(0deg)', opacity: 1 },
+        { transform: 'translate(' + Math.cos(ang) * dist + 'px,' + (Math.sin(ang) * dist + 110) + 'px) rotate(' + (Math.random() * 540 - 270) + 'deg)', opacity: 0 }
+      ], { duration: 900 + Math.random() * 500, easing: 'cubic-bezier(.2,.7,.3,1)', fill: 'forwards' });
+    }
+    doc.body.appendChild(layer);
+    setTimeout(function () { layer.remove(); bursting = false; }, 1500);
+  }
+
+  /* ==========================================================
+     EXPLICACIONES
+     ========================================================== */
+  function initExplanations() {
+    /* Avisos «A tener en cuenta»: entran uno tras otro */
+    $$('.m-notas').forEach(function (n) {
+      $$(':scope > .m-aviso', n).forEach(function (a, i) { tag(a, i); });
+    });
+
+    /* Fórmula que se ensambla */
+    $$('.m-formula').forEach(function (f) {
+      Array.prototype.forEach.call(f.children, function (c, k) { c.style.setProperty('--k', k); });
+      group(f);
+      addReplay(f, f);
+    });
+
+    /* ✗ → ✓ */
+    $$('.m-par').forEach(function (p) { group(p); addReplay(p, p); });
+    $$('.m-contraste').forEach(function (c) { group(c); addReplay(c, c); });
+
+    /* Subrayado marcador en lo importante */
+    $$('.m-nota-texto, .esc-contrast-col li, .esc-ejemplo').forEach(function (e) { e.classList.add('ea-hl'); group(e); });
+
+    /* Marcadores: fichas que se oyen */
+    $$('.m-marcas').forEach(function (m) {
+      $$('span', m).forEach(function (s, i) {
+        tag(s, i, 'scale(.6)');
+        s.classList.add('ea-tap'); s.setAttribute('role', 'button'); s.tabIndex = 0;
+        s.setAttribute('aria-label', 'Escuchar «' + s.textContent + '»');
+        press(s, function () { speak(s.textContent.replace(/\s+de$/, ' de'), s); });
+      });
+    });
+
+    /* Cita modelo con voz */
+    $$('.m-cita').forEach(function (c) {
+      group(c);
+      var txt = c.textContent.replace(/[«»"]/g, '').trim();
+      var b = doc.createElement('button');
+      b.type = 'button'; b.className = 'ea-listen'; b.textContent = '🔊';
+      b.setAttribute('aria-label', 'Escuchar la frase completa');
+      var eq = mkEq(); b.appendChild(eq);
+      b.addEventListener('click', function () { speak(txt, b); });
+      c.appendChild(b);
+    });
+
+    /* Tablas: filas en cascada + foco de lectura */
+    $$('.esc-table').forEach(function (t) {
+      group(t);
+      $$('tbody tr', t).forEach(function (tr, i) {
+        tag(tr, i, 'translateY(8px)');
+        tr.addEventListener('click', function (e) {
+          if (e.target.closest('button, a')) return;
+          var on = tr.classList.contains('ea-focus');
+          $$('tbody tr', t).forEach(function (x) { x.classList.remove('ea-focus'); });
+          if (!on) tr.classList.add('ea-focus');
+          t.classList.toggle('ea-has-focus', !on);
+        });
+      });
+    });
+    $$('.esc-contrast-col').forEach(function (c, i) { tag(c, i % 2, 'translateY(14px)'); });
+
+    /* Pronunciación: ecualizador mientras suena */
+    $$('.esc-pron-card').forEach(function (card, i) {
+      tag(card, i, 'translateY(12px)');
+      var btn = $('.btn-speak', card);
+      if (!btn) return;
+      btn.appendChild(mkEq());
+      btn.addEventListener('click', function () {
+        if (RM()) return;
+        $$('.esc-pron-card.ea-speaking').forEach(function (x) { x.classList.remove('ea-speaking'); });
+        var eqs = $$('.btn-speak.ea-speaking'); eqs.forEach(function (x) { x.classList.remove('ea-speaking'); });
+        card.classList.add('ea-speaking'); btn.classList.add('ea-speaking');
+        var t0 = Date.now(), had = false;
+        var iv = setInterval(function () {
+          var sp = 'speechSynthesis' in window && window.speechSynthesis.speaking;
+          if (sp) had = true;
+          var o = Date.now() - t0;
+          if (((!sp) && (had || o > 900)) || o > 8000) { clearInterval(iv); card.classList.remove('ea-speaking'); btn.classList.remove('ea-speaking'); }
+        }, 120);
+      });
+    });
+
+    /* Vocabulario en fichas */
+    $$('.esc-tap-card').forEach(function (c, i) { tag(c, i % 4, 'translateY(16px) scale(.95)'); });
+    /* Itinerario */
+    $$('.m-nodo').forEach(function (n, i) { tag(n, i, 'scale(.4)'); });
+
+    /* Formato antiguo (clases 16–17) */
+    $$('.phrase-main').forEach(function (p) {
+      if (RM() || p.children.length) return;
+      var words = p.textContent.split(/(\s+)/), k = 0;
+      p.textContent = '';
+      words.forEach(function (w) {
+        if (/^\s+$/.test(w) || !w) { p.appendChild(doc.createTextNode(w)); return; }
+        var s = doc.createElement('span'); s.className = 'ea-w'; s.style.setProperty('--w', k++); s.textContent = w; p.appendChild(s);
+      });
+    });
+    $$('.contrast-col').forEach(function (c, i) {
+      tag(c, i, 'translateY(14px)');
+      $$('li', c).forEach(function (li, j) { tag(li, j + 1, 'translateY(8px)'); });
+    });
+    $$('.connector-chip').forEach(function (c, i) { tag(c, i, 'scale(.85)'); });
+    $$('.note, .desc-card, .scene-setup').forEach(function (n) { tag(n, 0, 'translateY(12px)'); });
+  }
+
+  function mkEq() {
+    var e = doc.createElement('span'); e.className = 'ea-eq'; e.setAttribute('aria-hidden', 'true');
+    e.innerHTML = '<i></i><i></i><i></i><i></i><i></i>';
+    return e;
+  }
+
+  /* ==========================================================
+     EJERCICIOS
+     ========================================================== */
+  /* — Puntuaciones: pop, cuenta y confeti — */
+  function onScore(el) {
+    if (el.__eaBusy || RM()) return;
+    var txt = el.textContent.trim();
+    var m = /^(\d+)\s*\/\s*(\d+)/.exec(txt);
+    retrig(el, 'ea-pop', 500);
+    if (!m || /^Mejor/i.test(txt)) return;
+    var a = +m[1], b = +m[2];
+    var perfect = a === b && b > 0;
+    if (a > 1 && el.animate) {
+      el.__eaBusy = true;
+      var t0 = performance.now(), dur = 520;
+      (function step(now) {
+        var k = Math.min(1, (now - t0) / dur);
+        el.textContent = txt.replace(/^\d+/, String(Math.round(a * k)));
+        if (k < 1) requestAnimationFrame(step); else setTimeout(function () { el.__eaBusy = false; }, 0);
+      })(t0);
+    }
+    if (perfect) setTimeout(function () { burst(el); }, 350);
+  }
+
+  /* — Sprint: frase que entra, urgencia y racha — */
+  var sprint = { raf: 0, streak: 0, el: null };
+  function onSprintPhrase(el) {
+    var txt = el.textContent;
+    retrig(el, 'ea-phrase-in', 450);
+    var fill = $('#sprint-timer-fill'), track = fill && fill.parentElement;
+    cancelAnimationFrame(sprint.raf);
+    if (fill) fill.classList.remove('ea-urgent');
+    if (/Sprint completado/i.test(txt)) { setTimeout(function () { burst(el, 34); }, 200); return; }
+    if (!fill || !track || RM()) return;
+    var t0 = performance.now();
+    (function loop() {
+      var w = fill.getBoundingClientRect().width / (track.getBoundingClientRect().width || 1);
+      if (performance.now() - t0 > 300 && w < 0.34) { fill.classList.add('ea-urgent'); return; }
+      if (performance.now() - t0 < 7000) sprint.raf = requestAnimationFrame(loop);
+    })();
+  }
+  function streakEl() {
+    if (sprint.el) return sprint.el;
+    var box = $('.esc-sprint-box'); if (!box) return null;
+    var s = doc.createElement('div'); s.className = 'ea-streak'; s.hidden = true; s.setAttribute('aria-hidden', 'true');
+    var act = $('.esc-sprint-actions', box);
+    box.insertBefore(s, act); sprint.el = s; return s;
+  }
+  function watchSprintStyle() {
+    var ph = $('#sprint-phrase-text'); if (!ph) return;
+    new MutationObserver(function () {
+      var bg = ph.style.backgroundColor || '';
+      var s = streakEl(); if (!s) return;
+      if (/ok-soft/.test(bg)) {
+        sprint.streak++;
+        if (sprint.streak >= 2) { s.hidden = false; s.textContent = '🔥 racha ×' + sprint.streak; retrig(s, 'ea-pop', 500); }
+      } else if (/err-soft/.test(bg)) {
+        sprint.streak = 0; s.hidden = true; retrig(ph, 'ea-slot-bad', 500);
+      }
+    }).observe(ph, { attributes: true, attributeFilter: ['style'] });
+    var start = $('#btn-start-sprint');
+    if (start) start.addEventListener('click', function () { sprint.streak = 0; if (sprint.el) sprint.el.hidden = true; });
+  }
+
+  /* — Ordenar la frase — */
+  var lastChip = null;
+  function onOrderFeedback(fb) {
+    var slot = fb.parentElement && ($('.esc-order-slot', fb.parentElement.parentElement || fb.parentElement) || fb.previousElementSibling);
+    if (!slot) return;
+    var ok = /^✓/.test(fb.textContent.trim());
+    if (!fb.textContent.trim()) return;
+    Array.prototype.forEach.call(slot.children, function (c, k) { c.style.setProperty('--k', k); });
+    slot.classList.remove('ea-slot-ok', 'ea-slot-bad'); void slot.offsetWidth;
+    slot.classList.add(ok ? 'ea-slot-ok' : 'ea-slot-bad');
+    setTimeout(function () { slot.classList.remove('ea-slot-ok', 'ea-slot-bad'); }, 1400);
+  }
+
+  /* — FLIP de fichas (clasificar y ordenar) — */
+  var snap = new Map();
+  function takeSnap() {
+    snap.clear();
+    $$('.esc-sort-chip').forEach(function (c) { snap.set(c, c.getBoundingClientRect()); });
+  }
+  function flipFrom(el, r0) {
+    if (RM() || !el.animate || !r0) return;
+    var r1 = el.getBoundingClientRect();
+    var dx = r0.left - r1.left, dy = r0.top - r1.top;
+    if (Math.abs(dx) < 2 && Math.abs(dy) < 2) return;
+    el.animate([{ transform: 'translate(' + dx + 'px,' + dy + 'px) scale(1.04)' }, { transform: 'none' }], { duration: 460, easing: 'cubic-bezier(.32,1.2,.5,1)' });
+  }
+
+  /* ---------- observador único ---------- */
+  var SCORE = '#quiz-score-badge, .esc-score-text, .q-score, #fill-score';
+  function handleMutation(m) {
+    var t = m.target;
+    if (m.type === 'attributes') {
+      if (!(t instanceof Element)) return;
+      var now = (t.getAttribute('class') || '').split(/\s+/), old = (m.oldValue || '').split(/\s+/);
+      var added = now.filter(function (c) { return c && c.indexOf('ea-') !== 0 && old.indexOf(c) < 0; });
+      if (!added.length) return;
+      if (t.matches('.esc-opt-btn') && (added.indexOf('correct') > -1 || added.indexOf('wrong') > -1)) {
+        var items = $$('.esc-quiz-item'), idx = items.indexOf(t.closest('.esc-quiz-item'));
+        t.style.setProperty('--ea-d', Math.max(idx, 0) * 90 + 'ms');
+      }
+      if (t.matches('.esc-sort-chip') && (added.indexOf('ok') > -1 || added.indexOf('err') > -1)) {
+        var chips = $$('.esc-sort-chip'); t.style.setProperty('--ea-d', Math.max(chips.indexOf(t), 0) * 60 + 'ms');
+      }
+      if (t.matches('.esc-match-card') && added.indexOf('locked') > -1) {
+        var grid = t.closest('.esc-match-grid') || t.closest('.esc-panel');
+        if (grid) {
+          var all = $$('.esc-match-card', grid);
+          if (all.length && all.every(function (c) { return c.classList.contains('locked'); })) setTimeout(function () { burst(grid); }, 350);
+        }
+      }
+      if (t.matches('.esc-check-item') && added.indexOf('checked') > -1) {
+        var list = t.closest('.esc-checklist, ul, ol') || t.parentElement;
+        var its = $$('.esc-check-item', list);
+        if (its.length > 1 && its.every(function (c) { return c.classList.contains('checked'); })) burst(t);
+      }
+      if (t.matches('.esc-spot-token') && added.indexOf('is-error') > -1) {
+        var card = t.closest('.esc-spot-card');
+        setTimeout(function () {
+          var lab = card && $('.esc-spot-solution strong', card);
+          if (lab && /Encontrado/i.test(lab.textContent)) burst(t, 14);
+        }, 30);
+      }
+      if (t.matches('.order-item') && (added.indexOf('correct') > -1 || added.indexOf('wrong') > -1)) {
+        var slot = $('.order-slot', t);
+        if (slot) {
+          Array.prototype.forEach.call(slot.children, function (c, k) { c.style.setProperty('--k', k); });
+          var okk = added.indexOf('correct') > -1;
+          slot.classList.add(okk ? 'ea-slot-ok' : 'ea-slot-bad');
+          setTimeout(function () { slot.classList.remove('ea-slot-ok', 'ea-slot-bad'); }, 1400);
+        }
+      }
+      return;
+    }
+    /* childList */
+    if (!(t instanceof Element)) return;
+    if (t.matches(SCORE)) { onScore(t); return; }
+    if (t.matches('#sprint-phrase-text')) { onSprintPhrase(t); return; }
+    if (t.matches('.order-feedback-text')) { onOrderFeedback(t); return; }
+    if (t.matches('.q-fb')) { retrig(t, 'ea-flash', 450); return; }
+    if (t.matches('#oral-timer-display')) { retrig(t, 'ea-tick', 420); return; }
+    if (t.matches('#scale-val, #scale-hint, #regex-counter-label')) { retrig(t, 'ea-pop', 450); return; }
+    if (t.matches('#sort-feedback, .esc-sort-feedback')) { retrig(t, 'ea-fadeup', 400); return; }
+    if (t.matches('#roleplay-chat-thread')) {
+      $$('.esc-chat-line', t).forEach(function (l, k) { l.style.setProperty('--k', k); l.classList.add('ea-new'); });
+      return;
+    }
+    if (t.matches('#roleplay-context')) { $$('.m-aviso', t).forEach(function (a) { retrig(a, 'ea-fadeup', 450); }); return; }
+    /* fichas que cambian de sitio / se añaden */
+    Array.prototype.forEach.call(m.addedNodes, function (n) {
+      if (!(n instanceof Element)) return;
+      if (n.matches('.esc-sort-chip')) { flipFrom(n, snap.get(n)); return; }
+      if (n.matches('.esc-word-chip, .order-chip') && lastChip && Date.now() - lastChip.t < 250) { flipFrom(n, lastChip.r); lastChip = null; }
+    });
+  }
+
+  function initExercises() {
+    watchSprintStyle();
+    /* instantáneas para el FLIP: antes de que el script de la clase mueva nada */
+    ['pointerdown', 'click', 'keydown'].forEach(function (ev) {
+      doc.addEventListener(ev, function (e) {
+        var c = e.target instanceof Element && e.target.closest('.esc-word-chip, .order-chip');
+        if (c) lastChip = { r: c.getBoundingClientRect(), t: Date.now() };
+        if (ev !== 'keydown' || e.key === 'Enter' || e.key === ' ') takeSnap();
+      }, true);
+    });
+    new MutationObserver(function (list) { list.forEach(handleMutation); })
+      .observe(doc.body, { subtree: true, childList: true, attributes: true, attributeFilter: ['class'], attributeOldValue: true });
+    /* Cuadros de texto: el botón de guardar tiene su propio aviso por CSS (.show) */
+  }
+
+  function boot() { initExplanations(); initExercises(); }
+  if (doc.readyState === 'loading') doc.addEventListener('DOMContentLoaded', boot); else boot();
+})();
+</script>
+</body>
+</html>
