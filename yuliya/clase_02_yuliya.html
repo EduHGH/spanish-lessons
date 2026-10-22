@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Clase 2 · Yuliya · Esta semana en bici</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:light;
+  --paper:#F3F6FC;--paper-top:#E6EFFD;--paper-raised:#FFFFFF;--paper-alt:#E8EEF9;
+  --ink:#1B1F2A;--ink-soft:#4A5163;--ink-faint:#5A6176;
+  --line:rgba(27,31,42,.12);--line-strong:rgba(27,31,42,.24);--line-card:rgba(20,40,90,.08);
+  --accent:#0B66D6;--pur:#8E2DA8;--amber:#8A5A00;--ok:#0F7A3A;--ok-soft:rgba(30,158,79,.13);--family:#B3261E;--lift:0%;
+  --shadow-1:0 1px 2px rgba(20,40,90,.06),0 10px 28px rgba(20,40,90,.07);
+  --f-display:"Plus Jakarta Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-body:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --r-sm:12px;--r-md:20px;--r-lg:28px;
+  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#0F1420;--paper-top:#16203A;--paper-raised:#171D2C;--paper-alt:#1F2840;
+  --ink:#E7EBF5;--ink-soft:#B0B8CC;--ink-faint:#8D95AC;
+  --line:rgba(231,235,245,.14);--line-strong:rgba(231,235,245,.28);--line-card:rgba(231,235,245,.10);
+  --accent:#6AA6FF;--pur:#C77BE0;--amber:#E0B25A;--ok:#4CC27F;--ok-soft:rgba(76,194,127,.15);--family:#FF8A80;--lift:45%;
+  --shadow-1:0 1px 2px rgba(0,0,0,.45),0 10px 28px rgba(0,0,0,.35);color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#0F1420;--paper-top:#16203A;--paper-raised:#171D2C;--paper-alt:#1F2840;
+  --ink:#E7EBF5;--ink-soft:#B0B8CC;--ink-faint:#8D95AC;
+  --line:rgba(231,235,245,.14);--line-strong:rgba(231,235,245,.28);--line-card:rgba(231,235,245,.10);
+  --accent:#6AA6FF;--pur:#C77BE0;--amber:#E0B25A;--ok:#4CC27F;--ok-soft:rgba(76,194,127,.15);--family:#FF8A80;--lift:45%;
+  --shadow-1:0 1px 2px rgba(0,0,0,.45),0 10px 28px rgba(0,0,0,.35);color-scheme:dark}
+:root{--accent-soft:color-mix(in srgb,var(--accent) 10%,var(--paper-raised));--accent-line:color-mix(in srgb,var(--accent) 36%,var(--paper-raised));--accent-text:color-mix(in srgb,var(--accent),#fff var(--lift))}
+*{box-sizing:border-box}
+html{scroll-padding-top:76px;scroll-behavior:smooth}
+body{margin:0;background:linear-gradient(180deg,var(--paper-top) 0,var(--paper) 420px) fixed,var(--paper);color:var(--ink);font:15px/1.7 var(--f-body)}
+button{font:inherit;color:inherit}
+button:focus-visible,a:focus-visible,summary:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.wrap{max-width:860px;margin:0 auto;padding:0 clamp(16px,4vw,32px) 80px}
+header .wrap{padding-top:40px}
+.eyebrow{font:600 12px var(--f-body);letter-spacing:.07em;text-transform:uppercase;color:var(--accent-text);margin:0 0 10px;display:flex;align-items:center;gap:10px}
+.eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--accent);animation:pulse 2.2s ease-in-out infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--accent) 50%,transparent)}50%{box-shadow:0 0 0 7px transparent;transform:scale(1.4)}}
+h1{font:600 clamp(30px,5.6vw,46px)/1.08 var(--f-display);letter-spacing:-.025em;margin:0 0 14px;text-wrap:balance}
+h1 em{font-style:normal;background:linear-gradient(90deg,var(--accent-text) 10%,var(--pur));-webkit-background-clip:text;background-clip:text;color:transparent}
+.lede{margin:0;color:var(--ink-soft);font-size:16px;max-width:58ch}
+.meta-row{display:flex;flex-wrap:wrap;gap:22px;margin-top:22px;font:600 12px var(--f-body);letter-spacing:.07em;text-transform:uppercase;color:var(--ink-faint)}
+.meta-row strong{display:block;color:var(--ink);font:500 14.5px var(--f-display);letter-spacing:0;text-transform:none;margin-top:3px}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:color-mix(in srgb,var(--paper) 82%,transparent);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);padding-block:10px;margin-block:24px 4px;display:flex;flex-wrap:wrap;gap:10px 12px;align-items:center}
+.btn{font:600 13.5px var(--f-body);background:var(--accent);color:#fff;border:1px solid var(--accent);border-radius:999px;padding:8px 20px;cursor:pointer;margin:14px 8px 0 0;transition:transform .08s}
+.btn.alt{background:var(--paper-raised);color:var(--ink-soft);border-color:var(--line-strong)}
+.btn.alt:hover{border-color:var(--accent);color:var(--accent-text)}
+.btn:active{transform:scale(.97)}
+.bar .btn{margin:0;padding:7px 16px}
+.theme{margin-left:auto}
+.nav-btn{width:36px;height:36px;display:grid;place-items:center;padding:0;border:1px solid var(--line-strong);border-radius:50%;background:var(--paper-raised);color:var(--ink-soft);cursor:pointer}
+.nav-btn[aria-expanded="true"]{border-color:var(--accent);background:var(--accent-soft);color:var(--accent-text)}
+.nav-btn path{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;transform-box:fill-box;transform-origin:center;transition:transform .18s,opacity .18s}
+.nav-btn[aria-expanded="true"] path:nth-child(1){transform:translateY(4.5px) rotate(45deg)}
+.nav-btn[aria-expanded="true"] path:nth-child(2){opacity:0}
+.nav-btn[aria-expanded="true"] path:nth-child(3){transform:translateY(-4.5px) rotate(-45deg)}
+.toc{position:absolute;top:calc(100% + 8px);left:0;width:min(420px,100%);max-height:calc(100vh - 130px);overflow-y:auto;padding:8px;border:1px solid var(--line-strong);border-radius:var(--r-md);background:var(--paper-raised);box-shadow:var(--shadow-1),0 18px 40px rgba(20,40,90,.14);animation:tocIn .16s ease-out}
+.toc[hidden]{display:none}
+@keyframes tocIn{from{opacity:0;transform:translateY(-6px)}}
+.toc a{display:flex;align-items:center;gap:12px;min-height:44px;padding:7px 10px;border-radius:var(--r-sm);color:var(--ink);text-decoration:none;font:500 14.5px/1.3 var(--f-display)}
+.toc a:hover{background:var(--accent-soft);color:var(--accent-text)}
+.toc small{display:block;font:400 12px var(--f-body);color:var(--ink-faint)}
+.prog{flex:1 1 110px;min-width:110px;display:flex;align-items:center;gap:10px}
+.prog-track{flex:1;height:8px;border-radius:999px;background:var(--paper-alt);border:1px solid var(--line);overflow:hidden}
+.prog-track i{display:block;height:100%;width:0;border-radius:inherit;background:linear-gradient(90deg,var(--accent),var(--pur));transition:width .35s ease}
+.prog-n{font:600 12px var(--f-body);font-variant-numeric:tabular-nums;color:var(--ink-soft);min-width:3.4em;text-align:right}
+.prog[data-full] .prog-track i{background:var(--ok)}
+section{position:relative;background:var(--paper-raised);border:1px solid var(--line-card);border-radius:var(--r-lg);box-shadow:var(--shadow-1);margin-top:26px;padding:32px 34px 36px;scroll-margin-top:84px;opacity:calc(.62 + .38*var(--a,1))}
+section::before{content:"";position:absolute;inset:-1px;border-radius:inherit;border:1px solid var(--accent-text);opacity:var(--r,0);pointer-events:none}
+h2{font:600 22px/1.2 var(--f-display);letter-spacing:-.025em;margin:0 0 6px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+h3{font:600 15px var(--f-display);margin:22px 0 8px}
+.num{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;flex:none;font:600 13px var(--f-body);background:var(--accent);color:#fff;letter-spacing:0}
+.cue{font:600 11.5px var(--f-body);color:var(--ink-faint);background:var(--paper-alt);border-radius:999px;padding:2px 11px;letter-spacing:.02em;white-space:nowrap}
+.sub{color:var(--ink-soft);margin:0 0 18px;max-width:70ch;font-size:14.5px}
+.v{color:var(--accent-text);font-weight:600;text-decoration:underline;text-decoration-color:var(--accent-line);text-decoration-thickness:2px;text-underline-offset:3px}
+.e{background:linear-gradient(transparent 55%,color-mix(in srgb,var(--amber) 28%,transparent) 55%);font-weight:600}
+.note{color:var(--ink-faint);font-size:.9em}
+.box{border:1px solid var(--accent-line);background:var(--accent-soft);border-radius:var(--r-md);padding:16px 22px;margin:20px 0;font-size:14.5px}
+.box p{margin:0}.box p+p{margin-top:10px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.card{border:1px solid var(--line-card);background:var(--paper-alt);border-radius:var(--r-md);padding:16px 18px}
+.card h3{margin:0 0 8px;font:600 18px var(--f-display)}
+.card p{margin:6px 0;font-size:14.5px}
+.strip{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+.strip span{border:1px solid var(--line-strong);border-radius:999px;padding:3px 13px;background:var(--paper-raised);font-size:14px}
+.read{font-size:16px;line-height:1.85;max-width:68ch}
+.read p{margin:0 0 14px}
+/* plan */
+.plan{display:flex;gap:4px;margin:24px 0 8px;height:46px}
+.plan a{flex:var(--m) 1 0;min-width:0;border-radius:10px;background:var(--accent-soft);border:1px solid var(--accent-line);display:grid;place-items:center;text-decoration:none;color:var(--accent-text);font:600 12px var(--f-body);transform-origin:left;transform:scaleX(0);animation:grow .6s cubic-bezier(.2,.7,.2,1) forwards;animation-delay:calc(var(--i)*90ms);transition:background .2s,color .2s}
+.plan a:hover{background:var(--accent);color:#fff}
+@keyframes grow{to{transform:scaleX(1)}}
+.planl{display:flex;gap:4px;font:600 11px var(--f-body);color:var(--ink-faint)}
+.planl span{flex:var(--m) 1 0;text-align:center;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+/* ejercicios */
+ol.ex{padding:0;margin:8px 0 0;list-style:none;counter-reset:q}
+ol.ex li{counter-increment:q;padding:13px 0;border-top:1px solid var(--line);line-height:1.9}
+ol.ex li:before{content:counter(q)".";font:600 12px var(--f-body);color:var(--ink-faint);margin-right:8px}
+input.g{font:inherit;color:var(--ink);border:0;border-bottom:2px solid var(--line-strong);width:7em;text-align:center;padding:2px 6px;border-radius:8px 8px 0 0;background:var(--paper-alt)}
+input.g.ok{background:var(--ok-soft);border-color:var(--ok)}
+input.g.bad{background:color-mix(in srgb,var(--family) 12%,var(--paper-raised));border-color:var(--family)}
+.vb{color:var(--ink-faint);font-size:.9em}
+.fb{display:inline-block;margin-left:6px;font-size:14px;color:var(--ink-soft)}
+.sol{display:block;margin-top:4px;padding-left:10px;border-left:3px solid var(--family);color:var(--family);font-size:13.5px}
+textarea{width:100%;font:inherit;color:var(--ink);background:var(--paper);border:1px solid var(--line-strong);border-radius:var(--r-sm);padding:10px 14px;min-height:130px;resize:vertical}
+details{margin:8px 0 0}
+summary{cursor:pointer;color:var(--accent-text);font:600 13px var(--f-body)}
+details p{margin:6px 0 0;padding-left:12px;border-left:3px solid var(--line-strong);font-size:14.5px}
+.dlg p{margin:5px 0;padding:8px 14px;border-radius:var(--r-sm)}
+.dlg .a{background:var(--paper-alt)}.dlg .b{border:1px solid var(--line-strong)}
+.dlg b{font:600 11px var(--f-body);color:var(--ink-faint);margin-right:6px}
+.hot{display:inline-block;border-bottom:2px dotted var(--accent);cursor:help}
+.plx{position:fixed;inset:-20vh 0;z-index:-1;pointer-events:none;overflow:hidden}
+.plx i{position:absolute;border-radius:50%;filter:blur(60px);opacity:.4;will-change:transform;background:radial-gradient(circle,color-mix(in srgb,var(--accent) 44%,transparent),transparent 70%)}
+.plx i:nth-child(1){width:46vmax;height:46vmax;left:-14vmax;top:4vh}
+.plx i:nth-child(2){width:38vmax;height:38vmax;right:-12vmax;top:60vh;background:radial-gradient(circle,color-mix(in srgb,var(--pur) 38%,transparent),transparent 70%)}
+.plx i:nth-child(3){width:30vmax;height:30vmax;left:30vw;top:120vh}
+main{position:relative;z-index:1}
+header .wrap>*{will-change:transform,opacity}
+@media(max-width:560px){.two{grid-template-columns:1fr}section{padding:22px 18px 26px}.theme{margin-left:0}.plan{height:36px}.plan a{font-size:10px}.planl{display:none}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}.plx{display:none}.plan a{transform:none}}
+@media print{.plx,.bar,.btn{display:none}section{opacity:1;box-shadow:none;break-inside:avoid-page}header .wrap>*{transform:none!important;opacity:1!important}.plan a{transform:none}}
+/* ===== Tilde · mascota ESCOLAR (acento azul de la clase; modo oscuro con --accent-text) ===== */
+.bot{--d-fast:150ms;--d-base:280ms;--d-slow:340ms;--ease:cubic-bezier(.2,0,0,1);--spring:cubic-bezier(.34,1.56,.64,1)}
+/* bot */
+.bot{font-size:var(--s,48px);width:1em;height:1em;position:relative;flex:none;--c:var(--accent-text)}
+.bot svg{display:block;width:100%;height:100%;overflow:visible;color:var(--c);transition:color var(--d-base) var(--ease),transform var(--d-slow) var(--spring)}
+.bot .bd{fill:var(--paper-raised);stroke:currentColor;stroke-width:3.5;stroke-linejoin:round}
+.bot .ln{fill:none;stroke:currentColor;stroke-width:3.2;stroke-linecap:round;stroke-linejoin:round}
+.bot .pup{fill:currentColor;transform:translate(var(--gx,0em),var(--gy,0em));transform-box:fill-box;transform-origin:center;animation:blink 6s infinite}
+.bot .ck{fill:currentColor;opacity:.22}
+.bot .sm{fill:currentColor;stroke:currentColor;stroke-width:2.4;stroke-linejoin:round}
+.bot .tuft{fill:none;stroke:currentColor;stroke-width:3.2;stroke-linecap:round;transform-box:fill-box;transform-origin:50% 100%;transition:transform var(--d-base) var(--spring)}
+.bot [class^=f-]{display:none}
+.bot:not([data-face]) .f-neutral,.bot[data-face=neutral] .f-neutral,.bot[data-face=attentive] .f-attentive,.bot[data-face=curious] .f-curious,.bot[data-face=excited] .f-excited,.bot[data-face=delighted] .f-delighted,.bot[data-face=doubtful] .f-doubtful,.bot[data-face=drowsy] .f-drowsy{display:inline}
+.bot[data-face=curious]{--c:var(--amber)}.bot[data-face=delighted]{--c:var(--ok)}.bot[data-face=doubtful]{--c:var(--family)}.bot[data-face=drowsy]{--c:var(--ink-faint)}
+.bot[data-face=curious] svg{transform:rotate(7deg)}
+.bot[data-face=excited] .tuft{transform:rotate(-4deg)}
+.bot[data-face=delighted] .tuft{transform:translateY(-1.5px) rotate(-8deg)}
+.bot[data-face=doubtful] .tuft,.bot[data-face=drowsy] .tuft{transform:rotate(12deg) translateY(2px)}
+.bot.hop{animation:hop .9s both}.bot.wig{animation:wig 1s both}
+@keyframes blink{0%,94%,100%{scale:1 1}97%{scale:1 .08}}
+@keyframes hop{0%{translate:0 0}30%{translate:0 -.26em}52%{translate:0 0}66%{translate:0 -.07em}80%,100%{translate:0 0}}
+@keyframes wig{0%{rotate:0deg}26%{rotate:13deg}58%{rotate:-11deg}82%{rotate:5deg}100%{rotate:0deg}}
+h3.th{display:flex;align-items:center;gap:12px}
+h3.th .tt{min-width:0}
+.hello{display:flex;gap:16px;align-items:flex-start}
+.hello .lede{flex:1;min-width:0}
+.prog .bot{margin-right:-2px}
+@media(max-width:560px){.hello .bot{--s:44px!important}}
+@media(prefers-reduced-motion:reduce){.bot,.bot svg,.bot .pup,.bot .tuft{animation:none!important;transition:none!important}}
+@media print{.bot.hop,.bot.wig{animation:none!important}}
+
+.bot{display:inline-block}
+h2 .bot{display:block;margin-left:auto}
+.hello{margin-top:0}
+.rv{opacity:0;transform:translateY(14px);transition:opacity .5s,transform .5s cubic-bezier(.2,.7,.2,1);transition-delay:calc(var(--i,0)*60ms)}
+.rv.in{opacity:1;transform:none}
+.qs{list-style:none;counter-reset:q;padding:0;margin:6px 0 0}
+.qs li{counter-increment:q;display:flex;gap:12px;align-items:baseline;padding:9px 12px;border-radius:var(--r-sm);cursor:pointer;transition:background .2s}
+.qs li:before{content:counter(q);font:600 12px var(--f-body);color:var(--accent-text);background:var(--accent-soft);border-radius:50%;width:24px;height:24px;display:grid;place-items:center;flex:none;transition:background .25s,color .25s}
+.qs li:hover{background:var(--paper-alt)}
+.qs li.done span{text-decoration:line-through;color:var(--ink-faint)}
+.qs li.done:before{content:"✓";background:var(--ok);color:#fff}
+.qs details{margin:4px 0 0}
+.qs li.qd{display:block;cursor:default}
+.qs li.qd:before{float:left;margin:2px 12px 0 0}
+input.g.seen{background:var(--paper-alt);border-color:var(--ink-faint)}
+input.s{font:inherit;color:var(--ink);background:var(--paper-alt);border:0;border-bottom:2px solid var(--line-strong);border-radius:8px 8px 0 0;padding:6px 12px;width:100%;margin-top:6px;transition:border-color .2s,background .2s}
+input.s:focus{border-color:var(--accent)}
+input.s.full{border-color:var(--ok);background:var(--ok-soft)}
+.fl{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+.tag{font:600 11px var(--f-body);letter-spacing:.05em;text-transform:uppercase;border-radius:999px;padding:1px 10px}
+.tag.i{background:var(--accent-soft);color:var(--accent-text);border:1px solid var(--accent-line)}
+.tag.m{background:color-mix(in srgb,var(--amber) 16%,var(--paper-raised));color:var(--amber);border:1px solid color-mix(in srgb,var(--amber) 40%,var(--paper-raised))}
+.count{font:600 13px var(--f-body);color:var(--ink-soft);margin-left:6px}
+.lit{background:var(--accent-soft);outline:2px solid var(--accent);outline-offset:2px;border-radius:6px}
+.kind{display:inline-block;min-width:15em;font:600 13px var(--f-body);color:var(--accent-text)}
+.film{position:relative;border:1px solid var(--line-card);background:var(--paper-alt);border-radius:var(--r-md);padding:16px 18px 18px;margin:18px 0 6px;overflow:hidden}
+.film .lbl{font:600 11px var(--f-body);letter-spacing:.07em;text-transform:uppercase;color:var(--ink-faint);margin:10px 0 6px}
+.film .lbl:first-child{margin-top:0}
+.film .set{height:34px;border-radius:10px;background:linear-gradient(90deg,color-mix(in srgb,var(--amber) 34%,transparent),color-mix(in srgb,var(--amber) 14%,transparent));display:flex;align-items:center;padding:0 14px;font:600 12.5px var(--f-body);transform-origin:left;transform:scaleX(0)}
+.film.go .set{animation:grow 1.1s cubic-bezier(.2,.7,.2,1) forwards}
+.film .acts{display:flex;flex-wrap:wrap;gap:8px}
+.film .acts b{font:600 13px var(--f-body);color:#fff;background:var(--accent);border-radius:999px;padding:4px 14px;opacity:0;transform:translateY(10px) scale(.8)}
+.film.go .acts b{animation:pop .5s cubic-bezier(.34,1.56,.64,1) forwards;animation-delay:calc(1s + var(--i)*.45s)}
+@keyframes pop{to{opacity:1;transform:none}}
+.film .cut{padding-top:26px;position:relative}
+.film .long{height:28px;border-radius:8px;background:color-mix(in srgb,var(--amber) 28%,transparent);display:flex;align-items:center;padding:0 12px;font:600 12.5px var(--f-body);transform-origin:left;transform:scaleX(0)}
+.film.go .long{animation:grow 1.2s ease forwards;animation-delay:3.6s}
+.film .cut i{position:absolute;left:58%;top:0;font:600 12.5px var(--f-body);font-style:normal;background:var(--accent);color:#fff;border-radius:999px;padding:3px 12px;opacity:0;transform:translateY(-14px)}
+.film.go .cut i{animation:pop .5s cubic-bezier(.34,1.56,.64,1) forwards;animation-delay:4.9s}
+.film .btn{margin-top:16px}
+.card.rv:hover{border-color:var(--accent)}
+.strip span{display:inline-block;transition:transform .2s}
+.strip span:hover{transform:translateY(-3px) rotate(-2deg)}
+@media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none}.film .set,.film .long{transform:none}.film .acts b,.film .cut i{opacity:1;transform:none}}
+@media print{.rv{opacity:1;transform:none}.film .set,.film .long{transform:none}.film .acts b,.film .cut i{opacity:1;transform:none}}
+.film .set.past{background:linear-gradient(90deg,color-mix(in srgb,var(--ink-faint) 30%,transparent),color-mix(in srgb,var(--ink-faint) 12%,transparent))}
+.film.go .set.past{animation-delay:2.7s}
+.film .acts.p b{background:var(--ink-faint)}
+.film .acts.build b{background:var(--paper-raised);color:var(--ink);border:1px solid var(--line-strong)}
+.film .acts.build b.res{background:var(--ok);color:#fff;border-color:var(--ok)}
+</style></head>
+<body>
+<div class="plx" aria-hidden="true"><i></i><i></i><i></i></div>
+<header><div class="wrap">
+<p class="eyebrow"><span class="dot"></span>ESPAÑOL · Yuliya · B1 · Clase 2 · Línea 1</p>
+<h1>Esta semana <em>en bici</em></h1>
+<div class="hello"><div class="bot" id="hbot" data-face="excited" style="--s:56px"></div><p class="lede">Hoy cuentas lo que has hecho en un periodo que todavía no ha terminado: hoy, esta semana, este mes. Aprendes el pretérito perfecto y sus marcadores. Al final tienes un texto de apoyo sobre Anaga.</p></div>
+<div class="meta-row"><div>Nivel<strong>B1</strong></div><div>Gramática<strong>Pretérito perfecto y marcadores</strong></div><div>Tema<strong>Rutas recientes por Anaga y la costa</strong></div><div>Duración<strong>50 min</strong></div></div>
+</div></header>
+<main class="wrap">
+<div class="bar" role="toolbar" aria-label="Controles">
+<button type="button" class="nav-btn" id="navBtn" aria-label="Menú de secciones" aria-expanded="false" aria-controls="toc"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><path d="M3 5.5h14"/><path d="M3 10h14"/><path d="M3 14.5h14"/></svg></button>
+<nav class="toc" id="toc" aria-label="Secciones" hidden></nav>
+<div class="prog" id="prog" role="progressbar" aria-label="Huecos acertados" aria-valuemin="0" aria-valuemax="19" aria-valuenow="0"><div class="bot" id="pbot" data-face="neutral" style="--s:28px"></div><div class="prog-track"><i id="pf"></i></div><span class="prog-n" id="pn">0/19</span></div>
+<button type="button" class="btn alt theme" id="themeBtn" aria-pressed="false">Modo oscuro</button>
+</div>
+
+<section id="plan"><h2><span class="num">★</span>Plan de la clase <span class="cue">50 min</span></h2>
+<p class="sub">Pulsa un bloque para ir a él. El ancho de cada bloque es proporcional a su duración. Cada ejercicio tiene 10 frases o más.</p>
+<div class="plan" id="plan-bar"></div><div class="planl" id="plan-l"></div></section>
+
+<section id="s1"><h2><span class="num">1</span>Calentamiento oral <span class="cue">4 min</span><span class="bot" data-face="neutral" style="--s:36px"></span></h2>
+<p class="sub">Responde en voz alta con frases completas. Toca una pregunta cuando la hayas contestado.</p><ol class="qs"><li class="rv" style="--i:0"><span>¿Qué has hecho hoy por la mañana?</span></li><li class="rv" style="--i:1"><span>¿Has hecho deporte esta semana?</span></li><li class="rv" style="--i:2"><span>¿Has salido en bici alguna vez?</span></li><li class="rv" style="--i:3"><span>¿Cuántas veces has salido este mes?</span></li><li class="rv" style="--i:4"><span>¿Has visto algún sitio bonito últimamente?</span></li><li class="rv" style="--i:5"><span>¿Has comido algo especial esta semana?</span></li><li class="rv" style="--i:0"><span>¿Has hablado hoy en español con alguien?</span></li><li class="rv" style="--i:1"><span>¿Has estado alguna vez en un parque natural?</span></li><li class="rv" style="--i:2"><span>¿Has descubierto algo nuevo esta semana?</span></li><li class="rv" style="--i:3"><span>¿Qué no has hecho todavía hoy?</span></li></ol></section>
+
+<section id="s2"><h2><span class="num">2</span>Un modelo <span class="cue">5 min</span><span class="bot" data-face="neutral" style="--s:36px"></span></h2>
+<p class="sub">Lee el texto. <span class="v">Subrayado</span> = pretérito perfecto. <span class="e">Marcado</span> = marcador de tiempo. Pulsa el botón para verlos aparecer en orden.</p>
+<div class="read"><p><span class="e">Esta semana</span> <span class="v">he salido</span> tres veces en bici y <span class="e">hoy</span> <span class="v">he hecho</span> mi ruta más larga. <span class="e">Esta mañana</span> <span class="v">hemos subido</span> hasta Cruz del Carmen, pero <span class="e">todavía no</span> <span class="v">hemos bajado</span> a la costa. Mi marido <span class="v">ha pinchado</span> una rueda y yo <span class="v">he descubierto</span> un sendero precioso entre árboles cubiertos de niebla. <span class="e">Nunca</span> <span class="v">he visto</span> un bosque tan misterioso. ¿<span class="v">Has estado</span> <span class="e">alguna vez</span> en Anaga? <span class="e">Últimamente</span> <span class="v">he aprendido</span> mucho de la isla y <span class="e">ya</span> <span class="v">he puesto</span> fotos en el grupo de ciclistas.</p></div>
+<button class="btn" id="play">▶ Contar la historia</button><span class="kind" id="kind" role="status"></span>
+<div class="box"><p><b>Fíjate:</b> el perfecto siempre lleva dos piezas: <i>haber</i> + participio. Y casi siempre va con un marcador de un periodo que incluye el presente: hoy, esta semana, este mes, últimamente.</p></div></section>
+
+<section id="s3"><h2><span class="num">3</span>La regla <span class="cue">6 min</span><span class="bot" data-face="neutral" style="--s:36px"></span></h2>
+<p class="sub">Mira la animación: el periodo que incluye “hoy” pide perfecto; el periodo cerrado pide indefinido. Después, cómo se construye.</p>
+<div class="film" id="film"><p class="lbl">Periodo que incluye hoy · pretérito perfecto</p><div class="set">esta semana · hoy · este mes · últimamente · todavía no</div>
+<div class="acts"><b style="--i:0">he salido</b><b style="--i:1">hemos subido</b><b style="--i:2">ha pinchado</b><b style="--i:3">he visto</b></div>
+<p class="lbl">Periodo terminado · indefinido (clase 1)</p><div class="set past">la semana pasada · ayer · anoche · en 2024</div>
+<div class="acts p"><b style="--i:4">fuimos</b><b style="--i:5">descubrimos</b><b style="--i:6">escribí</b></div>
+<p class="lbl">Cómo se construye · haber + participio</p><div class="acts build"><b style="--i:7">he</b><b style="--i:8">+</b><b style="--i:9">pedaleado</b><b style="--i:10">=</b><b class="res" style="--i:11">he pedaleado</b></div>
+<button class="btn alt" id="replay">↻ Repetir animación</button></div>
+<div class="two">
+<div class="card rv"><h3>Haber</h3><p>he · has · ha · hemos · habéis · han</p><p class="note">Participios regulares: -ar → -ado (pedaleado) · -er/-ir → -ido (comido, vivido).</p>
+<div class="strip"><span>hoy</span><span>esta semana</span><span>este mes</span><span>este año</span><span>últimamente</span></div></div>
+<div class="card rv" style="--i:2"><h3>Con marcadores de experiencia</h3><p>Preguntas y respuestas sobre la vida hasta ahora.</p>
+<div class="strip"><span>alguna vez</span><span>nunca</span><span>ya</span><span>todavía no</span><span>hasta ahora</span></div>
+<p class="note">¿Has estado alguna vez en Anaga? · Nunca he visto un bosque así.</p></div></div>
+<h3>Participios irregulares</h3>
+<div class="strip rv"><span>hecho</span><span>dicho</span><span>visto</span><span>puesto</span><span>escrito</span><span>vuelto</span><span>roto</span><span>abierto</span><span>descubierto</span><span>cubierto</span></div>
+<div class="box rv"><p><b>Regla de oro:</b> ¿el periodo todavía no ha terminado (hoy, esta semana)? Perfecto. ¿Ya terminó (ayer, la semana pasada, en 2024)? Indefinido. Entre las dos piezas del perfecto no se pone nada: <i>he nunca visto</i> es incorrecto; di <i>nunca he visto</i>.</p></div></section>
+
+<section id="s4"><h2><span class="num">4</span>Ejercicio 1: frases sueltas <span class="cue">9 min</span><span class="bot" data-face="neutral" style="--s:36px"></span></h2>
+<p class="sub">Veinticuatro frases. Escribe el verbo en pretérito perfecto. Piensa en el marcador de cada frase.</p><ol class="ex"><li class="rv" style="--i:0">Esta semana <input class="g" data-a="he salido" style="width:8.0em" aria-label="hueco"> <span class="vb">(salir, yo)</span> en bici tres veces.</li><li class="rv" style="--i:1">Hoy <input class="g" data-a="hemos subido" style="width:9.8em" aria-label="hueco"> <span class="vb">(subir, nosotros)</span> hasta Cruz del Carmen.</li><li class="rv" style="--i:2">¿<input class="g" data-a="Has estado" style="width:8.6em" aria-label="hueco"> <span class="vb">(estar, tú)</span> alguna vez en Taganana?</li><li class="rv" style="--i:3">Mi marido nunca <input class="g" data-a="ha pinchado" style="width:9.2em" aria-label="hueco"> <span class="vb">(pinchar)</span> una rueda en la montaña.</li><li class="rv" style="--i:4">Todavía no <input class="g" data-a="he visto" style="width:7.4em" aria-label="hueco"> <span class="vb">(ver, yo)</span> el amanecer desde Anaga.</li><li class="rv" style="--i:5">Este mes <input class="g" data-a="hemos hecho" style="width:9.2em" aria-label="hueco"> <span class="vb">(hacer, nosotros)</span> dos rutas por la costa.</li><li class="rv" style="--i:0">Beberick <input class="g" data-a="ha dormido" style="width:8.6em" aria-label="hueco"> <span class="vb">(dormir)</span> todo el día en mi mochila.</li><li class="rv" style="--i:1">Últimamente <input class="g" data-a="he descubierto" style="width:11.1em" aria-label="hueco"> <span class="vb">(descubrir, yo)</span> caminos preciosos cerca de casa.</li><li class="rv" style="--i:2">¿Ya <input class="g" data-a="han llegado" style="width:9.2em" aria-label="hueco"> <span class="vb">(llegar, ellos)</span> tus amigos al mirador?</li><li class="rv" style="--i:3">Esta semana mis amigos y yo <input class="g" data-a="hemos puesto" style="width:9.8em" aria-label="hueco"> <span class="vb">(poner)</span> fotos de la ruta en el grupo.</li><li class="rv" style="--i:4">Nunca <input class="g" data-a="he vuelto" style="width:8.0em" aria-label="hueco"> <span class="vb">(volver, yo)</span> a casa sin una buena foto.</li><li class="rv" style="--i:5">Este año <input class="g" data-a="ha llovido" style="width:8.6em" aria-label="hueco"> <span class="vb">(llover)</span> mucho en Anaga.</li><li class="rv" style="--i:0">¿<input class="g" data-a="Has comido" style="width:8.6em" aria-label="hueco"> <span class="vb">(comer, tú)</span> alguna vez en un guachinche?</li><li class="rv" style="--i:1">Esta mañana <input class="g" data-a="hemos desayunado" style="width:12.3em" aria-label="hueco"> <span class="vb">(desayunar, nosotros)</span> a las siete.</li><li class="rv" style="--i:2">Hoy <input class="g" data-a="ha hecho" style="width:7.4em" aria-label="hueco"> <span class="vb">(hacer)</span> mucho sol.</li><li class="rv" style="--i:3">Todavía no <input class="g" data-a="he probado" style="width:8.6em" aria-label="hueco"> <span class="vb">(probar, yo)</span> el potaje de berros.</li><li class="rv" style="--i:4">Este fin de semana mis amigos <input class="g" data-a="han venido" style="width:8.6em" aria-label="hueco"> <span class="vb">(venir)</span> a Tenerife.</li><li class="rv" style="--i:5">Nunca <input class="g" data-a="hemos pedaleado" style="width:11.7em" aria-label="hueco"> <span class="vb">(pedalear, nosotros)</span> bajo la lluvia.</li><li class="rv" style="--i:0">Esta tarde <input class="g" data-a="he escrito" style="width:8.6em" aria-label="hueco"> <span class="vb">(escribir, yo)</span> a mi hermana desde el mirador.</li><li class="rv" style="--i:1">¿Qué <input class="g" data-a="has dicho" style="width:8.0em" aria-label="hueco"> <span class="vb">(decir, tú)</span>? No <input class="g" data-a="he oído" style="width:6.7em" aria-label="hueco"> <span class="vb">(oír, yo)</span> nada por el viento.</li><li class="rv" style="--i:2">Este año <input class="g" data-a="hemos abierto" style="width:10.5em" aria-label="hueco"> <span class="vb">(abrir, nosotros)</span> el mapa de rutas muchas veces.</li><li class="rv" style="--i:3">Hoy la niebla <input class="g" data-a="ha cubierto" style="width:9.2em" aria-label="hueco"> <span class="vb">(cubrir)</span> todo el valle.</li><li class="rv" style="--i:4">Alguna vez <input class="g" data-a="he roto" style="width:6.7em" aria-label="hueco"> <span class="vb">(romper, yo)</span> una cadena, pero nunca <input class="g" data-a="he dejado" style="width:8.0em" aria-label="hueco"> <span class="vb">(dejar, yo)</span> la ruta a medias.</li><li class="rv" style="--i:5">Últimamente <input class="g" data-a="hemos vuelto" style="width:9.8em" aria-label="hueco"> <span class="vb">(volver, nosotros)</span> a Anaga cada domingo.</li></ol>
+<button class="btn" data-check>Comprobar</button><button class="btn alt" data-show>Ver soluciones</button></section>
+
+<section id="s5"><h2><span class="num">5</span>Ejercicio 2: mi semana en bici <span class="cue">10 min</span><span class="bot" data-face="neutral" style="--s:36px"></span></h2>
+<p class="sub">Una historia de veinticuatro frases. Ojo: algunas piden perfecto y otras, indefinido. Mira el marcador.</p>
+<div class="read"><p>Esta semana <input class="g" data-a="he montado" style="width:8.6em" aria-label="hueco"> <span class="vb">(montar, yo)</span> en bici cuatro veces. Hoy <input class="g" data-a="he subido" style="width:8.0em" aria-label="hueco"> <span class="vb">(subir, yo)</span> hasta el mirador y <input class="g" data-a="he parado" style="width:8.0em" aria-label="hueco"> <span class="vb">(parar, yo)</span> a tomar un café. La semana pasada <input class="g" data-a="fuimos" style="width:6.1em" aria-label="hueco"> <span class="vb">(ir, nosotros)</span> a Anaga por primera vez. Mi marido <input class="g" data-a="ha pinchado" style="width:9.2em" aria-label="hueco"> <span class="vb">(pinchar)</span> una rueda esta mañana. Nunca <input class="g" data-a="he visto" style="width:7.4em" aria-label="hueco"> <span class="vb">(ver, yo)</span> un bosque tan verde y tan misterioso. Ayer <input class="g" data-a="descubrimos" style="width:9.2em" aria-label="hueco"> <span class="vb">(descubrir, nosotros)</span> un sendero junto al mar.</p><p>Todavía no <input class="g" data-a="hemos comido" style="width:9.8em" aria-label="hueco"> <span class="vb">(comer, nosotros)</span> en ningún restaurante de la zona. Este mes <input class="g" data-a="he conocido" style="width:9.2em" aria-label="hueco"> <span class="vb">(conocer, yo)</span> a muchos ciclistas simpáticos. Un ciclista nos <input class="g" data-a="ha dicho" style="width:7.4em" aria-label="hueco"> <span class="vb">(decir)</span> que hay una ruta nueva por la costa. Anoche <input class="g" data-a="escribí" style="width:6.7em" aria-label="hueco"> <span class="vb">(escribir, yo)</span> a mis amigos para invitarlos. Hasta ahora <input class="g" data-a="he hecho" style="width:7.4em" aria-label="hueco"> <span class="vb">(hacer, yo)</span> más de cien kilómetros este mes. ¡<input class="g" data-a="Ha sido" style="width:6.7em" aria-label="hueco"> <span class="vb">(ser)</span> una semana perfecta!</p><p>Esta semana también <input class="g" data-a="he bajado" style="width:8.0em" aria-label="hueco"> <span class="vb">(bajar, yo)</span> a la costa norte. El martes pasado <input class="g" data-a="llegué" style="width:6.1em" aria-label="hueco"> <span class="vb">(llegar, yo)</span> hasta Benijo y <input class="g" data-a="comí" style="width:4.9em" aria-label="hueco"> <span class="vb">(comer, yo)</span> pescado fresco. Hoy <input class="g" data-a="he encontrado" style="width:10.5em" aria-label="hueco"> <span class="vb">(encontrar, yo)</span> una playa casi vacía. Mis amigos <input class="g" data-a="han preguntado" style="width:11.1em" aria-label="hueco"> <span class="vb">(preguntar)</span> por la ruta y les <input class="g" data-a="he mandado" style="width:8.6em" aria-label="hueco"> <span class="vb">(mandar, yo)</span> el mapa. Anteayer <input class="g" data-a="conocimos" style="width:8.0em" aria-label="hueco"> <span class="vb">(conocer, nosotros)</span> a una pareja de ciclistas alemanes. Ellos ya <input class="g" data-a="han recorrido" style="width:10.5em" aria-label="hueco"> <span class="vb">(recorrer)</span> toda la isla en bici.</p><p>Nunca <input class="g" data-a="he hablado" style="width:8.6em" aria-label="hueco"> <span class="vb">(hablar, yo)</span> tanto español en una sola semana. Este mes <input class="g" data-a="he mejorado" style="width:9.2em" aria-label="hueco"> <span class="vb">(mejorar, yo)</span> mucho mi resistencia. La semana pasada <input class="g" data-a="terminé" style="width:6.7em" aria-label="hueco"> <span class="vb">(terminar, yo)</span> agotada una ruta de cuatro horas. Esta semana no <input class="g" data-a="he tenido" style="width:8.0em" aria-label="hueco"> <span class="vb">(tener, yo)</span> ningún pinchazo. Todavía no <input class="g" data-a="hemos visto" style="width:9.2em" aria-label="hueco"> <span class="vb">(ver, nosotros)</span> el atardecer desde la costa. ¡Qué semana: <input class="g" data-a="he vivido" style="width:8.0em" aria-label="hueco"> <span class="vb">(vivir, yo)</span> mucho y <input class="g" data-a="he aprendido" style="width:9.8em" aria-label="hueco"> <span class="vb">(aprender, yo)</span> aún más!</p></div>
+<button class="btn" data-check>Comprobar</button><button class="btn alt" data-show>Ver soluciones</button></section>
+
+<section id="s6"><h2><span class="num">6</span>Escribe tu semana <span class="cue">8 min</span><span class="bot" data-face="neutral" style="--s:36px"></span></h2>
+<p class="sub">Diez frases guiadas, una por línea. Cuando tengas las diez, tu semana está completa.</p><div class="rv" style="--i:0;margin-top:14px"><div class="fl"><b>1.</b><span class="tag i">perfecto</span><span>Marcador: ¿qué has hecho hoy?</span></div><input class="s" type="text" placeholder="Hoy he…" aria-label="Frase 1"></div><div class="rv" style="--i:1;margin-top:14px"><div class="fl"><b>2.</b><span class="tag i">perfecto</span><span>¿Qué has hecho esta semana?</span></div><input class="s" type="text" placeholder="Esta semana he…" aria-label="Frase 2"></div><div class="rv" style="--i:2;margin-top:14px"><div class="fl"><b>3.</b><span class="tag i">perfecto</span><span>¿Qué ruta habéis hecho este mes?</span></div><input class="s" type="text" placeholder="Este mes hemos…" aria-label="Frase 3"></div><div class="rv" style="--i:3;margin-top:14px"><div class="fl"><b>4.</b><span class="tag i">perfecto</span><span>¿Qué has descubierto últimamente?</span></div><input class="s" type="text" placeholder="Últimamente he descubierto…" aria-label="Frase 4"></div><div class="rv" style="--i:4;margin-top:14px"><div class="fl"><b>5.</b><span class="tag i">perfecto</span><span>Algo que nunca has hecho</span></div><input class="s" type="text" placeholder="Nunca he…" aria-label="Frase 5"></div><div class="rv" style="--i:5;margin-top:14px"><div class="fl"><b>6.</b><span class="tag i">perfecto</span><span>Algo que todavía no has hecho</span></div><input class="s" type="text" placeholder="Todavía no he…" aria-label="Frase 6"></div><div class="rv" style="--i:0;margin-top:14px"><div class="fl"><b>7.</b><span class="tag i">perfecto</span><span>Pregunta a tu profesor con alguna vez</span></div><input class="s" type="text" placeholder="¿Has … alguna vez…?" aria-label="Frase 7"></div><div class="rv" style="--i:1;margin-top:14px"><div class="fl"><b>8.</b><span class="tag i">perfecto</span><span>Usa un participio irregular (hecho, visto, dicho, puesto, vuelto, roto)</span></div><input class="s" type="text" placeholder="He…" aria-label="Frase 8"></div><div class="rv" style="--i:2;margin-top:14px"><div class="fl"><b>9.</b><span class="tag m">indefinido</span><span>Contraste: la semana pasada, ayer o anoche</span></div><input class="s" type="text" placeholder="La semana pasada fui…" aria-label="Frase 9"></div><div class="rv" style="--i:3;margin-top:14px"><div class="fl"><b>10.</b><span class="tag i">perfecto</span><span>Cierre: valora tu semana con ha sido</span></div><input class="s" type="text" placeholder="Ha sido una semana…" aria-label="Frase 10"></div>
+<p style="margin-top:18px"><button class="btn" id="cp" style="margin:0">Copiar mi texto</button><span class="count" id="sc" role="status">0/10 frases</span><span class="fb" id="cpf" role="status"></span></p></section>
+
+<section id="s7"><h2><span class="num">7</span>Conversación <span class="cue">7 min</span><span class="bot" data-face="neutral" style="--s:36px"></span></h2>
+<p class="sub">Cuenta tu semana en voz alta. Tu profesor hace estas diez preguntas; toca cada una cuando la hayas respondido.</p><ol class="qs"><li class="rv" style="--i:0"><span>¿Qué has hecho esta semana? Cuéntalo en dos frases.</span></li><li class="rv" style="--i:1"><span>¿Qué rutas has hecho este mes?</span></li><li class="rv" style="--i:2"><span>¿Has estado alguna vez en Anaga?</span></li><li class="rv" style="--i:3"><span>¿Qué es lo más bonito que has visto últimamente?</span></li><li class="rv" style="--i:4"><span>¿Qué has comido o bebido durante la ruta?</span></li><li class="rv" style="--i:5"><span>¿Has tenido algún problema, como un pinchazo o lluvia?</span></li><li class="rv" style="--i:0"><span>¿Cuántos kilómetros has hecho hoy?</span></li><li class="rv" style="--i:1"><span>¿Qué has aprendido de la isla últimamente?</span></li><li class="rv" style="--i:2"><span>¿Qué no has hecho todavía y quieres hacer?</span></li><li class="rv" style="--i:3"><span>¿Qué le has contado a un amigo sobre tu semana?</span></li></ol></section>
+
+<section id="s8"><h2><span class="num">8</span>Cierre y tarea <span class="cue">1 min</span><span class="bot" data-face="neutral" style="--s:36px"></span></h2>
+<div class="box"><p><b>Tarea:</b> graba un audio de un minuto contando qué has hecho esta semana y qué no has hecho todavía. Usa al menos cinco marcadores distintos. Antes, lee el texto de apoyo de abajo: te da vocabulario para hablar de tus rutas.</p></div></section>
+
+<section id="apoyo"><h2><span class="num">+</span>Material de apoyo: Anaga, bosque y costa<span class="bot" data-face="neutral" style="--s:36px"></span></h2>
+<p class="sub">Lectura para casa, con diez preguntas al final. Los perfectos del texto están subrayados.</p>
+<div class="read">
+<p class="rv">El macizo de Anaga está en el noreste de Tenerife. Es un parque rural lleno de montañas verdes, barrancos profundos y pueblos pequeños. En 2015 la UNESCO lo declaró Reserva de la Biosfera.</p>
+<p class="rv">Es una de las zonas más antiguas de la isla y por eso tiene un paisaje muy erosionado, con crestas, roques y valles estrechos. En las partes altas hay laurisilva, un bosque de laureles que casi siempre está cubierto de niebla y donde viven muchas plantas y animales propios de las islas.</p>
+<p class="rv">Un buen punto de partida es el centro de visitantes de Cruz del Carmen, donde dan mapas e información. Desde allí salen muchos senderos y también carreteras para recorrer el parque en bici.</p>
+<p class="rv">En la costa norte están los pueblos de Taganana y Almáciga y las playas de Benijo y Roque de las Bodegas. Muchos ciclistas bajan hasta allí por carreteras con muchas curvas y terminan comiendo pescado fresco junto al mar.</p>
+<p class="rv">Antes de salir, comprueba que <span class="v">has revisado</span> los frenos y que <span class="v">has cargado</span> las luces: en Anaga la niebla aparece sin avisar. Lleva también ropa impermeable y agua, y cuando vuelvas a casa, cuenta lo que <span class="v">has visto</span> y lo que todavía no <span class="v">has hecho</span>.</p></div>
+<div class="strip"><span>el macizo</span><span>el barranco</span><span>la cresta</span><span>la niebla</span><span>la curva</span><span>el mirador</span><span>el sendero</span><span>los frenos</span><span>impermeable</span><span>el pinchazo</span></div>
+<h3>Diez preguntas</h3><ol class="qs"><li class="qd rv" style="--i:0"><span>¿Dónde está el macizo de Anaga?</span><details><summary>Ver respuesta</summary><p>En el noreste de Tenerife.</p></details></li><li class="qd rv" style="--i:1"><span>¿Qué tipo de espacio natural es?</span><details><summary>Ver respuesta</summary><p>Un parque rural.</p></details></li><li class="qd rv" style="--i:2"><span>¿Cuándo lo declaró la UNESCO Reserva de la Biosfera?</span><details><summary>Ver respuesta</summary><p>En 2015.</p></details></li><li class="qd rv" style="--i:3"><span>¿Por qué tiene un paisaje tan erosionado?</span><details><summary>Ver respuesta</summary><p>Porque es una de las zonas más antiguas de la isla.</p></details></li><li class="qd rv" style="--i:4"><span>¿Qué es la laurisilva?</span><details><summary>Ver respuesta</summary><p>Un bosque de laureles que casi siempre está cubierto de niebla.</p></details></li><li class="qd rv" style="--i:5"><span>¿Dónde está el centro de visitantes que se recomienda?</span><details><summary>Ver respuesta</summary><p>En Cruz del Carmen.</p></details></li><li class="qd rv" style="--i:0"><span>¿Qué pueblos y playas se mencionan en la costa norte?</span><details><summary>Ver respuesta</summary><p>Los pueblos de Taganana y Almáciga y las playas de Benijo y Roque de las Bodegas.</p></details></li><li class="qd rv" style="--i:1"><span>¿Qué comen muchos ciclistas al terminar la ruta?</span><details><summary>Ver respuesta</summary><p>Pescado fresco.</p></details></li><li class="qd rv" style="--i:2"><span>¿Qué debes comprobar antes de salir?</span><details><summary>Ver respuesta</summary><p>Que has revisado los frenos y cargado las luces; además, llevar ropa impermeable.</p></details></li><li class="qd rv" style="--i:3"><span>¿Qué ruta harías tú? Contesta con una frase en condicional.</span><details><summary>Ver respuesta</summary><p>Ejemplo: Subiría a Cruz del Carmen y bajaría a la costa.</p></details></li></ol></section>
+</main>
+
+<script>
+const AVA='<svg viewBox=0,-6,64,70 aria-hidden=true><path class=bd d=M32,5C47,5,59,16,59,30C59,44,47,55,32,55C28.5,55,25.3,54.4,22.4,53.3L11,60L14.6,48.2C8.6,43.4,5,37.2,5,30C5,16,17,5,32,5Z /><path class=tuft d=M24,4.5q3.5,-6,8,0t8,0 />'+
+    '<g class=f-neutral><circle class=pup cx=23 cy=27 r=2.8 /><circle class=pup cx=41 cy=27 r=2.8 /><path class=ln d=M27,38q5,3.5,10,0 /></g>'+
+    '<g class=f-attentive><circle class=pup cx=23 cy=28 r=3.3 /><circle class=pup cx=41 cy=28 r=3.3 /><path class=ln d=M18,19q4,-3.5,8,-1.5 /><path class=ln d=M38,17.5q4,-2,8,1.5 /><path class=ln d=M29,39h6 /></g>'+
+    '<g class=f-curious><circle class=pup cx=23 cy=27 r=2.8 /><circle class=pup cx=41 cy=27 r=2.8 /><path class=ln d=M19,21h8 /><path class=ln d=M37,16.5q4,-3,8,-.5 /><path class=ln d=M27,39q6,-3,10,-1 /></g>'+
+    '<g class=f-excited><circle class=pup cx=23 cy=27 r=3 /><circle class=pup cx=41 cy=27 r=3 /><path class=ln d=M19,20q4,-2.5,8,-1 /><path class=ln d=M37,19q4,-1.5,8,1 /><path class=ln d=M25,36q7,8,14,0 /><circle class=ck cx=15 cy=36 r=3.5 /><circle class=ck cx=49 cy=36 r=3.5 /></g>'+
+    '<g class=f-delighted><path class=ln d=M18.5,29q4.5,-6,9,0 /><path class=ln d=M36.5,29q4.5,-6,9,0 /><path class=sm d=M24.5,35.5q7.5,11,15,0z /><circle class=ck cx=15 cy=36 r=3.5 /><circle class=ck cx=49 cy=36 r=3.5 /></g>'+
+    '<g class=f-doubtful><circle class=pup cx=23 cy=28 r=2.8 /><circle class=pup cx=41 cy=28 r=2.8 /><path class=ln d=M18.5,22l8,-4.5 /><path class=ln d=M37.5,17.5l8,4.5 /><path class=ln d=M27,39.5q2.5,-2.5,5,0t5,0 /></g>'+
+    '<g class=f-drowsy><path class=ln d=M19,27q4,4.5,8,0 /><path class=ln d=M37,27q4,4.5,8,0 /><circle class=ln cx=32 cy=39 r=1.6 /><path class=ln d=M46,13h5.5l-5.5,6.5h5.5 /></g></svg>';
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+$$('.bot').forEach(b=>{b.innerHTML=AVA});
+const RM=matchMedia('(prefers-reduced-motion:reduce)').matches;
+const react=(el,face,fx)=>{if(!el)return;el.setAttribute('data-face',face);if(RM)return;el.classList.remove('hop','wig');void el.offsetWidth;el.classList.add(fx)};
+/* ojos que siguen el puntero */
+if(!RM){const bots=$$('.bot');let q=0,ev=null;
+ addEventListener('pointermove',e=>{ev=e;if(q)return;q=requestAnimationFrame(()=>{q=0;bots.forEach(b=>{const r=b.getBoundingClientRect(),dx=ev.clientX-(r.left+r.width/2),dy=ev.clientY-(r.top+r.height/2),m=Math.max(1,Math.hypot(dx,dy));b.style.setProperty('--gx',(dx/m*.05).toFixed(3)+'em');b.style.setProperty('--gy',(dy/m*.04).toFixed(3)+'em')})})},{passive:true})}
+$('#hbot').onclick=()=>react($('#hbot'),'excited','hop');
+const sbot=sec=>sec&&sec.querySelector('h2 .bot');
+/* plan + menú */
+const P=[["s1","Calentamiento",4],["s2","Modelo",5],["s3","Regla",6],["s4","Ej. 1",9],["s5","Ej. 2",10],["s6","Escribir",8],["s7","Hablar",7],["s8","Cierre",1]];
+$('#plan-bar').innerHTML=P.map((p,i)=>'<a href="#'+p[0]+'" style="--m:'+p[2]+';--i:'+i+'" title="'+p[1]+' · '+p[2]+' min">'+p[2]+'′</a>').join('');
+$('#plan-l').innerHTML=P.map(p=>'<span style="--m:'+p[2]+'">'+p[1]+'</span>').join('');
+const toc=$('#toc'),nb=$('#navBtn');
+toc.innerHTML=P.map((p,i)=>'<a href="#'+p[0]+'"><span class="num">'+(i+1)+'</span><span>'+p[1]+'<small>'+p[2]+' min</small></span></a>').join('')+'<a href="#apoyo"><span class="num">+</span><span>Material de apoyo<small>Lectura para casa</small></span></a>';
+const setNav=o=>{toc.hidden=!o;nb.setAttribute('aria-expanded',o)};
+nb.onclick=()=>setNav(toc.hidden);toc.onclick=e=>{if(e.target.closest('a'))setNav(false)};
+addEventListener('keydown',e=>{if(e.key==='Escape')setNav(false)});
+/* tema */
+const root=document.documentElement,tb=$('#themeBtn');
+const cur=()=>root.dataset.theme||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
+const showT=()=>{const d=cur()==='dark';tb.setAttribute('aria-pressed',d);tb.textContent=d?'Modo claro':'Modo oscuro'};
+tb.onclick=()=>{root.dataset.theme=cur()==='dark'?'light':'dark';showT()};showT();
+/* huecos + Tilde */
+const norm=s=>s.trim().toLowerCase().replace(/\s+/g,' ');
+const gaps=$$('input.g'),TOT=gaps.length;let prev=0;
+function prog(){const n=gaps.filter(g=>g.classList.contains('ok')).length;
+ $('#pf').style.width=(n/TOT*100)+'%';$('#pn').textContent=n+'/'+TOT;$('#prog').setAttribute('aria-valuenow',n);$('#prog').setAttribute('aria-valuemax',TOT);
+ $('#prog').toggleAttribute('data-full',n===TOT);
+ if(n>prev)react($('#pbot'),n===TOT?'delighted':'excited','hop');prev=n}
+gaps.forEach(g=>g.addEventListener('input',()=>{g.classList.remove('ok','bad','seen');prog()}));
+$$('[data-check]').forEach(b=>b.onclick=()=>{const sec=b.closest('section'),ins=[...sec.querySelectorAll('input.g')];
+ ins.forEach(g=>{if(!g.value.trim())return;g.classList.remove('ok','bad','seen');g.classList.add(norm(g.value)===g.dataset.a?'ok':'bad')});
+ const empty=ins.some(g=>!g.value.trim()),bad=ins.some(g=>g.classList.contains('bad')),soft=ins.some(g=>g.dataset.soft);
+ prog();react(sbot(sec),empty?'curious':bad?'doubtful':soft?'excited':'delighted',bad?'wig':'hop')});
+$$('[data-show]').forEach(b=>b.onclick=()=>{const sec=b.closest('section');
+ sec.querySelectorAll('input.g').forEach(g=>{g.value=g.dataset.a;g.dataset.soft=1;g.classList.remove('ok','bad');g.classList.add('seen')});prog();react(sbot(sec),'excited','hop')});
+/* tocar para marcar preguntas */
+$$('.qs li:not(.qd)').forEach(li=>li.onclick=()=>{li.classList.toggle('done');const sec=li.closest('section'),ls=[...sec.querySelectorAll('.qs li')];
+ react(sbot(sec),ls.every(x=>x.classList.contains('done'))?'delighted':'excited','hop')});
+/* frases guiadas */
+const ss=$$('input.s');
+function cnt(){const n=ss.filter(i=>i.value.trim().length>3).length;ss.forEach(i=>i.classList.toggle('full',i.value.trim().length>3));$('#sc').textContent=n+'/10 frases';return n}
+ss.forEach(i=>i.addEventListener('input',()=>{const was=cnt();if(was===10)react(sbot($('#s6')),'delighted','hop')}));
+$('#cp').onclick=()=>{const t=ss.map(i=>i.value.trim()).filter(Boolean).join(' '),ok=()=>$('#cpf').textContent='Copiado.',ko=()=>$('#cpf').textContent='Selecciona el texto y copia a mano.';
+ try{navigator.clipboard.writeText(t).then(ok,ko)}catch(e){ko()}};
+/* historia animada */
+let running=false;
+$('#play').onclick=async()=>{if(running)return;running=true;const sec=$('#s2'),w=ms=>new Promise(r=>setTimeout(r,RM?0:ms)),k=$('#kind');
+ for(const el of sec.querySelectorAll('.read .e,.read .v')){const act=el.classList.contains('v');
+  el.classList.add('lit');k.textContent=act?'Pretérito perfecto: '+el.textContent:'Marcador de tiempo: '+el.textContent;
+  react(sbot(sec),act?'excited':'attentive',act?'hop':'wig');await w(act?650:520);el.classList.remove('lit')}
+ k.textContent='Fin: ¡ya tienes la historia de tu semana!';react(sbot(sec),'delighted','hop');running=false};
+/* animación de la regla */
+const film=$('#film');$('#replay').onclick=()=>{film.classList.remove('go');void film.offsetWidth;film.classList.add('go');react(sbot($('#s3')),'attentive','hop')};
+/* aparición al hacer scroll */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;const t=e.target;
+ if(t===film){film.classList.add('go');react(sbot($('#s3')),'attentive','hop')}
+ else if(t.id==='s2'||t.id==='apoyo')react(sbot(t),'attentive','hop');
+ else t.classList.add('in');io.unobserve(t)}),{threshold:.2});
+$$('.rv').forEach(x=>io.observe(x));io.observe(film);io.observe($('#s2'));io.observe($('#apoyo'));
+/* parallax + foco */
+if(!RM){
+ const bl=$$('.plx i'),K=[.18,.34,.52],hc=$$('header .wrap>*'),HK=[.16,.28,.4,.52,.6];let t=0;
+ function run(){t=0;const y=scrollY,vh=innerHeight,vw=innerWidth,c=vh/2;
+  bl.forEach((b,i)=>{b.style.transform='translate3d('+(Math.sin(y/600+i*1.7)*vw*.07).toFixed(1)+'px,'+(-y*K[i]).toFixed(1)+'px,0)'});
+  const f=Math.max(0,1-y/(vh*.7)).toFixed(2);
+  hc.forEach((h,i)=>{h.style.transform='translate3d(0,'+Math.round(y*(HK[i]||.4))+'px,0)';h.style.opacity=f});
+  $$('main section').forEach(s=>{const r=s.getBoundingClientRect(),d=r.top>c?r.top-c:r.bottom<c?c-r.bottom:0,v=Math.max(0,1-d/(vh*.5));
+   s.style.setProperty('--a',v.toFixed(2));s.style.setProperty('--r',(v**4).toFixed(2))})}
+ addEventListener('scroll',()=>{if(!t)t=requestAnimationFrame(run)},{passive:true});addEventListener('resize',run);run()}
+prog();
+</script>
+</body></html>
