@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Clase 17 · Anecdotes at full speed — Andrei</title>
+<title>Clase 17 · ¿Dónde estáis? — Andrei</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 
 /* ╔══════════════════════════════════════════════════════════════╗
    ║  ESCOLAR — sistema de diseño para clases de español online   ║
-   ║  Clase 17 · L3 Conversación con ritmo · "Anecdotes at full speed"   ║
+   ║  Clase 14 · L3 Conversación con ritmo · "Following a group conversation"   ║
    ╚══════════════════════════════════════════════════════════════╝ */
 
 :root{
@@ -99,16 +99,20 @@ section.block{ margin-bottom:52px; }
   box-shadow: var(--shadow-1); padding:26px 28px;
 }
 
-/* ---------- MILESTONE GRID (repaso de pasados) ---------- */
-.milestone-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:14px; margin-top:20px; }
-.milestone-card{ border-radius: var(--r-md); padding:16px 18px; border:1px solid var(--line); background: var(--paper-alt); }
-.milestone-head{ display:flex; align-items:center; gap:8px; margin:0 0 10px; }
-.milestone-tag{ font-family: var(--f-data); font-size:10px; color:#fff; padding:2px 9px; border-radius:999px; text-transform:uppercase; letter-spacing:.04em; }
-.milestone-card[data-t="indefinido"] .milestone-tag{ background: var(--b1); }
-.milestone-card[data-t="imperfecto"] .milestone-tag{ background: var(--b2); }
-.milestone-card[data-t="conector"] .milestone-tag{ background: var(--b3); }
-.milestone-main{ font-family: var(--f-display); font-weight:600; font-size:15.5px; }
-.milestone-ex{ font-family: var(--f-data); font-size:12.5px; color: var(--ink-soft); margin-top:8px; }
+/* ---------- CONNECTOR GRID ---------- */
+.conj-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:14px; margin-top:20px; }
+.conj-card{ border-radius: var(--r-md); padding:16px 18px; border:1px solid var(--line); background: var(--paper-alt); }
+.conj-head{ display:flex; align-items:center; gap:8px; margin:0 0 10px; }
+.conj-main{ font-family: var(--f-display); font-weight:600; font-size:17px; color: var(--b3); }
+.conj-reg{ font-family: var(--f-data); font-size:10.5px; color: var(--ink-faint); text-transform:uppercase; letter-spacing:.04em; }
+.conj-rows{ display:grid; gap:4px; font-family: var(--f-data); font-size:13px; color: var(--ink-soft); }
+.conj-rows span.pron{ color: var(--ink-faint); display:inline-block; width:76px; }
+.en{ display:block; font-style:italic; color: var(--ink-faint); font-size:0.92em; margin-top:3px; }
+
+.irregular-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:12px; margin-top:14px; }
+.irr-card{ background: var(--paper-raised); border:1px solid var(--b3-line); border-radius: var(--r-md); padding:12px 14px; text-align:center; }
+.irr-inf{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); text-transform:uppercase; }
+.irr-form{ font-family: var(--f-display); font-weight:600; font-size:18px; color: var(--b3); margin-top:4px; }
 
 .note{
   margin-top:18px; padding:14px 16px; background: var(--b3-soft); border:1px solid var(--b3-line);
@@ -148,10 +152,6 @@ section.block{ margin-bottom:52px; }
 .exercise:last-of-type{ margin-bottom:0; }
 .ex-sentence{ font-size:15.5px; margin-bottom:10px; }
 .ex-sentence .gap{ font-family: var(--f-data); color: var(--ink-faint); }
-.ex-tag{ font-family: var(--f-data); font-size:10px; text-transform:uppercase; letter-spacing:.04em; color:#fff; padding:2px 8px; border-radius:999px; margin-right:8px; vertical-align:middle; }
-.ex-tag.indefinido{ background: var(--b1); }
-.ex-tag.imperfecto{ background: var(--b2); }
-.ex-tag.conector{ background: var(--b3); }
 .ex-options{ display:flex; flex-wrap:wrap; gap:8px; }
 .opt-btn{
   font-family: var(--f-body); font-size:14px; background: var(--paper-raised);
@@ -298,135 +298,87 @@ footer a:hover{ text-decoration:underline; }
 }
 @media (prefers-reduced-motion: reduce){ *{ transition:none !important; } }
 
-/* ---------- INGLÉS SUTIL + TOGGLE ---------- */
-.en{ display:none; font-style:italic; font-weight:400; color: var(--ink-faint); font-size:0.88em; margin-top:3px; opacity:.85; text-transform:none; letter-spacing:0; }
-body.show-en .en{ display:block; }
-.block-head h2 .en{ font-family: var(--f-body); font-size:13px; }
-.lang-toggle{
-  position:fixed; top:14px; right:14px; z-index:50; display:flex; padding:3px; gap:2px;
-  background: var(--paper-raised); border:1px solid var(--line-strong); border-radius:999px;
-  box-shadow: var(--shadow-1); font-family: var(--f-data); font-size:12px;
-}
-.lang-toggle button{ font-family: inherit; font-size:inherit; background:none; border:none; color: var(--ink-soft); padding:6px 12px; border-radius:999px; cursor:pointer; transition: all .15s ease; }
-.lang-toggle button[aria-pressed="true"]{ background: var(--b3); color:#fff; }
-.lang-toggle .sub{ opacity:.7; font-size:.85em; }
-
-/* ---------- RETOS EXTRA ---------- */
-.retos{ margin-top:22px; }
-.reto{ margin-top:26px; padding-top:22px; border-top:1px dashed var(--line); }
-.reto:first-of-type{ margin-top:0; padding-top:0; border-top:none; }
-.reto-title{ font-family: var(--f-display); font-weight:600; font-size:17px; margin:0 0 4px; display:flex; align-items:center; gap:10px; }
-.reto-tag{ font-family: var(--f-data); font-size:10.5px; font-weight:400; text-transform:uppercase; letter-spacing:.06em; color: var(--b3); background: var(--b3-soft); border:1px solid var(--b3-line); padding:2px 9px; border-radius:999px; }
-.reto-desc{ font-size:14px; color: var(--ink-soft); margin:0 0 14px; }
-.reto-bar{ display:flex; align-items:center; gap:10px; margin-top:14px; flex-wrap:wrap; }
-.reto-score{ font-family: var(--f-data); font-size:13px; color: var(--ink-faint); }
-.ord-item{ margin-bottom:18px; }
-.ord-line{ min-height:48px; display:flex; flex-wrap:wrap; gap:8px; padding:10px 12px; border:1.5px dashed var(--line-strong); border-radius: var(--r-md); background: var(--paper); transition: border-color .15s ease, background .15s ease; }
-.ord-line.correct{ border:1.5px solid var(--b2); background: var(--b2-soft); }
-.ord-line.wrong{ border:1.5px solid var(--family); background: var(--family-soft); }
-.ord-bank{ display:flex; flex-wrap:wrap; gap:8px; margin-top:10px; min-height:38px; }
-.chip{ font-family: var(--f-body); font-size:14px; background: var(--paper-raised); border:1.5px solid var(--line); color: var(--ink); padding:6px 14px; border-radius:999px; cursor:pointer; transition: all .15s ease; }
-.chip:hover{ border-color: var(--ink-faint); }
-.ord-line .chip{ background: var(--b3-soft); border-color: var(--b3); color: var(--b3); }
-.ord-line.correct .chip{ background: var(--b2-soft); border-color: var(--b2); color: var(--b2); }
-.ord-line.wrong .chip{ background: var(--family-soft); border-color: var(--family); color: var(--family); }
-.ord-fb{ font-family: var(--f-data); font-size:12px; color: var(--family); margin-top:6px; }
-.match-cols{ display:grid; grid-template-columns:1fr 1fr; gap:14px 28px; }
-.match-col{ display:flex; flex-direction:column; gap:8px; }
-.match-btn{ font-family: var(--f-body); font-size:14.5px; text-align:left; background: var(--paper-raised); border:1.5px solid var(--line); color: var(--ink); padding:9px 14px; border-radius: var(--r-md); cursor:pointer; transition: all .15s ease; }
-.match-btn:hover{ border-color: var(--ink-faint); }
-.match-btn.picked{ background: var(--b3-soft); border-color: var(--b3); color: var(--b3); }
-.match-btn.correct{ background: var(--b2-soft); border-color: var(--b2); color: var(--b2); cursor:default; }
-.match-btn.wrong{ background: var(--family-soft); border-color: var(--family); color: var(--family); }
-.gap-item{ margin-bottom:16px; }
-.gap-sentence{ font-size:15.5px; }
-.gap-input{ font-family: var(--f-data); font-size:14.5px; width:130px; padding:4px 10px; margin:0 4px; border:none; border-bottom:2px solid var(--line-strong); background: var(--paper); color: var(--ink); border-radius:4px 4px 0 0; }
-.gap-input:focus{ outline:none; border-bottom-color: var(--b3); background: var(--b3-soft); }
-.gap-input.correct{ border-bottom-color: var(--b2); background: var(--b2-soft); color: var(--b2); }
-.gap-input.close{ border-bottom-color: var(--b3); background: var(--b3-soft); }
-.gap-input.wrong{ border-bottom-color: var(--family); background: var(--family-soft); color: var(--family); }
-.gap-fb{ font-family: var(--f-data); font-size:12px; margin-top:4px; color: var(--ink-faint); }
-@media (max-width:600px){ .match-cols{ gap:14px; } .lang-toggle{ top:8px; right:8px; } }
+/* ---------- LANG TOGGLE ---------- */
+.lang-toggle{position:sticky;top:10px;z-index:50;width:max-content;margin:10px 14px 0 auto;display:flex;background:var(--paper-raised);border:1px solid var(--line-strong);border-radius:999px;padding:3px;box-shadow:var(--shadow-1);font-family:var(--f-data);font-size:12px}
+.lang-toggle button{border:0;background:none;color:var(--ink-soft);padding:6px 13px;border-radius:999px;cursor:pointer;font:inherit}
+.lang-toggle button[aria-pressed="true"]{background:var(--b3);color:#fff}
+.lang-toggle button:focus-visible{outline:2px solid var(--b3);outline-offset:2px}
+body[data-lang="es"] .en{display:none}
+.en{opacity:.88}
+.block-head h2 .en{font-family:var(--f-body);font-size:.55em;font-weight:400;margin-top:2px}
+.conj-reg .en{display:inline;text-transform:none;letter-spacing:0;font-size:inherit}
+.irr-inf .en{text-transform:none;font-size:10.5px}
+/* ---------- MINIGAMES ---------- */
+.game + .game{margin-top:30px;padding-top:26px;border-top:1px dashed var(--line)}
+.game h3{font-family:var(--f-display);font-weight:500;font-size:19px;margin:0 0 4px}
+.game h3 b{font-family:var(--f-data);font-size:11px;font-weight:500;color:#fff;background:var(--b3);border-radius:6px;padding:2px 8px;margin-right:10px;vertical-align:2px}
+.game h3 .en{font-family:var(--f-body);font-size:13px;margin-top:0}
+.game-hint{font-size:14px;color:var(--ink-soft);margin:6px 0 14px}
+.chip{font-family:var(--f-body);font-size:14px;background:var(--paper-raised);border:1.5px solid var(--line-strong);color:var(--ink);padding:7px 14px;border-radius:10px;cursor:pointer;transition:all .15s ease}
+.chip:hover:not(:disabled){border-color:var(--b3)}
+.chip:disabled{cursor:default}
+.chip .en{font-size:11.5px}
+.chip.sel{border-color:var(--b3);background:var(--b3-soft);color:var(--b3)}
+.chip.done{border-color:var(--b2);background:var(--b2-soft);color:var(--b2)}
+.chip.nope{border-color:var(--family);background:var(--family-soft);color:var(--family)}
+.build{min-height:50px;display:flex;flex-wrap:wrap;gap:8px;padding:10px;border:1.5px dashed var(--b3-line);border-radius:var(--r-md);background:var(--b3-soft);margin-bottom:8px}
+.build.ok{border-color:var(--b2);background:var(--b2-soft)}
+.build.bad{border-color:var(--family);background:var(--family-soft)}
+.bank{display:flex;flex-wrap:wrap;gap:8px;min-height:38px}
+.sort-item{margin-bottom:20px}
+.match{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.match .col{display:flex;flex-direction:column;gap:10px}
+.match .chip{width:100%;text-align:left}
+.chat-opts{display:grid;gap:8px;margin-top:12px}
+.chat-opts .chip{text-align:left;border-radius:var(--r-md)}
+.feedback{font-size:13.5px;margin:10px 0 0;color:var(--ink-soft)}
+.game-bar{display:flex;align-items:center;gap:12px;margin-top:14px;flex-wrap:wrap}
+.game .score{font-family:var(--f-data);font-size:13px;color:var(--ink-faint)}
+.en.inl{display:inline;margin:0 0 0 .5em}.block-head h2 .en,.feedback-item h3 .en{font-family:var(--f-body);font-size:.55em;font-weight:400;margin-top:2px}.en.inl.b{display:inline-block}
 </style>
 </head>
-<body>
-
-<div class="lang-toggle" role="group" aria-label="Idioma de apoyo">
-  <button type="button" id="lang-es" aria-pressed="true">ES</button>
-  <button type="button" id="lang-en" aria-pressed="false">ES <span class="sub">+ EN</span></button>
+<body data-lang="es-en">
+<div class="lang-toggle" role="group" aria-label="Idioma / Language">
+  <button type="button" data-lang="es" aria-pressed="true">Español</button>
+  <button type="button" data-lang="es-en" aria-pressed="false">Español + EN</button>
 </div>
 
 <header>
-  <p class="eyebrow"><span class="dot"></span>Clase 17 de 27 · L3 Conversación con ritmo · Repaso integrado de todos los pasados</p>
-  <h1>Anécdotas a toda <em>velocidad</em><span class="en" style="font-family:var(--f-body);font-size:15px;font-weight:400;margin-top:6px">Anecdotes at full speed</span></h1>
-  <p class="lede">Última clase de la línea L3. Hoy no hay gramática nueva: juntas el pretérito indefinido, el imperfecto y los conectores conversacionales de la Clase 14 en una sola anécdota larga, contada a ritmo real, mientras el profesor te interrumpe y pregunta — como pasaría de verdad en una fiesta con amigos.<span class="en">Last class of the L3 line. Today there is no new grammar: you combine the simple past, the imperfect and the conversational connectors from Class 14 into one long anecdote, told at real speed, while the teacher interrupts and asks questions — just as would happen at a party with friends.</span></p>
+  <p class="eyebrow"><span class="dot"></span>Clase 17 de 27 · L3 · ¿Dónde estáis? · Estar + gerundio</p>
+  <h1>Estoy <em>llegando</em></h1>
+  <p class="lede">Última clase de L3. Hoy escribes y hablas con tus amigos en tiempo real: ¿dónde estáis?, ¿qué estáis haciendo?, estoy llegando. Aprendes estar + gerundio para hablar de lo que pasa ahora mismo.</p>
   <div class="meta-row">
     <div>Duración<strong>50 min</strong></div>
     <div>Construye sobre<strong>Clases 1–16</strong></div>
-    <div>Nivel<strong>B1</strong></div>
+    <div>Nivel<strong>A2</strong></div>
   </div>
 </header>
 
 <main>
 
   <section class="block">
-    <div class="block-head"><span class="block-num">1</span><h2>Las piezas de una buena anécdota<span class="en">The building blocks of a good anecdote</span></h2><span class="time-tag">10 min</span></div>
+    <div class="block-head"><span class="block-num">1</span><h2>Estar + gerundio</h2><span class="time-tag">10 min</span></div>
     <div class="panel">
-      <p style="margin:0 0 6px; font-size:14.5px; color:var(--ink-soft);">Contar una anécdota bien no es solo cuestión de gramática correcta — es saber cuándo usar cada pieza. El indefinido mueve la historia hacia adelante (qué pasó), el imperfecto pinta el fondo (cómo era la escena), y los conectores conversacionales le dan ritmo natural, como si lo estuvieras contando de verdad, no leyendo un guion.<span class="en">Telling an anecdote well is not just a matter of correct grammar — it is knowing when to use each piece. The simple past moves the story forward (what happened), the imperfect paints the background (what the scene was like), and the conversational connectors give it a natural rhythm, as if you were really telling it, not reading a script.</span></p>
-
-      <div class="milestone-grid">
-        <div class="milestone-card" data-t="indefinido">
-          <div class="milestone-head"><span class="milestone-tag">indefinido</span></div>
-          <div class="milestone-main">La acción principal<span class="en">The main action</span></div>
-          <div class="milestone-ex">llegamos tarde / se me cayó el móvil<span class="en">we arrived late / I dropped my phone</span></div>
-        </div>
-        <div class="milestone-card" data-t="imperfecto">
-          <div class="milestone-head"><span class="milestone-tag">imperfecto</span></div>
-          <div class="milestone-main">El fondo de la escena<span class="en">The background of the scene</span></div>
-          <div class="milestone-ex">hacía mucho frío / todos estaban borrachos<span class="en">it was very cold / everyone was drunk</span></div>
-        </div>
-        <div class="milestone-card" data-t="conector">
-          <div class="milestone-head"><span class="milestone-tag">conector</span></div>
-          <div class="milestone-main">El giro narrativo<span class="en">The narrative twist</span></div>
-          <div class="milestone-ex">resulta que... / total que... / al final...<span class="en">it turns out... / so anyway... / in the end...</span></div>
-        </div>
-        <div class="milestone-card" data-t="indefinido">
-          <div class="milestone-head"><span class="milestone-tag">indefinido</span></div>
-          <div class="milestone-main">El desenlace<span class="en">The outcome</span></div>
-          <div class="milestone-ex">al final decidimos volver a casa<span class="en">in the end we decided to go home</span></div>
-        </div>
-        <div class="milestone-card" data-t="imperfecto">
-          <div class="milestone-head"><span class="milestone-tag">imperfecto</span></div>
-          <div class="milestone-main">Descripción de personas<span class="en">Describing people</span></div>
-          <div class="milestone-ex">llevaba una camisa horrible / no paraba de reír<span class="en">he was wearing a horrible shirt / he wouldn't stop laughing</span></div>
-        </div>
-        <div class="milestone-card" data-t="conector">
-          <div class="milestone-head"><span class="milestone-tag">conector</span></div>
-          <div class="milestone-main">Reacción del oyente<span class="en">The listener's reaction</span></div>
-          <div class="milestone-ex">¡qué fuerte! / ¡no me digas! / ¡anda ya!<span class="en">wow! / no way! / come on!</span></div>
-        </div>
-      </div>
-
-      <div class="note"><strong>El truco de hoy:</strong> una anécdota real casi nunca sigue un orden perfecto — un nativo salta hacia atrás para añadir contexto ("ah, se me olvidaba decir que..."), se interrumpe a sí mismo y retoma el hilo. No busques la frase perfecta; busca que la historia fluya, aunque tengas que corregirte sobre la marcha.<span class="en">Today's trick: a real anecdote almost never follows a perfect order — a native jumps back to add context (“oh, I forgot to say that...”), interrupts themselves and picks the thread up again. Don't look for the perfect sentence; look for the story to flow, even if you have to correct yourself along the way.</span></div>
-
-      <div class="pron-note">🔊 <strong>Pronunciación de hoy:</strong> el reto de hoy es mantener el ritmo narrativo sin bajar la velocidad al cambiar de indefinido a imperfecto — un nativo no hace pausa entre "llegamos" (acción) y "estaba lloviendo" (fondo), fluyen como una sola frase.<span class="en">Today's pronunciation: the challenge is to keep the narrative rhythm without slowing down when switching from simple past to imperfect — a native doesn't pause between “llegamos” (action) and “estaba lloviendo” (background); they flow like a single sentence.</span></div>
-
-      <div class="compare-warning">
-        <strong>El error más frecuente hasta ahora:</strong> quedarse solo en indefinido y contar la anécdota como una lista de hechos ("llegamos, comimos, nos fuimos") sin ningún imperfecto que dé color a la escena. Hoy vas a forzar conscientemente al menos dos imperfectos por anécdota para practicar el contraste.<span class="en">The most frequent mistake so far: staying only in the simple past and telling the anecdote as a list of facts (“we arrived, we ate, we left”) with no imperfect to give colour to the scene. Today you will deliberately force at least two imperfects per anecdote to practise the contrast.</span>
-      </div>
+      <p style="margin:0 0 6px; font-size:14.5px; color:var(--ink-soft);">Estar + gerundio describe una acción en curso. El gerundio se forma así: -ar → -ando, -er / -ir → -iendo.</p>
+      <div class="conj-grid"><div class="conj-card"><div class="conj-head"><span class="conj-main">llegar</span><span class="conj-reg">-ando</span></div><div class="conj-rows"><div><span class="pron">yo · tú · él</span>estoy · estás · está llegando</div><div><span class="pron">nos. · vos. · ellos</span>estamos · estáis · están llegando</div><div><span class="pron">ejemplo</span><strong>Estoy llegando</strong> al bar.</div></div></div><div class="conj-card"><div class="conj-head"><span class="conj-main">esperar</span><span class="conj-reg">-ando</span></div><div class="conj-rows"><div><span class="pron">yo · tú · él</span>estoy · estás · está esperando</div><div><span class="pron">nos. · vos. · ellos</span>estamos · estáis · están esperando</div><div><span class="pron">ejemplo</span><strong>Estamos esperando</strong> a Marta.</div></div></div><div class="conj-card"><div class="conj-head"><span class="conj-main">comer</span><span class="conj-reg">-iendo</span></div><div class="conj-rows"><div><span class="pron">yo · tú · él</span>estoy · estás · está comiendo</div><div><span class="pron">nos. · vos. · ellos</span>estamos · estáis · están comiendo</div><div><span class="pron">ejemplo</span>Iker <strong>está comiendo</strong> con Sole.</div></div></div><div class="conj-card"><div class="conj-head"><span class="conj-main">salir</span><span class="conj-reg">-iendo</span></div><div class="conj-rows"><div><span class="pron">yo · tú · él</span>estoy · estás · está saliendo</div><div><span class="pron">nos. · vos. · ellos</span>estamos · estáis · están saliendo</div><div><span class="pron">ejemplo</span><strong>Estamos saliendo</strong> de casa.</div></div></div></div>
+      <div class="note"><strong>Truco:</strong> solo cambia el verbo estar; el gerundio no cambia nunca. Dices "estoy llegando", "estamos llegando", "están llegando".</div>
+      <p style="margin:20px 0 6px; font-size:14.5px; color:var(--ink-soft);">Tres preguntas para quedar en tiempo real:</p>
+      <div class="irregular-grid"><div class="irr-card"><div class="irr-inf">1 · dónde</div><div class="irr-form">¿Dónde estáis?</div></div><div class="irr-card"><div class="irr-inf">2 · acción</div><div class="irr-form">¿Qué estás haciendo?</div></div><div class="irr-card"><div class="irr-inf">3 · cuándo</div><div class="irr-form">¿Cuándo llegáis?</div></div></div>
+      <div class="pron-note">🔊 <strong>Pronunciación de hoy:</strong> El gerundio tiene el acento en la sílaba anterior a -ndo: lle-GAN-do, co-MIEN-do. Practica a velocidad de mensaje de voz.</div>
+      <div class="compare-warning"><strong>Cuidado:</strong> No uses el gerundio para planes futuros: "mañana estoy jugando" suena raro. Para el futuro usa "voy a" (ya lo conoces).</div>
     </div>
   </section>
 
   <section class="block">
-    <div class="block-head"><span class="block-num">2</span><h2>Repaso relámpago<span class="en">Quick review</span></h2><span class="time-tag">6 min</span></div>
-    <p class="vocab-hint">Seis piezas de vocabulario para anécdotas más elaboradas y giros narrativos. Toca cada tarjeta para ver un ejemplo. Dilo en voz alta antes de mirar el reverso.<span class="en">Six pieces of vocabulary for more elaborate anecdotes and narrative twists. Tap each card to see an example. Say it out loud before looking at the back.</span></p>
+    <div class="block-head"><span class="block-num">2</span><h2>Repaso relámpago</h2><span class="time-tag">6 min</span></div>
+    <p class="vocab-hint">Seis mensajes cortos de WhatsApp con amigos. Toca cada tarjeta para ver un ejemplo. Dilo en voz alta antes de mirar el reverso.</p>
     <div class="vocab-grid" id="vocab-grid"></div>
   </section>
 
   <section class="block">
-    <div class="block-head"><span class="block-num">3</span><h2>Practica: indefinido, imperfecto y conectores mezclados<span class="en">Practice: simple past, imperfect and connectors mixed</span></h2><span class="time-tag">12 min</span></div>
+    <div class="block-head"><span class="block-num">3</span><h2>Practica</h2><span class="time-tag">12 min</span></div>
     <div class="panel">
-      <p class="vocab-hint" style="margin-bottom:14px;">30 frases mezclando indefinido, imperfecto y conectores, marcadas con una etiqueta de color para que sepas qué pieza toca: las primeras 10 se hacen en voz alta en clase — di la opción correcta antes de tocar el botón; el resto queda como repaso auditivo para casa.<span class="en">30 sentences mixing simple past, imperfect and connectors, marked with a colour tag so you know which piece is needed: the first 10 are done out loud in class — say the correct option before tapping the button; the rest is listening review for home.</span></p>
+      <p class="vocab-hint" style="margin-bottom:14px;">10 frases eligiendo la forma correcta de estar + gerundio: se hacen en voz alta en clase.</p>
       <div id="exercises"></div>
       <div class="check-bar">
         <div style="display:flex; gap:10px;">
@@ -436,64 +388,36 @@ body.show-en .en{ display:block; }
         <span id="score-text"></span>
       </div>
     </div>
+  </section>
 
-    <div class="panel retos" id="retos">
-      <div class="reto" id="reto-orden">
-        <p class="reto-title"><span class="reto-tag">Reto 1</span>Ordena la anécdota</p>
-        <p class="reto-desc">Toca las palabras en el orden correcto. Toca una palabra de la línea para devolverla.<span class="en">Tap the words in the right order. Tap a word in the line to send it back.</span></p>
-        <div id="orden-wrap"></div>
-        <div class="reto-bar">
-          <button class="btn-primary" id="orden-check">Comprobar</button>
-          <button class="btn-ghost" id="orden-reset">Reiniciar</button>
-          <span class="reto-score" id="orden-score"></span>
-        </div>
-      </div>
-
-      <div class="reto" id="reto-une">
-        <p class="reto-title"><span class="reto-tag">Reto 2</span>Une el conector con su función</p>
-        <p class="reto-desc">¿Para qué sirve cada conector en una anécdota? Toca el conector y luego su función.<span class="en">What is each connector for in an anecdote? Tap the connector, then its function.</span></p>
-        <div class="match-cols">
-          <div class="match-col" id="match-left"></div>
-          <div class="match-col" id="match-right"></div>
-        </div>
-        <div class="reto-bar">
-          <button class="btn-ghost" id="match-reset">Reiniciar</button>
-          <span class="reto-score" id="match-score"></span>
-        </div>
-      </div>
-
-      <div class="reto" id="reto-huecos">
-        <p class="reto-title"><span class="reto-tag">Reto 3</span>Indefinido o imperfecto: escribe la forma</p>
-        <p class="reto-desc">Conjuga el verbo entre paréntesis. Fíjate en la etiqueta: te dice qué pieza toca. No hace falta escribir las tildes.<span class="en">Conjugate the verb in brackets. Look at the tag: it tells you which piece is needed. You don't need to type the accents.</span></p>
-        <div id="huecos-wrap"></div>
-        <div class="reto-bar">
-          <button class="btn-primary" id="huecos-check">Comprobar</button>
-          <button class="btn-ghost" id="huecos-reset">Reiniciar</button>
-          <span class="reto-score" id="huecos-score"></span>
-        </div>
-      </div>
+  <section class="block">
+    <div class="block-head"><span class="block-num">★</span><h2>Tres minijuegos</h2><span class="time-tag">extra</span></div>
+    <div class="panel">
+      <div class="game" id="g-sort"></div>
+      <div class="game" id="g-match"></div>
+      <div class="game" id="g-chat"></div>
     </div>
   </section>
 
   <section class="block">
-    <div class="block-head"><span class="block-num">4</span><h2>Construye tu anécdota<span class="en">Build your anecdote</span></h2><span class="time-tag">8 min</span></div>
-    <p class="lede" style="margin-bottom:16px;">Cada tarjeta te da un fragmento de anécdota que tienes que completar mezclando indefinido, imperfecto y un conector. Las primeras 6 se trabajan en clase; el resto queda como banco de repaso para casa.<span class="en">Each card gives you a fragment of an anecdote that you have to complete by mixing simple past, imperfect and a connector. The first 6 are worked on in class; the rest is a review bank for home.</span></p>
+    <div class="block-head"><span class="block-num">4</span><h2>Cuéntales tu plan</h2><span class="time-tag">8 min</span></div>
+    <p class="lede" style="margin-bottom:16px;">Cada tarjeta es un amigo que te escribe por WhatsApp. Contesta con estar + gerundio. Las primeras 6 se trabajan en clase; el resto queda como banco de repaso para casa.</p>
     <div class="characters" id="characters"></div>
   </section>
 
   <section class="block roleplay-panel">
-    <div class="block-head"><span class="block-num">5</span><h2>Roleplay: anécdota larga con interrupciones<span class="en">Roleplay: long anecdote with interruptions</span></h2><span class="time-tag">14 min</span></div>
-    <p class="lede" style="margin-bottom:16px;">5 escenas donde cuentas una anécdota de 1-2 minutos mientras la gente te interrumpe, pregunta y reacciona — todo mezclando los pasados y los conectores de las últimas clases. Practicamos en voz alta la escena principal en clase; el resto son para escuchar y practicar por tu cuenta durante la semana.<span class="en">5 scenes where you tell a 1–2 minute anecdote while people interrupt, ask questions and react — all mixing the past tenses and connectors from the last classes. We practise the main scene out loud in class; the rest are for listening and practising on your own during the week.</span></p>
+    <div class="block-head"><span class="block-num">5</span><h2>Roleplay: quedar por WhatsApp</h2><span class="time-tag">14 min</span></div>
+    <p class="lede" style="margin-bottom:16px;">2 escenas con amigos donde os localizáis y contáis qué hacéis ahora mismo. Practicamos la primera en voz alta en clase.</p>
     <div class="scene-tabs" id="scene-tabs"></div>
     <div id="scene-container"></div>
-    <div class="roleplay-tip"><strong>En clase:</strong> practicaremos la escena "Fiesta con amigos: contar una anécdota larga mientras la gente interrumpe y pregunta" en voz alta, cambiando de rol. El resto de escenas son para escuchar y repetir por tu cuenta durante la semana — la idea es que las digas, no que las escribas.<span class="en">In class: we will practise the scene “Party with friends: telling a long anecdote while people interrupt and ask questions” out loud, switching roles. The other scenes are for listening and repeating on your own during the week — the idea is that you say them, not write them.</span></div>
+    <div class="roleplay-tip"><strong>En clase:</strong> practicaremos la escena "Quedamos en la puerta" en voz alta, cambiando de rol. Las otras escenas son para escuchar y repetir por tu cuenta. La idea es que las digas, no que las escribas.</div>
   </section>
 
   <section class="block task-panel">
-    <div class="block-head"><span class="block-num">6</span><h2 style="color:var(--family)">Tu tarea<span class="en">Your homework</span></h2><span class="time-tag">3 min</span></div>
-    <p style="margin:0; font-size:15px; color:var(--ink-soft);">Grábate contando una anécdota de 1-2 minutos, mezclando indefinido, imperfecto y al menos un conector conversacional ("total que", "resulta que", "o sea"). No hace falta que sea perfecta — el objetivo es la fluidez, no la precisión gramatical.<span class="en">Record yourself telling a 1–2 minute anecdote, mixing simple past, imperfect and at least one conversational connector (“total que”, “resulta que”, “o sea”). It doesn't have to be perfect — the goal is fluency, not grammatical accuracy.</span></p>
-    <textarea id="final-task" placeholder="Notas rápidas sobre qué anécdota contaste (opcional)..."></textarea>
-    <p style="margin:10px 2px 0; font-size:12.5px; color:var(--ink-faint);">Esto es solo un apoyo para ti — no hace falta que esté perfecto. Lo importante es decirlo en voz alta y grabarte, no el texto escrito.<span class="en">This is only support for you — it doesn't have to be perfect. What matters is saying it out loud and recording yourself, not the written text.</span></p>
+    <div class="block-head"><span class="block-num">6</span><h2 style="color:var(--family)">Tu tarea</h2><span class="time-tag">3 min</span></div>
+    <p style="margin:0; font-size:15px; color:var(--ink-soft);">Escribe o di en voz alta 5 mensajes de WhatsApp para tus amigos. Usa estar + gerundio en cada uno y una pregunta. Ejemplo: "Marta, estamos esperando en la puerta. ¿Dónde estás?".</p>
+    <textarea id="final-task" placeholder="Tus 5 frases (opcional)..."></textarea>
+    <p style="margin:10px 2px 0; font-size:12.5px; color:var(--ink-faint);">Esto es solo un apoyo para ti: no hace falta que esté perfecto. Lo importante es decirlo en voz alta, no el texto escrito.</p>
     <div class="task-footer">
       <span id="task-count">0 líneas escritas</span>
       <div style="display:flex; gap:10px; align-items:center;">
@@ -506,20 +430,13 @@ body.show-en .en{ display:block; }
 </main>
 
 <footer>
-  <span>Clase 17 · Anecdotes at full speed</span>
-  <span>Próxima clase → Clase 18: Full speed small talk</span>
+  <span>Clase 17 · ¿Dónde estáis?</span>
+  <span>Próxima clase → Clase 18</span>
 </footer>
 
 <script>
 /* ---------- VOCAB ---------- */
-const VOCAB = [
-  {front:"resulta que", back:"Resulta que el bar estaba cerrado y tuvimos que buscar otro plan.", en:"It turns out the bar was closed and we had to find another plan."},
-  {front:"de repente", back:"De repente empezó a llover y todos salimos corriendo.", en:"Suddenly it started raining and we all ran off."},
-  {front:"sin venir a cuento", back:"Sin venir a cuento, se puso a cantar en medio de la calle.", en:"Out of nowhere, he started singing in the middle of the street."},
-  {front:"para colmo", back:"Perdimos el autobús y, para colmo, empezó a llover.", en:"We missed the bus and, to top it off, it started raining."},
-  {front:"lo mejor de todo", back:"Y lo mejor de todo es que al final todo salió genial.", en:"And the best part of it all is that everything turned out great in the end."},
-  {front:"no veas", back:"No veas la cara que puso cuando se enteró de la noticia.", en:"You should've seen the face he made when he found out the news."},
-];
+const VOCAB = [{"front": "estoy llegando", "back": "Estoy llegando, empezad sin mí.", "en": "I'm arriving, start without me."}, {"front": "estamos esperando", "back": "Estamos esperando en la puerta.", "en": "We're waiting at the door."}, {"front": "estás haciendo", "back": "¿Qué estás haciendo ahora?", "en": "What are you doing now?"}, {"front": "estoy aparcando", "back": "Estoy aparcando, un minuto.", "en": "I'm parking, one minute."}, {"front": "están pidiendo", "back": "Marta y Sole están pidiendo las bebidas.", "en": "Marta and Sole are ordering the drinks."}, {"front": "estoy saliendo", "back": "Estoy saliendo de casa.", "en": "I'm leaving home."}];
 
 const grid = document.getElementById('vocab-grid');
 VOCAB.forEach(v=>{
@@ -545,51 +462,21 @@ VOCAB.forEach(v=>{
 });
 
 /* ---------- EXERCISES ---------- */
-const EXERCISES = [
-  {"sentence": "<span class=\"ex-tag indefinido\">indefinido</span>Cuando <span class=\"gap\">___</span> al bar, ya no quedaban mesas libres.", "options": ["llegamos","llegábamos","llegaríamos"], "answer": "llegamos", "en": "When we arrived at the bar, there were no tables left."},
-  {"sentence": "<span class=\"ex-tag imperfecto\">imperfecto</span>Esa noche <span class=\"gap\">___</span> muchísimo frío, no lo olvido.", "options": ["hacía","hizo","hace"], "answer": "hacía", "en": "That night it was very cold, I don't forget it."},
-  {"sentence": "<span class=\"ex-tag conector\">conector</span><span class=\"gap\">___</span> el bar estaba cerrado por reformas.", "options": ["Resulta que","Al final","Para colmo"], "answer": "Resulta que", "en": "It turns out the bar was closed for renovations."},
-  {"sentence": "<span class=\"ex-tag indefinido\">indefinido</span>Al final <span class=\"gap\">___</span> ir a otro bar de la misma calle.", "options": ["decidimos","decidíamos","decidiríamos"], "answer": "decidimos", "en": "In the end we decided to go to another bar on the same street."},
-  {"sentence": "<span class=\"ex-tag imperfecto\">imperfecto</span>Mi amigo <span class=\"gap\">___</span> una camisa horrible esa noche.", "options": ["llevaba","llevó","lleva"], "answer": "llevaba", "en": "My friend was wearing a horrible shirt that night."},
-  {"sentence": "<span class=\"ex-tag conector\">conector</span><span class=\"gap\">___</span>, empezó a llover justo cuando salimos.", "options": ["De repente","Resulta que","Lo mejor de todo"], "answer": "De repente", "en": "Suddenly, it started raining right when we left."},
-  {"sentence": "<span class=\"ex-tag indefinido\">indefinido</span>Se me <span class=\"gap\">___</span> el móvil al suelo y se rompió la pantalla.", "options": ["cayó","caía","cae"], "answer": "cayó", "en": "My phone fell to the ground and the screen broke."},
-  {"sentence": "<span class=\"ex-tag imperfecto\">imperfecto</span>Todos <span class=\"gap\">___</span> tan borrachos que nadie se dio cuenta.", "options": ["estaban","estuvieron","están"], "answer": "estaban", "en": "Everyone was so drunk that nobody noticed."},
-  {"sentence": "<span class=\"ex-tag conector\">conector</span><span class=\"gap\">___</span>, perdimos el último metro y tuvimos que andar a casa.", "options": ["Para colmo","De repente","Resulta que"], "answer": "Para colmo", "en": "To top it off, we missed the last metro and had to walk home."},
-  {"sentence": "<span class=\"ex-tag indefinido\">indefinido</span>Al final <span class=\"gap\">___</span> a casa a las cuatro de la madrugada.", "options": ["llegamos","llegábamos","llegaríamos"], "answer": "llegamos", "en": "In the end we got home at four in the morning."},
-  {"sentence": "<span class=\"ex-tag imperfecto\">imperfecto</span>La música <span class=\"gap\">___</span> tan alta que no nos oíamos hablar.", "options": ["estaba","estuvo","está"], "answer": "estaba", "en": "The music was so loud that we couldn't hear each other talk."},
-  {"sentence": "<span class=\"ex-tag conector\">conector</span><span class=\"gap\">___</span>, sin venir a cuento, se puso a bailar encima de la mesa.", "options": ["De repente","Al final","Para colmo"], "answer": "De repente", "en": "Suddenly, out of nowhere, he started dancing on the table."},
-  {"sentence": "<span class=\"ex-tag indefinido\">indefinido</span>Alguien le <span class=\"gap\">___</span> una foto y ahora es viral en el grupo.", "options": ["sacó","sacaba","saca"], "answer": "sacó", "en": "Someone took a photo of him and now it's viral in the group."},
-  {"sentence": "<span class=\"ex-tag imperfecto\">imperfecto</span>Todo el mundo <span class=\"gap\">___</span> muchísimo con la situación.", "options": ["se reía","se rió","se ríe"], "answer": "se reía", "en": "Everyone was laughing a lot at the situation."},
-  {"sentence": "<span class=\"ex-tag conector\">conector</span>Y <span class=\"gap\">___</span>, al día siguiente ni se acordaba de nada.", "options": ["lo mejor de todo","de repente","al final"], "answer": "lo mejor de todo", "en": "And the best part of it all, the next day he didn't remember anything."},
-  {"sentence": "<span class=\"ex-tag indefinido\">indefinido</span>La fiesta <span class=\"gap\">___</span> sobre las once de la noche.", "options": ["empezó","empezaba","empieza"], "answer": "empezó", "en": "The party started around eleven at night."},
-  {"sentence": "<span class=\"ex-tag imperfecto\">imperfecto</span>El piso <span class=\"gap\">___</span> pequeñísimo para tanta gente.", "options": ["era","fue","es"], "answer": "era", "en": "The apartment was tiny for so many people."},
-  {"sentence": "<span class=\"ex-tag conector\">conector</span><span class=\"gap\">___</span> al final resultó que era el cumpleaños de otra persona también.", "options": ["Resulta que","Para colmo","De repente"], "answer": "Resulta que", "en": "It turns out that in the end it was also someone else's birthday."},
-  {"sentence": "<span class=\"ex-tag indefinido\">indefinido</span>Nos <span class=\"gap\">___</span> hasta las cinco de la mañana sin darnos cuenta.", "options": ["quedamos","quedábamos","quedaremos"], "answer": "quedamos", "en": "We stayed until five in the morning without realizing it."},
-  {"sentence": "<span class=\"ex-tag imperfecto\">imperfecto</span>Yo no <span class=\"gap\">___</span> a casi nadie de los que estaban allí.", "options": ["conocía","conocí","conozco"], "answer": "conocía", "en": "I didn't know almost anyone who was there."},
-  {"sentence": "<span class=\"ex-tag conector\">conector</span><span class=\"gap\">___</span>, no veas la cara que puso mi amigo cuando lo vio.", "options": ["No veas","Resulta que","Para colmo"], "answer": "No veas", "en": "You should've seen the face my friend made when he saw it."},
-  {"sentence": "<span class=\"ex-tag indefinido\">indefinido</span>El taxi <span class=\"gap\">___</span> media hora en llegar.", "options": ["tardó","tardaba","tarda"], "answer": "tardó", "en": "The taxi took half an hour to arrive."},
-  {"sentence": "<span class=\"ex-tag imperfecto\">imperfecto</span>Fuera <span class=\"gap\">___</span> muchísima gente esperando para entrar.", "options": ["había","hubo","hay"], "answer": "había", "en": "Outside there was a lot of people waiting to get in."},
-  {"sentence": "<span class=\"ex-tag conector\">conector</span><span class=\"gap\">___</span>, entramos gracias a que Iker conocía al portero.", "options": ["Al final","De repente","Lo mejor de todo"], "answer": "Al final", "en": "In the end, we got in thanks to Iker knowing the doorman."},
-  {"sentence": "<span class=\"ex-tag indefinido\">indefinido</span>Total que <span class=\"gap\">___</span> siendo la mejor fiesta del verano.", "options": ["acabó","acababa","acaba"], "answer": "acabó", "en": "So anyway it ended up being the best party of the summer."},
-  {"sentence": "<span class=\"ex-tag imperfecto\">imperfecto</span>Nadie <span class=\"gap\">___</span> que iba a acabar así de bien.", "options": ["se esperaba","se esperó","se espera"], "answer": "se esperaba", "en": "Nobody expected it would end up this well."},
-  {"sentence": "<span class=\"ex-tag conector\">conector</span><span class=\"gap\">___</span>, se nos olvidó por completo que teníamos clase al día siguiente.", "options": ["Para colmo","Resulta que","No veas"], "answer": "Para colmo", "en": "To top it off, we completely forgot we had class the next day."},
-  {"sentence": "<span class=\"ex-tag indefinido\">indefinido</span>Al final todos <span class=\"gap\">___</span> a casa juntos en un taxi.", "options": ["volvimos","volvíamos","volveremos"], "answer": "volvimos", "en": "In the end we all went home together in a taxi."},
-  {"sentence": "<span class=\"ex-tag imperfecto\">imperfecto</span>El taxista <span class=\"gap\">___</span> una cara de sueño impresionante.", "options": ["tenía","tuvo","tiene"], "answer": "tenía", "en": "The taxi driver had an impressively sleepy face."},
-  {"sentence": "<span class=\"ex-tag conector\">conector</span>Y <span class=\"gap\">___</span> es que al final se convirtió en una anécdota que contamos siempre.", "options": ["lo mejor de todo","de repente","al final"], "answer": "lo mejor de todo", "en": "And the best part of it all is that it ended up becoming an anecdote we always tell."}
-];
+const shuffleArr=a=>{const r=[...a];for(let i=r.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[r[i],r[j]]=[r[j],r[i]];}return r;};
+const EXERCISES = [{"sentence": "Yo <span class=\"gap\">___</span> al bar ahora mismo.", "options": ["estoy llegando", "estás llegando", "estamos llegando"], "answer": "estoy llegando", "en": "I'm arriving at the bar right now."}, {"sentence": "Marta <span class=\"gap\">___</span> a todos en la puerta.", "options": ["está esperando", "estás esperando", "están esperando"], "answer": "está esperando", "en": "Marta is waiting for everyone at the door."}, {"sentence": "Nosotros <span class=\"gap\">___</span> una pizza para el grupo.", "options": ["estamos pidiendo", "estáis pidiendo", "están pidiendo"], "answer": "estamos pidiendo", "en": "We're ordering a pizza for the group."}, {"sentence": "¿Vosotros <span class=\"gap\">___</span> ya o todavía en casa?", "options": ["estáis saliendo", "estamos saliendo", "están saliendo"], "answer": "estáis saliendo", "en": "Are you all leaving yet or still at home?"}, {"sentence": "Iker y Sole <span class=\"gap\">___</span> en el parque.", "options": ["están corriendo", "está corriendo", "estamos corriendo"], "answer": "están corriendo", "en": "Iker and Sole are running in the park."}, {"sentence": "¿Qué <span class=\"gap\">___</span> tú ahora?", "options": ["estás haciendo", "estoy haciendo", "está haciendo"], "answer": "estás haciendo", "en": "What are you doing now?"}, {"sentence": "Yo <span class=\"gap\">___</span> un mensaje a Diego.", "options": ["estoy escribiendo", "estás escribiendo", "estamos escribiendo"], "answer": "estoy escribiendo", "en": "I'm writing a message to Diego."}, {"sentence": "Mis amigos <span class=\"gap\">___</span> el partido en la tele.", "options": ["están viendo", "está viendo", "estamos viendo"], "answer": "están viendo", "en": "My friends are watching the match on TV."}, {"sentence": "Gerundio de cenar: están <span class=\"gap\">___</span>.", "options": ["cenando", "cenendo", "cenar"], "answer": "cenando", "en": "Gerund of cenar: cenando."}, {"sentence": "Gerundio de beber: estoy <span class=\"gap\">___</span>.", "options": ["bebiendo", "bebando", "beber"], "answer": "bebiendo", "en": "Gerund of beber: bebiendo."}];
 
 const exWrap = document.getElementById('exercises');
 EXERCISES.forEach((ex, i)=>{
   if(i === 0){
     const divider = document.createElement('div');
     divider.className = 'ex-divider en-clase';
-    divider.innerHTML = 'en clase · ítems 1–10<span class="en">in class · items 1–10</span>';
+    divider.textContent = 'en clase · ítems 1–10';
     exWrap.appendChild(divider);
   }
   if(i === 10){
     const divider = document.createElement('div');
     divider.className = 'ex-divider';
-    divider.innerHTML = 'para casa · repaso auditivo opcional<span class="en">for home · optional listening review</span>';
+    divider.textContent = 'para casa · repaso auditivo opcional';
     exWrap.appendChild(divider);
   }
   const el = document.createElement('div');
@@ -598,7 +485,7 @@ EXERCISES.forEach((ex, i)=>{
   el.innerHTML = `
     <div class="ex-sentence">${i+1}. ${ex.sentence}</div>
     <div class="ex-options">
-      ${ex.options.map(o=>`<button class="opt-btn" data-value="${o}">${o}</button>`).join('')}
+      ${shuffleArr(ex.options).map(o=>`<button class="opt-btn" data-value="${o}">${o}</button>`).join('')}
     </div>
     <p class="en" style="margin-top:8px;">${ex.en}</p>
   `;
@@ -637,192 +524,21 @@ document.getElementById('reset-btn').addEventListener('click', ()=>{
   document.getElementById('score-text').textContent = '';
 });
 
-/* ---------- RETOS EXTRA ---------- */
-const normalize = (t)=> t.toLowerCase().trim().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/\s+/g,' ');
-const shuffle = (arr, avoid)=>{
-  let a;
-  do{
-    a = arr.slice();
-    for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; }
-  }while(avoid && a.join(' ')===avoid && arr.length>1);
-  return a;
-};
-
-/* Reto 1 · ordenar palabras */
-const ORDEN = [
-  {answer:"Resulta que el bar estaba cerrado por reformas", en:"It turns out the bar was closed for renovations."},
-  {answer:"Para colmo perdimos el último autobús a casa", en:"To top it off, we missed the last bus home."},
-  {answer:"De repente empezó a llover y todos salimos corriendo", en:"Suddenly it started raining and we all ran off."}
-];
-const ordenWrap = document.getElementById('orden-wrap');
-function buildOrden(){
-  ordenWrap.innerHTML = '';
-  ORDEN.forEach((it, i)=>{
-    const words = it.answer.split(' ');
-    const el = document.createElement('div');
-    el.className = 'ord-item';
-    el.innerHTML = `
-      <div class="ord-line" aria-label="Frase ${i+1}"></div>
-      <div class="ord-bank"></div>
-      <div class="ord-fb"></div>
-      <span class="en">${it.en}</span>`;
-    const line = el.querySelector('.ord-line'), bank = el.querySelector('.ord-bank');
-    shuffle(words, it.answer).forEach(w=>{
-      const b = document.createElement('button');
-      b.type = 'button'; b.className = 'chip'; b.textContent = w;
-      b.addEventListener('click', ()=>{
-        if(line.classList.contains('correct')) return;
-        line.classList.remove('wrong'); el.querySelector('.ord-fb').textContent = '';
-        (b.parentElement === bank ? line : bank).appendChild(b);
-      });
-      bank.appendChild(b);
-    });
-    el._answer = it.answer;
-    ordenWrap.appendChild(el);
-  });
-  document.getElementById('orden-score').textContent = '';
-}
-document.getElementById('orden-check').addEventListener('click', ()=>{
-  let ok = 0;
-  ordenWrap.querySelectorAll('.ord-item').forEach(el=>{
-    const line = el.querySelector('.ord-line');
-    const built = [...line.querySelectorAll('.chip')].map(c=>c.textContent).join(' ');
-    const fb = el.querySelector('.ord-fb');
-    line.classList.remove('correct','wrong');
-    if(built === el._answer){ line.classList.add('correct'); fb.textContent = ''; ok++; }
-    else{ line.classList.add('wrong'); fb.textContent = built ? '→ ' + el._answer : 'Construye la frase con las palabras de abajo.'; }
-  });
-  document.getElementById('orden-score').textContent = `${ok} / ${ORDEN.length} correctas`;
-});
-document.getElementById('orden-reset').addEventListener('click', buildOrden);
-buildOrden();
-
-/* Reto 2 · emparejar conector ↔ función */
-const MATCH = [
-  {k:"resulta que", v:"revelar un dato sorprendente", en:"reveal a surprising fact"},
-  {k:"de repente", v:"algo pasa sin avisar", en:"something happens without warning"},
-  {k:"para colmo", v:"añadir otra cosa mala", en:"add another bad thing"},
-  {k:"lo mejor de todo", v:"el mejor momento de la historia", en:"the best moment of the story"},
-  {k:"no veas", v:"reacción exagerada a algo increíble", en:"exaggerated reaction to something incredible"},
-  {k:"sin venir a cuento", v:"algo que no tiene relación con lo anterior", en:"something unrelated to what came before"}
-];
-const mLeft = document.getElementById('match-left'), mRight = document.getElementById('match-right');
-let mSel = null, mDone = 0;
-function buildMatch(){
-  mLeft.innerHTML = ''; mRight.innerHTML = ''; mSel = null; mDone = 0;
-  MATCH.forEach(m=>{
-    const b = document.createElement('button');
-    b.type='button'; b.className='match-btn'; b.dataset.k = m.k; b.textContent = m.k;
-    b.addEventListener('click', ()=>{
-      if(b.classList.contains('correct')) return;
-      mLeft.querySelectorAll('.match-btn').forEach(x=>x.classList.remove('picked','wrong'));
-      mRight.querySelectorAll('.match-btn').forEach(x=>x.classList.remove('wrong'));
-      b.classList.add('picked'); mSel = b;
-    });
-    mLeft.appendChild(b);
-  });
-  shuffle(MATCH).forEach(m=>{
-    const b = document.createElement('button');
-    b.type='button'; b.className='match-btn'; b.dataset.v = m.k;
-    b.innerHTML = `${m.v}<span class="en">${m.en}</span>`;
-    b.addEventListener('click', ()=>{
-      if(!mSel || b.classList.contains('correct')) return;
-      if(mSel.dataset.k === m.k){
-        mSel.classList.remove('picked'); mSel.classList.add('correct'); b.classList.add('correct');
-        mSel = null; mDone++;
-        document.getElementById('match-score').textContent = mDone === MATCH.length ? '¡Todas unidas! ✓' : `${mDone} / ${MATCH.length} unidas`;
-      }else{
-        b.classList.add('wrong'); mSel.classList.add('wrong'); mSel.classList.remove('picked');
-        const bad = b, badL = mSel; mSel = null;
-        setTimeout(()=>{ bad.classList.remove('wrong'); badL.classList.remove('wrong'); }, 700);
-      }
-    });
-    mRight.appendChild(b);
-  });
-  document.getElementById('match-score').textContent = '';
-}
-document.getElementById('match-reset').addEventListener('click', buildMatch);
-buildMatch();
-
-/* Reto 3 · escribir la forma */
-const HUECOS = [
-  {tag:"indefinido", before:"Anoche mi hermano (perder) ", after:" el último tren.", answer:"perdió", close:["perdía"], en:"Last night my brother missed the last train."},
-  {tag:"imperfecto", before:"Cuando entramos, todos (bailar) ", after:" en la terraza.", answer:"bailaban", close:["bailaron"], en:"When we came in, everyone was dancing on the terrace."},
-  {tag:"imperfecto", before:"Mientras esperábamos, (hacer) ", after:" un frío horrible.", answer:"hacía", close:["hizo"], en:"While we waited, it was horribly cold."},
-  {tag:"indefinido", before:"Sin venir a cuento, Iker (cantar) ", after:" una canción entera.", answer:"cantó", close:["cantaba"], en:"Out of nowhere, Iker sang a whole song."},
-  {tag:"indefinido", before:"Total que al final (nosotros, volver) ", after:" a casa andando.", answer:"volvimos", close:["volvíamos"], en:"So anyway, in the end we walked back home."}
-];
-const huecosWrap = document.getElementById('huecos-wrap');
-function buildHuecos(){
-  huecosWrap.innerHTML = '';
-  HUECOS.forEach((h,i)=>{
-    const el = document.createElement('div');
-    el.className = 'gap-item';
-    el.innerHTML = `
-      <div class="gap-sentence"><span class="ex-tag ${h.tag}">${h.tag}</span>${h.before}<input class="gap-input" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Hueco ${i+1}">${h.after}</div>
-      <div class="gap-fb"></div>
-      <span class="en">${h.en}</span>`;
-    huecosWrap.appendChild(el);
-  });
-  document.getElementById('huecos-score').textContent = '';
-}
-document.getElementById('huecos-check').addEventListener('click', ()=>{
-  let ok = 0;
-  huecosWrap.querySelectorAll('.gap-item').forEach((el,i)=>{
-    const h = HUECOS[i], inp = el.querySelector('.gap-input'), fb = el.querySelector('.gap-fb');
-    const v = normalize(inp.value);
-    inp.classList.remove('correct','close','wrong');
-    if(v === normalize(h.answer)){ inp.classList.add('correct'); fb.textContent = '✓'; fb.style.color = 'var(--b2)'; ok++; }
-    else if(v && h.close.map(normalize).includes(v)){ inp.classList.add('close'); fb.textContent = 'Casi: ese es el otro pasado. Mira la etiqueta: ¿acción o fondo?'; fb.style.color = 'var(--b3)'; }
-    else{ inp.classList.add('wrong'); fb.textContent = '→ ' + h.answer; fb.style.color = 'var(--family)'; }
-  });
-  document.getElementById('huecos-score').textContent = `${ok} / ${HUECOS.length} correctas`;
-});
-document.getElementById('huecos-reset').addEventListener('click', buildHuecos);
-buildHuecos();
-
-/* ---------- TOGGLE ES / ES + EN ---------- */
-const LANG_KEY = 'andrei-clase17-lang';
-const btnEs = document.getElementById('lang-es'), btnEn = document.getElementById('lang-en');
-function setLang(mode, persist){
-  document.body.classList.toggle('show-en', mode === 'en');
-  btnEs.setAttribute('aria-pressed', String(mode !== 'en'));
-  btnEn.setAttribute('aria-pressed', String(mode === 'en'));
-  if(persist && window.storage){ try{ window.storage.set(LANG_KEY, mode); }catch(e){} }
-}
-btnEs.addEventListener('click', ()=>setLang('es', true));
-btnEn.addEventListener('click', ()=>setLang('en', true));
-(async ()=>{
-  if(!window.storage) return;
-  try{ const r = await window.storage.get(LANG_KEY); if(r && r.value === 'en') setLang('en', false); }catch(e){}
-})();
-
 /* ---------- CHARACTER CARDS ---------- */
-const CHARACTERS = [
-  {"name": "Marta", "role": "Te pide que le cuentes cómo empezó una anécdota, mezclando indefinido e imperfecto", "roleEn": "She asks you to tell how an anecdote started, mixing simple past and imperfect", "facts": ["clase 17","indefinido + imperfecto","pareja, curiosa"], "prompt": "Cuenta el inicio de la anécdota, describiendo la escena y la primera acción:", "promptEn": "Tell the start of the anecdote, describing the scene and the first action:"},
-  {"name": "Iker", "role": "Te interrumpe para preguntar un detalle concreto de la anécdota que estás contando", "roleEn": "He interrupts to ask a specific detail about the anecdote you're telling", "facts": ["clase 17","indefinido","fútbol, impaciente"], "prompt": "Responde a su pregunta con un detalle concreto, usando indefinido:", "promptEn": "Answer his question with a specific detail, using simple past:"},
-  {"name": "Rubén", "role": "Te pide que uses un conector para pasar a la siguiente parte de tu historia", "roleEn": "He asks you to use a connector to move to the next part of your story", "facts": ["clase 17","resulta que / total que","académico, atento"], "prompt": "Continúa tu anécdota usando \"resulta que\" o \"total que\":", "promptEn": "Continue your anecdote using \"it turns out\" or \"so anyway\":"},
-  {"name": "Sole", "role": "Te pregunta cómo era el ambiente o la escena mientras pasaba todo", "roleEn": "She asks what the atmosphere or scene was like while it was all happening", "facts": ["clase 17","imperfecto","detallista, curiosa"], "prompt": "Describe el ambiente de la escena, usando imperfecto:", "promptEn": "Describe the scene's atmosphere, using imperfect:"},
-  {"name": "Diego", "role": "Reacciona con sorpresa a tu anécdota y te pide que sigas contando", "roleEn": "He reacts with surprise to your anecdote and asks you to keep telling it", "facts": ["clase 17","reacciones","informal, entusiasta"], "prompt": "Continúa la anécdota tras su reacción de sorpresa:", "promptEn": "Continue the anecdote after his surprised reaction:"},
-  {"name": "Un grupo entero en la fiesta", "role": "Todos te interrumpen a la vez con preguntas distintas sobre tu historia", "roleEn": "Everyone interrupts you at once with different questions about your story", "facts": ["clase 17","mezcla completa","grupo, ritmo rápido"], "prompt": "Responde a varias preguntas del grupo, mezclando indefinido e imperfecto:", "promptEn": "Answer several questions from the group, mixing simple past and imperfect:"},
-  {"name": "Un compañero de máster", "role": "Te pregunta cómo terminó al final una historia que empezaste a contarle antes", "roleEn": "He asks how a story you started telling him earlier ended", "facts": ["clase 17","desenlace","académico"], "prompt": "Cuenta el desenlace de la anécdota, usando indefinido y algún conector:", "promptEn": "Tell the ending of the anecdote, using simple past and a connector:"},
-  {"name": "La madre de Marta", "role": "Te pide que le cuentes con más detalle cómo era la gente en tu anécdota", "roleEn": "She asks you to tell with more detail what the people in your anecdote were like", "facts": ["formal","imperfecto","familia, curiosa"], "prompt": "Describe a las personas de la anécdota, usando imperfecto:", "promptEn": "Describe the people in the anecdote, using imperfect:"},
-  {"name": "Un amigo escéptico", "role": "No se cree del todo tu anécdota y te pide más pruebas o detalles", "roleEn": "He doesn't quite believe your anecdote and asks for more proof or details", "facts": ["clase 17","indefinido + imperfecto","escéptico, gracioso"], "prompt": "Defiende tu anécdota dando más detalles concretos:", "promptEn": "Defend your anecdote by giving more concrete details:"},
-  {"name": "Tú mismo, resumiendo la noche", "role": "Al final de la fiesta, resumes toda la noche en pocas frases para alguien que llegó tarde", "roleEn": "At the end of the party, you sum up the whole night in a few sentences for someone who arrived late", "facts": ["clase 17","total que","resumen final"], "prompt": "Resume toda la anécdota en 3-4 frases, usando \"total que\":", "promptEn": "Sum up the whole anecdote in 3-4 sentences, using \"so anyway\":"}
-];
+const CHARACTERS = [{"name": "Marta", "role": "Pregunta dónde estás", "roleEn": "She asks where you are", "facts": ["clase 17", "estoy llegando", "dónde"], "prompt": "Dile dónde estás y cuánto tardas:", "promptEn": "Tell her where you are and how long you'll take:"}, {"name": "Iker", "role": "Pregunta qué estás haciendo", "roleEn": "He asks what you're doing", "facts": ["clase 17", "estar + gerundio", "acción"], "prompt": "Contesta con una frase corta:", "promptEn": "Answer with a short sentence:"}, {"name": "Sole", "role": "Dice que ya está en el bar", "roleEn": "She says she's already at the bar", "facts": ["clase 17", "estar", "bar"], "prompt": "Responde y di cuándo llegas:", "promptEn": "Reply and say when you arrive:"}, {"name": "Diego", "role": "Pregunta por el grupo", "roleEn": "He asks about the group", "facts": ["clase 17", "estamos", "grupo"], "prompt": "Cuéntale qué hacéis tus amigos y tú:", "promptEn": "Tell him what you and your friends are doing:"}, {"name": "Rubén", "role": "Está esperando un taxi", "roleEn": "He's waiting for a taxi", "facts": ["clase 17", "está esperando", "taxi"], "prompt": "Pregunta dónde está y con quién:", "promptEn": "Ask where he is and with whom:"}, {"name": "Tu grupo de WhatsApp", "role": "Pregunta quién está en camino", "roleEn": "The group asks who is on the way", "facts": ["clase 17", "están", "camino"], "prompt": "Responde por ti y por dos amigos:", "promptEn": "Answer for yourself and two friends:"}];
 
 const charWrap = document.getElementById('characters');
 CHARACTERS.forEach((c, i)=>{
   if(i === 0){
     const divider = document.createElement('div');
     divider.className = 'ex-divider en-clase';
-    divider.innerHTML = 'en clase · tarjetas 1–6<span class="en">in class · cards 1–6</span>';
+    divider.textContent = 'en clase · tarjetas 1–6';
     charWrap.appendChild(divider);
   }
   if(i === 6){
     const divider = document.createElement('div');
     divider.className = 'ex-divider';
-    divider.innerHTML = 'para casa · banco de repaso<span class="en">for home · review bank</span>';
+    divider.textContent = 'para casa · banco de repaso';
     charWrap.appendChild(divider);
   }
   const card = document.createElement('div');
@@ -834,100 +550,14 @@ CHARACTERS.forEach((c, i)=>{
       <p class="char-role">${c.role}<span class="en">${c.roleEn}</span></p>
       <div class="char-facts">${c.facts.map(f=>`<span class="fact-tag">${f}</span>`).join('')}</div>
       <p class="char-prompt">${c.prompt}<span class="en">${c.promptEn}</span></p>
-      <textarea class="char-input" rows="2" placeholder="Resulta que... / Estaba... / Al final..."></textarea>
+      <textarea class="char-input" rows="2" placeholder="Escribe o di tu respuesta..."></textarea>
     </div>
   `;
   charWrap.appendChild(card);
 });
 
 /* ---------- ROLEPLAY SCENES ---------- */
-const SCENES = [
-  {
-    "id": "fiesta-interrupciones",
-    "tab": "Fiesta con amigos: anécdota larga con interrupciones",
-    "icon": "🎉",
-    "setup": "Estás en una fiesta contando una anécdota larga sobre algo que te pasó. La gente te interrumpe constantemente con preguntas y reacciones.",
-    "setupEn": "You're at a party telling a long anecdote about something that happened to you. People keep interrupting with questions and reactions.",
-    "lines": [
-      {"who": "friend", "name": "Sole", "text": "Bueno, cuenta, cuenta, ¿qué pasó el fin de semana pasado?", "textEn": "Well, tell us, tell us, what happened last weekend?"},
-      {"who": "you", "hint": "Empieza la anécdota describiendo la escena con imperfecto.", "hintEn": "Start the anecdote describing the scene with imperfect."},
-      {"who": "friend", "name": "Iker", "text": "Espera, espera, ¿esto fue en el bar de siempre o en otro sitio?", "textEn": "Wait, wait, was this at the usual bar or somewhere else?"},
-      {"who": "you", "hint": "Aclara el lugar y continúa con la acción principal en indefinido.", "hintEn": "Clarify the place and continue with the main action in simple past."},
-      {"who": "friend", "name": "Rubén", "text": "No me digas, ¿y qué pasó después?", "textEn": "No way, and what happened next?"},
-      {"who": "you", "hint": "Continúa la historia usando \"resulta que\" o \"total que\".", "hintEn": "Continue the story using \"it turns out\" or \"so anyway\"."},
-      {"who": "friend", "name": "Diego", "text": "¡Qué fuerte! ¿Y cómo terminó todo al final?", "textEn": "No way! And how did it all end up?"},
-      {"who": "you", "hint": "Cuenta el desenlace de la anécdota.", "hintEn": "Tell the ending of the anecdote."}
-    ]
-  },
-  {
-    "id": "recuerdo-canada",
-    "tab": "Contando un recuerdo de Canadá a los amigos de Marta",
-    "icon": "🍁",
-    "setup": "Los amigos españoles de Marta te piden que cuentes una anécdota de cuando vivías en Canadá.",
-    "setupEn": "Marta's Spanish friends ask you to tell an anecdote from when you lived in Canada.",
-    "lines": [
-      {"who": "friend", "name": "Marta", "text": "Cuéntales lo que te pasó una vez en invierno en Canadá.", "textEn": "Tell them what happened to you once in winter in Canada."},
-      {"who": "you", "hint": "Describe cómo era el invierno canadiense usando imperfecto.", "hintEn": "Describe what Canadian winter was like using imperfect."},
-      {"who": "friend", "name": "Amiga de Marta", "text": "Uf, ¿y hacía tanto frío como dicen?", "textEn": "Wow, and was it as cold as they say?"},
-      {"who": "you", "hint": "Responde describiendo el frío y luego cuenta qué pasó.", "hintEn": "Respond describing the cold and then tell what happened."},
-      {"who": "friend", "name": "Amiga de Marta", "text": "No veas, ¿y qué hiciste al final?", "textEn": "No way, and what did you do in the end?"},
-      {"who": "you", "hint": "Cuenta la acción principal de la anécdota usando indefinido.", "hintEn": "Tell the main action of the anecdote using simple past."},
-      {"who": "friend", "name": "Marta", "text": "Total que al final saliste bien de esa, ¿no?", "textEn": "So in the end you came out okay from that, right?"},
-      {"who": "you", "hint": "Cierra la anécdota con el desenlace y una reacción final.", "hintEn": "Close the anecdote with the ending and a final reaction."}
-    ]
-  },
-  {
-    "id": "anecdota-master",
-    "tab": "Anécdota de una clase del máster que salió mal",
-    "icon": "🎒",
-    "setup": "Rubén te pide que cuentes una anécdota divertida de algo que pasó en una clase del máster.",
-    "setupEn": "Rubén asks you to tell a funny anecdote about something that happened in a master's class.",
-    "lines": [
-      {"who": "friend", "name": "Rubén", "text": "Oye, cuéntame esa historia de la clase que se te olvidó preparar.", "textEn": "Hey, tell me that story about the class you forgot to prepare for."},
-      {"who": "you", "hint": "Empieza describiendo cómo era ese día, usando imperfecto.", "hintEn": "Start describing what that day was like, using imperfect."},
-      {"who": "friend", "name": "Rubén", "text": "Ay no, ¿y qué hizo el profesor cuando se dio cuenta?", "textEn": "Oh no, and what did the professor do when he noticed?"},
-      {"who": "you", "hint": "Cuenta la reacción del profesor usando indefinido.", "hintEn": "Tell the professor's reaction using simple past."},
-      {"who": "friend", "name": "Rubén", "text": "Para colmo seguro que había gente importante en la sala, ¿no?", "textEn": "To top it off there was probably important people in the room, right?"},
-      {"who": "you", "hint": "Confirma o desmiente, y continúa la anécdota con un giro.", "hintEn": "Confirm or deny, and continue the anecdote with a twist."},
-      {"who": "friend", "name": "Rubén", "text": "Menos mal, ¿y cómo se resolvió todo al final?", "textEn": "Thank goodness, and how did it all get resolved in the end?"},
-      {"who": "you", "hint": "Cuenta el desenlace de la historia.", "hintEn": "Tell the ending of the story."}
-    ]
-  },
-  {
-    "id": "escepticismo",
-    "tab": "Un amigo escéptico no se cree tu anécdota",
-    "icon": "🤨",
-    "setup": "Diego escucha tu anécdota pero no se la cree del todo y te pide más pruebas y detalles.",
-    "setupEn": "Diego listens to your anecdote but doesn't quite believe it and asks for more proof and details.",
-    "lines": [
-      {"who": "friend", "name": "Diego", "text": "Anda ya, no me creo que te pasara eso de verdad.", "textEn": "No way, I don't believe that really happened to you."},
-      {"who": "you", "hint": "Defiende la anécdota dando un detalle concreto que la hace creíble.", "hintEn": "Defend the anecdote by giving a concrete detail that makes it believable."},
-      {"who": "friend", "name": "Diego", "text": "Vale, ¿y quién más estaba allí para confirmarlo?", "textEn": "Okay, and who else was there to confirm it?"},
-      {"who": "you", "hint": "Cuenta quién más estaba, describiendo la escena con imperfecto.", "hintEn": "Tell who else was there, describing the scene with imperfect."},
-      {"who": "friend", "name": "Diego", "text": "Bueno, vale, te creo. ¿Y qué pasó justo después de eso?", "textEn": "Okay, fine, I believe you. And what happened right after that?"},
-      {"who": "you", "hint": "Continúa la anécdota con la siguiente parte de la historia.", "hintEn": "Continue the anecdote with the next part of the story."},
-      {"who": "friend", "name": "Diego", "text": "Vaya historia. Lo mejor de todo es que suena típico de ti.", "textEn": "What a story. The best part is that it sounds just like you."},
-      {"who": "you", "hint": "Reacciona a su comentario y cierra la conversación.", "hintEn": "React to his comment and close the conversation."}
-    ]
-  },
-  {
-    "id": "resumen-noche",
-    "tab": "Resumir toda la noche para alguien que llegó tarde",
-    "icon": "🌙",
-    "setup": "Al final de la fiesta, alguien que acaba de llegar te pide que le resumas rápidamente todo lo que ha pasado esa noche.",
-    "setupEn": "At the end of the party, someone who just arrived asks you to quickly sum up everything that happened that night.",
-    "lines": [
-      {"who": "friend", "name": "Amigo que llegó tarde", "text": "¡Ey! ¿Qué me he perdido? Contadme rápido lo importante.", "textEn": "Hey! What did I miss? Tell me quickly the important stuff."},
-      {"who": "you", "hint": "Empieza un resumen rápido usando \"total que\".", "hintEn": "Start a quick summary using \"so, to sum up\"."},
-      {"who": "friend", "name": "Amigo que llegó tarde", "text": "No me digas. ¿Y eso pasó de verdad o me estáis tomando el pelo?", "textEn": "No way. Did that really happen or are you all pulling my leg?"},
-      {"who": "you", "hint": "Confirma que pasó de verdad, dando un detalle más.", "hintEn": "Confirm it really happened, giving one more detail."},
-      {"who": "friend", "name": "Amigo que llegó tarde", "text": "Qué fuerte, ¿y cómo acabó la cosa al final?", "textEn": "No way, and how did it end up in the end?"},
-      {"who": "you", "hint": "Cuenta el desenlace final de la noche.", "hintEn": "Tell the final outcome of the night."},
-      {"who": "friend", "name": "Amigo que llegó tarde", "text": "Vaya noche me he perdido. Bueno, ¿qué hacemos ahora?", "textEn": "What a night I missed. Well, what do we do now?"},
-      {"who": "you", "hint": "Propón qué hacer ahora para cerrar la noche.", "hintEn": "Propose what to do now to close out the night."}
-    ]
-  }
-];
+const SCENES = [{"id": "quedar", "tab": "Quedamos en la puerta", "icon": "📱", "setup": "Llegáis tarde y os escribís para encontraros.", "setupEn": "You're late and message each other to meet up.", "lines": [{"who": "friend", "name": "Marta", "text": "¿Dónde estáis? Estamos esperando.", "textEn": "Where are you? We're waiting."}, {"who": "you", "hint": "Di dónde estás y qué haces.", "hintEn": "Say where you are and what you're doing."}, {"who": "friend", "name": "Iker", "text": "Sole está pidiendo las bebidas.", "textEn": "Sole is ordering the drinks."}, {"who": "you", "hint": "Pregunta qué están haciendo los demás.", "hintEn": "Ask what the others are doing."}, {"who": "friend", "name": "Marta", "text": "¿Cuándo llegas?", "textEn": "When do you arrive?"}, {"who": "you", "hint": "Contesta con una hora aproximada.", "hintEn": "Answer with an approximate time."}]}, {"id": "tarde", "tab": "Tarde en el parque", "icon": "🌳", "setup": "Cada amigo cuenta qué está haciendo.", "setupEn": "Each friend says what they're doing.", "lines": [{"who": "friend", "name": "Diego", "text": "Estoy corriendo con Rubén.", "textEn": "I'm running with Rubén."}, {"who": "you", "hint": "Cuéntales qué estás haciendo tú.", "hintEn": "Tell them what you are doing."}, {"who": "friend", "name": "Rubén", "text": "Lucía está leyendo y Marta está bailando.", "textEn": "Lucía is reading and Marta is dancing."}, {"who": "you", "hint": "Pregunta qué hace otro amigo.", "hintEn": "Ask what another friend is doing."}, {"who": "friend", "name": "Diego", "text": "¿Venís después a cenar?", "textEn": "Are you coming to dinner afterwards?"}, {"who": "you", "hint": "Responde por ti y por otro amigo.", "hintEn": "Answer for you and another friend."}]}];
 
 const sceneTabs = document.getElementById('scene-tabs');
 const sceneContainer = document.getElementById('scene-container');
@@ -1026,5 +656,96 @@ document.getElementById('save-btn').addEventListener('click', async ()=>{
 });
 </script>
 
+<script>
+(function(){
+const $=id=>document.getElementById(id);
+const en=t=>`<span class="en">${t}</span>`;
+const shuffle=a=>{let r;do{r=[...a];for(let i=r.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[r[i],r[j]]=[r[j],r[i]];}}while(r.length>1&&r.every((x,i)=>x===a[i]));return r;};
+const head=(l,es,e,h,he)=>`<h3><b>${l}</b>${es}${en(e)}</h3><p class="game-hint">${h}${en(he)}</p>`;
+
+/* ---------- STATIC GLOSSES + TOGGLE ---------- */
+const G=[[".block-head h2", 0, "Estar + gerund"], [".block-head h2", 1, "Lightning review"], [".block-head h2", 2, "Practice"], [".block-head h2", 3, "Mini-games"], [".block-head h2", 4, "Tell them your plan"], [".block-head h2", 5, "Roleplay: meeting up on WhatsApp"], [".block-head h2", 6, "Your homework"], ["header .lede", 0, "Last class of L3. Today you message and talk with friends in real time. You learn estar + gerund to say what is happening right now."], [".roleplay-tip", 0, "In class: we'll practise the first scene aloud, swapping roles. The other one is to repeat at home."]];
+G.forEach(([sel,i,t])=>{const el=document.querySelectorAll(sel)[i];if(!el)return;const s=document.createElement('span');s.className='en';s.textContent=t;el.appendChild(s);});
+const btns=document.querySelectorAll('.lang-toggle button');
+function setLang(l){document.body.dataset.lang=l;btns.forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.lang===l)));try{localStorage.setItem('clase-lang-v2',l)}catch(e){}}
+btns.forEach(b=>b.addEventListener('click',()=>setLang(b.dataset.lang)));
+let saved=null;try{saved=localStorage.getItem('clase-lang-v2')}catch(e){}
+setLang(saved==='es'?'es':'es-en');
+
+/* ---------- A · ORDENA LA FRASE ---------- */
+const SORT=[{"w": ["Estoy", "llegando", "al bar", "con Marta"], "en": "I'm arriving at the bar with Marta."}, {"w": ["Mis amigos", "están", "cenando", "en casa de Iker"], "en": "My friends are having dinner at Iker's."}, {"w": ["¿Dónde", "estáis", "ahora", "vosotros?"], "en": "Where are you all now?"}, {"w": ["Marta", "está", "esperando", "en la puerta"], "en": "Marta is waiting at the door."}, {"w": ["Estamos", "tomando", "algo", "en el bar"], "en": "We're having a drink at the bar."}, {"w": ["¿Qué", "estás", "haciendo", "ahora?"], "en": "What are you doing now?"}, {"w": ["Iker y Sole", "están", "corriendo", "por el parque"], "en": "Iker and Sole are running in the park."}, {"w": ["Estáis", "escribiendo", "a Diego", "ahora"], "en": "You all are writing to Diego now."}, {"w": ["Estoy", "saliendo", "de casa", "ahora"], "en": "I'm leaving home now."}, {"w": ["¿Estáis", "viendo", "la película", "ya?"], "en": "Are you all watching the film already?"}];
+(()=>{
+ const root=$('g-sort');
+ root.innerHTML=head('A','Ordena la frase','Put the sentence in order','Toca las piezas en el orden correcto; toca una pieza colocada para quitarla.','Tap the pieces in the right order; tap a placed piece to remove it.')+'<div id="sort-items"></div><div class="game-bar"><button class="btn-primary" id="sort-check">Comprobar</button><button class="btn-ghost" id="sort-reset">Reiniciar</button><span class="score" id="sort-score"></span></div>';
+ const box=$('sort-items'),score=$('sort-score');let st;
+ const chip=(it,n,i,act,d)=>`<button class="chip" data-n="${n}" data-i="${i}" data-act="${act}"${d?' disabled':''}>${it.w[i]}</button>`;
+ function render(){box.innerHTML=SORT.map((it,n)=>{const s=st[n];return `<div class="sort-item"><div class="build ${s.cls}">${s.placed.map(i=>chip(it,n,i,'rm',s.done)).join('')}</div><div class="bank">${s.bank.map(i=>chip(it,n,i,'add',s.done)).join('')}</div>${s.msg?`<p class="feedback">${s.msg}</p>`:''}${en(it.en)}</div>`;}).join('');}
+ const init=()=>{st=SORT.map(it=>({bank:shuffle(it.w.map((_,i)=>i)),placed:[],done:false,cls:'',msg:''}));score.textContent='';render();};
+ box.addEventListener('click',e=>{const b=e.target.closest('.chip');if(!b)return;const s=st[+b.dataset.n],i=+b.dataset.i;if(b.dataset.act==='add'){s.bank=s.bank.filter(x=>x!==i);s.placed.push(i);}else{s.placed=s.placed.filter(x=>x!==i);s.bank.push(i);}render();});
+ $('sort-check').addEventListener('click',()=>{let ok=0;st.forEach((s,n)=>{const good=s.placed.length===SORT[n].w.length&&s.placed.every((v,k)=>v===k);s.done=true;s.cls=good?'ok':'bad';s.msg=good?'':'✗ Orden correcto: '+SORT[n].w.join(' ');if(good)ok++;});score.textContent=`${ok} / ${SORT.length} correctas`;render();});
+ $('sort-reset').addEventListener('click',init);init();
+})();
+
+/* ---------- B · EMPAREJA ---------- */
+const PAIRS=[["yo", "estoy comiendo", "I'm eating"], ["tú", "estás corriendo", "you're running"], ["él", "está esperando", "he's waiting"], ["nosotros", "estamos saliendo", "we're leaving"], ["vosotros", "estáis llegando", "you all are arriving"], ["ellos", "están pidiendo", "they're ordering"], ["ella", "está hablando", "she's talking"], ["Iker y yo", "estamos cenando", "Iker and I are having dinner"], ["tú y Sole", "estáis bebiendo", "you and Sole are drinking"], ["Marta", "está bebiendo", "Marta is drinking"]];
+(()=>{
+ const root=$('g-match');
+ root.innerHTML=head('B','Empareja persona y verbo','Match person and verb','Toca una persona y después su forma del verbo.','Tap a person, then its verb form.')+'<div id="match-board"></div><div class="game-bar"><button class="btn-ghost" id="match-reset">Reiniciar</button><span class="score" id="match-score"></span></div>';
+ const board=$('match-board');let order,done,sel,bad;
+ const cl=(side,i)=>done.has(i)?' done':(bad&&bad[side]===i?' nope':(sel[side]===i?' sel':''));
+ function draw(){
+  board.innerHTML=`<div class="match"><div class="col">${PAIRS.map((p,i)=>`<button class="chip${cl('L',i)}" data-side="L" data-i="${i}"${done.has(i)?' disabled':''}>${p[0]}</button>`).join('')}</div><div class="col">${order.map(i=>`<button class="chip${cl('R',i)}" data-side="R" data-i="${i}"${done.has(i)?' disabled':''}>${PAIRS[i][1]}${en(PAIRS[i][2])}</button>`).join('')}</div></div>`;
+  $('match-score').textContent=done.size===PAIRS.length?'¡Todo emparejado! 🎉':`${done.size} / ${PAIRS.length} parejas`;
+ }
+ const init=()=>{order=shuffle(PAIRS.map((_,i)=>i));done=new Set();sel={L:null,R:null};bad=null;draw();};
+ board.addEventListener('click',e=>{const b=e.target.closest('.chip');if(!b||bad||b.disabled)return;sel[b.dataset.side]=+b.dataset.i;
+  if(sel.L!==null&&sel.R!==null){
+   if(sel.L===sel.R){done.add(sel.L);sel={L:null,R:null};}
+   else{bad={...sel};sel={L:null,R:null};draw();setTimeout(()=>{bad=null;draw();},700);return;}
+  }
+  draw();});
+ $('match-reset').addEventListener('click',init);init();
+})();
+
+/* ---------- C · SIGUE EL HILO ---------- */
+const CHAT=[{"who": "Marta", "sit": "Marta te escribe.", "sitEn": "Marta messages you.", "msg": "¿Dónde estás? ¿Estás llegando?", "msgEn": "Where are you? Are you arriving?", "opts": [["Sí, estoy llegando.", 1, "", ""], ["Sí, estás llegando.", 0, "Hablas de ti: estoy.", "You talk about yourself: estoy."], ["Sí, estamos llegar.", 0, "Falta el gerundio: llegando.", "Missing the gerund: llegando."]]}, {"who": "Iker", "sit": "Iker pregunta por el grupo.", "sitEn": "Iker asks about the group.", "msg": "¿Qué estáis haciendo vosotros?", "msgEn": "What are you all doing?", "opts": [["Estamos cenando.", 1, "", ""], ["Estoy cenando.", 0, "Contestas por el grupo: estamos.", "You answer for the group: estamos."], ["Están cenando.", 0, "\"Están\" es para ellos.", "\"Están\" is for them."]]}, {"who": "Sole", "sit": "Sole habla de Diego.", "sitEn": "Sole talks about Diego.", "msg": "Diego no contesta.", "msgEn": "Diego doesn't answer.", "opts": [["Está escribiendo, creo.", 1, "", ""], ["Estoy escribiendo, creo.", 0, "Hablas de Diego: está.", "You talk about Diego: está."], ["Está escribir, creo.", 0, "Falta el gerundio: escribiendo.", "Missing the gerund: escribiendo."]]}, {"who": "Marta", "sit": "Marta pregunta dónde estáis.", "sitEn": "Marta asks where you are.", "msg": "¿Dónde estáis?", "msgEn": "Where are you all?", "opts": [["Estamos llegando al bar.", 1, "", ""], ["Estoy llegando al bar.", 0, "Contestas por el grupo: estamos.", "You answer for the group: estamos."], ["Estamos llegamos al bar.", 0, "Falta el gerundio: llegando.", "Missing the gerund: llegando."]]}, {"who": "Iker", "sit": "Iker pregunta qué haces.", "sitEn": "Iker asks what you're doing.", "msg": "¿Qué estás haciendo?", "msgEn": "What are you doing?", "opts": [["Estoy escribiendo a Sole.", 1, "", ""], ["Está escribiendo a Sole.", 0, "Hablas de ti: estoy.", "You talk about yourself: estoy."], ["Estoy escribir a Sole.", 0, "Falta el gerundio: escribiendo.", "Missing the gerund: escribiendo."]]}, {"who": "Sole", "sit": "Sole pregunta por Diego.", "sitEn": "Sole asks about Diego.", "msg": "¿Y Diego?", "msgEn": "And Diego?", "opts": [["Está comiendo en casa.", 1, "", ""], ["Estoy comiendo en casa.", 0, "Hablas de Diego: está.", "You talk about Diego: está."], ["Está comer en casa.", 0, "Falta el gerundio: comiendo.", "Missing the gerund: comiendo."]]}, {"who": "Lucía", "sit": "Lucía pregunta si esperáis.", "sitEn": "Lucía asks if you're waiting.", "msg": "¿Estáis esperando mucho?", "msgEn": "Have you all been waiting long?", "opts": [["Sí, estamos esperando.", 1, "", ""], ["Sí, estáis esperando.", 0, "Contestas por el grupo: estamos.", "You answer for the group: estamos."], ["Sí, estoy esperando.", 0, "Hablas del grupo: estamos.", "You speak for the group: estamos."]]}, {"who": "Rubén", "sit": "Rubén pregunta por Marta y Pablo.", "sitEn": "Rubén asks about Marta and Pablo.", "msg": "¿Qué están haciendo Marta y Pablo?", "msgEn": "What are Marta and Pablo doing?", "opts": [["Están corriendo por el parque.", 1, "", ""], ["Estamos corriendo por el parque.", 0, "Hablas de ellos: están.", "You talk about them: están."], ["Están correr por el parque.", 0, "Falta el gerundio: corriendo.", "Missing the gerund: corriendo."]]}, {"who": "Marta", "sit": "Marta pregunta por la peli.", "sitEn": "Marta asks about the film.", "msg": "¿Estás viendo la peli?", "msgEn": "Are you watching the film?", "opts": [["Sí, estoy viendo la peli.", 1, "", ""], ["Sí, estás viendo la peli.", 0, "Hablas de ti: estoy.", "You talk about yourself: estoy."], ["Sí, estoy ver la peli.", 0, "Falta el gerundio: viendo.", "Missing the gerund: viendo."]]}, {"who": "Iker", "sit": "Iker pregunta cuándo llegáis.", "sitEn": "Iker asks when you arrive.", "msg": "¿Cuándo llegáis?", "msgEn": "When do you all arrive?", "opts": [["Estamos llegando ahora.", 1, "", ""], ["Estáis llegando ahora.", 0, "Contestas por el grupo: estamos.", "You answer for the group: estamos."], ["Estoy llegando ahora.", 0, "Hablas del grupo: estamos, no estoy.", "You speak for the group: estamos, not estoy."]]}];
+(()=>{
+ const root=$('g-chat');const H=head('C','Contesta a tu amigo','Answer your friend','Elige la respuesta correcta.','Pick the correct reply.');
+ let t,score,opts,answered;
+ function turn(){const c=CHAT[t];opts=shuffle(c.opts);answered=false;
+  root.innerHTML=H+`<div class="scene-setup" style="margin-bottom:12px"><span class="scene-icon">💬</span><p class="scene-text" style="margin:0"><strong>Turno ${t+1} / ${CHAT.length}.</strong> ${c.sit}${en(c.sitEn)}</p></div><div class="line friend"><div class="line-avatar">${c.who[0]}</div><div class="line-body"><p class="line-name">${c.who}</p><div class="line-bubble">${c.msg}${en(c.msgEn)}</div></div></div><div class="chat-opts">${opts.map((o,i)=>`<button class="chip" data-i="${i}">${o[0]}</button>`).join('')}</div><p class="feedback" id="chat-fb"></p><div class="game-bar" id="chat-bar"></div>`;}
+ function end(){root.innerHTML=H+`<div class="note" style="margin-top:0"><strong>${score} / ${CHAT.length}</strong> ${score===CHAT.length?'¡Frases perfectas!':'Repasa estar + gerundio y vuelve a intentarlo.'}${en(score===CHAT.length?'Perfect sentences!':'Review estar + gerund and try again.')}</div><div class="game-bar"><button class="btn-ghost" id="chat-again">Jugar otra vez</button></div>`;}
+ root.addEventListener('click',e=>{
+  const b=e.target.closest('.chat-opts .chip');
+  if(b&&!answered){answered=true;const o=opts[+b.dataset.i];if(o[1])score++;
+   root.querySelectorAll('.chat-opts .chip').forEach((x,i)=>{x.disabled=true;if(opts[i][1])x.classList.add('done');else if(x===b)x.classList.add('nope');});
+   $('chat-fb').innerHTML=o[1]?'':'✗ '+o[2]+en(o[3]);
+   $('chat-bar').innerHTML=`<button class="btn-primary" id="chat-next">${t<CHAT.length-1?'Siguiente →':'Ver resultado'}</button>`;return;}
+  if(e.target.id==='chat-next'){t++;t<CHAT.length?turn():end();}
+  if(e.target.id==='chat-again'){t=0;score=0;turn();}
+ });
+ t=0;score=0;turn();
+})();
+})();
+</script>
+<script>
+/* ---------- INGLÉS SUTIL EN TEXTO ESTÁTICO ---------- */
+(()=>{const D={"Repaso relámpago": "Lightning review", "Practica": "Practice", "Cuéntales tu plan": "Tell them your plan", "Tu tarea": "Your homework", "Esto es solo un apoyo para ti — no hace falta que esté perfecto. Lo importante es decirlas en voz alta, no el texto escrito.": "This is just a support for you — it doesn't need to be perfect. What matters is saying them aloud, not the written text.", "Esto es solo un apoyo para ti: no hace falta que esté perfecto. Lo importante es decirlo en voz alta, no el texto escrito.": "This is just a support for you: it doesn't need to be perfect. What matters is saying it aloud, not the written text.", "en clase · ítems 1–10": "in class · items 1–10", "para casa · repaso auditivo opcional": "at home · optional listening review", "en clase · tarjetas 1–6": "in class · cards 1–6", "para casa · banco de repaso": "at home · review bank", "práctica activa · 3 ejercicios": "active practice · 3 exercises", "A · ordena la frase": "put the sentence in order", "B · escribe la palabra": "type the word", "B · escribe la forma": "type the form", "C · empareja la frase con su versión con \"lo\"": "match the sentence with its \"lo\" version", "C · empareja el marcador con su forma": "match the marker with its form", "Comprobar respuestas": "Check answers", "Comprobar": "Check", "Reiniciar": "Reset", "Guardar tarea": "Save", "Tres piezas para frases claras": "Three pieces for clear sentences", "Roleplay: organizar el fin de semana": "Roleplay: organising the weekend", "En clase: practicaremos la escena \"Tarde de pádel y barbacoa\" en voz alta, cambiando de rol. La idea es que lo digas, no que lo escribas.": "In class: we'll practise the \"Padel and barbecue\" scene aloud, swapping roles. The idea is to say it, not write it.", "Clase 12 · Planes con amigos": "Class 12 · Plans with friends", "Próxima clase → Clase 13: A2 check-in": "Next class → Class 13: A2 check-in", "El mapa de todo lo aprendido": "The map of everything learned", "Practica: los tres tiempos mezclados": "Practice: the three tenses mixed", "Feedback personalizado": "Personalised feedback", "Mini-simulación: un fin de semana con amigos": "Mini-simulation: a weekend with friends", "En clase: practicaremos la escena \"Contar el fin de semana\" en voz alta, cambiando de rol. La idea es que lo digas, no que lo escribas.": "In class: we'll practise the \"Telling about the weekend\" scene aloud, swapping roles. The idea is to say it, not write it.", "Clase 13 · A2 check-in": "Class 13 · A2 check-in", "Indefinido vs imperfecto": "Preterite vs imperfect", "Voy a vs -ré": "Going to vs will", "Propuestas suaves": "Gentle suggestions", "Quién + verbo + qué": "Who + verb + what", "Une dos ideas": "Joins two ideas", "Sustituye algo ya dicho": "Replaces something already said", "Lo que ya dominas": "What you already master", "En proceso": "In progress", "Pronunciación": "Pronunciation", "Lo que viene en L3": "Coming up in L3", "El pretérito indefinido con verbos regulares e irregulares comunes (fue, tuvo, hizo, dijo) sale ya de forma natural, y distingues bien cuándo usar \"voy a\" frente al futuro simple en conversación espontánea.": "The preterite with regular and common irregular verbs now comes out naturally, and you tell \"voy a\" from the simple future well in spontaneous speech.", "\"Que\", \"lo\" y la frase simple están empezando a salir solos; todavía cuesta elegirlos rápido en frases largas. Sigue apareciendo alguna confusión entre indefinido e imperfecto al contar historias de más de dos frases.": "Que, lo and the simple sentence are starting to come out on their own; choosing them quickly in long sentences is still hard. Some preterite/imperfect confusion remains in stories longer than two sentences.", "El ritmo general ha mejorado mucho desde la Clase 1 — las vocales suenan más puras y los enlaces entre palabras ya no se fuerzan. Sigue trabajando la reducción de \"voy a\" y la entonación suave del condicional.": "Overall rhythm has improved a lot since Class 1 — vowels sound purer and linking is no longer forced. Keep working on reducing \"voy a\" and the soft intonation of the conditional.", "Conversación en grupo a ritmo real y situaciones sin inglés de apoyo, construidas sobre esta base de pasado, futuro, \"que\" y \"lo\".": "Group conversation at real speed and situations without English support, built on this base of past, future, que and lo."};const n=t=>t.replace(/\s+/g,' ').trim();
+document.querySelectorAll('h2,h3,p,.ex-divider,.milestone-main,.roleplay-tip,footer span,button.btn-primary,button.btn-ghost,button.btn-secondary').forEach(el=>{
+ if(el.querySelector('.en'))return;const t=D[n(el.textContent)];if(!t)return;
+ const s=document.createElement('span');s.className='en'+(el.matches('button,.ex-divider')?' inl':'');s.textContent=(el.matches('.ex-divider')?'· ':'')+t;el.appendChild(s);});})();
+</script>
+<script>
+/* ---------- INGLÉS SUTIL (BLOQUE 2) ---------- */
+(()=>{const P=[["Hoy hablas de lo que haces con tus amigos en tu tiempo libre", "Today you talk about what you do with friends in your free time: walking, swimming, dancing, cycling, training. You learn a simple structure for almost everything (who + verb + what + where or when) and regular -ar verbs in the present."], ["Verbos en -ar y frase simple", "-ar verbs and the simple sentence"], ["Los verbos regulares en -ar siguen", "Regular -ar verbs always follow the same pattern: drop -ar and add -o, -as, -a, -amos, -áis, -an."], ["La terminación te dice quién", "The ending tells you who, so you almost always drop the subject: \"Nadamos los sábados\", not \"Nosotros nadamos…\". Add the subject only to contrast: \"Yo nado, pero Iker corre\"."], ["El orden de una frase simple", "The order of an everyday simple sentence:"], ["🔊 Pronunciación de hoy: el acento", "Stress changes the meaning: \"nado\" (I swim) and \"nadó\" (he swam) look almost the same but sound different. Also practise \"-áis\": ¿bailáis?, the vosotros form used a lot with friends in Spain."], ["Cuidado con las preposiciones", "Careful with fixed prepositions: days take el / los, times take a, people take con, places take en."], ["Seis actividades de tiempo libre", "Six free-time activities with friends. Tap a card for an example. Say it aloud before looking at the back."], ["30 frases", "30 sentences choosing the correct form or preposition: the first 10 are done aloud in class; the rest is review for home."], ["Cada tarjeta es un amigo que te pregunta qué haces", "Each card is a friend asking what you do in your free time. Answer with a simple sentence and an -ar verb. The first 6 are worked in class; the rest is a review bank for home."], ["Roleplay: organizar un plan", "Roleplay: organising a plan with friends"], ["3 escenas con amigos", "3 scenes with friends where you propose, tell and organise plans with -ar verbs. We practise the first aloud in class; the other two are to repeat at home."], ["Escribe o di en voz alta 5 frases sobre tu fin de semana ideal", "Write or say aloud 5 sentences about your ideal weekend with friends. Use 5 different -ar verbs and the structure who + verb + what + where or when."], ["Los verbos en -er e -ir comparten", "-er and -ir verbs share almost everything: -o, -es, -e, -en. They only differ in nosotros and vosotros."], ["Truco: -er: nosotros", "Tip: -er: nosotros -emos, vosotros -éis. -ir: nosotros -imos, vosotros -ís. All other forms are the same."], ["Cuatro preguntas para organizar", "Four questions to organise a plan:"], ["🔊 Pronunciación de hoy: ¿coméis?", "¿coméis? ¿vivís? With vosotros, the final syllable carries the stress. In \"cuánto\" and \"dónde\" the accent marks the question."], ["Cuidado: \"Beber\"", "Careful: \"beber\" and \"comer\" take a direct object without a preposition (bebo agua), but \"salir\" asks for \"con\" (salgo con Marta)."], ["Seis planes de comida", "Six dinner and outing plans with friends. Tap a card for an example. Say it aloud before looking at the back."], ["10 frases eligiendo la forma correcta de -er", "10 sentences choosing the correct -er / -ir form or the question: done aloud in class."], ["Cada tarjeta es un amigo que organiza", "Each card is a friend organising a dinner or outing. Answer with an -er / -ir verb and a plan question. The first 6 are worked in class; the rest is a review bank for home."], ["2 escenas con amigos donde organizas", "2 scenes with friends where you organise meals and outings with -er / -ir verbs. We practise the first aloud in class."], ["Escribe o di en voz alta 5 frases sobre una cena", "Write or say aloud 5 sentences about an ideal dinner with your friends. Use 5 different -er / -ir verbs and 2 questions (where, when, with whom or how much)."], ["Con gustar, la cosa que te gusta", "With gustar, the thing you like is the subject, so the verb is singular (gusta) or plural (gustan)."], ["Truco: cuando preguntas", "Tip: when you ask \"¿y a ti?\", the pronoun starts with \"a\": a mí, a ti, a él, a nosotros, a vosotros, a ellos."], ["Tres respuestas rápidas", "Three quick answers with friends:"], ["🔊 Pronunciación de hoy: \"A mí", "\"A mí también\" sounds almost like one word. Practise the intonation: it rises on \"mí\" and falls on \"también\"."], ["Cuidado: Si dices", "Careful: if you say \"yo gusto el cine\", you say something else: gustar doesn't work like \"comer\". The person goes in me / te / le, not yo."], ["Seis gustos de tiempo libre", "Six free-time tastes with friends. Tap a card for an example. Say it aloud before looking at the back."], ["10 frases eligiendo gusta", "10 sentences choosing gusta / gustan, the pronoun or the right answer: done aloud in class."], ["Cada tarjeta es un amigo que te pregunta por tus gustos", "Each card is a friend asking about your tastes. Answer with me gusta / me gustan and ask \"¿y a ti?\". The first 6 are worked in class; the rest is a review bank for home."], ["2 escenas con amigos donde comparáis", "2 scenes with friends where you compare tastes with gustar. We practise the first aloud in class."], ["Escribe o di en voz alta 5 frases sobre tus gustos", "Write or say aloud 5 sentences about your tastes and your friends'. Use me gusta, me gustan, a mí también and a mí tampoco at least once."], ["Estar + gerundio describe", "Estar + gerund describes an action in progress. The gerund is formed: -ar → -ando, -er / -ir → -iendo."], ["Truco: solo cambia el verbo estar", "Tip: only the verb estar changes; the gerund never does: \"estoy llegando\", \"estamos llegando\", \"están llegando\"."], ["Tres preguntas para quedar", "Three questions to meet up in real time:"], ["🔊 Pronunciación de hoy: El gerundio", "The gerund is stressed on the syllable before -ndo: lle-GAN-do, co-MIEN-do. Practise at voice-message speed."], ["Cuidado: No uses el gerundio", "Careful: don't use the gerund for future plans: \"mañana estoy jugando\" sounds odd. For the future use \"voy a\"."], ["Seis mensajes cortos", "Six short WhatsApp messages with friends. Tap a card for an example. Say it aloud before looking at the back."], ["10 frases eligiendo la forma correcta de estar", "10 sentences choosing the correct form of estar + gerund: done aloud in class."], ["Cada tarjeta es un amigo que te escribe", "Each card is a friend texting you on WhatsApp. Answer with estar + gerund. The first 6 are worked in class; the rest is a review bank for home."], ["2 escenas con amigos donde os localizáis", "2 scenes with friends where you find each other and say what you're doing right now. We practise the first aloud in class."], ["Escribe o di en voz alta 5 mensajes", "Write or say aloud 5 WhatsApp messages for your friends. Use estar + gerund in each one and a question."], ["Tres piezas de las clases 15", "Three pieces from classes 15, 16 and 17. Choose the piece first, then build the sentence."], ["Truco: antes de hablar", "Tip: before speaking, think whether you're telling a habit (-er / -ir), a like (gustar) or something happening now (estar + gerund)."], ["Tres señales para elegir", "Three signals for choosing the piece:"], ["🔊 Pronunciación de hoy: Practica pasar", "Practise moving from one piece to another without pausing: \"Me gusta correr, pero hoy estoy comiendo.\""], ["Cuidado: Gustar concuerda", "Careful: gustar agrees with the thing liked (gusta / gustan), not with the person. And the gerund never changes: only estar does."], ["Seis expresiones para contar", "Six expressions for telling about a weekend with friends. Tap a card for an example. Say it aloud before looking at the back."], ["10 frases mezclando", "10 sentences mixing -er / -ir, gustar and estar + gerund: done aloud in class."], ["Cada tarjeta es un amigo que te pregunta por el finde", "Each card is a friend asking about your weekend. Answer mixing the three pieces. The first 6 are worked in class; the rest is a review bank for home."], ["2 escenas con amigos donde planeas", "2 scenes with friends where you plan Saturday and say what you're doing. We practise the first aloud in class."], ["Escribe o di en voz alta 6 frases", "Write or say aloud 6 sentences about your weekend with friends: 2 with -er / -ir, 2 with gustar and 2 with estar + gerund."]],T={14:'Free time with friends',15:'Dinner and going out with friends',16:'Tastes with friends',17:'Where are you? I\'m arriving',18:'L3 checkpoint'};
+const n=t=>t.replace(/\s+/g,' ').trim();
+const tr=t=>{let m;for(const [k,v] of P)if(t.startsWith(k))return v;
+ if(m=t.match(/^En clase: practicaremos la escena "(.*?)" en voz alta/))return 'In class: we\'ll practise the "'+m[1]+'" scene aloud, swapping roles. The other scenes are for listening and repeating on your own. The idea is to say them, not write them.';
+ if(m=t.match(/^Clase (\d+) · /))return 'Class '+m[1]+' · '+(T[m[1]]||'');
+ if(m=t.match(/^Próxima clase → Clase (\d+)/))return 'Next class → Class '+m[1]+(T[m[1]]?': '+T[m[1]]:'');return null;};
+document.querySelectorAll('h2,h3,p,div.note,div.pron-note,div.compare-warning,.roleplay-tip,footer span').forEach(el=>{
+ if(el.querySelector('.en'))return;const t=tr(n(el.textContent));if(!t)return;
+ const s=document.createElement('span');s.className='en';s.textContent=t;el.appendChild(s);});})();
+</script>
 </body>
 </html>

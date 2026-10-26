@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clase 18 · Punto de control L3 — Andrei</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+
+/* ╔══════════════════════════════════════════════════════════════╗
+   ║  ESCOLAR — sistema de diseño para clases de español online   ║
+   ║  Clase 14 · L3 Conversación con ritmo · "Following a group conversation"   ║
+   ╚══════════════════════════════════════════════════════════════╝ */
+
+:root{
+  --paper:        #FBF7EE;
+  --paper-raised: #FFFFFF;
+  --paper-alt:    #F3ECDA;
+  --ink:          #23291F;
+  --ink-soft:     #565F52;
+  --ink-faint:    #8B9184;
+  --line:         rgba(35,41,31,0.12);
+  --line-strong:  rgba(35,41,31,0.22);
+
+  --b1:      #2F6FED;  --b1-soft: #EAF1FE;  --b1-line: #C6D9FC;
+  --b2:      #2E9E6B;  --b2-soft: #E9F6EF;  --b2-line: #BEE6D3;
+  --b3:      #DB8A2E;  --b3-soft: #FCF1E1;  --b3-line: #F3D9AF;
+  --family:  #B5502E;  --family-soft: #FBEBE3; --family-line: #EFC9B4;
+
+  --f-display: 'Fraunces', Georgia, serif;
+  --f-body:    'IBM Plex Sans', system-ui, sans-serif;
+  --f-data:    'IBM Plex Mono', monospace;
+
+  --r-sm: 8px;
+  --r-md: 14px;
+  --r-lg: 20px;
+
+  --shadow-1: 0 1px 2px rgba(35,41,31,0.05), 0 1px 8px rgba(35,41,31,0.04);
+}
+
+*{ box-sizing:border-box; }
+body{
+  margin:0;
+  background: var(--paper);
+  background-image: radial-gradient(circle at 1px 1px, var(--line) 1px, transparent 0);
+  background-size: 22px 22px;
+  color: var(--ink);
+  font-family: var(--f-body);
+  line-height:1.6;
+}
+::selection{ background: var(--b3-soft); }
+
+/* ---------- HEADER ---------- */
+header{ padding:44px 24px 28px; max-width:760px; margin:0 auto; }
+.eyebrow{
+  font-family: var(--f-data); font-size:12px; letter-spacing:.14em;
+  text-transform:uppercase; color: var(--b3); margin:0 0 10px;
+  display:flex; align-items:center; gap:10px;
+}
+.eyebrow .dot{ width:6px; height:6px; border-radius:50%; background: var(--b3); }
+h1{
+  font-family: var(--f-display); font-weight:600;
+  font-size:clamp(30px,5.6vw,46px); line-height:1.08;
+  margin:0 0 14px; letter-spacing:-.01em;
+}
+h1 em{ font-style:italic; color: var(--b3); }
+.lede{ font-size:16px; color: var(--ink-soft); max-width:56ch; margin:0; }
+
+.meta-row{
+  display:flex; flex-wrap:wrap; gap:20px; margin-top:26px;
+  font-family: var(--f-data); font-size:12px; color: var(--ink-faint);
+}
+.meta-row strong{
+  display:block; color: var(--ink); font-size:14.5px; font-weight:500;
+  font-family: var(--f-display); margin-top:3px;
+}
+
+/* ---------- SECTIONS ---------- */
+main{ max-width:760px; margin:0 auto; padding:8px 24px 100px; }
+
+section.block{ margin-bottom:52px; }
+.block-head{ display:flex; align-items:baseline; gap:12px; margin-bottom:18px; }
+.time-tag{
+  font-family: var(--f-data); font-size:11px; color: var(--ink-faint);
+  background: var(--paper-alt); padding:3px 10px; border-radius:999px; margin-left:auto; flex:none;
+}
+.block-num{
+  font-family: var(--f-data); font-size:12px; color:#fff; background: var(--b3);
+  width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  flex:none;
+}
+.block-head h2{
+  font-family: var(--f-display); font-weight:500; font-style:italic; font-size:22px; margin:0;
+}
+
+.panel{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-lg);
+  box-shadow: var(--shadow-1); padding:26px 28px;
+}
+
+/* ---------- CONNECTOR GRID ---------- */
+.conj-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:14px; margin-top:20px; }
+.conj-card{ border-radius: var(--r-md); padding:16px 18px; border:1px solid var(--line); background: var(--paper-alt); }
+.conj-head{ display:flex; align-items:center; gap:8px; margin:0 0 10px; }
+.conj-main{ font-family: var(--f-display); font-weight:600; font-size:17px; color: var(--b3); }
+.conj-reg{ font-family: var(--f-data); font-size:10.5px; color: var(--ink-faint); text-transform:uppercase; letter-spacing:.04em; }
+.conj-rows{ display:grid; gap:4px; font-family: var(--f-data); font-size:13px; color: var(--ink-soft); }
+.conj-rows span.pron{ color: var(--ink-faint); display:inline-block; width:76px; }
+.en{ display:block; font-style:italic; color: var(--ink-faint); font-size:0.92em; margin-top:3px; }
+
+.irregular-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:12px; margin-top:14px; }
+.irr-card{ background: var(--paper-raised); border:1px solid var(--b3-line); border-radius: var(--r-md); padding:12px 14px; text-align:center; }
+.irr-inf{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); text-transform:uppercase; }
+.irr-form{ font-family: var(--f-display); font-weight:600; font-size:18px; color: var(--b3); margin-top:4px; }
+
+.note{
+  margin-top:18px; padding:14px 16px; background: var(--b3-soft); border:1px solid var(--b3-line);
+  border-radius: var(--r-md); font-size:14px; color: var(--ink-soft);
+}
+.note strong{ color: var(--ink); }
+
+.pron-note{
+  margin-top:14px; padding:14px 16px; background: var(--paper-alt); border:1px solid var(--line);
+  border-radius: var(--r-md); font-size:14px; color: var(--ink-soft);
+}
+.pron-note strong{ color: var(--ink); }
+
+.compare-warning{
+  margin-top:14px; padding:14px 16px; background: var(--family-soft); border:1px solid var(--family-line);
+  border-radius: var(--r-md); font-size:13.5px; color: var(--ink-soft);
+}
+.compare-warning strong{ color: var(--family); }
+
+/* ---------- VOCAB CARDS ---------- */
+.vocab-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:12px; }
+.vocab-card{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:14px 16px; cursor:pointer; perspective:600px; min-height:78px;
+  display:flex; flex-direction:column; justify-content:center; transition: border-color .15s ease;
+}
+.vocab-card:hover{ border-color: var(--b3-line); }
+.vocab-card:focus-visible{ outline:2px solid var(--b3); outline-offset:2px; }
+.vocab-front{ font-family: var(--f-body); font-weight:600; font-size:15px; }
+.vocab-back{ display:none; font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); margin-top:6px; }
+.vocab-card.flipped .vocab-back{ display:block; }
+.vocab-card.flipped{ background: var(--b3-soft); border-color: var(--b3-line); }
+.vocab-hint{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin:10px 2px 16px; }
+
+/* ---------- EXERCISE ---------- */
+.exercise{ margin-bottom:20px; }
+.exercise:last-of-type{ margin-bottom:0; }
+.ex-sentence{ font-size:15.5px; margin-bottom:10px; }
+.ex-sentence .gap{ font-family: var(--f-data); color: var(--ink-faint); }
+.ex-options{ display:flex; flex-wrap:wrap; gap:8px; }
+.opt-btn{
+  font-family: var(--f-body); font-size:14px; background: var(--paper-raised);
+  border:1.5px solid var(--line); color: var(--ink); padding:7px 16px; border-radius:999px;
+  cursor:pointer; transition: all .15s ease;
+}
+.opt-btn:hover{ border-color: var(--ink-faint); }
+.opt-btn.picked{ background: var(--b3-soft); border-color: var(--b3); color: var(--b3); }
+.opt-btn.correct{ background: var(--b2-soft); border-color: var(--b2); color: var(--b2); }
+.opt-btn.wrong{ background: var(--family-soft); border-color: var(--family); color: var(--family); }
+.opt-btn:disabled{ cursor:default; }
+
+.check-bar{
+  display:flex; align-items:center; justify-content:space-between; gap:16px;
+  margin-top:22px; padding-top:18px; border-top:1px dashed var(--line);
+}
+.btn-primary{
+  font-family: var(--f-body); font-weight:600; font-size:14px; color:#fff; background: var(--b3);
+  border:none; padding:11px 22px; border-radius:999px; cursor:pointer; transition: transform .1s ease;
+}
+.btn-primary:hover{ transform: translateY(-1px); }
+#score-text{ font-family: var(--f-data); font-size:13px; color: var(--ink-faint); }
+.btn-ghost{
+  font-family: var(--f-body); font-weight:600; font-size:13px; color: var(--ink-soft); background:none;
+  border:1.5px solid var(--line); padding:9px 18px; border-radius:999px; cursor:pointer;
+}
+.btn-ghost:hover{ border-color: var(--ink-faint); }
+.ex-divider{
+  display:flex; align-items:center; gap:10px; margin:20px 0 16px;
+  font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.06em;
+  color: var(--ink-faint);
+}
+.ex-divider::before, .ex-divider::after{ content:""; flex:1; height:1px; background: var(--line); }
+.ex-divider.en-clase{ color: var(--b3); }
+.ex-divider.en-clase::before, .ex-divider.en-clase::after{ background: var(--b3-line); }
+
+/* ---------- CHARACTER CARDS ---------- */
+.characters{ display:grid; gap:16px; }
+.char-card{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-lg);
+  padding:20px 22px; display:flex; gap:16px; align-items:flex-start;
+}
+.char-avatar{
+  flex:none; width:44px; height:44px; border-radius:50%; background: var(--b3-soft);
+  display:flex; align-items:center; justify-content:center; font-family: var(--f-display);
+  font-weight:600; font-size:17px; color: var(--b3);
+}
+.char-body{ flex:1; }
+.char-name{ font-family: var(--f-display); font-weight:600; font-size:17px; margin:0 0 4px; }
+.char-role{ font-family: var(--f-data); font-size:11.5px; text-transform:uppercase; letter-spacing:.05em; color: var(--ink-faint); margin:0 0 10px; }
+.char-facts{ display:flex; flex-wrap:wrap; gap:6px; margin-bottom:10px; }
+.fact-tag{
+  font-family: var(--f-data); font-size:12px; background: var(--paper-alt); color: var(--ink-soft);
+  padding:4px 10px; border-radius:999px;
+}
+.char-prompt{ font-size:14px; color: var(--ink-soft); }
+.char-input{
+  width:100%; margin-top:8px; font-family: var(--f-body); font-size:14.5px; color: var(--ink);
+  background: var(--paper); border:1px solid var(--line); border-radius: var(--r-sm);
+  padding:10px 12px; resize:vertical; min-height:44px;
+}
+.char-input:focus{ outline:none; border-color: var(--b3-line); background: var(--paper-raised); }
+
+/* ---------- ROLEPLAY ---------- */
+.roleplay-panel{ background: var(--b1-soft); border:1px solid var(--b1-line); border-radius: var(--r-lg); padding:26px 28px; }
+.roleplay-panel .block-num{ background: var(--b1); }
+.scene-setup{
+  display:flex; gap:14px; align-items:flex-start; background: var(--paper-raised);
+  border:1px solid var(--b1-line); border-radius: var(--r-md); padding:14px 16px; margin-bottom:20px;
+}
+.scene-icon{ font-size:22px; flex:none; }
+.scene-text{ font-size:14px; color: var(--ink-soft); }
+.scene-text strong{ color: var(--ink); }
+
+.dialogue{ display:flex; flex-direction:column; gap:14px; }
+.scene-tabs{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:18px; }
+.scene-tab{
+  font-family: var(--f-data); font-size:12.5px; background: var(--paper-raised);
+  border:1.5px solid var(--b1-line); color: var(--ink-soft); padding:7px 14px;
+  border-radius:999px; cursor:pointer; transition: all .15s ease;
+}
+.scene-tab:hover{ border-color: var(--b1); }
+.scene-tab.active{ background: var(--b1); border-color: var(--b1); color:#fff; }
+.line{ display:flex; gap:12px; align-items:flex-start; }
+.line-avatar{
+  flex:none; width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  font-family: var(--f-display); font-weight:600; font-size:14px; color:#fff;
+}
+.line.friend .line-avatar{ background: var(--ink-faint); }
+.line.you .line-avatar{ background: var(--b1); }
+.line-body{ flex:1; }
+.line-name{ font-family: var(--f-data); font-size:11px; text-transform:uppercase; letter-spacing:.05em; color: var(--ink-faint); margin:0 0 4px; }
+.line-bubble{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:12px 14px; font-size:14.5px; color: var(--ink);
+}
+.line.you .line-bubble{ background:#fff; border-color: var(--b1-line); }
+.line-input{
+  width:100%; font-family: var(--f-body); font-size:14.5px; color: var(--ink);
+  background:#fff; border:1px solid var(--b1-line); border-radius: var(--r-sm);
+  padding:10px 12px; resize:vertical; min-height:40px; margin-top:2px;
+}
+.line-input:focus{ outline:none; border-color: var(--b1); }
+.line-hint{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); margin-top:5px; }
+
+.roleplay-tip{
+  margin-top:22px; padding:14px 16px; background: var(--paper-raised); border:1px solid var(--b1-line);
+  border-radius: var(--r-md); font-size:13.5px; color: var(--ink-soft);
+}
+.roleplay-tip strong{ color: var(--ink); }
+
+/* ---------- FINAL TASK ---------- */
+.task-panel{ background: var(--family-soft); border:1px solid var(--family-line); border-radius: var(--r-lg); padding:26px 28px; }
+.task-panel .block-num{ background: var(--family); }
+textarea#final-task{
+  width:100%; min-height:110px; font-family: var(--f-body); font-size:15px; color: var(--ink);
+  background: var(--paper-raised); border:1px solid var(--family-line); border-radius: var(--r-md);
+  padding:14px 16px; resize:vertical; margin-top:14px;
+}
+textarea#final-task:focus{ outline:none; border-color: var(--family); }
+.task-footer{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:12px; flex-wrap:wrap; }
+#task-count{ font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint); }
+.btn-secondary{
+  font-family: var(--f-body); font-weight:600; font-size:13.5px; color: var(--family); background:none;
+  border:1.5px solid var(--family-line); padding:9px 18px; border-radius:999px; cursor:pointer;
+}
+.saved-flag{ font-family: var(--f-data); font-size:12px; color: var(--b2); opacity:0; transition: opacity .3s ease; }
+.saved-flag.show{ opacity:1; }
+
+/* ---------- FOOTER NAV ---------- */
+footer{
+  max-width:760px; margin:0 auto; padding:0 24px 60px; display:flex;
+  justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;
+  font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint);
+}
+footer a{ color: var(--b3); text-decoration:none; }
+footer a:hover{ text-decoration:underline; }
+
+@media (max-width:600px){
+  header{ padding:34px 18px 22px; }
+  main{ padding:8px 18px 90px; }
+  .panel, .task-panel{ padding:20px 18px; }
+  .char-card{ flex-direction:column; }
+}
+@media (prefers-reduced-motion: reduce){ *{ transition:none !important; } }
+
+/* ---------- LANG TOGGLE ---------- */
+.lang-toggle{position:sticky;top:10px;z-index:50;width:max-content;margin:10px 14px 0 auto;display:flex;background:var(--paper-raised);border:1px solid var(--line-strong);border-radius:999px;padding:3px;box-shadow:var(--shadow-1);font-family:var(--f-data);font-size:12px}
+.lang-toggle button{border:0;background:none;color:var(--ink-soft);padding:6px 13px;border-radius:999px;cursor:pointer;font:inherit}
+.lang-toggle button[aria-pressed="true"]{background:var(--b3);color:#fff}
+.lang-toggle button:focus-visible{outline:2px solid var(--b3);outline-offset:2px}
+body[data-lang="es"] .en{display:none}
+.en{opacity:.88}
+.block-head h2 .en{font-family:var(--f-body);font-size:.55em;font-weight:400;margin-top:2px}
+.conj-reg .en{display:inline;text-transform:none;letter-spacing:0;font-size:inherit}
+.irr-inf .en{text-transform:none;font-size:10.5px}
+/* ---------- MINIGAMES ---------- */
+.game + .game{margin-top:30px;padding-top:26px;border-top:1px dashed var(--line)}
+.game h3{font-family:var(--f-display);font-weight:500;font-size:19px;margin:0 0 4px}
+.game h3 b{font-family:var(--f-data);font-size:11px;font-weight:500;color:#fff;background:var(--b3);border-radius:6px;padding:2px 8px;margin-right:10px;vertical-align:2px}
+.game h3 .en{font-family:var(--f-body);font-size:13px;margin-top:0}
+.game-hint{font-size:14px;color:var(--ink-soft);margin:6px 0 14px}
+.chip{font-family:var(--f-body);font-size:14px;background:var(--paper-raised);border:1.5px solid var(--line-strong);color:var(--ink);padding:7px 14px;border-radius:10px;cursor:pointer;transition:all .15s ease}
+.chip:hover:not(:disabled){border-color:var(--b3)}
+.chip:disabled{cursor:default}
+.chip .en{font-size:11.5px}
+.chip.sel{border-color:var(--b3);background:var(--b3-soft);color:var(--b3)}
+.chip.done{border-color:var(--b2);background:var(--b2-soft);color:var(--b2)}
+.chip.nope{border-color:var(--family);background:var(--family-soft);color:var(--family)}
+.build{min-height:50px;display:flex;flex-wrap:wrap;gap:8px;padding:10px;border:1.5px dashed var(--b3-line);border-radius:var(--r-md);background:var(--b3-soft);margin-bottom:8px}
+.build.ok{border-color:var(--b2);background:var(--b2-soft)}
+.build.bad{border-color:var(--family);background:var(--family-soft)}
+.bank{display:flex;flex-wrap:wrap;gap:8px;min-height:38px}
+.sort-item{margin-bottom:20px}
+.match{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.match .col{display:flex;flex-direction:column;gap:10px}
+.match .chip{width:100%;text-align:left}
+.chat-opts{display:grid;gap:8px;margin-top:12px}
+.chat-opts .chip{text-align:left;border-radius:var(--r-md)}
+.feedback{font-size:13.5px;margin:10px 0 0;color:var(--ink-soft)}
+.game-bar{display:flex;align-items:center;gap:12px;margin-top:14px;flex-wrap:wrap}
+.game .score{font-family:var(--f-data);font-size:13px;color:var(--ink-faint)}
+.en.inl{display:inline;margin:0 0 0 .5em}.block-head h2 .en,.feedback-item h3 .en{font-family:var(--f-body);font-size:.55em;font-weight:400;margin-top:2px}.en.inl.b{display:inline-block}
+</style>
+</head>
+<body data-lang="es-en">
+<div class="lang-toggle" role="group" aria-label="Idioma / Language">
+  <button type="button" data-lang="es" aria-pressed="true">Español</button>
+  <button type="button" data-lang="es-en" aria-pressed="false">Español + EN</button>
+</div>
+
+<header>
+  <p class="eyebrow"><span class="dot"></span>Clase 18 de 27 · L3 · Punto de control L3 · Repaso combinado</p>
+  <h1>Un finde <em>con amigos</em></h1>
+  <p class="lede">Última clase de L3. No hay gramática nueva: juntas los verbos en -er / -ir, gustar y estar + gerundio para organizar, opinar y contar un fin de semana con tus amigos. Al final tendrás feedback claro sobre qué dominas y qué te cuesta.</p>
+  <div class="meta-row">
+    <div>Duración<strong>50 min</strong></div>
+    <div>Construye sobre<strong>Clases 1–17</strong></div>
+    <div>Nivel<strong>A2</strong></div>
+  </div>
+</header>
+
+<main>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">1</span><h2>El mapa de la línea L3</h2><span class="time-tag">10 min</span></div>
+    <div class="panel">
+      <p style="margin:0 0 6px; font-size:14.5px; color:var(--ink-soft);">Tres piezas de las clases 15, 16 y 17. Elige primero la pieza y después construye la frase.</p>
+      <div class="conj-grid"><div class="conj-card"><div class="conj-head"><span class="conj-main">-er / -ir</span><span class="conj-reg">clase 15</span></div><div class="conj-rows"><div><span class="pron">yo · tú · él</span>como · comes · come</div><div><span class="pron">nos. · vos. · ellos</span>vivimos · vivís · viven</div><div><span class="pron">ejemplo</span><strong>Compartimos</strong> una pizza.</div></div></div><div class="conj-card"><div class="conj-head"><span class="conj-main">gustar</span><span class="conj-reg">clase 16</span></div><div class="conj-rows"><div><span class="pron">singular</span>me gusta · te gusta</div><div><span class="pron">plural</span>me gustan · os gustan</div><div><span class="pron">ejemplo</span><strong>Me gustan</strong> las tapas. ¿Y a ti?</div></div></div><div class="conj-card"><div class="conj-head"><span class="conj-main">estar + gerundio</span><span class="conj-reg">clase 17</span></div><div class="conj-rows"><div><span class="pron">-ar</span>estoy llegando</div><div><span class="pron">-er / -ir</span>estamos comiendo</div><div><span class="pron">ejemplo</span>¿Dónde <strong>estáis</strong>? <strong>Estamos saliendo</strong>.</div></div></div><div class="conj-card"><div class="conj-head"><span class="conj-main">preguntas</span><span class="conj-reg">clase 15</span></div><div class="conj-rows"><div><span class="pron">lugar y hora</span>¿dónde? ¿cuándo?</div><div><span class="pron">persona y precio</span>¿con quién? ¿cuánto?</div><div><span class="pron">ejemplo</span>¿<strong>Con quién</strong> cenáis?</div></div></div></div>
+      <div class="note"><strong>Truco:</strong> antes de hablar, piensa si cuentas una costumbre (-er / -ir), un gusto (gustar) o algo que pasa ahora (estar + gerundio).</div>
+      <p style="margin:20px 0 6px; font-size:14.5px; color:var(--ink-soft);">Tres señales para elegir la pieza:</p>
+      <div class="irregular-grid"><div class="irr-card"><div class="irr-inf">costumbre</div><div class="irr-form">los sábados → como, corro</div></div><div class="irr-card"><div class="irr-inf">gusto</div><div class="irr-form">me gusta / me gustan</div></div><div class="irr-card"><div class="irr-inf">ahora</div><div class="irr-form">ahora mismo → estoy + -ando / -iendo</div></div></div>
+      <div class="pron-note">🔊 <strong>Pronunciación de hoy:</strong> Practica pasar de una pieza a otra sin pausa: "Me gusta correr, pero hoy estoy comiendo."</div>
+      <div class="compare-warning"><strong>Cuidado:</strong> Gustar concuerda con la cosa que gusta (gusta / gustan), no con la persona. Y el gerundio nunca cambia: solo cambia estar.</div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">2</span><h2>Repaso relámpago</h2><span class="time-tag">6 min</span></div>
+    <p class="vocab-hint">Seis expresiones para contar un fin de semana con amigos. Toca cada tarjeta para ver un ejemplo. Dilo en voz alta antes de mirar el reverso.</p>
+    <div class="vocab-grid" id="vocab-grid"></div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">3</span><h2>Practica</h2><span class="time-tag">12 min</span></div>
+    <div class="panel">
+      <p class="vocab-hint" style="margin-bottom:14px;">10 frases mezclando -er / -ir, gustar y estar + gerundio: se hacen en voz alta en clase.</p>
+      <div id="exercises"></div>
+      <div class="check-bar">
+        <div style="display:flex; gap:10px;">
+          <button class="btn-primary" id="check-btn">Comprobar respuestas</button>
+          <button class="btn-ghost" id="reset-btn">Reiniciar</button>
+        </div>
+        <span id="score-text"></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">★</span><h2>Tres minijuegos</h2><span class="time-tag">extra</span></div>
+    <div class="panel">
+      <div class="game" id="g-sort"></div>
+      <div class="game" id="g-match"></div>
+      <div class="game" id="g-chat"></div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-num">4</span><h2>Cuéntales tu plan</h2><span class="time-tag">8 min</span></div>
+    <p class="lede" style="margin-bottom:16px;">Cada tarjeta es un amigo que te pregunta por el finde. Contesta mezclando las tres piezas. Las primeras 6 se trabajan en clase; el resto queda como banco de repaso para casa.</p>
+    <div class="characters" id="characters"></div>
+  </section>
+
+  <section class="block roleplay-panel">
+    <div class="block-head"><span class="block-num">5</span><h2>Roleplay: planear y contar el finde</h2><span class="time-tag">14 min</span></div>
+    <p class="lede" style="margin-bottom:16px;">2 escenas con amigos donde planeas el sábado y cuentas qué estás haciendo. Practicamos la primera en voz alta en clase.</p>
+    <div class="scene-tabs" id="scene-tabs"></div>
+    <div id="scene-container"></div>
+    <div class="roleplay-tip"><strong>En clase:</strong> practicaremos la escena "Planear el sábado" en voz alta, cambiando de rol. Las otras escenas son para escuchar y repetir por tu cuenta. La idea es que las digas, no que las escribas.</div>
+  </section>
+
+  <section class="block task-panel">
+    <div class="block-head"><span class="block-num">6</span><h2 style="color:var(--family)">Tu tarea</h2><span class="time-tag">3 min</span></div>
+    <p style="margin:0; font-size:15px; color:var(--ink-soft);">Escribe o di en voz alta 6 frases sobre tu finde con amigos: 2 con -er / -ir, 2 con gustar y 2 con estar + gerundio. Ejemplo: "Me gustan las tapas, así que ahora estamos comiendo en el bar".</p>
+    <textarea id="final-task" placeholder="Tus 5 frases (opcional)..."></textarea>
+    <p style="margin:10px 2px 0; font-size:12.5px; color:var(--ink-faint);">Esto es solo un apoyo para ti: no hace falta que esté perfecto. Lo importante es decirlo en voz alta, no el texto escrito.</p>
+    <div class="task-footer">
+      <span id="task-count">0 líneas escritas</span>
+      <div style="display:flex; gap:10px; align-items:center;">
+        <span class="saved-flag" id="saved-flag">Guardado ✓</span>
+        <button class="btn-secondary" id="save-btn">Guardar tarea</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <span>Clase 18 · Punto de control L3</span>
+  <span>Próxima clase → Clase 19</span>
+</footer>
+
+<script>
+/* ---------- VOCAB ---------- */
+const VOCAB = [{"front": "quedar con amigos", "back": "Quedo con Marta a las ocho.", "en": "I'm meeting Marta at eight."}, {"front": "me encanta", "back": "Me encanta cenar con ellos.", "en": "I love having dinner with them."}, {"front": "estoy esperando", "back": "Estoy esperando en la plaza.", "en": "I'm waiting in the square."}, {"front": "compartir plan", "back": "Compartimos el plan por WhatsApp.", "en": "We share the plan on WhatsApp."}, {"front": "a mí también", "back": "A mí también me gusta correr.", "en": "I like running too."}, {"front": "están bailando", "back": "Rubén y Sole están bailando.", "en": "Rubén and Sole are dancing."}];
+
+const grid = document.getElementById('vocab-grid');
+VOCAB.forEach(v=>{
+  const card = document.createElement('div');
+  card.className = 'vocab-card';
+  card.setAttribute('role', 'button');
+  card.setAttribute('tabindex', '0');
+  card.setAttribute('aria-pressed', 'false');
+  card.setAttribute('aria-label', `${v.front}. Pulsa para ver un ejemplo.`);
+  card.innerHTML = `<div class="vocab-front">${v.front}</div><div class="vocab-back">${v.back}<span class="en">${v.en}</span></div>`;
+  const toggle = ()=>{
+    const flipped = card.classList.toggle('flipped');
+    card.setAttribute('aria-pressed', String(flipped));
+  };
+  card.addEventListener('click', toggle);
+  card.addEventListener('keydown', (e)=>{
+    if(e.key === 'Enter' || e.key === ' '){
+      e.preventDefault();
+      toggle();
+    }
+  });
+  grid.appendChild(card);
+});
+
+/* ---------- EXERCISES ---------- */
+const shuffleArr=a=>{const r=[...a];for(let i=r.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[r[i],r[j]]=[r[j],r[i]];}return r;};
+const EXERCISES = [{"sentence": "Los sábados yo <span class=\"gap\">___</span> con mis amigos en el parque.", "options": ["corro", "estoy corriendo", "me gusta"], "answer": "corro", "en": "On Saturdays I run with my friends in the park."}, {"sentence": "Ahora mismo nosotros <span class=\"gap\">___</span> en el bar.", "options": ["estamos comiendo", "comemos", "nos gusta"], "answer": "estamos comiendo", "en": "Right now we're eating at the bar."}, {"sentence": "A Marta <span class=\"gap\">___</span> las películas de acción.", "options": ["le gustan", "le gusta", "está gustando"], "answer": "le gustan", "en": "Marta likes action films."}, {"sentence": "¿Dónde <span class=\"gap\">___</span> vosotros? Estamos esperando.", "options": ["estáis", "vivís", "os gusta"], "answer": "estáis", "en": "Where are you all? We're waiting."}, {"sentence": "Iker <span class=\"gap\">___</span> cerca del río.", "options": ["vive", "está viviendo", "le vive"], "answer": "vive", "en": "Iker lives near the river."}, {"sentence": "—Me gusta cocinar. —A mí <span class=\"gap\">___</span>.", "options": ["también", "tampoco", "sí"], "answer": "también", "en": "I like cooking. — Me too."}, {"sentence": "¿<span class=\"gap\">___</span> coméis mañana? ¿A las dos o a las tres?", "options": ["Cuándo", "Dónde", "Cuánto"], "answer": "Cuándo", "en": "When are you eating tomorrow? At two or three?"}, {"sentence": "Sole y Diego <span class=\"gap\">___</span> un mensaje al grupo.", "options": ["están escribiendo", "escribe", "les escribe"], "answer": "están escribiendo", "en": "Sole and Diego are writing a message to the group."}, {"sentence": "A nosotros <span class=\"gap\">___</span> jugar a las cartas.", "options": ["nos gusta", "nos gustan", "estamos gustando"], "answer": "nos gusta", "en": "We like playing cards."}, {"sentence": "¿Tú <span class=\"gap\">___</span> pizza o prefieres tapas?", "options": ["compartes", "compartís", "comparto"], "answer": "compartes", "en": "Do you share pizza or prefer tapas?"}];
+
+const exWrap = document.getElementById('exercises');
+EXERCISES.forEach((ex, i)=>{
+  if(i === 0){
+    const divider = document.createElement('div');
+    divider.className = 'ex-divider en-clase';
+    divider.textContent = 'en clase · ítems 1–10';
+    exWrap.appendChild(divider);
+  }
+  if(i === 10){
+    const divider = document.createElement('div');
+    divider.className = 'ex-divider';
+    divider.textContent = 'para casa · repaso auditivo opcional';
+    exWrap.appendChild(divider);
+  }
+  const el = document.createElement('div');
+  el.className = 'exercise';
+  el.dataset.answer = ex.answer;
+  el.innerHTML = `
+    <div class="ex-sentence">${i+1}. ${ex.sentence}</div>
+    <div class="ex-options">
+      ${shuffleArr(ex.options).map(o=>`<button class="opt-btn" data-value="${o}">${o}</button>`).join('')}
+    </div>
+    <p class="en" style="margin-top:8px;">${ex.en}</p>
+  `;
+  exWrap.appendChild(el);
+
+  el.querySelectorAll('.opt-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      el.querySelectorAll('.opt-btn').forEach(b=>b.classList.remove('picked'));
+      btn.classList.add('picked');
+    });
+  });
+});
+
+document.getElementById('check-btn').addEventListener('click', ()=>{
+  let correct = 0;
+  document.querySelectorAll('.exercise').forEach(el=>{
+    const answer = el.dataset.answer;
+    const picked = el.querySelector('.opt-btn.picked');
+    el.querySelectorAll('.opt-btn').forEach(b=>{
+      b.disabled = true;
+      if(b.dataset.value === answer) b.classList.add('correct');
+      else if(b === picked) b.classList.add('wrong');
+    });
+    if(picked && picked.dataset.value === answer) correct++;
+  });
+  document.getElementById('score-text').textContent = `${correct} / ${EXERCISES.length} correctas`;
+});
+
+document.getElementById('reset-btn').addEventListener('click', ()=>{
+  document.querySelectorAll('.exercise').forEach(el=>{
+    el.querySelectorAll('.opt-btn').forEach(b=>{
+      b.disabled = false;
+      b.classList.remove('picked','correct','wrong');
+    });
+  });
+  document.getElementById('score-text').textContent = '';
+});
+
+/* ---------- CHARACTER CARDS ---------- */
+const CHARACTERS = [{"name": "Marta", "role": "Pregunta qué haces los sábados", "roleEn": "She asks what you do on Saturdays", "facts": ["clase 18", "-er / -ir", "costumbre"], "prompt": "Cuéntale 2 actividades:", "promptEn": "Tell her 2 activities:"}, {"name": "Iker", "role": "Pregunta qué te gusta hacer", "roleEn": "He asks what you like doing", "facts": ["clase 18", "gustar", "gusto"], "prompt": "Dile 2 gustos y pregunta \"¿y a ti?\":", "promptEn": "Say 2 likes and ask \"and you?\":"}, {"name": "Sole", "role": "Te escribe: ¿dónde estás?", "roleEn": "She texts: where are you?", "facts": ["clase 18", "estar + gerundio", "ahora"], "prompt": "Dile dónde estás y qué haces:", "promptEn": "Tell her where you are and what you're doing:"}, {"name": "Diego", "role": "Organiza una cena", "roleEn": "He's organising dinner", "facts": ["clase 18", "preguntas", "plan"], "prompt": "Pregunta dónde, cuándo y con quién:", "promptEn": "Ask where, when and with whom:"}, {"name": "Rubén", "role": "Dice que odia madrugar", "roleEn": "He says he hates getting up early", "facts": ["clase 18", "a mí tampoco", "gusto"], "prompt": "Reacciona y propón una hora:", "promptEn": "React and suggest a time:"}, {"name": "Tu grupo de WhatsApp", "role": "Pregunta cómo va el finde", "roleEn": "The group asks how the weekend is going", "facts": ["clase 18", "mezcla", "finde"], "prompt": "Cuenta 3 cosas con las tres piezas:", "promptEn": "Tell 3 things using the three pieces:"}];
+
+const charWrap = document.getElementById('characters');
+CHARACTERS.forEach((c, i)=>{
+  if(i === 0){
+    const divider = document.createElement('div');
+    divider.className = 'ex-divider en-clase';
+    divider.textContent = 'en clase · tarjetas 1–6';
+    charWrap.appendChild(divider);
+  }
+  if(i === 6){
+    const divider = document.createElement('div');
+    divider.className = 'ex-divider';
+    divider.textContent = 'para casa · banco de repaso';
+    charWrap.appendChild(divider);
+  }
+  const card = document.createElement('div');
+  card.className = 'char-card';
+  card.innerHTML = `
+    <div class="char-avatar">${c.name.charAt(0)}</div>
+    <div class="char-body">
+      <p class="char-name">${c.name}</p>
+      <p class="char-role">${c.role}<span class="en">${c.roleEn}</span></p>
+      <div class="char-facts">${c.facts.map(f=>`<span class="fact-tag">${f}</span>`).join('')}</div>
+      <p class="char-prompt">${c.prompt}<span class="en">${c.promptEn}</span></p>
+      <textarea class="char-input" rows="2" placeholder="Escribe o di tu respuesta..."></textarea>
+    </div>
+  `;
+  charWrap.appendChild(card);
+});
+
+/* ---------- ROLEPLAY SCENES ---------- */
+const SCENES = [{"id": "plan", "tab": "Planear el sábado", "icon": "📅", "setup": "Organizáis el sábado entre todos.", "setupEn": "You organise Saturday together.", "lines": [{"who": "friend", "name": "Marta", "text": "¿Qué os gusta hacer el sábado?", "textEn": "What do you like doing on Saturday?"}, {"who": "you", "hint": "Di tus gustos.", "hintEn": "Say what you like."}, {"who": "friend", "name": "Iker", "text": "A mí me gusta correr. ¿Dónde quedamos?", "textEn": "I like running. Where do we meet?"}, {"who": "you", "hint": "Propón un lugar y una hora.", "hintEn": "Suggest a place and a time."}, {"who": "friend", "name": "Sole", "text": "¿Comemos juntos después?", "textEn": "Shall we eat together afterwards?"}, {"who": "you", "hint": "Acepta y pregunta con quién.", "hintEn": "Accept and ask with whom."}]}, {"id": "ahora", "tab": "Contar el finde", "icon": "📱", "setup": "Os escribís durante el sábado.", "setupEn": "You text each other during Saturday.", "lines": [{"who": "friend", "name": "Diego", "text": "¿Dónde estás? ¿Qué estás haciendo?", "textEn": "Where are you? What are you doing?"}, {"who": "you", "hint": "Contesta con estar + gerundio.", "hintEn": "Answer with estar + gerund."}, {"who": "friend", "name": "Rubén", "text": "Nosotros estamos comiendo en el bar.", "textEn": "We're eating at the bar."}, {"who": "you", "hint": "Pregunta si les gusta el sitio.", "hintEn": "Ask if they like the place."}, {"who": "friend", "name": "Diego", "text": "Sí, nos encanta. ¿Vienes?", "textEn": "Yes, we love it. Are you coming?"}, {"who": "you", "hint": "Responde y di cuándo llegas.", "hintEn": "Answer and say when you arrive."}]}];
+
+const sceneTabs = document.getElementById('scene-tabs');
+const sceneContainer = document.getElementById('scene-container');
+let activeScene = 0;
+
+function renderTabs(){
+  sceneTabs.innerHTML = SCENES.map((s,i)=>
+    `<button class="scene-tab${i===activeScene?' active':''}" data-idx="${i}">${s.icon} ${s.tab}</button>`
+  ).join('');
+  sceneTabs.querySelectorAll('.scene-tab').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      activeScene = parseInt(btn.dataset.idx, 10);
+      renderTabs();
+      renderScene();
+    });
+  });
+}
+
+function renderScene(){
+  const scene = SCENES[activeScene];
+  const linesHtml = scene.lines.map((l)=>{
+    if(l.who === 'friend'){
+      return `
+        <div class="line friend">
+          <div class="line-avatar">${l.name.charAt(0)}</div>
+          <div class="line-body">
+            <p class="line-name">${l.name}</p>
+            <div class="line-bubble">${l.text}<span class="en">${l.textEn}</span></div>
+          </div>
+        </div>`;
+    } else {
+      return `
+        <div class="line you">
+          <div class="line-avatar">Tú</div>
+          <div class="line-body">
+            <p class="line-name">Tú</p>
+            <textarea class="line-input" rows="2" placeholder="Di tu respuesta en voz alta (anota solo si te ayuda)..."></textarea>
+            <p class="line-hint">${l.hint}<span class="en">${l.hintEn}</span></p>
+          </div>
+        </div>`;
+    }
+  }).join('');
+
+  sceneContainer.innerHTML = `
+    <div class="scene-setup">
+      <span class="scene-icon">${scene.icon}</span>
+      <p class="scene-text"><strong>${scene.tab}:</strong> ${scene.setup}<span class="en">${scene.setupEn}</span></p>
+    </div>
+    <div class="dialogue">${linesHtml}</div>
+  `;
+}
+
+renderTabs();
+renderScene();
+
+/* ---------- FINAL TASK ---------- */
+const STORAGE_KEY = 'andrei-clase18-tarea';
+const taskArea = document.getElementById('final-task');
+const taskCount = document.getElementById('task-count');
+const savedFlag = document.getElementById('saved-flag');
+
+async function cargarTarea(){
+  if (!window.storage) return;
+  try{
+    const res = await window.storage.get(STORAGE_KEY);
+    if (res && typeof res.value === 'string') taskArea.value = res.value;
+  }catch(e){
+    // Clave inexistente todavía: no hay tarea previa, se queda en blanco.
+  }
+  updateCount();
+}
+
+function updateCount(){
+  const lines = taskArea.value.split('\n').filter(l => l.trim().length > 0).length;
+  taskCount.textContent = `${lines} línea${lines===1?'':'s'} escrita${lines===1?'':'s'}`;
+}
+taskArea.addEventListener('input', updateCount);
+updateCount();
+cargarTarea();
+
+document.getElementById('save-btn').addEventListener('click', async ()=>{
+  if (!window.storage){
+    savedFlag.textContent = 'Guardado no disponible aquí';
+    savedFlag.classList.add('show');
+    setTimeout(()=>{ savedFlag.classList.remove('show'); savedFlag.textContent = 'Guardado ✓'; }, 2200);
+    return;
+  }
+  try{
+    const ok = await window.storage.set(STORAGE_KEY, taskArea.value);
+    savedFlag.textContent = ok ? 'Guardado ✓' : 'No se pudo guardar';
+  }catch(e){
+    savedFlag.textContent = 'No se pudo guardar';
+  }
+  savedFlag.classList.add('show');
+  setTimeout(()=>{ savedFlag.classList.remove('show'); savedFlag.textContent = 'Guardado ✓'; }, 1800);
+});
+</script>
+
+<script>
+(function(){
+const $=id=>document.getElementById(id);
+const en=t=>`<span class="en">${t}</span>`;
+const shuffle=a=>{let r;do{r=[...a];for(let i=r.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[r[i],r[j]]=[r[j],r[i]];}}while(r.length>1&&r.every((x,i)=>x===a[i]));return r;};
+const head=(l,es,e,h,he)=>`<h3><b>${l}</b>${es}${en(e)}</h3><p class="game-hint">${h}${en(he)}</p>`;
+
+/* ---------- STATIC GLOSSES + TOGGLE ---------- */
+const G=[[".block-head h2", 0, "The map of line L3"], [".block-head h2", 1, "Lightning review"], [".block-head h2", 2, "Practice"], [".block-head h2", 3, "Mini-games"], [".block-head h2", 4, "Tell them your plan"], [".block-head h2", 5, "Roleplay: planning and telling the weekend"], [".block-head h2", 6, "Your homework"], ["header .lede", 0, "Last class of L3. No new grammar: you combine -er / -ir verbs, gustar and estar + gerund to plan, give opinions and tell a weekend with friends."], [".roleplay-tip", 0, "In class: we'll practise the first scene aloud, swapping roles. The other one is to repeat at home."]];
+G.forEach(([sel,i,t])=>{const el=document.querySelectorAll(sel)[i];if(!el)return;const s=document.createElement('span');s.className='en';s.textContent=t;el.appendChild(s);});
+const btns=document.querySelectorAll('.lang-toggle button');
+function setLang(l){document.body.dataset.lang=l;btns.forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.lang===l)));try{localStorage.setItem('clase-lang-v2',l)}catch(e){}}
+btns.forEach(b=>b.addEventListener('click',()=>setLang(b.dataset.lang)));
+let saved=null;try{saved=localStorage.getItem('clase-lang-v2')}catch(e){}
+setLang(saved==='es'?'es':'es-en');
+
+/* ---------- A · ORDENA LA FRASE ---------- */
+const SORT=[{"w": ["Me gusta", "correr", "con Iker", "los sábados"], "en": "I like running with Iker on Saturdays."}, {"w": ["Ahora", "estamos", "comiendo", "en el bar"], "en": "Right now we're eating at the bar."}, {"w": ["¿Dónde", "vivís", "vosotros", "ahora?"], "en": "Where do you all live now?"}, {"w": ["Me gustan", "las tapas", "de este bar"], "en": "I like the tapas at this bar."}, {"w": ["Marta", "está", "bebiendo", "un café"], "en": "Marta is drinking a coffee."}, {"w": ["Iker y yo", "vivimos", "en Madrid"], "en": "Iker and I live in Madrid."}, {"w": ["A Sole", "le gusta", "correr", "por la mañana"], "en": "Sole likes running in the morning."}, {"w": ["Ahora", "están", "saliendo", "del cine"], "en": "Right now they're leaving the cinema."}, {"w": ["Escribo", "a Marta", "los domingos"], "en": "I write to Marta on Sundays."}, {"w": ["¿Dónde", "estáis", "comiendo", "ahora?"], "en": "Where are you all eating now?"}];
+(()=>{
+ const root=$('g-sort');
+ root.innerHTML=head('A','Ordena la frase','Put the sentence in order','Toca las piezas en el orden correcto; toca una pieza colocada para quitarla.','Tap the pieces in the right order; tap a placed piece to remove it.')+'<div id="sort-items"></div><div class="game-bar"><button class="btn-primary" id="sort-check">Comprobar</button><button class="btn-ghost" id="sort-reset">Reiniciar</button><span class="score" id="sort-score"></span></div>';
+ const box=$('sort-items'),score=$('sort-score');let st;
+ const chip=(it,n,i,act,d)=>`<button class="chip" data-n="${n}" data-i="${i}" data-act="${act}"${d?' disabled':''}>${it.w[i]}</button>`;
+ function render(){box.innerHTML=SORT.map((it,n)=>{const s=st[n];return `<div class="sort-item"><div class="build ${s.cls}">${s.placed.map(i=>chip(it,n,i,'rm',s.done)).join('')}</div><div class="bank">${s.bank.map(i=>chip(it,n,i,'add',s.done)).join('')}</div>${s.msg?`<p class="feedback">${s.msg}</p>`:''}${en(it.en)}</div>`;}).join('');}
+ const init=()=>{st=SORT.map(it=>({bank:shuffle(it.w.map((_,i)=>i)),placed:[],done:false,cls:'',msg:''}));score.textContent='';render();};
+ box.addEventListener('click',e=>{const b=e.target.closest('.chip');if(!b)return;const s=st[+b.dataset.n],i=+b.dataset.i;if(b.dataset.act==='add'){s.bank=s.bank.filter(x=>x!==i);s.placed.push(i);}else{s.placed=s.placed.filter(x=>x!==i);s.bank.push(i);}render();});
+ $('sort-check').addEventListener('click',()=>{let ok=0;st.forEach((s,n)=>{const good=s.placed.length===SORT[n].w.length&&s.placed.every((v,k)=>v===k);s.done=true;s.cls=good?'ok':'bad';s.msg=good?'':'✗ Orden correcto: '+SORT[n].w.join(' ');if(good)ok++;});score.textContent=`${ok} / ${SORT.length} correctas`;render();});
+ $('sort-reset').addEventListener('click',init);init();
+})();
+
+/* ---------- B · EMPAREJA ---------- */
+const PAIRS=[["costumbre", "como los sábados", "I eat on Saturdays"], ["gusto", "me gustan las tapas", "I like tapas"], ["ahora mismo", "estoy llegando", "I'm arriving"], ["a mí también", "me gusta", "me too"], ["lugar", "¿dónde?", "where?"], ["persona", "¿con quién?", "with whom?"], ["los lunes", "corro", "on Mondays I run"], ["ahora mismo", "estamos cenando", "we're having dinner now"], ["gusto", "nos gustan las pelis", "we like films"], ["a mí sí", "me gusta madrugar", "I do (like it)"]];
+(()=>{
+ const root=$('g-match');
+ root.innerHTML=head('B','Empareja persona y verbo','Match person and verb','Toca una persona y después su forma del verbo.','Tap a person, then its verb form.')+'<div id="match-board"></div><div class="game-bar"><button class="btn-ghost" id="match-reset">Reiniciar</button><span class="score" id="match-score"></span></div>';
+ const board=$('match-board');let order,done,sel,bad;
+ const cl=(side,i)=>done.has(i)?' done':(bad&&bad[side]===i?' nope':(sel[side]===i?' sel':''));
+ function draw(){
+  board.innerHTML=`<div class="match"><div class="col">${PAIRS.map((p,i)=>`<button class="chip${cl('L',i)}" data-side="L" data-i="${i}"${done.has(i)?' disabled':''}>${p[0]}</button>`).join('')}</div><div class="col">${order.map(i=>`<button class="chip${cl('R',i)}" data-side="R" data-i="${i}"${done.has(i)?' disabled':''}>${PAIRS[i][1]}${en(PAIRS[i][2])}</button>`).join('')}</div></div>`;
+  $('match-score').textContent=done.size===PAIRS.length?'¡Todo emparejado! 🎉':`${done.size} / ${PAIRS.length} parejas`;
+ }
+ const init=()=>{order=shuffle(PAIRS.map((_,i)=>i));done=new Set();sel={L:null,R:null};bad=null;draw();};
+ board.addEventListener('click',e=>{const b=e.target.closest('.chip');if(!b||bad||b.disabled)return;sel[b.dataset.side]=+b.dataset.i;
+  if(sel.L!==null&&sel.R!==null){
+   if(sel.L===sel.R){done.add(sel.L);sel={L:null,R:null};}
+   else{bad={...sel};sel={L:null,R:null};draw();setTimeout(()=>{bad=null;draw();},700);return;}
+  }
+  draw();});
+ $('match-reset').addEventListener('click',init);init();
+})();
+
+/* ---------- C · SIGUE EL HILO ---------- */
+const CHAT=[{"who": "Marta", "sit": "Marta te escribe.", "sitEn": "Marta texts you.", "msg": "¿Qué estás haciendo?", "msgEn": "What are you doing?", "opts": [["Estoy comiendo con Iker.", 1, "", ""], ["Como con Iker ahora.", 0, "Para algo que pasa ahora, usa estar + gerundio.", "For something happening now, use estar + gerund."], ["Estoy comer con Iker.", 0, "Falta el gerundio: comiendo.", "Missing the gerund: comiendo."]]}, {"who": "Iker", "sit": "Iker habla de gustos.", "sitEn": "Iker talks about likes.", "msg": "No me gustan los domingos.", "msgEn": "I don't like Sundays.", "opts": [["A mí tampoco.", 1, "", ""], ["A mí también.", 0, "Es negativo: tampoco.", "It's negative: tampoco."], ["Yo gusto no.", 0, "Gustar necesita me / te / le.", "Gustar needs me / te / le."]]}, {"who": "Sole", "sit": "Sole pregunta por el plan.", "sitEn": "Sole asks about the plan.", "msg": "¿Dónde vivís vosotros?", "msgEn": "Where do you all live?", "opts": [["Vivimos cerca del parque.", 1, "", ""], ["Vivís cerca del parque.", 0, "Contestas por el grupo: vivimos.", "You answer for the group: vivimos."], ["Estamos vivir cerca.", 0, "Para una costumbre, usa vivimos.", "For a habit, use vivimos."]]}, {"who": "Marta", "sit": "Marta pregunta por tu sábado.", "sitEn": "Marta asks about your Saturday.", "msg": "¿Qué haces los sábados?", "msgEn": "What do you do on Saturdays?", "opts": [["Los sábados corro con Iker.", 1, "", ""], ["Los sábados estoy corriendo con Iker.", 0, "Para una costumbre usa el presente: corro.", "For a habit use the present: corro."], ["Los sábados corres con Iker.", 0, "Hablas de ti: corro.", "You talk about yourself: corro."]]}, {"who": "Iker", "sit": "Iker habla de deporte.", "sitEn": "Iker talks about sport.", "msg": "Me gusta mucho el pádel.", "msgEn": "I like padel a lot.", "opts": [["A mí también.", 1, "", ""], ["A mí tampoco.", 0, "Iker dice algo positivo: también.", "Iker says something positive: también."], ["Yo gusto el pádel.", 0, "Gustar necesita me / te / le.", "Gustar needs me / te / le."]]}, {"who": "Sole", "sit": "Sole pregunta qué hacéis ahora.", "sitEn": "Sole asks what you're doing now.", "msg": "¿Qué estáis haciendo?", "msgEn": "What are you all doing?", "opts": [["Estamos cenando en casa.", 1, "", ""], ["Cenamos en casa ahora.", 0, "Para algo que pasa ahora usa estar + gerundio.", "For something happening now use estar + gerund."], ["Estamos cenar en casa.", 0, "Falta el gerundio: cenando.", "Missing the gerund: cenando."]]}, {"who": "Diego", "sit": "Diego pregunta por Marta.", "sitEn": "Diego asks about Marta.", "msg": "¿Dónde vive Marta?", "msgEn": "Where does Marta live?", "opts": [["Marta vive cerca del bar.", 1, "", ""], ["Marta vivo cerca del bar.", 0, "Con Marta (ella) se usa -e: vive.", "With Marta (she) use -e: vive."], ["Marta vivís cerca del bar.", 0, "\"Vivís\" es para vosotros.", "\"Vivís\" is for vosotros."]]}, {"who": "Lucía", "sit": "Lucía habla del tiempo.", "sitEn": "Lucía talks about the weather.", "msg": "No me gusta el frío.", "msgEn": "I don't like the cold.", "opts": [["A mí tampoco.", 1, "", ""], ["A mí también.", 0, "Es negativo: tampoco.", "It's negative: tampoco."], ["A mí gusto el frío.", 0, "Gustar necesita me / te / le.", "Gustar needs me / te / le."]]}, {"who": "Rubén", "sit": "Rubén pregunta si llegas.", "sitEn": "Rubén asks if you're arriving.", "msg": "¿Estás llegando?", "msgEn": "Are you arriving?", "opts": [["Sí, estoy llegando.", 1, "", ""], ["Sí, llego estando.", 0, "El gerundio va después de estar: estoy llegando.", "The gerund goes after estar: estoy llegando."], ["Sí, estás llegando.", 0, "Hablas de ti: estoy.", "You talk about yourself: estoy."]]}, {"who": "Marta", "sit": "Marta pregunta qué bebéis.", "sitEn": "Marta asks what you drink.", "msg": "¿Qué bebéis los viernes?", "msgEn": "What do you all drink on Fridays?", "opts": [["Bebemos agua y café.", 1, "", ""], ["Bebo agua y café.", 0, "Contestas por el grupo: bebemos.", "You answer for the group: bebemos."], ["Estamos bebiendo agua los viernes.", 0, "Una costumbre usa el presente: bebemos.", "A habit uses the present: bebemos."]]}];
+(()=>{
+ const root=$('g-chat');const H=head('C','Contesta a tu amigo','Answer your friend','Elige la respuesta correcta.','Pick the correct reply.');
+ let t,score,opts,answered;
+ function turn(){const c=CHAT[t];opts=shuffle(c.opts);answered=false;
+  root.innerHTML=H+`<div class="scene-setup" style="margin-bottom:12px"><span class="scene-icon">💬</span><p class="scene-text" style="margin:0"><strong>Turno ${t+1} / ${CHAT.length}.</strong> ${c.sit}${en(c.sitEn)}</p></div><div class="line friend"><div class="line-avatar">${c.who[0]}</div><div class="line-body"><p class="line-name">${c.who}</p><div class="line-bubble">${c.msg}${en(c.msgEn)}</div></div></div><div class="chat-opts">${opts.map((o,i)=>`<button class="chip" data-i="${i}">${o[0]}</button>`).join('')}</div><p class="feedback" id="chat-fb"></p><div class="game-bar" id="chat-bar"></div>`;}
+ function end(){root.innerHTML=H+`<div class="note" style="margin-top:0"><strong>${score} / ${CHAT.length}</strong> ${score===CHAT.length?'¡Frases perfectas!':'Repasa las tres piezas y vuelve a intentarlo.'}${en(score===CHAT.length?'Perfect sentences!':'Review the three pieces and try again.')}</div><div class="game-bar"><button class="btn-ghost" id="chat-again">Jugar otra vez</button></div>`;}
+ root.addEventListener('click',e=>{
+  const b=e.target.closest('.chat-opts .chip');
+  if(b&&!answered){answered=true;const o=opts[+b.dataset.i];if(o[1])score++;
+   root.querySelectorAll('.chat-opts .chip').forEach((x,i)=>{x.disabled=true;if(opts[i][1])x.classList.add('done');else if(x===b)x.classList.add('nope');});
+   $('chat-fb').innerHTML=o[1]?'':'✗ '+o[2]+en(o[3]);
+   $('chat-bar').innerHTML=`<button class="btn-primary" id="chat-next">${t<CHAT.length-1?'Siguiente →':'Ver resultado'}</button>`;return;}
+  if(e.target.id==='chat-next'){t++;t<CHAT.length?turn():end();}
+  if(e.target.id==='chat-again'){t=0;score=0;turn();}
+ });
+ t=0;score=0;turn();
+})();
+})();
+</script>
+<script>
+/* ---------- INGLÉS SUTIL EN TEXTO ESTÁTICO ---------- */
+(()=>{const D={"Repaso relámpago": "Lightning review", "Practica": "Practice", "Cuéntales tu plan": "Tell them your plan", "Tu tarea": "Your homework", "Esto es solo un apoyo para ti — no hace falta que esté perfecto. Lo importante es decirlas en voz alta, no el texto escrito.": "This is just a support for you — it doesn't need to be perfect. What matters is saying them aloud, not the written text.", "Esto es solo un apoyo para ti: no hace falta que esté perfecto. Lo importante es decirlo en voz alta, no el texto escrito.": "This is just a support for you: it doesn't need to be perfect. What matters is saying it aloud, not the written text.", "en clase · ítems 1–10": "in class · items 1–10", "para casa · repaso auditivo opcional": "at home · optional listening review", "en clase · tarjetas 1–6": "in class · cards 1–6", "para casa · banco de repaso": "at home · review bank", "práctica activa · 3 ejercicios": "active practice · 3 exercises", "A · ordena la frase": "put the sentence in order", "B · escribe la palabra": "type the word", "B · escribe la forma": "type the form", "C · empareja la frase con su versión con \"lo\"": "match the sentence with its \"lo\" version", "C · empareja el marcador con su forma": "match the marker with its form", "Comprobar respuestas": "Check answers", "Comprobar": "Check", "Reiniciar": "Reset", "Guardar tarea": "Save", "Tres piezas para frases claras": "Three pieces for clear sentences", "Roleplay: organizar el fin de semana": "Roleplay: organising the weekend", "En clase: practicaremos la escena \"Tarde de pádel y barbacoa\" en voz alta, cambiando de rol. La idea es que lo digas, no que lo escribas.": "In class: we'll practise the \"Padel and barbecue\" scene aloud, swapping roles. The idea is to say it, not write it.", "Clase 12 · Planes con amigos": "Class 12 · Plans with friends", "Próxima clase → Clase 13: A2 check-in": "Next class → Class 13: A2 check-in", "El mapa de todo lo aprendido": "The map of everything learned", "Practica: los tres tiempos mezclados": "Practice: the three tenses mixed", "Feedback personalizado": "Personalised feedback", "Mini-simulación: un fin de semana con amigos": "Mini-simulation: a weekend with friends", "En clase: practicaremos la escena \"Contar el fin de semana\" en voz alta, cambiando de rol. La idea es que lo digas, no que lo escribas.": "In class: we'll practise the \"Telling about the weekend\" scene aloud, swapping roles. The idea is to say it, not write it.", "Clase 13 · A2 check-in": "Class 13 · A2 check-in", "Indefinido vs imperfecto": "Preterite vs imperfect", "Voy a vs -ré": "Going to vs will", "Propuestas suaves": "Gentle suggestions", "Quién + verbo + qué": "Who + verb + what", "Une dos ideas": "Joins two ideas", "Sustituye algo ya dicho": "Replaces something already said", "Lo que ya dominas": "What you already master", "En proceso": "In progress", "Pronunciación": "Pronunciation", "Lo que viene en L3": "Coming up in L3", "El pretérito indefinido con verbos regulares e irregulares comunes (fue, tuvo, hizo, dijo) sale ya de forma natural, y distingues bien cuándo usar \"voy a\" frente al futuro simple en conversación espontánea.": "The preterite with regular and common irregular verbs now comes out naturally, and you tell \"voy a\" from the simple future well in spontaneous speech.", "\"Que\", \"lo\" y la frase simple están empezando a salir solos; todavía cuesta elegirlos rápido en frases largas. Sigue apareciendo alguna confusión entre indefinido e imperfecto al contar historias de más de dos frases.": "Que, lo and the simple sentence are starting to come out on their own; choosing them quickly in long sentences is still hard. Some preterite/imperfect confusion remains in stories longer than two sentences.", "El ritmo general ha mejorado mucho desde la Clase 1 — las vocales suenan más puras y los enlaces entre palabras ya no se fuerzan. Sigue trabajando la reducción de \"voy a\" y la entonación suave del condicional.": "Overall rhythm has improved a lot since Class 1 — vowels sound purer and linking is no longer forced. Keep working on reducing \"voy a\" and the soft intonation of the conditional.", "Conversación en grupo a ritmo real y situaciones sin inglés de apoyo, construidas sobre esta base de pasado, futuro, \"que\" y \"lo\".": "Group conversation at real speed and situations without English support, built on this base of past, future, que and lo."};const n=t=>t.replace(/\s+/g,' ').trim();
+document.querySelectorAll('h2,h3,p,.ex-divider,.milestone-main,.roleplay-tip,footer span,button.btn-primary,button.btn-ghost,button.btn-secondary').forEach(el=>{
+ if(el.querySelector('.en'))return;const t=D[n(el.textContent)];if(!t)return;
+ const s=document.createElement('span');s.className='en'+(el.matches('button,.ex-divider')?' inl':'');s.textContent=(el.matches('.ex-divider')?'· ':'')+t;el.appendChild(s);});})();
+</script>
+<script>
+/* ---------- INGLÉS SUTIL (BLOQUE 2) ---------- */
+(()=>{const P=[["Hoy hablas de lo que haces con tus amigos en tu tiempo libre", "Today you talk about what you do with friends in your free time: walking, swimming, dancing, cycling, training. You learn a simple structure for almost everything (who + verb + what + where or when) and regular -ar verbs in the present."], ["Verbos en -ar y frase simple", "-ar verbs and the simple sentence"], ["Los verbos regulares en -ar siguen", "Regular -ar verbs always follow the same pattern: drop -ar and add -o, -as, -a, -amos, -áis, -an."], ["La terminación te dice quién", "The ending tells you who, so you almost always drop the subject: \"Nadamos los sábados\", not \"Nosotros nadamos…\". Add the subject only to contrast: \"Yo nado, pero Iker corre\"."], ["El orden de una frase simple", "The order of an everyday simple sentence:"], ["🔊 Pronunciación de hoy: el acento", "Stress changes the meaning: \"nado\" (I swim) and \"nadó\" (he swam) look almost the same but sound different. Also practise \"-áis\": ¿bailáis?, the vosotros form used a lot with friends in Spain."], ["Cuidado con las preposiciones", "Careful with fixed prepositions: days take el / los, times take a, people take con, places take en."], ["Seis actividades de tiempo libre", "Six free-time activities with friends. Tap a card for an example. Say it aloud before looking at the back."], ["30 frases", "30 sentences choosing the correct form or preposition: the first 10 are done aloud in class; the rest is review for home."], ["Cada tarjeta es un amigo que te pregunta qué haces", "Each card is a friend asking what you do in your free time. Answer with a simple sentence and an -ar verb. The first 6 are worked in class; the rest is a review bank for home."], ["Roleplay: organizar un plan", "Roleplay: organising a plan with friends"], ["3 escenas con amigos", "3 scenes with friends where you propose, tell and organise plans with -ar verbs. We practise the first aloud in class; the other two are to repeat at home."], ["Escribe o di en voz alta 5 frases sobre tu fin de semana ideal", "Write or say aloud 5 sentences about your ideal weekend with friends. Use 5 different -ar verbs and the structure who + verb + what + where or when."], ["Los verbos en -er e -ir comparten", "-er and -ir verbs share almost everything: -o, -es, -e, -en. They only differ in nosotros and vosotros."], ["Truco: -er: nosotros", "Tip: -er: nosotros -emos, vosotros -éis. -ir: nosotros -imos, vosotros -ís. All other forms are the same."], ["Cuatro preguntas para organizar", "Four questions to organise a plan:"], ["🔊 Pronunciación de hoy: ¿coméis?", "¿coméis? ¿vivís? With vosotros, the final syllable carries the stress. In \"cuánto\" and \"dónde\" the accent marks the question."], ["Cuidado: \"Beber\"", "Careful: \"beber\" and \"comer\" take a direct object without a preposition (bebo agua), but \"salir\" asks for \"con\" (salgo con Marta)."], ["Seis planes de comida", "Six dinner and outing plans with friends. Tap a card for an example. Say it aloud before looking at the back."], ["10 frases eligiendo la forma correcta de -er", "10 sentences choosing the correct -er / -ir form or the question: done aloud in class."], ["Cada tarjeta es un amigo que organiza", "Each card is a friend organising a dinner or outing. Answer with an -er / -ir verb and a plan question. The first 6 are worked in class; the rest is a review bank for home."], ["2 escenas con amigos donde organizas", "2 scenes with friends where you organise meals and outings with -er / -ir verbs. We practise the first aloud in class."], ["Escribe o di en voz alta 5 frases sobre una cena", "Write or say aloud 5 sentences about an ideal dinner with your friends. Use 5 different -er / -ir verbs and 2 questions (where, when, with whom or how much)."], ["Con gustar, la cosa que te gusta", "With gustar, the thing you like is the subject, so the verb is singular (gusta) or plural (gustan)."], ["Truco: cuando preguntas", "Tip: when you ask \"¿y a ti?\", the pronoun starts with \"a\": a mí, a ti, a él, a nosotros, a vosotros, a ellos."], ["Tres respuestas rápidas", "Three quick answers with friends:"], ["🔊 Pronunciación de hoy: \"A mí", "\"A mí también\" sounds almost like one word. Practise the intonation: it rises on \"mí\" and falls on \"también\"."], ["Cuidado: Si dices", "Careful: if you say \"yo gusto el cine\", you say something else: gustar doesn't work like \"comer\". The person goes in me / te / le, not yo."], ["Seis gustos de tiempo libre", "Six free-time tastes with friends. Tap a card for an example. Say it aloud before looking at the back."], ["10 frases eligiendo gusta", "10 sentences choosing gusta / gustan, the pronoun or the right answer: done aloud in class."], ["Cada tarjeta es un amigo que te pregunta por tus gustos", "Each card is a friend asking about your tastes. Answer with me gusta / me gustan and ask \"¿y a ti?\". The first 6 are worked in class; the rest is a review bank for home."], ["2 escenas con amigos donde comparáis", "2 scenes with friends where you compare tastes with gustar. We practise the first aloud in class."], ["Escribe o di en voz alta 5 frases sobre tus gustos", "Write or say aloud 5 sentences about your tastes and your friends'. Use me gusta, me gustan, a mí también and a mí tampoco at least once."], ["Estar + gerundio describe", "Estar + gerund describes an action in progress. The gerund is formed: -ar → -ando, -er / -ir → -iendo."], ["Truco: solo cambia el verbo estar", "Tip: only the verb estar changes; the gerund never does: \"estoy llegando\", \"estamos llegando\", \"están llegando\"."], ["Tres preguntas para quedar", "Three questions to meet up in real time:"], ["🔊 Pronunciación de hoy: El gerundio", "The gerund is stressed on the syllable before -ndo: lle-GAN-do, co-MIEN-do. Practise at voice-message speed."], ["Cuidado: No uses el gerundio", "Careful: don't use the gerund for future plans: \"mañana estoy jugando\" sounds odd. For the future use \"voy a\"."], ["Seis mensajes cortos", "Six short WhatsApp messages with friends. Tap a card for an example. Say it aloud before looking at the back."], ["10 frases eligiendo la forma correcta de estar", "10 sentences choosing the correct form of estar + gerund: done aloud in class."], ["Cada tarjeta es un amigo que te escribe", "Each card is a friend texting you on WhatsApp. Answer with estar + gerund. The first 6 are worked in class; the rest is a review bank for home."], ["2 escenas con amigos donde os localizáis", "2 scenes with friends where you find each other and say what you're doing right now. We practise the first aloud in class."], ["Escribe o di en voz alta 5 mensajes", "Write or say aloud 5 WhatsApp messages for your friends. Use estar + gerund in each one and a question."], ["Tres piezas de las clases 15", "Three pieces from classes 15, 16 and 17. Choose the piece first, then build the sentence."], ["Truco: antes de hablar", "Tip: before speaking, think whether you're telling a habit (-er / -ir), a like (gustar) or something happening now (estar + gerund)."], ["Tres señales para elegir", "Three signals for choosing the piece:"], ["🔊 Pronunciación de hoy: Practica pasar", "Practise moving from one piece to another without pausing: \"Me gusta correr, pero hoy estoy comiendo.\""], ["Cuidado: Gustar concuerda", "Careful: gustar agrees with the thing liked (gusta / gustan), not with the person. And the gerund never changes: only estar does."], ["Seis expresiones para contar", "Six expressions for telling about a weekend with friends. Tap a card for an example. Say it aloud before looking at the back."], ["10 frases mezclando", "10 sentences mixing -er / -ir, gustar and estar + gerund: done aloud in class."], ["Cada tarjeta es un amigo que te pregunta por el finde", "Each card is a friend asking about your weekend. Answer mixing the three pieces. The first 6 are worked in class; the rest is a review bank for home."], ["2 escenas con amigos donde planeas", "2 scenes with friends where you plan Saturday and say what you're doing. We practise the first aloud in class."], ["Escribe o di en voz alta 6 frases", "Write or say aloud 6 sentences about your weekend with friends: 2 with -er / -ir, 2 with gustar and 2 with estar + gerund."]],T={14:'Free time with friends',15:'Dinner and going out with friends',16:'Tastes with friends',17:'Where are you? I\'m arriving',18:'L3 checkpoint'};
+const n=t=>t.replace(/\s+/g,' ').trim();
+const tr=t=>{let m;for(const [k,v] of P)if(t.startsWith(k))return v;
+ if(m=t.match(/^En clase: practicaremos la escena "(.*?)" en voz alta/))return 'In class: we\'ll practise the "'+m[1]+'" scene aloud, swapping roles. The other scenes are for listening and repeating on your own. The idea is to say them, not write them.';
+ if(m=t.match(/^Clase (\d+) · /))return 'Class '+m[1]+' · '+(T[m[1]]||'');
+ if(m=t.match(/^Próxima clase → Clase (\d+)/))return 'Next class → Class '+m[1]+(T[m[1]]?': '+T[m[1]]:'');return null;};
+document.querySelectorAll('h2,h3,p,div.note,div.pron-note,div.compare-warning,.roleplay-tip,footer span').forEach(el=>{
+ if(el.querySelector('.en'))return;const t=tr(n(el.textContent));if(!t)return;
+ const s=document.createElement('span');s.className='en';s.textContent=t;el.appendChild(s);});})();
+</script>
+</body>
+</html>
