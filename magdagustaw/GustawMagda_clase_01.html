@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Clase 01 · Gustaw · ¡Hola, soy Gustaw!</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@400;600;700&display=swap">
+<script>try{var s=JSON.parse(localStorage.clase01_gustaw_v1||'{}');document.documentElement.dataset.theme=s.theme||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light')}catch(e){document.documentElement.dataset.theme='light'}</script>
+<style>
+:root{--paper:#F4EFE4;--ink:#1B1C20;--mut:#5F5E5A;--glass:rgba(255,255,255,.55);--card:#FBF8F0;--line:rgba(27,28,32,.16);--b:#2F5DA8;--p:#7434E0;--on:#fff;--ok:#1F7A50;--er:#A8431F;--am:#8A5C0A;--mesh:#2F5DA8;--sp:cubic-bezier(.34,1.56,.64,1);--f1:Fraunces,Georgia,serif;--f2:'IBM Plex Sans',system-ui,sans-serif;--f3:'Space Mono',ui-monospace,monospace;color-scheme:light}
+:root[data-theme=dark]{--paper:#13151A;--ink:#F1EEE6;--mut:#A9A79F;--glass:rgba(30,33,41,.6);--card:#1C1F27;--line:rgba(241,238,230,.18);--b:#7EA6EE;--p:#BE9BFF;--on:#0E1420;--ok:#4CC38A;--er:#E8845C;--am:#E0A73C;color-scheme:dark}
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*,*::before,*::after{box-sizing:inherit}
+html,body{height:100%;margin:0}
+body{background:var(--paper) radial-gradient(var(--line) 1px,transparent 1px) 0 0/22px 22px;color:var(--ink);font:400 1.05rem/1.55 var(--f2);overflow:hidden}
+.mesh{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none}
+.mesh i{position:absolute;width:55vmax;height:55vmax;border-radius:50%;background:var(--mesh);filter:blur(90px);opacity:.28;transition:background .9s;animation:dr 22s ease-in-out infinite alternate}
+.mesh i:nth-child(1){left:-15vmax;top:-15vmax}.mesh i:nth-child(2){right:-20vmax;top:20vh;animation-delay:-8s}.mesh i:nth-child(3){left:20vw;bottom:-30vmax;animation-delay:-15s}
+@keyframes dr{to{transform:translate(12vw,8vh) scale(1.25)}}
+#deck{position:relative;z-index:1;height:100%;overflow-y:auto;scroll-snap-type:y proximity;scroll-behavior:smooth;outline:0}
+.sc{min-height:100%;scroll-snap-align:start;display:flex;align-items:center;padding:12vh 7vw 8vh}
+.w{max-width:1040px;width:100%;margin:0 auto}
+h1,h2{font-family:var(--f1);font-weight:700;margin:0 0 .4em;letter-spacing:-.02em;line-height:1.02}
+h1{font-size:clamp(2.7rem,8.5vw,6.2rem)}h2{font-size:clamp(1.8rem,4.4vw,3.1rem)}
+h3{font:600 1.15rem var(--f1);margin:0 0 .3em}
+p{margin:0 0 .6em;max-width:60ch}.mut{color:var(--mut)}
+.tag{display:flex;align-items:center;gap:8px;font:.78rem var(--f3);color:var(--mut)}
+.cue{padding:2px 10px;border-radius:99px;border:1px solid var(--line);background:var(--glass)}
+.en{font-size:.88em;font-style:italic;color:var(--mut)}.en.b{display:block;margin:2px 0}
+.btn .en,.yo .en{color:inherit;opacity:.85}
+body[data-lang=es] .en{display:none!important}
+.r{opacity:0;transform:translateY(28px);filter:blur(8px);transition:opacity .8s,transform .9s var(--sp),filter .8s;transition-delay:calc(var(--i,0)*.12s)}
+.on .r{opacity:1;transform:none;filter:none}
+.hw{display:inline-block;margin-right:.22em}
+.uw{background:linear-gradient(var(--b),var(--b)) 0 100%/0 .09em no-repeat;transition:background-size 1.2s ease 1.3s}
+.on .uw{background-size:100% .09em}
+.hero{display:flex;gap:6vw;align-items:center;justify-content:space-between}
+.g{background:var(--glass);-webkit-backdrop-filter:blur(22px);backdrop-filter:blur(22px);border:1px solid var(--line);border-radius:20px;padding:22px}
+.g[data-r=b]{border-color:var(--b)}.g[data-r=a]{border-color:var(--am)}.g[data-r=o]{border-color:var(--ok)}
+.gr{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin:22px 0}
+.chip{padding:9px 16px;border-radius:99px;border:1px solid var(--line);background:var(--glass);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
+.chip.k{border-color:var(--b);color:var(--b);font-weight:600}
+.cv{border-left:4px solid var(--c)}
+.v{color:var(--c);font-weight:700;border-bottom:2px solid;border-radius:4px;padding:0 3px;background:color-mix(in srgb,var(--c) 10%,transparent)}
+.ab{display:grid;grid-template-columns:7fr 8fr 9fr 8fr 12fr 6fr;gap:4px;margin:5vh 0 12px}
+.ab div{height:6px;border-radius:3px;background:var(--line);overflow:hidden}
+.ab div::after{content:'';display:block;height:100%;background:var(--b);transform:scaleX(0);transform-origin:left;transition:transform .9s ease calc(1.4s + var(--i)*.35s)}
+.on .ab div::after{transform:scaleX(1)}
+.al{display:flex;flex-wrap:wrap;gap:6px 20px;font:.78rem var(--f3);color:var(--mut)}
+.fc{perspective:900px;height:150px;border:0;background:none;padding:0;font:inherit;color:inherit;text-align:left;cursor:pointer}
+.fi{position:relative;width:100%;height:100%;transition:transform .7s var(--sp);transform-style:preserve-3d}
+.f .fi{transform:rotateY(180deg)}
+.fa,.fb{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;display:flex;flex-direction:column;justify-content:center;padding:18px;border-radius:20px;background:var(--card);border:1px solid var(--line)}
+.fa{font:600 1.25rem var(--f1);border-color:var(--b)}.fb{transform:rotateY(180deg);border-color:var(--ok)}
+.btn{position:relative;overflow:hidden;padding:14px 26px;border:0;border-radius:99px;background:var(--b);color:var(--on);font:600 1.02rem var(--f2);cursor:pointer;min-height:44px;transition:transform .18s var(--sp)}
+.btn::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 20% 30%,rgba(255,255,255,.35),transparent 55%),radial-gradient(circle at 80% 80%,rgba(0,0,0,.25),transparent 55%);background-size:200% 200%;animation:ms 6s ease-in-out infinite alternate}
+.btn span{position:relative}.btn:active{transform:scale(.96);transition-duration:.08s}
+@keyframes ms{to{background-position:100% 100%}}
+.ex{list-style:none;margin:16px 0;padding:0;max-width:720px;counter-reset:q}
+.ex li{counter-increment:q;position:relative;padding:14px 0 14px 34px;border-bottom:1px solid var(--line)}
+.ex li::before{content:counter(q);position:absolute;left:0;top:17px;font:.78rem var(--f3);color:var(--mut)}
+input.hu,input.w,textarea{font:inherit;color:var(--ink);background:var(--glass);border:0;border-bottom:2px solid var(--ink);padding:2px 8px;text-align:center;border-radius:6px 6px 0 0}
+input.w,textarea{border:1px solid var(--mut);border-radius:12px;text-align:left;width:100%;max-width:440px;padding:9px 14px;margin-top:6px}
+textarea{display:block;max-width:640px;min-height:130px;resize:vertical}
+input.ok{background:color-mix(in srgb,var(--ok) 16%,transparent);border-color:var(--ok);animation:ok .5s}
+input.bad{background:color-mix(in srgb,var(--er) 12%,transparent);border-color:var(--er);border-style:dashed;animation:sh .42s}
+@keyframes ok{50%{transform:scale(1.1)}}
+@keyframes sh{25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+.sol{display:none;margin-top:6px;padding-left:10px;border-left:3px solid var(--er);color:var(--er);font-size:.92rem}
+.sol:not(:empty){display:block;animation:up .35s}.sol.tip{border-color:var(--b);color:var(--b)}
+@keyframes up{from{opacity:0;transform:translateY(-8px)}}
+.fd{min-height:1.6em;margin-top:10px;font-weight:600}
+details.ref{margin-top:18px;border-style:dashed;max-width:640px}
+details.ref summary{cursor:pointer;font-weight:600}details[data-lock] summary{opacity:.6}
+.ch{display:flex;flex-direction:column;gap:12px;max-width:640px}
+.bb{padding:13px 18px;border-radius:18px;max-width:86%}
+.co{background:var(--card);border:1px solid var(--line);align-self:flex-start}
+.yo{background:var(--b);color:var(--on);align-self:flex-end;display:flex;gap:12px;align-items:center;border:0;font:inherit;text-align:left;cursor:pointer;transition:background .3s,transform .18s var(--sp)}
+.yo:active{transform:scale(.97)}.yo[aria-pressed=true]{background:var(--ok)}
+.wv{display:flex;gap:3px;align-items:center;height:18px}
+.wv i{width:3px;height:100%;background:currentColor;border-radius:2px;animation:wv 1s ease-in-out infinite}
+.wv i:nth-child(2){animation-delay:.15s}.wv i:nth-child(3){animation-delay:.3s}.wv i:nth-child(4){animation-delay:.45s}
+@keyframes wv{50%{transform:scaleY(.3)}}
+.tl{display:inline-block;width:var(--s,34px);color:var(--b);flex:none;transition:color .3s,rotate .3s}
+.tl svg{display:block;width:100%;overflow:visible}.tl .pu{fill:currentColor;transition:transform .1s}
+.tl[data-f=curious]{color:var(--am);rotate:7deg}.tl[data-f=delighted]{color:var(--ok)}.tl[data-f=doubtful]{color:var(--er);animation:sh .5s}
+.bar{position:fixed;top:calc(10px + env(safe-area-inset-top,0px));left:50%;translate:-50% 0;z-index:9;display:flex;gap:8px;align-items:center;padding:5px 8px;border-radius:99px;background:var(--glass);-webkit-backdrop-filter:blur(22px);backdrop-filter:blur(22px);border:1px solid var(--line);max-width:calc(100vw - 16px)}
+.seg{display:flex;border:1px solid var(--line);border-radius:99px;overflow:hidden}
+.seg button,.ib{font:700 1rem var(--f2);color:var(--ink);background:none;border:0;min-height:36px;padding:0 12px;cursor:pointer}
+.seg [aria-pressed=true],.ib[aria-pressed=true]{background:var(--b);color:var(--on)}.ib{border-radius:99px;min-width:36px;padding:0}
+.prog{display:flex;align-items:center;gap:7px;font:.78rem var(--f3)}
+.prog i{width:56px;height:8px;border-radius:4px;background:var(--line);overflow:hidden}
+.prog i b{display:block;height:100%;width:0;background:var(--b);border-radius:4px;transition:width .6s}
+.dt{position:fixed;right:max(14px,env(safe-area-inset-right));top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:10px;z-index:5}
+.dt button{width:10px;height:10px;border-radius:50%;border:1px solid var(--ink);background:transparent;padding:0;cursor:pointer;transition:transform .3s var(--sp),background .3s}
+.dt .a{background:var(--b);border-color:var(--b);transform:scale(1.5)}
+.hint{position:fixed;bottom:calc(14px + env(safe-area-inset-bottom,0px));left:50%;translate:-50% 0;z-index:5;font:.78rem var(--f3);color:var(--mut);transition:opacity .5s}
+.cf{position:fixed;width:8px;height:12px;z-index:50;pointer-events:none;animation:cf 1.1s cubic-bezier(.2,.8,.3,1) forwards}
+@keyframes cf{to{transform:translate(var(--dx),var(--dy)) rotate(var(--rot));opacity:0}}
+button:focus-visible,input:focus-visible,textarea:focus-visible,summary:focus-visible{outline:3px solid var(--b);outline-offset:3px}
+.lnk{background:none;border:0;color:var(--mut);text-decoration:underline;font:inherit;font-size:.85rem;cursor:pointer;margin-left:12px}
+@media(max-width:700px){.hero{flex-direction:column-reverse;align-items:flex-start}.dt{display:none}.seg button{padding:0 9px}.prog i{width:34px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.r{opacity:1;transform:none;filter:none}.cf{display:none}}
+
+/* capa infantil */
+:root{--paper:#FFF4D1;--ink:#17112F;--mut:#372F5C;--glass:rgba(255,255,255,.8);--card:#fff;--line:rgba(43,35,80,.22);--b:#0032E5;--p:#5C04E3;--am:#7B3F00;--ok:#105C2D;--er:#952717;--on:#fff;--f1:'Baloo 2',system-ui,sans-serif;--f2:Nunito,system-ui,sans-serif;--f3:'Baloo 2',system-ui,sans-serif}
+:root[data-theme=dark]{--paper:#1E1B4B;--ink:#FFF4D1;--mut:#E2DFFA;--glass:rgba(60,52,130,.6);--card:#2B2766;--line:rgba(255,244,209,.28);--b:#A6C0FF;--p:#D1B3FF;--am:#FFC15E;--ok:#5FE0A0;--er:#FFAD9C;--on:#14123A}
+body{background:var(--paper) radial-gradient(color-mix(in srgb,var(--b) 6%,transparent) 3px,transparent 3.5px) 0 0/34px 34px;font-size:1.15rem}
+.mesh i{opacity:.12}.mesh i:nth-child(2){background:#FF6FB5}.mesh i:nth-child(3){background:#FFC93C}
+h1,h2{font-weight:800;letter-spacing:0;line-height:1.05}h3{font-weight:700;font-size:1.3rem}.tag{font-size:1.05rem}
+.on .hw:nth-child(odd){rotate:-2deg}
+.uw{background:linear-gradient(#FFD43B,#FFD43B) 0 88%/0 .4em no-repeat;color:#17112F}.on .uw{background-size:100% .4em}
+:root[data-theme=dark] .uw{background-image:linear-gradient(#5B3FE0,#5B3FE0);color:#FFF4D1}
+.g,.g[data-r]{background:var(--card);border:3px solid var(--ink);border-radius:28px;box-shadow:5px 5px 0 var(--ink);-webkit-backdrop-filter:none;backdrop-filter:none}
+.g[data-r=b]{box-shadow:5px 5px 0 var(--b)}.g[data-r=a]{box-shadow:5px 5px 0 #FFB000}.g[data-r=o]{box-shadow:5px 5px 0 var(--ok)}
+.cv{border-left:12px solid var(--c)}
+.chip{border:2px solid var(--ink);font-weight:700;background:var(--card)}.chip.k{border-color:var(--b)}
+.btn{border:3px solid var(--ink);border-radius:22px;box-shadow:0 5px 0 var(--ink);font:800 1.15rem var(--f1)}.btn::before{display:none}
+.btn:active{transform:translateY(4px);box-shadow:0 1px 0 var(--ink)}
+.fa,.fb{border:3px solid var(--ink);border-radius:28px;box-shadow:4px 4px 0 var(--ink)}.fa{font-size:1.6rem}.fc{height:170px}
+.ab div{height:12px;border-radius:6px;border:2px solid var(--ink)}
+.ex li{border-bottom:2px dashed var(--line)}
+input.hu{border-bottom:3px dashed var(--b);font-weight:800;font-size:1.1em}
+input.w,textarea{border:3px solid var(--ink);border-radius:18px;box-shadow:3px 3px 0 var(--ink)}
+.bb{border:3px solid var(--ink);border-radius:26px;box-shadow:3px 3px 0 var(--ink)}
+.bar{background:var(--card);border:3px solid var(--ink);box-shadow:3px 3px 0 var(--ink)}.prog i{display:none}.prog{font-size:1.1rem}
+.cue{border:2px solid var(--ink);background:#FFD43B;color:#17112F;font-weight:700}
+.en{font-size:1rem;font-weight:400}h1 .en,h2 .en{font-size:1.15rem;font-family:var(--f2)}.en.b{margin:0}
+.big-e{font-size:2.4rem;line-height:1;margin-bottom:6px}
+
+/* accesibilidad */
+.sk{position:fixed;left:8px;top:-80px;z-index:30;padding:10px 16px;border-radius:14px;background:var(--card);color:var(--ink);border:3px solid var(--ink);font-weight:800}.sk:focus{top:8px}
+#deck{scroll-padding-top:90px}::placeholder{color:var(--mut);opacity:1}
+.bar{flex-wrap:wrap;justify-content:center}.seg button,.ib{min-height:40px}.ib{min-width:40px}
+.lnk{min-height:44px;padding:0 10px;font-size:1rem}.al{font-size:1.05rem}.hint{font-size:1rem;background:var(--card);border:2px solid var(--ink);border-radius:99px;padding:4px 14px}
+.dt button{width:24px;height:24px;border:0;background:none;display:grid;place-items:center}
+.dt button::before{content:'';width:10px;height:10px;border-radius:50%;border:1px solid var(--ink);transition:transform .3s var(--sp),background .3s}
+.dt .a{background:none;border:0;transform:none}.dt .a::before{background:var(--b);border-color:var(--b);transform:scale(1.5)}
+.ex li::before{font-size:1rem;font-weight:700}.sol{font-size:1rem;background:var(--card);padding:6px 12px;border-radius:0 12px 12px 0}
+.yo[aria-pressed=true]::after{content:'✓';font-weight:800;margin-left:auto}
+.noanim *{animation:none!important;transition:none!important}.noanim .r{opacity:1;transform:none;filter:none}.noanim .cf{display:none}
+@media(max-width:420px){#mt{display:none}.prog{gap:4px}}
+@media(prefers-reduced-motion:reduce){#deck{scroll-behavior:auto;scroll-snap-type:none}}
+@media(prefers-contrast:more){:root,:root[data-theme=dark]{--mut:var(--ink);--line:var(--ink)}}
+@media(forced-colors:active){.yo[aria-pressed=true],.seg [aria-pressed=true],.ib[aria-pressed=true]{outline:3px solid Highlight}input.bad{border-style:dashed}}
+html{font-size:112.5%}
+.bar{left:0;right:0;translate:none;margin:0 auto;width:max-content}
+@media(max-width:480px){.bar{flex-wrap:nowrap;gap:4px;padding:4px 6px}.seg button{padding:0 8px}.ib{min-width:38px}.prog{gap:0}}
+@media(max-width:350px){.bar{flex-wrap:wrap}}
+</style>
+</head>
+<body data-lang="both">
+<a class="sk" href="#deck">Saltar al contenido</a>
+<div class="mesh" aria-hidden="true"><i></i><i></i><i></i></div>
+<div class="bar" role="toolbar" aria-label="Controles">
+ <span class="tl" id="mt" style="--s:28px" aria-hidden="true"></span>
+ <div class="seg"><button data-l="es" aria-label="Solo español">ES</button><button data-l="both" aria-label="Español más English">ES + EN</button></div>
+ <div class="prog" role="progressbar" aria-label="Progreso de la clase" aria-valuemin="0" aria-valuemax="4" aria-valuenow="0" aria-valuetext="0 de 4 estrellas"><i><b></b></i><span id="pc" aria-hidden="true">☆☆☆☆</span></div>
+ <button class="ib" id="an" aria-label="Pausar animaciones" aria-pressed="false">⏸</button><button class="ib" id="sn" aria-label="Sonido" aria-pressed="false">♪</button><button class="ib" id="th" aria-label="Tema claro u oscuro">◐</button>
+</div>
+<nav class="dt" id="dt" aria-label="Escenas"></nav>
+<div class="hint" id="hint" aria-hidden="true">↓ desliza · ← → cambian de escena</div>
+<main id="deck" tabindex="-1">
+
+<section class="sc"><div class="w">
+ <div class="hero"><div>
+  <p class="tag r">Clase 01 · Gustaw · Español con Óscar 🇪🇸</p>
+  <h1><span class="hw r" style="--i:1">¡Hola,</span><span class="hw r" style="--i:2"><span class="uw">me llamo</span></span><span class="hw r" style="--i:3">Gustaw!</span></h1>
+  <p class="en b r" style="--i:4;font-size:1.2rem">Hello, my name is Gustaw!</p>
+  <p class="mut r" style="--i:5;font-size:1.25rem">Hoy conoces a Manolito 🧒 y aprendes a presentarte en español de España.<span class="en b">Today you meet Manolito and learn to introduce yourself in Spanish from Spain.</span></p>
+ </div><span class="tl r" style="--s:min(28vw,170px);--i:5" aria-hidden="true"></span></div>
+ <div class="chips r" style="--i:7"><span class="chip k">Ya sabes un poquito 💪</span><span class="chip">me llamo · tengo · me gusta</span><span class="chip">50 minutos</span></div>
+ <p class="tag r" id="due" style="--i:8"></p>
+ <div class="ab r" style="--i:8;grid-template-columns:6fr 8fr 9fr 8fr 12fr 7fr"><div style="--i:0"></div><div style="--i:1"></div><div style="--i:2"></div><div style="--i:3"></div><div style="--i:4"></div><div style="--i:5"></div></div>
+ <div class="al r" style="--i:9"><span>00′ Calentar</span><span>06′ Fórmulas</span><span>14′ Completa</span><span>23′ Escribe</span><span>31′ Juego con Manolito</span><span>43′ Repaso y tarea</span></div>
+</div></section>
+
+<section class="sc"><div class="w">
+ <h2 class="r">Cómo jugamos hoy 🎲<span class="en b">How we play today</span></h2>
+ <div class="gr">
+  <div class="g r" data-r="b" style="--i:2"><div class="big-e">💪</div><h3>Primero, inténtalo</h3><p class="mut">Las pistas llegan después de intentarlo.</p></div>
+  <div class="g r" data-r="a" style="--i:3"><div class="big-e">🔍</div><h3>Un error es una pista</h3><p class="mut">Tilde pone cara antes de la nota. Los errores vuelven otro día.</p></div>
+  <div class="g r" data-r="o" style="--i:4"><div class="big-e">🦁</div><h3>¡Dilo fuerte!</h3><p class="mut">Cada frase en voz alta, como un león.</p></div>
+ </div>
+</div></section>
+
+<section class="sc" id="s0"><div class="w">
+ <p class="tag r">Calentamiento<span class="cue">6′</span></p>
+ <h2 class="r" style="--i:1">Toca, dilo y gira 🎴<span class="en b">Tap, say it, flip.</span></h2>
+ <div class="gr r" style="--i:3">
+  <button class="fc"><div class="fi"><div class="fa">👋 Hola.</div><div class="fb"><b>Hello.</b><span class="mut">Para todo el mundo.</span></div></div></button>
+  <button class="fc"><div class="fi"><div class="fa">👍 ¡Vale!</div><div class="fb"><b>OK! Sure!</b><span class="mut">Se dice mucho en España.</span></div></div></button>
+  <button class="fc"><div class="fi"><div class="fa">😎 ¡Guay!</div><div class="fb"><b>Cool!</b><span class="mut">Muy español de España.</span></div></div></button>
+  <button class="fc"><div class="fi"><div class="fa">🙂 ¿Qué tal?</div><div class="fb"><b>How are you?</b><span class="mut">Tu primera pregunta.</span></div></div></button>
+  <button class="fc"><div class="fi"><div class="fa">🌅 Buenos días.</div><div class="fb"><b>Good morning.</b><span class="mut">Por la mañana.</span></div></div></button>
+  <button class="fc"><div class="fi"><div class="fa">🙏 Gracias.</div><div class="fb"><b>Thank you.</b><span class="mut">Siempre se dice.</span></div></div></button>
+  <button class="fc"><div class="fi"><div class="fa">👋 ¡Adiós!</div><div class="fb"><b>Bye!</b><span class="mut">Para despedirte.</span></div></div></button>
+  <button class="fc"><div class="fi"><div class="fa">🤗 ¡Hasta luego!</div><div class="fb"><b>See you later!</b><span class="mut">Hasta la próxima.</span></div></div></button>
+ </div>
+ <p class="tag" id="wc0" aria-live="polite" style="margin-top:16px">0/8 tarjetas giradas</p>
+</div></section>
+
+<section class="sc" id="sP"><div class="w">
+ <p class="tag r">Tus tres fórmulas<span class="cue">8′</span></p>
+ <h2 class="r" style="--i:1">Tres frases mágicas ✨<span class="en b">Three magic sentences.</span></h2>
+ <div class="gr">
+  <div class="g cv r" style="--c:var(--b);--i:2"><div class="big-e">🙋</div><h3><span class="v">Me llamo</span> + nombre</h3><p>Me llamo Gustaw.</p><span class="en b">My name is Gustaw.</span><p class="mut" style="margin-top:8px">Y Manolito: Me llamo Manolito.</p></div>
+  <div class="g cv r" style="--c:var(--p);--i:3"><div class="big-e">🎂</div><h3><span class="v">Tengo</span> + número + años</h3><p>Tengo ocho años.</p><span class="en b">I am eight years old.</span><p class="mut" style="margin-top:8px">Y Manolito: Tengo cinco años.</p></div>
+  <div class="g cv r" style="--c:var(--am);--i:4"><div class="big-e">🍦</div><h3><span class="v">Me gusta</span> + algo</h3><p>Me gusta el helado.</p><span class="en b">I like ice cream.</span><p class="mut" style="margin-top:8px">Y Manolito: Me gusta jugar.</p></div>
+ </div>
+ <details class="g ref r" data-r="b" style="--i:6"><summary>🤫 Secreto: ¿«tengo» años?<span class="en b">Secret: "tengo" years?</span></summary><p>En español no «eres» ocho: ¡<b>tienes</b> ocho años!</p><span class="en b">In Spanish you don't "are" eight: you HAVE eight years!</span></details>
+</div></section>
+
+<section class="sc" id="sA"><div class="w">
+ <p class="tag r"><span class="tl" style="--s:30px" aria-hidden="true"></span>Ejercicio A · completa<span class="cue">9′</span></p>
+ <h2 class="r" style="--i:1">Manolito se presenta 🧒<span class="en b">Manolito introduces himself.</span></h2>
+ <ol class="ex r" style="--i:2" data-pk="a">
+  <li>¡Hola, <input class="hu" style="width:3em" aria-label="hueco 1" data-a="me" data-why="«Me llamo» = my name is."> llamo Manolito!<span class="en b">Hi, my name is Manolito!</span><div class="sol"></div></li>
+  <li><input class="hu" style="width:5em" aria-label="hueco 2" data-a="tengo" data-why="«Tengo» = I have: ¡tienes años!"> cinco años.<span class="en b">I am five years old.</span><div class="sol"></div></li>
+  <li>Me <input class="hu" style="width:5em" aria-label="hueco 3" data-a="gusta" data-why="«Me gusta» = I like."> jugar.<span class="en b">I like to play.</span><div class="sol"></div></li>
+  <li>¡Mucho <input class="hu" style="width:5em" aria-label="hueco 4" data-a="gusto" data-why="«Mucho gusto» = nice to meet you.">!<span class="en b">Nice to meet you!</span><div class="sol"></div></li>
+  <li>¿Y <input class="hu" style="width:3.4em" aria-label="hueco 5" data-a="tú" data-why="«tú» (you) lleva tilde.">? ¿Cómo te llamas?<span class="en b">And you? What's your name?</span><div class="sol"></div></li>
+  <li>Tengo seis <input class="hu" style="width:5em" aria-label="hueco 6" data-a="años" data-why="«años» lleva ñ.">.<span class="en b">I am six years old.</span><div class="sol"></div></li>
+  <li>¿Cuántos años <input class="hu" style="width:5.5em" aria-label="hueco 7" data-a="tienes" data-why="Con «tú» se dice «tienes»: ¿cuántos años tienes?">?<span class="en b">How old are you?</span><div class="sol"></div></li>
+  <li>Me gusta la <input class="hu" style="width:6em" aria-label="hueco 8" data-a="pelota" data-why="«la pelota» = the ball.">. 🎾<span class="en b">I like the ball.</span><div class="sol"></div></li>
+  <li>¡Buenos <input class="hu" style="width:5em" aria-label="hueco 9" data-a="días" data-why="«Buenos días» = good morning, con tilde.">!<span class="en b">Good morning!</span><div class="sol"></div></li>
+  <li>Manolito se equivoca 🙈: «Yo soy cinco años». Dilo bien: <input class="hu" style="width:5.5em" aria-label="hueco 10" data-a="tengo" data-why="En español no «eres» cinco: ¡tienes cinco años!"> cinco años.<span class="en b">Manolito makes a mistake: say it right.</span><div class="sol"></div></li>
+ </ol>
+ <button class="btn" data-chk><span>¡Comprobar!</span></button><div class="fd" aria-live="polite"></div>
+</div></section>
+
+<section class="sc" id="sB"><div class="w">
+ <p class="tag r"><span class="tl" style="--s:30px" aria-hidden="true"></span>Ejercicio B · escribe<span class="cue">8′</span></p>
+ <h2 class="r" style="--i:1">Ahora, tú ✏️<span class="en b">Now, you!</span></h2>
+ <ol class="ex r" style="--i:2" data-pk="b">
+  <li><b>¿Cómo te llamas?</b><span class="en"> What's your name?</span><br><input class="w" aria-label="Tu nombre" data-rx="^(me llamo|soy) \S+" data-a="Me llamo Gustaw." data-hint="Empieza con «Me llamo…»"><div class="sol"></div></li>
+  <li><b>¿Cuántos años tienes?</b><span class="en"> How old are you?</span><br><input class="w" aria-label="Tu edad" data-rx="^tengo \S+ anos?" data-a="Tengo ocho años." data-hint="Empieza con «Tengo…» y acaba con «años»"><div class="sol"></div></li>
+  <li><b>¿Qué te gusta?</b><span class="en"> What do you like?</span><br><input class="w" aria-label="Lo que te gusta" data-rx="^me gustan? \S+" data-a="Me gusta el helado." data-hint="Empieza con «Me gusta…»"><div class="sol"></div></li>
+  <li><b>Escríbelo en español:</b><span class="en"> Write it in Spanish:</span><br><i>«Hello, my name is Manolito.»</i><br><input class="w" aria-label="Traducción 1" data-rx="^hola me llamo manolito$" data-a="Hola, me llamo Manolito." data-hint="Empieza con «Hola…»"><div class="sol"></div></li>
+  <li><b>Escríbelo en español:</b><span class="en"> Write it in Spanish:</span><br><i>«I am five years old.»</i><br><input class="w" aria-label="Traducción 2" data-rx="^tengo cinco anos$" data-a="Tengo cinco años." data-hint="Empieza con «Tengo…»"><div class="sol"></div></li>
+  <li><b>Escríbelo en español:</b><span class="en"> Write it in Spanish:</span><br><i>«I like ice cream.»</i><br><input class="w" aria-label="Traducción 3" data-rx="^me gusta el helado$" data-a="Me gusta el helado." data-hint="Empieza con «Me gusta…»"><div class="sol"></div></li>
+ </ol>
+ <button class="btn" data-chk><span>¡Comprobar!</span></button><div class="fd" aria-live="polite"></div>
+</div></section>
+
+<section class="sc" id="s4"><div class="w">
+ <p class="tag r"><span class="tl" style="--s:30px" aria-hidden="true"></span>Juego con Manolito · ronda 1<span class="cue">6′</span></p>
+ <h2 class="r" style="--i:1">Conoces a Manolito 🧒<span class="en b">You meet Manolito.</span></h2>
+ <p class="mut r" style="--i:2">Toca tu frase cuando la hayas dicho fuerte, ¡como un león! 🦁<span class="en b">Tap your line after saying it loudly, like a lion!</span></p>
+ <div class="ch">
+  <div class="bb co r" style="--i:3">🧒 ¡Buenos días! Me llamo Manolito. ¿Cómo te llamas?<span class="en b">Good morning! My name is Manolito. What's your name?</span></div>
+  <button class="bb yo r" style="--i:4" data-rp aria-pressed="false"><span class="wv"><i></i><i></i><i></i><i></i></span><span>Me llamo Gustaw. ¡Mucho gusto!</span></button>
+  <div class="bb co r" style="--i:5">🧒 ¡Guay! ¿Cuántos años tienes?<span class="en b">Cool! How old are you?</span></div>
+  <button class="bb yo r" style="--i:6" data-rp aria-pressed="false"><span class="wv"><i></i><i></i><i></i><i></i></span><span>Tengo … años.</span></button>
+  <div class="bb co r" style="--i:7">🧒 ¡Vale! ¿Y qué te gusta?<span class="en b">OK! And what do you like?</span></div>
+  <button class="bb yo r" style="--i:8" data-rp aria-pressed="false"><span class="wv"><i></i><i></i><i></i><i></i></span><span>Me gusta …</span></button>
+  <div class="bb co r" style="--i:9">🧒 ¡Qué bien! ¡Me gusta jugar contigo!<span class="en b">Great! I like playing with you!</span></div>
+ </div>
+ <p class="tag rpc" aria-live="polite" style="margin-top:14px">0/7 frases dichas</p>
+</div></section>
+
+<section class="sc" id="s5"><div class="w">
+ <p class="tag r"><span class="tl" style="--s:30px" aria-hidden="true"></span>Juego con Manolito · ronda 2<span class="cue">6′</span></p>
+ <h2 class="r" style="--i:1">Ahora preguntas tú 🙋<span class="en b">Now you ask the questions.</span></h2>
+ <p class="mut r" style="--i:2">Manolito contesta. ¡Pregunta con voz de reportero! 🎤<span class="en b">Manolito answers. Ask like a reporter!</span></p>
+ <div class="ch">
+  <div class="bb co r" style="--i:3">🧒 Ahora tú. ¡Pregúntame!<span class="en b">Now you. Ask me!</span></div>
+  <button class="bb yo r" style="--i:4" data-rp aria-pressed="false"><span class="wv"><i></i><i></i><i></i><i></i></span><span>¿Cómo te llamas?</span></button>
+  <div class="bb co r" style="--i:5">🧒 Me llamo Manolito.<span class="en b">My name is Manolito.</span></div>
+  <button class="bb yo r" style="--i:6" data-rp aria-pressed="false"><span class="wv"><i></i><i></i><i></i><i></i></span><span>¿Cuántos años tienes?</span></button>
+  <div class="bb co r" style="--i:7">🧒 Tengo cinco años.<span class="en b">I am five years old.</span></div>
+  <button class="bb yo r" style="--i:8" data-rp aria-pressed="false"><span class="wv"><i></i><i></i><i></i><i></i></span><span>¿Qué te gusta?</span></button>
+  <div class="bb co r" style="--i:9">🧒 Me gusta el chocolate 🍫.<span class="en b">I like chocolate.</span></div>
+  <button class="bb yo r" style="--i:10" data-rp aria-pressed="false"><span class="wv"><i></i><i></i><i></i><i></i></span><span>¡Hasta luego, Manolito!</span></button>
+  <div class="bb co r" style="--i:11">🧒 ¡Hasta luego, Gustaw!<span class="en b">See you later, Gustaw!</span></div>
+ </div>
+ <p class="tag rpc" aria-live="polite" style="margin-top:14px">0/7 frases dichas</p>
+</div></section>
+
+<section class="sc" id="sR"><div class="w">
+ <p class="tag r"><span class="tl" style="--s:30px" aria-hidden="true"></span>Repaso<span class="cue">4′</span></p>
+ <h2 class="r" style="--i:1">Tu banco de errores 🏦<span class="en b">Your mistake bank.</span></h2>
+ <p class="mut r" style="--i:2">Una frase sale del banco cuando la aciertas a la primera en dos días distintos.</p>
+ <div id="bk"></div>
+ <button class="btn" data-chk hidden><span>¡Comprobar!</span></button><div class="fd" aria-live="polite"></div>
+</div></section>
+
+<section class="sc" id="tarea"><div class="w">
+ <p class="tag r">Tarea<span class="cue">3′</span></p>
+ <h2 class="r" style="--i:1">Preséntate a tu familia 🏠<span class="en b">Introduce yourself to your family.</span></h2>
+ <p class="mut r" style="--i:2">Escribe 3 frases: cómo te llamas, cuántos años tienes y qué te gusta. ¡Y dibuja a Manolito! 🎨<span class="en b">Write 3 sentences: name, age, what you like. And draw Manolito!</span></p>
+ <textarea id="tk" aria-label="Tu tarea" placeholder="Hola, me llamo…"></textarea>
+ <p class="tag" style="margin-top:8px" id="wc">0 palabras</p>
+ <p><button class="btn" id="cp"><span>Copiar para Óscar</span></button><button class="lnk" id="cl">Borrar</button></p>
+ <div class="g" data-r="o" style="margin-top:14px;max-width:640px"><h3>👨‍👩‍👦 Para mamá o papá</h3><p class="mut" style="margin:0">Five minutes at home: ask Gustaw the three questions in Spanish and just celebrate his answers. No correcting needed.</p></div>
+ <div class="chips"><span class="chip k">Próxima clase: mi familia 👨‍👩‍👧</span></div>
+</div></section>
+
+</main>
+<script>
+const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)],R=document.documentElement,K='clase01_gustaw_v1';
+let S={lang:'both',done:{},att:{},bank:[],snd:0,tk:''};try{Object.assign(S,JSON.parse(localStorage[K]||'{}'))}catch(e){}
+const save=()=>{try{localStorage[K]=JSON.stringify(S)}catch(e){}},bi=(a,b)=>a+'<span class="en b" lang="en">'+b+'</span>';
+let AC;const tone=(f,t='sine',d=.3,g=f,at=0)=>{if(!S.snd)return;AC=AC||new(window.AudioContext||window.webkitAudioContext)();const o=AC.createOscillator(),v=AC.createGain(),T=AC.currentTime+at;o.type=t;o.frequency.setValueAtTime(f,T);o.frequency.exponentialRampToValueAtTime(g,T+d);v.gain.setValueAtTime(.0001,T);v.gain.exponentialRampToValueAtTime(.25,T+.012);v.gain.exponentialRampToValueAtTime(.0001,T+d);o.connect(v).connect(AC.destination);o.start(T);o.stop(T+d)};
+const snd={pop:()=>tone(520,'sine',.13,780),note:()=>tone(660,'sine',.4),nope:()=>tone(220,'square',.16,160),fan:()=>[523,659,784,1047].forEach((f,i)=>tone(f,'sine',.4,f,i*.09))};
+const TL='<svg viewBox="0 -6 64 70"><path d="M8 8h48a6 6 0 0 1 6 6v26a6 6 0 0 1-6 6H30L18 58V46H8a6 6 0 0 1-6-6V14a6 6 0 0 1 6-6z" fill="var(--card)" stroke="currentColor" stroke-width="3.5" stroke-linejoin="round"/><path d="M26 8c0-7 8-9 12-5" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/><circle class="pu" cx="22" cy="25" r="3.4"/><circle class="pu" cx="42" cy="25" r="3.4"/><path class="mo" d="M26 37h12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>';
+const MO={neutral:'M26 37h12',attentive:'M26 37q6 3 12 0',curious:'M27 38q5-3 10 0',excited:'M24 35q8 9 16 0',delighted:'M23 34q9 11 18 0',doubtful:'M25 40q7-5 14 0'};
+$$('.tl').forEach(e=>{e.innerHTML=TL;e.dataset.f='attentive'});$('#mt').dataset.f='neutral';
+const face=(e,f)=>{if(!e)return;e.dataset.f=f;$('.mo',e).setAttribute('d',MO[f])};
+addEventListener('pointermove',e=>$$('.tl .pu').forEach(p=>{const r=p.ownerSVGElement.getBoundingClientRect(),c=v=>Math.max(-2,Math.min(2,v/80));p.style.transform=`translate(${c(e.clientX-r.left-r.width/2)}px,${c(e.clientY-r.top-r.height/2)}px)`}));
+$$('.en').forEach(e=>e.lang='en');
+const setLang=l=>{S.lang=l;document.body.dataset.lang=l;$$('.seg button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.l===l));save()};
+$$('.seg button').forEach(b=>b.onclick=()=>setLang(b.dataset.l));setLang(S.lang);
+$('#sn').setAttribute('aria-pressed',!!S.snd);$('#sn').onclick=e=>{S.snd=S.snd?0:1;e.currentTarget.setAttribute('aria-pressed',!!S.snd);save();snd.pop()};
+$('#th').onclick=()=>{S.theme=R.dataset.theme==='dark'?'light':'dark';R.dataset.theme=S.theme;save()};
+const d=$('#deck'),SC=[...d.children],dt=$('#dt'),C=['--b','--b','--b','--p','--b','--b','--b','--b','--am','--ok'];let cur=0;
+SC.forEach((s,i)=>{const b=document.createElement('button');b.setAttribute('aria-label','Escena '+(i+1));b.onclick=()=>go(i);dt.appendChild(b)});
+const go=i=>SC[Math.max(0,Math.min(SC.length-1,i))].scrollIntoView({behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth'});
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting||!(e.intersectionRatio>.3||e.intersectionRect.height>e.rootBounds.height*.45))return;const i=SC.indexOf(e.target);cur=i;e.target.classList.add('on');R.style.setProperty('--mesh','var('+C[i]+')');[...dt.children].forEach((b,k)=>{b.classList.toggle('a',k===i);k===i?b.setAttribute('aria-current','step'):b.removeAttribute('aria-current')});if(i)$('#hint').style.opacity=0}),{root:d,threshold:[0,.15,.3,.55]});
+SC.forEach(s=>io.observe(s));
+addEventListener('keydown',e=>{if(e.altKey||e.ctrlKey||e.metaKey||e.shiftKey)return;if(/INPUT|TEXTAREA/.test(e.target.tagName)){if(e.key==='Enter'&&e.target.tagName==='INPUT'){const b=$('[data-chk]',e.target.closest('section'));b&&b.click()}return}if(['ArrowRight'].includes(e.key)){e.preventDefault();go(cur+1)}if(['ArrowLeft'].includes(e.key)){e.preventDefault();go(cur-1)}});
+function burst(x,y){const k=['#2D5BFF','#16813F','#FFC93C','#FF6FB5','#8A3FFC'];for(let n=0;n<44;n++){const s=document.createElement('span');s.className='cf';s.style.cssText=`left:${x}px;top:${y}px;background:${k[n%5]};--dx:${(Math.random()-.5)*340}px;--dy:${(Math.random()-.7)*300}px;--rot:${Math.random()*720}deg`;document.body.appendChild(s);setTimeout(()=>s.remove(),1200)}}
+const PK=['w','a','b','rp'];
+function prog(){const n=PK.filter(k=>S.done[k]).length;$('.prog i b').style.width=n/PK.length*100+'%';$('#pc').textContent='⭐'.repeat(n)+'☆'.repeat(PK.length-n);face($('#mt'),n==PK.length?'delighted':'neutral');const pb=$('.prog');pb.setAttribute('aria-valuenow',n);pb.setAttribute('aria-valuetext',n+' de '+PK.length+' estrellas')}
+function done(k){if(S.done[k])return;S.done[k]=1;save();snd.fan();prog()}
+function unlock(){$$('details[data-lock]').forEach(x=>{x.removeAttribute('data-lock');const s=$('summary',x);s.removeAttribute('aria-disabled');s.firstChild.textContent=s.firstChild.textContent.replace('🔒','🔓')})}
+$$('details[data-lock] summary').forEach(s=>s.onclick=e=>{if(s.parentNode.hasAttribute('data-lock')){e.preventDefault();face($('#sA .tl'),'curious');snd.nope()}});
+$$('.fc').forEach(c=>c.onclick=()=>{c.setAttribute('aria-pressed',c.classList.toggle('f'));c.dataset.v=1;snd.pop();const k=$$('.fc[data-v]').length;const N=$$('.fc').length;$('#wc0').textContent=k+'/'+N+' tarjetas giradas';if(k==N)done('w')});
+$$('[data-rp]').forEach(b=>b.onclick=e=>{b.setAttribute('aria-pressed',b.getAttribute('aria-pressed')!=='true');snd.pop();const k=$$('[data-rp][aria-pressed=true]').length,N=$$('[data-rp]').length;$$('.rpc').forEach(x=>x.textContent=k+'/'+N+' frases dichas');face($('.tl',b.closest('section')),k==N?'delighted':'excited');if(k==N){burst(e.clientX,e.clientY);done('rp')}});
+const n=s=>s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[¿?¡!.,;:]/g,'').trim().replace(/\s+/g,' '),today=new Date().toISOString().slice(0,10);
+function addBank(li,i){const c=li.cloneNode(true);$('input',c).replaceWith('___');$$('.en,.sol',c).forEach(x=>x.remove());const q=c.textContent.trim();if(!S.bank.some(b=>b.q===q)){S.bank.push({q,a:i.dataset.a,rx:i.dataset.rx||'',w:i.dataset.why||i.dataset.hint||'',d:[]});save()}}
+function bank(){const b=$('#bk'),L=S.bank.slice(0,5),bt=$('#sR [data-chk]');b.innerHTML='';bt.hidden=!L.length;$('#due').textContent=S.bank.length?'Banco de errores: '+S.bank.length+' frases por repasar.':'';
+ if(!L.length){b.innerHTML='<div class="g" data-r="o">'+bi('Banco vacío. Nada que repasar… todavía.','Empty bank. Nothing to review… yet.')+'</div>';return}
+ const ol=document.createElement('ol');ol.className='ex';L.forEach(x=>{const li=document.createElement('li'),i=document.createElement('input'),p=x.q.split('___');i.className='hu';i.style.width='8em';i.setAttribute('aria-label','hueco');i.dataset.a=x.a;if(x.rx)i.dataset.rx=x.rx;i.dataset.why=x.w;i.dataset.bi=S.bank.indexOf(x);const s=document.createElement('div');s.className='sol';li.append(p[0],i,p[1]||'',s);ol.appendChild(li)});b.appendChild(ol)}
+let uid=0;function chk(g,btn){
+ const sc=g.closest('section'),tl=$('.tl',sc),fd=$('.fd',sc),ins=$$('input',g),isB=!g.dataset.pk;
+ if(ins.some(i=>!i.value.trim())){fd.innerHTML=bi('Escribe algo en todos: un intento vale más que un hueco.','Write something in every blank: an attempt beats a blank.');face(tl,'curious');snd.nope();return}
+ if(g.dataset.pk==='a'){S.att.a=1;save();unlock()}
+ let first=0,bad=0,out=0;
+ ins.forEach(i=>{const v=i.value,t=+i.dataset.t||0,a=i.dataset.a.split('|'),ok=i.dataset.rx?new RegExp(i.dataset.rx).test(n(v)):a.some(x=>n(x)===n(v)),sol=i.closest('li').querySelector('.sol'),it=isB?S.bank[+i.dataset.bi]:0;
+  sol.id=sol.id||'sl'+(++uid);i.setAttribute('aria-describedby',sol.id);i.classList.toggle('ok',ok);i.classList.toggle('bad',!ok);i.setAttribute('aria-invalid',!ok);
+  if(ok){if(!t)first++;sol.className='sol tip';sol.textContent='✓ ¡Bien!';if(!i.dataset.rx&&/[áéíóúñü]/i.test(a[0])&&a[0].toLowerCase()!==v.trim().toLowerCase()){sol.className='sol tip';sol.textContent='✓ Con tilde: '+a[0]}if(it&&!t){if(!it.d.includes(today))it.d.push(today)}}
+  else{bad++;i.dataset.t=t+1;sol.className='sol';sol.innerHTML=t?'Solución: <b>'+a[0]+'</b>. '+(i.dataset.why||''):(i.dataset.hint||'Pista: '+a[0].length+' letras, empieza por «'+a[0][0]+'».');if(it)it.d=[];else if(!t)addBank(i.closest('li'),i)}});
+ if(isB){const k=S.bank.length;S.bank=S.bank.filter(x=>x.d.length<2);out=k-S.bank.length;save()}else bank();
+ const m=ins.length;face(tl,bad?'doubtful':first==m?'delighted':'excited');bad?snd.nope():snd.note();
+ fd.innerHTML=bad?bi('Revisa los huecos rojos. A la primera: '+first+' de '+m+'.','Check the red blanks. First try: '+first+' of '+m+'.'):bi('¡Todo bien! A la primera: '+first+' de '+m+'.'+(out?' Salen del banco: '+out+'.':''),'All good! First try: '+first+' of '+m+'.');
+ if(!bad&&!isB){if(first==m){const r=btn.getBoundingClientRect();burst(r.left+r.width/2,r.top)}done(g.dataset.pk)}}
+document.addEventListener('click',e=>{const b=e.target.closest('[data-chk]');if(b)chk($('.ex',b.closest('section')),b)});
+const tk=$('#tk'),wc=()=>$('#wc').textContent=tk.value.trim().split(/\s+/).filter(Boolean).length+' palabras';tk.value=S.tk||'';tk.oninput=()=>{S.tk=tk.value;save();wc()};wc();
+$('#cp').onclick=async e=>{try{await navigator.clipboard.writeText('Clase 01 · Gustaw\n\n'+tk.value);e.currentTarget.firstChild.textContent='¡Copiado!'}catch(x){tk.select()}};
+$('#cl').onclick=()=>{tk.value='';S.tk='';save();wc()};
+const EM=/\p{Regional_Indicator}{2}|\p{Extended_Pictographic}(?:\uFE0F|\u200D\p{Extended_Pictographic})*/gu,T=/\p{Regional_Indicator}|\p{Extended_Pictographic}/u,wk=document.createTreeWalker(d,NodeFilter.SHOW_TEXT),ns=[];while(wk.nextNode())ns.push(wk.currentNode);
+ns.forEach(t=>{if(!T.test(t.data)||t.parentNode.closest('textarea'))return;const f=document.createDocumentFragment();let l=0;t.data.replace(EM,(m,o)=>{f.append(t.data.slice(l,o));const s=document.createElement('span');s.setAttribute('aria-hidden','true');s.textContent=m;f.append(s);l=o+m.length;return m});f.append(t.data.slice(l));t.replaceWith(f)});
+$$('.wv').forEach(e=>e.setAttribute('aria-hidden','true'));$$('.fc').forEach(c=>c.setAttribute('aria-pressed','false'));$$('details[data-lock] summary').forEach(s=>s.setAttribute('aria-disabled','true'));
+SC.forEach(s=>s.addEventListener('focusin',()=>s.classList.add('on')));
+const an=$('#an'),sa=()=>{document.body.classList.toggle('noanim',!!S.anim);an.setAttribute('aria-pressed',!!S.anim)};an.onclick=()=>{S.anim=S.anim?0:1;save();sa()};sa();
+if(S.att.a)unlock();bank();prog();
+</script>
+</body>
+</html>

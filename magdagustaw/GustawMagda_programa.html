@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Programa · Gustaw · 12 clases de español</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@400;600;700&display=swap">
+<script>try{var s=JSON.parse(localStorage.programa_gustaw_v1||'{}');document.documentElement.dataset.theme=s.theme||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light')}catch(e){document.documentElement.dataset.theme='light'}</script>
+<style>
+:root{--paper:#F4EFE4;--ink:#1B1C20;--mut:#5F5E5A;--glass:rgba(255,255,255,.55);--card:#FBF8F0;--line:rgba(27,28,32,.16);--b:#2F5DA8;--p:#7434E0;--on:#fff;--ok:#1F7A50;--er:#A8431F;--am:#8A5C0A;--mesh:#2F5DA8;--sp:cubic-bezier(.34,1.56,.64,1);--f1:Fraunces,Georgia,serif;--f2:'IBM Plex Sans',system-ui,sans-serif;--f3:'Space Mono',ui-monospace,monospace;color-scheme:light}
+:root[data-theme=dark]{--paper:#13151A;--ink:#F1EEE6;--mut:#A9A79F;--glass:rgba(30,33,41,.6);--card:#1C1F27;--line:rgba(241,238,230,.18);--b:#7EA6EE;--p:#BE9BFF;--on:#0E1420;--ok:#4CC38A;--er:#E8845C;--am:#E0A73C;color-scheme:dark}
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*,*::before,*::after{box-sizing:inherit}
+html,body{height:100%;margin:0}
+body{background:var(--paper) radial-gradient(var(--line) 1px,transparent 1px) 0 0/22px 22px;color:var(--ink);font:400 1.05rem/1.55 var(--f2);overflow:hidden}
+.mesh{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none}
+.mesh i{position:absolute;width:55vmax;height:55vmax;border-radius:50%;background:var(--mesh);filter:blur(90px);opacity:.28;transition:background .9s;animation:dr 22s ease-in-out infinite alternate}
+.mesh i:nth-child(1){left:-15vmax;top:-15vmax}.mesh i:nth-child(2){right:-20vmax;top:20vh;animation-delay:-8s}.mesh i:nth-child(3){left:20vw;bottom:-30vmax;animation-delay:-15s}
+@keyframes dr{to{transform:translate(12vw,8vh) scale(1.25)}}
+#deck{position:relative;z-index:1;height:100%;overflow-y:auto;scroll-snap-type:y proximity;scroll-behavior:smooth;outline:0}
+.sc{min-height:100%;scroll-snap-align:start;display:flex;align-items:center;padding:12vh 7vw 8vh}
+.w{max-width:1040px;width:100%;margin:0 auto}
+h1,h2{font-family:var(--f1);font-weight:700;margin:0 0 .4em;letter-spacing:-.02em;line-height:1.02}
+h1{font-size:clamp(2.7rem,8.5vw,6.2rem)}h2{font-size:clamp(1.8rem,4.4vw,3.1rem)}
+h3{font:600 1.15rem var(--f1);margin:0 0 .3em}
+p{margin:0 0 .6em;max-width:60ch}.mut{color:var(--mut)}
+.tag{display:flex;align-items:center;gap:8px;font:.78rem var(--f3);color:var(--mut)}
+.cue{padding:2px 10px;border-radius:99px;border:1px solid var(--line);background:var(--glass)}
+.en{font-size:.88em;font-style:italic;color:var(--mut)}.en.b{display:block;margin:2px 0}
+.btn .en,.yo .en{color:inherit;opacity:.85}
+body[data-lang=es] .en{display:none!important}
+.r{opacity:0;transform:translateY(28px);filter:blur(8px);transition:opacity .8s,transform .9s var(--sp),filter .8s;transition-delay:calc(var(--i,0)*.12s)}
+.on .r{opacity:1;transform:none;filter:none}
+.hw{display:inline-block;margin-right:.22em}
+.uw{background:linear-gradient(var(--b),var(--b)) 0 100%/0 .09em no-repeat;transition:background-size 1.2s ease 1.3s}
+.on .uw{background-size:100% .09em}
+.hero{display:flex;gap:6vw;align-items:center;justify-content:space-between}
+.g{background:var(--glass);-webkit-backdrop-filter:blur(22px);backdrop-filter:blur(22px);border:1px solid var(--line);border-radius:20px;padding:22px}
+.g[data-r=b]{border-color:var(--b)}.g[data-r=a]{border-color:var(--am)}.g[data-r=o]{border-color:var(--ok)}
+.gr{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin:22px 0}
+.chip{padding:9px 16px;border-radius:99px;border:1px solid var(--line);background:var(--glass);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
+.chip.k{border-color:var(--b);color:var(--b);font-weight:600}
+.cv{border-left:4px solid var(--c)}
+.v{color:var(--c);font-weight:700;border-bottom:2px solid;border-radius:4px;padding:0 3px;background:color-mix(in srgb,var(--c) 10%,transparent)}
+.ab{display:grid;grid-template-columns:7fr 8fr 9fr 8fr 12fr 6fr;gap:4px;margin:5vh 0 12px}
+.ab div{height:6px;border-radius:3px;background:var(--line);overflow:hidden}
+.ab div::after{content:'';display:block;height:100%;background:var(--b);transform:scaleX(0);transform-origin:left;transition:transform .9s ease calc(1.4s + var(--i)*.35s)}
+.on .ab div::after{transform:scaleX(1)}
+.al{display:flex;flex-wrap:wrap;gap:6px 20px;font:.78rem var(--f3);color:var(--mut)}
+.fc{perspective:900px;height:150px;border:0;background:none;padding:0;font:inherit;color:inherit;text-align:left;cursor:pointer}
+.fi{position:relative;width:100%;height:100%;transition:transform .7s var(--sp);transform-style:preserve-3d}
+.f .fi{transform:rotateY(180deg)}
+.fa,.fb{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;display:flex;flex-direction:column;justify-content:center;padding:18px;border-radius:20px;background:var(--card);border:1px solid var(--line)}
+.fa{font:600 1.25rem var(--f1);border-color:var(--b)}.fb{transform:rotateY(180deg);border-color:var(--ok)}
+.btn{position:relative;overflow:hidden;padding:14px 26px;border:0;border-radius:99px;background:var(--b);color:var(--on);font:600 1.02rem var(--f2);cursor:pointer;min-height:44px;transition:transform .18s var(--sp)}
+.btn::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 20% 30%,rgba(255,255,255,.35),transparent 55%),radial-gradient(circle at 80% 80%,rgba(0,0,0,.25),transparent 55%);background-size:200% 200%;animation:ms 6s ease-in-out infinite alternate}
+.btn span{position:relative}.btn:active{transform:scale(.96);transition-duration:.08s}
+@keyframes ms{to{background-position:100% 100%}}
+.ex{list-style:none;margin:16px 0;padding:0;max-width:720px;counter-reset:q}
+.ex li{counter-increment:q;position:relative;padding:14px 0 14px 34px;border-bottom:1px solid var(--line)}
+.ex li::before{content:counter(q);position:absolute;left:0;top:17px;font:.78rem var(--f3);color:var(--mut)}
+input.hu,input.w,textarea{font:inherit;color:var(--ink);background:var(--glass);border:0;border-bottom:2px solid var(--ink);padding:2px 8px;text-align:center;border-radius:6px 6px 0 0}
+input.w,textarea{border:1px solid var(--mut);border-radius:12px;text-align:left;width:100%;max-width:440px;padding:9px 14px;margin-top:6px}
+textarea{display:block;max-width:640px;min-height:130px;resize:vertical}
+input.ok{background:color-mix(in srgb,var(--ok) 16%,transparent);border-color:var(--ok);animation:ok .5s}
+input.bad{background:color-mix(in srgb,var(--er) 12%,transparent);border-color:var(--er);border-style:dashed;animation:sh .42s}
+@keyframes ok{50%{transform:scale(1.1)}}
+@keyframes sh{25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+.sol{display:none;margin-top:6px;padding-left:10px;border-left:3px solid var(--er);color:var(--er);font-size:.92rem}
+.sol:not(:empty){display:block;animation:up .35s}.sol.tip{border-color:var(--b);color:var(--b)}
+@keyframes up{from{opacity:0;transform:translateY(-8px)}}
+.fd{min-height:1.6em;margin-top:10px;font-weight:600}
+details.ref{margin-top:18px;border-style:dashed;max-width:640px}
+details.ref summary{cursor:pointer;font-weight:600}details[data-lock] summary{opacity:.6}
+.ch{display:flex;flex-direction:column;gap:12px;max-width:640px}
+.bb{padding:13px 18px;border-radius:18px;max-width:86%}
+.co{background:var(--card);border:1px solid var(--line);align-self:flex-start}
+.yo{background:var(--b);color:var(--on);align-self:flex-end;display:flex;gap:12px;align-items:center;border:0;font:inherit;text-align:left;cursor:pointer;transition:background .3s,transform .18s var(--sp)}
+.yo:active{transform:scale(.97)}.yo[aria-pressed=true]{background:var(--ok)}
+.wv{display:flex;gap:3px;align-items:center;height:18px}
+.wv i{width:3px;height:100%;background:currentColor;border-radius:2px;animation:wv 1s ease-in-out infinite}
+.wv i:nth-child(2){animation-delay:.15s}.wv i:nth-child(3){animation-delay:.3s}.wv i:nth-child(4){animation-delay:.45s}
+@keyframes wv{50%{transform:scaleY(.3)}}
+.tl{display:inline-block;width:var(--s,34px);color:var(--b);flex:none;transition:color .3s,rotate .3s}
+.tl svg{display:block;width:100%;overflow:visible}.tl .pu{fill:currentColor;transition:transform .1s}
+.tl[data-f=curious]{color:var(--am);rotate:7deg}.tl[data-f=delighted]{color:var(--ok)}.tl[data-f=doubtful]{color:var(--er);animation:sh .5s}
+.bar{position:fixed;top:calc(10px + env(safe-area-inset-top,0px));left:50%;translate:-50% 0;z-index:9;display:flex;gap:8px;align-items:center;padding:5px 8px;border-radius:99px;background:var(--glass);-webkit-backdrop-filter:blur(22px);backdrop-filter:blur(22px);border:1px solid var(--line);max-width:calc(100vw - 16px)}
+.seg{display:flex;border:1px solid var(--line);border-radius:99px;overflow:hidden}
+.seg button,.ib{font:700 1rem var(--f2);color:var(--ink);background:none;border:0;min-height:36px;padding:0 12px;cursor:pointer}
+.seg [aria-pressed=true],.ib[aria-pressed=true]{background:var(--b);color:var(--on)}.ib{border-radius:99px;min-width:36px;padding:0}
+.prog{display:flex;align-items:center;gap:7px;font:.78rem var(--f3)}
+.prog i{width:56px;height:8px;border-radius:4px;background:var(--line);overflow:hidden}
+.prog i b{display:block;height:100%;width:0;background:var(--b);border-radius:4px;transition:width .6s}
+.dt{position:fixed;right:max(14px,env(safe-area-inset-right));top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:10px;z-index:5}
+.dt button{width:10px;height:10px;border-radius:50%;border:1px solid var(--ink);background:transparent;padding:0;cursor:pointer;transition:transform .3s var(--sp),background .3s}
+.dt .a{background:var(--b);border-color:var(--b);transform:scale(1.5)}
+.hint{position:fixed;bottom:calc(14px + env(safe-area-inset-bottom,0px));left:50%;translate:-50% 0;z-index:5;font:.78rem var(--f3);color:var(--mut);transition:opacity .5s}
+.cf{position:fixed;width:8px;height:12px;z-index:50;pointer-events:none;animation:cf 1.1s cubic-bezier(.2,.8,.3,1) forwards}
+@keyframes cf{to{transform:translate(var(--dx),var(--dy)) rotate(var(--rot));opacity:0}}
+button:focus-visible,input:focus-visible,textarea:focus-visible,summary:focus-visible{outline:3px solid var(--b);outline-offset:3px}
+.lnk{background:none;border:0;color:var(--mut);text-decoration:underline;font:inherit;font-size:.85rem;cursor:pointer;margin-left:12px}
+@media(max-width:700px){.hero{flex-direction:column-reverse;align-items:flex-start}.dt{display:none}.seg button{padding:0 9px}.prog i{width:34px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.r{opacity:1;transform:none;filter:none}.cf{display:none}}
+
+/* capa infantil */
+:root{--paper:#FFF4D1;--ink:#17112F;--mut:#372F5C;--glass:rgba(255,255,255,.8);--card:#fff;--line:rgba(43,35,80,.22);--b:#0032E5;--p:#5C04E3;--am:#7B3F00;--ok:#105C2D;--er:#952717;--on:#fff;--f1:'Baloo 2',system-ui,sans-serif;--f2:Nunito,system-ui,sans-serif;--f3:'Baloo 2',system-ui,sans-serif}
+:root[data-theme=dark]{--paper:#1E1B4B;--ink:#FFF4D1;--mut:#E2DFFA;--glass:rgba(60,52,130,.6);--card:#2B2766;--line:rgba(255,244,209,.28);--b:#A6C0FF;--p:#D1B3FF;--am:#FFC15E;--ok:#5FE0A0;--er:#FFAD9C;--on:#14123A}
+body{background:var(--paper) radial-gradient(color-mix(in srgb,var(--b) 6%,transparent) 3px,transparent 3.5px) 0 0/34px 34px;font-size:1.15rem}
+.mesh i{opacity:.12}.mesh i:nth-child(2){background:#FF6FB5}.mesh i:nth-child(3){background:#FFC93C}
+h1,h2{font-weight:800;letter-spacing:0;line-height:1.05}h3{font-weight:700;font-size:1.3rem}.tag{font-size:1.05rem}
+.on .hw:nth-child(odd){rotate:-2deg}
+.uw{background:linear-gradient(#FFD43B,#FFD43B) 0 88%/0 .4em no-repeat;color:#17112F}.on .uw{background-size:100% .4em}
+:root[data-theme=dark] .uw{background-image:linear-gradient(#5B3FE0,#5B3FE0);color:#FFF4D1}
+.g,.g[data-r]{background:var(--card);border:3px solid var(--ink);border-radius:28px;box-shadow:5px 5px 0 var(--ink);-webkit-backdrop-filter:none;backdrop-filter:none}
+.g[data-r=b]{box-shadow:5px 5px 0 var(--b)}.g[data-r=a]{box-shadow:5px 5px 0 #FFB000}.g[data-r=o]{box-shadow:5px 5px 0 var(--ok)}
+.cv{border-left:12px solid var(--c)}
+.chip{border:2px solid var(--ink);font-weight:700;background:var(--card)}.chip.k{border-color:var(--b)}
+.btn{border:3px solid var(--ink);border-radius:22px;box-shadow:0 5px 0 var(--ink);font:800 1.15rem var(--f1)}.btn::before{display:none}
+.btn:active{transform:translateY(4px);box-shadow:0 1px 0 var(--ink)}
+.fa,.fb{border:3px solid var(--ink);border-radius:28px;box-shadow:4px 4px 0 var(--ink)}.fa{font-size:1.6rem}.fc{height:170px}
+.ab div{height:12px;border-radius:6px;border:2px solid var(--ink)}
+.ex li{border-bottom:2px dashed var(--line)}
+input.hu{border-bottom:3px dashed var(--b);font-weight:800;font-size:1.1em}
+input.w,textarea{border:3px solid var(--ink);border-radius:18px;box-shadow:3px 3px 0 var(--ink)}
+.bb{border:3px solid var(--ink);border-radius:26px;box-shadow:3px 3px 0 var(--ink)}
+.bar{background:var(--card);border:3px solid var(--ink);box-shadow:3px 3px 0 var(--ink)}.prog i{display:none}.prog{font-size:1.1rem}
+.cue{border:2px solid var(--ink);background:#FFD43B;color:#17112F;font-weight:700}
+.en{font-size:1rem;font-weight:400}h1 .en,h2 .en{font-size:1.15rem;font-family:var(--f2)}.en.b{margin:0}
+.big-e{font-size:2.4rem;line-height:1;margin-bottom:6px}
+
+/* accesibilidad */
+.sk{position:fixed;left:8px;top:-80px;z-index:30;padding:10px 16px;border-radius:14px;background:var(--card);color:var(--ink);border:3px solid var(--ink);font-weight:800}.sk:focus{top:8px}
+#deck{scroll-padding-top:90px}::placeholder{color:var(--mut);opacity:1}
+.bar{flex-wrap:wrap;justify-content:center}.seg button,.ib{min-height:40px}.ib{min-width:40px}
+.lnk{min-height:44px;padding:0 10px;font-size:1rem}.al{font-size:1.05rem}.hint{font-size:1rem;background:var(--card);border:2px solid var(--ink);border-radius:99px;padding:4px 14px}
+.dt button{width:24px;height:24px;border:0;background:none;display:grid;place-items:center}
+.dt button::before{content:'';width:10px;height:10px;border-radius:50%;border:1px solid var(--ink);transition:transform .3s var(--sp),background .3s}
+.dt .a{background:none;border:0;transform:none}.dt .a::before{background:var(--b);border-color:var(--b);transform:scale(1.5)}
+.ex li::before{font-size:1rem;font-weight:700}.sol{font-size:1rem;background:var(--card);padding:6px 12px;border-radius:0 12px 12px 0}
+.yo[aria-pressed=true]::after{content:'✓';font-weight:800;margin-left:auto}
+.noanim *{animation:none!important;transition:none!important}.noanim .r{opacity:1;transform:none;filter:none}.noanim .cf{display:none}
+@media(max-width:420px){#mt{display:none}.prog{gap:4px}}
+@media(prefers-reduced-motion:reduce){#deck{scroll-behavior:auto;scroll-snap-type:none}}
+@media(prefers-contrast:more){:root,:root[data-theme=dark]{--mut:var(--ink);--line:var(--ink)}}
+@media(forced-colors:active){.yo[aria-pressed=true],.seg [aria-pressed=true],.ib[aria-pressed=true]{outline:3px solid Highlight}input.bad{border-style:dashed}}
+html{font-size:112.5%}
+.bar{left:0;right:0;translate:none;margin:0 auto;width:max-content}
+@media(max-width:480px){.bar{flex-wrap:nowrap;gap:4px;padding:4px 6px}.seg button{padding:0 8px}.ib{min-width:38px}.prog{gap:0}}
+@media(max-width:350px){.bar{flex-wrap:wrap}}
+
+/* programa */
+.gr.c2{grid-template-columns:repeat(2,1fr)}
+.note{font:700 1rem var(--f2);color:var(--mut)}
+.mc{margin-top:12px;border-top:2px dashed var(--line);padding-top:6px}
+.mc summary{cursor:pointer;font-weight:800;min-height:44px;display:flex;align-items:center}
+.mc h4{font:800 1rem var(--f2);margin:12px 0 6px}
+.mc p{margin:0 0 .5em}
+.card .chips{margin:12px 0}
+.card .chip{font-size:1rem}
+.card h3{font-size:1.45rem}
+a.btn{display:inline-block;text-decoration:none;color:var(--on)}
+.mapa{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:6px 0 18px}
+a.mn{display:flex;gap:10px;align-items:center;padding:10px 14px;border:3px solid var(--ink);border-radius:22px;background:var(--card);box-shadow:3px 3px 0 var(--c);color:var(--ink);text-decoration:none;font-weight:800;min-height:56px;line-height:1.2}
+a.mn b{flex:none;display:grid;place-items:center;width:38px;height:38px;border-radius:50%;background:var(--c);color:var(--on);font:800 1.1rem var(--f1)}
+a.mn:hover{transform:translateY(-2px)}
+.flag .en,.cue .en{color:inherit}
+.flag{display:inline-block;padding:2px 12px;border-radius:99px;border:2px solid var(--ink);background:#FFD43B;color:#17112F;font-weight:800;font-size:.9rem}
+.ms{display:flex;flex-direction:column;gap:6px;margin:8px 0 0;padding:0;list-style:none}
+.ms li::before{content:'✓ ';font-weight:800;color:var(--ok)}
+@media(max-width:700px){.gr.c2{grid-template-columns:1fr}.mapa{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body data-lang="both">
+<a class="sk" href="#deck">Saltar al contenido</a>
+<div class="mesh" aria-hidden="true"><i></i><i></i><i></i></div>
+<div class="bar" role="toolbar" aria-label="Controles">
+ <span class="tl" id="mt" style="--s:28px" aria-hidden="true"></span>
+ <div class="seg"><button data-l="es" aria-label="Solo español">ES</button><button data-l="both" aria-label="Español más English">ES + EN</button></div>
+  <button class="ib" id="an" aria-label="Pausar animaciones" aria-pressed="false">⏸</button><button class="ib" id="th" aria-label="Tema claro u oscuro">◐</button>
+</div>
+<nav class="dt" id="dt" aria-label="Escenas"></nav>
+<div class="hint" id="hint" aria-hidden="true">↓ desliza · ← → cambian de escena</div>
+<main id="deck" tabindex="-1">
+
+<section class="sc"><div class="w">
+ <div class="hero"><div>
+  <p class="tag r"><span>Programa · Gustaw · Español con Óscar 🇪🇸<span class="en"> · Program · Gustaw · Spanish with Óscar</span></span></p>
+  <h1><span class="hw r" style="--i:1">12</span><span class="hw r" style="--i:2">clases</span><span class="hw r" style="--i:3">para</span><span class="hw r" style="--i:4"><span class="uw">hablar</span></span><span class="hw r" style="--i:5">español</span></h1>
+  <p class="en b r" style="--i:6;font-size:1.2rem">12 classes to speak Spanish</p>
+  <p class="mut r" style="--i:7;font-size:1.25rem">De «me llamo Gustaw» a contar tu día completo, con Manolito.<span class="en b">From “my name is Gustaw” to telling your whole day, with Manolito.</span></p>
+ </div><span class="tl r" style="--s:min(28vw,170px);--i:5" aria-hidden="true"></span></div>
+ <div class="chips r" style="--i:8"><span class="chip k">12 clases<span class="en"> · 12 classes</span></span><span class="chip">50 minutos cada una<span class="en"> · 50 minutes each</span></span><span class="chip">Español de España<span class="en"> · Spanish from Spain</span></span><span class="chip">Nivel inicial A1 (se ajusta)<span class="en"> · Starting level A1 (adjustable)</span></span></div>
+ <div class="ab r" style="--i:9;grid-template-columns:1fr 1fr 1fr"><div style="--i:0"></div><div style="--i:1"></div><div style="--i:2"></div></div>
+ <div class="al r" style="--i:10"><span>Clases 1–4 · Yo y mi mundo<span class="en"> · Classes 1–4 · Me and my world</span></span><span>5–8 · Me gusta, no me gusta<span class="en"> · 5–8 · Likes and dislikes</span></span><span>9–12 · Mi día<span class="en"> · 9–12 · My day</span></span></div>
+</div></section>
+
+<section class="sc"><div class="w">
+ <p class="tag r"><span>Así es cada clase<span class="en"> · What each class is like</span></span><span class="cue">50′</span></p>
+ <h2 class="r" style="--i:1">Seis bloques, siempre igual 🧩<span class="en b">Six blocks, always the same.</span></h2>
+ <div class="ab r" style="--i:2;grid-template-columns:6fr 8fr 9fr 8fr 12fr 7fr"><div style="--i:0"></div><div style="--i:1"></div><div style="--i:2"></div><div style="--i:3"></div><div style="--i:4"></div><div style="--i:5"></div></div>
+ <div class="al r" style="--i:3"><span>00′ Calentar<span class="en"> · Warm-up</span></span><span>06′ Fórmulas<span class="en"> · Formulas</span></span><span>14′ Completa<span class="en"> · Fill in</span></span><span>23′ Escribe<span class="en"> · Write</span></span><span>31′ Juego con Manolito<span class="en"> · Game with Manolito</span></span><span>43′ Repaso y tarea<span class="en"> · Review and homework</span></span></div>
+ <div class="gr" style="margin-top:22px">
+  <div class="g r" data-r="b" style="--i:4"><div class="big-e">💪</div><h3>Primero, inténtalo<span class="en b">First, give it a try</span></h3><p class="mut">Las pistas llegan después de intentarlo.<span class="en b">Hints come after you try.</span></p></div>
+  <div class="g r" data-r="a" style="--i:5"><div class="big-e">🔍</div><h3>Un error es una pista<span class="en b">A mistake is a clue</span></h3><p class="mut">Los errores van al banco de errores y vuelven otro día.<span class="en b">Mistakes go to the mistake bank and come back another day.</span></p></div>
+  <div class="g r" data-r="o" style="--i:6"><div class="big-e">🦁</div><h3>¡Dilo fuerte!<span class="en b">Say it loud!</span></h3><p class="mut">Cada frase en voz alta, como un león.<span class="en b">Every sentence out loud, like a lion.</span></p></div>
+  <div class="g r" data-r="b" style="--i:7"><div class="big-e">🔁</div><h3>Todo vuelve<span class="en b">It all comes back</span></h3><p class="mut">Cada calentamiento repasa la clase anterior.<span class="en b">Every warm-up reviews the previous class.</span></p></div>
+ </div>
+</div></section>
+
+<section class="sc" id="mapa"><div class="w">
+ <p class="tag r"><span>El mapa<span class="en"> · The map</span></span></p>
+ <h2 class="r" style="--i:1">12 paradas, 3 misiones 🗺️<span class="en b">12 stops, 3 missions.</span></h2>
+ <p class="tag r"><span>Bloque 1 · Yo y mi mundo<span class="en"> · Block 1 · Me and my world</span></span></p><div class="mapa r" style="--c:var(--b)"><a class="mn" style="--c:var(--b)" href="#c01"><b>1</b><span>👋 ¡Hola, soy Gustaw!<span class="en b">Hi, I’m Gustaw!</span></span></a><a class="mn" style="--c:var(--b)" href="#c02"><b>2</b><span>👨‍👩‍👧 Mi familia<span class="en b">My family</span></span></a><a class="mn" style="--c:var(--b)" href="#c03"><b>3</b><span>🎒 Mi cole y mis cosas<span class="en b">My school and my things</span></span></a><a class="mn" style="--c:var(--b)" href="#c04"><b>4</b><span>🏠 Mi casa<span class="en b">My home</span></span></a></div><p class="tag r"><span>Bloque 2 · Me gusta, no me gusta<span class="en"> · Block 2 · Likes and dislikes</span></span></p><div class="mapa r" style="--c:var(--p)"><a class="mn" style="--c:var(--p)" href="#c05"><b>5</b><span>🍕 A comer<span class="en b">Let’s eat</span></span></a><a class="mn" style="--c:var(--p)" href="#c06"><b>6</b><span>🥤 Pedir en un bar<span class="en b">Ordering at a café</span></span></a><a class="mn" style="--c:var(--p)" href="#c07"><b>7</b><span>⚽ Deportes y juegos<span class="en b">Sports and games</span></span></a><a class="mn" style="--c:var(--p)" href="#c08"><b>8</b><span>⭐ Mis cosas favoritas<span class="en b">My favourite things</span></span></a></div><p class="tag r"><span>Bloque 3 · Mi día<span class="en"> · Block 3 · My day</span></span></p><div class="mapa r" style="--c:var(--ok)"><a class="mn" style="--c:var(--ok)" href="#c09"><b>9</b><span>📅 Los días y la hora<span class="en b">Days and time</span></span></a><a class="mn" style="--c:var(--ok)" href="#c10"><b>10</b><span>☀️ Mi mañana<span class="en b">My morning</span></span></a><a class="mn" style="--c:var(--ok)" href="#c11"><b>11</b><span>🌙 Mi tarde y mi noche<span class="en b">My afternoon and night</span></span></a><a class="mn" style="--c:var(--ok)" href="#c12"><b>12</b><span>🌞 Mi día completo<span class="en b">My whole day</span></span></a></div>
+ <p class="note r" style="--i:7;margin-top:14px">Toca una parada para ir a su clase.<span class="en b">Tap a stop to go to its class.</span></p>
+</div></section>
+
+<section class="sc" id="b1"><div class="w">
+ <p class="tag r"><span>Bloque 1 · clases 1–4<span class="en"> · Block 1 · classes 1–4</span></span></p>
+ <h2 class="r" style="--i:1">Yo y mi mundo<span class="en b">Me and my world</span></h2>
+ <div class="gr c2">
+<article class="g cv card r" id="c01" style="--c:var(--b);--i:2"><p class="tag"><span class="cue">Clase 01</span></p><h3>👋 ¡Hola, soy Gustaw!<span class="en b">Hi, I’m Gustaw!</span></h3><p>Me presento: mi nombre, mi edad y lo que me gusta.<span class="en b">I introduce myself: my name, my age and what I like.</span></p><div class="chips"><span class="chip k">Me llamo Gustaw.<span class="en"> · My name is Gustaw.</span></span><span class="chip k">Tengo … años.<span class="en"> · I am … years old.</span></span><span class="chip k">Me gusta …<span class="en"> · I like …</span></span><span class="chip k">¡Mucho gusto!<span class="en"> · Nice to meet you!</span></span></div><details class="mc"><summary><span>Palabras, juego y tarea<span class="en"> · Words, game and homework</span></span></summary><h4>Palabras<span class="en"> · Words</span></h4><div class="chips" style="margin-top:0"><span class="chip">hola<span class="en"> · hello</span></span><span class="chip">buenos días<span class="en"> · good morning</span></span><span class="chip">gracias<span class="en"> · thank you</span></span><span class="chip">adiós<span class="en"> · bye</span></span><span class="chip">¡vale!<span class="en"> · OK!</span></span><span class="chip">¡guay!<span class="en"> · cool!</span></span></div><h4>Juego con Manolito<span class="en"> · Game with Manolito</span></h4><p>Conoces a Manolito: él pregunta y tú contestas. Después preguntas tú.<span class="en b">You meet Manolito: he asks and you answer. Then you ask.</span></p><h4>Tarea<span class="en"> · Homework</span></h4><p>Preséntate a tu familia con 3 frases y dibuja a Manolito.<span class="en b">Introduce yourself to your family with 3 sentences and draw Manolito.</span></p></details></article><article class="g cv card r" id="c02" style="--c:var(--b);--i:3"><p class="tag"><span class="cue">Clase 02</span></p><h3>👨‍👩‍👧 Mi familia<span class="en b">My family</span></h3><p>Presento a mi familia y digo cómo se llaman.<span class="en b">I introduce my family and say their names.</span></p><div class="chips"><span class="chip k">Esta es mi madre.<span class="en"> · This is my mother.</span></span><span class="chip k">Tengo un hermano.<span class="en"> · I have a brother.</span></span><span class="chip k">Se llama …<span class="en"> · His/her name is …</span></span><span class="chip k">Mis abuelos<span class="en"> · My grandparents</span></span></div><details class="mc"><summary><span>Palabras, juego y tarea<span class="en"> · Words, game and homework</span></span></summary><p class="mut">Calentamiento: repaso de la clase 01.<span class="en b">Warm-up: review of class 01.</span></p><h4>Palabras<span class="en"> · Words</span></h4><div class="chips" style="margin-top:0"><span class="chip">la madre<span class="en"> · mother</span></span><span class="chip">el padre<span class="en"> · father</span></span><span class="chip">el hermano / la hermana<span class="en"> · brother / sister</span></span><span class="chip">el abuelo / la abuela<span class="en"> · grandfather / grandmother</span></span><span class="chip">el tío / la tía<span class="en"> · uncle / aunt</span></span><span class="chip">el primo / la prima<span class="en"> · cousin</span></span></div><h4>Juego con Manolito<span class="en"> · Game with Manolito</span></h4><p>El árbol de Manolito: Gustaw cuenta su familia y Manolito se equivoca a propósito. ¡Corrígelo!<span class="en b">Manolito’s family tree: Gustaw tells his family and Manolito makes mistakes on purpose. Correct him!</span></p><h4>Tarea<span class="en"> · Homework</span></h4><p>Dibuja tu árbol de familia y escribe 4 frases.<span class="en b">Draw your family tree and write 4 sentences.</span></p></details></article><article class="g cv card r" id="c03" style="--c:var(--b);--i:4"><p class="tag"><span class="cue">Clase 03</span></p><h3>🎒 Mi cole y mis cosas<span class="en b">My school and my things</span></h3><p>Digo qué hay en mi mochila y de qué color es.<span class="en b">I say what is in my backpack and what colour it is.</span></p><div class="chips"><span class="chip k">En mi mochila hay …<span class="en"> · In my backpack there is/are …</span></span><span class="chip k">Es un lápiz azul.<span class="en"> · It is a blue pencil.</span></span><span class="chip k">¿Qué es esto?<span class="en"> · What is this?</span></span><span class="chip k">Tengo diez libros.<span class="en"> · I have ten books.</span></span></div><details class="mc"><summary><span>Palabras, juego y tarea<span class="en"> · Words, game and homework</span></span></summary><p class="mut">Calentamiento: repaso de la clase 02.<span class="en b">Warm-up: review of class 02.</span></p><h4>Palabras<span class="en"> · Words</span></h4><div class="chips" style="margin-top:0"><span class="chip">la mochila<span class="en"> · backpack</span></span><span class="chip">el estuche<span class="en"> · pencil case</span></span><span class="chip">el lápiz<span class="en"> · pencil</span></span><span class="chip">la goma<span class="en"> · eraser</span></span><span class="chip">el cuaderno<span class="en"> · notebook</span></span><span class="chip">los números 1–20<span class="en"> · numbers 1–20</span></span></div><p class="mut">🇪🇸 En España decimos «el cole» y «la profe».<span class="en b">🇪🇸 In Spain we say “el cole” (school) and “la profe” (teacher).</span></p><h4>Juego con Manolito<span class="en"> · Game with Manolito</span></h4><p>La mochila misteriosa: Manolito saca cosas y tú dices qué son y de qué color.<span class="en b">The mystery backpack: Manolito pulls out things and you say what they are and what colour.</span></p><h4>Tarea<span class="en"> · Homework</span></h4><p>Dibuja tu mochila y escribe 4 frases con «hay».<span class="en b">Draw your backpack and write 4 sentences with “hay”.</span></p></details></article><article class="g cv card r" id="c04" style="--c:var(--b);--i:5"><p class="tag"><span class="cue">Clase 04</span><span class="flag">🏁 Misión 1<span class="en"> · Mission 1</span></span></p><h3>🏠 Mi casa<span class="en b">My home</span></h3><p>Describo mi casa y digo dónde está cada cosa.<span class="en b">I describe my home and say where things are.</span></p><div class="chips"><span class="chip k">En mi casa hay …<span class="en"> · In my home there is/are …</span></span><span class="chip k">¿Dónde está …?<span class="en"> · Where is …?</span></span><span class="chip k">Está en mi cuarto.<span class="en"> · It is in my room.</span></span><span class="chip k">Está encima de la mesa.<span class="en"> · It is on top of the table.</span></span></div><details class="mc"><summary><span>Palabras, juego y tarea<span class="en"> · Words, game and homework</span></span></summary><p class="mut">Calentamiento: repaso de la clase 03.<span class="en b">Warm-up: review of class 03.</span></p><h4>Palabras<span class="en"> · Words</span></h4><div class="chips" style="margin-top:0"><span class="chip">la cocina<span class="en"> · kitchen</span></span><span class="chip">el salón<span class="en"> · living room</span></span><span class="chip">el cuarto<span class="en"> · bedroom</span></span><span class="chip">el baño<span class="en"> · bathroom</span></span><span class="chip">encima de<span class="en"> · on top of</span></span><span class="chip">debajo de<span class="en"> · under</span></span></div><p class="mut">🇪🇸 En España: el salón. En América: la sala.<span class="en b">🇪🇸 In Spain: el salón. In Latin America: la sala.</span></p><h4>Juego con Manolito<span class="en"> · Game with Manolito</span></h4><p>Busca a Manolito: se esconde en la casa y tú le preguntas «¿Dónde estás?».<span class="en b">Find Manolito: he hides in the house and you ask “Where are you?”.</span></p><h4>Tarea<span class="en"> · Homework</span></h4><p>Cuéntale a tu familia, en voz alta, tres cosas de tu casa.<span class="en b">Tell your family, out loud, three things about your home.</span></p></details></article> </div>
+</div></section>
+
+<section class="sc" id="b2"><div class="w">
+ <p class="tag r"><span>Bloque 2 · clases 5–8<span class="en"> · Block 2 · classes 5–8</span></span></p>
+ <h2 class="r" style="--i:1">Me gusta, no me gusta<span class="en b">Likes and dislikes</span></h2>
+ <div class="gr c2">
+<article class="g cv card r" id="c05" style="--c:var(--p);--i:2"><p class="tag"><span class="cue">Clase 05</span></p><h3>🍕 A comer<span class="en b">Let’s eat</span></h3><p>Digo qué me gusta y qué no me gusta comer y beber.<span class="en b">I say what I like and don’t like to eat and drink.</span></p><div class="chips"><span class="chip k">Me gusta el helado.<span class="en"> · I like ice cream.</span></span><span class="chip k">No me gusta el pescado.<span class="en"> · I don’t like fish.</span></span><span class="chip k">Me gustan las patatas.<span class="en"> · I like potatoes.</span></span><span class="chip k">Tengo hambre.<span class="en"> · I’m hungry.</span></span></div><details class="mc"><summary><span>Palabras, juego y tarea<span class="en"> · Words, game and homework</span></span></summary><p class="mut">Calentamiento: repaso de la clase 04.<span class="en b">Warm-up: review of class 04.</span></p><h4>Palabras<span class="en"> · Words</span></h4><div class="chips" style="margin-top:0"><span class="chip">el zumo<span class="en"> · juice</span></span><span class="chip">la patata<span class="en"> · potato</span></span><span class="chip">el bocadillo<span class="en"> · sandwich</span></span><span class="chip">la fruta<span class="en"> · fruit</span></span><span class="chip">la leche<span class="en"> · milk</span></span><span class="chip">el helado<span class="en"> · ice cream</span></span></div><p class="mut">🇪🇸 En España: el zumo, la patata. En América: el jugo, la papa.<span class="en b">🇪🇸 In Spain: el zumo, la patata. In Latin America: el jugo, la papa.</span></p><h4>Juego con Manolito<span class="en"> · Game with Manolito</span></h4><p>El menú de Manolito: cartas de comida y tú dices «¡Me gusta!» o «¡No me gusta!».<span class="en b">Manolito’s menu: food cards and you say “I like it!” or “I don’t like it!”.</span></p><h4>Tarea<span class="en"> · Homework</span></h4><p>Escribe tu menú favorito: desayuno, comida y cena.<span class="en b">Write your favourite menu: breakfast, lunch and dinner.</span></p></details></article><article class="g cv card r" id="c06" style="--c:var(--p);--i:3"><p class="tag"><span class="cue">Clase 06</span></p><h3>🥤 Pedir en un bar<span class="en b">Ordering at a café</span></h3><p>Pido algo con educación y entiendo la respuesta.<span class="en b">I order politely and understand the answer.</span></p><div class="chips"><span class="chip k">Quiero un zumo, por favor.<span class="en"> · I’d like a juice, please.</span></span><span class="chip k">¿Cuánto es?<span class="en"> · How much is it?</span></span><span class="chip k">Aquí tienes.<span class="en"> · Here you go.</span></span><span class="chip k">Gracias, ¡adiós!<span class="en"> · Thanks, bye!</span></span></div><details class="mc"><summary><span>Palabras, juego y tarea<span class="en"> · Words, game and homework</span></span></summary><p class="mut">Calentamiento: repaso de la clase 05.<span class="en b">Warm-up: review of class 05.</span></p><h4>Palabras<span class="en"> · Words</span></h4><div class="chips" style="margin-top:0"><span class="chip">el camarero<span class="en"> · waiter</span></span><span class="chip">la cuenta<span class="en"> · the bill</span></span><span class="chip">una botella<span class="en"> · a bottle</span></span><span class="chip">un euro<span class="en"> · one euro</span></span><span class="chip">por favor<span class="en"> · please</span></span><span class="chip">de nada<span class="en"> · you’re welcome</span></span></div><p class="mut">🇪🇸 En España se oye mucho «¿Me pones…?». Tú empieza con «Quiero…, por favor».<span class="en b">🇪🇸 In Spain you often hear “¿Me pones…?”. You start with “Quiero…, por favor”.</span></p><h4>Juego con Manolito<span class="en"> · Game with Manolito</span></h4><p>Bar de Manolito: él es el camarero y tú el cliente. Luego cambiáis.<span class="en b">Manolito’s café: he is the waiter and you are the customer. Then you swap.</span></p><h4>Tarea<span class="en"> · Homework</span></h4><p>Escribe un diálogo de 4 líneas para pedir un helado.<span class="en b">Write a 4-line dialogue to order an ice cream.</span></p></details></article><article class="g cv card r" id="c07" style="--c:var(--p);--i:4"><p class="tag"><span class="cue">Clase 07</span></p><h3>⚽ Deportes y juegos<span class="en b">Sports and games</span></h3><p>Digo qué juegos me gustan y propongo jugar a un amigo.<span class="en b">I say which games I like and invite a friend to play.</span></p><div class="chips"><span class="chip k">Me gusta jugar al fútbol.<span class="en"> · I like playing football.</span></span><span class="chip k">¿Quieres jugar?<span class="en"> · Do you want to play?</span></span><span class="chip k">¡Vale! / Hoy no puedo.<span class="en"> · OK! / I can’t today.</span></span><span class="chip k">Juego con Lego.<span class="en"> · I play with Lego.</span></span></div><details class="mc"><summary><span>Palabras, juego y tarea<span class="en"> · Words, game and homework</span></span></summary><p class="mut">Calentamiento: repaso de la clase 06.<span class="en b">Warm-up: review of class 06.</span></p><h4>Palabras<span class="en"> · Words</span></h4><div class="chips" style="margin-top:0"><span class="chip">el fútbol<span class="en"> · football</span></span><span class="chip">nadar<span class="en"> · to swim</span></span><span class="chip">la bici<span class="en"> · bike</span></span><span class="chip">los videojuegos<span class="en"> · video games</span></span><span class="chip">Lego<span class="en"> · Lego</span></span><span class="chip">dibujar<span class="en"> · to draw</span></span></div><p class="mut">Aquí usamos los gustos que elegiste en la clase 00.<span class="en b">We use the things you chose in class 00.</span></p><h4>Juego con Manolito<span class="en"> · Game with Manolito</span></h4><p>Invita a Manolito a jugar: él dice que sí o que no y tú entiendes por qué.<span class="en b">Invite Manolito to play: he says yes or no and you understand why.</span></p><h4>Tarea<span class="en"> · Homework</span></h4><p>Escribe una invitación para un amigo: qué, cuándo y dónde.<span class="en b">Write an invitation for a friend: what, when and where.</span></p></details></article><article class="g cv card r" id="c08" style="--c:var(--p);--i:5"><p class="tag"><span class="cue">Clase 08</span><span class="flag">🏁 Misión 2<span class="en"> · Mission 2</span></span></p><h3>⭐ Mis cosas favoritas<span class="en b">My favourite things</span></h3><p>Hablo un minuto de lo que me gusta y no me gusta.<span class="en b">I talk for a minute about what I like and don’t like.</span></p><div class="chips"><span class="chip k">Mi color favorito es …<span class="en"> · My favourite colour is …</span></span><span class="chip k">Mi animal favorito es …<span class="en"> · My favourite animal is …</span></span><span class="chip k">¿Cuál es tu …?<span class="en"> · What is your …?</span></span><span class="chip k">Me gusta mucho …<span class="en"> · I like … a lot.</span></span></div><details class="mc"><summary><span>Palabras, juego y tarea<span class="en"> · Words, game and homework</span></span></summary><p class="mut">Calentamiento: repaso de la clase 07.<span class="en b">Warm-up: review of class 07.</span></p><h4>Palabras<span class="en"> · Words</span></h4><div class="chips" style="margin-top:0"><span class="chip">favorito / favorita<span class="en"> · favourite</span></span><span class="chip">el color<span class="en"> · colour</span></span><span class="chip">el animal<span class="en"> · animal</span></span><span class="chip">la canción<span class="en"> · song</span></span><span class="chip">la comida<span class="en"> · food</span></span><span class="chip">el deporte<span class="en"> · sport</span></span></div><h4>Juego con Manolito<span class="en"> · Game with Manolito</span></h4><p>Entrevista: Gustaw es el reportero y Manolito, el famoso. Seis preguntas.<span class="en b">Interview: Gustaw is the reporter and Manolito the celebrity. Six questions.</span></p><h4>Tarea<span class="en"> · Homework</span></h4><p>Tu carné de favoritos: un dibujo y 5 frases.<span class="en b">Your favourites card: a drawing and 5 sentences.</span></p></details></article> </div>
+</div></section>
+
+<section class="sc" id="b3"><div class="w">
+ <p class="tag r"><span>Bloque 3 · clases 9–12<span class="en"> · Block 3 · classes 9–12</span></span></p>
+ <h2 class="r" style="--i:1">Mi día<span class="en b">My day</span></h2>
+ <div class="gr c2">
+<article class="g cv card r" id="c09" style="--c:var(--ok);--i:2"><p class="tag"><span class="cue">Clase 09</span></p><h3>📅 Los días y la hora<span class="en b">Days and time</span></h3><p>Digo qué día es y a qué hora hago algo.<span class="en b">I say what day it is and at what time I do something.</span></p><div class="chips"><span class="chip k">Hoy es lunes.<span class="en"> · Today is Monday.</span></span><span class="chip k">¿Qué hora es?<span class="en"> · What time is it?</span></span><span class="chip k">Son las cuatro y media.<span class="en"> · It’s half past four.</span></span><span class="chip k">A las cinco tengo clase.<span class="en"> · At five I have class.</span></span></div><details class="mc"><summary><span>Palabras, juego y tarea<span class="en"> · Words, game and homework</span></span></summary><p class="mut">Calentamiento: repaso de la clase 08.<span class="en b">Warm-up: review of class 08.</span></p><h4>Palabras<span class="en"> · Words</span></h4><div class="chips" style="margin-top:0"><span class="chip">lunes · martes · miércoles<span class="en"> · Mon · Tue · Wed</span></span><span class="chip">jueves · viernes<span class="en"> · Thu · Fri</span></span><span class="chip">sábado · domingo<span class="en"> · Sat · Sun</span></span><span class="chip">la mañana<span class="en"> · morning</span></span><span class="chip">la tarde<span class="en"> · afternoon</span></span><span class="chip">la noche<span class="en"> · night</span></span></div><h4>Juego con Manolito<span class="en"> · Game with Manolito</span></h4><p>El reloj de Manolito: él pone la hora y tú la dices. Después, al revés.<span class="en b">Manolito’s clock: he sets the time and you say it. Then the other way round.</span></p><h4>Tarea<span class="en"> · Homework</span></h4><p>Escribe 5 frases sobre tu semana: qué día y a qué hora.<span class="en b">Write 5 sentences about your week: which day and what time.</span></p></details></article><article class="g cv card r" id="c10" style="--c:var(--ok);--i:3"><p class="tag"><span class="cue">Clase 10</span></p><h3>☀️ Mi mañana<span class="en b">My morning</span></h3><p>Cuento lo que hago por la mañana, en orden.<span class="en b">I tell what I do in the morning, in order.</span></p><div class="chips"><span class="chip k">Me levanto a las siete.<span class="en"> · I get up at seven.</span></span><span class="chip k">Desayuno cereales.<span class="en"> · I have cereal for breakfast.</span></span><span class="chip k">Voy al cole en coche.<span class="en"> · I go to school by car.</span></span><span class="chip k">Primero … y luego …<span class="en"> · First … and then …</span></span></div><details class="mc"><summary><span>Palabras, juego y tarea<span class="en"> · Words, game and homework</span></span></summary><p class="mut">Calentamiento: repaso de la clase 09.<span class="en b">Warm-up: review of class 09.</span></p><h4>Palabras<span class="en"> · Words</span></h4><div class="chips" style="margin-top:0"><span class="chip">levantarse<span class="en"> · to get up</span></span><span class="chip">desayunar<span class="en"> · to have breakfast</span></span><span class="chip">lavarse los dientes<span class="en"> · to brush teeth</span></span><span class="chip">vestirse<span class="en"> · to get dressed</span></span><span class="chip">primero<span class="en"> · first</span></span><span class="chip">luego<span class="en"> · then</span></span></div><h4>Juego con Manolito<span class="en"> · Game with Manolito</span></h4><p>La mañana de Manolito: ordena las escenas y cuéntalas con «primero» y «luego».<span class="en b">Manolito’s morning: put the scenes in order and tell them with “first” and “then”.</span></p><h4>Tarea<span class="en"> · Homework</span></h4><p>Escribe tu mañana en 5 frases con «primero» y «luego».<span class="en b">Write your morning in 5 sentences with “first” and “then”.</span></p></details></article><article class="g cv card r" id="c11" style="--c:var(--ok);--i:4"><p class="tag"><span class="cue">Clase 11</span></p><h3>🌙 Mi tarde y mi noche<span class="en b">My afternoon and night</span></h3><p>Cuento lo que hago por la tarde y por la noche.<span class="en b">I tell what I do in the afternoon and at night.</span></p><div class="chips"><span class="chip k">Hago los deberes.<span class="en"> · I do my homework.</span></span><span class="chip k">Meriendo un bocadillo.<span class="en"> · I have a sandwich as a snack.</span></span><span class="chip k">Ceno a las ocho.<span class="en"> · I have dinner at eight.</span></span><span class="chip k">Me acuesto a las nueve.<span class="en"> · I go to bed at nine.</span></span></div><details class="mc"><summary><span>Palabras, juego y tarea<span class="en"> · Words, game and homework</span></span></summary><p class="mut">Calentamiento: repaso de la clase 10.<span class="en b">Warm-up: review of class 10.</span></p><h4>Palabras<span class="en"> · Words</span></h4><div class="chips" style="margin-top:0"><span class="chip">los deberes<span class="en"> · homework</span></span><span class="chip">merendar<span class="en"> · to have an afternoon snack</span></span><span class="chip">cenar<span class="en"> · to have dinner</span></span><span class="chip">acostarse<span class="en"> · to go to bed</span></span><span class="chip">después<span class="en"> · after</span></span><span class="chip">por la noche<span class="en"> · at night</span></span></div><p class="mut">🇪🇸 La merienda es el bocadillo o la fruta de la tarde.<span class="en b">🇪🇸 La merienda is the sandwich or fruit you have in the afternoon.</span></p><h4>Juego con Manolito<span class="en"> · Game with Manolito</span></h4><p>Cómic a dos voces: Manolito cuenta una viñeta, tú cuentas la siguiente.<span class="en b">Two-voice comic: Manolito tells one panel, you tell the next.</span></p><h4>Tarea<span class="en"> · Homework</span></h4><p>Haz un cómic de tres viñetas con una frase cada una.<span class="en b">Make a three-panel comic with one sentence each.</span></p></details></article><article class="g cv card r" id="c12" style="--c:var(--ok);--i:5"><p class="tag"><span class="cue">Clase 12</span><span class="flag">🏁 Misión 3<span class="en"> · Mission 3</span></span></p><h3>🌞 Mi día completo<span class="en b">My whole day</span></h3><p>Cuento mi día, de la mañana a la noche, sin guion.<span class="en b">I tell my day, from morning to night, without a script.</span></p><div class="chips"><span class="chip k">Por la mañana …<span class="en"> · In the morning …</span></span><span class="chip k">Por la tarde …<span class="en"> · In the afternoon …</span></span><span class="chip k">Por la noche …<span class="en"> · At night …</span></span><span class="chip k">Mi parte favorita es …<span class="en"> · My favourite part is …</span></span></div><details class="mc"><summary><span>Palabras, juego y tarea<span class="en"> · Words, game and homework</span></span></summary><p class="mut">Calentamiento: repaso de la clase 11.<span class="en b">Warm-up: review of class 11.</span></p><h4>Palabras<span class="en"> · Words</span></h4><div class="chips" style="margin-top:0"><span class="chip">primero<span class="en"> · first</span></span><span class="chip">luego<span class="en"> · then</span></span><span class="chip">después<span class="en"> · after</span></span><span class="chip">por fin<span class="en"> · finally</span></span><span class="chip">mi parte favorita<span class="en"> · my favourite part</span></span><span class="chip">todo el día<span class="en"> · all day</span></span></div><h4>Juego con Manolito<span class="en"> · Game with Manolito</span></h4><p>Un día con Gustaw: programa de radio de dos minutos. Manolito pregunta y tú cuentas.<span class="en b">A day with Gustaw: a two-minute radio show. Manolito asks and you tell.</span></p><h4>Tarea<span class="en"> · Homework</span></h4><p>Tu diploma: elige con tu familia qué quieres aprender después.<span class="en b">Your diploma: choose with your family what you want to learn next.</span></p></details></article> </div>
+</div></section>
+
+<section class="sc"><div class="w">
+ <p class="tag r"><span>Las tres misiones<span class="en"> · The three missions</span></span></p>
+ <h2 class="r" style="--i:1">Cada cuatro clases, una misión 🏁<span class="en b">Every four classes, a mission.</span></h2>
+ <div class="gr">
+  <div class="g r" data-r="b" style="--i:2"><h3>🏁 Misión 1 · clase 4<span class="en b">Mission 1 · class 4</span></h3><p>Un minuto para presentarte: tú, tu familia, tu cole y tu casa.<span class="en b">One minute to introduce yourself: you, your family, your school and your home.</span></p><ul class="ms"><li>Usa «me llamo», «tengo» y «hay»<span class="en"> · Uses “me llamo”, “tengo” and “hay”</span></li><li>Nombra a tres personas de su familia<span class="en"> · Names three people in his family</span></li><li>Habla sin mirar el guion<span class="en"> · Speaks without looking at the script</span></li></ul></div>
+  <div class="g r" data-r="a" style="--i:3"><h3>🏁 Misión 2 · clase 8<span class="en b">Mission 2 · class 8</span></h3><p>Entrevista a Manolito y contesta a todas sus preguntas.<span class="en b">Interview Manolito and answer all his questions.</span></p><ul class="ms"><li>Dice qué le gusta y qué no<span class="en"> · Says what he likes and doesn’t</span></li><li>Pide algo con «por favor»<span class="en"> · Asks for something with “por favor”</span></li><li>Invita a jugar y entiende un «no»<span class="en"> · Invites someone to play and understands a “no”</span></li></ul></div>
+  <div class="g r" data-r="o" style="--i:4"><h3>🏁 Misión 3 · clase 12<span class="en b">Mission 3 · class 12</span></h3><p>Un día con Gustaw: cuenta tu día de la mañana a la noche.<span class="en b">A day with Gustaw: tell your day from morning to night.</span></p><ul class="ms"><li>Dice la hora y el día<span class="en"> · Says the time and the day</span></li><li>Ordena con «primero» y «luego»<span class="en"> · Orders with “primero” and “luego”</span></li><li>Cuenta dos minutos sin guion<span class="en"> · Talks for two minutes without a script</span></li></ul></div>
+ </div>
+ <p class="mut r" style="--i:6;margin-top:22px">Al terminar, Gustaw puede hablar de sí mismo, de su familia y de su día con frases completas, y entender las preguntas de Manolito.<span class="en b">At the end, Gustaw can talk about himself, his family and his day in full sentences, and understand Manolito’s questions.</span></p>
+</div></section>
+
+<section class="sc" lang="en"><div class="w">
+ <p class="tag r" lang="es">Para Magda · For Magda</p>
+ <h2 class="r" style="--i:1">What to expect</h2>
+ <div class="gr c2">
+  <div class="g r" data-r="b" style="--i:3"><h3>🎯 One clear goal per class</h3><p class="mut">Each class ends with something Gustaw can really say, and a short game where he talks without a script.</p></div>
+  <div class="g r" data-r="a" style="--i:4"><h3>🧭 Flexible, not fixed</h3><p class="mut">The plan is a map, not a contract. After every class I adjust the next one to what he found easy or hard.</p></div>
+  <div class="g r" data-r="o" style="--i:5"><h3>🏠 Five minutes at home</h3><p class="mut">Each class has a small task. At home you only need to ask him the questions in Spanish and celebrate his answers. No correcting needed.</p></div>
+  <div class="g r" data-r="b" style="--i:6"><h3>🇪🇸 Spanish from Spain</h3><p class="mut">Words like zumo, patata, cole and merienda sit alongside what he already learns in his weekly class with his teacher from Guatemala.</p></div>
+ </div>
+</div></section>
+
+</main>
+<script>
+const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)],R=document.documentElement,K='programa_gustaw_v1';
+let S={lang:'both'};try{Object.assign(S,JSON.parse(localStorage[K]||'{}'))}catch(e){}
+const save=()=>{try{localStorage[K]=JSON.stringify(S)}catch(e){}};
+const TL='<svg viewBox="0 -6 64 70"><path d="M8 8h48a6 6 0 0 1 6 6v26a6 6 0 0 1-6 6H30L18 58V46H8a6 6 0 0 1-6-6V14a6 6 0 0 1 6-6z" fill="var(--card)" stroke="currentColor" stroke-width="3.5" stroke-linejoin="round"/><path d="M26 8c0-7 8-9 12-5" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/><circle class="pu" cx="22" cy="25" r="3.4"/><circle class="pu" cx="42" cy="25" r="3.4"/><path class="mo" d="M26 37h12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>';
+$$('.tl').forEach(e=>{e.innerHTML=TL;e.dataset.f='attentive'});$('#mt').dataset.f='neutral';
+addEventListener('pointermove',e=>$$('.tl .pu').forEach(p=>{const r=p.ownerSVGElement.getBoundingClientRect(),c=v=>Math.max(-2,Math.min(2,v/80));p.style.transform=`translate(${c(e.clientX-r.left-r.width/2)}px,${c(e.clientY-r.top-r.height/2)}px)`}));
+$$('.en').forEach(e=>e.lang='en');
+const setLang=l=>{S.lang=l;document.body.dataset.lang=l;$$('.seg button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.l===l));save()};
+$$('.seg button').forEach(b=>b.onclick=()=>setLang(b.dataset.l));setLang(S.lang);
+$('#th').onclick=()=>{S.theme=R.dataset.theme==='dark'?'light':'dark';R.dataset.theme=S.theme;save()};
+const d=$('#deck'),SC=[...d.children],dt=$('#dt'),C=['--b','--b','--p','--b','--p','--ok','--am','--p'];let cur=0;
+SC.forEach((s,i)=>{const b=document.createElement('button');b.setAttribute('aria-label','Escena '+(i+1));b.onclick=()=>go(i);dt.appendChild(b)});
+const go=i=>SC[Math.max(0,Math.min(SC.length-1,i))].scrollIntoView({behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth'});
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting||!(e.intersectionRatio>.3||e.intersectionRect.height>e.rootBounds.height*.45))return;const i=SC.indexOf(e.target);cur=i;e.target.classList.add('on');R.style.setProperty('--mesh','var('+C[i]+')');[...dt.children].forEach((b,k)=>{b.classList.toggle('a',k===i);k===i?b.setAttribute('aria-current','step'):b.removeAttribute('aria-current')});if(i)$('#hint').style.opacity=0}),{root:d,threshold:[0,.15,.3,.55]});
+SC.forEach(s=>io.observe(s));
+addEventListener('keydown',e=>{if(e.altKey||e.ctrlKey||e.metaKey||e.shiftKey)return;if(/INPUT|TEXTAREA/.test(e.target.tagName))return;if(e.key==='ArrowRight'){e.preventDefault();go(cur+1)}if(e.key==='ArrowLeft'){e.preventDefault();go(cur-1)}});
+$$('a.mn').forEach(a=>a.addEventListener('click',()=>{const c=$(a.getAttribute('href'));if(c)c.closest('section').classList.add('on')}));
+const EM=/\p{Regional_Indicator}{2}|\p{Extended_Pictographic}(?:\uFE0F|\u200D\p{Extended_Pictographic})*/gu,T=/\p{Regional_Indicator}|\p{Extended_Pictographic}/u,wk=document.createTreeWalker(d,NodeFilter.SHOW_TEXT),tn=[];while(wk.nextNode())tn.push(wk.currentNode);
+tn.forEach(t=>{if(!T.test(t.data))return;const f=document.createDocumentFragment();let l=0;t.data.replace(EM,(m,o)=>{f.append(t.data.slice(l,o));const s=document.createElement('span');s.setAttribute('aria-hidden','true');s.textContent=m;f.append(s);l=o+m.length;return m});f.append(t.data.slice(l));t.replaceWith(f)});
+SC.forEach(s=>s.addEventListener('focusin',()=>s.classList.add('on')));
+const an=$('#an'),sa=()=>{document.body.classList.toggle('noanim',!!S.anim);an.setAttribute('aria-pressed',!!S.anim)};an.onclick=()=>{S.anim=S.anim?0:1;save();sa()};sa();
+</script>
+</body>
+</html>
