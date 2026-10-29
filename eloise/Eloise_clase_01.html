@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Clase 01 · Eloïse · Presentarte</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<script>
+(function(){var t;try{t=localStorage.getItem('theme')}catch(e){}
+document.documentElement.dataset.theme=(t==='light'||t==='dark')?t:(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')})();
+</script>
+<style>
+:root{--paper:#F7F4EC;--ink:#1B1C20;--mut:#5A5953;--line:#D3CFC4;--edge:#7C7A72;--b:#2250E8;--on:#fff;--ok:#08813F;--er:#D42A18;--f1:Fraunces,Georgia,serif;--f2:'IBM Plex Sans',system-ui,sans-serif;--am:#B35400;--hl-b:rgba(34,80,232,.16);--hl-ok:rgba(8,129,63,.16);--hl-am:rgba(230,120,0,.20);--hl-er:rgba(212,42,24,.14);--p:var(--ink);--card:var(--paper);--glass:transparent;--f3:var(--f2);color-scheme:light}
+:root[data-theme=dark]{--paper:#13151A;--ink:#F1EEE6;--mut:#A9A79F;--line:#34363D;--edge:#8A8880;--b:#6B9AFF;--on:#0E1420;--ok:#2FD38C;--er:#FF7B5A;--am:#FFC233;--hl-b:rgba(107,154,255,.26);--hl-ok:rgba(47,211,140,.24);--hl-am:rgba(255,194,51,.16);--hl-er:rgba(255,123,90,.24);color-scheme:dark}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-snap-type:y proximity;scroll-behavior:smooth;scroll-padding-top:64px;-webkit-text-size-adjust:100%}
+html,body{margin:0}
+body{background:var(--paper);color:var(--ink);font:400 1.0625rem/1.6 var(--f2);padding:env(safe-area-inset-top,0) 0 env(safe-area-inset-bottom,0)}
+#deck{outline:0}
+h1,h2,h3{font-family:var(--f1);font-weight:600;letter-spacing:-.01em;margin:0 0 .5em}
+h1{font-size:clamp(2.4rem,7vw,5rem);line-height:1.05}h2{font-size:clamp(1.7rem,4vw,2.8rem);line-height:1.15}h3{font-size:1.2rem;line-height:1.3;margin-bottom:.3em}
+p{margin:0 0 .75em;max-width:62ch}.mut{color:var(--mut)}
+.tag{display:flex;align-items:center;gap:10px;font-size:.9rem;color:var(--mut);margin-bottom:.6em}
+.cue{padding:1px 10px;border-radius:99px;border:1px solid var(--edge);font-size:.8rem}
+.en{font-size:.9em;color:var(--mut)}.en.b{display:block;margin:2px 0}
+.btn .en,.yo .en{color:inherit;opacity:.85}
+body[data-lang=es] .en,body[data-lang=esfr] .en{display:none!important}
+body:not([data-lang=esfr]) .fr{display:none!important}
+.fr{font-size:.88em;font-style:italic;color:var(--mut)}.fr.b{display:block;margin:2px 0}.btn .fr{color:inherit}
+.skip{position:fixed;left:12px;top:-80px;z-index:20;background:var(--b);color:var(--on);padding:12px 18px;border-radius:6px;font-weight:600}.skip:focus{top:12px}
+.op:disabled{opacity:1}.op:disabled:not(.ok):not(.bad){color:var(--mut)}
+.op.ok::before,.pb.ok::before,.wd2.ok::before{content:"✓ "}.op.bad::before,.pb.bad::before,.wd2.bad::before{content:"✗ "}
+.sc{padding-top:clamp(88px,12vh,110px)}
+@media(max-width:700px){.bar{left:0;right:0;top:0;padding:6px max(10px,env(safe-area-inset-right)) 6px max(10px,env(safe-area-inset-left));justify-content:flex-end;flex-wrap:wrap;background:var(--paper);border-bottom:1px solid var(--edge)}.sc{padding-top:140px}.hint{display:none}}
+@media(max-width:420px){.pm{grid-template-columns:1fr}.bb{max-width:100%}}
+@media(forced-colors:active){.v,.rd{border:1px solid CanvasText}.seg [aria-pressed=true],.tabs [aria-pressed=true]{outline:2px solid Highlight}}
+.tl{display:none!important}
+.sc{min-height:100vh;min-height:100svh;scroll-snap-align:start;display:flex;align-items:center;padding:clamp(64px,10vh,100px) clamp(20px,7vw,96px)}
+.w{width:100%;max-width:960px;margin:0 auto}
+.r{opacity:0;transform:translateY(64px) scale(.94);filter:blur(8px);transition:opacity .8s ease,transform 1s cubic-bezier(.34,1.56,.64,1),filter .8s ease;transition-delay:calc(var(--i,0)*110ms)}
+.on .r{opacity:1;transform:none;filter:none}
+.hw{display:inline-block;margin-right:.22em}
+.uw{background:linear-gradient(var(--b),var(--b)) 0 100%/0 .07em no-repeat;transition:background-size 1.3s cubic-bezier(.2,.8,.2,1) .8s}.on .uw{background-size:100% .07em}
+.hero{display:block}
+.g{border-top:2px solid var(--c,var(--ink));padding-top:14px}
+.g[data-r=b]{--c:var(--b)}.g[data-r=a]{--c:var(--am)}.g[data-r=o]{--c:var(--ok)}
+.gr{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:28px 32px;margin-top:28px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:24px 0}
+.chip{padding:4px 14px;border:1px solid var(--edge);border-radius:99px;background:none}
+.chip.k{border-color:var(--b);color:var(--b);font-weight:600}
+.v{font-weight:600;background:linear-gradient(var(--hl-b),var(--hl-b)) 0 90%/100% 45% no-repeat}
+.ab{display:grid;grid-template-columns:5fr 7fr 6fr 6fr 4fr 3fr 4fr 10fr 5fr;gap:4px;margin:5vh 0 12px}
+.ab div{height:8px;border-radius:4px;background:var(--line);overflow:hidden}
+.ab div::after{content:'';display:block;height:100%;background:var(--b);transform:scaleX(0);transform-origin:left;transition:transform .9s ease calc(1.4s + var(--i)*.35s)}.on .ab div::after{transform:scaleX(1)}
+.al{display:flex;flex-wrap:wrap;gap:6px 20px;font-size:.88rem;color:var(--mut)}
+.fc{perspective:900px;height:150px;border:0;background:none;padding:0;font:inherit;color:inherit;text-align:left;cursor:pointer}
+.fi{position:relative;width:100%;height:100%;transition:transform .7s cubic-bezier(.34,1.56,.64,1);transform-style:preserve-3d}.f .fi{transform:rotateY(180deg)}
+.fa,.fb{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;display:flex;flex-direction:column;justify-content:center;padding:16px;border-radius:6px;background:var(--paper);border:1px solid var(--edge)}
+.fa{font:600 1.2rem var(--f1)}.fb{transform:rotateY(180deg);border:2px solid var(--ok)}
+.btn{padding:14px 28px;min-height:48px;border:0;border-radius:99px;background:var(--b);color:var(--on);font:600 1.05rem var(--f2);cursor:pointer}.btn:hover{filter:brightness(1.08)}.btn:active{transform:scale(.94)}
+.ex{list-style:none;margin:16px 0;padding:0;max-width:720px;counter-reset:q}
+.ex li{counter-increment:q;position:relative;padding:14px 0 14px 34px;border-bottom:1px solid var(--line)}
+.ex li::before{content:counter(q);position:absolute;left:0;top:14px;font:600 1.05rem var(--f1);color:var(--b)}
+input.hu,input.w,textarea,select{font:inherit;color:var(--ink);background:var(--paper);border:1px solid var(--edge);border-radius:6px;padding:8px 10px;min-height:44px}
+input.hu{border:0;border-bottom:2px solid var(--ink);border-radius:6px 6px 0 0;text-align:center;min-height:0;padding:2px 8px;background:var(--hl-b)}
+input.w,textarea{width:100%;max-width:440px;margin-top:6px}
+textarea{display:block;max-width:640px;min-height:130px;resize:vertical}
+input.ok,select.ok{border-color:var(--ok);background:var(--hl-ok);animation:ok .5s}
+input.bad,select.bad{border-color:var(--er);background:var(--hl-er);border-style:dashed;animation:sh .42s}
+@keyframes ok{50%{transform:scale(1.08)}}@keyframes sh{25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+.sol{display:none;margin-top:6px;padding-left:10px;border-left:3px solid var(--er);color:var(--er);font-size:.92rem}
+.sol:not(:empty){display:block;animation:up .35s}.sol.tip{border-color:var(--b);color:var(--b)}
+@keyframes up{from{opacity:0;transform:translateY(-8px)}}
+.fd{min-height:1.6em;margin-top:10px;font-weight:600}
+details.ref{margin-top:18px;border:1px dashed var(--edge);border-radius:6px;padding:14px 16px;max-width:640px}
+details.ref summary{cursor:pointer;font-weight:600}details[data-lock] summary{opacity:.6}
+.ch{display:flex;flex-direction:column;gap:12px;max-width:640px}
+.bb{padding:12px 18px;border:1px solid var(--line);border-radius:12px;max-width:86%}
+.co{align-self:flex-start}
+.yo{align-self:flex-end;display:flex;gap:12px;align-items:center;border:2px solid var(--ok);background:none;color:var(--ink);font:inherit;text-align:left;cursor:pointer;padding:11px 17px}
+.yo[aria-pressed=true]{background:var(--hl-ok)}
+.wv{display:flex;gap:3px;align-items:center;height:16px}.wv i{width:3px;height:100%;background:var(--ok);border-radius:2px}
+.wv i:nth-child(1){height:40%}.wv i:nth-child(2){height:90%}.wv i:nth-child(3){height:60%}.wv i:nth-child(4){height:75%}
+.yo[aria-pressed=true] .wv i{animation:wv .7s ease-in-out 4}@keyframes wv{50%{transform:scaleY(.1)}}
+.yl{align-self:flex-end;display:flex;gap:8px;align-items:center;max-width:94%}
+.bar{position:fixed;top:max(10px,env(safe-area-inset-top));right:max(10px,env(safe-area-inset-right));z-index:9;display:flex;gap:8px;align-items:center}
+.seg{display:flex;border:1px solid var(--edge);border-radius:99px;overflow:hidden;background:var(--paper)}
+.seg button,.ib{font:600 .85rem var(--f2);color:var(--ink);background:none;border:0;min-height:44px;padding:0 14px;cursor:pointer}
+.seg [aria-pressed=true]{background:var(--b);color:var(--on)}
+.ib{border-radius:50%;min-width:44px;padding:0}
+.bar>.ib{border:1px solid var(--edge);background:var(--paper)}
+#sn,#mt{display:none}
+.prog{display:flex;align-items:center;gap:7px;font-size:.85rem;background:var(--paper);border:1px solid var(--edge);border-radius:99px;padding:0 12px;min-height:44px}
+.prog i{width:48px;height:6px;border-radius:3px;background:var(--line);overflow:hidden}.prog i b{display:block;height:100%;width:0;background:var(--ok);transition:width .6s}
+#pg{position:fixed;top:0;left:0;width:100%;height:3px;background:var(--b);transform-origin:left;transform:scaleX(0);z-index:10}
+.dt{position:fixed;right:max(6px,env(safe-area-inset-right));top:50%;transform:translateY(-50%);display:flex;flex-direction:column;z-index:5}
+.dt button{display:grid;place-items:center;width:24px;height:24px;background:none;border:0;padding:0;cursor:pointer}
+.dt button::before{content:"";width:8px;height:8px;border-radius:50%;border:1px solid var(--ink)}.dt .a::before{width:12px;height:12px;background:var(--b);border-color:var(--b)}
+.hint{position:fixed;bottom:calc(14px + env(safe-area-inset-bottom,0px));left:50%;translate:-50% 0;z-index:5;font-size:.85rem;color:var(--mut);transition:opacity .5s}
+.cf{position:fixed;width:9px;height:14px;border-radius:2px;z-index:50;pointer-events:none;animation:cf 1.1s cubic-bezier(.2,.8,.3,1) forwards}
+@keyframes cf{to{transform:translate(var(--dx),var(--dy)) rotate(var(--rot));opacity:0}}
+button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid var(--b);outline-offset:3px}
+.lnk{background:none;border:0;color:var(--mut);text-decoration:underline;font:inherit;font-size:.9rem;cursor:pointer;margin-left:12px;min-height:44px}
+[hidden]{display:none!important}
+button.chip{font:inherit;color:inherit;cursor:pointer;min-height:44px}
+.chip[aria-selected=true]{border-color:var(--b);color:var(--b);font-weight:600}.chip.ok::before{content:'✓ ';color:var(--ok)}
+.cvt{margin:16px 0 18px}.cs{margin:0 0 14px}
+.tu{align-self:flex-end;width:min(100%,480px);display:flex;flex-direction:column;gap:6px}
+.tu .q{font-size:.9rem;color:var(--mut)}.tu .row{display:flex;gap:8px;align-items:center}
+.tu input.w{margin:0;max-width:none;flex:1;min-width:0}.tu input.w[readonly]{cursor:default}.tu .btn{flex:none;padding:10px 18px}.tu .sol{margin-top:0}
+.rv{animation:up .4s}.rpn{margin-top:14px}
+.alt{list-style:none;margin:6px 0 0;padding:0}.alt li{margin:0 0 10px;padding-top:8px;border-top:1px solid var(--line);font-size:.95rem}.alt li:first-child{border-top:0}
+.alt .ex1{display:block;font-weight:600}.alt .en.b{margin:0}.alt-t{margin:14px 0 0;font-size:.85rem}
+.hb{display:block;width:18px;height:14px;position:relative;margin:auto}
+.hb i{position:absolute;left:0;width:100%;height:2px;border-radius:2px;background:currentColor;transition:transform .3s,opacity .2s,top .3s}
+.hb i:nth-child(1){top:0}.hb i:nth-child(2){top:6px}.hb i:nth-child(3){top:12px}
+#mn[aria-expanded=true] .hb i:nth-child(1){top:6px;transform:rotate(45deg)}#mn[aria-expanded=true] .hb i:nth-child(2){opacity:0}#mn[aria-expanded=true] .hb i:nth-child(3){top:6px;transform:rotate(-45deg)}
+.mnb{position:fixed;inset:0;z-index:11;background:rgba(0,0,0,.35)}
+.mnu{position:fixed;z-index:12;top:calc(62px + env(safe-area-inset-top,0px));right:max(10px,env(safe-area-inset-right));width:min(460px,calc(100vw - 20px));max-height:calc(100% - 84px - env(safe-area-inset-top,0px));overflow-y:auto;padding:8px;border-radius:6px;background:var(--paper);border:1px solid var(--edge);box-shadow:0 18px 50px rgba(0,0,0,.28);animation:up .25s}
+.mnu ol{list-style:none;margin:0;padding:0}
+.mnu button{display:flex;gap:12px;align-items:center;width:100%;min-height:46px;padding:8px 12px;border:0;border-radius:6px;background:none;color:var(--ink);font:inherit;text-align:left;cursor:pointer}
+.mnu button:hover{background:var(--hl-b)}.mnu .n{font:600 1rem var(--f1);color:var(--b);width:1.8em;flex:none}.mnu .t{flex:1;min-width:0}.mnu .t .en.b{margin:0}
+.mnu .m{font-size:.85rem;color:var(--mut);flex:none}.mnu .ck{color:var(--ok);font-weight:700}.mnu li.cur button{background:var(--hl-b);font-weight:600}
+.od .sl,.tk0{min-height:54px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:8px;border:1px dashed var(--edge);border-radius:6px}
+.od .sl:empty::before{content:'Toca las piezas…';color:var(--mut);font-size:.9rem;padding:0 6px}
+.pool{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.pz,.wd2{font:inherit;color:var(--ink);background:none;border:1px solid var(--edge);border-radius:6px;padding:8px 14px;min-height:44px;cursor:pointer}
+.pz:hover,.wd2:hover{border-color:var(--ink)}.pz:active{transform:scale(.94)}.pz[aria-pressed=true]{border:2px solid var(--b);color:var(--b);padding:7px 13px}
+.sl .pz{border-color:var(--b);color:var(--b);font-weight:600}
+.od.ok{pointer-events:none}.od.ok .sl{border-style:solid;border-color:var(--ok);background:var(--hl-ok)}.od.ok .sl .pz{border-color:var(--ok);color:var(--ok)}
+.od.bad .sl{border-style:solid;border-color:var(--er);background:var(--hl-er);animation:sh .42s}
+.pm{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:660px}.pm .col{display:flex;flex-direction:column;gap:8px}
+.pb{font:inherit;color:var(--ink);text-align:left;background:none;border:1px solid var(--edge);border-radius:6px;padding:10px 14px;min-height:50px;cursor:pointer}
+.pb:hover{border-color:var(--ink)}.pb .en.b{margin:0}
+.pb[aria-pressed=true]{border:2px solid var(--b);color:var(--b);padding:9px 13px}
+.pb.ok{border:2px solid var(--ok);color:var(--ok);padding:9px 13px;pointer-events:none}.pb.bad{border:2px solid var(--er);color:var(--er);padding:9px 13px;animation:sh .42s}
+.cx{max-width:640px}.cxh{display:flex;gap:12px;align-items:center;margin-bottom:14px}
+.av{width:42px;height:42px;border-radius:50%;border:2px solid var(--b);color:var(--b);display:grid;place-items:center;font:600 1.15rem var(--f1);flex:none}
+.cxh .m{display:block;font-size:.85rem;color:var(--mut)}.cxh .m .en.b{display:inline;margin-left:6px}
+.ops{display:grid;gap:10px;margin-top:12px;max-width:560px}
+.op{font:inherit;font-weight:600;color:var(--ink);text-align:left;background:none;border:1px solid var(--edge);border-radius:6px;padding:12px 16px;min-height:48px;cursor:pointer}
+.op:hover:not(:disabled){border-color:var(--ink)}.op:disabled{cursor:default;opacity:.7}
+.op.ok{border:2px solid var(--ok);color:var(--ok);padding:11px 15px;opacity:1;animation:ok .4s}.op.bad{border:2px solid var(--er);color:var(--er);padding:11px 15px;animation:sh .42s}
+/* Teoría en imágenes */
+.tg{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));gap:28px 32px;margin-top:18px}.tg .wide{grid-column:1/-1}
+.sc:not(.on) .tg *{animation-play-state:paused}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0 14px}
+.tabs button{font:600 .85rem var(--f2);color:var(--ink);background:none;border:1px solid var(--edge);border-radius:99px;min-height:44px;padding:0 16px;cursor:pointer}
+.tabs [aria-pressed=true]{background:var(--c);border-color:var(--c);color:var(--on)}
+.bd{display:flex;flex-wrap:wrap;gap:8px;align-items:center;min-height:96px;align-content:flex-start}
+.bk{position:relative;padding:9px 14px;border-radius:6px;font-weight:700;color:var(--c);border:2px solid var(--c);background:color-mix(in srgb,var(--c) 14%,transparent)}
+.bk2{display:grid}.bk2>*{grid-area:1/1;text-align:center}.bk2 .lb{opacity:0;color:var(--mut);font-weight:500}
+.bk2::before{content:'';position:absolute;inset:-2px;border:2px dashed var(--mut);border-radius:6px;opacity:0;background:var(--paper)}
+.fs{flex-basis:100%;margin-top:6px}.fs .ib{border:1px solid var(--edge);margin-left:8px;vertical-align:middle}
+.go .bk1{animation:fl .6s cubic-bezier(.34,1.56,.64,1) both}.go .bk2{animation:fr .6s cubic-bezier(.34,1.56,.64,1) .5s both,sf .3s ease 1.3s both}
+.go .bk2::before{animation:db 1.6s ease .5s both}.go .bk2 .lb{animation:lbk 1.6s ease .5s both}.go .bk2 .wd{animation:ty .5s cubic-bezier(.34,1.56,.64,1) 1.3s both}.go .fs{animation:fl2 .5s ease 1.9s both}
+@keyframes fl{from{opacity:0;transform:translateX(-34px)}}@keyframes fr{from{opacity:0;transform:translateX(34px)}}
+@keyframes sf{from{background-color:transparent}}@keyframes ty{from{opacity:0;transform:translateY(-16px) scale(.8)}}
+@keyframes db{0%{opacity:0}20%,75%{opacity:1}100%{opacity:0}}@keyframes lbk{0%{opacity:0}20%,75%{opacity:1}100%{opacity:0}}@keyframes fl2{from{opacity:0;transform:translateY(8px)}}
+.dy{font:600 1.5rem var(--f1);display:flex;align-items:baseline;margin:10px 0 6px;flex-wrap:wrap;gap:0 .3em}
+.dy .y{display:inline-block;overflow:hidden;white-space:nowrap;max-width:2em;color:var(--er);text-decoration:line-through;animation:dy 5s ease-in-out infinite}.dy .y2{animation-delay:-2.5s}
+@keyframes dy{0%,30%{opacity:1;max-width:2em;margin-right:0;text-decoration-color:transparent}42%{opacity:1;text-decoration-color:var(--er)}58%,92%{opacity:0;max-width:0;margin-right:-.3em}100%{opacity:1;max-width:2em;margin-right:0}}
+.dg{width:100%;max-width:200px;display:block;margin:0 auto 8px;overflow:visible}
+.dg *{fill:none;stroke:var(--c);stroke-width:3;stroke-linecap:round;stroke-linejoin:round}.dg .f{fill:var(--c);stroke:none}
+.dg .fl{stroke-dasharray:6 8;animation:fw 1s linear infinite}@keyframes fw{to{stroke-dashoffset:-28}}
+.dg .pl{transform-box:fill-box;transform-origin:center;animation:pl 1.8s ease-out infinite}@keyframes pl{from{transform:scale(.5);opacity:.9}to{transform:scale(1.6);opacity:0}}
+.pp .g{text-align:center}.pp h3{margin-top:4px}.pp p{margin:0 auto .3em}
+.fw{width:100%;display:block;overflow:visible}
+.fw text{font:600 15px var(--f2);fill:var(--ink);text-anchor:middle}.fw text.lbl{font:12px var(--f2);fill:var(--mut)}.fw text.fr{font:italic 12.5px var(--f2);fill:var(--mut)}.fw text.lbl.fr{font:italic 12px var(--f2)}.fw text.en{font:12.5px var(--f2);fill:var(--mut)}
+.fw .trk,.fw .pg{stroke:var(--line);stroke-width:4;stroke-linecap:round;fill:none}.fw .pg{stroke:var(--b);stroke-dasharray:480;animation:pg 9s linear infinite}
+.fw .bub{fill:var(--paper);stroke:var(--c);stroke-width:2}.fw .bg,.fw .dt{transform-box:fill-box;transform-origin:center}
+.fw .bg{animation:bb 9s ease infinite backwards;animation-delay:calc(var(--k)*3s)}
+.fw .dt{position:static;display:inline;fill:var(--c);stroke:var(--c);stroke-width:3;animation:dp 9s ease infinite backwards;animation-delay:calc(var(--k)*3s)}
+@keyframes pg{0%,5.5%{stroke-dashoffset:480;opacity:1}72%,92%{stroke-dashoffset:0;opacity:1}100%{stroke-dashoffset:0;opacity:0}}
+@keyframes bb{0%{opacity:0;transform:translateY(10px)}6%,30%{opacity:1;transform:none}36%,100%{opacity:0;transform:none}}
+@keyframes dp{0%{transform:scale(.7);fill:var(--paper)}8%{transform:scale(1.35);fill:var(--c)}16%,34%{transform:scale(1);fill:var(--c)}40%,100%{transform:scale(1);fill:var(--paper)}}
+/* Gramática para reforzar */
+.gl{list-style:none;margin:18px 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(330px,100%),1fr));gap:28px 32px;counter-reset:gq}
+.gl li{counter-increment:gq;position:relative;padding:14px 0 0 54px}
+.gl li::before{content:counter(gq,decimal-leading-zero);position:absolute;left:0;top:12px;font:600 1.4rem var(--f1);color:var(--c)}
+.gl h3{margin:0 0 .15em}.gl h3 .en.b{font:400 .85rem var(--f2)}
+.gl .hoy{font-size:.95rem;margin:6px 0 0}.gl .hoy b,.gl .wk b{font-weight:600;color:var(--c);margin-right:6px}
+.gl .wk{margin:9px 0 0;padding-top:9px;border-top:1px dashed var(--line);font-size:.95rem;max-width:none}.gl .en.b{margin:1px 0 0}
+.ord{margin-top:16px;max-width:none}
+/* Ejercicios nuevos */
+.bkts{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;margin:16px 0}
+.bt{border-top:2px solid var(--c)}.bh{display:block;width:100%;text-align:left;font:600 1.1rem var(--f1);color:var(--c);background:none;border:1px solid var(--c);border-radius:6px;padding:10px 14px;min-height:48px;margin:12px 0 8px;cursor:pointer}
+.bh:hover{background:color-mix(in srgb,var(--c) 14%,transparent)}.bh.bad{animation:sh .42s}
+.bl{list-style:none;margin:0;padding:0;min-height:30px}.bl li{padding:6px 0;border-top:1px solid var(--line);color:var(--ok);font-weight:600}.bl li::before{content:'✓ '}
+.wd2{margin:0 4px 6px 0}.wd2.ok{border:2px solid var(--ok);color:var(--ok);padding:7px 13px;pointer-events:none}.wd2.bad{border:2px solid var(--er);color:var(--er);padding:7px 13px;animation:sh .42s}
+.sp{border:1px solid var(--edge);vertical-align:middle;margin-right:8px}
+.rd{max-width:640px;padding:14px 18px;border-left:3px solid var(--b);margin:16px 0}
+@media(max-width:700px){.dt{display:none}.pm{gap:10px}.pb{padding:9px 10px;font-size:.95rem}.pb[aria-pressed=true]{padding:8px 9px}.prog i{display:none}.seg button{padding:0 10px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}.r{opacity:1;transform:none;filter:none}.cf{display:none}}
+</style>
+</head>
+<body data-lang="both">
+<a class="skip" href="#deck">Saltar al contenido</a>
+<div id="pg" aria-hidden="true"></div>
+<div class="bar" role="toolbar" aria-label="Controles">
+ <button class="ib" id="mn" type="button" aria-label="Menú de secciones" aria-expanded="false" aria-controls="mnu"><span class="hb" aria-hidden="true"><i></i><i></i><i></i></span></button>
+ <span class="tl" id="mt" style="--s:28px" aria-hidden="true"></span>
+ <div class="seg" role="group" aria-label="Idioma de apoyo"><button data-l="es" aria-label="Solo español">ES</button><button data-l="both" aria-label="Español más English">ES + EN</button><button data-l="esfr" aria-label="Español más un poco de français">ES + FR</button></div>
+ <div class="prog" role="progressbar" aria-label="Progreso de la clase" aria-valuemin="0" aria-valuemax="15" aria-valuenow="0"><i><b></b></i><span id="pc">0/15</span></div>
+ <button class="ib" id="sn" aria-label="Sonido" aria-pressed="false">♪</button><button class="ib" id="th" aria-label="Tema claro u oscuro">◐</button>
+</div>
+<div class="mnb" id="mnb" hidden></div>
+<nav class="mnu" id="mnu" aria-label="Secciones de la clase" hidden></nav>
+<nav class="dt" id="dt" aria-label="Escenas"></nav>
+<div class="hint" id="hint">↓ desliza · ← → cambian de escena · ☰ menú<span class="en" lang="en"> | swipe down · ← → change scene · ☰ menu</span><span class="fr" lang="fr"> | fais défiler · ← → changent de scène · ☰ menu</span></div>
+<main id="deck" tabindex="-1">
+
+<section class="sc"><div class="w">
+ <div class="hero"><div>
+  <p class="tag r">Clase 01 · Eloïse · A1 · Español con Óscar</p>
+  <h1><span class="hw r" style="--i:1">Hola,</span><span class="hw r" style="--i:2"><span class="uw">me llamo</span></span><span class="hw r" style="--i:3">Eloïse</span></h1>
+  <p class="en b r" style="--i:4;font-size:1.15rem">Hello, my name is Eloïse.</p><p class="fr b r" lang="fr" style="--i:4;font-size:1.15rem">Bonjour, je m’appelle Eloïse.</p>
+  <p class="mut r" style="--i:5;font-size:1.2rem">Hoy aprendes a presentarte en los primeros minutos de una reunión.<span class="en b">Today you learn to introduce yourself in the first minutes of a meeting.</span><span class="fr b" lang="fr">Aujourd’hui, tu apprends à te présenter dans les premières minutes d’une réunion.</span></p>
+ </div><span class="tl r" style="--s:min(28vw,170px);--i:5" aria-hidden="true"></span></div>
+ <div class="chips r" style="--i:7"><span class="chip k">Nivel A1<span class="en" lang="en"> · Level A1</span><span class="fr" lang="fr"> · Niveau A1</span></span><span class="chip">me llamo · soy de · trabajo en</span><span class="chip">50 minutos<span class="en" lang="en"> · 50 minutes</span><span class="fr" lang="fr"> · 50 minutes</span></span></div>
+ <p class="tag r" id="due" style="--i:8"></p>
+ <div class="ab r" style="--i:8"><div style="--i:0"></div><div style="--i:1"></div><div style="--i:2"></div><div style="--i:3"></div><div style="--i:4"></div><div style="--i:5"></div><div style="--i:6"></div><div style="--i:7"></div><div style="--i:8"></div></div>
+ <div class="al r" style="--i:9"><span>00′ Calentar<span class="en" lang="en"> · Warm up</span><span class="fr" lang="fr"> · Échauffement</span></span><span>05′ Fórmulas<span class="en" lang="en"> · Formulas</span><span class="fr" lang="fr"> · Formules</span></span><span>12′ Completa<span class="en" lang="en"> · Fill in</span><span class="fr" lang="fr"> · Complète</span></span><span>18′ Produce<span class="en" lang="en"> · Produce</span><span class="fr" lang="fr"> · Produis</span></span><span>24′ Ordena<span class="en" lang="en"> · Order</span><span class="fr" lang="fr"> · Ordonne</span></span><span>28′ Empareja<span class="en" lang="en"> · Match</span><span class="fr" lang="fr"> · Associe</span></span><span>31′ Contesta<span class="en" lang="en"> · Answer</span><span class="fr" lang="fr"> · Réponds</span></span><span>35′ Role-play<span class="en" lang="en"> · Role-play</span><span class="fr" lang="fr"> · Jeu de rôle</span></span><span>45′ Repaso y tarea<span class="en" lang="en"> · Review and homework</span><span class="fr" lang="fr"> · Révision et devoir</span></span></div>
+</div></section>
+
+<section class="sc"><div class="w">
+ <h2 class="r">Cómo trabajamos hoy<span class="en b">How we work today</span><span class="fr b" lang="fr">Comment on travaille aujourd’hui</span></h2>
+ <div class="gr">
+  <div class="g r" data-r="b" style="--i:2"><h3>Intenta primero<span class="en b" lang="en">Try first</span><span class="fr b" lang="fr">Essaie d’abord</span></h3><p class="mut">La ayuda se abre cuando lo has intentado.</p><span class="en b">Help opens once you have tried.</span><span class="fr b" lang="fr">L’aide s’ouvre quand tu as essayé.</span></div>
+  <div class="g r" data-r="a" style="--i:3"><h3>El error es un dato<span class="en b" lang="en">The mistake is data</span><span class="fr b" lang="fr">L’erreur est une donnée</span></h3><p class="mut">Tilde reacciona con la cara antes que la nota. Tus errores van a un banco y vuelven otro día.</p><span class="en b">Mistakes go to a bank and come back another day.</span><span class="fr b" lang="fr">Les erreurs vont dans une banque et reviennent un autre jour.</span></div>
+  <div class="g r" data-r="o" style="--i:4"><h3>En voz alta<span class="en b" lang="en">Aloud</span><span class="fr b" lang="fr">À voix haute</span></h3><p class="mut">Cada frase, dicha en voz alta. Termina con una mini-conversación.</p><span class="en b">Every sentence aloud, then a mini conversation.</span><span class="fr b" lang="fr">Chaque phrase à voix haute, puis une mini-conversation.</span></div>
+ </div>
+</div></section>
+
+<section class="sc" id="s0"><div class="w">
+ <p class="tag r">Calentamiento oral<span class="en" lang="en"> · Oral warm-up</span><span class="fr" lang="fr"> · Échauffement oral</span><span class="cue">5′</span></p>
+ <h2 class="r" style="--i:1">Toca, dilo y gira.<span class="en b">Tap, say it aloud, flip.</span><span class="fr b" lang="fr">Touche, dis-le à voix haute, retourne.</span></h2>
+ <div class="gr r" style="--i:3">
+  <button class="fc"><div class="fi"><div class="fa">Hola.</div><div class="fb"><span class="en b" lang="en"><b>Hello.</b></span><span class="fr b" lang="fr"><b>Bonjour.</b></span><span class="mut">Con colegas, a cualquier hora.</span><span class="en b" lang="en">With colleagues, at any hour.</span><span class="fr b" lang="fr">Avec des collègues, à toute heure.</span></div></div></button>
+  <button class="fc"><div class="fi"><div class="fa">Buenos días.</div><div class="fb"><span class="en b" lang="en"><b>Good morning.</b></span><span class="fr b" lang="fr"><b>Bonjour (le matin).</b></span><span class="mut">Hasta el mediodía.</span><span class="en b" lang="en">Until noon.</span><span class="fr b" lang="fr">Jusqu’à midi.</span></div></div></button>
+  <button class="fc"><div class="fi"><div class="fa">¿Qué tal?</div><div class="fb"><span class="en b" lang="en"><b>How are you?</b></span><span class="fr b" lang="fr"><b>Comment ça va ?</b></span><span class="mut">Tu primera pregunta de small talk.</span><span class="en b" lang="en">Your first small-talk question.</span><span class="fr b" lang="fr">Ta première question de small talk.</span></div></div></button>
+  <button class="fc"><div class="fi"><div class="fa">Mucho gusto.</div><div class="fb"><span class="en b" lang="en"><b>Nice to meet you.</b></span><span class="fr b" lang="fr"><b>Enchanté(e).</b></span><span class="mut">Al conocer a alguien.</span><span class="en b" lang="en">When you meet someone.</span><span class="fr b" lang="fr">Quand tu rencontres quelqu’un.</span></div></div></button>
+ </div>
+ <p class="tag" id="wc0" style="margin-top:16px">0/4 tarjetas giradas<span class="en" lang="en"> · 0/4 cards flipped</span><span class="fr" lang="fr"> · 0/4 cartes retournées</span></p>
+</div></section>
+
+<section class="sc" id="sP"><div class="w">
+ <p class="tag r">Tus tres fórmulas<span class="en" lang="en"> · Your three formulas</span><span class="fr" lang="fr"> · Tes trois formules</span><span class="cue">7′</span></p>
+ <h2 class="r" style="--i:1">Tres frases para empezar, y otras formas de decirlas.<span class="en b">Three sentences to start, and other ways to say them.</span><span class="fr b" lang="fr">Trois phrases pour commencer, et d’autres façons de les dire.</span></h2>
+ <div class="gr">
+  <div class="g cv r" style="--c:var(--b);--i:2"><h3><span class="v">Me llamo</span> + nombre</h3><p>Me llamo Eloïse.</p><span class="en b">My name is Eloïse.</span><span class="fr b" lang="fr">Je m’appelle Eloïse.</span><p class="tag alt-t">También puedes decir<span class="en"> · You can also say</span><span class="fr" lang="fr">· Tu peux aussi dire</span></p><ul class="alt"><li><span class="v">Soy</span> + nombre<span class="ex1">Soy Eloïse.</span><span class="en b">I&#x27;m Eloïse.</span><span class="fr b" lang="fr">Je suis Eloïse.</span></li><li><span class="v">Mi nombre es</span> + nombre<span class="ex1">Mi nombre es Eloïse.</span><span class="en b">My name is Eloïse.</span><span class="fr b" lang="fr">Je m’appelle Eloïse.</span></li></ul></div>
+  <div class="g cv r" style="--c:var(--p);--i:3"><h3><span class="v">Soy de</span> + ciudad</h3><p>Soy de Madrid.</p><span class="en b">I&#x27;m from Madrid.</span><span class="fr b" lang="fr">Je suis de Madrid.</span><p class="tag alt-t">También puedes decir<span class="en"> · You can also say</span><span class="fr" lang="fr">· Tu peux aussi dire</span></p><ul class="alt"><li><span class="v">Vengo de</span> + ciudad<span class="ex1">Vengo de París.</span><span class="en b">I come from Paris.</span><span class="fr b" lang="fr">Je viens de Paris.</span></li><li><span class="v">Vivo en</span> + ciudad<span class="ex1">Vivo en Madrid.</span><span class="en b">I live in Madrid.</span><span class="fr b" lang="fr">J’habite à Madrid.</span></li></ul></div>
+  <div class="g cv r" style="--c:var(--am);--i:4"><h3><span class="v">Trabajo en</span> + lugar</h3><p>Trabajo en una empresa.</p><span class="en b">I work at a company.</span><span class="fr b" lang="fr">Je travaille dans une entreprise.</span><p class="tag alt-t">También puedes decir<span class="en"> · You can also say</span><span class="fr" lang="fr">· Tu peux aussi dire</span></p><ul class="alt"><li><span class="v">Trabajo para</span> + empresa<span class="ex1">Trabajo para un banco.</span><span class="en b">I work for a bank.</span><span class="fr b" lang="fr">Je travaille pour une banque.</span></li><li><span class="v">Soy</span> + profesión<span class="ex1">Soy profesora.</span><span class="en b">I&#x27;m a teacher.</span><span class="fr b" lang="fr">Je suis professeure.</span></li></ul></div>
+ </div>
+ <details class="g ref r" data-lock data-r="b" style="--i:6"><summary>🔒 ¿Por qué «de», «en» y «para»? Se abre cuando intentes el ejercicio A.<span class="en b">Why "de", "en" and "para"? Opens after you try exercise A.</span><span class="fr b" lang="fr">Pourquoi « de », « en » et « para » ? S’ouvre après l’exercice A.</span></summary><p><b>de</b> = origen: Soy de Madrid. Vengo de París. <b>en</b> = lugar: Trabajo en Madrid. Vivo en Madrid. <b>para</b> = empresa: Trabajo para un banco.</p><span class="en b">de = origin (from) · en = place (in / at) · para = company (for)</span><span class="fr b" lang="fr">de = origine · en = lieu (à / dans) · para = entreprise (pour)</span></details>
+</div></section>
+
+<section class="sc" id="sT"><div class="w">
+ <p class="tag r">Teoría en imágenes<span class="en" lang="en"> · Theory in pictures</span><span class="fr" lang="fr"> · La théorie en images</span></p>
+ <h2 class="r" style="--i:1">Mira cómo se construye una presentación.<span class="en b">See how an introduction is built.</span><span class="fr b" lang="fr">Regarde comment se construit une présentation.</span></h2>
+ <div class="tg">
+  <div class="g r" style="--i:2"><h3>1 · Fórmula + dato<span class="en b">Formula + detail</span><span class="fr b" lang="fr">Formule + détail</span></h3>
+   <div class="tabs" id="tbs"><button type="button" style="--c:var(--b)">Me llamo</button><button type="button" style="--c:var(--p)">Soy de</button><button type="button" style="--c:var(--am)">Trabajo en</button></div>
+   <div class="bd" id="bd"></div></div>
+  <div class="g r" style="--i:3"><h3>2 · No necesitas «yo»<span class="en b">You don't need "yo"</span><span class="fr b" lang="fr">Tu n’as pas besoin de « yo »</span></h3>
+   <div class="dy"><span class="y">Yo</span><span>me llamo Eloïse.</span></div>
+   <div class="dy"><span class="y y2">Yo</span><span>soy de Madrid.</span></div>
+   <p class="mut">El verbo ya dice quién habla: <b>-o</b> = yo.</p><span class="en b">The verb already tells who is speaking.</span><span class="fr b" lang="fr">Le verbe indique déjà qui parle.</span></div>
+  <div class="wide pp"><h3 class="r" style="--i:4">3 · Tres palabras pequeñas, tres ideas<span class="en b">Three small words, three ideas</span><span class="fr b" lang="fr">Trois petits mots, trois idées</span></h3><div class="gr"><div class="g cv r" style="--c:var(--b);--i:1"><svg class="dg" viewBox="0 0 160 90" aria-hidden="true"><circle cx="30" cy="45" r="22" opacity=".5"/><path d="M30 33a8 8 0 0 1 8 8c0 6-8 16-8 16s-8-10-8-16a8 8 0 0 1 8-8z"/><circle class="f" cx="30" cy="41" r="3"/><path class="fl" d="M58 45H122"/><path d="M112 36l11 9-11 9"/><circle class="f" cx="144" cy="45" r="7"/></svg><h3><span class="v">de</span> = origen</h3><p>Soy <b>de</b> Madrid.</p><span class="en b">de = origin · I'm from Madrid.</span><span class="fr b" lang="fr">de = origine · Je suis de Madrid.</span></div><div class="g cv r" style="--c:var(--p);--i:2"><svg class="dg" viewBox="0 0 160 90" aria-hidden="true"><rect x="38" y="12" width="84" height="66" rx="16"/><circle class="pl" cx="80" cy="45" r="14"/><circle class="f" cx="80" cy="45" r="7"/></svg><h3><span class="v">en</span> = lugar</h3><p>Vivo <b>en</b> Madrid.</p><span class="en b">en = place · I live in Madrid.</span><span class="fr b" lang="fr">en = lieu · J’habite à Madrid.</span></div><div class="g cv r" style="--c:var(--am);--i:3"><svg class="dg" viewBox="0 0 160 90" aria-hidden="true"><circle class="f" cx="20" cy="50" r="7"/><path class="fl" d="M36 50H76"/><path d="M68 41l10 9-10 9"/><rect x="92" y="12" width="48" height="64" rx="5"/><path d="M104 28h6M122 28h6M104 42h6M122 42h6M108 76V62h16v14"/></svg><h3><span class="v">para</span> = empresa</h3><p>Trabajo <b>para</b> un banco.</p><span class="en b">para = company · I work for a bank.</span><span class="fr b" lang="fr">para = entreprise · Je travaille pour une banque.</span></div></div></div>
+  <div class="g wide r" style="--i:8"><h3>4 · El recorrido de tu presentación<span class="en b">The path of your introduction</span><span class="fr b" lang="fr">Le parcours de ta présentation</span></h3><svg class="fw" viewBox="0 0 720 175" role="img" aria-label="Recorrido de la presentación: nombre, ciudad, trabajo"><line class="trk" x1="120" y1="112" x2="600" y2="112"/><line class="pg" x1="120" y1="112" x2="600" y2="112"/><g style="--k:0;--c:var(--b)"><g class="bg"><rect class="bub" x="0" y="8" width="240" height="58" rx="14"/><text x="120" y="34">Me llamo Eloïse.</text><text class="en" x="120" y="54">My name is Eloïse.</text></g><circle class="dt" cx="120" cy="112" r="13"/><text class="lbl" x="120" y="150">1 · NOMBRE</text><text class="lbl en" x="120" y="167">Name</text><text class="lbl fr" lang="fr" x="120" y="167">Nom</text></g><g style="--k:1;--c:var(--p)"><g class="bg"><rect class="bub" x="240" y="8" width="240" height="58" rx="14"/><text x="360" y="34">Soy de Madrid.</text><text class="en" x="360" y="54">I'm from Madrid.</text></g><circle class="dt" cx="360" cy="112" r="13"/><text class="lbl" x="360" y="150">2 · CIUDAD</text><text class="lbl en" x="360" y="167">City</text><text class="lbl fr" lang="fr" x="360" y="167">Ville</text></g><g style="--k:2;--c:var(--am)"><g class="bg"><rect class="bub" x="480" y="8" width="240" height="58" rx="14"/><text x="600" y="34">Trabajo en una empresa.</text><text class="en" x="600" y="54">I work at a company.</text><text class="fr" lang="fr" x="600" y="54">Je travaille dans une entreprise.</text></g><circle class="dt" cx="600" cy="112" r="13"/><text class="lbl" x="600" y="150">3 · TRABAJO</text><text class="lbl en" x="600" y="167">Work</text><text class="lbl fr" lang="fr" x="600" y="167">Travail</text></g></svg></div>
+ </div>
+</div></section>
+
+<section class="sc" id="sA"><div class="w">
+ <p class="tag r"><span class="tl" style="--s:30px" aria-hidden="true"></span>Ejercicio A · completa<span class="en" lang="en"> · Exercise A · fill in</span><span class="fr" lang="fr"> · Exercice A · complète</span><span class="cue">6′</span></p>
+ <h2 class="r" style="--i:1">Carlos se presenta.<span class="en b">Carlos introduces himself.</span><span class="fr b" lang="fr">Carlos se présente.</span></h2>
+ <ol class="ex r" style="--i:2" data-pk="a">
+  <li>Buenos días, <input class="hu" style="width:3em" aria-label="hueco 1" data-a="me" data-why="«Me llamo» = I'm called."> llamo Carlos.<span class="en b">Good morning, my name is Carlos.</span><span class="fr b" lang="fr">Bonjour, je m’appelle Carlos.</span><div class="sol"></div></li>
+  <li>Soy <input class="hu" style="width:3em" aria-label="hueco 2" data-a="de" data-why="«de» marca el origen (from)."> Madrid.<span class="en b">I'm from Madrid.</span><span class="fr b" lang="fr">Je suis de Madrid.</span><div class="sol"></div></li>
+  <li>Trabajo <input class="hu" style="width:3em" aria-label="hueco 3" data-a="en" data-why="«en» marca el lugar (at / in)."> una empresa pequeña.<span class="en b">I work at a small company.</span><span class="fr b" lang="fr">Je travaille dans une petite entreprise.</span><div class="sol"></div></li>
+  <li>Mucho <input class="hu" style="width:5em" aria-label="hueco 4" data-a="gusto" data-why="«Mucho gusto» = nice to meet you.">, Eloïse.<span class="en b">Nice to meet you, Eloïse.</span><span class="fr b" lang="fr">Enchanté(e), Eloïse.</span><div class="sol"></div></li>
+  <li>¿Y <input class="hu" style="width:3.4em" aria-label="hueco 5" data-a="tú" data-why="«tú» (you) lleva tilde.">? ¿Cómo te llamas?<span class="en b">And you? What's your name?</span><span class="fr b" lang="fr">Et toi ? Comment tu t’appelles ?</span><div class="sol"></div></li>
+  <li>¡<input class="hu" style="width:4.5em" aria-label="hueco 6" data-a="hola" data-why="«Hola» = hello.">, Marta!<span class="en b">Hi, Marta!</span><span class="fr b" lang="fr">Salut, Marta !</span><div class="sol"></div></li>
+  <li>Buenos días, Pablo. ¿Qué <input class="hu" style="width:3em" aria-label="hueco 7" data-a="tal" data-why="«¿Qué tal?» = how are you?">?<span class="en b">Good morning, Pablo. How are you?</span><span class="fr b" lang="fr">Bonjour, Pablo. Comment ça va ?</span><div class="sol"></div></li>
+  <li>Mi nombre <input class="hu" style="width:3em" aria-label="hueco 8" data-a="es" data-why="«Mi nombre es» = my name is."> Lucía.<span class="en b">My name is Lucía.</span><span class="fr b" lang="fr">Je m’appelle Lucía.</span><div class="sol"></div></li>
+  <li><input class="hu" style="width:4.5em" aria-label="hueco 9" data-a="vivo" data-why="«Vivo en» = I live in."> en Sevilla.<span class="en b">I live in Seville.</span><span class="fr b" lang="fr">J’habite à Séville.</span><div class="sol"></div></li>
+  <li>¿De <input class="hu" style="width:5em" aria-label="hueco 10" data-a="dónde" data-why="«dónde» = where. Lleva tilde."> eres?<span class="en b">Where are you from?</span><span class="fr b" lang="fr">D’où viens-tu ?</span><div class="sol"></div></li>
+  <li>Trabajo <input class="hu" style="width:4em" aria-label="hueco 11" data-a="para" data-why="«Trabajo para» + empresa = I work for."> un banco.<span class="en b">I work for a bank.</span><span class="fr b" lang="fr">Je travaille pour une banque.</span><div class="sol"></div></li>
+  <li>¿Dónde <input class="hu" style="width:6.5em" aria-label="hueco 12" data-a="trabajas" data-why="«trabajas» = you work (tú).">?<span class="en b">Where do you work?</span><span class="fr b" lang="fr">Où travailles-tu ?</span><div class="sol"></div></li>
+  <li>Soy de Valencia <input class="hu" style="width:2.4em" aria-label="hueco 13" data-a="y" data-why="«y» = and."> trabajo en una oficina.<span class="en b">I'm from Valencia and I work in an office.</span><span class="fr b" lang="fr">Je suis de Valence et je travaille dans un bureau.</span><div class="sol"></div></li>
+  <li><input class="hu" style="width:5em" aria-label="hueco 14" data-a="vengo" data-why="«Vengo de» = I come from."> de París y trabajo en Madrid.<span class="en b">I come from Paris and I work in Madrid.</span><span class="fr b" lang="fr">Je viens de Paris et je travaille à Madrid.</span><div class="sol"></div></li>
+  <li><input class="hu" style="width:5em" aria-label="hueco 15" data-a="mucho" data-why="«Mucho gusto» = nice to meet you."> gusto, Pablo.<span class="en b">Nice to meet you, Pablo.</span><span class="fr b" lang="fr">Enchantée, Pablo.</span><div class="sol"></div></li>
+ </ol>
+ <button class="btn" data-chk><span>Comprobar<span class="en" lang="en"> · Check</span><span class="fr" lang="fr"> · Vérifier</span></span></button><div class="fd" aria-live="polite"></div>
+</div></section>
+
+<section class="sc" id="sB"><div class="w">
+ <p class="tag r"><span class="tl" style="--s:30px" aria-hidden="true"></span>Ejercicio B · produce<span class="en" lang="en"> · Exercise B · produce</span><span class="fr" lang="fr"> · Exercice B · produis</span><span class="cue">6′</span></p>
+ <h2 class="r" style="--i:1">Ahora, tus datos.<span class="en b">Now, your details.</span><span class="fr b" lang="fr">Maintenant, tes informations.</span></h2>
+ <p class="mut r" style="--i:2">Tres preguntas sobre ti. Después cambias de papel.<span class="en b">Three questions about you. Then you switch roles.</span><span class="fr b" lang="fr">Trois questions sur toi. Ensuite, tu changes de rôle.</span></p>
+ <ol class="ex r" style="--i:2" data-pk="b">
+  <li><b>¿Cómo te llamas?</b><span class="en"> What's your name?</span><span class="fr" lang="fr">Comment tu t’appelles ?</span><br><input class="w" aria-label="Tu nombre" data-rx="^(me llamo|soy|mi nombre es) \S+" data-a="Me llamo Eloïse." data-hint="Empieza con «Me llamo…»"><div class="sol"></div></li>
+  <li><b>¿De dónde eres?</b><span class="en"> Where are you from?</span><span class="fr" lang="fr">D’où viens-tu ?</span><br><input class="w" aria-label="Tu ciudad" data-rx="^(soy de|vengo de) \S+" data-a="Soy de Madrid." data-hint="Empieza con «Soy de…»"><div class="sol"></div></li>
+  <li><b>¿Dónde trabajas?</b><span class="en"> Where do you work?</span><span class="fr" lang="fr">Où travailles-tu ?</span><br><input class="w" aria-label="Tu trabajo" data-rx="^trabajo (en|para) \S+" data-a="Trabajo en una empresa." data-hint="Empieza con «Trabajo en…»"><div class="sol"></div></li>
+  <li><span class="mut">Eres Marta.</span> <b>¿Cómo te llamas?</b><span class="en"> You are Marta. What's your name?</span><span class="fr" lang="fr">Tu es Marta. Comment tu t’appelles ?</span><br><input class="w" aria-label="Respuesta 4" data-rx="^(hola |buenos dias )?(me llamo|soy|mi nombre es) marta" data-a="Me llamo Marta." data-hint="Empieza con «Me llamo…» y usa el nombre de Marta."><div class="sol"></div></li>
+  <li><span class="mut">Eres Pablo, de Valencia.</span> <b>¿De dónde eres?</b><span class="en"> You are Pablo, from Valencia. Where are you from?</span><span class="fr" lang="fr">Tu es Pablo, de Valence. D’où viens-tu ?</span><br><input class="w" aria-label="Respuesta 5" data-rx="^(hola )?(soy de|vengo de) valencia" data-a="Soy de Valencia." data-hint="Empieza con «Soy de…»"><div class="sol"></div></li>
+  <li><span class="mut">Eres Lucía y trabajas en un banco.</span> <b>¿Dónde trabajas?</b><span class="en"> You are Lucía and you work at a bank. Where do you work?</span><span class="fr" lang="fr">Tu es Lucía et tu travailles dans une banque. Où travailles-tu ?</span><br><input class="w" aria-label="Respuesta 6" data-rx="^(hola )?trabajo (en|para) (un |el )?banco" data-a="Trabajo en un banco." data-hint="Empieza con «Trabajo en…»"><div class="sol"></div></li>
+  <li><span class="mut">Eres Carlos, de Madrid.</span> <b>Di tu nombre y tu ciudad.</b><span class="en"> You are Carlos, from Madrid. Say your name and your city.</span><span class="fr" lang="fr">Tu es Carlos, de Madrid. Dis ton nom et ta ville.</span><br><input class="w" aria-label="Respuesta 7" data-rx="^(hola )?(me llamo|soy|mi nombre es) carlos (y )?(soy |vengo )?de madrid" data-a="Me llamo Carlos. Soy de Madrid." data-hint="Dos ideas: «Me llamo…» y «Soy de…»"><div class="sol"></div></li>
+  <li><span class="mut">Eres Ana y trabajas en una escuela.</span> <b>Di tu nombre y dónde trabajas.</b><span class="en"> You are Ana and you work at a school. Say your name and where you work.</span><span class="fr" lang="fr">Tu es Ana et tu travailles dans une école. Dis ton nom et où tu travailles.</span><br><input class="w" aria-label="Respuesta 8" data-rx="^(hola )?(me llamo|soy|mi nombre es) ana (y )?trabajo (en|para) (una |la )?escuela" data-a="Me llamo Ana. Trabajo en una escuela." data-hint="Dos ideas: «Me llamo…» y «Trabajo en…»"><div class="sol"></div></li>
+  <li><span class="mut">Eres Sofía, de Sevilla, y trabajas en un hotel.</span> <b>Preséntate: nombre, ciudad y trabajo.</b><span class="en"> You are Sofía, from Seville, and you work at a hotel. Introduce yourself: name, city and job.</span><span class="fr" lang="fr">Tu es Sofía, de Séville, et tu travailles dans un hôtel. Présente-toi : nom, ville et travail.</span><br><input class="w" aria-label="Respuesta 9" data-rx="^(hola |buenos dias )?(me llamo|soy|mi nombre es) sofia (y )?(soy |vengo )?de sevilla (y )?trabajo (en|para) (un |el )?hotel" data-a="Me llamo Sofía. Soy de Sevilla. Trabajo en un hotel." data-hint="Tres ideas: «Me llamo…», «Soy de…» y «Trabajo en…»"><div class="sol"></div></li>
+  <li><span class="mut">Tu colega es nuevo.</span> <b>Pregúntale su nombre.</b><span class="en"> Your colleague is new. Ask for their name.</span><span class="fr" lang="fr">Ton collègue est nouveau. Demande-lui son nom.</span><br><input class="w" aria-label="Respuesta 10" data-rx="^(hola |y tu )?como te llamas" data-a="¿Cómo te llamas?" data-hint="Es una pregunta de la clase: «¿Cómo…?»"><div class="sol"></div></li>
+  <li><b>Pregúntale de dónde es.</b><span class="en"> Ask where they are from.</span><span class="fr" lang="fr">Demande-lui d’où il/elle vient.</span><br><input class="w" aria-label="Respuesta 11" data-rx="^(hola |y tu )?de donde eres" data-a="¿De dónde eres?" data-hint="Empieza con «¿De dónde…?»"><div class="sol"></div></li>
+  <li><b>Pregúntale dónde trabaja.</b><span class="en"> Ask where they work.</span><span class="fr" lang="fr">Demande-lui où il/elle travaille.</span><br><input class="w" aria-label="Respuesta 12" data-rx="^(hola |y tu )?donde trabajas" data-a="¿Dónde trabajas?" data-hint="Empieza con «¿Dónde…?»"><div class="sol"></div></li>
+  <li><span class="mut">Es por la mañana.</span> <b>Saluda a tu colega.</b><span class="en"> It's morning. Greet your colleague.</span><span class="fr" lang="fr">C’est le matin. Salue ton collègue.</span><br><input class="w" aria-label="Respuesta 13" data-rx="^(buenos dias|hola)" data-a="Buenos días." data-hint="Mira las tarjetas del calentamiento."><div class="sol"></div></li>
+  <li><span class="mut">Tu colega dice: «¿Qué tal?»</span> <b>Respóndele.</b><span class="en"> Your colleague says: "How are you?" Answer.</span><span class="fr" lang="fr">Ton collègue dit : « Comment ça va ? » Réponds-lui.</span><br><input class="w" aria-label="Respuesta 14" data-rx="^(hola )?(muy )?(bien|mal|regular|genial|fenomenal)|^asi asi" data-a="Muy bien, gracias." data-hint="Una palabra basta: bien, regular, mal…"><div class="sol"></div></li>
+  <li><span class="mut">Carlos dice: «Mucho gusto.»</span> <b>Respóndele.</b><span class="en"> Carlos says: "Nice to meet you." Answer.</span><span class="fr" lang="fr">Carlos dit : « Enchanté. » Réponds-lui.</span><br><input class="w" aria-label="Respuesta 15" data-rx="^(mucho gusto|igualmente|encantad[oa])" data-a="Mucho gusto, Carlos." data-hint="Usa la fórmula del calentamiento: «Mucho…»"><div class="sol"></div></li>
+ </ol>
+ <button class="btn" data-chk><span>Comprobar<span class="en" lang="en"> · Check</span><span class="fr" lang="fr"> · Vérifier</span></span></button><div class="fd" aria-live="polite"></div>
+</div></section>
+
+<section class="sc" id="sC"><div class="w">
+ <p class="tag r"><span class="tl" style="--s:30px" aria-hidden="true"></span>Ejercicio C · ordena<span class="en" lang="en"> · Exercise C · put in order</span><span class="fr" lang="fr"> · Exercice C · remets dans l’ordre</span><span class="cue">4′</span></p>
+ <h2 class="r" style="--i:1">Ordena la frase.<span class="en b">Put the sentence in order.</span><span class="fr b" lang="fr">Remets la phrase dans l’ordre.</span></h2>
+ <p class="mut r" style="--i:2">Toca las piezas en el orden correcto; toca una pieza colocada para quitarla.<span class="en b">Tap the pieces in the right order; tap a placed piece to remove it.</span><span class="fr b" lang="fr">Touche les pièces dans le bon ordre ; touche une pièce placée pour la retirer.</span></p>
+ <ol class="ex r" style="--i:3">
+  <li class="od" data-ok="Buenos días, me llamo Carlos."><div class="sl" aria-label="Tu frase"></div><div class="pool"><button type="button" class="pz" data-i="0">Buenos días,</button><button type="button" class="pz" data-i="1">llamo</button><button type="button" class="pz" data-i="2">Carlos.</button><button type="button" class="pz" data-i="3">me</button></div><span class="en b">Good morning, my name is Carlos.</span><span class="fr b" lang="fr">Bonjour, je m’appelle Carlos.</span><div class="sol"></div></li>
+  <li class="od" data-ok="Mucho gusto, Marta. ¿De dónde eres?"><div class="sl" aria-label="Tu frase"></div><div class="pool"><button type="button" class="pz" data-i="0">Mucho gusto,</button><button type="button" class="pz" data-i="1">eres?</button><button type="button" class="pz" data-i="2">¿De dónde</button><button type="button" class="pz" data-i="3">Marta.</button></div><span class="en b">Nice to meet you, Marta. Where are you from?</span><span class="fr b" lang="fr">Enchanté(e), Marta. D’où viens-tu ?</span><div class="sol"></div></li>
+  <li class="od" data-ok="Vengo de París y trabajo para un banco."><div class="sl" aria-label="Tu frase"></div><div class="pool"><button type="button" class="pz" data-i="0">Vengo</button><button type="button" class="pz" data-i="1">para un banco.</button><button type="button" class="pz" data-i="2">y trabajo</button><button type="button" class="pz" data-i="3">de París</button></div><span class="en b">I come from Paris and I work for a bank.</span><span class="fr b" lang="fr">Je viens de Paris et je travaille pour une banque.</span><div class="sol"></div></li>
+  <li class="od" data-ok="Hola, Pablo. ¿Qué tal?"><div class="sl" aria-label="Tu frase"></div><div class="pool"><button type="button" class="pz" data-i="0">Pablo.</button><button type="button" class="pz" data-i="1">Hola,</button><button type="button" class="pz" data-i="2">¿Qué</button><button type="button" class="pz" data-i="3">tal?</button></div><span class="en b">Hi, Pablo. How are you?</span><span class="fr b" lang="fr">Salut, Pablo. Comment ça va ?</span><div class="sol"></div></li>
+  <li class="od" data-ok="Soy profesora y vivo en Madrid."><div class="sl" aria-label="Tu frase"></div><div class="pool"><button type="button" class="pz" data-i="0">profesora</button><button type="button" class="pz" data-i="1">y vivo</button><button type="button" class="pz" data-i="2">en Madrid.</button><button type="button" class="pz" data-i="3">Soy</button></div><span class="en b">I&#x27;m a teacher and I live in Madrid.</span><span class="fr b" lang="fr">Je suis professeure et j’habite à Madrid.</span><div class="sol"></div></li>
+  <li class="od" data-ok="¡Buenos días! ¿Cómo te llamas?"><div class="sl" aria-label="Tu frase"></div><div class="pool"><button type="button" class="pz" data-i="0">¿Cómo</button><button type="button" class="pz" data-i="1">¡Buenos días!</button><button type="button" class="pz" data-i="2">llamas?</button><button type="button" class="pz" data-i="3">te</button></div><span class="en b">Good morning! What&#x27;s your name?</span><span class="fr b" lang="fr">Bonjour ! Comment tu t’appelles ?</span><div class="sol"></div></li>
+  <li class="od" data-ok="Mi nombre es Lucía. Vivo en Valencia.|Vivo en Valencia. Mi nombre es Lucía."><div class="sl" aria-label="Tu frase"></div><div class="pool"><button type="button" class="pz" data-i="0">Vivo</button><button type="button" class="pz" data-i="1">es Lucía.</button><button type="button" class="pz" data-i="2">Mi nombre</button><button type="button" class="pz" data-i="3">en Valencia.</button></div><span class="en b">My name is Lucía. I live in Valencia.</span><span class="fr b" lang="fr">Je m’appelle Lucía. J’habite à Valence.</span><div class="sol"></div></li>
+  <li class="od" data-ok="¿Y tú? ¿Dónde trabajas?"><div class="sl" aria-label="Tu frase"></div><div class="pool"><button type="button" class="pz" data-i="0">¿Y</button><button type="button" class="pz" data-i="1">trabajas?</button><button type="button" class="pz" data-i="2">¿Dónde</button><button type="button" class="pz" data-i="3">tú?</button></div><span class="en b">And you? Where do you work?</span><span class="fr b" lang="fr">Et toi ? Où travailles-tu ?</span><div class="sol"></div></li>
+  <li class="od" data-ok="Me llamo Ana. Trabajo en una escuela.|Trabajo en una escuela. Me llamo Ana."><div class="sl" aria-label="Tu frase"></div><div class="pool"><button type="button" class="pz" data-i="0">en una escuela.</button><button type="button" class="pz" data-i="1">Me llamo</button><button type="button" class="pz" data-i="2">Trabajo</button><button type="button" class="pz" data-i="3">Ana.</button></div><span class="en b">My name is Ana. I work at a school.</span><span class="fr b" lang="fr">Je m’appelle Ana. Je travaille dans une école.</span><div class="sol"></div></li>
+  <li class="od" data-ok="Soy Sofía, de Sevilla, y trabajo en un hotel."><div class="sl" aria-label="Tu frase"></div><div class="pool"><button type="button" class="pz" data-i="0">Soy</button><button type="button" class="pz" data-i="1">en un hotel.</button><button type="button" class="pz" data-i="2">y trabajo</button><button type="button" class="pz" data-i="3">Sofía,</button><button type="button" class="pz" data-i="4">de Sevilla,</button></div><span class="en b">I&#x27;m Sofía, from Seville, and I work at a hotel.</span><span class="fr b" lang="fr">Je suis Sofía, de Séville, et je travaille dans un hôtel.</span><div class="sol"></div></li>
+ </ol>
+ <button class="btn" id="oc" type="button"><span>Comprobar<span class="en"> · Check</span><span class="fr" lang="fr">· Vérifier</span></span></button><button class="lnk" id="orr" type="button">Reiniciar<span class="en"> · Reset</span><span class="fr" lang="fr">· Réinitialiser</span></button><div class="fd" aria-live="polite"></div>
+</div></section>
+
+<section class="sc" id="sD"><div class="w">
+ <p class="tag r"><span class="tl" style="--s:30px" aria-hidden="true"></span>Ejercicio D · empareja<span class="en" lang="en"> · Exercise D · match</span><span class="fr" lang="fr"> · Exercice D · associe</span><span class="cue">3′</span></p>
+ <h2 class="r" style="--i:1">Empareja persona y verbo.<span class="en b">Match person and verb.</span><span class="fr b" lang="fr">Associe personne et verbe.</span></h2>
+ <p class="mut r" style="--i:2">Toca una persona y después su forma del verbo.<span class="en b">Tap a person, then its verb form.</span><span class="fr b" lang="fr">Touche une personne, puis sa forme du verbe.</span></p>
+ <div class="pm r" style="--i:3"><div class="col"><button type="button" class="pb" data-s="p" data-k="8"><b>yo</b> <span class="mut">(vivir)</span></button><button type="button" class="pb" data-s="p" data-k="3"><b>yo</b> <span class="mut">(ser)</span></button><button type="button" class="pb" data-s="p" data-k="1"><b>tú</b> <span class="mut">(llamarse)</span></button><button type="button" class="pb" data-s="p" data-k="4"><b>tú</b> <span class="mut">(ser)</span></button><button type="button" class="pb" data-s="p" data-k="7"><b>tú</b> <span class="mut">(trabajar)</span></button><button type="button" class="pb" data-s="p" data-k="0"><b>yo</b> <span class="mut">(llamarse)</span></button><button type="button" class="pb" data-s="p" data-k="9"><b>yo</b> <span class="mut">(venir)</span></button><button type="button" class="pb" data-s="p" data-k="6"><b>yo</b> <span class="mut">(trabajar)</span></button><button type="button" class="pb" data-s="p" data-k="2"><b>Carlos</b> <span class="mut">(llamarse)</span></button><button type="button" class="pb" data-s="p" data-k="5"><b>Marta</b> <span class="mut">(ser)</span></button></div><div class="col"><button type="button" class="pb" data-s="v" data-k="7">trabajas<span class="en b">you work</span><span class="fr b" lang="fr">tu travailles</span></button><button type="button" class="pb" data-s="v" data-k="0">me llamo<span class="en b">my name is</span><span class="fr b" lang="fr">je m’appelle</span></button><button type="button" class="pb" data-s="v" data-k="4">eres<span class="en b">you are</span><span class="fr b" lang="fr">tu es</span></button><button type="button" class="pb" data-s="v" data-k="1">te llamas<span class="en b">your name is</span><span class="fr b" lang="fr">tu t’appelles</span></button><button type="button" class="pb" data-s="v" data-k="3">soy<span class="en b">I am</span><span class="fr b" lang="fr">je suis</span></button><button type="button" class="pb" data-s="v" data-k="9">vengo<span class="en b">I come</span><span class="fr b" lang="fr">je viens</span></button><button type="button" class="pb" data-s="v" data-k="5">es<span class="en b">she is</span><span class="fr b" lang="fr">elle est</span></button><button type="button" class="pb" data-s="v" data-k="8">vivo<span class="en b">I live</span><span class="fr b" lang="fr">j’habite</span></button><button type="button" class="pb" data-s="v" data-k="6">trabajo<span class="en b">I work</span><span class="fr b" lang="fr">je travaille</span></button><button type="button" class="pb" data-s="v" data-k="2">se llama<span class="en b">his name is</span><span class="fr b" lang="fr">il s’appelle</span></button></div></div>
+ <p style="margin-top:14px"><button class="lnk" id="mrr" type="button" style="margin-left:0">Reiniciar<span class="en"> · Reset</span><span class="fr" lang="fr">· Réinitialiser</span></button></p>
+ <p class="tag" id="mcnt" aria-live="polite">0 / 10 parejas<span class="en"> · pairs</span><span class="fr" lang="fr">· paires</span></p>
+</div></section>
+
+<section class="sc" id="sE"><div class="w">
+ <p class="tag r"><span class="tl" style="--s:30px" aria-hidden="true"></span>Ejercicio E · contesta<span class="en" lang="en"> · Exercise E · answer</span><span class="fr" lang="fr"> · Exercice E · réponds</span><span class="cue">4′</span></p>
+ <h2 class="r" style="--i:1">Contesta a tu colega.<span class="en b">Answer your colleague.</span><span class="fr b" lang="fr">Réponds à ton collègue.</span></h2>
+ <p class="mut r" style="--i:2">Elige la respuesta correcta.<span class="en b">Pick the correct reply.</span><span class="fr b" lang="fr">Choisis la bonne réponse.</span></p>
+ <div class="g cx r" style="--i:3">
+  <div class="cxh"><span class="av" id="cxa" aria-hidden="true">M</span><div><b id="cxn">Marta</b><span class="m" id="cxm"></span></div></div>
+  <div class="bb co" id="cxb"></div>
+  <div class="ops" id="cxo"></div>
+  <div class="fd" aria-live="polite"></div>
+ </div>
+ <p><button class="lnk" id="cxr" type="button" style="margin-left:0">Reiniciar<span class="en"> · Reset</span><span class="fr" lang="fr">· Réinitialiser</span></button></p>
+</div></section>
+
+<section class="sc" id="s4"><div class="w">
+ <p class="tag r"><span class="tl" style="--s:30px" aria-hidden="true"></span>Role-play<span class="fr" lang="fr"> · Jeu de rôle</span><span class="cue">10′</span></p>
+ <h2 class="r" style="--i:1">Primeros minutos de una reunión.<span class="en b">First minutes of a meeting.</span><span class="fr b" lang="fr">Premières minutes d’une réunion.</span></h2>
+ <p class="mut r" style="--i:2">Lee lo que dice la otra persona y escribe tu respuesta. Después, dila en voz alta.<span class="en b">Read what the other person says and type your reply. Then say it aloud.</span><span class="fr b" lang="fr">Lis ce que dit l’autre personne et écris ta réponse. Puis dis-la à voix haute.</span></p>
+ <div class="chips cvt r" style="--i:3" role="tablist" aria-label="Conversaciones"><button class="chip" type="button" role="tab" aria-selected="true">1 · Carlos</button><button class="chip" type="button" role="tab" aria-selected="false">2 · Marta</button><button class="chip" type="button" role="tab" aria-selected="false">3 · Lucía</button><button class="chip" type="button" role="tab" aria-selected="false">4 · Ana</button><button class="chip" type="button" role="tab" aria-selected="false">5 · Pablo</button></div>
+  <div class="cvn" data-c="0" role="tabpanel">
+   <p class="mut cs">Llegas a la reunión. Carlos te saluda en la puerta.<span class="en b">You arrive at the meeting. Carlos greets you at the door.</span><span class="fr b" lang="fr">Tu arrives à la réunion. Carlos t’accueille à la porte.</span></p>
+   <div class="ch">
+    <div class="bb co">¡Buenos días! Soy Carlos. ¿Cómo te llamas?<span class="en b">Good morning! I&#x27;m Carlos. What&#x27;s your name?</span><span class="fr b" lang="fr">Bonjour ! Je suis Carlos. Comment tu t’appelles ?</span></div>
+    <div class="tu"><div class="row"><input class="w" type="text" autocomplete="off" autocapitalize="sentences" spellcheck="false" placeholder="Escribe tu respuesta…" aria-label="Tu respuesta 1.1" data-rx="(me llamo|soy|mi nombre es) eloise" data-a="Me llamo Eloïse." data-hint="Empieza con «Me llamo…» y di tu nombre." data-why="«Me llamo» + tu nombre."><button class="btn" type="button"><span>Enviar<span class="en" lang="en"> · Send</span><span class="fr" lang="fr"> · Envoyer</span></span></button></div><div class="sol"></div></div>
+    <div class="bb co" hidden>Mucho gusto, Eloïse. ¿De dónde eres?<span class="en b">Nice to meet you, Eloïse. Where are you from?</span><span class="fr b" lang="fr">Enchantée, Eloïse. D’où viens-tu ?</span></div>
+    <div class="tu" hidden><div class="row"><input class="w" type="text" autocomplete="off" autocapitalize="sentences" spellcheck="false" placeholder="Escribe tu respuesta…" aria-label="Tu respuesta 1.2" data-rx="(soy de|vengo de) \S+" data-a="Soy de Madrid." data-hint="Empieza con «Soy de…» y di tu ciudad." data-why="«Soy de» + ciudad." data-open=1><button class="btn" type="button"><span>Enviar<span class="en" lang="en"> · Send</span><span class="fr" lang="fr"> · Envoyer</span></span></button></div><div class="sol"></div></div>
+    <div class="bb co" hidden>¿Y dónde trabajas?<span class="en b">And where do you work?</span><span class="fr b" lang="fr">Et où travailles-tu ?</span></div>
+    <div class="tu" hidden><div class="row"><input class="w" type="text" autocomplete="off" autocapitalize="sentences" spellcheck="false" placeholder="Escribe tu respuesta…" aria-label="Tu respuesta 1.3" data-rx="trabajo (en|para) \S+" data-a="Trabajo en una empresa." data-hint="Empieza con «Trabajo en…» y di el lugar." data-why="«Trabajo en» + lugar." data-open=1><button class="btn" type="button"><span>Enviar<span class="en" lang="en"> · Send</span><span class="fr" lang="fr"> · Envoyer</span></span></button></div><div class="sol"></div></div>
+   </div>
+   <div class="fd" aria-live="polite"></div>
+   <button class="btn rpn" type="button" hidden><span>Siguiente conversación →<span class="en" lang="en"> · Next conversation</span><span class="fr" lang="fr"> · Conversation suivante</span></span></button>
+  </div>
+  <div class="cvn" data-c="1" role="tabpanel" hidden>
+   <p class="mut cs">Es por la mañana. Marta, una colega, está en el café de la oficina.<span class="en b">It&#x27;s morning. Marta, a colleague, is at the office café.</span><span class="fr b" lang="fr">C’est le matin. Marta, une collègue, est à la cafétéria du bureau.</span></p>
+   <div class="ch">
+    <div class="bb co">¡Hola! ¿Qué tal?<span class="en b">Hi! How are you?</span><span class="fr b" lang="fr">Salut ! Comment ça va ?</span></div>
+    <div class="tu"><div class="row"><input class="w" type="text" autocomplete="off" autocapitalize="sentences" spellcheck="false" placeholder="Escribe tu respuesta…" aria-label="Tu respuesta 2.1" data-rx="(bien|mal|regular|genial|fenomenal|asi asi)" data-a="Muy bien, gracias." data-hint="Una palabra basta: bien, regular, mal…" data-why="«Muy bien, gracias» = very well, thanks."><button class="btn" type="button"><span>Enviar<span class="en" lang="en"> · Send</span><span class="fr" lang="fr"> · Envoyer</span></span></button></div><div class="sol"></div></div>
+    <div class="bb co" hidden>Yo soy Marta. Soy de Sevilla. ¿Y tú? ¿De dónde eres?<span class="en b">I&#x27;m Marta. I&#x27;m from Seville. And you? Where are you from?</span><span class="fr b" lang="fr">Je suis Marta. Je suis de Séville. Et toi ? D’où viens-tu ?</span></div>
+    <div class="tu" hidden><div class="row"><input class="w" type="text" autocomplete="off" autocapitalize="sentences" spellcheck="false" placeholder="Escribe tu respuesta…" aria-label="Tu respuesta 2.2" data-rx="(soy de|vengo de) \S+" data-a="Soy de Madrid." data-hint="Empieza con «Soy de…» y di tu ciudad." data-why="«Soy de» + ciudad." data-open=1><button class="btn" type="button"><span>Enviar<span class="en" lang="en"> · Send</span><span class="fr" lang="fr"> · Envoyer</span></span></button></div><div class="sol"></div></div>
+    <div class="bb co" hidden>Yo trabajo en un hotel. ¿Y tú? ¿Dónde trabajas?<span class="en b">I work at a hotel. And you? Where do you work?</span><span class="fr b" lang="fr">Je travaille dans un hôtel. Et toi ? Où travailles-tu ?</span></div>
+    <div class="tu" hidden><div class="row"><input class="w" type="text" autocomplete="off" autocapitalize="sentences" spellcheck="false" placeholder="Escribe tu respuesta…" aria-label="Tu respuesta 2.3" data-rx="trabajo (en|para) \S+" data-a="Trabajo en una empresa." data-hint="Empieza con «Trabajo en…» y di el lugar." data-why="«Trabajo en» + lugar." data-open=1><button class="btn" type="button"><span>Enviar<span class="en" lang="en"> · Send</span><span class="fr" lang="fr"> · Envoyer</span></span></button></div><div class="sol"></div></div>
+   </div>
+   <div class="fd" aria-live="polite"></div>
+   <button class="btn rpn" type="button" hidden><span>Siguiente conversación →<span class="en" lang="en"> · Next conversation</span><span class="fr" lang="fr"> · Conversation suivante</span></span></button>
+  </div>
+  <div class="cvn" data-c="2" role="tabpanel" hidden>
+   <p class="mut cs">Hoy llega una colega nueva, Lucía. Ahora haces tú las preguntas.<span class="en b">A new colleague, Lucía, arrives today. This time you ask the questions.</span><span class="fr b" lang="fr">Aujourd’hui arrive une nouvelle collègue, Lucía. Cette fois, c’est toi qui poses les questions.</span></p>
+   <div class="ch">
+    <div class="bb co">¡Hola! Soy nueva en la empresa.<span class="en b">Hi! I&#x27;m new at the company.</span><span class="fr b" lang="fr">Salut ! Je suis nouvelle dans l’entreprise.</span></div>
+    <div class="tu"><span class="q">Salúdala y pregúntale su nombre.<span class="en b">Greet her and ask her name.</span><span class="fr b" lang="fr">Salue-la et demande-lui son nom.</span></span><div class="row"><input class="w" type="text" autocomplete="off" autocapitalize="sentences" spellcheck="false" placeholder="Escribe tu respuesta…" aria-label="Tu respuesta 3.1" data-rx="como te llamas" data-a="Hola. ¿Cómo te llamas?" data-hint="Es una pregunta de la clase: «¿Cómo…?»" data-why="«¿Cómo te llamas?» = what&#x27;s your name?"><button class="btn" type="button"><span>Enviar<span class="en" lang="en"> · Send</span><span class="fr" lang="fr"> · Envoyer</span></span></button></div><div class="sol"></div></div>
+    <div class="bb co" hidden>Me llamo Lucía. Soy de Valencia.<span class="en b">My name is Lucía. I&#x27;m from Valencia.</span><span class="fr b" lang="fr">Je m’appelle Lucía. Je suis de Valence.</span></div>
+    <div class="tu" hidden><span class="q">Dile «mucho gusto» y pregúntale dónde trabaja.<span class="en b">Say nice to meet you and ask where she works.</span><span class="fr b" lang="fr">Dis « enchantée » et demande-lui où elle travaille.</span></span><div class="row"><input class="w" type="text" autocomplete="off" autocapitalize="sentences" spellcheck="false" placeholder="Escribe tu respuesta…" aria-label="Tu respuesta 3.2" data-rx="(mucho gusto|encantad[oa]|igualmente).*donde trabajas" data-a="Mucho gusto, Lucía. ¿Dónde trabajas?" data-hint="Dos ideas: «Mucho gusto…» y «¿Dónde trabajas?»" data-why="«Mucho gusto» + «¿Dónde trabajas?»"><button class="btn" type="button"><span>Enviar<span class="en" lang="en"> · Send</span><span class="fr" lang="fr"> · Envoyer</span></span></button></div><div class="sol"></div></div>
+    <div class="bb co" hidden>Trabajo en un banco, en Madrid. ¿Y tú? ¿Dónde trabajas?<span class="en b">I work at a bank, in Madrid. And you? Where do you work?</span><span class="fr b" lang="fr">Je travaille dans une banque, à Madrid. Et toi ? Où travailles-tu ?</span></div>
+    <div class="tu" hidden><div class="row"><input class="w" type="text" autocomplete="off" autocapitalize="sentences" spellcheck="false" placeholder="Escribe tu respuesta…" aria-label="Tu respuesta 3.3" data-rx="trabajo (en|para) \S+" data-a="Trabajo en una empresa." data-hint="Empieza con «Trabajo en…» y di el lugar." data-why="«Trabajo en» + lugar." data-open=1><button class="btn" type="button"><span>Enviar<span class="en" lang="en"> · Send</span><span class="fr" lang="fr"> · Envoyer</span></span></button></div><div class="sol"></div></div>
+   </div>
+   <div class="fd" aria-live="polite"></div>
+   <button class="btn rpn" type="button" hidden><span>Siguiente conversación →<span class="en" lang="en"> · Next conversation</span><span class="fr" lang="fr"> · Conversation suivante</span></span></button>
+  </div>
+  <div class="cvn" data-c="3" role="tabpanel" hidden>
+   <p class="mut cs">Videollamada con el equipo. Ana, la directora, pide a cada persona que se presente.<span class="en b">Video call with the team. Ana, the director, asks each person to introduce themselves.</span><span class="fr b" lang="fr">Visioconférence avec l’équipe. Ana, la directrice, demande à chacun de se présenter.</span></p>
+   <div class="ch">
+    <div class="bb co">Buenos días a todos. Hoy cada persona se presenta. Eloïse, ¿tu nombre y tu ciudad?<span class="en b">Good morning, everyone. Today each person introduces themselves. Eloïse, your name and your city?</span><span class="fr b" lang="fr">Bonjour à tous. Aujourd’hui, chacun se présente. Eloïse, ton nom et ta ville ?</span></div>
+    <div class="tu"><div class="row"><input class="w" type="text" autocomplete="off" autocapitalize="sentences" spellcheck="false" placeholder="Escribe tu respuesta…" aria-label="Tu respuesta 4.1" data-rx="(me llamo|soy|mi nombre es) eloise (y )?(soy |vengo )?de \S+" data-a="Me llamo Eloïse. Soy de Madrid." data-hint="Dos ideas: «Me llamo…» y «Soy de…»" data-why="«Me llamo» + nombre. «Soy de» + ciudad." data-open=1><button class="btn" type="button"><span>Enviar<span class="en" lang="en"> · Send</span><span class="fr" lang="fr"> · Envoyer</span></span></button></div><div class="sol"></div></div>
+    <div class="bb co" hidden>Mucho gusto, Eloïse. Yo soy Ana y trabajo en Madrid. ¿Y tú? ¿Dónde trabajas?<span class="en b">Nice to meet you, Eloïse. I&#x27;m Ana and I work in Madrid. And you? Where do you work?</span><span class="fr b" lang="fr">Enchantée, Eloïse. Je suis Ana et je travaille à Madrid. Et toi ? Où travailles-tu ?</span></div>
+    <div class="tu" hidden><div class="row"><input class="w" type="text" autocomplete="off" autocapitalize="sentences" spellcheck="false" placeholder="Escribe tu respuesta…" aria-label="Tu respuesta 4.2" data-rx="trabajo (en|para) \S+" data-a="Trabajo en una empresa." data-hint="Empieza con «Trabajo en…» y di el lugar." data-why="«Trabajo en» + lugar." data-open=1><button class="btn" type="button"><span>Enviar<span class="en" lang="en"> · Send</span><span class="fr" lang="fr"> · Envoyer</span></span></button></div><div class="sol"></div></div>
+    <div class="bb co" hidden>Perfecto, Eloïse. Mucho gusto.<span class="en b">Perfect, Eloïse. Nice to meet you.</span><span class="fr b" lang="fr">Parfait, Eloïse. Enchantée.</span></div>
+    <div class="tu" hidden><div class="row"><input class="w" type="text" autocomplete="off" autocapitalize="sentences" spellcheck="false" placeholder="Escribe tu respuesta…" aria-label="Tu respuesta 4.3" data-rx="(mucho gusto|igualmente|encantad[oa])" data-a="Mucho gusto, Ana." data-hint="Usa la fórmula del calentamiento: «Mucho…»" data-why="«Mucho gusto» = nice to meet you."><button class="btn" type="button"><span>Enviar<span class="en" lang="en"> · Send</span><span class="fr" lang="fr"> · Envoyer</span></span></button></div><div class="sol"></div></div>
+   </div>
+   <div class="fd" aria-live="polite"></div>
+   <button class="btn rpn" type="button" hidden><span>Siguiente conversación →<span class="en" lang="en"> · Next conversation</span><span class="fr" lang="fr"> · Conversation suivante</span></span></button>
+  </div>
+  <div class="cvn" data-c="4" role="tabpanel" hidden>
+   <p class="mut cs">Conoces a Pablo, de otra oficina, en una videollamada.<span class="en b">You meet Pablo, from another office, on a video call.</span><span class="fr b" lang="fr">Tu fais la connaissance de Pablo, d’un autre bureau, en visioconférence.</span></p>
+   <div class="ch">
+    <div class="bb co">Hola, buenos días. Me llamo Pablo. ¿Y tú?<span class="en b">Hello, good morning. My name is Pablo. And you?</span><span class="fr b" lang="fr">Bonjour. Je m’appelle Pablo. Et toi ?</span></div>
+    <div class="tu"><div class="row"><input class="w" type="text" autocomplete="off" autocapitalize="sentences" spellcheck="false" placeholder="Escribe tu respuesta…" aria-label="Tu respuesta 5.1" data-rx="(me llamo|soy|mi nombre es) eloise" data-a="Me llamo Eloïse." data-hint="Empieza con «Me llamo…» y di tu nombre." data-why="«Me llamo» + tu nombre."><button class="btn" type="button"><span>Enviar<span class="en" lang="en"> · Send</span><span class="fr" lang="fr"> · Envoyer</span></span></button></div><div class="sol"></div></div>
+    <div class="bb co" hidden>Mucho gusto, Eloïse. ¿Qué tal?<span class="en b">Nice to meet you, Eloïse. How are you?</span><span class="fr b" lang="fr">Enchanté(e), Eloïse. Comment ça va ?</span></div>
+    <div class="tu" hidden><div class="row"><input class="w" type="text" autocomplete="off" autocapitalize="sentences" spellcheck="false" placeholder="Escribe tu respuesta…" aria-label="Tu respuesta 5.2" data-rx="(bien|mal|regular|genial|fenomenal|asi asi)" data-a="Muy bien, gracias." data-hint="Una palabra basta: bien, regular, mal…" data-why="«Muy bien, gracias» = very well, thanks."><button class="btn" type="button"><span>Enviar<span class="en" lang="en"> · Send</span><span class="fr" lang="fr"> · Envoyer</span></span></button></div><div class="sol"></div></div>
+    <div class="bb co" hidden>Muy bien, gracias. Yo soy de Valencia y trabajo en un banco. ¿Y tú?<span class="en b">Very well, thanks. I&#x27;m from Valencia and I work at a bank. And you?</span><span class="fr b" lang="fr">Très bien, merci. Je suis de Valence et je travaille dans une banque. Et toi ?</span></div>
+    <div class="tu" hidden><div class="row"><input class="w" type="text" autocomplete="off" autocapitalize="sentences" spellcheck="false" placeholder="Escribe tu respuesta…" aria-label="Tu respuesta 5.3" data-rx="(soy de|vengo de) .+ trabajo (en|para) \S+" data-a="Soy de Madrid y trabajo en una empresa." data-hint="Dos ideas: «Soy de…» y «Trabajo en…»" data-why="«Soy de» + ciudad. «Trabajo en» + lugar." data-open=1><button class="btn" type="button"><span>Enviar<span class="en" lang="en"> · Send</span><span class="fr" lang="fr"> · Envoyer</span></span></button></div><div class="sol"></div></div>
+   </div>
+   <div class="fd" aria-live="polite"></div>
+  </div>
+ <p class="tag" id="rpc" style="margin-top:14px">0/5 conversaciones completas</p>
+</div></section>
+
+<section class="sc" id="sR"><div class="w">
+ <p class="tag r"><span class="tl" style="--s:30px" aria-hidden="true"></span>Repaso<span class="en" lang="en"> · Review</span><span class="fr" lang="fr"> · Révision</span><span class="cue">3′</span></p>
+ <h2 class="r" style="--i:1">Tu banco de errores.<span class="en b">Your error bank.</span><span class="fr b" lang="fr">Ta banque d’erreurs.</span></h2>
+ <p class="mut r" style="--i:2">Una frase sale del banco cuando la aciertas a la primera en dos días distintos.<span class="en b">A phrase leaves the bank when you get it right first time on two different days.</span><span class="fr b" lang="fr">Une phrase quitte la banque quand tu la réussis du premier coup deux jours différents.</span></p>
+ <div id="bk"></div>
+ <button class="btn" data-chk hidden><span>Comprobar<span class="en" lang="en"> · Check</span><span class="fr" lang="fr"> · Vérifier</span></span></button><div class="fd" aria-live="polite"></div>
+</div></section>
+
+<section class="sc" id="tarea"><div class="w">
+ <p class="tag r">Tarea<span class="en" lang="en"> · Homework</span><span class="fr" lang="fr"> · Devoir</span><span class="cue">2′</span></p>
+ <h2 class="r" style="--i:1">Preséntate a un colega nuevo.<span class="en b">Introduce yourself to a new colleague.</span><span class="fr b" lang="fr">Présente-toi à un nouveau collègue.</span></h2>
+ <p class="mut r" style="--i:2">Escribe 4 frases: tu nombre, tu ciudad, tu trabajo y una pregunta con «¿Y tú?».<span class="en b">Write 4 sentences: name, city, job and a question with "¿Y tú?".</span><span class="fr b" lang="fr">Écris 4 phrases : ton nom, ta ville, ton travail et une question avec « ¿Y tú? ».</span></p>
+ <textarea id="tk" aria-label="Tu tarea" placeholder="Hola, me llamo…"></textarea>
+ <p class="tag" style="margin-top:8px" id="wc">0 palabras</p>
+ <p><button class="btn" id="cp"><span>Copiar para Óscar<span class="en" lang="en"> · Copy for Óscar</span><span class="fr" lang="fr"> · Copier pour Óscar</span></span></button><button class="lnk" id="cl">Borrar<span class="en" lang="en"> · Clear</span><span class="fr" lang="fr"> · Effacer</span></button></p>
+ <div class="chips"><span class="chip k">Próxima clase: opinar<span class="en" lang="en"> · Next class: giving opinions</span><span class="fr" lang="fr"> · Prochain cours : donner son avis</span></span><span class="chip">Estoy de acuerdo · No estoy de acuerdo<span class="en" lang="en"> · I agree · I disagree</span><span class="fr" lang="fr"> · Je suis d’accord · Je ne suis pas d’accord</span></span></div>
+</div></section>
+
+<section class="sc" id="sG"><div class="w">
+ <p class="tag r">Después de la clase<span class="en" lang="en"> · After class</span><span class="fr" lang="fr"> · Après le cours</span></p>
+ <h2 class="r" style="--i:1">Gramática útil para reforzar esta clase.<span class="en b">Useful grammar to reinforce this class.</span><span class="fr b" lang="fr">Grammaire utile pour consolider ce cours.</span></h2>
+ <p class="mut r" style="--i:2">Todo esto ya apareció hoy sin explicarlo. Cada tema puede ser una clase corta en un contexto de trabajo.<span class="en b">All of this appeared today without explanation. Each topic can become a short class in a work context.</span><span class="fr b" lang="fr">Tout cela est apparu aujourd’hui sans explication. Chaque thème peut devenir un court cours en contexte professionnel.</span></p>
+ <ol class="gl">
+<li class="g cv r" style="--c:var(--b);--i:2"><h3>Posesivos: mi, tu, su<span class="en b">Possessives: my, your, his/her</span><span class="fr b" lang="fr">Possessifs : mon, ton, son</span></h3><p class="hoy"><b>Hoy<span class="en"> · Today</span><span class="fr" lang="fr">· Aujourd’hui</span></b>«tus datos» · «tu nombre y tu ciudad» · «Mi nombre es…» · «tu colega»</p><p class="wk"><b>En el trabajo<span class="en"> · At work</span><span class="fr" lang="fr">· Au travail</span></b>«mi equipo» · «tu jefa» · «nuestra oficina» · «su correo»<span class="en b">my team · your boss · our office · his/her email</span><span class="fr b" lang="fr">mon équipe · ta cheffe · notre bureau · son e-mail</span></p></li>
+<li class="g cv r" style="--c:var(--p);--i:3"><h3>Artículos y género: un/una, el/la<span class="en b">Articles and gender: a, the</span><span class="fr b" lang="fr">Articles et genre : un/une, le/la</span></h3><p class="hoy"><b>Hoy<span class="en"> · Today</span><span class="fr" lang="fr">· Aujourd’hui</span></b>«una empresa» · «un banco» · «una escuela» · «un hotel» · «profesora»</p><p class="wk"><b>En el trabajo<span class="en"> · At work</span><span class="fr" lang="fr">· Au travail</span></b>«el equipo» · «la reunión» · «el director / la directora»<span class="en b">the team · the meeting · the director (m/f)</span><span class="fr b" lang="fr">l’équipe · la réunion · le directeur / la directrice</span></p></li>
+<li class="g cv r" style="--c:var(--am);--i:4"><h3>Tú y usted: informal y formal<span class="en b">Informal and formal “you”</span><span class="fr b" lang="fr">« Tu » et « vous » : informel et formel</span></h3><p class="hoy"><b>Hoy<span class="en"> · Today</span><span class="fr" lang="fr">· Aujourd’hui</span></b>«¿Cómo te llamas?» · «Carlos se llama…»</p><p class="wk"><b>En el trabajo<span class="en"> · At work</span><span class="fr" lang="fr">· Au travail</span></b>«¿Cómo se llama usted?» con clientes y en correos formales<span class="en b">“What’s your name?” with clients and in formal emails</span><span class="fr b" lang="fr">« Comment vous appelez-vous ? » avec les clients et dans les e-mails formels</span></p></li>
+<li class="g cv r" style="--c:var(--ok);--i:5"><h3>Palabras interrogativas<span class="en b">Question words</span><span class="fr b" lang="fr">Mots interrogatifs</span></h3><p class="hoy"><b>Hoy<span class="en"> · Today</span><span class="fr" lang="fr">· Aujourd’hui</span></b>«¿Cómo?» · «¿De dónde?» · «¿Dónde?» · «¿Qué tal?» · «¿Y tú?»</p><p class="wk"><b>En el trabajo<span class="en"> · At work</span><span class="fr" lang="fr">· Au travail</span></b>«¿Cuándo es la reunión?» · «¿Quién viene?» · «¿Cuál es el plan?»<span class="en b">When is the meeting? · Who’s coming? · What’s the plan?</span><span class="fr b" lang="fr">Quand a lieu la réunion ? · Qui vient ? · Quel est le plan ?</span></p></li>
+<li class="g cv r" style="--c:var(--b);--i:6"><h3>Presente de los verbos regulares: -ar, -er, -ir<span class="en b">Present tense of regular verbs</span><span class="fr b" lang="fr">Présent des verbes réguliers</span></h3><p class="hoy"><b>Hoy<span class="en"> · Today</span><span class="fr" lang="fr">· Aujourd’hui</span></b>«trabajo / trabajas» · «vivo» · «soy / eres / es» · «vengo» (irregular)</p><p class="wk"><b>En el trabajo<span class="en"> · At work</span><span class="fr" lang="fr">· Au travail</span></b>«escribo un correo» · «necesito ayuda» · «recibes mis mensajes»<span class="en b">I write an email · I need help · you receive my messages</span><span class="fr b" lang="fr">J’écris un e-mail · j’ai besoin d’aide · tu reçois mes messages</span></p></li>
+<li class="g cv r" style="--c:var(--p);--i:7"><h3>Ser y estar<span class="en b">To be: ser and estar</span><span class="fr b" lang="fr">Être : ser et estar</span></h3><p class="hoy"><b>Hoy<span class="en"> · Today</span><span class="fr" lang="fr">· Aujourd’hui</span></b>«Soy Carlos» · «Soy nueva en la empresa» · «¿Qué tal?» · próxima clase: «Estoy de acuerdo»</p><p class="wk"><b>En el trabajo<span class="en"> · At work</span><span class="fr" lang="fr">· Au travail</span></b>«Soy el responsable» frente a «Estoy en una reunión» · «El informe está listo»<span class="en b">I’m the person in charge vs. I’m in a meeting · The report is ready</span><span class="fr b" lang="fr">Je suis le responsable / je suis en réunion · Le rapport est prêt</span></p></li>
+<li class="g cv r" style="--c:var(--am);--i:8"><h3>Verbos con me / te / se<span class="en b">Verbs with me / te / se</span><span class="fr b" lang="fr">Verbes avec me / te / se</span></h3><p class="hoy"><b>Hoy<span class="en"> · Today</span><span class="fr" lang="fr">· Aujourd’hui</span></b>«me llamo» · «te llamas» · «se llama»</p><p class="wk"><b>En el trabajo<span class="en"> · At work</span><span class="fr" lang="fr">· Au travail</span></b>«me presento» · «me incorporo hoy» · «se reúnen a las diez»<span class="en b">I introduce myself · I join today · they meet at ten</span><span class="fr b" lang="fr">Je me présente · j’arrive aujourd’hui · ils se réunissent à dix heures</span></p></li>
+<li class="g cv r" style="--c:var(--ok);--i:9"><h3>Preposiciones y conectores<span class="en b">Prepositions and connectors</span><span class="fr b" lang="fr">Prépositions et connecteurs</span></h3><p class="hoy"><b>Hoy<span class="en"> · Today</span><span class="fr" lang="fr">· Aujourd’hui</span></b>«de» · «en» · «para» · «y» · «¿Y tú?»</p><p class="wk"><b>En el trabajo<span class="en"> · At work</span><span class="fr" lang="fr">· Au travail</span></b>«trabajo con Ana» · «de lunes a viernes» · «vivo en Madrid, pero trabajo en Toledo»<span class="en b">I work with Ana · Monday to Friday · I live in Madrid, but work in Toledo</span><span class="fr b" lang="fr">Je travaille avec Ana · du lundi au vendredi · j’habite à Madrid, mais je travaille à Tolède</span></p></li>
+ </ol>
+ <p class="tag ord r" style="--i:10">Orden sugerido: 05 → 01 → 04 → 02 → 03 → 06 → 07 → 08<span class="en"> · Suggested order</span><span class="fr" lang="fr">· Ordre suggéré</span></p>
+</div></section>
+
+
+</main>
+<script>
+const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)],R=document.documentElement,K='clase01_eloise_v1';
+let S={lang:'both',done:{},att:{},bank:[],snd:0,tk:'',rp:{}};try{Object.assign(S,JSON.parse(localStorage[K]||'{}'))}catch(e){}
+const FRJ={"A new colleague, Lucía, arrives today. This time you ask the questions.": "Aujourd’hui arrive une nouvelle collègue, Lucía. Cette fois, c’est toi qui poses les questions.", "A phrase leaves the bank when you get it right first time on two different days.": "Une phrase quitte la banque quand tu la réussis du premier coup deux jours différents.", "All of this appeared today without explanation. Each topic can become a short class in a work context.": "Tout cela est apparu aujourd’hui sans explication. Chaque thème peut devenir un court cours en contexte professionnel.", "And where do you work?": "Et où travailles-tu ?", "And you? What's your name?": "Et toi ? Comment tu t’appelles ?", "And you? Where do you work?": "Et toi ? Où travailles-tu ?", "Articles and gender: a, the": "Articles et genre : un/une, le/la", "Ask where they are from.": "Demande-lui d’où il/elle vient.", "Ask where they work.": "Demande-lui où il/elle travaille.", "Carlos says: \"Nice to meet you.\" Answer.": "Carlos dit : « Enchanté. » Réponds-lui.", "Good morning! I'm Carlos. What's your name?": "Bonjour ! Je suis Carlos. Comment tu t’appelles ?", "Good morning! What's your name?": "Bonjour ! Comment tu t’appelles ?", "Good morning, Pablo. How are you?": "Bonjour, Pablo. Comment ça va ?", "Good morning, everyone. Today each person introduces themselves. Eloïse, your name and your city?": "Bonjour à tous. Aujourd’hui, chacun se présente. Eloïse, ton nom et ta ville ?", "Good morning, my name is Carlos.": "Bonjour, je m’appelle Carlos.", "Greet her and ask her name.": "Salue-la et demande-lui son nom.", "Hello, good morning. My name is Pablo. And you?": "Bonjour. Je m’appelle Pablo. Et toi ?", "Hi! How are you?": "Salut ! Comment ça va ?", "Hi! I'm new at the company.": "Salut ! Je suis nouvelle dans l’entreprise.", "Hi, Marta!": "Salut, Marta !", "Hi, Pablo. How are you?": "Salut, Pablo. Comment ça va ?", "I am": "je suis", "I come": "je viens", "I live": "j’habite", "I work": "je travaille", "I come from Paris and I work for a bank.": "Je viens de Paris et je travaille pour une banque.", "I come from Paris and I work in Madrid.": "Je viens de Paris et je travaille à Madrid.", "I live in Seville.": "J’habite à Séville.", "I work at a bank, in Madrid. And you? Where do you work?": "Je travaille dans une banque, à Madrid. Et toi ? Où travailles-tu ?", "I work at a hotel. And you? Where do you work?": "Je travaille dans un hôtel. Et toi ? Où travailles-tu ?", "I work at a hotel. And you?": "Je travaille dans un hôtel. Et toi ?", "I work at a small company.": "Je travaille dans une petite entreprise.", "I work with Ana · Monday to Friday · I live in Madrid, but work in Toledo": "Je travaille avec Ana · du lundi au vendredi · j’habite à Madrid, mais je travaille à Tolède", "I write an email · I need help · you receive my messages": "J’écris un e-mail · j’ai besoin d’aide · tu reçois mes messages", "I'm Marta. I'm from Seville. And you? Where are you from?": "Je suis Marta. Je suis de Séville. Et toi ? D’où viens-tu ?", "I'm Sofía, from Seville, and I work at a hotel.": "Je suis Sofía, de Séville, et je travaille dans un hôtel.", "I'm a teacher and I live in Madrid.": "Je suis professeure et j’habite à Madrid.", "I'm from Valencia and I work in an office.": "Je suis de Valence et je travaille dans un bureau.", "I'm from Valencia. And you?": "Je suis de Valence. Et toi ?", "I'm from Seville. And where do you work?": "Je suis de Séville. Et où travailles-tu ?", "I'm from Paris.": "Je suis de Paris.", "Informal and formal \"you\"": "« Tu » et « vous » : informel et formel", "I introduce myself · I join today · they meet at ten": "Je me présente · j’arrive aujourd’hui · ils se réunissent à dix heures", "It's morning. Greet your colleague.": "C’est le matin. Salue ton collègue.", "It's morning. Marta, a colleague, is at the office café.": "C’est le matin. Marta, une collègue, est à la cafétéria du bureau.", "I'm the person in charge vs. I'm in a meeting · The report is ready": "Je suis le responsable / je suis en réunion · Le rapport est prêt", "My name is Ana. I work at a school.": "Je m’appelle Ana. Je travaille dans une école.", "My name is Lucía.": "Je m’appelle Lucía.", "My name is Lucía. I live in Valencia.": "Je m’appelle Lucía. J’habite à Valence.", "My name is Lucía. I'm from Valencia.": "Je m’appelle Lucía. Je suis de Valence.", "Nice to meet you, Eloïse.": "Enchanté(e), Eloïse.", "Nice to meet you, Eloïse. How are you?": "Enchanté(e), Eloïse. Comment ça va ?", "Nice to meet you, Eloïse. I'm Ana and I work in Madrid. And you? Where do you work?": "Enchantée, Eloïse. Je suis Ana et je travaille à Madrid. Et toi ? Où travailles-tu ?", "Nice to meet you, Eloïse. Where are you from?": "Enchantée, Eloïse. D’où viens-tu ?", "Nice to meet you, Marta. Where are you from?": "Enchanté(e), Marta. D’où viens-tu ?", "Nice to meet you, Pablo.": "Enchantée, Pablo.", "Perfect, Eloïse. Nice to meet you.": "Parfait, Eloïse. Enchantée.", "Thank you, Eloïse. Nice to meet you.": "Merci, Eloïse. Enchantée.", "Possessives: my, your, his/her": "Possessifs : mon, ton, son", "Prepositions and connectors": "Prépositions et connecteurs", "Present tense of regular verbs": "Présent des verbes réguliers", "Question words": "Mots interrogatifs", "Read what the other person says and type your reply. Then say it aloud.": "Lis ce que dit l’autre personne et écris ta réponse. Puis dis-la à voix haute.", "Say nice to meet you and ask where she works.": "Dis « enchantée » et demande-lui où elle travaille.", "Three questions about you. Then you switch roles.": "Trois questions sur toi. Ensuite, tu changes de rôle.", "To be: ser and estar": "Être : ser et estar", "Verbs with me / te / se": "Verbes avec me / te / se", "Very well, thanks. I'm from Valencia and I work at a bank. And you?": "Très bien, merci. Je suis de Valence et je travaille dans une banque. Et toi ?", "Video call with the team. Ana, the director, asks each person to introduce themselves.": "Visioconférence avec l’équipe. Ana, la directrice, demande à chacun de se présenter.", "Video call with the team.": "Visioconférence avec l’équipe.", "What's your name?": "Comment tu t’appelles ?", "When is the meeting? · Who's coming? · What's the plan?": "Quand a lieu la réunion ? · Qui vient ? · Quel est le plan ?", "Where are you from?": "D’où viens-tu ?", "Where do you work?": "Où travailles-tu ?", "Where do you work, Eloïse?": "Où travailles-tu, Eloïse ?", "Eloïse, your name and your city?": "Eloïse, ton nom et ta ville ?", "Why \"de\", \"en\" and \"para\"? Opens after you try exercise A.": "Pourquoi « de », « en » et « para » ? S’ouvre après l’exercice A.", "Write 4 sentences: name, city, job and a question with \"¿Y tú?\".": "Écris 4 phrases : ton nom, ta ville, ton travail et une question avec « ¿Y tú? ».", "You are Ana and you work at a school. Say your name and where you work.": "Tu es Ana et tu travailles dans une école. Dis ton nom et où tu travailles.", "You are Carlos, from Madrid. Say your name and your city.": "Tu es Carlos, de Madrid. Dis ton nom et ta ville.", "You are Lucía and you work at a bank. Where do you work?": "Tu es Lucía et tu travailles dans une banque. Où travailles-tu ?", "You are Marta. What's your name?": "Tu es Marta. Comment tu t’appelles ?", "You are Pablo, from Valencia. Where are you from?": "Tu es Pablo, de Valence. D’où viens-tu ?", "You are Sofía, from Seville, and you work at a hotel. Introduce yourself: name, city and job.": "Tu es Sofía, de Séville, et tu travailles dans un hôtel. Présente-toi : nom, ville et travail.", "You arrive at the meeting. Carlos greets you at the door.": "Tu arrives à la réunion. Carlos t’accueille à la porte.", "You meet Pablo, from another office, on a video call.": "Tu fais la connaissance de Pablo, d’un autre bureau, en visioconférence.", "Your colleague is new. Ask for their name.": "Ton collègue est nouveau. Demande-lui son nom.", "Your colleague says: \"How are you?\" Answer.": "Ton collègue dit : « Comment ça va ? » Réponds-lui.", "de = origin · I'm from Madrid.": "de = origine · Je suis de Madrid.", "en = place · I live in Madrid.": "en = lieu · J’habite à Madrid.", "para = company · I work for a bank.": "para = entreprise · Je travaille pour une banque.", "his name is": "il s’appelle", "my name is": "je m’appelle", "she is": "elle est", "you are": "tu es", "you work": "tu travailles", "your name is": "tu t’appelles", "my team · your boss · our office · his/her email": "mon équipe · ta cheffe · notre bureau · son e-mail", "the team · the meeting · the director (m/f)": "l’équipe · la réunion · le directeur / la directrice", "\"What's your name?\" with clients and in formal emails": "« Comment vous appelez-vous ? » avec les clients et dans les e-mails formels", "Marta is from Seville.": "Marta est de Séville.", "Marta introduces herself.": "Marta se présente.", "Hello, good morning. My name is Marta. I'm from Seville, but I live in Madrid. I work for a bank. Nice to meet you.": "Bonjour. Je m’appelle Marta. Je suis de Séville, mais j’habite à Madrid. Je travaille pour une banque. Enchantée.", "Hello, good morning. I'm Pablo.": "Bonjour. Je suis Pablo.", "Pick the missing word.": "Choisis le mot manquant.", "Open the menu of each blank and choose.": "Ouvre le menu de chaque blanc et choisis.", "Which word is wrong?": "Quel mot est faux ?", "Tap the wrong word in each sentence.": "Touche le mot incorrect de chaque phrase.", "Name, city or job?": "Nom, ville ou travail ?", "Tap a phrase, then its category.": "Touche une phrase, puis sa catégorie.", "What do you say in each situation?": "Que dis-tu dans chaque situation ?", "Pick the best reply.": "Choisis la meilleure réponse.", "Read the text and say whether each sentence is true or false.": "Lis le texte et dis si chaque phrase est vraie ou fausse.", "Listen and choose what you hear.": "Écoute et choisis ce que tu entends.", "Press 🔊 and choose the right sentence.": "Appuie sur 🔊 et choisis la bonne phrase.", "Listen and write.": "Écoute et écris.", "Press 🔊 and write the sentence. Capitals don't matter; I'll flag accents.": "Appuie sur 🔊 et écris la phrase. Les majuscules n’ont pas d’importance ; je signale les accents.", "Now you speak.": "Maintenant, c’est à toi de parler.", "Listen with 🔊, say your part aloud and tap the bubble once you have said it.": "Écoute avec 🔊, dis ta partie à voix haute et touche la bulle quand tu l’as dite.", "Choose an option in every blank.": "Choisis une option dans chaque blanc.", "Write something in every line: an attempt beats a blank.": "Écris quelque chose à chaque ligne : un essai vaut mieux qu’un blanc.", "Write something in every blank: an attempt beats a blank.": "Écris quelque chose dans chaque blanc : un essai vaut mieux qu’un blanc.", "Empty bank. Nothing to review… yet.": "Banque vide. Rien à réviser… pour l’instant.", "Place all the pieces.": "Place toutes les pièces.", "Some pieces are still to place.": "Il reste des pièces à placer.", "Conversation complete!": "Conversation terminée !", "Type your reply: an attempt beats a blank.": "Écris ta réponse : un essai vaut mieux qu’un blanc.", "Your first day. Marta welcomes you.": "Ton premier jour. Marta t’accueille.", "Marta walks you to the office.": "Marta t’accompagne au bureau.", "Marta introduces you to Pablo.": "Marta te présente Pablo.", "I work at a company.": "Je travaille dans une entreprise.", "Name": "Nom", "City": "Ville", "Work": "Travail", "Cover": "Couverture", "How we work": "Comment on travaille", "Oral warm-up": "Échauffement oral", "Your three formulas": "Tes trois formules", "Theory in pictures": "La théorie en images", "Exercise A · fill in": "Exercice A · complète", "Dropdown": "Menu déroulant", "Exercise B · produce": "Exercice B · produis", "Exercise C · put in order": "Exercice C · remets dans l’ordre", "Spot the mistake": "Trouve l’erreur", "Exercise D · match": "Exercice D · associe", "Sort": "Classe", "Situation": "Situation", "Exercise E · answer": "Exercice E · réponds", "Read and check": "Lis et vérifie", "Listen and choose": "Écoute et choisis", "Dictation": "Dictée", "Speak aloud": "Parle à voix haute", "Role-play": "Jeu de rôle", "Review · error bank": "Révision · banque d’erreurs", "Homework": "Devoir", "Grammar to reinforce": "Grammaire à consolider"},nk=s=>s.replace(/’/g,"'"),FP=[[/^Check the red blanks\. First try: (\d+) of (\d+)\.$/,'Vérifie les blancs rouges. Du premier coup : $1 sur $2.'],[/^All good! First try: (\d+) of (\d+)\.$/,'Tout est bon ! Du premier coup : $1 sur $2.'],[/^Check the red sentences\. First try: (\d+) of (\d+)\.$/,'Vérifie les phrases en rouge. Du premier coup : $1 sur $2.'],[/^Conversation complete! First try: (\d+) of (\d+)\.$/,'Conversation terminée ! Du premier coup : $1 sur $2.'],[/^Turn (\d+) \/ (\d+) ✓$/,'Tour $1 / $2 ✓']];
+function fj(b){b=nk(b);let f=FRJ[b];if(!f)for(const[r,t]of FP)if(r.test(b)){f=b.replace(r,t);break}if(!f){const m=/^Turn (\d+) \/ (\d+)\. (.*)$/.exec(b);if(m&&FRJ[m[3]])f='Tour '+m[1]+' / '+m[2]+'. '+FRJ[m[3]]}return f?'<span class="fr b" lang="fr">'+f+'</span>':''}
+const tri=(a,b,c)=>a+(b?'<span class="en" lang="en"> · '+b+'</span>':'')+(c?'<span class="fr" lang="fr"> · '+c+'</span>':'');
+const save=()=>{try{localStorage[K]=JSON.stringify(S)}catch(e){}},bi=(a,b)=>a+'<span class="en b" lang="en">'+b+'</span>'+fj(b);
+let AC;const tone=(f,t='sine',d=.3,g=f,at=0)=>{if(!S.snd)return;AC=AC||new(window.AudioContext||window.webkitAudioContext)();const o=AC.createOscillator(),v=AC.createGain(),T=AC.currentTime+at;o.type=t;o.frequency.setValueAtTime(f,T);o.frequency.exponentialRampToValueAtTime(g,T+d);v.gain.setValueAtTime(.0001,T);v.gain.exponentialRampToValueAtTime(.25,T+.012);v.gain.exponentialRampToValueAtTime(.0001,T+d);o.connect(v).connect(AC.destination);o.start(T);o.stop(T+d)};
+const snd={pop:()=>tone(520,'sine',.13,780),note:()=>tone(660,'sine',.4),nope:()=>tone(220,'square',.16,160),fan:()=>[523,659,784,1047].forEach((f,i)=>tone(f,'sine',.4,f,i*.09))};
+const TL='<svg viewBox="0 -6 64 70"><path d="M8 8h48a6 6 0 0 1 6 6v26a6 6 0 0 1-6 6H30L18 58V46H8a6 6 0 0 1-6-6V14a6 6 0 0 1 6-6z" fill="var(--card)" stroke="currentColor" stroke-width="3.5" stroke-linejoin="round"/><path d="M26 8c0-7 8-9 12-5" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/><circle class="pu" cx="22" cy="25" r="3.4"/><circle class="pu" cx="42" cy="25" r="3.4"/><path class="mo" d="M26 37h12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>';
+const MO={neutral:'M26 37h12',attentive:'M26 37q6 3 12 0',curious:'M27 38q5-3 10 0',excited:'M24 35q8 9 16 0',delighted:'M23 34q9 11 18 0',doubtful:'M25 40q7-5 14 0'};
+$$('.tl').forEach(e=>{e.innerHTML=TL;e.dataset.f='attentive'});$('#mt').dataset.f='neutral';
+const face=(e,f)=>{if(!e)return;e.dataset.f=f;$('.mo',e).setAttribute('d',MO[f])};
+addEventListener('pointermove',e=>$$('.tl .pu').forEach(p=>{const r=p.ownerSVGElement.getBoundingClientRect(),c=v=>Math.max(-2,Math.min(2,v/80));p.style.transform=`translate(${c(e.clientX-r.left-r.width/2)}px,${c(e.clientY-r.top-r.height/2)}px)`}));
+$$('.en').forEach(e=>e.lang='en');
+const setLang=l=>{if(!['es','both','esfr'].includes(l))l='both';S.lang=l;document.body.dataset.lang=l;$$('.seg button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.l===l));save()};
+$$('.seg button').forEach(b=>b.onclick=()=>setLang(b.dataset.l));setLang(S.lang);
+$('#sn').setAttribute('aria-pressed',!!S.snd);$('#sn').onclick=e=>{S.snd=S.snd?0:1;e.currentTarget.setAttribute('aria-pressed',!!S.snd);save();snd.pop()};
+$('#th').onclick=()=>{const t=R.dataset.theme==='dark'?'light':'dark';R.dataset.theme=t;try{localStorage.setItem('theme',t)}catch(e){}};
+const pgb=$('#pg'),pgf=()=>{const h=R.scrollHeight-innerHeight;pgb.style.transform='scaleX('+(h>0?scrollY/h:0)+')'};addEventListener('scroll',pgf,{passive:true});addEventListener('resize',pgf);pgf();
+/* ===== Ejercicios nuevos: desplegable, error, clasificar, situación, V/F, escucha, dictado, voz ===== */
+const sh=a=>{a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a},
+E=(a,b)=>a+'<span class="en b" lang="en">'+b+'</span>'+fj(b),
+say=t=>{if(!window.speechSynthesis)return 0;const u=new SpeechSynthesisUtterance(t);u.lang='es-ES';u.rate=.85;speechSynthesis.cancel();speechSynthesis.speak(u);return 1},
+SCN=(id,tag,h,he,i,ie,body)=>'<section class="sc" id="'+id+'"><div class="w"><p class="tag r">'+tag+'</p><h2 class="r" style="--i:1">'+E(h,he)+'</h2>'+(i?'<p class="mut r" style="--i:2">'+E(i,ie)+'</p>':'')+'<div class="r" style="--i:3">'+body+'</div><div class="fd" aria-live="polite"></div></div></section>',
+fin=(sc,key,f,m)=>{const fd=$('.fd',sc);fd.innerHTML=bi('¡Todo bien! A la primera: '+f+' de '+m+'.','All good! First try: '+f+' of '+m+'.');if(f==m){const r=fd.getBoundingClientRect();burst(r.left+60,r.top)}snd.fan();done(key)},
+CHK='<button class="btn" type="button"><span>Comprobar<span class="en" lang="en"> · Check</span><span class="fr" lang="fr"> · Vérifier</span></span></button>',RST='<button class="lnk" type="button" style="margin-left:0">Reiniciar<span class="en"> · Reset</span><span class="fr" lang="fr">· Réinitialiser</span></button>';
+document.addEventListener('click',e=>{const b=e.target.closest('.sp[data-t]');if(b&&!say(b.dataset.t)&&!b.nextElementSibling?.classList.contains('nv'))b.insertAdjacentHTML('afterend','<span class="mut nv"> «'+b.dataset.t+'»</span>')});
+const bold=(i,c)=>'<span class="'+c+'">'+i+'</span>';
+
+/* Lista de opciones (situación, verdadero/falso, escucha) */
+function CL(id,key,items,fixed,audio){
+ const sc=$('#'+id),ol=$('ol',sc);let ok=0,fi=0;
+ ol.innerHTML=items.map((it,i)=>{const ix=(fixed?(x=>x):sh)(it.o.map((_,j)=>j));
+  return '<li data-i="'+i+'">'+(audio?'<button type="button" class="ib sp" data-t="'+it.say+'" aria-label="Escuchar la frase">🔊</button>':'')+(it.q?'<b>'+it.q+'</b>':'')+(it.en?'<span class="en b" lang="en">'+it.en+'</span>'+fj(it.en):'')+'<div class="ops">'+ix.map(j=>'<button type="button" class="op" data-j="'+j+'">'+it.o[j]+'</button>').join('')+'</div><div class="sol"></div></li>'}).join('');
+ ol.onclick=e=>{const b=e.target.closest('.op'),li=b&&b.closest('li');if(!b||li.dataset.d)return;const it=items[+li.dataset.i],j=+b.dataset.j,s=$('.sol',li);
+  if(j===it.k){b.classList.add('ok');li.dataset.d=1;$$('.op',li).forEach(x=>x.disabled=true);snd.pop();if(!li.dataset.t)fi++;ok++;if(it.why){s.className='sol tip';s.textContent=it.why}if(ok===items.length)fin(sc,key,fi,items.length)}
+  else{li.dataset.t=(+li.dataset.t||0)+1;b.classList.add('bad');b.disabled=true;snd.nope();if(+li.dataset.t>1){s.className='sol';s.innerHTML='Solución: <b>'+it.o[it.k]+'</b>'}}}}
+
+const OL='<ol class="ex"></ol>';
+const HTML={
+sSel:SCN('sSel','Ejercicio · desplegable','Elige la palabra que falta.','Pick the missing word.','Abre el menú de cada hueco y elige.','Open the menu of each blank and choose.',OL+CHK),
+sErr:SCN('sErr','Ejercicio · encuentra el error','¿Qué palabra está mal?','Which word is wrong?','Toca la palabra incorrecta de cada frase.','Tap the wrong word in each sentence.',OL),
+sSort:SCN('sSort','Ejercicio · clasifica','¿Nombre, ciudad o trabajo?','Name, city or job?','Toca una frase y después su categoría.','Tap a phrase, then its category.','<div class="pool" id="spool"></div><div class="bkts" id="sbk"></div>'+RST),
+sSit:SCN('sSit','Ejercicio · situación','¿Qué dices en cada situación?','What do you say in each situation?','Elige la mejor respuesta.','Pick the best reply.',OL),
+sVF:SCN('sVF','Ejercicio · lee y comprueba','Marta se presenta.','Marta introduces herself.','Lee el texto y di si cada frase es verdadera o falsa.','Read the text and say whether each sentence is true or false.','<div class="rd"><p>Hola, buenos días. Me llamo Marta. Soy de Sevilla, pero vivo en Madrid. Trabajo para un banco. Mucho gusto.</p><span class="en b" lang="en">Hello, good morning. My name is Marta. I’m from Seville, but I live in Madrid. I work for a bank. Nice to meet you.</span><span class="fr b" lang="fr">Bonjour. Je m’appelle Marta. Je suis de Séville, mais j’habite à Madrid. Je travaille pour une banque. Enchantée.</span></div>'+OL),
+sEsc:SCN('sEsc','Ejercicio · escucha y elige','Escucha y elige lo que oyes.','Listen and choose what you hear.','Pulsa 🔊 y elige la frase correcta.','Press 🔊 and choose the right sentence.',OL),
+sDic:SCN('sDic','Ejercicio · dictado','Escucha y escribe.','Listen and write.','Pulsa 🔊 y escribe la frase. Las mayúsculas no importan; las tildes, sí te las marco.','Press 🔊 and write the sentence. Capitals don’t matter; I’ll flag accents.',OL+CHK),
+sVoz:SCN('sVoz','Ejercicio · producir en voz alta','Ahora hablas tú.','Now you speak.','Escucha con 🔊, di tu parte en voz alta y toca la burbuja cuando la hayas dicho.','Listen with 🔊, say your part aloud and tap the bubble once you have said it.','<div class="ch" id="vch"></div><p class="tag" id="vc" style="margin-top:16px"></p>')};
+$('#sB').insertAdjacentHTML('beforebegin',HTML.sSel);
+$('#sD').insertAdjacentHTML('beforebegin',HTML.sErr);
+$('#sE').insertAdjacentHTML('beforebegin',HTML.sSort+HTML.sSit);
+$('#s4').insertAdjacentHTML('beforebegin',HTML.sVF+HTML.sEsc+HTML.sDic+HTML.sVoz);
+
+/* Desplegable */
+(function(){const sc=$('#sSel'),ol=$('ol',sc),fd=$('.fd',sc),D=[['Buenos días, ','me',['te','se'],' llamo Carlos.','Good morning, my name is Carlos.'],['Soy ','de',['en','para'],' París.','I’m from Paris.'],['Vivo ','en',['de','para'],' Sevilla.','I live in Seville.'],['Trabajo ','para',['de','me'],' un banco.','I work for a bank.'],['¿De dónde ','eres',['soy','es'],' tú?','Where are you from?'],['¿Cómo ','te',['me','se'],' llamas?','What’s your name?'],['Marta ','es',['soy','eres'],' de Sevilla.','Marta is from Seville.'],['¿Y ','tú',['tu','te'],'? ¿Dónde trabajas?','And you? Where do you work?']];
+ ol.innerHTML=D.map(d=>'<li>'+d[0]+'<select aria-label="hueco" data-a="'+d[1]+'"><option value="">…</option>'+sh([d[1],...d[2]]).map(o=>'<option>'+o+'</option>').join('')+'</select>'+d[3]+E('',d[4])+'<div class="sol"></div></li>').join('');
+ $('.btn',sc).onclick=()=>{const S0=$$('select',sc);if(S0.some(s=>!s.value)){fd.innerHTML=bi('Elige una opción en todos los huecos.','Choose an option in every blank.');snd.nope();return}
+  let bad=0,f=0;S0.forEach(s=>{const li=s.closest('li'),sol=$('.sol',li),ok=s.value===s.dataset.a;if(li.dataset.l)return;
+   if(ok){s.classList.remove('bad');s.classList.add('ok');s.disabled=true;li.dataset.l=1;sol.className='sol';sol.textContent=''}
+   else{bad++;li.dataset.t=(+li.dataset.t||0)+1;s.classList.remove('bad');void s.offsetWidth;s.classList.add('bad');sol.className='sol';sol.innerHTML=+li.dataset.t>1?'Solución: <b>'+s.dataset.a+'</b>':'Prueba otra vez.'}});
+  f=$$('li',ol).filter(li=>li.dataset.l&&!li.dataset.t).length;
+  if(!bad)fin(sc,'s',f,S0.length);else{fd.innerHTML=bi('Revisa los huecos rojos. A la primera: '+f+' de '+S0.length+'.','Check the red blanks. First try: '+f+' of '+S0.length+'.');snd.nope()}}})();
+
+/* Encuentra el error */
+(function(){const sc=$('#sErr'),ol=$('ol',sc),R0=[['Me llamas Eloïse.','llamas','llamo','My name is Eloïse.'],['Soy en Madrid.','en','de','I’m from Madrid.'],['Mucho gusta, Pablo.','gusta','gusto','Nice to meet you, Pablo.'],['Yo eres de Valencia.','eres','soy','I’m from Valencia.'],['¿Cómo te llamo?','llamo','llamas','What’s your name?'],['Vivo para Sevilla.','para','en','I live in Seville.'],['Mi nombre soy Lucía.','soy','es','My name is Lucía.']];let ok=0,fi=0;
+ const cl=t=>t.replace(/[¿?¡!.,]/g,'');
+ ol.innerHTML=R0.map((r,i)=>'<li data-i="'+i+'">'+r[0].split(' ').map(w=>'<button type="button" class="wd2">'+w+'</button>').join('')+E('',r[3])+'<div class="sol"></div></li>').join('');
+ ol.onclick=e=>{const b=e.target.closest('.wd2'),li=b&&b.closest('li');if(!b||li.dataset.d)return;const r=R0[+li.dataset.i],s=$('.sol',li);
+  if(cl(b.textContent)===r[1]){b.classList.add('ok');li.dataset.d=1;if(!li.dataset.t)fi++;ok++;snd.pop();s.className='sol tip';s.innerHTML='✓ «'+r[1]+'» → <b>'+r[2]+'</b>';if(ok===R0.length)fin(sc,'e',fi,R0.length)}
+  else{li.dataset.t=(+li.dataset.t||0)+1;b.classList.remove('bad');void b.offsetWidth;b.classList.add('bad');snd.nope();setTimeout(()=>b.classList.remove('bad'),700)}}})();
+
+/* Clasifica */
+(function(){const sc=$('#sSort'),pool=$('#spool'),bk=$('#sbk'),P=[['Me llamo Eloïse.',0],['Soy Carlos.',0],['Mi nombre es Lucía.',0],['Soy de Madrid.',1],['Vengo de París.',1],['Vivo en Sevilla.',1],['Trabajo en un hotel.',2],['Trabajo para un banco.',2],['Soy profesora.',2]],B0=[['Nombre','Name','info'],['Ciudad','City','ink'],['Trabajo','Work','warn']];let sel=null,left=0,fi=0;
+ function build(){sel=null;fi=0;left=P.length;$('.fd',sc).textContent='';
+  pool.innerHTML=sh(P).map(p=>'<button type="button" class="pz" data-k="'+p[1]+'" aria-pressed="false">'+p[0]+'</button>').join('');
+  bk.innerHTML=B0.map((b,i)=>'<div class="bt" data-c="'+b[2]+'"><button type="button" class="bh" data-b="'+i+'">'+E(b[0],b[1])+'</button><ul class="bl"></ul></div>').join('')}
+ pool.onclick=e=>{const p=e.target.closest('.pz');if(!p)return;$$('.pz',pool).forEach(x=>x.setAttribute('aria-pressed',x===p&&sel!==p));sel=sel===p?null:p;snd.pop()};
+ bk.onclick=e=>{const h=e.target.closest('.bh');if(!h||!sel)return;
+  if(sel.dataset.k===h.dataset.b){const li=document.createElement('li');li.textContent=sel.textContent;$('.bl',h.parentNode).appendChild(li);if(!sel.dataset.x)fi++;sel.remove();sel=null;left--;snd.note();if(!left)fin(sc,'t',fi,P.length)}
+  else{sel.dataset.x=1;h.classList.remove('bad');void h.offsetWidth;h.classList.add('bad');snd.nope()}};
+ $('.lnk',sc).onclick=build;build()})();
+
+/* Situación, V/F, escucha */
+CL('sSit','q',[{q:'Un colega nuevo te dice: «Hola, ¿cómo te llamas?»',en:'A new colleague says: “Hi, what’s your name?”',o:['Me llamo Eloïse.','Soy en Eloïse.','Te llamas Eloïse.'],k:0},{q:'Quieres saber de dónde es tu colega. ¿Qué preguntas?',en:'You want to know where your colleague is from. What do you ask?',o:['¿De dónde eres?','¿Dónde llamas?','¿Cómo eres de?'],k:0},{q:'Dices dónde vives.',en:'You say where you live.',o:['Vivo en Madrid.','Vivo de Madrid.','Soy vivo Madrid.'],k:0},{q:'Tu colega dice: «Mucho gusto.»',en:'Your colleague says: “Nice to meet you.”',o:['Mucho gusto.','Me llamo gusto.','Muy bien, soy.'],k:0},{q:'Dices para quién trabajas.',en:'You say who you work for.',o:['Trabajo de un banco.','Trabajo para un banco.','Trabajas para un banco.'],k:1}]);
+CL('sVF','v',[{q:'Marta se llama Marta.',o:['Verdadero','Falso'],k:0},{q:'Marta es de Madrid.',o:['Verdadero','Falso'],k:1,why:'Es de Sevilla.'},{q:'Marta vive en Madrid.',o:['Verdadero','Falso'],k:0},{q:'Marta trabaja en un hotel.',o:['Verdadero','Falso'],k:1,why:'Trabaja para un banco.'},{q:'Marta trabaja para un banco.',o:['Verdadero','Falso'],k:0},{q:'Marta dice «Mucho gusto».',o:['Verdadero','Falso'],k:0}],1);
+CL('sEsc','l',[{say:'¿Cómo te llamas?',o:['¿Cómo te llamas?','¿Cómo me llamo?','¿Cómo se llama?'],k:0},{say:'Soy de Sevilla.',o:['Soy de Sevilla.','Eres de Sevilla.','Vengo de Sevilla.'],k:0},{say:'Trabajo para un banco.',o:['Trabajas para un banco.','Trabajo en un banco.','Trabajo para un banco.'],k:2},{say:'Vivo en Madrid.',o:['Vives en Madrid.','Vivo en Madrid.','Vengo de Madrid.'],k:1},{say:'Mucho gusto, Pablo.',o:['Mucho gusto, Pablo.','Mucho gusto, Pedro.','Muy gusto, Pablo.'],k:0}],0,1);
+
+/* Dictado */
+(function(){const sc=$('#sDic'),ol=$('ol',sc),fd=$('.fd',sc),D=['Buenos días, me llamo Carlos.','Soy de Valencia.','¿Dónde trabajas?','Mucho gusto, Marta.','Vivo en Sevilla.'],pn=s=>s.toLowerCase().replace(/[¿?¡!.,;:]/g,'').trim();
+ ol.innerHTML=D.map(a=>'<li><button type="button" class="ib sp" data-t="'+a+'" aria-label="Escuchar la frase">🔊</button><input class="w" type="text" autocomplete="off" spellcheck="false" aria-label="Escribe lo que oyes" data-a="'+a+'" style="display:inline-block;width:min(100%,380px);margin:0"><div class="sol"></div></li>').join('');
+ const go=()=>{const I=$$('input',ol);if(I.some(i=>!i.readOnly&&!i.value.trim())){fd.innerHTML=bi('Escribe algo en todos: un intento vale más que un hueco.','Write something in every line: an attempt beats a blank.');snd.nope();return}
+  let bad=0;I.forEach(i=>{if(i.readOnly)return;const a=i.dataset.a,li=i.closest('li'),sol=$('.sol',li),v=i.value;
+   if(n(v)===n(a)){i.classList.remove('bad');i.classList.add('ok');i.readOnly=true;if(!li.dataset.t)li.dataset.f=1;if(pn(v)!==pn(a)){sol.className='sol tip';sol.textContent='✓ Con tilde: '+a}else{sol.className='sol';sol.textContent=''}}
+   else{bad++;li.dataset.t=(+li.dataset.t||0)+1;i.classList.remove('bad');void i.offsetWidth;i.classList.add('bad');sol.className='sol';sol.innerHTML=+li.dataset.t>1?'Solución: <b>'+a+'</b>':'Empieza por «'+a.split(' ')[0]+'». Escucha otra vez.'}});
+  const f=$$('li[data-f]',ol).length;if(!bad)fin(sc,'d',f,D.length);else{fd.innerHTML=bi('Revisa las líneas en rojo. A la primera: '+f+' de '+D.length+'.','Check the red lines. First try: '+f+' of '+D.length+'.');snd.nope()}};
+ $('.btn',sc).onclick=go;ol.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();go()}})})();
+
+/* En voz alta */
+(function(){const L=[['co','¡Buenos días! Soy Carlos. ¿Cómo te llamas?','Good morning! I’m Carlos. What’s your name?'],['yo','Buenos días, Carlos. Me llamo Eloïse.','Good morning, Carlos. My name is Eloïse.'],['co','Mucho gusto, Eloïse. ¿De dónde eres?','Nice to meet you, Eloïse. Where are you from?'],['yo','Mucho gusto. Soy de Madrid.','Nice to meet you. I’m from Madrid.'],['co','¿Y dónde trabajas?','And where do you work?'],['yo','Trabajo en una empresa. ¿Y tú?','I work at a company. And you?']],h=$('#vch'),c=$('#vc'),m=L.filter(l=>l[0]=='yo').length;let k=0;
+ h.innerHTML=L.map(l=>l[0]=='co'?'<div class="bb co"><button type="button" class="ib sp" data-t="'+l[1]+'" aria-label="Escuchar">🔊</button>'+E(l[1],l[2])+'</div>':'<div class="yl"><button type="button" class="ib sp" data-t="'+l[1]+'" aria-label="Escuchar el modelo">🔊</button><button type="button" class="bb yo" aria-pressed="false"><span class="wv" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span><span class="sr">Tú, en voz alta: </span>'+E(l[1],l[2])+'</span></button></div>').join('');
+ const up=()=>{c.textContent=k+'/'+m+' frases dichas en voz alta'};up();
+ h.onclick=e=>{const b=e.target.closest('.yo');if(!b)return;const on=b.getAttribute('aria-pressed')!=='true';b.setAttribute('aria-pressed',on);k+=on?1:-1;up();snd.pop();if(k===m){const r=c.getBoundingClientRect();burst(r.left+60,r.top);snd.fan();done('x')}}})();
+
+const d=$('#deck'),SC=[...d.children],dt=$('#dt'),C=['--b','--b','--b','--p','--p','--b','--b','--p','--ok','--am','--b','--am','--ok','--p'];let cur=0;
+SC.forEach((s,i)=>{const b=document.createElement('button');b.setAttribute('aria-label','Escena '+(i+1));b.onclick=()=>go(i);dt.appendChild(b)});
+const go=i=>SC[Math.max(0,Math.min(SC.length-1,i))].scrollIntoView({behavior:'smooth'});
+new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting||!(e.intersectionRatio>.3||e.intersectionRect.height>innerHeight*.45))return;const i=SC.indexOf(e.target);cur=i;e.target.classList.add('on');R.style.setProperty('--mesh','var('+C[i]+')');[...dt.children].forEach((b,k)=>b.classList.toggle('a',k===i));if(i)$('#hint').style.opacity=0}),{root:null,threshold:[0,.15,.3,.55]}).observe&&SC.forEach(s=>0);
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting||!(e.intersectionRatio>.3||e.intersectionRect.height>innerHeight*.45))return;const i=SC.indexOf(e.target);cur=i;e.target.classList.add('on');R.style.setProperty('--mesh','var('+C[i]+')');[...dt.children].forEach((b,k)=>b.classList.toggle('a',k===i));if(i)$('#hint').style.opacity=0}),{root:null,threshold:[0,.15,.3,.55]});
+SC.forEach(s=>io.observe(s));
+addEventListener('keydown',e=>{if(document.body.dataset.menu)return;if(/INPUT|TEXTAREA/.test(e.target.tagName)){if(e.key==='Enter'&&e.target.tagName==='INPUT'){const b=$('[data-chk]',e.target.closest('section'));b&&b.click()}return}if(['ArrowRight','PageDown'].includes(e.key)){e.preventDefault();go(cur+1)}if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();go(cur-1)}});
+function burst(x,y){const k=['#2F5DA8','#1F7A50','#8A5C0A','#A8431F','#7434E0'];for(let n=0;n<24;n++){const s=document.createElement('span');s.className='cf';s.style.cssText=`left:${x}px;top:${y}px;background:${k[n%5]};--dx:${(Math.random()-.5)*340}px;--dy:${(Math.random()-.7)*300}px;--rot:${Math.random()*720}deg`;document.body.appendChild(s);setTimeout(()=>s.remove(),1200)}}
+const PK=['w','a','s','b','o','e','m','t','q','c','v','l','d','x','rp'];
+function prog(){const n=PK.filter(k=>S.done[k]).length;$('.prog i b').style.width=n/PK.length*100+'%';$('#pc').textContent=n+'/'+PK.length;$('.prog').setAttribute('aria-valuenow',n);$('.prog').setAttribute('aria-valuemax',PK.length);face($('#mt'),n==PK.length?'delighted':'neutral')}
+function done(k){if(S.done[k])return;S.done[k]=1;save();snd.fan();prog()}
+function unlock(){$$('details[data-lock]').forEach(x=>{x.removeAttribute('data-lock');const s=$('summary',x);s.firstChild.textContent=s.firstChild.textContent.replace('🔒','🔓')})}
+$$('details[data-lock] summary').forEach(s=>s.onclick=e=>{if(s.parentNode.hasAttribute('data-lock')){e.preventDefault();face($('#sA .tl'),'curious');snd.nope()}});
+$$('.fc').forEach(c=>c.onclick=()=>{c.classList.toggle('f');c.dataset.v=1;snd.pop();const k=$$('.fc[data-v]').length;$('#wc0').innerHTML=tri(k+'/4 tarjetas giradas',k+'/4 cards flipped',k+'/4 cartes retournées');if(k==4)done('w')});
+const n=s=>s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[¿?¡!.,;:]/g,'').trim().replace(/\s+/g,' '),today=new Date().toISOString().slice(0,10);
+function addBank(li,i){const c=li.cloneNode(true);$('input',c).replaceWith('___');$$('.en,.sol',c).forEach(x=>x.remove());const q=c.textContent.trim();if(!S.bank.some(b=>b.q===q)){S.bank.push({q,a:i.dataset.a,rx:i.dataset.rx||'',w:i.dataset.why||i.dataset.hint||'',d:[]});save()}}
+function bank(){const b=$('#bk'),L=S.bank.slice(0,5),bt=$('#sR [data-chk]');b.innerHTML='';bt.hidden=!L.length;$('#due').innerHTML=S.bank.length?tri('Banco de errores: '+S.bank.length+' frases por repasar.','Error bank: '+S.bank.length+' phrases to review.','Banque d’erreurs : '+S.bank.length+' phrases à réviser.'):'';
+ if(!L.length){b.innerHTML='<div class="g" data-r="o">'+bi('Banco vacío. Nada que repasar… todavía.','Empty bank. Nothing to review… yet.')+'</div>';return}
+ const ol=document.createElement('ol');ol.className='ex';L.forEach(x=>{const li=document.createElement('li'),i=document.createElement('input'),p=x.q.split('___');i.className=x.rx?'w':'hu';if(!x.rx)i.style.width='8em';i.setAttribute('aria-label','hueco');i.dataset.a=x.a;if(x.rx)i.dataset.rx=x.rx;i.dataset.why=x.w;i.dataset.bi=S.bank.indexOf(x);const s=document.createElement('div');s.className='sol';li.append(p[0],i,p[1]||'',s);ol.appendChild(li)});b.appendChild(ol)}
+function chk(g,btn){
+ const sc=g.closest('section'),tl=$('.tl',sc),fd=$('.fd',sc),ins=$$('input',g),isB=!g.dataset.pk;
+ if(ins.some(i=>!i.value.trim())){fd.innerHTML=bi('Escribe algo en todos: un intento vale más que un hueco.','Write something in every blank: an attempt beats a blank.');face(tl,'curious');snd.nope();return}
+ if(g.dataset.pk==='a'){S.att.a=1;save();unlock()}
+ let first=0,bad=0,out=0;
+ ins.forEach(i=>{const v=i.value,t=+i.dataset.t||0,a=i.dataset.a.split('|'),ok=i.dataset.rx?new RegExp(i.dataset.rx).test(n(v)):a.some(x=>n(x)===n(v)),sol=i.closest('li').querySelector('.sol'),it=isB?S.bank[+i.dataset.bi]:0;
+  i.classList.toggle('ok',ok);i.classList.toggle('bad',!ok);i.setAttribute('aria-invalid',!ok);
+  if(ok){if(!t)first++;sol.className='sol';sol.textContent='';if(!i.dataset.rx&&/[áéíóúñü]/i.test(a[0])&&a[0].toLowerCase()!==v.trim().toLowerCase()){sol.className='sol tip';sol.textContent='✓ Con tilde: '+a[0]}if(it&&!t){if(!it.d.includes(today))it.d.push(today)}}
+  else{bad++;i.dataset.t=t+1;sol.className='sol';sol.innerHTML=t?'Solución: <b>'+a[0]+'</b>. '+(i.dataset.why||''):(i.dataset.hint||'Pista: '+a[0].length+' letras, empieza por «'+a[0][0]+'».');if(it)it.d=[];else if(!t)addBank(i.closest('li'),i)}});
+ if(isB){const k=S.bank.length;S.bank=S.bank.filter(x=>x.d.length<2);out=k-S.bank.length;save()}else bank();
+ const m=ins.length;face(tl,bad?'doubtful':first==m?'delighted':'excited');bad?snd.nope():snd.note();
+ fd.innerHTML=bad?bi('Revisa los huecos rojos. A la primera: '+first+' de '+m+'.','Check the red blanks. First try: '+first+' of '+m+'.'):bi('¡Todo bien! A la primera: '+first+' de '+m+'.'+(out?' Salen del banco: '+out+'.':''),'All good! First try: '+first+' of '+m+'.');
+ if(!bad&&!isB){if(first==m){const r=btn.getBoundingClientRect();burst(r.left+r.width/2,r.top)}done(g.dataset.pk)}}
+document.addEventListener('click',e=>{const b=e.target.closest('[data-chk]');if(b)chk($('.ex',b.closest('section')),b)});
+const tk=$('#tk'),wc=()=>{const w=tk.value.trim().split(/\s+/).filter(Boolean).length;$('#wc').innerHTML=tri(w+' palabras',w+' words',w+' mots')};tk.value=S.tk||'';tk.oninput=()=>{S.tk=tk.value;save();wc()};wc();
+$('#cp').onclick=async e=>{try{await navigator.clipboard.writeText('Clase 01 · Eloïse\n\n'+tk.value);e.currentTarget.firstChild.textContent='¡Copiado!'}catch(x){tk.select()}};
+$('#cl').onclick=()=>{tk.value='';S.tk='';save();wc()};
+/* Menú hamburguesa: ir a cualquier sección */
+const MS=[['Portada','Cover',''],['Cómo trabajamos','How we work',''],['Calentamiento oral','Oral warm-up','5′','w'],['Tus tres fórmulas','Your three formulas','7′'],['Teoría en imágenes','Theory in pictures',''],['Ejercicio A · completa','Exercise A · fill in','6′','a'],['Desplegable','Dropdown','','s'],['Ejercicio B · produce','Exercise B · produce','6′','b'],['Ejercicio C · ordena','Exercise C · put in order','4′','o'],['Encuentra el error','Spot the mistake','','e'],['Ejercicio D · empareja','Exercise D · match','3′','m'],['Clasifica','Sort','','t'],['Situación','Situation','','q'],['Ejercicio E · contesta','Exercise E · answer','4′','c'],['Lee y comprueba','Read and check','','v'],['Escucha y elige','Listen and choose','','l'],['Dictado','Dictation','','d'],['En voz alta','Speak aloud','','x'],['Role-play','Role-play','10′','rp'],['Repaso · banco de errores','Review · error bank','3′'],['Tarea','Homework','2′'],['Gramática para reforzar','Grammar to reinforce','']];
+const MB=$('#mn'),MU=$('#mnu'),MV=$('#mnb');
+function mRender(){MU.innerHTML='<ol>'+MS.map((s,i)=>'<li'+(i===cur?' class="cur"':'')+'><button type="button" data-i="'+i+'"'+(i===cur?' aria-current="location"':'')+'><span class="n">'+(i+1)+'</span><span class="t">'+s[0]+'<span class="en b" lang="en">'+s[1]+'</span>'+fj(s[1])+'</span><span class="m">'+(s[3]&&S.done[s[3]]?'<span class="ck" aria-label="completado">✓</span> ':'')+s[2]+'</span></button></li>').join('')+'</ol>'}
+function mSet(o){MV.hidden=MU.hidden=!o;MB.setAttribute('aria-expanded',o);
+ if(o){mRender();document.body.dataset.menu='1';const c=$('li.cur button',MU)||$('button',MU);c.focus()}else delete document.body.dataset.menu}
+MB.onclick=()=>mSet(MU.hidden);MV.onclick=()=>mSet(false);
+MU.onclick=e=>{const b=e.target.closest('button[data-i]');if(!b)return;mSet(false);go(+b.dataset.i);MB.focus({preventScroll:true})};
+document.addEventListener('keydown',e=>{if(MU.hidden)return;const bs=$$('button',MU),i=bs.indexOf(document.activeElement);
+ if(e.key==='Escape'){e.preventDefault();mSet(false);MB.focus()}
+ else if(e.key==='ArrowDown'){e.preventDefault();bs[(i+1)%bs.length].focus()}
+ else if(e.key==='ArrowUp'){e.preventDefault();bs[(i-1+bs.length)%bs.length].focus()}
+ else if(e.key==='Home'){e.preventDefault();bs[0].focus()}
+ else if(e.key==='End'){e.preventDefault();bs[bs.length-1].focus()}
+ else if(e.key==='Tab'){if(e.shiftKey&&i<=0){e.preventDefault();bs[bs.length-1].focus()}else if(!e.shiftKey&&i===bs.length-1){e.preventDefault();bs[0].focus()}}});
+
+/* Ejercicios C, D, E */
+const OD=$$('#sC .od'),otl=$('#sC .tl'),ofd=$('#sC .fd');
+OD.forEach(l=>{const sl=$('.sl',l),pool=$('.pool',l);l.onclick=e=>{const p=e.target.closest('.pz');if(!p||l.classList.contains('ok'))return;(p.parentNode===pool?sl:pool).appendChild(p);l.classList.remove('bad');$('.sol',l).textContent='';snd.pop()}});
+$('#oc').onclick=()=>{let bad=0,inc=0;
+ OD.forEach(l=>{if(l.classList.contains('ok'))return;
+  const sol=$('.sol',l),P=$$('.pz',$('.sl',l));
+  if(P.length<$$('.pz',l).length){inc++;sol.className='sol tip';sol.innerHTML=bi('Coloca todas las piezas.','Place all the pieces.');return}
+  const A=l.dataset.ok.split('|'),t=+l.dataset.t||0;
+  if(A.includes(P.map(p=>p.textContent).join(' '))){l.classList.remove('bad');l.classList.add('ok');sol.className='sol';sol.textContent=''}
+  else{bad++;l.dataset.t=t+1;l.classList.remove('bad');void l.offsetWidth;l.classList.add('bad');sol.className='sol';sol.innerHTML=t?'Solución: <b>'+A[0]+'</b>':'Empieza con «'+A[0].split(' ')[0]+'»…'}});
+ const k=OD.filter(l=>l.classList.contains('ok')).length,f=OD.filter(l=>l.classList.contains('ok')&&!+l.dataset.t).length,m=OD.length;
+ if(k===m){ofd.innerHTML=bi('¡Todo bien! A la primera: '+f+' de '+m+'.','All good! First try: '+f+' of '+m+'.');face(otl,f==m?'delighted':'excited');snd.note();if(f==m){const r=$('#oc').getBoundingClientRect();burst(r.left+r.width/2,r.top)}done('o')}
+ else{ofd.innerHTML=bad?bi('Revisa las frases en rojo. A la primera: '+f+' de '+m+'.','Check the red sentences. First try: '+f+' of '+m+'.'):bi('Faltan piezas por colocar.','Some pieces are still to place.');face(otl,bad?'doubtful':'curious');snd.nope()}};
+$('#orr').onclick=()=>{OD.forEach(l=>{const pool=$('.pool',l);$$('.pz',l).sort((a,b)=>a.dataset.i-b.dataset.i).forEach(p=>pool.appendChild(p));l.classList.remove('ok','bad');delete l.dataset.t;const s=$('.sol',l);s.className='sol';s.textContent=''});ofd.textContent='';face(otl,'attentive')};
+
+const PB=$$('#sD .pb'),dtl=$('#sD .tl');let ms=null,mn=0,mf=0;
+const mc=()=>$('#mcnt').innerHTML=mn+' / '+PB.length/2+' parejas<span class="en"> · pairs</span><span class="fr" lang="fr">· paires</span>';
+PB.forEach(b=>b.onclick=()=>{if(b.classList.contains('ok'))return;
+ if(!ms||ms.dataset.s===b.dataset.s){if(ms)ms.setAttribute('aria-pressed','false');ms=b===ms?null:b;if(ms)ms.setAttribute('aria-pressed','true');snd.pop();return}
+ const a=ms;ms=null;a.setAttribute('aria-pressed','false');
+ if(a.dataset.k===b.dataset.k){[a,b].forEach(x=>{x.classList.remove('bad');x.classList.add('ok')});mn++;if(!a.dataset.x&&!b.dataset.x)mf++;mc();snd.note();face(dtl,'excited');
+  if(mn===PB.length/2){face(dtl,'delighted');if(mf===mn){const r=b.getBoundingClientRect();burst(r.left+r.width/2,r.top)}done('m')}}
+ else{[a,b].forEach(x=>{x.dataset.x=1;x.classList.remove('bad');void x.offsetWidth;x.classList.add('bad');setTimeout(()=>x.classList.remove('bad'),600)});snd.nope();face(dtl,'doubtful')}});
+$('#mrr').onclick=()=>{ms=null;mn=0;mf=0;PB.forEach(b=>{b.classList.remove('ok','bad');b.setAttribute('aria-pressed','false');delete b.dataset.x});mc();face(dtl,'attentive')};
+
+const EQ=[{"w": "Marta", "cx": "Tu primer día. Marta te recibe.", "cxe": "Your first day. Marta welcomes you.", "es": "¡Buenos días! ¿Cómo te llamas?", "en": "Good morning! What's your name?", "o": ["Me llamas Eloïse.", "Me llamo Eloïse.", "Soy llamo Eloïse."], "k": 1}, {"w": "Marta", "cx": "Tu primer día. Marta te recibe.", "cxe": "Your first day. Marta welcomes you.", "es": "Mucho gusto, Eloïse. ¿De dónde eres?", "en": "Nice to meet you, Eloïse. Where are you from?", "o": ["Soy en Madrid.", "Eres de Madrid.", "Soy de Madrid."], "k": 2}, {"w": "Marta", "cx": "Tu primer día. Marta te recibe.", "cxe": "Your first day. Marta welcomes you.", "es": "Yo soy de Sevilla. ¿Y dónde trabajas?", "en": "I'm from Seville. And where do you work?", "o": ["Trabajo en una empresa.", "Trabajo de una empresa.", "Soy de una empresa."], "k": 0}, {"w": "Marta", "cx": "Marta te acompaña a la oficina.", "cxe": "Marta walks you to the office.", "es": "¿Qué tal?", "en": "How are you?", "o": ["Mucho gusto, gracias.", "Muy bien, gracias.", "Me llamo bien."], "k": 1}, {"w": "Marta", "cx": "Marta te acompaña a la oficina.", "cxe": "Marta walks you to the office.", "es": "Yo trabajo en un hotel. ¿Y tú?", "en": "I work at a hotel. And you?", "o": ["Yo soy en una escuela.", "Yo trabajas en una escuela.", "Yo soy profesora."], "k": 2}, {"w": "Pablo", "cx": "Marta te presenta a Pablo.", "cxe": "Marta introduces you to Pablo.", "es": "Hola, buenos días. Soy Pablo.", "en": "Hello, good morning. I'm Pablo.", "o": ["Mucho gusto, Pablo.", "Mucho gusto, Eloïse.", "Muy gusto, Pablo."], "k": 0}, {"w": "Pablo", "cx": "Marta te presenta a Pablo.", "cxe": "Marta introduces you to Pablo.", "es": "Yo soy de Valencia. ¿Y tú?", "en": "I'm from Valencia. And you?", "o": ["Soy en Madrid.", "Vengo de Madrid.", "Es de Madrid."], "k": 1}, {"w": "Pablo", "cx": "Marta te presenta a Pablo.", "cxe": "Marta introduces you to Pablo.", "es": "¿Dónde trabajas, Eloïse?", "en": "Where do you work, Eloïse?", "o": ["Trabajas para una empresa.", "Trabajo de una empresa.", "Trabajo para una empresa."], "k": 2}, {"w": "Ana", "cx": "Videollamada con el equipo.", "cxe": "Video call with the team.", "es": "Eloïse, ¿tu nombre y tu ciudad?", "en": "Eloïse, your name and your city?", "o": ["Mi nombre es Eloïse. Vengo de Madrid.", "Mi nombre es Madrid. Vengo de Eloïse.", "Soy Eloïse. Me llamo de Madrid."], "k": 0}, {"w": "Ana", "cx": "Videollamada con el equipo.", "cxe": "Video call with the team.", "es": "Gracias, Eloïse. Mucho gusto.", "en": "Thank you, Eloïse. Nice to meet you.", "o": ["Muy gusto, Ana.", "Mucho gusto, Eloïse.", "Mucho gusto, Ana."], "k": 2}],etl=$('#sE .tl'),efd=$('#sE .fd'),eb=(a,b)=>a+'<span class="en b" lang="en">'+b+'</span>'+fj(b);let ei=0,ef=0,et=0,elk=0;
+function eRender(){const q=EQ[ei],bb=$('#cxb');elk=0;et=0;efd.textContent='';
+ $('#cxa').textContent=q.w[0];$('#cxn').textContent=q.w;
+ $('#cxm').innerHTML=eb('Turno '+(ei+1)+' / '+EQ.length+'. '+q.cx,'Turn '+(ei+1)+' / '+EQ.length+'. '+q.cxe);
+ bb.innerHTML=eb(q.es,q.en);bb.classList.remove('rv');void bb.offsetWidth;bb.classList.add('rv');
+ const o=$('#cxo');o.innerHTML='';q.o.forEach((t,j)=>{const b=document.createElement('button');b.type='button';b.className='op';b.textContent=t;b.onclick=()=>eAns(b,j);o.appendChild(b)})}
+function eAns(b,j){if(elk)return;
+ if(j===EQ[ei].k){elk=1;b.classList.add('ok');if(!et)ef++;snd.note();face(etl,'excited');setTimeout(()=>{ei++;ei<EQ.length?eRender():eEnd()},900)}
+ else{et++;b.classList.add('bad');b.disabled=true;snd.nope();face(etl,'doubtful')}}
+function eEnd(){$('#cxo').innerHTML='';$('#cxm').innerHTML=eb('Turno '+EQ.length+' / '+EQ.length+' ✓','Turn '+EQ.length+' / '+EQ.length+' ✓');
+ efd.innerHTML=bi('¡Conversación completa! A la primera: '+ef+' de '+EQ.length+'.','Conversation complete! First try: '+ef+' of '+EQ.length+'.');
+ face(etl,'delighted');snd.fan();if(ef===EQ.length){const r=efd.getBoundingClientRect();burst(r.left+60,r.top)}done('c')}
+$('#cxr').onclick=()=>{ei=0;ef=0;face(etl,'attentive');eRender()};eRender();
+
+/* Role-play: 5 conversaciones, la alumna escribe cada respuesta */
+const CV=$$('#s4 .cvn'),TB=$$('#s4 .cvt button'),rtl=$('#s4 .tl'),pl=s=>s.toLowerCase().replace(/[¿?¡!.,;:]/g,'').replace(/\s+/g,' ').trim();
+S.rp=S.rp||{};
+const rpFull=k=>(S.rp[k]||[]).length===$$('.tu',CV[k]).length,rpN=()=>CV.filter((c,k)=>rpFull(k)).length;
+function rpShow(k){CV.forEach((c,j)=>c.hidden=j!==k);TB.forEach((b,j)=>b.setAttribute('aria-selected',j===k))}
+function rpCount(){$('#rpc').innerHTML=tri(rpN()+'/'+CV.length+' conversaciones completas',rpN()+'/'+CV.length+' conversations completed',rpN()+'/'+CV.length+' conversations terminées');TB.forEach((b,j)=>b.classList.toggle('ok',rpFull(j)))}
+function rpLock(t){const i=$('input',t);i.readOnly=true;i.classList.remove('bad');i.classList.add('ok');i.removeAttribute('aria-invalid');$('button',t).hidden=true}
+function rpOpen(c,m){const co=$$('.co',c)[m],t=$$('.tu',c)[m];co.hidden=t.hidden=false;co.classList.add('rv');t.classList.add('rv');$('input',t).focus({preventScroll:true});t.scrollIntoView({block:'center',behavior:'smooth'})}
+function rpEnd(c,k,quiet){
+ $('.fd',c).innerHTML=bi('¡Conversación completa!','Conversation complete!');
+ const nx=$('.rpn',c);if(nx)nx.hidden=false;rpCount();
+ if(quiet)return;
+ const all=rpN()===CV.length;face(rtl,all?'delighted':'excited');
+ if(all){const r=$('.fd',c).getBoundingClientRect();burst(r.left+60,r.top);done('rp')}else snd.fan()}
+function rpChk(c,k,m){
+ const t=$$('.tu',c)[m],i=$('input',t),sol=$('.sol',t),v=i.value.trim();
+ if(i.readOnly)return;
+ if(!v){sol.className='sol tip';sol.innerHTML=bi('Escribe tu respuesta: un intento vale más que un hueco.','Type your reply: an attempt beats a blank.');face(rtl,'curious');snd.nope();i.focus();return}
+ const ok=new RegExp(i.dataset.rx).test(n(v)),a=i.dataset.a,tt=+i.dataset.t||0;
+ i.setAttribute('aria-invalid',!ok);
+ if(!ok){i.dataset.t=tt+1;i.classList.remove('bad');void i.offsetWidth;i.classList.add('bad');
+  sol.className='sol';sol.innerHTML=tt?(i.dataset.open?'Por ejemplo: ':'Solución: ')+'<b>'+a+'</b> '+i.dataset.why:i.dataset.hint;
+  face(rtl,'doubtful');snd.nope();return}
+ sol.className='sol';sol.textContent='';
+ if(!i.dataset.open&&n(v)===n(a)&&pl(v)!==pl(a)){sol.className='sol tip';sol.textContent='✓ Con tilde: '+a}
+ (S.rp[k]=S.rp[k]||[])[m]=v;save();rpLock(t);face(rtl,'excited');snd.note();
+ if(m+1<$$('.tu',c).length)rpOpen(c,m+1);else rpEnd(c,k)}
+TB.forEach((b,k)=>b.onclick=()=>rpShow(k));
+CV.forEach((c,k)=>{const T=$$('.tu',c),sv=S.rp[k]||[];
+ T.forEach((t,m)=>{const i=$('input',t);
+  i.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();rpChk(c,k,m)}});
+  $('button',t).onclick=()=>rpChk(c,k,m);
+  if(m<sv.length){i.value=sv[m];rpLock(t)}
+  $$('.co',c)[m].hidden=t.hidden=m>sv.length});
+ const nx=$('.rpn',c);if(nx)nx.onclick=()=>{rpShow(k+1);TB[k+1].scrollIntoView({block:'center',behavior:'smooth'});const f=$$('.tu input:not([readonly])',CV[k+1])[0];f&&f.focus({preventScroll:true})};
+ if(rpFull(k))rpEnd(c,k,true)});
+rpN()===CV.length?S.done.rp=1:delete S.done.rp;rpCount();
+if(S.att.a)unlock();bank();prog();
+
+/* Teoría en imágenes: constructor de frases */
+const FM=[['Me llamo','nombre','Eloïse','My name is Eloïse.'],['Soy de','ciudad','Madrid',"I'm from Madrid."],['Trabajo en','lugar','una empresa','I work at a company.']],bd=$('#bd'),tb=$$('#tbs button');
+function bld(k,q){const f=FM[k];tb.forEach((b,i)=>b.setAttribute('aria-pressed',i===k));bd.style.setProperty('--c',tb[k].style.getPropertyValue('--c'));
+ bd.innerHTML='<span class="bk bk1">'+f[0]+'</span><span class="bk bk2"><span class="lb">'+f[1]+'</span><span class="wd">'+f[2]+'</span></span><span class="fs"><b>'+f[0]+' '+f[2]+'.</b><span class="en b" lang="en">'+f[3]+'</span><button type="button" class="ib sp" aria-label="Escuchar la frase">🔊</button></span>';
+ bd.dataset.t=f[0]+' '+f[2];bd.classList.remove('go');void bd.offsetWidth;bd.classList.add('go');if(!q)snd.pop()}
+tb.forEach((b,i)=>b.onclick=()=>bld(i));bld(0,1);
+bd.onclick=e=>{if(!e.target.closest('.sp')||!window.speechSynthesis)return;const u=new SpeechSynthesisUtterance(bd.dataset.t);u.lang='es-ES';u.rate=.85;speechSynthesis.cancel();speechSynthesis.speak(u)};
+</script>
+</body>
+</html>
