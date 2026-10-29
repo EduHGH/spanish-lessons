@@ -235,6 +235,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var
   .opt[data-s=ok]{animation:pop .4s,ring 1s ease .1s}
   .anim .on .wv i{animation:wv .7s ease-in-out calc(1s + var(--i,0)*.9s) 4}
 }
+.btn .gl,.btn2 .gl{color:inherit;font-weight:400;font-size:.8rem}.chips li .gl{font-size:.75rem;margin-top:.1em}.st dt .gl,.rt .gl{font-size:.78rem}.ch .gl{margin-top:.25em}
 </style>
 </head>
 <body>
@@ -459,6 +460,7 @@ function say(el,text,state,icon){
   if(icon){const i=document.createElement('span');i.setAttribute('aria-hidden','true');i.textContent=icon+' ';el.append(i)}
   el.append(document.createTextNode(text));
   el.classList.remove('fin');void el.offsetWidth;el.classList.add('fin');
+  window.__pl&&window.__pl();
 }
 function fx(n,c=26){
   if(!anim)return;
@@ -523,7 +525,7 @@ const en=t=>{const n=mk('span','',t);n.lang='en';return n};
   let k=0,ok=false;const ans=$('ra'),bank=$('rb'),f=$('rf'),go=$('rc');
   function load(){
     ok=false;ans.textContent='';bank.textContent='';f.textContent='';delete f.dataset.s;go.textContent='Comprobar';
-    const ri=$('ri');ri.textContent='Frase '+(k+1)+' de '+S.length+' · ';ri.append(en(S[k][1]));
+    const ri=$('ri');ri.textContent='Frase '+(k+1)+' de '+S.length+' · ';ri.append(en(S[k][1]));window.__pl&&window.__pl();
     shuf(S[k][0].split(' ')).forEach(w=>{const b=mk('button','opt',w);b.type='button';bank.append(b)});
   }
   [bank,ans].forEach(c=>c.addEventListener('click',e=>{const b=e.target.closest('.opt');if(!b||ok)return;(b.parentNode===bank?ans:bank).append(b);b.focus()}));
@@ -534,7 +536,7 @@ const en=t=>{const n=mk('span','',t);n.lang='en';return n};
     if(!t){say(f,'Toca las palabras para formar la frase.','no','!');return}
     if(t===S[k][0]){
       ok=true;[...ans.children].forEach(b=>b.dataset.s='ok');
-      const last=k===S.length-1;go.textContent=last?'Empezar de nuevo':'Siguiente';
+      const last=k===S.length-1;go.textContent=last?'Empezar de nuevo':'Siguiente';window.__pl&&window.__pl();
       say(f,last?'¡Completado! Las dos frases son correctas.':'¡Correcto!','ok','✓');fx(f,last?50:24);
     }else say(f,'Casi. Revisa el orden de las palabras.','no','!');
   };
@@ -600,21 +602,108 @@ const GL={
 "Ejercicio · completar":["Exercise · fill in the blanks","Exercice · compléter"],"Completa las frases":["Complete the sentences","Complète les phrases"],
 "Ejercicio · escribir":["Exercise · write","Exercice · écrire"],"Ahora escríbelo tú":["Now write it yourself","Écris-le toi-même maintenant"],
 "Tus primeras 4 semanas":["Your first 4 weeks","Tes 4 premières semaines"],"Presentarte":["Introducing yourself","Te présenter"],"Opinar":["Giving opinions","Donner son avis"],"Trabajar en equipo":["Teamwork","Travailler en équipe"],"Tu reunión completa":["Your full meeting","Ta réunion complète"]
+,
+"según datos y reseñas reales de alumnos":["based on real student data and reviews","selon des données et des avis réels d’élèves"],
+"Estructurado":["Structured","Structuré"],
+"Carrera y negocios":["Career and business","Carrière et affaires"],
+"Reuniones":["Meetings","Réunions"],
+"Trabajo en equipo":["Teamwork","Travail en équipe"],
+"Fluidez":["Fluency","Aisance"],
+"Vocabulario":["Vocabulary","Vocabulaire"],
+"Empiezas desde cero":["You're starting from zero","Tu pars de zéro"],
+"Lunes a jueves por la tarde-noche":["Monday to Thursday, late afternoon–evening","Du lundi au jeudi, en fin d’après-midi et en soirée"],
+"Español nativo":["Native Spanish","Espagnol natif"],
+"Sin teoría que no uses. Cada ejercicio parte de una situación real de tu trabajo.":["No theory you won't use. Every exercise starts from a real situation at your work.","Pas de théorie inutile. Chaque exercice part d’une situation réelle de ton travail."],
+"Toca una tarjeta, dila en voz alta y mira la traducción.":["Tap a card, say it aloud and see the translation.","Touche une carte, dis-la à voix haute et regarde la traduction."],
+"Y al final de cada clase, una conversación sin guion.":["And at the end of every class, an unscripted conversation.","Et à la fin de chaque cours, une conversation sans script."],
+"Elige una frase y después su pareja. Parejas: # de #.":["Pick a phrase, then its pair. Pairs: # of #.","Choisis une phrase, puis son associée. Paires : # sur #."],
+"Elige la palabra que falta en cada frase.":["Pick the missing word in each sentence.","Choisis le mot manquant dans chaque phrase."],
+"Escribe la frase en español. Las mayúsculas y las tildes no importan.":["Write the sentence in Spanish. Capitals and accents don't matter.","Écris la phrase en espagnol. Les majuscules et les accents n’ont pas d’importance."],
+"Valoración de las clases: #,# · Reseñas de alumnos: #,# (# reseñas)":["Class rating: #,# · Student reviews: #,# (# reviews)","Note des cours : #,# · Avis d’élèves : #,# (# avis)"],
+"#,# · # reseñas":["#,# · # reviews","#,# · # avis"],
+"Enseñando español como lengua extranjera a profesionales, expatriados y residentes.":["Teaching Spanish as a foreign language to professionals, expats and residents.","J’enseigne l’espagnol langue étrangère à des professionnels, expatriés et résidents."],
+"Certificado en español como lengua extranjera.":["Certified in Spanish as a foreign language.","Certifié en espagnol langue étrangère."],
+"Cuando lo necesites, te aclaro en inglés o en francés.":["When you need it, I'll clarify in English or French.","Quand tu en as besoin, j’éclaircis en anglais ou en français."],
+"Hablas y escribes desde el minuto 5. Las opciones múltiples son solo calentamiento.":["You speak and write from minute 5. Multiple choice is only a warm-up.","Tu parles et écris dès la cinquième minute. Les QCM ne sont qu’un échauffement."],
+"Aprendes bloques que puedes usar mañana: «Tengo que…», «¿Puedes…?».":["You learn blocks you can use tomorrow: “I have to…”, “Can you…?”.","Tu apprends des blocs utilisables demain : « Je dois… », « Peux-tu… ? »."],
+"No avanzamos hasta que te sale en voz alta.":["We don't move on until it comes out aloud.","On n’avance pas tant que tu ne le dis pas à voix haute."],
+"Tus reuniones, tu equipo, tu agenda. Nada de ejemplos que no son tuyos.":["Your meetings, your team, your schedule. No examples that aren't yours.","Tes réunions, ton équipe, ton agenda. Aucun exemple qui ne soit pas le tien."],
+"Mi método: hablar, pronunciar y pensar en español. Sin repasar lo que ya puedes estudiar por tu cuenta.":["My method: speak, pronounce and think in Spanish. Without reviewing what you can already study on your own.","Ma méthode : parler, prononcer et penser en espagnol. Sans réviser ce que tu peux déjà étudier seul(e)."],
+"Small talk y primeros minutos de una reunión.":["Small talk and the first minutes of a meeting.","Small talk et premières minutes d’une réunion."],
+"Estar de acuerdo, no estar de acuerdo, preguntar.":["Agreeing, disagreeing, asking.","Être d’accord, ne pas être d’accord, demander."],
+"Tareas, plazos, días, horas y números.":["Tasks, deadlines, days, hours and numbers.","Tâches, délais, jours, heures et chiffres."],
+"Simulación de principio a fin.":["A simulation from start to finish.","Une simulation du début à la fin."],
+"Dos clases por semana · lunes a jueves · tarde-noche, hora de París":["Two classes a week · Monday to Thursday · late afternoon–evening, Paris time","Deux cours par semaine · du lundi au jeudi · fin d’après-midi et soirée, heure de Paris"],
+"↓ desliza o usa las flechas":["↓ swipe or use the arrow keys","↓ fais défiler ou utilise les flèches"],
+"horas de clase":["class hours","heures de cours"],
+"clases impartidas":["classes taught","cours donnés"],
+"alumnos":["students","élèves"],
+"días en la plataforma":["days on the platform","jours sur la plateforme"],
+"Claridad":["Clarity","Clarté"],
+"Tranquilidad":["Calm","Sérénité"],
+"Progreso":["Progress","Progrès"],
+"Escucha":["Listen","Écoute"],
+"Repite":["Repeat","Répète"],
+"Adapta":["Adapt","Adapte"],
+"Úsalo":["Use it","Utilise-le"],
+"Tu salvavidas en cualquier reunión.":["Your lifeline in any meeting.","Ta bouée de sauvetage dans toute réunion."],
+"Educado y directo.":["Polite and direct.","Poli et direct."],
+"Tu primera opinión en español.":["Your first opinion in Spanish.","Ta première opinion en espagnol."],
+"Cierra cualquier conversación bien.":["Close any conversation well.","Termine bien n’importe quelle conversation."],
+"Can you repeat, please?":["","Peux-tu répéter, s’il te plaît ?"],
+"Slower, please.":["","Plus lentement, s’il te plaît."],
+"I agree.":["","Je suis d’accord."],
+"Thank you for your help.":["","Merci pour ton aide."],
+"Frase # de # · Can you speak more slowly, please?":["Sentence # of #","Phrase # sur #"],
+"Frase # de # · I agree with your proposal.":["Sentence # of #","Phrase # sur #"],
+"Comprobar":["Check","Vérifier"],
+"Borrar":["Clear","Effacer"],
+"Elegir mis dos días":["Choose my two days","Choisir mes deux jours"],
+"Siguiente":["Next","Suivant"],
+"Empezar de nuevo":["Start again","Recommencer"],
+"Colega: ¡Buenos días, Eloïse! ¿Qué tal el fin de semana?":["Colleague: Good morning, Eloïse! How was your weekend?","Collègue : Bonjour, Eloïse ! Comment s’est passé ton week-end ?"],
+"Tú, en voz alta: Bien, gracias, ¿y tú?":["You, aloud: Fine, thanks, and you?","Toi, à voix haute : Bien, merci, et toi ?"],
+"Colega: Muy bien. Empezamos: el proyecto es importante.":["Colleague: Very well. Let's start: the project is important.","Collègue : Très bien. On commence : le projet est important."],
+"Tú, en voz alta: ¿Puedes repetir, por favor?":["You, aloud: Can you repeat, please?","Toi, à voix haute : Peux-tu répéter, s’il te plaît ?"],
+"¡Exacto! Ya sabes pedirlo en una reunión real.":["Exactly! You now know how to ask for it in a real meeting.","Exactement ! Tu sais maintenant le demander dans une vraie réunion."],
+"Casi. Piensa: ¿qué necesitas que haga tu colega?":["Almost. Think: what do you need your colleague to do?","Presque. Réfléchis : que dois-tu demander à ton collègue ?"],
+"¡Todas unidas!":["All matched!","Toutes associées !"],
+"¡Pareja correcta!":["Correct pair!","Bonne paire !"],
+"Casi. Prueba otra pareja.":["Almost. Try another pair.","Presque. Essaie une autre paire."],
+"Toca las palabras para formar la frase.":["Tap the words to build the sentence.","Touche les mots pour former la phrase."],
+"¡Completado! Las dos frases son correctas.":["Done! Both sentences are correct.","Terminé ! Les deux phrases sont correctes."],
+"¡Correcto!":["Correct!","Correct !"],
+"Casi. Revisa el orden de las palabras.":["Almost. Check the word order.","Presque. Vérifie l’ordre des mots."],
+"Correcto":["Correct","Correct"],
+"Casi, prueba otra":["Almost, try another","Presque, essaie un autre"],
+"Te faltan # por completar.":["You still have # to complete.","Il t’en reste # à compléter."],
+"¡Todo correcto!":["All correct!","Tout est correct !"],
+"# de # correctas.":["# of # correct.","# sur # correctes."],
+"Escribe una frase.":["Write a sentence.","Écris une phrase."],
+"¡Correcto! Gracias por tu ayuda.":["Correct! Gracias por tu ayuda.","Correct ! Gracias por tu ayuda."],
+"¡Correcto! Estoy de acuerdo.":["Correct! Estoy de acuerdo.","Correct ! Estoy de acuerdo."],
+"¡Correcto! Más despacio, por favor.":["Correct! Más despacio, por favor.","Correct ! Más despacio, por favor."],
+"Casi. Una respuesta posible: Gracias por tu ayuda.":["Almost. One possible answer: Gracias por tu ayuda.","Presque. Une réponse possible : Gracias por tu ayuda."],
+"Casi. Una respuesta posible: Estoy de acuerdo.":["Almost. One possible answer: Estoy de acuerdo.","Presque. Une réponse possible : Estoy de acuerdo."],
+"Casi. Una respuesta posible: Más despacio, por favor.":["Almost. One possible answer: Más despacio, por favor.","Presque. Une réponse possible : Más despacio, por favor."],
+"Casi. Prueba otra vez.":["Almost. Try again.","Presque. Réessaie."],
+"¡Genial! Los elegimos juntos":["Great! We'll choose them together","Super ! On les choisit ensemble"]
 },G={};
 Object.keys(GL).forEach(k=>G[nk(k)]=GL[k]);
-const gt=[];
-document.querySelectorAll('main h1,main h2,main h3,main .tag,main .ag li,main p.mut').forEach(n=>{const g=G[nk(n.textContent)];if(g){n._g=g;gt.push(n)}});
+const SEL='main h1,main h2,main h3,main p,main .tag,main .ag li,main .chips li,main .flow li,main .st dt,main .rt li>span>span:first-child,main .bk .mut,main .bk b,main .btn,main .btn2,main .ch li,#fb,.fbk';
+const gt=[...document.querySelectorAll(SEL)];
+const gOf=n=>{const c=n.cloneNode(true);c.querySelectorAll('.gl,.sr:empty').forEach(x=>x.remove());const raw=c.textContent.replace(/\s+/g,' ').trim().replace(/^[✓!✗] /,'');const g=G[nk(raw)];if(!g)return null;const d=raw.match(/\d+/g)||[];return g.map(s=>{let j=0;return s.replace(/#/g,()=>d[j++]||'#')})};
 const MODES=['es','en','fr'],LB={es:['ES','solo español'],en:['ES + EN','español con inglés de apoyo'],fr:['ES + FR','español con francés de apoyo']};
 let mode='es';try{const m=localStorage.getItem('lang');if(MODES.includes(m))mode=m}catch(e){}
 const lb=$('lg');
 function paintLang(announce){
   document.querySelectorAll('.gl').forEach(g=>g.remove());
-  if(mode!=='es'){const i=mode==='en'?0:1;gt.forEach(n=>{const g=mk('span','gl fin',n._g[i]);g.lang=mode;n.append(g)})}
+  if(mode!=='es'){const i=mode==='en'?0:1;gt.forEach(n=>{const g=gOf(n);if(g&&g[i]){const s=mk('span','gl fin',g[i]);s.lang=mode;n.append(s)}})}
   lb.textContent=LB[mode][0];
   lb.setAttribute('aria-label',LB[mode][0]+': '+LB[mode][1]+'. Pulsa para cambiar el idioma de apoyo.');
   if(announce)$('lgst').textContent='Idioma de apoyo: '+LB[mode][1];
 }
-lb.hidden=false;paintLang(false);
+lb.hidden=false;paintLang(false);window.__pl=()=>paintLang(false);
 lb.addEventListener('click',()=>{
   mode=MODES[(MODES.indexOf(mode)+1)%3];
   try{localStorage.setItem('lang',mode)}catch(e){}
