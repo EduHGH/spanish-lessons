@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<!--
+PLANTILLA · Vídeo de clase (75 s, 5 escenas) — Eloïse
+USO
+ 1. Duplica este archivo como Eloise_clase_NN_video.html.
+ 2. Edita SOLO el bloque «CONFIG» (const V). No toques CSS, controles ni motor: así todos los vídeos salen iguales.
+ 3. Ábrelo con ?lint al final de la URL: avisa de textos sin traducir (TODO), formas mal contadas y textos que se salen del cuadro.
+ 4. MP4: ?render&lang=en|fr&theme=light|dark (oculta controles; sin parámetros usa ES+EN y claro).
+TEXTOS: cada apoyo es ['EN','FR']. Marcas: *azul*, _subrayado_ (solo en el español grande), \n = salto de línea.
+ESCENAS (tiempos fijos): 1 Situación 0–5 s · 2 Fórmula 5–25 s · 3 Contraste 25–50 s · 4 Verbo 50–65 s · 5 Dilo tú 65–75 s.
+ESCENA 3: por defecto, dos tarjetas A/B + cierre. Si la clase necesita otra imagen (ruta, silueta, raíz/terminación…), rellena V.s3.custom = {html, fn:(u,h)=>{…}} (u = segundos dentro de la escena, 0–25; h = {E,cl,pr,eo,eb,put,up}: E(id) elemento, pr(u,a,b) progreso 0–1, up(el,u,inicio,duración,desplazamiento) aparece subiendo, put(el,opacidad,x,y,escala)). El html son los hijos de <section id="z3">, con position absolute (left/top en px sobre 1280×720).
+-->
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Clase 07 · Eloïse · Vídeo: Tu agenda</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<script>(function(){var q=new URLSearchParams(location.search),t=q.get('theme'),rd=location.search.length>1&&!q.has('lint');if(t!=='light'&&t!=='dark'){t=null;if(!rd)try{t=localStorage.getItem('theme')}catch(e){}}document.documentElement.dataset.theme=(t==='light'||t==='dark')?t:(rd?'light':matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')})();</script>
+<style>
+:root{color-scheme:light;--paper:#F7F4EC;--ink:#1B1C20;--mut:#5A5953;--line:#D3CFC4;--edge:#7C7A72;--b:#2250E8;--am:#B35400;--on:#fff;--hl-b:rgba(34,80,232,.16);--f1:Fraunces,Georgia,serif;--f2:'IBM Plex Sans',system-ui,sans-serif}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--paper:#13151A;--ink:#F1EEE6;--mut:#A9A79F;--line:#34363D;--edge:#8A8880;--b:#6B9AFF;--am:#FFC233;--on:#0E1420;--hl-b:rgba(107,154,255,.26)}}
+:root[data-theme=dark]{color-scheme:dark;--paper:#13151A;--ink:#F1EEE6;--mut:#A9A79F;--line:#34363D;--edge:#8A8880;--b:#6B9AFF;--am:#FFC233;--on:#0E1420;--hl-b:rgba(107,154,255,.26)}
+html,body{margin:0}
+body{background:var(--paper);max-width:1100px;margin:0 auto;padding:24px}
+[data-zr] body{max-width:none;padding:0}
+.vd{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;background:var(--paper);color:var(--ink);font:400 24px/1.3 var(--f2)}
+.vd *{box-sizing:border-box}
+.zst{position:absolute;left:0;top:0;width:1280px;height:720px;transform-origin:0 0}
+.zs{position:absolute;inset:0;opacity:0}
+.zs>*{position:absolute}
+.ze{font:600 56px/1.12 var(--f1);letter-spacing:-.01em;margin:0}
+.zg{margin:6px 0 0;font-size:24px;line-height:1.3;color:var(--mut)}
+.kb{color:var(--b)}
+.zb{position:absolute;left:64px;right:64px;top:28px;display:grid;grid-template-columns:5fr 20fr 25fr 15fr 10fr;gap:6px}
+.zb i{height:8px;border-radius:4px;background:var(--line);overflow:hidden}
+.zb i::after{content:'';display:block;height:100%;background:var(--b);transform:scaleX(var(--p,0));transform-origin:left}
+.zh{position:absolute;left:64px;top:50px;font:500 22px var(--f2);color:var(--ink)}
+.zh span{font-weight:400;color:var(--mut)}
+.zc{display:inline-block;padding:10px 28px;border:2px solid var(--edge);border-radius:99px;font:500 30px var(--f2);white-space:nowrap}
+.zc.k{border-color:var(--b);color:var(--b);font:600 34px var(--f1)}
+.zr{position:absolute;left:64px;width:1152px;height:128px;display:grid;grid-template-columns:600px 1fr;align-items:center}
+.zf{display:flex;align-items:center;gap:6px}
+.zf .zc{padding:8px 22px;border-radius:12px}
+.zpl{width:0;display:flex;justify-content:center;font:600 30px var(--f2);color:var(--mut)}
+.zt{position:absolute;left:0;width:656px;height:76px;display:flex;align-items:center;gap:28px;border-bottom:1px solid var(--line)}
+.zpn{width:240px;text-align:right;font:500 28px var(--f2);color:var(--mut)}
+.zvb{font:600 54px/76px var(--f1)}
+.zvb b{font-weight:700;padding:0 3px;margin:0 -3px;background:linear-gradient(var(--hl-b),var(--hl-b)) 0 85%/0 55% no-repeat}
+.zj{color:var(--am)}
+.zbb{max-width:760px;padding:26px 38px;border:2px solid var(--edge);border-radius:30px 30px 30px 6px}
+.zbb .ze{font-size:46px}
+.zbb u{color:var(--b);text-decoration:underline;text-decoration-thickness:4px;text-underline-offset:6px}
+.zbb.y{right:64px;border-color:var(--b);background:var(--b);color:var(--on);border-radius:30px 30px 6px 30px}
+.zbb.y u,.zbb.y .kb{color:inherit}
+.zbb.y .zg{color:inherit;opacity:.88}
+.zpb{width:560px;height:10px;border-radius:5px;background:var(--line);overflow:hidden;margin-top:18px}
+.zpb i{display:block;height:100%;background:var(--b);transform-origin:left}
+.zq{display:flex;align-items:center;gap:14px;margin-top:10px;font:400 16px var(--f2);color:var(--mut)}
+[data-zr] .zq{display:none}
+.zq button{font:600 16px var(--f2);padding:8px 22px;min-height:40px;border:0;border-radius:99px;background:var(--b);color:var(--on);cursor:pointer}
+.zq input{flex:1;min-width:120px;accent-color:var(--b)}
+.zq{flex-wrap:wrap}
+.zk{display:flex;gap:8px;margin-left:auto}
+.zk button{background:none;color:var(--ink);border:2px solid var(--edge);padding:6px 16px}
+.zk button[aria-pressed=true]{background:var(--b);color:var(--on);border-color:var(--b)}
+.vh{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.zq button,.zq input{min-height:44px}
+.zq button:focus-visible,.zq input:focus-visible,.zx summary:focus-visible{outline:3px solid var(--b);outline-offset:3px}
+.zx{margin-top:12px;font:400 18px/1.5 var(--f2);color:var(--ink)}
+.zx summary{cursor:pointer;font-weight:600;min-height:44px;display:flex;align-items:center}
+.zx h3{font:600 20px var(--f1);margin:14px 0 4px}.zx ul{margin:0;padding-left:22px}.zx li[lang]{color:var(--mut)}
+[data-zr] .zx{display:none}
+#lint{white-space:pre-wrap;font:14px/1.5 var(--f2);padding:12px;border:2px dashed var(--edge);margin-top:12px}
+@media(forced-colors:active){.zk button[aria-pressed=true]{outline:2px solid Highlight}}
+</style>
+</head>
+<body>
+<main>
+<h1 class="vh" id="h1"></h1>
+<div class="vd" id="vd" role="img"><div class="zst" id="zst"></div></div>
+<div class="zq"><button id="zp" type="button">Ver<span class="vh"> el vídeo</span></button><input id="zt" type="range" min="0" max="75" step=".1" value="0" aria-label="Posición del vídeo" aria-valuetext="0:00 de 1:15"><span id="zm">0:00 / 1:15</span><div class="zk" role="group" aria-label="Ajustes"><button type="button" id="le" aria-pressed="true">ES + EN</button><button type="button" id="lf" aria-pressed="false">ES + FR</button><button type="button" id="zth"></button></div></div>
+<details class="zx" id="zx"></details>
+</main>
+
+<script>
+/* ══════════ CONFIG · lo único que cambia de una clase a otra ══════════ */
+const G=(en,fr,a)=>'<p class="zg" data-fr="'+fr+'" '+(a||'')+'>'+en+'</p>';
+const X0=260,HW=95.6,Y0=185,RH=70,XH=k=>X0+(k-8)*HW,DAYS=['lunes','martes','miércoles','jueves','viernes'];
+const TICKS=[...Array(12)].map((_,i)=>{const a=i*Math.PI/6,s=Math.sin(a),c=-Math.cos(a);return '<line x1="'+s*142+'" y1="'+c*142+'" x2="'+s*154+'" y2="'+c*154+'" style="stroke:var(--edge);stroke-width:'+(i%3?3:5)+'"/>'+(i%3?'':'<text x="'+s*116+'" y="'+c*116+'" text-anchor="middle" dominant-baseline="central" style="fill:var(--mut);font:500 28px var(--f2)">'+(i||12)+'</text>')}).join('');
+let WK='';
+for(let k=9;k<=17;k++)WK+='<div style="position:absolute;left:'+XH(k)+'px;top:148px;width:1px;height:358px;background:var(--line)"></div><span style="position:absolute;left:'+(XH(k)-30)+'px;top:118px;width:60px;text-align:center;font:500 20px var(--f2);color:var(--mut)">'+k+'</span>';
+DAYS.forEach((d,i)=>{const y=Y0+i*RH;WK+='<span style="position:absolute;left:64px;top:'+(y-17)+'px;font:500 28px var(--f2)">'+d+'</span><i id="br'+i+'" style="position:absolute;left:'+XH(9)+'px;top:'+(y-19)+'px;width:'+(8*HW)+'px;height:38px;border:2px solid var(--b);border-radius:10px;background:var(--hl-b);transform-origin:left;opacity:0"></i>'});
+WK+='<div id="mn" style="position:absolute;left:0;top:0">'+[[9,'las nueve'],[17,'las cinco']].map(m=>'<div style="position:absolute;left:'+(XH(m[0])-1)+'px;top:148px;height:358px;border-left:3px dashed var(--b)"></div><span style="position:absolute;left:'+(XH(m[0])-70)+'px;top:512px;width:140px;text-align:center;font:600 22px var(--f2);color:var(--b)">'+m[1]+'</span>').join('')+'</div>';
+WK+='<i id="mt" style="position:absolute;left:'+XH(10)+'px;top:'+(Y0+RH-19)+'px;width:'+HW+'px;height:38px;border-radius:10px;background:var(--b);color:var(--on);font:600 17px/38px var(--f2);text-align:center;font-style:normal">reunión</i>';
+const CL=(id,chip,es,en,fr)=>'<div id="'+id+'" style="left:580px;top:190px;width:636px">'+(chip?'<span class="zc k">'+chip+'</span>':'')+'<div class="ze" style="font-size:46px;margin-top:'+(chip?18:78)+'px">'+es+'</div>'+G(en,fr,'style="font-size:26px"')+'</div>';
+const KP=(id,es,en,fr)=>'<div id="'+id+'" style="left:96px;top:575px;width:1088px"><div class="ze" style="font-size:44px">'+es+'</div>'+G(en,fr,'style="font-size:22px"')+'</div>';
+const V={
+ clase:'07', alumna:'Eloïse', titulo:'Tu agenda',
+ aria:'Vídeo animado de la clase 7: a las y a la una; un reloj con agujas muestra y cuarto, y media y menos cuarto; barras de lunes a viernes para de… a… y desde… hasta…; presente de volver; práctica oral con Carlos.',
+ s1:{ es:'Una reunión\ncon Carlos.', ap:['A meeting with Carlos. Which day? What time?','Une réunion avec Carlos. Quel jour ? À quelle heure ?'], chips:['el lunes','a las diez'] },
+ s2:{ rows:[
+   {a:'A las', b:'hora', es:'La reunión es a las diez.', ap:['The meeting is at ten.','La réunion est à dix heures.']},
+   {a:'A la', b:'una', es:'La reunión es a la una.', ap:['The meeting is at one.','La réunion est à une heure.']},
+   {a:'De … a …', b:'días', es:'Trabajo de lunes a viernes.', ap:['I work Monday to Friday.','Je travaille du lundi au vendredi.']}],
+  dato:{ es:'Solo la una usa *«a la»*.', ex:'a la una · a las dos · a las tres…', ap:['Only one o’clock takes “a la”; every other hour takes “a las”.','Seule une heure prend « a la » ; toutes les autres prennent « a las ».'] } },
+ s3:{ custom:{
+  html:
+  '<svg id="ck" style="left:130px;top:170px" width="340" height="340" viewBox="-170 -170 340 340" aria-hidden="true"><circle r="160" style="fill:none;stroke:var(--edge);stroke-width:5"/><g>'+TICKS+'</g><line id="hh" x1="0" y1="10" x2="0" y2="-82" style="stroke:var(--ink);stroke-width:12;stroke-linecap:round"/><line id="mh" x1="0" y1="14" x2="0" y2="-124" style="stroke:var(--b);stroke-width:7;stroke-linecap:round"/><circle r="10" style="fill:var(--ink)"/></svg>'+
+  CL('c0','','Son las <span class="kb">diez</span>.','It is ten o’clock.','Il est dix heures.')+
+  CL('c1',':15 · y cuarto','Son las diez <span class="kb">y cuarto</span>.','It is a quarter past ten.','Il est dix heures et quart.')+
+  CL('c2',':30 · y media','Son las diez <span class="kb">y media</span>.','It is half past ten.','Il est dix heures et demie.')+
+  CL('c3',':45 · menos cuarto','Son las once <span class="kb">menos cuarto</span>.','It is a quarter to eleven.','Il est onze heures moins le quart.')+
+  '<div id="wk" style="left:0;top:0;width:1280px;height:720px">'+WK+'</div>'+
+  KP('k1','Trabajo <span class="kb">de</span> lunes <span class="kb">a</span> viernes.','I work Monday to Friday.','Je travaille du lundi au vendredi.')+
+  KP('k2','Trabajo <span class="kb">desde</span> las nueve <span class="kb">hasta</span> las cinco.','I work from nine until five.','Je travaille de neuf heures à cinq heures.')+
+  KP('k3','La reunión es <span class="kb">el</span> martes <span class="kb">a las</span> diez.','The meeting is on Tuesday at ten.','La réunion est mardi à dix heures.'),
+  fn:(u,h)=>{const {E,pr,eo,eb,put,up}=h,
+   sw=(id,a,b,dy)=>put(E(id),pr(u,a,a+.4)*(1-pr(u,b-.4,b)),0,(1-eo(pr(u,a,a+.4)))*dy),
+   M=600+15*(eo(pr(u,3.4,4.3))+eo(pr(u,6.4,7.3))+eo(pr(u,9.4,10.3)));
+   sw('ck',.2,12.2,16);
+   E('hh').setAttribute('transform','rotate('+(M*.5)+')');E('mh').setAttribute('transform','rotate('+((M%60)*6)+')');
+   sw('c0',.6,3.8,12);sw('c1',3.6,6.8,12);sw('c2',6.6,9.8,12);sw('c3',9.6,12.2,12);
+   sw('wk',12.3,26,14);
+   DAYS.forEach((_,i)=>{const p=eo(pr(u,13+i*.6,13.7+i*.6)),el=E('br'+i);el.style.opacity=p>0?1:0;el.style.transform='scaleX('+p+')'});
+   up(E('mn'),u,17,.5,10);
+   put(E('mt'),pr(u,21,21.2),0,0,.7+.3*eb(pr(u,21,21.5)));
+   sw('k1',13,17.6,10);sw('k2',17.4,21.4,10);sw('k3',21.2,26,10)}
+ }},
+ s4:{ verbo:'volver', ap:['to come back','revenir'], tipo:['verbo en -er','-er verb','verbe en -er'],
+   formas:[['vuelv','o',1],['vuelv','es',1],['vuelv','e',1],['volv','emos'],['volv','éis'],['vuelv','en',1]],
+   nota:{ es:'*Vuelvo* a las cinco. *Vuelve* a la una.', ap:['I come back at five. He/she comes back at one.','Je reviens à cinq heures. Il/elle revient à une heure.'] } },
+ s5:{ quien:'Carlos', q:{es:'¿A qué hora es la reunión?', ap:['What time is the meeting?','À quelle heure est la réunion ?']},
+      turno:{es:'Tu turno: di la *hora*.', ap:['Your turn: say the time, aloud.','À toi : dis l’heure, à voix haute.']}, r:{es:'La reunión es a las diez.', ap:['The meeting is at ten.','La réunion est à dix heures.']} }
+};
+
+/* ══════════ MOTOR · no tocar ══════════ */
+(()=>{
+const E=id=>document.getElementById(id),cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x)),pr=(t,a,b)=>cl((t-a)/(b-a)),
+eo=x=>1-Math.pow(1-x,3),eb=x=>1+2.70158*Math.pow(x-1,3)+1.70158*Math.pow(x-1,2),
+put=(el,o,x=0,y=0,s=1)=>{el.style.opacity=o;el.style.transform='translate('+x+'px,'+y+'px) scale('+s+')'},
+up=(el,u,a,d=.6,dy=24)=>{const p=pr(u,a,a+d);put(el,p,0,(1-eo(p))*dy)};
+const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'),
+fm=s=>esc(s).replace(/\n/g,'<br>').replace(/\*(.+?)\*/g,'<span class="kb">$1</span>').replace(/_(.+?)_/g,'<u>$1</u>'),
+g=(ap,a='')=>'<p class="zg" data-fr="'+esc(ap[1])+'" '+a+'>'+esc(ap[0])+'</p>';
+const Q=new URLSearchParams(location.search),LINT=Q.has('lint'),render=location.search.length>1&&!LINT;
+if(render)document.documentElement.dataset.zr=1;
+const T=[0,5,25,50,65,75],TG=[['Situación','Situation','Situation'],['Fórmula','Formula','Formule'],['El contraste clave','The key contrast','Le contraste clé'],['Verbo del día','Verb of the day','Verbe du jour'],['Dilo tú','Your turn','À toi']];
+const P4=['yo','tú','él / ella / usted','nosotros','vosotros','ellos / ustedes'];
+
+document.title='Clase '+V.clase+' · '+V.alumna+' · Vídeo: '+V.titulo;E('h1').textContent=document.title;
+E('vd').setAttribute('aria-label',V.aria+' Debajo tienes la transcripción.');
+
+/* escenas (HTML generado desde V) */
+const a=V.s3.a,b=V.s3.b,c=V.s3.cierre,s4=V.s4,s5=V.s5;
+E('zst').innerHTML='<div class="zb" id="zb"></div><div class="zh" id="zh"></div>'+
+'<section class="zs" id="z1"><div class="ze" id="a1" style="left:96px;top:170px;width:1088px;font-size:84px">'+fm(V.s1.es)+'</div>'+g(V.s1.ap,'id="a2" style="left:96px;top:380px;font-size:30px"')+'<div id="a3" style="left:96px;top:480px"><span class="zc" id="ca" style="margin-right:20px">'+esc(V.s1.chips[0])+'</span><span class="zc" id="cb">'+esc(V.s1.chips[1])+'</span></div></section>'+
+'<section class="zs" id="z2">'+V.s2.rows.map((r,i)=>'<div class="zr" style="top:'+(90+i*140)+'px"><div class="zf"><span class="zc k" id="ra'+i+'">'+esc(r.a)+'</span><span class="zpl" id="rp'+i+'">+</span><span class="zc" id="rb'+i+'">'+esc(r.b)+'</span></div><div id="rs'+i+'"><div class="ze" style="font-size:32px">'+fm(r.es)+'</div>'+g(r.ap,'style="font-size:21px"')+'</div></div>').join('')+
+ '<div id="zd" style="left:64px;top:540px;width:1152px"><div class="ze" style="font-size:44px">'+fm(V.s2.dato.es)+'</div><p class="zg" style="font-size:26px;color:var(--ink)">'+esc(V.s2.dato.ex)+'</p>'+g(V.s2.dato.ap,'style="font-size:20px"')+'</div></section>'+
+'<section class="zs" id="z3">'+(V.s3.custom?V.s3.custom.html:
+ '<div class="zbb" id="ga" style="left:64px;top:130px;width:552px"><div class="ze">'+fm(a.es)+'</div>'+g(a.ap)+'</div><span class="zc k" id="ta" style="left:64px;top:330px;font-size:28px">'+esc(a.tag)+'</span>'+
+ '<div class="zbb y" id="gb" style="left:664px;right:auto;top:130px;width:552px"><div class="ze">'+fm(b.es)+'</div>'+g(b.ap)+'</div><span class="zc k" id="tg" style="left:664px;top:330px;font-size:28px">'+esc(b.tag)+'</span>'+
+ '<div id="ci" style="left:96px;top:520px;width:1088px"><div class="ze" style="font-size:38px">'+fm(c.es)+'</div>'+g(c.ap,'style="font-size:22px"')+'</div>')+'</section>'+
+'<section class="zs" id="z4"><div id="zv" style="left:64px;top:190px"><div class="ze" style="font-size:120px">'+esc(s4.verbo)+'</div>'+g(s4.ap,'style="font-size:30px"')+'<p class="zg" style="font-size:22px">'+esc(s4.tipo[0])+' · <span data-fr="'+esc(s4.tipo[2])+'">'+esc(s4.tipo[1])+'</span></p></div>'+
+ '<div id="tb" style="left:560px;top:100px;width:656px;height:460px">'+P4.map((p,i)=>{const f=s4.formas[i]||['','',0];return'<div class="zt" style="top:'+i*76+'px"><span class="zpn" id="pn'+i+'">'+p+'</span><span class="zvb" id="v'+i+'">'+(f[2]?'<span class="zj">'+esc(f[0])+'</span>':esc(f[0]))+'<b>'+esc(f[1])+'</b></span></div>'}).join('')+'</div>'+
+ '<div id="zn4" style="left:64px;top:596px;width:1152px"><div class="ze" style="font-size:34px">'+fm(s4.nota.es)+'</div>'+g(s4.nota.ap,'style="font-size:22px"')+'</div></section>'+
+'<section class="zs" id="z5"><div id="b1" style="left:64px;top:110px"><p class="zg" style="margin:0 0 8px 8px;font-size:22px">'+esc(s5.quien)+'</p><div class="zbb"><div class="ze">'+fm(s5.q.es)+'</div>'+g(s5.q.ap)+'</div></div>'+
+ '<div id="tn" style="left:72px;top:430px"><div style="display:flex;align-items:center;gap:20px"><span id="zdt" style="width:22px;height:22px;border-radius:50%;background:var(--b)"></span><div class="ze" style="font-size:44px">'+fm(s5.turno.es)+'</div></div>'+g(s5.turno.ap,'style="margin-left:42px"')+'<div class="zpb"><i id="zpi"></i></div></div>'+
+ '<div class="zbb y" id="b2" style="top:400px"><div class="ze">'+fm(s5.r.es)+'</div>'+g(s5.r.ap)+'</div></section>';
+const Z=[1,2,3,4,5].map(i=>E('z'+i));
+E('zb').innerHTML='<i></i>'.repeat(5);const bars=[...E('zb').children];
+
+function s1(t){up(E('a1'),t,.3,.9,34);up(E('a2'),t,1.1,.7,16);
+ [['ca',2],['cb',2.5]].forEach(([id,a])=>put(E(id),pr(t,a,a+.2),0,0,.7+.3*eb(pr(t,a,a+.5))))}
+function s2(u){
+ V.s2.rows.forEach((r,i)=>{const a=.5+i*4.6,x=90*(1-eb(pr(u,a,a+.85))),o=pr(u,a,a+.3),bump=1+.04*Math.sin(Math.PI*pr(u,a+.75,a+1.05));
+  put(E('ra'+i),o,-x,0,bump);put(E('rb'+i),o,x,0,bump);put(E('rp'+i),o*(1-pr(u,a+.5,a+.85)));up(E('rs'+i),u,a+1.5,.6,14)});
+ up(E('zd'),u,14.4,.7,20)}
+function s3g(u){up(E('ga'),u,1,.7,24);up(E('ta'),u,4,.5,10);up(E('gb'),u,9,.7,24);up(E('tg'),u,12,.5,10);up(E('ci'),u,17,.7,16)}
+const H={E,cl,pr,eo,eb,put,up},s3=V.s3.custom?u=>V.s3.custom.fn(u,H):s3g;
+function s4f(u){
+ up(E('zv'),u,.1,.7,20);
+ P4.forEach((_,i)=>{const s=.8+i*1.1,h=eo(pr(u,8.2+i*.22,8.8+i*.22)),v=E('v'+i),b=v.lastElementChild;
+  E('pn'+i).style.opacity=pr(u,s,s+.35);v.style.clipPath='inset(-10% '+(1-eo(pr(u,s+.2,s+.8)))*100+'% -10% 0)';
+  b.style.backgroundSize=h*100+'% 55%';b.style.color=h>.15?'var(--b)':'inherit'});
+ up(E('zn4'),u,10.4,.7,16)}
+function s5f(u){
+ up(E('b1'),u,.3,.8,24);
+ put(E('tn'),pr(u,3,3.4)*(1-pr(u,6.9,7.2)),0,(1-eo(pr(u,3,3.5)))*16);
+ E('zpi').style.transform='scaleX('+(1-pr(u,3,7))+')';E('zdt').style.transform='scale('+(1+.25*Math.sin(u*7))+')';
+ const q=eb(pr(u,7.2,7.9));put(E('b2'),pr(u,7.2,7.5),(1-q)*60,0,.92+.08*q)}
+
+let cur=-1,lt=0,ls=-1,L='en';const fmt=t=>Math.floor(t/60)+':'+String(Math.floor(t%60)).padStart(2,'0');
+function seek(t){t=cl(t,0,75);lt=t;const i=t<5?0:t<25?1:t<50?2:t<65?3:4;
+ Z.forEach((s,k)=>{const a=T[k],b=T[k+1];s.style.opacity=t>=a&&t<=b?Math.min(k?pr(t,a,a+.5):1,1-pr(t,b-.5,b)):0});
+ bars.forEach((el,k)=>el.style.setProperty('--p',pr(t,T[k],T[k+1])));
+ if(i!==cur){cur=i;E('zh').innerHTML=TG[i][0]+'<span lang="'+L+'"> · '+TG[i][L==='fr'?2:1]+'</span>'}
+ s1(t);s2(t-5);s3(t-25);s4f(t-50);s5f(t-65);
+ E('zt').value=t;E('zm').textContent=fmt(t)+' / 1:15';if(Math.floor(t)!==ls){ls=Math.floor(t);E('zt').setAttribute('aria-valuetext',fmt(t)+' de 1:15')}}
+
+const vd=E('vd'),st=E('zst'),fit=()=>st.style.transform='scale('+vd.clientWidth/1280+')';
+new ResizeObserver(fit).observe(vd);fit();
+
+const rm=matchMedia('(prefers-reduced-motion:reduce)').matches;
+let t=0,pl=false,go=false,last=0;const bt=E('zp'),set=()=>{bt.innerHTML=(pl?'Pausa':t>=75?'Repetir':'Ver')+'<span class="vh"> el vídeo</span>'};
+bt.onclick=()=>{if(pl)pl=false;else{if(!go||t>=75)t=0;go=true;pl=true}set()};
+E('zt').oninput=e=>{pl=false;go=true;t=+e.target.value;seek(t);set()};
+E('zt').onkeydown=e=>{const d={ArrowRight:5,ArrowLeft:-5,PageUp:10,PageDown:-10}[e.key];if(d){e.preventDefault();pl=false;go=true;t=cl(lt+d,0,75);seek(t);set()}};
+const loop=ts=>{if(pl){t+=(ts-last)/1000;if(t>=75){t=75;pl=false;set()}seek(t)}last=ts;requestAnimationFrame(loop)};
+
+/* idioma, tema y transcripción */
+const sv=(k,v)=>{try{localStorage.setItem(k,v)}catch(e){}},le=E('le'),lf=E('lf'),zth=E('zth');
+L=Q.get('lang')==='fr'?'fr':'en';
+if(!render)try{const g=localStorage.getItem('vlang');if(g==='fr'||g==='en')L=g}catch(e){}
+document.querySelectorAll('[data-fr]').forEach(e=>e.dataset.en=e.textContent);
+function buildTx(){const d=E('zx'),H=TG.map(x=>x[0]);
+ d.innerHTML='<summary>Transcripción del vídeo</summary>';
+ Z.forEach((s,k)=>{const h=document.createElement('h3'),u=document.createElement('ul');h.textContent=H[k]+' · '+fmt(T[k]);d.append(h,u);
+  s.querySelectorAll('.ze,.zg,.zc,.zt').forEach(x=>{const v=(x.classList.contains('zt')?[...x.children].map(c=>c.textContent).join(' '):(x.innerText??x.textContent)).replace(/\s+/g,' ').trim();if(v.length<2)return;const li=document.createElement('li');li.textContent=v;if(x.dataset.fr)li.lang=L;u.append(li)})})}
+function setLang(l){L=l;document.querySelectorAll('[data-fr]').forEach(e=>{e.textContent=l==='fr'?e.dataset.fr:e.dataset.en;e.lang=l});
+ le.setAttribute('aria-pressed',l==='en');lf.setAttribute('aria-pressed',l==='fr');cur=-1;seek(lt);buildTx()}
+function setTh(m){document.documentElement.dataset.theme=m;zth.innerHTML=m==='dark'?'<span aria-hidden="true">☀</span> Claro':'<span aria-hidden="true">☾</span> Oscuro';zth.setAttribute('aria-label',m==='dark'?'Cambiar a modo claro':'Cambiar a modo oscuro')}
+le.onclick=()=>{setLang('en');sv('vlang','en')};lf.onclick=()=>{setLang('fr');sv('vlang','fr')};
+zth.onclick=()=>{const m=document.documentElement.dataset.theme==='dark'?'light':'dark';setTh(m);sv('theme',m)};
+setTh(document.documentElement.dataset.theme);setLang(L);
+
+/* ?lint: pendientes, recuentos y desbordes */
+function lint(){const w=[];
+ (function wk(o,p){if(typeof o==='string'){if(!o.trim()||/TODO/.test(o))w.push('Falta texto: '+p)}else if(o&&typeof o==='object'){if(Array.isArray(o)&&/\.ap$/.test(p)&&o.length!==2)w.push('«ap» debe ser [EN, FR]: '+p);Object.keys(o).forEach(k=>wk(o[k],p+'.'+k))}})(V,'V');
+ if(V.s2.rows.length!==3)w.push('s2.rows debe tener 3 filas');if(s4.formas.length!==6)w.push('s4.formas debe tener 6 formas');if(V.s1.chips.length!==2)w.push('s1.chips debe tener 2 chips');
+ const sr=st.getBoundingClientRect(),k=sr.width/1280;
+ [4.4,24.4,49.4,64.4,74.9].forEach((tt,i)=>{seek(tt);Z[i].querySelectorAll('.ze,.zg,.zc,.zbb,.zt').forEach(x=>{const r=x.getBoundingClientRect();if(!r.width||+getComputedStyle(x).opacity<.3||x.closest('[style*="opacity: 0"]'))return;
+  if((r.right-sr.left)/k>1250||(r.bottom-sr.top)/k>706||(r.left-sr.left)/k<30)w.push('Se sale del cuadro (escena '+(i+1)+'): '+x.textContent.trim().slice(0,50))})});
+ seek(2.8);const p=document.createElement('pre');p.id='lint';p.textContent=w.length?'⚠ '+w.length+' aviso(s):\n'+w.join('\n'):'✓ Plantilla coherente: sin pendientes ni desbordes.';document.querySelector('main').append(p);console.log(p.textContent)}
+
+document.fonts.ready.then(()=>{window.seek=seek;seek(render?0:2.8);window.__ready=1;
+ if(LINT)lint();
+ if(!render&&!LINT){requestAnimationFrame(loop);
+  if(!rm&&'IntersectionObserver'in window)new IntersectionObserver((es,o)=>{if(es[0].isIntersecting){o.disconnect();if(!go){t=0;go=true;pl=true;set()}}},{threshold:.6}).observe(vd)}});
+})();
+</script>
+</body>
+</html>
