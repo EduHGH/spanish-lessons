@@ -487,7 +487,6 @@ EXERCISES.forEach((ex, i)=>{
     <div class="ex-options">
       ${shuffleArr(ex.options).map(o=>`<button class="opt-btn" data-value="${o}">${o}</button>`).join('')}
     </div>
-    <p class="en" style="margin-top:8px;">${ex.en}</p>
   `;
   exWrap.appendChild(el);
 
@@ -679,7 +678,7 @@ const SORT=[{"w": ["Estoy", "llegando", "al bar", "con Marta"], "en": "I'm arriv
  root.innerHTML=head('A','Ordena la frase','Put the sentence in order','Toca las piezas en el orden correcto; toca una pieza colocada para quitarla.','Tap the pieces in the right order; tap a placed piece to remove it.')+'<div id="sort-items"></div><div class="game-bar"><button class="btn-primary" id="sort-check">Comprobar</button><button class="btn-ghost" id="sort-reset">Reiniciar</button><span class="score" id="sort-score"></span></div>';
  const box=$('sort-items'),score=$('sort-score');let st;
  const chip=(it,n,i,act,d)=>`<button class="chip" data-n="${n}" data-i="${i}" data-act="${act}"${d?' disabled':''}>${it.w[i]}</button>`;
- function render(){box.innerHTML=SORT.map((it,n)=>{const s=st[n];return `<div class="sort-item"><div class="build ${s.cls}">${s.placed.map(i=>chip(it,n,i,'rm',s.done)).join('')}</div><div class="bank">${s.bank.map(i=>chip(it,n,i,'add',s.done)).join('')}</div>${s.msg?`<p class="feedback">${s.msg}</p>`:''}${en(it.en)}</div>`;}).join('');}
+ function render(){box.innerHTML=SORT.map((it,n)=>{const s=st[n];return `<div class="sort-item"><div class="build ${s.cls}">${s.placed.map(i=>chip(it,n,i,'rm',s.done)).join('')}</div><div class="bank">${s.bank.map(i=>chip(it,n,i,'add',s.done)).join('')}</div>${s.msg?`<p class="feedback">${s.msg}</p>`:''}</div>`;}).join('');}
  const init=()=>{st=SORT.map(it=>({bank:shuffle(it.w.map((_,i)=>i)),placed:[],done:false,cls:'',msg:''}));score.textContent='';render();};
  box.addEventListener('click',e=>{const b=e.target.closest('.chip');if(!b)return;const s=st[+b.dataset.n],i=+b.dataset.i;if(b.dataset.act==='add'){s.bank=s.bank.filter(x=>x!==i);s.placed.push(i);}else{s.placed=s.placed.filter(x=>x!==i);s.bank.push(i);}render();});
  $('sort-check').addEventListener('click',()=>{let ok=0;st.forEach((s,n)=>{const good=s.placed.length===SORT[n].w.length&&s.placed.every((v,k)=>v===k);s.done=true;s.cls=good?'ok':'bad';s.msg=good?'':'✗ Orden correcto: '+SORT[n].w.join(' ');if(good)ok++;});score.textContent=`${ok} / ${SORT.length} correctas`;render();});
@@ -694,7 +693,7 @@ const PAIRS=[["yo", "estoy comiendo", "I'm eating"], ["tú", "estás corriendo",
  const board=$('match-board');let order,done,sel,bad;
  const cl=(side,i)=>done.has(i)?' done':(bad&&bad[side]===i?' nope':(sel[side]===i?' sel':''));
  function draw(){
-  board.innerHTML=`<div class="match"><div class="col">${PAIRS.map((p,i)=>`<button class="chip${cl('L',i)}" data-side="L" data-i="${i}"${done.has(i)?' disabled':''}>${p[0]}</button>`).join('')}</div><div class="col">${order.map(i=>`<button class="chip${cl('R',i)}" data-side="R" data-i="${i}"${done.has(i)?' disabled':''}>${PAIRS[i][1]}${en(PAIRS[i][2])}</button>`).join('')}</div></div>`;
+  board.innerHTML=`<div class="match"><div class="col">${PAIRS.map((p,i)=>`<button class="chip${cl('L',i)}" data-side="L" data-i="${i}"${done.has(i)?' disabled':''}>${p[0]}</button>`).join('')}</div><div class="col">${order.map(i=>`<button class="chip${cl('R',i)}" data-side="R" data-i="${i}"${done.has(i)?' disabled':''}>${PAIRS[i][1]}</button>`).join('')}</div></div>`;
   $('match-score').textContent=done.size===PAIRS.length?'¡Todo emparejado! 🎉':`${done.size} / ${PAIRS.length} parejas`;
  }
  const init=()=>{order=shuffle(PAIRS.map((_,i)=>i));done=new Set();sel={L:null,R:null};bad=null;draw();};
@@ -713,7 +712,7 @@ const CHAT=[{"who": "Marta", "sit": "Marta te escribe.", "sitEn": "Marta message
  const root=$('g-chat');const H=head('C','Contesta a tu amigo','Answer your friend','Elige la respuesta correcta.','Pick the correct reply.');
  let t,score,opts,answered;
  function turn(){const c=CHAT[t];opts=shuffle(c.opts);answered=false;
-  root.innerHTML=H+`<div class="scene-setup" style="margin-bottom:12px"><span class="scene-icon">💬</span><p class="scene-text" style="margin:0"><strong>Turno ${t+1} / ${CHAT.length}.</strong> ${c.sit}${en(c.sitEn)}</p></div><div class="line friend"><div class="line-avatar">${c.who[0]}</div><div class="line-body"><p class="line-name">${c.who}</p><div class="line-bubble">${c.msg}${en(c.msgEn)}</div></div></div><div class="chat-opts">${opts.map((o,i)=>`<button class="chip" data-i="${i}">${o[0]}</button>`).join('')}</div><p class="feedback" id="chat-fb"></p><div class="game-bar" id="chat-bar"></div>`;}
+  root.innerHTML=H+`<div class="scene-setup" style="margin-bottom:12px"><span class="scene-icon">💬</span><p class="scene-text" style="margin:0"><strong>Turno ${t+1} / ${CHAT.length}.</strong> ${c.sit}${en(c.sitEn)}</p></div><div class="line friend"><div class="line-avatar">${c.who[0]}</div><div class="line-body"><p class="line-name">${c.who}</p><div class="line-bubble">${c.msg}</div></div></div><div class="chat-opts">${opts.map((o,i)=>`<button class="chip" data-i="${i}">${o[0]}</button>`).join('')}</div><p class="feedback" id="chat-fb"></p><div class="game-bar" id="chat-bar"></div>`;}
  function end(){root.innerHTML=H+`<div class="note" style="margin-top:0"><strong>${score} / ${CHAT.length}</strong> ${score===CHAT.length?'¡Frases perfectas!':'Repasa estar + gerundio y vuelve a intentarlo.'}${en(score===CHAT.length?'Perfect sentences!':'Review estar + gerund and try again.')}</div><div class="game-bar"><button class="btn-ghost" id="chat-again">Jugar otra vez</button></div>`;}
  root.addEventListener('click',e=>{
   const b=e.target.closest('.chat-opts .chip');
