@@ -224,7 +224,7 @@ select.input.tone{background-color:var(--bg);cursor:default}
 .fb.tone{width:fit-content;max-width:100%;margin-top:var(--a2);padding:var(--a1) var(--a3);border:1px solid var(--bd);border-radius:var(--rad2);background:var(--bg)}
 .hint{margin:2px 0 var(--a2);color:var(--ink2);font:400 14px/1.5 var(--f)}
 .hint kbd{padding:0 var(--a2);border:1px solid var(--edge);border-radius:var(--a1);font:500 14px var(--f);color:var(--ink)}
-.alt{display:none}.noaud .alt{display:block}.noaud .sayb{display:none}
+.alt{display:none}.noaud .alt,.rev .alt{display:block}.noaud .sayb{display:none}
 .alt-h{border-bottom:1.5px dotted currentColor;cursor:pointer}
 [lang=en]{font-size:.95em}
 
@@ -288,8 +288,8 @@ select.input.tone{background-color:var(--bg);cursor:default}
 .flip:hover{background:var(--tint)}
 .flip[aria-pressed=true]{border-color:var(--steel)}
 .flip>span{grid-area:1/1;align-self:center;display:grid;gap:var(--a1);justify-items:center}
-.flip .bk,.flip[aria-pressed=true] .ff{visibility:hidden}
-.flip[aria-pressed=true] .bk{visibility:visible}
+.flip .bk,.flip[aria-pressed=true] .ff{opacity:0;visibility:hidden}.flip>span{transition:opacity .18s,transform .18s,visibility .18s}.flip .bk{transform:perspective(600px) rotateY(90deg)}.flip[aria-pressed=true] .ff{transform:perspective(600px) rotateY(-90deg)}@media(prefers-reduced-motion:reduce){.flip>span{transition:none}}
+.flip[aria-pressed=true] .bk{opacity:1;visibility:visible;transform:none}
 .flip .w{font:800 24px var(--f);letter-spacing:-.025em}
 .flip .m{font:500 14px var(--f)}
 html:not([data-lang=en]) .eo{display:none}
@@ -405,7 +405,7 @@ html::after{height:calc(100vh + var(--h2,120vh));background-size:100% var(--h2,1
 :is(a,button,summary,input,select,textarea,[tabindex="0"]):focus-visible{outline:3px solid var(--steel)}
 @media(prefers-contrast:more){:root:root{--ink2:var(--ink);--edge:var(--ink);--line:var(--ink2)}html{background:var(--sand)}html::before,html::after{display:none}:is(a,button,summary,input,select,textarea,[tabindex="0"]):focus-visible{outline-width:4px}}
 @media(forced-colors:active){html{background:Canvas}html::before,html::after{display:none}}
-</style><script>(function(){var r=document.documentElement,q=matchMedia("(prefers-reduced-motion:reduce)"),a=1,b=1,W=0,H=0,f=0;
+.ax-lips svg{display:block;width:112px;height:94px}.ax-lips ellipse{transition:rx .45s cubic-bezier(.3,1.4,.5,1),ry .45s cubic-bezier(.3,1.4,.5,1)}@media(prefers-reduced-motion:reduce){.ax-lips ellipse{transition:none}}.ax-tc svg{display:block;width:100%}.ax-sy{display:grid;grid-template-columns:repeat(5,1fr);text-align:center;font-weight:600;margin-top:4px}.ax-sy b{color:var(--acc);text-transform:uppercase;font-weight:800;border-bottom:3px solid var(--acc)}.ax-tg0{stroke:var(--ink);stroke-dasharray:3 4;opacity:.35}</style><script>(function(){var r=document.documentElement,q=matchMedia("(prefers-reduced-motion:reduce)"),a=1,b=1,W=0,H=0,f=0;
 function u(){f=0;var s=q.matches?0:scrollY;r.style.setProperty("--ty1",-(s*.1%a)+"px");r.style.setProperty("--ty2",-(s*.22%b)+"px")}
 function z(){if(innerWidth===W&&Math.abs(innerHeight-H)<160)return;W=innerWidth;H=innerHeight;a=Math.round(H*1.5);b=Math.round(H*1.2);r.style.setProperty("--h1",a+"px");r.style.setProperty("--h2",b+"px");u()}
 addEventListener("scroll",function(){f||(f=requestAnimationFrame(u))},{passive:true});addEventListener("resize",z);z()})();</script>
@@ -585,11 +585,11 @@ let tipHide=()=>{};const tipTab=()=>{tipHide();document.querySelectorAll('[data-
  let had=false;document.addEventListener('click',e=>{had=!!get(e)},true);
  document.addEventListener('click',e=>{const el=had?get(e):null;if(el&&el!==cur)show(el);else hide()});
  addEventListener('scroll',()=>{if(cur)place(cur)},true);addEventListener('resize',()=>{if(cur)place(cur)})}
-const stepper=(b,its)=>{let i=0;const n=its.length,nav=E('div','stp'),bk=E('button','btn nu','Anterior'),nx=E('button','btn pri ink','Siguiente'),ct=E('span','stc'),bar=E('div','stbar','<i></i>');
+const stepper=(b,its)=>{let i=0,at=0;const n=its.length,nav=E('div','stp'),bk=E('button','btn nu','Anterior'),nx=E('button','btn pri ink','Siguiente'),ct=E('span','stc'),bar=E('div','stbar','<i></i>');
  ct.setAttribute('aria-live','polite');bar.setAttribute('aria-hidden','true');b.classList.add('stp-on');
- const show=k=>{i=Math.max(0,Math.min(n-1,k));its.forEach((x,j)=>x.hidden=j!==i);ct.innerHTML='<span aria-hidden="true">'+(i+1)+' / '+n+'</span><span class="sr">Pregunta '+(i+1)+' de '+n+'</span>';bar.firstChild.style.width=((i+1)/n*100)+'%';bk.disabled=!i;nx.disabled=i===n-1};
+ const show=k=>{clearTimeout(at);i=Math.max(0,Math.min(n-1,k));its.forEach((x,j)=>x.hidden=j!==i);ct.innerHTML='<span aria-hidden="true">'+(i+1)+' / '+n+'</span><span class="sr">Pregunta '+(i+1)+' de '+n+'</span>';bar.firstChild.style.width=((i+1)/n*100)+'%';bk.disabled=!i;nx.disabled=i===n-1};
  bk.onclick=()=>{snd('back');show(i-1)};nx.onclick=()=>{snd('next');show(i+1)};nav.append(bk,ct,nx);b.append(bar,nav);show(0);
- return{next:()=>show(i+1),at:()=>i}};
+ return{next:()=>show(i+1),at:()=>i,auto:()=>{const j=i;clearTimeout(at);at=setTimeout(()=>{if(i===j&&j<n-1)show(j+1)},700)}}};
 function choice(b,items,keep){const k=N-1,els=[],first=[],dn=new Set;let sp,g;
   items.forEach((it,ix)=>{const w=E('div','item'),id='q'+(++QN),qe=E('p','q',it.q);qe.id=id;w.appendChild(qe);if(it.alt)w.appendChild(altHint(it.alt));
     const og=E('div','opts'),f=FB(w);og.setAttribute('role','group');og.setAttribute('aria-labelledby',id);let ans=0;
@@ -599,7 +599,7 @@ function choice(b,items,keep){const k=N-1,els=[],first=[],dn=new Set;let sp,g;
         if(!ok){x.className='opt tone no';x.lastChild.textContent='✗';miss(k,it.say||it.q)}
         fb(f,ok?'ok':'err',(ok?'Correcto. ':'Incorrecto. ')+(it.e||''));[...og.children].forEach(y=>{const m=it.t&&it.t.find(([a])=>a===y.firstChild.textContent);if(m)trh(y,m[1],1)});c.append(E('span','sr',ok?' (tu respuesta, correcta)':' (respuesta correcta)'));if(!ok)x.append(E('span','sr',' (tu respuesta, incorrecta)'));
         
-        dn.add(ix);if(dn.size===items.length){const c2=first.reduce((a,b)=>a+b,0);fb(g,'ok',c2+' de '+items.length+' correctas.');cmpDone(k,c2,items.length)}};
+        dn.add(ix);if(ok)sp.auto();if(dn.size===items.length){const c2=first.reduce((a,b)=>a+b,0);fb(g,'ok',c2+' de '+items.length+' correctas.');cmpDone(k,c2,items.length)}};
       og.appendChild(x)});
     w.insertBefore(og,f);b.appendChild(w);els.push(w)});
   sp=stepper(b,els);g=FB(b)}
@@ -627,11 +627,12 @@ const axT=(c,h,en)=>{const e=E('p',c,h);if(en)e.dataset.en=en;return e};
 const axWatch=(el,f)=>{el._axv=f;AXIO?AXIO.observe(el):f(true)};
 const axReplay=el=>{el.classList.remove('ax-go');void el.offsetWidth;el.classList.add('ax-go')};
 const axOnce=el=>axWatch(el,v=>{if(v&&!el._d){el._d=1;axReplay(el)}});
+const axCard=c=>{const b=E('button','btn nu','↻');b.setAttribute('aria-label','Repetir animación');b.onclick=()=>{snd('tick');axReplay(c)};c.appendChild(b);axOnce(c);return c};
 /* reproductor por pasos: Pausar/Reproducir y Siguiente; solo avanza si está a la vista y no hay «reducir movimiento» */
-function axPlayer(box,n,ms,apply,ctl){let i=0,t=0,play=false,vis=false;
+function axPlayer(box,n,ms,apply,ctl){let i=0,t=0,play=true,vis=false;
  const pp=E('button','btn pri',play?'Pausar':'Reproducir'),nx=E('button','btn nu','Siguiente');
- const go=k=>{i=(k+n)%n;apply(i)},tick=()=>{clearInterval(t);t=0;if(play&&vis&&!RM.matches)t=setInterval(()=>go(i+1),ms)};
- pp.onclick=()=>{snd('tick');play=!play;pp.textContent=play?'Pausar':'Reproducir';tick()};
+ const go=k=>{i=(k+n)%n;apply(i)},adv=()=>{if(i>=n-1){play=false;pp.textContent='Reproducir';tick()}else go(i+1)},tick=()=>{clearInterval(t);t=0;if(play&&vis&&!RM.matches)t=setInterval(adv,ms)};
+ pp.onclick=()=>{snd('tick');if(!play&&i>=n-1)go(0);play=!play;pp.textContent=play?'Pausar':'Reproducir';tick()};
  nx.onclick=()=>{snd('next');go(i+1);tick()};pp.hidden=RM.matches;ctl.append(pp,nx);
  axWatch(box,v=>{vis=v;tick()});apply(0);
  return{go:k=>{go(k);play=false;pp.textContent='Reproducir';tick()}}}
@@ -645,13 +646,15 @@ function axSort(){const a=E('article','card ax-sort');
  bk=E('div','ax-buckets'),cols=[0,1].map(k=>{const c=E('div','ax-b tone '+(k?'ax-estar':'ax-ser'));c.append(E('h4','',k?'ESTAR':'SER'),axT('meta',k?'dónde estás':'quién eres · de dónde eres',k?'where you are':'who you are · where you are from'));bk.appendChild(c);return c});
  S.forEach(([s,q,k],i)=>{const x=E('div','ax-ch',`${s}<small>${q}</small>`);trh(x,()=>tr(s));x.style.setProperty('--i',i);x.style.setProperty('--dx',k?'-90px':'90px');cols[k].appendChild(x)});
  a.append(bk);return a}
+function axLips(){const d=E('div','ax-lips','<svg viewBox="0 0 120 100" aria-hidden="true"><defs><clipPath id="axlc"><ellipse cx="60" cy="50"/></clipPath></defs><ellipse class="lp" cx="60" cy="50" fill="#c8605a"/><ellipse class="mt" cx="60" cy="50" fill="#3a1418"/><g clip-path="url(#axlc)"><ellipse class="tg" cx="60" cy="86" rx="22" ry="14" fill="#d98a8a"/><rect class="te" x="20" y="0" width="80" height="0" fill="#fff"/></g></svg>'),q=c=>d.querySelector('.'+c),cp=d.querySelector('clipPath ellipse');
+d._s=(w,h,l)=>{const rx=w*.55,ry=h*.5,t=l==='o'||l==='u'?13:9;[[q('lp'),rx+t,ry+t*.8],[q('mt'),rx,ry],[cp,rx,ry]].forEach(([e,a,b])=>{e.style.rx=a+'px';e.style.ry=b+'px';e.setAttribute('rx',a);e.setAttribute('ry',b)});const te=q('te');te.setAttribute('x',60-rx);te.setAttribute('width',rx*2);te.setAttribute('y',50-ry);te.setAttribute('height',l==='e'||l==='i'?Math.max(3,ry*.55):0);q('tg').setAttribute('cy',50+ry*.8)};return d}
 /* vocales: la boca cambia de forma */
 function axVowels(){const V=[['a','casa','boca muy abierta',62,72],['e','mesa','boca media y labios anchos',76,42],['i','misa','labios anchos y boca casi cerrada',84,12],['o','sol','labios redondos',40,54],['u','luna','labios muy redondos y pequeños',24,30]],
- w=E('div','ax-vow'),fc=E('div','ax-face'),mo=E('i','ax-mouth'),r=E('div'),bs=E('div','ax-vs'),cap=E('p','ax-vc','<b></b> <span></span>'),ctl=E('div','ax-ctl');
+ w=E('div','ax-vow'),fc=E('div','ax-face'),mo=axLips(),r=E('div'),bs=E('div','ax-vs'),cap=E('p','ax-vc','<b></b> <span></span>'),ctl=E('div','ax-ctl');
  fc.setAttribute('aria-hidden','true');fc.appendChild(mo);cap.setAttribute('aria-live','polite');cap.setAttribute('aria-atomic','true');
  const bt=V.map(([l,wd],k)=>{const b=E('button','chip nu ax-v',`<b>${l}</b><span>${wd}</span>`);b.setAttribute('aria-label',l+', '+wd);b.onclick=()=>{pl.go(k)};bs.appendChild(b);return b});
  r.append(bs,cap,ctl);w.append(fc,r);
- const pl=axPlayer(w,V.length,1900,i=>{mo.style.width=V[i][3]+'px';mo.style.height=V[i][4]+'px';bt.forEach((b,k)=>b.setAttribute('aria-pressed',String(k===i)));cap.firstChild.textContent=V[i][0];cap.lastChild.textContent=V[i][2]},ctl);return w}
+ const pl=axPlayer(w,V.length,1900,i=>{mo._s(V[i][3],V[i][4],V[i][0]);bt.forEach((b,k)=>b.setAttribute('aria-pressed',String(k===i)));cap.firstChild.textContent=V[i][0];cap.lastChild.textContent=V[i][2]},ctl);return w}
 const axPos=(me,rows,r)=>{const x=rows[r];if(x)me.style.setProperty('--y',(x.offsetTop+(x.offsetHeight-22)/2-7)+'px')};
 /* la escena: subes del portal al tercero */
 function axBuilding(){const F=['Cuarto · Pablo','Tercero · tu piso','Segundo · Rosa','Primero','Portal'],
@@ -659,7 +662,7 @@ function axBuilding(){const F=['Cuarto · Pablo','Tercero · tu piso','Segundo �
  w=E('div','ax-bld'),tw=E('div','ax-tw'),me=E('i','ax-me'),rt=E('div'),pl=E('b','ax-pl'),tx=E('p','ax-tx'),ctl=E('div','ax-ctl');
  me.setAttribute('aria-hidden','true');tx.setAttribute('aria-live','polite');tx.setAttribute('aria-atomic','true');const rows=F.map(f=>{const r=E('div','ax-fl',f);tw.appendChild(r);return r});tw.appendChild(me);
  trh(tx,()=>typeof tr==='function'?tr(tx.textContent):null);rt.append(pl,tx,ctl);w.append(tw,rt);if(window.ResizeObserver)new ResizeObserver(()=>axPos(me,rows,me._r)).observe(tw);
- axPlayer(w,ST.length,3000,i=>{const[p,t,r]=ST[i];pl.textContent=p;tx.textContent=t;me.style.setProperty('--r',r);me._r=r;axPos(me,rows,r);rows.forEach((x,k)=>x.classList.toggle('on',k===r))},ctl);return w}
+ axPlayer(w,ST.length,3000,i=>{const[p,t,r]=ST[i];const up=()=>{pl.textContent=p;tx.textContent=t;tx.style.opacity=1};clearTimeout(tx._t);tx.style.transition='opacity .14s';if(RM.matches||!tx.textContent)up();else{tx.style.opacity=0;tx._t=setTimeout(up,900)};me.style.setProperty('--r',r);me._r=r;axPos(me,rows,r);rows.forEach((x,k)=>x.classList.toggle('on',k===r))},ctl);return w}
 Object.assign(EN3,{'Ser o estar':'Ser or estar','Pregúntate: ¿quién es? ¿de dónde es? → ser. ¿Dónde está? → estar.':'Ask yourself: who is it? where is it from? → ser. Where is it? → estar.',
 '¿quién?':'who?','¿de dónde?':'where from?','¿dónde?':'where (place)?','Soy Michelle.':'I’m Michelle.','Estoy en el portal.':'I’m in the entrance hall.','Soy de Francia.':'I’m from France.','Mi piso está en el tercero.':'My flat is on the third floor.','Pablo es mi vecino.':'Pablo is my neighbour.','Pablo está en el ascensor.':'Pablo is in the lift.',
 'dónde estás':'where you are','quién eres · de dónde eres':'who you are · where you are from',
@@ -724,7 +727,7 @@ Object.assign(EN3,{'Ser o estar':'Ser or estar','Pregúntate: ¿quién es? ¿de 
  const g=E('div','grid g2');
  G.forEach(([tag,t,r,en,f,ex])=>{const c=E('article','card'),w=f.map((x,i)=>row(S6[i],x)),st=E('div','stage all','<div><p class="meta">Singular</p>'+w.slice(0,3).join('')+'</div>'+(w.length>3?'<div><p class="meta">Plural</p>'+w.slice(3).join('')+'</div>':''));
   st.style.fontSize='1.125rem';st.querySelectorAll('.fr').forEach((x,k)=>x.style.setProperty('--i',k));c.append(T('meta',tag),E('h3','',t),T('',r,en));if(/-ar/.test(t))c.appendChild(axAr());c.appendChild(st);ex.forEach(([h,e])=>c.appendChild(trh(T('',h),e)));g.appendChild(c)});
- {const ct=E('div','ax-ctl'),rb=E('button','btn pri','Reproducir');rb.onclick=()=>{snd('tick');p.querySelectorAll('article.card').forEach(axReplay)};ct.appendChild(rb);p.appendChild(ct)}p.append(g,axSort(),T('hint','En las frases también aparecen «vivo» (vivir) y «puede» (poder). Se explican más adelante: de momento, aprende la frase entera.','The phrases also contain «vivo» (vivir) and «puede» (poder). They are explained later on: for now, learn the whole phrase.'))}
+ {const ct=E('div','ax-ctl'),rb=E('button','btn pri','Reproducir');rb.onclick=()=>{snd('tick');p.querySelectorAll('article.card').forEach(axReplay)};ct.appendChild(rb);p.appendChild(ct)}g.querySelectorAll('article.card').forEach(axCard);p.append(g,axCard(axSort()),T('hint','En las frases también aparecen «vivo» (vivir) y «puede» (poder). Se explican más adelante: de momento, aprende la frase entera.','The phrases also contain «vivo» (vivir) and «puede» (poder). They are explained later on: for now, learn the whole phrase.'))}
 
 /* 3 · Huecos */ {const b=sec('Huecos con desplegable','Soy, estoy, me llamo, hablo','Practica. Elige la forma correcta en cada hueco.');
  const RS={L:'Llamarse es reflexivo: me llamo, te llamas, se llama.',S:'«Ser» dice quién eres y de dónde: soy, eres, es, somos, sois, son.',E:'«Estar» dice dónde estás: estoy, estás, está, estamos, estáis, están.',A:'Verbos en -ar: -o, -as, -a, -amos, -áis, -an.'};
@@ -760,8 +763,8 @@ E|Mi bolso |está,es,estoy| en el ascensor.|My bag is in the lift.
 S|Mi vecino |es,está,soy| profesor.|My neighbour is a teacher.`.split('\n').map(r=>{const[c,a,o,z,t]=r.split('|');return[a,o.split(','),z,RS[c],t]}).slice(0,12),L=[];
  Q.forEach(([a,o,z,e,t],n)=>{const w=E('div','item'),p=E('p','q'),s=E('select','input nu','<option value="">Elige…</option>'+sh(o).map(t=>`<option>${t}</option>`).join(''));
   s.setAttribute('aria-label','Hueco '+(n+1)+': '+a.trim()+' … '+z.trim());p.append((n+1)+'. ',a,s,z);w.appendChild(p);const f=FB(w);f.id='fbh'+n;s.setAttribute('aria-describedby',f.id);const cb=E('button','btn pri','Comprobar');w.insertBefore(cb,f);b.appendChild(w);L.push(w);
-  s.onchange=()=>{if(DN.has(n))s.value=o[0];else snd('tick')};cb.onclick=()=>{if(DN.has(n))return;if(!s.value){fb(f,'hint','Elige una opción primero.');return}const ok=s.value===o[0];if(!p.dataset.tr)trh(p,t);if(F1[n]==null)F1[n]=ok?1:0;s.className='input tone '+(ok?'ok':'no');s.setAttribute('aria-invalid',String(!ok));
-   if(ok){DN.add(n);cb.setAttribute('aria-disabled','true');s.setAttribute('aria-readonly','true');fb(f,'ok','Correcto.');if(DN.size===Q.length){const c=F1.reduce((x,y)=>x+y,0);fb(g,'ok',c+' de '+Q.length+' correctas a la primera.');cmpDone(1,c,Q.length)}}
+  s.onchange=()=>{clearTimeout(s._ck);if(DN.has(n))s.value=o[0];else{snd('tick');s._ck=setTimeout(()=>s.value&&cb.onclick(),450)}};cb.onclick=()=>{if(DN.has(n))return;if(!s.value){fb(f,'hint','Elige una opción primero.');return}const ok=s.value===o[0];if(!p.dataset.tr)trh(p,t);if(F1[n]==null)F1[n]=ok?1:0;s.className='input tone '+(ok?'ok':'no');s.setAttribute('aria-invalid',String(!ok));
+   if(ok){DN.add(n);sp.auto();cb.setAttribute('aria-disabled','true');s.setAttribute('aria-readonly','true');fb(f,'ok','Correcto.');if(DN.size===Q.length){const c=F1.reduce((x,y)=>x+y,0);fb(g,'ok',c+' de '+Q.length+' correctas a la primera.');cmpDone(1,c,Q.length)}}
    else{miss(1,(a+o[0]+z).trim());fb(f,'err','Pista: '+e)}}});
  const DN=new Set,F1=[],sp=stepper(b,L),g=FB(b)}
 
@@ -801,7 +804,7 @@ Hay una luna.|Hay una lona.|luna|lona|u|o|moon|canvas|There is a moon.|There is 
  {b.classList.add('noaud')}
  choice(b,PH)}
 
-/* 5 · Para llevar */ {const b=sec('Tarjetas','Treinta frases para llevar','Para llevar. Lee la frase en inglés, dila en español en voz alta y pulsa la tarjeta para comprobarla.');Object.assign(EN3,{'Treinta frases para llevar':'Thirty phrases to take away'});const g=E('div','grid'),seen=new Set(),sc=E('p','meta','0 / 30 vistas');sc.setAttribute('role','status');b.appendChild(sc);
+/* 5 · Para llevar */ {const b=sec('Tarjetas','Treinta frases para llevar','Para llevar. Lee la frase en inglés, dila en español en voz alta y pulsa la tarjeta para comprobarla.');Object.assign(EN3,{'Treinta frases para llevar':'Thirty phrases to take away'});const g=E('div','grid'),seen=new Set(),sc=E('p','meta','0 / 30 vistas');sc.setAttribute('role','status');b.appendChild(sc);const RN=6,KN={},DD=new Set,cs=[],nr=E('button','btn pri','Siguiente ronda');let rd=0;nr.hidden=true;const vw=()=>{cs.forEach((c,i)=>c.style.display=Math.floor(i/RN)===rd?'grid':'none');sc.textContent='Ronda '+(rd+1)+' de '+(30/RN)+' · '+DD.size+' / 30 vistas'},chk=()=>{vw();if(cs.slice(rd*RN,rd*RN+RN).every(c=>c.dataset.d)){if(DD.size===cs.length)cmpDone(3,0,0);else nr.hidden=false}};nr.onclick=()=>{rd++;nr.hidden=true;vw()};
  [
   ['Hola, me llamo Michelle.','Hi, my name is Michelle.','me llamo + tu nombre'],
   ['Vivo aquí, pero soy de…','I live here, but I’m from…','soy de + tu país'],
@@ -834,8 +837,8 @@ Hay una luna.|Hay una lona.|luna|lona|u|o|moon|canvas|There is a moon.|There is 
   ['¿Habla usted español?','Do you speak Spanish? (formal)','hablar → habla usted'],
   ['Mi profesor se llama Daniel.','My teacher is called Daniel.','llamarse → se llama']].forEach(([w,m,k])=>{
   const c=E('div'),x=E('button','flip nu',`<span class="ff"><span class="w">${m}</span></span><span class="bk"><span class="w">${w}</span><span class="m">${k}</span></span>`);c.style.cssText='display:grid;gap:8px;align-content:start';x.setAttribute('aria-pressed','false');x.setAttribute('aria-label',m);const stt=E('span','sr');stt.setAttribute('role','status');
-  x.onclick=()=>{if(x.getAttribute('aria-pressed')!=='true'){seen.add(w);sc.textContent=seen.size+' / 30 vistas';if(seen.size===30)cmpDone(3,0,0)}const on=x.getAttribute('aria-pressed')!=='true';x.setAttribute('aria-pressed',String(on));snd(on?'flip':'flipb');stt.innerHTML=on?'<span>'+w+' — '+k+'</span>':'';};
-  c.append(x,stt);g.appendChild(c)});b.appendChild(g);b.appendChild(E('div','callout','<p>Ahora, en voz alta</p><p>Haz la escena otra vez con tu profesor, sin leer. Cambia el país, el piso y el nombre del vecino.</p>'))}
+  x.onclick=()=>{if(x.getAttribute('aria-pressed')!=='true'){seen.add(w);}const on=x.getAttribute('aria-pressed')!=='true';x.setAttribute('aria-pressed',String(on));snd(on?'flip':'flipb');if(on&&!DD.has(w)){DD.add(w);c.dataset.d=1;chk()}stt.innerHTML=on?'<span>'+w+' — '+k+'</span>':'';};
+  c.append(x,stt);cs.push(c);g.appendChild(c)});b.append(g,nr);vw();b.appendChild(E('div','callout','<p>Ahora, en voz alta</p><p>Haz la escena otra vez con tu profesor, sin leer. Cambia el país, el piso y el nombre del vecino.</p>'))}
 
 
 Object.assign(EN3,{'Excelente: clase dominada.':'Excellent: lesson mastered.','Muy bien: casi lo tienes.':'Very good: nearly there.','Buen trabajo: repasa «Para repasar» y pulsa Reiniciar para volver a intentarlo.':'Good work: review the mistakes and try again.','Para repasar':'To review'});
