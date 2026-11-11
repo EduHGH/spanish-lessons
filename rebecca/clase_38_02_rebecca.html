@@ -484,6 +484,57 @@ input.ok{border-color:var(--ok)}input.bad{border-color:var(--family);border-styl
 .anchor{font:600 clamp(20px,3.4vw,26px)/1.3 var(--f-display);letter-spacing:-.02em;margin:6px 0 8px}
 .anchor+.note{margin:4px 0 22px}
 .ft{margin-top:40px;text-align:center;color:var(--ink-soft)}.ft p{margin:4px 0}
+
+.tfrow{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 0}
+.tf{display:inline-block;white-space:nowrap;font:600 14px var(--f-data);color:var(--ink);background:var(--paper-alt);border:1px solid var(--ok);border-radius:999px;padding:3px 13px;cursor:pointer;animation:tfPop .4s cubic-bezier(.2,.8,.3,1) var(--d,0s) both}
+.tf-bad{border-color:var(--accent-text);border-style:dashed}
+.tf:hover{background:var(--paper-raised)}
+.tf b,.tf s,.tf em{display:inline-block;vertical-align:baseline;font-weight:600;font-style:normal;text-decoration:none}
+.tf s{animation:tfOut .75s ease calc(var(--d,0s) + .55s) both}
+.tf em{color:var(--ok);transform-origin:left bottom;animation:tfIn .85s ease calc(var(--d,0s) + 1.05s) both}
+.tf-bad em{color:var(--accent-text)}
+@keyframes tfPop{from{opacity:0;transform:translateY(8px) scale(.85)}}
+@keyframes tfOut{0%{max-width:9em;opacity:1}40%{color:var(--family);transform:translateY(-5px) rotate(-9deg)}100%{max-width:0;opacity:0;transform:translateY(10px) rotate(15deg)}}
+@keyframes tfIn{0%{max-width:0;opacity:0;transform:scale(.3,1.5)}40%{max-width:9em;opacity:1;transform:scale(1.4,.7)}60%{transform:scale(.88,1.14)}80%{transform:scale(1.06,.96)}100%{max-width:9em;opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){.tf,.tf s,.tf em{animation-delay:0s!important}}
+@media print{.tfrow{display:none}}
+
+/* ===== Capa de animaciones 2: muelle, imán, repulsión, sellos y ola de verbos (se añade encima; no toca la lógica) ===== */
+:root{--kin-spring:cubic-bezier(.34,1.56,.64,1)}
+.prog-track i{transition:width .8s var(--kin-spring)}
+/* fichas de regla (huecos con data-why, al acertar) */
+.kinrow{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 0}
+.tf-rule{display:inline-flex;align-items:baseline;gap:9px;white-space:normal;text-align:left;border-radius:14px;padding:4px 14px 4px 13px;line-height:1.35}
+.tf-rule em{white-space:nowrap;font-weight:700;animation:kinIn .85s ease calc(var(--d,0s) + .15s) both}
+.tf-rule small{font:500 12.5px var(--f-data);color:var(--ink-soft);animation:tfPop .45s cubic-bezier(.2,.8,.3,1) calc(var(--d,0s) + .75s) both}
+@keyframes kinIn{0%{opacity:0;transform:scale(.3,1.5)}40%{opacity:1;transform:scale(1.4,.7)}60%{transform:scale(.88,1.14)}80%{transform:scale(1.06,.96)}100%{opacity:1;transform:none}}
+/* repulsión: la respuesta errónea sale despedida */
+.kin-ghost{position:fixed;z-index:61;margin:0;padding:0;pointer-events:none;color:var(--family);font-weight:600;white-space:nowrap;text-align:center;overflow:hidden;text-decoration:line-through;text-decoration-thickness:2px;will-change:transform,opacity}
+/* sello de sección completada */
+.num{position:relative;transition:background-color .4s,color .4s}
+section.kin-done>h2 .num,.toc a.kin-done .num{background:var(--ok);color:var(--paper-raised)}
+section.kin-done>h2 .num::before,.toc a.kin-done .num::before{content:"";position:absolute;inset:-2px;border-radius:inherit;border:2px solid var(--ok);opacity:0;pointer-events:none}
+section.kin-done>h2 .num::after,.toc a.kin-done .num::after{content:"✓";position:absolute;right:-7px;top:-8px;width:15px;height:15px;border-radius:50%;background:var(--paper-raised);color:var(--ok);border:1.5px solid var(--ok);font:700 10px/12px var(--f-data);text-align:center;box-sizing:border-box}
+section.kin-go>h2 .num,.toc a.kin-go .num{animation:kinStamp .7s var(--kin-spring) both}
+section.kin-go>h2 .num::before,.toc a.kin-go .num::before{animation:kinRing .9s ease-out both}
+section.kin-go>h2 .num::after,.toc a.kin-go .num::after{animation:kinBadge .5s var(--kin-spring) .25s both}
+@keyframes kinStamp{0%{transform:scale(1)}30%{transform:scale(1.5) rotate(-12deg)}60%{transform:scale(.9) rotate(4deg)}100%{transform:none}}
+@keyframes kinRing{0%{opacity:.9;transform:scale(1)}100%{opacity:0;transform:scale(2.4)}}
+@keyframes kinBadge{0%{transform:scale(0)}100%{transform:scale(1)}}
+/* contador de palabras: barra con muelle y pop al llegar al mínimo */
+.wc{padding-bottom:5px;background:linear-gradient(90deg,var(--accent),var(--pur)) left bottom/calc(var(--kp,0)*100%) 3px no-repeat;transition:background-size .6s var(--kin-spring)}
+.wc.ok{background-image:linear-gradient(90deg,var(--ok),var(--ok))}
+.wc.kin-pop{transform-origin:left center;animation:kinPop .6s var(--kin-spring)}
+@keyframes kinPop{0%{transform:scale(1)}40%{transform:scale(1.18)}100%{transform:scale(1)}}
+/* casillas: barrido al marcar */
+label.ck{border-radius:6px;background:linear-gradient(90deg,color-mix(in srgb,var(--ok) 14%,transparent),transparent 85%) no-repeat left/0% 100%;transition:background-size .55s cubic-bezier(.2,.8,.3,1)}
+label.ck:has(input:checked){background-size:100% 100%}
+/* ola de verbos del mismo tiempo */
+.v,.vb{cursor:pointer}
+.kin-wave{animation:kinWave .75s ease var(--kd,0ms) backwards}
+@keyframes kinWave{35%{background-color:color-mix(in srgb,var(--vcl,var(--accent)) 38%,transparent);box-shadow:0 0 0 4px color-mix(in srgb,var(--vcl,var(--accent)) 26%,transparent)}}
+@media(prefers-reduced-motion:reduce){.tf-rule em,.tf-rule small,section.kin-go>h2 .num,section.kin-go>h2 .num::before,section.kin-go>h2 .num::after,.toc a.kin-go .num,.wc.kin-pop,.kin-wave{animation:none!important}.kin-ghost{display:none}.prog-track i,.wc,label.ck{transition:none}}
+@media print{.kinrow,.kin-ghost{display:none!important}label.ck{background:none}.num::before,.num::after{display:none}}
 </style></head><body data-accent="azul" data-lang="both">
 <a class="skip" href="#main">Saltar al contenido</a>
 <div class="plx" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
@@ -1004,6 +1055,148 @@ new MutationObserver(function(ms){ms.forEach(function(m){
 if(m.type==='attributes'){if(m.target.matches&&m.target.matches('input.g,input.w'))inv(m.target);return}
 m.addedNodes.forEach(function(n){if(n.nodeType===1){en(n);dec(n);if(n.matches&&n.matches('.en:not([lang])'))n.setAttribute('lang','en')}})})})
 .observe(document.body,{subtree:true,childList:true,attributes:true,attributeFilter:['class']});
+})();
+</script>
+<script>
+(()=>{
+const el=(k,x)=>{const n=document.createElement(k);n.textContent=x;return n};
+function infs(li){
+ const t=[...li.childNodes].filter(n=>!(n.nodeType===1&&/\b(en|sol|tfrow)\b/.test(n.className))).map(n=>n.textContent).join(' ');
+ const m=[...t.matchAll(/\(([^()]+)\)/g)].pop();if(!m)return null;
+ const a=m[1].split(',').map(x=>x.trim().toLowerCase());
+ return a.every(x=>/^\p{L}+r(se)?$/u.test(x))?a:null}
+function chip(inf,ans,ok,d){
+ let p=0;while(p<inf.length&&p<ans.length&&inf[p]===ans[p].toLowerCase())p++;
+ const b=document.createElement('button');b.type='button';b.className='tf '+(ok?'tf-ok':'tf-bad');
+ b.style.setProperty('--d',d+'s');b.setAttribute('aria-label','Repetir la animación: '+inf+' → '+ans);
+ b.append(el('b',ans.slice(0,p)),el('s',inf.slice(p)),el('em',ans.slice(p)));return b}
+function run(grp){
+ if(!grp)return;
+ grp.querySelectorAll('.tfrow').forEach(x=>x.remove());
+ grp.querySelectorAll('li').forEach(li=>{
+  const g=[...li.querySelectorAll('input.g[data-a]')],I=g.length&&infs(li);
+  if(!I||I.length!==g.length)return;
+  const row=document.createElement('div');row.className='tfrow';
+  g.forEach((i,k)=>{
+   const ok=i.classList.contains('ok'),bad=i.classList.contains('bad');
+   if(ok||(bad&&+i.dataset.t>=2))row.append(chip(I[k],i.dataset.a.split('|')[0],ok,.25+row.children.length*.2))});
+  if(row.children.length)li.append(row)})}
+document.addEventListener('click',e=>{
+ const c=e.target.closest('.tf');
+ if(c){const n=c.cloneNode(true);c.replaceWith(n);n.focus();return}
+ const b=e.target.closest('[data-check]');
+ if(b)setTimeout(()=>run(b.closest('.grp')||b.closest('section')),0);
+ setTimeout(()=>document.querySelectorAll('.tfrow').forEach(r=>{const l=r.closest('li');if(!l||!l.querySelector('input.g.ok,input.g.bad'))r.remove()}),90)});
+})();
+</script>
+
+<script>
+/* Capa de animaciones 2 · se engancha a los eventos existentes sin cambiar la mecánica de los ejercicios */
+(()=>{
+'use strict';
+const RM=matchMedia('(prefers-reduced-motion:reduce)').matches;
+const FINE=matchMedia('(hover:hover) and (pointer:fine)').matches;
+const CAN=typeof Element.prototype.animate==='function';
+const $$=(s,r)=>[...(r||document).querySelectorAll(s)];
+const restart=(el,c)=>{el.classList.remove(c);void el.offsetWidth;el.classList.add(c)};
+const safe=f=>{try{f()}catch(e){if(window.console)console.warn('kin:',e)}};
+const N=s=>s.toLowerCase().replace(/[¿?¡!.,]/g,'').replace(/\s+/g,' ').trim();
+
+/* fichas de regla */
+const mkRule=(ans,why,d)=>{const b=document.createElement('button');b.type='button';b.className='tf tf-rule';
+ b.style.setProperty('--d',d+'s');b.setAttribute('aria-label','Repetir la animación: '+ans+' · '+why);
+ const e=document.createElement('em');e.textContent=ans;const s=document.createElement('small');s.textContent=why;b.append(e,s);return b};
+function rules(unit){
+ if(!unit)return;
+ $$('.kinrow',unit).forEach(x=>x.remove());
+ $$('li',unit).forEach(li=>{
+  if(li.querySelector('.tfrow'))return;
+  const row=document.createElement('div');row.className='kinrow';
+  $$('input[data-a][data-why]',li).forEach(i=>{
+   if(!i.classList.contains('ok'))return;
+   const v=N(i.value),alt=i.dataset.a.split('|').find(a=>N(a)===v)||i.value.trim();
+   row.append(mkRule(alt,i.dataset.why,.1+row.children.length*.2))});
+  if(row.children.length)li.append(row)})}
+
+/* repulsión */
+function ghosts(unit){
+ if(RM||!CAN||!unit)return;
+ let k=0;
+ $$('input[data-a],input[data-q]',unit).forEach(i=>{
+  if(!i.classList.contains('bad')||!i.value.trim())return;
+  const r=i.getBoundingClientRect();if(!r.width||r.bottom<0||r.top>innerHeight)return;
+  const cs=getComputedStyle(i),g=document.createElement('span');
+  g.className='kin-ghost';g.setAttribute('aria-hidden','true');g.textContent=i.value.trim();
+  g.style.cssText='left:'+r.left+'px;top:'+r.top+'px;width:'+r.width+'px;height:'+r.height+'px;font:'+cs.font+';line-height:'+r.height+'px';
+  document.body.append(g);
+  const s=k%2?1:-1,dx=s*(70+Math.random()*60),dy=-(30+Math.random()*24);
+  const a=g.animate([
+   {transform:'translate(0,0) rotate(0deg) scale(1)',opacity:.95},
+   {transform:'translate('+dx*.4+'px,'+dy+'px) rotate('+s*14+'deg) scale(1.08)',opacity:.95,offset:.3},
+   {transform:'translate('+dx+'px,'+(dy+110)+'px) rotate('+s*48+'deg) scale(.6)',opacity:0}],
+   {duration:950,delay:k*70,easing:'cubic-bezier(.3,.6,.4,1)',fill:'both'});
+  a.onfinish=()=>g.remove();k++})}
+
+/* sello de sección */
+function complete(sec){
+ const gaps=$$('input[data-a],input[data-q]',sec).filter(i=>!i.closest('[hidden]'));
+ if(gaps.length)return gaps.every(i=>i.classList.contains('ok')||i.classList.contains('seen'));
+ const cks=$$('.ck input[type=checkbox]',sec);
+ return cks.length>0&&cks.every(c=>c.checked)}
+function seal(sec){
+ if(!sec||!sec.id||sec.id==='sR'||!sec.querySelector(':scope>h2 .num'))return;
+ const on=complete(sec),was=sec.classList.contains('kin-done'),t=document.querySelector('.toc a[href="#'+sec.id+'"]');
+ sec.classList.toggle('kin-done',on);if(t)t.classList.toggle('kin-done',on);
+ if(on&&!was&&!RM){restart(sec,'kin-go');if(t)restart(t,'kin-go')}}
+
+document.addEventListener('click',e=>{
+ const T=e.target;if(!T.closest)return;
+ const b=T.closest('[data-check]');
+ if(b){const unit=b.closest('.grp')||b.closest('section'),sec=b.closest('section');
+  safe(()=>ghosts(unit));
+  setTimeout(()=>safe(()=>rules(unit)),40);
+  setTimeout(()=>safe(()=>seal(sec)),60)}
+ /* muelle en botones */
+ if(!RM&&CAN){const x=T.closest('.btn,.seg button,.nav-btn,.anim-re,.anim-snd');
+  if(x&&!x.disabled&&!x.hidden)safe(()=>x.animate([{scale:'.94'},{scale:'1.08',offset:.35},{scale:'.98',offset:.6},{scale:'1.02',offset:.8},{scale:'1'}],{duration:520,easing:'ease-out'}))}
+ /* ola de verbos */
+ const v=T.closest('.v,.vb');
+ if(v&&!RM&&!T.closest('input,button,a,summary')&&!String(getSelection()).length){
+  const fam=el=>(el.className.match(/\bvb-\w+/)||['v'])[0],f=fam(v);
+  $$('.v,.vb',v.closest('section')||document).filter(x=>fam(x)===f).slice(0,30).forEach((x,i)=>{
+   x.style.setProperty('--kd',Math.min(i*55,900)+'ms');restart(x,'kin-wave');
+   x.addEventListener('animationend',()=>x.classList.remove('kin-wave'),{once:true})})}
+});
+addEventListener('change',e=>{const c=e.target;if(c.matches&&c.matches('.ck input[type=checkbox]'))safe(()=>seal(c.closest('section')))});
+
+/* contador de palabras */
+safe(()=>{$$('textarea[data-wc]').forEach(t=>{
+ const upd=pop=>{const w=t.nextElementSibling;if(!w||!w.classList.contains('wc'))return;
+  const m=w.textContent.match(/(\d+)\s*\/\s*(\d+)/);w.style.setProperty('--kp',m?Math.min(1,+m[1]/(+m[2]||1)):0);
+  const ok=w.classList.contains('ok');if(pop&&m&&ok&&!w._ok&&!RM)restart(w,'kin-pop');w._ok=ok};
+ t.addEventListener('input',()=>upd(true));upd(false)})});
+
+/* imán en los huecos */
+safe(()=>{
+ if(RM||!FINE)return;
+ const R=84,MAX=4.5,st=new Map();let px=-1e3,py=-1e3,raf=0,idle=0;
+ function frame(){raf=0;let moving=false;
+  const els=$$('input.g'),rs=els.map(e=>e.getBoundingClientRect());
+  els.forEach((el,k)=>{const r=rs[k];let s=st.get(el);if(!s){s={x:0,y:0};st.set(el,s)}
+   let tx=0,ty=0;
+   if(el!==document.activeElement&&r.bottom>-R&&r.top<innerHeight+R){
+    const cx=r.left+r.width/2-s.x,cy=r.top+r.height/2-s.y,
+     ddx=Math.max(cx-r.width/2-px,0,px-cx-r.width/2),ddy=Math.max(cy-r.height/2-py,0,py-cy-r.height/2),d=Math.hypot(ddx,ddy);
+    if(d<R){const m=Math.hypot(px-cx,py-cy)||1,a=MAX*Math.pow(1-d/R,2)*Math.min(1,m/20);tx=(px-cx)/m*a;ty=(py-cy)/m*a}}
+   s.x+=(tx-s.x)*.2;s.y+=(ty-s.y)*.2;
+   if(Math.abs(tx-s.x)>.03||Math.abs(ty-s.y)>.03)moving=true;
+   if(Math.abs(s.x)<.03&&Math.abs(s.y)<.03&&!tx&&!ty){s.x=s.y=0;if(el.style.translate)el.style.translate=''}
+   else el.style.translate=s.x.toFixed(2)+'px '+s.y.toFixed(2)+'px'});
+  if(moving||performance.now()-idle<400)raf=requestAnimationFrame(frame)}
+ const go=()=>{idle=performance.now();if(!raf)raf=requestAnimationFrame(frame)};
+ addEventListener('pointermove',e=>{if(e.pointerType!=='mouse')return;px=e.clientX;py=e.clientY;go()},{passive:true});
+ document.documentElement.addEventListener('mouseleave',()=>{px=py=-1e3;go()});
+});
 })();
 </script>
 </body></html>
