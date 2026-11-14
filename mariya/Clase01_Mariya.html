@@ -273,6 +273,7 @@ label.ck input[type=checkbox]{position:absolute;left:2px;top:12px;margin:0;width
 .anim-snd{border:1px solid var(--line-strong);background:var(--paper-raised);border-radius:999px;padding:3px 12px;font:600 11.5px var(--f-data);color:var(--ink-soft);cursor:pointer}
 .anim-snd .en{font-weight:400}
 .anim-snd[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+.anim-snd[aria-pressed="true"] .en{color:#fff;opacity:.92}
 .anim-re .en{font-weight:400}
 @keyframes aPop{0%{opacity:0;transform:translate(var(--x,0),var(--y,10px)) scale(.7) rotate(var(--r,0deg))}60%{opacity:1;transform:translate(0,-3px) scale(1.05)}100%{opacity:1;transform:none}}
 @keyframes aShake{0%,100%{transform:translateX(0)}20%{transform:translateX(-6px)}40%{transform:translateX(5px)}60%{transform:translateX(-4px)}80%{transform:translateX(3px)}}
@@ -562,6 +563,7 @@ label.ck:has(input:checked){background-size:100% 100%}
 #gm-sort .gm-bank:empty{display:none;min-height:0}
 #gm-sort .gm-build:has(+.gm-bank:empty){margin-bottom:0}
 #gm-sort .gm-fb{margin-top:6px}
+#gm-sort .gm-sol{margin-top:8px;min-height:36px;padding:4px 14px;font-size:13px}
 .gm-bar{display:flex;align-items:center;gap:12px;margin-top:14px;flex-wrap:wrap}
 .gm-score{font:500 13.5px var(--f-data);color:var(--ink-faint)}
 .gm-pager{display:flex;align-items:center;justify-content:center;gap:8px;margin:0 0 16px}
@@ -712,13 +714,22 @@ const head=(l,es,e,h,he)=>'<h3><b>'+l+'</b>'+es+en(e)+'</h3><p class="gm-hint">'
  root.innerHTML=head('A','Ordena la frase','Put the sentence in order','Toca las piezas en el orden correcto; toca una pieza colocada para quitarla. Se comprueba sola al colocar la última.','Tap the pieces in the right order; tap a placed piece to remove it. It checks itself when you place the last one.')+'<div id="gm-sort-items"></div><div class="gm-bar"><button class="btn alt" id="gm-sort-reset">Reiniciar<span class="en"> · Reset</span></button><span class="gm-score" aria-live="polite" id="gm-sort-score"></span></div>';
  const box=$('gm-sort-items'),score=$('gm-sort-score');let st;
  const chip=(it,n,i,act,d)=>'<button class="gm-chip" data-n="'+n+'" data-i="'+i+'" data-act="'+act+'"'+(d?' disabled':'')+'>'+it.w[i]+'</button>';
- function item(n){const it=S[n],s=st[n];return '<div class="gm-build '+s.cls+'">'+s.placed.map(i=>chip(it,n,i,'rm',s.done)).join('')+'</div><div class="gm-bank">'+s.bank.map(i=>chip(it,n,i,'add',s.done)).join('')+'</div>'+(s.done?'<p class="gm-fb" role="status">'+(s.cls==='ok'?'✓ ':'✗ Orden correcto: '+it.w.join(' ')+'. ')+'<span class="en">'+it.en+'</span></p>':'')}
+ function item(n){const it=S[n],s=st[n],sol=it.w.join(' ');let fb='';
+  if(s.done&&s.cls==='ok')fb='<p class="gm-fb" role="status">✓ <span class="en">'+it.en+'</span></p>';
+  else if(s.done)fb='<p class="gm-fb" role="status"><b>Solución:</b> '+sol+'. <span class="en">'+it.en+'</span></p>';
+  else if(s.cls==='bad')fb='<p class="gm-fb" role="status">✗ Ese no es el orden. Quita piezas y prueba otra vez.<span class="en"> That is not the order. Remove pieces and try again.</span></p>';
+  return '<div class="gm-build '+s.cls+'">'+s.placed.map(i=>chip(it,n,i,'rm',s.done)).join('')+'</div><div class="gm-bank">'+s.bank.map(i=>chip(it,n,i,'add',s.done)).join('')+'</div>'+fb+(s.done?'':'<button type="button" class="btn alt gm-sol" data-n="'+n+'">Mostrar solución<span class="en"> · Show solution</span></button>')}
  const draw=n=>{box.children[n].innerHTML=item(n)};
- function init(){st=S.map(it=>({bank:sh(it.w.map((_,i)=>i)),placed:[],done:false,cls:''}));box.innerHTML=S.map((_,n)=>'<div class="gm-item"></div>').join('');S.forEach((_,n)=>draw(n));score.textContent=''}
- box.addEventListener('click',e=>{const b=e.target.closest('.gm-chip');if(!b)return;const n=+b.dataset.n,s=st[n],it=S[n],i=+b.dataset.i;if(s.done)return;
+ function init(){st=S.map(it=>({bank:sh(it.w.map((_,i)=>i)),placed:[],done:false,cls:'',miss:false}));box.innerHTML=S.map((_,n)=>'<div class="gm-item"></div>').join('');S.forEach((_,n)=>draw(n));score.textContent=''}
+ const upd=()=>{score.textContent=st.filter(x=>x.cls==='ok'&&!x.miss).length+' / '+S.length+' correctas'};
+ box.addEventListener('click',e=>{
+  const sb=e.target.closest('.gm-sol');
+  if(sb){const n=+sb.dataset.n,s=st[n];if(s.done)return;s.done=true;s.rev=true;s.miss=true;s.cls='';s.placed=S[n].w.map((_,k)=>k);s.bank=[];draw(n);upd();return}
+  const b=e.target.closest('.gm-chip');if(!b)return;const n=+b.dataset.n,s=st[n],it=S[n],i=+b.dataset.i;if(s.done)return;
   if(b.dataset.act==='add'){s.bank=s.bank.filter(x=>x!==i);s.placed.push(i)}else{s.placed=s.placed.filter(x=>x!==i);s.bank.push(i)}
-  if(s.placed.length===it.w.length){const j=nz(s.placed.map(k=>it.w[k]).join(' ')),good=[it.w.join(' ')].concat(it.alt||[]).some(a=>nz(a)===j);s.done=true;s.cls=good?'ok':'bad';score.textContent=st.filter(x=>x.cls==='ok').length+' / '+S.length+' correctas'}
-  draw(n)});
+  s.cls='';
+  if(s.placed.length===it.w.length){const j=nz(s.placed.map(k=>it.w[k]).join(' ')),good=[it.w.join(' ')].concat(it.alt||[]).some(a=>nz(a)===j);if(good){s.done=true;s.cls='ok'}else{s.cls='bad';s.miss=true}}
+  draw(n);upd()});
  $('gm-sort-reset').onclick=init;init()})();
 
 /* B · empareja: las cuatro rondas, una bajo otra */
@@ -741,13 +752,13 @@ const head=(l,es,e,h,he)=>'<h3><b>'+l+'</b>'+es+en(e)+'</h3><p class="gm-hint">'
 /* C · chat: los ocho turnos en una lista, sin botón de siguiente */
 (()=>{const root=$('gm-chat'),C=D.chat;
  root.innerHTML=head('C','Contesta a tu interlocutor','Answer the other person','Elige la respuesta correcta en cada turno.','Pick the correct reply in each turn.')+'<div id="gm-chat-list"></div><div class="gm-bar"><button class="btn alt" id="gm-chat-reset">Jugar otra vez<span class="en"> · Play again</span></button><span class="gm-score" aria-live="polite" id="gm-chat-score"></span></div>';
- const list=$('gm-chat-list'),sc=$('gm-chat-score');let opts,ans;
- function turn(t){const c=C[t],a=ans[t];
-  return '<p class="gm-hint" style="margin:0 0 6px"><b>'+c.sit+'</b>'+en(c.sitEn)+'</p><div class="gm-line"><div class="gm-av">'+c.who[0]+'</div><div class="gm-bub"><small>'+c.who+'</small>'+c.msg+en(c.msgEn)+'</div></div><div class="gm-opts">'+opts[t].map((o,i)=>'<button class="gm-chip'+(a===null?'':(o[1]?' done':(a===i?' nope':'')))+'" data-t="'+t+'" data-i="'+i+'"'+(a===null?'':' disabled')+'>'+o[0]+'</button>').join('')+'</div>'+(a!==null&&!opts[t][a][1]?'<p class="gm-fb" role="status">✗ '+opts[t][a][2]+en(opts[t][a][3])+'</p>':'')}
+ const list=$('gm-chat-list'),sc=$('gm-chat-score');let opts,ans,solved,wr,last;
+ function turn(t){const c=C[t],sv=solved[t],w=wr[t],la=last[t];
+  return '<p class="gm-hint" style="margin:0 0 6px"><b>'+c.sit+'</b>'+en(c.sitEn)+'</p><div class="gm-line"><div class="gm-av">'+c.who[0]+'</div><div class="gm-bub"><small>'+c.who+'</small>'+c.msg+en(c.msgEn)+'</div></div><div class="gm-opts">'+opts[t].map((o,i)=>'<button class="gm-chip'+(sv&&o[1]?' done':(w.includes(i)?' nope':''))+'" data-t="'+t+'" data-i="'+i+'"'+(sv||w.includes(i)?' disabled':'')+'>'+o[0]+'</button>').join('')+'</div>'+(la!==null?'<p class="gm-fb" role="status">✗ '+opts[t][la][2]+en(opts[t][la][3])+'</p>':'')}
  const draw=t=>{list.children[t].innerHTML=turn(t)};
- function stat(){const n=ans.filter(x=>x!==null).length,ok=ans.filter((x,t)=>x!==null&&opts[t][x][1]).length;sc.textContent=n===C.length?(ok===C.length?'¡Frases perfectas! 🎉 ':'')+ok+' / '+C.length+' correctas'+(ok<C.length?'. '+D.again[0]:''):ok+' / '+C.length+' correctas'}
- function init(){opts=C.map(c=>sh(c.opts));ans=C.map(()=>null);list.innerHTML=C.map(()=>'<div class="gm-turn"></div>').join('');C.forEach((_,t)=>draw(t));stat()}
- list.addEventListener('click',e=>{const b=e.target.closest('.gm-chip');if(!b||b.disabled)return;const t=+b.dataset.t;ans[t]=+b.dataset.i;draw(t);stat()});
+ function stat(){const n=solved.filter(Boolean).length,ok=ans.filter((x,t)=>x!==null&&opts[t][x][1]).length;sc.textContent=n===C.length?(ok===C.length?'¡Frases perfectas! 🎉 ':'')+ok+' / '+C.length+' correctas'+(ok<C.length?'. '+D.again[0]:''):ok+' / '+C.length+' correctas'}
+ function init(){opts=C.map(c=>sh(c.opts));ans=C.map(()=>null);solved=C.map(()=>false);wr=C.map(()=>[]);last=C.map(()=>null);list.innerHTML=C.map(()=>'<div class="gm-turn"></div>').join('');C.forEach((_,t)=>draw(t));stat()}
+ list.addEventListener('click',e=>{const b=e.target.closest('.gm-chip');if(!b||b.disabled)return;const t=+b.dataset.t,i=+b.dataset.i;if(ans[t]===null)ans[t]=i;if(opts[t][i][1]){solved[t]=true}else{wr[t].push(i);last[t]=i}draw(t);stat()});
  $('gm-chat-reset').onclick=init;init()})();
 })();
 </script></section>
@@ -1059,7 +1070,7 @@ const ATL=[[[0.25, "pop", 330], [0.8, "note", 523], [0.55, "tick", 700], [1.65, 
 const runAnim=a=>{a.classList.remove('play');void a.offsetWidth;a.classList.add('play');fire(ATL[A.indexOf(a)]||[],a)};
 if(!RM){
  if('IntersectionObserver' in window){
-  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){runAnim(e.target);io.unobserve(e.target)}}),{threshold:.6});
+  const io=new IntersectionObserver(es=>es.forEach(e=>{const vh=innerHeight||document.documentElement.clientHeight;if(e.isIntersecting&&(e.intersectionRatio>=.6||e.intersectionRect.height>=vh*.5)){runAnim(e.target);io.unobserve(e.target)}}),{threshold:[0,.1,.2,.3,.4,.5,.6,.7,.8,.9,1]});
   A.forEach(a=>{a.classList.add('ready');io.observe(a)})}
  document.querySelectorAll('.anim-re').forEach(b=>b.addEventListener('click',()=>runAnim(b.closest('.anim'))));
 }
