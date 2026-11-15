@@ -582,6 +582,105 @@ label.ck:has(input:checked){background-size:100% 100%}
 .gm-item:first-child,.gm-turn:first-child{border-top:0;padding-top:4px}
 .gm-rd h4{font:600 13px var(--f-data);color:var(--ink-faint);margin:18px 0 8px;text-transform:uppercase;letter-spacing:.04em}
 @media(max-width:560px){.gm-match{gap:10px}}
+
+/* ===== Diálogo ramificado (sección 4) ===== */
+.br{margin-top:10px}
+.br-stage{border:1px solid var(--line-strong);border-radius:12px;background:var(--paper-alt);overflow:hidden}
+.br-top{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px 14px;padding:10px 16px;background:var(--paper-raised);border-bottom:1px solid var(--line)}
+.br-step{font:600 13px var(--f-data);color:var(--ink-soft)}
+.br-trail{display:inline-flex;align-items:center;gap:7px;min-height:14px}
+.br-trail i{display:block;width:12px;height:12px;border-radius:50%;border:2px solid var(--ok);background:var(--ok)}
+.br-trail i.m{border-radius:3px;transform:rotate(45deg) scale(.8);border-color:var(--amber);background:var(--amber)}
+.br-trail i.f{border-color:var(--family);background:var(--paper-raised)}
+.br-log{display:grid;gap:12px;padding:18px 16px 10px;min-height:96px}
+.br-sc{justify-self:center;max-width:100%;text-align:center;font:600 12.5px/1.45 var(--f-data);color:var(--ink-soft);background:var(--paper-raised);border:1px solid var(--line-strong);border-radius:999px;padding:5px 16px}
+.br-sc .en{display:block;font-weight:400}
+.br-row{display:flex;align-items:flex-end;gap:10px;max-width:min(580px,94%)}
+.br-row.me{justify-self:end;flex-direction:row-reverse}
+.br-av{flex:none;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font:600 15px var(--f-display);background:var(--ink-soft);color:var(--paper-raised)}
+.br-b{min-width:0;padding:10px 14px 11px;border:1px solid var(--line-strong);border-radius:12px 12px 12px 4px;background:var(--paper-raised);line-height:1.55;font-size:15.5px}
+.br-row.me .br-b{border-color:var(--accent-line);background:var(--accent-soft);border-radius:12px 12px 4px 12px}
+.br-row.me.w .br-b{border:1px dashed var(--family);background:color-mix(in srgb,var(--family) 9%,var(--paper-raised))}
+.br-b small{display:flex;flex-wrap:wrap;align-items:center;gap:2px 8px;margin:0 0 3px;font:600 12px var(--f-data);color:var(--ink-faint)}
+.br-b small .cue{margin:0}
+.br-t{overflow-wrap:anywhere}
+.br-b .en.b{display:block;margin-top:3px}
+.br-row.new{animation:fxUp .35s cubic-bezier(.2,.8,.3,1) both}
+.br-typing .br-b{display:inline-flex;gap:5px;padding:14px 16px}
+.br-typing i{width:7px;height:7px;border-radius:50%;background:var(--ink-faint);animation:brDot 1s infinite ease-in-out}
+.br-typing i:nth-child(2){animation-delay:.15s}
+.br-typing i:nth-child(3){animation-delay:.3s}
+@keyframes brDot{0%,60%,100%{opacity:.35;transform:none}30%{opacity:1;transform:translateY(-4px)}}
+.br-fb{position:relative;justify-self:end;max-width:min(580px,94%);margin:-4px 0 0;padding:3px 0 3px 12px;border-left:3px solid var(--fc);font-size:13.5px;line-height:1.5;color:var(--ink-soft)}
+.br-fb.g{--fc:var(--ok)}.br-fb.m{--fc:var(--amber)}.br-fb.w{--fc:var(--family)}
+.br-fb .br-g{display:inline-block;width:1.3em;font-weight:700;color:var(--fc)}
+.br-fb .en{display:block;margin-top:1px;padding-left:1.3em}
+.br-sr{position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.br-ask{padding:4px 16px 18px;background:var(--paper-raised);border-top:1px dashed var(--line-strong)}
+.br-ask[hidden]{display:none}
+.br-q{margin:14px 0 10px;font:600 13px var(--f-data);color:var(--ink-soft)}
+.br-opts{display:grid;gap:8px}
+.br-opt{position:relative;display:block;width:100%;text-align:left;font:inherit;font-size:15.5px;line-height:1.5;color:var(--ink);background:var(--paper-raised);border:1.5px solid var(--ctl);border-radius:8px;padding:11px 14px;min-height:44px;cursor:pointer;transition:border-color .15s,background-color .15s,transform .08s}
+.br-opt:hover:not(:disabled){border-color:var(--accent);background:var(--accent-soft)}
+.br-opt:active:not(:disabled){transform:scale(.99)}
+.br-opt .en{display:block;margin-top:2px}
+.br-opt:disabled{cursor:default}
+.br-opt.nope{border:1.5px dashed var(--family);background:color-mix(in srgb,var(--family) 8%,var(--paper-raised));color:var(--ink-soft)}
+.br-opt.nope .br-es::before{content:"✗ ";color:var(--family);font-weight:700}
+.br-end{margin-top:16px;padding:18px 20px 20px;border:1px solid var(--line-strong);border-left:5px solid var(--ek);border-radius:12px;background:var(--paper-raised);scroll-margin:90px 0 24px;animation:fxReveal .45s cubic-bezier(.2,.8,.3,1) both}
+.br-end[hidden]{display:none}
+.br-end.best{--ek:var(--ok)}.br-end.good{--ek:var(--accent)}.br-end.mid{--ek:var(--amber)}.br-end.low{--ek:var(--family)}
+.br-end h3{margin:0 0 8px;font:600 20px/1.25 var(--f-display)}
+.br-end h3:focus{outline:none}
+.br-end h3 .en{display:block;margin-top:2px;font:italic 400 14px/1.35 var(--f-body)}
+.br-end p{margin:0;max-width:64ch}
+.br-end p .en{display:block;margin-top:4px}
+.br-stats{display:flex;flex-wrap:wrap;gap:6px 26px;margin:16px 0 0;padding:14px 0 0;border-top:1px solid var(--line);list-style:none}
+.br-stats li{font-size:14px;color:var(--ink-soft)}
+.br-stats b{margin-right:6px;font:600 20px var(--f-display);font-variant-numeric:tabular-nums;color:var(--ink)}
+.br-end details.ref{margin-top:16px}
+.br-rec{display:grid;gap:14px;margin:10px 0 0;padding:0;list-style:none}
+.br-rec li{display:grid;gap:4px;padding-top:12px;border-top:1px solid var(--line)}
+.br-rec li:first-child{padding-top:2px;border-top:0}
+.br-rq{font-size:13.5px;color:var(--ink-faint)}
+.br-ra{font-weight:500}
+.br-ra .br-g{display:inline-block;width:1.4em;font-weight:700}
+.br-ra.g .br-g,.br-ra.f .br-g{color:var(--ok)}
+.br-ra.m .br-g{color:var(--amber)}
+.br-rw,.br-rn{font-size:13.5px;line-height:1.5;color:var(--ink-soft);padding-left:12px;border-left:3px solid var(--family)}
+.br-rn{border-left-color:var(--amber)}
+.br-rw .en,.br-rn .en{display:block}
+.br-legend{display:flex;flex-wrap:wrap;gap:6px 18px;margin:12px 0 2px;font-size:12.5px;color:var(--ink-soft)}
+.br-legend span::before{content:"";display:inline-block;width:22px;margin-right:7px;vertical-align:middle;border-top:3.5px solid var(--accent)}
+.br-legend .x::before{border-top:2px solid var(--accent-line)}
+.br-legend .u::before{border-top:2px dashed var(--ctl)}
+.br-map{display:block;width:100%;max-width:380px;height:auto;margin:8px auto 0;overflow:visible}
+.br-map .e{fill:none;stroke:var(--ctl);stroke-width:1.5;stroke-dasharray:3 4;opacity:.75}
+.br-map .e.x{stroke:var(--accent-line);stroke-dasharray:none;stroke-width:2;opacity:1}
+.br-map .e.on{stroke:var(--accent);stroke-dasharray:none;stroke-width:3.5;opacity:1}
+.br-map .n{fill:var(--paper-raised);stroke:var(--ctl);stroke-width:2}
+.br-map .n.x{fill:var(--accent-soft);stroke:var(--accent-line)}
+.br-map .n.on{fill:var(--accent);stroke:var(--accent)}
+.br-map .t{fill:var(--paper-raised);stroke:var(--ctl);stroke-width:2;stroke-dasharray:3 3}
+.br-map .t.best{fill:var(--ok-soft);stroke:var(--ok);stroke-dasharray:none}
+.br-map .t.good{fill:var(--accent-soft);stroke:var(--accent);stroke-dasharray:none}
+.br-map .t.mid{fill:color-mix(in srgb,var(--amber) 16%,var(--paper-raised));stroke:var(--amber);stroke-dasharray:none}
+.br-map .t.low{fill:color-mix(in srgb,var(--family) 13%,var(--paper-raised));stroke:var(--family);stroke-dasharray:none}
+.br-map .t.on{stroke-width:3.5}
+.br-map text{font:700 11px var(--f-data);fill:var(--ink-soft);text-anchor:middle;dominant-baseline:central}
+.br-bar{display:flex;flex-wrap:wrap;align-items:center;gap:0 8px}
+.br-bar .btn:disabled{opacity:.45;cursor:not-allowed}
+.br-found{display:inline-flex;align-items:center;gap:10px;margin:14px 0 0 auto;font:600 13px var(--f-data);color:var(--ink-soft)}
+.br-tiles{display:inline-flex;gap:5px}
+.br-tiles i{display:block;width:12px;height:12px;border-radius:3px;border:2px dashed var(--ctl)}
+.br-tiles i.best{border:2px solid var(--ok);background:var(--ok-soft)}
+.br-tiles i.good{border:2px solid var(--accent);background:var(--accent-soft)}
+.br-tiles i.mid{border:2px solid var(--amber);background:color-mix(in srgb,var(--amber) 16%,var(--paper-raised))}
+.br-tiles i.low{border:2px solid var(--family);background:color-mix(in srgb,var(--family) 13%,var(--paper-raised))}
+@media(max-width:560px){.br-top{padding:9px 12px}.br-log{padding:14px 10px 8px}.br-row{max-width:100%}.br-av{width:30px;height:30px;font-size:13px}.br-ask{padding:2px 10px 14px}.br-end{padding:16px 14px 18px}.br-found{margin-left:0;width:100%}}
+@media(prefers-reduced-motion:reduce){.br-row.new,.br-end{animation:none!important}.br-opt{transition:none}.br-typing i{animation:none}}
+@media(forced-colors:active){.br-opt,.br-b{border:1.5px solid CanvasText}.br-trail i,.br-tiles i{border:2px solid CanvasText}.br-end{border-left:5px solid CanvasText}}
+@media print{.br-ask,.br-bar,.br-top{display:none!important}.br-stage{border:0;background:none}.br-row.new{animation:none}}
 </style></head><body data-accent="azul" data-lang="both">
 <a class="skip" href="#main">Saltar al contenido</a>
 <div class="plx" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
@@ -659,7 +758,20 @@ const head=(l,es,e,h,he)=>'<h3><b>'+l+'</b>'+es+en(e)+'</h3><p class="gm-hint">'
 })();
 </script></section>
 
-<section id="s4"><h2><span class="num">4</span>Role-play: el lunes en la oficina<span class="en"> Role-play: Monday at the office</span><span class="cue">9 minutos</span></h2><p class="sub">Es lunes por la mañana. El profesor es un compañero de trabajo. Tú le cuentas tu fin de semana en Valencia y le preguntas por el suyo. Contesta con frases completas.<span class="en"> It's Monday morning. The teacher is a colleague. You tell them about your weekend in Valencia and ask about theirs. Answer with full sentences.</span></p><label class="ck"><input type="checkbox" id="c1"> Paso 1 · saludo y pregunta: Buenos días. ¿Qué tal el fin de semana?<span class="en"> Step 1 · greeting and question</span></label><label class="ck"><input type="checkbox" id="c2"> Paso 2 · dónde fuiste: El sábado fui a… / fuimos a…<span class="en"> Step 2 · where you went</span></label><label class="ck"><input type="checkbox" id="c3"> Paso 3 · el orden: Primero… después… al final…<span class="en"> Step 3 · the order</span></label><label class="ck"><input type="checkbox" id="c4"> Paso 4 · qué hiciste o qué no pudiste hacer: Hice… / No pude…<span class="en"> Step 4 · what you did or couldn't do</span></label><label class="ck"><input type="checkbox" id="c5"> Paso 5 · tu opinión: La comida fue… y el sitio estaba…<span class="en"> Step 5 · your opinion</span></label><label class="ck"><input type="checkbox" id="c6"> Paso 6 · preguntas de vuelta: ¿Y tú, qué hiciste? ¿Adónde fuiste?<span class="en"> Step 6 · you ask back</span></label><label class="ck"><input type="checkbox" id="c7"> Si dices una forma que no existe (¿yo hací?), corrígete y sigue<span class="en"> If you say a form that doesn't exist, correct yourself and keep going</span></label><details class="ref"><summary>Ayuda: frases para empezar (solo si te bloqueas)<span class="en"> Help: phrases to get started (only if you get stuck)</span></summary><div class="box"><ul class="ph"><li>Ir: fui a…, fuimos a…, fueron a…<span class="en"> I went to…, we went to…</span></li><li>Hacer: hice…, hicimos…, ¿qué hiciste?<span class="en"> I did…, we did…, what did you do?</span></li><li>Poder: no pude…, no pudimos…<span class="en"> I couldn't…, we couldn't…</span></li><li>Opinar: fue genial, fue un día largo, estaba lleno, estaba tranquilo.<span class="en"> It was great, a long day, full, quiet.</span></li></ul></div></details></section><section id="tarea"><h2><span class="num">5</span>Tarea: seis frases sobre tu último fin de semana<span class="en"> Homework: six sentences about your last weekend</span></h2><p class="sub">Escribe seis frases sobre tu último fin de semana con el indefinido y aprende de memoria las formas de ir, hacer y poder.<span class="en"> Write six sentences about your last weekend with the preterite and learn the forms of ir, hacer and poder by heart.</span></p><label>1. Dos frases con ir (adónde fuiste, con quién):<span class="en"> Two sentences with ir</span><textarea id="t1" rows="3" data-wc></textarea></label><label>2. Dos frases con hacer (qué hiciste):<span class="en"> Two sentences with hacer</span><textarea id="t2" rows="3" data-wc></textarea></label><label>3. Una frase con poder (algo que no pudiste hacer):<span class="en"> One sentence with poder</span><textarea id="t3" rows="2" data-wc></textarea></label><label>4. Una frase con fue / estaba (cómo fue el sitio o la comida):<span class="en"> One sentence with fue / estaba</span><textarea id="t4" rows="2" data-wc></textarea></label><label>5. La frase estrella: tu fin de semana en cuatro frases, con primero, después y al final:<span class="en"> The star text: your weekend in four sentences, with primero, después and al final</span><textarea id="t5" rows="4" data-wc data-min="30"></textarea></label><button class="btn" id="cp">Copiar mis frases<span class="en"> · Copy my sentences</span></button><span class="fb" id="cpf"></span><div class="box"><p class="bt"><b>Repaso en voz alta, sin mirar la clase (2 minutos):</b><span class="en"> Out-loud review, without looking at the class (2 minutes):</span></p><p>Di las seis formas de ir, de hacer y de poder.<span class="en"> Say the six forms of ir, hacer and poder.</span></p><p>Cuenta tu fin de semana con primero, después y al final.<span class="en"> Tell your weekend with primero, después and al final.</span></p><div class="ckgrp"><label class="ck"><input type="checkbox" id="sp1"> Mañana<span class="en"> Tomorrow</span></label><label class="ck"><input type="checkbox" id="sp2"> Dentro de 3 días<span class="en"> In 3 days</span></label><label class="ck"><input type="checkbox" id="sp3"> Dentro de 7 días<span class="en"> In 7 days</span></label></div></div></section><div class="ft"><p>Clase 2 · Un fin de semana en Valencia · Mariya</p></div>
+<section id="s4">
+<h2><span class="num">4</span>Diálogo ramificado: el lunes en la oficina<span class="en"> Branching dialogue: Monday at the office</span><span class="cue">9 minutos</span></h2>
+<p class="sub">Es lunes por la mañana y estás en la oficina con un compañero. Lee lo que dice, elige tu respuesta y dila en voz alta antes de pulsar. Cada elección cambia la conversación: hay rutas distintas y varios finales. Haz una ruta (unos 4 minutos) y, con el tiempo que quede, prueba otra.<span class="en"> It's Monday morning and you are at the office with a colleague. Read what he says, choose your answer and say it out loud before clicking. Each choice changes the conversation: there are different routes and several endings. Do one route (about 4 minutes) and, with the time left, try another.</span></p>
+<p class="note">Profesor: haz de Carlos y lee sus frases en voz alta. La alumna dice su respuesta antes de pulsarla. Al final, comentad la ruta y los errores.<span class="en"> Teacher: play Carlos and read his lines aloud. The student says her answer before clicking it. At the end, go over the route and the mistakes together.</span></p>
+<div class="br" id="br">
+<div class="br-stage">
+<div class="br-top"><span class="br-step" id="brStep"></span><span class="br-trail" id="brTrail" role="img" aria-label=""></span></div>
+<div class="br-log" id="brLog" role="log" aria-live="polite" aria-relevant="additions"></div>
+<div class="br-ask" id="brAsk"><p class="br-q" id="brQ">Tu respuesta: elige una<span class="en"> Your answer: pick one</span></p><div class="br-opts" id="brOpts" role="group" aria-labelledby="brQ"></div></div>
+</div>
+<div class="br-end" id="brEnd" hidden></div>
+<div class="br-bar"><button type="button" class="btn alt" id="brBack">← Un paso atrás<span class="en"> · One step back</span></button><button type="button" class="btn alt" id="brAgain">↻ Probar otra ruta<span class="en"> · Try another route</span></button><span class="br-found" id="brFound" aria-live="polite"></span></div>
+</div>
+</section><section id="tarea"><h2><span class="num">5</span>Tarea: seis frases sobre tu último fin de semana<span class="en"> Homework: six sentences about your last weekend</span></h2><p class="sub">Escribe seis frases sobre tu último fin de semana con el indefinido y aprende de memoria las formas de ir, hacer y poder.<span class="en"> Write six sentences about your last weekend with the preterite and learn the forms of ir, hacer and poder by heart.</span></p><label>1. Dos frases con ir (adónde fuiste, con quién):<span class="en"> Two sentences with ir</span><textarea id="t1" rows="3" data-wc></textarea></label><label>2. Dos frases con hacer (qué hiciste):<span class="en"> Two sentences with hacer</span><textarea id="t2" rows="3" data-wc></textarea></label><label>3. Una frase con poder (algo que no pudiste hacer):<span class="en"> One sentence with poder</span><textarea id="t3" rows="2" data-wc></textarea></label><label>4. Una frase con fue / estaba (cómo fue el sitio o la comida):<span class="en"> One sentence with fue / estaba</span><textarea id="t4" rows="2" data-wc></textarea></label><label>5. La frase estrella: tu fin de semana en cuatro frases, con primero, después y al final:<span class="en"> The star text: your weekend in four sentences, with primero, después and al final</span><textarea id="t5" rows="4" data-wc data-min="30"></textarea></label><button class="btn" id="cp">Copiar mis frases<span class="en"> · Copy my sentences</span></button><span class="fb" id="cpf"></span><div class="box"><p class="bt"><b>Repaso en voz alta, sin mirar la clase (2 minutos):</b><span class="en"> Out-loud review, without looking at the class (2 minutes):</span></p><p>Di las seis formas de ir, de hacer y de poder.<span class="en"> Say the six forms of ir, hacer and poder.</span></p><p>Cuenta tu fin de semana con primero, después y al final.<span class="en"> Tell your weekend with primero, después and al final.</span></p><div class="ckgrp"><label class="ck"><input type="checkbox" id="sp1"> Mañana<span class="en"> Tomorrow</span></label><label class="ck"><input type="checkbox" id="sp2"> Dentro de 3 días<span class="en"> In 3 days</span></label><label class="ck"><input type="checkbox" id="sp3"> Dentro de 7 días<span class="en"> In 7 days</span></label></div></div></section><div class="ft"><p>Clase 2 · Un fin de semana en Valencia · Mariya</p></div>
 
 </main>
 
@@ -1023,6 +1135,7 @@ if(!RM&&'IntersectionObserver' in window){
  cs.forEach(c=>{[...c.children].forEach((k,i)=>k.style.setProperty('--i',Math.min(i,10)));c.classList.add('fx-hide');io2.observe(c)});
  const io3=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('fx-num');io3.unobserve(e.target)}}),{threshold:.05});
  document.querySelectorAll('main section').forEach(x=>io3.observe(x))}
+window.__sfx={fire:fire,confetti:confetti};
 })();
 </script>
 
@@ -1196,6 +1309,372 @@ safe(()=>{
  addEventListener('pointermove',e=>{if(e.pointerType!=='mouse')return;px=e.clientX;py=e.clientY;go()},{passive:true});
  document.documentElement.addEventListener('mouseleave',()=>{px=py=-1e3;go()});
 });
+})();
+</script>
+<script>
+/* Diálogo ramificado · Clase 2 · Mariya · el lunes en la oficina */
+window.BR=(()=>{
+const g=(es,en,to,re,fb,x)=>Object.assign({q:'g',es,en,to,re,fb},x||{});
+const m=(es,en,to,re,fb,x)=>Object.assign({q:'m',es,en,to,re,fb},x||{});
+const w=(es,en,fb)=>({q:'w',es,en,fb});
+return{
+me:'Mariya',
+start:'d1',
+cast:{carlos:{n:'Carlos'}},
+huh:[
+ ["Perdona, ¿cómo dices?","Sorry, what did you say?"],
+ ["¿Cómo? No te he entendido bien.","Sorry? I did not understand you well."],
+ ["Perdona, no lo he entendido. ¿Me lo repites?","Sorry, I did not get that. Can you say it again?"]],
+nodes:{
+d1:{sc:["Es lunes por la mañana, en la oficina. Carlos es un compañero de trabajo.","It's Monday morning, at the office. Carlos is a colleague."],
+ who:'carlos',es:"¡Buenos días, Mariya! ¿Qué tal el fin de semana? ¿Qué hiciste?",en:"Good morning, Mariya! How was the weekend? What did you do?",
+ o:[
+  g("El sábado fui a la playa con unos amigos y comimos en un chiringuito.","On Saturday I went to the beach with some friends and we ate at a beach bar.",'p1',
+    ["¡Qué envidia! La playa y un chiringuito…","How I envy you! The beach and a beach bar…"],
+    ["Muy bien: fui (ir) y comimos, con un marcador de tiempo: el sábado.","Very good: fui (ir) and comimos, with a time marker: el sábado."]),
+  g("El domingo hicimos una excursión a la sierra y comimos en un pueblo.","On Sunday we went on a trip to the mountains and ate in a village.",'s1',
+    ["¡Una excursión! Eso sí que es un buen plan.","A trip! Now that's a good plan."],
+    ["Muy bien: hicimos (hacer) y comimos, con el domingo.","Very good: hicimos (hacer) and comimos, with el domingo."]),
+  w("El sábado yo hací una excursión a la sierra.","On Saturday I went on a trip to the mountains.",
+    ["Hacer en indefinido: yo hice (no «hací»). Hice no lleva tilde.","Hacer in the preterite: yo hice (not «hací»). Hice has no accent."])]},
+
+/* ruta playa */
+p1:{who:'carlos',es:"¿Y cómo fue el plan? Cuéntamelo en orden.",en:"And how was the plan? Tell me in order.",
+ o:[
+  g("Primero fuimos a la playa; después paseamos un rato y al final comimos paella en un chiringuito.","First we went to the beach; then we walked for a while and finally we ate paella at a beach bar.",'p2',
+    ["¡Qué buen plan!","What a great plan!"],
+    ["Muy bien: primero, después y al final ordenan la historia: fuimos, paseamos, comimos.","Very good: primero, después and al final order the story: fuimos, paseamos, comimos."]),
+  m("Fuimos a la playa y comimos paella. Nada más.","We went to the beach and ate paella. Nothing else.",'p2',
+    ["Ah, vale. Un plan sencillo.","Ah, okay. A simple plan."],
+    ["Correcto, pero muy corto: usa primero, después y al final para contarlo mejor.","Correct, but very short: use primero, después and al final to tell it better."],{set:'corto'}),
+  w("Primero fuimos a la playa y después comemos paella en un chiringuito.","First we went to the beach and then we ate paella at a beach bar.",
+    ["Es una historia del pasado: después comimos (no «comemos»).","It is a story in the past: después comimos (not «comemos»)."])]},
+p2:{who:'carlos',es:"¿Y qué tal la comida? ¿Y el chiringuito?",en:"And how was the food? And the beach bar?",
+ o:[
+  g("La paella fue buenísima y el chiringuito estaba lleno.","The paella was delicious and the beach bar was full.",'p3',
+    ["Uf, ¡qué hambre me da!","Ugh, now I'm hungry!"],
+    ["Muy bien: fue para opinar sobre lo que pasó; estaba para describir cómo estaba el sitio.","Very good: fue to give an opinion about what happened; estaba to describe how the place was."]),
+  m("Bien. Estaba bien.","Fine. It was fine.",'p3',
+    ["Vale.","Okay."],
+    ["Se entiende, pero es poco: di cómo fue (la paella fue…) y cómo estaba (el chiringuito estaba…).","It is understood, but it is too little: say how it was (la paella fue…) and how the place was (el chiringuito estaba…)."],{set:'corto'}),
+  w("La paella fue buenísima y el chiringuito fue lleno.","The paella was delicious and the beach bar was full.",
+    ["Para describir cómo estaba el sitio: estaba lleno (no «fue lleno»).","To describe how the place was: estaba lleno (not «fue lleno»)."])]},
+p3:{who:'carlos',es:"Pareces cansada. ¿Qué hiciste el domingo? ¿Pudiste descansar?",en:"You look tired. What did you do on Sunday? Could you rest?",
+ o:[
+  g("El domingo no pude descansar mucho: hice la compra y preparé una paella enorme en casa.","On Sunday I couldn't rest much: I did the shopping and made a huge paella at home.",'zP',
+    ["¡Otra paella! ¡Qué dos días!","Another paella! What a couple of days!"],
+    ["Muy bien: pude y hice (irregulares, sin tilde) y preparé (regular).","Very good: pude and hice (irregular, no accent) and preparé (regular)."]),
+  g("Sí, el domingo descansé: hablé con mi madre por teléfono y comí en casa.","Yes, on Sunday I rested: I talked to my mother on the phone and ate at home.",'zP',
+    ["Un domingo tranquilo, ¡qué bien!","A quiet Sunday, how nice!"],
+    ["Bien: descansé, hablé y comí (regulares). Con la tilde: hablé ≠ habló.","Good: descansé, hablé and comí (regular). With the accent: hablé ≠ habló."]),
+  w("El domingo no pudo descansar mucho: hizo la compra y preparó una paella enorme.","On Sunday I couldn't rest much: I did the shopping and made a huge paella.",
+    ["Hablas de ti: pude, hice, preparé (no «pudo», «hizo», «preparó»).","You talk about yourself: pude, hice, preparé (not «pudo», «hizo», «preparó»)."])]},
+zP:{who:'carlos',es:"¡Qué fin de semana! Yo no hice nada especial. Bueno… ¿empezamos con el informe?",en:"What a weekend! I didn't do anything special. Well… shall we start with the report?",
+ o:[
+  g("Antes del informe: y tú, Carlos, ¿qué hiciste el fin de semana?","Before the report: and you, Carlos, what did you do at the weekend?",['corto','P_good','P_best'],null,
+    ["Muy bien: preguntas de vuelta con el indefinido: ¿qué hiciste?","Very good: you ask back with the preterite: ¿qué hiciste?"]),
+  g("Vale, empezamos. ¡Y el próximo fin de semana quiero otro plan así!","Okay, let's start. And next weekend I want another plan like that!",['corto','P_low','P_good'],null,
+    ["Bien: cierras con buen ánimo, pero sin preguntar nada a Carlos.","Good: you close in a good mood, but without asking Carlos anything."]),
+  w("Antes del informe: y tú, Carlos, ¿qué hizo el fin de semana?","Before the report: and you, Carlos, what did you do at the weekend?",
+    ["A Carlos le hablas de «tú»: ¿qué hiciste? (no «hizo»).","You address Carlos with «tú»: ¿qué hiciste? (not «hizo»)."])]},
+
+/* ruta sierra */
+s1:{who:'carlos',es:"¿Una excursión? ¿Adónde fuisteis exactamente? ¿Salisteis temprano?",en:"A trip? Where exactly did you go? Did you leave early?",
+ o:[
+  g("Sí, primero salimos temprano y después paramos a desayunar en un pueblo de la sierra.","Yes, first we left early and then we stopped for breakfast in a village in the mountains.",'s2',
+    ["¡Qué buena idea!","What a good idea!"],
+    ["Muy bien: salimos y paramos (regulares), con primero y después.","Very good: salimos and paramos (regular), with primero and después."]),
+  m("Sí, salimos temprano. Fuimos a la sierra.","Yes, we left early. We went to the mountains.",'s2',
+    ["Ah, vale.","Ah, okay."],
+    ["Correcto, pero muy corto: usa primero y después para ordenar la historia.","Correct, but very short: use primero and después to order the story."],{set:'corto'}),
+  w("Sí, primero salimos temprano y después pararon a desayunar en un pueblo de la sierra.","Yes, first we left early and then we stopped for breakfast in a village in the mountains.",
+    ["Hablas de «nosotros»: paramos (no «pararon»).","You talk about «nosotros»: paramos (not «pararon»)."])]},
+s2:{who:'carlos',es:"¿Y qué tal el día? ¿Cómo estaba el pueblo?",en:"And how was the day? How was the village?",
+ o:[
+  g("Fue un día genial: el pueblo estaba muy tranquilo y la comida fue buenísima.","It was a great day: the village was very quiet and the food was delicious.",'s3',
+    ["¡Qué bien suena!","That sounds great!"],
+    ["Muy bien: fue para opinar sobre el día; estaba para describir el pueblo.","Very good: fue to give an opinion about the day; estaba to describe the village."]),
+  m("Bien, todo bien.","Fine, all fine.",'s3',
+    ["Vale.","Okay."],
+    ["Se entiende, pero es poco: di cómo fue el día y cómo estaba el pueblo.","It is understood, but it is too little: say how the day was and how the village was."],{set:'corto'}),
+  w("Fue un día genial: el pueblo fue muy tranquilo y la comida fue buenísima.","It was a great day: the village was very quiet and the food was delicious.",
+    ["Para describir cómo estaba el pueblo: estaba tranquilo (no «fue tranquilo»).","To describe how the village was: estaba tranquilo (not «fue tranquilo»)."])]},
+s3:{who:'carlos',es:"¿Y hicisteis fotos? ¿Pudisteis llegar a la cima?",en:"And did you take photos? Could you reach the summit?",
+ o:[
+  g("Sí, hicimos muchísimas fotos, pero no pudimos llegar a la cima porque el camino estaba cerrado.","Yes, we took loads of photos, but we couldn't reach the summit because the path was closed.",'zS',
+    ["¡Qué pena! Pero seguro que las fotos son preciosas.","What a pity! But I'm sure the photos are beautiful."],
+    ["Muy bien: hicimos y pudimos (irregulares) y estaba cerrado para describir el camino.","Very good: hicimos and pudimos (irregular) and estaba cerrado to describe the path."]),
+  g("Sí, hicimos muchas fotos y pudimos llegar a la cima. ¡Fue genial!","Yes, we took lots of photos and we could reach the summit. It was great!",'zS',
+    ["¡Qué bien! Seguro que las vistas son espectaculares.","Great! I'm sure the views are spectacular."],
+    ["Muy bien: hicimos, pudimos y fue genial.","Very good: hicimos, pudimos and fue genial."]),
+  w("Sí, hicimos muchas fotos, pero no pudisteis llegar a la cima.","Yes, we took lots of photos, but we couldn't reach the summit.",
+    ["Hablas de «nosotros»: no pudimos (no «pudisteis»).","You talk about «nosotros»: no pudimos (not «pudisteis»)."])]},
+zS:{who:'carlos',es:"¡Qué envidia! Yo no pude salir de casa. Bueno… ¿empezamos con el informe?",en:"How I envy you! I couldn't leave the house. Well… shall we start with the report?",
+ o:[
+  g("Antes del informe: ¿y tú, Carlos? ¿Por qué no pudiste salir de casa?","Before the report: and you, Carlos? Why couldn't you leave the house?",['corto','S_good','S_best'],null,
+    ["Muy bien: preguntas de vuelta con el indefinido: ¿por qué no pudiste salir?","Very good: you ask back with the preterite: ¿por qué no pudiste salir?"]),
+  g("Vale, empezamos. ¡Y el próximo fin de semana quiero otra excursión así!","Okay, let's start. And next weekend I want another trip like that!",['corto','S_low','S_good'],null,
+    ["Bien: cierras con buen ánimo, pero sin preguntar nada a Carlos.","Good: you close in a good mood, but without asking Carlos anything."]),
+  w("Antes del informe: ¿y tú, Carlos? ¿Por qué no pudo salir de casa?","Before the report: and you, Carlos? Why couldn't you leave the house?",
+    ["A Carlos le hablas de «tú»: ¿por qué no pudiste salir? (no «pudo»).","You address Carlos with «tú»: ¿por qué no pudiste salir? (not «pudo»)."])]}
+},
+ends:{
+P_best:{g:'best',t:["Dos historias de lunes","Two Monday stories"],
+ line:["Yo salí a correr y comí en casa de mis padres. ¡Mucho menos emocionante que tu paella!","I went for a run and ate at my parents' house. Much less exciting than your paella!"],
+ ep:["Contaste tu fin de semana en orden, con fue y estaba, y preguntaste de vuelta: Carlos también te cuenta el suyo.","You told your weekend in order, with fue and estaba, and asked back: Carlos tells you his too."]},
+P_good:{g:'good',t:["A trabajar con buen ánimo","Off to work in a good mood"],
+ line:["¡Perfecto! Pues vamos, que hoy hay mucho trabajo.","Perfect! Then let's go, there is a lot of work today."],
+ ep:["Buen relato y buena energía. Para un final más cálido, pregunta también: «¿Y tú, qué hiciste?».","A good story and good energy. For a warmer ending, ask something too: «¿Y tú, qué hiciste?»."]},
+P_low:{g:'low',t:["Un relato muy corto","A very short story"],
+ line:["Vale… pues a trabajar.","Okay… then, back to work."],
+ ep:["Respondiste con frases muy cortas y no preguntaste nada: faltaron primero, después, al final y fue / estaba.","You answered with very short sentences and asked nothing: primero, después, al final and fue / estaba were missing."]},
+S_best:{g:'best',t:["Una excursión para dos","A trip for two"],
+ line:["Estaba enfermo y no pude salir de casa, ¡qué rollo! Pero el próximo fin de semana me apunto a tu excursión.","I was ill and couldn't leave the house, what a drag! But next weekend I'm in for your trip."],
+ ep:["Contaste la excursión con fue y estaba y preguntaste de vuelta: Carlos te cuenta su fin de semana y quiere ir contigo.","You told the trip with fue and estaba and asked back: Carlos tells you about his weekend and wants to come with you."]},
+S_good:{g:'good',t:["Con las pilas cargadas","Batteries recharged"],
+ line:["¡Pues vamos allá! Que hoy hay mucho trabajo.","Then let's go! There is a lot of work today."],
+ ep:["Buen relato, con fue y estaba bien usados. Para un final más cálido, pregunta también: «¿Y tú, qué hiciste?».","A good story, with fue and estaba used well. For a warmer ending, ask something too: «¿Y tú, qué hiciste?»."]},
+S_low:{g:'low',t:["Poco que contar","Not much to tell"],
+ line:["Vale… pues a trabajar.","Okay… then, back to work."],
+ ep:["Respondiste con frases muy cortas y no preguntaste nada: faltaron primero, después y fue / estaba.","You answered with very short sentences and asked nothing: primero, después and fue / estaba were missing."]}
+}};
+})();
+
+/* Diálogo ramificado · motor. Los datos de cada clase están en window.BR (nodos, opciones y finales). */
+(()=>{
+'use strict';
+const B=window.BR,root=document.getElementById('br');
+if(!B||!root)return;
+const $=id=>document.getElementById(id);
+const RM=matchMedia('(prefers-reduced-motion:reduce)').matches;
+const sfx=window.__sfx||{fire(){},confetti(){}};
+const LOG=$('brLog'),ASK=$('brAsk'),OPTS=$('brOpts'),END=$('brEnd'),TRAIL=$('brTrail'),STEP=$('brStep'),
+  BACK=$('brBack'),AGAIN=$('brAgain'),FOUND=$('brFound'),SEC=$('s4');
+const NODES=B.nodes,ENDS=B.ends,EK=Object.keys(ENDS);
+const ST=typeof S!=='undefined'?S:{},SV=typeof save==='function'?save:()=>{};
+
+const mk=(t,c,x)=>{const e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e};
+const en=(x,c)=>mk('span','en'+(c?' '+c:''),x);
+const col=(el,t)=>{if(typeof vb==='function')vb(el,t);else el.append(t)};           /* colores de verbos de la clase */
+const sh=a=>{const r=[...a];for(let i=r.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[r[i],r[j]]=[r[j],r[i]]}return r};
+const wait=ms=>RM||!ms?Promise.resolve():new Promise(r=>setTimeout(r,ms));
+const near=(el,b)=>{if(el&&el.scrollIntoView)el.scrollIntoView({block:b||'nearest',behavior:RM?'auto':'smooth'})};
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const isEnd=id=>Object.prototype.hasOwnProperty.call(ENDS,id);
+const tg=to=>Array.isArray(to)?[...tg(to[1]),...tg(to[2])]:[to];                    /* destinos posibles de una opción */
+const store=()=>{const s=(ST.br=ST.br||{});s.e=s.e||{};s.x=s.x||{};return s};
+const KIND={g:'✓',m:'~',w:'✗'},SR={g:'Bien. ',m:'Casi. ',w:'Incorrecto. '};
+
+/* ---------- estado de la ruta ---------- */
+let run,busy=false,rid=0;
+function fresh(){rid++;busy=false;run={hist:[],cur:B.start,wr:[],tried:{},flags:{},end:null,order:null}}
+const resolve=to=>Array.isArray(to)?resolve(run.flags[to[0]]?to[1]:to[2]):to;
+const whoName=id=>(B.cast[id]||{n:''}).n;
+
+/* ---------- piezas de la conversación ---------- */
+function npc(who,es,enx,tag,inst){
+  const c=B.cast[who]||{n:'?'},row=mk('div','br-row npc'+(inst?'':' new'));
+  const av=mk('div','br-av',c.i||c.n[0]);av.setAttribute('aria-hidden','true');
+  const b=mk('div','br-b'),sm=mk('small','',c.n);
+  if(tag){const t=mk('span','cue',tag[0]);t.append(en(' '+tag[1]));sm.append(t)}
+  const t=mk('div','br-t');col(t,es);
+  b.append(sm,t,en(enx,'b'));row.append(av,b);return row}
+function you(o,k,inst){
+  const row=mk('div','br-row me '+k+(inst?'':' new')),b=mk('div','br-b'),t=mk('div','br-t');
+  col(t,o.es);b.append(mk('small','',B.me||'Tú'),t,en(o.en,'b'));row.append(b);return row}
+function note(o,k){
+  const f=o.fb;if(!f)return null;
+  const d=mk('div','br-fb '+k),g=mk('span','br-g',KIND[k]);g.setAttribute('aria-hidden','true');
+  d.append(g,mk('span','br-sr',SR[k]),document.createTextNode(f[0]),en(f[1],'b'));return d}
+function scene(sc){const d=mk('div','br-sc',sc[0]);d.append(en(sc[1],'b'));return d}
+function huh(nd,i){const p=B.huh[i%B.huh.length];return npc(nd.who,p[0],p[1],null,false)}
+
+/* turno del otro personaje: reacción a tu respuesta + (cambio de escena) + su frase */
+function say(id,via,from,inst){
+  const nd=NODES[id],re=via&&via.re,out=[],J=(a,b)=>[a,b].filter(Boolean).join(' ');
+  if(re){
+    const rw=via.rw||(from&&from.who);
+    if(!nd.es||(!nd.sc&&rw===nd.who))out.push(npc(rw,J(re[0],nd.es),J(re[1],nd.en),nd.tag,inst));
+    else{out.push(npc(rw,re[0],re[1],null,inst));if(nd.sc)out.push(scene(nd.sc));out.push(npc(nd.who,nd.es,nd.en,nd.tag,inst))}
+  }else{if(nd.sc)out.push(scene(nd.sc));out.push(npc(nd.who,nd.es,nd.en,nd.tag,inst))}
+  return out}
+function closing(id,via,from){
+  const e=ENDS[id],re=via&&via.re,w=from&&(via&&via.rw||from.who),out=[];
+  if(re&&e.line)out.push(npc(w,re[0]+' '+e.line[0],re[1]+' '+e.line[1],null,false));
+  else{if(re)out.push(npc(w,re[0],re[1],null,false));if(e.line)out.push(npc(w,e.line[0],e.line[1],null,false))}
+  return out}
+async function typing(who,len){
+  if(RM)return;
+  const c=B.cast[who]||{n:'?'},row=mk('div','br-row npc br-typing'),av=mk('div','br-av',c.i||c.n[0]),b=mk('div','br-b');
+  av.setAttribute('aria-hidden','true');b.setAttribute('aria-hidden','true');
+  for(let i=0;i<3;i++)b.append(mk('i'));row.append(av,b);LOG.append(row);near(row);
+  await wait(Math.min(950,380+(len||40)*7));row.remove()}
+
+/* ---------- cabecera: paso y ruta ---------- */
+function head(){
+  const n=run.hist.length,ft=run.hist.filter(h=>h.ft).length;
+  TRAIL.textContent='';
+  run.hist.forEach(h=>TRAIL.append(mk('i',h.q==='m'?'m':h.ft?'g':'f')));
+  TRAIL.setAttribute('aria-label',n?n+(n===1?' respuesta dada, ':' respuestas dadas, ')+ft+' a la primera':'Aún no has respondido');
+  STEP.textContent=run.end?'Final':'Paso '+(n+1);STEP.append(en(run.end?' · Ending':' · Step '+(n+1)));
+  BACK.disabled=!n;AGAIN.disabled=!n&&!run.wr.length&&!run.end}
+
+/* ---------- opciones (el orden se baraja en cada pregunta) ---------- */
+function ask(focus){
+  const nd=NODES[run.cur];
+  if(!run.order||run.order.id!==run.cur)run.order={id:run.cur,idx:sh(nd.o.map((_,i)=>i))};
+  OPTS.textContent='';OPTS.style.minHeight='';
+  run.order.idx.forEach(i=>{
+    const o=nd.o[i],b=mk('button','br-opt');b.type='button';b.dataset.i=i;
+    b.append(mk('span','br-es',o.es),en(o.en,'b'));
+    if(run.wr.includes(i)){b.disabled=true;b.classList.add('nope');b.append(mk('span','br-sr',' (ya probada: incorrecta)'))}
+    OPTS.append(b)});
+  ASK.hidden=false;
+  if(focus){const f=OPTS.querySelector('button:not(:disabled)');if(f)f.focus({preventScroll:true});near(OPTS)}}
+
+/* ---------- elegir una respuesta ---------- */
+async function pick(i){
+  if(busy)return;
+  const my=rid,nd=NODES[run.cur],o=nd.o[i];busy=true;
+  const first=!run.tried[run.cur];run.tried[run.cur]=1;
+  const btn=OPTS.querySelector('[data-i="'+i+'"]');
+  OPTS.style.minHeight=OPTS.offsetHeight+'px';
+  if(o.q==='w'){                                               /* forma incorrecta: el otro no entiende y vuelves a elegir */
+    run.wr.push(i);
+    if(btn){btn.classList.add('nope');if(!RM)btn.classList.add('fx-bad')}
+    sfx.fire([[0,'buzz']]);
+    await wait(260);if(my!==rid)return;
+    LOG.append(you(o,'w'));const f=note(o,'w');if(f)LOG.append(f);near(LOG.lastElementChild);
+    head();await wait(450);if(my!==rid)return;
+    const j=run.wr.length-1;
+    if(o.hu){await typing(nd.who,o.hu[0].length);if(my!==rid)return;LOG.append(npc(nd.who,o.hu[0],o.hu[1],null,false))}
+    else{const p=B.huh[(i+j)%B.huh.length];await typing(nd.who,p[0].length);if(my!==rid)return;LOG.append(npc(nd.who,p[0],p[1],null,false))}
+    ask(true);busy=false;return}
+  if(btn&&!RM)btn.classList.add('fx-ok');
+  sfx.fire(o.q==='g'?[[0,'pop',660],[.09,'note',880]]:[[0,'tick',520]]);
+  await wait(240);if(my!==rid)return;
+  if(o.set)run.flags[o.set]=1;
+  const to=resolve(o.to);
+  run.hist.push({id:run.cur,pick:i,wr:run.wr.slice(),q:o.q,ft:first&&o.q==='g',to});
+  run.wr=[];
+  LOG.append(you(o,o.q));const f=note(o,o.q);if(f)LOG.append(f);near(LOG.lastElementChild);
+  const s=store();s.x[run.hist[run.hist.length-1].id+'>'+to]=1;SV();
+  OPTS.textContent='';head();
+  await wait(520);if(my!==rid)return;
+  if(isEnd(to)){
+    run.end=to;
+    const items=closing(to,o,nd),len=items.length?items[0].textContent.length:30;
+    await typing(nd.who,len);if(my!==rid)return;
+    items.forEach(x=>LOG.append(x));finish(to);
+  }else{
+    run.cur=to;const next=NODES[to];
+    await typing(next.who,(o.re?o.re[0].length:0)+next.es.length);if(my!==rid)return;
+    say(to,o,nd,false).forEach(x=>LOG.append(x));
+    head();ask(true)}
+  busy=false}
+
+/* ---------- final ---------- */
+function finish(id){
+  const e=ENDS[id],s=store();
+  s.e[id]=1;s.n=(s.n||0)+1;SV();
+  ASK.hidden=true;head();found();seal(true);
+  const n=run.hist.length,ft=run.hist.filter(h=>h.ft).length,fd=EK.filter(k=>s.e[k]).length;
+  END.className='br-end '+e.g;END.hidden=false;END.textContent='';
+  const h=mk('h3','',e.t[0]);h.append(en(' '+e.t[1]));h.tabIndex=-1;
+  const p=mk('p','',e.ep[0]);p.append(en(e.ep[1]));
+  const ul=mk('ul','br-stats'),li=(num,es,x)=>{const l=mk('li');l.append(mk('b','',num),es,en(' '+x));return l};
+  ul.append(li(ft+' / '+n,'a la primera','first try'),li(fd+' / '+EK.length,'finales descubiertos','endings found'));
+  END.append(h,p,ul,recap(),mapBox());
+  near(END,'start');h.focus({preventScroll:true});
+  const best=e.g==='best';
+  sfx.fire(best?[[0,'fan']]:e.g==='good'?[[0,'note',784],[.1,'note',988]]:e.g==='mid'?[[0,'note',523],[.1,'note',659]]:[[0,'glide',500,200,.3]]);
+  if(best)sfx.confetti(END);
+  busy=false}
+
+function recap(){
+  const d=mk('details','ref'),s=mk('summary','','Tu ruta, paso a paso');s.append(en(' · Your route, step by step'));d.append(s);
+  const ol=mk('ol','br-rec');
+  run.hist.forEach(h=>{
+    const nd=NODES[h.id],o=nd.o[h.pick],li=mk('li');
+    li.append(mk('span','br-rq',whoName(nd.who)+': '+nd.es));
+    const k=o.q==='m'?'m':h.ft?'g':'f',ra=mk('span','br-ra '+k),t=mk('span','br-rt');
+    col(t,o.es);ra.append(mk('span','br-g',k==='m'?'~':'✓'),t);li.append(ra);
+    h.wr.forEach(i=>{const w=nd.o[i],x=mk('span','br-rw','✗ «'+w.es+'» → '+w.fb[0]);x.append(en(' '+w.fb[1]));li.append(x)});
+    if(o.q==='m'&&o.fb){const x=mk('span','br-rn','~ '+o.fb[0]);x.append(en(' '+o.fb[1]));li.append(x)}
+    ol.append(li)});
+  d.append(ol);return d}
+
+/* ---------- mapa del diálogo (se calcula una vez a partir de los datos) ---------- */
+const ALL={};Object.keys(NODES).forEach(id=>{ALL[id]=[...new Set(NODES[id].o.flatMap(o=>o.to?tg(o.to):[]))]});
+const DEP={};(function v(id,d){if(isEnd(id))return;if(DEP[id]!==undefined&&DEP[id]>=d)return;DEP[id]=d;ALL[id].forEach(t=>v(t,d+1))})(B.start,0);
+const MAXD=Math.max(...Object.values(DEP)),ROWS=[],EO=[];
+{const seen=new Set([B.start]),q=[B.start],order=[];
+ while(q.length){const id=q.shift();order.push(id);ALL[id].forEach(t=>{if(isEnd(t)){if(!EO.includes(t))EO.push(t)}else if(!seen.has(t)){seen.add(t);q.push(t)}})}
+ order.forEach(id=>{(ROWS[DEP[id]]=ROWS[DEP[id]]||[]).push(id)});
+ EK.forEach(k=>{if(!EO.includes(k))EO.push(k)});ROWS[MAXD+1]=EO}
+const MW=340,RG=48,PT=20,XY={};
+ROWS.forEach((r,i)=>r.forEach((id,k)=>{XY[id]=[r.length===1?MW/2:36+(MW-72)*k/(r.length-1),PT+i*RG]}));
+const MH=PT*2+(ROWS.length-1)*RG;
+function mapBox(){
+  const s=store(),path=[B.start,...run.hist.map(h=>h.to)],on=new Set(run.hist.map(h=>h.id+'>'+h.to)),inPath=new Set(path),
+    seenN=new Set([...Object.keys(s.x).flatMap(k=>k.split('>')),...path]);
+  const edge=(a,t,k)=>{const [x1,y1]=XY[a],[x2,y2]=XY[t],dy=(y2-y1)*.55;
+    return '<path class="e'+(on.has(k)?' on':s.x[k]?' x':'')+'" d="M'+x1+' '+y1+'C'+x1+' '+(y1+dy)+' '+x2+' '+(y2-dy)+' '+x2+' '+y2+'"/>'};
+  let g='<svg class="br-map" viewBox="0 0 '+MW+' '+MH+'" role="img" aria-label="Mapa del diálogo: tu ruta, las ramas ya probadas y las que quedan por descubrir">';
+  const E=[];Object.keys(ALL).forEach(a=>ALL[a].forEach(t=>E.push([a,t,a+'>'+t])));
+  E.filter(e=>!on.has(e[2])).forEach(e=>{g+=edge(...e)});E.filter(e=>on.has(e[2])).forEach(e=>{g+=edge(...e)});
+  Object.keys(ALL).forEach(id=>{if(!XY[id])return;const [x,y]=XY[id];
+    g+='<circle class="n'+(inPath.has(id)?' on':seenN.has(id)?' x':'')+'" cx="'+x+'" cy="'+y+'" r="'+(inPath.has(id)?7:6)+'"/>'});
+  EK.forEach(id=>{if(!XY[id])return;const [x,y]=XY[id],f=s.e[id];
+    g+='<g><title>'+esc(f?ENDS[id].t[0]:'Final por descubrir')+'</title><rect class="t'+(f?' '+ENDS[id].g:'')+(inPath.has(id)?' on':'')+'" x="'+(x-9)+'" y="'+(y-9)+'" width="18" height="18" rx="5"/><text x="'+x+'" y="'+y+'">'+(f?'✓':'?')+'</text></g>'});
+  g+='</svg>';
+  const d=mk('details','ref'),sm=mk('summary','','Mapa del diálogo');sm.append(en(' · Dialogue map'));d.append(sm);
+  const wrap=mk('div');wrap.innerHTML=g;d.append(wrap.firstChild);
+  const lg=mk('p','br-legend'),sp=(c,es,x)=>{const e=mk('span',c,es);e.append(en(' '+x));return e};
+  lg.append(sp('','Tu ruta','Your route'),sp('x','Ramas ya probadas','Branches you have tried'),sp('u','Ramas por descubrir','Branches left to find'));
+  d.append(lg);return d}
+
+/* ---------- finales descubiertos y sello de la sección ---------- */
+function found(){
+  const s=store(),n=EK.filter(k=>s.e[k]).length;
+  FOUND.textContent='';
+  const ti=mk('span','br-tiles');ti.setAttribute('aria-hidden','true');
+  EK.forEach(k=>ti.append(mk('i',s.e[k]?ENDS[k].g:'')));
+  const t=mk('span','',n+' de '+EK.length+' finales');t.append(en(' · '+n+' of '+EK.length+' endings'));
+  FOUND.append(ti,t)}
+function seal(anim){
+  const t=document.querySelector('.toc a[href="#s4"]'),was=SEC.classList.contains('kin-done');
+  SEC.classList.add('kin-done');if(t)t.classList.add('kin-done');
+  if(anim&&!was&&!RM)[SEC,t].forEach(x=>{if(!x)return;x.classList.remove('kin-go');void x.offsetWidth;x.classList.add('kin-go')})}
+
+/* ---------- pintar la conversación entera desde el historial (al empezar y al volver atrás) ---------- */
+function render(focus){
+  LOG.setAttribute('aria-live','off');
+  LOG.textContent='';END.hidden=true;END.textContent='';
+  say(B.start,null,null,true).forEach(x=>LOG.append(x));
+  run.hist.forEach(h=>{
+    const nd=NODES[h.id],o=nd.o[h.pick];
+    h.wr.forEach((i,j)=>{LOG.append(you(nd.o[i],'w',true));const f=note(nd.o[i],'w');if(f)LOG.append(f);
+      const x=nd.o[i].hu||B.huh[(i+j)%B.huh.length];LOG.append(npc(nd.who,x[0],x[1],null,true))});
+    LOG.append(you(o,o.q,true));const f=note(o,o.q);if(f)LOG.append(f);
+    if(!isEnd(h.to))say(h.to,o,nd,true).forEach(x=>LOG.append(x))});
+  head();ask(!!focus);
+  requestAnimationFrame(()=>LOG.setAttribute('aria-live','polite'))}
+
+function back(){
+  if(!run.hist.length)return;
+  const h=run.hist.pop(),tr=run.tried;rid++;busy=false;
+  run.cur=h.id;run.wr=[];run.end=null;run.order=null;
+  run.flags={};run.hist.forEach(x=>{const o=NODES[x.id].o[x.pick];if(o.set)run.flags[o.set]=1});
+  run.tried=tr;render(true)}
+function again(){fresh();render(false);near(LOG)}
+
+OPTS.addEventListener('click',e=>{const b=e.target.closest('.br-opt');if(!b||b.disabled||busy)return;pick(+b.dataset.i)});
+BACK.addEventListener('click',back);
+AGAIN.addEventListener('click',again);
+
+fresh();render(false);found();
+if(EK.some(k=>store().e[k]))seal(false);
 })();
 </script>
 </body></html>
