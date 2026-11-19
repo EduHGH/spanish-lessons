@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rebecca · Programa de Español (A1 + A2 · pendientes PCIC)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+
+/* ╔══════════════════════════════════════════════════════════════╗
+   ║  ESCOLAR — sistema de diseño para clases de español online   ║
+   ║  Aplicado al programa de Rebecca · concepto "viaje en tren"    ║
+   ╚══════════════════════════════════════════════════════════════╝ */
+
+:root{
+  --paper:        #FBF7EE;
+  --paper-raised: #FFFFFF;
+  --paper-alt:    #F3ECDA;
+  --ink:          #23291F;
+  --ink-soft:     #565F52;
+  --ink-faint:    #8B9184;
+  --line:         rgba(35,41,31,0.12);
+  --line-strong:  rgba(35,41,31,0.22);
+
+  --b1:      #2F6FED;  --b1-soft: #EAF1FE;  --b1-line: #C6D9FC;
+  --b2:      #2E9E6B;  --b2-soft: #E9F6EF;  --b2-line: #BEE6D3;
+  --b3:      #DB8A2E;  --b3-soft: #FCF1E1;  --b3-line: #F3D9AF;
+  --family:  #B5502E;  --family-soft: #FBEBE3; --family-line: #EFC9B4;
+
+  --f-display: 'Fraunces', Georgia, serif;
+  --f-body:    'IBM Plex Sans', system-ui, sans-serif;
+  --f-data:    'IBM Plex Mono', monospace;
+
+  --r-sm: 8px;
+  --r-md: 14px;
+  --r-lg: 20px;
+  --line-w: 3px;
+
+  --shadow-1: 0 1px 2px rgba(35,41,31,0.05), 0 1px 8px rgba(35,41,31,0.04);
+}
+
+*{ box-sizing:border-box; }
+body{
+  margin:0;
+  background: var(--paper);
+  background-image: radial-gradient(circle at 1px 1px, var(--line) 1px, transparent 0);
+  background-size: 22px 22px;
+  color: var(--ink);
+  font-family: var(--f-body);
+  line-height:1.55;
+}
+::selection{ background: var(--b1-soft); }
+
+/* ---------- HEADER / TICKET ---------- */
+header{
+  padding:48px 24px 34px;
+  max-width:980px;
+  margin:0 auto;
+}
+.eyebrow{
+  font-family: var(--f-data); font-size:12px; letter-spacing:.14em;
+  text-transform:uppercase; color: var(--family); margin:0 0 10px;
+}
+h1{
+  font-family: var(--f-display); font-weight:600;
+  font-size:clamp(32px,5.4vw,52px); line-height:1.05;
+  margin:0 0 18px; letter-spacing:-.01em;
+}
+h1 em{ font-style:italic; color: var(--family); }
+.ticket-card{
+  background: var(--paper-raised);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-1);
+  padding: 24px 28px;
+  position:relative; overflow:hidden;
+}
+.ticket-card::before{
+  content:""; position:absolute; inset:0 0 auto 0; height:6px;
+  background: linear-gradient(90deg, var(--b1) 0 33.3%, var(--b2) 33.3% 66.6%, var(--b3) 66.6% 100%);
+}
+.ticket-meta{
+  display:flex; flex-wrap:wrap; gap:24px;
+  font-family: var(--f-data); font-size:12.5px; color: var(--ink-faint);
+}
+.ticket-meta strong{
+  display:block; color: var(--ink); font-size:16px; font-weight:500;
+  font-family: var(--f-display); margin-top:3px;
+}
+
+/* ---------- PROGRESS ---------- */
+.progress-wrap{ max-width:980px; margin:0 auto; padding:22px 24px 0; }
+.progress-label{
+  display:flex; justify-content:space-between;
+  font-family: var(--f-data); font-size:12px; color: var(--ink-faint); margin-bottom:8px;
+}
+.progress-track{
+  height:8px; background: var(--paper-alt); border:1px solid var(--line);
+  border-radius:99px; overflow:hidden;
+}
+.progress-fill{ height:100%; background: var(--b2); width:0%; transition: width .4s ease; }
+
+/* ---------- FILTERS ---------- */
+.filters{ max-width:980px; margin:0 auto; padding:20px 24px 0; display:flex; flex-wrap:wrap; gap:8px; }
+.filter-btn{
+  font-family: var(--f-data); font-size:12px; letter-spacing:.02em;
+  background: var(--paper-raised); border:1px solid var(--line); color: var(--ink-soft);
+  padding:7px 14px; border-radius:999px; cursor:pointer; transition: all .15s ease;
+}
+.filter-btn:hover{ border-color: var(--ink-faint); color: var(--ink); }
+.filter-btn.active{ background: var(--ink); border-color: var(--ink); color: var(--paper); }
+
+/* ---------- MAIN LINE ---------- */
+main{ max-width:980px; margin:0 auto; padding:36px 24px 90px; }
+
+.week{ position:relative; margin-bottom:48px; }
+.week-header{ display:flex; align-items:baseline; gap:14px; margin-bottom:20px; padding-left:2px; }
+.week-tag{
+  font-family: var(--f-data); font-size:13px; font-weight:500; color:#fff;
+  padding:4px 11px; border-radius:999px; letter-spacing:.04em; flex:none;
+}
+.week[data-color="b1"] .week-tag{ background: var(--b1); }
+.week[data-color="b2"] .week-tag{ background: var(--b2); }
+.week[data-color="b3"] .week-tag{ background: var(--b3); }
+.week-titles h2{
+  font-family: var(--f-display); font-weight:500; font-style:italic; font-size:23px; margin:0; line-height:1;
+}
+.week-titles p{
+  font-family: var(--f-data); font-size:11.5px; color: var(--ink-faint); margin:5px 0 0;
+  text-transform:uppercase; letter-spacing:.06em;
+}
+
+.stops{ position:relative; padding-left:34px; }
+.stops::before{
+  content:""; position:absolute; left:9px; top:6px; bottom:6px; width:var(--line-w);
+  background: var(--line-strong); opacity:.6;
+}
+.week[data-color="b1"] .stops::before{ background: var(--b1-line); }
+.week[data-color="b2"] .stops::before{ background: var(--b2-line); }
+.week[data-color="b3"] .stops::before{ background: var(--b3-line); }
+
+.stop{ position:relative; margin-bottom:12px; }
+.stop::before{
+  content:""; position:absolute; left:-34px; top:22px; width:11px; height:11px;
+  border-radius:50%; background: var(--paper); border: var(--line-w) solid var(--ink-faint);
+  transition: all .2s ease; z-index:2;
+}
+.stop.done::before{ background: var(--b2); border-color: var(--b2); }
+
+.card{
+  background: var(--paper-raised); border:1px solid var(--line); border-radius: var(--r-md);
+  padding:16px 18px; cursor:pointer; transition: border-color .15s ease, box-shadow .15s ease;
+}
+.card:hover{ border-color: var(--ink-faint); box-shadow: var(--shadow-1); }
+.card:focus-visible{ outline:2px solid var(--b1); outline-offset:2px; }
+.stop.done .card{ background: var(--b2-soft); border-color: var(--b2-line); }
+
+.card-top{ display:flex; align-items:flex-start; justify-content:space-between; gap:12px; }
+.card-id{ font-family: var(--f-data); font-size:11px; color: var(--ink-faint); white-space:nowrap; padding-top:2px; }
+.card-title{ font-family: var(--f-body); font-weight:600; font-size:15.5px; margin:0; flex:1; color: var(--ink); }
+.check{
+  width:22px; height:22px; border-radius:6px; border:1.5px solid var(--ink-faint); flex-shrink:0;
+  display:flex; align-items:center; justify-content:center; font-size:13px; color:transparent;
+  background: var(--paper-raised); transition: all .15s ease; cursor:pointer;
+}
+.check:focus-visible{ outline:2px solid var(--b1); outline-offset:2px; }
+.stop.done .check{ background: var(--b2); border-color: var(--b2); color:#fff; }
+
+.card-detail{ max-height:0; overflow:hidden; transition: max-height .28s ease; }
+.card.open .card-detail{ max-height:760px; }
+.detail-inner{
+  padding-top:14px; margin-top:14px; border-top:1px dashed var(--line);
+  display:grid; gap:10px; font-size:13.5px; line-height:1.5;
+}
+.detail-row{ display:grid; grid-template-columns:96px 1fr; gap:10px; }
+.detail-label{
+  font-family: var(--f-data); font-size:10.5px; text-transform:uppercase; letter-spacing:.05em;
+  color: var(--family); padding-top:1px;
+}
+.detail-value{ color: var(--ink-soft); }
+
+.week.filtered-out{ display:none; }
+
+/* ---------- FOOTER ---------- */
+footer{
+  max-width:980px; margin:0 auto; padding:0 24px 60px;
+  font-family: var(--f-data); font-size:11.5px; color: var(--ink-faint);
+  display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px;
+}
+.reset-btn{
+  background:none; border:none; color: var(--ink-faint); text-decoration:underline;
+  cursor:pointer; font-family: var(--f-data); font-size:11.5px; padding:0;
+}
+.reset-btn:hover{ color: var(--family); }
+
+@media (max-width:640px){
+  header{ padding:36px 16px 26px; }
+  .ticket-card{ padding:20px 18px; }
+  .ticket-meta{ gap:16px; }
+  main{ padding:26px 12px 70px; }
+  .stops{ padding-left:26px; }
+  .stops::before{ left:6px; }
+  .stop::before{ left:-26px; }
+  .detail-row{ grid-template-columns:1fr; gap:2px; }
+}
+@media (prefers-reduced-motion: reduce){ *{ transition:none !important; } }
+.lang-toggle{position:absolute;top:14px;right:24px;display:inline-flex;padding:2px;border:1px solid var(--line-strong);border-radius:999px;background:transparent;font-family:var(--f-data);font-size:11px;letter-spacing:.04em;color:var(--ink-soft);cursor:pointer;opacity:.75;transition:opacity .15s}
+.lang-toggle:hover,.lang-toggle:focus-visible{opacity:1}
+.lang-toggle:focus-visible{outline:2px solid var(--b1);outline-offset:2px}
+.lang-toggle span{padding:3px 9px;border-radius:999px}
+.lang-toggle span.on{background:var(--paper-alt);color:var(--ink);font-weight:500}
+header{position:relative}
+.en{display:none;font-family:var(--f-body);font-style:italic;font-weight:400;font-size:.9em;line-height:1.45;color:var(--ink-soft);letter-spacing:0;text-transform:none;margin-top:2px}
+.bi .en{display:block}
+.bi .en.inl{display:inline}
+.en-sub{font-size:15px;margin:-6px 0 18px}
+.en-title{font-size:13px;margin:3px 0 0}
+.detail-label .en{font-style:normal;text-transform:uppercase;font-size:inherit;margin:0;color:var(--ink-faint)}
+.bi .detail-label .en{display:inline}
+@media(max-width:600px){.lang-toggle{right:16px}}
+</style>
+</head>
+<body>
+
+<header>
+<button class="lang-toggle" id="lang-toggle" role="switch" aria-checked="false" aria-label="Modo de idioma · Language mode" title="Español / Español+English"><span class="on">ES</span><span>ES+EN</span></button>
+  <p class="eyebrow">Programa individual · Español A1 + A2 · Pendientes PCIC</p>
+  <h1>Los huecos del <em>PCIC</em></h1>
+<p class="en en-sub">The gaps in the PCIC · individual programme, Spanish A1 + A2</p>
+  <div class="ticket-card">
+    <div class="ticket-meta">
+      <div>Alumna<span class="en inl"> · Student</span><strong>Rebecca</strong></div>
+      <div>Duración de sesión<span class="en inl"> · Session length</span><strong>50 min</strong></div>
+      <div>Nivel PCIC<span class="en inl"> · PCIC level</span><strong>A1 + A2</strong></div>
+      <div>Total de clases<span class="en inl"> · Total classes</span><strong id="total-count">30</strong></div>
+    </div>
+  </div>
+  <p style="font-family: var(--f-data); font-size:12px; color: var(--family); margin:14px 2px 0; letter-spacing:.02em;">Pautas de cada clase: 5 min de repaso oral al inicio · producir en vez de elegir · tarea de 5 frases · cierre oral sin guion. Verbos de apoyo: ser, ir, estar, tener, hacer, poder, querer, decir.<span class="en">Every class: 5-minute oral review at the start · produce rather than choose · 5-sentence homework · unscripted oral close. Support verbs: ser, ir, estar, tener, hacer, poder, querer, decir.</span></p>
+</header>
+
+<div class="progress-wrap">
+  <div class="progress-label">
+    <span>Progreso del curso<span class="en inl"> · Course progress</span></span>
+    <span id="progress-text">0 / 30 completadas</span>
+  </div>
+  <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
+</div>
+
+<div class="filters" id="filters"></div>
+
+<main id="main"></main>
+
+<footer>
+  <span>Marca cada parada al completar la clase — tu progreso se guarda en este navegador.<span class="en">Tick each stop when the class is done — your progress is saved in this browser.</span></span>
+  <button class="reset-btn" id="reset-btn">Reiniciar progreso</button>
+</footer>
+
+<script>
+const LINEA_COLOR = {L1:'b1', L2:'b2', L3:'b3', L4:'b1', L5:'b2', L6:'b3', L7:'b1', L8:'b2'};
+
+const DATA = {"weeks": [{"linea": "L1", "titulo": "Estación de los cimientos", "subtitulo": "A1 · Nombres, adjetivos y negación", "classes": [{"n": 1, "nivel": "A1", "title": "Esto, eso, aquello — los demostrativos", "grammar": "Demostrativos este/ese/aquel (y esta, estos…) · «¿Qué es eso?»", "vocab": "móvil, llaves, cartera, gafas, mochila", "activity": "Mercadillo imaginario: señalar objetos cerca y lejos y preguntar «¿Qué es eso?»", "task": "5 frases con este/ese/aquel sobre objetos de su casa", "en": {"title": "This, that, that over there — demonstratives", "grammar": "Demonstratives este/ese/aquel (and esta, estos…) · “What is that?”", "vocab": "phone, keys, wallet, glasses, backpack", "activity": "Imaginary flea market: point at objects near and far and ask «¿Qué es eso?»", "task": "5 sentences with este/ese/aquel about objects in her home"}}, {"n": 2, "nivel": "A1", "title": "Un objeto, muchos objetos — un/una y plural", "grammar": "Artículo indefinido un/una/unos/unas · plural -s/-es (la luz → las luces)", "vocab": "la maleta: ropa y objetos de viaje", "activity": "Pasar frases del singular al plural en cadena oral y explicar la regla", "task": "5 frases con «un/una» y su versión en plural", "en": {"title": "One thing, many things — a/an and plurals", "grammar": "Indefinite articles un/una/unos/unas · plurals -s/-es (la luz → las luces)", "vocab": "the suitcase: clothes and travel items", "activity": "Turn sentences from singular to plural in an oral chain and explain the rule", "task": "5 sentences with «un/una» and their plural versions"}}, {"n": 3, "nivel": "A1", "title": "¿Cuánto? — muy, mucho, poco, bastante", "grammar": "Adverbios de grado: muy + adjetivo · mucho/poco con verbos · bastante", "vocab": "tranquilo, caro, ruidoso, cómodo", "activity": "Describir su barrio graduando cada opinión", "task": "5 frases sobre su barrio con muy/bastante/poco", "en": {"title": "How much? — very, a lot, little, quite", "grammar": "Degree adverbs: muy + adjective · mucho/poco with verbs · bastante", "vocab": "quiet, expensive, noisy, comfortable", "activity": "Describe her neighbourhood, grading each opinion", "task": "5 sentences about her neighbourhood with muy/bastante/poco"}}, {"n": 4, "nivel": "A1", "title": "Decir que no — no, nunca, tampoco", "grammar": "Negación: no, nunca, tampoco (no… nunca / nunca + verbo)", "vocab": "nunca, casi nunca, a veces, rutina", "activity": "Verdad o mentira: negar frases con «no / nunca / tampoco»", "task": "5 frases negativas sobre hábitos que no tiene", "en": {"title": "Saying no — no, never, neither", "grammar": "Negation: no, nunca, tampoco (no… nunca / nunca + verb)", "vocab": "never, hardly ever, sometimes, routine", "activity": "True or false: deny sentences with «no / nunca / tampoco»", "task": "5 negative sentences about habits she doesn’t have"}}, {"n": 5, "nivel": "A1", "title": "Tú, usted, vosotros — el tratamiento", "grammar": "Pronombres sujeto · tú/usted/vosotros/ustedes · cuándo se omiten", "vocab": "saludos formales e informales", "activity": "Role-play: la misma conversación con un amigo y con el casero", "task": "Reescribir un correo corto de tú a usted", "en": {"title": "You (informal), you (formal), you all", "grammar": "Subject pronouns · tú/usted/vosotros/ustedes · when to drop them", "vocab": "formal and informal greetings", "activity": "Role-play: the same conversation with a friend and with the landlord", "task": "Rewrite a short email from tú to usted"}}], "en": "Foundations station — A1 · Nouns, adjectives and negation"}, {"linea": "L2", "titulo": "Línea de las perífrasis", "subtitulo": "A1 · Obligación, habilidad, fechas y cuerpo", "classes": [{"n": 6, "nivel": "A1", "title": "Tengo que… — tener que y hay que", "grammar": "Tener que + inf. (obligación personal) · hay que + inf. (general)", "vocab": "pagar, renovar, rellenar, pedir cita", "activity": "Trámites en Barcelona: «¿Qué tengo que hacer?»", "task": "5 frases con «tengo que» y 3 con «hay que»", "en": {"title": "I have to… — tener que and hay que", "grammar": "Tener que + inf. (personal obligation) · hay que + inf. (general obligation)", "vocab": "pay, renew, fill in, book an appointment", "activity": "Paperwork in Barcelona: “What do I have to do?”", "task": "5 sentences with «tengo que» and 3 with «hay que»"}}, {"n": 7, "nivel": "A1", "title": "Puedo y sé — poder y saber", "grammar": "Poder + inf. · saber + inf. (habilidad) · «¿Sabes…?» · «no sé»", "vocab": "cocinar, nadar, conducir, tocar", "activity": "Entrevista de habilidades: qué sabe y qué no sabe hacer", "task": "5 frases con «sé / no sé» y una pregunta con «¿sabes…?»", "en": {"title": "I can, I know how — poder and saber", "grammar": "Poder + inf. · saber + inf. (ability) · “Do you know…?” · “I don’t know”", "vocab": "cook, swim, drive, play (an instrument)", "activity": "Skills interview: what she can and can’t do", "task": "5 sentences with «sé / no sé» and one question with «¿sabes…?»"}}, {"n": 8, "nivel": "A1", "title": "Lo que prefiero — las preferencias", "grammar": "Preferir + sustantivo/inf. · me gusta más… · «no tengo preferencia»", "vocab": "comida, ocio, planes de fin de semana", "activity": "Elegir y justificar: ¿café o té? ¿cine o teatro?", "task": "5 frases con «prefiero» y su motivo", "en": {"title": "What I prefer — preferences", "grammar": "Preferir + noun/inf. · me gusta más… · “I have no preference”", "vocab": "food, leisure, weekend plans", "activity": "Choose and justify: coffee or tea? cinema or theatre?", "task": "5 sentences with «prefiero» and the reason"}}, {"n": 9, "nivel": "A1", "title": "Es el 14 — ser: fecha, finalidad y causa", "grammar": "Ser: fecha («es el 14 de marzo») · finalidad («es para…») · causa («es por…»)", "vocab": "meses, días, fechas, ordinales básicos", "activity": "Preguntar y decir fechas de trámites y cumpleaños; «¿Para qué es esto?»", "task": "5 fechas importantes y 3 frases con «es para»", "en": {"title": "It’s the 14th — ser: date, purpose and cause", "grammar": "Ser: dates («es el 14 de marzo») · purpose («es para…») · cause («es por…»)", "vocab": "months, days, dates, basic ordinals", "activity": "Ask and say dates for paperwork and birthdays; “What is this for?”", "task": "5 important dates and 3 sentences with «es para»"}}, {"n": 10, "nivel": "A1", "title": "Mañana voy… — presente con valor de futuro", "grammar": "Presente con valor de futuro (mañana voy, el lunes trabajo)", "vocab": "mañana, el lunes, la semana que viene", "activity": "Montar su agenda de la semana y contarla sin «ir a»", "task": "5 frases sobre su semana que viene", "en": {"title": "Tomorrow I go… — present tense for the future", "grammar": "Present tense with future meaning (mañana voy, el lunes trabajo)", "vocab": "tomorrow, on Monday, next week", "activity": "Build her weekly schedule and tell it without «ir a»", "task": "5 sentences about next week"}}, {"n": 11, "nivel": "A1", "title": "El cuerpo y mis cosas", "grammar": "Léxico: partes del cuerpo y objetos personales · es mi… / son mis…", "vocab": "cabeza, mano, pie, ojo, espalda · cargador, bolso", "activity": "«Simón dice» para adultos y descripción de lo que lleva en el bolso", "task": "5 frases sobre lo que lleva siempre consigo", "en": {"title": "The body and my belongings", "grammar": "Vocabulary: body parts and personal belongings · es mi… / son mis…", "vocab": "head, hand, foot, eye, back · charger, handbag", "activity": "“Simon says” for adults and describing what is in her bag", "task": "5 sentences about what she always carries"}}, {"n": 12, "nivel": "A1", "title": "Punto de control A1 — lo que faltaba", "grammar": "Repaso integrado de las clases 1–11, produciendo sin apoyo", "vocab": "vocabulario acumulado de L1 y L2", "activity": "Entrevista oral de 10 min; si un bloque falla, se repite antes de pasar a A2", "task": "Microrrelato de 5 frases con 5 contenidos de A1", "en": {"title": "A1 checkpoint — what was missing", "grammar": "Integrated review of classes 1–11, producing without support", "vocab": "accumulated vocabulary from L1 and L2", "activity": "10-minute oral interview; if a block fails, repeat it before moving on to A2", "task": "5-sentence micro-story using 5 A1 contents"}}], "en": "Periphrasis line — A1 · Obligation, ability, dates and body"}, {"linea": "L3", "titulo": "Línea del perfecto", "subtitulo": "A2 · Pretérito perfecto", "classes": [{"n": 13, "nivel": "A2", "title": "¿Alguna vez has…? — perfecto regular", "grammar": "Pretérito perfecto: he/has/ha/hemos/habéis/han + participio regular (-ado/-ido)", "vocab": "hoy, esta semana, alguna vez, nunca", "activity": "Preguntas en cadena: «¿Has estado en…?», «¿Has probado…?»", "task": "5 frases sobre lo que ha hecho esta semana", "en": {"title": "Have you ever…? — regular perfect", "grammar": "Present perfect: he/has/ha/hemos/habéis/han + regular participle (-ado/-ido)", "vocab": "today, this week, ever, never", "activity": "Chain questions: “Have you been to…?”, “Have you tried…?”", "task": "5 sentences about what she has done this week"}}, {"n": 14, "nivel": "A2", "title": "Participios irregulares — los 8 verbos", "grammar": "Participios: sido, ido, estado, tenido, hecho, podido, querido, dicho · visto, puesto, escrito, vuelto", "vocab": "ya, todavía no, ya he…", "activity": "Lista de pendientes: «¿Ya has…?» «Todavía no he…»", "task": "5 frases con participios irregulares", "en": {"title": "Irregular participles — the 8 verbs", "grammar": "Participles: sido, ido, estado, tenido, hecho, podido, querido, dicho · visto, puesto, escrito, vuelto", "vocab": "already, not yet, I’ve already…", "activity": "To-do list: “Have you already…?” “I haven’t… yet”", "task": "5 sentences with irregular participles"}}, {"n": 15, "nivel": "A2", "title": "¿Perfecto o indefinido?", "grammar": "Contraste perfecto/indefinido: hoy, este año vs ayer, el año pasado", "vocab": "marcadores temporales", "activity": "Contar el mismo hecho con y sin marcador; si el indefinido falla, se repite antes de seguir", "task": "5 frases: 3 con perfecto y 2 con indefinido", "en": {"title": "Perfect or simple past?", "grammar": "Perfect vs simple past: hoy, este año vs ayer, el año pasado", "vocab": "time markers", "activity": "Tell the same event with and without a marker; if the simple past fails, repeat it before moving on", "task": "5 sentences: 3 with the perfect and 2 with the simple past"}}, {"n": 16, "nivel": "A2", "title": "Acabo de… y sigo… — acabar de y seguir + gerundio", "grammar": "Acabar de + inf. · estar/seguir + gerundio", "vocab": "ahora mismo, todavía, hace un momento", "activity": "Llamada de teléfono: «Acabo de llegar», «Sigo esperando»", "task": "5 frases con «acabar de» y 3 con «seguir + gerundio»", "en": {"title": "I’ve just… and I’m still… — acabar de and seguir + gerund", "grammar": "Acabar de + inf. · estar/seguir + gerund", "vocab": "right now, still, a moment ago", "activity": "Phone call: “I’ve just arrived”, “I’m still waiting”", "task": "5 sentences with «acabar de» and 3 with «seguir + gerundio»"}}], "en": "Perfect line — A2 · Present perfect"}, {"linea": "L4", "titulo": "Línea de la orden", "subtitulo": "A2 · Presente e→i e imperativo", "classes": [{"n": 17, "nivel": "A2", "title": "Pedir en el café — verbos e→i", "grammar": "Presente irregular e→i: pedir, seguir, servir, repetir, decir (digo)", "vocab": "pedir, servir, repetir, seguir", "activity": "Pedir en un bar y repetir el pedido; seguir direcciones", "task": "Conjugar pedir y seguir + 5 frases", "en": {"title": "Ordering at the café — e→i verbs", "grammar": "Stem-changing e→i presents: pedir, seguir, servir, repetir, decir (digo)", "vocab": "order, serve, repeat, follow", "activity": "Order at a bar and repeat the order; follow directions", "task": "Conjugate pedir and seguir + 5 sentences"}}, {"n": 18, "nivel": "A2", "title": "¡Hazlo! — imperativo de tú y vosotros", "grammar": "Imperativo afirmativo regular: habla/hablad, come/comed, escribe/escribid", "vocab": "instrucciones de cocina y de clase", "activity": "Dar instrucciones para preparar una receta", "task": "5 instrucciones para un amigo que visita Barcelona", "en": {"title": "Do it! — the imperative for tú and vosotros", "grammar": "Regular affirmative imperative: habla/hablad, come/comed, escribe/escribid", "vocab": "cooking and classroom instructions", "activity": "Give instructions to prepare a recipe", "task": "5 instructions for a friend visiting Barcelona"}}, {"n": 19, "nivel": "A2", "title": "Órdenes irregulares — di, haz, pon, sal", "grammar": "Imperativo irregular de tú: di, haz, pon, sal, ven, ve, ten, sé", "vocab": "decir, hacer, ir, tener, ser + poner, salir, venir", "activity": "Órdenes cruzadas y consejos a un amigo", "task": "5 consejos con imperativo irregular", "en": {"title": "Irregular commands — di, haz, pon, sal", "grammar": "Irregular tú imperative: di, haz, pon, sal, ven, ve, ten, sé", "vocab": "decir, hacer, ir, tener, ser + poner, salir, venir", "activity": "Crossed commands and advice to a friend", "task": "5 pieces of advice with irregular imperatives"}}, {"n": 20, "nivel": "A2", "title": "¡No lo hagas! — imperativo negativo", "grammar": "Imperativo negativo: no hables, no comas, no escribas · no digas, no hagas, no pongas", "vocab": "normas, prohibiciones, advertencias", "activity": "Normas del piso compartido", "task": "5 prohibiciones del piso y 2 consejos", "en": {"title": "Don’t do that! — the negative imperative", "grammar": "Negative imperative: no hables, no comas, no escribas · no digas, no hagas, no pongas", "vocab": "rules, prohibitions, warnings", "activity": "House rules for a shared flat", "task": "5 flat prohibitions and 2 pieces of advice"}}], "en": "Command line — A2 · e→i verbs and the imperative"}, {"linea": "L5", "titulo": "Línea de enlace", "subtitulo": "A2 · Pronombres, indefinidos y conectores", "classes": [{"n": 21, "nivel": "A2", "title": "Objeto directo — lo, la, los, las", "grammar": "Pronombres de objeto directo: lo/la/los/las · posición con verbo conjugado e infinitivo", "vocab": "compras y objetos del día a día", "activity": "Responder sustituyendo el objeto: «¿Tienes la llave?» «Sí, la tengo»", "task": "5 respuestas con pronombre", "en": {"title": "Direct object — lo, la, los, las", "grammar": "Direct object pronouns: lo/la/los/las · position with a conjugated verb and the infinitive", "vocab": "shopping and everyday objects", "activity": "Answer by replacing the object: “Do you have the key?” “Yes, I have it”", "task": "5 answers with a pronoun"}}, {"n": 22, "nivel": "A2", "title": "Objeto indirecto — me, te, le + imperativo", "grammar": "Objeto indirecto: me, te, le, nos, les · posición con imperativo (dime, dale)", "vocab": "dar, decir, pedir, enviar", "activity": "Pedir y dar cosas: «Dime…», «Dale…»", "task": "5 frases con imperativo + pronombre", "en": {"title": "Indirect object — me, te, le + imperative", "grammar": "Indirect object: me, te, le, nos, les · position with the imperative (dime, dale)", "vocab": "give, tell, ask for, send", "activity": "Ask for and hand over things: «Dime…», «Dale…»", "task": "5 sentences with imperative + pronoun"}}, {"n": 23, "nivel": "A2", "title": "Algo, nada, alguien, nadie", "grammar": "Indefinidos: algo, nada, alguien, nadie · «no hay ningún…»", "vocab": "oficina, casa, ciudad", "activity": "Encuesta del piso: «¿Hay alguien en casa?» «No hay nadie»", "task": "5 frases con algo/nada/alguien/nadie", "en": {"title": "Something, nothing, someone, no one", "grammar": "Indefinites: algo, nada, alguien, nadie · «no hay ningún…»", "vocab": "office, home, city", "activity": "Flat survey: “Is anyone home?” “There’s no one”", "task": "5 sentences with algo/nada/alguien/nadie"}}, {"n": 24, "nivel": "A2", "title": "¿Por o para?", "grammar": "Contraste por/para: finalidad, destinatario, plazo vs causa, medio, duración", "vocab": "viajes, regalos, plazos", "activity": "Clasificar y producir: «Es para ti» / «Lo hago por ti»", "task": "5 pares de frases por/para", "en": {"title": "Por or para?", "grammar": "Por vs para: purpose, recipient, deadline vs cause, means, duration", "vocab": "travel, gifts, deadlines", "activity": "Sort and produce: “It’s for you” / “I do it for you”", "task": "5 pairs of sentences with por/para"}}, {"n": 25, "nivel": "A2", "title": "Si… entonces — si, que, pero", "grammar": "Si + presente · relativas con «que» · coordinadas con «pero»", "vocab": "planes con condición", "activity": "Cadenas de condiciones: «Si llueve, …»", "task": "5 frases combinando si, que y pero", "en": {"title": "If… then — si, que, pero", "grammar": "Si + present · relative clauses with «que» · coordination with «pero»", "vocab": "plans with a condition", "activity": "Chains of conditions: “If it rains, …”", "task": "5 sentences combining si, que and pero"}}], "en": "Connection line — A2 · Pronouns, indefinites and connectors"}, {"linea": "L6", "titulo": "Terminal de llegada", "subtitulo": "A2 · Funciones, léxico y cierre", "classes": [{"n": 26, "nivel": "A2", "title": "¡Qué bonito! — exclamativos y lo + adjetivo", "grammar": "Exclamativos: ¡Qué + adj./sust.! · lo + adjetivo (lo bueno, lo difícil)", "vocab": "opiniones y reacciones", "activity": "Reaccionar a fotos y noticias; «Lo mejor de Barcelona es…»", "task": "5 exclamaciones y 3 frases con «lo + adjetivo»", "en": {"title": "How lovely! — exclamations and lo + adjective", "grammar": "Exclamations: ¡Qué + adj./noun! · lo + adjective (lo bueno, lo difícil)", "vocab": "opinions and reactions", "activity": "React to photos and news; “The best thing about Barcelona is…”", "task": "5 exclamations and 3 sentences with «lo + adjetivo»"}}, {"n": 27, "nivel": "A2", "title": "¿Cuál? — ¿qué prefieres? ¿cuál es tu…?", "grammar": "Funciones: ¿Qué prefieres? · ¿Cuál es tu…? (qué vs cuál)", "vocab": "datos personales, gustos, elecciones", "activity": "Entrevista cruzada con preguntas precisas", "task": "5 preguntas con «qué» y «cuál» para un amigo nuevo", "en": {"title": "Which one? — ¿qué prefieres? ¿cuál es tu…?", "grammar": "Functions: ¿Qué prefieres? · ¿Cuál es tu…? (qué vs cuál)", "vocab": "personal details, tastes, choices", "activity": "Cross interview with precise questions", "task": "5 questions with «qué» and «cuál» for a new friend"}}, {"n": 28, "nivel": "A2", "title": "De compras — tiendas y devoluciones", "grammar": "Léxico: frutería, panadería, librería · ir de compras · devolver, cambiar", "vocab": "talla, ticket, devolución", "activity": "Role-play: devolver una prenda", "task": "5 frases sobre qué compra en cada tienda", "en": {"title": "Shopping — shops and returns", "grammar": "Vocabulary: greengrocer’s, bakery, bookshop · ir de compras · devolver, cambiar", "vocab": "size, receipt, return", "activity": "Role-play: returning a garment", "task": "5 sentences about what she buys in each shop"}}, {"n": 29, "nivel": "A2", "title": "En el médico — cuerpo y salud", "grammar": "Léxico: garganta, estómago, espalda · me duele(n) · tengo…", "vocab": "síntomas y consejos", "activity": "Role-play en el centro de salud", "task": "5 frases sobre síntomas", "en": {"title": "At the doctor — body and health", "grammar": "Vocabulary: throat, stomach, back · me duele(n) · tengo…", "vocab": "symptoms and advice", "activity": "Role-play at the health centre", "task": "5 sentences about symptoms"}}, {"n": 30, "nivel": "A2", "title": "Punto de control final — A1 + A2", "grammar": "Repaso integrado: perfecto, imperativo, pronombres, por/para y conectores", "vocab": "vocabulario acumulado de todo el programa", "activity": "Prueba oral de 15 min + relato de 8 frases sin guion", "task": "Mapa personal: qué contenidos del PCIC domina ya", "en": {"title": "Final checkpoint — A1 + A2", "grammar": "Integrated review: perfect, imperative, pronouns, por/para and connectors", "vocab": "accumulated vocabulary from the whole programme", "activity": "15-minute oral test + 8-sentence story without a script", "task": "Personal map: which PCIC contents she already masters"}}], "en": "Arrival terminal — A2 · Functions, vocabulary and wrap-up"}]};
+const STORAGE_KEY = 'rebecca-pendientes-pcic-progreso-escolar';
+
+async function loadProgress(){
+  if (!window.storage){ try{ return JSON.parse(localStorage.getItem(STORAGE_KEY)||'{}'); }catch(e){ return {}; } }
+  try{
+    const res = await window.storage.get(STORAGE_KEY);
+    return (res && typeof res.value === 'string') ? JSON.parse(res.value) : {};
+  }catch(e){
+    return {};
+  }
+}
+async function saveProgress(state){
+  if (!window.storage){ try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }catch(e){} return; }
+  try{ await window.storage.set(STORAGE_KEY, JSON.stringify(state)); }catch(e){ /* fallo silencioso: se reintentará en el próximo cambio */ }
+}
+
+let progress = {};
+let activeFilter = 'all';
+
+function render(){
+  const main = document.getElementById('main');
+  main.innerHTML = '';
+
+  DATA.weeks.forEach(week => {
+    const weekEl = document.createElement('section');
+    weekEl.className = 'week';
+    weekEl.dataset.linea = week.linea;
+    weekEl.dataset.color = LINEA_COLOR[week.linea] || 'b1';
+
+    const header = document.createElement('div');
+    header.className = 'week-header';
+    header.innerHTML = `
+      <span class="week-tag">${week.linea}</span>
+      <div class="week-titles">
+        <h2>${week.titulo}</h2>
+        <p>${week.subtitulo}</p><p class="en">${week.en}</p>
+      </div>
+    `;
+    weekEl.appendChild(header);
+
+    const stopsEl = document.createElement('div');
+    stopsEl.className = 'stops';
+
+    week.classes.forEach(c => {
+      const isDone = !!progress[c.n];
+      const stop = document.createElement('div');
+      stop.className = 'stop' + (isDone ? ' done' : '');
+      stop.dataset.n = c.n;
+
+      const dateStr = 'PCIC ' + c.nivel;
+
+      stop.innerHTML = `
+        <div class="card" role="button" tabindex="0" aria-expanded="false" aria-label="Clase ${c.n}: ${c.title}. Pulsa para ver el detalle.">
+          <div class="card-top">
+            <p class="card-title">Clase ${c.n} — ${c.title}</p>
+            <div class="check" role="checkbox" tabindex="0" aria-checked="${isDone}" aria-label="Marcar clase ${c.n} como completada">✓</div>
+          </div>
+          <div class="en en-title">${c.en.title}</div><div class="card-id">${dateStr}</div>
+          <div class="card-detail">
+            <div class="detail-inner">
+              <div class="detail-row"><span class="detail-label">Gramática<span class="en"> / Grammar</span></span><span class="detail-value">${c.grammar}<span class="en">${c.en.grammar}</span></span></div>
+              <div class="detail-row"><span class="detail-label">Vocabulario<span class="en"> / Vocabulary</span></span><span class="detail-value">${c.vocab}<span class="en">${c.en.vocab}</span></span></div>
+              <div class="detail-row"><span class="detail-label">Actividad<span class="en"> / Activity</span></span><span class="detail-value">${c.activity}<span class="en">${c.en.activity}</span></span></div>
+              <div class="detail-row"><span class="detail-label">Tarea<span class="en"> / Homework</span></span><span class="detail-value">${c.task}<span class="en">${c.en.task}</span></span></div>
+            </div>
+          </div>
+        </div>
+      `;
+
+      const card = stop.querySelector('.card');
+      const check = stop.querySelector('.check');
+
+      const toggleOpen = () => {
+        const open = card.classList.toggle('open');
+        card.setAttribute('aria-expanded', String(open));
+      };
+      card.addEventListener('click', (e) => {
+        if(e.target === check) return;
+        toggleOpen();
+      });
+      card.addEventListener('keydown', (e) => {
+        if(e.target === check) return;
+        if(e.key === 'Enter' || e.key === ' '){
+          e.preventDefault();
+          toggleOpen();
+        }
+      });
+
+      const toggleCheck = async () => {
+        const done = !progress[c.n];
+        if(done){ progress[c.n] = true; } else { delete progress[c.n]; }
+        stop.classList.toggle('done', done);
+        check.setAttribute('aria-checked', String(done));
+        updateProgressBar();
+        await saveProgress(progress);
+      };
+      check.addEventListener('click', (e) => {
+        e.stopPropagation();
+        toggleCheck();
+      });
+      check.addEventListener('keydown', (e) => {
+        if(e.key === 'Enter' || e.key === ' '){
+          e.preventDefault();
+          e.stopPropagation();
+          toggleCheck();
+        }
+      });
+
+      stopsEl.appendChild(stop);
+    });
+
+    weekEl.appendChild(stopsEl);
+    main.appendChild(weekEl);
+  });
+
+  updateProgressBar();
+  applyFilter();
+}
+
+function updateProgressBar(){
+  const total = DATA.weeks.reduce((s,w)=>s+w.classes.length,0);
+  const done = Object.keys(progress).length;
+  document.getElementById('progress-fill').style.width = (done/total*100) + '%';
+  document.getElementById('progress-text').innerHTML = `${done} / ${total} completadas<span class="en inl"> · completed</span>`;
+  document.getElementById('total-count').textContent = total;
+}
+
+function renderFilters(){
+  const filtersEl = document.getElementById('filters');
+  filtersEl.innerHTML = '';
+  const allBtn = document.createElement('button');
+  allBtn.className = 'filter-btn active';
+  allBtn.textContent = 'Todas las líneas';
+  allBtn.dataset.linea = 'all';
+  filtersEl.appendChild(allBtn);
+
+  DATA.weeks.forEach(w => {
+    const btn = document.createElement('button');
+    btn.className = 'filter-btn';
+    btn.textContent = `${w.linea} · ${w.titulo}`;
+    btn.dataset.linea = w.linea;
+    filtersEl.appendChild(btn);
+  });
+
+  filtersEl.addEventListener('click', (e) => {
+    const btn = e.target.closest('.filter-btn');
+    if(!btn) return;
+    activeFilter = btn.dataset.linea;
+    [...filtersEl.children].forEach(b => b.classList.toggle('active', b === btn));
+    applyFilter();
+  });
+}
+
+function applyFilter(){
+  document.querySelectorAll('.week').forEach(w => {
+    w.classList.toggle('filtered-out', activeFilter !== 'all' && w.dataset.linea !== activeFilter);
+  });
+}
+
+let pendingReset = false;
+document.getElementById('reset-btn').addEventListener('click', async () => {
+  const btn = document.getElementById('reset-btn');
+  if(!pendingReset){
+    pendingReset = true;
+    btn.textContent = '¿Seguro? Pulsa de nuevo para confirmar';
+    setTimeout(()=>{ pendingReset = false; btn.textContent = 'Reiniciar progreso'; }, 4000);
+    return;
+  }
+  pendingReset = false;
+  btn.textContent = 'Reiniciar progreso';
+  progress = {};
+  await saveProgress(progress);
+  render();
+});
+
+const LANG_KEY = 'rebecca-pendientes-pcic-lang';
+async function loadLang(){ try{ if (window.storage){ const r = await window.storage.get(LANG_KEY); return !!r && r.value === 'bi'; } return localStorage.getItem(LANG_KEY) === 'bi'; }catch(e){ return false; } }
+async function saveLang(on){ try{ if (window.storage){ await window.storage.set(LANG_KEY, on ? 'bi' : 'es'); } else { localStorage.setItem(LANG_KEY, on ? 'bi' : 'es'); } }catch(e){} }
+function setLang(on){ document.body.classList.toggle('bi', on); const t = document.getElementById('lang-toggle'); t.setAttribute('aria-checked', String(on)); t.children[0].classList.toggle('on', !on); t.children[1].classList.toggle('on', on); }
+document.getElementById('lang-toggle').addEventListener('click', async () => { const on = !document.body.classList.contains('bi'); setLang(on); await saveLang(on); });
+(async function init(){
+  progress = await loadProgress(); setLang(await loadLang()); renderFilters();
+  render();
+})();
+</script>
+
+</body>
+</html>
