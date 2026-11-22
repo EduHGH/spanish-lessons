@@ -138,28 +138,106 @@ label.ck{display:inline-block;margin:4px 14px 4px 0;cursor:pointer}
 .go .sw .n{animation:ax-new 2.4s both;animation-delay:calc(var(--i)*.3s + .4s)}
 .boot.go .in{animation:ax-pulse .9s both}.boot.go .in:nth-child(2){animation-delay:.25s}.boot.go .in:nth-child(3){animation-delay:.5s}.boot.go .in:nth-child(6){animation-delay:.75s}
 @media(prefers-reduced-motion:reduce){.go .ax-r,.go .sw .o,.go .sw .n,.boot.go .in{animation:none!important}}
-.act:not(.alt) .en,.seg button[aria-pressed="true"] .en,.num .en{color:inherit!important;opacity:.92}</style>
+.act:not(.alt) .en,.seg button[aria-pressed="true"] .en,.num .en{color:inherit!important;opacity:.92}
+/* ===== Animaciones y efectos (portados de la clase 14 de Noah) ===== */
+:root{--f-data:var(--f-body)}
+.plx i{will-change:transform}
+#sndBtn{margin-left:auto}#sndBtn+.btn{margin-left:0}
+#sndBtn[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+#sndBtn[aria-pressed="true"] .en{color:inherit}
+@media(max-width:600px){#sndBtn{margin-left:0}#sndBtn .snd-t,#sndBtn .en{display:none}}
+/* sección en foco (parallax) */
+section.mg{opacity:calc(.72 + .28*var(--a,1))}
+/* diagramas animados */
+.anim{border:1px solid var(--line);border-radius:var(--r-md);background:var(--paper-alt);padding:16px 18px 10px;overflow:hidden;margin:12px 0}
+.anim-foot{display:flex;justify-content:flex-end;gap:8px;margin-top:8px}
+.anim-re{border:1px solid var(--line-strong);background:var(--paper-raised);border-radius:999px;padding:3px 12px;font:600 11.5px var(--f-data);color:var(--ink-soft);cursor:pointer}
+.anim-re:hover{color:var(--accent-text);border-color:var(--accent-line)}
+.anim-re .en{font-weight:400}
+@keyframes aPop{0%{opacity:0;transform:translate(var(--x,0),var(--y,10px)) scale(.7) rotate(var(--r,0deg))}60%{opacity:1;transform:translate(0,-3px) scale(1.05)}100%{opacity:1;transform:none}}
+@keyframes aShake{0%,100%{transform:translateX(0)}20%{transform:translateX(-6px)}40%{transform:translateX(5px)}60%{transform:translateX(-4px)}80%{transform:translateX(3px)}}
+.anim.ready:not(.play) .t{opacity:0}
+.anim.play .t{animation:aPop .55s cubic-bezier(.2,.8,.3,1) var(--d,0s) both}
+.chips{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start}
+.chip{display:inline-flex;flex-direction:column;align-items:center;padding:8px 16px 6px;border-radius:14px;background:var(--paper-raised);border:2px solid var(--cc);font:600 18px/1.2 var(--f-display)}
+.chip small{font:600 10.5px var(--f-data);letter-spacing:.06em;text-transform:uppercase;color:var(--cc);margin-top:3px}
+.chip small .en{text-transform:none;letter-spacing:0;font-weight:400}
+.chip.c-w{--cc:var(--accent-text)}.chip.c-v{--cc:var(--pur)}.chip.c-s{--cc:var(--ink-soft);border-style:dashed}
+.pr2{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:10px 0}
+.c2{padding:7px 15px;border-radius:12px;border:2px solid var(--accent-line);background:var(--paper-raised);font:600 17px var(--f-display)}
+.c2.res{border-color:var(--accent);background:var(--accent-soft);color:var(--accent-text)}
+.ar2{font:700 18px var(--f-display);color:var(--ink-faint)}
+.cmpx{display:grid;gap:10px}
+.cm{padding:10px 16px;border-radius:var(--r-sm);border:2px solid;background:var(--paper-raised);font:600 17px var(--f-display);width:fit-content;max-width:100%}
+.cm.ko{border-color:var(--family);color:var(--family)}.cm.yes{border-color:var(--ok);color:var(--ok)}
+.anim.play .cm.ko{animation:aPop .5s ease var(--d) both,aShake .45s ease calc(var(--d) + .5s)}
+/* tarjetas que se voltean */
+.fcs{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:14px 0;perspective:900px}
+.fc{position:relative;min-height:84px;border:0;background:none;padding:0;cursor:pointer;transform-style:preserve-3d;transition:transform .5s cubic-bezier(.2,.8,.3,1);color:var(--ink)}
+.fc.on{transform:rotateY(180deg)}
+.fc>span{position:absolute;inset:0;display:grid;place-items:center;padding:10px 12px;border-radius:var(--r-md);backface-visibility:hidden;-webkit-backface-visibility:hidden;text-align:center;border:1px solid var(--line-card)}
+.fc .f{background:var(--paper-alt);font:600 17px var(--f-display)}
+.fc .bk{background:var(--accent-soft);border-color:var(--accent-line);transform:rotateY(180deg);font:700 22px var(--f-display);color:var(--accent-text)}
+.fc:hover .f{border-color:var(--accent-line)}
+/* ecualizador al escuchar */
+.eq{display:none;gap:3px;align-items:flex-end;height:18px;margin-left:10px;vertical-align:middle}
+.eq i{width:4px;height:5px;border-radius:2px;background:var(--accent)}
+.chunk.on{color:var(--accent-text)}
+.chunk.on .eq{display:inline-flex}
+.chunk.on .eq i{animation:eqb .6s ease-in-out infinite alternate}
+.eq i:nth-child(2){animation-delay:.12s!important}.eq i:nth-child(3){animation-delay:.24s!important}.eq i:nth-child(4){animation-delay:.36s!important}
+@keyframes eqb{to{height:18px}}
+/* entrada escalonada, número de sección, foco en huecos */
+.fx-hide:not(.fx-show)>*{opacity:0}
+.fx-show>*{animation:fxUp .45s cubic-bezier(.2,.8,.3,1) calc(var(--i,0)*55ms) both}
+@keyframes fxUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+section.fx-num>h2 .num{animation:fxNum .65s cubic-bezier(.2,.9,.3,1.4) both}
+@keyframes fxNum{0%{transform:scale(.2) rotate(-90deg);opacity:0}100%{transform:none;opacity:1}}
+input.g,textarea{transition:box-shadow .2s,border-color .2s,background-color .25s}
+input.g:focus,textarea:focus{box-shadow:0 0 0 4px color-mix(in srgb,var(--accent) 20%,transparent)}
+.op button,.wd button{transition:transform .1s,background .2s,border-color .2s}
+.op button:hover,.wd button:hover{transform:translateY(-1px)}
+/* resultado de Comprobar */
+.fx-ok{animation:fxOk .55s ease calc(var(--i,0)*100ms) both}
+@keyframes fxOk{0%{transform:scale(1)}35%{transform:scale(1.1);box-shadow:0 0 0 7px color-mix(in srgb,var(--ok) 30%,transparent)}100%{transform:scale(1);box-shadow:0 0 0 0 transparent}}
+.fx-bad{animation:fxBad .42s ease calc(var(--i,0)*100ms) both}
+@keyframes fxBad{0%,100%{transform:translateX(0)}20%{transform:translateX(-7px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(3px)}}
+.sol{animation:fxSol .35s ease both}
+@keyframes fxSol{from{opacity:0;transform:translateX(-10px)}to{opacity:1;transform:none}}
+details[open]>:not(summary){animation:fxReveal .42s cubic-bezier(.2,.8,.3,1) both}
+@keyframes fxReveal{from{opacity:0;transform:translateY(-9px)}to{opacity:1;transform:none}}
+.fx-in{animation:fxReveal .45s cubic-bezier(.2,.8,.3,1) both}
+.fx-pop{animation:fxPop .45s cubic-bezier(.2,.9,.3,1.4)}
+@keyframes fxPop{0%{transform:scale(1)}40%{transform:scale(1.06)}100%{transform:scale(1)}}
+/* confeti */
+.cf-wrap{position:fixed;width:0;height:0;z-index:60;pointer-events:none}
+.cf{position:absolute;left:-4px;top:-6px;width:8px;height:12px;border-radius:2px;background:var(--c);opacity:0;animation:cfFly 1.2s cubic-bezier(.2,.7,.3,1) forwards}
+@keyframes cfFly{0%{opacity:1;transform:translate(0,0) rotate(0)}45%{opacity:1;transform:translate(calc(var(--dx)*.8),var(--up)) rotate(calc(var(--rot)*.5))}100%{opacity:0;transform:translate(var(--dx),var(--fall)) rotate(var(--rot))}}
+@media(prefers-reduced-motion:reduce){.fx-hide>*{opacity:1!important}.fx-show>*,.fx-ok,.fx-bad,.sol,details[open]>:not(summary),.fx-in,.fx-pop,section.fx-num>h2 .num{animation:none!important}.cf-wrap,.anim-foot{display:none}.fc{transition:none}.chunk.on .eq i{animation:none}}
+@media print{.fx-hide>*{opacity:1!important;animation:none!important}.cf-wrap,#sndBtn,.anim-foot{display:none!important}section.mg{opacity:1}header .wrap>*{transform:none!important;opacity:1!important}.anim .t{animation:none!important;opacity:1!important;transform:none!important}}
+.sol[hidden]{display:none}
+</style>
 </head>
 <body data-accent="azul" data-lang="both">
 <a class="skip" href="#main">Saltar al contenido</a>
 <div class="plx" aria-hidden="true"><i></i><i></i><i></i></div>
 <header><div class="wrap"><p class="eyebrow"><span class="dot"></span>Español · Stefan B. · B1 · Clase 1</p><h1>Presente irregular: <em>yo hago, tú puedes</em><span class="en"> Irregular present: I do, you can</span></h1><p class="lede">Hoy trabajas los verbos irregulares del presente para hablar de ti, de tus rutinas y de tus gustos. Es la base de todo el curso.<span class="en b"> Today you work on irregular present-tense verbs to talk about yourself, your routines and your likes. It is the base of the whole course.</span></p><div class="meta-row"><div>Nivel <span class="en"> / Level</span><strong>B1</strong></div><div>Patrones <span class="en"> / Patterns</span><strong>3</strong></div><div>Partes <span class="en"> / Parts</span><strong>10</strong></div><div>Duración <span class="en"> / Duration</span><strong>50 min</strong></div></div></div></header>
 <main class="wrap" id="main" tabindex="-1">
-<div class="bar" role="toolbar" aria-label="Controles de la página"><button type="button" class="nav-btn" id="navBtn" aria-label="Menú de partes" aria-expanded="false" aria-controls="toc"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><path d="M3 5.5h14"/><path d="M3 10h14"/><path d="M3 14.5h14"/></svg></button><nav class="toc" id="toc" aria-label="Partes" hidden></nav><span class="bar-t">Ir a una parte <span class="en"> / Go to a part</span></span><div class="seg" id="lang" role="group" aria-label="Idioma"><button type="button" data-lang="es" aria-pressed="false">Solo español</button><button type="button" data-lang="both" aria-pressed="true">Español + English</button></div><button type="button" class="btn" id="themeBtn" aria-pressed="false">Modo oscuro</button></div>
+<div class="bar" role="toolbar" aria-label="Controles de la página"><button type="button" class="nav-btn" id="navBtn" aria-label="Menú de partes" aria-expanded="false" aria-controls="toc"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><path d="M3 5.5h14"/><path d="M3 10h14"/><path d="M3 14.5h14"/></svg></button><nav class="toc" id="toc" aria-label="Partes" hidden></nav><span class="bar-t">Ir a una parte <span class="en"> / Go to a part</span></span><div class="seg" id="lang" role="group" aria-label="Idioma"><button type="button" data-lang="es" aria-pressed="false">Solo español</button><button type="button" data-lang="both" aria-pressed="true">Español + English</button></div><button type="button" class="btn" id="sndBtn" aria-pressed="false" title="Efectos de sonido · Sound effects" aria-label="Efectos de sonido">♪<span class="snd-t"> Sonido</span><span class="en"> · Sound</span></button><button type="button" class="btn" id="themeBtn" aria-pressed="false">Modo oscuro</button></div>
 
 <section id="plan"><h2><span class="num">★</span><span>Plan de hoy <span class="en"> Today’s plan</span></span><span class="cue">⏱ 1 min</span></h2>
 <div class="box"><p style="margin:0 0 6px"><b>Cómo trabajamos hoy:</b><span class="en">  How we work today:</span></p><ol style="margin:0;padding-left:20px"><li>Intenta responder sin mirar. Si dudas, escribe algo: un intento vale más que un hueco.<span class="en b"> Try to answer without looking. If you’re unsure, write something: an attempt is worth more than a blank.</span></li><li>Comprueba tu respuesta. Lo que cuenta es acertar a la primera.<span class="en b"> Check your answer. What counts is getting it right the first time.</span></li><li>Los errores vuelven hoy y otro día, hasta que los recuerdas.<span class="en b"> Mistakes come back today and another day, until you remember them.</span></li></ol><p class="rt"><b>Reparto de los 50 minutos:</b> 0 · 5 + P · 6 + 1 · 5 + A · 5 + B · 3 + C · 4 + R · 3 + ★ · 7 + 4 · 11 + plan · 1</p></div></section>
 
 <section id="s0"><h2><span class="num">0</span><span>Calentamiento oral <span class="en"> Oral warm-up</span></span><span class="cue">⏱ 5 min</span></h2><p class="sub">Sin pantalla: tú escuchas y contestas con frases completas. Lee el profesor.<span class="en b"> No screen: you listen and answer in full sentences. The teacher reads.</span></p>
-<ol class="ex"><li><span class="v">¿Cómo te llamas</span> y de dónde eres?<span class="en b"> What’s your name and where are you from?</span></li><li>¿Qué <span class="v">haces</span> en un día normal?<span class="en b"> What do you do on a normal day?</span></li><li>¿A qué hora <span class="v">te levantas</span> y qué <span class="v">desayunas</span>?<span class="en b"> What time do you get up and what do you have for breakfast?</span></li><li>¿Qué <span class="v">prefieres</span> hacer los fines de semana?<span class="en b"> What do you prefer to do at weekends?</span></li><li>¿Qué <span class="v">quieres</span> mejorar en español?<span class="en b"> What do you want to improve in Spanish?</span></li><li>¿Qué cosas <span class="v">no sabes</span> hacer todavía?<span class="en b"> What things can’t you do yet?</span></li></ol></section>
+<ol class="ex"><li><span class="v">¿Cómo te llamas</span> y de dónde eres?<span class="en b"> What’s your name and where are you from?</span></li><li>¿Qué <span class="v">haces</span> en un día normal?<span class="en b"> What do you do on a normal day?</span></li><li>¿A qué hora <span class="v">te levantas</span> y qué <span class="v">desayunas</span>?<span class="en b"> What time do you get up and what do you have for breakfast?</span></li><li>¿Qué <span class="v">prefieres</span> hacer los fines de semana?<span class="en b"> What do you prefer to do at weekends?</span></li><li>¿Qué <span class="v">quieres</span> mejorar en español?<span class="en b"> What do you want to improve in Spanish?</span></li><li>¿Qué cosas <span class="v">no sabes</span> hacer todavía?<span class="en b"> What things can’t you do yet?</span></li><li>¿Qué <span class="v">piensas</span> hacer este fin de semana?<span class="en b"> What are you thinking of doing this weekend?</span></li><li>¿A qué hora <span class="v">empieza</span> tu día de trabajo?<span class="en b"> What time does your working day start?</span></li><li>¿Cuántas horas <span class="v">duermes</span> normalmente?<span class="en b"> How many hours do you normally sleep?</span></li><li>¿Cuándo <span class="v">vuelves</span> a casa por la tarde?<span class="en b"> When do you get back home in the afternoon?</span></li><li>¿Qué <span class="v">pides</span> normalmente en un restaurante?<span class="en b"> What do you normally order in a restaurant?</span></li><li>¿Con quién <span class="v">sales</span> los sábados por la noche?<span class="en b"> Who do you go out with on Saturday nights?</span></li><li>¿Qué <span class="v">tienes</span> que hacer mañana?<span class="en b"> What do you have to do tomorrow?</span></li><li>¿Qué <span class="v">dices</span> cuando no <span class="v">entiendes</span> algo?<span class="en b"> What do you say when you don’t understand something?</span></li><li>¿Qué ciudades de España <span class="v">conoces</span>?<span class="en b"> Which cities in Spain do you know?</span></li></ol></section>
 
 <section id="sP"><h2><span class="num">P</span><span>Los patrones de hoy <span class="en"> Today’s patterns</span></span><span class="cue">⏱ 6 min</span></h2><p class="sub">Primero, la teoría: tres patrones que usarás en toda la clase.<span class="en b"> First, the theory: three patterns you will use throughout the class.</span></p>
 <div class="axw" id="ax" aria-label="Animación de las formas"></div><h3>1. El cambio en la «bota»<span class="en"> The “boot” change</span></h3><div class="box">Cambian la vocal de la raíz en <b>yo, tú, él y ellos</b>; no en nosotros ni vosotros.<span class="en b"> The stem vowel changes in <b>yo, tú, él and ellos</b>; not in nosotros or vosotros.</span>
 <div class="scroll"><table class="fm"><thead><tr><th>e&gt;ie</th><th>o&gt;ue</th><th>e&gt;i</th></tr></thead><tbody><tr><td><span class="v">qu<b>ie</b>ro</span>, qu<b>ie</b>res, qu<b>ie</b>re, queremos, queréis, qu<b>ie</b>ren</td><td><span class="v">p<b>ue</b>do</span>, p<b>ue</b>des, p<b>ue</b>de, podemos, podéis, p<b>ue</b>den</td><td><span class="v">p<b>i</b>do</span>, p<b>i</b>des, p<b>i</b>de, pedimos, pedís, p<b>i</b>den</td></tr></tbody></table></div>
 <div class="strip"><span>e&gt;ie: preferir · empezar · pensar · entender</span><span>o&gt;ue: dormir · volver · encontrar</span><span>e&gt;i: repetir · seguir</span></div></div>
-<h3>2. La primera persona irregular<span class="en"> The irregular first person</span></h3><div class="box">Solo <b>yo</b> es distinto; las demás personas son regulares.<span class="en b"> Only <b>yo</b> is different; the other persons are regular.</span><div class="strip"><span>hacer → <b>hago</b></span><span>salir → <b>salgo</b></span><span>poner → <b>pongo</b></span><span>conocer → <b>conozco</b></span><span>saber → <b>sé</b></span><span>dar → <b>doy</b></span><span>ver → <b>veo</b></span></div></div>
-<h3>3. Verbos con las dos cosas<span class="en"> Verbs with both</span></h3><div class="box"><b>tener</b>: tengo, tienes, tiene, tenemos, tenéis, tienen · <b>venir</b>: vengo, vienes… · <b>decir</b>: digo, dices, dice, decimos, decís, dicen<span class="en b"> <b>tener</b>, <b>venir</b> and <b>decir</b> have an irregular yo and the boot change.</span></div>
-<ol class="ex"><li><span class="v">Prefiero</span> cenar tarde, pero mis amigos <span class="v">prefieren</span> cenar pronto.<span class="en b"> I prefer to have dinner late, but my friends prefer early.</span></li><li>Siempre <span class="v">pido</span> un café con leche.<span class="en b"> I always order a coffee with milk.</span></li><li><span class="v">Conozco</span> a tu hermano, pero no <span class="v">sé</span> dónde vive.<span class="en b"> I know your brother, but I don’t know where he lives.</span></li></ol></section>
+<div class="anim"><div class="anim-st" aria-hidden="true"><div class="chips"><span class="chip c-w t" style="--d:0s">quiero<small>yo</small></span><span class="chip c-w t" style="--d:.2s">quieres<small>tú</small></span><span class="chip c-w t" style="--d:.4s">quiere<small>él</small></span><span class="chip c-s t" style="--d:.6s">queremos<small>nosotros<span class="en"> · out</span></small></span><span class="chip c-s t" style="--d:.8s">queréis<small>vosotros<span class="en"> · out</span></small></span><span class="chip c-w t" style="--d:1s">quieren<small>ellos</small></span></div><div class="cmpx" style="margin-top:14px"><div class="t cm ko" style="--d:1.5s"><b>✗</b> yo quero</div><div class="t cm yes" style="--d:2.1s"><b>✓</b> yo quiero</div><div class="t cm ko" style="--d:2.8s"><b>✗</b> tú pedes</div><div class="t cm yes" style="--d:3.4s"><b>✓</b> tú pides</div></div></div><div class="anim-foot"><button type="button" class="anim-re">↻ Repetir<span class="en"> · Replay</span></button></div></div><h3>2. La primera persona irregular<span class="en"> The irregular first person</span></h3><div class="box">Solo <b>yo</b> es distinto; las demás personas son regulares.<span class="en b"> Only <b>yo</b> is different; the other persons are regular.</span><div class="strip"><span>hacer → <b>hago</b></span><span>salir → <b>salgo</b></span><span>poner → <b>pongo</b></span><span>conocer → <b>conozco</b></span><span>saber → <b>sé</b></span><span>dar → <b>doy</b></span><span>ver → <b>veo</b></span></div></div>
+<div class="anim"><div class="anim-st" aria-hidden="true"><div class="pr2 t" style="--d:0s"><span class="c2">hacer</span><span class="ar2">→ yo</span><span class="c2 res">hago</span></div><div class="pr2 t" style="--d:.45s"><span class="c2">salir</span><span class="ar2">→ yo</span><span class="c2 res">salgo</span></div><div class="pr2 t" style="--d:.9s"><span class="c2">conocer</span><span class="ar2">→ yo</span><span class="c2 res">conozco</span></div><div class="pr2 t" style="--d:1.35s"><span class="c2">saber</span><span class="ar2">→ yo</span><span class="c2 res">sé</span></div><div class="cmpx" style="margin-top:10px"><div class="t cm ko" style="--d:2s"><b>✗</b> yo sabo</div><div class="t cm yes" style="--d:2.6s"><b>✓</b> yo sé</div></div></div><div class="anim-foot"><button type="button" class="anim-re">↻ Repetir<span class="en"> · Replay</span></button></div></div><h3>3. Verbos con las dos cosas<span class="en"> Verbs with both</span></h3><div class="box"><b>tener</b>: tengo, tienes, tiene, tenemos, tenéis, tienen · <b>venir</b>: vengo, vienes… · <b>decir</b>: digo, dices, dice, decimos, decís, dicen<span class="en b"> <b>tener</b>, <b>venir</b> and <b>decir</b> have an irregular yo and the boot change.</span></div>
+<div class="anim"><div class="anim-st" aria-hidden="true"><div class="chips"><span class="chip c-s t" style="--d:0s">tener<small>infinitivo<span class="en"> · infinitive</span></small></span><span class="chip c-v t" style="--d:.3s">tengo<small>yo · +g</small></span><span class="chip c-w t" style="--d:.6s">tienes<small>tú · bota<span class="en"> · boot</span></small></span><span class="chip c-w t" style="--d:.9s">tiene<small>él · bota<span class="en"> · boot</span></small></span><span class="chip c-s t" style="--d:1.2s">tenemos<small>nosotros<span class="en"> · out</span></small></span><span class="chip c-w t" style="--d:1.5s">tienen<small>ellos · bota<span class="en"> · boot</span></small></span></div></div><div class="anim-foot"><button type="button" class="anim-re">↻ Repetir<span class="en"> · Replay</span></button></div></div><ol class="ex"><li><span class="v">Prefiero</span> cenar tarde, pero mis amigos <span class="v">prefieren</span> cenar pronto.<span class="en b"> I prefer to have dinner late, but my friends prefer early.</span></li><li>Siempre <span class="v">pido</span> un café con leche.<span class="en b"> I always order a coffee with milk.</span></li><li><span class="v">Conozco</span> a tu hermano, pero no <span class="v">sé</span> dónde vive.<span class="en b"> I know your brother, but I don’t know where he lives.</span></li></ol></section>
 
 <section id="s1"><h2><span class="num">1</span><span>El truco: la bota <span class="en"> The trick: the boot</span></span><span class="cue">⏱ 5 min</span></h2><p class="sub">El cambio vive dentro de la bota: yo, tú, él y ellos. Nosotros y vosotros se quedan fuera.<span class="en b"> The change lives inside the boot: yo, tú, él and ellos. Nosotros and vosotros stay out.</span></p>
 <div class="boot" aria-label="La bota"><div class="in">yo</div><div class="in">tú</div><div class="in">él · ella · usted</div><div class="out">nosotros</div><div class="out">vosotros</div><div class="in">ellos · ellas · ustedes</div></div>
@@ -169,13 +247,13 @@ label.ck{display:inline-block;margin:4px 14px 4px 0;cursor:pointer}
 <details class="ref"><summary>Ayuda: las formas <span class="en"> · Help: the forms</span></summary><div class="scroll"><table class="fm"><thead><tr><th></th><th>yo</th><th>tú</th><th>él</th><th>nos.</th><th>vos.</th><th>ellos</th></tr></thead><tbody><tr><td>querer</td><td>quiero</td><td>quieres</td><td>quiere</td><td>queremos</td><td>queréis</td><td>quieren</td></tr><tr><td>poder</td><td>puedo</td><td>puedes</td><td>puede</td><td>podemos</td><td>podéis</td><td>pueden</td></tr><tr><td>pedir</td><td>pido</td><td>pides</td><td>pide</td><td>pedimos</td><td>pedís</td><td>piden</td></tr><tr><td>hacer</td><td>hago</td><td>haces</td><td>hace</td><td>hacemos</td><td>hacéis</td><td>hacen</td></tr><tr><td>salir</td><td>salgo</td><td>sales</td><td>sale</td><td>salimos</td><td>salís</td><td>salen</td></tr></tbody></table></div></details></section>
 
 <section id="sB"><h2><span class="num">B</span><span>Pronunciación y entonación <span class="en"> Pronunciation and intonation</span></span><span class="cue">⏱ 3 min</span></h2><p class="sub">Agrupa las palabras en bloques (cada barra es una pausa corta). Marca bien <b>ie</b> y <b>ue</b>. Paso 1: escuchas. Paso 2: repites bloque a bloque. Paso 3: la frase entera.<span class="en b"> Group the words in chunks (each slash is a short pause). Stress <b>ie</b> and <b>ue</b> clearly. Step 1: listen. Step 2: repeat chunk by chunk. Step 3: the whole sentence.</span></p>
-<p class="chunk">Prefiero cenar tarde / pero mis amigos / prefieren cenar pronto.<button type="button" class="snd" data-say="Prefiero cenar tarde, pero mis amigos, prefieren cenar pronto.">🔊</button></p><p class="chunk">Siempre pido / un café con leche / y salgo de casa / a las ocho.<button type="button" class="snd" data-say="Siempre pido, un café con leche, y salgo de casa, a las ocho.">🔊</button></p><p class="chunk">Conozco a tu hermano / pero no sé / dónde vive.<button type="button" class="snd" data-say="Conozco a tu hermano, pero no sé, dónde vive.">🔊</button></p><p class="chunk">Hago deporte / los martes / y duermo / ocho horas.<button type="button" class="snd" data-say="Hago deporte, los martes, y duermo, ocho horas.">🔊</button></p></section>
+<p class="chunk">Prefiero cenar tarde / pero mis amigos / prefieren cenar pronto.<button type="button" class="snd" data-say="Prefiero cenar tarde, pero mis amigos, prefieren cenar pronto.">🔊</button></p><p class="chunk">Siempre pido / un café con leche / y salgo de casa / a las ocho.<button type="button" class="snd" data-say="Siempre pido, un café con leche, y salgo de casa, a las ocho.">🔊</button></p><p class="chunk">Conozco a tu hermano / pero no sé / dónde vive.<button type="button" class="snd" data-say="Conozco a tu hermano, pero no sé, dónde vive.">🔊</button></p><p class="chunk">Hago deporte / los martes / y duermo / ocho horas.<button type="button" class="snd" data-say="Hago deporte, los martes, y duermo, ocho horas.">🔊</button></p><p class="chunk">Empiezo a trabajar / a las nueve / y vuelvo a casa / a las seis.<button type="button" class="snd" data-say="Empiezo a trabajar, a las nueve, y vuelvo a casa, a las seis.">🔊</button></p><p class="chunk">Mi mujer duerme / siete horas / pero yo duermo / solo seis.<button type="button" class="snd" data-say="Mi mujer duerme, siete horas, pero yo duermo, solo seis.">🔊</button></p><p class="chunk">¿Qué piensas hacer / el sábado / por la noche?<button type="button" class="snd" data-say="¿Qué piensas hacer, el sábado, por la noche?">🔊</button></p><p class="chunk">Mis hijos quieren / jugar fuera / pero no pueden / porque llueve.<button type="button" class="snd" data-say="Mis hijos quieren, jugar fuera, pero no pueden, porque llueve.">🔊</button></p><p class="chunk">Entiendo bien el español / pero no siempre / encuentro las palabras.<button type="button" class="snd" data-say="Entiendo bien el español, pero no siempre, encuentro las palabras.">🔊</button></p><p class="chunk">Pido un menú del día / y repito / el postre.<button type="button" class="snd" data-say="Pido un menú del día, y repito, el postre.">🔊</button></p><p class="chunk">Tengo que salir pronto / porque vengo / en tren.<button type="button" class="snd" data-say="Tengo que salir pronto, porque vengo, en tren.">🔊</button></p><p class="chunk">No sé / qué decir / cuando conozco / a gente nueva.<button type="button" class="snd" data-say="No sé, qué decir, cuando conozco, a gente nueva.">🔊</button></p><p class="chunk">Mi gato duerme / en el sofá / y no quiere / salir de casa.<button type="button" class="snd" data-say="Mi gato duerme, en el sofá, y no quiere, salir de casa.">🔊</button></p><p class="chunk">Siempre pongo / el despertador / a las siete / y me levanto / a las siete y media.<button type="button" class="snd" data-say="Siempre pongo, el despertador, a las siete, y me levanto, a las siete y media.">🔊</button></p><p class="chunk">Los domingos salgo / con mi familia / y comemos / en el campo.<button type="button" class="snd" data-say="Los domingos salgo, con mi familia, y comemos, en el campo.">🔊</button></p></section>
 
-<section id="sC"><h2><span class="num">C</span><span>Fórmulas <span class="en"> Formulas</span></span><span class="cue">⏱ 4 min</span></h2><div class="strip"><span>yo → hago · salgo · sé · conozco</span><span>tú → puedes · pides · duermes</span><span>ellos → quieren · vuelven · dicen</span></div><ol class="ex" id="fc"></ol><button type="button" class="act" id="fcB">Comprobar <span class="en"> · Check</span></button></section>
+<section id="sC"><h2><span class="num">C</span><span>Fórmulas <span class="en"> Formulas</span></span><span class="cue">⏱ 4 min</span></h2><div class="strip"><span>yo → hago · salgo · sé · conozco</span><span>tú → puedes · pides · duermes</span><span>ellos → quieren · vuelven · dicen</span></div><h3>Voltea la tarjeta<span class="en"> Flip the card</span></h3><div class="fcs"><button type="button" class="fc" aria-pressed="false"><span class="f">hacer · yo</span><span class="bk">hago</span></button><button type="button" class="fc" aria-pressed="false"><span class="f">salir · yo</span><span class="bk">salgo</span></button><button type="button" class="fc" aria-pressed="false"><span class="f">poner · yo</span><span class="bk">pongo</span></button><button type="button" class="fc" aria-pressed="false"><span class="f">conocer · yo</span><span class="bk">conozco</span></button><button type="button" class="fc" aria-pressed="false"><span class="f">saber · yo</span><span class="bk">sé</span></button><button type="button" class="fc" aria-pressed="false"><span class="f">dar · yo</span><span class="bk">doy</span></button><button type="button" class="fc" aria-pressed="false"><span class="f">ver · yo</span><span class="bk">veo</span></button><button type="button" class="fc" aria-pressed="false"><span class="f">tener · yo</span><span class="bk">tengo</span></button></div><ol class="ex" id="fc"></ol><button type="button" class="act" id="fcB">Comprobar <span class="en"> · Check</span></button></section>
 
 <section id="sR"><h2><span class="num">R</span><span>Otra vez, sin mirar <span class="en"> Again, without looking</span></span><span class="cue">⏱ 3 min</span></h2><p class="sub">Vuelve aquí mañana y dentro de 3 días. Un error sale del banco cuando lo recuerdas bien en dos días distintos.<span class="en b"> Come back here tomorrow and in 3 days. A mistake leaves the bank when you remember it well on two different days.</span></p>
 <h3>Tus errores <span class="en"> Your mistakes</span></h3><ol class="ex" id="rErr"></ol><p class="rt" id="rN"></p><button type="button" class="act alt" id="rLoad">Cargar mis errores <span class="en"> · Load my mistakes</span></button><button type="button" class="act" id="rChk">Comprobar <span class="en"> · Check</span></button><button type="button" class="act alt" id="rClr">Vaciar el banco <span class="en"> · Clear the bank</span></button>
-<h3>Cinco nuevas (cambian cada día) <span class="en"> Five new ones (they change every day)</span></h3><ol class="ex" id="rNew"></ol><button type="button" class="act" id="rNB">Comprobar <span class="en"> · Check</span></button></section>
+<h3>Quince nuevas (cambian cada día) <span class="en"> Fifteen new ones (they change every day)</span></h3><ol class="ex" id="rNew"></ol><button type="button" class="act" id="rNB">Comprobar <span class="en"> · Check</span></button></section>
 
 <section id="sJ"><h2><span class="num">★</span><span>Tres minijuegos <span class="en"> Three mini-games</span></span><span class="cue">⏱ 7 min</span></h2>
 <h3>Juego 1 · Ordena la frase <span class="en"> Game 1 · Order the sentence</span></h3><div id="g1"></div>
@@ -190,6 +268,118 @@ label.ck{display:inline-block;margin:4px 14px 4px 0;cursor:pointer}
 </main>
 <footer>Clase 1 · Programa de español B1 · 50 clases · Stefan B.</footer>
 <script>
+/* Animación, sonido (Web Audio, sin archivos) y parallax — portados de la clase 14 de Noah. Los ejercicios llaman a window.FX. */
+(function(){
+var RM=matchMedia('(prefers-reduced-motion:reduce)').matches,AC=window.AudioContext||window.webkitAudioContext,ctx=null,on=false,SK='stefan_c01_snd';
+function $(i){return document.getElementById(i)}
+function restart(el,c){el.classList.remove(c);void el.offsetWidth;el.classList.add(c)}
+function tone(o,t,f,g,d,ty,v){var x=ctx.createOscillator(),e=ctx.createGain();x.type=ty||'sine';x.frequency.setValueAtTime(f,t);if(g)x.frequency.exponentialRampToValueAtTime(g,t+d);
+ e.gain.setValueAtTime(.0001,t);e.gain.exponentialRampToValueAtTime(v||.25,t+.012);e.gain.exponentialRampToValueAtTime(.0001,t+d);x.connect(e);e.connect(o);x.start(t);x.stop(t+d+.03)}
+var SND={
+ pop:function(o,t,f){tone(o,t,f,f*1.5,.13,'sine',.3)},
+ tick:function(o,t,f){tone(o,t,f,f,.07,'triangle',.18)},
+ key:function(o,t,f){tone(o,t,f,f*.8,.035,'triangle',.06)},
+ note:function(o,t,f){tone(o,t,f,f,.4,'sine',.26);tone(o,t,f*2,f*2,.25,'sine',.05)},
+ glide:function(o,t,f,g,d){tone(o,t,f,g,d,'sine',.22)},
+ buzz:function(o,t){tone(o,t,170,110,.28,'sawtooth',.1)},
+ nope:function(o,t){tone(o,t,220,160,.16,'square',.07)},
+ fan:function(o,t){[523,659,784,1047].forEach(function(f,i){SND.note(o,t+i*.09,f)})}};
+var bus=new WeakMap();
+function mute(k){var g=bus.get(k);if(g)try{g.gain.cancelScheduledValues(0);g.gain.value=0}catch(e){}}
+function fire(list,key){if(!on||!ctx)return;if(ctx.state==='suspended'&&ctx.resume)ctx.resume();
+ if(key)mute(key);var o=ctx.createGain();o.gain.value=.5;o.connect(ctx.destination);if(key)bus.set(key,o);
+ var t0=ctx.currentTime+.03;list.forEach(function(a){SND[a[1]].apply(null,[o,t0+a[0]].concat(a.slice(2)))})}
+function unlock(){if(!on||ctx||!AC)return;try{ctx=new AC();if(ctx.resume)ctx.resume()}catch(e){}}
+['pointerdown','keydown'].forEach(function(ev){addEventListener(ev,unlock,{capture:true,passive:true})});
+var A=[].slice.call(document.querySelectorAll('.anim')),SB=$('sndBtn');
+function setSnd(v,persist){on=v;if(on)unlock();else A.forEach(mute);if(SB)SB.setAttribute('aria-pressed',String(on));
+ if(persist){try{localStorage.setItem(SK,on?'1':'0')}catch(e){}}}
+if(!AC){if(SB)SB.hidden=true}else{try{if(localStorage.getItem(SK)==='1')setSnd(true)}catch(e){}}
+
+/* confeti */
+function confetti(el){if(RM||!el)return;var r=el.getBoundingClientRect(),w=document.createElement('div');w.className='cf-wrap';
+ w.style.left=(r.left+r.width/2)+'px';w.style.top=(r.top+r.height/2)+'px';
+ var C=['var(--accent)','var(--pur)','var(--amber)','var(--ok)','var(--family)'];
+ for(var k=0;k<22;k++){var c=document.createElement('i'),an=-Math.PI/2+(Math.random()-.5)*2.2,d=60+Math.random()*110;c.className='cf';
+  c.style.cssText='--c:'+C[k%5]+';--dx:'+(Math.cos(an)*d).toFixed(0)+'px;--up:'+(Math.sin(an)*d).toFixed(0)+'px;--fall:'+(Math.sin(an)*d+90+Math.random()*60).toFixed(0)+'px;--rot:'+Math.round(Math.random()*720-360)+'deg;animation-delay:'+(Math.random()*.08).toFixed(2)+'s';
+  w.appendChild(c)}
+ document.body.appendChild(w);setTimeout(function(){w.remove()},1600)}
+
+/* diagramas animados: el sonido se deduce de los elementos .t y su retardo --d */
+function sched(a){var L=[];[].forEach.call(a.querySelectorAll('.t'),function(t,k){var d=parseFloat(t.style.getPropertyValue('--d'))||0;
+ if(t.classList.contains('ko'))L.push([d,'pop',330],[d+.5,'buzz']);
+ else if(t.classList.contains('yes'))L.push([d,'note',659]);
+ else L.push([d,'pop',392+(k%8)*50])});return L}
+function runAnim(a){a.classList.remove('play');void a.offsetWidth;a.classList.add('play');fire(sched(a),a)}
+if(!RM){
+ if('IntersectionObserver' in window){
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){runAnim(e.target);io.unobserve(e.target)}})},{threshold:.6});
+  A.forEach(function(a){a.classList.add('ready');io.observe(a)})}
+ [].forEach.call(document.querySelectorAll('.anim-re'),function(b){b.addEventListener('click',function(){runAnim(b.closest('.anim'))})})}
+if(SB)SB.addEventListener('click',function(){setSnd(!on,true);if(on)fire([[0,'note',784],[.1,'note',1047]])});
+
+/* resultados de los ejercicios */
+function res(el,ok,quiet,big){if(!el)return;el.classList.remove('fx-ok','fx-bad');if(!RM){void el.offsetWidth;el.classList.add(ok?'fx-ok':'fx-bad')}
+ if(quiet)return;
+ if(ok&&big){fire([[0,'fan']]);confetti(el)}else fire(ok?[[0,'note',784]]:[[0,'buzz']])}
+var NOTES=[523,587,659,784,880,988,1047,1175];
+function batch(box,rows){var L=[],ok=0,bad=0;
+ rows.forEach(function(r,n){r[0].style.setProperty('--i',n);res(r[0],r[1],1);if(r[1]){ok++;L.push([n*.1,'note',NOTES[n%8]])}else{bad++;L.push([n*.1,'buzz'])}});
+ if(!rows.length)L.push([0,'nope']);
+ else if(!bad){L.push([rows.length*.1+.1,'fan']);var a=document.activeElement;confetti(a&&a.tagName==='BUTTON'?a:box)}
+ fire(L)}
+function pop(el){if(!RM)restart(el,'fx-pop');fire([[0,'tick',650]])}
+function dlg(el,n){if(RM)return;[].slice.call(el.children,Math.max(0,n-1)).forEach(function(k,i){k.style.animationDelay=(i*90)+'ms';restart(k,'fx-in')})}
+function end(el){fire([[0,'fan']]);confetti(el)}
+function ax(box){var L=[];[].forEach.call(box.querySelectorAll('.ax-r'),function(r,i){L.push([i*.3+.05,'pop',380+i*40]);if(r.querySelector('.sw'))L.push([i*.3+1.7,'glide',420,760,.35])});fire(L,box)}
+window.FX={fire:fire,res:res,batch:batch,confetti:confetti,pop:pop,dlg:dlg,end:end,ax:ax};
+
+/* clics y toques */
+document.addEventListener('click',function(e){var t=e.target;if(!t.closest)return;
+ var fc=t.closest('.fc');if(fc){fc.classList.toggle('on');fc.setAttribute('aria-pressed',fc.classList.contains('on'));fire([[0,'glide',420,640,.16]]);return}
+ if(t.closest('#rLoad')){fire([[0,'glide',300,700,.22]]);return}
+ if(t.closest('#rClr')){fire([[0,'glide',700,200,.35]]);return}
+ if(t.closest('#dRe')){fire([[0,'glide',300,700,.22]]);return}
+ if(t.closest('#dBack')){fire([[0,'glide',600,400,.15]]);return}
+ if(t.closest('.snd')){fire([[0,'tick',800]]);return}
+ if(t.closest('.seg button,#themeBtn,#navBtn,.toc a'))fire([[0,'tick',700]])});
+addEventListener('toggle',function(e){var d=e.target;if(!d||d.tagName!=='DETAILS'||!d.open)return;fire([[0,'glide',380,760,.22]])},true);
+addEventListener('change',function(e){var c=e.target;if(!c.matches||!c.matches('.ck input[type=checkbox]'))return;
+ var lab=c.closest('.ck');if(!RM)restart(lab,'fx-pop');
+ if(!c.checked){fire([[0,'tick',500]]);return}
+ var all=[].slice.call(c.closest('section').querySelectorAll('.ck input[type=checkbox]'));
+ if(all.every(function(x){return x.checked})){fire([[0,'pop',660],[.1,'fan']]);confetti(lab)}else fire([[0,'pop',660]])});
+var lk=0;addEventListener('input',function(e){var t=e.target;if(!t.matches||!t.matches('input.g,textarea'))return;
+ var n=performance.now();if(n-lk<45)return;lk=n;fire([[0,'key',900+Math.random()*500]])});
+
+/* entrada escalonada y número de sección */
+if(!RM&&'IntersectionObserver' in window){
+ var cs=[].slice.call(document.querySelectorAll('ol.ex:not(#rErr),.strip,.two')).filter(function(c){return !c.closest('.anim')});
+ var io2=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('fx-show');io2.unobserve(e.target)}})},{threshold:.1});
+ cs.forEach(function(c){[].forEach.call(c.children,function(k,i){k.style.setProperty('--i',Math.min(i,10))});c.classList.add('fx-hide');io2.observe(c)});
+ var io3=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('fx-num');io3.unobserve(e.target)}})},{threshold:.05});
+ [].forEach.call(document.querySelectorAll('main section'),function(x){io3.observe(x)})}
+
+/* parallax: manchas de fondo, cabecera en capas y foco en la sección activa */
+if(!RM){(function(){
+ var plx=document.querySelector('.plx');if(!plx)return;
+ var K=[.18,.34,.52,.76],HK=[.16,.30,.44,.60],
+  bl=[].map.call(plx.querySelectorAll('i'),function(el,i){return{el:el,k:K[i]||.4,top:0,s:0}}),
+  hc=[].slice.call(document.querySelectorAll('header .wrap>*')),
+  secs=[].map.call(document.querySelectorAll('main section'),function(el){el.classList.add('mg');return{el:el,a:-1}}),t=0,H=0;
+ function mod(a,n){return((a%n)+n)%n}
+ function measure(){H=plx.offsetHeight;bl.forEach(function(b){b.top=b.el.offsetTop;b.s=b.el.offsetHeight})}
+ function run(){t=0;var y=scrollY,vh=innerHeight,vw=innerWidth,c=vh/2;
+  bl.forEach(function(b,i){var p=mod(b.top-y*b.k+b.s,H+b.s)-b.s,x=Math.sin(y/600+i*1.7)*vw*.07;b.el.style.transform='translate3d('+x.toFixed(1)+'px,'+(p-b.top).toFixed(1)+'px,0)'});
+  var f=Math.max(0,1-y/(vh*.7)).toFixed(2);
+  hc.forEach(function(h,i){h.style.transform='translate3d(0,'+Math.round(y*(HK[i]||.4))+'px,0)';h.style.opacity=f});
+  secs.forEach(function(s){var r=s.el.getBoundingClientRect(),d=r.top>c?r.top-c:r.bottom<c?c-r.bottom:0,v=Math.round(Math.max(0,1-d/(vh*.5))*20)/20;
+   if(v!==s.a){s.a=v;s.el.style.setProperty('--a',v)}})}
+ function q(){if(!t)t=requestAnimationFrame(run)}
+ addEventListener('scroll',q,{passive:true});addEventListener('resize',function(){measure();q()});measure();run()})()}
+})();
+</script>
+<script>
 function $(i){return document.getElementById(i)}
 function sh(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t}return a}
 function E(t,b){return t?'<span class="en'+(b?' b':'')+'"> '+t+'</span>':''}
@@ -199,26 +389,26 @@ var EK='stefan_c01_err',err=ld(EK,[]),day=new Date().toISOString().slice(0,10),d
 function note(q,a){if(!err.some(function(x){return x.q===q}))err.push({q:q,a:a,d:[]});sv(EK,err)}
 function norm(s){return s.trim().toLowerCase().replace(/\s+/g,' ')}
 function mc(id,items,rec){var el=$(id);el.innerHTML=items.map(function(it){return '<li><span>'+it[0]+E(it[1],1)+'</span><div class="op">'+sh(it[2]).map(function(o){return '<button type="button">'+o+'</button>'}).join('')+'</div><span class="sol" hidden></span></li>'}).join('');
- [].forEach.call(el.children,function(li,i){var it=items[i];li.querySelector('.op').onclick=function(e){var b=e.target.closest('button');if(!b||li.dataset.done||b.disabled)return;var ok=b.textContent===it[2][0],s=li.querySelector('.sol');b.className=ok?'ok':'bad';s.hidden=false;if(ok){li.dataset.done=1;s.className='sol tip';s.textContent='✓'}else{b.disabled=true;s.className='sol';s.innerHTML='✗ Prueba otra vez'+E('Try again');if(rec)note(it[0],it[2][0])}}})}
+ [].forEach.call(el.children,function(li,i){var it=items[i];li.querySelector('.op').onclick=function(e){var b=e.target.closest('button');if(!b||li.dataset.done||b.disabled)return;var ok=b.textContent===it[2][0],s=li.querySelector('.sol');b.className=ok?'ok':'bad';window.FX&&FX.res(b,ok);s.hidden=false;if(ok){li.dataset.done=1;s.className='sol tip';s.textContent='✓'}else{b.disabled=true;s.className='sol';s.innerHTML='✗ Prueba otra vez'+E('Try again');if(rec)note(it[0],it[2][0])}}})}
 function fill(id,items){$(id).innerHTML=items.map(function(it){return '<li>'+it[0].replace('___','<input class="g" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="respuesta">')+E(it[1],1)+'<span class="sol" hidden></span></li>'}).join('')}
-function chk(id,items,cb){[].forEach.call($(id).children,function(li,i){var inp=li.querySelector('input'),s=li.querySelector('.sol'),ok=items[i][2].split('/').map(norm).indexOf(norm(inp.value))>-1;if(li.dataset.done)return;li.dataset.done=1;inp.className='g '+(ok?'ok':'bad');s.hidden=false;if(ok){s.className='sol tip';s.textContent='✓'}else{s.textContent='→ '+items[i][2]}if(cb)cb(i,ok,items[i])})}
+function chk(id,items,cb){var rows=[];[].forEach.call($(id).children,function(li,i){var inp=li.querySelector('input'),s=li.querySelector('.sol'),ok=items[i][2].split('/').map(norm).indexOf(norm(inp.value))>-1;if(li.dataset.done)return;li.dataset.done=1;inp.className='g '+(ok?'ok':'bad');s.hidden=false;if(ok){s.className='sol tip';s.textContent='✓'}else{s.textContent='→ '+items[i][2]}rows.push([inp,ok]);if(cb)cb(i,ok,items[i])});window.FX&&FX.batch($(id),rows)}
 var MC1=[['Yo ___ (querer) un café.','I want a coffee.',['quiero','quero','quieró']],['Nosotros ___ (querer) pasear.','We want to walk.',['queremos','quieremos','quiremos']],['Ellos ___ (poder) venir hoy.','They can come today.',['pueden','podan','podén']],['Tú ___ (pedir) una pizza.','You order a pizza.',['pides','pedes','pidas']],['Vosotros ___ (dormir) poco.','You (pl.) sleep little.',['dormís','duermís','dormen']],['Ella ___ (preferir) el té.','She prefers tea.',['prefiere','prefere','prifiere']]];
 var FA=[['Yo (poder) → ___ venir.','puedo'],['Tú (pedir) → ___ café.','pides'],['Ella (empezar) → ___ a trabajar.','empieza'],['Nosotros (volver) → ___ pronto.','volvemos'],['Yo (hacer) → ___ deporte.','hago'],['Ellos (dormir) → ___ mucho.','duermen'],['Yo (conocer) → ___ a Marta.','conozco'],['Tú (decir) → ___ la verdad.','dices']].map(function(x){return [x[0],'',x[1]]});
 var FC=[['Siempre ___ (pedir, yo) un café con leche.','I always order a coffee with milk.','pido'],['No ___ (saber, yo) dónde vive tu hermano.','I don’t know where your brother lives.','sé'],['Mis amigos ___ (preferir) cenar pronto.','My friends prefer to eat early.','prefieren'],['¿A qué hora ___ (volver, tú) a casa?','What time do you get back home?','vuelves'],['Los sábados ___ (salir, yo) con amigos.','On Saturdays I go out with friends.','salgo']];
 var NP=[['Yo ___ (tener) dos hermanos.','','tengo'],['Tú ___ (venir) mañana, ¿no?','','vienes'],['Ellos ___ (decir) que sí.','','dicen'],['Yo ___ (poner) la mesa.','','pongo'],['Ella ___ (seguir) en casa.','','sigue'],['Yo ___ (ver) a mi madre hoy.','','veo'],['Tú ___ (entender) todo.','','entiendes'],['Yo ___ (dar) clases.','','doy'],['Ellos ___ (encontrar) trabajo.','','encuentran'],['Nosotros ___ (repetir) la frase.','','repetimos']];
-mc('mc1',MC1,1);fill('fa',FA);fill('fc',FC);
+MC1=MC1.concat([['Tú ___ (querer) otro café.','You want another coffee.',['quieres','queres','quiéres']],['Él ___ (poder) venir mañana.','He can come tomorrow.',['puede','poede','pude']],['Nosotros ___ (pedir) la cuenta.','We ask for the bill.',['pedimos','pidimos','pedemos']],['Yo ___ (pedir) agua.','I ask for water.',['pido','pedo','pide']],['Ellos ___ (preferir) el campo.','They prefer the countryside.',['prefieren','preferen','prifieren']],['Vosotros ___ (querer) salir.','You (pl.) want to go out.',['queréis','quieréis','queráis']],['Yo ___ (poder) ayudarte.','I can help you.',['puedo','podo','pudo']],['Tú ___ (dormir) mucho.','You sleep a lot.',['duermes','dormes','duermas']],['Nosotros ___ (poder) esperar.','We can wait.',['podemos','puedemos','podamos']]]);FA=FA.concat([['Yo (salir) → ___ de casa.','','salgo'],['Tú (poder) → ___ esperar.','','puedes'],['Nosotros (pedir) → ___ la cuenta.','','pedimos'],['Él (querer) → ___ un café.','','quiere'],['Yo (saber) → ___ la respuesta.','','sé'],['Ellos (hacer) → ___ la cena.','','hacen'],['Yo (tener) → ___ dos hijos.','','tengo']]);FC=FC.concat([['Mi mujer ___ (querer) viajar en verano.','My wife wants to travel in summer.','quiere'],['Mis hijos ___ (dormir) hasta tarde.','My children sleep late.','duermen'],['Yo ___ (hacer) la compra los sábados.','I do the shopping on Saturdays.','hago'],['¿___ (poder, tú) venir mañana?','Can you come tomorrow?','puedes'],['Yo ___ (conocer) bien Estocolmo.','I know Stockholm well.','conozco'],['Nosotros ___ (volver) a casa a las seis.','We get home at six.','volvemos'],['Felix ___ (pedir) comida todas las mañanas.','Felix asks for food every morning.','pide'],['Yo ___ (poner) la mesa para cenar.','I set the table for dinner.','pongo'],['¿Qué ___ (preferir, tú): té o café?','What do you prefer: tea or coffee?','prefieres'],['Ellos ___ (decir) que no pueden.','They say they can’t.','dicen']]);NP=NP.concat([['Yo ___ (salir) a las ocho.','','salgo'],['Tú ___ (hacer) deporte.','','haces'],['Ella ___ (querer) un té.','','quiere'],['Nosotros ___ (poder) hablar.','','podemos'],['Ellos ___ (volver) mañana.','','vuelven']]);mc('mc1',MC1,1);fill('fa',FA);fill('fc',FC);
 $('faB').onclick=function(){chk('fa',FA,function(i,ok,it){if(!ok)note(it[0],it[2])})};
 $('fcB').onclick=function(){chk('fc',FC,function(i,ok,it){if(!ok)note(it[0],it[2])})};
-var NW=[0,1,2,3,4].map(function(k){return NP[(dn+k)%10]});fill('rNew',NW);$('rNB').onclick=function(){chk('rNew',NW)};
+var NW=NP.slice(dn%15).concat(NP.slice(0,dn%15));fill('rNew',NW);$('rNB').onclick=function(){chk('rNew',NW)};
 var RB=[];
 $('rLoad').onclick=function(){RB=err.slice();fill('rErr',RB.map(function(e){return [e.q,'',e.a]}));$('rN').textContent=RB.length?RB.length+' errores en el banco':'Todavía no hay errores en el banco: ¡bien!'};
 $('rChk').onclick=function(){chk('rErr',RB.map(function(e){return [e.q,'',e.a]}),function(i,ok){var e=RB[i];if(ok){if(e.d.indexOf(day)<0)e.d.push(day);if(e.d.length>=2)err=err.filter(function(x){return x!==e})}sv(EK,err)})};
 $('rClr').onclick=function(){err=[];sv(EK,err);RB=[];$('rErr').innerHTML='';$('rN').textContent='Banco vacío'};
 (function(P){var L=sh(P.map(function(p){return p[0]})),Rr=sh(P.map(function(p){return p[1]})),sel=null,n=0;
-function mk(t,box,side){var b=document.createElement('button');b.type='button';b.textContent=t;b.onclick=function(){if(b.disabled)return;if(side==0){if(sel)sel.classList.remove('on');sel=b;b.classList.add('on');return}if(!sel)return;var ok=P.some(function(p){return p[0]===sel.textContent&&p[1]===t});if(ok){sel.disabled=b.disabled=true;sel.className=b.className='ok';sel=null;if(++n==P.length){$('gs').hidden=false;$('gs').className='sol tip';$('gs').textContent='✓'}}else{b.className='bad';setTimeout(function(){b.className=''},500)}};box.appendChild(b)}
-L.forEach(function(t){mk(t,$('gl'),0)});Rr.forEach(function(t){mk(t,$('gr'),1)})})([['yo + hacer','hago'],['tú + querer','quieres'],['ellos + poder','pueden'],['nosotros + dormir','dormimos'],['yo + saber','sé']]);
-mc('g3',[['¿Qué prefieres, té o café?','',['Prefiero café.','Prefero café.','Prefiere café.']],['¿Puedes venir mañana?','',['Sí, puedo venir a las seis.','Sí, podo venir a las seis.','Sí, pueden venir a las seis.']],['¿Qué haces los domingos?','',['Hago deporte y descanso.','Hacío deporte y descanso.','Hace deporte y descanso.']],['¿Conoces a Marta?','',['Sí, la conozco.','Sí, la conoco.','Sí, la conoce.']]],0);
-(function(S){var el=$('g1');S.forEach(function(s){var d=document.createElement('div');d.className='oi';d.innerHTML='<div class="wd tg" aria-label="tu frase"></div><div class="wd pl"></div><span class="sol" hidden></span><button type="button" class="act alt">Comprobar</button>';var tg=d.querySelector('.tg'),pl=d.querySelector('.pl');sh(s.split(' ')).forEach(function(w){var b=document.createElement('button');b.type='button';b.textContent=w;b.onclick=function(){(b.parentNode===pl?tg:pl).appendChild(b)};pl.appendChild(b)});d.querySelector('.act').onclick=function(){var v=[].map.call(tg.children,function(b){return b.textContent}).join(' '),o=v===s,x=d.querySelector('.sol');x.hidden=false;x.className='sol'+(o?' tip':'');x.textContent=o?'✓':'→ '+s};el.appendChild(d)})})(['Yo siempre hago la compra los sábados.','¿A qué hora vuelves tú a casa?','Ellos no pueden venir hoy.']);
+function mk(t,box,side){var b=document.createElement('button');b.type='button';b.textContent=t;b.onclick=function(){if(b.disabled)return;if(side==0){if(sel)sel.classList.remove('on');sel=b;b.classList.add('on');return}if(!sel)return;var ok=P.some(function(p){return p[0]===sel.textContent&&p[1]===t});if(ok){sel.disabled=b.disabled=true;sel.className=b.className='ok';var s0=sel,full=(n+1==P.length);sel=null;window.FX&&(FX.res(s0,true,1),FX.res(b,true,0,full));if(++n==P.length){$('gs').hidden=false;$('gs').className='sol tip';$('gs').textContent='✓'}}else{b.className='bad';window.FX&&FX.res(b,false);setTimeout(function(){b.className=''},500)}};box.appendChild(b)}
+L.forEach(function(t){mk(t,$('gl'),0)});Rr.forEach(function(t){mk(t,$('gr'),1)})})([['yo + hacer','hago'],['tú + querer','quieres'],['ellos + poder','pueden'],['nosotros + dormir','dormimos'],['yo + saber','sé'],['yo + salir','salgo'],['tú + pedir','pides'],['él + querer','quiere'],['nosotros + poder','podemos'],['ellos + hacer','hacen'],['yo + conocer','conozco'],['tú + dormir','duermes'],['vosotros + querer','queréis'],['yo + poner','pongo'],['ellos + decir','dicen']]);
+mc('g3',[['¿Qué prefieres, té o café?','',['Prefiero café.','Prefero café.','Prefiere café.']],['¿Puedes venir mañana?','',['Sí, puedo venir a las seis.','Sí, podo venir a las seis.','Sí, pueden venir a las seis.']],['¿Qué haces los domingos?','',['Hago deporte y descanso.','Hacío deporte y descanso.','Hace deporte y descanso.']],['¿Conoces a Marta?','',['Sí, la conozco.','Sí, la conoco.','Sí, la conoce.']],['¿Qué quieres hacer hoy?','',['Quiero descansar un poco.','Quero descansar un poco.','Quiere descansar un poco.']],['¿A qué hora sales de casa?','',['Salgo a las ocho.','Salo a las ocho.','Sale a las ocho.']],['¿Duermes bien?','',['Sí, duermo siete horas.','Sí, dormo siete horas.','Sí, duerme siete horas.']],['¿Qué pides en un café?','',['Pido un café con leche.','Pedo un café con leche.','Pide un café con leche.']],['¿Sabes dónde vive Marta?','',['No, no sé dónde vive.','No, no sabo dónde vive.','No, no sabe dónde vive.']],['¿Qué prefieres: el campo o la ciudad?','',['Prefiero el campo.','Prefero el campo.','Prefiere el campo.']],['¿Qué hacen tus hijos los sábados?','',['Hacen deporte y juegan.','Hacan deporte y juegan.','Hace deporte y juegan.']],['¿Puedes ayudarme hoy?','',['Sí, puedo ayudarte.','Sí, podo ayudarte.','Sí, pueden ayudarte.']],['¿Cuándo vuelves a casa?','',['Vuelvo a las seis.','Volvo a las seis.','Vuelve a las seis.']],['¿Qué ves en la tele?','',['Veo series y noticias.','Vo series y noticias.','Ve series y noticias.']],['¿Quién pone la mesa en tu casa?','',['Yo pongo la mesa.','Yo pono la mesa.','Yo pone la mesa.']]],0);
+(function(S){var el=$('g1');S.forEach(function(s){var d=document.createElement('div');d.className='oi';d.innerHTML='<div class="wd tg" aria-label="tu frase"></div><div class="wd pl"></div><span class="sol" hidden></span><button type="button" class="act alt">Comprobar</button>';var tg=d.querySelector('.tg'),pl=d.querySelector('.pl');sh(s.split(' ')).forEach(function(w){var b=document.createElement('button');b.type='button';b.textContent=w;b.onclick=function(){window.FX&&FX.pop(b);(b.parentNode===pl?tg:pl).appendChild(b)};pl.appendChild(b)});d.querySelector('.act').onclick=function(){var v=[].map.call(tg.children,function(b){return b.textContent}).join(' '),o=v===s,x=d.querySelector('.sol');x.hidden=false;x.className='sol'+(o?' tip':'');x.textContent=o?'✓':'→ '+s;window.FX&&FX.res(tg,o,0,o)};el.appendChild(d)})})(['Yo siempre hago la compra los sábados.','¿A qué hora vuelves tú a casa?','Ellos no pueden venir hoy.','Mis hijos duermen hasta tarde los domingos.','Yo salgo de casa a las ocho.','¿Qué quieres hacer este fin de semana?','Nosotros volvemos a casa a las seis.','Tú pides siempre un café con leche.','Felix duerme en el sofá.','No sé dónde vive tu hermano.','Yo conozco bien Estocolmo.','¿Puedes venir a mi casa mañana?','Mi mujer prefiere el campo.','Yo pongo la mesa para cenar.','Ellos dicen que quieren salir.']);
 var DN={n1:{s:'¡Hola! Me llamo Marta. ¿Y tú? ¿Cómo te llamas y a qué te dedicas?',e:'Hi! I’m Marta. And you? What’s your name and what do you do?',o:[['Me llamo Stefan y trabajo en una empresa.','My name is Stefan and I work at a company.','n2a'],['Soy Stefan y estudio español por las tardes.','I’m Stefan and I study Spanish in the afternoons.','n2b'],['Soy Stefan y no sabo mucho español todavía.','','','Ojo: saber → yo sé: «no sé mucho español todavía».']]},
 n2a:{s:'¡Qué interesante! ¿Qué haces en un día normal?',e:'How interesting! What do you do on a normal day?',o:[['Me levanto a las siete, desayuno y salgo de casa a las ocho.','I get up at seven, have breakfast and leave home at eight.','n3'],['Empiezo a trabajar a las nueve y como a las dos.','I start work at nine and eat at two.','n3'],['Yo pedo un café y salgo a las ocho.','','','Ojo: pedir → yo pido (e>i): «pido un café».']]},
 n2b:{s:'¡Genial! ¿Y qué prefieres: estudiar solo o con otras personas?',e:'Great! And which do you prefer: studying alone or with other people?',o:[['Prefiero estudiar solo, pero a veces pido ayuda.','I prefer studying alone, but sometimes I ask for help.','n3'],['Prefiero estudiar con otras personas porque entiendo mejor.','I prefer studying with other people because I understand better.','n3'],['Yo prifiero estudiar solo.','','','Ojo: preferir → yo prefiero (e>ie).']]},
@@ -227,14 +417,15 @@ e1:{s:'¡Qué buen plan! Yo también duermo poco entre semana. ¡Hasta pronto, S
 e2:{s:'¡Genial! Yo hago deporte los sábados. ¡Quedamos un día!',e:'Great! I do sport on Saturdays. Let’s meet up one day!',end:1}};
 var tr=[],cur='n1',hist=[];
 function dl(){var n=DN[cur],h=tr.join('')+'<p class="a"><span class="who">Marta</span>'+n.s+E(n.e)+'</p>',el=$('dlg');
- if(n.end){el.innerHTML=h+'<p class="b"><b>Final de la ruta.</b>'+E('End of the route.')+' Pulsa «Probar otra ruta».</p>';return}
+ if(n.end){el.innerHTML=h+'<p class="b"><b>Final de la ruta.</b>'+E('End of the route.')+' Pulsa «Probar otra ruta».</p>';window.FX&&(FX.dlg(el,tr.length),FX.end(el));return}
  var os=sh(n.o);el.innerHTML=h+'<div class="op col">'+os.map(function(o){return '<button type="button">'+o[0]+E(o[1])+'</button>'}).join('')+'</div><span class="sol" hidden></span>';
- [].forEach.call(el.querySelectorAll('.op button'),function(b,i){b.onclick=function(){var o=os[i],s=el.querySelector('.sol');if(!o[2]){b.className='bad';b.disabled=true;s.hidden=false;s.innerHTML='✗ Esa no es correcta. Elige otra.'+E('That one is not right. Choose another.');return}tr.push('<p class="a"><span class="who">Marta</span>'+n.s+E(n.e)+'</p>','<p class="b"><span class="who">Tú</span>'+o[0]+E(o[1])+'</p>');hist.push(cur);cur=o[2];dl()}})}
+ window.FX&&FX.dlg(el,tr.length);[].forEach.call(el.querySelectorAll('.op button'),function(b,i){b.onclick=function(){var o=os[i],s=el.querySelector('.sol');if(!o[2]){b.className='bad';window.FX&&FX.res(b,false);b.disabled=true;s.hidden=false;s.innerHTML='✗ Esa no es correcta. Elige otra.'+E('That one is not right. Choose another.');return}tr.push('<p class="a"><span class="who">Marta</span>'+n.s+E(n.e)+'</p>','<p class="b"><span class="who">Tú</span>'+o[0]+E(o[1])+'</p>');hist.push(cur);cur=o[2];window.FX&&FX.fire([[0,'pop',660]]);dl()}})}
 $('dBack').onclick=function(){if(hist.length){cur=hist.pop();tr.splice(-2)}dl()};
 $('dRe').onclick=function(){tr=[];hist=[];cur='n1';dl()};dl();
 $('vk').innerHTML=['querer','poder','pedir','hacer','salir','saber','conocer','tener','decir','dormir','volver','preferir'].map(function(v){return '<label class="ck"><input type="checkbox"> '+v+'</label>'}).join('');
 var nt=$('notes');nt.value=ld('stefan_c01_notes','');nt.oninput=function(){sv('stefan_c01_notes',nt.value)};
-[].forEach.call(document.querySelectorAll('.snd'),function(b){b.onclick=function(){try{var u=new SpeechSynthesisUtterance(b.dataset.say);u.lang='es-ES';u.rate=.85;speechSynthesis.cancel();speechSynthesis.speak(u)}catch(e){}}});
+[].forEach.call(document.querySelectorAll('.snd'),function(b){var p=b.closest('.chunk');if(p){var q=document.createElement('span');q.className='eq';q.setAttribute('aria-hidden','true');q.innerHTML='<i></i><i></i><i></i><i></i>';p.appendChild(q)}
+b.onclick=function(){try{var u=new SpeechSynthesisUtterance(b.dataset.say);u.lang='es-ES';u.rate=.85;[].forEach.call(document.querySelectorAll('.chunk.on'),function(c){c.classList.remove('on')});if(p){var id=window._tts=(window._tts||0)+1,off=function(){if(window._tts===id)p.classList.remove('on')};p.classList.add('on');u.onend=off;u.onerror=off;setTimeout(off,9000)}speechSynthesis.cancel();speechSynthesis.speak(u)}catch(e){}}});
 var T=[['plan','★','Plan de hoy','Today’s plan'],['s0','0','Calentamiento oral','Oral warm-up'],['sP','P','Los patrones de hoy','Today’s patterns'],['s1','1','El truco: la bota','The trick: the boot'],['sA','A','Verbos: las formas','Verbs: the forms'],['sB','B','Pronunciación y entonación','Pronunciation and intonation'],['sC','C','Fórmulas','Formulas'],['sR','R','Otra vez, sin mirar','Again, without looking'],['sJ','★','Tres minijuegos','Three mini-games'],['sD','4','Diálogo ramificado y producción libre','Branching dialogue and free production']];
 $('toc').innerHTML=T.map(function(t){return '<a href="#'+t[0]+'"><span class="num">'+t[1]+'</span><span>'+t[2]+E(t[3])+'</span></a>'}).join('');
 var lg=$('lang');lg.onclick=function(e){var b=e.target.closest('button');if(!b)return;document.body.setAttribute('data-lang',b.dataset.lang);[].forEach.call(lg.children,function(x){x.setAttribute('aria-pressed',x===b)})};
@@ -251,14 +442,14 @@ box.innerHTML='<div class="vs"></div><div class="ax-b"></div><p class="ax-cap"><
 var vs=box.querySelector('.vs'),bd=box.querySelector('.ax-b'),cp=box.querySelector('.ax-cap');
 Object.keys(V).forEach(function(v){var b=document.createElement('button');b.type='button';b.className='act alt';b.textContent=v;b.onclick=function(){cur=v;draw()};vs.appendChild(b)});
 var rp=document.createElement('button');rp.type='button';rp.className='act';rp.textContent='▶ Ver otra vez';rp.onclick=play;vs.appendChild(rp);
-function play(){box.classList.remove('go');void box.offsetWidth;box.classList.add('go')}
+function play(){box.classList.remove('go');void box.offsetWidth;box.classList.add('go');window.FX&&FX.ax(box)}
 function draw(){var d=V[cur];[].forEach.call(vs.children,function(b){b.classList.toggle('on',b.textContent===cur)});
 bd.innerHTML=d.r.map(function(f,i){var m=f.indexOf('[')>-1,c=m?'in':(d.t=='b'?'out':''),o=f.replace(/\[([^|\]]*)\|([^\]]*)\]/g,'$2'),n=f.replace(/\[([^|\]]*)\|([^\]]*)\]/g,'<b class="ch">$1</b>');
 return '<div class="ax-r '+c+'" style="--i:'+i+'"><span class="p">'+P[i]+'</span><span class="f">'+(m?'<span class="sw"><span class="o">'+o+'</span><span class="n">'+n+'</span></span>':f)+'</span><span class="t">'+(c=='out'?'fuera · out':'')+'</span></div>'}).join('');
 var k=(cur=='tener')?'b':d.t;cp.innerHTML=CP[k][0]+E(CP[k][1],1)+(cur=='tener'?'<br>Además, yo tiene una g: tengo.'+E('Also, yo gets a g: tengo.',1):'');play()}
 draw();
 if('IntersectionObserver' in window){box.classList.remove('go');var io=new IntersectionObserver(function(e){if(e[0].isIntersecting){play();io.disconnect()}});io.observe(box)}
-[].forEach.call(document.querySelectorAll('.boot'),function(b){if('IntersectionObserver' in window){var o=new IntersectionObserver(function(e){if(e[0].isIntersecting){b.classList.add('go');o.disconnect()}});o.observe(b)}else b.classList.add('go')})})();
+[].forEach.call(document.querySelectorAll('.boot'),function(b){if('IntersectionObserver' in window){var o=new IntersectionObserver(function(e){if(e[0].isIntersecting){b.classList.add('go');window.FX&&FX.fire([[0,'pop',392],[.25,'pop',440],[.5,'pop',494],[.75,'pop',523]]);o.disconnect()}});o.observe(b)}else b.classList.add('go')})})();
 </script>
 </body>
 </html>
