@@ -334,6 +334,28 @@ footer{
   .i18n-toggle{ top:12px; right:12px; padding:7px 12px; font-size:11px; }
 }
 @media (prefers-reduced-motion: reduce){ *{ transition:none !important; } }
+
+/* ---------- TARJETAS DE VOCABULARIO ---------- */
+.vocab-tools{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin:0 0 14px; flex-wrap:wrap; }
+.vocab-count{ font-family: var(--f-data); font-size:12px; color: var(--ink-faint); }
+.vocab-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(210px,1fr)); gap:12px; }
+.vcard{ all:unset; box-sizing:border-box; display:block; perspective:900px; height:190px; cursor:pointer; -webkit-tap-highlight-color:transparent; }
+.vcard:focus-visible{ outline:3px solid var(--accent); outline-offset:3px; border-radius: var(--r-md); }
+.vc-inner{ position:relative; display:block; width:100%; height:100%; transform-style:preserve-3d; transition:transform .45s ease; }
+.vcard.flipped .vc-inner{ transform:rotateY(180deg); }
+.vc-face{ position:absolute; inset:0; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; gap:6px; padding:16px 14px; border-radius: var(--r-md); backface-visibility:hidden; -webkit-backface-visibility:hidden; overflow:auto; }
+.vc-front{ background: var(--paper-raised); border:1.5px solid var(--accent-line); box-shadow: var(--shadow-1); }
+.vc-front .vc-word{ font-family: var(--f-display); font-size:19px; font-weight:600; color: var(--ink); line-height:1.2; }
+.vc-front .en{ font-family: var(--f-body); font-size:12.5px; margin:0; }
+.vc-hint{ position:absolute; right:10px; bottom:7px; font-family: var(--f-data); font-size:10.5px; color: var(--ink-faint); }
+.vc-back{ background: var(--accent-soft); border:1.5px solid var(--accent); transform:rotateY(180deg); }
+.vc-tag{ font-family: var(--f-data); font-size:10.5px; letter-spacing:.06em; text-transform:uppercase; color: var(--accent); }
+.vc-back .vc-ex{ font-family: var(--f-display); font-size:14.5px; line-height:1.4; color: var(--ink); }
+.vc-back .vc-ex b{ color: var(--accent); }
+.vc-back .en{ font-family: var(--f-body); font-size:12px; margin:0; }
+@media (prefers-reduced-motion: reduce){ .vc-inner{ transition:none; } }
+@media (max-width:600px){ .vocab-grid{ grid-template-columns:1fr 1fr; gap:10px; } .vcard{ height:230px; } }
+@media (max-width:380px){ .vocab-grid{ grid-template-columns:1fr; } }
 </style>
 </head>
 <body data-accent="rosa-lisa19">
@@ -405,18 +427,53 @@ footer{
 
   <!-- 3. Vocabulario nuevo -->
   <section class="block">
-    <div class="block-head"><span class="block-num">3</span><h2>El vocabulario de hoy</h2><span class="time-tag">vocabulario nuevo</span></div>
-    <p class="intro-text">Estas son las palabras que vas a necesitar para contar tu llegada a España.
-      <span class="en">These are the words you'll need to tell the story of your arrival in Spain.</span>
+    <div class="block-head"><span class="block-num">3</span><h2>El vocabulario de hoy</h2><span class="time-tag">30 tarjetas</span></div>
+    <p class="intro-text">Toca una tarjeta para ver la palabra en una frase de ejemplo. Léela en voz alta y piensa en una frase tuya.
+      <span class="en">Tap a card to see the word in an example sentence. Read it aloud and think of one of your own.</span>
     </p>
-    <div class="connector-grid">
-      <div class="connector-chip">llegar<span class="en">to arrive</span></div>
-      <div class="connector-chip">mudarse<span class="en">to move (house/country)</span></div>
-      <div class="connector-chip">empezar<span class="en">to start</span></div>
-      <div class="connector-chip">decidir<span class="en">to decide</span></div>
-      <div class="connector-chip">dejar el trabajo<span class="en">to leave a job</span></div>
-      <div class="connector-chip">hace tres años<span class="en">three years ago</span></div>
+    <div class="vocab-tools"><span class="vocab-count" id="vocab-count">0 / 30 vistas</span><button type="button" class="btn-ghost" id="vocab-all">Mostrar todos los ejemplos</button></div>
+    <div class="vocab-grid">
+<button type="button" class="vcard" aria-pressed="false" aria-label="llegar: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">llegar</span><span class="en">to arrive</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">llegar</span><span class="vc-ex">Llegué a España hace tres años.</span><span class="en">I arrived in Spain three years ago.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="mudarse: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">mudarse</span><span class="en">to move (house/country)</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">mudarse</span><span class="vc-ex">Me mudé a Xàtiva en septiembre.</span><span class="en">I moved to Xàtiva in September.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="empezar: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">empezar</span><span class="en">to start</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">empezar</span><span class="vc-ex">Empecé de cero, sin conocer a nadie.</span><span class="en">I started from scratch, without knowing anyone.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="decidir: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">decidir</span><span class="en">to decide</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">decidir</span><span class="vc-ex">Decidí cambiar de vida después de un viaje.</span><span class="en">I decided to change my life after a trip.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="dejar el trabajo: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">dejar el trabajo</span><span class="en">to leave a job</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">dejar el trabajo</span><span class="vc-ex">Dejé mi trabajo en Chicago.</span><span class="en">I left my job in Chicago.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="hace tres años: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">hace tres años</span><span class="en">three years ago</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">hace tres años</span><span class="vc-ex">Hace tres años vendí casi todo lo que tenía.</span><span class="en">Three years ago I sold almost everything I owned.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="vender: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">vender</span><span class="en">to sell</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">vender</span><span class="vc-ex">Vendí mi coche antes de venir.</span><span class="en">I sold my car before coming.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="reservar: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">reservar</span><span class="en">to book</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">reservar</span><span class="vc-ex">Reservé un vuelo solo de ida.</span><span class="en">I booked a one-way flight.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="alquilar: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">alquilar</span><span class="en">to rent</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">alquilar</span><span class="vc-ex">Alquilamos un piso pequeño cerca del centro.</span><span class="en">We rented a small flat near the centre.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="buscar: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">buscar</span><span class="en">to look for</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">buscar</span><span class="vc-ex">Busqué piso durante un mes.</span><span class="en">I looked for a flat for a month.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="encontrar: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">encontrar</span><span class="en">to find</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">encontrar</span><span class="vc-ex">Encontramos un piso en una semana.</span><span class="en">We found a flat in a week.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="firmar: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">firmar</span><span class="en">to sign</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">firmar</span><span class="vc-ex">Firmé el contrato un viernes por la tarde.</span><span class="en">I signed the contract on a Friday afternoon.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="pagar: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">pagar</span><span class="en">to pay</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">pagar</span><span class="vc-ex">Pagué la fianza en efectivo.</span><span class="en">I paid the deposit in cash.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="el contrato: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">el contrato</span><span class="en">the contract</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">el contrato</span><span class="vc-ex">Leí el contrato dos veces antes de firmar.</span><span class="en">I read the contract twice before signing.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="la maleta: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">la maleta</span><span class="en">the suitcase</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">la maleta</span><span class="vc-ex">Facturé dos maletas en el aeropuerto.</span><span class="en">I checked two suitcases at the airport.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="aterrizar: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">aterrizar</span><span class="en">to land</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">aterrizar</span><span class="vc-ex">Aterricé en Valencia un día de septiembre.</span><span class="en">I landed in Valencia one day in September.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="el vuelo: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">el vuelo</span><span class="en">the flight</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">el vuelo</span><span class="vc-ex">Mi vuelo salió con una hora de retraso.</span><span class="en">My flight left an hour late.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="recibir: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">recibir</span><span class="en">to receive / welcome</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">recibir</span><span class="vc-ex">Los vecinos me recibieron con una tarta.</span><span class="en">The neighbours welcomed me with a cake.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="el vecino: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">el vecino</span><span class="en">the neighbour</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">el vecino</span><span class="vc-ex">Conocí a mis vecinos el primer día.</span><span class="en">I met my neighbours on the first day.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="comprar: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">comprar</span><span class="en">to buy</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">comprar</span><span class="vc-ex">Compramos un sofá en un mercadillo.</span><span class="en">We bought a sofa at a flea market.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="practicar: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">practicar</span><span class="en">to practice</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">practicar</span><span class="vc-ex">Practiqué español todos los días en el mercado.</span><span class="en">I practised Spanish every day at the market.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="aprender: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">aprender</span><span class="en">to learn</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">aprender</span><span class="vc-ex">Aprendí mucho español hablando con los vecinos.</span><span class="en">I learned a lot of Spanish talking with the neighbours.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="apuntarse: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">apuntarse</span><span class="en">to sign up</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">apuntarse</span><span class="vc-ex">Me apunté a un curso de español en octubre.</span><span class="en">I signed up for a Spanish course in October.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="empadronarse: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">empadronarse</span><span class="en">to register at the town hall</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">empadronarse</span><span class="vc-ex">Me empadroné en el ayuntamiento la primera semana.</span><span class="en">I registered at the town hall in the first week.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="abrir una cuenta: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">abrir una cuenta</span><span class="en">to open an account</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">abrir una cuenta</span><span class="vc-ex">Chris abrió una cuenta en el banco.</span><span class="en">Chris opened an account at the bank.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="echar de menos: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">echar de menos</span><span class="en">to miss</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">echar de menos</span><span class="vc-ex">Eché de menos a mi familia el primer mes.</span><span class="en">I missed my family the first month.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="escribir: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">escribir</span><span class="en">to write</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">escribir</span><span class="vc-ex">Escribí a mi familia esa noche.</span><span class="en">I wrote to my family that night.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="el primer día: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">el primer día</span><span class="en">the first day</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">el primer día</span><span class="vc-ex">El primer día cenamos en el suelo, sin muebles.</span><span class="en">On the first day we ate dinner on the floor, with no furniture.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="sentirse en casa: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">sentirse en casa</span><span class="en">to feel at home</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">sentirse en casa</span><span class="vc-ex">Me sentí en casa después de dos meses.</span><span class="en">I felt at home after two months.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="celebrar: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">celebrar</span><span class="en">to celebrate</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">celebrar</span><span class="vc-ex">Celebramos el primer año con una paella.</span><span class="en">We celebrated our first year with a paella.</span></span></span></button>
     </div>
+    <script>
+(function(){
+  const cards=[...document.querySelectorAll('.vcard')], cnt=document.getElementById('vocab-count'), all=document.getElementById('vocab-all');
+  let seen=new Set();
+  function upd(){ cnt.textContent=seen.size+' / '+cards.length+' vistas'; }
+  function setF(c,f){ c.classList.toggle('flipped',f); c.setAttribute('aria-pressed',f); if(f){ seen.add(c); } }
+  cards.forEach(c=>c.addEventListener('click',()=>{ setF(c,!c.classList.contains('flipped')); upd(); }));
+  all.addEventListener('click',()=>{ const anyUn=cards.some(c=>!c.classList.contains('flipped')); cards.forEach(c=>setF(c,anyUn)); all.textContent=anyUn?'Ocultar ejemplos':'Mostrar todos los ejemplos'; upd(); });
+})();
+</script>
   </section>
 
   <!-- 4. Texto modelo con etiquetas -->
@@ -705,6 +762,63 @@ document.getElementById('save-task-btn').addEventListener('click', async ()=>{
   setTimeout(()=>flag.classList.remove('show'), 2000);
 });
 loadTask();
+</script>
+
+<!-- TECLADO-TILDES -->
+<style>
+#tk{position:fixed;left:50%;width:max-content;bottom:calc(10px + env(safe-area-inset-bottom,0px));transform:translate(-50%,24px);z-index:9999;display:flex;gap:6px;align-items:center;flex-wrap:wrap;justify-content:center;max-width:calc(100vw - 16px);padding:8px 10px;background:var(--paper-raised,#fff);color:var(--ink,#1B1F2A);border:1px solid var(--line-strong,rgba(0,0,0,.24));border-radius:16px;box-shadow:0 8px 28px rgba(0,0,0,.22);opacity:0;visibility:hidden;pointer-events:none;transition:opacity .18s,transform .18s,visibility .18s}
+#tk.on{opacity:1;visibility:visible;pointer-events:auto;transform:translate(-50%,0)}
+#tk button{font:600 1.15rem/1 inherit;font-family:inherit;min-width:42px;min-height:42px;padding:0 10px;border-radius:10px;border:1px solid var(--line-strong,rgba(0,0,0,.24));background:var(--paper-alt,#E8EEF9);color:inherit;cursor:pointer;touch-action:manipulation}
+#tk button:hover{border-color:var(--accent,#2457d6)}
+#tk button:active{transform:scale(.94)}
+#tk button[aria-pressed=true]{background:var(--accent,#2457d6);color:#fff;border-color:var(--accent,#2457d6)}
+#tk .tk-l{font-size:.72rem;opacity:.7;margin-right:2px}
+@media print{#tk{display:none!important}}
+@media (prefers-reduced-motion:reduce){#tk{transition:none}}
+</style>
+<script>
+(function(){
+ var bar=document.createElement('div');bar.id='tk';bar.setAttribute('role','toolbar');bar.setAttribute('aria-label','Teclas especiales: tildes y ñ');
+ var chars=['á','é','í','ó','ú','ü','ñ','¿','¡'],up=false,last=null,btns=[];
+ var lab=document.createElement('span');lab.className='tk-l';lab.textContent='Tildes';bar.appendChild(lab);
+ var sh=document.createElement('button');sh.type='button';sh.textContent='⇧';sh.title='Mayúscula (Shift)';sh.setAttribute('aria-label','Mayúscula');sh.setAttribute('aria-pressed','false');bar.appendChild(sh);
+ chars.forEach(function(c){var b=document.createElement('button');b.type='button';b.textContent=c;b.setAttribute('aria-label','Insertar '+c);b.dataset.c=c;bar.appendChild(b);btns.push(b)});
+ function paint(){sh.setAttribute('aria-pressed',up?'true':'false');btns.forEach(function(b){b.textContent=up?b.dataset.c.toUpperCase():b.dataset.c})}
+ function isF(e){return e&&e.matches&&e.matches('textarea,input[type=text],input:not([type])')&&!e.readOnly&&!e.disabled}
+ function put(ch){
+  var f=last;if(!f||!document.contains(f))return;
+  var ml=f.maxLength;if(ml>0&&f.value.length>=ml&&f.selectionStart===f.selectionEnd)return;
+  f.focus();
+  var s=f.selectionStart,e=f.selectionEnd;if(s==null){s=e=f.value.length}
+  f.setRangeText(ch,s,e,'end');
+  f.dispatchEvent(new Event('input',{bubbles:true}));
+ }
+ bar.addEventListener('pointerdown',function(e){if(e.target.closest('button'))e.preventDefault()});
+ bar.addEventListener('mousedown',function(e){if(e.target.closest('button'))e.preventDefault()});
+ bar.addEventListener('click',function(e){
+  var b=e.target.closest('button');if(!b)return;
+  if(b===sh){up=!up;paint();if(last)last.focus();return}
+  put(up?b.dataset.c.toUpperCase():b.dataset.c);
+  if(up){up=false;paint()}
+ });
+ function place(){
+  var v=window.visualViewport;if(!v){bar.style.bottom='';return}
+  var off=Math.max(0,window.innerHeight-v.height-v.offsetTop);
+  bar.style.bottom='calc('+(10+off)+'px + env(safe-area-inset-bottom,0px))';
+ }
+ function show(){place();bar.classList.add('on');document.body.style.paddingBottom=Math.max(parseFloat(getComputedStyle(document.body).paddingBottom)||0,0)+'px'}
+ function hide(){bar.classList.remove('on')}
+ document.addEventListener('focusin',function(e){if(isF(e.target)){last=e.target;place();bar.classList.add('on');
+   setTimeout(function(){var r=e.target.getBoundingClientRect(),br=bar.getBoundingClientRect();if(r.bottom>br.top-8){window.scrollBy({top:r.bottom-br.top+16,behavior:'smooth'})}},60)}});
+ document.addEventListener('focusout',function(){setTimeout(function(){var a=document.activeElement;if(!isF(a)&&!bar.contains(a))hide()},120)});
+ document.addEventListener('keydown',function(e){
+  if(!isF(e.target)||!e.altKey||e.ctrlKey||e.metaKey)return;
+  var m={a:'á',e:'é',i:'í',o:'ó',u:'ú',n:'ñ'};var k=(e.key||'').toLowerCase();
+  if(e.code&&/^Key[AEIOUN]$/.test(e.code)&&m[e.code.slice(3).toLowerCase()]&&!e.isComposing){e.preventDefault();var ch=m[e.code.slice(3).toLowerCase()];put(e.shiftKey?ch.toUpperCase():ch)}
+ });
+ if(window.visualViewport){visualViewport.addEventListener('resize',place);visualViewport.addEventListener('scroll',place)}
+ document.body.appendChild(bar);
+})();
 </script>
 
 </body>

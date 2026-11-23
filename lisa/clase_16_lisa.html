@@ -334,6 +334,28 @@ footer{
   .i18n-toggle{ top:12px; right:12px; padding:7px 12px; font-size:11px; }
 }
 @media (prefers-reduced-motion: reduce){ *{ transition:none !important; } }
+
+/* ---------- TARJETAS DE VOCABULARIO ---------- */
+.vocab-tools{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin:0 0 14px; flex-wrap:wrap; }
+.vocab-count{ font-family: var(--f-data); font-size:12px; color: var(--ink-faint); }
+.vocab-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(210px,1fr)); gap:12px; }
+.vcard{ all:unset; box-sizing:border-box; display:block; perspective:900px; height:190px; cursor:pointer; -webkit-tap-highlight-color:transparent; }
+.vcard:focus-visible{ outline:3px solid var(--accent); outline-offset:3px; border-radius: var(--r-md); }
+.vc-inner{ position:relative; display:block; width:100%; height:100%; transform-style:preserve-3d; transition:transform .45s ease; }
+.vcard.flipped .vc-inner{ transform:rotateY(180deg); }
+.vc-face{ position:absolute; inset:0; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; gap:6px; padding:16px 14px; border-radius: var(--r-md); backface-visibility:hidden; -webkit-backface-visibility:hidden; overflow:auto; }
+.vc-front{ background: var(--paper-raised); border:1.5px solid var(--accent-line); box-shadow: var(--shadow-1); }
+.vc-front .vc-word{ font-family: var(--f-display); font-size:19px; font-weight:600; color: var(--ink); line-height:1.2; }
+.vc-front .en{ font-family: var(--f-body); font-size:12.5px; margin:0; }
+.vc-hint{ position:absolute; right:10px; bottom:7px; font-family: var(--f-data); font-size:10.5px; color: var(--ink-faint); }
+.vc-back{ background: var(--accent-soft); border:1.5px solid var(--accent); transform:rotateY(180deg); }
+.vc-tag{ font-family: var(--f-data); font-size:10.5px; letter-spacing:.06em; text-transform:uppercase; color: var(--accent); }
+.vc-back .vc-ex{ font-family: var(--f-display); font-size:14.5px; line-height:1.4; color: var(--ink); }
+.vc-back .vc-ex b{ color: var(--accent); }
+.vc-back .en{ font-family: var(--f-body); font-size:12px; margin:0; }
+@media (prefers-reduced-motion: reduce){ .vc-inner{ transition:none; } }
+@media (max-width:600px){ .vocab-grid{ grid-template-columns:1fr 1fr; gap:10px; } .vcard{ height:230px; } }
+@media (max-width:380px){ .vocab-grid{ grid-template-columns:1fr; } }
 </style>
 </head>
 <body data-accent="petroleo-lisa16">
@@ -405,18 +427,53 @@ footer{
 
   <!-- 3. Vocabulario nuevo -->
   <section class="block">
-    <div class="block-head"><span class="block-num">3</span><h2>El vocabulario de hoy</h2><span class="time-tag">vocabulario nuevo</span></div>
-    <p class="intro-text">Estas son las palabras que vas a necesitar para hablar de comer en la calle y en el restaurante.
-      <span class="en">These are the words you'll need to talk about eating on the street and in a restaurant.</span>
+    <div class="block-head"><span class="block-num">3</span><h2>El vocabulario de hoy</h2><span class="time-tag">30 tarjetas</span></div>
+    <p class="intro-text">Toca una tarjeta para ver la palabra en una frase de ejemplo. Léela en voz alta y piensa en una frase tuya.
+      <span class="en">Tap a card to see the word in an example sentence. Read it aloud and think of one of your own.</span>
     </p>
-    <div class="connector-grid">
-      <div class="connector-chip">barato/a<span class="en">cheap</span></div>
-      <div class="connector-chip">auténtico/a<span class="en">authentic</span></div>
-      <div class="connector-chip">el puesto<span class="en">the street stall</span></div>
-      <div class="connector-chip">el sabor<span class="en">the flavor</span></div>
-      <div class="connector-chip">el mercado<span class="en">the market</span></div>
-      <div class="connector-chip">mejor / peor<span class="en">better / worse (irregular)</span></div>
+    <div class="vocab-tools"><span class="vocab-count" id="vocab-count">0 / 30 vistas</span><button type="button" class="btn-ghost" id="vocab-all">Mostrar todos los ejemplos</button></div>
+    <div class="vocab-grid">
+<button type="button" class="vcard" aria-pressed="false" aria-label="barato/a: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">barato/a</span><span class="en">cheap</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">barato/a</span><span class="vc-ex">El menú del puesto es más barato que el del restaurante.</span><span class="en">The stall&#x27;s menu is cheaper than the restaurant&#x27;s.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="caro/a: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">caro/a</span><span class="en">expensive</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">caro/a</span><span class="vc-ex">Cenar en el centro es mucho más caro que comer en el mercado.</span><span class="en">Eating in the centre is much more expensive than eating at the market.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="auténtico/a: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">auténtico/a</span><span class="en">authentic</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">auténtico/a</span><span class="vc-ex">Esta tortilla es más auténtica que la del restaurante turístico.</span><span class="en">This tortilla is more authentic than the tourist restaurant&#x27;s.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="el puesto: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">el puesto</span><span class="en">street stall</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">el puesto</span><span class="vc-ex">En el puesto hay menos mesas que en el restaurante.</span><span class="en">At the stall there are fewer tables than at the restaurant.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="el sabor: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">el sabor</span><span class="en">flavor</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">el sabor</span><span class="vc-ex">El sabor del pescado frito es tan bueno como el de un restaurante con estrella.</span><span class="en">The flavor of the fried fish is as good as a starred restaurant&#x27;s.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="el mercado: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">el mercado</span><span class="en">the market</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">el mercado</span><span class="vc-ex">El mercado es tan interesante como el museo.</span><span class="en">The market is as interesting as the museum.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="mejor: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">mejor</span><span class="en">better</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">mejor</span><span class="vc-ex">La comida del mercado es mejor que la del hotel.</span><span class="en">The market food is better than the hotel&#x27;s.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="peor: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">peor</span><span class="en">worse</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">peor</span><span class="vc-ex">El servicio aquí es peor que en el bar de barrio.</span><span class="en">The service here is worse than at the neighbourhood bar.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="el mantel: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">el mantel</span><span class="en">tablecloth</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">el mantel</span><span class="vc-ex">Un restaurante con mantel suele ser más caro que un puesto.</span><span class="en">A restaurant with tablecloths is usually more expensive than a stall.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="la carta: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">la carta</span><span class="en">the menu (à la carte)</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">la carta</span><span class="vc-ex">La carta del restaurante tiene más platos que el puesto.</span><span class="en">The restaurant&#x27;s menu has more dishes than the stall.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="el menú del día: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">el menú del día</span><span class="en">set lunch menu</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">el menú del día</span><span class="vc-ex">El menú del día es más barato que pedir a la carta.</span><span class="en">The set menu is cheaper than ordering à la carte.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="la propina: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">la propina</span><span class="en">the tip</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">la propina</span><span class="vc-ex">En España dejas menos propina que en Estados Unidos.</span><span class="en">In Spain you leave a smaller tip than in the United States.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="la cuenta: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">la cuenta</span><span class="en">the bill</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">la cuenta</span><span class="vc-ex">La cuenta del restaurante fue más alta que la del puesto.</span><span class="en">The restaurant bill was higher than the stall&#x27;s.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="el camarero: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">el camarero</span><span class="en">the waiter</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">el camarero</span><span class="vc-ex">El camarero fue tan amable como el cocinero.</span><span class="en">The waiter was as kind as the cook.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="el cocinero: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">el cocinero</span><span class="en">the cook</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">el cocinero</span><span class="vc-ex">El cocinero del puesto es más simpático que el del hotel.</span><span class="en">The stall&#x27;s cook is friendlier than the hotel&#x27;s.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="la terraza: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">la terraza</span><span class="en">terrace</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">la terraza</span><span class="vc-ex">La terraza es más tranquila que el interior.</span><span class="en">The terrace is quieter than the inside.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="la cola: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">la cola</span><span class="en">the queue</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">la cola</span><span class="vc-ex">Hoy hay menos cola que ayer en el puesto.</span><span class="en">Today there&#x27;s a shorter queue than yesterday at the stall.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="picante: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">picante</span><span class="en">spicy</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">picante</span><span class="vc-ex">Estos tacos son más picantes que los de ayer.</span><span class="en">These tacos are spicier than yesterday&#x27;s.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="fresco/a: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">fresco/a</span><span class="en">fresh</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">fresco/a</span><span class="vc-ex">El pescado del puerto es más fresco que el del supermercado.</span><span class="en">The fish from the harbour is fresher than the supermarket&#x27;s.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="casero/a: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">casero/a</span><span class="en">homemade</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">casero/a</span><span class="vc-ex">La sopa casera es mejor que la de bote.</span><span class="en">Homemade soup is better than canned soup.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="la ración: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">la ración</span><span class="en">serving (to share)</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">la ración</span><span class="vc-ex">Esta ración es tan grande como un plato entero.</span><span class="en">This serving is as big as a whole dish.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="compartir: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">compartir</span><span class="en">to share</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">compartir</span><span class="vc-ex">Compartir platos sale más barato que pedir uno cada uno.</span><span class="en">Sharing dishes works out cheaper than ordering one each.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="el ambiente: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">el ambiente</span><span class="en">the atmosphere</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">el ambiente</span><span class="vc-ex">El ambiente del mercado es más animado que el del restaurante.</span><span class="en">The market atmosphere is livelier than the restaurant&#x27;s.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="turístico/a: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">turístico/a</span><span class="en">touristy</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">turístico/a</span><span class="vc-ex">Un sitio turístico suele ser peor y más caro.</span><span class="en">A touristy place is usually worse and more expensive.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="la especialidad: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">la especialidad</span><span class="en">the specialty</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">la especialidad</span><span class="vc-ex">La especialidad de la casa es mejor que el plato del día.</span><span class="en">The house specialty is better than the dish of the day.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="probar: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">probar</span><span class="en">to try</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">probar</span><span class="vc-ex">De viaje pruebo más platos nuevos que en casa.</span><span class="en">When I travel I try more new dishes than at home.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="sencillo/a: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">sencillo/a</span><span class="en">simple</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">sencillo/a</span><span class="vc-ex">Un plato sencillo puede ser tan rico como uno elaborado.</span><span class="en">A simple dish can be as tasty as an elaborate one.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="la sobremesa: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">la sobremesa</span><span class="en">lingering after a meal</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">la sobremesa</span><span class="vc-ex">La sobremesa en España es más larga que en Estados Unidos.</span><span class="en">The after-meal chat in Spain is longer than in the United States.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="la reserva: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">la reserva</span><span class="en">the reservation</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">la reserva</span><span class="vc-ex">En el puesto no hace falta reserva: es más cómodo que el restaurante.</span><span class="en">At the stall you don&#x27;t need a reservation: it&#x27;s more convenient than the restaurant.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="el postre: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">el postre</span><span class="en">dessert</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">el postre</span><span class="vc-ex">Este postre es tan rico como el del restaurante, pero más barato.</span><span class="en">This dessert is as good as the restaurant&#x27;s, but cheaper.</span></span></span></button>
     </div>
+    <script>
+(function(){
+  const cards=[...document.querySelectorAll('.vcard')], cnt=document.getElementById('vocab-count'), all=document.getElementById('vocab-all');
+  let seen=new Set();
+  function upd(){ cnt.textContent=seen.size+' / '+cards.length+' vistas'; }
+  function setF(c,f){ c.classList.toggle('flipped',f); c.setAttribute('aria-pressed',f); if(f){ seen.add(c); } }
+  cards.forEach(c=>c.addEventListener('click',()=>{ setF(c,!c.classList.contains('flipped')); upd(); }));
+  all.addEventListener('click',()=>{ const anyUn=cards.some(c=>!c.classList.contains('flipped')); cards.forEach(c=>setF(c,anyUn)); all.textContent=anyUn?'Ocultar ejemplos':'Mostrar todos los ejemplos'; upd(); });
+})();
+</script>
   </section>
 
   <!-- 4. Texto modelo con etiquetas -->
@@ -705,6 +762,63 @@ document.getElementById('save-task-btn').addEventListener('click', async ()=>{
   setTimeout(()=>flag.classList.remove('show'), 2000);
 });
 loadTask();
+</script>
+
+<!-- TECLADO-TILDES -->
+<style>
+#tk{position:fixed;left:50%;width:max-content;bottom:calc(10px + env(safe-area-inset-bottom,0px));transform:translate(-50%,24px);z-index:9999;display:flex;gap:6px;align-items:center;flex-wrap:wrap;justify-content:center;max-width:calc(100vw - 16px);padding:8px 10px;background:var(--paper-raised,#fff);color:var(--ink,#1B1F2A);border:1px solid var(--line-strong,rgba(0,0,0,.24));border-radius:16px;box-shadow:0 8px 28px rgba(0,0,0,.22);opacity:0;visibility:hidden;pointer-events:none;transition:opacity .18s,transform .18s,visibility .18s}
+#tk.on{opacity:1;visibility:visible;pointer-events:auto;transform:translate(-50%,0)}
+#tk button{font:600 1.15rem/1 inherit;font-family:inherit;min-width:42px;min-height:42px;padding:0 10px;border-radius:10px;border:1px solid var(--line-strong,rgba(0,0,0,.24));background:var(--paper-alt,#E8EEF9);color:inherit;cursor:pointer;touch-action:manipulation}
+#tk button:hover{border-color:var(--accent,#2457d6)}
+#tk button:active{transform:scale(.94)}
+#tk button[aria-pressed=true]{background:var(--accent,#2457d6);color:#fff;border-color:var(--accent,#2457d6)}
+#tk .tk-l{font-size:.72rem;opacity:.7;margin-right:2px}
+@media print{#tk{display:none!important}}
+@media (prefers-reduced-motion:reduce){#tk{transition:none}}
+</style>
+<script>
+(function(){
+ var bar=document.createElement('div');bar.id='tk';bar.setAttribute('role','toolbar');bar.setAttribute('aria-label','Teclas especiales: tildes y ñ');
+ var chars=['á','é','í','ó','ú','ü','ñ','¿','¡'],up=false,last=null,btns=[];
+ var lab=document.createElement('span');lab.className='tk-l';lab.textContent='Tildes';bar.appendChild(lab);
+ var sh=document.createElement('button');sh.type='button';sh.textContent='⇧';sh.title='Mayúscula (Shift)';sh.setAttribute('aria-label','Mayúscula');sh.setAttribute('aria-pressed','false');bar.appendChild(sh);
+ chars.forEach(function(c){var b=document.createElement('button');b.type='button';b.textContent=c;b.setAttribute('aria-label','Insertar '+c);b.dataset.c=c;bar.appendChild(b);btns.push(b)});
+ function paint(){sh.setAttribute('aria-pressed',up?'true':'false');btns.forEach(function(b){b.textContent=up?b.dataset.c.toUpperCase():b.dataset.c})}
+ function isF(e){return e&&e.matches&&e.matches('textarea,input[type=text],input:not([type])')&&!e.readOnly&&!e.disabled}
+ function put(ch){
+  var f=last;if(!f||!document.contains(f))return;
+  var ml=f.maxLength;if(ml>0&&f.value.length>=ml&&f.selectionStart===f.selectionEnd)return;
+  f.focus();
+  var s=f.selectionStart,e=f.selectionEnd;if(s==null){s=e=f.value.length}
+  f.setRangeText(ch,s,e,'end');
+  f.dispatchEvent(new Event('input',{bubbles:true}));
+ }
+ bar.addEventListener('pointerdown',function(e){if(e.target.closest('button'))e.preventDefault()});
+ bar.addEventListener('mousedown',function(e){if(e.target.closest('button'))e.preventDefault()});
+ bar.addEventListener('click',function(e){
+  var b=e.target.closest('button');if(!b)return;
+  if(b===sh){up=!up;paint();if(last)last.focus();return}
+  put(up?b.dataset.c.toUpperCase():b.dataset.c);
+  if(up){up=false;paint()}
+ });
+ function place(){
+  var v=window.visualViewport;if(!v){bar.style.bottom='';return}
+  var off=Math.max(0,window.innerHeight-v.height-v.offsetTop);
+  bar.style.bottom='calc('+(10+off)+'px + env(safe-area-inset-bottom,0px))';
+ }
+ function show(){place();bar.classList.add('on');document.body.style.paddingBottom=Math.max(parseFloat(getComputedStyle(document.body).paddingBottom)||0,0)+'px'}
+ function hide(){bar.classList.remove('on')}
+ document.addEventListener('focusin',function(e){if(isF(e.target)){last=e.target;place();bar.classList.add('on');
+   setTimeout(function(){var r=e.target.getBoundingClientRect(),br=bar.getBoundingClientRect();if(r.bottom>br.top-8){window.scrollBy({top:r.bottom-br.top+16,behavior:'smooth'})}},60)}});
+ document.addEventListener('focusout',function(){setTimeout(function(){var a=document.activeElement;if(!isF(a)&&!bar.contains(a))hide()},120)});
+ document.addEventListener('keydown',function(e){
+  if(!isF(e.target)||!e.altKey||e.ctrlKey||e.metaKey)return;
+  var m={a:'á',e:'é',i:'í',o:'ó',u:'ú',n:'ñ'};var k=(e.key||'').toLowerCase();
+  if(e.code&&/^Key[AEIOUN]$/.test(e.code)&&m[e.code.slice(3).toLowerCase()]&&!e.isComposing){e.preventDefault();var ch=m[e.code.slice(3).toLowerCase()];put(e.shiftKey?ch.toUpperCase():ch)}
+ });
+ if(window.visualViewport){visualViewport.addEventListener('resize',place);visualViewport.addEventListener('scroll',place)}
+ document.body.appendChild(bar);
+})();
 </script>
 
 </body>

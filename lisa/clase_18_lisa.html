@@ -334,6 +334,28 @@ footer{
   .i18n-toggle{ top:12px; right:12px; padding:7px 12px; font-size:11px; }
 }
 @media (prefers-reduced-motion: reduce){ *{ transition:none !important; } }
+
+/* ---------- TARJETAS DE VOCABULARIO ---------- */
+.vocab-tools{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin:0 0 14px; flex-wrap:wrap; }
+.vocab-count{ font-family: var(--f-data); font-size:12px; color: var(--ink-faint); }
+.vocab-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(210px,1fr)); gap:12px; }
+.vcard{ all:unset; box-sizing:border-box; display:block; perspective:900px; height:190px; cursor:pointer; -webkit-tap-highlight-color:transparent; }
+.vcard:focus-visible{ outline:3px solid var(--accent); outline-offset:3px; border-radius: var(--r-md); }
+.vc-inner{ position:relative; display:block; width:100%; height:100%; transform-style:preserve-3d; transition:transform .45s ease; }
+.vcard.flipped .vc-inner{ transform:rotateY(180deg); }
+.vc-face{ position:absolute; inset:0; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; gap:6px; padding:16px 14px; border-radius: var(--r-md); backface-visibility:hidden; -webkit-backface-visibility:hidden; overflow:auto; }
+.vc-front{ background: var(--paper-raised); border:1.5px solid var(--accent-line); box-shadow: var(--shadow-1); }
+.vc-front .vc-word{ font-family: var(--f-display); font-size:19px; font-weight:600; color: var(--ink); line-height:1.2; }
+.vc-front .en{ font-family: var(--f-body); font-size:12.5px; margin:0; }
+.vc-hint{ position:absolute; right:10px; bottom:7px; font-family: var(--f-data); font-size:10.5px; color: var(--ink-faint); }
+.vc-back{ background: var(--accent-soft); border:1.5px solid var(--accent); transform:rotateY(180deg); }
+.vc-tag{ font-family: var(--f-data); font-size:10.5px; letter-spacing:.06em; text-transform:uppercase; color: var(--accent); }
+.vc-back .vc-ex{ font-family: var(--f-display); font-size:14.5px; line-height:1.4; color: var(--ink); }
+.vc-back .vc-ex b{ color: var(--accent); }
+.vc-back .en{ font-family: var(--f-body); font-size:12px; margin:0; }
+@media (prefers-reduced-motion: reduce){ .vc-inner{ transition:none; } }
+@media (max-width:600px){ .vocab-grid{ grid-template-columns:1fr 1fr; gap:10px; } .vcard{ height:230px; } }
+@media (max-width:380px){ .vocab-grid{ grid-template-columns:1fr; } }
 </style>
 </head>
 <body data-accent="petroleo-lisa18">
@@ -428,18 +450,53 @@ footer{
 
   <!-- 4. Vocabulario nuevo -->
   <section class="block">
-    <div class="block-head"><span class="block-num">4</span><h2>El vocabulario de hoy</h2><span class="time-tag">vocabulario nuevo</span></div>
-    <p class="intro-text">Estas son las palabras que vas a necesitar para hablar de tu rutina de pesas.
-      <span class="en">These are the words you'll need to talk about your weightlifting routine.</span>
+    <div class="block-head"><span class="block-num">4</span><h2>El vocabulario de hoy</h2><span class="time-tag">30 tarjetas</span></div>
+    <p class="intro-text">Toca una tarjeta para ver la palabra en una frase de ejemplo. Léela en voz alta y piensa en una frase tuya.
+      <span class="en">Tap a card to see the word in an example sentence. Read it aloud and think of one of your own.</span>
     </p>
-    <div class="connector-grid">
-      <div class="connector-chip">levantar pesas<span class="en">to lift weights</span></div>
-      <div class="connector-chip">la rutina<span class="en">the routine</span></div>
-      <div class="connector-chip">las repeticiones<span class="en">the reps</span></div>
-      <div class="connector-chip">el entrenador<span class="en">the trainer</span></div>
-      <div class="connector-chip">estar en forma<span class="en">to be in shape</span></div>
-      <div class="connector-chip">descansar<span class="en">to rest</span></div>
+    <div class="vocab-tools"><span class="vocab-count" id="vocab-count">0 / 30 vistas</span><button type="button" class="btn-ghost" id="vocab-all">Mostrar todos los ejemplos</button></div>
+    <div class="vocab-grid">
+<button type="button" class="vcard" aria-pressed="false" aria-label="levantar pesas: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">levantar pesas</span><span class="en">to lift weights</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">levantar pesas</span><span class="vc-ex">Levanto pesas por la salud, no para verme como una influencer.</span><span class="en">I lift weights for my health, not to look like an influencer.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="la rutina: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">la rutina</span><span class="en">the routine</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">la rutina</span><span class="vc-ex">Esta rutina es más dura que la anterior.</span><span class="en">This routine is harder than the last one.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="las repeticiones: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">las repeticiones</span><span class="en">the reps</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">las repeticiones</span><span class="vc-ex">Hago tantas repeticiones como antes, pero con menos peso.</span><span class="en">I do as many reps as before, but with less weight.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="el entrenador: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">el entrenador</span><span class="en">the trainer</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">el entrenador</span><span class="vc-ex">Mi entrenador es más exigente que el anterior.</span><span class="en">My trainer is more demanding than the previous one.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="estar en forma: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">estar en forma</span><span class="en">to be in shape</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">estar en forma</span><span class="vc-ex">Entreno para estar en forma antes del verano.</span><span class="en">I train to be in shape before summer.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="descansar: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">descansar</span><span class="en">to rest</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">descansar</span><span class="vc-ex">Descanso dos días por semana para recuperarme.</span><span class="en">I rest two days a week to recover.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="el peso: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">el peso</span><span class="en">the weight</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">el peso</span><span class="vc-ex">Hoy levanté menos peso que ayer por la lesión.</span><span class="en">Today I lifted less weight than yesterday because of the injury.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="la mancuerna: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">la mancuerna</span><span class="en">dumbbell</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">la mancuerna</span><span class="vc-ex">Compré mancuernas para entrenar en casa.</span><span class="en">I bought dumbbells to train at home.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="la barra: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">la barra</span><span class="en">the barbell</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">la barra</span><span class="vc-ex">Esta barra es demasiado pesada para mí.</span><span class="en">This barbell is too heavy for me.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="la sentadilla: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">la sentadilla</span><span class="en">the squat</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">la sentadilla</span><span class="vc-ex">Hago más sentadillas que flexiones.</span><span class="en">I do more squats than push-ups.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="la flexión: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">la flexión</span><span class="en">the push-up</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">la flexión</span><span class="vc-ex">Hice veinte flexiones por la mañana.</span><span class="en">I did twenty push-ups in the morning.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="el calentamiento: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">el calentamiento</span><span class="en">the warm-up</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">el calentamiento</span><span class="vc-ex">Hago un calentamiento corto para no lesionarme.</span><span class="en">I do a short warm-up so I don&#x27;t get injured.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="estirar: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">estirar</span><span class="en">to stretch</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">estirar</span><span class="vc-ex">Estiro diez minutos para evitar las agujetas.</span><span class="en">I stretch ten minutes to avoid soreness.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="las agujetas: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">las agujetas</span><span class="en">muscle soreness</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">las agujetas</span><span class="vc-ex">Tengo agujetas por la rutina de ayer.</span><span class="en">I&#x27;m sore because of yesterday&#x27;s routine.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="la lesión: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">la lesión</span><span class="en">the injury</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">la lesión</span><span class="vc-ex">Cambié de rutina por una lesión en la rodilla.</span><span class="en">I changed routine because of a knee injury.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="la matrícula: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">la matrícula</span><span class="en">enrollment fee</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">la matrícula</span><span class="vc-ex">Pagué treinta euros por la matrícula.</span><span class="en">I paid thirty euros for the enrollment fee.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="la cuota: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">la cuota</span><span class="en">monthly fee</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">la cuota</span><span class="vc-ex">La cuota de este gimnasio es más barata que la del otro.</span><span class="en">This gym&#x27;s monthly fee is cheaper than the other one&#x27;s.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="la clase de spinning: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">la clase de spinning</span><span class="en">spinning class</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">la clase de spinning</span><span class="vc-ex">La clase de spinning es tan intensa como la de boxeo.</span><span class="en">The spinning class is as intense as the boxing one.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="la máquina: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">la máquina</span><span class="en">the machine</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">la máquina</span><span class="vc-ex">Esta máquina es la mejor del gimnasio.</span><span class="en">This machine is the best in the gym.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="la cinta de correr: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">la cinta de correr</span><span class="en">the treadmill</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">la cinta de correr</span><span class="vc-ex">Corro en la cinta por las tardes, cuando llueve.</span><span class="en">I run on the treadmill in the afternoons, when it rains.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="el vestuario: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">el vestuario</span><span class="en">locker room</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">el vestuario</span><span class="vc-ex">El vestuario está más limpio que el del otro gimnasio.</span><span class="en">The locker room is cleaner than the other gym&#x27;s.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="la taquilla: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">la taquilla</span><span class="en">the locker</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">la taquilla</span><span class="vc-ex">Guardo la mochila en la taquilla para no perderla.</span><span class="en">I keep my bag in the locker so I don&#x27;t lose it.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="la toalla: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">la toalla</span><span class="en">the towel</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">la toalla</span><span class="vc-ex">Llevo una toalla para secarme el sudor.</span><span class="en">I bring a towel to dry off the sweat.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="sudar: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">sudar</span><span class="en">to sweat</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">sudar</span><span class="vc-ex">Sudo mucho más en verano que en invierno.</span><span class="en">I sweat much more in summer than in winter.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="la botella de agua: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">la botella de agua</span><span class="en">water bottle</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">la botella de agua</span><span class="vc-ex">Bebo agua de mi botella para no deshidratarme.</span><span class="en">I drink from my bottle so I don&#x27;t get dehydrated.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="el objetivo: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">el objetivo</span><span class="en">the goal</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">el objetivo</span><span class="vc-ex">Mi objetivo es entrenar tres veces por semana.</span><span class="en">My goal is to train three times a week.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="la constancia: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">la constancia</span><span class="en">consistency</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">la constancia</span><span class="vc-ex">La constancia es más importante que la fuerza.</span><span class="en">Consistency is more important than strength.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="el músculo: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">el músculo</span><span class="en">the muscle</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">el músculo</span><span class="vc-ex">Entreno piernas para ganar músculo.</span><span class="en">I train legs to build muscle.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="la espalda: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">la espalda</span><span class="en">the back</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">la espalda</span><span class="vc-ex">Me duele la espalda por pasar tantas horas sentada.</span><span class="en">My back hurts from sitting so many hours.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="el batido de proteínas: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">el batido de proteínas</span><span class="en">protein shake</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">el batido de proteínas</span><span class="vc-ex">Tomo un batido para recuperarme después de entrenar.</span><span class="en">I have a shake to recover after training.</span></span></span></button>
     </div>
+    <script>
+(function(){
+  const cards=[...document.querySelectorAll('.vcard')], cnt=document.getElementById('vocab-count'), all=document.getElementById('vocab-all');
+  let seen=new Set();
+  function upd(){ cnt.textContent=seen.size+' / '+cards.length+' vistas'; }
+  function setF(c,f){ c.classList.toggle('flipped',f); c.setAttribute('aria-pressed',f); if(f){ seen.add(c); } }
+  cards.forEach(c=>c.addEventListener('click',()=>{ setF(c,!c.classList.contains('flipped')); upd(); }));
+  all.addEventListener('click',()=>{ const anyUn=cards.some(c=>!c.classList.contains('flipped')); cards.forEach(c=>setF(c,anyUn)); all.textContent=anyUn?'Ocultar ejemplos':'Mostrar todos los ejemplos'; upd(); });
+})();
+</script>
   </section>
 
   <!-- 5. Texto modelo con etiquetas -->
@@ -728,6 +785,63 @@ document.getElementById('save-task-btn').addEventListener('click', async ()=>{
   setTimeout(()=>flag.classList.remove('show'), 2000);
 });
 loadTask();
+</script>
+
+<!-- TECLADO-TILDES -->
+<style>
+#tk{position:fixed;left:50%;width:max-content;bottom:calc(10px + env(safe-area-inset-bottom,0px));transform:translate(-50%,24px);z-index:9999;display:flex;gap:6px;align-items:center;flex-wrap:wrap;justify-content:center;max-width:calc(100vw - 16px);padding:8px 10px;background:var(--paper-raised,#fff);color:var(--ink,#1B1F2A);border:1px solid var(--line-strong,rgba(0,0,0,.24));border-radius:16px;box-shadow:0 8px 28px rgba(0,0,0,.22);opacity:0;visibility:hidden;pointer-events:none;transition:opacity .18s,transform .18s,visibility .18s}
+#tk.on{opacity:1;visibility:visible;pointer-events:auto;transform:translate(-50%,0)}
+#tk button{font:600 1.15rem/1 inherit;font-family:inherit;min-width:42px;min-height:42px;padding:0 10px;border-radius:10px;border:1px solid var(--line-strong,rgba(0,0,0,.24));background:var(--paper-alt,#E8EEF9);color:inherit;cursor:pointer;touch-action:manipulation}
+#tk button:hover{border-color:var(--accent,#2457d6)}
+#tk button:active{transform:scale(.94)}
+#tk button[aria-pressed=true]{background:var(--accent,#2457d6);color:#fff;border-color:var(--accent,#2457d6)}
+#tk .tk-l{font-size:.72rem;opacity:.7;margin-right:2px}
+@media print{#tk{display:none!important}}
+@media (prefers-reduced-motion:reduce){#tk{transition:none}}
+</style>
+<script>
+(function(){
+ var bar=document.createElement('div');bar.id='tk';bar.setAttribute('role','toolbar');bar.setAttribute('aria-label','Teclas especiales: tildes y ñ');
+ var chars=['á','é','í','ó','ú','ü','ñ','¿','¡'],up=false,last=null,btns=[];
+ var lab=document.createElement('span');lab.className='tk-l';lab.textContent='Tildes';bar.appendChild(lab);
+ var sh=document.createElement('button');sh.type='button';sh.textContent='⇧';sh.title='Mayúscula (Shift)';sh.setAttribute('aria-label','Mayúscula');sh.setAttribute('aria-pressed','false');bar.appendChild(sh);
+ chars.forEach(function(c){var b=document.createElement('button');b.type='button';b.textContent=c;b.setAttribute('aria-label','Insertar '+c);b.dataset.c=c;bar.appendChild(b);btns.push(b)});
+ function paint(){sh.setAttribute('aria-pressed',up?'true':'false');btns.forEach(function(b){b.textContent=up?b.dataset.c.toUpperCase():b.dataset.c})}
+ function isF(e){return e&&e.matches&&e.matches('textarea,input[type=text],input:not([type])')&&!e.readOnly&&!e.disabled}
+ function put(ch){
+  var f=last;if(!f||!document.contains(f))return;
+  var ml=f.maxLength;if(ml>0&&f.value.length>=ml&&f.selectionStart===f.selectionEnd)return;
+  f.focus();
+  var s=f.selectionStart,e=f.selectionEnd;if(s==null){s=e=f.value.length}
+  f.setRangeText(ch,s,e,'end');
+  f.dispatchEvent(new Event('input',{bubbles:true}));
+ }
+ bar.addEventListener('pointerdown',function(e){if(e.target.closest('button'))e.preventDefault()});
+ bar.addEventListener('mousedown',function(e){if(e.target.closest('button'))e.preventDefault()});
+ bar.addEventListener('click',function(e){
+  var b=e.target.closest('button');if(!b)return;
+  if(b===sh){up=!up;paint();if(last)last.focus();return}
+  put(up?b.dataset.c.toUpperCase():b.dataset.c);
+  if(up){up=false;paint()}
+ });
+ function place(){
+  var v=window.visualViewport;if(!v){bar.style.bottom='';return}
+  var off=Math.max(0,window.innerHeight-v.height-v.offsetTop);
+  bar.style.bottom='calc('+(10+off)+'px + env(safe-area-inset-bottom,0px))';
+ }
+ function show(){place();bar.classList.add('on');document.body.style.paddingBottom=Math.max(parseFloat(getComputedStyle(document.body).paddingBottom)||0,0)+'px'}
+ function hide(){bar.classList.remove('on')}
+ document.addEventListener('focusin',function(e){if(isF(e.target)){last=e.target;place();bar.classList.add('on');
+   setTimeout(function(){var r=e.target.getBoundingClientRect(),br=bar.getBoundingClientRect();if(r.bottom>br.top-8){window.scrollBy({top:r.bottom-br.top+16,behavior:'smooth'})}},60)}});
+ document.addEventListener('focusout',function(){setTimeout(function(){var a=document.activeElement;if(!isF(a)&&!bar.contains(a))hide()},120)});
+ document.addEventListener('keydown',function(e){
+  if(!isF(e.target)||!e.altKey||e.ctrlKey||e.metaKey)return;
+  var m={a:'á',e:'é',i:'í',o:'ó',u:'ú',n:'ñ'};var k=(e.key||'').toLowerCase();
+  if(e.code&&/^Key[AEIOUN]$/.test(e.code)&&m[e.code.slice(3).toLowerCase()]&&!e.isComposing){e.preventDefault();var ch=m[e.code.slice(3).toLowerCase()];put(e.shiftKey?ch.toUpperCase():ch)}
+ });
+ if(window.visualViewport){visualViewport.addEventListener('resize',place);visualViewport.addEventListener('scroll',place)}
+ document.body.appendChild(bar);
+})();
 </script>
 
 </body>

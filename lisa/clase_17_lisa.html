@@ -334,6 +334,28 @@ footer{
   .i18n-toggle{ top:12px; right:12px; padding:7px 12px; font-size:11px; }
 }
 @media (prefers-reduced-motion: reduce){ *{ transition:none !important; } }
+
+/* ---------- TARJETAS DE VOCABULARIO ---------- */
+.vocab-tools{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin:0 0 14px; flex-wrap:wrap; }
+.vocab-count{ font-family: var(--f-data); font-size:12px; color: var(--ink-faint); }
+.vocab-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(210px,1fr)); gap:12px; }
+.vcard{ all:unset; box-sizing:border-box; display:block; perspective:900px; height:190px; cursor:pointer; -webkit-tap-highlight-color:transparent; }
+.vcard:focus-visible{ outline:3px solid var(--accent); outline-offset:3px; border-radius: var(--r-md); }
+.vc-inner{ position:relative; display:block; width:100%; height:100%; transform-style:preserve-3d; transition:transform .45s ease; }
+.vcard.flipped .vc-inner{ transform:rotateY(180deg); }
+.vc-face{ position:absolute; inset:0; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; gap:6px; padding:16px 14px; border-radius: var(--r-md); backface-visibility:hidden; -webkit-backface-visibility:hidden; overflow:auto; }
+.vc-front{ background: var(--paper-raised); border:1.5px solid var(--accent-line); box-shadow: var(--shadow-1); }
+.vc-front .vc-word{ font-family: var(--f-display); font-size:19px; font-weight:600; color: var(--ink); line-height:1.2; }
+.vc-front .en{ font-family: var(--f-body); font-size:12.5px; margin:0; }
+.vc-hint{ position:absolute; right:10px; bottom:7px; font-family: var(--f-data); font-size:10.5px; color: var(--ink-faint); }
+.vc-back{ background: var(--accent-soft); border:1.5px solid var(--accent); transform:rotateY(180deg); }
+.vc-tag{ font-family: var(--f-data); font-size:10.5px; letter-spacing:.06em; text-transform:uppercase; color: var(--accent); }
+.vc-back .vc-ex{ font-family: var(--f-display); font-size:14.5px; line-height:1.4; color: var(--ink); }
+.vc-back .vc-ex b{ color: var(--accent); }
+.vc-back .en{ font-family: var(--f-body); font-size:12px; margin:0; }
+@media (prefers-reduced-motion: reduce){ .vc-inner{ transition:none; } }
+@media (max-width:600px){ .vocab-grid{ grid-template-columns:1fr 1fr; gap:10px; } .vcard{ height:230px; } }
+@media (max-width:380px){ .vocab-grid{ grid-template-columns:1fr; } }
 </style>
 </head>
 <body data-accent="petroleo-lisa17">
@@ -405,18 +427,53 @@ footer{
 
   <!-- 3. Vocabulario nuevo -->
   <section class="block">
-    <div class="block-head"><span class="block-num">3</span><h2>El vocabulario de hoy</h2><span class="time-tag">vocabulario nuevo</span></div>
-    <p class="intro-text">Estas son las palabras que vas a necesitar para describir tu lugar favorito de senderismo.
-      <span class="en">These are the words you'll need to describe your favorite hiking spot.</span>
+    <div class="block-head"><span class="block-num">3</span><h2>El vocabulario de hoy</h2><span class="time-tag">30 tarjetas</span></div>
+    <p class="intro-text">Toca una tarjeta para ver la palabra en una frase de ejemplo. Léela en voz alta y piensa en una frase tuya.
+      <span class="en">Tap a card to see the word in an example sentence. Read it aloud and think of one of your own.</span>
     </p>
-    <div class="connector-grid">
-      <div class="connector-chip">precioso/a<span class="en">gorgeous</span></div>
-      <div class="connector-chip">montañoso/a<span class="en">mountainous</span></div>
-      <div class="connector-chip">tranquilísimo/a<span class="en">super quiet</span></div>
-      <div class="connector-chip">el mejor sitio<span class="en">the best spot</span></div>
-      <div class="connector-chip">las vistas<span class="en">the views</span></div>
-      <div class="connector-chip">la subida<span class="en">the climb / ascent</span></div>
+    <div class="vocab-tools"><span class="vocab-count" id="vocab-count">0 / 30 vistas</span><button type="button" class="btn-ghost" id="vocab-all">Mostrar todos los ejemplos</button></div>
+    <div class="vocab-grid">
+<button type="button" class="vcard" aria-pressed="false" aria-label="precioso/a: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">precioso/a</span><span class="en">gorgeous</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">precioso/a</span><span class="vc-ex">Es el valle más precioso que conozco.</span><span class="en">It&#x27;s the most gorgeous valley I know.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="montañoso/a: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">montañoso/a</span><span class="en">mountainous</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">montañoso/a</span><span class="vc-ex">Esta es la zona más montañosa de la provincia.</span><span class="en">This is the most mountainous area in the province.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="tranquilísimo/a: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">tranquilísimo/a</span><span class="en">super quiet</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">tranquilísimo/a</span><span class="vc-ex">Un martes por la mañana el camino está tranquilísimo.</span><span class="en">On a Tuesday morning the path is super quiet.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="el mejor sitio: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">el mejor sitio</span><span class="en">the best spot</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">el mejor sitio</span><span class="vc-ex">Este es el mejor sitio para ver el atardecer.</span><span class="en">This is the best spot to watch the sunset.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="las vistas: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">las vistas</span><span class="en">the views</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">las vistas</span><span class="vc-ex">Desde la cima tienes las vistas más impresionantes.</span><span class="en">From the summit you get the most impressive views.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="la subida: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">la subida</span><span class="en">the climb</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">la subida</span><span class="vc-ex">La subida es durísima, pero merece la pena.</span><span class="en">The climb is extremely hard, but worth it.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="la bajada: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">la bajada</span><span class="en">the descent</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">la bajada</span><span class="vc-ex">La bajada es la parte más fácil de la ruta.</span><span class="en">The descent is the easiest part of the route.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="la cima: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">la cima</span><span class="en">the summit</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">la cima</span><span class="vc-ex">La cima es el punto más alto de la sierra.</span><span class="en">The summit is the highest point of the range.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="el sendero: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">el sendero</span><span class="en">the trail</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">el sendero</span><span class="vc-ex">Este sendero es el más famoso de la zona.</span><span class="en">This trail is the most famous in the area.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="la ruta: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">la ruta</span><span class="en">the route</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">la ruta</span><span class="vc-ex">Es la ruta más larga que he hecho.</span><span class="en">It&#x27;s the longest route I&#x27;ve done.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="empinado/a: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">empinado/a</span><span class="en">steep</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">empinado/a</span><span class="vc-ex">La cuesta final es empinadísima.</span><span class="en">The final slope is extremely steep.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="la mochila: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">la mochila</span><span class="en">backpack</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">la mochila</span><span class="vc-ex">Mi mochila es la más ligera del grupo.</span><span class="en">My backpack is the lightest in the group.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="las botas: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">las botas</span><span class="en">hiking boots</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">las botas</span><span class="vc-ex">Mis botas de montaña son las más cómodas que tengo.</span><span class="en">My hiking boots are the most comfortable I have.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="el mirador: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">el mirador</span><span class="en">viewpoint</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">el mirador</span><span class="vc-ex">El mirador es el sitio más tranquilo del pueblo.</span><span class="en">The viewpoint is the quietest spot in the village.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="el atardecer: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">el atardecer</span><span class="en">the sunset</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">el atardecer</span><span class="vc-ex">El atardecer desde el castillo fue preciosísimo.</span><span class="en">The sunset from the castle was absolutely gorgeous.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="el amanecer: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">el amanecer</span><span class="en">the sunrise</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">el amanecer</span><span class="vc-ex">Salimos al amanecer: es la hora más fresca del día.</span><span class="en">We set out at sunrise: it&#x27;s the coolest time of day.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="la fuente: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">la fuente</span><span class="en">the spring / fountain</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">la fuente</span><span class="vc-ex">El agua de la fuente está fresquísima.</span><span class="en">The spring water is ice cold.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="el bosque: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">el bosque</span><span class="en">the forest</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">el bosque</span><span class="vc-ex">Este bosque es el más oscuro de toda la sierra.</span><span class="en">This forest is the darkest in the whole range.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="el barranco: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">el barranco</span><span class="en">the ravine</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">el barranco</span><span class="vc-ex">El barranco es la zona más peligrosa de la ruta.</span><span class="en">The ravine is the most dangerous part of the route.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="la sombra: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">la sombra</span><span class="en">the shade</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">la sombra</span><span class="vc-ex">En verano busco la sombra más fresca.</span><span class="en">In summer I look for the coolest shade.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="el refugio: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">el refugio</span><span class="en">mountain hut</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">el refugio</span><span class="vc-ex">La cena del refugio estaba riquísima.</span><span class="en">The dinner at the hut was delicious.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="el desnivel: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">el desnivel</span><span class="en">elevation gain</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">el desnivel</span><span class="vc-ex">Esta ruta tiene el mayor desnivel de la sierra.</span><span class="en">This route has the biggest elevation gain in the range.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="la señal: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">la señal</span><span class="en">trail marker</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">la señal</span><span class="vc-ex">La señal roja y blanca marca el sendero más largo.</span><span class="en">The red and white marker shows the longest trail.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="agotador/a: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">agotador/a</span><span class="en">exhausting</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">agotador/a</span><span class="vc-ex">Fue la caminata más agotadora del año.</span><span class="en">It was the most exhausting hike of the year.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="cansadísimo/a: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">cansadísimo/a</span><span class="en">exhausted</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">cansadísimo/a</span><span class="vc-ex">Llegué cansadísima, pero feliz.</span><span class="en">I arrived exhausted, but happy.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="el desvío: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">el desvío</span><span class="en">the detour</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">el desvío</span><span class="vc-ex">Tomamos un desvío y fue lo mejor del día.</span><span class="en">We took a detour and it was the best part of the day.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="el/la senderista: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">el/la senderista</span><span class="en">hiker</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">el/la senderista</span><span class="vc-ex">Mi amiga es la senderista más rápida del grupo.</span><span class="en">My friend is the fastest hiker in the group.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="el pico: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">el pico</span><span class="en">the peak</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">el pico</span><span class="vc-ex">Ese pico es el más alto de la sierra.</span><span class="en">That peak is the highest in the range.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="el paisaje: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">el paisaje</span><span class="en">the landscape</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">el paisaje</span><span class="vc-ex">El paisaje de los Pirineos es uno de los más espectaculares.</span><span class="en">The Pyrenees landscape is one of the most spectacular.</span></span></span></button>
+<button type="button" class="vcard" aria-pressed="false" aria-label="el picnic: toca para ver un ejemplo"><span class="vc-inner"><span class="vc-face vc-front"><span class="vc-word">el picnic</span><span class="en">the picnic</span><span class="vc-hint">↻ ejemplo</span></span><span class="vc-face vc-back"><span class="vc-tag">el picnic</span><span class="vc-ex">Hicimos el mejor picnic de nuestra vida en la cima.</span><span class="en">We had the best picnic of our lives at the summit.</span></span></span></button>
     </div>
+    <script>
+(function(){
+  const cards=[...document.querySelectorAll('.vcard')], cnt=document.getElementById('vocab-count'), all=document.getElementById('vocab-all');
+  let seen=new Set();
+  function upd(){ cnt.textContent=seen.size+' / '+cards.length+' vistas'; }
+  function setF(c,f){ c.classList.toggle('flipped',f); c.setAttribute('aria-pressed',f); if(f){ seen.add(c); } }
+  cards.forEach(c=>c.addEventListener('click',()=>{ setF(c,!c.classList.contains('flipped')); upd(); }));
+  all.addEventListener('click',()=>{ const anyUn=cards.some(c=>!c.classList.contains('flipped')); cards.forEach(c=>setF(c,anyUn)); all.textContent=anyUn?'Ocultar ejemplos':'Mostrar todos los ejemplos'; upd(); });
+})();
+</script>
   </section>
 
   <!-- 4. Texto modelo con etiquetas -->
@@ -705,6 +762,63 @@ document.getElementById('save-task-btn').addEventListener('click', async ()=>{
   setTimeout(()=>flag.classList.remove('show'), 2000);
 });
 loadTask();
+</script>
+
+<!-- TECLADO-TILDES -->
+<style>
+#tk{position:fixed;left:50%;width:max-content;bottom:calc(10px + env(safe-area-inset-bottom,0px));transform:translate(-50%,24px);z-index:9999;display:flex;gap:6px;align-items:center;flex-wrap:wrap;justify-content:center;max-width:calc(100vw - 16px);padding:8px 10px;background:var(--paper-raised,#fff);color:var(--ink,#1B1F2A);border:1px solid var(--line-strong,rgba(0,0,0,.24));border-radius:16px;box-shadow:0 8px 28px rgba(0,0,0,.22);opacity:0;visibility:hidden;pointer-events:none;transition:opacity .18s,transform .18s,visibility .18s}
+#tk.on{opacity:1;visibility:visible;pointer-events:auto;transform:translate(-50%,0)}
+#tk button{font:600 1.15rem/1 inherit;font-family:inherit;min-width:42px;min-height:42px;padding:0 10px;border-radius:10px;border:1px solid var(--line-strong,rgba(0,0,0,.24));background:var(--paper-alt,#E8EEF9);color:inherit;cursor:pointer;touch-action:manipulation}
+#tk button:hover{border-color:var(--accent,#2457d6)}
+#tk button:active{transform:scale(.94)}
+#tk button[aria-pressed=true]{background:var(--accent,#2457d6);color:#fff;border-color:var(--accent,#2457d6)}
+#tk .tk-l{font-size:.72rem;opacity:.7;margin-right:2px}
+@media print{#tk{display:none!important}}
+@media (prefers-reduced-motion:reduce){#tk{transition:none}}
+</style>
+<script>
+(function(){
+ var bar=document.createElement('div');bar.id='tk';bar.setAttribute('role','toolbar');bar.setAttribute('aria-label','Teclas especiales: tildes y ñ');
+ var chars=['á','é','í','ó','ú','ü','ñ','¿','¡'],up=false,last=null,btns=[];
+ var lab=document.createElement('span');lab.className='tk-l';lab.textContent='Tildes';bar.appendChild(lab);
+ var sh=document.createElement('button');sh.type='button';sh.textContent='⇧';sh.title='Mayúscula (Shift)';sh.setAttribute('aria-label','Mayúscula');sh.setAttribute('aria-pressed','false');bar.appendChild(sh);
+ chars.forEach(function(c){var b=document.createElement('button');b.type='button';b.textContent=c;b.setAttribute('aria-label','Insertar '+c);b.dataset.c=c;bar.appendChild(b);btns.push(b)});
+ function paint(){sh.setAttribute('aria-pressed',up?'true':'false');btns.forEach(function(b){b.textContent=up?b.dataset.c.toUpperCase():b.dataset.c})}
+ function isF(e){return e&&e.matches&&e.matches('textarea,input[type=text],input:not([type])')&&!e.readOnly&&!e.disabled}
+ function put(ch){
+  var f=last;if(!f||!document.contains(f))return;
+  var ml=f.maxLength;if(ml>0&&f.value.length>=ml&&f.selectionStart===f.selectionEnd)return;
+  f.focus();
+  var s=f.selectionStart,e=f.selectionEnd;if(s==null){s=e=f.value.length}
+  f.setRangeText(ch,s,e,'end');
+  f.dispatchEvent(new Event('input',{bubbles:true}));
+ }
+ bar.addEventListener('pointerdown',function(e){if(e.target.closest('button'))e.preventDefault()});
+ bar.addEventListener('mousedown',function(e){if(e.target.closest('button'))e.preventDefault()});
+ bar.addEventListener('click',function(e){
+  var b=e.target.closest('button');if(!b)return;
+  if(b===sh){up=!up;paint();if(last)last.focus();return}
+  put(up?b.dataset.c.toUpperCase():b.dataset.c);
+  if(up){up=false;paint()}
+ });
+ function place(){
+  var v=window.visualViewport;if(!v){bar.style.bottom='';return}
+  var off=Math.max(0,window.innerHeight-v.height-v.offsetTop);
+  bar.style.bottom='calc('+(10+off)+'px + env(safe-area-inset-bottom,0px))';
+ }
+ function show(){place();bar.classList.add('on');document.body.style.paddingBottom=Math.max(parseFloat(getComputedStyle(document.body).paddingBottom)||0,0)+'px'}
+ function hide(){bar.classList.remove('on')}
+ document.addEventListener('focusin',function(e){if(isF(e.target)){last=e.target;place();bar.classList.add('on');
+   setTimeout(function(){var r=e.target.getBoundingClientRect(),br=bar.getBoundingClientRect();if(r.bottom>br.top-8){window.scrollBy({top:r.bottom-br.top+16,behavior:'smooth'})}},60)}});
+ document.addEventListener('focusout',function(){setTimeout(function(){var a=document.activeElement;if(!isF(a)&&!bar.contains(a))hide()},120)});
+ document.addEventListener('keydown',function(e){
+  if(!isF(e.target)||!e.altKey||e.ctrlKey||e.metaKey)return;
+  var m={a:'á',e:'é',i:'í',o:'ó',u:'ú',n:'ñ'};var k=(e.key||'').toLowerCase();
+  if(e.code&&/^Key[AEIOUN]$/.test(e.code)&&m[e.code.slice(3).toLowerCase()]&&!e.isComposing){e.preventDefault();var ch=m[e.code.slice(3).toLowerCase()];put(e.shiftKey?ch.toUpperCase():ch)}
+ });
+ if(window.visualViewport){visualViewport.addEventListener('resize',place);visualViewport.addEventListener('scroll',place)}
+ document.body.appendChild(bar);
+})();
 </script>
 
 </body>
