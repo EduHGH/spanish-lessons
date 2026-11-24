@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Clase 21 · Opiniones con dientes — Andrei</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* Clase 19 · L4 Fluidez total · "Making plans that actually happen" */
+:root{
+  --paper:#FBF7EE;--paper-top:#F6EEDA;--paper-raised:#FFFFFF;--paper-alt:#F3ECDA;
+  --ink:#23291F;--ink-soft:#565F52;--ink-faint:#6E7568;
+  --line:rgba(35,41,31,.12);--line-strong:rgba(35,41,31,.22);
+  --b1:#2F6FED;--b1-soft:#EAF1FE;--b1-line:#C6D9FC;
+  --b2:#2E9E6B;--b2-soft:#E9F6EF;--b2-line:#BEE6D3;
+  --b3:#DB8A2E;--b3-soft:#FCF1E1;--b3-line:#F3D9AF;
+  --family:#B5502E;--family-soft:#FBEBE3;--family-line:#EFC9B4;
+  --f-display:'Fraunces',Georgia,serif;--f-body:'IBM Plex Sans',system-ui,sans-serif;--f-data:'IBM Plex Mono',monospace;
+  --r-sm:12px;--r-md:18px;--r-lg:26px;
+  --shadow-1:0 1px 2px rgba(35,41,31,.05),0 10px 28px rgba(35,41,31,.07);
+  color-scheme:light}
+:root[data-theme="dark"]{
+  --paper:#171912;--paper-top:#22251A;--paper-raised:#22251B;--paper-alt:#2B2F22;
+  --ink:#F1EDE0;--ink-soft:#C3C7B8;--ink-faint:#9CA190;
+  --line:rgba(241,237,224,.14);--line-strong:rgba(241,237,224,.28);
+  --b1-soft:#1D2A44;--b1-line:#2F4B82;--b2-soft:#1B3328;--b2-line:#2B6A4C;--b3-soft:#3A2D18;--b3-line:#7A5524;--family-soft:#3A2219;--family-line:#7A3F29;
+  --shadow-1:0 1px 2px rgba(0,0,0,.45),0 10px 28px rgba(0,0,0,.35);color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-padding-top:calc(70px + env(safe-area-inset-top,0px))}
+body{margin:0;background:linear-gradient(180deg,var(--paper-top) 0,var(--paper) 460px) fixed,var(--paper);color:var(--ink);font:15px/1.6 var(--f-body);padding-bottom:env(safe-area-inset-bottom,0px)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--paper);z-index:10}
+::selection{background:var(--b3-soft)}
+:focus-visible{outline:2px solid var(--b3);outline-offset:2px}
+.skip{position:absolute;left:-999px}.skip:focus{left:12px;top:12px;z-index:20;background:var(--paper-raised);padding:8px 14px;border-radius:99px}
+.sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.plx{position:fixed;inset:-20vh 0;z-index:-1;pointer-events:none;overflow:hidden}
+.plx i{position:absolute;border-radius:50%;filter:blur(60px);opacity:.45;will-change:transform}
+.plx i:nth-child(1){width:46vmax;height:46vmax;left:-14vmax;top:4vh;background:radial-gradient(circle,color-mix(in srgb,var(--b3) 40%,transparent),transparent 70%)}
+.plx i:nth-child(2){width:38vmax;height:38vmax;right:-12vmax;top:70vh;background:radial-gradient(circle,color-mix(in srgb,var(--b1) 30%,transparent),transparent 70%)}
+.wrap{max-width:780px;margin:0 auto;padding:0 clamp(16px,4vw,28px) 90px}
+header .wrap{padding-top:34px;padding-bottom:0}
+.eyebrow{font:500 12px var(--f-data);letter-spacing:.14em;text-transform:uppercase;color:var(--b3);margin:0 0 10px;display:flex;align-items:center;gap:10px}
+.eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--b3)}
+h1{font:600 clamp(30px,5.6vw,48px)/1.08 var(--f-display);letter-spacing:-.02em;margin:0 0 14px;text-wrap:balance}
+h1 em{font-style:italic;background:linear-gradient(90deg,var(--b3) 20%,var(--family));-webkit-background-clip:text;background-clip:text;color:transparent}
+.lede{font-size:16px;color:var(--ink-soft);max-width:58ch;margin:0}
+.meta-row{display:flex;flex-wrap:wrap;gap:20px;margin-top:22px;font:12px var(--f-data);color:var(--ink-faint)}
+.meta-row strong{display:block;color:var(--ink);font:500 14.5px var(--f-display);margin-top:3px}
+.en{color:var(--ink-faint);font-size:.88em;font-style:italic;font-weight:400;text-transform:none;letter-spacing:0}
+.en.b{display:block;margin-top:2px}
+body[data-lang="es"] .en{display:none!important}
+h1 .en{display:block;font:italic 400 clamp(15px,2.6vw,19px)/1.35 var(--f-body);margin-top:8px}
+/* barra */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:11;background:color-mix(in srgb,var(--paper) 82%,transparent);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);padding-block:10px;margin-block:24px 4px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.nav-btn{width:36px;height:36px;display:grid;place-items:center;border:1px solid var(--line-strong);border-radius:50%;background:var(--paper-raised);color:var(--ink-soft);cursor:pointer;padding:0}
+.nav-btn:hover,.nav-btn[aria-expanded=true]{border-color:var(--b3);color:var(--b3)}
+.nav-btn path{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round}
+.toc{position:absolute;top:calc(100% + 8px);left:0;width:min(380px,100%);padding:8px;border:1px solid var(--line-strong);border-radius:var(--r-md);background:var(--paper-raised);box-shadow:var(--shadow-1)}
+.toc[hidden]{display:none}
+.toc a{display:flex;gap:12px;align-items:center;min-height:42px;padding:6px 10px;border-radius:var(--r-sm);color:var(--ink);text-decoration:none;font:500 14.5px var(--f-display)}
+.toc a:hover{background:var(--b3-soft)}
+.toc a b{font:500 12px var(--f-data);color:#fff;background:var(--b3);width:24px;height:24px;border-radius:50%;display:grid;place-items:center;flex:none}
+.bar-t{font:600 13px var(--f-display);color:var(--ink-soft);margin-right:auto}
+.seg{display:inline-flex;gap:3px;padding:3px;border:1px solid var(--line-strong);border-radius:99px;background:var(--paper-raised)}
+.seg button{border:0;background:none;padding:5px 13px;border-radius:99px;font:12px var(--f-data);color:var(--ink-soft);cursor:pointer;min-height:30px}
+.seg button[aria-pressed=true]{background:var(--b3);color:#fff;box-shadow:0 6px 16px color-mix(in srgb,var(--b3) 30%,transparent)}
+.btn{font:600 13px var(--f-body);background:var(--paper-raised);color:var(--ink-soft);border:1px solid var(--line-strong);border-radius:99px;padding:7px 15px;cursor:pointer}
+.btn:hover{border-color:var(--b3);color:var(--b3)}
+@media(max-width:600px){.bar-t{display:none}}
+/* secciones */
+section{background:var(--paper-raised);border:1px solid var(--line);border-radius:var(--r-lg);box-shadow:var(--shadow-1);margin-top:18px;padding:24px 26px 28px;scroll-margin-top:84px;position:relative;opacity:calc(.74 + .26*var(--a,1))}
+section.rp{background:var(--b1-soft);border-color:var(--b1-line)}section.rp .num{background:var(--b1)}
+section.tk{background:var(--family-soft);border-color:var(--family-line)}section.tk .num{background:var(--family)}
+h2{font:italic 500 22px/1.2 var(--f-display);margin:0 0 6px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+h2 .en{font:400 .6em var(--f-body);font-style:italic}
+h3{font:500 17px var(--f-display);margin:20px 0 6px}
+.num{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;flex:none;font:500 13px var(--f-data);background:var(--b3);color:#fff;font-style:normal}
+section.fx-num .num{animation:fxNum .65s cubic-bezier(.2,.9,.3,1.4) both}
+@keyframes fxNum{0%{transform:scale(.2) rotate(-90deg);opacity:0}100%{transform:none;opacity:1}}
+.cue{margin-left:auto;font:11px var(--f-data);color:var(--ink-faint);background:var(--paper-alt);border-radius:99px;padding:2px 10px;font-style:normal}
+.sub{color:var(--ink-soft);margin:0 0 12px;font-size:14.5px}
+.box{margin:14px 0 0;padding:13px 16px;background:var(--b3-soft);border:1px solid var(--b3-line);border-radius:var(--r-md);font-size:14.5px;color:var(--ink-soft)}
+.box strong,.box b{color:var(--ink)}
+.box.pr{background:var(--paper-alt);border-color:var(--line)}
+.box.wr{background:var(--family-soft);border-color:var(--family-line)}.box.wr b{color:var(--family)}
+ol.ex{padding:0;margin:8px 0 0;list-style:none;counter-reset:q}
+ol.ex>li{counter-increment:q;padding:11px 0;border-top:1px solid var(--line)}
+ol.ex>li::before{content:counter(q)".";font:12px var(--f-data);color:var(--ink-faint);margin-right:8px}
+.v{color:var(--b3);font-weight:600;text-decoration:underline;text-decoration-color:var(--b3-line);text-decoration-thickness:2px;text-underline-offset:3px}
+.div{display:flex;align-items:center;gap:10px;margin:16px 0 4px;font:11px var(--f-data);text-transform:uppercase;letter-spacing:.06em;color:var(--ink-faint)}
+.div::before,.div::after{content:"";flex:1;height:1px;background:var(--line)}
+.div.cl{color:var(--b3)}.div.cl::before,.div.cl::after{background:var(--b3-line)}
+/* animación de peldaños */
+.anim{border:1px solid var(--line);border-radius:var(--r-md);background:var(--paper-alt);padding:16px 18px 10px;margin:14px 0}
+.anim .lab{font:11px var(--f-data);text-transform:uppercase;letter-spacing:.08em;color:var(--ink-faint);margin:0 0 8px}
+.step{display:flex;align-items:center;gap:10px;margin:6px 0;flex-wrap:wrap}
+.step .t2{font:11px var(--f-data);color:var(--ink-faint);width:92px;flex:none}
+.chip{display:inline-block;padding:7px 15px;border-radius:14px;background:var(--paper-raised);border:2px solid var(--line-strong);font:600 16px var(--f-display)}
+.chip.c1{border-color:var(--b3-line)}.chip.c2{border-color:var(--b3);color:var(--b3)}.chip.c3{border-color:var(--b1);color:var(--b1)}.chip.x{border-color:var(--family);color:var(--family);border-style:dashed}
+.anim.ready:not(.play) .t{opacity:0}
+.anim.play .t{animation:aPop .55s cubic-bezier(.2,.8,.3,1) var(--d,0s) both}
+@keyframes aPop{0%{opacity:0;transform:translateY(10px) scale(.7)}60%{opacity:1;transform:translateY(-3px) scale(1.05)}100%{opacity:1;transform:none}}
+.anim-foot{display:flex;justify-content:flex-end;margin-top:6px}
+.re{border:1px solid var(--line-strong);background:var(--paper-raised);border-radius:99px;padding:3px 12px;font:11.5px var(--f-data);color:var(--ink-soft);cursor:pointer}
+.re:hover{color:var(--b3);border-color:var(--b3-line)}
+.forms{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-top:12px}
+.forms div{background:var(--paper-raised);border:1px solid var(--b3-line);border-radius:var(--r-md);padding:10px 12px;text-align:center}
+.forms small{display:block;font:11px var(--f-data);color:var(--ink-faint);text-transform:uppercase}
+.forms b{font:600 18px var(--f-display);color:var(--b3)}
+.say{margin:7px 0;font-size:15.5px}
+.say .tag{font:11px var(--f-data);padding:1px 8px;border-radius:99px;margin-right:8px;color:#fff}
+.say .tag.k{background:var(--family)}.say .tag.o{background:var(--b2)}
+/* tarjetas */
+.fcs{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin:14px 0 0;perspective:900px}
+.fc{position:relative;min-height:118px;border:0;background:none;padding:0;cursor:pointer;transform-style:preserve-3d;transition:transform .5s cubic-bezier(.2,.8,.3,1);color:var(--ink)}
+.fc.on{transform:rotateY(180deg)}
+.fc>span{position:absolute;inset:0;display:grid;place-items:center;padding:10px 14px;border-radius:var(--r-md);backface-visibility:hidden;-webkit-backface-visibility:hidden;text-align:center;border:1px solid var(--line)}
+.fc .f{background:var(--paper-alt);font:600 17px var(--f-display)}
+.fc .bk{background:var(--b3-soft);border-color:var(--b3-line);transform:rotateY(180deg);font:500 14px/1.4 var(--f-body)}
+.fc .bk i{display:block;font-size:12px;color:var(--ink-faint);margin-top:4px}
+.fc:hover .f{border-color:var(--b3-line)}
+/* ejercicios */
+.op{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.op button{font:500 14px var(--f-body);border:1.5px solid var(--line-strong);background:var(--paper-raised);color:var(--ink);border-radius:99px;padding:6px 16px;cursor:pointer;transition:transform .1s,background .2s}
+.op button:hover:not(:disabled){border-color:var(--b3);transform:translateY(-1px)}
+.op button.pk{background:var(--b3-soft);border-color:var(--b3);color:var(--b3)}
+.op button.ok{background:var(--b2-soft);border-color:var(--b2);color:var(--b2)}.op button.ok::after{content:" ✓"}
+.op button.bad{background:var(--family-soft);border-color:var(--family);color:var(--family)}.op button.bad::after{content:" ✗"}
+.sol{display:block;margin:7px 0 0;padding:1px 0 1px 10px;border-left:3px solid var(--family);color:var(--family);font-size:13.5px;animation:fxSol .35s ease both}
+.sol.tip{color:var(--b2);border-color:var(--b2)}
+@keyframes fxSol{from{opacity:0;transform:translateX(-10px)}to{opacity:1;transform:none}}
+.sol[hidden]{display:none}
+.fx-ok{animation:fxOk .55s ease calc(var(--i,0)*90ms) both}.fx-bad{animation:fxBad .42s ease calc(var(--i,0)*90ms) both}
+@keyframes fxOk{35%{transform:scale(1.1);box-shadow:0 0 0 7px color-mix(in srgb,var(--b2) 30%,transparent)}}
+@keyframes fxBad{20%{transform:translateX(-7px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(3px)}}
+.fx-hide:not(.fx-show)>*{opacity:0}.fx-show>*{animation:fxUp .45s cubic-bezier(.2,.8,.3,1) calc(var(--i,0)*55ms) both}
+@keyframes fxUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.check{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-top:20px;padding-top:16px;border-top:1px dashed var(--line)}
+.act{font:600 14px var(--f-body);background:var(--b3);color:#fff;border:0;border-radius:99px;padding:10px 22px;cursor:pointer}
+.act:hover{transform:translateY(-1px)}
+.act.alt{background:none;color:var(--ink-soft);border:1.5px solid var(--line-strong)}
+.score{font:13px var(--f-data);color:var(--ink-faint)}
+/* ejercicios con intentos */
+.op button:disabled:not(.ok):not(.bad){opacity:.55;cursor:default}
+.op.long button{border-radius:var(--r-md);text-align:left;padding:8px 14px}
+.ty{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.ty input{flex:1 1 180px;min-width:0;font:500 15px var(--f-body);border:1.5px solid var(--line-strong);background:var(--paper-raised);color:var(--ink);border-radius:99px;padding:7px 16px}
+.ty input:focus{outline:none;border-color:var(--b3);box-shadow:0 0 0 4px color-mix(in srgb,var(--b3) 20%,transparent)}
+.ty input.ok{border-color:var(--b2);background:var(--b2-soft);color:var(--b2)}
+.ty input.bad{border-color:var(--family);background:var(--family-soft);color:var(--family)}
+.ty .act{padding:7px 18px;font-size:13px}
+.ty .act:disabled{opacity:.5;cursor:default;transform:none}
+.hint{font:12px var(--f-data);color:var(--ink-faint);margin-left:8px;white-space:nowrap}
+.exh{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+/* menú de caracteres */
+.cm{position:fixed;z-index:70;display:flex;flex-wrap:wrap;gap:4px;max-width:min(92vw,330px);padding:6px;background:var(--paper-raised);border:1px solid var(--line-strong);border-radius:var(--r-md);box-shadow:var(--shadow-1)}
+.cm[hidden]{display:none}
+.cm button{min-width:36px;height:36px;padding:0 8px;display:grid;place-items:center;border:1px solid var(--line);border-radius:10px;background:var(--paper-alt);color:var(--ink);font:600 17px var(--f-display);cursor:pointer;touch-action:manipulation}
+.cm button:hover{border-color:var(--b3);color:var(--b3)}
+.cm button.sh{font:600 15px var(--f-body);color:var(--ink-soft)}
+.cm button.sh[aria-pressed=true]{background:var(--b3);border-color:var(--b3);color:#fff}
+/* diálogo */
+.dl{display:flex;flex-direction:column;gap:12px;margin-top:12px}
+.ln{display:flex;gap:10px;align-items:flex-start;animation:fxUp .4s ease both}
+.av{flex:none;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font:600 14px var(--f-display);color:#fff;background:var(--ink-faint)}
+.ln.me .av{background:var(--b1)}
+.bub{background:var(--paper-raised);border:1px solid var(--line);border-radius:var(--r-md);padding:10px 14px;font-size:14.5px}
+.ln.me .bub{border-color:var(--b1-line)}
+.nm{font:11px var(--f-data);text-transform:uppercase;color:var(--ink-faint);margin:0 0 3px}
+.opts{display:grid;gap:8px;margin-top:12px}
+.opts button{text-align:left;font:500 14.5px var(--f-body);border:1.5px solid var(--b1-line);background:var(--paper-raised);color:var(--ink);border-radius:var(--r-md);padding:9px 14px;cursor:pointer}
+.opts button:hover:not(:disabled){border-color:var(--b1)}
+.opts button.bad{border-color:var(--family);background:var(--family-soft)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+.card{border:1px solid var(--b1-line);background:var(--paper-raised);border-radius:var(--r-md);padding:12px 16px;font-size:14px}
+.card h3{margin:0 0 4px;font-size:15px}
+@media(max-width:600px){.two{grid-template-columns:1fr}section{padding:18px 16px 22px}}
+textarea{width:100%;min-height:90px;border:1px solid var(--family-line);border-radius:var(--r-sm);padding:10px 12px;background:var(--paper-raised);color:var(--ink);font:inherit;margin-top:10px;transition:box-shadow .2s}
+textarea:focus{outline:none;box-shadow:0 0 0 4px color-mix(in srgb,var(--family) 20%,transparent)}
+.ck{display:block;padding:5px 0;cursor:pointer}
+.sv{font:12px var(--f-data);color:var(--b2);margin-left:10px;opacity:0;transition:opacity .3s}.sv.show{opacity:1}
+footer{max-width:780px;margin:0 auto;padding:0 clamp(16px,4vw,28px) 60px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font:12.5px var(--f-data);color:var(--ink-faint)}
+.cf-wrap{position:fixed;width:0;height:0;z-index:60;pointer-events:none}
+.cf{position:absolute;width:8px;height:12px;border-radius:2px;background:var(--c);opacity:0;animation:cfFly 1.2s cubic-bezier(.2,.7,.3,1) forwards}
+@keyframes cfFly{0%{opacity:1}45%{opacity:1;transform:translate(calc(var(--dx)*.8),var(--up)) rotate(200deg)}100%{opacity:0;transform:translate(var(--dx),var(--fall)) rotate(var(--rot))}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.plx,.cf-wrap{display:none}.fx-hide>*,.anim.ready .t{opacity:1!important}}
+@media print{.plx,.bar,body::before,.cf-wrap,.cm{display:none}section{opacity:1;box-shadow:none}}
+
+/* explica a diez personas */
+section.pp{background:var(--b2-soft);border-color:var(--b2-line)}
+.pp .num{background:var(--b2)}
+.pp-use{display:flex;flex-wrap:wrap;gap:6px 8px;align-items:center;margin:0 0 8px;font-size:13px}
+.pp-use span{background:var(--paper-raised);border:1px solid var(--b2-line);border-radius:99px;padding:2px 11px;font:12.5px var(--f-data);color:var(--ink-soft)}
+.tk .pp-use span{border-color:var(--family-line)}
+.ppl-ol{list-style:none;margin:8px 0 0;padding:0}
+.ppl-i{border-top:1px solid var(--line)}
+.ppl-i label{display:grid;grid-template-columns:22px 1fr;gap:12px;align-items:start;padding:11px 8px;cursor:pointer;border-radius:var(--r-sm)}
+.ppl-i input{width:20px;height:20px;margin:2px 0 0;accent-color:var(--b2);cursor:pointer}
+.tk .ppl-i input{accent-color:var(--family)}
+.ppl-w{display:block;font-size:12.5px;color:var(--ink-faint)}
+.ppl-w b{font-size:14px;color:var(--ink);font-weight:600}
+.ppl-t{display:block;margin-top:2px;line-height:1.5}
+.ppl-i.done .ppl-t{color:var(--ink-faint)}
+.ppl-i.pick label{background:var(--b3-soft);outline:2px solid var(--b3);outline-offset:-2px}
+.pp-hw{margin-top:24px;padding-top:4px;border-top:1px dashed var(--line-strong)}
+</style>
+</head>
+<body data-lang="es-en">
+<a class="skip" href="#main">Saltar al contenido</a>
+<div class="plx" aria-hidden="true"><i></i><i></i></div>
+<header><div class="wrap">
+  <p class="eyebrow"><span class="dot"></span>Clase 21 de 44 · L5 · Opinions with teeth</p>
+  <h1>Opiniones <em>con dientes</em><span class="en">Opinions with teeth — the subjunctive for real</span></h1>
+  <p class="lede">Hoy aprendes a discrepar sin pelearte: «no creo que sea…», «dudo que tenga…», «me sorprende que digas…». Subjuntivo tras duda y sentimiento, con la entonación de la discrepancia cortés. Casi todo se dice en voz alta.<span class="en b">Today you learn to disagree without a fight: subjunctive after doubt and feeling, with the intonation of polite disagreement. Almost everything is said aloud.</span></p>
+  <div class="meta-row"><div>Duración<strong>50 min</strong></div><div>Construye sobre<strong>Clases 19 y 20</strong></div><div>Nivel<strong>B1</strong></div></div>
+</div></header>
+
+<main class="wrap" id="main" tabindex="-1">
+<div class="bar" role="group" aria-label="Controles de la página">
+  <button type="button" class="nav-btn" id="navBtn" aria-label="Menú de partes" aria-expanded="false" aria-controls="toc"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><path d="M3 5.5h14M3 10h14M3 14.5h14"/></svg></button>
+  <nav class="toc" id="toc" aria-label="Partes" hidden></nav>
+  <span class="bar-t">Ir a una parte</span>
+  <div class="seg" id="lang" role="group" aria-label="Idioma"><button type="button" data-lang="es" aria-pressed="false">Español</button><button type="button" data-lang="es-en" aria-pressed="true">Español + EN</button></div>
+  <button type="button" class="btn" id="themeBtn" aria-pressed="false">Modo oscuro</button>
+</div>
+
+<section id="s0" aria-labelledby="s0-t"><h2 id="s0-t"><span class="num">0</span><span>Calentamiento oral<span class="en"> Oral warm-up</span></span><span class="cue">⏱ 4 min</span></h2>
+<p class="sub">Sin pantalla: escuchas y contestas con frases completas. Lee el profesor.<span class="en b">No screen: you listen and answer in full sentences. The teacher reads.</span></p>
+<ol class="ex">
+<li>¿Qué <span class="v">prefieres</span>: GTA VI o FIFA? ¿Por qué?<span class="en b"> Which do you prefer: GTA VI or FIFA? Why?</span></li>
+<li>¿Qué <span class="v">piensas</span> de la pizza con piña?<span class="en b"> What do you think of pineapple on pizza?</span></li>
+<li>¿Quién <span class="v">es</span> el mejor jugador de tu equipo y por qué?<span class="en b"> Who is the best player on your team and why?</span></li>
+<li>¿Con quién <span class="v">discutes</span> más de fútbol y cómo termina la discusión?<span class="en b"> Who do you argue with most about football, and how does the argument end?</span></li>
+</ol></section>
+
+<section id="s1" aria-labelledby="s1-t"><h2 id="s1-t"><span class="num">1</span><span>Discrepar con tacto<span class="en"> Disagreeing tactfully</span></span><span class="cue">⏱ 9 min</span></h2>
+<p class="sub">Para discrepar con cordura: primero empatizas, luego dudas con subjuntivo.<span class="en b">To disagree with grace: first empathise, then doubt with the subjunctive.</span></p>
+<div class="anim" id="an1"><p class="lab">Discrepar · de seco a cordial<span class="en"> · Disagreeing · from blunt to friendly</span></p>
+<div class="step"><span class="t2">1 · seca</span><span class="chip x t" style="--d:0s">Eso es mentira.</span></div>
+<div class="step"><span class="t2">2 · suave</span><span class="chip c1 t" style="--d:0.5s">No estoy de acuerdo.</span></div>
+<div class="step"><span class="t2">3 · subjuntivo</span><span class="chip c3 t" style="--d:1s">No creo que GTA VI sea mejor.</span></div>
+<div class="step"><span class="t2">4 · cordial</span><span class="chip c3 t" style="--d:1.5s">Entiendo, pero dudo que tenga mejor historia.</span></div>
+<div class="anim-foot"><button type="button" class="re">↻ Repetir<span class="en"> · Replay</span></button></div></div>
+<div class="anim" id="an2"><p class="lab">Reaccionar · sentimiento + que<span class="en"> · Reacting · feeling + que</span></p>
+<div class="step"><span class="t2">1 · sorpresa</span><span class="chip c3 t" style="--d:0s">Me sorprende que opines eso.</span></div>
+<div class="step"><span class="t2">2 · alegría</span><span class="chip c3 t" style="--d:0.5s">Me alegra que vengas.</span></div>
+<div class="step"><span class="t2">3 · molestia</span><span class="chip c3 t" style="--d:1s">Me molesta que llegues tarde.</span></div>
+<div class="step"><span class="t2">4 · pena</span><span class="chip c3 t" style="--d:1.5s">Es una pena que no puedas.</span></div>
+<div class="anim-foot"><button type="button" class="re">↻ Repetir<span class="en"> · Replay</span></button></div></div>
+<div class="box"><b>Fórmula:</b> <b>creo que + indicativo</b> (afirmas), pero <b>no creo que + subjuntivo</b> (dudas o niegas). También con <b>dudo que</b>, <b>no pienso que</b>, <b>no es verdad que</b>, y con sentimientos: <b>me sorprende / me alegra / me molesta / es una pena que</b>.<span class="en b">Formula: «creo que» + indicative (you affirm), «no creo que» + subjunctive (you doubt). Same with «dudo que», «no pienso que», «no es verdad que», and with feelings: «me sorprende / me alegra / me molesta / es una pena que».</span></div>
+<div class="forms"><div><small>ser</small><b>sea</b></div><div><small>tener</small><b>tenga</b></div><div><small>estar</small><b>esté</b></div><div><small>ir</small><b>vaya</b></div><div><small>saber</small><b>sepa</b></div><div><small>venir</small><b>venga</b></div></div>
+<div class="box pr">🗣️ <b>Pronunciación de hoy:</b> discrepas bajando el tono y suavizando el inicio: «Hombre…», «Pues…», «Entiendo, pero…». El «pero» no se corta, se desliza.<span class="en b">You disagree by softening the start («Hombre…», «Pues…», «Entiendo, pero…»); the «pero» glides rather than cuts.</span>
+<p class="say"><span class="tag k">seca</span>No es verdad.</p>
+<p class="say"><span class="tag o">cordial</span>Hombre, entiendo, pero no creo que sea para tanto.</p>
+<p class="say"><span class="tag k">seca</span>Estás equivocado.</p>
+<p class="say"><span class="tag o">cordial</span>Pues yo lo veo distinto: dudo que tenga razón.</p>
+</div>
+<div class="box wr"><b>Cuidado:</b> si el sujeto es el mismo, usa infinitivo: «Me alegra <i>verte</i>», pero «Me alegra que <i>vengas</i>». Y no digas «no creo que es», sino «no creo que <b>sea</b>».<span class="en b">Same subject → infinitive: «Me alegra verte», but «Me alegra que vengas». Not «no creo que es» but «no creo que sea».</span></div>
+</section>
+
+<section id="s2" aria-labelledby="s2-t"><h2 id="s2-t"><span class="num">2</span><span>Repaso relámpago<span class="en"> Lightning review</span></span><span class="cue">⏱ 5 min</span></h2>
+<p class="sub">Doce expresiones para debatir entre amigos. Dilo en voz alta antes de girar la tarjeta.<span class="en b">Twelve expressions for friendly debates. Say it aloud before flipping the card.</span></p>
+<div class="fcs" id="fcs"></div></section>
+
+<section id="s3" aria-labelledby="s3-t"><h2 id="s3-t"><span class="num">3</span><span>Practica<span class="en"> Practice</span></span><span class="cue">⏱ 11 min</span></h2>
+<p class="sub">Tres ejercicios de 15 frases. Cada frase te corrige al instante y tienes <b>dos intentos</b>: si fallas los dos, te enseñamos la respuesta. Los tres ejercicios se hacen en clase.<span class="en b">Three exercises of 15 sentences. Every sentence gives instant feedback and you get two tries: if you miss both, we show the answer. All three exercises are done in class.</span></p>
+
+<h3>A · Elige el modo correcto<span class="en"> · Pick the right mood</span></h3>
+<ol class="ex" id="exA"></ol>
+<div class="check"><div><button type="button" class="act alt" id="exArs">Reiniciar<span class="en"> · Reset</span></button></div><span class="score" id="exAsc"></span></div>
+
+<h3>B · Escribe el verbo<span class="en"> · Type the verb</span></h3>
+<p class="sub">Escribe el verbo en subjuntivo presente. Pulsa Intro o «Comprobar». Al escribir, usa el menú de teclas (o clic derecho) para tildes, ñ, ¿ y ¡.<span class="en b">Write the verb in the present subjunctive. Press Enter or “Check”. While typing, use the key menu (or right-click) for accents, ñ, ¿ and ¡.</span></p>
+<ol class="ex" id="exB"></ol>
+<div class="check"><div><button type="button" class="act alt" id="exBrs">Reiniciar<span class="en"> · Reset</span></button></div><span class="score" id="exBsc"></span></div>
+
+<h3>C · ¿Qué dices?<span class="en"> · What do you say?</span></h3>
+<p class="sub">Lee la situación y elige la respuesta más cordial y gramaticalmente correcta.<span class="en b">Read the situation and pick the friendliest, grammatically correct reply.</span></p>
+<ol class="ex" id="exC"></ol>
+<div class="check"><div><button type="button" class="act alt" id="exCrs">Reiniciar<span class="en"> · Reset</span></button></div><span class="score" id="exCsc"></span></div></section>
+
+<section id="s4" class="rp" aria-labelledby="s4-t"><h2 id="s4-t"><span class="num">4</span><span>Roleplay: discusión de bar<span class="en"> Roleplay: bar argument</span></span><span class="cue">⏱ 14 min</span></h2>
+<p class="sub">Iker defiende GTA VI, Marta defiende FIFA y Sole defiende la piña. Tú tienes que defender tu postura sin ganarte enemigos.<span class="en b">Iker defends GTA VI, Marta defends FIFA and Sole defends pineapple. You defend your position without making enemies.</span></p>
+<div class="dl" id="dl" aria-live="polite"></div><div class="opts" id="opts"></div>
+<button type="button" class="act alt" id="dre" style="margin-top:14px">↻ Otra vez<span class="en"> · Again</span></button>
+<h3>Parte 2 · Improvisación libre con rol<span class="en"> Part 2 · Free role-play</span></h3>
+<div class="two"><div class="card"><h3>Rol A · Andrei</h3>Defiende tu postura sobre el mejor videojuego o la mejor pizza. Usa al menos «no creo que», «dudo que» y «me sorprende que», y empieza con empatía.<span class="en b">Defend your position on the best game or pizza. Use «no creo que», «dudo que» and «me sorprende que», and start with empathy.</span></div>
+<div class="card"><h3>Rol B · Amigos del bar</h3>El profesor es Iker, Marta y Sole: cada uno defiende algo distinto y te contradice. Después cambiáis.<span class="en b">The teacher plays Iker, Marta and Sole: each defends something different and contradicts you. Then swap.</span></div></div>
+<p style="margin:14px 0 2px"><b>Marca lo que uses:</b><span class="en"> Tick what you use:</span></p>
+<div id="ck"></div></section>
+
+<section id="s5" class="pp" aria-labelledby="s5-t"><h2 id="s5-t"><span class="num">5</span><span>Explica a diez personas<span class="en"> Explain to ten people</span></span><span class="cue">⏱ 8 min</span></h2>
+<p class="sub">Diez personas inventadas necesitan que les expliques algo del tema de hoy. Elige una (o pulsa «Al azar») y explícaselo en voz alta en 20–30 segundos. Marca ✓ cuando termines.<span class="en b">Ten made-up people need you to explain something from today’s topic. Pick one (or press “Random”) and explain it aloud in 20–30 seconds. Tick ✓ when you’re done.</span></p>
+<div class="pp-use"><b>Usa:</b><span>No creo que + subj.</span><span>Dudo que + subj.</span><span>Me sorprende / me alegra / me molesta que + subj.</span><span>Es una pena que</span><span>Entiendo, pero…</span></div>
+<div class="ppl" data-k="c21-in"><ol class="ppl-ol"><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Laura"><span class="ppl-b"><span class="ppl-w"><b>1 · Laura</b> · tertuliana que defiende los videojuegos</span><span class="ppl-t">Explícale con tacto por qué no estás de acuerdo con «los videojuegos son peores que el deporte».<span class="en b">Explain tactfully why you disagree that “video games are worse than sport”.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Sergio"><span class="ppl-b"><span class="ppl-w"><b>2 · Sergio</b> · vecino que opina de todo</span><span class="ppl-t">Explícale por qué se dice «creo que es» pero «no creo que sea».<span class="en b">Explain why we say “creo que es” but “no creo que sea”.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Nuria"><span class="ppl-b"><span class="ppl-w"><b>3 · Nuria</b> · amiga que se ofende fácilmente</span><span class="ppl-t">Explícale cómo discrepar sin pelearte: primero empatizas y luego dudas.<span class="en b">Explain how to disagree without fighting: empathise first, then express doubt.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Aiko"><span class="ppl-b"><span class="ppl-w"><b>4 · Aiko</b> · estudiante de intercambio</span><span class="ppl-t">Explícale cuándo el subjuntivo acompaña a los sentimientos: «Me alegra que vengas».<span class="en b">Explain when feelings take the subjunctive: “Me alegra que vengas”.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Hugo"><span class="ppl-b"><span class="ppl-w"><b>5 · Hugo</b> · amigo que siempre llega tarde</span><span class="ppl-t">Dile cómo te sientes con «me molesta que…», sin sonar seco.<span class="en b">Tell him how you feel with “me molesta que…”, without sounding harsh.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Tomás"><span class="ppl-b"><span class="ppl-w"><b>6 · Tomás</b> · compañero de piso</span><span class="ppl-t">Explícale por qué «no creo que es» es un error y cómo se corrige.<span class="en b">Explain why “no creo que es” is a mistake and how to fix it.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Elena"><span class="ppl-b"><span class="ppl-w"><b>7 · Elena</b> · jubilada que aprende inglés</span><span class="ppl-t">Explícale tres formas de decir «no estoy de acuerdo», de seca a cordial.<span class="en b">Explain three ways to say “I disagree”, from blunt to warm.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Ben"><span class="ppl-b"><span class="ppl-w"><b>8 · Ben</b> · colega</span><span class="ppl-t">Explícale cuándo se usa infinitivo («Me alegra verte») y cuándo «que» («Me alegra que vengas»).<span class="en b">Explain when to use the infinitive and when “que”.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Sofía"><span class="ppl-b"><span class="ppl-w"><b>9 · Sofía</b> · amiga que te cuenta una noticia triste</span><span class="ppl-t">Explícale cómo reaccionar con «es una pena que» y «me sorprende que».<span class="en b">Explain how to react with “es una pena que” and “me sorprende que”.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Iker"><span class="ppl-b"><span class="ppl-w"><b>10 · Iker</b> · amigo convencido de que GTA VI será el mejor juego</span><span class="ppl-t">Dile con «dudo que» y un «pero» suave que no lo ves tan claro.<span class="en b">Tell him with “dudo que” and a soft “pero” that you’re not so sure.</span></span></span></label></li></ol><div class="check"><div><button type="button" class="act alt ppl-rnd">🎲 Al azar<span class="en"> · Random</span></button> <button type="button" class="act alt ppl-rs">Reiniciar<span class="en"> · Reset</span></button></div><span class="score ppl-sc" aria-live="polite"></span></div></div></section>
+
+<section id="s6" class="tk" aria-labelledby="s6-t"><h2 id="s6-t"><span class="num">6</span><span style="color:var(--family)">Tu tarea<span class="en"> Your homework</span></span><span class="cue">⏱ 3 min</span></h2>
+<p class="sub">Lee esta tertulia de radio (y, si puedes, escucha una real sobre fútbol o videojuegos). Después cuenta <b>en voz alta</b> con quién estás de acuerdo y por qué.<span class="en b">Read this radio chat (and, if you can, listen to a real one about football or video games). Then say aloud who you agree with and why.</span></p>
+<div class="dl">
+<div class="ln"><div class="av">L</div><div><p class="nm">Laura</p><div class="bub">No creo que los videojuegos sean peores que el deporte. Dudo que alguien se aburra con un buen juego.<span class="en b">I don't think video games are worse than sport. I doubt anyone gets bored with a good game.</span></div></div></div>
+<div class="ln"><div class="av">S</div><div><p class="nm">Sergio</p><div class="bub">Me sorprende que digas eso. Es una pena que la gente no salga más a la calle.<span class="en b">I'm surprised you say that. It's a shame people don't go out more.</span></div></div></div>
+<div class="ln"><div class="av">N</div><div><p class="nm">Nuria</p><div class="bub">Yo creo que las dos cosas son compatibles. No creo que haya que elegir.<span class="en b">I think both are compatible. I don't think you have to choose.</span></div></div></div>
+</div>
+<p class="sub" style="margin-top:14px">Al contarlo, di: ① qué piensa cada uno · ② con quién estás tú y por qué · ③ una frase con «no creo que» o «dudo que».<span class="en b">When retelling: ① what each thinks · ② who you side with and why · ③ one sentence with «no creo que» or «dudo que».</span></p>
+<div class="pp-hw"><h3>Para casa: diez personas más<span class="en"> · Ten more people, at home</span></h3><p class="sub">Otras diez personas, ahora para hacer en casa. Explícale a cada una lo que se pide, en voz alta o grabándote (al menos tres con audio). Marca ✓ cuando termines.<span class="en b">Ten more people, to do at home. Explain to each one what is asked, aloud or recording yourself (at least three with audio). Tick ✓ when you’re done.</span></p>
+<div class="pp-use"><b>Usa:</b><span>No creo que + subj.</span><span>Dudo que + subj.</span><span>Me sorprende / me alegra / me molesta que + subj.</span><span>Es una pena que</span><span>Entiendo, pero…</span></div>
+<div class="ppl" data-k="c21-hw"><ol class="ppl-ol"><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Pablo"><span class="ppl-b"><span class="ppl-w"><b>1 · Pablo</b> · amigo hincha del equipo rival</span><span class="ppl-t">Explícale con cordialidad por qué dudas que su equipo gane la liga.<span class="en b">Explain politely why you doubt his team will win the league.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Gloria"><span class="ppl-b"><span class="ppl-w"><b>2 · Gloria</b> · tía que cree que los videojuegos son malos</span><span class="ppl-t">Explícale con tacto por qué no crees que sean tan malos.<span class="en b">Explain tactfully why you don’t think they’re that bad.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Karim"><span class="ppl-b"><span class="ppl-w"><b>3 · Karim</b> · vecino que aprende español</span><span class="ppl-t">Explícale la fórmula: «ser → sea», «tener → tenga», «ir → vaya».<span class="en b">Explain the formula: “ser → sea”, “tener → tenga”, “ir → vaya”.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Nerea"><span class="ppl-b"><span class="ppl-w"><b>4 · Nerea</b> · amiga</span><span class="ppl-t">Explícale cómo suena «Hombre, entiendo, pero…» para discrepar sin sonar enfadado.<span class="en b">Explain how “Hombre, entiendo, pero…” sounds when you disagree without seeming angry.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Camille"><span class="ppl-b"><span class="ppl-w"><b>5 · Camille</b> · amiga francesa</span><span class="ppl-t">Explícale la diferencia entre «Creo que tienes razón» y «No creo que tengas razón».<span class="en b">Explain the difference between “Creo que tienes razón” and “No creo que tengas razón”.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Julia"><span class="ppl-b"><span class="ppl-w"><b>6 · Julia</b> · hermana pequeña</span><span class="ppl-t">Explícale cómo mostrar alegría con «me alegra que» cuando alguien te da una buena noticia.<span class="en b">Explain how to show joy with “me alegra que” when someone shares good news.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Mateo"><span class="ppl-b"><span class="ppl-w"><b>7 · Mateo</b> · entrenador</span><span class="ppl-t">Explícale con tacto por qué dudas que sea buena idea entrenar todos los días.<span class="en b">Explain tactfully why you doubt training every day is a good idea.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Raúl"><span class="ppl-b"><span class="ppl-w"><b>8 · Raúl</b> · jefe</span><span class="ppl-t">Explícale que no estás de acuerdo con un cambio de horario, con «no creo que» y «entiendo, pero».<span class="en b">Explain you disagree with a schedule change, with “no creo que” and “entiendo, pero”.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Inés"><span class="ppl-b"><span class="ppl-w"><b>9 · Inés</b> · amiga</span><span class="ppl-t">Explícale cómo decir «me molesta que…» sin ofender a nadie.<span class="en b">Explain how to say “me molesta que…” without offending anyone.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Leo"><span class="ppl-b"><span class="ppl-w"><b>10 · Leo</b> · amigo bromista</span><span class="ppl-t">Explícale tres formas de dudar: «no es verdad que», «dudo que» y «no pienso que».<span class="en b">Explain three ways to express doubt: “no es verdad que”, “dudo que” and “no pienso que”.</span></span></span></label></li></ol><div class="check"><div><button type="button" class="act alt ppl-rnd">🎲 Al azar<span class="en"> · Random</span></button> <button type="button" class="act alt ppl-rs">Reiniciar<span class="en"> · Reset</span></button></div><span class="score ppl-sc" aria-live="polite"></span></div></div></div>
+<textarea id="notes" aria-label="Notas" placeholder="Notas opcionales · Optional notes"></textarea>
+<p style="margin:8px 2px 0;font-size:12.5px;color:var(--ink-faint)">Es solo un apoyo: lo importante es decirlo en voz alta.<span class="en b">Just a support: what matters is saying it aloud.</span></p>
+<p><button type="button" class="act alt" id="sv">Guardar notas</button><span class="sv" id="svf">Guardado ✓</span></p></section>
+</main>
+<footer><span>Clase 21 · Opiniones con dientes</span><span>Próxima clase → Clase 22</span></footer>
+
+<div class="cm" id="cm" role="toolbar" aria-label="Caracteres especiales" hidden></div>
+<script>
+
+const $=id=>document.getElementById(id),RM=matchMedia('(prefers-reduced-motion:reduce)').matches;
+const E=(t,b)=>t?`<span class="en${b?' b':''}"> ${t}</span>`:'';
+const sh=a=>{const r=[...a];for(let i=r.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[r[i],r[j]]=[r[j],r[i]]}return r};
+const ld=k=>{try{return localStorage.getItem(k)}catch(e){return null}},sv=(k,v)=>{try{localStorage.setItem(k,v)}catch(e){}};
+const restart=(el,c)=>{el.classList.remove(c);void el.offsetWidth;el.classList.add(c)};
+function confetti(el){if(RM||!el)return;const r=el.getBoundingClientRect(),w=document.createElement('div');w.className='cf-wrap';w.style.left=r.left+r.width/2+'px';w.style.top=r.top+r.height/2+'px';
+ const C=['var(--b3)','var(--b1)','var(--b2)','var(--family)'];
+ for(let k=0;k<22;k++){const c=document.createElement('i'),an=-Math.PI/2+(Math.random()-.5)*2.2,d=60+Math.random()*110;c.className='cf';
+  c.style.cssText=`--c:${C[k%4]};--dx:${Math.cos(an)*d|0}px;--up:${Math.sin(an)*d|0}px;--fall:${(Math.sin(an)*d+90+Math.random()*60)|0}px;--rot:${(Math.random()*720-360)|0}deg`;w.appendChild(c)}
+ document.body.appendChild(w);setTimeout(()=>w.remove(),1600)}
+
+/* barra: índice, idioma, tema */
+const secs=[...document.querySelectorAll('main section')],toc=$('toc'),nb=$('navBtn');
+toc.innerHTML=secs.map(s=>{const h=s.querySelector('h2');return `<a href="#${s.id}"><b>${h.querySelector('.num').textContent}</b>${h.children[1].firstChild.textContent}</a>`}).join('');
+nb.onclick=()=>{toc.hidden=!toc.hidden;nb.setAttribute('aria-expanded',String(!toc.hidden))};
+toc.onclick=e=>{if(e.target.closest('a')){toc.hidden=true;nb.setAttribute('aria-expanded','false')}};
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!toc.hidden){toc.hidden=true;nb.focus()}});
+function setLang(l){document.body.dataset.lang=l;document.querySelectorAll('#lang button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.lang===l)));sv('clase-lang-v2',l)}
+document.querySelectorAll('#lang button').forEach(b=>b.onclick=()=>setLang(b.dataset.lang));setLang(ld('clase-lang-v2')==='es'?'es':'es-en');
+const tb=$('themeBtn');function setTheme(d){document.documentElement.dataset.theme=d?'dark':'light';tb.setAttribute('aria-pressed',String(d));tb.textContent=d?'Modo claro':'Modo oscuro';sv('clase21-theme',d?'d':'l')}
+tb.onclick=()=>setTheme(tb.getAttribute('aria-pressed')!=='true');setTheme(ld('clase21-theme')==='d');
+
+/* animaciones al entrar */
+document.querySelectorAll('.anim').forEach(a=>{
+ const run=()=>{a.classList.remove('play');void a.offsetWidth;a.classList.add('play')};
+ a.querySelector('.re').onclick=run;
+ if(RM)return;a.classList.add('ready');
+ new IntersectionObserver((es,o)=>es.forEach(e=>{if(e.isIntersecting){run();o.unobserve(a)}}),{threshold:.6}).observe(a)});
+if(!RM&&'IntersectionObserver' in window){
+ const io=new IntersectionObserver((es,o)=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('fx-num');o.unobserve(e.target)}}),{threshold:.05});secs.forEach(s=>io.observe(s));
+ const io2=new IntersectionObserver((es,o)=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('fx-show');o.unobserve(e.target)}}),{threshold:.1});
+ document.querySelectorAll('ol.ex,.forms').forEach(c=>{[...c.children].forEach((k,i)=>k.style.setProperty('--i',Math.min(i,10)));c.classList.add('fx-hide');io2.observe(c)})}
+/* parallax suave y foco de sección */
+if(!RM){const orbs=[...document.querySelectorAll('.plx i')];let t=0;
+ const run=()=>{t=0;const y=scrollY,vh=innerHeight,c=vh/2;orbs.forEach((o,i)=>o.style.transform=`translate3d(${Math.sin(y/600+i*1.7)*innerWidth*.06|0}px,${-y*(.2+i*.15)|0}px,0)`);
+  secs.forEach(s=>{const r=s.getBoundingClientRect(),d=r.top>c?r.top-c:r.bottom<c?c-r.bottom:0;s.style.setProperty('--a',(Math.round(Math.max(0,1-d/(vh*.5))*20)/20))})};
+ addEventListener('scroll',()=>{if(!t)t=requestAnimationFrame(run)},{passive:true});run()}
+
+/* tarjetas */
+const CARDS=[["no creo que…", "No creo que sea para tanto.", "I don't think it's that big a deal."], ["dudo que…", "Dudo que tengamos tiempo.", "I doubt we'll have time."], ["me sorprende que…", "Me sorprende que opines eso.", "I'm surprised you think that."], ["me alegra que…", "Me alegra que vengas.", "I'm glad you're coming."], ["es una pena que…", "Es una pena que llueva.", "It's a shame it's raining."], ["estar de acuerdo", "No estoy de acuerdo contigo.", "I don't agree with you."], ["tener razón", "Tienes razón en parte.", "You're partly right."], ["pues yo no lo veo así", "Pues yo no lo veo así.", "Well, I don't see it that way."], ["con o sin piña", "¿Pizza con o sin piña?", "Pizza with or without pineapple?"], ["el mejor del equipo", "Es el mejor del equipo.", "He's the best on the team."], ["defender una postura", "Defiendo mi postura.", "I defend my position."], ["para nada", "Para nada, no creo que sea así.", "Not at all, I don't think so."]];
+$('fcs').innerHTML=CARDS.map(c=>`<button type="button" class="fc" aria-pressed="false"><span class="f">${c[0]}</span><span class="bk">${c[1]}<i class="en">${c[2]}</i></span></button>`).join('');
+$('fcs').onclick=e=>{const f=e.target.closest('.fc');if(f){f.classList.toggle('on');f.setAttribute('aria-pressed',f.classList.contains('on'))}};
+
+/* menú de caracteres: aparece al enfocar un campo y con clic derecho */
+const cm=$('cm'),CH=['á','é','í','ó','ú','ü','ñ','¿','?','¡','!'];let cmT=null,cmUp=false,cmMode='el';
+const isFld=el=>el&&el.matches&&el.matches('input[type="text"],textarea');
+function cmDraw(){cm.innerHTML=CH.map(c=>{const v=cmUp?c.toUpperCase():c;return `<button type="button" tabindex="-1" data-c="${v}" aria-label="Insertar ${v}">${v}</button>`}).join('')+`<button type="button" tabindex="-1" class="sh" aria-pressed="${cmUp}" aria-label="Mayúsculas">⇧</button>`}
+function cmPlace(x,y){cm.style.left='0px';cm.style.top='0px';cm.hidden=false;const w=cm.offsetWidth,h=cm.offsetHeight,vw=innerWidth,vh=innerHeight;
+ cm.style.left=Math.max(8,Math.min(x,vw-w-8))+'px';cm.style.top=Math.max(8,Math.min(y,vh-h-8))+'px'}
+function cmAnchor(el){const r=el.getBoundingClientRect();cm.hidden=false;const h=cm.offsetHeight,vh=(window.visualViewport?visualViewport.height:innerHeight);
+ /* debajo de la caja; solo arriba si no cabe debajo */
+ cmPlace(r.left,r.bottom+6+h<=vh-8?r.bottom+6:Math.max(8,r.top-h-6))}
+function cmShow(el){cmT=el;cmMode='el';cmDraw();cm.hidden=false;cmAnchor(el)}
+function cmHide(){cm.hidden=true;cmT=null}
+document.addEventListener('focusin',e=>{if(isFld(e.target)&&!e.target.disabled)cmShow(e.target);else if(!cm.contains(e.target))cmHide()});
+document.addEventListener('focusout',e=>{if(isFld(e.target)&&!(e.relatedTarget&&cm.contains(e.relatedTarget)))cmHide()});
+document.addEventListener('contextmenu',e=>{const f=e.target;if(!isFld(f)||f.disabled)return;e.preventDefault();f.focus();cmT=f;cmMode='el';cmDraw();cmAnchor(f)});
+addEventListener('scroll',()=>{if(cm.hidden||!cmT)return;if(cmMode==='el')cmAnchor(cmT);else cmHide()},{passive:true,capture:true});
+addEventListener('resize',()=>{if(!cm.hidden&&cmT&&cmMode==='el')cmAnchor(cmT)});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!cm.hidden)cmHide()});
+['mousedown','pointerdown'].forEach(t=>cm.addEventListener(t,e=>e.preventDefault()));
+cm.addEventListener('click',e=>{const b=e.target.closest('button');if(!b||!cmT)return;
+ if(b.classList.contains('sh')){cmUp=!cmUp;cmDraw();return}
+ const f=cmT,c=b.dataset.c;f.focus();f.setRangeText(c,f.selectionStart,f.selectionEnd,'end');f.dispatchEvent(new Event('input',{bubbles:true}));
+ if(cmUp&&/[a-zñü]/i.test(c)){cmUp=false;cmDraw()}});
+
+/* ejercicios · feedback instantáneo por frase · dos intentos y luego se revela */
+const nz=t=>t.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/\s+/g,' ').trim();
+const EXA=[["No creo que GTA VI ___ mejor que FIFA.", ["sea", "es", "será"], "", "No creo que + subjuntivo (ser → sea)."], ["Dudo que ___ tiempo para jugar hoy.", ["tengamos", "tenemos", "tendremos"], "", "Dudo que + subjuntivo."], ["Me sorprende que Iker ___ la piña en la pizza.", ["defienda", "defiende", "defendería"], "", "Sentimiento + que + subjuntivo."], ["Creo que la pizza con piña ___ rica.", ["está", "esté", "estaría"], "", "Creo que afirma: indicativo."], ["Me alegra que ___ a la cena, Andrei.", ["vengas", "vienes", "venías"], "", "Me alegra que + subjuntivo (venir → vengas)."], ["No pienso que el árbitro ___ razón.", ["tenga", "tiene", "tuvo"], "", "No pienso que + subjuntivo."], ["Es una pena que Marta no ___ venir.", ["pueda", "puede", "podía"], "", "Es una pena que + subjuntivo."], ["Me molesta que la gente ___ tarde al partido.", ["llegue", "llega", "llegará"], "", "Me molesta que + subjuntivo."], ["No es verdad que el fútbol ___ aburrido.", ["sea", "es", "fue"], "", "No es verdad que + subjuntivo."], ["Pienso que tú ___ razón.", ["tienes", "tengas", "tendrías"], "", "Pienso que afirma: indicativo."], ["Me da rabia que mi equipo siempre ___ en el último minuto.", ["pierda", "pierde", "perdió"], "", "Me da rabia que + subjuntivo (perder → pierda)."], ["Dudo que ___ a tiempo.", ["lleguemos", "llegamos", "llegaremos"], "", "Dudo que + subjuntivo (llegar → lleguemos)."], ["Me encanta ___ videojuegos con mis amigos.", ["jugar", "juegue", "juego"], "", "Mismo sujeto: infinitivo."], ["No creo que Sole ___ la receta de memoria.", ["sepa", "sabe", "supo"], "", "No creo que + subjuntivo (saber → sepa)."], ["Me alegro de que ___ tan bien el nuevo fichaje.", ["juegue", "juega", "jugó"], "", "Me alegro de que + subjuntivo."]];
+const EXB=[["No creo que Iker ___ razón.", "tener", "tenga", "", "tener → tenga."], ["Dudo que GTA VI ___ a tiempo.", "salir", "salga", "", "salir → salga."], ["Me sorprende que ellos ___ tan rápido.", "jugar", "jueguen", "", "jugar → jueguen (u → ue, -ar → -en)."], ["No es verdad que yo ___ siempre tarde.", "llegar", "llegue", "", "llegar → llegue (g → gu)."], ["Me alegra que tú ___ en el equipo.", "estar", "estés", "", "estar → estés."], ["Es una pena que no ___ tiempo.", "tener · nosotros", "tengamos", "", "tener → tengamos."], ["No creo que ___ una buena idea.", "ser", "sea", "", "ser → sea."], ["Me molesta que me ___ mentiras.", "decir · ellos", "digan", "", "decir → digan."], ["Dudo que Marta ___ al cine hoy.", "ir", "vaya", "", "ir → vaya."], ["No pienso que la pizza ___ tanto.", "costar", "cueste", "", "costar → cueste (o → ue)."], ["Me da rabia que ___ tantos errores.", "haber", "haya", "", "haber → haya."], ["No creo que ellos ___ la respuesta.", "saber", "sepan", "", "saber → sepan."], ["Me sorprende que tú no ___ ver el partido.", "querer", "quieras", "", "querer → quieras (e → ie)."], ["Es increíble que ___ tanto.", "comer · vosotros", "comáis", "", "-er → -áis."], ["Dudo que Sole ___ la mesa.", "reservar", "reserve", "", "reservar → reserve."]];
+const EXC=[["Discrepas con cortesía sobre GTA VI.", ["Entiendo, pero no creo que GTA VI sea mejor que FIFA.", "No creo que GTA VI es mejor.", "Estás loco, FIFA es mejor."], "", "Empatía + no creo que + subjuntivo."], ["Te sorprende que un amigo no coma pizza.", ["Me sorprende que no comas pizza.", "Me sorprende que no comes pizza.", "Qué raro eres."], "", "Me sorprende que + subjuntivo."], ["Das tu opinión afirmativa sobre la piña.", ["Creo que la pizza con piña está buena.", "Creo que la pizza con piña esté buena.", "Creo que la pizza con piña estaría."], "", "Creo que + indicativo."], ["Dudas de que tu equipo gane.", ["Dudo que nuestro equipo gane.", "Dudo que nuestro equipo gana.", "Dudo que nuestro equipo ganará."], "", "Dudo que + subjuntivo."], ["Te alegras de que tu amigo venga a cenar.", ["Me alegra que vengas a la cena.", "Me alegra que vienes a la cena.", "Me alegra venir tú a la cena."], "", "Me alegra que + subjuntivo."], ["Defiendes tu postura con firmeza amable.", ["Entiendo tu punto, pero sigo pensando que es mejor jugar en el polideportivo.", "Sigo pensando que sea mejor jugar en el polideportivo.", "Estás equivocado, punto."], "", "Sigo pensando que + indicativo."], ["No estás de acuerdo con el «mejor del equipo».", ["No creo que sea el mejor, pero juega muy bien.", "No creo que es el mejor.", "No es el mejor y ya está."], "", "No creo que + subjuntivo y matiz."], ["Cedes un punto en el debate.", ["Tienes razón en eso, aunque dudo que sea para tanto.", "Tienes razón. Me callo.", "Tengo razón y tú no."], "", "Conceder con tacto."], ["Preguntas qué piensa tu amigo sobre la piña.", ["¿Crees que la piña va bien en la pizza?", "¿Crees que la piña vaya bien en la pizza?", "¿Crees que va bien o no? Contesta ya."], "", "¿Crees que + indicativo?"], ["Te molesta que un amigo use el móvil en la cena.", ["Me molesta un poco que uses el móvil en la cena.", "Me molesta que usas el móvil.", "Deja el móvil, es de mala educación."], "", "Me molesta que + subjuntivo."], ["Muestras sorpresa con cortesía.", ["¡No me digas! Me sorprende que haya ganado tan fácil.", "¡No me digas! Me sorprende que ganó tan fácil.", "¡No me digas! Me sorprende ganó tan fácil."], "", "Me sorprende que + subjuntivo."], ["Lamentas que se cancele un plan.", ["Es una pena que se cancele el partido.", "Es una pena que se cancela el partido.", "Es una pena que se cancelaría el partido."], "", "Es una pena que + subjuntivo."], ["Dudas de la veracidad de lo que cuenta un amigo.", ["Dudo que eso sea verdad, ¿lo viste tú?", "Dudo que eso es verdad.", "Eso es mentira seguro."], "", "Dudo que + subjuntivo."], ["Terminas el debate con humor.", ["Vale, no estamos de acuerdo, pero la pizza la pago yo.", "Vale, gano yo y punto.", "No hablamos más."], "", "Cerrar con humor."], ["Alguien dice que no cree que sepas cocinar.", ["Pues no lo creas, pero cocino muy bien.", "Pues no lo creas, pero cocinaré muy bien.", "Pues no lo creas, pero cocine muy bien."], "", "Pero + indicativo para afirmar."]];
+
+function mount(id,raw,kind,splits){
+ const ol=$(id),sc=$(id+'sc');
+ const I=raw.map(x=>kind==='ty'?{q:x[0],hint:x[1],ans:x[2],en:x[3],why:x[4]}:{q:x[0],o:x[1],ans:x[1][0],en:x[2],why:x[3]});
+ let st=[];
+ const upd=()=>{const d=st.filter(s=>s.d).length,ok=st.filter(s=>s.ok).length,f=st.filter(s=>s.f).length;
+  sc.textContent=d?`${d} / ${I.length} hechas · ${ok} correctas · ${f} a la primera`:`${I.length} frases · 2 intentos por frase`;
+  if(d===I.length&&ok===I.length)confetti(sc)};
+ function draw(){
+  cmHide();st=I.map(()=>({t:0,d:false,ok:false,f:false}));
+  ol.innerHTML=I.map((x,i)=>`<li data-i="${i}"><span>${x.q.replace('___','<b class="v">___</b>')}${x.hint?`<span class="hint">(${x.hint})</span>`:''}</span>`+
+   (kind==='ty'?`<div class="ty"><input type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" aria-label="Respuesta ${i+1}"><button type="button" class="act">Comprobar</button></div>`
+    :`<div class="op${kind==='sit'?' long':''}">${sh(x.o).map(o=>`<button type="button">${o}</button>`).join('')}</div>`)+
+   `<span class="sol" role="status" hidden></span></li>`).join('');
+  const L=[...ol.children];splits.forEach(p=>L[p[0]].insertAdjacentHTML('beforebegin',`<div class="div${p[2]?' cl':''}">${p[1]}</div>`));
+  upd()}
+ function judge(li,i,good,given){
+  const x=I[i],s=st[i],m=li.querySelector('.sol');s.t++;
+  let msg,tip=false;
+  if(good){s.d=s.ok=true;s.f=s.t===1;tip=true;msg=`✓ ${s.t===1?'¡Correcto!':'¡Bien, a la segunda!'} ${x.why}`;
+   if(kind==='ty'&&given.trim().toLowerCase()!==x.ans.toLowerCase())msg+=` (Ojo con la tilde: «${x.ans}»).`}
+  else if(s.t>=2){s.d=true;msg=`✗ La respuesta correcta es «${x.ans}». ${x.why}`}
+  else msg='✗ Todavía no. Te queda 1 intento.';
+  m.hidden=false;m.className='sol'+(tip?' tip':'');m.innerHTML=msg;restart(m,'sol');
+  if(s.d){cmHide();li.querySelectorAll('button,input').forEach(el=>{el.disabled=true});
+   if(kind==='ty'){li.querySelector('input').classList.add(s.ok?'ok':'bad')}
+   else li.querySelectorAll('.op button').forEach(bt=>{if(bt.textContent===x.ans)bt.classList.add('ok')})}
+  upd()}
+ ol.onclick=e=>{const li=e.target.closest('li');if(!li)return;const i=+li.dataset.i;if(st[i].d)return;
+  if(kind==='ty'){if(!e.target.closest('.ty button'))return;typed(li,i)}
+  else{const b=e.target.closest('.op button');if(!b||b.disabled)return;const good=b.textContent===I[i].ans;
+   if(!good){b.classList.add('bad');b.disabled=true;restart(b,'fx-bad')}else{b.classList.add('ok');restart(b,'fx-ok')}
+   judge(li,i,good)}};
+ function typed(li,i){const inp=li.querySelector('input'),v=inp.value;if(!v.trim()){inp.focus();return}
+  const good=nz(v)===nz(I[i].ans);if(!good){restart(inp,'fx-bad')}judge(li,i,good,v);if(!st[i].d){inp.focus();inp.select()}}
+ ol.onkeydown=e=>{if(kind==='ty'&&e.key==='Enter'&&e.target.matches('.ty input')){e.preventDefault();const li=e.target.closest('li'),i=+li.dataset.i;if(!st[i].d)typed(li,i)}};
+ $(id+'rs').onclick=draw;draw()}
+mount('exA',EXA,'mc',[[0,'en clase · elige la forma correcta',1]]);
+mount('exB',EXB,'ty',[[0,'en clase · escribe el verbo',1]]);
+mount('exC',EXC,'sit',[[0,'en clase · elige tu respuesta',1]]);
+
+/* diálogo con ramas */
+const DL=[["Iker", "GTA VI es mucho mejor que FIFA, ¿a que sí?", "GTA VI is much better than FIFA, right?", ["Entiendo, pero no creo que sea mejor: FIFA lo juego con mis amigos.", "No creo que es mejor.", "Sí, sí, tienes razón siempre."], "Empatía + no creo que + subjuntivo."], ["Marta", "Pues yo dudo que GTA VI tenga mejor historia que un partido de verdad.", "Well, I doubt GTA VI has a better story than a real match.", ["Tienes razón en parte, pero me sorprende que no te guste la historia de GTA.", "Dudo que tienes razón.", "Es mentira, no hablo."], "Conceder + me sorprende que + subjuntivo."], ["Sole", "Y la pizza con piña, ¿qué? Yo creo que está riquísima.", "And pineapple pizza? I think it's delicious.", ["Me sorprende que te guste, pero no creo que sea buena idea ponerla en mi pizza.", "Me sorprende que te gusta.", "No creo que piña pizza."], "Sentimiento + que + subjuntivo."], ["Iker", "Vale, ¿entonces con quién estás tú, Andrei?", "OK, so who are you with, Andrei?", ["Dudo que nos pongamos de acuerdo, así que pido pizza para todos y jugamos los dos juegos.", "Dudo que nos ponemos de acuerdo.", "Estoy con nadie."], "Dudo que + subjuntivo y propuesta final."]];
+let dt=0;const dl=$('dl'),op=$('opts'),mk=(c,n,t,e)=>`<div class="ln ${c}"><div class="av">${c==='me'?'Tú':n[0]}</div><div><p class="nm">${n}</p><div class="bub">${t}${E(e)}</div></div></div>`;
+function turn(){if(dt>=DL.length){op.innerHTML='';dl.insertAdjacentHTML('beforeend','<div class="box" style="margin:0">¡Debate cerrado con pizza y sin enemigos! 🎉</div>');confetti(op);return}
+ const d=DL[dt];dl.insertAdjacentHTML('beforeend',mk('fr',d[0],d[1],d[2]));
+ op.innerHTML=sh(d[3].map((t,i)=>[t,i])).map(o=>`<button type="button" data-ok="${o[1]===0}">${o[0]}</button>`).join('');}
+op.onclick=e=>{const b=e.target.closest('button');if(!b||b.disabled)return;const d=DL[dt];
+ if(b.dataset.ok==='true'){dl.insertAdjacentHTML('beforeend',mk('me','Tú',b.textContent));dt++;turn()}
+ else{b.classList.add('bad');b.disabled=true;restart(b,'fx-bad');if(!op.querySelector('.sol'))op.insertAdjacentHTML('beforeend',`<span class="sol">✗ ${d[4]}</span>`)}};
+$('dre').onclick=()=>{dt=0;dl.innerHTML='';turn()};turn();
+const CK=["No creo que + subj.", "Dudo que + subj.", "Me sorprende que + subj.", "Me alegra que + subj.", "Es una pena que + subj.", "Creo que + indicativo", "Entiendo, pero…"];
+$('ck').innerHTML=CK.map(c=>`<label class="ck"><input type="checkbox"> ${c}</label>`).join('');
+$('ck').onchange=e=>{const all=[...$('ck').querySelectorAll('input')];if(all.every(x=>x.checked))confetti(e.target)};
+
+/* tarea: notas */
+const KEY='andrei-clase21-tarea',na=$('notes');
+(async()=>{try{if(window.storage){const r=await window.storage.get(KEY);if(r&&typeof r.value==='string'){na.value=r.value;return}}}catch(e){}const v=ld(KEY);if(v)na.value=v})();
+$('sv').onclick=async()=>{let ok=false;try{if(window.storage)ok=!!await window.storage.set(KEY,na.value)}catch(e){}if(!ok){sv(KEY,na.value);ok=true}
+ const f=$('svf');f.textContent=ok?'Guardado ✓':'No se pudo guardar';f.classList.add('show');setTimeout(()=>f.classList.remove('show'),1800)};
+</script>
+<script>
+/* explica a diez personas: marcar y sortear */
+(function(){
+var RM=matchMedia('(prefers-reduced-motion:reduce)').matches;
+function ld(k){try{return localStorage.getItem(k)}catch(e){return null}}
+function sv(k,v){try{localStorage.setItem(k,v)}catch(e){}}
+document.querySelectorAll('.ppl').forEach(function(box){
+  var key='andrei-pp-'+box.getAttribute('data-k'),items=[].slice.call(box.querySelectorAll('.ppl-i')),sc=box.querySelector('.ppl-sc'),saved={};
+  try{saved=JSON.parse(ld(key)||'{}')||{}}catch(e){saved={}}
+  items.forEach(function(li,i){li.querySelector('input').checked=!!saved[i]});
+  function upd(){var n=0,o={};items.forEach(function(li,i){var c=li.querySelector('input').checked;li.classList.toggle('done',c);if(c){n++;o[i]=1}});
+    sc.textContent=n+' / '+items.length+' ✓';sv(key,JSON.stringify(o))}
+  box.addEventListener('change',function(e){if(e.target.closest('.ppl-i'))e.target.closest('.ppl-i').classList.remove('pick');upd()});
+  box.querySelector('.ppl-rnd').onclick=function(){
+    var left=items.filter(function(li){return !li.querySelector('input').checked});
+    items.forEach(function(li){li.classList.remove('pick')});
+    if(!left.length){sc.textContent='¡Las diez hechas! ✓';return}
+    var li=left[Math.floor(Math.random()*left.length)];li.classList.add('pick');
+    li.scrollIntoView({block:'center',behavior:RM?'auto':'smooth'})};
+  box.querySelector('.ppl-rs').onclick=function(){items.forEach(function(li){li.querySelector('input').checked=false;li.classList.remove('pick')});upd()};
+  upd();
+});
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Clase 40 · El plan perfecto — Andrei</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* clase */
+:root{
+  --paper:#FBF7EE;--paper-top:#F6EEDA;--paper-raised:#FFFFFF;--paper-alt:#F3ECDA;
+  --ink:#23291F;--ink-soft:#565F52;--ink-faint:#6E7568;
+  --line:rgba(35,41,31,.12);--line-strong:rgba(35,41,31,.22);
+  --b1:#2F6FED;--b1-soft:#EAF1FE;--b1-line:#C6D9FC;
+  --b2:#2E9E6B;--b2-soft:#E9F6EF;--b2-line:#BEE6D3;
+  --b3:#DB8A2E;--b3-soft:#FCF1E1;--b3-line:#F3D9AF;
+  --family:#B5502E;--family-soft:#FBEBE3;--family-line:#EFC9B4;
+  --f-display:'Fraunces',Georgia,serif;--f-body:'IBM Plex Sans',system-ui,sans-serif;--f-data:'IBM Plex Mono',monospace;
+  --r-sm:12px;--r-md:18px;--r-lg:26px;
+  --shadow-1:0 1px 2px rgba(35,41,31,.05),0 10px 28px rgba(35,41,31,.07);
+  color-scheme:light}
+:root[data-theme="dark"]{
+  --paper:#171912;--paper-top:#22251A;--paper-raised:#22251B;--paper-alt:#2B2F22;
+  --ink:#F1EDE0;--ink-soft:#C3C7B8;--ink-faint:#9CA190;
+  --line:rgba(241,237,224,.14);--line-strong:rgba(241,237,224,.28);
+  --b1-soft:#1D2A44;--b1-line:#2F4B82;--b2-soft:#1B3328;--b2-line:#2B6A4C;--b3-soft:#3A2D18;--b3-line:#7A5524;--family-soft:#3A2219;--family-line:#7A3F29;
+  --shadow-1:0 1px 2px rgba(0,0,0,.45),0 10px 28px rgba(0,0,0,.35);color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-padding-top:calc(70px + env(safe-area-inset-top,0px))}
+body{margin:0;background:linear-gradient(180deg,var(--paper-top) 0,var(--paper) 460px) fixed,var(--paper);color:var(--ink);font:15px/1.6 var(--f-body);padding-bottom:env(safe-area-inset-bottom,0px)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--paper);z-index:10}
+::selection{background:var(--b3-soft)}
+:focus-visible{outline:2px solid var(--b3);outline-offset:2px}
+.skip{position:absolute;left:-999px}.skip:focus{left:12px;top:12px;z-index:20;background:var(--paper-raised);padding:8px 14px;border-radius:99px}
+.sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.plx{position:fixed;inset:-20vh 0;z-index:-1;pointer-events:none;overflow:hidden}
+.plx i{position:absolute;border-radius:50%;filter:blur(60px);opacity:.45;will-change:transform}
+.plx i:nth-child(1){width:46vmax;height:46vmax;left:-14vmax;top:4vh;background:radial-gradient(circle,color-mix(in srgb,var(--b3) 40%,transparent),transparent 70%)}
+.plx i:nth-child(2){width:38vmax;height:38vmax;right:-12vmax;top:70vh;background:radial-gradient(circle,color-mix(in srgb,var(--b1) 30%,transparent),transparent 70%)}
+.wrap{max-width:780px;margin:0 auto;padding:0 clamp(16px,4vw,28px) 90px}
+header .wrap{padding-top:34px;padding-bottom:0}
+.eyebrow{font:500 12px var(--f-data);letter-spacing:.14em;text-transform:uppercase;color:var(--b3);margin:0 0 10px;display:flex;align-items:center;gap:10px}
+.eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--b3)}
+h1{font:600 clamp(30px,5.6vw,48px)/1.08 var(--f-display);letter-spacing:-.02em;margin:0 0 14px;text-wrap:balance}
+h1 em{font-style:italic;background:linear-gradient(90deg,var(--b3) 20%,var(--family));-webkit-background-clip:text;background-clip:text;color:transparent}
+.lede{font-size:16px;color:var(--ink-soft);max-width:58ch;margin:0}
+.meta-row{display:flex;flex-wrap:wrap;gap:20px;margin-top:22px;font:12px var(--f-data);color:var(--ink-faint)}
+.meta-row strong{display:block;color:var(--ink);font:500 14.5px var(--f-display);margin-top:3px}
+.en{color:var(--ink-faint);font-size:.88em;font-style:italic;font-weight:400;text-transform:none;letter-spacing:0}
+.en.b{display:block;margin-top:2px}
+body[data-lang="es"] .en{display:none!important}
+h1 .en{display:block;font:italic 400 clamp(15px,2.6vw,19px)/1.35 var(--f-body);margin-top:8px}
+/* barra */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:11;background:color-mix(in srgb,var(--paper) 82%,transparent);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);padding-block:10px;margin-block:24px 4px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.nav-btn{width:36px;height:36px;display:grid;place-items:center;border:1px solid var(--line-strong);border-radius:50%;background:var(--paper-raised);color:var(--ink-soft);cursor:pointer;padding:0}
+.nav-btn:hover,.nav-btn[aria-expanded=true]{border-color:var(--b3);color:var(--b3)}
+.nav-btn path{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round}
+.toc{position:absolute;top:calc(100% + 8px);left:0;width:min(380px,100%);padding:8px;border:1px solid var(--line-strong);border-radius:var(--r-md);background:var(--paper-raised);box-shadow:var(--shadow-1)}
+.toc[hidden]{display:none}
+.toc a{display:flex;gap:12px;align-items:center;min-height:42px;padding:6px 10px;border-radius:var(--r-sm);color:var(--ink);text-decoration:none;font:500 14.5px var(--f-display)}
+.toc a:hover{background:var(--b3-soft)}
+.toc a b{font:500 12px var(--f-data);color:#fff;background:var(--b3);width:24px;height:24px;border-radius:50%;display:grid;place-items:center;flex:none}
+.bar-t{font:600 13px var(--f-display);color:var(--ink-soft);margin-right:auto}
+.seg{display:inline-flex;gap:3px;padding:3px;border:1px solid var(--line-strong);border-radius:99px;background:var(--paper-raised)}
+.seg button{border:0;background:none;padding:5px 13px;border-radius:99px;font:12px var(--f-data);color:var(--ink-soft);cursor:pointer;min-height:30px}
+.seg button[aria-pressed=true]{background:var(--b3);color:#fff;box-shadow:0 6px 16px color-mix(in srgb,var(--b3) 30%,transparent)}
+.btn{font:600 13px var(--f-body);background:var(--paper-raised);color:var(--ink-soft);border:1px solid var(--line-strong);border-radius:99px;padding:7px 15px;cursor:pointer}
+.btn:hover{border-color:var(--b3);color:var(--b3)}
+@media(max-width:600px){.bar-t{display:none}}
+/* secciones */
+section{background:var(--paper-raised);border:1px solid var(--line);border-radius:var(--r-lg);box-shadow:var(--shadow-1);margin-top:18px;padding:24px 26px 28px;scroll-margin-top:84px;position:relative;opacity:calc(.74 + .26*var(--a,1))}
+section.rp{background:var(--b1-soft);border-color:var(--b1-line)}section.rp .num{background:var(--b1)}
+section.tk{background:var(--family-soft);border-color:var(--family-line)}section.tk .num{background:var(--family)}
+h2{font:italic 500 22px/1.2 var(--f-display);margin:0 0 6px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+h2 .en{font:400 .6em var(--f-body);font-style:italic}
+h3{font:500 17px var(--f-display);margin:20px 0 6px}
+.num{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;flex:none;font:500 13px var(--f-data);background:var(--b3);color:#fff;font-style:normal}
+section.fx-num .num{animation:fxNum .65s cubic-bezier(.2,.9,.3,1.4) both}
+@keyframes fxNum{0%{transform:scale(.2) rotate(-90deg);opacity:0}100%{transform:none;opacity:1}}
+.cue{margin-left:auto;font:11px var(--f-data);color:var(--ink-faint);background:var(--paper-alt);border-radius:99px;padding:2px 10px;font-style:normal}
+.sub{color:var(--ink-soft);margin:0 0 12px;font-size:14.5px}
+.box{margin:14px 0 0;padding:13px 16px;background:var(--b3-soft);border:1px solid var(--b3-line);border-radius:var(--r-md);font-size:14.5px;color:var(--ink-soft)}
+.box strong,.box b{color:var(--ink)}
+.box.pr{background:var(--paper-alt);border-color:var(--line)}
+.box.wr{background:var(--family-soft);border-color:var(--family-line)}.box.wr b{color:var(--family)}
+ol.ex{padding:0;margin:8px 0 0;list-style:none;counter-reset:q}
+ol.ex>li{counter-increment:q;padding:11px 0;border-top:1px solid var(--line)}
+ol.ex>li::before{content:counter(q)".";font:12px var(--f-data);color:var(--ink-faint);margin-right:8px}
+.v{color:var(--b3);font-weight:600;text-decoration:underline;text-decoration-color:var(--b3-line);text-decoration-thickness:2px;text-underline-offset:3px}
+.div{display:flex;align-items:center;gap:10px;margin:16px 0 4px;font:11px var(--f-data);text-transform:uppercase;letter-spacing:.06em;color:var(--ink-faint)}
+.div::before,.div::after{content:"";flex:1;height:1px;background:var(--line)}
+.div.cl{color:var(--b3)}.div.cl::before,.div.cl::after{background:var(--b3-line)}
+/* animación de peldaños */
+.anim{border:1px solid var(--line);border-radius:var(--r-md);background:var(--paper-alt);padding:16px 18px 10px;margin:14px 0}
+.anim .lab{font:11px var(--f-data);text-transform:uppercase;letter-spacing:.08em;color:var(--ink-faint);margin:0 0 8px}
+.step{display:flex;align-items:center;gap:10px;margin:6px 0;flex-wrap:wrap}
+.step .t2{font:11px var(--f-data);color:var(--ink-faint);width:92px;flex:none}
+.chip{display:inline-block;padding:7px 15px;border-radius:14px;background:var(--paper-raised);border:2px solid var(--line-strong);font:600 16px var(--f-display)}
+.chip.c1{border-color:var(--b3-line)}.chip.c2{border-color:var(--b3);color:var(--b3)}.chip.c3{border-color:var(--b1);color:var(--b1)}.chip.x{border-color:var(--family);color:var(--family);border-style:dashed}
+.anim.ready:not(.play) .t{opacity:0}
+.anim.play .t{animation:aPop .55s cubic-bezier(.2,.8,.3,1) var(--d,0s) both}
+@keyframes aPop{0%{opacity:0;transform:translateY(10px) scale(.7)}60%{opacity:1;transform:translateY(-3px) scale(1.05)}100%{opacity:1;transform:none}}
+.anim-foot{display:flex;justify-content:flex-end;margin-top:6px}
+.re{border:1px solid var(--line-strong);background:var(--paper-raised);border-radius:99px;padding:3px 12px;font:11.5px var(--f-data);color:var(--ink-soft);cursor:pointer}
+.re:hover{color:var(--b3);border-color:var(--b3-line)}
+.forms{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-top:12px}
+.forms div{background:var(--paper-raised);border:1px solid var(--b3-line);border-radius:var(--r-md);padding:10px 12px;text-align:center}
+.forms small{display:block;font:11px var(--f-data);color:var(--ink-faint);text-transform:uppercase}
+.forms b{font:600 18px var(--f-display);color:var(--b3)}
+.say{margin:7px 0;font-size:15.5px}
+.say .tag{font:11px var(--f-data);padding:1px 8px;border-radius:99px;margin-right:8px;color:#fff}
+.say .tag.k{background:var(--family)}.say .tag.o{background:var(--b2)}
+/* tarjetas */
+.fcs{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin:14px 0 0;perspective:900px}
+.fc{position:relative;min-height:118px;border:0;background:none;padding:0;cursor:pointer;transform-style:preserve-3d;transition:transform .5s cubic-bezier(.2,.8,.3,1);color:var(--ink)}
+.fc.on{transform:rotateY(180deg)}
+.fc>span{position:absolute;inset:0;display:grid;place-items:center;padding:10px 14px;border-radius:var(--r-md);backface-visibility:hidden;-webkit-backface-visibility:hidden;text-align:center;border:1px solid var(--line)}
+.fc .f{background:var(--paper-alt);font:600 17px var(--f-display)}
+.fc .bk{background:var(--b3-soft);border-color:var(--b3-line);transform:rotateY(180deg);font:500 14px/1.4 var(--f-body)}
+.fc .bk i{display:block;font-size:12px;color:var(--ink-faint);margin-top:4px}
+.fc:hover .f{border-color:var(--b3-line)}
+/* ejercicios */
+.op{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.op button{font:500 14px var(--f-body);border:1.5px solid var(--line-strong);background:var(--paper-raised);color:var(--ink);border-radius:99px;padding:6px 16px;cursor:pointer;transition:transform .1s,background .2s}
+.op button:hover:not(:disabled){border-color:var(--b3);transform:translateY(-1px)}
+.op button.pk{background:var(--b3-soft);border-color:var(--b3);color:var(--b3)}
+.op button.ok{background:var(--b2-soft);border-color:var(--b2);color:var(--b2)}.op button.ok::after{content:" ✓"}
+.op button.bad{background:var(--family-soft);border-color:var(--family);color:var(--family)}.op button.bad::after{content:" ✗"}
+.sol{display:block;margin:7px 0 0;padding:1px 0 1px 10px;border-left:3px solid var(--family);color:var(--family);font-size:13.5px;animation:fxSol .35s ease both}
+.sol.tip{color:var(--b2);border-color:var(--b2)}
+@keyframes fxSol{from{opacity:0;transform:translateX(-10px)}to{opacity:1;transform:none}}
+.sol[hidden]{display:none}
+.fx-ok{animation:fxOk .55s ease calc(var(--i,0)*90ms) both}.fx-bad{animation:fxBad .42s ease calc(var(--i,0)*90ms) both}
+@keyframes fxOk{35%{transform:scale(1.1);box-shadow:0 0 0 7px color-mix(in srgb,var(--b2) 30%,transparent)}}
+@keyframes fxBad{20%{transform:translateX(-7px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(3px)}}
+.fx-hide:not(.fx-show)>*{opacity:0}.fx-show>*{animation:fxUp .45s cubic-bezier(.2,.8,.3,1) calc(var(--i,0)*55ms) both}
+@keyframes fxUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.check{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-top:20px;padding-top:16px;border-top:1px dashed var(--line)}
+.act{font:600 14px var(--f-body);background:var(--b3);color:#fff;border:0;border-radius:99px;padding:10px 22px;cursor:pointer}
+.act:hover{transform:translateY(-1px)}
+.act.alt{background:none;color:var(--ink-soft);border:1.5px solid var(--line-strong)}
+.score{font:13px var(--f-data);color:var(--ink-faint)}
+/* ejercicios con intentos */
+.op button:disabled:not(.ok):not(.bad){opacity:.55;cursor:default}
+.op.long button{border-radius:var(--r-md);text-align:left;padding:8px 14px}
+.ty{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.ty input{flex:1 1 180px;min-width:0;font:500 15px var(--f-body);border:1.5px solid var(--line-strong);background:var(--paper-raised);color:var(--ink);border-radius:99px;padding:7px 16px}
+.ty input:focus{outline:none;border-color:var(--b3);box-shadow:0 0 0 4px color-mix(in srgb,var(--b3) 20%,transparent)}
+.ty input.ok{border-color:var(--b2);background:var(--b2-soft);color:var(--b2)}
+.ty input.bad{border-color:var(--family);background:var(--family-soft);color:var(--family)}
+.ty .act{padding:7px 18px;font-size:13px}
+.ty .act:disabled{opacity:.5;cursor:default;transform:none}
+.hint{font:12px var(--f-data);color:var(--ink-faint);margin-left:8px;white-space:nowrap}
+.exh{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+/* menú de caracteres */
+.cm{position:fixed;z-index:70;display:flex;flex-wrap:wrap;gap:4px;max-width:min(92vw,330px);padding:6px;background:var(--paper-raised);border:1px solid var(--line-strong);border-radius:var(--r-md);box-shadow:var(--shadow-1)}
+.cm[hidden]{display:none}
+.cm button{min-width:36px;height:36px;padding:0 8px;display:grid;place-items:center;border:1px solid var(--line);border-radius:10px;background:var(--paper-alt);color:var(--ink);font:600 17px var(--f-display);cursor:pointer;touch-action:manipulation}
+.cm button:hover{border-color:var(--b3);color:var(--b3)}
+.cm button.sh{font:600 15px var(--f-body);color:var(--ink-soft)}
+.cm button.sh[aria-pressed=true]{background:var(--b3);border-color:var(--b3);color:#fff}
+/* diálogo */
+.dl{display:flex;flex-direction:column;gap:12px;margin-top:12px}
+.ln{display:flex;gap:10px;align-items:flex-start;animation:fxUp .4s ease both}
+.av{flex:none;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font:600 14px var(--f-display);color:#fff;background:var(--ink-faint)}
+.ln.me .av{background:var(--b1)}
+.bub{background:var(--paper-raised);border:1px solid var(--line);border-radius:var(--r-md);padding:10px 14px;font-size:14.5px}
+.ln.me .bub{border-color:var(--b1-line)}
+.nm{font:11px var(--f-data);text-transform:uppercase;color:var(--ink-faint);margin:0 0 3px}
+.opts{display:grid;gap:8px;margin-top:12px}
+.opts button{text-align:left;font:500 14.5px var(--f-body);border:1.5px solid var(--b1-line);background:var(--paper-raised);color:var(--ink);border-radius:var(--r-md);padding:9px 14px;cursor:pointer}
+.opts button:hover:not(:disabled){border-color:var(--b1)}
+.opts button.bad{border-color:var(--family);background:var(--family-soft)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+.card{border:1px solid var(--b1-line);background:var(--paper-raised);border-radius:var(--r-md);padding:12px 16px;font-size:14px}
+.card h3{margin:0 0 4px;font-size:15px}
+@media(max-width:600px){.two{grid-template-columns:1fr}section{padding:18px 16px 22px}}
+textarea{width:100%;min-height:90px;border:1px solid var(--family-line);border-radius:var(--r-sm);padding:10px 12px;background:var(--paper-raised);color:var(--ink);font:inherit;margin-top:10px;transition:box-shadow .2s}
+textarea:focus{outline:none;box-shadow:0 0 0 4px color-mix(in srgb,var(--family) 20%,transparent)}
+.ck{display:block;padding:5px 0;cursor:pointer}
+.sv{font:12px var(--f-data);color:var(--b2);margin-left:10px;opacity:0;transition:opacity .3s}.sv.show{opacity:1}
+footer{max-width:780px;margin:0 auto;padding:0 clamp(16px,4vw,28px) 60px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font:12.5px var(--f-data);color:var(--ink-faint)}
+.cf-wrap{position:fixed;width:0;height:0;z-index:60;pointer-events:none}
+.cf{position:absolute;width:8px;height:12px;border-radius:2px;background:var(--c);opacity:0;animation:cfFly 1.2s cubic-bezier(.2,.7,.3,1) forwards}
+@keyframes cfFly{0%{opacity:1}45%{opacity:1;transform:translate(calc(var(--dx)*.8),var(--up)) rotate(200deg)}100%{opacity:0;transform:translate(var(--dx),var(--fall)) rotate(var(--rot))}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.plx,.cf-wrap{display:none}.fx-hide>*,.anim.ready .t{opacity:1!important}}
+@media print{.plx,.bar,body::before,.cf-wrap,.cm{display:none}section{opacity:1;box-shadow:none}}
+
+/* explica a diez personas */
+section.pp{background:var(--b2-soft);border-color:var(--b2-line)}
+.pp .num{background:var(--b2)}
+.pp-use{display:flex;flex-wrap:wrap;gap:6px 8px;align-items:center;margin:0 0 8px;font-size:13px}
+.pp-use span{background:var(--paper-raised);border:1px solid var(--b2-line);border-radius:99px;padding:2px 11px;font:12.5px var(--f-data);color:var(--ink-soft)}
+.tk .pp-use span{border-color:var(--family-line)}
+.ppl-ol{list-style:none;margin:8px 0 0;padding:0}
+.ppl-i{border-top:1px solid var(--line)}
+.ppl-i label{display:grid;grid-template-columns:22px 1fr;gap:12px;align-items:start;padding:11px 8px;cursor:pointer;border-radius:var(--r-sm)}
+.ppl-i input{width:20px;height:20px;margin:2px 0 0;accent-color:var(--b2);cursor:pointer}
+.tk .ppl-i input{accent-color:var(--family)}
+.ppl-w{display:block;font-size:12.5px;color:var(--ink-faint)}
+.ppl-w b{font-size:14px;color:var(--ink);font-weight:600}
+.ppl-t{display:block;margin-top:2px;line-height:1.5}
+.ppl-i.done .ppl-t{color:var(--ink-faint)}
+.ppl-i.pick label{background:var(--b3-soft);outline:2px solid var(--b3);outline-offset:-2px}
+.pp-hw{margin-top:24px;padding-top:4px;border-top:1px dashed var(--line-strong)}
+</style>
+</head>
+<body data-lang="es-en">
+<a class="skip" href="#main">Saltar al contenido</a>
+<div class="plx" aria-hidden="true"><i></i><i></i></div>
+<header><div class="wrap">
+  <p class="eyebrow"><span class="dot"></span>Clase 40 de 44 · L8 · Presenting without notes · el plan perfecto</p>
+  <h1>El plan <em>perfecto</em><span class="en">The perfect plan</span></h1>
+  <p class="lede">Hoy presentas un plan de principio a fin, sin papeles: objetivo, opciones, ventajas, riesgos y próximos pasos. Conectores, condicional y subjuntivo al servicio de una presentación segura. Casi todo se dice en voz alta.<span class="en b">Today you present a plan from start to finish, without notes: goal, options, pros, risks and next steps. Connectors, conditional and subjunctive at the service of a confident presentation. Almost everything is said aloud.</span></p>
+  <div class="meta-row"><div>Duración<strong>50 min</strong></div><div>Construye sobre<strong>Clases 12, 36 y 38</strong></div><div>Nivel<strong>B2</strong></div></div>
+</div></header>
+
+<main class="wrap" id="main" tabindex="-1">
+<div class="bar" role="group" aria-label="Controles de la página">
+  <button type="button" class="nav-btn" id="navBtn" aria-label="Menú de partes" aria-expanded="false" aria-controls="toc"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><path d="M3 5.5h14M3 10h14M3 14.5h14"/></svg></button>
+  <nav class="toc" id="toc" aria-label="Partes" hidden></nav>
+  <span class="bar-t">Ir a una parte</span>
+  <div class="seg" id="lang" role="group" aria-label="Idioma"><button type="button" data-lang="es" aria-pressed="false">Español</button><button type="button" data-lang="es-en" aria-pressed="true">Español + EN</button></div>
+  <button type="button" class="btn" id="themeBtn" aria-pressed="false">Modo oscuro</button>
+</div>
+
+<section id="s0" aria-labelledby="s0-t"><h2 id="s0-t"><span class="num">0</span><span>Calentamiento oral<span class="en"> Oral warm-up</span></span><span class="cue">⏱ 4 min</span></h2>
+<p class="sub">Sin pantalla: escuchas y contestas con frases completas. Lee el profesor.<span class="en b">No screen: you listen and answer in full sentences. The teacher reads.</span></p>
+<ol class="ex"><li>¿Cuál es el <span class="v">mejor plan</span> que has organizado para tus amigos?<span class="en b">What is the best plan you’ve organised for your friends?</span></li><li>¿Qué haces para <span class="v">no ponerte nervioso</span> cuando hablas delante de varias personas?<span class="en b">What do you do to not get nervous when speaking in front of several people?</span></li><li>¿Cómo <span class="v">empiezas</span> una presentación? ¿Y cómo la terminas?<span class="en b">How do you start a presentation? And how do you end it?</span></li><li>¿Qué <span class="v">riesgos</span> tiene organizar un torneo de fútbol con amigos?<span class="en b">What risks are there in organising a football tournament with friends?</span></li></ol></section>
+
+<section id="s1" aria-labelledby="s1-t"><h2 id="s1-t"><span class="num">1</span><span>Estructura de una presentación<span class="en"> Structure of a presentation</span></span><span class="cue">⏱ 9 min</span></h2>
+<p class="sub">Cinco pasos: objetivo, opciones, ventajas, riesgos y próximos pasos. Sube peldaño a peldaño.<span class="en b">Five steps: goal, options, pros, risks and next steps. Climb one step at a time.</span></p>
+<div class="anim" id="an1"><p class="lab">Cinco pasos<span class="en">  · five steps</span></p><div class="step"><span class="t2">1 · objetivo</span><span class="chip c1 t" style="--d:0s">Mi propuesta es organizar un torneo el sábado.</span></div><div class="step"><span class="t2">2 · opciones</span><span class="chip c1 t" style="--d:0.5s">Hay dos opciones: jugar por la mañana o por la tarde.</span></div><div class="step"><span class="t2">3 · ventajas</span><span class="chip c2 t" style="--d:1s">Por un lado, se juega con menos calor.</span></div><div class="step"><span class="t2">4 · riesgos</span><span class="chip c3 t" style="--d:1.5s">En caso de que llueva, lo dejaríamos para el domingo.</span></div><div class="step"><span class="t2">5 · pasos</span><span class="chip c3 t" style="--d:2s">En cuanto confirméis, reservo el polideportivo.</span></div><div class="anim-foot"><button type="button" class="re">↻ Repetir<span class="en">  · Replay</span></button></div></div><div class="anim" id="an2"><p class="lab">Frases de presentador<span class="en">  · presenter phrases</span></p><div class="step"><span class="t2">abrir</span><span class="chip c1 t" style="--d:0s">Voy a hablaros de un plan para el sábado.</span></div><div class="step"><span class="t2">ordenar</span><span class="chip c2 t" style="--d:0.5s">En primer lugar… en segundo lugar…</span></div><div class="step"><span class="t2">cambiar de punto</span><span class="chip c2 t" style="--d:1s">Pasando a las ventajas…</span></div><div class="step"><span class="t2">cerrar</span><span class="chip c3 t" style="--d:1.5s">En resumen, mi propuesta es…</span></div><div class="anim-foot"><button type="button" class="re">↻ Repetir<span class="en">  · Replay</span></button></div></div>
+<div class="box"><b>Receta:</b> abrir (<i>voy a hablaros de…</i>) → ordenar (<i>en primer lugar…</i>) → contrastar (<i>por un lado… por otro</i>) → proponer con condicional (<i>podríamos, sería mejor que…</i>) → condiciones con subjuntivo (<b>siempre que, en caso de que, en cuanto</b>) → cerrar (<i>en resumen</i>).<span class="en b">Recipe: open → order → contrast → propose with the conditional → conditions with the subjunctive (siempre que, en caso de que, en cuanto) → close.</span></div>
+<div class="forms"><div><small>abrir</small><b>voy a hablaros de</b></div><div><small>ordenar</small><b>en primer lugar</b></div><div><small>proponer</small><b>podríamos + inf.</b></div><div><small>condición</small><b>siempre que + subj.</b></div><div><small>riesgo</small><b>en caso de que + subj.</b></div><div><small>cerrar</small><b>en resumen</b></div></div>
+<div class="box pr">🗣️ <b>Pronunciación de hoy:</b> ritmo de presentador seguro: habla un poco más despacio de lo normal, haz una pausa tras cada idea y baja el tono al final de cada frase (↘).<span class="en b">confident presenter rhythm: speak a little slower than usual, pause after each idea and drop your tone at the end of each sentence (↘).</span><p class="say"><span class="tag k">acelerado</span>Vamos a jugar y luego pizza y ya vemos.</p><p class="say"><span class="tag o">seguro</span>Primero, jugamos. ↘ Después, cenamos pizza. ↘</p></div>
+<div class="box wr"><b>Cuidado:</b> «en caso de que» y «siempre que» llevan subjuntivo: «en caso de que llueva». Y no leas: mira al grupo y apóyate en tres palabras clave, no en frases enteras.<span class="en b">“en caso de que” and “siempre que” take the subjunctive. And don’t read: look at the group and lean on three key words, not whole sentences.</span></div></section>
+
+<section id="s2" aria-labelledby="s2-t"><h2 id="s2-t"><span class="num">2</span><span>Repaso relámpago<span class="en"> Lightning review</span></span><span class="cue">⏱ 5 min</span></h2>
+<p class="sub">Ocho expresiones clave. Dilo en voz alta antes de girar la tarjeta.<span class="en b">Eight key expressions. Say it aloud before flipping the card.</span></p>
+<div class="fcs" id="fcs"></div></section>
+
+<section id="s3" aria-labelledby="s3-t"><h2 id="s3-t"><span class="num">3</span><span>Practica<span class="en"> Practice</span></span><span class="cue">⏱ 11 min</span></h2>
+<p class="sub">Tres ejercicios de 15 frases. Cada frase te corrige al instante y tienes <b>dos intentos</b>: si fallas los dos, te enseñamos la respuesta. Los tres ejercicios se hacen en clase.<span class="en b">Three exercises of 15 sentences. Every sentence gives instant feedback and you get two tries: if you miss both, we show the answer. All three exercises are done in class.</span></p>
+
+<h3>A · Elige la forma correcta<span class="en"> · Pick the correct form</span></h3>
+<ol class="ex" id="exA"></ol>
+<div class="check"><div><button type="button" class="act alt" id="exArs">Reiniciar<span class="en"> · Reset</span></button></div><span class="score" id="exAsc"></span></div>
+
+<h3>B · Escribe el verbo<span class="en"> · Type the verb</span></h3>
+<p class="sub">Conjuga el verbo entre paréntesis. Pulsa Intro o «Comprobar». Al escribir, usa el menú de teclas (o clic derecho) para tildes, ñ, ¿ y ¡.<span class="en b">Conjugate the verb in brackets. Press Enter or “Check”. While typing, use the key menu (or right-click) for accents, ñ, ¿ and ¡.</span></p>
+<ol class="ex" id="exB"></ol>
+<div class="check"><div><button type="button" class="act alt" id="exBrs">Reiniciar<span class="en"> · Reset</span></button></div><span class="score" id="exBsc"></span></div>
+
+<h3>C · ¿Qué dices?<span class="en"> · What do you say?</span></h3>
+<p class="sub">Lee la situación y elige la respuesta más natural y gramaticalmente correcta.<span class="en b">Read the situation and pick the most natural, grammatically correct reply.</span></p>
+<ol class="ex" id="exC"></ol>
+<div class="check"><div><button type="button" class="act alt" id="exCrs">Reiniciar<span class="en"> · Reset</span></button></div><span class="score" id="exCsc"></span></div></section>
+
+<section id="s4" class="rp" aria-labelledby="s4-t"><h2 id="s4-t"><span class="num">4</span><span>Roleplay: presentar el plan<span class="en"> presenting the plan</span></span><span class="cue">⏱ 14 min</span></h2>
+<p class="sub">Presentas el fin de semana de torneo y pizza mientras tus amigos interrumpen con preguntas y objeciones. Elige la mejor respuesta y dila en voz alta antes de pulsar.<span class="en b">You present the tournament-and-pizza weekend while your friends interrupt with questions and objections. Pick the best reply and say it aloud before clicking.</span></p>
+<div class="dl" id="dl" aria-live="polite"></div><div class="opts" id="opts"></div>
+<button type="button" class="act alt" id="dre" style="margin-top:14px">↻ Otra vez<span class="en"> · Again</span></button>
+<h3>Parte 2 · Improvisación libre con rol<span class="en"> Part 2 · Free role-play</span></h3>
+<div class="two"><div class="card"><h3>Rol A · Andrei</h3>Presentas el fin de semana de torneo y pizza durante 4–5 minutos, sin papeles, y respondes a las objeciones. Usa un condicional, un subjuntivo con «en cuanto» o «en caso de que» y un conector de contraste.<span class="en b">You present the weekend for 4–5 minutes, without notes, and answer objections. Use a conditional, a subjunctive with “en cuanto” or “en caso de que” and a contrast connector.</span></div><div class="card"><h3>Rol B · Amigos</h3>El profesor interrumpe con preguntas y objeciones: «¿y si llueve?», «¿cuánto cuesta?». Después cambiáis.<span class="en b">The teacher interrupts with questions and objections: “what if it rains?”, “how much?”. Then swap.</span></div></div>
+<p style="margin:14px 2px 2px"><b>Marca lo que uses:</b><span class="en"> Tick what you use:</span></p>
+<div id="ck"></div></section>
+
+<section id="s5" class="pp" aria-labelledby="s5-t"><h2 id="s5-t"><span class="num">5</span><span>Explica a diez personas<span class="en"> Explain to ten people</span></span><span class="cue">⏱ 8 min</span></h2>
+<p class="sub">Diez personas inventadas necesitan que les expliques algo del tema de hoy. Elige una (o pulsa «Al azar») y explícaselo en voz alta en 20–30 segundos. Marca ✓ cuando termines.<span class="en b">Ten made-up people need you to explain something from today’s topic. Pick one (or press “Random”) and explain it aloud in 20–30 seconds. Tick ✓ when you’re done.</span></p>
+<div class="pp-use"><b>Usa:</b><span>Voy a hablaros de…</span><span>En primer lugar…</span><span>Por un lado… por otro</span><span>Podríamos + inf.</span><span>Siempre que / en caso de que / en cuanto + subj.</span><span>En resumen</span></div>
+<div class="ppl" data-k="c40-in"><ol class="ppl-ol"><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Marta"><span class="ppl-b"><span class="ppl-w"><b>1 · Marta</b> · amiga que organiza el torneo</span><span class="ppl-t">Explícale cómo abrir una presentación: «Voy a hablaros de un plan para el sábado».<span class="en b">Explain how to open a presentation.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Hugo"><span class="ppl-b"><span class="ppl-w"><b>2 · Hugo</b> · amigo</span><span class="ppl-t">Explícale los cinco pasos de una presentación: objetivo, opciones, ventajas, riesgos y próximos pasos.<span class="en b">Explain the five steps of a presentation.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Elena"><span class="ppl-b"><span class="ppl-w"><b>3 · Elena</b> · jubilada</span><span class="ppl-t">Explícale cómo presentar dos opciones con «hay dos opciones».<span class="en b">Explain how to present two options.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Tomás"><span class="ppl-b"><span class="ppl-w"><b>4 · Tomás</b> · compañero de piso</span><span class="ppl-t">Explícale cómo mostrar ventajas con «por un lado… por otro».<span class="en b">Explain how to show advantages.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Aiko"><span class="ppl-b"><span class="ppl-w"><b>5 · Aiko</b> · estudiante de intercambio</span><span class="ppl-t">Explícale por qué dices «en caso de que llueva» con subjuntivo.<span class="en b">Explain why “en caso de que llueva” takes the subjunctive.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Sofía"><span class="ppl-b"><span class="ppl-w"><b>6 · Sofía</b> · amiga</span><span class="ppl-t">Explícale cómo plantear un riesgo con condicional: «lo dejaríamos para el domingo».<span class="en b">Explain how to raise a risk with the conditional.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Ben"><span class="ppl-b"><span class="ppl-w"><b>7 · Ben</b> · colega</span><span class="ppl-t">Explícale cómo cerrar con próximos pasos: «En cuanto confirméis, reservo».<span class="en b">Explain how to close with next steps.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Don Ramón"><span class="ppl-b"><span class="ppl-w"><b>8 · Don Ramón</b> · portero</span><span class="ppl-t">Explícale cómo ordenar ideas con «en primer lugar» y «en segundo lugar».<span class="en b">Explain how to order ideas.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Valeria"><span class="ppl-b"><span class="ppl-w"><b>9 · Valeria</b> · amiga</span><span class="ppl-t">Explícale cómo suena una presentación segura: ritmo, pausas y tono.<span class="en b">Explain how a confident presentation sounds.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Lucía"><span class="ppl-b"><span class="ppl-w"><b>10 · Lucía</b> · amiga</span><span class="ppl-t">Explícale tu plan perfecto para un sábado en cinco frases y termina con «En resumen».<span class="en b">Explain your perfect Saturday plan in five sentences ending with “En resumen”.</span></span></span></label></li></ol><div class="check"><div><button type="button" class="act alt ppl-rnd">🎲 Al azar<span class="en"> · Random</span></button> <button type="button" class="act alt ppl-rs">Reiniciar<span class="en"> · Reset</span></button></div><span class="score ppl-sc" aria-live="polite"></span></div></div></section>
+
+<section id="s6" class="tk" aria-labelledby="s6-t"><h2 id="s6-t"><span class="num">6</span><span style="color:var(--family)">Tu tarea<span class="en"> Your homework</span></span><span class="cue">⏱ 3 min</span></h2>
+<p class="sub">Lee el modelo en voz alta. Después <b>grábate 2 minutos</b> presentando un plan de ocio para el grupo, sin guion.<span class="en b">Read the model aloud. Then record yourself for 2 minutes presenting a leisure plan for the group, without a script.</span></p>
+<div class="dl"><div class="ln"><div class="av">L</div><div><p class="nm">Lucas</p><div class="bub">Voy a hablaros de un plan para el finde: torneo de fútbol y noche de pizza.<span class="en b">I’m going to tell you about a plan for the weekend: football tournament and pizza night.</span></div></div></div><div class="ln"><div class="av">L</div><div><p class="nm">Lucas</p><div class="bub">En primer lugar, jugamos por la mañana. Por un lado, hace menos calor; por otro, hay más sitio.<span class="en b">First, we play in the morning. On one hand it’s cooler; on the other, there’s more room.</span></div></div></div><div class="ln"><div class="av">L</div><div><p class="nm">Lucas</p><div class="bub">En caso de que llueva, lo dejaríamos para el domingo.<span class="en b">In case it rains, we’d leave it for Sunday.</span></div></div></div><div class="ln"><div class="av">L</div><div><p class="nm">Lucas</p><div class="bub">En resumen: en cuanto confirméis, reservo la pista. ¿Os parece bien?<span class="en b">In short: as soon as you confirm, I book the court. Does that work?</span></div></div></div></div>
+<p class="sub" style="margin-top:14px">En tu grabación di: ① objetivo · ② ventajas y riesgos · ③ próximos pasos.<span class="en b">In your recording say: ① goal · ② pros and risks · ③ next steps.</span></p>
+<div class="pp-hw"><h3>Para casa: diez personas más<span class="en"> · Ten more people, at home</span></h3><p class="sub">Otras diez personas, ahora para hacer en casa. Explícale a cada una lo que se pide, en voz alta o grabándote (al menos tres con audio). Marca ✓ cuando termines.<span class="en b">Ten more people, to do at home. Explain to each one what is asked, aloud or recording yourself (at least three with audio). Tick ✓ when you’re done.</span></p>
+<div class="pp-use"><b>Usa:</b><span>Voy a hablaros de…</span><span>En primer lugar…</span><span>Por un lado… por otro</span><span>Podríamos + inf.</span><span>Siempre que / en caso de que / en cuanto + subj.</span><span>En resumen</span></div>
+<div class="ppl" data-k="c40-hw"><ol class="ppl-ol"><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Pablo"><span class="ppl-b"><span class="ppl-w"><b>1 · Pablo</b> · jefe de un club deportivo</span><span class="ppl-t">Explícale un plan para un torneo de fútbol, con objetivo y opciones.<span class="en b">Explain a plan for a football tournament.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Gloria"><span class="ppl-b"><span class="ppl-w"><b>2 · Gloria</b> · tía</span><span class="ppl-t">Explícale un plan de cena familiar con ventajas y riesgos.<span class="en b">Explain a family dinner plan with pros and risks.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Karim"><span class="ppl-b"><span class="ppl-w"><b>3 · Karim</b> · vecino</span><span class="ppl-t">Explícale la diferencia entre «siempre que» y «en caso de que».<span class="en b">Explain the difference between “siempre que” and “en caso de que”.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Nerea"><span class="ppl-b"><span class="ppl-w"><b>4 · Nerea</b> · amiga</span><span class="ppl-t">Explícale cómo cambiar de punto con «pasando a las ventajas».<span class="en b">Explain how to move to the next point.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Camille"><span class="ppl-b"><span class="ppl-w"><b>5 · Camille</b> · amiga francesa</span><span class="ppl-t">Explícale cómo proponer con «podríamos» y «sería mejor que».<span class="en b">Explain how to propose with “podríamos” and “sería mejor que”.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Julia"><span class="ppl-b"><span class="ppl-w"><b>6 · Julia</b> · hermana pequeña</span><span class="ppl-t">Explícale un plan para un viaje con tres ventajas.<span class="en b">Explain a trip plan with three advantages.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Mateo"><span class="ppl-b"><span class="ppl-w"><b>7 · Mateo</b> · entrenador</span><span class="ppl-t">Explícale un plan de entrenamiento semanal en cinco pasos.<span class="en b">Explain a weekly training plan in five steps.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Raúl"><span class="ppl-b"><span class="ppl-w"><b>8 · Raúl</b> · jefe</span><span class="ppl-t">Explícale una propuesta para mejorar tu equipo, con riesgos y próximos pasos.<span class="en b">Explain a proposal to improve your team.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Inés"><span class="ppl-b"><span class="ppl-w"><b>9 · Inés</b> · amiga</span><span class="ppl-t">Explícale cómo no leer un guion y seguir hablando.<span class="en b">Explain how not to read a script and keep speaking.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Leo"><span class="ppl-b"><span class="ppl-w"><b>10 · Leo</b> · amigo</span><span class="ppl-t">Explícale en dos minutos tu plan de ocio completo, sin guion.<span class="en b">Explain in two minutes your full leisure plan, no script.</span></span></span></label></li></ol><div class="check"><div><button type="button" class="act alt ppl-rnd">🎲 Al azar<span class="en"> · Random</span></button> <button type="button" class="act alt ppl-rs">Reiniciar<span class="en"> · Reset</span></button></div><span class="score ppl-sc" aria-live="polite"></span></div></div></div>
+<textarea id="notes" aria-label="Notas" placeholder="Notas opcionales · Optional notes"></textarea>
+<p style="margin:8px 2px 0;font-size:12.5px;color:var(--ink-faint)">Es solo un apoyo: lo importante es decirlo en voz alta.<span class="en b">Just a support: what matters is saying it aloud.</span></p>
+<p><button type="button" class="act alt" id="sv">Guardar notas</button><span class="sv" id="svf">Guardado ✓</span></p></section>
+</main>
+<footer><span>Clase 40 · El plan perfecto</span><span>Próxima clase → Clase 41</span></footer>
+
+<div class="cm" id="cm" role="toolbar" aria-label="Caracteres especiales" hidden></div>
+<script>
+
+const $=id=>document.getElementById(id),RM=matchMedia('(prefers-reduced-motion:reduce)').matches;
+const E=(t,b)=>t?`<span class="en${b?' b':''}"> ${t}</span>`:'';
+const sh=a=>{const r=[...a];for(let i=r.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[r[i],r[j]]=[r[j],r[i]]}return r};
+const ld=k=>{try{return localStorage.getItem(k)}catch(e){return null}},sv=(k,v)=>{try{localStorage.setItem(k,v)}catch(e){}};
+const restart=(el,c)=>{el.classList.remove(c);void el.offsetWidth;el.classList.add(c)};
+function confetti(el){if(RM||!el)return;const r=el.getBoundingClientRect(),w=document.createElement('div');w.className='cf-wrap';w.style.left=r.left+r.width/2+'px';w.style.top=r.top+r.height/2+'px';
+ const C=['var(--b3)','var(--b1)','var(--b2)','var(--family)'];
+ for(let k=0;k<22;k++){const c=document.createElement('i'),an=-Math.PI/2+(Math.random()-.5)*2.2,d=60+Math.random()*110;c.className='cf';
+  c.style.cssText=`--c:${C[k%4]};--dx:${Math.cos(an)*d|0}px;--up:${Math.sin(an)*d|0}px;--fall:${(Math.sin(an)*d+90+Math.random()*60)|0}px;--rot:${(Math.random()*720-360)|0}deg`;w.appendChild(c)}
+ document.body.appendChild(w);setTimeout(()=>w.remove(),1600)}
+
+/* barra: índice, idioma, tema */
+const secs=[...document.querySelectorAll('main section')],toc=$('toc'),nb=$('navBtn');
+toc.innerHTML=secs.map(s=>{const h=s.querySelector('h2');return `<a href="#${s.id}"><b>${h.querySelector('.num').textContent}</b>${h.children[1].firstChild.textContent}</a>`}).join('');
+nb.onclick=()=>{toc.hidden=!toc.hidden;nb.setAttribute('aria-expanded',String(!toc.hidden))};
+toc.onclick=e=>{if(e.target.closest('a')){toc.hidden=true;nb.setAttribute('aria-expanded','false')}};
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!toc.hidden){toc.hidden=true;nb.focus()}});
+function setLang(l){document.body.dataset.lang=l;document.querySelectorAll('#lang button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.lang===l)));sv('clase-lang-v2',l)}
+document.querySelectorAll('#lang button').forEach(b=>b.onclick=()=>setLang(b.dataset.lang));setLang(ld('clase-lang-v2')==='es'?'es':'es-en');
+const tb=$('themeBtn');function setTheme(d){document.documentElement.dataset.theme=d?'dark':'light';tb.setAttribute('aria-pressed',String(d));tb.textContent=d?'Modo claro':'Modo oscuro';sv('clase-theme',d?'d':'l')}
+tb.onclick=()=>setTheme(tb.getAttribute('aria-pressed')!=='true');setTheme(ld('clase-theme')?ld('clase-theme')==='d':matchMedia('(prefers-color-scheme:dark)').matches);
+
+/* animaciones al entrar */
+document.querySelectorAll('.anim').forEach(a=>{
+ const run=()=>{a.classList.remove('play');void a.offsetWidth;a.classList.add('play')};
+ a.querySelector('.re').onclick=run;
+ if(RM)return;a.classList.add('ready');
+ new IntersectionObserver((es,o)=>es.forEach(e=>{if(e.isIntersecting){run();o.unobserve(a)}}),{threshold:.6}).observe(a)});
+if(!RM&&'IntersectionObserver' in window){
+ const io=new IntersectionObserver((es,o)=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('fx-num');o.unobserve(e.target)}}),{threshold:.05});secs.forEach(s=>io.observe(s));
+ const io2=new IntersectionObserver((es,o)=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('fx-show');o.unobserve(e.target)}}),{threshold:.1});
+ document.querySelectorAll('ol.ex,.forms').forEach(c=>{[...c.children].forEach((k,i)=>k.style.setProperty('--i',Math.min(i,10)));c.classList.add('fx-hide');io2.observe(c)})}
+/* parallax suave y foco de sección */
+if(!RM){const orbs=[...document.querySelectorAll('.plx i')];let t=0;
+ const run=()=>{t=0;const y=scrollY,vh=innerHeight,c=vh/2;orbs.forEach((o,i)=>o.style.transform=`translate3d(${Math.sin(y/600+i*1.7)*innerWidth*.06|0}px,${-y*(.2+i*.15)|0}px,0)`);
+  secs.forEach(s=>{const r=s.getBoundingClientRect(),d=r.top>c?r.top-c:r.bottom<c?c-r.bottom:0;s.style.setProperty('--a',(Math.round(Math.max(0,1-d/(vh*.5))*20)/20))})};
+ addEventListener('scroll',()=>{if(!t)t=requestAnimationFrame(run)},{passive:true});run()}
+
+/* tarjetas */
+const CARDS=[["voy a hablaros de", "Voy a hablaros de un plan.", "I’m going to tell you about a plan."], ["en primer lugar", "En primer lugar, el torneo.", "First, the tournament."], ["pasando a…", "Pasando a las ventajas…", "Moving on to the pros…"], ["en caso de que", "En caso de que llueva, jugamos el domingo.", "In case it rains, we play on Sunday."], ["siempre que", "Vamos siempre que haya sitio.", "We go as long as there’s room."], ["en resumen", "En resumen, torneo y pizza.", "In short, tournament and pizza."], ["tengo una propuesta", "Tengo una propuesta para el finde.", "I have a proposal for the weekend."], ["¿os parece bien?", "¿Os parece bien a las diez?", "Does ten work for you?"]];
+$('fcs').innerHTML=CARDS.map(c=>`<button type="button" class="fc" aria-pressed="false"><span class="f">${c[0]}</span><span class="bk">${c[1]}<i class="en">${c[2]}</i></span></button>`).join('');
+$('fcs').onclick=e=>{const f=e.target.closest('.fc');if(f){f.classList.toggle('on');f.setAttribute('aria-pressed',f.classList.contains('on'))}};
+
+/* menú de caracteres: aparece al enfocar un campo y con clic derecho */
+const cm=$('cm'),CH=['á','é','í','ó','ú','ü','ñ','¿','?','¡','!'];let cmT=null,cmUp=false,cmMode='el';
+const isFld=el=>el&&el.matches&&el.matches('input[type="text"],textarea');
+function cmDraw(){cm.innerHTML=CH.map(c=>{const v=cmUp?c.toUpperCase():c;return `<button type="button" tabindex="-1" data-c="${v}" aria-label="Insertar ${v}">${v}</button>`}).join('')+`<button type="button" tabindex="-1" class="sh" aria-pressed="${cmUp}" aria-label="Mayúsculas">⇧</button>`}
+function cmPlace(x,y){cm.style.left='0px';cm.style.top='0px';cm.hidden=false;const w=cm.offsetWidth,h=cm.offsetHeight,vw=innerWidth,vh=innerHeight;
+ cm.style.left=Math.max(8,Math.min(x,vw-w-8))+'px';cm.style.top=Math.max(8,Math.min(y,vh-h-8))+'px'}
+function cmAnchor(el){const r=el.getBoundingClientRect();cm.hidden=false;const h=cm.offsetHeight,vh=(window.visualViewport?visualViewport.height:innerHeight);
+ /* debajo de la caja; solo arriba si no cabe debajo */
+ cmPlace(r.left,r.bottom+6+h<=vh-8?r.bottom+6:Math.max(8,r.top-h-6))}
+function cmShow(el){cmT=el;cmMode='el';cmDraw();cm.hidden=false;cmAnchor(el)}
+function cmHide(){cm.hidden=true;cmT=null}
+document.addEventListener('focusin',e=>{if(isFld(e.target)&&!e.target.disabled)cmShow(e.target);else if(!cm.contains(e.target))cmHide()});
+document.addEventListener('focusout',e=>{if(isFld(e.target)&&!(e.relatedTarget&&cm.contains(e.relatedTarget)))cmHide()});
+document.addEventListener('contextmenu',e=>{const f=e.target;if(!isFld(f)||f.disabled)return;e.preventDefault();f.focus();cmT=f;cmMode='el';cmDraw();cmAnchor(f)});
+addEventListener('scroll',()=>{if(cm.hidden||!cmT)return;if(cmMode==='el')cmAnchor(cmT);else cmHide()},{passive:true,capture:true});
+addEventListener('resize',()=>{if(!cm.hidden&&cmT&&cmMode==='el')cmAnchor(cmT)});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!cm.hidden)cmHide()});
+['mousedown','pointerdown'].forEach(t=>cm.addEventListener(t,e=>e.preventDefault()));
+cm.addEventListener('click',e=>{const b=e.target.closest('button');if(!b||!cmT)return;
+ if(b.classList.contains('sh')){cmUp=!cmUp;cmDraw();return}
+ const f=cmT,c=b.dataset.c;f.focus();f.setRangeText(c,f.selectionStart,f.selectionEnd,'end');f.dispatchEvent(new Event('input',{bubbles:true}));
+ if(cmUp&&/[a-zñü]/i.test(c)){cmUp=false;cmDraw()}});
+
+/* ejercicios · feedback instantáneo por frase · dos intentos y luego se revela */
+const nz=t=>t.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/\s+/g,' ').trim();
+const EXA=[["___ hablaros de un plan para el sábado.", ["Voy a", "Voy de", "Voy que"], "I’m going to tell you about a plan for Saturday.", "Voy a + infinitivo (hablaros = hablar + os)."], ["En caso de que ___, jugamos el domingo.", ["llueva", "llueve", "lloverá"], "In case it rains, we play on Sunday.", "En caso de que + subjuntivo."], ["Iremos siempre que ___ buen tiempo.", ["haga", "hace", "hará"], "We’ll go as long as the weather’s good.", "Siempre que + subjuntivo."], ["En primer ___, reservamos el polideportivo.", ["lugar", "lado", "tiempo"], "First, we book the sports centre.", "En primer lugar."], ["Por un lado se juega con menos calor; ___, hay menos gente.", ["por otro lado", "por eso", "aun así"], "On one hand it’s cooler; on the other, fewer people.", "Por un lado… por otro lado."], ["Podríamos ___ por la mañana.", ["jugar", "jugamos", "jugáramos"], "We could play in the morning.", "Podríamos + infinitivo."], ["En cuanto ___ todos, reservo la pista.", ["confirméis", "confirmáis", "confirmaréis"], "As soon as you all confirm, I’ll book the court.", "En cuanto + subjuntivo (vosotros)."], ["Sería mejor que ___ pronto.", ["empezáramos", "empezamos", "empezaremos"], "It would be better if we started early.", "Sería mejor que + subjuntivo imperfecto."], ["___, mi propuesta es jugar y cenar juntos.", ["En resumen", "Por eso", "Antes de que"], "In short, my proposal is to play and have dinner together.", "En resumen = cierre."], ["¿Os parece bien ___ a las diez?", ["quedar", "quedáis", "quedasteis"], "Does it work to meet at ten?", "¿Os parece bien + infinitivo?"], ["En segundo ___, hablaremos del presupuesto.",["lugar", "lado", "tiempo"],"Secondly, we’ll talk about the budget.", "En primer lugar… en segundo lugar…"], ["Si llueve, ___ al pabellón.",["iremos", "fuéramos", "hubiéramos ido"],"If it rains, we’ll go to the sports hall.", "Si + presente → futuro."], ["Quiero que todos ___ la propuesta antes del viernes.",["conozcáis", "conocéis", "conoceréis"],"I want you all to know the proposal before Friday.", "Quiero que + subjuntivo."], ["Para ___, os pido vuestra opinión.",["terminar", "terminado", "termino"],"To finish, I ask for your opinion.", "Para terminar + coma."], ["Si la mayoría prefiere el sábado, ___ ese día.",["jugaremos", "jugáramos", "jugábamos"],"If most people prefer Saturday, we’ll play that day.", "Si + presente → futuro."]];
+const EXB=[["En caso de que ___, jugamos en el pabellón.", "llover", "llueva", "If it rains, we play in the sports hall.", "llover → llueva."], ["Siempre que ___ sitio, vamos todos.", "haber", "haya", "As long as there’s room, we all go.", "haber → haya."], ["En cuanto ___, reservo la pista.", "confirmar · vosotros", "confirméis", "As soon as you confirm, I book the court.", "confirmar → confirméis."], ["Sería mejor que ___ a las diez.", "empezar · nosotros", "empezáramos", "It would be better if we started at ten.", "empezar → empezáramos."], ["___ jugar por la mañana, ¿qué os parece?", "poder · nosotros", "Podríamos", "We could play in the morning, what do you think?", "Condicional de poder."], ["Antes de que ___ el torneo, hacemos equipos.", "empezar", "empiece", "Before the tournament starts, we make teams.", "Antes de que + subjuntivo."], ["Voy a ___ de la propuesta del sábado.", "hablar + os", "hablaros", "I’m going to tell you about Saturday’s proposal.", "Infinitivo + pronombre pegado."], ["Si ___ más gente, alquilaríamos otra pista.", "venir", "viniera", "If more people came, we’d rent another court.", "Si + subjuntivo imperfecto."], ["Para ___, os doy las gracias.", "terminar · infinitivo", "terminar", "To finish, I thank you.", "Para terminar + coma."], ["Quiero que todos ___ a las diez.", "llegar · vosotros", "lleguéis", "I want you all to arrive at ten.", "llegar → lleguéis (g → gu)."], ["Si ___ mal tiempo, jugaríamos en el pabellón.", "hacer · el tiempo", "hiciera", "If the weather were bad, we’d play in the sports hall.", "Si + subjuntivo imperfecto (hacer → hiciera)."], ["Antes de que ___ la lluvia, recogemos todo.", "llegar · ella", "llegue", "Before the rain arrives, we pack everything up.", "Antes de que + subjuntivo."], ["Reservaré la pista en cuanto me ___ la respuesta.", "dar · vosotros", "deis", "I’ll book the court as soon as you give me an answer.", "dar → deis (sin tilde)."], ["Sería mejor que ___ el domingo.", "jugar · nosotros", "jugáramos", "It would be better if we played on Sunday.", "Sería mejor que + subjuntivo imperfecto."], ["En caso de que alguien no ___ venir, avisadme.", "poder · él", "pueda", "If anyone can’t come, let me know.", "En caso de que + subjuntivo."]];
+const EXC=[["Abres tu presentación ante el grupo.", ["Voy a hablaros de un plan para el sábado.", "Hablo plan sábado vosotros.", "Os voy plan sábado."], "You open your presentation to the group.", "Apertura de presentador."], ["Ordenas tus ideas.", ["En primer lugar, el torneo; en segundo lugar, la cena.", "Primero lugar torneo; segundo cena.", "En primero, el torneo; en segundo, la cena."], "You order your ideas.", "En primer lugar… en segundo lugar…"], ["Planteas un riesgo y su solución.", ["En caso de que llueva, lo dejaríamos para el domingo.", "En caso de que llueve, lo dejamos para el domingo.", "En caso de que lloverá, lo dejaremos."], "You raise a risk and its solution.", "En caso de que + subjuntivo."], ["Pones una condición para reservar.", ["Reservo en cuanto confirméis.", "Reservo en cuanto confirmáis.", "Reservo en cuanto confirmasteis."], "You set a condition for booking.", "En cuanto + subjuntivo."], ["Alguien te interrumpe con una objeción. Respondes con calma.", ["Buena pregunta; ahora lo explico.", "Ahora no puedo hablar.", "No me interrumpas."], "Someone interrupts with an objection. You answer calmly.", "Calma y cortesía."], ["Cierras la presentación.", ["En resumen, mi propuesta es jugar por la mañana y cenar pizza después.", "En fin, nada más, ya está.", "Por eso, antes de que termino."], "You close the presentation.", "En resumen = cierre."], ["Pides al grupo su opinión sobre tu propuesta.",["¿Qué os parece mi propuesta?", "¿Qué os parecéis mi propuesta?", "¿Qué parece vosotros mi propuesta?"],"You ask the group what they think of your proposal.", "Parecer funciona como gustar: ¿qué os parece?"], ["Introduces tu segundo punto.",["En segundo lugar, hablaré del presupuesto.", "En segundo lugar, hablando del presupuesto.", "En segundo lado, hablaré del presupuesto."],"You introduce your second point.", "En segundo lugar + verbo conjugado."], ["Propones jugar el domingo como alternativa suave.",["Podríamos jugar el domingo, ¿qué os parece?", "Jugamos el domingo, y punto.", "Podríamos jugaríamos el domingo."],"You softly suggest playing on Sunday instead.", "Podríamos + infinitivo = propuesta suave."], ["Pones una condición: que haga buen tiempo.",["Jugaremos siempre que haga buen tiempo.", "Jugaremos siempre que hace buen tiempo.", "Jugaremos siempre que hará buen tiempo."],"You set a condition: good weather.", "Siempre que + subjuntivo."], ["Anuncias que ahora vas a explicar el presupuesto.",["Ahora voy a explicaros el presupuesto.", "Ahora voy explicaros el presupuesto.", "Ahora voy a explicáis el presupuesto."],"You announce you’re about to explain the budget.", "Voy a + infinitivo (explicaros = explicar + os)."], ["Alguien dice que el plan es caro. Respondes con calma.",["Entiendo tu preocupación; veamos las cifras.", "¡Qué dices! Eso no es verdad.", "No sé, no me importa."],"Someone says the plan is expensive. You answer calmly.", "Calma y cortesía ante una objeción."], ["Planteas un riesgo: puede que falte gente.",["En caso de que falte gente, cambiaríamos el horario.", "En caso de que falta gente, cambiaríamos el horario.", "En caso de que faltará gente, cambiaríamos el horario."],"You raise a risk: not enough people may turn up.", "En caso de que + subjuntivo."], ["Presentas la secuencia final: reservar y después cenar.",["Para empezar, reservamos la pista; para terminar, cenamos juntos.", "Para empezar, reservamos la pista; por eso, cenamos juntos.", "Para empezar, reservamos la pista; por un lado, cenamos juntos."],"You present the final sequence: book, then have dinner.", "Para empezar… para terminar…"], ["Te dicen que tu propuesta es buena. Aceptas con humildad.",["Gracias; me alegro de que os guste.", "Gracias; me alegro que os gusta.", "Gracias; me alegro de que os gusta."],"They say your proposal is good. You accept modestly.", "Me alegro de que + subjuntivo."]];
+function mount(id,raw,kind,splits){
+ const ol=$(id),sc=$(id+'sc');
+ const I=raw.map(x=>kind==='ty'?{q:x[0],hint:x[1],ans:x[2],en:x[3],why:x[4]}:{q:x[0],o:x[1],ans:x[1][0],en:x[2],why:x[3]});
+ let st=[];
+ const upd=()=>{const d=st.filter(s=>s.d).length,ok=st.filter(s=>s.ok).length,f=st.filter(s=>s.f).length;
+  sc.textContent=d?`${d} / ${I.length} hechas · ${ok} correctas · ${f} a la primera`:`${I.length} frases · 2 intentos por frase`;
+  if(d===I.length&&ok===I.length)confetti(sc)};
+ function draw(){
+  cmHide();st=I.map(()=>({t:0,d:false,ok:false,f:false}));
+  ol.innerHTML=I.map((x,i)=>`<li data-i="${i}"><span>${x.q.replace('___','<b class="v">___</b>')}${x.hint?`<span class="hint">(${x.hint})</span>`:''}</span>${E(x.en,1)}`+
+   (kind==='ty'?`<div class="ty"><input type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" aria-label="Respuesta ${i+1}"><button type="button" class="act">Comprobar</button></div>`
+    :`<div class="op${kind==='sit'?' long':''}">${sh(x.o).map(o=>`<button type="button">${o}</button>`).join('')}</div>`)+
+   `<span class="sol" role="status" hidden></span></li>`).join('');
+  const L=[...ol.children];splits.forEach(p=>L[p[0]].insertAdjacentHTML('beforebegin',`<div class="div${p[2]?' cl':''}">${p[1]}</div>`));
+  upd()}
+ function judge(li,i,good,given){
+  const x=I[i],s=st[i],m=li.querySelector('.sol');s.t++;
+  let msg,tip=false;
+  if(good){s.d=s.ok=true;s.f=s.t===1;tip=true;msg=`✓ ${s.t===1?'¡Correcto!':'¡Bien, a la segunda!'} ${x.why}`;
+   if(kind==='ty'&&given.trim().toLowerCase()!==x.ans.toLowerCase())msg+=` (Ojo con la tilde: «${x.ans}»).`}
+  else if(s.t>=2){s.d=true;msg=`✗ La respuesta correcta es «${x.ans}». ${x.why}`}
+  else msg='✗ Todavía no. Te queda 1 intento.';
+  m.hidden=false;m.className='sol'+(tip?' tip':'');m.innerHTML=msg;restart(m,'sol');
+  if(s.d){cmHide();li.querySelectorAll('button,input').forEach(el=>{el.disabled=true});
+   if(kind==='ty'){li.querySelector('input').classList.add(s.ok?'ok':'bad')}
+   else li.querySelectorAll('.op button').forEach(bt=>{if(bt.textContent===x.ans)bt.classList.add('ok')})}
+  upd()}
+ ol.onclick=e=>{const li=e.target.closest('li');if(!li)return;const i=+li.dataset.i;if(st[i].d)return;
+  if(kind==='ty'){if(!e.target.closest('.ty button'))return;typed(li,i)}
+  else{const b=e.target.closest('.op button');if(!b||b.disabled)return;const good=b.textContent===I[i].ans;
+   if(!good){b.classList.add('bad');b.disabled=true;restart(b,'fx-bad')}else{b.classList.add('ok');restart(b,'fx-ok')}
+   judge(li,i,good)}};
+ function typed(li,i){const inp=li.querySelector('input'),v=inp.value;if(!v.trim()){inp.focus();return}
+  const good=nz(v)===nz(I[i].ans);if(!good){restart(inp,'fx-bad')}judge(li,i,good,v);if(!st[i].d){inp.focus();inp.select()}}
+ ol.onkeydown=e=>{if(kind==='ty'&&e.key==='Enter'&&e.target.matches('.ty input')){e.preventDefault();const li=e.target.closest('li'),i=+li.dataset.i;if(!st[i].d)typed(li,i)}};
+ $(id+'rs').onclick=draw;draw()}
+mount('exA',EXA,'mc',[[0,'en clase · elige la forma correcta',1]]);
+mount('exB',EXB,'ty',[[0,'en clase · escribe el verbo',1]]);
+mount('exC',EXC,'sit',[[0,'en clase · elige tu respuesta',1]]);
+
+/* diálogo con ramas */
+const DL=[["Iker", "A ver, Andrei, ¿cuál es el plan?", "So, Andrei, what’s the plan?", ["Voy a hablaros de una propuesta: torneo por la mañana y pizza por la noche.", "Plan: torneo y pizza, y ya.", "No lo sé todavía."], "Abres con una frase de presentador."], ["Marta", "¿Y si llueve?", "And if it rains?", ["Buena pregunta: en caso de que llueva, lo dejaríamos para el domingo.", "Si llueve, lloverá.", "En caso de que llueve, domingo."], "En caso de que + subjuntivo; condicional para la solución."], ["Sole", "Yo prefiero la tarde: así dormimos más.", "I prefer the afternoon: we get more sleep.", ["Entiendo tu punto; por un lado, dormiríais más, pero por otro, sería mejor que empezáramos pronto.", "No, por la mañana y punto.", "Me da igual."], "Cortesía + por un lado… por otro + sería mejor que…"], ["Iker", "Vale, ¿y qué necesitas de nosotros?", "OK, and what do you need from us?", ["En cuanto confirméis, reservo la pista. En resumen: torneo, pizza y buen ambiente.", "Confirmad ya o no reservo.", "En cuanto confirmáis, reservo. Resumen: nada."], "Próximos pasos + cierre."]];
+let dt=0;const dl=$('dl'),op=$('opts'),mk=(c,n,t,e)=>`<div class="ln ${c}"><div class="av">${c==='me'?'Tú':n[0]}</div><div><p class="nm">${n}</p><div class="bub">${t}${E(e)}</div></div></div>`;
+function turn(){if(dt>=DL.length){op.innerHTML='';dl.insertAdjacentHTML('beforeend','<div class="box" style="margin:0">¡Plan aprobado! Objetivo, riesgos y próximos pasos, sin papeles. 🎉</div>');confetti(op);return}
+ const d=DL[dt];dl.insertAdjacentHTML('beforeend',mk('fr',d[0],d[1],d[2]));
+ op.innerHTML=sh(d[3].map((t,i)=>[t,i])).map(o=>`<button type="button" data-ok="${o[1]===0}">${o[0]}</button>`).join('');}
+op.onclick=e=>{const b=e.target.closest('button');if(!b||b.disabled)return;const d=DL[dt];
+ if(b.dataset.ok==='true'){dl.insertAdjacentHTML('beforeend',mk('me','Tú',b.textContent));dt++;turn()}
+ else{b.classList.add('bad');b.disabled=true;restart(b,'fx-bad');if(!op.querySelector('.sol'))op.insertAdjacentHTML('beforeend',`<span class="sol">✗ ${d[4]}</span>`)}};
+$('dre').onclick=()=>{dt=0;dl.innerHTML='';turn()};turn();
+const CK=["Voy a hablaros de…", "En primer lugar… después…", "Por un lado… por otro", "Podríamos / sería mejor que…", "En cuanto / siempre que + subjuntivo", "En caso de que + subjuntivo", "En resumen…"];
+$('ck').innerHTML=CK.map(c=>`<label class="ck"><input type="checkbox"> ${c}</label>`).join('');
+$('ck').onchange=e=>{const all=[...$('ck').querySelectorAll('input')];if(all.every(x=>x.checked))confetti(e.target)};
+
+/* tarea: notas */
+const KEY='andrei-clase40-tarea',na=$('notes');
+(async()=>{try{if(window.storage){const r=await window.storage.get(KEY);if(r&&typeof r.value==='string'){na.value=r.value;return}}}catch(e){}const v=ld(KEY);if(v)na.value=v})();
+$('sv').onclick=async()=>{let ok=false;try{if(window.storage)ok=!!await window.storage.set(KEY,na.value)}catch(e){}if(!ok){sv(KEY,na.value);ok=true}
+ const f=$('svf');f.textContent=ok?'Guardado ✓':'No se pudo guardar';f.classList.add('show');setTimeout(()=>f.classList.remove('show'),1800)};
+</script>
+<script>
+/* explica a diez personas: marcar y sortear */
+(function(){
+var RM=matchMedia('(prefers-reduced-motion:reduce)').matches;
+function ld(k){try{return localStorage.getItem(k)}catch(e){return null}}
+function sv(k,v){try{localStorage.setItem(k,v)}catch(e){}}
+document.querySelectorAll('.ppl').forEach(function(box){
+  var key='andrei-pp-'+box.getAttribute('data-k'),items=[].slice.call(box.querySelectorAll('.ppl-i')),sc=box.querySelector('.ppl-sc'),saved={};
+  try{saved=JSON.parse(ld(key)||'{}')||{}}catch(e){saved={}}
+  items.forEach(function(li,i){li.querySelector('input').checked=!!saved[i]});
+  function upd(){var n=0,o={};items.forEach(function(li,i){var c=li.querySelector('input').checked;li.classList.toggle('done',c);if(c){n++;o[i]=1}});
+    sc.textContent=n+' / '+items.length+' ✓';sv(key,JSON.stringify(o))}
+  box.addEventListener('change',function(e){if(e.target.closest('.ppl-i'))e.target.closest('.ppl-i').classList.remove('pick');upd()});
+  box.querySelector('.ppl-rnd').onclick=function(){
+    var left=items.filter(function(li){return !li.querySelector('input').checked});
+    items.forEach(function(li){li.classList.remove('pick')});
+    if(!left.length){sc.textContent='¡Las diez hechas! ✓';return}
+    var li=left[Math.floor(Math.random()*left.length)];li.classList.add('pick');
+    li.scrollIntoView({block:'center',behavior:RM?'auto':'smooth'})};
+  box.querySelector('.ppl-rs').onclick=function(){items.forEach(function(li){li.querySelector('input').checked=false;li.classList.remove('pick')});upd()};
+  upd();
+});
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Clase 24 · ¿Cómo se llama esa cosa? — Andrei</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* Clase 24 · L5 B1 con soltura · ¿Cómo se llama esa cosa? */
+:root{
+  --paper:#FBF7EE;--paper-top:#F6EEDA;--paper-raised:#FFFFFF;--paper-alt:#F3ECDA;
+  --ink:#23291F;--ink-soft:#565F52;--ink-faint:#6E7568;
+  --line:rgba(35,41,31,.12);--line-strong:rgba(35,41,31,.22);
+  --b1:#2F6FED;--b1-soft:#EAF1FE;--b1-line:#C6D9FC;
+  --b2:#2E9E6B;--b2-soft:#E9F6EF;--b2-line:#BEE6D3;
+  --b3:#DB8A2E;--b3-soft:#FCF1E1;--b3-line:#F3D9AF;
+  --family:#B5502E;--family-soft:#FBEBE3;--family-line:#EFC9B4;
+  --f-display:'Fraunces',Georgia,serif;--f-body:'IBM Plex Sans',system-ui,sans-serif;--f-data:'IBM Plex Mono',monospace;
+  --r-sm:12px;--r-md:18px;--r-lg:26px;
+  --shadow-1:0 1px 2px rgba(35,41,31,.05),0 10px 28px rgba(35,41,31,.07);
+  color-scheme:light}
+:root[data-theme="dark"]{
+  --paper:#171912;--paper-top:#22251A;--paper-raised:#22251B;--paper-alt:#2B2F22;
+  --ink:#F1EDE0;--ink-soft:#C3C7B8;--ink-faint:#9CA190;
+  --line:rgba(241,237,224,.14);--line-strong:rgba(241,237,224,.28);
+  --b1-soft:#1D2A44;--b1-line:#2F4B82;--b2-soft:#1B3328;--b2-line:#2B6A4C;--b3-soft:#3A2D18;--b3-line:#7A5524;--family-soft:#3A2219;--family-line:#7A3F29;
+  --shadow-1:0 1px 2px rgba(0,0,0,.45),0 10px 28px rgba(0,0,0,.35);color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-padding-top:calc(70px + env(safe-area-inset-top,0px))}
+body{margin:0;background:linear-gradient(180deg,var(--paper-top) 0,var(--paper) 460px) fixed,var(--paper);color:var(--ink);font:15px/1.6 var(--f-body);padding-bottom:env(safe-area-inset-bottom,0px)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--paper);z-index:10}
+::selection{background:var(--b1-soft)}
+:focus-visible{outline:2px solid var(--b1);outline-offset:2px}
+.skip{position:absolute;left:-999px}.skip:focus{left:12px;top:12px;z-index:20;background:var(--paper-raised);padding:8px 14px;border-radius:99px}
+.sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.plx{position:fixed;inset:-20vh 0;z-index:-1;pointer-events:none;overflow:hidden}
+.plx i{position:absolute;border-radius:50%;filter:blur(60px);opacity:.45;will-change:transform}
+.plx i:nth-child(1){width:46vmax;height:46vmax;left:-14vmax;top:4vh;background:radial-gradient(circle,color-mix(in srgb,var(--b1) 40%,transparent),transparent 70%)}
+.plx i:nth-child(2){width:38vmax;height:38vmax;right:-12vmax;top:70vh;background:radial-gradient(circle,color-mix(in srgb,var(--b3) 30%,transparent),transparent 70%)}
+.wrap{max-width:780px;margin:0 auto;padding:0 clamp(16px,4vw,28px) 90px}
+header .wrap{padding-top:34px;padding-bottom:0}
+.eyebrow{font:500 12px var(--f-data);letter-spacing:.14em;text-transform:uppercase;color:var(--b1);margin:0 0 10px;display:flex;align-items:center;gap:10px}
+.eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--b1)}
+h1{font:600 clamp(30px,5.6vw,48px)/1.08 var(--f-display);letter-spacing:-.02em;margin:0 0 14px;text-wrap:balance}
+h1 em{font-style:italic;background:linear-gradient(90deg,var(--b1) 20%,var(--family));-webkit-background-clip:text;background-clip:text;color:transparent}
+.lede{font-size:16px;color:var(--ink-soft);max-width:58ch;margin:0}
+.meta-row{display:flex;flex-wrap:wrap;gap:20px;margin-top:22px;font:12px var(--f-data);color:var(--ink-faint)}
+.meta-row strong{display:block;color:var(--ink);font:500 14.5px var(--f-display);margin-top:3px}
+.en{color:var(--ink-faint);font-size:.88em;font-style:italic;font-weight:400;text-transform:none;letter-spacing:0}
+.en.b{display:block;margin-top:2px}
+body[data-lang="es"] .en{display:none!important}
+h1 .en{display:block;font:italic 400 clamp(15px,2.6vw,19px)/1.35 var(--f-body);margin-top:8px}
+/* barra */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:11;background:color-mix(in srgb,var(--paper) 82%,transparent);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);padding-block:10px;margin-block:24px 4px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.nav-btn{width:36px;height:36px;display:grid;place-items:center;border:1px solid var(--line-strong);border-radius:50%;background:var(--paper-raised);color:var(--ink-soft);cursor:pointer;padding:0}
+.nav-btn:hover,.nav-btn[aria-expanded=true]{border-color:var(--b1);color:var(--b1)}
+.nav-btn path{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round}
+.toc{position:absolute;top:calc(100% + 8px);left:0;width:min(380px,100%);padding:8px;border:1px solid var(--line-strong);border-radius:var(--r-md);background:var(--paper-raised);box-shadow:var(--shadow-1)}
+.toc[hidden]{display:none}
+.toc a{display:flex;gap:12px;align-items:center;min-height:42px;padding:6px 10px;border-radius:var(--r-sm);color:var(--ink);text-decoration:none;font:500 14.5px var(--f-display)}
+.toc a:hover{background:var(--b1-soft)}
+.toc a b{font:500 12px var(--f-data);color:#fff;background:var(--b1);width:24px;height:24px;border-radius:50%;display:grid;place-items:center;flex:none}
+.bar-t{font:600 13px var(--f-display);color:var(--ink-soft);margin-right:auto}
+.seg{display:inline-flex;gap:3px;padding:3px;border:1px solid var(--line-strong);border-radius:99px;background:var(--paper-raised)}
+.seg button{border:0;background:none;padding:5px 13px;border-radius:99px;font:12px var(--f-data);color:var(--ink-soft);cursor:pointer;min-height:30px}
+.seg button[aria-pressed=true]{background:var(--b1);color:#fff;box-shadow:0 6px 16px color-mix(in srgb,var(--b1) 30%,transparent)}
+.btn{font:600 13px var(--f-body);background:var(--paper-raised);color:var(--ink-soft);border:1px solid var(--line-strong);border-radius:99px;padding:7px 15px;cursor:pointer}
+.btn:hover{border-color:var(--b1);color:var(--b1)}
+@media(max-width:600px){.bar-t{display:none}}
+/* secciones */
+section{background:var(--paper-raised);border:1px solid var(--line);border-radius:var(--r-lg);box-shadow:var(--shadow-1);margin-top:18px;padding:24px 26px 28px;scroll-margin-top:84px;position:relative;opacity:calc(.74 + .26*var(--a,1))}
+section.rp{background:var(--b3-soft);border-color:var(--b3-line)}section.rp .num{background:var(--b3)}
+section.tk{background:var(--family-soft);border-color:var(--family-line)}section.tk .num{background:var(--family)}
+h2{font:italic 500 22px/1.2 var(--f-display);margin:0 0 6px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+h2 .en{font:400 .6em var(--f-body);font-style:italic}
+h3{font:500 17px var(--f-display);margin:20px 0 6px}
+.num{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;flex:none;font:500 13px var(--f-data);background:var(--b1);color:#fff;font-style:normal}
+section.fx-num .num{animation:fxNum .65s cubic-bezier(.2,.9,.3,1.4) both}
+@keyframes fxNum{0%{transform:scale(.2) rotate(-90deg);opacity:0}100%{transform:none;opacity:1}}
+.cue{margin-left:auto;font:11px var(--f-data);color:var(--ink-faint);background:var(--paper-alt);border-radius:99px;padding:2px 10px;font-style:normal}
+.sub{color:var(--ink-soft);margin:0 0 12px;font-size:14.5px}
+.box{margin:14px 0 0;padding:13px 16px;background:var(--b1-soft);border:1px solid var(--b1-line);border-radius:var(--r-md);font-size:14.5px;color:var(--ink-soft)}
+.box strong,.box b{color:var(--ink)}
+.box.pr{background:var(--paper-alt);border-color:var(--line)}
+.box.wr{background:var(--family-soft);border-color:var(--family-line)}.box.wr b{color:var(--family)}
+ol.ex{padding:0;margin:8px 0 0;list-style:none;counter-reset:q}
+ol.ex>li{counter-increment:q;padding:11px 0;border-top:1px solid var(--line)}
+ol.ex>li::before{content:counter(q)".";font:12px var(--f-data);color:var(--ink-faint);margin-right:8px}
+.v{color:var(--b1);font-weight:600;text-decoration:underline;text-decoration-color:var(--b1-line);text-decoration-thickness:2px;text-underline-offset:3px}
+.div{display:flex;align-items:center;gap:10px;margin:16px 0 4px;font:11px var(--f-data);text-transform:uppercase;letter-spacing:.06em;color:var(--ink-faint)}
+.div::before,.div::after{content:"";flex:1;height:1px;background:var(--line)}
+.div.cl{color:var(--b1)}.div.cl::before,.div.cl::after{background:var(--b1-line)}
+/* animación de peldaños */
+.anim{border:1px solid var(--line);border-radius:var(--r-md);background:var(--paper-alt);padding:16px 18px 10px;margin:14px 0}
+.anim .lab{font:11px var(--f-data);text-transform:uppercase;letter-spacing:.08em;color:var(--ink-faint);margin:0 0 8px}
+.step{display:flex;align-items:center;gap:10px;margin:6px 0;flex-wrap:wrap}
+.step .t2{font:11px var(--f-data);color:var(--ink-faint);width:92px;flex:none}
+.chip{display:inline-block;padding:7px 15px;border-radius:14px;background:var(--paper-raised);border:2px solid var(--line-strong);font:600 16px var(--f-display)}
+.chip.c1{border-color:var(--b1-line)}.chip.c2{border-color:var(--b1);color:var(--b1)}.chip.c3{border-color:var(--b3);color:var(--b3)}.chip.x{border-color:var(--family);color:var(--family);border-style:dashed}
+.anim.ready:not(.play) .t{opacity:0}
+.anim.play .t{animation:aPop .55s cubic-bezier(.2,.8,.3,1) var(--d,0s) both}
+@keyframes aPop{0%{opacity:0;transform:translateY(10px) scale(.7)}60%{opacity:1;transform:translateY(-3px) scale(1.05)}100%{opacity:1;transform:none}}
+.anim-foot{display:flex;justify-content:flex-end;margin-top:6px}
+.re{border:1px solid var(--line-strong);background:var(--paper-raised);border-radius:99px;padding:3px 12px;font:11.5px var(--f-data);color:var(--ink-soft);cursor:pointer}
+.re:hover{color:var(--b1);border-color:var(--b1-line)}
+.forms{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-top:12px}
+.forms div{background:var(--paper-raised);border:1px solid var(--b1-line);border-radius:var(--r-md);padding:10px 12px;text-align:center}
+.forms small{display:block;font:11px var(--f-data);color:var(--ink-faint);text-transform:uppercase}
+.forms b{font:600 18px var(--f-display);color:var(--b1)}
+.say{margin:7px 0;font-size:15.5px}
+.say .tag{font:11px var(--f-data);padding:1px 8px;border-radius:99px;margin-right:8px;color:#fff}
+.say .tag.k{background:var(--family)}.say .tag.o{background:var(--b2)}
+/* tarjetas */
+.fcs{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin:14px 0 0;perspective:900px}
+.fc{position:relative;min-height:118px;border:0;background:none;padding:0;cursor:pointer;transform-style:preserve-3d;transition:transform .5s cubic-bezier(.2,.8,.3,1);color:var(--ink)}
+.fc.on{transform:rotateY(180deg)}
+.fc>span{position:absolute;inset:0;display:grid;place-items:center;padding:10px 14px;border-radius:var(--r-md);backface-visibility:hidden;-webkit-backface-visibility:hidden;text-align:center;border:1px solid var(--line)}
+.fc .f{background:var(--paper-alt);font:600 17px var(--f-display)}
+.fc .bk{background:var(--b1-soft);border-color:var(--b1-line);transform:rotateY(180deg);font:500 14px/1.4 var(--f-body)}
+.fc .bk i{display:block;font-size:12px;color:var(--ink-faint);margin-top:4px}
+.fc:hover .f{border-color:var(--b1-line)}
+/* ejercicios */
+.op{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.op button{font:500 14px var(--f-body);border:1.5px solid var(--line-strong);background:var(--paper-raised);color:var(--ink);border-radius:99px;padding:6px 16px;cursor:pointer;transition:transform .1s,background .2s}
+.op button:hover:not(:disabled){border-color:var(--b1);transform:translateY(-1px)}
+.op button.pk{background:var(--b1-soft);border-color:var(--b1);color:var(--b1)}
+.op button.ok{background:var(--b2-soft);border-color:var(--b2);color:var(--b2)}.op button.ok::after{content:" ✓"}
+.op button.bad{background:var(--family-soft);border-color:var(--family);color:var(--family)}.op button.bad::after{content:" ✗"}
+.sol{display:block;margin:7px 0 0;padding:1px 0 1px 10px;border-left:3px solid var(--family);color:var(--family);font-size:13.5px;animation:fxSol .35s ease both}
+.sol.tip{color:var(--b2);border-color:var(--b2)}
+@keyframes fxSol{from{opacity:0;transform:translateX(-10px)}to{opacity:1;transform:none}}
+.sol[hidden]{display:none}
+.fx-ok{animation:fxOk .55s ease calc(var(--i,0)*90ms) both}.fx-bad{animation:fxBad .42s ease calc(var(--i,0)*90ms) both}
+@keyframes fxOk{35%{transform:scale(1.1);box-shadow:0 0 0 7px color-mix(in srgb,var(--b2) 30%,transparent)}}
+@keyframes fxBad{20%{transform:translateX(-7px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(3px)}}
+.fx-hide:not(.fx-show)>*{opacity:0}.fx-show>*{animation:fxUp .45s cubic-bezier(.2,.8,.3,1) calc(var(--i,0)*55ms) both}
+@keyframes fxUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.check{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-top:20px;padding-top:16px;border-top:1px dashed var(--line)}
+.act{font:600 14px var(--f-body);background:var(--b1);color:#fff;border:0;border-radius:99px;padding:10px 22px;cursor:pointer}
+.act:hover{transform:translateY(-1px)}
+.act.alt{background:none;color:var(--ink-soft);border:1.5px solid var(--line-strong)}
+.score{font:13px var(--f-data);color:var(--ink-faint)}
+/* ejercicios con intentos */
+.op button:disabled:not(.ok):not(.bad){opacity:.55;cursor:default}
+.op.long button{border-radius:var(--r-md);text-align:left;padding:8px 14px}
+.ty{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.ty input{flex:1 1 180px;min-width:0;font:500 15px var(--f-body);border:1.5px solid var(--line-strong);background:var(--paper-raised);color:var(--ink);border-radius:99px;padding:7px 16px}
+.ty input:focus{outline:none;border-color:var(--b1);box-shadow:0 0 0 4px color-mix(in srgb,var(--b1) 20%,transparent)}
+.ty input.ok{border-color:var(--b2);background:var(--b2-soft);color:var(--b2)}
+.ty input.bad{border-color:var(--family);background:var(--family-soft);color:var(--family)}
+.ty .act{padding:7px 18px;font-size:13px}
+.ty .act:disabled{opacity:.5;cursor:default;transform:none}
+.hint{font:12px var(--f-data);color:var(--ink-faint);margin-left:8px;white-space:nowrap}
+.exh{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+/* menú de caracteres */
+.cm{position:fixed;z-index:70;display:flex;flex-wrap:wrap;gap:4px;max-width:min(92vw,330px);padding:6px;background:var(--paper-raised);border:1px solid var(--line-strong);border-radius:var(--r-md);box-shadow:var(--shadow-1)}
+.cm[hidden]{display:none}
+.cm button{min-width:36px;height:36px;padding:0 8px;display:grid;place-items:center;border:1px solid var(--line);border-radius:10px;background:var(--paper-alt);color:var(--ink);font:600 17px var(--f-display);cursor:pointer;touch-action:manipulation}
+.cm button:hover{border-color:var(--b1);color:var(--b1)}
+.cm button.sh{font:600 15px var(--f-body);color:var(--ink-soft)}
+.cm button.sh[aria-pressed=true]{background:var(--b1);border-color:var(--b1);color:#fff}
+/* diálogo */
+.dl{display:flex;flex-direction:column;gap:12px;margin-top:12px}
+.ln{display:flex;gap:10px;align-items:flex-start;animation:fxUp .4s ease both}
+.av{flex:none;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font:600 14px var(--f-display);color:#fff;background:var(--ink-faint)}
+.ln.me .av{background:var(--b3)}
+.bub{background:var(--paper-raised);border:1px solid var(--line);border-radius:var(--r-md);padding:10px 14px;font-size:14.5px}
+.ln.me .bub{border-color:var(--b3-line)}
+.nm{font:11px var(--f-data);text-transform:uppercase;color:var(--ink-faint);margin:0 0 3px}
+.opts{display:grid;gap:8px;margin-top:12px}
+.opts button{text-align:left;font:500 14.5px var(--f-body);border:1.5px solid var(--b3-line);background:var(--paper-raised);color:var(--ink);border-radius:var(--r-md);padding:9px 14px;cursor:pointer}
+.opts button:hover:not(:disabled){border-color:var(--b3)}
+.opts button.bad{border-color:var(--family);background:var(--family-soft)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+.card{border:1px solid var(--b3-line);background:var(--paper-raised);border-radius:var(--r-md);padding:12px 16px;font-size:14px}
+.card h3{margin:0 0 4px;font-size:15px}
+@media(max-width:600px){.two{grid-template-columns:1fr}section{padding:18px 16px 22px}}
+textarea{width:100%;min-height:90px;border:1px solid var(--family-line);border-radius:var(--r-sm);padding:10px 12px;background:var(--paper-raised);color:var(--ink);font:inherit;margin-top:10px;transition:box-shadow .2s}
+textarea:focus{outline:none;box-shadow:0 0 0 4px color-mix(in srgb,var(--family) 20%,transparent)}
+.ck{display:block;padding:5px 0;cursor:pointer}
+.sv{font:12px var(--f-data);color:var(--b2);margin-left:10px;opacity:0;transition:opacity .3s}.sv.show{opacity:1}
+footer{max-width:780px;margin:0 auto;padding:0 clamp(16px,4vw,28px) 60px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font:12.5px var(--f-data);color:var(--ink-faint)}
+.cf-wrap{position:fixed;width:0;height:0;z-index:60;pointer-events:none}
+.cf{position:absolute;width:8px;height:12px;border-radius:2px;background:var(--c);opacity:0;animation:cfFly 1.2s cubic-bezier(.2,.7,.3,1) forwards}
+@keyframes cfFly{0%{opacity:1}45%{opacity:1;transform:translate(calc(var(--dx)*.8),var(--up)) rotate(200deg)}100%{opacity:0;transform:translate(var(--dx),var(--fall)) rotate(var(--rot))}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.plx,.cf-wrap{display:none}.fx-hide>*,.anim.ready .t{opacity:1!important}}
+@media print{.plx,.bar,body::before,.cf-wrap,.cm{display:none}section{opacity:1;box-shadow:none}}
+
+/* minijuego */
+.mg-top{display:flex;justify-content:space-between;font:500 14px var(--f-data);color:var(--ink-faint)}
+.mg-q{font:600 19px/1.4 var(--f-display);margin:12px 0 4px;min-height:64px}
+.mg-q small{display:block;font:400 12px var(--f-data);text-transform:uppercase;letter-spacing:.06em;color:var(--ink-faint);margin-bottom:4px}
+.mgf{min-height:22px;font:13px var(--f-data);color:var(--ink-soft);margin:8px 0 0}
+.mg .ck{display:inline-block;margin-left:10px;font-size:13.5px}
+
+/* explica a diez personas */
+section.pp{background:var(--b2-soft);border-color:var(--b2-line)}
+.pp .num{background:var(--b2)}
+.pp-use{display:flex;flex-wrap:wrap;gap:6px 8px;align-items:center;margin:0 0 8px;font-size:13px}
+.pp-use span{background:var(--paper-raised);border:1px solid var(--b2-line);border-radius:99px;padding:2px 11px;font:12.5px var(--f-data);color:var(--ink-soft)}
+.tk .pp-use span{border-color:var(--family-line)}
+.ppl-ol{list-style:none;margin:8px 0 0;padding:0}
+.ppl-i{border-top:1px solid var(--line)}
+.ppl-i label{display:grid;grid-template-columns:22px 1fr;gap:12px;align-items:start;padding:11px 8px;cursor:pointer;border-radius:var(--r-sm)}
+.ppl-i input{width:20px;height:20px;margin:2px 0 0;accent-color:var(--b2);cursor:pointer}
+.tk .ppl-i input{accent-color:var(--family)}
+.ppl-w{display:block;font-size:12.5px;color:var(--ink-faint)}
+.ppl-w b{font-size:14px;color:var(--ink);font-weight:600}
+.ppl-t{display:block;margin-top:2px;line-height:1.5}
+.ppl-i.done .ppl-t{color:var(--ink-faint)}
+.ppl-i.pick label{background:var(--b3-soft);outline:2px solid var(--b3);outline-offset:-2px}
+.pp-hw{margin-top:24px;padding-top:4px;border-top:1px dashed var(--line-strong)}
+</style>
+</head>
+<body data-lang="es-en">
+<a class="skip" href="#main">Saltar al contenido</a>
+<div class="plx" aria-hidden="true"><i></i><i></i></div>
+<header><div class="wrap">
+  <p class="eyebrow"><span class="dot"></span>Clase 24 de 44 · L5 · Explaining without a script</p>
+  <h1>¿Cómo se llama esa <em>cosa</em>?<span class="en">What’s that thing called?</span></h1>
+  <p class="lede">Hoy aprendes a explicar un objeto cuando te falta la palabra: para qué sirve, cómo es y a qué se parece. También aprendes a ganar tiempo sin quedarte callado, con «bueno», «o sea» y «a ver». Casi todo se dice en voz alta.<span class="en b">Today you learn to explain an object when you’re missing the word: what it’s for, what it’s like and what it resembles. You also learn to buy time without going silent, with «bueno», «o sea» and «a ver». Almost everything is said aloud.</span></p>
+  <div class="meta-row"><div>Duración<strong>50 min</strong></div><div>Construye sobre<strong>Clases 15 y 23</strong></div><div>Nivel<strong>B1</strong></div></div>
+</div></header>
+
+<main class="wrap" id="main" tabindex="-1">
+<div class="bar" role="group" aria-label="Controles de la página">
+  <button type="button" class="nav-btn" id="navBtn" aria-label="Menú de partes" aria-expanded="false" aria-controls="toc"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><path d="M3 5.5h14M3 10h14M3 14.5h14"/></svg></button>
+  <nav class="toc" id="toc" aria-label="Partes" hidden></nav>
+  <span class="bar-t">Ir a una parte</span>
+  <div class="seg" id="lang" role="group" aria-label="Idioma"><button type="button" data-lang="es" aria-pressed="false">Español</button><button type="button" data-lang="es-en" aria-pressed="true">Español + EN</button></div>
+  <button type="button" class="btn" id="themeBtn" aria-pressed="false">Modo oscuro</button>
+</div>
+
+<section id="s0" aria-labelledby="s0-t"><h2 id="s0-t"><span class="num">0</span><span>Calentamiento oral<span class="en"> Oral warm-up</span></span><span class="cue">⏱ 4 min</span></h2>
+<p class="sub">Sin pantalla: escuchas y contestas con frases completas. Lee el profesor.<span class="en b">No screen: you listen and answer in full sentences. The teacher reads.</span></p>
+<ol class="ex">
+<li>¿Qué objeto de tu casa te gusta más? ¿Cómo lo <span class="v">describirías</span> sin decir su nombre?<span class="en b">Which object in your home do you like most? How would you describe it without saying its name?</span></li>
+<li>¿Qué aparato de cocina <span class="v">usas</span> todos los días? ¿Para qué <span class="v">sirve</span>?<span class="en b">Which kitchen appliance do you use every day? What is it for?</span></li>
+<li>¿Qué <span class="v">haces</span> cuando no sabes una palabra en español: la buscas, la cambias o preguntas?<span class="en b">What do you do when you don’t know a word in Spanish: look it up, swap it or ask?</span></li>
+<li>¿Cómo le <span class="v">explicarías</span> «el mando de la consola» a alguien que nunca ha jugado?<span class="en b">How would you explain “the console controller” to someone who has never played?</span></li>
+</ol></section>
+
+<section id="s1" aria-labelledby="s1-t"><h2 id="s1-t"><span class="num">1</span><span>Explicar sin la palabra<span class="en"> Explaining without the word</span></span><span class="cue">⏱ 9 min</span></h2>
+<p class="sub">Si falta una palabra, no te quedes callado: da un rodeo. Sube un peldaño cada vez.<span class="en b">If a word is missing, don’t go silent: take a detour. Climb one step at a time.</span></p>
+<div class="anim" id="an1"><p class="lab">Cuando falta la palabra · cuatro recursos<span class="en"> · when a word is missing · four resources</span></p>
+<div class="step"><span class="t2">1 · bloqueo</span><span class="chip x t" style="--d:0s">«Eh… no sé cómo se dice…»</span></div>
+<div class="step"><span class="t2">2 · categoría</span><span class="chip c1 t" style="--d:0.5s">«Es una cosa que sirve para cocinar.»</span></div>
+<div class="step"><span class="t2">3 · comparar</span><span class="chip c2 t" style="--d:1s">«Se parece a un horno, pero es más pequeño.»</span></div>
+<div class="step"><span class="t2">4 · detalle</span><span class="chip c3 t" style="--d:1.5s">«Es de metal, redonda y tiene un cajón.»</span></div>
+<div class="anim-foot"><button type="button" class="re">↻ Repetir<span class="en"> · Replay</span></button></div></div>
+<div class="anim" id="an2"><p class="lab">Ganar tiempo · muletillas naturales<span class="en"> · buying time · natural fillers</span></p>
+<div class="step"><span class="t2">1 · empezar</span><span class="chip c1 t" style="--d:0s">«Bueno…»</span></div>
+<div class="step"><span class="t2">2 · reformular</span><span class="chip c1 t" style="--d:0.5s">«O sea…»</span></div>
+<div class="step"><span class="t2">3 · pensar</span><span class="chip c2 t" style="--d:1s">«A ver…»</span></div>
+<div class="step"><span class="t2">4 · pedir ayuda</span><span class="chip c3 t" style="--d:1.5s">«¿Cómo te lo explico?»</span></div>
+<div class="anim-foot"><button type="button" class="re">↻ Repetir<span class="en"> · Replay</span></button></div></div>
+<div class="box"><b>Fórmulas para explicar:</b> <b>es una cosa que</b> + sirve para / se usa para… · <b>es como</b> + objeto · <b>se parece a</b> + objeto (pero…) · <b>sirve para</b> + infinitivo · <b>es un sitio donde</b>… · <b>es de</b> + material.<span class="en b">Formulas for explaining: es una cosa que + sirve para / se usa para… · es como + object · se parece a + object (but…) · sirve para + infinitive · es un sitio donde… · es de + material.</span></div>
+<div class="forms"><div><small>¿Para qué sirve?</small><b>sirve para cocinar</b></div><div><small>¿Cómo es?</small><b>es pequeño y redondo</b></div><div><small>¿A qué se parece?</small><b>se parece a un horno</b></div><div><small>¿De qué es?</small><b>es de metal</b></div><div><small>¿Dónde está?</small><b>está en la cocina</b></div><div><small>¿Cuándo se usa?</small><b>se usa los sábados</b></div></div>
+<div class="box pr">🗣️ <b>Pronunciación de hoy:</b> una muletilla dura un segundo y te ayuda a pensar; no la repitas en cada frase. Mantén un ritmo constante: si no sale la palabra, rodea la idea sin pararte.<span class="en b">Today’s pronunciation: a filler lasts one second and helps you think; don’t repeat it in every sentence. Keep a steady rhythm: if the word won’t come, go around the idea without stopping.</span>
+<p class="say"><span class="tag k">bloqueo</span>Eh… es… una… no sé… cosa…</p>
+<p class="say"><span class="tag o">fluidez</span>A ver, es una cosa que sirve para cocinar, o sea, como un horno pequeño.</p>
+<p class="say"><span class="tag k">bloqueo</span>No sé. Olvídalo.</p>
+<p class="say"><span class="tag o">fluidez</span>No me sale la palabra, pero es redonda y sirve para jugar al fútbol.</p>
+</div>
+<div class="box wr"><b>Cuidado:</b> «sirve <b>para</b> + infinitivo», no «sirve de cocinar». Y «cosa» es normal en la conversación, no suena infantil. Para lugares usa «un sitio donde…».<span class="en b">Careful: «sirve para + infinitive», not «sirve de cocinar». And «cosa» is normal in conversation, it doesn’t sound childish. For places use «un sitio donde…».</span></div>
+</section>
+
+<section id="s2" aria-labelledby="s2-t"><h2 id="s2-t"><span class="num">2</span><span>Repaso relámpago<span class="en"> Lightning review</span></span><span class="cue">⏱ 5 min</span></h2>
+<p class="sub">Doce palabras y fórmulas para explicar. Dilo en voz alta antes de girar la tarjeta.<span class="en b">Twelve words and formulas for explaining. Say it aloud before flipping the card.</span></p>
+<div class="fcs" id="fcs"></div></section>
+
+<section id="s3" aria-labelledby="s3-t"><h2 id="s3-t"><span class="num">3</span><span>Practica<span class="en"> Practice</span></span><span class="cue">⏱ 11 min</span></h2>
+<p class="sub">Tres ejercicios de 15 frases. Cada frase te corrige al instante y tienes <b>dos intentos</b>: si fallas los dos, te enseñamos la respuesta. Los tres ejercicios se hacen en clase.<span class="en b">Three exercises of 15 sentences. Every sentence gives instant feedback and you get two tries: if you miss both, we show the answer. All three exercises are done in class.</span></p>
+
+<h3>A · Elige la forma correcta<span class="en"> · Pick the correct form</span></h3>
+<ol class="ex" id="exA"></ol>
+<div class="check"><div><button type="button" class="act alt" id="exArs">Reiniciar<span class="en"> · Reset</span></button></div><span class="score" id="exAsc"></span></div>
+
+<h3>B · Escribe la forma<span class="en"> · Type the form</span></h3>
+<p class="sub">Escribe la forma que falta. Entre paréntesis tienes el verbo, la persona y el tiempo. Pulsa Intro o «Comprobar». Al escribir, usa el menú de teclas (o clic derecho) para tildes, ñ, ¿ y ¡.<span class="en b">Type the missing form. In brackets you get the verb, the person and the tense. Press Enter or “Check”. While typing, use the key menu (or right-click) for accents, ñ, ¿ and ¡.</span></p>
+<ol class="ex" id="exB"></ol>
+<div class="check"><div><button type="button" class="act alt" id="exBrs">Reiniciar<span class="en"> · Reset</span></button></div><span class="score" id="exBsc"></span></div>
+
+<h3>C · ¿Qué dices?<span class="en"> · What do you say?</span></h3>
+<p class="sub">Lee la situación y elige la respuesta más natural y gramaticalmente correcta.<span class="en b">Read the situation and pick the most natural, grammatically correct reply.</span></p>
+<ol class="ex" id="exC"></ol>
+<div class="check"><div><button type="button" class="act alt" id="exCrs">Reiniciar<span class="en"> · Reset</span></button></div><span class="score" id="exCsc"></span></div></section>
+
+<section id="s4" aria-labelledby="s4-t"><h2 id="s4-t"><span class="num">4</span><span>Minijuego: tabú relámpago<span class="en"> Mini-game: lightning taboo</span></span><span class="cue">⏱ 5 min</span></h2>
+<p class="sub">Te damos la descripción sin la palabra: elige qué objeto es. Tienes 90 segundos (o juega sin tiempo).<span class="en b">We give you the description without the word: pick which object it is. You have 90 seconds (or play without a countdown).</span></p>
+<div class="mg"><div class="mg-top"><span id="mgT" aria-hidden="true">90 s</span><span id="mgS">0 puntos</span></div>
+<div class="mg-q" id="mgQ" aria-live="polite">Pulsa «Empezar» para jugar.<span class="en b">Press “Start” to play.</span></div>
+<div class="op" id="mgO"></div>
+<p class="mgf" id="mgF" role="status"></p>
+<div class="check"><div><button type="button" class="act" id="mgGo">Empezar<span class="en"> · Start</span></button><label class="ck"><input type="checkbox" id="mgNt"> Sin cuenta atrás<span class="en"> · No countdown</span></label></div><span class="score" id="mgR"></span></div></div>
+</section>
+
+<section id="s5" class="rp" aria-labelledby="s5-t"><h2 id="s5-t"><span class="num">5</span><span>Roleplay: explicar la freidora<span class="en"> Roleplay: explaining the air fryer</span></span><span class="cue">⏱ 12 min</span></h2>
+<p class="sub">Sofía, una amiga chilena, no conoce la freidora de aire. Explícasela sin saber todas las palabras y presume un poco. Elige la mejor respuesta y dila en voz alta antes de pulsar.<span class="en b">Sofía, a Chilean friend, doesn’t know the air fryer. Explain it to her without knowing all the words and show off a little. Pick the best reply and say it aloud before clicking.</span></p>
+<div class="dl" id="dl" aria-live="polite"></div><div class="opts" id="opts"></div>
+<button type="button" class="act alt" id="dre" style="margin-top:14px">↻ Otra vez<span class="en"> · Again</span></button>
+<h3>Parte 2 · Improvisación libre con rol<span class="en"> Part 2 · Free role-play</span></h3>
+<div class="two"><div class="card"><h3>Rol A · Andrei</h3>Le explicas la freidora de aire sin saber todas las palabras: usa «es una cosa que…», «se parece a…» y «sirve para…», y presume un poco. Usa al menos dos muletillas (bueno, o sea, a ver).<span class="en b">You explain the air fryer without knowing all the words: use «es una cosa que…», «se parece a…» and «sirve para…», and show off a little. Use at least two fillers (bueno, o sea, a ver).</span></div>
+<div class="card"><h3>Rol B · Amigos<span class="en"> · Friends</span></h3>El profesor es Sofía: pregunta «¿cómo es?», «¿para qué sirve?», «¿a qué se parece?» y finge no entender hasta que la explicación es clara. Después cambiáis.<span class="en b">The teacher plays Sofía: she asks “what is it like?”, “what is it for?”, “what does it look like?” and pretends not to understand until the explanation is clear. Then swap.</span></div></div>
+<p style="margin:14px 2px 2px"><b>Marca lo que uses:</b><span class="en"> Tick what you use:</span></p>
+<div id="ck"></div></section>
+
+<section id="s6" class="pp" aria-labelledby="s6-t"><h2 id="s6-t"><span class="num">6</span><span>Explica a diez personas<span class="en"> Explain to ten people</span></span><span class="cue">⏱ 8 min</span></h2>
+<p class="sub">Diez personas inventadas necesitan que les expliques algo del tema de hoy. Elige una (o pulsa «Al azar») y explícaselo en voz alta en 20–30 segundos. Marca ✓ cuando termines.<span class="en b">Ten made-up people need you to explain something from today’s topic. Pick one (or press “Random”) and explain it aloud in 20–30 seconds. Tick ✓ when you’re done.</span></p>
+<div class="pp-use"><b>Usa:</b><span>Es una cosa que sirve para…</span><span>Se parece a… (pero…)</span><span>Es de + material</span><span>Es un sitio donde…</span><span>Bueno… / O sea… / A ver…</span></div>
+<div class="ppl" data-k="c24-in"><ol class="ppl-ol"><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Marta"><span class="ppl-b"><span class="ppl-w"><b>1 · Marta</b> · vecina que busca una palabra</span><span class="ppl-t">Explícale qué es la freidora de aire sin decir su nombre.<span class="en b">Explain what an air fryer is without saying its name.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Hugo"><span class="ppl-b"><span class="ppl-w"><b>2 · Hugo</b> · amigo que no juega a videojuegos</span><span class="ppl-t">Explícale qué es el mando de la consola con «es una cosa que sirve para…».<span class="en b">Explain what a game controller is with “es una cosa que sirve para…”.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Elena"><span class="ppl-b"><span class="ppl-w"><b>3 · Elena</b> · jubilada</span><span class="ppl-t">Explícale cómo es un sofá: de qué es, dónde está y para qué sirve.<span class="en b">Explain what a sofa is: what it’s made of, where it is, what it’s for.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Tomás"><span class="ppl-b"><span class="ppl-w"><b>4 · Tomás</b> · compañero de piso</span><span class="ppl-t">Explícale cómo ganar tiempo con «bueno», «o sea» y «a ver».<span class="en b">Explain how to buy time with “bueno”, “o sea” and “a ver”.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Aiko"><span class="ppl-b"><span class="ppl-w"><b>5 · Aiko</b> · estudiante de intercambio</span><span class="ppl-t">Explícale por qué se dice «sirve para cocinar» y no «sirve de cocinar».<span class="en b">Explain why we say “sirve para cocinar”, not “sirve de cocinar”.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Sofía"><span class="ppl-b"><span class="ppl-w"><b>6 · Sofía</b> · amiga que nunca ve fútbol</span><span class="ppl-t">Explícale qué es un balón con «se parece a… pero…».<span class="en b">Explain what a ball is with “se parece a… pero…”.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Ben"><span class="ppl-b"><span class="ppl-w"><b>7 · Ben</b> · colega</span><span class="ppl-t">Explícale cómo describir un lugar con «es un sitio donde…».<span class="en b">Explain how to describe a place with “es un sitio donde…”.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Don Ramón"><span class="ppl-b"><span class="ppl-w"><b>8 · Don Ramón</b> · portero</span><span class="ppl-t">Explícale qué es un microondas sin decir la palabra: forma, material y uso.<span class="en b">Explain a microwave without the word: shape, material and use.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Valeria"><span class="ppl-b"><span class="ppl-w"><b>9 · Valeria</b> · amiga</span><span class="ppl-t">Explícale qué hacer cuando te quedas en blanco en mitad de una frase.<span class="en b">Explain what to do when you go blank mid-sentence.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Lucía"><span class="ppl-b"><span class="ppl-w"><b>10 · Lucía</b> · amiga</span><span class="ppl-t">Explícale cuándo una muletilla ayuda y cuándo molesta.<span class="en b">Explain when a filler word helps and when it annoys.</span></span></span></label></li></ol><div class="check"><div><button type="button" class="act alt ppl-rnd">🎲 Al azar<span class="en"> · Random</span></button> <button type="button" class="act alt ppl-rs">Reiniciar<span class="en"> · Reset</span></button></div><span class="score ppl-sc" aria-live="polite"></span></div></div></section>
+
+<section id="s7" class="tk" aria-labelledby="s7-t"><h2 id="s7-t"><span class="num">7</span><span style="color:var(--family)">Tu tarea<span class="en"> Your homework</span></span><span class="cue">⏱ 3 min</span></h2>
+<p class="sub">Mira el modelo y después grábate <b>hablando</b> 30–40 segundos: explica 3 objetos de tu casa sin decir su nombre (por ejemplo: el mando, la freidora de aire, el sofá).<span class="en b">Look at the model, then record yourself speaking for 30–40 seconds: explain 3 objects in your home without saying their name (for example: the controller, the air fryer, the sofa).</span></p>
+<div class="dl">
+<div class="ln"><div class="av">M</div><div><p class="nm">Modelo</p><div class="bub">A ver… es una cosa redonda y negra que sirve para jugar en la tele. Se parece a un teléfono, pero tiene dos palancas y muchos botones. Sin esto no puedo jugar a la FIFA. ¿Cuál es? (Respuesta: el mando.)<span class="en b">Let’s see… it’s a round black thing that is for playing on the TV. It looks like a phone, but it has two sticks and lots of buttons. Without this I can’t play FIFA. Which is it? (Answer: the controller.)</span></div></div></div>
+</div>
+<p class="sub">Para cada objeto, di: ① para qué sirve · ② a qué se parece · ③ un detalle (forma, material o dónde está). Usa «a ver», «o sea» o «bueno» una vez.<span class="en b">For each object, say: ① what it’s for · ② what it looks like · ③ one detail (shape, material or where it is). Use «a ver», «o sea» or «bueno» once.</span></p>
+<div class="pp-hw"><h3>Para casa: diez personas más<span class="en"> · Ten more people, at home</span></h3><p class="sub">Otras diez personas, ahora para hacer en casa. Explícale a cada una lo que se pide, en voz alta o grabándote (al menos tres con audio). Marca ✓ cuando termines.<span class="en b">Ten more people, to do at home. Explain to each one what is asked, aloud or recording yourself (at least three with audio). Tick ✓ when you’re done.</span></p>
+<div class="pp-use"><b>Usa:</b><span>Es una cosa que sirve para…</span><span>Se parece a… (pero…)</span><span>Es de + material</span><span>Es un sitio donde…</span><span>Bueno… / O sea… / A ver…</span></div>
+<div class="ppl" data-k="c24-hw"><ol class="ppl-ol"><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Pablo"><span class="ppl-b"><span class="ppl-w"><b>1 · Pablo</b> · amigo</span><span class="ppl-t">Explícale qué es una mochila sin decir la palabra.<span class="en b">Explain what a backpack is without saying the word.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Gloria"><span class="ppl-b"><span class="ppl-w"><b>2 · Gloria</b> · tía</span><span class="ppl-t">Explícale qué es el mando de la tele: para qué sirve y a qué se parece.<span class="en b">Explain a TV remote: what it’s for and what it looks like.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Karim"><span class="ppl-b"><span class="ppl-w"><b>3 · Karim</b> · vecino</span><span class="ppl-t">Explícale qué es una lavadora con «es una cosa que se usa para…».<span class="en b">Explain a washing machine with “es una cosa que se usa para…”.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Nerea"><span class="ppl-b"><span class="ppl-w"><b>4 · Nerea</b> · amiga</span><span class="ppl-t">Explícale qué es una bufanda: de qué es, dónde se usa y cuándo.<span class="en b">Explain a scarf: what it’s made of, where and when it’s used.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Camille"><span class="ppl-b"><span class="ppl-w"><b>5 · Camille</b> · amiga francesa</span><span class="ppl-t">Explícale qué es una nevera con «es como… pero…».<span class="en b">Explain a fridge with “es como… pero…”.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Julia"><span class="ppl-b"><span class="ppl-w"><b>6 · Julia</b> · hermana pequeña</span><span class="ppl-t">Explícale qué es una taza: forma, material y para qué sirve.<span class="en b">Explain a mug: shape, material and use.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Mateo"><span class="ppl-b"><span class="ppl-w"><b>7 · Mateo</b> · entrenador</span><span class="ppl-t">Explícale qué es un silbato sin decir la palabra.<span class="en b">Explain a whistle without saying the word.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Raúl"><span class="ppl-b"><span class="ppl-w"><b>8 · Raúl</b> · jefe</span><span class="ppl-t">Explícale qué es un enchufe con tres recursos distintos.<span class="en b">Explain a plug socket using three different strategies.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Inés"><span class="ppl-b"><span class="ppl-w"><b>9 · Inés</b> · amiga</span><span class="ppl-t">Explícale qué es un paraguas: cuándo se usa y a qué se parece.<span class="en b">Explain an umbrella: when it’s used and what it resembles.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Leo"><span class="ppl-b"><span class="ppl-w"><b>10 · Leo</b> · amigo</span><span class="ppl-t">Explícale tres objetos de tu casa sin decir su nombre, con ritmo constante y sin silencios.<span class="en b">Explain three objects at home without naming them, at a steady pace.</span></span></span></label></li></ol><div class="check"><div><button type="button" class="act alt ppl-rnd">🎲 Al azar<span class="en"> · Random</span></button> <button type="button" class="act alt ppl-rs">Reiniciar<span class="en"> · Reset</span></button></div><span class="score ppl-sc" aria-live="polite"></span></div></div></div>
+<textarea id="notes" aria-label="Notas" placeholder="Escribe aquí tus 3 objetos · Write your 3 objects here"></textarea>
+<p style="margin:8px 2px 0;font-size:12.5px;color:var(--ink-faint)">Es solo un apoyo: lo importante es decirlo en voz alta.<span class="en b">Just a support: what matters is saying it aloud.</span></p>
+<p><button type="button" class="act alt" id="sv">Guardar notas</button><span class="sv" id="svf">Guardado ✓</span></p></section>
+
+</main>
+<footer><span>Clase 24 · ¿Cómo se llama esa cosa?</span><span>Próxima clase → Clase 25</span></footer>
+
+<div class="cm" id="cm" role="toolbar" aria-label="Caracteres especiales" hidden></div>
+<script>
+const $=id=>document.getElementById(id),RM=matchMedia('(prefers-reduced-motion:reduce)').matches;
+const E=(t,b)=>t?`<span class="en${b?' b':''}"> ${t}</span>`:'';
+const sh=a=>{const r=[...a];for(let i=r.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[r[i],r[j]]=[r[j],r[i]]}return r};
+const ld=k=>{try{return localStorage.getItem(k)}catch(e){return null}},sv=(k,v)=>{try{localStorage.setItem(k,v)}catch(e){}};
+const restart=(el,c)=>{el.classList.remove(c);void el.offsetWidth;el.classList.add(c)};
+function confetti(el){if(RM||!el)return;const r=el.getBoundingClientRect(),w=document.createElement('div');w.className='cf-wrap';w.style.left=r.left+r.width/2+'px';w.style.top=r.top+r.height/2+'px';
+ const C=['var(--b1)','var(--b3)','var(--b2)','var(--family)'];
+ for(let k=0;k<22;k++){const c=document.createElement('i'),an=-Math.PI/2+(Math.random()-.5)*2.2,d=60+Math.random()*110;c.className='cf';
+  c.style.cssText=`--c:${C[k%4]};--dx:${Math.cos(an)*d|0}px;--up:${Math.sin(an)*d|0}px;--fall:${(Math.sin(an)*d+90+Math.random()*60)|0}px;--rot:${(Math.random()*720-360)|0}deg`;w.appendChild(c)}
+ document.body.appendChild(w);setTimeout(()=>w.remove(),1600)}
+
+/* barra: índice, idioma, tema */
+const secs=[...document.querySelectorAll('main section')],toc=$('toc'),nb=$('navBtn');
+toc.innerHTML=secs.map(s=>{const h=s.querySelector('h2');return `<a href="#${s.id}"><b>${h.querySelector('.num').textContent}</b>${h.children[1].firstChild.textContent}</a>`}).join('');
+nb.onclick=()=>{toc.hidden=!toc.hidden;nb.setAttribute('aria-expanded',String(!toc.hidden))};
+toc.onclick=e=>{if(e.target.closest('a')){toc.hidden=true;nb.setAttribute('aria-expanded','false')}};
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!toc.hidden){toc.hidden=true;nb.focus()}});
+function setLang(l){document.body.dataset.lang=l;document.querySelectorAll('#lang button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.lang===l)));sv('clase-lang-v2',l)}
+document.querySelectorAll('#lang button').forEach(b=>b.onclick=()=>setLang(b.dataset.lang));setLang(ld('clase-lang-v2')==='es'?'es':'es-en');
+const tb=$('themeBtn');function setTheme(d){document.documentElement.dataset.theme=d?'dark':'light';tb.setAttribute('aria-pressed',String(d));tb.textContent=d?'Modo claro':'Modo oscuro';sv('clase24-theme',d?'d':'l')}
+tb.onclick=()=>setTheme(tb.getAttribute('aria-pressed')!=='true');setTheme(ld('clase24-theme')==='d');
+
+/* animaciones al entrar */
+document.querySelectorAll('.anim').forEach(a=>{
+ const run=()=>{a.classList.remove('play');void a.offsetWidth;a.classList.add('play')};
+ a.querySelector('.re').onclick=run;
+ if(RM)return;a.classList.add('ready');
+ new IntersectionObserver((es,o)=>es.forEach(e=>{if(e.isIntersecting){run();o.unobserve(a)}}),{threshold:.6}).observe(a)});
+if(!RM&&'IntersectionObserver' in window){
+ const io=new IntersectionObserver((es,o)=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('fx-num');o.unobserve(e.target)}}),{threshold:.05});secs.forEach(s=>io.observe(s));
+ const io2=new IntersectionObserver((es,o)=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('fx-show');o.unobserve(e.target)}}),{threshold:.1});
+ document.querySelectorAll('ol.ex,.forms').forEach(c=>{[...c.children].forEach((k,i)=>k.style.setProperty('--i',Math.min(i,10)));c.classList.add('fx-hide');io2.observe(c)})}
+/* parallax suave y foco de sección */
+if(!RM){const orbs=[...document.querySelectorAll('.plx i')];let t=0;
+ const run=()=>{t=0;const y=scrollY,vh=innerHeight,c=vh/2;orbs.forEach((o,i)=>o.style.transform=`translate3d(${Math.sin(y/600+i*1.7)*innerWidth*.06|0}px,${-y*(.2+i*.15)|0}px,0)`);
+  secs.forEach(s=>{const r=s.getBoundingClientRect(),d=r.top>c?r.top-c:r.bottom<c?c-r.bottom:0;s.style.setProperty('--a',(Math.round(Math.max(0,1-d/(vh*.5))*20)/20))})};
+ addEventListener('scroll',()=>{if(!t)t=requestAnimationFrame(run)},{passive:true});run()}
+
+/* tarjetas */
+const CARDS=[["la freidora de aire", "Hago las patatas en la freidora de aire.", "I make the fries in the air fryer."], ["el mando", "Dame el mando, por favor.", "Pass me the controller, please."], ["la consola", "La consola está en el salón.", "The console is in the living room."], ["el balón", "Pásame el balón.", "Pass me the ball."], ["decoración minimalista", "Mi casa tiene decoración minimalista.", "My home has minimalist decor."], ["sirve para", "Sirve para cocinar sin aceite.", "It’s for cooking without oil."], ["se parece a", "Se parece a un horno pequeño.", "It looks like a small oven."], ["es como", "Es como una olla, pero con tapa.", "It’s like a pot, but with a lid."], ["una cosa que", "Es una cosa que se enchufa.", "It’s a thing you plug in."], ["no sé cómo se dice", "No sé cómo se dice, pero es redondo.", "I don’t know how to say it, but it’s round."], ["a ver", "A ver, déjame pensar.", "Let’s see, let me think."], ["o sea", "O sea, es un horno pequeño.", "I mean, it’s a small oven."]];
+$('fcs').innerHTML=CARDS.map(c=>`<button type="button" class="fc" aria-pressed="false"><span class="f">${c[0]}</span><span class="bk">${c[1]}<i class="en">${c[2]}</i></span></button>`).join('');
+$('fcs').onclick=e=>{const f=e.target.closest('.fc');if(f){f.classList.toggle('on');f.setAttribute('aria-pressed',f.classList.contains('on'))}};
+
+/* menú de caracteres: aparece al enfocar un campo y con clic derecho */
+const cm=$('cm'),CH=['á','é','í','ó','ú','ü','ñ','¿','?','¡','!'];let cmT=null,cmUp=false,cmMode='el';
+const isFld=el=>el&&el.matches&&el.matches('input[type="text"],textarea');
+function cmDraw(){cm.innerHTML=CH.map(c=>{const v=cmUp?c.toUpperCase():c;return `<button type="button" tabindex="-1" data-c="${v}" aria-label="Insertar ${v}">${v}</button>`}).join('')+`<button type="button" tabindex="-1" class="sh" aria-pressed="${cmUp}" aria-label="Mayúsculas">⇧</button>`}
+function cmPlace(x,y){cm.style.left='0px';cm.style.top='0px';cm.hidden=false;const w=cm.offsetWidth,h=cm.offsetHeight,vw=innerWidth,vh=innerHeight;
+ cm.style.left=Math.max(8,Math.min(x,vw-w-8))+'px';cm.style.top=Math.max(8,Math.min(y,vh-h-8))+'px'}
+function cmAnchor(el){const r=el.getBoundingClientRect();cm.hidden=false;const h=cm.offsetHeight,vh=(window.visualViewport?visualViewport.height:innerHeight);
+ /* debajo de la caja; solo arriba si no cabe debajo */
+ cmPlace(r.left,r.bottom+6+h<=vh-8?r.bottom+6:Math.max(8,r.top-h-6))}
+function cmShow(el){cmT=el;cmMode='el';cmDraw();cm.hidden=false;cmAnchor(el)}
+function cmHide(){cm.hidden=true;cmT=null}
+document.addEventListener('focusin',e=>{if(isFld(e.target)&&!e.target.disabled)cmShow(e.target);else if(!cm.contains(e.target))cmHide()});
+document.addEventListener('focusout',e=>{if(isFld(e.target)&&!(e.relatedTarget&&cm.contains(e.relatedTarget)))cmHide()});
+document.addEventListener('contextmenu',e=>{const f=e.target;if(!isFld(f)||f.disabled)return;e.preventDefault();f.focus();cmT=f;cmMode='el';cmDraw();cmAnchor(f)});
+addEventListener('scroll',()=>{if(cm.hidden||!cmT)return;if(cmMode==='el')cmAnchor(cmT);else cmHide()},{passive:true,capture:true});
+addEventListener('resize',()=>{if(!cm.hidden&&cmT&&cmMode==='el')cmAnchor(cmT)});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!cm.hidden)cmHide()});
+['mousedown','pointerdown'].forEach(t=>cm.addEventListener(t,e=>e.preventDefault()));
+cm.addEventListener('click',e=>{const b=e.target.closest('button');if(!b||!cmT)return;
+ if(b.classList.contains('sh')){cmUp=!cmUp;cmDraw();return}
+ const f=cmT,c=b.dataset.c;f.focus();f.setRangeText(c,f.selectionStart,f.selectionEnd,'end');f.dispatchEvent(new Event('input',{bubbles:true}));
+ if(cmUp&&/[a-zñü]/i.test(c)){cmUp=false;cmDraw()}});
+
+/* ejercicios · feedback instantáneo por frase · dos intentos y luego se revela */
+const nz=t=>t.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/\s+/g,' ').trim();
+/* A */
+const EXA=[["Es una cosa que ___ para cocinar sin aceite.", ["sirve", "sirva", "servir"], "It’s a thing that is for cooking without oil.", "«Una cosa que + indicativo»: sirve."], ["Es ___ un horno, pero mucho más pequeño.", ["como", "igual", "tan"], "It’s like an oven, but much smaller.", "«Es como + sustantivo» compara dos cosas."], ["Se ___ a una olla, pero tiene un cajón.", ["parece", "parezco", "parecen"], "It looks like a pot, but it has a drawer.", "Se parece a (3.ª persona singular)."], ["No sé cómo se ___ en español: es el aparato para jugar a la FIFA.", ["dice", "diga", "decir"], "I don’t know how to say it in Spanish: it’s the device for playing FIFA.", "«No sé cómo se dice» + indicativo."], ["___, déjame pensar… es una cosa redonda.", ["A ver", "Aunque", "Por eso"], "Let’s see, let me think… it’s a round thing.", "«A ver» es una muletilla para ganar tiempo."], ["Sirve ___ preparar patatas fritas.", ["para", "por", "a"], "It’s for preparing fries.", "«Sirve para + infinitivo»."], ["El ___ es lo que usas para jugar en la consola.", ["mando", "balón", "horno"], "The controller is what you use to play on the console.", "Mando = el aparato con botones para la consola."], ["Para jugar al fútbol necesitas un ___.", ["balón", "mando", "enchufe"], "To play football you need a ball.", "Balón = pelota de fútbol."], ["Mi casa es muy minimalista: tengo ___ cosas.", ["pocas", "pocos", "poca"], "My home is very minimalist: I have few things.", "Cosas es femenino plural → pocas."], ["Es un aparato ___ se enchufa a la pared.", ["que", "quien", "donde"], "It’s an appliance that plugs into the wall.", "«Un aparato que + verbo»."], ["Es un sitio ___ guardo los zapatos.", ["donde", "quien", "cuando"], "It’s a place where I keep my shoes.", "«Un sitio donde…» para lugares."], ["—¿Cómo es? —Es pequeño, redondo ___ negro.", ["y", "pero", "sino"], "What is it like? It’s small, round and black.", "Enumeración: pequeño, redondo y negro."], ["O sea, ___ como un horno pequeño.", ["es", "está", "tiene"], "I mean, it’s like a small oven.", "«Es como + sustantivo»."], ["Es una cosa que se ___ para cocinar sin aceite.", ["usa", "use", "usando"], "It’s a thing that is used to cook without oil.", "«Se usa para + infinitivo» (indicativo)."], ["Bueno, es ___ difícil de explicar…", ["un poco", "muy poco", "poco un"], "Well, it’s a bit hard to explain…", "«Un poco + adjetivo» suaviza la frase."]];
+/* B */
+const EXB=[["Es una cosa que ___ para cocinar.", "servir · ella · presente", "sirve", "It’s a thing that is for cooking.", "servir → sirve (e → i)."], ["Se ___ a un microondas, pero es redonda.", "parecer · ella · presente", "parece", "It looks like a microwave, but it’s round.", "parecer → parece."], ["Yo ___ la freidora todos los días.", "usar · yo · presente", "uso", "I use the air fryer every day.", "Yo → uso."], ["Ayer ___ unas patatas en la freidora de aire.", "hacer · yo · indefinido", "hice", "Yesterday I made some fries in the air fryer.", "hacer → hice."], ["El mando de la consola ___ pilas.", "tener · él · presente", "tiene", "The console controller has batteries.", "tener → tiene (e → ie)."], ["¿Para qué ___ este aparato?", "servir · presente", "sirve", "What is this device for?", "servir → sirve."], ["No ___ cómo se dice «air fryer» en español.", "saber · yo · presente", "sé", "I don’t know how to say “air fryer” in Spanish.", "saber → sé."], ["Mis amigos ___ que mi casa es muy minimalista.", "decir · ellos · presente", "dicen", "My friends say my home is very minimalist.", "decir → dicen."], ["Cuando era niño, ___ al balón en la calle.", "jugar · yo · imperfecto", "jugaba", "When I was a kid, I played ball in the street.", "Costumbre en el pasado: jugaba."], ["Ayer mis amigos ___ las patatas en el horno.", "poner · ellos · indefinido", "pusieron", "Yesterday my friends put the fries in the oven.", "poner → pusieron (irregular)."], ["¿Me ___ el mando, por favor?", "pasar · tú · presente", "pasas", "Can you pass me the controller, please?", "Tú → pasas."], ["Mañana te ___ cómo funciona.", "explicar · yo · futuro", "explicaré", "Tomorrow I’ll explain to you how it works.", "Futuro: explicaré."], ["Yo ___ explicarlo mejor si tuviera las palabras.", "poder · yo · condicional", "podría", "I could explain it better if I had the words.", "Condicional: podría."], ["Quiero que ___ mi freidora de aire.", "probar · tú · subjuntivo", "pruebes", "I want you to try my air fryer.", "Quiero que + subjuntivo (probar → pruebes)."], ["Nosotros ___ al fútbol con el balón nuevo.", "jugar · nosotros · presente", "jugamos", "We play football with the new ball.", "Nosotros → jugamos."]];
+/* C */
+const EXC=[["No recuerdas la palabra «mando».", ["Es la cosa con botones que usas para jugar a la consola.", "No sé cómo se dice. Adiós.", "¡Dame el… el… eso!"], "You can’t remember the word “mando”.", "Rodeas la palabra: categoría + uso."], ["Te falta la palabra «balón».", ["Es la cosa redonda que usas para jugar al fútbol.", "Es un… ¿cómo se dice? No sé.", "¡Eso, eso, el eso!"], "You’re missing the word “balón”.", "Describes forma y uso sin pararte."], ["Necesitas tiempo para pensar.", ["A ver… ¿cómo te lo explico?", "(Silencio de diez segundos.)", "No sé nada."], "You need time to think.", "Una muletilla natural mantiene el ritmo."], ["Quieres comparar la freidora con algo conocido.", ["Se parece a un horno, pero más pequeño y más rápido.", "Es completamente distinto de todo.", "No se parece a nada."], "You want to compare the air fryer with something familiar.", "«Se parece a… pero…» compara y distingue."], ["Tu amigo no entiende tu explicación. Quieres probar de otra manera.", ["Bueno, déjame decírtelo de otra forma: sirve para cocinar.", "Ya te lo he dicho. Escucha mejor.", "Da igual, no importa."], "Your friend doesn’t understand your explanation. You want to try another way.", "Reformular sin culpar al otro."], ["Quieres decir para qué sirve un objeto.", ["Sirve para cocinar sin aceite.", "Sirve cocinar sin aceite.", "Sirve de cocinar sin aceite."], "You want to say what an object is for.", "«Sirve para + infinitivo»."], ["Quieres describir tu casa minimalista.", ["Mi casa es muy minimalista: tengo pocas cosas, pero todas útiles.", "Mi casa es mucha minimalista: tengo pocas cosas.", "Mi casa tiene minimalista: tengo pocas cosas."], "You want to describe your minimalist home.", "Ser + adjetivo: «es muy minimalista»."], ["Le preguntas a alguien cómo se llama algo.", ["¿Cómo se llama esa cosa que sirve para cortar la pizza?", "¿Qué es llama esa cosa que sirve para cortar la pizza?", "¿Cómo llama esa cosa que sirve para cortar la pizza?"], "You ask someone what something is called.", "«¿Cómo se llama…?» lleva «se»."], ["Tu amigo te dice «¿La qué?». Repites la idea con otras palabras.", ["Una cosa como un horno pequeño que cocina con aire caliente.", "¡Nada, nada! Olvídalo.", "Ya te lo he dicho antes, escucha mejor."], "Your friend says “The what?”. You repeat the idea in other words.", "Reformulas con comparación y detalle."], ["Quieres presumir (con simpatía) de tu freidora.", ["¡Es genial! Las patatas salen crujientes con casi nada de aceite.", "La mía es mejor que la tuya y punto.", "No sé, es una cosa que cocina."], "You want to show off (kindly) about your air fryer.", "Presumir con datos concretos suena seguro y simpático."], ["Quieres decir de qué material es algo.", ["Es de metal y tiene un cajón.", "Es en metal y tiene un cajón.", "Es con metal y tiene un cajón."], "You want to say what material something is made of.", "«Es de + material»."], ["Explicas dónde se pone la freidora.", ["Se pone en la cocina, encima de la encimera.", "Se pone a la cocina, encima la encimera.", "Se pone en cocina encimera."], "You explain where the air fryer goes.", "Preposiciones: en la cocina, encima de la encimera."], ["Quieres que tu amigo adivine un objeto.", ["A ver si adivinas: es redonda y sirve para jugar al fútbol.", "Adivina mi objeto, y ya está.", "Tú adivinas el objeto: es redondo sirve fútbol."], "You want your friend to guess an object.", "Una pista completa y con muletilla."], ["Tu amigo adivina el objeto.", ["¡Eso es! ¡Exacto!", "No, nada que ver.", "Mmm, no sé."], "Your friend guesses the object.", "Confirmas con entusiasmo."], ["Terminas la explicación y compruebas que te ha entendido.", ["¿Me explico bien o lo digo de otra forma?", "¿Entiendes o no entiendes?", "¿Entiendo?"], "You finish the explanation and check you were understood.", "Preguntas con cortesía y ofreces repetir."]];
+
+function mount(id,raw,kind,splits){
+ const ol=$(id),sc=$(id+'sc');
+ const I=raw.map(x=>kind==='ty'?{q:x[0],hint:x[1],ans:x[2],en:x[3],why:x[4]}:{q:x[0],o:x[1],ans:x[1][0],en:x[2],why:x[3]});
+ let st=[];
+ const upd=()=>{const d=st.filter(s=>s.d).length,ok=st.filter(s=>s.ok).length,f=st.filter(s=>s.f).length;
+  sc.textContent=d?`${d} / ${I.length} hechas · ${ok} correctas · ${f} a la primera`:`${I.length} frases · 2 intentos por frase`;
+  if(d===I.length&&ok===I.length)confetti(sc)};
+ function draw(){
+  cmHide();st=I.map(()=>({t:0,d:false,ok:false,f:false}));
+  ol.innerHTML=I.map((x,i)=>`<li data-i="${i}"><span>${x.q.replace('___','<b class="v">___</b>')}${x.hint?`<span class="hint">(${x.hint})</span>`:''}</span>${E(x.en,1)}`+
+   (kind==='ty'?`<div class="ty"><input type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" aria-label="Respuesta ${i+1}"><button type="button" class="act">Comprobar</button></div>`
+    :`<div class="op${kind==='sit'?' long':''}">${sh(x.o).map(o=>`<button type="button">${o}</button>`).join('')}</div>`)+
+   `<span class="sol" role="status" hidden></span></li>`).join('');
+  const L=[...ol.children];splits.forEach(p=>L[p[0]].insertAdjacentHTML('beforebegin',`<div class="div${p[2]?' cl':''}">${p[1]}</div>`));
+  upd()}
+ function judge(li,i,good,given){
+  const x=I[i],s=st[i],m=li.querySelector('.sol');s.t++;
+  let msg,tip=false;
+  if(good){s.d=s.ok=true;s.f=s.t===1;tip=true;msg=`✓ ${s.t===1?'¡Correcto!':'¡Bien, a la segunda!'} ${x.why}`;
+   if(kind==='ty'&&given.trim().toLowerCase()!==x.ans.toLowerCase())msg+=` (Ojo con la tilde: «${x.ans}»).`}
+  else if(s.t>=2){s.d=true;msg=`✗ La respuesta correcta es «${x.ans}». ${x.why}`}
+  else msg='✗ Todavía no. Te queda 1 intento.';
+  m.hidden=false;m.className='sol'+(tip?' tip':'');m.innerHTML=msg;restart(m,'sol');
+  if(s.d){cmHide();li.querySelectorAll('button,input').forEach(el=>{el.disabled=true});
+   if(kind==='ty'){li.querySelector('input').classList.add(s.ok?'ok':'bad')}
+   else li.querySelectorAll('.op button').forEach(bt=>{if(bt.textContent===x.ans)bt.classList.add('ok')})}
+  upd()}
+ ol.onclick=e=>{const li=e.target.closest('li');if(!li)return;const i=+li.dataset.i;if(st[i].d)return;
+  if(kind==='ty'){if(!e.target.closest('.ty button'))return;typed(li,i)}
+  else{const b=e.target.closest('.op button');if(!b||b.disabled)return;const good=b.textContent===I[i].ans;
+   if(!good){b.classList.add('bad');b.disabled=true;restart(b,'fx-bad')}else{b.classList.add('ok');restart(b,'fx-ok')}
+   judge(li,i,good)}};
+ function typed(li,i){const inp=li.querySelector('input'),v=inp.value;if(!v.trim()){inp.focus();return}
+  const good=nz(v)===nz(I[i].ans);if(!good){restart(inp,'fx-bad')}judge(li,i,good,v);if(!st[i].d){inp.focus();inp.select()}}
+ ol.onkeydown=e=>{if(kind==='ty'&&e.key==='Enter'&&e.target.matches('.ty input')){e.preventDefault();const li=e.target.closest('li'),i=+li.dataset.i;if(!st[i].d)typed(li,i)}};
+ $(id+'rs').onclick=draw;draw()}
+mount('exA',EXA,'mc',[[0,'en clase · elige la forma correcta',1]]);
+mount('exB',EXB,'ty',[[0,'en clase · escribe el verbo',1]]);
+mount('exC',EXC,'sit',[[0,'en clase · elige tu respuesta',1]]);
+
+/* diálogo con ramas */
+const DL=[["Sofía", "¿Qué es eso que tienes en la cocina, Andrei? ¿Una cafetera rara?", "What’s that thing you have in the kitchen, Andrei? A strange coffee machine?", ["No, no es una cafetera. Es una cosa que sirve para cocinar, como un horno pequeño.", "Es una freidora de aire. ¿No lo sabes?", "Eh… no sé cómo explicarlo. Olvídalo."], "Rodeas la palabra: categoría + comparación. Las otras repiten la palabra que ella no conoce o abandonan."], ["Sofía", "¿Un horno pequeño? ¿Y para qué sirve exactamente?", "A small oven? And what exactly is it for?", ["A ver, sirve para hacer patatas fritas casi sin aceite. Se parece a un horno, pero es más rápida.", "Sirve cocinar patatas fritas.", "Para cocinar y ya está."], "«Sirve para + infinitivo», con muletilla y comparación. «Sirve cocinar» no lleva «para»."], ["Sofía", "¿Y funciona de verdad? Yo prefiero la sartén de toda la vida.", "Does it really work? I prefer the good old frying pan.", ["Te lo juro, salen crujientes. Quiero que la pruebes esta noche.", "Tu sartén es horrible.", "No sé, a mí me gusta."], "Presumes con cordialidad y la invitas a probar. Criticar su sartén no ayuda."], ["Sofía", "Vale, vale… ¿y qué necesito para usarla?", "OK, OK… and what do I need to use it?", ["Solo se enchufa a la pared y listo. Es una cosa muy fácil, ¿me explico?", "Necesitas un máster en cocina.", "No lo sé, mira en internet."], "Explicas con seguridad y compruebas que te entiende: «¿Me explico?»."]];
+let dt=0;const dl=$('dl'),op=$('opts'),mk=(c,n,t,e)=>`<div class="ln ${c}"><div class="av">${c==='me'?'Tú':n[0]}</div><div><p class="nm">${n}</p><div class="bub">${t}${E(e)}</div></div></div>`;
+function turn(){if(dt>=DL.length){op.innerHTML='';dl.insertAdjacentHTML('beforeend','<div class="box" style="margin:0">¡Convencida! Has explicado la freidora sin saber todas las palabras, con muletillas y sin quedarte callado. 🎉</div>');confetti(op);return}
+ const d=DL[dt];dl.insertAdjacentHTML('beforeend',mk('fr',d[0],d[1],d[2]));
+ op.innerHTML=sh(d[3].map((t,i)=>[t,i])).map(o=>`<button type="button" data-ok="${o[1]===0}">${o[0]}</button>`).join('');}
+op.onclick=e=>{const b=e.target.closest('button');if(!b||b.disabled)return;const d=DL[dt];
+ if(b.dataset.ok==='true'){dl.insertAdjacentHTML('beforeend',mk('me','Tú',b.textContent));dt++;turn()}
+ else{b.classList.add('bad');b.disabled=true;restart(b,'fx-bad');if(!op.querySelector('.sol'))op.insertAdjacentHTML('beforeend',`<span class="sol">✗ ${d[4]}</span>`)}};
+$('dre').onclick=()=>{dt=0;dl.innerHTML='';turn()};turn();
+const CK=["Es una cosa que…", "Se parece a…", "Es como…", "Sirve para…", "A ver… / o sea… / bueno…", "No sé cómo se dice…"];
+$('ck').innerHTML=CK.map(c=>`<label class="ck"><input type="checkbox"> ${c}</label>`).join('');
+$('ck').onchange=e=>{const all=[...$('ck').querySelectorAll('input')];if(all.every(x=>x.checked))confetti(e.target)};
+
+const MG=[["<small>¿Qué objeto es?</small>«Es redonda, la pateas y se usa en el fútbol.»", ["el balón", "el mando", "la lámpara"], "It’s round, you kick it and it’s used in football."], ["<small>¿Qué objeto es?</small>«Tiene botones y lo sujetas con las dos manos para jugar.»", ["el mando", "el balón", "la cafetera"], "It has buttons and you hold it with both hands to play."], ["<small>¿Qué objeto es?</small>«Es un aparato que conectas a la tele para jugar a la FIFA.»", ["la consola", "la nevera", "la plancha"], "It’s a device you connect to the TV to play FIFA."], ["<small>¿Qué objeto es?</small>«Es pequeña, cocina con aire caliente y las patatas salen crujientes.»", ["la freidora de aire", "la lavadora", "la tostadora"], "It’s small, cooks with hot air and the fries come out crispy."], ["<small>¿Qué es?</small>«Es un estilo de casa con pocas cosas, colores neutros y mucho espacio libre.»", ["la decoración minimalista", "la decoración barroca", "la decoración navideña"], "It’s a home style with few things, neutral colours and lots of free space."], ["<small>¿Qué objeto es?</small>«Es grande, cómodo y sirve para sentarte delante de la tele.»", ["el sofá", "el armario", "el espejo"], "It’s big, comfortable and for sitting in front of the TV."], ["<small>¿Qué objeto es?</small>«Es un aparato que da frío y guarda la comida.»", ["la nevera", "el horno", "el ventilador"], "It’s an appliance that is cold and keeps food."], ["<small>¿Qué objeto es?</small>«Calienta la comida en dos minutos y tiene un plato que gira.»", ["el microondas", "la lavadora", "el horno"], "It heats food in two minutes and has a turning plate."], ["<small>¿Qué objeto es?</small>«Es muy pequeño, lo llevas en el bolsillo y sirve para llamar.»", ["el móvil", "el reloj", "la llave"], "It’s very small, you carry it in your pocket and it’s for calling."], ["<small>¿Qué objeto es?</small>«Es grande, está en la cocina, llega a doscientos grados y sirve para asar.»", ["el horno", "el frigorífico", "el lavavajillas"], "It’s big, in the kitchen, reaches two hundred degrees and is for roasting."], ["<small>¿Qué objeto es?</small>«Es una rueda con mango y sirve para cortar la pizza.»", ["el cortapizzas", "el cuchillo", "la cuchara"], "It’s a wheel with a handle and is for cutting pizza."], ["<small>¿Qué objeto es?</small>«Es de cristal, tiene asa y sirve para beber cerveza.»", ["la jarra", "la sartén", "el plato"], "It’s made of glass, has a handle and is for drinking beer."], ["<small>¿Qué objeto es?</small>«Sirve para encender la tele sin levantarte del sofá.»", ["el mando a distancia", "el enchufe", "la antena"], "It’s for turning on the TV without getting up from the sofa."], ["<small>¿Qué objeto es?</small>«Es de madera o de metal y sirve para guardar la ropa.»", ["el armario", "la mesa", "la lámpara"], "It’s made of wood or metal and is for keeping clothes."], ["<small>¿Qué objeto es?</small>«Lo pones en la pared y sirve para ver la hora.»", ["el reloj", "el cuadro", "el espejo"], "You put it on the wall and it’s for telling the time."], ["<small>¿Qué objeto es?</small>«Es redonda y plana, tiene mango y sirve para freír huevos.»", ["la sartén", "la olla", "la bandeja"], "It’s round and flat, has a handle and is for frying eggs."]];
+
+/* minijuego sprint */
+const MGT=90;let mgQ=[],mgI=0,mgOk=0,mgOn=false,mgLeft=MGT,mgTm=null;
+const mgEnd=()=>{clearInterval(mgTm);mgOn=false;$('mgO').innerHTML='';const n=mgI;
+ $('mgQ').innerHTML=`Fin: ${mgOk} aciertos de ${n} frases.`+E(`Done: ${mgOk} correct out of ${n}.`,1);
+ $('mgR').textContent=n?`${Math.round(mgOk/n*100)} % de aciertos`:'';$('mgF').textContent='';
+ $('mgGo').innerHTML='Jugar otra vez'+E('Play again');$('mgGo').disabled=false;
+ if(n>=8&&mgOk>=Math.ceil(n*.8))confetti($('mgGo'))};
+const mgNext=()=>{if(mgI>=mgQ.length){mgEnd();return}const x=mgQ[mgI];$('mgQ').innerHTML=x[0]+E(x[2],1);
+ $('mgO').innerHTML=sh(x[1]).map(o=>`<button type="button">${o}</button>`).join('')};
+$('mgGo').onclick=()=>{mgQ=sh(MG);mgI=0;mgOk=0;mgOn=true;mgLeft=MGT;$('mgGo').disabled=true;$('mgS').textContent='0 puntos';$('mgR').textContent='';$('mgF').textContent='';
+ const nt=$('mgNt').checked;$('mgT').textContent=nt?'sin tiempo':MGT+' s';clearInterval(mgTm);
+ if(!nt)mgTm=setInterval(()=>{mgLeft--;$('mgT').textContent=mgLeft+' s';if(mgLeft<=0)mgEnd()},1000);mgNext()};
+$('mgO').onclick=e=>{const b=e.target.closest('button');if(!b||!mgOn||b.disabled)return;const x=mgQ[mgI],ok=b.textContent===x[1][0];
+ if(ok)mgOk++;b.classList.add(ok?'ok':'bad');restart(b,ok?'fx-ok':'fx-bad');
+ $('mgO').querySelectorAll('button').forEach(k=>{k.disabled=true;if(k.textContent===x[1][0])k.classList.add('ok')});
+ $('mgS').textContent=mgOk+' puntos';$('mgF').textContent=ok?'✓ ¡Bien!':'✗ Era «'+x[1][0]+'»';
+ mgI++;setTimeout(()=>{if(mgOn){$('mgF').textContent='';mgNext()}},ok?450:1300)};
+/* tarea: notas */
+const KEY='andrei-clase24-tarea',na=$('notes');
+(async()=>{try{if(window.storage){const r=await window.storage.get(KEY);if(r&&typeof r.value==='string'){na.value=r.value;return}}}catch(e){}const v=ld(KEY);if(v)na.value=v})();
+$('sv').onclick=async()=>{let ok=false;try{if(window.storage)ok=!!await window.storage.set(KEY,na.value)}catch(e){}if(!ok){sv(KEY,na.value);ok=true}
+ const f=$('svf');f.textContent=ok?'Guardado ✓':'No se pudo guardar';f.classList.add('show');setTimeout(()=>f.classList.remove('show'),1800)};
+</script>
+<script>
+/* explica a diez personas: marcar y sortear */
+(function(){
+var RM=matchMedia('(prefers-reduced-motion:reduce)').matches;
+function ld(k){try{return localStorage.getItem(k)}catch(e){return null}}
+function sv(k,v){try{localStorage.setItem(k,v)}catch(e){}}
+document.querySelectorAll('.ppl').forEach(function(box){
+  var key='andrei-pp-'+box.getAttribute('data-k'),items=[].slice.call(box.querySelectorAll('.ppl-i')),sc=box.querySelector('.ppl-sc'),saved={};
+  try{saved=JSON.parse(ld(key)||'{}')||{}}catch(e){saved={}}
+  items.forEach(function(li,i){li.querySelector('input').checked=!!saved[i]});
+  function upd(){var n=0,o={};items.forEach(function(li,i){var c=li.querySelector('input').checked;li.classList.toggle('done',c);if(c){n++;o[i]=1}});
+    sc.textContent=n+' / '+items.length+' ✓';sv(key,JSON.stringify(o))}
+  box.addEventListener('change',function(e){if(e.target.closest('.ppl-i'))e.target.closest('.ppl-i').classList.remove('pick');upd()});
+  box.querySelector('.ppl-rnd').onclick=function(){
+    var left=items.filter(function(li){return !li.querySelector('input').checked});
+    items.forEach(function(li){li.classList.remove('pick')});
+    if(!left.length){sc.textContent='¡Las diez hechas! ✓';return}
+    var li=left[Math.floor(Math.random()*left.length)];li.classList.add('pick');
+    li.scrollIntoView({block:'center',behavior:RM?'auto':'smooth'})};
+  box.querySelector('.ppl-rs').onclick=function(){items.forEach(function(li){li.querySelector('input').checked=false;li.classList.remove('pick')});upd()};
+  upd();
+});
+})();
+</script>
+</body>
+</html>

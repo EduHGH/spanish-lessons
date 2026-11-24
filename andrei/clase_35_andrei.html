@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Clase 35 · Si hubiera sabido… — Andrei</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* clase */
+:root{
+  --paper:#FBF7EE;--paper-top:#F6EEDA;--paper-raised:#FFFFFF;--paper-alt:#F3ECDA;
+  --ink:#23291F;--ink-soft:#565F52;--ink-faint:#6E7568;
+  --line:rgba(35,41,31,.12);--line-strong:rgba(35,41,31,.22);
+  --b1:#2F6FED;--b1-soft:#EAF1FE;--b1-line:#C6D9FC;
+  --b2:#2E9E6B;--b2-soft:#E9F6EF;--b2-line:#BEE6D3;
+  --b3:#DB8A2E;--b3-soft:#FCF1E1;--b3-line:#F3D9AF;
+  --family:#B5502E;--family-soft:#FBEBE3;--family-line:#EFC9B4;
+  --f-display:'Fraunces',Georgia,serif;--f-body:'IBM Plex Sans',system-ui,sans-serif;--f-data:'IBM Plex Mono',monospace;
+  --r-sm:12px;--r-md:18px;--r-lg:26px;
+  --shadow-1:0 1px 2px rgba(35,41,31,.05),0 10px 28px rgba(35,41,31,.07);
+  color-scheme:light}
+:root[data-theme="dark"]{
+  --paper:#171912;--paper-top:#22251A;--paper-raised:#22251B;--paper-alt:#2B2F22;
+  --ink:#F1EDE0;--ink-soft:#C3C7B8;--ink-faint:#9CA190;
+  --line:rgba(241,237,224,.14);--line-strong:rgba(241,237,224,.28);
+  --b1-soft:#1D2A44;--b1-line:#2F4B82;--b2-soft:#1B3328;--b2-line:#2B6A4C;--b3-soft:#3A2D18;--b3-line:#7A5524;--family-soft:#3A2219;--family-line:#7A3F29;
+  --shadow-1:0 1px 2px rgba(0,0,0,.45),0 10px 28px rgba(0,0,0,.35);color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-padding-top:calc(70px + env(safe-area-inset-top,0px))}
+body{margin:0;background:linear-gradient(180deg,var(--paper-top) 0,var(--paper) 460px) fixed,var(--paper);color:var(--ink);font:15px/1.6 var(--f-body);padding-bottom:env(safe-area-inset-bottom,0px)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--paper);z-index:10}
+::selection{background:var(--b3-soft)}
+:focus-visible{outline:2px solid var(--b3);outline-offset:2px}
+.skip{position:absolute;left:-999px}.skip:focus{left:12px;top:12px;z-index:20;background:var(--paper-raised);padding:8px 14px;border-radius:99px}
+.sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.plx{position:fixed;inset:-20vh 0;z-index:-1;pointer-events:none;overflow:hidden}
+.plx i{position:absolute;border-radius:50%;filter:blur(60px);opacity:.45;will-change:transform}
+.plx i:nth-child(1){width:46vmax;height:46vmax;left:-14vmax;top:4vh;background:radial-gradient(circle,color-mix(in srgb,var(--b3) 40%,transparent),transparent 70%)}
+.plx i:nth-child(2){width:38vmax;height:38vmax;right:-12vmax;top:70vh;background:radial-gradient(circle,color-mix(in srgb,var(--b1) 30%,transparent),transparent 70%)}
+.wrap{max-width:780px;margin:0 auto;padding:0 clamp(16px,4vw,28px) 90px}
+header .wrap{padding-top:34px;padding-bottom:0}
+.eyebrow{font:500 12px var(--f-data);letter-spacing:.14em;text-transform:uppercase;color:var(--b3);margin:0 0 10px;display:flex;align-items:center;gap:10px}
+.eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--b3)}
+h1{font:600 clamp(30px,5.6vw,48px)/1.08 var(--f-display);letter-spacing:-.02em;margin:0 0 14px;text-wrap:balance}
+h1 em{font-style:italic;background:linear-gradient(90deg,var(--b3) 20%,var(--family));-webkit-background-clip:text;background-clip:text;color:transparent}
+.lede{font-size:16px;color:var(--ink-soft);max-width:58ch;margin:0}
+.meta-row{display:flex;flex-wrap:wrap;gap:20px;margin-top:22px;font:12px var(--f-data);color:var(--ink-faint)}
+.meta-row strong{display:block;color:var(--ink);font:500 14.5px var(--f-display);margin-top:3px}
+.en{color:var(--ink-faint);font-size:.88em;font-style:italic;font-weight:400;text-transform:none;letter-spacing:0}
+.en.b{display:block;margin-top:2px}
+body[data-lang="es"] .en{display:none!important}
+h1 .en{display:block;font:italic 400 clamp(15px,2.6vw,19px)/1.35 var(--f-body);margin-top:8px}
+/* barra */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:11;background:color-mix(in srgb,var(--paper) 82%,transparent);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);padding-block:10px;margin-block:24px 4px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.nav-btn{width:36px;height:36px;display:grid;place-items:center;border:1px solid var(--line-strong);border-radius:50%;background:var(--paper-raised);color:var(--ink-soft);cursor:pointer;padding:0}
+.nav-btn:hover,.nav-btn[aria-expanded=true]{border-color:var(--b3);color:var(--b3)}
+.nav-btn path{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round}
+.toc{position:absolute;top:calc(100% + 8px);left:0;width:min(380px,100%);padding:8px;border:1px solid var(--line-strong);border-radius:var(--r-md);background:var(--paper-raised);box-shadow:var(--shadow-1)}
+.toc[hidden]{display:none}
+.toc a{display:flex;gap:12px;align-items:center;min-height:42px;padding:6px 10px;border-radius:var(--r-sm);color:var(--ink);text-decoration:none;font:500 14.5px var(--f-display)}
+.toc a:hover{background:var(--b3-soft)}
+.toc a b{font:500 12px var(--f-data);color:#fff;background:var(--b3);width:24px;height:24px;border-radius:50%;display:grid;place-items:center;flex:none}
+.bar-t{font:600 13px var(--f-display);color:var(--ink-soft);margin-right:auto}
+.seg{display:inline-flex;gap:3px;padding:3px;border:1px solid var(--line-strong);border-radius:99px;background:var(--paper-raised)}
+.seg button{border:0;background:none;padding:5px 13px;border-radius:99px;font:12px var(--f-data);color:var(--ink-soft);cursor:pointer;min-height:30px}
+.seg button[aria-pressed=true]{background:var(--b3);color:#fff;box-shadow:0 6px 16px color-mix(in srgb,var(--b3) 30%,transparent)}
+.btn{font:600 13px var(--f-body);background:var(--paper-raised);color:var(--ink-soft);border:1px solid var(--line-strong);border-radius:99px;padding:7px 15px;cursor:pointer}
+.btn:hover{border-color:var(--b3);color:var(--b3)}
+@media(max-width:600px){.bar-t{display:none}}
+/* secciones */
+section{background:var(--paper-raised);border:1px solid var(--line);border-radius:var(--r-lg);box-shadow:var(--shadow-1);margin-top:18px;padding:24px 26px 28px;scroll-margin-top:84px;position:relative;opacity:calc(.74 + .26*var(--a,1))}
+section.rp{background:var(--b1-soft);border-color:var(--b1-line)}section.rp .num{background:var(--b1)}
+section.tk{background:var(--family-soft);border-color:var(--family-line)}section.tk .num{background:var(--family)}
+h2{font:italic 500 22px/1.2 var(--f-display);margin:0 0 6px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+h2 .en{font:400 .6em var(--f-body);font-style:italic}
+h3{font:500 17px var(--f-display);margin:20px 0 6px}
+.num{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;flex:none;font:500 13px var(--f-data);background:var(--b3);color:#fff;font-style:normal}
+section.fx-num .num{animation:fxNum .65s cubic-bezier(.2,.9,.3,1.4) both}
+@keyframes fxNum{0%{transform:scale(.2) rotate(-90deg);opacity:0}100%{transform:none;opacity:1}}
+.cue{margin-left:auto;font:11px var(--f-data);color:var(--ink-faint);background:var(--paper-alt);border-radius:99px;padding:2px 10px;font-style:normal}
+.sub{color:var(--ink-soft);margin:0 0 12px;font-size:14.5px}
+.box{margin:14px 0 0;padding:13px 16px;background:var(--b3-soft);border:1px solid var(--b3-line);border-radius:var(--r-md);font-size:14.5px;color:var(--ink-soft)}
+.box strong,.box b{color:var(--ink)}
+.box.pr{background:var(--paper-alt);border-color:var(--line)}
+.box.wr{background:var(--family-soft);border-color:var(--family-line)}.box.wr b{color:var(--family)}
+ol.ex{padding:0;margin:8px 0 0;list-style:none;counter-reset:q}
+ol.ex>li{counter-increment:q;padding:11px 0;border-top:1px solid var(--line)}
+ol.ex>li::before{content:counter(q)".";font:12px var(--f-data);color:var(--ink-faint);margin-right:8px}
+.v{color:var(--b3);font-weight:600;text-decoration:underline;text-decoration-color:var(--b3-line);text-decoration-thickness:2px;text-underline-offset:3px}
+.div{display:flex;align-items:center;gap:10px;margin:16px 0 4px;font:11px var(--f-data);text-transform:uppercase;letter-spacing:.06em;color:var(--ink-faint)}
+.div::before,.div::after{content:"";flex:1;height:1px;background:var(--line)}
+.div.cl{color:var(--b3)}.div.cl::before,.div.cl::after{background:var(--b3-line)}
+/* animación de peldaños */
+.anim{border:1px solid var(--line);border-radius:var(--r-md);background:var(--paper-alt);padding:16px 18px 10px;margin:14px 0}
+.anim .lab{font:11px var(--f-data);text-transform:uppercase;letter-spacing:.08em;color:var(--ink-faint);margin:0 0 8px}
+.step{display:flex;align-items:center;gap:10px;margin:6px 0;flex-wrap:wrap}
+.step .t2{font:11px var(--f-data);color:var(--ink-faint);width:92px;flex:none}
+.chip{display:inline-block;padding:7px 15px;border-radius:14px;background:var(--paper-raised);border:2px solid var(--line-strong);font:600 16px var(--f-display)}
+.chip.c1{border-color:var(--b3-line)}.chip.c2{border-color:var(--b3);color:var(--b3)}.chip.c3{border-color:var(--b1);color:var(--b1)}.chip.x{border-color:var(--family);color:var(--family);border-style:dashed}
+.anim.ready:not(.play) .t{opacity:0}
+.anim.play .t{animation:aPop .55s cubic-bezier(.2,.8,.3,1) var(--d,0s) both}
+@keyframes aPop{0%{opacity:0;transform:translateY(10px) scale(.7)}60%{opacity:1;transform:translateY(-3px) scale(1.05)}100%{opacity:1;transform:none}}
+.anim-foot{display:flex;justify-content:flex-end;margin-top:6px}
+.re{border:1px solid var(--line-strong);background:var(--paper-raised);border-radius:99px;padding:3px 12px;font:11.5px var(--f-data);color:var(--ink-soft);cursor:pointer}
+.re:hover{color:var(--b3);border-color:var(--b3-line)}
+.forms{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-top:12px}
+.forms div{background:var(--paper-raised);border:1px solid var(--b3-line);border-radius:var(--r-md);padding:10px 12px;text-align:center}
+.forms small{display:block;font:11px var(--f-data);color:var(--ink-faint);text-transform:uppercase}
+.forms b{font:600 18px var(--f-display);color:var(--b3)}
+.say{margin:7px 0;font-size:15.5px}
+.say .tag{font:11px var(--f-data);padding:1px 8px;border-radius:99px;margin-right:8px;color:#fff}
+.say .tag.k{background:var(--family)}.say .tag.o{background:var(--b2)}
+/* tarjetas */
+.fcs{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin:14px 0 0;perspective:900px}
+.fc{position:relative;min-height:118px;border:0;background:none;padding:0;cursor:pointer;transform-style:preserve-3d;transition:transform .5s cubic-bezier(.2,.8,.3,1);color:var(--ink)}
+.fc.on{transform:rotateY(180deg)}
+.fc>span{position:absolute;inset:0;display:grid;place-items:center;padding:10px 14px;border-radius:var(--r-md);backface-visibility:hidden;-webkit-backface-visibility:hidden;text-align:center;border:1px solid var(--line)}
+.fc .f{background:var(--paper-alt);font:600 17px var(--f-display)}
+.fc .bk{background:var(--b3-soft);border-color:var(--b3-line);transform:rotateY(180deg);font:500 14px/1.4 var(--f-body)}
+.fc .bk i{display:block;font-size:12px;color:var(--ink-faint);margin-top:4px}
+.fc:hover .f{border-color:var(--b3-line)}
+/* ejercicios */
+.op{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.op button{font:500 14px var(--f-body);border:1.5px solid var(--line-strong);background:var(--paper-raised);color:var(--ink);border-radius:99px;padding:6px 16px;cursor:pointer;transition:transform .1s,background .2s}
+.op button:hover:not(:disabled){border-color:var(--b3);transform:translateY(-1px)}
+.op button.pk{background:var(--b3-soft);border-color:var(--b3);color:var(--b3)}
+.op button.ok{background:var(--b2-soft);border-color:var(--b2);color:var(--b2)}.op button.ok::after{content:" ✓"}
+.op button.bad{background:var(--family-soft);border-color:var(--family);color:var(--family)}.op button.bad::after{content:" ✗"}
+.sol{display:block;margin:7px 0 0;padding:1px 0 1px 10px;border-left:3px solid var(--family);color:var(--family);font-size:13.5px;animation:fxSol .35s ease both}
+.sol.tip{color:var(--b2);border-color:var(--b2)}
+@keyframes fxSol{from{opacity:0;transform:translateX(-10px)}to{opacity:1;transform:none}}
+.sol[hidden]{display:none}
+.fx-ok{animation:fxOk .55s ease calc(var(--i,0)*90ms) both}.fx-bad{animation:fxBad .42s ease calc(var(--i,0)*90ms) both}
+@keyframes fxOk{35%{transform:scale(1.1);box-shadow:0 0 0 7px color-mix(in srgb,var(--b2) 30%,transparent)}}
+@keyframes fxBad{20%{transform:translateX(-7px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(3px)}}
+.fx-hide:not(.fx-show)>*{opacity:0}.fx-show>*{animation:fxUp .45s cubic-bezier(.2,.8,.3,1) calc(var(--i,0)*55ms) both}
+@keyframes fxUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.check{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-top:20px;padding-top:16px;border-top:1px dashed var(--line)}
+.act{font:600 14px var(--f-body);background:var(--b3);color:#fff;border:0;border-radius:99px;padding:10px 22px;cursor:pointer}
+.act:hover{transform:translateY(-1px)}
+.act.alt{background:none;color:var(--ink-soft);border:1.5px solid var(--line-strong)}
+.score{font:13px var(--f-data);color:var(--ink-faint)}
+/* ejercicios con intentos */
+.op button:disabled:not(.ok):not(.bad){opacity:.55;cursor:default}
+.op.long button{border-radius:var(--r-md);text-align:left;padding:8px 14px}
+.ty{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.ty input{flex:1 1 180px;min-width:0;font:500 15px var(--f-body);border:1.5px solid var(--line-strong);background:var(--paper-raised);color:var(--ink);border-radius:99px;padding:7px 16px}
+.ty input:focus{outline:none;border-color:var(--b3);box-shadow:0 0 0 4px color-mix(in srgb,var(--b3) 20%,transparent)}
+.ty input.ok{border-color:var(--b2);background:var(--b2-soft);color:var(--b2)}
+.ty input.bad{border-color:var(--family);background:var(--family-soft);color:var(--family)}
+.ty .act{padding:7px 18px;font-size:13px}
+.ty .act:disabled{opacity:.5;cursor:default;transform:none}
+.hint{font:12px var(--f-data);color:var(--ink-faint);margin-left:8px;white-space:nowrap}
+.exh{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+/* menú de caracteres */
+.cm{position:fixed;z-index:70;display:flex;flex-wrap:wrap;gap:4px;max-width:min(92vw,330px);padding:6px;background:var(--paper-raised);border:1px solid var(--line-strong);border-radius:var(--r-md);box-shadow:var(--shadow-1)}
+.cm[hidden]{display:none}
+.cm button{min-width:36px;height:36px;padding:0 8px;display:grid;place-items:center;border:1px solid var(--line);border-radius:10px;background:var(--paper-alt);color:var(--ink);font:600 17px var(--f-display);cursor:pointer;touch-action:manipulation}
+.cm button:hover{border-color:var(--b3);color:var(--b3)}
+.cm button.sh{font:600 15px var(--f-body);color:var(--ink-soft)}
+.cm button.sh[aria-pressed=true]{background:var(--b3);border-color:var(--b3);color:#fff}
+/* diálogo */
+.dl{display:flex;flex-direction:column;gap:12px;margin-top:12px}
+.ln{display:flex;gap:10px;align-items:flex-start;animation:fxUp .4s ease both}
+.av{flex:none;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font:600 14px var(--f-display);color:#fff;background:var(--ink-faint)}
+.ln.me .av{background:var(--b1)}
+.bub{background:var(--paper-raised);border:1px solid var(--line);border-radius:var(--r-md);padding:10px 14px;font-size:14.5px}
+.ln.me .bub{border-color:var(--b1-line)}
+.nm{font:11px var(--f-data);text-transform:uppercase;color:var(--ink-faint);margin:0 0 3px}
+.opts{display:grid;gap:8px;margin-top:12px}
+.opts button{text-align:left;font:500 14.5px var(--f-body);border:1.5px solid var(--b1-line);background:var(--paper-raised);color:var(--ink);border-radius:var(--r-md);padding:9px 14px;cursor:pointer}
+.opts button:hover:not(:disabled){border-color:var(--b1)}
+.opts button.bad{border-color:var(--family);background:var(--family-soft)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+.card{border:1px solid var(--b1-line);background:var(--paper-raised);border-radius:var(--r-md);padding:12px 16px;font-size:14px}
+.card h3{margin:0 0 4px;font-size:15px}
+@media(max-width:600px){.two{grid-template-columns:1fr}section{padding:18px 16px 22px}}
+textarea{width:100%;min-height:90px;border:1px solid var(--family-line);border-radius:var(--r-sm);padding:10px 12px;background:var(--paper-raised);color:var(--ink);font:inherit;margin-top:10px;transition:box-shadow .2s}
+textarea:focus{outline:none;box-shadow:0 0 0 4px color-mix(in srgb,var(--family) 20%,transparent)}
+.ck{display:block;padding:5px 0;cursor:pointer}
+.sv{font:12px var(--f-data);color:var(--b2);margin-left:10px;opacity:0;transition:opacity .3s}.sv.show{opacity:1}
+footer{max-width:780px;margin:0 auto;padding:0 clamp(16px,4vw,28px) 60px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font:12.5px var(--f-data);color:var(--ink-faint)}
+.cf-wrap{position:fixed;width:0;height:0;z-index:60;pointer-events:none}
+.cf{position:absolute;width:8px;height:12px;border-radius:2px;background:var(--c);opacity:0;animation:cfFly 1.2s cubic-bezier(.2,.7,.3,1) forwards}
+@keyframes cfFly{0%{opacity:1}45%{opacity:1;transform:translate(calc(var(--dx)*.8),var(--up)) rotate(200deg)}100%{opacity:0;transform:translate(var(--dx),var(--fall)) rotate(var(--rot))}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.plx,.cf-wrap{display:none}.fx-hide>*,.anim.ready .t{opacity:1!important}}
+@media print{.plx,.bar,body::before,.cf-wrap,.cm{display:none}section{opacity:1;box-shadow:none}}
+
+/* explica a diez personas */
+section.pp{background:var(--b2-soft);border-color:var(--b2-line)}
+.pp .num{background:var(--b2)}
+.pp-use{display:flex;flex-wrap:wrap;gap:6px 8px;align-items:center;margin:0 0 8px;font-size:13px}
+.pp-use span{background:var(--paper-raised);border:1px solid var(--b2-line);border-radius:99px;padding:2px 11px;font:12.5px var(--f-data);color:var(--ink-soft)}
+.tk .pp-use span{border-color:var(--family-line)}
+.ppl-ol{list-style:none;margin:8px 0 0;padding:0}
+.ppl-i{border-top:1px solid var(--line)}
+.ppl-i label{display:grid;grid-template-columns:22px 1fr;gap:12px;align-items:start;padding:11px 8px;cursor:pointer;border-radius:var(--r-sm)}
+.ppl-i input{width:20px;height:20px;margin:2px 0 0;accent-color:var(--b2);cursor:pointer}
+.tk .ppl-i input{accent-color:var(--family)}
+.ppl-w{display:block;font-size:12.5px;color:var(--ink-faint)}
+.ppl-w b{font-size:14px;color:var(--ink);font-weight:600}
+.ppl-t{display:block;margin-top:2px;line-height:1.5}
+.ppl-i.done .ppl-t{color:var(--ink-faint)}
+.ppl-i.pick label{background:var(--b3-soft);outline:2px solid var(--b3);outline-offset:-2px}
+.pp-hw{margin-top:24px;padding-top:4px;border-top:1px dashed var(--line-strong)}
+</style>
+</head>
+<body data-lang="es-en">
+<a class="skip" href="#main">Saltar al contenido</a>
+<div class="plx" aria-hidden="true"><i></i><i></i></div>
+<header><div class="wrap">
+  <p class="eyebrow"><span class="dot"></span>Clase 35 de 44 · L7 · Wishes and regrets · ojalá, si hubiera</p>
+  <h1>Si hubiera <em>sabido</em>…<span class="en">If I had known…</span></h1>
+  <p class="lede">Hoy hablas de lo que pasó y de lo que podría haber pasado: el gol fallado, el viaje que no hiciste. Pluscuamperfecto de subjuntivo y condicional compuesto. Casi todo se dice en voz alta.<span class="en b">Today you talk about what happened and what could have happened: the missed goal, the trip you didn’t take. Pluperfect subjunctive and conditional perfect. Almost everything is said aloud.</span></p>
+  <div class="meta-row"><div>Duración<strong>50 min</strong></div><div>Construye sobre<strong>Clases 22 y 28</strong></div><div>Nivel<strong>B1+</strong></div></div>
+</div></header>
+
+<main class="wrap" id="main" tabindex="-1">
+<div class="bar" role="group" aria-label="Controles de la página">
+  <button type="button" class="nav-btn" id="navBtn" aria-label="Menú de partes" aria-expanded="false" aria-controls="toc"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><path d="M3 5.5h14M3 10h14M3 14.5h14"/></svg></button>
+  <nav class="toc" id="toc" aria-label="Partes" hidden></nav>
+  <span class="bar-t">Ir a una parte</span>
+  <div class="seg" id="lang" role="group" aria-label="Idioma"><button type="button" data-lang="es" aria-pressed="false">Español</button><button type="button" data-lang="es-en" aria-pressed="true">Español + EN</button></div>
+  <button type="button" class="btn" id="themeBtn" aria-pressed="false">Modo oscuro</button>
+</div>
+
+<section id="s0" aria-labelledby="s0-t"><h2 id="s0-t"><span class="num">0</span><span>Calentamiento oral<span class="en"> Oral warm-up</span></span><span class="cue">⏱ 4 min</span></h2>
+<p class="sub">Sin pantalla: escuchas y contestas con frases completas. Lee el profesor.<span class="en b">No screen: you listen and answer in full sentences. The teacher reads.</span></p>
+<ol class="ex"><li>¿Hay algo que <span class="v">habrías hecho</span> diferente este año? ¿Qué?<span class="en b">Is there anything you would have done differently this year? What?</span></li><li>¿Alguna vez has <span class="v">fallado</span> una ocasión clara en un partido? ¿Qué pasó?<span class="en b">Have you ever missed a clear chance in a match? What happened?</span></li><li>¿Qué viaje o plan no hiciste y <span class="v">te habría gustado</span> hacer?<span class="en b">What trip or plan did you not do that you would have liked to?</span></li><li>¿Qué habría pasado si no <span class="v">te hubieras mudado</span> a Madrid?<span class="en b">What would have happened if you hadn’t moved to Madrid?</span></li></ol></section>
+
+<section id="s1" aria-labelledby="s1-t"><h2 id="s1-t"><span class="num">1</span><span>Si hubiera… habría…<span class="en"> If I had… I would have…</span></span><span class="cue">⏱ 9 min</span></h2>
+<p class="sub">Del hecho real al lamento: cada peldaño añade un poco de nostalgia.<span class="en b">From the real fact to regret: each step adds a bit of nostalgia.</span></p>
+<div class="anim" id="an1"><p class="lab">De la realidad al lamento<span class="en">  · from reality to regret</span></p><div class="step"><span class="t2">1 · realidad</span><span class="chip x t" style="--d:0s">No estudié más español antes de venir.</span></div><div class="step"><span class="t2">2 · deseo</span><span class="chip c2 t" style="--d:0.5s">Ojalá hubiera estudiado más.</span></div><div class="step"><span class="t2">3 · hipótesis</span><span class="chip c3 t" style="--d:1s">Si hubiera estudiado más, habría hablado antes.</span></div><div class="step"><span class="t2">4 · lamento</span><span class="chip c2 t" style="--d:1.5s">Me habría gustado empezar antes.</span></div><div class="anim-foot"><button type="button" class="re">↻ Repetir<span class="en">  · Replay</span></button></div></div>
+<div class="box"><b>Fórmula:</b> <b>Si + hubiera + participio</b> (condición), <b>habría + participio</b> (resultado). Es el subjuntivo y el condicional de la Clase 22, pero con <b>haber</b> delante. <b>Ojalá hubiera + participio</b> = lamento. <b>Me habría gustado + infinitivo</b> = lo que no pudiste hacer.<span class="en b">Formula: Si + hubiera + participle (condition), habría + participle (result). It is the subjunctive and conditional from Class 22, with haber in front. Ojalá hubiera + participle = regret. Me habría gustado + infinitive = what you couldn’t do.</span></div>
+<div class="forms"><div><small>hubiera + hacer</small><b>hubiera hecho</b></div><div><small>habría + decir</small><b>habría dicho</b></div><div><small>hubiera + ver</small><b>hubiera visto</b></div><div><small>habría + ir</small><b>habría ido</b></div><div><small>hubiéramos + poner</small><b>hubiéramos puesto</b></div><div><small>habríamos + volver</small><b>habríamos vuelto</b></div></div>
+<div class="box pr">🗣️ <b>Pronunciación de hoy:</b> el lamento suena distinto: tono que baja, vocal larga en «hubiera…» y una pausa antes de «habría». Que se note la pena, sin dramatizar.<span class="en b">regret sounds different: falling tone, a long vowel in “hubiera…” and a pause before “habría”. Let the sadness show, without overacting.</span><p class="say"><span class="tag k">plano</span>Si hubiera sabido, habría ido.</p><p class="say"><span class="tag o">con pena</span>Si hubiera sabido… ↘ habría ido, seguro.</p></div>
+<div class="box wr"><b>Cuidado:</b> nunca «si habría sabido»: después de <b>si</b> va <b>hubiera</b>, y <b>habría</b> va en el resultado. Y vigila los participios irregulares: hecho, dicho, visto, puesto, vuelto, escrito.<span class="en b">never “si habría sabido”: after si comes hubiera, and habría goes in the result. Watch the irregular participles: hecho, dicho, visto, puesto, vuelto, escrito.</span></div></section>
+
+<section id="s2" aria-labelledby="s2-t"><h2 id="s2-t"><span class="num">2</span><span>Repaso relámpago<span class="en"> Lightning review</span></span><span class="cue">⏱ 5 min</span></h2>
+<p class="sub">Ocho expresiones clave. Dilo en voz alta antes de girar la tarjeta.<span class="en b">Eight key expressions. Say it aloud before flipping the card.</span></p>
+<div class="fcs" id="fcs"></div></section>
+
+<section id="s3" aria-labelledby="s3-t"><h2 id="s3-t"><span class="num">3</span><span>Practica<span class="en"> Practice</span></span><span class="cue">⏱ 11 min</span></h2>
+<p class="sub">Tres ejercicios de 15 frases. Cada frase te corrige al instante y tienes <b>dos intentos</b>: si fallas los dos, te enseñamos la respuesta. Los tres ejercicios se hacen en clase.<span class="en b">Three exercises of 15 sentences. Every sentence gives instant feedback and you get two tries: if you miss both, we show the answer. All three exercises are done in class.</span></p>
+
+<h3>A · Elige la forma correcta<span class="en"> · Pick the correct form</span></h3>
+<ol class="ex" id="exA"></ol>
+<div class="check"><div><button type="button" class="act alt" id="exArs">Reiniciar<span class="en"> · Reset</span></button></div><span class="score" id="exAsc"></span></div>
+
+<h3>B · Escribe el verbo<span class="en"> · Type the verb</span></h3>
+<p class="sub">Conjuga el verbo entre paréntesis. Pulsa Intro o «Comprobar». Al escribir, usa el menú de teclas (o clic derecho) para tildes, ñ, ¿ y ¡.<span class="en b">Conjugate the verb in brackets. Press Enter or “Check”. While typing, use the key menu (or right-click) for accents, ñ, ¿ and ¡.</span></p>
+<ol class="ex" id="exB"></ol>
+<div class="check"><div><button type="button" class="act alt" id="exBrs">Reiniciar<span class="en"> · Reset</span></button></div><span class="score" id="exBsc"></span></div>
+
+<h3>C · ¿Qué dices?<span class="en"> · What do you say?</span></h3>
+<p class="sub">Lee la situación y elige la respuesta más natural y gramaticalmente correcta.<span class="en b">Read the situation and pick the most natural, grammatically correct reply.</span></p>
+<ol class="ex" id="exC"></ol>
+<div class="check"><div><button type="button" class="act alt" id="exCrs">Reiniciar<span class="en"> · Reset</span></button></div><span class="score" id="exCsc"></span></div></section>
+
+<section id="s4" class="rp" aria-labelledby="s4-t"><h2 id="s4-t"><span class="num">4</span><span>Roleplay: la decisión que no tomé<span class="en"> the decision I didn’t make</span></span><span class="cue">⏱ 14 min</span></h2>
+<p class="sub">Iker te pregunta por una oferta de trabajo en Canadá que no aceptaste. Elige la mejor respuesta y dila en voz alta antes de pulsar.<span class="en b">Iker asks you about a job offer in Canada you didn’t accept. Pick the best reply and say it aloud before clicking.</span></p>
+<div class="dl" id="dl" aria-live="polite"></div><div class="opts" id="opts"></div>
+<button type="button" class="act alt" id="dre" style="margin-top:14px">↻ Otra vez<span class="en"> · Again</span></button>
+<h3>Parte 2 · Improvisación libre con rol<span class="en"> Part 2 · Free role-play</span></h3>
+<div class="two"><div class="card"><h3>Rol A · Andrei</h3>Cuentas una decisión que no tomaste y cómo habría cambiado todo (o no). Usa un «ojalá hubiera», un «si hubiera… habría…» y un «me habría gustado».<span class="en b">You tell about a decision you didn’t make and how it would have changed everything (or not). Use one “ojalá hubiera”, one “si hubiera… habría…” and one “me habría gustado”.</span></div><div class="card"><h3>Rol B · Iker</h3>El profesor es un amigo que pregunta, dice qué habría hecho él y te hace dudar. Después cambiáis.<span class="en b">The teacher plays a friend who asks, says what he would have done and makes you doubt. Then swap.</span></div></div>
+<p style="margin:14px 2px 2px"><b>Marca lo que uses:</b><span class="en"> Tick what you use:</span></p>
+<div id="ck"></div></section>
+
+<section id="s5" class="pp" aria-labelledby="s5-t"><h2 id="s5-t"><span class="num">5</span><span>Explica a diez personas<span class="en"> Explain to ten people</span></span><span class="cue">⏱ 8 min</span></h2>
+<p class="sub">Diez personas inventadas necesitan que les expliques algo del tema de hoy. Elige una (o pulsa «Al azar») y explícaselo en voz alta en 20–30 segundos. Marca ✓ cuando termines.<span class="en b">Ten made-up people need you to explain something from today’s topic. Pick one (or press “Random”) and explain it aloud in 20–30 seconds. Tick ✓ when you’re done.</span></p>
+<div class="pp-use"><b>Usa:</b><span>Si + hubiera + participio, habría + participio</span><span>Ojalá hubiera…</span><span>Me habría gustado + infinitivo</span></div>
+<div class="ppl" data-k="c35-in"><ol class="ppl-ol"><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Marta"><span class="ppl-b"><span class="ppl-w"><b>1 · Marta</b> · amiga que lamenta algo</span><span class="ppl-t">Explícale cómo expresar un lamento con «ojalá hubiera…».<span class="en b">Explain how to express a regret with “ojalá hubiera…”.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Hugo"><span class="ppl-b"><span class="ppl-w"><b>2 · Hugo</b> · amigo que falló un gol</span><span class="ppl-t">Explícale cómo contar el gol fallado: «Si hubiera chutado antes, habría marcado».<span class="en b">Explain how to tell about the missed goal.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Elena"><span class="ppl-b"><span class="ppl-w"><b>3 · Elena</b> · jubilada</span><span class="ppl-t">Explícale cómo se forma «hubiera hecho» y «habría dicho».<span class="en b">Explain how “hubiera hecho” and “habría dicho” are formed.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Tomás"><span class="ppl-b"><span class="ppl-w"><b>4 · Tomás</b> · compañero de piso</span><span class="ppl-t">Explícale por qué nunca se dice «si habría sabido».<span class="en b">Explain why we never say “si habría sabido”.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Aiko"><span class="ppl-b"><span class="ppl-w"><b>5 · Aiko</b> · estudiante de intercambio</span><span class="ppl-t">Explícale cuándo usar «me habría gustado» + infinitivo.<span class="en b">Explain when to use “me habría gustado” + infinitive.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Sofía"><span class="ppl-b"><span class="ppl-w"><b>6 · Sofía</b> · amiga</span><span class="ppl-t">Explícale algo que no hiciste el año pasado y que ahora lamentas.<span class="en b">Explain something you didn’t do last year and now regret.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Ben"><span class="ppl-b"><span class="ppl-w"><b>7 · Ben</b> · colega</span><span class="ppl-t">Explícale cómo habría cambiado tu año si hubieras llegado antes a Madrid.<span class="en b">Explain how your year would have changed if you’d arrived earlier.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Don Ramón"><span class="ppl-b"><span class="ppl-w"><b>8 · Don Ramón</b> · portero</span><span class="ppl-t">Explícale cómo suena el lamento: vocal larga y tono que baja.<span class="en b">Explain how regret sounds: long vowel and falling tone.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Valeria"><span class="ppl-b"><span class="ppl-w"><b>9 · Valeria</b> · amiga</span><span class="ppl-t">Explícale un viaje que no hiciste, con «si hubiera…».<span class="en b">Explain a trip you didn’t take, with “si hubiera…”.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Lucía"><span class="ppl-b"><span class="ppl-w"><b>10 · Lucía</b> · amiga</span><span class="ppl-t">Explícale los participios irregulares: hecho, dicho, visto, puesto, vuelto, escrito.<span class="en b">Explain the irregular participles.</span></span></span></label></li></ol><div class="check"><div><button type="button" class="act alt ppl-rnd">🎲 Al azar<span class="en"> · Random</span></button> <button type="button" class="act alt ppl-rs">Reiniciar<span class="en"> · Reset</span></button></div><span class="score ppl-sc" aria-live="polite"></span></div></div></section>
+
+<section id="s6" class="tk" aria-labelledby="s6-t"><h2 id="s6-t"><span class="num">6</span><span style="color:var(--family)">Tu tarea<span class="en"> Your homework</span></span><span class="cue">⏱ 3 min</span></h2>
+<p class="sub">Lee el modelo en voz alta. Después <b>grábate 1 minuto</b> contando algo que habrías hecho distinto y por qué.<span class="en b">Read the model aloud. Then record yourself for 1 minute telling something you would have done differently and why.</span></p>
+<div class="dl"><div class="ln"><div class="av">L</div><div><p class="nm">Lucas</p><div class="bub">El año pasado no fui al viaje de fin de curso. Ojalá hubiera ido.<span class="en b">Last year I didn’t go on the end-of-year trip. I wish I had gone.</span></div></div></div><div class="ln"><div class="av">L</div><div><p class="nm">Lucas</p><div class="bub">Si hubiera sabido que iba a ser tan divertido, habría ahorrado desde antes.<span class="en b">If I had known it would be so much fun, I would have saved up earlier.</span></div></div></div><div class="ln"><div class="av">L</div><div><p class="nm">Lucas</p><div class="bub">Me habría gustado conocer a más gente. Pero en el fondo, quién sabe qué habría pasado.<span class="en b">I would have liked to meet more people. But deep down, who knows what would have happened.</span></div></div></div></div>
+<p class="sub" style="margin-top:14px">En tu grabación di: ① qué habrías hecho distinto · ② por qué · ③ cómo habría cambiado todo (o no).<span class="en b">In your recording say: ① what you would have done differently · ② why · ③ how everything would have changed (or not).</span></p>
+<div class="pp-hw"><h3>Para casa: diez personas más<span class="en"> · Ten more people, at home</span></h3><p class="sub">Otras diez personas, ahora para hacer en casa. Explícale a cada una lo que se pide, en voz alta o grabándote (al menos tres con audio). Marca ✓ cuando termines.<span class="en b">Ten more people, to do at home. Explain to each one what is asked, aloud or recording yourself (at least three with audio). Tick ✓ when you’re done.</span></p>
+<div class="pp-use"><b>Usa:</b><span>Si + hubiera + participio, habría + participio</span><span>Ojalá hubiera…</span><span>Me habría gustado + infinitivo</span></div>
+<div class="ppl" data-k="c35-hw"><ol class="ppl-ol"><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Pablo"><span class="ppl-b"><span class="ppl-w"><b>1 · Pablo</b> · amigo</span><span class="ppl-t">Explícale qué habrías hecho distinto en el viaje de fin de curso.<span class="en b">Explain what you’d have done differently on the end-of-year trip.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Gloria"><span class="ppl-b"><span class="ppl-w"><b>2 · Gloria</b> · tía</span><span class="ppl-t">Explícale una decisión que no tomaste y qué habría pasado.<span class="en b">Explain a decision you didn’t make and what would have happened.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Karim"><span class="ppl-b"><span class="ppl-w"><b>3 · Karim</b> · vecino</span><span class="ppl-t">Explícale la diferencia entre «si tuviera» y «si hubiera tenido».<span class="en b">Explain the difference between “si tuviera” and “si hubiera tenido”.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Nerea"><span class="ppl-b"><span class="ppl-w"><b>4 · Nerea</b> · amiga</span><span class="ppl-t">Explícale con «ojalá hubiera estudiado» algo de tu español.<span class="en b">Explain something about your Spanish with “ojalá hubiera estudiado”.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Camille"><span class="ppl-b"><span class="ppl-w"><b>5 · Camille</b> · amiga francesa</span><span class="ppl-t">Explícale cómo cambia el resultado si añades «si hubiera ahorrado».<span class="en b">Explain how the result changes with “si hubiera ahorrado”.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Julia"><span class="ppl-b"><span class="ppl-w"><b>6 · Julia</b> · hermana pequeña</span><span class="ppl-t">Explícale un lamento pequeño y divertido de tu semana.<span class="en b">Explain a small, funny regret from your week.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Mateo"><span class="ppl-b"><span class="ppl-w"><b>7 · Mateo</b> · entrenador</span><span class="ppl-t">Explícale una jugada que habrías hecho distinta.<span class="en b">Explain a play you’d have done differently.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Raúl"><span class="ppl-b"><span class="ppl-w"><b>8 · Raúl</b> · jefe</span><span class="ppl-t">Explícale cómo habríais evitado un error en el trabajo.<span class="en b">Explain how you’d have avoided a mistake at work.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Inés"><span class="ppl-b"><span class="ppl-w"><b>9 · Inés</b> · amiga</span><span class="ppl-t">Explícale por qué «en el fondo, quién sabe qué habría pasado».<span class="en b">Explain why “en el fondo, quién sabe qué habría pasado”.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Leo"><span class="ppl-b"><span class="ppl-w"><b>10 · Leo</b> · amigo</span><span class="ppl-t">Explícale en un minuto algo que habrías hecho distinto y por qué.<span class="en b">Explain in one minute something you’d have done differently and why.</span></span></span></label></li></ol><div class="check"><div><button type="button" class="act alt ppl-rnd">🎲 Al azar<span class="en"> · Random</span></button> <button type="button" class="act alt ppl-rs">Reiniciar<span class="en"> · Reset</span></button></div><span class="score ppl-sc" aria-live="polite"></span></div></div></div>
+<textarea id="notes" aria-label="Notas" placeholder="Notas opcionales · Optional notes"></textarea>
+<p style="margin:8px 2px 0;font-size:12.5px;color:var(--ink-faint)">Es solo un apoyo: lo importante es decirlo en voz alta.<span class="en b">Just a support: what matters is saying it aloud.</span></p>
+<p><button type="button" class="act alt" id="sv">Guardar notas</button><span class="sv" id="svf">Guardado ✓</span></p></section>
+</main>
+<footer><span>Clase 35 · Si hubiera sabido…</span><span>Próxima clase → Clase 36</span></footer>
+
+<div class="cm" id="cm" role="toolbar" aria-label="Caracteres especiales" hidden></div>
+<script>
+
+const $=id=>document.getElementById(id),RM=matchMedia('(prefers-reduced-motion:reduce)').matches;
+const E=(t,b)=>t?`<span class="en${b?' b':''}"> ${t}</span>`:'';
+const sh=a=>{const r=[...a];for(let i=r.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[r[i],r[j]]=[r[j],r[i]]}return r};
+const ld=k=>{try{return localStorage.getItem(k)}catch(e){return null}},sv=(k,v)=>{try{localStorage.setItem(k,v)}catch(e){}};
+const restart=(el,c)=>{el.classList.remove(c);void el.offsetWidth;el.classList.add(c)};
+function confetti(el){if(RM||!el)return;const r=el.getBoundingClientRect(),w=document.createElement('div');w.className='cf-wrap';w.style.left=r.left+r.width/2+'px';w.style.top=r.top+r.height/2+'px';
+ const C=['var(--b3)','var(--b1)','var(--b2)','var(--family)'];
+ for(let k=0;k<22;k++){const c=document.createElement('i'),an=-Math.PI/2+(Math.random()-.5)*2.2,d=60+Math.random()*110;c.className='cf';
+  c.style.cssText=`--c:${C[k%4]};--dx:${Math.cos(an)*d|0}px;--up:${Math.sin(an)*d|0}px;--fall:${(Math.sin(an)*d+90+Math.random()*60)|0}px;--rot:${(Math.random()*720-360)|0}deg`;w.appendChild(c)}
+ document.body.appendChild(w);setTimeout(()=>w.remove(),1600)}
+
+/* barra: índice, idioma, tema */
+const secs=[...document.querySelectorAll('main section')],toc=$('toc'),nb=$('navBtn');
+toc.innerHTML=secs.map(s=>{const h=s.querySelector('h2');return `<a href="#${s.id}"><b>${h.querySelector('.num').textContent}</b>${h.children[1].firstChild.textContent}</a>`}).join('');
+nb.onclick=()=>{toc.hidden=!toc.hidden;nb.setAttribute('aria-expanded',String(!toc.hidden))};
+toc.onclick=e=>{if(e.target.closest('a')){toc.hidden=true;nb.setAttribute('aria-expanded','false')}};
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!toc.hidden){toc.hidden=true;nb.focus()}});
+function setLang(l){document.body.dataset.lang=l;document.querySelectorAll('#lang button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.lang===l)));sv('clase-lang-v2',l)}
+document.querySelectorAll('#lang button').forEach(b=>b.onclick=()=>setLang(b.dataset.lang));setLang(ld('clase-lang-v2')==='es'?'es':'es-en');
+const tb=$('themeBtn');function setTheme(d){document.documentElement.dataset.theme=d?'dark':'light';tb.setAttribute('aria-pressed',String(d));tb.textContent=d?'Modo claro':'Modo oscuro';sv('clase-theme',d?'d':'l')}
+tb.onclick=()=>setTheme(tb.getAttribute('aria-pressed')!=='true');setTheme(ld('clase-theme')?ld('clase-theme')==='d':matchMedia('(prefers-color-scheme:dark)').matches);
+
+/* animaciones al entrar */
+document.querySelectorAll('.anim').forEach(a=>{
+ const run=()=>{a.classList.remove('play');void a.offsetWidth;a.classList.add('play')};
+ a.querySelector('.re').onclick=run;
+ if(RM)return;a.classList.add('ready');
+ new IntersectionObserver((es,o)=>es.forEach(e=>{if(e.isIntersecting){run();o.unobserve(a)}}),{threshold:.6}).observe(a)});
+if(!RM&&'IntersectionObserver' in window){
+ const io=new IntersectionObserver((es,o)=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('fx-num');o.unobserve(e.target)}}),{threshold:.05});secs.forEach(s=>io.observe(s));
+ const io2=new IntersectionObserver((es,o)=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('fx-show');o.unobserve(e.target)}}),{threshold:.1});
+ document.querySelectorAll('ol.ex,.forms').forEach(c=>{[...c.children].forEach((k,i)=>k.style.setProperty('--i',Math.min(i,10)));c.classList.add('fx-hide');io2.observe(c)})}
+/* parallax suave y foco de sección */
+if(!RM){const orbs=[...document.querySelectorAll('.plx i')];let t=0;
+ const run=()=>{t=0;const y=scrollY,vh=innerHeight,c=vh/2;orbs.forEach((o,i)=>o.style.transform=`translate3d(${Math.sin(y/600+i*1.7)*innerWidth*.06|0}px,${-y*(.2+i*.15)|0}px,0)`);
+  secs.forEach(s=>{const r=s.getBoundingClientRect(),d=r.top>c?r.top-c:r.bottom<c?c-r.bottom:0;s.style.setProperty('--a',(Math.round(Math.max(0,1-d/(vh*.5))*20)/20))})};
+ addEventListener('scroll',()=>{if(!t)t=requestAnimationFrame(run)},{passive:true});run()}
+
+/* tarjetas */
+const CARDS=[["arrepentirse de", "Me arrepiento de no haber ido.", "I regret not having gone."], ["una oportunidad perdida", "Fue una oportunidad perdida.", "It was a missed opportunity."], ["fallar un gol", "Falló un gol increíble.", "He missed an incredible goal."], ["por poco", "Por poco ganamos.", "We nearly won."], ["ojalá hubiera…", "Ojalá hubiera ido.", "I wish I had gone."], ["quién sabe qué habría pasado", "Quién sabe qué habría pasado.", "Who knows what would have happened."], ["ya es tarde", "Ya es tarde para cambiarlo.", "It’s too late to change it."], ["en el fondo", "En el fondo, no cambiaría nada.", "Deep down, I wouldn’t change anything."]];
+$('fcs').innerHTML=CARDS.map(c=>`<button type="button" class="fc" aria-pressed="false"><span class="f">${c[0]}</span><span class="bk">${c[1]}<i class="en">${c[2]}</i></span></button>`).join('');
+$('fcs').onclick=e=>{const f=e.target.closest('.fc');if(f){f.classList.toggle('on');f.setAttribute('aria-pressed',f.classList.contains('on'))}};
+
+/* menú de caracteres: aparece al enfocar un campo y con clic derecho */
+const cm=$('cm'),CH=['á','é','í','ó','ú','ü','ñ','¿','?','¡','!'];let cmT=null,cmUp=false,cmMode='el';
+const isFld=el=>el&&el.matches&&el.matches('input[type="text"],textarea');
+function cmDraw(){cm.innerHTML=CH.map(c=>{const v=cmUp?c.toUpperCase():c;return `<button type="button" tabindex="-1" data-c="${v}" aria-label="Insertar ${v}">${v}</button>`}).join('')+`<button type="button" tabindex="-1" class="sh" aria-pressed="${cmUp}" aria-label="Mayúsculas">⇧</button>`}
+function cmPlace(x,y){cm.style.left='0px';cm.style.top='0px';cm.hidden=false;const w=cm.offsetWidth,h=cm.offsetHeight,vw=innerWidth,vh=innerHeight;
+ cm.style.left=Math.max(8,Math.min(x,vw-w-8))+'px';cm.style.top=Math.max(8,Math.min(y,vh-h-8))+'px'}
+function cmAnchor(el){const r=el.getBoundingClientRect();cm.hidden=false;const h=cm.offsetHeight,vh=(window.visualViewport?visualViewport.height:innerHeight);
+ /* debajo de la caja; solo arriba si no cabe debajo */
+ cmPlace(r.left,r.bottom+6+h<=vh-8?r.bottom+6:Math.max(8,r.top-h-6))}
+function cmShow(el){cmT=el;cmMode='el';cmDraw();cm.hidden=false;cmAnchor(el)}
+function cmHide(){cm.hidden=true;cmT=null}
+document.addEventListener('focusin',e=>{if(isFld(e.target)&&!e.target.disabled)cmShow(e.target);else if(!cm.contains(e.target))cmHide()});
+document.addEventListener('focusout',e=>{if(isFld(e.target)&&!(e.relatedTarget&&cm.contains(e.relatedTarget)))cmHide()});
+document.addEventListener('contextmenu',e=>{const f=e.target;if(!isFld(f)||f.disabled)return;e.preventDefault();f.focus();cmT=f;cmMode='el';cmDraw();cmAnchor(f)});
+addEventListener('scroll',()=>{if(cm.hidden||!cmT)return;if(cmMode==='el')cmAnchor(cmT);else cmHide()},{passive:true,capture:true});
+addEventListener('resize',()=>{if(!cm.hidden&&cmT&&cmMode==='el')cmAnchor(cmT)});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!cm.hidden)cmHide()});
+['mousedown','pointerdown'].forEach(t=>cm.addEventListener(t,e=>e.preventDefault()));
+cm.addEventListener('click',e=>{const b=e.target.closest('button');if(!b||!cmT)return;
+ if(b.classList.contains('sh')){cmUp=!cmUp;cmDraw();return}
+ const f=cmT,c=b.dataset.c;f.focus();f.setRangeText(c,f.selectionStart,f.selectionEnd,'end');f.dispatchEvent(new Event('input',{bubbles:true}));
+ if(cmUp&&/[a-zñü]/i.test(c)){cmUp=false;cmDraw()}});
+
+/* ejercicios · feedback instantáneo por frase · dos intentos y luego se revela */
+const nz=t=>t.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/\s+/g,' ').trim();
+const EXA=[["Si ___ sabido, habría ido.", ["hubiera", "habría", "había"], "If I had known, I would have gone.", "Si + hubiera + participio."], ["Si hubiera sabido, ___ ido.", ["habría", "hubiera", "había"], "If I had known, I would have gone.", "Resultado: habría + participio."], ["Ojalá ___ ido al viaje con vosotros.", ["hubiera", "había", "habría"], "I wish I had gone on the trip with you.", "Ojalá + hubiera + participio."], ["Me habría ___ ir a Alemania antes.", ["gustado", "gustaba", "gustara"], "I would have liked to go to Germany earlier.", "Me habría gustado + infinitivo."], ["Si hubiéramos salido antes, ___ llegado a tiempo.", ["habríamos", "hubiéramos", "hemos"], "If we had left earlier, we would have arrived on time.", "Resultado: habríamos + participio."], ["Si no ___ a Madrid, no habría conocido a Iker.", ["me hubiera mudado", "me mudaría", "me habría mudado"], "If I hadn’t moved to Madrid, I wouldn’t have met Iker.", "Después de si: hubiera + participio."], ["Si hubieras pasado el balón, ___ el gol.", ["habríamos metido", "metemos", "hemos metido"], "If you had passed the ball, we would have scored.", "Resultado: habríamos + participio."], ["Ojalá no ___ tan nervioso en el penalti.", ["hubiera estado", "habría estado", "estaba"], "I wish I hadn’t been so nervous at the penalty.", "Ojalá + hubiera + participio."], ["Si ___ más, habrías aprobado.", ["hubieras estudiado", "habrías estudiado", "estudiaras"], "If you had studied more, you would have passed.", "Si + hubieras + participio."], ["Habría ___ más fotos si hubiera llevado la cámara.", ["hecho", "hacido", "hacer"], "I would have taken more photos if I had brought the camera.", "hacer → hecho (participio irregular)."], ["Si ___ más dinero, habríamos comprado la consola.",["hubiéramos tenido", "tuviéramos", "hemos tenido"],"If we had had more money, we would have bought the console.", "Si + hubiéramos + participio."], ["Si hubieras venido, ___ encantado el partido.",["te habría", "te había", "te habrá"],"If you had come, you would have loved the match.", "Resultado: habría + participio."], ["Ojalá ___ más tiempo para estudiar.",["hubiera tenido", "tendría", "había tenido"],"I wish I had had more time to study.", "Ojalá + hubiera + participio."], ["Habríamos ___ el partido si Iker no se hubiera lesionado.",["ganado", "ganar", "ganamos"],"We would have won the match if Iker hadn’t got injured.", "habríamos + participio (ganado)."], ["Si no hubiera llovido, ___ al parque.",["habríamos ido", "vamos", "hemos ido"],"If it hadn’t rained, we would have gone to the park.", "Resultado: habríamos + participio (ir → ido)."]];
+const EXB=[["Si ___ antes, habría llegado a tiempo.", "salir · yo", "hubiera salido", "If I had left earlier, I would have arrived on time.", "Si + hubiera + salido."], ["Si hubiera sabido, ___ al viaje.", "ir · yo", "habría ido", "If I had known, I would have gone on the trip.", "habría + ido."], ["Ojalá ___ más español antes.", "estudiar · yo", "hubiera estudiado", "I wish I had studied more Spanish before.", "Ojalá + hubiera + estudiado."], ["Si lo ___, me lo habría dicho.", "saber · él", "hubiera sabido", "If he had known, he would have told me.", "Si + hubiera + sabido."], ["Nosotros ___ ganado si el portero hubiera parado.", "haber · condicional · nosotros", "habríamos", "We would have won if the goalkeeper had saved it.", "habríamos + ganado."], ["Me ___ gustado ver el partido contigo.", "haber · condicional · yo", "habría", "I would have liked to watch the match with you.", "Me habría gustado + infinitivo."], ["Si hubieras ___ antes, lo habríamos arreglado.", "decir · participio", "dicho", "If you had said it earlier, we would have fixed it.", "decir → dicho."], ["Si no ___ tarde, no habríais perdido el tren.", "llegar · vosotros", "hubierais llegado", "If you hadn’t arrived late, you wouldn’t have missed the train.", "hubierais + llegado."], ["Si ___ más fuerte, habríamos ganado.", "jugar · nosotros", "hubiéramos jugado", "If we had played harder, we would have won.", "Si + hubiéramos + jugado."], ["Si ___ el recado, te habría llamado.", "recibir · yo", "hubiera recibido", "If I had received the message, I would have called you.", "Si + hubiera + recibido."], ["Ojalá ___ tomado otra decisión.", "haber · imperfecto de subjuntivo · yo", "hubiera", "I wish I had made another decision.", "Ojalá + hubiera + participio."], ["Si lo hubiera ___ antes, lo habría arreglado.", "ver · participio", "visto", "If I had seen it earlier, I would have fixed it.", "ver → visto (participio irregular)."], ["¿Qué ___ tú si hubieras ganado?", "hacer · condicional compuesto · tú", "habrías hecho", "What would you have done if you had won?", "habrías + hecho (hacer → hecho)."], ["Si ___ el despertador, no habría llegado tarde.", "poner · yo", "hubiera puesto", "If I had set the alarm, I wouldn’t have arrived late.", "Si + hubiera + puesto (poner → puesto)."], ["Ellos ___ venido si les hubiéramos avisado.", "haber · condicional · ellos", "habrían", "They would have come if we had told them.", "habrían + participio."]];
+const EXC=[["Lamentas no haber ido al viaje.", ["Ojalá hubiera ido al viaje.", "Ojalá habría ido al viaje.", "Ojalá voy al viaje."], "You regret not having gone on the trip.", "Ojalá + hubiera + participio."], ["Fallaste un gol claro y dices qué habría pasado con más calma.", ["Si hubiera tenido más calma, habría metido el gol.", "Si habría tenido más calma, habría metido el gol.", "Si tuviera más calma, metí el gol."], "You missed a clear goal and say what would have happened if calmer.", "Si hubiera tenido…, habría metido…"], ["Quieres decir que te habría gustado ver ese partido.", ["Me habría gustado ver ese partido.", "Me habría gustado vi ese partido.", "Me gustaba ver ese partido."], "You want to say you would have liked to see that match.", "Me habría gustado + infinitivo."], ["Un amigo se lamenta de no haber estudiado más. Le dices que nadie sabe cómo habría salido.", ["Quién sabe qué habría pasado.", "Quién sabe qué pasaba.", "Nadie sabe qué ha pasado ayer."], "A friend regrets not having studied more.", "Quién sabe qué habría pasado = hipótesis pasada."], ["Cuentas que no te mudaste antes a Madrid y lo lamentas un poco.", ["Si me hubiera mudado antes, habría conocido a más gente.", "Si me mudaba antes, conocí a más gente.", "Si me habría mudado antes, habría conocido más gente."], "You say you didn’t move to Madrid earlier and regret it a bit.", "Si + hubiera + participio, habría + participio."], ["Terminas con una reflexión: en el fondo, no habrías cambiado nada.", ["En el fondo, no habría cambiado nada.", "En el fondo, no cambiaba nada.", "En el fondo, no he cambiado nada."], "You close with a reflection: deep down, you wouldn’t have changed anything.", "Condicional compuesto: no habría cambiado."], ["Te arrepientes de no haber estudiado más español de joven.",["Ojalá hubiera estudiado más español.", "Ojalá estudiaba más español.", "Ojalá he estudiado más español."],"You regret not having studied more Spanish when you were young.", "Ojalá + hubiera + participio."], ["Perdiste el tren. Dices qué habría pasado si hubieras salido antes.",["Si hubiera salido antes, no habría perdido el tren.", "Si habría salido antes, no hubiera perdido el tren.", "Si salgo antes, no perdí el tren."],"You missed the train. You say what would have happened if you had left earlier.", "Si + hubiera + participio, habría + participio (nunca si + habría)."], ["Quieres decir que tú no habrías ido a esa fiesta.",["Yo no habría ido a esa fiesta.", "Yo no habría ir a esa fiesta.", "Yo no había ido a esa fiesta."],"You want to say you wouldn’t have gone to that party.", "Condicional compuesto: habría + participio."], ["Dices que Iker habría ganado si hubiera entrenado más.",["Iker habría ganado si hubiera entrenado más.", "Iker habría ganado si habría entrenado más.", "Iker había ganado si hubiera entrenado más."],"You say Iker would have won if he had trained more.", "Resultado: habría ganado; condición: hubiera entrenado."], ["Lamentas no haber comprado la entrada a tiempo para el partido.",["Si hubiera comprado la entrada a tiempo, habría visto el partido.", "Si compraría la entrada a tiempo, vería el partido.", "Si he comprado la entrada a tiempo, habría visto el partido."],"You regret not buying the ticket in time for the match.", "Si + hubiera + participio, habría + participio."], ["Un amigo te pregunta qué habrías hecho tú. Dices que habrías hablado con él.",["Yo habría hablado con él.", "Yo habría hablando con él.", "Yo había hablado con él."],"A friend asks what you would have done. You say you would have talked to him.", "habría + participio (hablado)."], ["Dices que sin tu móvil no habrías encontrado el restaurante.",["Sin mi móvil, no habría encontrado el restaurante.", "Sin mi móvil, no habría encontrar el restaurante.", "Sin mi móvil, no había encontrado el restaurante."],"You say that without your phone you wouldn’t have found the restaurant.", "Condicional compuesto: habría encontrado."], ["Dices que te habría encantado vivir en Alemania de joven.",["Me habría encantado vivir en Alemania de joven.", "Me habría encantado viviendo en Alemania de joven.", "Me había encantado vivir en Alemania de joven."],"You say you would have loved to live in Germany when you were young.", "Me habría encantado + infinitivo."], ["Dices que, sin Iker, no habrías empezado a jugar al fútbol.",["Si no hubiera conocido a Iker, no habría empezado a jugar al fútbol.", "Si no habría conocido a Iker, no hubiera empezado a jugar al fútbol.", "Si no conocí a Iker, no habría empezado a jugar al fútbol."],"You say that without Iker you wouldn’t have started playing football.", "Si + hubiera + participio, habría + participio."]];
+function mount(id,raw,kind,splits){
+ const ol=$(id),sc=$(id+'sc');
+ const I=raw.map(x=>kind==='ty'?{q:x[0],hint:x[1],ans:x[2],en:x[3],why:x[4]}:{q:x[0],o:x[1],ans:x[1][0],en:x[2],why:x[3]});
+ let st=[];
+ const upd=()=>{const d=st.filter(s=>s.d).length,ok=st.filter(s=>s.ok).length,f=st.filter(s=>s.f).length;
+  sc.textContent=d?`${d} / ${I.length} hechas · ${ok} correctas · ${f} a la primera`:`${I.length} frases · 2 intentos por frase`;
+  if(d===I.length&&ok===I.length)confetti(sc)};
+ function draw(){
+  cmHide();st=I.map(()=>({t:0,d:false,ok:false,f:false}));
+  ol.innerHTML=I.map((x,i)=>`<li data-i="${i}"><span>${x.q.replace('___','<b class="v">___</b>')}${x.hint?`<span class="hint">(${x.hint})</span>`:''}</span>${E(x.en,1)}`+
+   (kind==='ty'?`<div class="ty"><input type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" aria-label="Respuesta ${i+1}"><button type="button" class="act">Comprobar</button></div>`
+    :`<div class="op${kind==='sit'?' long':''}">${sh(x.o).map(o=>`<button type="button">${o}</button>`).join('')}</div>`)+
+   `<span class="sol" role="status" hidden></span></li>`).join('');
+  const L=[...ol.children];splits.forEach(p=>L[p[0]].insertAdjacentHTML('beforebegin',`<div class="div${p[2]?' cl':''}">${p[1]}</div>`));
+  upd()}
+ function judge(li,i,good,given){
+  const x=I[i],s=st[i],m=li.querySelector('.sol');s.t++;
+  let msg,tip=false;
+  if(good){s.d=s.ok=true;s.f=s.t===1;tip=true;msg=`✓ ${s.t===1?'¡Correcto!':'¡Bien, a la segunda!'} ${x.why}`;
+   if(kind==='ty'&&given.trim().toLowerCase()!==x.ans.toLowerCase())msg+=` (Ojo con la tilde: «${x.ans}»).`}
+  else if(s.t>=2){s.d=true;msg=`✗ La respuesta correcta es «${x.ans}». ${x.why}`}
+  else msg='✗ Todavía no. Te queda 1 intento.';
+  m.hidden=false;m.className='sol'+(tip?' tip':'');m.innerHTML=msg;restart(m,'sol');
+  if(s.d){cmHide();li.querySelectorAll('button,input').forEach(el=>{el.disabled=true});
+   if(kind==='ty'){li.querySelector('input').classList.add(s.ok?'ok':'bad')}
+   else li.querySelectorAll('.op button').forEach(bt=>{if(bt.textContent===x.ans)bt.classList.add('ok')})}
+  upd()}
+ ol.onclick=e=>{const li=e.target.closest('li');if(!li)return;const i=+li.dataset.i;if(st[i].d)return;
+  if(kind==='ty'){if(!e.target.closest('.ty button'))return;typed(li,i)}
+  else{const b=e.target.closest('.op button');if(!b||b.disabled)return;const good=b.textContent===I[i].ans;
+   if(!good){b.classList.add('bad');b.disabled=true;restart(b,'fx-bad')}else{b.classList.add('ok');restart(b,'fx-ok')}
+   judge(li,i,good)}};
+ function typed(li,i){const inp=li.querySelector('input'),v=inp.value;if(!v.trim()){inp.focus();return}
+  const good=nz(v)===nz(I[i].ans);if(!good){restart(inp,'fx-bad')}judge(li,i,good,v);if(!st[i].d){inp.focus();inp.select()}}
+ ol.onkeydown=e=>{if(kind==='ty'&&e.key==='Enter'&&e.target.matches('.ty input')){e.preventDefault();const li=e.target.closest('li'),i=+li.dataset.i;if(!st[i].d)typed(li,i)}};
+ $(id+'rs').onclick=draw;draw()}
+mount('exA',EXA,'mc',[[0,'en clase · elige la forma correcta',1]]);
+mount('exB',EXB,'ty',[[0,'en clase · escribe el verbo',1]]);
+mount('exC',EXC,'sit',[[0,'en clase · elige tu respuesta',1]]);
+
+/* diálogo con ramas */
+const DL=[["Iker", "¿Has pensado alguna vez qué habría pasado si hubieras aceptado aquella oferta de trabajo en Canadá?", "Have you ever wondered what would have happened if you had accepted that job offer in Canada?", ["Sí, muchas veces. Si hubiera aceptado, habría vivido allí y no te habría conocido.", "Sí. Si habría aceptado, viví en Canadá.", "No sé, no me acuerdo."], "Si + hubiera aceptado, habría vivido."], ["Iker", "¿Y te arrepientes de no haberla aceptado?", "And do you regret not having accepted it?", ["A veces. Ojalá hubiera tenido más tiempo para pensarlo.", "A veces. Ojalá tengo más tiempo.", "Nunca, ya pasó."], "Ojalá + hubiera + participio = lamento."], ["Iker", "Yo creo que habría aceptado sin pensarlo. ¿Qué te frenó?", "I think I would have accepted without thinking. What held you back?", ["Me dio miedo. Si hubiera estado más seguro, habría dicho que sí.", "Me da miedo. Si estaba seguro, dije que sí.", "No me frenó nada."], "Condición imposible en el pasado: si hubiera estado… habría dicho."], ["Iker", "En fin… ¿y ahora, lo cambiarías?", "Anyway… and now, would you change it?", ["En el fondo, no. Si lo hubiera cambiado, no habría llegado a Madrid.", "No. Si lo cambiaría, no llegué a Madrid.", "Sí, cámbialo."], "Reflexión final: si lo hubiera cambiado… no habría llegado."]];
+let dt=0;const dl=$('dl'),op=$('opts'),mk=(c,n,t,e)=>`<div class="ln ${c}"><div class="av">${c==='me'?'Tú':n[0]}</div><div><p class="nm">${n}</p><div class="bub">${t}${E(e)}</div></div></div>`;
+function turn(){if(dt>=DL.length){op.innerHTML='';dl.insertAdjacentHTML('beforeend','<div class="box" style="margin:0">¡Decisión analizada! Ojalá… y si hubiera… 🎉</div>');confetti(op);return}
+ const d=DL[dt];dl.insertAdjacentHTML('beforeend',mk('fr',d[0],d[1],d[2]));
+ op.innerHTML=sh(d[3].map((t,i)=>[t,i])).map(o=>`<button type="button" data-ok="${o[1]===0}">${o[0]}</button>`).join('');}
+op.onclick=e=>{const b=e.target.closest('button');if(!b||b.disabled)return;const d=DL[dt];
+ if(b.dataset.ok==='true'){dl.insertAdjacentHTML('beforeend',mk('me','Tú',b.textContent));dt++;turn()}
+ else{b.classList.add('bad');b.disabled=true;restart(b,'fx-bad');if(!op.querySelector('.sol'))op.insertAdjacentHTML('beforeend',`<span class="sol">✗ ${d[4]}</span>`)}};
+$('dre').onclick=()=>{dt=0;dl.innerHTML='';turn()};turn();
+const CK=["Ojalá hubiera + participio", "Si hubiera + participio…", "…habría + participio", "Me habría gustado + infinitivo", "Participio irregular (hecho, dicho, visto)", "Quién sabe qué habría pasado", "En el fondo… (reflexión)"];
+$('ck').innerHTML=CK.map(c=>`<label class="ck"><input type="checkbox"> ${c}</label>`).join('');
+$('ck').onchange=e=>{const all=[...$('ck').querySelectorAll('input')];if(all.every(x=>x.checked))confetti(e.target)};
+
+/* tarea: notas */
+const KEY='andrei-clase35-tarea',na=$('notes');
+(async()=>{try{if(window.storage){const r=await window.storage.get(KEY);if(r&&typeof r.value==='string'){na.value=r.value;return}}}catch(e){}const v=ld(KEY);if(v)na.value=v})();
+$('sv').onclick=async()=>{let ok=false;try{if(window.storage)ok=!!await window.storage.set(KEY,na.value)}catch(e){}if(!ok){sv(KEY,na.value);ok=true}
+ const f=$('svf');f.textContent=ok?'Guardado ✓':'No se pudo guardar';f.classList.add('show');setTimeout(()=>f.classList.remove('show'),1800)};
+</script>
+<script>
+/* explica a diez personas: marcar y sortear */
+(function(){
+var RM=matchMedia('(prefers-reduced-motion:reduce)').matches;
+function ld(k){try{return localStorage.getItem(k)}catch(e){return null}}
+function sv(k,v){try{localStorage.setItem(k,v)}catch(e){}}
+document.querySelectorAll('.ppl').forEach(function(box){
+  var key='andrei-pp-'+box.getAttribute('data-k'),items=[].slice.call(box.querySelectorAll('.ppl-i')),sc=box.querySelector('.ppl-sc'),saved={};
+  try{saved=JSON.parse(ld(key)||'{}')||{}}catch(e){saved={}}
+  items.forEach(function(li,i){li.querySelector('input').checked=!!saved[i]});
+  function upd(){var n=0,o={};items.forEach(function(li,i){var c=li.querySelector('input').checked;li.classList.toggle('done',c);if(c){n++;o[i]=1}});
+    sc.textContent=n+' / '+items.length+' ✓';sv(key,JSON.stringify(o))}
+  box.addEventListener('change',function(e){if(e.target.closest('.ppl-i'))e.target.closest('.ppl-i').classList.remove('pick');upd()});
+  box.querySelector('.ppl-rnd').onclick=function(){
+    var left=items.filter(function(li){return !li.querySelector('input').checked});
+    items.forEach(function(li){li.classList.remove('pick')});
+    if(!left.length){sc.textContent='¡Las diez hechas! ✓';return}
+    var li=left[Math.floor(Math.random()*left.length)];li.classList.add('pick');
+    li.scrollIntoView({block:'center',behavior:RM?'auto':'smooth'})};
+  box.querySelector('.ppl-rs').onclick=function(){items.forEach(function(li){li.querySelector('input').checked=false;li.classList.remove('pick')});upd()};
+  upd();
+});
+})();
+</script>
+</body>
+</html>

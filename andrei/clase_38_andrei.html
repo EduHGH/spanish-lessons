@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Clase 38 · Por un lado… por otro — Andrei</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* clase */
+:root{
+  --paper:#FBF7EE;--paper-top:#F6EEDA;--paper-raised:#FFFFFF;--paper-alt:#F3ECDA;
+  --ink:#23291F;--ink-soft:#565F52;--ink-faint:#6E7568;
+  --line:rgba(35,41,31,.12);--line-strong:rgba(35,41,31,.22);
+  --b1:#2F6FED;--b1-soft:#EAF1FE;--b1-line:#C6D9FC;
+  --b2:#2E9E6B;--b2-soft:#E9F6EF;--b2-line:#BEE6D3;
+  --b3:#DB8A2E;--b3-soft:#FCF1E1;--b3-line:#F3D9AF;
+  --family:#B5502E;--family-soft:#FBEBE3;--family-line:#EFC9B4;
+  --f-display:'Fraunces',Georgia,serif;--f-body:'IBM Plex Sans',system-ui,sans-serif;--f-data:'IBM Plex Mono',monospace;
+  --r-sm:12px;--r-md:18px;--r-lg:26px;
+  --shadow-1:0 1px 2px rgba(35,41,31,.05),0 10px 28px rgba(35,41,31,.07);
+  color-scheme:light}
+:root[data-theme="dark"]{
+  --paper:#171912;--paper-top:#22251A;--paper-raised:#22251B;--paper-alt:#2B2F22;
+  --ink:#F1EDE0;--ink-soft:#C3C7B8;--ink-faint:#9CA190;
+  --line:rgba(241,237,224,.14);--line-strong:rgba(241,237,224,.28);
+  --b1-soft:#1D2A44;--b1-line:#2F4B82;--b2-soft:#1B3328;--b2-line:#2B6A4C;--b3-soft:#3A2D18;--b3-line:#7A5524;--family-soft:#3A2219;--family-line:#7A3F29;
+  --shadow-1:0 1px 2px rgba(0,0,0,.45),0 10px 28px rgba(0,0,0,.35);color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-padding-top:calc(70px + env(safe-area-inset-top,0px))}
+body{margin:0;background:linear-gradient(180deg,var(--paper-top) 0,var(--paper) 460px) fixed,var(--paper);color:var(--ink);font:15px/1.6 var(--f-body);padding-bottom:env(safe-area-inset-bottom,0px)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--paper);z-index:10}
+::selection{background:var(--b3-soft)}
+:focus-visible{outline:2px solid var(--b3);outline-offset:2px}
+.skip{position:absolute;left:-999px}.skip:focus{left:12px;top:12px;z-index:20;background:var(--paper-raised);padding:8px 14px;border-radius:99px}
+.sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.plx{position:fixed;inset:-20vh 0;z-index:-1;pointer-events:none;overflow:hidden}
+.plx i{position:absolute;border-radius:50%;filter:blur(60px);opacity:.45;will-change:transform}
+.plx i:nth-child(1){width:46vmax;height:46vmax;left:-14vmax;top:4vh;background:radial-gradient(circle,color-mix(in srgb,var(--b3) 40%,transparent),transparent 70%)}
+.plx i:nth-child(2){width:38vmax;height:38vmax;right:-12vmax;top:70vh;background:radial-gradient(circle,color-mix(in srgb,var(--b1) 30%,transparent),transparent 70%)}
+.wrap{max-width:780px;margin:0 auto;padding:0 clamp(16px,4vw,28px) 90px}
+header .wrap{padding-top:34px;padding-bottom:0}
+.eyebrow{font:500 12px var(--f-data);letter-spacing:.14em;text-transform:uppercase;color:var(--b3);margin:0 0 10px;display:flex;align-items:center;gap:10px}
+.eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--b3)}
+h1{font:600 clamp(30px,5.6vw,48px)/1.08 var(--f-display);letter-spacing:-.02em;margin:0 0 14px;text-wrap:balance}
+h1 em{font-style:italic;background:linear-gradient(90deg,var(--b3) 20%,var(--family));-webkit-background-clip:text;background-clip:text;color:transparent}
+.lede{font-size:16px;color:var(--ink-soft);max-width:58ch;margin:0}
+.meta-row{display:flex;flex-wrap:wrap;gap:20px;margin-top:22px;font:12px var(--f-data);color:var(--ink-faint)}
+.meta-row strong{display:block;color:var(--ink);font:500 14.5px var(--f-display);margin-top:3px}
+.en{color:var(--ink-faint);font-size:.88em;font-style:italic;font-weight:400;text-transform:none;letter-spacing:0}
+.en.b{display:block;margin-top:2px}
+body[data-lang="es"] .en{display:none!important}
+h1 .en{display:block;font:italic 400 clamp(15px,2.6vw,19px)/1.35 var(--f-body);margin-top:8px}
+/* barra */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:11;background:color-mix(in srgb,var(--paper) 82%,transparent);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);padding-block:10px;margin-block:24px 4px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.nav-btn{width:36px;height:36px;display:grid;place-items:center;border:1px solid var(--line-strong);border-radius:50%;background:var(--paper-raised);color:var(--ink-soft);cursor:pointer;padding:0}
+.nav-btn:hover,.nav-btn[aria-expanded=true]{border-color:var(--b3);color:var(--b3)}
+.nav-btn path{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round}
+.toc{position:absolute;top:calc(100% + 8px);left:0;width:min(380px,100%);padding:8px;border:1px solid var(--line-strong);border-radius:var(--r-md);background:var(--paper-raised);box-shadow:var(--shadow-1)}
+.toc[hidden]{display:none}
+.toc a{display:flex;gap:12px;align-items:center;min-height:42px;padding:6px 10px;border-radius:var(--r-sm);color:var(--ink);text-decoration:none;font:500 14.5px var(--f-display)}
+.toc a:hover{background:var(--b3-soft)}
+.toc a b{font:500 12px var(--f-data);color:#fff;background:var(--b3);width:24px;height:24px;border-radius:50%;display:grid;place-items:center;flex:none}
+.bar-t{font:600 13px var(--f-display);color:var(--ink-soft);margin-right:auto}
+.seg{display:inline-flex;gap:3px;padding:3px;border:1px solid var(--line-strong);border-radius:99px;background:var(--paper-raised)}
+.seg button{border:0;background:none;padding:5px 13px;border-radius:99px;font:12px var(--f-data);color:var(--ink-soft);cursor:pointer;min-height:30px}
+.seg button[aria-pressed=true]{background:var(--b3);color:#fff;box-shadow:0 6px 16px color-mix(in srgb,var(--b3) 30%,transparent)}
+.btn{font:600 13px var(--f-body);background:var(--paper-raised);color:var(--ink-soft);border:1px solid var(--line-strong);border-radius:99px;padding:7px 15px;cursor:pointer}
+.btn:hover{border-color:var(--b3);color:var(--b3)}
+@media(max-width:600px){.bar-t{display:none}}
+/* secciones */
+section{background:var(--paper-raised);border:1px solid var(--line);border-radius:var(--r-lg);box-shadow:var(--shadow-1);margin-top:18px;padding:24px 26px 28px;scroll-margin-top:84px;position:relative;opacity:calc(.74 + .26*var(--a,1))}
+section.rp{background:var(--b1-soft);border-color:var(--b1-line)}section.rp .num{background:var(--b1)}
+section.tk{background:var(--family-soft);border-color:var(--family-line)}section.tk .num{background:var(--family)}
+h2{font:italic 500 22px/1.2 var(--f-display);margin:0 0 6px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+h2 .en{font:400 .6em var(--f-body);font-style:italic}
+h3{font:500 17px var(--f-display);margin:20px 0 6px}
+.num{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;flex:none;font:500 13px var(--f-data);background:var(--b3);color:#fff;font-style:normal}
+section.fx-num .num{animation:fxNum .65s cubic-bezier(.2,.9,.3,1.4) both}
+@keyframes fxNum{0%{transform:scale(.2) rotate(-90deg);opacity:0}100%{transform:none;opacity:1}}
+.cue{margin-left:auto;font:11px var(--f-data);color:var(--ink-faint);background:var(--paper-alt);border-radius:99px;padding:2px 10px;font-style:normal}
+.sub{color:var(--ink-soft);margin:0 0 12px;font-size:14.5px}
+.box{margin:14px 0 0;padding:13px 16px;background:var(--b3-soft);border:1px solid var(--b3-line);border-radius:var(--r-md);font-size:14.5px;color:var(--ink-soft)}
+.box strong,.box b{color:var(--ink)}
+.box.pr{background:var(--paper-alt);border-color:var(--line)}
+.box.wr{background:var(--family-soft);border-color:var(--family-line)}.box.wr b{color:var(--family)}
+ol.ex{padding:0;margin:8px 0 0;list-style:none;counter-reset:q}
+ol.ex>li{counter-increment:q;padding:11px 0;border-top:1px solid var(--line)}
+ol.ex>li::before{content:counter(q)".";font:12px var(--f-data);color:var(--ink-faint);margin-right:8px}
+.v{color:var(--b3);font-weight:600;text-decoration:underline;text-decoration-color:var(--b3-line);text-decoration-thickness:2px;text-underline-offset:3px}
+.div{display:flex;align-items:center;gap:10px;margin:16px 0 4px;font:11px var(--f-data);text-transform:uppercase;letter-spacing:.06em;color:var(--ink-faint)}
+.div::before,.div::after{content:"";flex:1;height:1px;background:var(--line)}
+.div.cl{color:var(--b3)}.div.cl::before,.div.cl::after{background:var(--b3-line)}
+/* animación de peldaños */
+.anim{border:1px solid var(--line);border-radius:var(--r-md);background:var(--paper-alt);padding:16px 18px 10px;margin:14px 0}
+.anim .lab{font:11px var(--f-data);text-transform:uppercase;letter-spacing:.08em;color:var(--ink-faint);margin:0 0 8px}
+.step{display:flex;align-items:center;gap:10px;margin:6px 0;flex-wrap:wrap}
+.step .t2{font:11px var(--f-data);color:var(--ink-faint);width:92px;flex:none}
+.chip{display:inline-block;padding:7px 15px;border-radius:14px;background:var(--paper-raised);border:2px solid var(--line-strong);font:600 16px var(--f-display)}
+.chip.c1{border-color:var(--b3-line)}.chip.c2{border-color:var(--b3);color:var(--b3)}.chip.c3{border-color:var(--b1);color:var(--b1)}.chip.x{border-color:var(--family);color:var(--family);border-style:dashed}
+.anim.ready:not(.play) .t{opacity:0}
+.anim.play .t{animation:aPop .55s cubic-bezier(.2,.8,.3,1) var(--d,0s) both}
+@keyframes aPop{0%{opacity:0;transform:translateY(10px) scale(.7)}60%{opacity:1;transform:translateY(-3px) scale(1.05)}100%{opacity:1;transform:none}}
+.anim-foot{display:flex;justify-content:flex-end;margin-top:6px}
+.re{border:1px solid var(--line-strong);background:var(--paper-raised);border-radius:99px;padding:3px 12px;font:11.5px var(--f-data);color:var(--ink-soft);cursor:pointer}
+.re:hover{color:var(--b3);border-color:var(--b3-line)}
+.forms{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-top:12px}
+.forms div{background:var(--paper-raised);border:1px solid var(--b3-line);border-radius:var(--r-md);padding:10px 12px;text-align:center}
+.forms small{display:block;font:11px var(--f-data);color:var(--ink-faint);text-transform:uppercase}
+.forms b{font:600 18px var(--f-display);color:var(--b3)}
+.say{margin:7px 0;font-size:15.5px}
+.say .tag{font:11px var(--f-data);padding:1px 8px;border-radius:99px;margin-right:8px;color:#fff}
+.say .tag.k{background:var(--family)}.say .tag.o{background:var(--b2)}
+/* tarjetas */
+.fcs{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin:14px 0 0;perspective:900px}
+.fc{position:relative;min-height:118px;border:0;background:none;padding:0;cursor:pointer;transform-style:preserve-3d;transition:transform .5s cubic-bezier(.2,.8,.3,1);color:var(--ink)}
+.fc.on{transform:rotateY(180deg)}
+.fc>span{position:absolute;inset:0;display:grid;place-items:center;padding:10px 14px;border-radius:var(--r-md);backface-visibility:hidden;-webkit-backface-visibility:hidden;text-align:center;border:1px solid var(--line)}
+.fc .f{background:var(--paper-alt);font:600 17px var(--f-display)}
+.fc .bk{background:var(--b3-soft);border-color:var(--b3-line);transform:rotateY(180deg);font:500 14px/1.4 var(--f-body)}
+.fc .bk i{display:block;font-size:12px;color:var(--ink-faint);margin-top:4px}
+.fc:hover .f{border-color:var(--b3-line)}
+/* ejercicios */
+.op{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.op button{font:500 14px var(--f-body);border:1.5px solid var(--line-strong);background:var(--paper-raised);color:var(--ink);border-radius:99px;padding:6px 16px;cursor:pointer;transition:transform .1s,background .2s}
+.op button:hover:not(:disabled){border-color:var(--b3);transform:translateY(-1px)}
+.op button.pk{background:var(--b3-soft);border-color:var(--b3);color:var(--b3)}
+.op button.ok{background:var(--b2-soft);border-color:var(--b2);color:var(--b2)}.op button.ok::after{content:" ✓"}
+.op button.bad{background:var(--family-soft);border-color:var(--family);color:var(--family)}.op button.bad::after{content:" ✗"}
+.sol{display:block;margin:7px 0 0;padding:1px 0 1px 10px;border-left:3px solid var(--family);color:var(--family);font-size:13.5px;animation:fxSol .35s ease both}
+.sol.tip{color:var(--b2);border-color:var(--b2)}
+@keyframes fxSol{from{opacity:0;transform:translateX(-10px)}to{opacity:1;transform:none}}
+.sol[hidden]{display:none}
+.fx-ok{animation:fxOk .55s ease calc(var(--i,0)*90ms) both}.fx-bad{animation:fxBad .42s ease calc(var(--i,0)*90ms) both}
+@keyframes fxOk{35%{transform:scale(1.1);box-shadow:0 0 0 7px color-mix(in srgb,var(--b2) 30%,transparent)}}
+@keyframes fxBad{20%{transform:translateX(-7px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(3px)}}
+.fx-hide:not(.fx-show)>*{opacity:0}.fx-show>*{animation:fxUp .45s cubic-bezier(.2,.8,.3,1) calc(var(--i,0)*55ms) both}
+@keyframes fxUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.check{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-top:20px;padding-top:16px;border-top:1px dashed var(--line)}
+.act{font:600 14px var(--f-body);background:var(--b3);color:#fff;border:0;border-radius:99px;padding:10px 22px;cursor:pointer}
+.act:hover{transform:translateY(-1px)}
+.act.alt{background:none;color:var(--ink-soft);border:1.5px solid var(--line-strong)}
+.score{font:13px var(--f-data);color:var(--ink-faint)}
+/* ejercicios con intentos */
+.op button:disabled:not(.ok):not(.bad){opacity:.55;cursor:default}
+.op.long button{border-radius:var(--r-md);text-align:left;padding:8px 14px}
+.ty{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.ty input{flex:1 1 180px;min-width:0;font:500 15px var(--f-body);border:1.5px solid var(--line-strong);background:var(--paper-raised);color:var(--ink);border-radius:99px;padding:7px 16px}
+.ty input:focus{outline:none;border-color:var(--b3);box-shadow:0 0 0 4px color-mix(in srgb,var(--b3) 20%,transparent)}
+.ty input.ok{border-color:var(--b2);background:var(--b2-soft);color:var(--b2)}
+.ty input.bad{border-color:var(--family);background:var(--family-soft);color:var(--family)}
+.ty .act{padding:7px 18px;font-size:13px}
+.ty .act:disabled{opacity:.5;cursor:default;transform:none}
+.hint{font:12px var(--f-data);color:var(--ink-faint);margin-left:8px;white-space:nowrap}
+.exh{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+/* menú de caracteres */
+.cm{position:fixed;z-index:70;display:flex;flex-wrap:wrap;gap:4px;max-width:min(92vw,330px);padding:6px;background:var(--paper-raised);border:1px solid var(--line-strong);border-radius:var(--r-md);box-shadow:var(--shadow-1)}
+.cm[hidden]{display:none}
+.cm button{min-width:36px;height:36px;padding:0 8px;display:grid;place-items:center;border:1px solid var(--line);border-radius:10px;background:var(--paper-alt);color:var(--ink);font:600 17px var(--f-display);cursor:pointer;touch-action:manipulation}
+.cm button:hover{border-color:var(--b3);color:var(--b3)}
+.cm button.sh{font:600 15px var(--f-body);color:var(--ink-soft)}
+.cm button.sh[aria-pressed=true]{background:var(--b3);border-color:var(--b3);color:#fff}
+/* diálogo */
+.dl{display:flex;flex-direction:column;gap:12px;margin-top:12px}
+.ln{display:flex;gap:10px;align-items:flex-start;animation:fxUp .4s ease both}
+.av{flex:none;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font:600 14px var(--f-display);color:#fff;background:var(--ink-faint)}
+.ln.me .av{background:var(--b1)}
+.bub{background:var(--paper-raised);border:1px solid var(--line);border-radius:var(--r-md);padding:10px 14px;font-size:14.5px}
+.ln.me .bub{border-color:var(--b1-line)}
+.nm{font:11px var(--f-data);text-transform:uppercase;color:var(--ink-faint);margin:0 0 3px}
+.opts{display:grid;gap:8px;margin-top:12px}
+.opts button{text-align:left;font:500 14.5px var(--f-body);border:1.5px solid var(--b1-line);background:var(--paper-raised);color:var(--ink);border-radius:var(--r-md);padding:9px 14px;cursor:pointer}
+.opts button:hover:not(:disabled){border-color:var(--b1)}
+.opts button.bad{border-color:var(--family);background:var(--family-soft)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+.card{border:1px solid var(--b1-line);background:var(--paper-raised);border-radius:var(--r-md);padding:12px 16px;font-size:14px}
+.card h3{margin:0 0 4px;font-size:15px}
+@media(max-width:600px){.two{grid-template-columns:1fr}section{padding:18px 16px 22px}}
+textarea{width:100%;min-height:90px;border:1px solid var(--family-line);border-radius:var(--r-sm);padding:10px 12px;background:var(--paper-raised);color:var(--ink);font:inherit;margin-top:10px;transition:box-shadow .2s}
+textarea:focus{outline:none;box-shadow:0 0 0 4px color-mix(in srgb,var(--family) 20%,transparent)}
+.ck{display:block;padding:5px 0;cursor:pointer}
+.sv{font:12px var(--f-data);color:var(--b2);margin-left:10px;opacity:0;transition:opacity .3s}.sv.show{opacity:1}
+footer{max-width:780px;margin:0 auto;padding:0 clamp(16px,4vw,28px) 60px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font:12.5px var(--f-data);color:var(--ink-faint)}
+.cf-wrap{position:fixed;width:0;height:0;z-index:60;pointer-events:none}
+.cf{position:absolute;width:8px;height:12px;border-radius:2px;background:var(--c);opacity:0;animation:cfFly 1.2s cubic-bezier(.2,.7,.3,1) forwards}
+@keyframes cfFly{0%{opacity:1}45%{opacity:1;transform:translate(calc(var(--dx)*.8),var(--up)) rotate(200deg)}100%{opacity:0;transform:translate(var(--dx),var(--fall)) rotate(var(--rot))}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.plx,.cf-wrap{display:none}.fx-hide>*,.anim.ready .t{opacity:1!important}}
+@media print{.plx,.bar,body::before,.cf-wrap,.cm{display:none}section{opacity:1;box-shadow:none}}
+
+/* explica a diez personas */
+section.pp{background:var(--b2-soft);border-color:var(--b2-line)}
+.pp .num{background:var(--b2)}
+.pp-use{display:flex;flex-wrap:wrap;gap:6px 8px;align-items:center;margin:0 0 8px;font-size:13px}
+.pp-use span{background:var(--paper-raised);border:1px solid var(--b2-line);border-radius:99px;padding:2px 11px;font:12.5px var(--f-data);color:var(--ink-soft)}
+.tk .pp-use span{border-color:var(--family-line)}
+.ppl-ol{list-style:none;margin:8px 0 0;padding:0}
+.ppl-i{border-top:1px solid var(--line)}
+.ppl-i label{display:grid;grid-template-columns:22px 1fr;gap:12px;align-items:start;padding:11px 8px;cursor:pointer;border-radius:var(--r-sm)}
+.ppl-i input{width:20px;height:20px;margin:2px 0 0;accent-color:var(--b2);cursor:pointer}
+.tk .ppl-i input{accent-color:var(--family)}
+.ppl-w{display:block;font-size:12.5px;color:var(--ink-faint)}
+.ppl-w b{font-size:14px;color:var(--ink);font-weight:600}
+.ppl-t{display:block;margin-top:2px;line-height:1.5}
+.ppl-i.done .ppl-t{color:var(--ink-faint)}
+.ppl-i.pick label{background:var(--b3-soft);outline:2px solid var(--b3);outline-offset:-2px}
+.pp-hw{margin-top:24px;padding-top:4px;border-top:1px dashed var(--line-strong)}
+</style>
+</head>
+<body data-lang="es-en">
+<a class="skip" href="#main">Saltar al contenido</a>
+<div class="plx" aria-hidden="true"><i></i><i></i></div>
+<header><div class="wrap">
+  <p class="eyebrow"><span class="dot"></span>Clase 38 de 44 · L7 · Arguing a point · debate entre amigos</p>
+  <h1>Por un lado… <em>por otro</em><span class="en">On one hand… on the other</span></h1>
+  <p class="lede">Hoy defiendes una postura y rebates la de otros con conectores: por un lado, por otro, sin embargo, en cambio, aun así. Con subjuntivo de opinión. Casi todo se dice en voz alta.<span class="en b">Today you defend a position and counter others with connectors: por un lado, por otro, sin embargo, en cambio, aun así. With the subjunctive of opinion. Almost everything is said aloud.</span></p>
+  <div class="meta-row"><div>Duración<strong>50 min</strong></div><div>Construye sobre<strong>Clases 21 y 22</strong></div><div>Nivel<strong>B2</strong></div></div>
+</div></header>
+
+<main class="wrap" id="main" tabindex="-1">
+<div class="bar" role="group" aria-label="Controles de la página">
+  <button type="button" class="nav-btn" id="navBtn" aria-label="Menú de partes" aria-expanded="false" aria-controls="toc"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><path d="M3 5.5h14M3 10h14M3 14.5h14"/></svg></button>
+  <nav class="toc" id="toc" aria-label="Partes" hidden></nav>
+  <span class="bar-t">Ir a una parte</span>
+  <div class="seg" id="lang" role="group" aria-label="Idioma"><button type="button" data-lang="es" aria-pressed="false">Español</button><button type="button" data-lang="es-en" aria-pressed="true">Español + EN</button></div>
+  <button type="button" class="btn" id="themeBtn" aria-pressed="false">Modo oscuro</button>
+</div>
+
+<section id="s0" aria-labelledby="s0-t"><h2 id="s0-t"><span class="num">0</span><span>Calentamiento oral<span class="en"> Oral warm-up</span></span><span class="cue">⏱ 4 min</span></h2>
+<p class="sub">Sin pantalla: escuchas y contestas con frases completas. Lee el profesor.<span class="en b">No screen: you listen and answer in full sentences. The teacher reads.</span></p>
+<ol class="ex"><li>¿Es mejor <span class="v">vivir con pocas cosas</span> o tenerlo todo? ¿Por qué?<span class="en b">Is it better to live with few things or have everything? Why?</span></li><li>¿Prefieres jugar a la consola o jugar un partido real?<span class="en b">Do you prefer playing console or a real match?</span></li><li>¿Pizza con piña, sí o no? Defiéndelo.<span class="en b">Pizza with pineapple, yes or no? Defend it.</span></li><li>¿Dónde se vive mejor, en Madrid o en Ámsterdam?<span class="en b">Where is life better, Madrid or Amsterdam?</span></li></ol></section>
+
+<section id="s1" aria-labelledby="s1-t"><h2 id="s1-t"><span class="num">1</span><span>Argumentar con conectores<span class="en"> Arguing with connectors</span></span><span class="cue">⏱ 9 min</span></h2>
+<p class="sub">Cada conector tiene un trabajo: contrastar, conceder o concluir. Sube peldaño a peldaño.<span class="en b">Each connector has a job: contrast, concede or conclude. Climb one step at a time.</span></p>
+<div class="anim" id="an1"><p class="lab">Contrastar y conceder<span class="en">  · contrast and concede</span></p><div class="step"><span class="t2">1 · por un lado</span><span class="chip c1 t" style="--d:0s">Por un lado, la consola es cómoda.</span></div><div class="step"><span class="t2">2 · por otro</span><span class="chip c2 t" style="--d:0.5s">Por otro lado, un partido real es más sano.</span></div><div class="step"><span class="t2">3 · sin embargo</span><span class="chip c3 t" style="--d:1s">Sin embargo, no siempre hay gente para jugar.</span></div><div class="step"><span class="t2">4 · aun así</span><span class="chip c3 t" style="--d:1.5s">Aun así, prefiero el partido.</span></div><div class="anim-foot"><button type="button" class="re">↻ Repetir<span class="en">  · Replay</span></button></div></div><div class="anim" id="an2"><p class="lab">Opinión: indicativo o subjuntivo<span class="en">  · opinion: indicative or subjunctive</span></p><div class="step"><span class="t2">creo que</span><span class="chip c1 t" style="--d:0s">Creo que tienes razón.</span></div><div class="step"><span class="t2">no creo que</span><span class="chip c3 t" style="--d:0.5s">No creo que tengas razón.</span></div><div class="step"><span class="t2">es cierto que</span><span class="chip c1 t" style="--d:1s">Es cierto que es caro.</span></div><div class="step"><span class="t2">no es cierto que</span><span class="chip c3 t" style="--d:1.5s">No es cierto que sea caro.</span></div><div class="anim-foot"><button type="button" class="re">↻ Repetir<span class="en">  · Replay</span></button></div></div>
+<div class="box"><b>Fórmula:</b> opinión afirmativa (<b>creo que, pienso que, es verdad que</b>) + indicativo; negativa o dudosa (<b>no creo que, dudo que, no es verdad que</b>) + subjuntivo. Contraste: <b>sin embargo, en cambio</b>. Concesión: <b>aun así</b>. Consecuencia: <b>por eso</b>. Cierre: <b>en definitiva</b>.<span class="en b">Formula: affirmative opinion + indicative; negative or doubtful + subjunctive. Contrast: sin embargo, en cambio. Concession: aun así. Consequence: por eso. Closing: en definitiva.</span></div>
+<div class="forms"><div><small>añadir</small><b>por otro lado</b></div><div><small>contrastar</small><b>sin embargo</b></div><div><small>contrastar dos cosas</small><b>en cambio</b></div><div><small>conceder</small><b>aun así</b></div><div><small>consecuencia</small><b>por eso</b></div><div><small>concluir</small><b>en definitiva</b></div></div>
+<div class="box pr">🗣️ <b>Pronunciación de hoy:</b> el énfasis y las pausas dan fuerza al argumento: una pausa breve antes del conector y el tono baja (↘) al cerrar la idea, para sonar seguro.<span class="en b">stress and pauses give force to an argument: a brief pause before the connector and a falling tone (↘) at the end of the idea, to sound sure.</span><p class="say"><span class="tag k">sin fuerza</span>Sin embargo no siempre hay gente.</p><p class="say"><span class="tag o">con fuerza</span>Sin embargo… ↗ no siempre hay gente. ↘</p></div>
+<div class="box wr"><b>Cuidado:</b> «creo que» va con indicativo; «no creo que», con subjuntivo. Y «en cambio» contrasta dos cosas: «Madrid es ruidoso; en cambio, Ámsterdam es tranquilo».<span class="en b">“creo que” takes the indicative; “no creo que”, the subjunctive. And “en cambio” contrasts two things.</span></div></section>
+
+<section id="s2" aria-labelledby="s2-t"><h2 id="s2-t"><span class="num">2</span><span>Repaso relámpago<span class="en"> Lightning review</span></span><span class="cue">⏱ 5 min</span></h2>
+<p class="sub">Ocho expresiones clave. Dilo en voz alta antes de girar la tarjeta.<span class="en b">Eight key expressions. Say it aloud before flipping the card.</span></p>
+<div class="fcs" id="fcs"></div></section>
+
+<section id="s3" aria-labelledby="s3-t"><h2 id="s3-t"><span class="num">3</span><span>Practica<span class="en"> Practice</span></span><span class="cue">⏱ 11 min</span></h2>
+<p class="sub">Tres ejercicios de 15 frases. Cada frase te corrige al instante y tienes <b>dos intentos</b>: si fallas los dos, te enseñamos la respuesta. Los tres ejercicios se hacen en clase.<span class="en b">Three exercises of 15 sentences. Every sentence gives instant feedback and you get two tries: if you miss both, we show the answer. All three exercises are done in class.</span></p>
+
+<h3>A · Elige la forma correcta<span class="en"> · Pick the correct form</span></h3>
+<ol class="ex" id="exA"></ol>
+<div class="check"><div><button type="button" class="act alt" id="exArs">Reiniciar<span class="en"> · Reset</span></button></div><span class="score" id="exAsc"></span></div>
+
+<h3>B · Escribe el verbo<span class="en"> · Type the verb</span></h3>
+<p class="sub">Conjuga el verbo entre paréntesis. Pulsa Intro o «Comprobar». Al escribir, usa el menú de teclas (o clic derecho) para tildes, ñ, ¿ y ¡.<span class="en b">Conjugate the verb in brackets. Press Enter or “Check”. While typing, use the key menu (or right-click) for accents, ñ, ¿ and ¡.</span></p>
+<ol class="ex" id="exB"></ol>
+<div class="check"><div><button type="button" class="act alt" id="exBrs">Reiniciar<span class="en"> · Reset</span></button></div><span class="score" id="exBsc"></span></div>
+
+<h3>C · ¿Qué dices?<span class="en"> · What do you say?</span></h3>
+<p class="sub">Lee la situación y elige la respuesta más natural y gramaticalmente correcta.<span class="en b">Read the situation and pick the most natural, grammatically correct reply.</span></p>
+<ol class="ex" id="exC"></ol>
+<div class="check"><div><button type="button" class="act alt" id="exCrs">Reiniciar<span class="en"> · Reset</span></button></div><span class="score" id="exCsc"></span></div></section>
+
+<section id="s4" class="rp" aria-labelledby="s4-t"><h2 id="s4-t"><span class="num">4</span><span>Roleplay: mesa redonda<span class="en"> round table</span></span><span class="cue">⏱ 14 min</span></h2>
+<p class="sub">Iker defiende la consola, Sole la pizza con piña y Marta el partido real. Tú defiendes el minimalismo y rebates con cortesía. Elige la mejor respuesta y dila en voz alta antes de pulsar.<span class="en b">Iker defends the console, Sole pineapple pizza and Marta the real match. You defend minimalism and push back politely. Pick the best reply and say it aloud before clicking.</span></p>
+<div class="dl" id="dl" aria-live="polite"></div><div class="opts" id="opts"></div>
+<button type="button" class="act alt" id="dre" style="margin-top:14px">↻ Otra vez<span class="en"> · Again</span></button>
+<h3>Parte 2 · Improvisación libre con rol<span class="en"> Part 2 · Free role-play</span></h3>
+<div class="two"><div class="card"><h3>Rol A · Andrei</h3>Defiendes una postura en la mesa redonda y rebates con cortesía. Usa «por un lado… por otro», «sin embargo», «aun así» y un «no creo que».<span class="en b">You defend a position and push back politely. Use “por un lado… por otro”, “sin embargo”, “aun así” and a “no creo que”.</span></div><div class="card"><h3>Rol B · Amigos</h3>El profesor hace de Iker, Marta y Sole, cada uno con una postura distinta y muy tozudo. Después cambiáis.<span class="en b">The teacher plays Iker, Marta and Sole, each with a different, stubborn position. Then swap.</span></div></div>
+<p style="margin:14px 2px 2px"><b>Marca lo que uses:</b><span class="en"> Tick what you use:</span></p>
+<div id="ck"></div></section>
+
+<section id="s5" class="pp" aria-labelledby="s5-t"><h2 id="s5-t"><span class="num">5</span><span>Explica a diez personas<span class="en"> Explain to ten people</span></span><span class="cue">⏱ 8 min</span></h2>
+<p class="sub">Diez personas inventadas necesitan que les expliques algo del tema de hoy. Elige una (o pulsa «Al azar») y explícaselo en voz alta en 20–30 segundos. Marca ✓ cuando termines.<span class="en b">Ten made-up people need you to explain something from today’s topic. Pick one (or press “Random”) and explain it aloud in 20–30 seconds. Tick ✓ when you’re done.</span></p>
+<div class="pp-use"><b>Usa:</b><span>Por un lado… por otro</span><span>Sin embargo</span><span>En cambio</span><span>Aun así</span><span>Por eso</span><span>En definitiva</span><span>No creo que + subj.</span><span>Creo que + indic.</span></div>
+<div class="ppl" data-k="c38-in"><ol class="ppl-ol"><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Iker"><span class="ppl-b"><span class="ppl-w"><b>1 · Iker</b> · amigo que defiende la consola</span><span class="ppl-t">Explícale por qué prefieres un partido real, con «por un lado… por otro».<span class="en b">Explain why you prefer a real match.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Marta"><span class="ppl-b"><span class="ppl-w"><b>2 · Marta</b> · amiga que defiende el partido real</span><span class="ppl-t">Explícale con «sin embargo» por qué la consola también tiene ventajas.<span class="en b">Explain why the console also has advantages.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Sole"><span class="ppl-b"><span class="ppl-w"><b>3 · Sole</b> · amiga que adora la pizza con piña</span><span class="ppl-t">Rebátele con cortesía su postura sobre la pizza con piña, usando «no creo que».<span class="en b">Politely push back with “no creo que”.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Elena"><span class="ppl-b"><span class="ppl-w"><b>4 · Elena</b> · jubilada</span><span class="ppl-t">Explícale la diferencia entre «sin embargo» y «en cambio».<span class="en b">Explain the difference between those.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Tomás"><span class="ppl-b"><span class="ppl-w"><b>5 · Tomás</b> · compañero de piso</span><span class="ppl-t">Explícale por qué «creo que» lleva indicativo y «no creo que» subjuntivo.<span class="en b">Explain why “creo que” takes indicative and “no creo que” subjunctive.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Aiko"><span class="ppl-b"><span class="ppl-w"><b>6 · Aiko</b> · estudiante de intercambio</span><span class="ppl-t">Explícale cuándo usar «aun así» para conceder.<span class="en b">Explain when to use “aun así” to concede.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Sofía"><span class="ppl-b"><span class="ppl-w"><b>7 · Sofía</b> · amiga</span><span class="ppl-t">Explícale cómo cerrar un argumento con «en definitiva».<span class="en b">Explain how to close an argument with “en definitiva”.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Ben"><span class="ppl-b"><span class="ppl-w"><b>8 · Ben</b> · colega</span><span class="ppl-t">Explícale por qué defiendes vivir con pocas cosas.<span class="en b">Explain why you defend living with few things.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Valeria"><span class="ppl-b"><span class="ppl-w"><b>9 · Valeria</b> · amiga</span><span class="ppl-t">Explícale cómo suena una pausa antes del conector para dar fuerza.<span class="en b">Explain how a pause before the connector adds force.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Lucía"><span class="ppl-b"><span class="ppl-w"><b>10 · Lucía</b> · amiga</span><span class="ppl-t">Explícale dónde se vive mejor, Madrid o Ámsterdam, con tres conectores.<span class="en b">Explain where life is better with three connectors.</span></span></span></label></li></ol><div class="check"><div><button type="button" class="act alt ppl-rnd">🎲 Al azar<span class="en"> · Random</span></button> <button type="button" class="act alt ppl-rs">Reiniciar<span class="en"> · Reset</span></button></div><span class="score ppl-sc" aria-live="polite"></span></div></div></section>
+
+<section id="s6" class="tk" aria-labelledby="s6-t"><h2 id="s6-t"><span class="num">6</span><span style="color:var(--family)">Tu tarea<span class="en"> Your homework</span></span><span class="cue">⏱ 3 min</span></h2>
+<p class="sub">Lee el debate en voz alta (y, si puedes, escucha uno informal en español). Después di <b>oralmente</b> qué postura te parece más convincente y por qué.<span class="en b">Read the debate aloud (and, if you can, listen to an informal one in Spanish). Then say aloud which position is more convincing and why.</span></p>
+<div class="dl"><div class="ln"><div class="av">L</div><div><p class="nm">Lucas</p><div class="bub">Yo creo que es mejor vivir con pocas cosas. Por un lado, ahorras; por otro, piensas menos.<span class="en b">I think it’s better to live with few things. On one hand you save; on the other, you worry less.</span></div></div></div><div class="ln"><div class="av">C</div><div><p class="nm">Carmen</p><div class="bub">No creo que sea tan sencillo. Es cierto que ahorras, pero a mí me gustan mis libros.<span class="en b">I don’t think it’s that simple. It’s true you save, but I like my books.</span></div></div></div><div class="ln"><div class="av">L</div><div><p class="nm">Lucas</p><div class="bub">Aun así, no necesitas tantos.<span class="en b">Even so, you don’t need so many.</span></div></div></div><div class="ln"><div class="av">C</div><div><p class="nm">Carmen</p><div class="bub">Sin embargo, no es lo mismo necesitar que disfrutar. En definitiva, depende.<span class="en b">However, needing isn’t the same as enjoying. In short, it depends.</span></div></div></div></div>
+<p class="sub" style="margin-top:14px">Al contarlo, di: ① qué defiende cada uno · ② qué conectores usan · ③ qué postura te parece más convincente y por qué.<span class="en b">When retelling, say: ① what each defends · ② which connectors they use · ③ which position is more convincing and why.</span></p>
+<div class="pp-hw"><h3>Para casa: diez personas más<span class="en"> · Ten more people, at home</span></h3><p class="sub">Otras diez personas, ahora para hacer en casa. Explícale a cada una lo que se pide, en voz alta o grabándote (al menos tres con audio). Marca ✓ cuando termines.<span class="en b">Ten more people, to do at home. Explain to each one what is asked, aloud or recording yourself (at least three with audio). Tick ✓ when you’re done.</span></p>
+<div class="pp-use"><b>Usa:</b><span>Por un lado… por otro</span><span>Sin embargo</span><span>En cambio</span><span>Aun así</span><span>Por eso</span><span>En definitiva</span><span>No creo que + subj.</span><span>Creo que + indic.</span></div>
+<div class="ppl" data-k="c38-hw"><ol class="ppl-ol"><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Pablo"><span class="ppl-b"><span class="ppl-w"><b>1 · Pablo</b> · amigo</span><span class="ppl-t">Explícale tu postura sobre pizza con piña con un argumento completo.<span class="en b">Explain your stance on pineapple pizza.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Gloria"><span class="ppl-b"><span class="ppl-w"><b>2 · Gloria</b> · tía</span><span class="ppl-t">Explícale por qué prefieres la ciudad o el pueblo con conectores.<span class="en b">Explain why you prefer city or village.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Karim"><span class="ppl-b"><span class="ppl-w"><b>3 · Karim</b> · vecino</span><span class="ppl-t">Explícale cómo discrepar con cortesía en un debate.<span class="en b">Explain how to disagree politely in a debate.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Nerea"><span class="ppl-b"><span class="ppl-w"><b>4 · Nerea</b> · amiga</span><span class="ppl-t">Explícale las ventajas y desventajas del móvil con «por un lado… por otro».<span class="en b">Explain pros and cons of the phone.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Camille"><span class="ppl-b"><span class="ppl-w"><b>5 · Camille</b> · amiga francesa</span><span class="ppl-t">Explícale la consecuencia de una decisión con «por eso».<span class="en b">Explain a consequence with “por eso”.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Julia"><span class="ppl-b"><span class="ppl-w"><b>6 · Julia</b> · hermana pequeña</span><span class="ppl-t">Explícale cuál de las posturas del debate te parece más convincente.<span class="en b">Explain which position seems most convincing.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Mateo"><span class="ppl-b"><span class="ppl-w"><b>7 · Mateo</b> · entrenador</span><span class="ppl-t">Explícale por qué entrenar menos y mejor puede funcionar, con conectores.<span class="en b">Explain why training less but better might work.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Raúl"><span class="ppl-b"><span class="ppl-w"><b>8 · Raúl</b> · jefe</span><span class="ppl-t">Explícale una propuesta con ventajas, objeciones y conclusión.<span class="en b">Explain a proposal with pros, objections and conclusion.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Inés"><span class="ppl-b"><span class="ppl-w"><b>9 · Inés</b> · amiga</span><span class="ppl-t">Explícale cómo concedes un punto y sigues con tu opinión.<span class="en b">Explain how to concede a point.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Leo"><span class="ppl-b"><span class="ppl-w"><b>10 · Leo</b> · amigo</span><span class="ppl-t">Explícale en un minuto un debate completo con los seis conectores.<span class="en b">Explain in one minute a full debate with the six connectors.</span></span></span></label></li></ol><div class="check"><div><button type="button" class="act alt ppl-rnd">🎲 Al azar<span class="en"> · Random</span></button> <button type="button" class="act alt ppl-rs">Reiniciar<span class="en"> · Reset</span></button></div><span class="score ppl-sc" aria-live="polite"></span></div></div></div>
+<textarea id="notes" aria-label="Notas" placeholder="Notas opcionales · Optional notes"></textarea>
+<p style="margin:8px 2px 0;font-size:12.5px;color:var(--ink-faint)">Es solo un apoyo: lo importante es decirlo en voz alta.<span class="en b">Just a support: what matters is saying it aloud.</span></p>
+<p><button type="button" class="act alt" id="sv">Guardar notas</button><span class="sv" id="svf">Guardado ✓</span></p></section>
+</main>
+<footer><span>Clase 38 · Por un lado… por otro</span><span>Próxima clase → Clase 39</span></footer>
+
+<div class="cm" id="cm" role="toolbar" aria-label="Caracteres especiales" hidden></div>
+<script>
+
+const $=id=>document.getElementById(id),RM=matchMedia('(prefers-reduced-motion:reduce)').matches;
+const E=(t,b)=>t?`<span class="en${b?' b':''}"> ${t}</span>`:'';
+const sh=a=>{const r=[...a];for(let i=r.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[r[i],r[j]]=[r[j],r[i]]}return r};
+const ld=k=>{try{return localStorage.getItem(k)}catch(e){return null}},sv=(k,v)=>{try{localStorage.setItem(k,v)}catch(e){}};
+const restart=(el,c)=>{el.classList.remove(c);void el.offsetWidth;el.classList.add(c)};
+function confetti(el){if(RM||!el)return;const r=el.getBoundingClientRect(),w=document.createElement('div');w.className='cf-wrap';w.style.left=r.left+r.width/2+'px';w.style.top=r.top+r.height/2+'px';
+ const C=['var(--b3)','var(--b1)','var(--b2)','var(--family)'];
+ for(let k=0;k<22;k++){const c=document.createElement('i'),an=-Math.PI/2+(Math.random()-.5)*2.2,d=60+Math.random()*110;c.className='cf';
+  c.style.cssText=`--c:${C[k%4]};--dx:${Math.cos(an)*d|0}px;--up:${Math.sin(an)*d|0}px;--fall:${(Math.sin(an)*d+90+Math.random()*60)|0}px;--rot:${(Math.random()*720-360)|0}deg`;w.appendChild(c)}
+ document.body.appendChild(w);setTimeout(()=>w.remove(),1600)}
+
+/* barra: índice, idioma, tema */
+const secs=[...document.querySelectorAll('main section')],toc=$('toc'),nb=$('navBtn');
+toc.innerHTML=secs.map(s=>{const h=s.querySelector('h2');return `<a href="#${s.id}"><b>${h.querySelector('.num').textContent}</b>${h.children[1].firstChild.textContent}</a>`}).join('');
+nb.onclick=()=>{toc.hidden=!toc.hidden;nb.setAttribute('aria-expanded',String(!toc.hidden))};
+toc.onclick=e=>{if(e.target.closest('a')){toc.hidden=true;nb.setAttribute('aria-expanded','false')}};
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!toc.hidden){toc.hidden=true;nb.focus()}});
+function setLang(l){document.body.dataset.lang=l;document.querySelectorAll('#lang button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.lang===l)));sv('clase-lang-v2',l)}
+document.querySelectorAll('#lang button').forEach(b=>b.onclick=()=>setLang(b.dataset.lang));setLang(ld('clase-lang-v2')==='es'?'es':'es-en');
+const tb=$('themeBtn');function setTheme(d){document.documentElement.dataset.theme=d?'dark':'light';tb.setAttribute('aria-pressed',String(d));tb.textContent=d?'Modo claro':'Modo oscuro';sv('clase-theme',d?'d':'l')}
+tb.onclick=()=>setTheme(tb.getAttribute('aria-pressed')!=='true');setTheme(ld('clase-theme')?ld('clase-theme')==='d':matchMedia('(prefers-color-scheme:dark)').matches);
+
+/* animaciones al entrar */
+document.querySelectorAll('.anim').forEach(a=>{
+ const run=()=>{a.classList.remove('play');void a.offsetWidth;a.classList.add('play')};
+ a.querySelector('.re').onclick=run;
+ if(RM)return;a.classList.add('ready');
+ new IntersectionObserver((es,o)=>es.forEach(e=>{if(e.isIntersecting){run();o.unobserve(a)}}),{threshold:.6}).observe(a)});
+if(!RM&&'IntersectionObserver' in window){
+ const io=new IntersectionObserver((es,o)=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('fx-num');o.unobserve(e.target)}}),{threshold:.05});secs.forEach(s=>io.observe(s));
+ const io2=new IntersectionObserver((es,o)=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('fx-show');o.unobserve(e.target)}}),{threshold:.1});
+ document.querySelectorAll('ol.ex,.forms').forEach(c=>{[...c.children].forEach((k,i)=>k.style.setProperty('--i',Math.min(i,10)));c.classList.add('fx-hide');io2.observe(c)})}
+/* parallax suave y foco de sección */
+if(!RM){const orbs=[...document.querySelectorAll('.plx i')];let t=0;
+ const run=()=>{t=0;const y=scrollY,vh=innerHeight,c=vh/2;orbs.forEach((o,i)=>o.style.transform=`translate3d(${Math.sin(y/600+i*1.7)*innerWidth*.06|0}px,${-y*(.2+i*.15)|0}px,0)`);
+  secs.forEach(s=>{const r=s.getBoundingClientRect(),d=r.top>c?r.top-c:r.bottom<c?c-r.bottom:0;s.style.setProperty('--a',(Math.round(Math.max(0,1-d/(vh*.5))*20)/20))})};
+ addEventListener('scroll',()=>{if(!t)t=requestAnimationFrame(run)},{passive:true});run()}
+
+/* tarjetas */
+const CARDS=[["defender una postura", "Defiendo que menos es más.", "I argue that less is more."], ["rebatir", "Te lo rebato con un ejemplo.", "I counter it with an example."], ["tener razón", "Tienes razón en parte.", "You’re partly right."], ["admitir un punto", "Admito que tienes un punto.", "I admit you have a point."], ["a mi modo de ver", "A mi modo de ver, gana el partido.", "The way I see it, the match wins."], ["ahora bien", "Ahora bien, no todo es perfecto.", "Having said that, not everything is perfect."], ["en definitiva", "En definitiva, depende.", "In short, it depends."], ["depende de", "Depende de con quién juegues.", "It depends on who you play with."]];
+$('fcs').innerHTML=CARDS.map(c=>`<button type="button" class="fc" aria-pressed="false"><span class="f">${c[0]}</span><span class="bk">${c[1]}<i class="en">${c[2]}</i></span></button>`).join('');
+$('fcs').onclick=e=>{const f=e.target.closest('.fc');if(f){f.classList.toggle('on');f.setAttribute('aria-pressed',f.classList.contains('on'))}};
+
+/* menú de caracteres: aparece al enfocar un campo y con clic derecho */
+const cm=$('cm'),CH=['á','é','í','ó','ú','ü','ñ','¿','?','¡','!'];let cmT=null,cmUp=false,cmMode='el';
+const isFld=el=>el&&el.matches&&el.matches('input[type="text"],textarea');
+function cmDraw(){cm.innerHTML=CH.map(c=>{const v=cmUp?c.toUpperCase():c;return `<button type="button" tabindex="-1" data-c="${v}" aria-label="Insertar ${v}">${v}</button>`}).join('')+`<button type="button" tabindex="-1" class="sh" aria-pressed="${cmUp}" aria-label="Mayúsculas">⇧</button>`}
+function cmPlace(x,y){cm.style.left='0px';cm.style.top='0px';cm.hidden=false;const w=cm.offsetWidth,h=cm.offsetHeight,vw=innerWidth,vh=innerHeight;
+ cm.style.left=Math.max(8,Math.min(x,vw-w-8))+'px';cm.style.top=Math.max(8,Math.min(y,vh-h-8))+'px'}
+function cmAnchor(el){const r=el.getBoundingClientRect();cm.hidden=false;const h=cm.offsetHeight,vh=(window.visualViewport?visualViewport.height:innerHeight);
+ /* debajo de la caja; solo arriba si no cabe debajo */
+ cmPlace(r.left,r.bottom+6+h<=vh-8?r.bottom+6:Math.max(8,r.top-h-6))}
+function cmShow(el){cmT=el;cmMode='el';cmDraw();cm.hidden=false;cmAnchor(el)}
+function cmHide(){cm.hidden=true;cmT=null}
+document.addEventListener('focusin',e=>{if(isFld(e.target)&&!e.target.disabled)cmShow(e.target);else if(!cm.contains(e.target))cmHide()});
+document.addEventListener('focusout',e=>{if(isFld(e.target)&&!(e.relatedTarget&&cm.contains(e.relatedTarget)))cmHide()});
+document.addEventListener('contextmenu',e=>{const f=e.target;if(!isFld(f)||f.disabled)return;e.preventDefault();f.focus();cmT=f;cmMode='el';cmDraw();cmAnchor(f)});
+addEventListener('scroll',()=>{if(cm.hidden||!cmT)return;if(cmMode==='el')cmAnchor(cmT);else cmHide()},{passive:true,capture:true});
+addEventListener('resize',()=>{if(!cm.hidden&&cmT&&cmMode==='el')cmAnchor(cmT)});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!cm.hidden)cmHide()});
+['mousedown','pointerdown'].forEach(t=>cm.addEventListener(t,e=>e.preventDefault()));
+cm.addEventListener('click',e=>{const b=e.target.closest('button');if(!b||!cmT)return;
+ if(b.classList.contains('sh')){cmUp=!cmUp;cmDraw();return}
+ const f=cmT,c=b.dataset.c;f.focus();f.setRangeText(c,f.selectionStart,f.selectionEnd,'end');f.dispatchEvent(new Event('input',{bubbles:true}));
+ if(cmUp&&/[a-zñü]/i.test(c)){cmUp=false;cmDraw()}});
+
+/* ejercicios · feedback instantáneo por frase · dos intentos y luego se revela */
+const nz=t=>t.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/\s+/g,' ').trim();
+const EXA=[["No creo que ___ razón.", ["tengas", "tienes", "tendrás"], "I don’t think you’re right.", "No creo que + subjuntivo."], ["Creo que ___ razón.", ["tienes", "tengas", "tuvieras"], "I think you’re right.", "Creo que + indicativo."], ["Por un lado me gusta la consola; ___, el fútbol es más sano.", ["por otro lado", "por eso", "a pesar"], "On one hand I like the console; on the other, football is healthier.", "Por un lado… por otro lado."], ["Madrid es ruidoso; ___, Ámsterdam es tranquilo.", ["en cambio", "por eso", "en definitiva"], "Madrid is noisy; Amsterdam, on the other hand, is quiet.", "En cambio contrasta dos cosas."], ["Es caro. ___, lo compro.", ["Aun así", "Por eso", "En cambio"], "It’s expensive. Even so, I’m buying it.", "Aun así = concesión."], ["Llueve; ___, no salimos.", ["por eso", "aun así", "sin embargo"], "It’s raining; that’s why we’re not going out.", "Por eso = consecuencia."], ["No es verdad que la pizza con piña ___ buena.", ["sea", "es", "será"], "It’s not true that pineapple pizza is good.", "No es verdad que + subjuntivo."], ["Es verdad que mi piso ___ pequeño.", ["es", "sea", "fuera"], "It’s true that my flat is small.", "Es verdad que + indicativo."], ["El plan es bueno. ___, tiene un riesgo.", ["Ahora bien", "Por lo tanto", "Así que"], "The plan is good. Having said that, it has a risk.", "Ahora bien = matiz."], ["Dudo que tener más cosas te ___ más feliz.", ["haga", "hace", "hará"], "I doubt having more things makes you happier.", "Dudo que + subjuntivo."], ["No me parece que ___ una buena idea.",["sea", "es", "será"],"I don’t think it’s a good idea.", "No me parece que + subjuntivo."], ["Me parece que Madrid ___ una ciudad muy cómoda.",["es", "sea", "fuera"],"I think Madrid is a very comfortable city.", "Me parece que + indicativo."], ["Es muy caro; ___, la calidad es excelente.",["sin embargo", "por eso", "así que"],"It’s very expensive; however, the quality is excellent.", "Sin embargo = contraste."], ["Por una parte, quiero ahorrar; ___, quiero comprar la consola.",["por otra parte", "por eso", "así que"],"On the one hand, I want to save; on the other, I want to buy the console.", "Por una parte… por otra parte."], ["No estoy seguro de que Iker ___ razón.",["tenga", "tiene", "tendrá"],"I’m not sure Iker is right.", "No estoy seguro de que + subjuntivo."]];
+const EXB=[["No pienso que ___ buena idea.", "ser", "sea", "I don’t think it’s a good idea.", "No pienso que + subjuntivo."], ["Creo que Madrid ___ más vida.", "tener", "tiene", "I think Madrid has more life.", "Creo que + indicativo."], ["No es cierto que Iker ___ razón.", "tener", "tenga", "It’s not true that Iker is right.", "No es cierto que + subjuntivo."], ["Es verdad que el piso ___ pequeño.", "ser", "es", "It’s true that the flat is small.", "Es verdad que + indicativo."], ["Dudo que ellos ___ de acuerdo.", "estar", "estén", "I doubt they agree.", "Dudo que + subjuntivo."], ["No me parece que ___ tantas cosas.", "necesitar · nosotros", "necesitemos", "I don’t think we need so many things.", "No me parece que + subjuntivo."], ["Pienso que el minimalismo ___ útil.", "ser", "es", "I think minimalism is useful.", "Pienso que + indicativo."], ["No creo que Marta ___ venir hoy.", "poder", "pueda", "I don’t think Marta can come today.", "No creo que + subjuntivo."], ["Dudo que ___ tiempo para todo.", "tener · nosotros", "tengamos", "I doubt we have time for everything.", "Dudo que + subjuntivo (tener → tengamos)."], ["No creo que Iker ___ a tiempo.", "llegar · él", "llegue", "I don’t think Iker will arrive on time.", "No creo que + subjuntivo (llegar → llegue)."], ["Estoy seguro de que ___ razón.", "tener · tú", "tienes", "I’m sure you’re right.", "Estoy seguro de que + indicativo."], ["No es verdad que el minimalismo ___ caro.", "ser", "sea", "It’s not true that minimalism is expensive.", "No es verdad que + subjuntivo."], ["Me parece que ___ mucho ruido en Madrid.", "haber", "hay", "I think there’s a lot of noise in Madrid.", "Me parece que + indicativo (haber → hay)."], ["Dudo que yo ___ cambiar de opinión.", "poder · yo", "pueda", "I doubt I can change my mind.", "Dudo que + subjuntivo (poder → pueda)."], ["Es obvio que ellos ___ de acuerdo.", "estar · ellos", "están", "It’s obvious they agree.", "Es obvio que + indicativo."]];
+const EXC=[["Contrastas dos ideas: la consola es cómoda y el partido es más sano.", ["Por un lado, la consola es cómoda; por otro, el partido es más sano.", "Por un lado, la consola es cómoda; por eso, el partido es más sano.", "Por un lado, la consola es cómoda; sin lado, el partido es más sano."], "You contrast two ideas.", "Por un lado… por otro."], ["Rebates con cortesía que la piña vaya en la pizza.", ["Entiendo tu punto, pero no creo que la piña vaya en la pizza.", "Entiendo tu punto, pero no creo que la piña va en la pizza.", "Eso es una tontería."], "You politely push back on pineapple on pizza.", "Cortesía + no creo que + subjuntivo."], ["Concedes un punto y sigues defendiendo tu postura.", ["Es cierto que es caro; aun así, prefiero el partido real.", "Es cierto que es caro; por eso, prefiero el partido real.", "Es cierto que sea caro; aun así prefiero el partido real."], "You concede a point and keep your position.", "Aun así = concesión; es cierto que + indicativo."], ["Opinas que Madrid tiene más vida que Ámsterdam.", ["Creo que Madrid tiene más vida.", "Creo que Madrid tenga más vida.", "No creo que Madrid tiene más vida."], "You think Madrid has more life than Amsterdam.", "Creo que + indicativo."], ["Dudas de que tener más cosas dé más felicidad.", ["Dudo que más cosas den más felicidad.", "Dudo que más cosas dan más felicidad.", "Dudo que más cosas darán más felicidad."], "You doubt more things bring more happiness.", "Dudo que + subjuntivo."], ["Cierras el debate con una conclusión.", ["En definitiva, depende de cada persona.", "En definitiva, dependa de cada persona.", "Por un lado, depende de cada persona."], "You close the debate with a conclusion.", "En definitiva = cierre."], ["Dices que no crees que la consola sea mejor que el fútbol real.",["No creo que la consola sea mejor que el fútbol real.", "No creo que la consola es mejor que el fútbol real.", "No creo que la consola será mejor que el fútbol real."],"You say you don’t think the console is better than real football.", "No creo que + subjuntivo."], ["Das tu opinión: te parece que vivir en Madrid es cómodo.",["Me parece que vivir en Madrid es cómodo.", "Me parece que vivir en Madrid sea cómodo.", "Me parece que vivir en Madrid será cómodo."],"You give your opinion: you think living in Madrid is comfortable.", "Me parece que + indicativo."], ["Contrastas: en tu ciudad hace frío y en Madrid hace sol.",["En mi ciudad hace frío; en cambio, en Madrid hace sol.", "En mi ciudad hace frío; por eso, en Madrid hace sol.", "En mi ciudad hace frío; así que, en Madrid hace sol."],"You contrast: it’s cold in your city and sunny in Madrid.", "En cambio contrasta dos cosas."], ["Explicas una consecuencia: llueve mucho, así que te quedas en casa.",["Llueve mucho; por eso me quedo en casa.", "Llueve mucho; aun así me quedo en casa.", "Llueve mucho; en cambio me quedo en casa."],"You explain a consequence: it rains a lot, so you stay at home.", "Por eso = consecuencia."], ["Respetas la opinión de tu amigo, pero no estás de acuerdo.",["Entiendo tu punto, pero no estoy de acuerdo.", "Entiendo tu punto, por eso no estoy de acuerdo.", "Entiendo tu punto, entonces no estoy de acuerdo."],"You respect your friend’s opinion, but you disagree.", "Cortesía: «entiendo tu punto, pero…»."], ["Dudas de que tu amigo vaya a venir a la fiesta.",["Dudo que mi amigo venga a la fiesta.", "Dudo que mi amigo viene a la fiesta.", "Dudo que mi amigo vendrá a la fiesta."],"You doubt that your friend will come to the party.", "Dudo que + subjuntivo."], ["Concedes que el piso es pequeño, pero tiene mucha luz.",["Es cierto que el piso es pequeño; aun así, tiene mucha luz.", "Es cierto que el piso sea pequeño; aun así, tiene mucha luz.", "Es cierto que el piso es pequeño; por eso, tiene mucha luz."],"You concede the flat is small, but it has lots of light.", "Es cierto que + indicativo; aun así = concesión."], ["Dices que no es verdad que necesitemos muchas cosas para ser felices.",["No es verdad que necesitemos muchas cosas para ser felices.", "No es verdad que necesitamos muchas cosas para ser felices.", "No es verdad que necesitaremos muchas cosas para ser felices."],"You say it’s not true that we need lots of things to be happy.", "No es verdad que + subjuntivo."], ["Preguntas a un amigo qué opina de las redes sociales.",["¿Qué opinas de las redes sociales?", "¿Qué piensas que las redes sociales?", "¿Cuál opinas de las redes sociales?"],"You ask a friend what he thinks about social media.", "Pedir opinión: ¿qué opinas de…?"]];
+function mount(id,raw,kind,splits){
+ const ol=$(id),sc=$(id+'sc');
+ const I=raw.map(x=>kind==='ty'?{q:x[0],hint:x[1],ans:x[2],en:x[3],why:x[4]}:{q:x[0],o:x[1],ans:x[1][0],en:x[2],why:x[3]});
+ let st=[];
+ const upd=()=>{const d=st.filter(s=>s.d).length,ok=st.filter(s=>s.ok).length,f=st.filter(s=>s.f).length;
+  sc.textContent=d?`${d} / ${I.length} hechas · ${ok} correctas · ${f} a la primera`:`${I.length} frases · 2 intentos por frase`;
+  if(d===I.length&&ok===I.length)confetti(sc)};
+ function draw(){
+  cmHide();st=I.map(()=>({t:0,d:false,ok:false,f:false}));
+  ol.innerHTML=I.map((x,i)=>`<li data-i="${i}"><span>${x.q.replace('___','<b class="v">___</b>')}${x.hint?`<span class="hint">(${x.hint})</span>`:''}</span>${E(x.en,1)}`+
+   (kind==='ty'?`<div class="ty"><input type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" aria-label="Respuesta ${i+1}"><button type="button" class="act">Comprobar</button></div>`
+    :`<div class="op${kind==='sit'?' long':''}">${sh(x.o).map(o=>`<button type="button">${o}</button>`).join('')}</div>`)+
+   `<span class="sol" role="status" hidden></span></li>`).join('');
+  const L=[...ol.children];splits.forEach(p=>L[p[0]].insertAdjacentHTML('beforebegin',`<div class="div${p[2]?' cl':''}">${p[1]}</div>`));
+  upd()}
+ function judge(li,i,good,given){
+  const x=I[i],s=st[i],m=li.querySelector('.sol');s.t++;
+  let msg,tip=false;
+  if(good){s.d=s.ok=true;s.f=s.t===1;tip=true;msg=`✓ ${s.t===1?'¡Correcto!':'¡Bien, a la segunda!'} ${x.why}`;
+   if(kind==='ty'&&given.trim().toLowerCase()!==x.ans.toLowerCase())msg+=` (Ojo con la tilde: «${x.ans}»).`}
+  else if(s.t>=2){s.d=true;msg=`✗ La respuesta correcta es «${x.ans}». ${x.why}`}
+  else msg='✗ Todavía no. Te queda 1 intento.';
+  m.hidden=false;m.className='sol'+(tip?' tip':'');m.innerHTML=msg;restart(m,'sol');
+  if(s.d){cmHide();li.querySelectorAll('button,input').forEach(el=>{el.disabled=true});
+   if(kind==='ty'){li.querySelector('input').classList.add(s.ok?'ok':'bad')}
+   else li.querySelectorAll('.op button').forEach(bt=>{if(bt.textContent===x.ans)bt.classList.add('ok')})}
+  upd()}
+ ol.onclick=e=>{const li=e.target.closest('li');if(!li)return;const i=+li.dataset.i;if(st[i].d)return;
+  if(kind==='ty'){if(!e.target.closest('.ty button'))return;typed(li,i)}
+  else{const b=e.target.closest('.op button');if(!b||b.disabled)return;const good=b.textContent===I[i].ans;
+   if(!good){b.classList.add('bad');b.disabled=true;restart(b,'fx-bad')}else{b.classList.add('ok');restart(b,'fx-ok')}
+   judge(li,i,good)}};
+ function typed(li,i){const inp=li.querySelector('input'),v=inp.value;if(!v.trim()){inp.focus();return}
+  const good=nz(v)===nz(I[i].ans);if(!good){restart(inp,'fx-bad')}judge(li,i,good,v);if(!st[i].d){inp.focus();inp.select()}}
+ ol.onkeydown=e=>{if(kind==='ty'&&e.key==='Enter'&&e.target.matches('.ty input')){e.preventDefault();const li=e.target.closest('li'),i=+li.dataset.i;if(!st[i].d)typed(li,i)}};
+ $(id+'rs').onclick=draw;draw()}
+mount('exA',EXA,'mc',[[0,'en clase · elige la forma correcta',1]]);
+mount('exB',EXB,'ty',[[0,'en clase · escribe el verbo',1]]);
+mount('exC',EXC,'sit',[[0,'en clase · elige tu respuesta',1]]);
+
+/* diálogo con ramas */
+const DL=[["Iker", "Para mí, la consola gana: GTA VI no se puede comparar con un partido en el polideportivo.", "For me, the console wins: GTA VI can’t be compared to a match at the sports centre.", ["Entiendo tu punto, pero no creo que sea comparable: un partido real es más sano y más social.", "Eso es falso.", "Creo que tengas razón."], "Cortesía + no creo que + subjuntivo."], ["Sole", "Y la pizza con piña es lo mejor del mundo, que lo sepáis.", "And pineapple pizza is the best thing in the world, just so you know.", ["Por un lado, entiendo que te guste; por otro, no creo que la piña sea buena idea en una pizza.", "Por un lado, tu pizza es mala; por eso, odio la piña.", "Sin embargo, sí."], "Por un lado… por otro + no creo que."], ["Marta", "A ver, Andrei, tú vives con pocas cosas. ¿No te falta nada?", "Come on, Andrei, you live with few things. Don’t you miss anything?", ["Es cierto que a veces echo algo de menos; aun así, prefiero vivir con lo esencial.", "Es cierto que echar algo de menos; por eso lo esencial.", "No sé, depende."], "Conceder (es cierto que) + aun así."], ["Iker", "Bueno, ¿y Madrid o Ámsterdam?", "Well, and Madrid or Amsterdam?", ["Madrid tiene más vida; en cambio, Ámsterdam es más tranquilo. En definitiva, depende de lo que busques.", "Madrid tenga más vida; por eso Ámsterdam no.", "Ninguna de las dos."], "En cambio contrasta; en definitiva concluye."]];
+let dt=0;const dl=$('dl'),op=$('opts'),mk=(c,n,t,e)=>`<div class="ln ${c}"><div class="av">${c==='me'?'Tú':n[0]}</div><div><p class="nm">${n}</p><div class="bub">${t}${E(e)}</div></div></div>`;
+function turn(){if(dt>=DL.length){op.innerHTML='';dl.insertAdjacentHTML('beforeend','<div class="box" style="margin:0">¡Debate cerrado! Cada uno con su postura y nadie enfadado. 🎉</div>');confetti(op);return}
+ const d=DL[dt];dl.insertAdjacentHTML('beforeend',mk('fr',d[0],d[1],d[2]));
+ op.innerHTML=sh(d[3].map((t,i)=>[t,i])).map(o=>`<button type="button" data-ok="${o[1]===0}">${o[0]}</button>`).join('');}
+op.onclick=e=>{const b=e.target.closest('button');if(!b||b.disabled)return;const d=DL[dt];
+ if(b.dataset.ok==='true'){dl.insertAdjacentHTML('beforeend',mk('me','Tú',b.textContent));dt++;turn()}
+ else{b.classList.add('bad');b.disabled=true;restart(b,'fx-bad');if(!op.querySelector('.sol'))op.insertAdjacentHTML('beforeend',`<span class="sol">✗ ${d[4]}</span>`)}};
+$('dre').onclick=()=>{dt=0;dl.innerHTML='';turn()};turn();
+const CK=["Por un lado… por otro", "Sin embargo", "En cambio", "Aun así", "Creo que + indicativo", "No creo que + subjuntivo", "En definitiva"];
+$('ck').innerHTML=CK.map(c=>`<label class="ck"><input type="checkbox"> ${c}</label>`).join('');
+$('ck').onchange=e=>{const all=[...$('ck').querySelectorAll('input')];if(all.every(x=>x.checked))confetti(e.target)};
+
+/* tarea: notas */
+const KEY='andrei-clase38-tarea',na=$('notes');
+(async()=>{try{if(window.storage){const r=await window.storage.get(KEY);if(r&&typeof r.value==='string'){na.value=r.value;return}}}catch(e){}const v=ld(KEY);if(v)na.value=v})();
+$('sv').onclick=async()=>{let ok=false;try{if(window.storage)ok=!!await window.storage.set(KEY,na.value)}catch(e){}if(!ok){sv(KEY,na.value);ok=true}
+ const f=$('svf');f.textContent=ok?'Guardado ✓':'No se pudo guardar';f.classList.add('show');setTimeout(()=>f.classList.remove('show'),1800)};
+</script>
+<script>
+/* explica a diez personas: marcar y sortear */
+(function(){
+var RM=matchMedia('(prefers-reduced-motion:reduce)').matches;
+function ld(k){try{return localStorage.getItem(k)}catch(e){return null}}
+function sv(k,v){try{localStorage.setItem(k,v)}catch(e){}}
+document.querySelectorAll('.ppl').forEach(function(box){
+  var key='andrei-pp-'+box.getAttribute('data-k'),items=[].slice.call(box.querySelectorAll('.ppl-i')),sc=box.querySelector('.ppl-sc'),saved={};
+  try{saved=JSON.parse(ld(key)||'{}')||{}}catch(e){saved={}}
+  items.forEach(function(li,i){li.querySelector('input').checked=!!saved[i]});
+  function upd(){var n=0,o={};items.forEach(function(li,i){var c=li.querySelector('input').checked;li.classList.toggle('done',c);if(c){n++;o[i]=1}});
+    sc.textContent=n+' / '+items.length+' ✓';sv(key,JSON.stringify(o))}
+  box.addEventListener('change',function(e){if(e.target.closest('.ppl-i'))e.target.closest('.ppl-i').classList.remove('pick');upd()});
+  box.querySelector('.ppl-rnd').onclick=function(){
+    var left=items.filter(function(li){return !li.querySelector('input').checked});
+    items.forEach(function(li){li.classList.remove('pick')});
+    if(!left.length){sc.textContent='¡Las diez hechas! ✓';return}
+    var li=left[Math.floor(Math.random()*left.length)];li.classList.add('pick');
+    li.scrollIntoView({block:'center',behavior:RM?'auto':'smooth'})};
+  box.querySelector('.ppl-rs').onclick=function(){items.forEach(function(li){li.querySelector('input').checked=false;li.classList.remove('pick')});upd()};
+  upd();
+});
+})();
+</script>
+</body>
+</html>

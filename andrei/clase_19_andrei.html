@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Clase 19 · ¿Y si quedamos el sábado? — Andrei</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* Clase 19 · L4 Fluidez total · "Making plans that actually happen" */
+:root{
+  --paper:#FBF7EE;--paper-top:#F6EEDA;--paper-raised:#FFFFFF;--paper-alt:#F3ECDA;
+  --ink:#23291F;--ink-soft:#565F52;--ink-faint:#6E7568;
+  --line:rgba(35,41,31,.12);--line-strong:rgba(35,41,31,.22);
+  --b1:#2F6FED;--b1-soft:#EAF1FE;--b1-line:#C6D9FC;
+  --b2:#2E9E6B;--b2-soft:#E9F6EF;--b2-line:#BEE6D3;
+  --b3:#DB8A2E;--b3-soft:#FCF1E1;--b3-line:#F3D9AF;
+  --family:#B5502E;--family-soft:#FBEBE3;--family-line:#EFC9B4;
+  --f-display:'Fraunces',Georgia,serif;--f-body:'IBM Plex Sans',system-ui,sans-serif;--f-data:'IBM Plex Mono',monospace;
+  --r-sm:12px;--r-md:18px;--r-lg:26px;
+  --shadow-1:0 1px 2px rgba(35,41,31,.05),0 10px 28px rgba(35,41,31,.07);
+  color-scheme:light}
+:root[data-theme="dark"]{
+  --paper:#171912;--paper-top:#22251A;--paper-raised:#22251B;--paper-alt:#2B2F22;
+  --ink:#F1EDE0;--ink-soft:#C3C7B8;--ink-faint:#9CA190;
+  --line:rgba(241,237,224,.14);--line-strong:rgba(241,237,224,.28);
+  --b1-soft:#1D2A44;--b1-line:#2F4B82;--b2-soft:#1B3328;--b2-line:#2B6A4C;--b3-soft:#3A2D18;--b3-line:#7A5524;--family-soft:#3A2219;--family-line:#7A3F29;
+  --shadow-1:0 1px 2px rgba(0,0,0,.45),0 10px 28px rgba(0,0,0,.35);color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-padding-top:calc(70px + env(safe-area-inset-top,0px))}
+body{margin:0;background:linear-gradient(180deg,var(--paper-top) 0,var(--paper) 460px) fixed,var(--paper);color:var(--ink);font:15px/1.6 var(--f-body);padding-bottom:env(safe-area-inset-bottom,0px)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--paper);z-index:10}
+::selection{background:var(--b3-soft)}
+:focus-visible{outline:2px solid var(--b3);outline-offset:2px}
+.skip{position:absolute;left:-999px}.skip:focus{left:12px;top:12px;z-index:20;background:var(--paper-raised);padding:8px 14px;border-radius:99px}
+.sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.plx{position:fixed;inset:-20vh 0;z-index:-1;pointer-events:none;overflow:hidden}
+.plx i{position:absolute;border-radius:50%;filter:blur(60px);opacity:.45;will-change:transform}
+.plx i:nth-child(1){width:46vmax;height:46vmax;left:-14vmax;top:4vh;background:radial-gradient(circle,color-mix(in srgb,var(--b3) 40%,transparent),transparent 70%)}
+.plx i:nth-child(2){width:38vmax;height:38vmax;right:-12vmax;top:70vh;background:radial-gradient(circle,color-mix(in srgb,var(--b1) 30%,transparent),transparent 70%)}
+.wrap{max-width:780px;margin:0 auto;padding:0 clamp(16px,4vw,28px) 90px}
+header .wrap{padding-top:34px;padding-bottom:0}
+.eyebrow{font:500 12px var(--f-data);letter-spacing:.14em;text-transform:uppercase;color:var(--b3);margin:0 0 10px;display:flex;align-items:center;gap:10px}
+.eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--b3)}
+h1{font:600 clamp(30px,5.6vw,48px)/1.08 var(--f-display);letter-spacing:-.02em;margin:0 0 14px;text-wrap:balance}
+h1 em{font-style:italic;background:linear-gradient(90deg,var(--b3) 20%,var(--family));-webkit-background-clip:text;background-clip:text;color:transparent}
+.lede{font-size:16px;color:var(--ink-soft);max-width:58ch;margin:0}
+.meta-row{display:flex;flex-wrap:wrap;gap:20px;margin-top:22px;font:12px var(--f-data);color:var(--ink-faint)}
+.meta-row strong{display:block;color:var(--ink);font:500 14.5px var(--f-display);margin-top:3px}
+.en{color:var(--ink-faint);font-size:.88em;font-style:italic;font-weight:400;text-transform:none;letter-spacing:0}
+.en.b{display:block;margin-top:2px}
+body[data-lang="es"] .en{display:none!important}
+h1 .en{display:block;font:italic 400 clamp(15px,2.6vw,19px)/1.35 var(--f-body);margin-top:8px}
+/* barra */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:11;background:color-mix(in srgb,var(--paper) 82%,transparent);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);padding-block:10px;margin-block:24px 4px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.nav-btn{width:36px;height:36px;display:grid;place-items:center;border:1px solid var(--line-strong);border-radius:50%;background:var(--paper-raised);color:var(--ink-soft);cursor:pointer;padding:0}
+.nav-btn:hover,.nav-btn[aria-expanded=true]{border-color:var(--b3);color:var(--b3)}
+.nav-btn path{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round}
+.toc{position:absolute;top:calc(100% + 8px);left:0;width:min(380px,100%);padding:8px;border:1px solid var(--line-strong);border-radius:var(--r-md);background:var(--paper-raised);box-shadow:var(--shadow-1)}
+.toc[hidden]{display:none}
+.toc a{display:flex;gap:12px;align-items:center;min-height:42px;padding:6px 10px;border-radius:var(--r-sm);color:var(--ink);text-decoration:none;font:500 14.5px var(--f-display)}
+.toc a:hover{background:var(--b3-soft)}
+.toc a b{font:500 12px var(--f-data);color:#fff;background:var(--b3);width:24px;height:24px;border-radius:50%;display:grid;place-items:center;flex:none}
+.bar-t{font:600 13px var(--f-display);color:var(--ink-soft);margin-right:auto}
+.seg{display:inline-flex;gap:3px;padding:3px;border:1px solid var(--line-strong);border-radius:99px;background:var(--paper-raised)}
+.seg button{border:0;background:none;padding:5px 13px;border-radius:99px;font:12px var(--f-data);color:var(--ink-soft);cursor:pointer;min-height:30px}
+.seg button[aria-pressed=true]{background:var(--b3);color:#fff;box-shadow:0 6px 16px color-mix(in srgb,var(--b3) 30%,transparent)}
+.btn{font:600 13px var(--f-body);background:var(--paper-raised);color:var(--ink-soft);border:1px solid var(--line-strong);border-radius:99px;padding:7px 15px;cursor:pointer}
+.btn:hover{border-color:var(--b3);color:var(--b3)}
+@media(max-width:600px){.bar-t{display:none}}
+/* secciones */
+section{background:var(--paper-raised);border:1px solid var(--line);border-radius:var(--r-lg);box-shadow:var(--shadow-1);margin-top:18px;padding:24px 26px 28px;scroll-margin-top:84px;position:relative;opacity:calc(.74 + .26*var(--a,1))}
+section.rp{background:var(--b1-soft);border-color:var(--b1-line)}section.rp .num{background:var(--b1)}
+section.tk{background:var(--family-soft);border-color:var(--family-line)}section.tk .num{background:var(--family)}
+h2{font:italic 500 22px/1.2 var(--f-display);margin:0 0 6px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+h2 .en{font:400 .6em var(--f-body);font-style:italic}
+h3{font:500 17px var(--f-display);margin:20px 0 6px}
+.num{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;flex:none;font:500 13px var(--f-data);background:var(--b3);color:#fff;font-style:normal}
+section.fx-num .num{animation:fxNum .65s cubic-bezier(.2,.9,.3,1.4) both}
+@keyframes fxNum{0%{transform:scale(.2) rotate(-90deg);opacity:0}100%{transform:none;opacity:1}}
+.cue{margin-left:auto;font:11px var(--f-data);color:var(--ink-faint);background:var(--paper-alt);border-radius:99px;padding:2px 10px;font-style:normal}
+.sub{color:var(--ink-soft);margin:0 0 12px;font-size:14.5px}
+.box{margin:14px 0 0;padding:13px 16px;background:var(--b3-soft);border:1px solid var(--b3-line);border-radius:var(--r-md);font-size:14.5px;color:var(--ink-soft)}
+.box strong,.box b{color:var(--ink)}
+.box.pr{background:var(--paper-alt);border-color:var(--line)}
+.box.wr{background:var(--family-soft);border-color:var(--family-line)}.box.wr b{color:var(--family)}
+ol.ex{padding:0;margin:8px 0 0;list-style:none;counter-reset:q}
+ol.ex>li{counter-increment:q;padding:11px 0;border-top:1px solid var(--line)}
+ol.ex>li::before{content:counter(q)".";font:12px var(--f-data);color:var(--ink-faint);margin-right:8px}
+.v{color:var(--b3);font-weight:600;text-decoration:underline;text-decoration-color:var(--b3-line);text-decoration-thickness:2px;text-underline-offset:3px}
+.div{display:flex;align-items:center;gap:10px;margin:16px 0 4px;font:11px var(--f-data);text-transform:uppercase;letter-spacing:.06em;color:var(--ink-faint)}
+.div::before,.div::after{content:"";flex:1;height:1px;background:var(--line)}
+.div.cl{color:var(--b3)}.div.cl::before,.div.cl::after{background:var(--b3-line)}
+/* animación de peldaños */
+.anim{border:1px solid var(--line);border-radius:var(--r-md);background:var(--paper-alt);padding:16px 18px 10px;margin:14px 0}
+.anim .lab{font:11px var(--f-data);text-transform:uppercase;letter-spacing:.08em;color:var(--ink-faint);margin:0 0 8px}
+.step{display:flex;align-items:center;gap:10px;margin:6px 0;flex-wrap:wrap}
+.step .t2{font:11px var(--f-data);color:var(--ink-faint);width:92px;flex:none}
+.chip{display:inline-block;padding:7px 15px;border-radius:14px;background:var(--paper-raised);border:2px solid var(--line-strong);font:600 16px var(--f-display)}
+.chip.c1{border-color:var(--b3-line)}.chip.c2{border-color:var(--b3);color:var(--b3)}.chip.c3{border-color:var(--b1);color:var(--b1)}.chip.x{border-color:var(--family);color:var(--family);border-style:dashed}
+.anim.ready:not(.play) .t{opacity:0}
+.anim.play .t{animation:aPop .55s cubic-bezier(.2,.8,.3,1) var(--d,0s) both}
+@keyframes aPop{0%{opacity:0;transform:translateY(10px) scale(.7)}60%{opacity:1;transform:translateY(-3px) scale(1.05)}100%{opacity:1;transform:none}}
+.anim-foot{display:flex;justify-content:flex-end;margin-top:6px}
+.re{border:1px solid var(--line-strong);background:var(--paper-raised);border-radius:99px;padding:3px 12px;font:11.5px var(--f-data);color:var(--ink-soft);cursor:pointer}
+.re:hover{color:var(--b3);border-color:var(--b3-line)}
+.forms{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-top:12px}
+.forms div{background:var(--paper-raised);border:1px solid var(--b3-line);border-radius:var(--r-md);padding:10px 12px;text-align:center}
+.forms small{display:block;font:11px var(--f-data);color:var(--ink-faint);text-transform:uppercase}
+.forms b{font:600 18px var(--f-display);color:var(--b3)}
+.say{margin:7px 0;font-size:15.5px}
+.say .tag{font:11px var(--f-data);padding:1px 8px;border-radius:99px;margin-right:8px;color:#fff}
+.say .tag.k{background:var(--family)}.say .tag.o{background:var(--b2)}
+/* tarjetas */
+.fcs{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin:14px 0 0;perspective:900px}
+.fc{position:relative;min-height:118px;border:0;background:none;padding:0;cursor:pointer;transform-style:preserve-3d;transition:transform .5s cubic-bezier(.2,.8,.3,1);color:var(--ink)}
+.fc.on{transform:rotateY(180deg)}
+.fc>span{position:absolute;inset:0;display:grid;place-items:center;padding:10px 14px;border-radius:var(--r-md);backface-visibility:hidden;-webkit-backface-visibility:hidden;text-align:center;border:1px solid var(--line)}
+.fc .f{background:var(--paper-alt);font:600 17px var(--f-display)}
+.fc .bk{background:var(--b3-soft);border-color:var(--b3-line);transform:rotateY(180deg);font:500 14px/1.4 var(--f-body)}
+.fc .bk i{display:block;font-size:12px;color:var(--ink-faint);margin-top:4px}
+.fc:hover .f{border-color:var(--b3-line)}
+/* ejercicios */
+.op{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.op button{font:500 14px var(--f-body);border:1.5px solid var(--line-strong);background:var(--paper-raised);color:var(--ink);border-radius:99px;padding:6px 16px;cursor:pointer;transition:transform .1s,background .2s}
+.op button:hover:not(:disabled){border-color:var(--b3);transform:translateY(-1px)}
+.op button.pk{background:var(--b3-soft);border-color:var(--b3);color:var(--b3)}
+.op button.ok{background:var(--b2-soft);border-color:var(--b2);color:var(--b2)}.op button.ok::after{content:" ✓"}
+.op button.bad{background:var(--family-soft);border-color:var(--family);color:var(--family)}.op button.bad::after{content:" ✗"}
+.sol{display:block;margin:7px 0 0;padding:1px 0 1px 10px;border-left:3px solid var(--family);color:var(--family);font-size:13.5px;animation:fxSol .35s ease both}
+.sol.tip{color:var(--b2);border-color:var(--b2)}
+@keyframes fxSol{from{opacity:0;transform:translateX(-10px)}to{opacity:1;transform:none}}
+.sol[hidden]{display:none}
+.fx-ok{animation:fxOk .55s ease calc(var(--i,0)*90ms) both}.fx-bad{animation:fxBad .42s ease calc(var(--i,0)*90ms) both}
+@keyframes fxOk{35%{transform:scale(1.1);box-shadow:0 0 0 7px color-mix(in srgb,var(--b2) 30%,transparent)}}
+@keyframes fxBad{20%{transform:translateX(-7px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(3px)}}
+.fx-hide:not(.fx-show)>*{opacity:0}.fx-show>*{animation:fxUp .45s cubic-bezier(.2,.8,.3,1) calc(var(--i,0)*55ms) both}
+@keyframes fxUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.check{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-top:20px;padding-top:16px;border-top:1px dashed var(--line)}
+.act{font:600 14px var(--f-body);background:var(--b3);color:#fff;border:0;border-radius:99px;padding:10px 22px;cursor:pointer}
+.act:hover{transform:translateY(-1px)}
+.act.alt{background:none;color:var(--ink-soft);border:1.5px solid var(--line-strong)}
+.score{font:13px var(--f-data);color:var(--ink-faint)}
+/* ejercicios con intentos */
+.op button:disabled:not(.ok):not(.bad){opacity:.55;cursor:default}
+.op.long button{border-radius:var(--r-md);text-align:left;padding:8px 14px}
+.ty{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.ty input{flex:1 1 180px;min-width:0;font:500 15px var(--f-body);border:1.5px solid var(--line-strong);background:var(--paper-raised);color:var(--ink);border-radius:99px;padding:7px 16px}
+.ty input:focus{outline:none;border-color:var(--b3);box-shadow:0 0 0 4px color-mix(in srgb,var(--b3) 20%,transparent)}
+.ty input.ok{border-color:var(--b2);background:var(--b2-soft);color:var(--b2)}
+.ty input.bad{border-color:var(--family);background:var(--family-soft);color:var(--family)}
+.ty .act{padding:7px 18px;font-size:13px}
+.ty .act:disabled{opacity:.5;cursor:default;transform:none}
+.hint{font:12px var(--f-data);color:var(--ink-faint);margin-left:8px;white-space:nowrap}
+.exh{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+/* menú de caracteres */
+.cm{position:fixed;z-index:70;display:flex;flex-wrap:wrap;gap:4px;max-width:min(92vw,330px);padding:6px;background:var(--paper-raised);border:1px solid var(--line-strong);border-radius:var(--r-md);box-shadow:var(--shadow-1)}
+.cm[hidden]{display:none}
+.cm button{min-width:36px;height:36px;padding:0 8px;display:grid;place-items:center;border:1px solid var(--line);border-radius:10px;background:var(--paper-alt);color:var(--ink);font:600 17px var(--f-display);cursor:pointer;touch-action:manipulation}
+.cm button:hover{border-color:var(--b3);color:var(--b3)}
+.cm button.sh{font:600 15px var(--f-body);color:var(--ink-soft)}
+.cm button.sh[aria-pressed=true]{background:var(--b3);border-color:var(--b3);color:#fff}
+/* diálogo */
+.dl{display:flex;flex-direction:column;gap:12px;margin-top:12px}
+.ln{display:flex;gap:10px;align-items:flex-start;animation:fxUp .4s ease both}
+.av{flex:none;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font:600 14px var(--f-display);color:#fff;background:var(--ink-faint)}
+.ln.me .av{background:var(--b1)}
+.bub{background:var(--paper-raised);border:1px solid var(--line);border-radius:var(--r-md);padding:10px 14px;font-size:14.5px}
+.ln.me .bub{border-color:var(--b1-line)}
+.nm{font:11px var(--f-data);text-transform:uppercase;color:var(--ink-faint);margin:0 0 3px}
+.opts{display:grid;gap:8px;margin-top:12px}
+.opts button{text-align:left;font:500 14.5px var(--f-body);border:1.5px solid var(--b1-line);background:var(--paper-raised);color:var(--ink);border-radius:var(--r-md);padding:9px 14px;cursor:pointer}
+.opts button:hover:not(:disabled){border-color:var(--b1)}
+.opts button.bad{border-color:var(--family);background:var(--family-soft)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+.card{border:1px solid var(--b1-line);background:var(--paper-raised);border-radius:var(--r-md);padding:12px 16px;font-size:14px}
+.card h3{margin:0 0 4px;font-size:15px}
+@media(max-width:600px){.two{grid-template-columns:1fr}section{padding:18px 16px 22px}}
+textarea{width:100%;min-height:90px;border:1px solid var(--family-line);border-radius:var(--r-sm);padding:10px 12px;background:var(--paper-raised);color:var(--ink);font:inherit;margin-top:10px;transition:box-shadow .2s}
+textarea:focus{outline:none;box-shadow:0 0 0 4px color-mix(in srgb,var(--family) 20%,transparent)}
+.ck{display:block;padding:5px 0;cursor:pointer}
+.sv{font:12px var(--f-data);color:var(--b2);margin-left:10px;opacity:0;transition:opacity .3s}.sv.show{opacity:1}
+footer{max-width:780px;margin:0 auto;padding:0 clamp(16px,4vw,28px) 60px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font:12.5px var(--f-data);color:var(--ink-faint)}
+.cf-wrap{position:fixed;width:0;height:0;z-index:60;pointer-events:none}
+.cf{position:absolute;width:8px;height:12px;border-radius:2px;background:var(--c);opacity:0;animation:cfFly 1.2s cubic-bezier(.2,.7,.3,1) forwards}
+@keyframes cfFly{0%{opacity:1}45%{opacity:1;transform:translate(calc(var(--dx)*.8),var(--up)) rotate(200deg)}100%{opacity:0;transform:translate(var(--dx),var(--fall)) rotate(var(--rot))}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.plx,.cf-wrap{display:none}.fx-hide>*,.anim.ready .t{opacity:1!important}}
+@media print{.plx,.bar,body::before,.cf-wrap,.cm{display:none}section{opacity:1;box-shadow:none}}
+
+/* explica a diez personas */
+section.pp{background:var(--b2-soft);border-color:var(--b2-line)}
+.pp .num{background:var(--b2)}
+.pp-use{display:flex;flex-wrap:wrap;gap:6px 8px;align-items:center;margin:0 0 8px;font-size:13px}
+.pp-use span{background:var(--paper-raised);border:1px solid var(--b2-line);border-radius:99px;padding:2px 11px;font:12.5px var(--f-data);color:var(--ink-soft)}
+.tk .pp-use span{border-color:var(--family-line)}
+.ppl-ol{list-style:none;margin:8px 0 0;padding:0}
+.ppl-i{border-top:1px solid var(--line)}
+.ppl-i label{display:grid;grid-template-columns:22px 1fr;gap:12px;align-items:start;padding:11px 8px;cursor:pointer;border-radius:var(--r-sm)}
+.ppl-i input{width:20px;height:20px;margin:2px 0 0;accent-color:var(--b2);cursor:pointer}
+.tk .ppl-i input{accent-color:var(--family)}
+.ppl-w{display:block;font-size:12.5px;color:var(--ink-faint)}
+.ppl-w b{font-size:14px;color:var(--ink);font-weight:600}
+.ppl-t{display:block;margin-top:2px;line-height:1.5}
+.ppl-i.done .ppl-t{color:var(--ink-faint)}
+.ppl-i.pick label{background:var(--b3-soft);outline:2px solid var(--b3);outline-offset:-2px}
+.pp-hw{margin-top:24px;padding-top:4px;border-top:1px dashed var(--line-strong)}
+</style>
+</head>
+<body data-lang="es-en">
+<a class="skip" href="#main">Saltar al contenido</a>
+<div class="plx" aria-hidden="true"><i></i><i></i></div>
+<header><div class="wrap">
+  <p class="eyebrow"><span class="dot"></span>Clase 19 de 44 · L4 · Making plans that actually happen</p>
+  <h1>¿Y si <em>quedamos</em> el sábado?<span class="en">What if we meet up on Saturday?</span></h1>
+  <p class="lede">Hoy aprendes a proponer un plan con tacto, a decir que no sin cortar la conversación y a ponerte de acuerdo con tus amigos. Condicional para proponer, subjuntivo para pedir o rechazar. Casi todo se dice en voz alta.<span class="en b">Today you learn to propose a plan tactfully, say no without killing the conversation, and agree with friends. Conditional to propose, subjunctive to ask or decline. Almost everything is said aloud.</span></p>
+  <div class="meta-row"><div>Duración<strong>50 min</strong></div><div>Construye sobre<strong>Clases 12 y 16</strong></div><div>Nivel<strong>A2</strong></div></div>
+</div></header>
+
+<main class="wrap" id="main" tabindex="-1">
+<div class="bar" role="group" aria-label="Controles de la página">
+  <button type="button" class="nav-btn" id="navBtn" aria-label="Menú de partes" aria-expanded="false" aria-controls="toc"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><path d="M3 5.5h14M3 10h14M3 14.5h14"/></svg></button>
+  <nav class="toc" id="toc" aria-label="Partes" hidden></nav>
+  <span class="bar-t">Ir a una parte</span>
+  <div class="seg" id="lang" role="group" aria-label="Idioma"><button type="button" data-lang="es" aria-pressed="false">Español</button><button type="button" data-lang="es-en" aria-pressed="true">Español + EN</button></div>
+  <button type="button" class="btn" id="themeBtn" aria-pressed="false">Modo oscuro</button>
+</div>
+
+<section id="s0" aria-labelledby="s0-t"><h2 id="s0-t"><span class="num">0</span><span>Calentamiento oral<span class="en"> Oral warm-up</span></span><span class="cue">⏱ 4 min</span></h2>
+<p class="sub">Sin pantalla: escuchas y contestas con frases completas. Lee el profesor.<span class="en b">No screen: you listen and answer in full sentences. The teacher reads.</span></p>
+<ol class="ex">
+<li>¿Qué <span class="v">haces</span> normalmente los sábados? ¿Con quién <span class="v">quedas</span>?<span class="en b">What do you normally do on Saturdays? Who do you meet up with?</span></li>
+<li>¿Quién <span class="v">propone</span> los planes en tu grupo de amigos: tú o los demás?<span class="en b">Who proposes the plans in your group: you or the others?</span></li>
+<li>¿Qué <span class="v">prefieres</span> hacer un sábado: ver fútbol, ir al cine o cenar pizza?<span class="en b">What do you prefer on a Saturday: football, cinema or pizza?</span></li>
+<li>¿Cuándo fue la última vez que alguien <span class="v">cambió el plan</span> a última hora? ¿Qué pasó?<span class="en b">When did someone last change the plan at the last minute? What happened?</span></li>
+</ol></section>
+
+<section id="s1" aria-labelledby="s1-t"><h2 id="s1-t"><span class="num">1</span><span>Proponer y rechazar con tacto<span class="en"> Proposing and declining tactfully</span></span><span class="cue">⏱ 9 min</span></h2>
+<p class="sub">Cuanto más suave la frase, más cordial suenas. Sube un peldaño cada vez.<span class="en b">The softer the sentence, the friendlier you sound. Climb one step at a time.</span></p>
+<div class="anim" id="an1"><p class="lab">Proponer · de seco a cordial<span class="en"> · from blunt to friendly</span></p>
+<div class="step"><span class="t2">1 · seca</span><span class="chip x t" style="--d:0s">Quedamos el sábado.</span></div>
+<div class="step"><span class="t2">2 · suave</span><span class="chip c1 t" style="--d:.5s">¿Y si quedamos el sábado?</span></div>
+<div class="step"><span class="t2">3 · condicional</span><span class="chip c2 t" style="--d:1s">Podríamos quedar el sábado.</span></div>
+<div class="step"><span class="t2">4 · deseo</span><span class="chip c2 t" style="--d:1.5s">Me gustaría quedar el sábado.</span></div>
+<div class="anim-foot"><button type="button" class="re">↻ Repetir<span class="en"> · Replay</span></button></div></div>
+<div class="anim" id="an2"><p class="lab">Rechazar · de seco a cordial<span class="en"> · from blunt to friendly</span></p>
+<div class="step"><span class="t2">1 · seca</span><span class="chip x t" style="--d:0s">No puedo. No quiero.</span></div>
+<div class="step"><span class="t2">2 · excusa</span><span class="chip c1 t" style="--d:.5s">Es que el sábado no me va bien.</span></div>
+<div class="step"><span class="t2">3 · subjuntivo</span><span class="chip c3 t" style="--d:1s">Prefiero que quedemos el domingo.</span></div>
+<div class="step"><span class="t2">4 · alternativa</span><span class="chip c3 t" style="--d:1.5s">Es mejor que lo dejemos para otro día.</span></div>
+<div class="anim-foot"><button type="button" class="re">↻ Repetir<span class="en"> · Replay</span></button></div></div>
+<div class="box"><b>Fórmula del subjuntivo:</b> forma de <i>yo</i> del presente, quita <b>-o</b> y cambia la vocal: <b>-ar → -e</b>, <b>-er/-ir → -a</b>. Se usa con <b>quiero que · prefiero que · es mejor que · ojalá</b>.<span class="en b">Formula: take the yo form, drop -o and flip the vowel: -ar → -e, -er/-ir → -a. Used after quiero que, prefiero que, es mejor que, ojalá.</span></div>
+<div class="forms"><div><small>quedar · nosotros</small><b>quedemos</b></div><div><small>llegar · nosotros</small><b>lleguemos</b></div><div><small>pedir · nosotros</small><b>pidamos</b></div><div><small>hacer · nosotros</small><b>hagamos</b></div><div><small>venir · tú</small><b>vengas</b></div><div><small>ir · nosotros</small><b>vayamos</b></div></div>
+<div class="box pr">🗣️ <b>Pronunciación de hoy:</b> propones con entonación que sube al final (↗ ¿Y si quedamos…?). Rechazas con tono que baja y una pausa suave (↘ Es que… no puedo). Cordial pero firme.<span class="en b">Propose with a rising ending; decline with a falling tone and a soft pause. Friendly but firm.</span>
+<p class="say"><span class="tag k">seca</span>Quedamos el sábado.</p>
+<p class="say"><span class="tag o">cordial</span>¿Y si quedamos el sábado?</p>
+<p class="say"><span class="tag k">seca</span>No puedo.</p>
+<p class="say"><span class="tag o">cordial</span>Es que el sábado no me va bien. ¿Y si lo dejamos para el domingo?</p></div>
+<div class="box wr"><b>Cuidado:</b> «¿Y si…?» va con indicativo (¿Y si quedamos?), no con subjuntivo. Y si el sujeto es el mismo, usa infinitivo: «Prefiero ir», pero «Prefiero que vayamos».<span class="en b">«¿Y si…?» takes the indicative. Same subject → infinitive; different subject → que + subjunctive.</span></div></section>
+
+<section id="s2" aria-labelledby="s2-t"><h2 id="s2-t"><span class="num">2</span><span>Repaso relámpago<span class="en"> Lightning review</span></span><span class="cue">⏱ 5 min</span></h2>
+<p class="sub">Doce expresiones para quedar. Dilo en voz alta antes de girar la tarjeta.<span class="en b">Twelve expressions for meeting up. Say it aloud before flipping the card.</span></p>
+<div class="fcs" id="fcs"></div></section>
+
+<section id="s3" aria-labelledby="s3-t"><h2 id="s3-t"><span class="num">3</span><span>Practica<span class="en"> Practice</span></span><span class="cue">⏱ 11 min</span></h2>
+<p class="sub">Tres ejercicios de 15 frases. Cada frase te corrige al instante y tienes <b>dos intentos</b>: si fallas los dos, te enseñamos la respuesta. Los tres ejercicios se hacen en clase.<span class="en b">Three exercises of 15 sentences. Every sentence gives instant feedback and you get two tries: if you miss both, we show the answer. All three exercises are done in class.</span></p>
+
+<h3>A · Elige la forma correcta<span class="en"> · Pick the correct form</span></h3>
+<ol class="ex" id="exA"></ol>
+<div class="check"><div><button type="button" class="act alt" id="exArs">Reiniciar<span class="en"> · Reset</span></button></div><span class="score" id="exAsc"></span></div>
+
+<h3>B · Escribe el verbo<span class="en"> · Type the verb</span></h3>
+<p class="sub">Conjuga el verbo entre paréntesis. Puede ser subjuntivo, indicativo o condicional. Pulsa Intro o «Comprobar». Al escribir, usa el menú de teclas (o clic derecho) para tildes, ñ, ¿ y ¡.<span class="en b">Conjugate the verb in brackets. It can be subjunctive, indicative or conditional. Press Enter or “Check”. While typing, use the key menu (or right-click) for accents, ñ, ¿ and ¡.</span></p>
+<ol class="ex" id="exB"></ol>
+<div class="check"><div><button type="button" class="act alt" id="exBrs">Reiniciar<span class="en"> · Reset</span></button></div><span class="score" id="exBsc"></span></div>
+
+<h3>C · ¿Qué dices?<span class="en"> · What do you say?</span></h3>
+<p class="sub">Lee la situación y elige la respuesta más cordial y gramaticalmente correcta.<span class="en b">Read the situation and pick the friendliest, grammatically correct reply.</span></p>
+<ol class="ex" id="exC"></ol>
+<div class="check"><div><button type="button" class="act alt" id="exCrs">Reiniciar<span class="en"> · Reset</span></button></div><span class="score" id="exCsc"></span></div></section>
+
+<section id="s4" class="rp" aria-labelledby="s4-t"><h2 id="s4-t"><span class="num">4</span><span>Roleplay: el sábado del grupo<span class="en"> Roleplay: the group's Saturday</span></span><span class="cue">⏱ 14 min</span></h2>
+<p class="sub">Iker quiere fútbol, Marta cine y Sole pizza. Tú propones y rebates con cordialidad. Elige la mejor respuesta y dila en voz alta antes de pulsar.<span class="en b">Iker wants football, Marta cinema, Sole pizza. You propose and push back kindly. Pick the best reply and say it aloud before clicking.</span></p>
+<div class="dl" id="dl" aria-live="polite"></div><div class="opts" id="opts"></div>
+<button type="button" class="act alt" id="dre" style="margin-top:14px">↻ Otra vez<span class="en"> · Again</span></button>
+<h3>Parte 2 · Improvisación libre con rol<span class="en"> Part 2 · Free role-play</span></h3>
+<div class="two"><div class="card"><h3>Rol A · Andrei</h3>Propones un plan para el sábado y rebates con tacto cada objeción. Usa al menos un condicional y un «prefiero que».<span class="en b">You propose a Saturday plan and counter each objection tactfully. Use one conditional and one «prefiero que».</span></div>
+<div class="card"><h3>Rol B · Amigos<span class="en"> · Friends</span></h3>El profesor es Iker, Marta y Sole: cada uno quiere algo distinto y pone excusas. Después cambiáis.<span class="en b">The teacher plays Iker, Marta and Sole: each wants something different and makes excuses. Then swap.</span></div></div>
+<p style="margin:14px 0 2px"><b>Marca lo que uses:</b><span class="en"> Tick what you use:</span></p>
+<div id="ck"></div></section>
+
+<section id="s5" class="pp" aria-labelledby="s5-t"><h2 id="s5-t"><span class="num">5</span><span>Explica a diez personas<span class="en"> Explain to ten people</span></span><span class="cue">⏱ 8 min</span></h2>
+<p class="sub">Diez personas inventadas necesitan que les expliques algo del tema de hoy. Elige una (o pulsa «Al azar») y explícaselo en voz alta en 20–30 segundos. Marca ✓ cuando termines.<span class="en b">Ten made-up people need you to explain something from today’s topic. Pick one (or press “Random”) and explain it aloud in 20–30 seconds. Tick ✓ when you’re done.</span></p>
+<div class="pp-use"><b>Usa:</b><span>¿Y si quedamos…?</span><span>Podríamos + infinitivo</span><span>Me gustaría…</span><span>Prefiero que + subjuntivo</span><span>Es mejor que…</span><span>Es que…</span></div>
+<div class="ppl" data-k="c19-in"><ol class="ppl-ol"><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Marta"><span class="ppl-b"><span class="ppl-w"><b>1 · Marta</b> · compañera de máster, muy directa</span><span class="ppl-t">Explícale por qué «Quedamos el sábado» suena seco y cómo proponer el plan con más tacto.<span class="en b">Explain why “Quedamos el sábado” sounds blunt and how to propose the plan more tactfully.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Hugo"><span class="ppl-b"><span class="ppl-w"><b>2 · Hugo</b> · amigo que siempre dice «no puedo»</span><span class="ppl-t">Explícale tres formas más cordiales de rechazar un plan.<span class="en b">Explain three friendlier ways to turn down a plan.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Elena"><span class="ppl-b"><span class="ppl-w"><b>3 · Elena</b> · profesora jubilada que aprende inglés</span><span class="ppl-t">Explícale cómo se forma «quedemos» y cuándo se usa tras «prefiero que».<span class="en b">Explain how “quedemos” is formed and when it follows “prefiero que”.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Tomás"><span class="ppl-b"><span class="ppl-w"><b>4 · Tomás</b> · compañero de piso chileno</span><span class="ppl-t">Explícale la diferencia entre «¿Y si quedamos?» y «Prefiero que quedemos».<span class="en b">Explain the difference between “¿Y si quedamos?” and “Prefiero que quedemos”.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Sofía"><span class="ppl-b"><span class="ppl-w"><b>5 · Sofía</b> · vecina que odia los planes de última hora</span><span class="ppl-t">Explícale cómo rechazar un plan de última hora con excusa y alternativa.<span class="en b">Explain how to decline a last-minute plan with an excuse and an alternative.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Iker"><span class="ppl-b"><span class="ppl-w"><b>6 · Iker</b> · amigo del fútbol que quiere ver el partido</span><span class="ppl-t">Explícale por qué el sábado no te va bien y propón otro día en condicional.<span class="en b">Explain why Saturday doesn’t work and propose another day using the conditional.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Aiko"><span class="ppl-b"><span class="ppl-w"><b>7 · Aiko</b> · estudiante japonesa de intercambio</span><span class="ppl-t">Explícale cuándo se usa infinitivo («Prefiero ir») y cuándo «que» + subjuntivo.<span class="en b">Explain when to use the infinitive (“Prefiero ir”) and when “que” + subjunctive.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Don Ramón"><span class="ppl-b"><span class="ppl-w"><b>8 · Don Ramón</b> · portero del edificio, muy educado</span><span class="ppl-t">Explícale por qué «Me gustaría quedar» suena más suave que «Quiero quedar».<span class="en b">Explain why “Me gustaría quedar” sounds softer than “Quiero quedar”.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Valeria"><span class="ppl-b"><span class="ppl-w"><b>9 · Valeria</b> · amiga canadiense</span><span class="ppl-t">Explícale cuándo sube la entonación al proponer y cuándo baja al rechazar.<span class="en b">Explain when your intonation rises to propose and falls to decline.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Lucía"><span class="ppl-b"><span class="ppl-w"><b>10 · Lucía</b> · amiga que organiza una cena de grupo</span><span class="ppl-t">Explícale cómo ponerse de acuerdo cuando cada uno quiere algo distinto.<span class="en b">Explain how to reach an agreement when everyone wants something different.</span></span></span></label></li></ol><div class="check"><div><button type="button" class="act alt ppl-rnd">🎲 Al azar<span class="en"> · Random</span></button> <button type="button" class="act alt ppl-rs">Reiniciar<span class="en"> · Reset</span></button></div><span class="score ppl-sc" aria-live="polite"></span></div></div></section>
+
+<section id="s6" class="tk" aria-labelledby="s6-t"><h2 id="s6-t"><span class="num">6</span><span style="color:var(--family)">Tu tarea<span class="en"> Your homework</span></span><span class="cue">⏱ 3 min</span></h2>
+<p class="sub">Lee la conversación de tres amigos (y, si puedes, escucha además una conversación real en español). Después cuenta <b>en voz alta</b> cómo resuelven el desacuerdo.<span class="en b">Read the conversation between three friends (and, if you can, also listen to a real Spanish conversation). Then tell aloud how they solve the disagreement.</span></p>
+<div class="dl">
+<div class="ln"><div class="av">L</div><div><p class="nm">Lucas</p><div class="bub">¿Qué hacemos el sábado? Yo quiero ver el partido.<span class="en b">What are we doing on Saturday? I want to watch the match.</span></div></div></div>
+<div class="ln"><div class="av">C</div><div><p class="nm">Carmen</p><div class="bub">Yo preferiría ir al cine. Hay una película que quiero ver.<span class="en b">I'd rather go to the cinema. There's a film I want to see.</span></div></div></div>
+<div class="ln"><div class="av">P</div><div><p class="nm">Pablo</p><div class="bub">Pues a mí me apetece pizza en casa. ¿Y si hacemos las tres cosas?<span class="en b">Well, I fancy pizza at home. What if we do all three?</span></div></div></div>
+<div class="ln"><div class="av">C</div><div><p class="nm">Carmen</p><div class="bub">Podríamos jugar por la mañana y cenar pizza después del cine.<span class="en b">We could play in the morning and have pizza after the cinema.</span></div></div></div>
+<div class="ln"><div class="av">L</div><div><p class="nm">Lucas</p><div class="bub">Vale, pero prefiero que quedemos temprano.<span class="en b">OK, but I'd rather we meet early.</span></div></div></div>
+<div class="ln"><div class="av">P</div><div><p class="nm">Pablo</p><div class="bub">Perfecto. Quedamos a las doce.<span class="en b">Perfect. Let's meet at twelve.</span></div></div></div>
+</div>
+<p class="sub" style="margin-top:14px">Al contarlo, di: ① qué quiere cada uno · ② qué propone el grupo · ③ a qué hora quedan.<span class="en b">When retelling: ① what each wants · ② what the group proposes · ③ what time they meet.</span></p>
+<div class="pp-hw"><h3>Para casa: diez personas más<span class="en"> · Ten more people, at home</span></h3><p class="sub">Otras diez personas, ahora para hacer en casa. Explícale a cada una lo que se pide, en voz alta o grabándote (al menos tres con audio). Marca ✓ cuando termines.<span class="en b">Ten more people, to do at home. Explain to each one what is asked, aloud or recording yourself (at least three with audio). Tick ✓ when you’re done.</span></p>
+<div class="pp-use"><b>Usa:</b><span>¿Y si quedamos…?</span><span>Podríamos + infinitivo</span><span>Me gustaría…</span><span>Prefiero que + subjuntivo</span><span>Es mejor que…</span><span>Es que…</span></div>
+<div class="ppl" data-k="c19-hw"><ol class="ppl-ol"><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Pablo"><span class="ppl-b"><span class="ppl-w"><b>1 · Pablo</b> · amigo que siempre llega tarde</span><span class="ppl-t">Explícale cómo proponer una hora más temprana: «Prefiero que quedemos a las ocho».<span class="en b">Explain how to propose an earlier time: “Prefiero que quedemos a las ocho”.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Gloria"><span class="ppl-b"><span class="ppl-w"><b>2 · Gloria</b> · tía que organiza la comida del domingo</span><span class="ppl-t">Explícale cómo rechazar la comida sin que se enfade.<span class="en b">Explain how to decline the lunch without upsetting her.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Ben"><span class="ppl-b"><span class="ppl-w"><b>3 · Ben</b> · colega estadounidense</span><span class="ppl-t">Explícale las cuatro formas de proponer un plan, de la más seca a la más cordial.<span class="en b">Explain the four ways to propose a plan, from blunt to warm.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Nerea"><span class="ppl-b"><span class="ppl-w"><b>4 · Nerea</b> · amiga con muy poco tiempo</span><span class="ppl-t">Explícale cómo decir «no puedo» con una excusa y una alternativa.<span class="en b">Explain how to say “no puedo” with an excuse and an alternative.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Karim"><span class="ppl-b"><span class="ppl-w"><b>5 · Karim</b> · vecino marroquí que aprende español</span><span class="ppl-t">Explícale el truco del subjuntivo: forma de «yo», quita -o y cambia la vocal.<span class="en b">Explain the subjunctive trick: “yo” form, drop -o and switch the vowel.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Julia"><span class="ppl-b"><span class="ppl-w"><b>6 · Julia</b> · hermana pequeña</span><span class="ppl-t">Explícale por qué a veces conviene decir «Es mejor que lo dejemos para otro día».<span class="en b">Explain why it sometimes helps to say “Es mejor que lo dejemos para otro día”.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Mateo"><span class="ppl-b"><span class="ppl-w"><b>7 · Mateo</b> · entrenador del equipo</span><span class="ppl-t">Explícale cómo proponer un entrenamiento extra con «¿Y si…?» y «Podríamos…».<span class="en b">Explain how to propose an extra training with “¿Y si…?” and “Podríamos…”.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Camille"><span class="ppl-b"><span class="ppl-w"><b>8 · Camille</b> · amiga francesa</span><span class="ppl-t">Explícale la diferencia entre «Prefiero ir» y «Prefiero que vayamos».<span class="en b">Explain the difference between “Prefiero ir” and “Prefiero que vayamos”.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Raúl"><span class="ppl-b"><span class="ppl-w"><b>9 · Raúl</b> · jefe que siempre da órdenes</span><span class="ppl-t">Explícale cómo rechazar una reunión del sábado con tacto.<span class="en b">Explain how to tactfully decline a Saturday meeting.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Inés"><span class="ppl-b"><span class="ppl-w"><b>10 · Inés</b> · compañera que organiza un viaje</span><span class="ppl-t">Explícale cómo pasar de «Quiero ir a la playa» a una propuesta amable.<span class="en b">Explain how to turn “Quiero ir a la playa” into a friendly proposal.</span></span></span></label></li></ol><div class="check"><div><button type="button" class="act alt ppl-rnd">🎲 Al azar<span class="en"> · Random</span></button> <button type="button" class="act alt ppl-rs">Reiniciar<span class="en"> · Reset</span></button></div><span class="score ppl-sc" aria-live="polite"></span></div></div></div>
+<textarea id="notes" aria-label="Notas" placeholder="Notas opcionales · Optional notes"></textarea>
+<p style="margin:8px 2px 0;font-size:12.5px;color:var(--ink-faint)">Es solo un apoyo: lo importante es decirlo en voz alta.<span class="en b">Just a support: what matters is saying it aloud.</span></p>
+<p><button type="button" class="act alt" id="sv">Guardar notas</button><span class="sv" id="svf">Guardado ✓</span></p></section>
+</main>
+<footer><span>Clase 19 · ¿Y si quedamos el sábado?</span><span>Próxima clase → Clase 20</span></footer>
+
+<div class="cm" id="cm" role="toolbar" aria-label="Caracteres especiales" hidden></div>
+<script>
+const $=id=>document.getElementById(id),RM=matchMedia('(prefers-reduced-motion:reduce)').matches;
+const E=(t,b)=>t?`<span class="en${b?' b':''}"> ${t}</span>`:'';
+const sh=a=>{const r=[...a];for(let i=r.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[r[i],r[j]]=[r[j],r[i]]}return r};
+const ld=k=>{try{return localStorage.getItem(k)}catch(e){return null}},sv=(k,v)=>{try{localStorage.setItem(k,v)}catch(e){}};
+const restart=(el,c)=>{el.classList.remove(c);void el.offsetWidth;el.classList.add(c)};
+function confetti(el){if(RM||!el)return;const r=el.getBoundingClientRect(),w=document.createElement('div');w.className='cf-wrap';w.style.left=r.left+r.width/2+'px';w.style.top=r.top+r.height/2+'px';
+ const C=['var(--b3)','var(--b1)','var(--b2)','var(--family)'];
+ for(let k=0;k<22;k++){const c=document.createElement('i'),an=-Math.PI/2+(Math.random()-.5)*2.2,d=60+Math.random()*110;c.className='cf';
+  c.style.cssText=`--c:${C[k%4]};--dx:${Math.cos(an)*d|0}px;--up:${Math.sin(an)*d|0}px;--fall:${(Math.sin(an)*d+90+Math.random()*60)|0}px;--rot:${(Math.random()*720-360)|0}deg`;w.appendChild(c)}
+ document.body.appendChild(w);setTimeout(()=>w.remove(),1600)}
+
+/* barra: índice, idioma, tema */
+const secs=[...document.querySelectorAll('main section')],toc=$('toc'),nb=$('navBtn');
+toc.innerHTML=secs.map(s=>{const h=s.querySelector('h2');return `<a href="#${s.id}"><b>${h.querySelector('.num').textContent}</b>${h.children[1].firstChild.textContent}</a>`}).join('');
+nb.onclick=()=>{toc.hidden=!toc.hidden;nb.setAttribute('aria-expanded',String(!toc.hidden))};
+toc.onclick=e=>{if(e.target.closest('a')){toc.hidden=true;nb.setAttribute('aria-expanded','false')}};
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!toc.hidden){toc.hidden=true;nb.focus()}});
+function setLang(l){document.body.dataset.lang=l;document.querySelectorAll('#lang button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.lang===l)));sv('clase-lang-v2',l)}
+document.querySelectorAll('#lang button').forEach(b=>b.onclick=()=>setLang(b.dataset.lang));setLang(ld('clase-lang-v2')==='es'?'es':'es-en');
+const tb=$('themeBtn');function setTheme(d){document.documentElement.dataset.theme=d?'dark':'light';tb.setAttribute('aria-pressed',String(d));tb.textContent=d?'Modo claro':'Modo oscuro';sv('clase19-theme',d?'d':'l')}
+tb.onclick=()=>setTheme(tb.getAttribute('aria-pressed')!=='true');setTheme(ld('clase19-theme')==='d');
+
+/* animaciones al entrar */
+document.querySelectorAll('.anim').forEach(a=>{
+ const run=()=>{a.classList.remove('play');void a.offsetWidth;a.classList.add('play')};
+ a.querySelector('.re').onclick=run;
+ if(RM)return;a.classList.add('ready');
+ new IntersectionObserver((es,o)=>es.forEach(e=>{if(e.isIntersecting){run();o.unobserve(a)}}),{threshold:.6}).observe(a)});
+if(!RM&&'IntersectionObserver' in window){
+ const io=new IntersectionObserver((es,o)=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('fx-num');o.unobserve(e.target)}}),{threshold:.05});secs.forEach(s=>io.observe(s));
+ const io2=new IntersectionObserver((es,o)=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('fx-show');o.unobserve(e.target)}}),{threshold:.1});
+ document.querySelectorAll('ol.ex,.forms').forEach(c=>{[...c.children].forEach((k,i)=>k.style.setProperty('--i',Math.min(i,10)));c.classList.add('fx-hide');io2.observe(c)})}
+/* parallax suave y foco de sección */
+if(!RM){const orbs=[...document.querySelectorAll('.plx i')];let t=0;
+ const run=()=>{t=0;const y=scrollY,vh=innerHeight,c=vh/2;orbs.forEach((o,i)=>o.style.transform=`translate3d(${Math.sin(y/600+i*1.7)*innerWidth*.06|0}px,${-y*(.2+i*.15)|0}px,0)`);
+  secs.forEach(s=>{const r=s.getBoundingClientRect(),d=r.top>c?r.top-c:r.bottom<c?c-r.bottom:0;s.style.setProperty('--a',(Math.round(Math.max(0,1-d/(vh*.5))*20)/20))})};
+ addEventListener('scroll',()=>{if(!t)t=requestAnimationFrame(run)},{passive:true});run()}
+
+/* tarjetas */
+const CARDS=[["quedar con amigos","Quedo con mis amigos los sábados.","I meet up with my friends on Saturdays."],["¿Te apetece…?","¿Te apetece ir al cine?","Do you fancy going to the cinema?"],["¿Qué tal si…?","¿Qué tal si cenamos pizza?","How about we have pizza?"],["me apunto","¡Me apunto al fútbol!","Count me in for football!"],["no me va bien","El sábado no me va bien.","Saturday doesn't suit me."],["poner una excusa","No pongas excusas, ¡ven!","Don't make excuses, come!"],["cambiar de plan","Cambiamos de plan: cine.","We're changing plans: cinema."],["a última hora","Siempre cambia el plan a última hora.","He always changes the plan at the last minute."],["dejarlo para otro día","Lo dejamos para otro día.","Let's leave it for another day."],["es que…","Es que tengo un examen.","It's just that I have an exam."],["estar libre","¿Estás libre el sábado?","Are you free on Saturday?"],["ponerse de acuerdo","Tenemos que ponernos de acuerdo.","We have to agree."]];
+$('fcs').innerHTML=CARDS.map(c=>`<button type="button" class="fc" aria-pressed="false"><span class="f">${c[0]}</span><span class="bk">${c[1]}<i class="en">${c[2]}</i></span></button>`).join('');
+$('fcs').onclick=e=>{const f=e.target.closest('.fc');if(f){f.classList.toggle('on');f.setAttribute('aria-pressed',f.classList.contains('on'))}};
+
+/* menú de caracteres: aparece al enfocar un campo y con clic derecho */
+const cm=$('cm'),CH=['á','é','í','ó','ú','ü','ñ','¿','?','¡','!'];let cmT=null,cmUp=false,cmMode='el';
+const isFld=el=>el&&el.matches&&el.matches('input[type="text"],textarea');
+function cmDraw(){cm.innerHTML=CH.map(c=>{const v=cmUp?c.toUpperCase():c;return `<button type="button" tabindex="-1" data-c="${v}" aria-label="Insertar ${v}">${v}</button>`}).join('')+`<button type="button" tabindex="-1" class="sh" aria-pressed="${cmUp}" aria-label="Mayúsculas">⇧</button>`}
+function cmPlace(x,y){cm.style.left='0px';cm.style.top='0px';cm.hidden=false;const w=cm.offsetWidth,h=cm.offsetHeight,vw=innerWidth,vh=innerHeight;
+ cm.style.left=Math.max(8,Math.min(x,vw-w-8))+'px';cm.style.top=Math.max(8,Math.min(y,vh-h-8))+'px'}
+function cmAnchor(el){const r=el.getBoundingClientRect();cm.hidden=false;const h=cm.offsetHeight,vh=(window.visualViewport?visualViewport.height:innerHeight);
+ /* debajo de la caja; solo arriba si no cabe debajo */
+ cmPlace(r.left,r.bottom+6+h<=vh-8?r.bottom+6:Math.max(8,r.top-h-6))}
+function cmShow(el){cmT=el;cmMode='el';cmDraw();cm.hidden=false;cmAnchor(el)}
+function cmHide(){cm.hidden=true;cmT=null}
+document.addEventListener('focusin',e=>{if(isFld(e.target)&&!e.target.disabled)cmShow(e.target);else if(!cm.contains(e.target))cmHide()});
+document.addEventListener('focusout',e=>{if(isFld(e.target)&&!(e.relatedTarget&&cm.contains(e.relatedTarget)))cmHide()});
+document.addEventListener('contextmenu',e=>{const f=e.target;if(!isFld(f)||f.disabled)return;e.preventDefault();f.focus();cmT=f;cmMode='el';cmDraw();cmAnchor(f)});
+addEventListener('scroll',()=>{if(cm.hidden||!cmT)return;if(cmMode==='el')cmAnchor(cmT);else cmHide()},{passive:true,capture:true});
+addEventListener('resize',()=>{if(!cm.hidden&&cmT&&cmMode==='el')cmAnchor(cmT)});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!cm.hidden)cmHide()});
+['mousedown','pointerdown'].forEach(t=>cm.addEventListener(t,e=>e.preventDefault()));
+cm.addEventListener('click',e=>{const b=e.target.closest('button');if(!b||!cmT)return;
+ if(b.classList.contains('sh')){cmUp=!cmUp;cmDraw();return}
+ const f=cmT,c=b.dataset.c;f.focus();f.setRangeText(c,f.selectionStart,f.selectionEnd,'end');f.dispatchEvent(new Event('input',{bubbles:true}));
+ if(cmUp&&/[a-zñü]/i.test(c)){cmUp=false;cmDraw()}});
+
+/* ejercicios · feedback instantáneo por frase · dos intentos y luego se revela */
+const nz=t=>t.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/\s+/g,' ').trim();
+/* A: [frase, [correcta, x, y], inglés, por qué] */
+const EXA=[["¿Y si ___ el sábado a las ocho?",["quedamos","quedemos","quedaríamos"],"What if we meet on Saturday at eight?","«¿Y si…?» + indicativo."],
+["___ ir al cine, ¿qué te parece?",["Podríamos","Podemos","Podamos"],"We could go to the cinema, what do you think?","Condicional = propuesta suave."],
+["Prefiero que ___ al fútbol el domingo.",["vayamos","vamos","iríamos"],"I'd rather we go to the football on Sunday.","Prefiero que + subjuntivo (ir → vayamos)."],
+["Me gustaría ___ pizza en mi casa.",["hacer","hago","haga"],"I'd like to make pizza at my place.","Mismo sujeto: me gustaría + infinitivo."],
+["Quiero que ___ tú también, Andrei.",["vengas","vienes","venías"],"I want you to come too, Andrei.","Quiero que + subjuntivo (venir → vengas)."],
+["Es mejor que ___ pronto: hay mucha gente.",["lleguemos","llegamos","llegaríamos"],"It's better that we arrive early: it's busy.","Es mejor que + subjuntivo (-ar → -emos)."],
+["Lo siento, es que no ___ el sábado.",["puedo","pueda","podría"],"Sorry, I just can't on Saturday.","«Es que…» + indicativo."],
+["Ojalá ___ buen tiempo el sábado.",["haga","hace","hará"],"I hope the weather's good on Saturday.","Ojalá + subjuntivo (hacer → haga)."],
+["¿Te apetece ___ al cine?",["ir","vas","vayas"],"Do you fancy going to the cinema?","¿Te apetece + infinitivo?"],
+["Preferiría ___ en casa esta noche.",["quedarme","me quedo","me quede"],"I'd prefer to stay home tonight.","Mismo sujeto: preferiría + infinitivo."],
+["Es mejor que lo ___ para el domingo.",["dejemos","dejamos","dejaríamos"],"It's better that we leave it for Sunday.","Es mejor que + subjuntivo."],
+["Quiero que ___ nosotros la pizza.",["pidamos","pedimos","pedíamos"],"I want us to order the pizza.","pedir → pidamos."],
+["Me apunto, pero prefiero que ___ pronto a casa.",["volvamos","volvemos","volveríamos"],"Count me in, but I'd rather we get home early.","volver → volvamos."],
+["¿Quieres que ___ yo el cine?",["elija","elijo","elegiría"],"Do you want me to choose the cinema?","elegir → elija."],
+["Quiero que ___ tú la hora, Andrei.",["decidas","decides","decidirías"],"I want you to decide the time, Andrei.","Quiero que + subjuntivo (decidir → decidas)."]];
+/* B: [frase, (verbo), respuesta, inglés, por qué] */
+const EXB=[["Prefiero que ___ el domingo.","quedar · nosotros","quedemos","I'd rather we meet on Sunday.","Prefiero que + subjuntivo (-ar → -emos)."],
+["Quiero que ___ con nosotros.","venir · tú","vengas","I want you to come with us.","Quiero que + subjuntivo (venir → vengas)."],
+["Es mejor que ___ pronto.","llegar · nosotros","lleguemos","It's better that we arrive early.","llegar → lleguemos (g → gu delante de e)."],
+["Ojalá ___ sol el sábado.","hacer","haga","I hope it's sunny on Saturday.","Ojalá + subjuntivo (hacer → haga)."],
+["¿Quieres que ___ yo la pizza?","pedir · yo","pida","Do you want me to order the pizza?","pedir → pida (e → i)."],
+["Prefiero que ___ en metro.","ir · nosotros","vayamos","I'd rather we go by metro.","ir → vayamos."],
+["Quiero que Marta ___ la película.","elegir","elija","I want Marta to choose the film.","elegir → elija."],
+["Es mejor que ___ antes de las doce.","volver · nosotros","volvamos","It's better that we get back before twelve.","volver → volvamos."],
+["Ojalá ___ venir el sábado.","poder · tú","puedas","I hope you can come on Saturday.","Ojalá + subjuntivo (poder → puedas)."],
+["Prefiero que ___ después del cine.","cenar · nosotros","cenemos","I'd rather we have dinner after the cinema.","cenar → cenemos."],
+["¿Y si ___ un partido por la mañana?","jugar · nosotros","jugamos","What if we play a match in the morning?","«¿Y si…?» + indicativo (jugamos)."],
+["Quiero que ___ las bebidas.","traer · vosotros","traigáis","I want you to bring the drinks.","traer → traigáis."],
+["Es mejor que Iker ___ la hora.","decidir","decida","It's better that Iker decides the time.","decidir → decida."],
+["Ojalá no ___ el sábado.","llover","llueva","I hope it doesn't rain on Saturday.","llover → llueva (o → ue)."],
+["___ quedar el domingo, ¿qué te parece?","poder · nosotros","Podríamos","We could meet on Sunday, what do you think?","Condicional = propuesta suave."]];
+/* C: [situación, [mejor respuesta, x, y], inglés, por qué] */
+const EXC=[["Quieres proponer ir al cine el sábado.",["¿Y si vamos al cine el sábado?","Tienes que venir al cine el sábado.","Cine el sábado. Vienes."],"You want to suggest going to the cinema on Saturday.","Suave y con pregunta: «¿Y si…?» + indicativo."],
+["Alguien propone fútbol, pero tú prefieres cine y quieres ser amable.",["Me gustaría, pero prefiero que vayamos al cine.","El fútbol es muy aburrido.","Prefiero que vamos al cine."],"Someone suggests football, but you prefer cinema and want to be kind.","Cordial + prefiero que + subjuntivo (ir → vayamos)."],
+["No puedes quedar el sábado.",["Es que el sábado no me va bien. ¿Y si quedamos el domingo?","No puedo.","No quiero quedar el sábado."],"You can't meet on Saturday.","Excusa suave + alternativa."],
+["Quieres que un amigo venga a tu casa.",["Quiero que vengas, ¿vale?","Quiero que vienes, ¿vale?","Tienes que venir."],"You want a friend to come to your place.","Quiero que + subjuntivo (venir → vengas)."],
+["Quieres cambiar la hora de quedar.",["¿Qué tal si quedamos a las ocho?","Quedamos a las ocho y punto.","Es mejor que quedamos a las ocho."],"You want to change the meeting time.","«¿Qué tal si…?» + indicativo, y deja hablar al otro."],
+["Un amigo siempre avisa a última hora. Te molesta, pero quieres ser cordial.",["Prefiero que avises antes, ¿vale?","Siempre igual, qué rollo.","Prefiero que avisas antes."],"A friend always tells you at the last minute. It bugs you, but you want to be friendly.","Prefiero que + subjuntivo (avisar → avises)."],
+["Aceptas un plan, pero con una condición.",["Me apunto, pero prefiero que volvamos pronto.","Me apunto, pero prefiero volvamos pronto.","Vale, lo que queráis."],"You accept a plan, but with a condition.","Aceptar y matizar: «Me apunto, pero prefiero que…»."],
+["Quieres posponer el plan.",["Es mejor que lo dejemos para otro día.","Es mejor que lo dejamos para otro día.","Olvídalo."],"You want to postpone the plan.","Es mejor que + subjuntivo (dejar → dejemos)."],
+["Te invitan a cenar y esta noche prefieres quedarte en casa.",["Gracias, pero es que hoy prefiero quedarme en casa.","No me apetece nada.","Gracias, pero prefiero que me quede en casa."],"You're invited to dinner and you'd rather stay in tonight.","Mismo sujeto: preferir + infinitivo."],
+["Quieres saber si tu amiga tiene el sábado libre.",["¿Estás libre el sábado?","¿Eres libre el sábado?","¿Libre sábado?"],"You want to know if your friend is free on Saturday.","Estar libre = disponible."],
+["Deseas buen tiempo para el sábado.",["Ojalá haga buen tiempo.","Ojalá hace buen tiempo.","Ojalá hará buen tiempo."],"You hope for good weather on Saturday.","Ojalá + subjuntivo (hacer → haga)."],
+["Ofreces reservar mesa para el grupo.",["¿Quieres que reserve yo la mesa?","¿Quieres que reservo yo la mesa?","¿Quieres reserve yo la mesa?"],"You offer to book a table for the group.","¿Quieres que + subjuntivo? (reservar → reserve)."],
+["Dos amigos quieren cosas distintas y propones combinarlas.",["Podríamos jugar por la mañana y ver la peli por la tarde.","Eso es imposible, elegid solo uno.","Podamos jugar por la mañana y ver la peli por la tarde."],"Two friends want different things and you suggest combining them.","Podríamos + infinitivo = propuesta suave."],
+["Te piden que decidas tú, pero prefieres que decidan ellos.",["Prefiero que decidáis vosotros; a mí me da igual.","Prefiero que decidís vosotros.","Decidid vosotros y no me molestéis."],"They ask you to decide, but you'd rather they decide.","decidir → decidáis (vosotros)."],
+["El grupo se ha puesto de acuerdo y tú confirmas la hora.",["Perfecto, entonces quedamos a las doce.","Ya veremos, quizás a las doce.","Quedo a las doce y vosotros veréis."],"The group has agreed and you confirm the time.","Confirmar con indicativo y hora clara."]];
+
+function mount(id,raw,kind,splits){
+ const ol=$(id),sc=$(id+'sc');
+ const I=raw.map(x=>kind==='ty'?{q:x[0],hint:x[1],ans:x[2],en:x[3],why:x[4]}:{q:x[0],o:x[1],ans:x[1][0],en:x[2],why:x[3]});
+ let st=[];
+ const upd=()=>{const d=st.filter(s=>s.d).length,ok=st.filter(s=>s.ok).length,f=st.filter(s=>s.f).length;
+  sc.textContent=d?`${d} / ${I.length} hechas · ${ok} correctas · ${f} a la primera`:`${I.length} frases · 2 intentos por frase`;
+  if(d===I.length&&ok===I.length)confetti(sc)};
+ function draw(){
+  cmHide();st=I.map(()=>({t:0,d:false,ok:false,f:false}));
+  ol.innerHTML=I.map((x,i)=>`<li data-i="${i}"><span>${x.q.replace('___','<b class="v">___</b>')}${x.hint?`<span class="hint">(${x.hint})</span>`:''}</span>${E(x.en,1)}`+
+   (kind==='ty'?`<div class="ty"><input type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" aria-label="Respuesta ${i+1}"><button type="button" class="act">Comprobar</button></div>`
+    :`<div class="op${kind==='sit'?' long':''}">${sh(x.o).map(o=>`<button type="button">${o}</button>`).join('')}</div>`)+
+   `<span class="sol" role="status" hidden></span></li>`).join('');
+  const L=[...ol.children];splits.forEach(p=>L[p[0]].insertAdjacentHTML('beforebegin',`<div class="div${p[2]?' cl':''}">${p[1]}</div>`));
+  upd()}
+ function judge(li,i,good,given){
+  const x=I[i],s=st[i],m=li.querySelector('.sol');s.t++;
+  let msg,tip=false;
+  if(good){s.d=s.ok=true;s.f=s.t===1;tip=true;msg=`✓ ${s.t===1?'¡Correcto!':'¡Bien, a la segunda!'} ${x.why}`;
+   if(kind==='ty'&&given.trim().toLowerCase()!==x.ans.toLowerCase())msg+=` (Ojo con la tilde: «${x.ans}»).`}
+  else if(s.t>=2){s.d=true;msg=`✗ La respuesta correcta es «${x.ans}». ${x.why}`}
+  else msg='✗ Todavía no. Te queda 1 intento.';
+  m.hidden=false;m.className='sol'+(tip?' tip':'');m.innerHTML=msg;restart(m,'sol');
+  if(s.d){cmHide();li.querySelectorAll('button,input').forEach(el=>{el.disabled=true});
+   if(kind==='ty'){li.querySelector('input').classList.add(s.ok?'ok':'bad')}
+   else li.querySelectorAll('.op button').forEach(bt=>{if(bt.textContent===x.ans)bt.classList.add('ok')})}
+  upd()}
+ ol.onclick=e=>{const li=e.target.closest('li');if(!li)return;const i=+li.dataset.i;if(st[i].d)return;
+  if(kind==='ty'){if(!e.target.closest('.ty button'))return;typed(li,i)}
+  else{const b=e.target.closest('.op button');if(!b||b.disabled)return;const good=b.textContent===I[i].ans;
+   if(!good){b.classList.add('bad');b.disabled=true;restart(b,'fx-bad')}else{b.classList.add('ok');restart(b,'fx-ok')}
+   judge(li,i,good)}};
+ function typed(li,i){const inp=li.querySelector('input'),v=inp.value;if(!v.trim()){inp.focus();return}
+  const good=nz(v)===nz(I[i].ans);if(!good){restart(inp,'fx-bad')}judge(li,i,good,v);if(!st[i].d){inp.focus();inp.select()}}
+ ol.onkeydown=e=>{if(kind==='ty'&&e.key==='Enter'&&e.target.matches('.ty input')){e.preventDefault();const li=e.target.closest('li'),i=+li.dataset.i;if(!st[i].d)typed(li,i)}};
+ $(id+'rs').onclick=draw;draw()}
+mount('exA',EXA,'mc',[[0,'en clase · elige la forma correcta',1]]);
+mount('exB',EXB,'ty',[[0,'en clase · escribe el verbo',1]]);
+mount('exC',EXC,'sit',[[0,'en clase · elige tu respuesta',1]]);
+
+/* diálogo con ramas */
+const DL=[["Iker","Yo quiero ver el partido el sábado. ¿Vienes al polideportivo?","I want to watch the match on Saturday. Are you coming to the sports centre?",["Me gustaría, pero Marta quiere ir al cine. ¿Y si jugamos por la mañana?","No. Prefiero el cine.","Quizás, no sé, ya veremos…"],"Cordial y con propuesta nueva: ¡perfecto! Las otras son secas o vagas."],
+["Marta","Yo prefiero el cine. A las seis hay una peli buena.","I prefer the cinema. There's a good film at six.",["Podríamos ir al cine a las seis y antes jugar un rato. ¿Qué os parece?","Es imposible, el fútbol es mejor.","Vale, lo que queráis."],"Condicional + pregunta final: propones y dejas hablar al grupo."],
+["Sole","Pues yo quiero pizza en mi casa. ¡Vais a cenar conmigo!","Well, I want pizza at my place. You're all having dinner with me!",["Me apunto, pero prefiero que cenemos después del cine.","No me apetece, es que la pizza siempre es lo mismo.","Cenemos ya y se acabó."],"«Me apunto, pero prefiero que…» = aceptar y matizar."],
+["Iker","Entonces, ¿a qué hora quedamos todos?","So what time do we all meet?",["Es mejor que quedemos a las cuatro en el polideportivo.","Quedáis vosotros y yo voy luego.","Da igual, cuando queráis."],"Firme y claro: es mejor que + subjuntivo."]];
+let dt=0;const dl=$('dl'),op=$('opts'),mk=(c,n,t,e)=>`<div class="ln ${c}"><div class="av">${c==='me'?'Tú':n[0]}</div><div><p class="nm">${n}</p><div class="bub">${t}${E(e)}</div></div></div>`;
+function turn(){if(dt>=DL.length){op.innerHTML='';dl.insertAdjacentHTML('beforeend','<div class="box" style="margin:0">¡Plan cerrado! Fútbol por la mañana, cine a las seis, pizza después. 🎉</div>');confetti(op);return}
+ const d=DL[dt];dl.insertAdjacentHTML('beforeend',mk('fr',d[0],d[1],d[2]));
+ op.innerHTML=sh(d[3].map((t,i)=>[t,i])).map(o=>`<button type="button" data-ok="${o[1]===0}">${o[0]}</button>`).join('');}
+op.onclick=e=>{const b=e.target.closest('button');if(!b||b.disabled)return;const d=DL[dt];
+ if(b.dataset.ok==='true'){dl.insertAdjacentHTML('beforeend',mk('me','Tú',b.textContent));dt++;turn()}
+ else{b.classList.add('bad');b.disabled=true;restart(b,'fx-bad');if(!op.querySelector('.sol'))op.insertAdjacentHTML('beforeend',`<span class="sol">✗ ${d[4]}</span>`)}};
+$('dre').onclick=()=>{dt=0;dl.innerHTML='';turn()};turn();
+const CK=["¿Y si quedamos…?","Podríamos + infinitivo","Me gustaría + infinitivo","Prefiero que + subjuntivo","Es mejor que + subjuntivo","Es que… (excusa)","Me apunto"];
+$('ck').innerHTML=CK.map(c=>`<label class="ck"><input type="checkbox"> ${c}</label>`).join('');
+$('ck').onchange=e=>{const all=[...$('ck').querySelectorAll('input')];if(all.every(x=>x.checked))confetti(e.target)};
+
+/* tarea: notas */
+const KEY='andrei-clase19-tarea',na=$('notes');
+(async()=>{try{if(window.storage){const r=await window.storage.get(KEY);if(r&&typeof r.value==='string'){na.value=r.value;return}}}catch(e){}const v=ld(KEY);if(v)na.value=v})();
+$('sv').onclick=async()=>{let ok=false;try{if(window.storage)ok=!!await window.storage.set(KEY,na.value)}catch(e){}if(!ok){sv(KEY,na.value);ok=true}
+ const f=$('svf');f.textContent=ok?'Guardado ✓':'No se pudo guardar';f.classList.add('show');setTimeout(()=>f.classList.remove('show'),1800)};
+</script>
+<script>
+/* explica a diez personas: marcar y sortear */
+(function(){
+var RM=matchMedia('(prefers-reduced-motion:reduce)').matches;
+function ld(k){try{return localStorage.getItem(k)}catch(e){return null}}
+function sv(k,v){try{localStorage.setItem(k,v)}catch(e){}}
+document.querySelectorAll('.ppl').forEach(function(box){
+  var key='andrei-pp-'+box.getAttribute('data-k'),items=[].slice.call(box.querySelectorAll('.ppl-i')),sc=box.querySelector('.ppl-sc'),saved={};
+  try{saved=JSON.parse(ld(key)||'{}')||{}}catch(e){saved={}}
+  items.forEach(function(li,i){li.querySelector('input').checked=!!saved[i]});
+  function upd(){var n=0,o={};items.forEach(function(li,i){var c=li.querySelector('input').checked;li.classList.toggle('done',c);if(c){n++;o[i]=1}});
+    sc.textContent=n+' / '+items.length+' ✓';sv(key,JSON.stringify(o))}
+  box.addEventListener('change',function(e){if(e.target.closest('.ppl-i'))e.target.closest('.ppl-i').classList.remove('pick');upd()});
+  box.querySelector('.ppl-rnd').onclick=function(){
+    var left=items.filter(function(li){return !li.querySelector('input').checked});
+    items.forEach(function(li){li.classList.remove('pick')});
+    if(!left.length){sc.textContent='¡Las diez hechas! ✓';return}
+    var li=left[Math.floor(Math.random()*left.length)];li.classList.add('pick');
+    li.scrollIntoView({block:'center',behavior:RM?'auto':'smooth'})};
+  box.querySelector('.ppl-rs').onclick=function(){items.forEach(function(li){li.querySelector('input').checked=false;li.classList.remove('pick')});upd()};
+  upd();
+});
+})();
+</script>
+</body>
+</html>

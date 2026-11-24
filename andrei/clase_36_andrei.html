@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Clase 36 · Cuando termine… — Andrei</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* clase */
+:root{
+  --paper:#FBF7EE;--paper-top:#F6EEDA;--paper-raised:#FFFFFF;--paper-alt:#F3ECDA;
+  --ink:#23291F;--ink-soft:#565F52;--ink-faint:#6E7568;
+  --line:rgba(35,41,31,.12);--line-strong:rgba(35,41,31,.22);
+  --b1:#2F6FED;--b1-soft:#EAF1FE;--b1-line:#C6D9FC;
+  --b2:#2E9E6B;--b2-soft:#E9F6EF;--b2-line:#BEE6D3;
+  --b3:#DB8A2E;--b3-soft:#FCF1E1;--b3-line:#F3D9AF;
+  --family:#B5502E;--family-soft:#FBEBE3;--family-line:#EFC9B4;
+  --f-display:'Fraunces',Georgia,serif;--f-body:'IBM Plex Sans',system-ui,sans-serif;--f-data:'IBM Plex Mono',monospace;
+  --r-sm:12px;--r-md:18px;--r-lg:26px;
+  --shadow-1:0 1px 2px rgba(35,41,31,.05),0 10px 28px rgba(35,41,31,.07);
+  color-scheme:light}
+:root[data-theme="dark"]{
+  --paper:#171912;--paper-top:#22251A;--paper-raised:#22251B;--paper-alt:#2B2F22;
+  --ink:#F1EDE0;--ink-soft:#C3C7B8;--ink-faint:#9CA190;
+  --line:rgba(241,237,224,.14);--line-strong:rgba(241,237,224,.28);
+  --b1-soft:#1D2A44;--b1-line:#2F4B82;--b2-soft:#1B3328;--b2-line:#2B6A4C;--b3-soft:#3A2D18;--b3-line:#7A5524;--family-soft:#3A2219;--family-line:#7A3F29;
+  --shadow-1:0 1px 2px rgba(0,0,0,.45),0 10px 28px rgba(0,0,0,.35);color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-padding-top:calc(70px + env(safe-area-inset-top,0px))}
+body{margin:0;background:linear-gradient(180deg,var(--paper-top) 0,var(--paper) 460px) fixed,var(--paper);color:var(--ink);font:15px/1.6 var(--f-body);padding-bottom:env(safe-area-inset-bottom,0px)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--paper);z-index:10}
+::selection{background:var(--b3-soft)}
+:focus-visible{outline:2px solid var(--b3);outline-offset:2px}
+.skip{position:absolute;left:-999px}.skip:focus{left:12px;top:12px;z-index:20;background:var(--paper-raised);padding:8px 14px;border-radius:99px}
+.sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.plx{position:fixed;inset:-20vh 0;z-index:-1;pointer-events:none;overflow:hidden}
+.plx i{position:absolute;border-radius:50%;filter:blur(60px);opacity:.45;will-change:transform}
+.plx i:nth-child(1){width:46vmax;height:46vmax;left:-14vmax;top:4vh;background:radial-gradient(circle,color-mix(in srgb,var(--b3) 40%,transparent),transparent 70%)}
+.plx i:nth-child(2){width:38vmax;height:38vmax;right:-12vmax;top:70vh;background:radial-gradient(circle,color-mix(in srgb,var(--b1) 30%,transparent),transparent 70%)}
+.wrap{max-width:780px;margin:0 auto;padding:0 clamp(16px,4vw,28px) 90px}
+header .wrap{padding-top:34px;padding-bottom:0}
+.eyebrow{font:500 12px var(--f-data);letter-spacing:.14em;text-transform:uppercase;color:var(--b3);margin:0 0 10px;display:flex;align-items:center;gap:10px}
+.eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--b3)}
+h1{font:600 clamp(30px,5.6vw,48px)/1.08 var(--f-display);letter-spacing:-.02em;margin:0 0 14px;text-wrap:balance}
+h1 em{font-style:italic;background:linear-gradient(90deg,var(--b3) 20%,var(--family));-webkit-background-clip:text;background-clip:text;color:transparent}
+.lede{font-size:16px;color:var(--ink-soft);max-width:58ch;margin:0}
+.meta-row{display:flex;flex-wrap:wrap;gap:20px;margin-top:22px;font:12px var(--f-data);color:var(--ink-faint)}
+.meta-row strong{display:block;color:var(--ink);font:500 14.5px var(--f-display);margin-top:3px}
+.en{color:var(--ink-faint);font-size:.88em;font-style:italic;font-weight:400;text-transform:none;letter-spacing:0}
+.en.b{display:block;margin-top:2px}
+body[data-lang="es"] .en{display:none!important}
+h1 .en{display:block;font:italic 400 clamp(15px,2.6vw,19px)/1.35 var(--f-body);margin-top:8px}
+/* barra */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:11;background:color-mix(in srgb,var(--paper) 82%,transparent);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);padding-block:10px;margin-block:24px 4px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.nav-btn{width:36px;height:36px;display:grid;place-items:center;border:1px solid var(--line-strong);border-radius:50%;background:var(--paper-raised);color:var(--ink-soft);cursor:pointer;padding:0}
+.nav-btn:hover,.nav-btn[aria-expanded=true]{border-color:var(--b3);color:var(--b3)}
+.nav-btn path{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round}
+.toc{position:absolute;top:calc(100% + 8px);left:0;width:min(380px,100%);padding:8px;border:1px solid var(--line-strong);border-radius:var(--r-md);background:var(--paper-raised);box-shadow:var(--shadow-1)}
+.toc[hidden]{display:none}
+.toc a{display:flex;gap:12px;align-items:center;min-height:42px;padding:6px 10px;border-radius:var(--r-sm);color:var(--ink);text-decoration:none;font:500 14.5px var(--f-display)}
+.toc a:hover{background:var(--b3-soft)}
+.toc a b{font:500 12px var(--f-data);color:#fff;background:var(--b3);width:24px;height:24px;border-radius:50%;display:grid;place-items:center;flex:none}
+.bar-t{font:600 13px var(--f-display);color:var(--ink-soft);margin-right:auto}
+.seg{display:inline-flex;gap:3px;padding:3px;border:1px solid var(--line-strong);border-radius:99px;background:var(--paper-raised)}
+.seg button{border:0;background:none;padding:5px 13px;border-radius:99px;font:12px var(--f-data);color:var(--ink-soft);cursor:pointer;min-height:30px}
+.seg button[aria-pressed=true]{background:var(--b3);color:#fff;box-shadow:0 6px 16px color-mix(in srgb,var(--b3) 30%,transparent)}
+.btn{font:600 13px var(--f-body);background:var(--paper-raised);color:var(--ink-soft);border:1px solid var(--line-strong);border-radius:99px;padding:7px 15px;cursor:pointer}
+.btn:hover{border-color:var(--b3);color:var(--b3)}
+@media(max-width:600px){.bar-t{display:none}}
+/* secciones */
+section{background:var(--paper-raised);border:1px solid var(--line);border-radius:var(--r-lg);box-shadow:var(--shadow-1);margin-top:18px;padding:24px 26px 28px;scroll-margin-top:84px;position:relative;opacity:calc(.74 + .26*var(--a,1))}
+section.rp{background:var(--b1-soft);border-color:var(--b1-line)}section.rp .num{background:var(--b1)}
+section.tk{background:var(--family-soft);border-color:var(--family-line)}section.tk .num{background:var(--family)}
+h2{font:italic 500 22px/1.2 var(--f-display);margin:0 0 6px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+h2 .en{font:400 .6em var(--f-body);font-style:italic}
+h3{font:500 17px var(--f-display);margin:20px 0 6px}
+.num{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;flex:none;font:500 13px var(--f-data);background:var(--b3);color:#fff;font-style:normal}
+section.fx-num .num{animation:fxNum .65s cubic-bezier(.2,.9,.3,1.4) both}
+@keyframes fxNum{0%{transform:scale(.2) rotate(-90deg);opacity:0}100%{transform:none;opacity:1}}
+.cue{margin-left:auto;font:11px var(--f-data);color:var(--ink-faint);background:var(--paper-alt);border-radius:99px;padding:2px 10px;font-style:normal}
+.sub{color:var(--ink-soft);margin:0 0 12px;font-size:14.5px}
+.box{margin:14px 0 0;padding:13px 16px;background:var(--b3-soft);border:1px solid var(--b3-line);border-radius:var(--r-md);font-size:14.5px;color:var(--ink-soft)}
+.box strong,.box b{color:var(--ink)}
+.box.pr{background:var(--paper-alt);border-color:var(--line)}
+.box.wr{background:var(--family-soft);border-color:var(--family-line)}.box.wr b{color:var(--family)}
+ol.ex{padding:0;margin:8px 0 0;list-style:none;counter-reset:q}
+ol.ex>li{counter-increment:q;padding:11px 0;border-top:1px solid var(--line)}
+ol.ex>li::before{content:counter(q)".";font:12px var(--f-data);color:var(--ink-faint);margin-right:8px}
+.v{color:var(--b3);font-weight:600;text-decoration:underline;text-decoration-color:var(--b3-line);text-decoration-thickness:2px;text-underline-offset:3px}
+.div{display:flex;align-items:center;gap:10px;margin:16px 0 4px;font:11px var(--f-data);text-transform:uppercase;letter-spacing:.06em;color:var(--ink-faint)}
+.div::before,.div::after{content:"";flex:1;height:1px;background:var(--line)}
+.div.cl{color:var(--b3)}.div.cl::before,.div.cl::after{background:var(--b3-line)}
+/* animación de peldaños */
+.anim{border:1px solid var(--line);border-radius:var(--r-md);background:var(--paper-alt);padding:16px 18px 10px;margin:14px 0}
+.anim .lab{font:11px var(--f-data);text-transform:uppercase;letter-spacing:.08em;color:var(--ink-faint);margin:0 0 8px}
+.step{display:flex;align-items:center;gap:10px;margin:6px 0;flex-wrap:wrap}
+.step .t2{font:11px var(--f-data);color:var(--ink-faint);width:92px;flex:none}
+.chip{display:inline-block;padding:7px 15px;border-radius:14px;background:var(--paper-raised);border:2px solid var(--line-strong);font:600 16px var(--f-display)}
+.chip.c1{border-color:var(--b3-line)}.chip.c2{border-color:var(--b3);color:var(--b3)}.chip.c3{border-color:var(--b1);color:var(--b1)}.chip.x{border-color:var(--family);color:var(--family);border-style:dashed}
+.anim.ready:not(.play) .t{opacity:0}
+.anim.play .t{animation:aPop .55s cubic-bezier(.2,.8,.3,1) var(--d,0s) both}
+@keyframes aPop{0%{opacity:0;transform:translateY(10px) scale(.7)}60%{opacity:1;transform:translateY(-3px) scale(1.05)}100%{opacity:1;transform:none}}
+.anim-foot{display:flex;justify-content:flex-end;margin-top:6px}
+.re{border:1px solid var(--line-strong);background:var(--paper-raised);border-radius:99px;padding:3px 12px;font:11.5px var(--f-data);color:var(--ink-soft);cursor:pointer}
+.re:hover{color:var(--b3);border-color:var(--b3-line)}
+.forms{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-top:12px}
+.forms div{background:var(--paper-raised);border:1px solid var(--b3-line);border-radius:var(--r-md);padding:10px 12px;text-align:center}
+.forms small{display:block;font:11px var(--f-data);color:var(--ink-faint);text-transform:uppercase}
+.forms b{font:600 18px var(--f-display);color:var(--b3)}
+.say{margin:7px 0;font-size:15.5px}
+.say .tag{font:11px var(--f-data);padding:1px 8px;border-radius:99px;margin-right:8px;color:#fff}
+.say .tag.k{background:var(--family)}.say .tag.o{background:var(--b2)}
+/* tarjetas */
+.fcs{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin:14px 0 0;perspective:900px}
+.fc{position:relative;min-height:118px;border:0;background:none;padding:0;cursor:pointer;transform-style:preserve-3d;transition:transform .5s cubic-bezier(.2,.8,.3,1);color:var(--ink)}
+.fc.on{transform:rotateY(180deg)}
+.fc>span{position:absolute;inset:0;display:grid;place-items:center;padding:10px 14px;border-radius:var(--r-md);backface-visibility:hidden;-webkit-backface-visibility:hidden;text-align:center;border:1px solid var(--line)}
+.fc .f{background:var(--paper-alt);font:600 17px var(--f-display)}
+.fc .bk{background:var(--b3-soft);border-color:var(--b3-line);transform:rotateY(180deg);font:500 14px/1.4 var(--f-body)}
+.fc .bk i{display:block;font-size:12px;color:var(--ink-faint);margin-top:4px}
+.fc:hover .f{border-color:var(--b3-line)}
+/* ejercicios */
+.op{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.op button{font:500 14px var(--f-body);border:1.5px solid var(--line-strong);background:var(--paper-raised);color:var(--ink);border-radius:99px;padding:6px 16px;cursor:pointer;transition:transform .1s,background .2s}
+.op button:hover:not(:disabled){border-color:var(--b3);transform:translateY(-1px)}
+.op button.pk{background:var(--b3-soft);border-color:var(--b3);color:var(--b3)}
+.op button.ok{background:var(--b2-soft);border-color:var(--b2);color:var(--b2)}.op button.ok::after{content:" ✓"}
+.op button.bad{background:var(--family-soft);border-color:var(--family);color:var(--family)}.op button.bad::after{content:" ✗"}
+.sol{display:block;margin:7px 0 0;padding:1px 0 1px 10px;border-left:3px solid var(--family);color:var(--family);font-size:13.5px;animation:fxSol .35s ease both}
+.sol.tip{color:var(--b2);border-color:var(--b2)}
+@keyframes fxSol{from{opacity:0;transform:translateX(-10px)}to{opacity:1;transform:none}}
+.sol[hidden]{display:none}
+.fx-ok{animation:fxOk .55s ease calc(var(--i,0)*90ms) both}.fx-bad{animation:fxBad .42s ease calc(var(--i,0)*90ms) both}
+@keyframes fxOk{35%{transform:scale(1.1);box-shadow:0 0 0 7px color-mix(in srgb,var(--b2) 30%,transparent)}}
+@keyframes fxBad{20%{transform:translateX(-7px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(3px)}}
+.fx-hide:not(.fx-show)>*{opacity:0}.fx-show>*{animation:fxUp .45s cubic-bezier(.2,.8,.3,1) calc(var(--i,0)*55ms) both}
+@keyframes fxUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.check{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-top:20px;padding-top:16px;border-top:1px dashed var(--line)}
+.act{font:600 14px var(--f-body);background:var(--b3);color:#fff;border:0;border-radius:99px;padding:10px 22px;cursor:pointer}
+.act:hover{transform:translateY(-1px)}
+.act.alt{background:none;color:var(--ink-soft);border:1.5px solid var(--line-strong)}
+.score{font:13px var(--f-data);color:var(--ink-faint)}
+/* ejercicios con intentos */
+.op button:disabled:not(.ok):not(.bad){opacity:.55;cursor:default}
+.op.long button{border-radius:var(--r-md);text-align:left;padding:8px 14px}
+.ty{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.ty input{flex:1 1 180px;min-width:0;font:500 15px var(--f-body);border:1.5px solid var(--line-strong);background:var(--paper-raised);color:var(--ink);border-radius:99px;padding:7px 16px}
+.ty input:focus{outline:none;border-color:var(--b3);box-shadow:0 0 0 4px color-mix(in srgb,var(--b3) 20%,transparent)}
+.ty input.ok{border-color:var(--b2);background:var(--b2-soft);color:var(--b2)}
+.ty input.bad{border-color:var(--family);background:var(--family-soft);color:var(--family)}
+.ty .act{padding:7px 18px;font-size:13px}
+.ty .act:disabled{opacity:.5;cursor:default;transform:none}
+.hint{font:12px var(--f-data);color:var(--ink-faint);margin-left:8px;white-space:nowrap}
+.exh{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+/* menú de caracteres */
+.cm{position:fixed;z-index:70;display:flex;flex-wrap:wrap;gap:4px;max-width:min(92vw,330px);padding:6px;background:var(--paper-raised);border:1px solid var(--line-strong);border-radius:var(--r-md);box-shadow:var(--shadow-1)}
+.cm[hidden]{display:none}
+.cm button{min-width:36px;height:36px;padding:0 8px;display:grid;place-items:center;border:1px solid var(--line);border-radius:10px;background:var(--paper-alt);color:var(--ink);font:600 17px var(--f-display);cursor:pointer;touch-action:manipulation}
+.cm button:hover{border-color:var(--b3);color:var(--b3)}
+.cm button.sh{font:600 15px var(--f-body);color:var(--ink-soft)}
+.cm button.sh[aria-pressed=true]{background:var(--b3);border-color:var(--b3);color:#fff}
+/* diálogo */
+.dl{display:flex;flex-direction:column;gap:12px;margin-top:12px}
+.ln{display:flex;gap:10px;align-items:flex-start;animation:fxUp .4s ease both}
+.av{flex:none;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font:600 14px var(--f-display);color:#fff;background:var(--ink-faint)}
+.ln.me .av{background:var(--b1)}
+.bub{background:var(--paper-raised);border:1px solid var(--line);border-radius:var(--r-md);padding:10px 14px;font-size:14.5px}
+.ln.me .bub{border-color:var(--b1-line)}
+.nm{font:11px var(--f-data);text-transform:uppercase;color:var(--ink-faint);margin:0 0 3px}
+.opts{display:grid;gap:8px;margin-top:12px}
+.opts button{text-align:left;font:500 14.5px var(--f-body);border:1.5px solid var(--b1-line);background:var(--paper-raised);color:var(--ink);border-radius:var(--r-md);padding:9px 14px;cursor:pointer}
+.opts button:hover:not(:disabled){border-color:var(--b1)}
+.opts button.bad{border-color:var(--family);background:var(--family-soft)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+.card{border:1px solid var(--b1-line);background:var(--paper-raised);border-radius:var(--r-md);padding:12px 16px;font-size:14px}
+.card h3{margin:0 0 4px;font-size:15px}
+@media(max-width:600px){.two{grid-template-columns:1fr}section{padding:18px 16px 22px}}
+textarea{width:100%;min-height:90px;border:1px solid var(--family-line);border-radius:var(--r-sm);padding:10px 12px;background:var(--paper-raised);color:var(--ink);font:inherit;margin-top:10px;transition:box-shadow .2s}
+textarea:focus{outline:none;box-shadow:0 0 0 4px color-mix(in srgb,var(--family) 20%,transparent)}
+.ck{display:block;padding:5px 0;cursor:pointer}
+.sv{font:12px var(--f-data);color:var(--b2);margin-left:10px;opacity:0;transition:opacity .3s}.sv.show{opacity:1}
+footer{max-width:780px;margin:0 auto;padding:0 clamp(16px,4vw,28px) 60px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font:12.5px var(--f-data);color:var(--ink-faint)}
+.cf-wrap{position:fixed;width:0;height:0;z-index:60;pointer-events:none}
+.cf{position:absolute;width:8px;height:12px;border-radius:2px;background:var(--c);opacity:0;animation:cfFly 1.2s cubic-bezier(.2,.7,.3,1) forwards}
+@keyframes cfFly{0%{opacity:1}45%{opacity:1;transform:translate(calc(var(--dx)*.8),var(--up)) rotate(200deg)}100%{opacity:0;transform:translate(var(--dx),var(--fall)) rotate(var(--rot))}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.plx,.cf-wrap{display:none}.fx-hide>*,.anim.ready .t{opacity:1!important}}
+@media print{.plx,.bar,body::before,.cf-wrap,.cm{display:none}section{opacity:1;box-shadow:none}}
+
+/* explica a diez personas */
+section.pp{background:var(--b2-soft);border-color:var(--b2-line)}
+.pp .num{background:var(--b2)}
+.pp-use{display:flex;flex-wrap:wrap;gap:6px 8px;align-items:center;margin:0 0 8px;font-size:13px}
+.pp-use span{background:var(--paper-raised);border:1px solid var(--b2-line);border-radius:99px;padding:2px 11px;font:12.5px var(--f-data);color:var(--ink-soft)}
+.tk .pp-use span{border-color:var(--family-line)}
+.ppl-ol{list-style:none;margin:8px 0 0;padding:0}
+.ppl-i{border-top:1px solid var(--line)}
+.ppl-i label{display:grid;grid-template-columns:22px 1fr;gap:12px;align-items:start;padding:11px 8px;cursor:pointer;border-radius:var(--r-sm)}
+.ppl-i input{width:20px;height:20px;margin:2px 0 0;accent-color:var(--b2);cursor:pointer}
+.tk .ppl-i input{accent-color:var(--family)}
+.ppl-w{display:block;font-size:12.5px;color:var(--ink-faint)}
+.ppl-w b{font-size:14px;color:var(--ink);font-weight:600}
+.ppl-t{display:block;margin-top:2px;line-height:1.5}
+.ppl-i.done .ppl-t{color:var(--ink-faint)}
+.ppl-i.pick label{background:var(--b3-soft);outline:2px solid var(--b3);outline-offset:-2px}
+.pp-hw{margin-top:24px;padding-top:4px;border-top:1px dashed var(--line-strong)}
+</style>
+</head>
+<body data-lang="es-en">
+<a class="skip" href="#main">Saltar al contenido</a>
+<div class="plx" aria-hidden="true"><i></i><i></i></div>
+<header><div class="wrap">
+  <p class="eyebrow"><span class="dot"></span>Clase 36 de 44 · L7 · When it happens · cuando + subjuntivo</p>
+  <h1>Cuando <em>termine</em>…<span class="en">When I finish…</span></h1>
+  <p class="lede">Hoy hablas del futuro con fecha y con condiciones: cuando termines el máster, en cuanto tengas tu empresa, hasta que seas el jefe. Tras estas palabras, el futuro lleva subjuntivo. Casi todo se dice en voz alta.<span class="en b">Today you talk about the future with dates and conditions: when you finish the master’s, as soon as you have your company, until you’re the boss. After these words, the future takes the subjunctive. Almost everything is said aloud.</span></p>
+  <div class="meta-row"><div>Duración<strong>50 min</strong></div><div>Construye sobre<strong>Clases 22 y 25</strong></div><div>Nivel<strong>B1+</strong></div></div>
+</div></header>
+
+<main class="wrap" id="main" tabindex="-1">
+<div class="bar" role="group" aria-label="Controles de la página">
+  <button type="button" class="nav-btn" id="navBtn" aria-label="Menú de partes" aria-expanded="false" aria-controls="toc"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><path d="M3 5.5h14M3 10h14M3 14.5h14"/></svg></button>
+  <nav class="toc" id="toc" aria-label="Partes" hidden></nav>
+  <span class="bar-t">Ir a una parte</span>
+  <div class="seg" id="lang" role="group" aria-label="Idioma"><button type="button" data-lang="es" aria-pressed="false">Español</button><button type="button" data-lang="es-en" aria-pressed="true">Español + EN</button></div>
+  <button type="button" class="btn" id="themeBtn" aria-pressed="false">Modo oscuro</button>
+</div>
+
+<section id="s0" aria-labelledby="s0-t"><h2 id="s0-t"><span class="num">0</span><span>Calentamiento oral<span class="en"> Oral warm-up</span></span><span class="cue">⏱ 4 min</span></h2>
+<p class="sub">Sin pantalla: escuchas y contestas con frases completas. Lee el profesor.<span class="en b">No screen: you listen and answer in full sentences. The teacher reads.</span></p>
+<ol class="ex"><li>¿Qué vas a hacer <span class="v">cuando termines</span> el máster?<span class="en b">What are you going to do when you finish the master’s?</span></li><li>¿Qué harás <span class="v">en cuanto tengas</span> vacaciones?<span class="en b">What will you do as soon as you have a holiday?</span></li><li>¿Qué haces normalmente <span class="v">cuando llegas</span> a casa?<span class="en b">What do you normally do when you get home?</span></li><li>¿Hasta cuándo quieres seguir estudiando español?<span class="en b">Until when do you want to keep studying Spanish?</span></li></ol></section>
+
+<section id="s1" aria-labelledby="s1-t"><h2 id="s1-t"><span class="num">1</span><span>Cuando + subjuntivo<span class="en"> Cuando + subjunctive</span></span><span class="cue">⏱ 9 min</span></h2>
+<p class="sub">Futuro → subjuntivo; hábito o pasado → indicativo. Sube peldaño a peldaño.<span class="en b">Future → subjunctive; habit or past → indicative. Climb one step at a time.</span></p>
+<div class="anim" id="an1"><p class="lab">Mismo «cuando», dos modos<span class="en">  · same “cuando”, two moods</span></p><div class="step"><span class="t2">1 · hábito</span><span class="chip c1 t" style="--d:0s">Cuando llego a casa, ceno.</span></div><div class="step"><span class="t2">2 · pasado</span><span class="chip c1 t" style="--d:0.5s">Cuando llegué a casa, cené.</span></div><div class="step"><span class="t2">3 · futuro</span><span class="chip c3 t" style="--d:1s">Cuando llegue a casa, cenaré.</span></div><div class="step"><span class="t2">4 · futuro</span><span class="chip c3 t" style="--d:1.5s">En cuanto termine, te llamo.</span></div><div class="anim-foot"><button type="button" class="re">↻ Repetir<span class="en">  · Replay</span></button></div></div><div class="anim" id="an2"><p class="lab">Conectores de tiempo<span class="en">  · time connectors</span></p><div class="step"><span class="t2">cuando</span><span class="chip c2 t" style="--d:0s">Cuando termine el máster, buscaré trabajo.</span></div><div class="step"><span class="t2">en cuanto</span><span class="chip c3 t" style="--d:0.5s">En cuanto tenga mi empresa, contrataré a Iker.</span></div><div class="step"><span class="t2">hasta que</span><span class="chip c3 t" style="--d:1s">No paro hasta que sea el jefe.</span></div><div class="step"><span class="t2">antes de que</span><span class="chip c3 t" style="--d:1.5s">Llámame antes de que salgas.</span></div><div class="anim-foot"><button type="button" class="re">↻ Repetir<span class="en">  · Replay</span></button></div></div>
+<div class="box"><b>Fórmula:</b> <b>cuando · en cuanto · hasta que · después de que · tan pronto como</b> + <b>subjuntivo</b> si hablas del futuro. <b>Antes de que</b> siempre va con subjuntivo. Si el sujeto es el mismo, usa infinitivo: «antes de salir».<span class="en b">Formula: cuando, en cuanto, hasta que, después de que, tan pronto como + subjunctive when talking about the future. Antes de que always takes the subjunctive. Same subject → infinitive: “antes de salir”.</span></div>
+<div class="forms"><div><small>terminar · yo</small><b>termine</b></div><div><small>tener · yo</small><b>tenga</b></div><div><small>ser · tú</small><b>seas</b></div><div><small>llegar · tú</small><b>llegues</b></div><div><small>salir · ellos</small><b>salgan</b></div><div><small>poder · nosotros</small><b>podamos</b></div></div>
+<div class="box pr">🗣️ <b>Pronunciación de hoy:</b> en frases con dos verbos conectados, no cortes el ritmo: «cuando termine el máster» va en un solo bloque, y la voz baja en la pausa antes de la segunda parte.<span class="en b">in sentences with two linked verbs, don’t chop the rhythm: “cuando termine el máster” is one block, and the voice drops at the pause before the second part.</span><p class="say"><span class="tag k">cortado</span>Cuando… termine… el máster… buscaré…</p><p class="say"><span class="tag o">en bloque</span>Cuando termine el máster, ↘ buscaré trabajo.</p></div>
+<div class="box wr"><b>Cuidado:</b> «cuando» + futuro nunca lleva «-ré»: no se dice «cuando terminaré». Y con hábito o pasado va indicativo: «cuando llego, ceno».<span class="en b">“cuando” + future never takes “-ré”: not “cuando terminaré”. With habit or past it takes the indicative.</span></div></section>
+
+<section id="s2" aria-labelledby="s2-t"><h2 id="s2-t"><span class="num">2</span><span>Repaso relámpago<span class="en"> Lightning review</span></span><span class="cue">⏱ 5 min</span></h2>
+<p class="sub">Ocho expresiones clave. Dilo en voz alta antes de girar la tarjeta.<span class="en b">Eight key expressions. Say it aloud before flipping the card.</span></p>
+<div class="fcs" id="fcs"></div></section>
+
+<section id="s3" aria-labelledby="s3-t"><h2 id="s3-t"><span class="num">3</span><span>Practica<span class="en"> Practice</span></span><span class="cue">⏱ 11 min</span></h2>
+<p class="sub">Tres ejercicios de 15 frases. Cada frase te corrige al instante y tienes <b>dos intentos</b>: si fallas los dos, te enseñamos la respuesta. Los tres ejercicios se hacen en clase.<span class="en b">Three exercises of 15 sentences. Every sentence gives instant feedback and you get two tries: if you miss both, we show the answer. All three exercises are done in class.</span></p>
+
+<h3>A · Elige la forma correcta<span class="en"> · Pick the correct form</span></h3>
+<ol class="ex" id="exA"></ol>
+<div class="check"><div><button type="button" class="act alt" id="exArs">Reiniciar<span class="en"> · Reset</span></button></div><span class="score" id="exAsc"></span></div>
+
+<h3>B · Escribe el verbo<span class="en"> · Type the verb</span></h3>
+<p class="sub">Conjuga el verbo entre paréntesis. Pulsa Intro o «Comprobar». Al escribir, usa el menú de teclas (o clic derecho) para tildes, ñ, ¿ y ¡.<span class="en b">Conjugate the verb in brackets. Press Enter or “Check”. While typing, use the key menu (or right-click) for accents, ñ, ¿ and ¡.</span></p>
+<ol class="ex" id="exB"></ol>
+<div class="check"><div><button type="button" class="act alt" id="exBrs">Reiniciar<span class="en"> · Reset</span></button></div><span class="score" id="exBsc"></span></div>
+
+<h3>C · ¿Qué dices?<span class="en"> · What do you say?</span></h3>
+<p class="sub">Lee la situación y elige la respuesta más natural y gramaticalmente correcta.<span class="en b">Read the situation and pick the most natural, grammatically correct reply.</span></p>
+<ol class="ex" id="exC"></ol>
+<div class="check"><div><button type="button" class="act alt" id="exCrs">Reiniciar<span class="en"> · Reset</span></button></div><span class="score" id="exCsc"></span></div></section>
+
+<section id="s4" class="rp" aria-labelledby="s4-t"><h2 id="s4-t"><span class="num">4</span><span>Roleplay: ¿qué harás cuando…?<span class="en"> what will you do when…?</span></span><span class="cue">⏱ 14 min</span></h2>
+<p class="sub">Tus amigos quieren saber qué harás cuando termines el máster y cuando tengas tu empresa. Elige la mejor respuesta y dila en voz alta antes de pulsar.<span class="en b">Your friends want to know what you’ll do when you finish the master’s and when you have your company. Pick the best reply and say it aloud before clicking.</span></p>
+<div class="dl" id="dl" aria-live="polite"></div><div class="opts" id="opts"></div>
+<button type="button" class="act alt" id="dre" style="margin-top:14px">↻ Otra vez<span class="en"> · Again</span></button>
+<h3>Parte 2 · Improvisación libre con rol<span class="en"> Part 2 · Free role-play</span></h3>
+<div class="two"><div class="card"><h3>Rol A · Andrei</h3>Cuentas tus planes con fechas y condiciones. Usa cuando, en cuanto y hasta que con subjuntivo.<span class="en b">You tell your plans with dates and conditions. Use cuando, en cuanto and hasta que with the subjunctive.</span></div><div class="card"><h3>Rol B · Amigos</h3>El profesor pregunta «¿y cuándo?» y «¿y si no?». Después cambiáis.<span class="en b">The teacher asks “and when?” and “and if not?”. Then swap.</span></div></div>
+<p style="margin:14px 2px 2px"><b>Marca lo que uses:</b><span class="en"> Tick what you use:</span></p>
+<div id="ck"></div></section>
+
+<section id="s5" class="pp" aria-labelledby="s5-t"><h2 id="s5-t"><span class="num">5</span><span>Explica a diez personas<span class="en"> Explain to ten people</span></span><span class="cue">⏱ 8 min</span></h2>
+<p class="sub">Diez personas inventadas necesitan que les expliques algo del tema de hoy. Elige una (o pulsa «Al azar») y explícaselo en voz alta en 20–30 segundos. Marca ✓ cuando termines.<span class="en b">Ten made-up people need you to explain something from today’s topic. Pick one (or press “Random”) and explain it aloud in 20–30 seconds. Tick ✓ when you’re done.</span></p>
+<div class="pp-use"><b>Usa:</b><span>Cuando / en cuanto / hasta que / después de que / antes de que + subjuntivo</span><span>cuando + indicativo (hábito o pasado)</span></div>
+<div class="ppl" data-k="c36-in"><ol class="ppl-ol"><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Marta"><span class="ppl-b"><span class="ppl-w"><b>1 · Marta</b> · amiga que te pregunta por tus planes</span><span class="ppl-t">Explícale qué harás cuando termines el máster.<span class="en b">Explain what you’ll do when you finish the master’s.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Hugo"><span class="ppl-b"><span class="ppl-w"><b>2 · Hugo</b> · amigo</span><span class="ppl-t">Explícale qué harás en cuanto tengas tu empresa.<span class="en b">Explain what you’ll do as soon as you have your company.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Elena"><span class="ppl-b"><span class="ppl-w"><b>3 · Elena</b> · jubilada</span><span class="ppl-t">Explícale por qué «cuando terminaré» es un error.<span class="en b">Explain why “cuando terminaré” is a mistake.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Tomás"><span class="ppl-b"><span class="ppl-w"><b>4 · Tomás</b> · compañero de piso</span><span class="ppl-t">Explícale la diferencia entre «cuando llego, ceno» y «cuando llegue, cenaré».<span class="en b">Explain the difference between those two sentences.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Aiko"><span class="ppl-b"><span class="ppl-w"><b>5 · Aiko</b> · estudiante de intercambio</span><span class="ppl-t">Explícale cuándo se usa «antes de que» y por qué siempre lleva subjuntivo.<span class="en b">Explain when “antes de que” is used and why it takes the subjunctive.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Sofía"><span class="ppl-b"><span class="ppl-w"><b>6 · Sofía</b> · amiga</span><span class="ppl-t">Explícale hasta cuándo seguirás ahorrando: «No paro hasta que…».<span class="en b">Explain how long you’ll keep saving.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Ben"><span class="ppl-b"><span class="ppl-w"><b>7 · Ben</b> · colega</span><span class="ppl-t">Explícale cuándo usar infinitivo en vez de subjuntivo: «antes de salir».<span class="en b">Explain when to use the infinitive.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Don Ramón"><span class="ppl-b"><span class="ppl-w"><b>8 · Don Ramón</b> · portero</span><span class="ppl-t">Explícale qué harás después de que acabe el curso.<span class="en b">Explain what you’ll do after the course ends.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Valeria"><span class="ppl-b"><span class="ppl-w"><b>9 · Valeria</b> · amiga</span><span class="ppl-t">Explícale cómo hacer una frase larga en un solo bloque de voz.<span class="en b">Explain how to say a long sentence in one block of voice.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Lucía"><span class="ppl-b"><span class="ppl-w"><b>10 · Lucía</b> · amiga</span><span class="ppl-t">Explícale qué le pedirás a un amigo antes de que salga de casa.<span class="en b">Explain what you’ll ask a friend before he leaves home.</span></span></span></label></li></ol><div class="check"><div><button type="button" class="act alt ppl-rnd">🎲 Al azar<span class="en"> · Random</span></button> <button type="button" class="act alt ppl-rs">Reiniciar<span class="en"> · Reset</span></button></div><span class="score ppl-sc" aria-live="polite"></span></div></div></section>
+
+<section id="s6" class="tk" aria-labelledby="s6-t"><h2 id="s6-t"><span class="num">6</span><span style="color:var(--family)">Tu tarea<span class="en"> Your homework</span></span><span class="cue">⏱ 3 min</span></h2>
+<p class="sub">Lee el diálogo en voz alta (y, si puedes, escucha un audio sobre planes de futuro en español). Después resume <b>oralmente</b> dos condiciones que aparecen.<span class="en b">Read the dialogue aloud (and, if you can, listen to a Spanish audio about future plans). Then summarise two conditions aloud.</span></p>
+<div class="dl"><div class="ln"><div class="av">A</div><div><p class="nm">Ana</p><div class="bub">Cuando termine el curso, me voy a Argentina tres meses.<span class="en b">When I finish the course, I’m going to Argentina for three months.</span></div></div></div><div class="ln"><div class="av">P</div><div><p class="nm">Pedro</p><div class="bub">¿Y hasta cuándo vas a ahorrar?<span class="en b">And until when will you save?</span></div></div></div><div class="ln"><div class="av">A</div><div><p class="nm">Ana</p><div class="bub">Hasta que tenga mil euros. En cuanto llegue a esa cifra, compro el billete.<span class="en b">Until I have a thousand euros. As soon as I reach that figure, I buy the ticket.</span></div></div></div><div class="ln"><div class="av">P</div><div><p class="nm">Pedro</p><div class="bub">Avísame antes de que lo compres; quizá voy contigo.<span class="en b">Tell me before you buy it; maybe I’ll come with you.</span></div></div></div></div>
+<p class="sub" style="margin-top:14px">Al resumir, di: ① cuándo se va Ana · ② hasta cuándo ahorra · ③ qué le pide Pedro.<span class="en b">When summarising, say: ① when Ana goes · ② until when she saves · ③ what Pedro asks of her.</span></p>
+<div class="pp-hw"><h3>Para casa: diez personas más<span class="en"> · Ten more people, at home</span></h3><p class="sub">Otras diez personas, ahora para hacer en casa. Explícale a cada una lo que se pide, en voz alta o grabándote (al menos tres con audio). Marca ✓ cuando termines.<span class="en b">Ten more people, to do at home. Explain to each one what is asked, aloud or recording yourself (at least three with audio). Tick ✓ when you’re done.</span></p>
+<div class="pp-use"><b>Usa:</b><span>Cuando / en cuanto / hasta que / después de que / antes de que + subjuntivo</span><span>cuando + indicativo (hábito o pasado)</span></div>
+<div class="ppl" data-k="c36-hw"><ol class="ppl-ol"><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Pablo"><span class="ppl-b"><span class="ppl-w"><b>1 · Pablo</b> · amigo</span><span class="ppl-t">Explícale tus planes de futuro con tres «cuando».<span class="en b">Explain your future plans with three “cuando”.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Gloria"><span class="ppl-b"><span class="ppl-w"><b>2 · Gloria</b> · tía</span><span class="ppl-t">Explícale qué harás cuando llegues a Canadá de visita.<span class="en b">Explain what you’ll do when you visit Canada.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Karim"><span class="ppl-b"><span class="ppl-w"><b>3 · Karim</b> · vecino</span><span class="ppl-t">Explícale el truco para formar «termine», «tenga», «seas», «llegues».<span class="en b">Explain the trick for forming those subjunctives.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Nerea"><span class="ppl-b"><span class="ppl-w"><b>4 · Nerea</b> · amiga</span><span class="ppl-t">Explícale una condición con «en cuanto» y otra con «hasta que».<span class="en b">Explain one condition with “en cuanto” and another with “hasta que”.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Camille"><span class="ppl-b"><span class="ppl-w"><b>5 · Camille</b> · amiga francesa</span><span class="ppl-t">Explícale la diferencia entre «cuando llegué» y «cuando llegue».<span class="en b">Explain the difference between those.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Julia"><span class="ppl-b"><span class="ppl-w"><b>6 · Julia</b> · hermana pequeña</span><span class="ppl-t">Explícale qué harás cuando tengas vacaciones.<span class="en b">Explain what you’ll do when you have holidays.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Mateo"><span class="ppl-b"><span class="ppl-w"><b>7 · Mateo</b> · entrenador</span><span class="ppl-t">Explícale qué cambiarás en cuanto ganéis un partido importante.<span class="en b">Explain what you’ll change once you win an important match.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Raúl"><span class="ppl-b"><span class="ppl-w"><b>8 · Raúl</b> · jefe</span><span class="ppl-t">Explícale cuándo entregarás un informe: «Te lo mando cuando…».<span class="en b">Explain when you’ll deliver a report.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Inés"><span class="ppl-b"><span class="ppl-w"><b>9 · Inés</b> · amiga</span><span class="ppl-t">Explícale cómo avisar a alguien antes de que compre un billete.<span class="en b">Explain how to warn someone before he buys a ticket.</span></span></span></label></li><li class="ppl-i"><label><input type="checkbox" aria-label="Hecho: Leo"><span class="ppl-b"><span class="ppl-w"><b>10 · Leo</b> · amigo</span><span class="ppl-t">Explícale en un minuto tus tres próximos objetivos con cuatro conectores.<span class="en b">Explain in one minute your next three goals using four connectors.</span></span></span></label></li></ol><div class="check"><div><button type="button" class="act alt ppl-rnd">🎲 Al azar<span class="en"> · Random</span></button> <button type="button" class="act alt ppl-rs">Reiniciar<span class="en"> · Reset</span></button></div><span class="score ppl-sc" aria-live="polite"></span></div></div></div>
+<textarea id="notes" aria-label="Notas" placeholder="Notas opcionales · Optional notes"></textarea>
+<p style="margin:8px 2px 0;font-size:12.5px;color:var(--ink-faint)">Es solo un apoyo: lo importante es decirlo en voz alta.<span class="en b">Just a support: what matters is saying it aloud.</span></p>
+<p><button type="button" class="act alt" id="sv">Guardar notas</button><span class="sv" id="svf">Guardado ✓</span></p></section>
+</main>
+<footer><span>Clase 36 · Cuando termine…</span><span>Próxima clase → Clase 37</span></footer>
+
+<div class="cm" id="cm" role="toolbar" aria-label="Caracteres especiales" hidden></div>
+<script>
+
+const $=id=>document.getElementById(id),RM=matchMedia('(prefers-reduced-motion:reduce)').matches;
+const E=(t,b)=>t?`<span class="en${b?' b':''}"> ${t}</span>`:'';
+const sh=a=>{const r=[...a];for(let i=r.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[r[i],r[j]]=[r[j],r[i]]}return r};
+const ld=k=>{try{return localStorage.getItem(k)}catch(e){return null}},sv=(k,v)=>{try{localStorage.setItem(k,v)}catch(e){}};
+const restart=(el,c)=>{el.classList.remove(c);void el.offsetWidth;el.classList.add(c)};
+function confetti(el){if(RM||!el)return;const r=el.getBoundingClientRect(),w=document.createElement('div');w.className='cf-wrap';w.style.left=r.left+r.width/2+'px';w.style.top=r.top+r.height/2+'px';
+ const C=['var(--b3)','var(--b1)','var(--b2)','var(--family)'];
+ for(let k=0;k<22;k++){const c=document.createElement('i'),an=-Math.PI/2+(Math.random()-.5)*2.2,d=60+Math.random()*110;c.className='cf';
+  c.style.cssText=`--c:${C[k%4]};--dx:${Math.cos(an)*d|0}px;--up:${Math.sin(an)*d|0}px;--fall:${(Math.sin(an)*d+90+Math.random()*60)|0}px;--rot:${(Math.random()*720-360)|0}deg`;w.appendChild(c)}
+ document.body.appendChild(w);setTimeout(()=>w.remove(),1600)}
+
+/* barra: índice, idioma, tema */
+const secs=[...document.querySelectorAll('main section')],toc=$('toc'),nb=$('navBtn');
+toc.innerHTML=secs.map(s=>{const h=s.querySelector('h2');return `<a href="#${s.id}"><b>${h.querySelector('.num').textContent}</b>${h.children[1].firstChild.textContent}</a>`}).join('');
+nb.onclick=()=>{toc.hidden=!toc.hidden;nb.setAttribute('aria-expanded',String(!toc.hidden))};
+toc.onclick=e=>{if(e.target.closest('a')){toc.hidden=true;nb.setAttribute('aria-expanded','false')}};
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!toc.hidden){toc.hidden=true;nb.focus()}});
+function setLang(l){document.body.dataset.lang=l;document.querySelectorAll('#lang button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.lang===l)));sv('clase-lang-v2',l)}
+document.querySelectorAll('#lang button').forEach(b=>b.onclick=()=>setLang(b.dataset.lang));setLang(ld('clase-lang-v2')==='es'?'es':'es-en');
+const tb=$('themeBtn');function setTheme(d){document.documentElement.dataset.theme=d?'dark':'light';tb.setAttribute('aria-pressed',String(d));tb.textContent=d?'Modo claro':'Modo oscuro';sv('clase-theme',d?'d':'l')}
+tb.onclick=()=>setTheme(tb.getAttribute('aria-pressed')!=='true');setTheme(ld('clase-theme')?ld('clase-theme')==='d':matchMedia('(prefers-color-scheme:dark)').matches);
+
+/* animaciones al entrar */
+document.querySelectorAll('.anim').forEach(a=>{
+ const run=()=>{a.classList.remove('play');void a.offsetWidth;a.classList.add('play')};
+ a.querySelector('.re').onclick=run;
+ if(RM)return;a.classList.add('ready');
+ new IntersectionObserver((es,o)=>es.forEach(e=>{if(e.isIntersecting){run();o.unobserve(a)}}),{threshold:.6}).observe(a)});
+if(!RM&&'IntersectionObserver' in window){
+ const io=new IntersectionObserver((es,o)=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('fx-num');o.unobserve(e.target)}}),{threshold:.05});secs.forEach(s=>io.observe(s));
+ const io2=new IntersectionObserver((es,o)=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('fx-show');o.unobserve(e.target)}}),{threshold:.1});
+ document.querySelectorAll('ol.ex,.forms').forEach(c=>{[...c.children].forEach((k,i)=>k.style.setProperty('--i',Math.min(i,10)));c.classList.add('fx-hide');io2.observe(c)})}
+/* parallax suave y foco de sección */
+if(!RM){const orbs=[...document.querySelectorAll('.plx i')];let t=0;
+ const run=()=>{t=0;const y=scrollY,vh=innerHeight,c=vh/2;orbs.forEach((o,i)=>o.style.transform=`translate3d(${Math.sin(y/600+i*1.7)*innerWidth*.06|0}px,${-y*(.2+i*.15)|0}px,0)`);
+  secs.forEach(s=>{const r=s.getBoundingClientRect(),d=r.top>c?r.top-c:r.bottom<c?c-r.bottom:0;s.style.setProperty('--a',(Math.round(Math.max(0,1-d/(vh*.5))*20)/20))})};
+ addEventListener('scroll',()=>{if(!t)t=requestAnimationFrame(run)},{passive:true});run()}
+
+/* tarjetas */
+const CARDS=[["cuando tenga tiempo", "Cuando tenga tiempo, te llamo.", "When I have time, I’ll call you."], ["en cuanto pueda", "En cuanto pueda, voy.", "As soon as I can, I’ll go."], ["hasta que", "Espera hasta que llegue.", "Wait until he arrives."], ["antes de que", "Dime algo antes de que te vayas.", "Tell me something before you go."], ["tan pronto como", "Tan pronto como termine, te aviso.", "As soon as I finish, I’ll let you know."], ["después de que", "Después de que acabe el partido, cenamos.", "After the match ends, we have dinner."], ["una vez que", "Una vez que lo sepa, te lo digo.", "Once I know, I’ll tell you."], ["mientras tanto", "Mientras tanto, practico.", "Meanwhile, I practise."]];
+$('fcs').innerHTML=CARDS.map(c=>`<button type="button" class="fc" aria-pressed="false"><span class="f">${c[0]}</span><span class="bk">${c[1]}<i class="en">${c[2]}</i></span></button>`).join('');
+$('fcs').onclick=e=>{const f=e.target.closest('.fc');if(f){f.classList.toggle('on');f.setAttribute('aria-pressed',f.classList.contains('on'))}};
+
+/* menú de caracteres: aparece al enfocar un campo y con clic derecho */
+const cm=$('cm'),CH=['á','é','í','ó','ú','ü','ñ','¿','?','¡','!'];let cmT=null,cmUp=false,cmMode='el';
+const isFld=el=>el&&el.matches&&el.matches('input[type="text"],textarea');
+function cmDraw(){cm.innerHTML=CH.map(c=>{const v=cmUp?c.toUpperCase():c;return `<button type="button" tabindex="-1" data-c="${v}" aria-label="Insertar ${v}">${v}</button>`}).join('')+`<button type="button" tabindex="-1" class="sh" aria-pressed="${cmUp}" aria-label="Mayúsculas">⇧</button>`}
+function cmPlace(x,y){cm.style.left='0px';cm.style.top='0px';cm.hidden=false;const w=cm.offsetWidth,h=cm.offsetHeight,vw=innerWidth,vh=innerHeight;
+ cm.style.left=Math.max(8,Math.min(x,vw-w-8))+'px';cm.style.top=Math.max(8,Math.min(y,vh-h-8))+'px'}
+function cmAnchor(el){const r=el.getBoundingClientRect();cm.hidden=false;const h=cm.offsetHeight,vh=(window.visualViewport?visualViewport.height:innerHeight);
+ /* debajo de la caja; solo arriba si no cabe debajo */
+ cmPlace(r.left,r.bottom+6+h<=vh-8?r.bottom+6:Math.max(8,r.top-h-6))}
+function cmShow(el){cmT=el;cmMode='el';cmDraw();cm.hidden=false;cmAnchor(el)}
+function cmHide(){cm.hidden=true;cmT=null}
+document.addEventListener('focusin',e=>{if(isFld(e.target)&&!e.target.disabled)cmShow(e.target);else if(!cm.contains(e.target))cmHide()});
+document.addEventListener('focusout',e=>{if(isFld(e.target)&&!(e.relatedTarget&&cm.contains(e.relatedTarget)))cmHide()});
+document.addEventListener('contextmenu',e=>{const f=e.target;if(!isFld(f)||f.disabled)return;e.preventDefault();f.focus();cmT=f;cmMode='el';cmDraw();cmAnchor(f)});
+addEventListener('scroll',()=>{if(cm.hidden||!cmT)return;if(cmMode==='el')cmAnchor(cmT);else cmHide()},{passive:true,capture:true});
+addEventListener('resize',()=>{if(!cm.hidden&&cmT&&cmMode==='el')cmAnchor(cmT)});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!cm.hidden)cmHide()});
+['mousedown','pointerdown'].forEach(t=>cm.addEventListener(t,e=>e.preventDefault()));
+cm.addEventListener('click',e=>{const b=e.target.closest('button');if(!b||!cmT)return;
+ if(b.classList.contains('sh')){cmUp=!cmUp;cmDraw();return}
+ const f=cmT,c=b.dataset.c;f.focus();f.setRangeText(c,f.selectionStart,f.selectionEnd,'end');f.dispatchEvent(new Event('input',{bubbles:true}));
+ if(cmUp&&/[a-zñü]/i.test(c)){cmUp=false;cmDraw()}});
+
+/* ejercicios · feedback instantáneo por frase · dos intentos y luego se revela */
+const nz=t=>t.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/\s+/g,' ').trim();
+const EXA=[["Cuando ___ el máster, buscaré trabajo.", ["termine", "termino", "terminé"], "When I finish the master’s, I’ll look for a job.", "Futuro + cuando → subjuntivo."], ["Cuando ___ a casa todos los días, ceno.", ["llego", "llegue", "llegaré"], "When I get home every day, I have dinner.", "Hábito → indicativo."], ["En cuanto ___ mi empresa, contrataré a Iker.", ["tenga", "tengo", "tendré"], "As soon as I have my company, I’ll hire Iker.", "En cuanto + subjuntivo (futuro)."], ["No paro hasta que ___ el jefe.", ["sea", "soy", "seré"], "I won’t stop until I’m the boss.", "Hasta que + subjuntivo (futuro)."], ["Llámame antes de que ___.", ["salgas", "sales", "saldrás"], "Call me before you leave.", "Antes de que + subjuntivo, siempre."], ["Ayer, cuando ___ a casa, llovía.", ["llegué", "llegue", "llegaré"], "Yesterday, when I got home, it was raining.", "Pasado → indicativo."], ["Te aviso tan pronto como ___ el resultado.", ["sepa", "sé", "sabré"], "I’ll tell you as soon as I know the result.", "Tan pronto como + subjuntivo (futuro)."], ["Antes de ___, quiero hablar con mi madre.", ["salir", "que salga", "salgo"], "Before leaving, I want to talk to my mum.", "Mismo sujeto: antes de + infinitivo."], ["Cuando ___ vacaciones, viajaremos a Alemania.", ["tengamos", "tenemos", "tuvimos"], "When we have holidays, we’ll travel to Germany.", "Futuro + cuando → subjuntivo."], ["Voy a esperar hasta que ___ Marta.", ["llegue", "llega", "llegó"], "I’m going to wait until Marta arrives.", "Hasta que + subjuntivo."], ["Cuando ___ de clase, siempre me ducho.",["salgo", "salga", "saldré"],"When I leave class, I always take a shower.", "Hábito → indicativo."], ["Te llamo en cuanto ___ del trabajo.",["salga", "salgo", "saldré"],"I’ll call you as soon as I leave work.", "En cuanto + subjuntivo (futuro)."], ["Cuando ___ mis padres a Madrid, les enseñaré mi barrio.",["vengan", "vienen", "vinieron"],"When my parents come to Madrid, I’ll show them my neighbourhood.", "Futuro + cuando → subjuntivo."], ["Siempre llamo a mi madre en cuanto ___ del polideportivo.",["salgo", "salga", "salí"],"I always call my mum as soon as I leave the sports centre.", "Hábito → indicativo."], ["No voy a salir hasta que ___ los deberes.",["termine", "termino", "terminé"],"I’m not going out until I finish my homework.", "Hasta que + subjuntivo (futuro)."]];
+const EXB=[["Cuando ___ el máster, me iré de vacaciones.", "terminar · yo", "termine", "When I finish the master’s, I’ll go on holiday.", "terminar → termine."], ["En cuanto ___ tiempo, te llamo.", "tener · yo", "tenga", "As soon as I have time, I’ll call you.", "tener → tenga."], ["No descanso hasta que ___ el jefe.", "ser · yo", "sea", "I won’t rest until I’m the boss.", "ser → sea."], ["Llámame cuando ___ a casa.", "llegar · tú", "llegues", "Call me when you get home.", "llegar → llegues (g → gu)."], ["Cenamos cuando ___ Iker.", "venir · él", "venga", "We’ll have dinner when Iker comes.", "venir → venga."], ["En cuanto ___ el partido, pedimos pizza.", "acabar · nosotros", "acabemos", "As soon as we finish the match, we order pizza.", "acabar → acabemos."], ["Cuando ___ dinero, compraré una consola nueva.", "ahorrar · yo", "ahorre", "When I save money, I’ll buy a new console.", "ahorrar → ahorre."], ["No empezamos hasta que ___ todos.", "llegar · ellos", "lleguen", "We don’t start until everyone arrives.", "llegar → lleguen."], ["Cuando ___ en Alemania, practicaré alemán.", "estar · yo", "esté", "When I’m in Germany, I’ll practise German.", "estar → esté."], ["En cuanto ___ de clase, te escribo.", "salir · yo", "salga", "As soon as I leave class, I’ll text you.", "salir → salga."], ["Voy a esperar hasta que ___ del gimnasio.", "volver · tú", "vuelvas", "I’m going to wait until you come back from the gym.", "volver → vuelvas (o → ue)."], ["Cuando ___ buen tiempo, iremos al parque.", "hacer · el tiempo", "haga", "When the weather is nice, we’ll go to the park.", "hacer → haga."], ["Dímelo en cuanto ___ la respuesta.", "saber · tú", "sepas", "Tell me as soon as you know the answer.", "saber → sepas."], ["Cuando ___ el examen, celebramos.", "aprobar · yo", "apruebe", "When I pass the exam, we’ll celebrate.", "aprobar → apruebe (o → ue)."], ["No me voy hasta que ___ todo.", "recoger · yo", "recoja", "I’m not leaving until I’ve tidied everything up.", "recoger → recoja (g → j)."]];
+const EXC=[["Prometes a un amigo que le llamarás cuando llegues.", ["Te llamaré cuando llegue.", "Te llamaré cuando llegaré.", "Te llamé cuando llegue."], "You promise to call a friend when you arrive.", "Futuro + cuando → subjuntivo."], ["Cuentas lo que haces siempre al llegar a casa.", ["Cuando llego a casa, ceno.", "Cuando llegue a casa, ceno.", "Cuando llegaré a casa, ceno."], "You say what you always do when you get home.", "Hábito → indicativo."], ["Dices que no paras hasta ser el jefe.", ["No paro hasta que sea el jefe.", "No paro hasta que soy el jefe.", "No paro hasta que seré el jefe."], "You say you won’t stop until you’re the boss.", "Hasta que + subjuntivo."], ["Pides a un amigo que te avise rápido si sabe algo.", ["Avísame en cuanto sepas algo.", "Avísame en cuanto sabes algo.", "Avísame en cuanto sabrás algo."], "You ask a friend to tell you quickly if he knows something.", "En cuanto + subjuntivo."], ["Quieres que tu amigo hable con ella antes de que se vaya.", ["Habla con ella antes de que se vaya.", "Habla con ella antes de que se va.", "Habla con ella antes que irse."], "You want your friend to talk to her before she leaves.", "Antes de que + subjuntivo."], ["Cuentas tu plan: primero el máster y después tu empresa.", ["Cuando termine el máster, montaré mi empresa.", "Cuando termino el máster, montaré mi empresa.", "Cuando terminaré el máster, monto mi empresa."], "You tell your plan: master’s first, then your company.", "Cuando + subjuntivo, futuro."], ["Dices que cada mañana, cuando te despiertas, bebes agua.",["Cuando me despierto, bebo agua.", "Cuando me despierte, bebo agua.", "Cuando me despertaré, bebo agua."],"You say that every morning, when you wake up, you drink water.", "Hábito → indicativo."], ["Prometes a tu madre que la visitarás cuando tengas vacaciones.",["Te visitaré en cuanto tenga vacaciones.", "Te visitaré en cuanto tengo vacaciones.", "Te visitaré en cuanto tendré vacaciones."],"You promise your mum you’ll visit her when you have holidays.", "En cuanto + subjuntivo."], ["Pides a un amigo que te espere hasta que llegues.",["Espérame hasta que llegue.", "Espérame hasta que llego.", "Espérame hasta que llegaré."],"You ask a friend to wait for you until you arrive.", "Hasta que + subjuntivo."], ["Dices que avisarás a Iker antes de que empiece el partido.",["Avisaré a Iker antes de que empiece el partido.", "Avisaré a Iker antes de que empieza el partido.", "Avisaré a Iker antes de que empezará el partido."],"You say you’ll tell Iker before the match starts.", "Antes de que + subjuntivo, siempre."], ["Cuentas lo que hiciste ayer: cenaste y después viste el partido.",["Ayer, cuando terminé de cenar, vi el partido.", "Ayer, cuando termine de cenar, vi el partido.", "Ayer, cuando terminaré de cenar, vi el partido."],"You tell what you did yesterday: you had dinner and then watched the match.", "Pasado → indicativo."], ["Explicas que comprarás una consola nueva cuando ahorres lo suficiente.",["Compraré una consola nueva cuando ahorre lo suficiente.", "Compraré una consola nueva cuando ahorro lo suficiente.", "Compraré una consola nueva cuando ahorraré lo suficiente."],"You explain you’ll buy a new console when you’ve saved enough.", "Cuando + subjuntivo (futuro)."], ["Dices que, después de que termine el partido, iréis a cenar.",["Después de que termine el partido, iremos a cenar.", "Después de que termina el partido, iremos a cenar.", "Después de que terminó el partido, iremos a cenar."],"You say that after the match finishes, you’ll go for dinner.", "Después de que + subjuntivo (futuro)."], ["Dices que no hablarás con tu jefe hasta tener todos los datos.",["No voy a hablar con mi jefe hasta que tenga todos los datos.", "No voy a hablar con mi jefe hasta que tengo todos los datos.", "No voy a hablar con mi jefe hasta que tuve todos los datos."],"You say you won’t talk to your boss until you have all the data.", "Hasta que + subjuntivo."], ["Prometes a tu novia que la llamarás tan pronto como llegues al hotel.",["La llamaré tan pronto como llegue al hotel.", "La llamaré tan pronto como llego al hotel.", "La llamaré tan pronto como llegaré al hotel."],"You promise your girlfriend you’ll call her as soon as you arrive at the hotel.", "Tan pronto como + subjuntivo (futuro)."]];
+function mount(id,raw,kind,splits){
+ const ol=$(id),sc=$(id+'sc');
+ const I=raw.map(x=>kind==='ty'?{q:x[0],hint:x[1],ans:x[2],en:x[3],why:x[4]}:{q:x[0],o:x[1],ans:x[1][0],en:x[2],why:x[3]});
+ let st=[];
+ const upd=()=>{const d=st.filter(s=>s.d).length,ok=st.filter(s=>s.ok).length,f=st.filter(s=>s.f).length;
+  sc.textContent=d?`${d} / ${I.length} hechas · ${ok} correctas · ${f} a la primera`:`${I.length} frases · 2 intentos por frase`;
+  if(d===I.length&&ok===I.length)confetti(sc)};
+ function draw(){
+  cmHide();st=I.map(()=>({t:0,d:false,ok:false,f:false}));
+  ol.innerHTML=I.map((x,i)=>`<li data-i="${i}"><span>${x.q.replace('___','<b class="v">___</b>')}${x.hint?`<span class="hint">(${x.hint})</span>`:''}</span>${E(x.en,1)}`+
+   (kind==='ty'?`<div class="ty"><input type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" aria-label="Respuesta ${i+1}"><button type="button" class="act">Comprobar</button></div>`
+    :`<div class="op${kind==='sit'?' long':''}">${sh(x.o).map(o=>`<button type="button">${o}</button>`).join('')}</div>`)+
+   `<span class="sol" role="status" hidden></span></li>`).join('');
+  const L=[...ol.children];splits.forEach(p=>L[p[0]].insertAdjacentHTML('beforebegin',`<div class="div${p[2]?' cl':''}">${p[1]}</div>`));
+  upd()}
+ function judge(li,i,good,given){
+  const x=I[i],s=st[i],m=li.querySelector('.sol');s.t++;
+  let msg,tip=false;
+  if(good){s.d=s.ok=true;s.f=s.t===1;tip=true;msg=`✓ ${s.t===1?'¡Correcto!':'¡Bien, a la segunda!'} ${x.why}`;
+   if(kind==='ty'&&given.trim().toLowerCase()!==x.ans.toLowerCase())msg+=` (Ojo con la tilde: «${x.ans}»).`}
+  else if(s.t>=2){s.d=true;msg=`✗ La respuesta correcta es «${x.ans}». ${x.why}`}
+  else msg='✗ Todavía no. Te queda 1 intento.';
+  m.hidden=false;m.className='sol'+(tip?' tip':'');m.innerHTML=msg;restart(m,'sol');
+  if(s.d){cmHide();li.querySelectorAll('button,input').forEach(el=>{el.disabled=true});
+   if(kind==='ty'){li.querySelector('input').classList.add(s.ok?'ok':'bad')}
+   else li.querySelectorAll('.op button').forEach(bt=>{if(bt.textContent===x.ans)bt.classList.add('ok')})}
+  upd()}
+ ol.onclick=e=>{const li=e.target.closest('li');if(!li)return;const i=+li.dataset.i;if(st[i].d)return;
+  if(kind==='ty'){if(!e.target.closest('.ty button'))return;typed(li,i)}
+  else{const b=e.target.closest('.op button');if(!b||b.disabled)return;const good=b.textContent===I[i].ans;
+   if(!good){b.classList.add('bad');b.disabled=true;restart(b,'fx-bad')}else{b.classList.add('ok');restart(b,'fx-ok')}
+   judge(li,i,good)}};
+ function typed(li,i){const inp=li.querySelector('input'),v=inp.value;if(!v.trim()){inp.focus();return}
+  const good=nz(v)===nz(I[i].ans);if(!good){restart(inp,'fx-bad')}judge(li,i,good,v);if(!st[i].d){inp.focus();inp.select()}}
+ ol.onkeydown=e=>{if(kind==='ty'&&e.key==='Enter'&&e.target.matches('.ty input')){e.preventDefault();const li=e.target.closest('li'),i=+li.dataset.i;if(!st[i].d)typed(li,i)}};
+ $(id+'rs').onclick=draw;draw()}
+mount('exA',EXA,'mc',[[0,'en clase · elige la forma correcta',1]]);
+mount('exB',EXB,'ty',[[0,'en clase · escribe el verbo',1]]);
+mount('exC',EXC,'sit',[[0,'en clase · elige tu respuesta',1]]);
+
+/* diálogo con ramas */
+const DL=[["Marta", "Andrei, ¿qué vas a hacer cuando termines el máster?", "Andrei, what are you going to do when you finish the master’s?", ["Cuando termine el máster, buscaré trabajo en gestión deportiva.", "Cuando terminaré el máster, busco trabajo.", "No sé, ya veremos."], "Cuando + futuro → subjuntivo: termine."], ["Iker", "¿Y tu propia empresa? ¿Cuándo la montas?", "And your own company? When are you setting it up?", ["En cuanto tenga ahorros y un buen plan, la montaré.", "En cuanto tengo ahorros, la monto.", "Algún día, supongo."], "En cuanto + subjuntivo."], ["Sole", "Menudo plan. ¿Y hasta cuándo vas a trabajar sin descanso?", "Quite a plan. And until when will you work non-stop?", ["Hasta que sea el jefe, no voy a parar. Y después, vacaciones.", "Hasta que soy el jefe, no paro.", "Hasta nunca."], "Hasta que + subjuntivo."], ["Marta", "Vale, pero llámanos antes de que te hagas famoso.", "OK, but call us before you get famous.", ["Os llamaré en cuanto tenga las llaves de la oficina.", "Os llamé cuando tendré las llaves.", "Ya veremos."], "Futuro + en cuanto + subjuntivo."]];
+let dt=0;const dl=$('dl'),op=$('opts'),mk=(c,n,t,e)=>`<div class="ln ${c}"><div class="av">${c==='me'?'Tú':n[0]}</div><div><p class="nm">${n}</p><div class="bub">${t}${E(e)}</div></div></div>`;
+function turn(){if(dt>=DL.length){op.innerHTML='';dl.insertAdjacentHTML('beforeend','<div class="box" style="margin:0">¡Plan con fecha! Máster, empresa y jefe, con cuando y en cuanto. 🎉</div>');confetti(op);return}
+ const d=DL[dt];dl.insertAdjacentHTML('beforeend',mk('fr',d[0],d[1],d[2]));
+ op.innerHTML=sh(d[3].map((t,i)=>[t,i])).map(o=>`<button type="button" data-ok="${o[1]===0}">${o[0]}</button>`).join('');}
+op.onclick=e=>{const b=e.target.closest('button');if(!b||b.disabled)return;const d=DL[dt];
+ if(b.dataset.ok==='true'){dl.insertAdjacentHTML('beforeend',mk('me','Tú',b.textContent));dt++;turn()}
+ else{b.classList.add('bad');b.disabled=true;restart(b,'fx-bad');if(!op.querySelector('.sol'))op.insertAdjacentHTML('beforeend',`<span class="sol">✗ ${d[4]}</span>`)}};
+$('dre').onclick=()=>{dt=0;dl.innerHTML='';turn()};turn();
+const CK=["Cuando + subjuntivo", "En cuanto + subjuntivo", "Hasta que + subjuntivo", "Antes de que + subjuntivo", "Antes de + infinitivo", "Cuando + indicativo (hábito)", "Futuro en la otra parte"];
+$('ck').innerHTML=CK.map(c=>`<label class="ck"><input type="checkbox"> ${c}</label>`).join('');
+$('ck').onchange=e=>{const all=[...$('ck').querySelectorAll('input')];if(all.every(x=>x.checked))confetti(e.target)};
+
+/* tarea: notas */
+const KEY='andrei-clase36-tarea',na=$('notes');
+(async()=>{try{if(window.storage){const r=await window.storage.get(KEY);if(r&&typeof r.value==='string'){na.value=r.value;return}}}catch(e){}const v=ld(KEY);if(v)na.value=v})();
+$('sv').onclick=async()=>{let ok=false;try{if(window.storage)ok=!!await window.storage.set(KEY,na.value)}catch(e){}if(!ok){sv(KEY,na.value);ok=true}
+ const f=$('svf');f.textContent=ok?'Guardado ✓':'No se pudo guardar';f.classList.add('show');setTimeout(()=>f.classList.remove('show'),1800)};
+</script>
+<script>
+/* explica a diez personas: marcar y sortear */
+(function(){
+var RM=matchMedia('(prefers-reduced-motion:reduce)').matches;
+function ld(k){try{return localStorage.getItem(k)}catch(e){return null}}
+function sv(k,v){try{localStorage.setItem(k,v)}catch(e){}}
+document.querySelectorAll('.ppl').forEach(function(box){
+  var key='andrei-pp-'+box.getAttribute('data-k'),items=[].slice.call(box.querySelectorAll('.ppl-i')),sc=box.querySelector('.ppl-sc'),saved={};
+  try{saved=JSON.parse(ld(key)||'{}')||{}}catch(e){saved={}}
+  items.forEach(function(li,i){li.querySelector('input').checked=!!saved[i]});
+  function upd(){var n=0,o={};items.forEach(function(li,i){var c=li.querySelector('input').checked;li.classList.toggle('done',c);if(c){n++;o[i]=1}});
+    sc.textContent=n+' / '+items.length+' ✓';sv(key,JSON.stringify(o))}
+  box.addEventListener('change',function(e){if(e.target.closest('.ppl-i'))e.target.closest('.ppl-i').classList.remove('pick');upd()});
+  box.querySelector('.ppl-rnd').onclick=function(){
+    var left=items.filter(function(li){return !li.querySelector('input').checked});
+    items.forEach(function(li){li.classList.remove('pick')});
+    if(!left.length){sc.textContent='¡Las diez hechas! ✓';return}
+    var li=left[Math.floor(Math.random()*left.length)];li.classList.add('pick');
+    li.scrollIntoView({block:'center',behavior:RM?'auto':'smooth'})};
+  box.querySelector('.ppl-rs').onclick=function(){items.forEach(function(li){li.querySelector('input').checked=false;li.classList.remove('pick')});upd()};
+  upd();
+});
+})();
+</script>
+</body>
+</html>
